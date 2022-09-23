@@ -1,22 +1,105 @@
-import { fileURLToPath, URL } from "node:url";
-
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import vueJsx from "@vitejs/plugin-vue-jsx";
+import { ConfigEnv, loadEnv, UserConfig } from "vite";
 import { createProxy } from "./build/vite/proxy";
+import { wrapperEnv } from "./build/utils";
+import { resolve } from "path";
+import pkg from "./package.json";
+import dayjs from "dayjs";
+import { createVitePlugins } from "./build/vite/plugin";
+import { generateModifyVars } from "./build/generate/generateModifyVars";
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [vue(), vueJsx()],
-  resolve: {
-    alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url))
+function pathResolve(dir: string) {
+  return resolve(process.cwd(), ".", dir);
+}
+
+const { dependencies, devDependencies, name, version } = pkg;
+const __APP_INFO__ = {
+  pkg: { dependencies, devDependencies, name, version },
+  lastBuildTime: dayjs().format("YYYY-MM-DD HH:mm:ss")
+};
+export default ({ command, mode }: ConfigEnv): UserConfig => {
+  const root = process.cwd();
+  const viteEnv = wrapperEnv(loadEnv(mode, root));
+  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv;
+  const isBuild = command === "build";
+  return {
+    base: VITE_PUBLIC_PATH,
+    root,
+    resolve: {
+      alias: [
+        {
+          find: "vue-i18n",
+          replacement: "vue-i18n/dist/vue-i18n.cjs.js"
+        },
+        // /@/xxxx => src/xxxx
+        {
+          find: /\/@\//,
+          replacement: pathResolve("src") + "/"
+        },
+        // /#/xxxx => types/xxxx
+        {
+          find: /\/#\//,
+          replacement: pathResolve("types") + "/"
+        }
+      ]
+    },
+    server: {
+      https: true,
+      // Listening on all local IPs
+      host: true,
+      port: VITE_PORT,
+      // Load proxy configuration from .env
+      proxy: createProxy(VITE_PROXY)
+    },
+    esbuild: {
+      pure: VITE_DROP_CONSOLE ? ["console.log", "debugger"] : []
+    },
+    build: {
+      target: "es2015",
+      cssTarget: "chrome80",
+      outDir: "dist",
+      // minify: 'terser',
+      /**
+       * 当 minify=“minify:'terser'” 解开注释
+       * Uncomment when minify="minify:'terser'"
+       */
+      // terserOptions: {
+      //   compress: {
+      //     keep_infinity: true,
+      //     drop_console: VITE_DROP_CONSOLE,
+      //   },
+      // },
+      // 启用/禁用 gzip 压缩大小报告。压缩大型输出文件可能会很慢，因此禁用该功能可能会提高大型项目的构建性能
+      reportCompressedSize: false,
+      chunkSizeWarningLimit: 2000
+    },
+    define: {
+      // setting vue-i18-next
+      // Suppress warning
+      __INTLIFY_PROD_DEVTOOLS__: false,
+      __APP_INFO__: JSON.stringify(__APP_INFO__)
+    },
+
+    css: {
+      preprocessorOptions: {
+        less: {
+          modifyVars: generateModifyVars(),
+          javascriptEnabled: true
+        }
+      }
+    },
+
+    // The vite plugin used by the project. The quantity is large, so it is separately extracted and managed
+    plugins: createVitePlugins(viteEnv, isBuild),
+
+    optimizeDeps: {
+      // @iconify/iconify: The dependency is dynamically and virtually loaded by @purge-icons/generated, so it needs to be specified explicitly
+      include: [
+        "@vue/runtime-core",
+        "@vue/shared",
+        "@iconify/iconify",
+        "ant-design-vue/es/locale/zh_CN",
+        "ant-design-vue/es/locale/en_US"
+      ]
     }
-  },
-  server: {
-    https: true,
-    host: true,
-    port: 5281,
-    proxy: createProxy([["/api", "https://app.mfish.com.cn"]])
-  }
-});
+  };
+};
