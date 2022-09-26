@@ -43,7 +43,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       ]
     },
     server: {
-      https: true,
+      https: false,
       // Listening on all local IPs
       host: true,
       port: VITE_PORT,
@@ -57,11 +57,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       target: "es2015",
       cssTarget: "chrome80",
       outDir: "dist",
-      // minify: 'terser',
       /**
-       * 当 minify=“minify:'terser'” 解开注释
+       * 当 minify=“minify:'terser'” 解开注释 需要安装Terser
+       * npm add -D terser
        * Uncomment when minify="minify:'terser'"
        */
+      // minify: 'terser',
       // terserOptions: {
       //   compress: {
       //     keep_infinity: true,
