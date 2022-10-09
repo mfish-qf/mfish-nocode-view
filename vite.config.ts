@@ -5,7 +5,8 @@ import { resolve } from "path";
 import pkg from "./package.json";
 import dayjs from "dayjs";
 import { createVitePlugins } from "./build/vite/plugin";
-import { generateModifyVars } from "./build/generate/generateModifyVars";
+import { generateModifyVars } from "./build/generate/GenerateModifyVars";
+import { OUTPUT_DIR } from "./build/vite/Constant";
 
 function pathResolve(dir: string) {
   return resolve(process.cwd(), ".", dir);
@@ -56,7 +57,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     build: {
       target: "es2015",
       cssTarget: "chrome80",
-      outDir: "dist",
+      outDir: OUTPUT_DIR,
       /**
        * 当 minify=“minify:'terser'” 解开注释 需要安装Terser
        * npm add -D terser

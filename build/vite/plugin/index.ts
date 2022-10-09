@@ -8,10 +8,10 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueSetupExtend from "vite-plugin-vue-setup-extend";
 import VitePluginCertificate from "vite-plugin-mkcert";
+import { configHtmlPlugin } from "./html";
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const {} = viteEnv;
-  console.log(isBuild);
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // have to
     vue(),
@@ -23,5 +23,6 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
       source: "coding"
     })
   ];
+  vitePlugins.push(configHtmlPlugin(viteEnv, isBuild));
   return vitePlugins;
 }

@@ -11,6 +11,16 @@ export function isProdFn(mode: string): boolean {
 }
 
 /**
+ * 获取配置文件名
+ * @param env
+ */
+export function getConfigFileName(env: Record<string, any>){
+  return `__${env.VITE_GLOB_APP_SHORT_NAME || '__APP'}__PRODUCTION__CONF__`
+    .toUpperCase()
+    .replace(/\s/g, '');
+}
+
+/**
  * Whether to generate package preview
  */
 export function isReportMode(): boolean {

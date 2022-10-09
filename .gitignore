@@ -27,3 +27,4 @@ coverage
 *.sln
 *.sw?
 /pnpm-lock.yaml
+/mfish-nocode-view/
