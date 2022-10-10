@@ -8,7 +8,7 @@ import { useRouter } from "vue-router";
 import { useTitle as usePageTitle } from "@vueuse/core";
 import { REDIRECT_NAME } from "/@/router/Constant";
 import { getEnvConfig } from "/@/utils/Env";
-import { useI18n } from "vue-i18n";
+import { useI18n } from '/@/hooks/web/UseI18n';
 
 export function useTitle() {
   const { title } = getEnvConfig();
