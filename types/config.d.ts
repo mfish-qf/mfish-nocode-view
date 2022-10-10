@@ -1,8 +1,10 @@
 /**
- * @description：系统配置信息
+ * @description：配置定义
  * @author     ：qiufeng
  * @date       ：2022/10/8 17:42
  */
+
+//全局环境配置
 export interface GlobEnvConfig {
   // Site title
   VITE_GLOB_APP_TITLE: string;
@@ -16,6 +18,7 @@ export interface GlobEnvConfig {
   VITE_GLOB_UPLOAD_URL?: string;
 }
 
+//环境配置转换为只读属性提供使用
 export interface GlobConfig {
   // Site title
   title: string;
@@ -29,3 +32,16 @@ export interface GlobConfig {
   uploadUrl?: string;
 }
 
+//国际化类型
+export type LocaleType = "zh_CN" | "en" | "ru" | "ja" | "ko";
+
+//国际化设置
+export interface LocaleSetting {
+  showPicker: boolean;
+  // 当前语言
+  locale: LocaleType;
+  // 默认语言
+  fallback: LocaleType;
+  // 可用语言
+  availableLocales: LocaleType[];
+}

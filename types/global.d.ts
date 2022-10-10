@@ -1,9 +1,10 @@
 /**
- * @description：全局配置信息
+ * @description：全局配置信息定义
  * @author     ：qiufeng
  * @date       ：2022/9/22 18:02
  */
 import type {} from "vue";
+import { ImportGlobOptions, KnownAsTypeMap } from "vite/types/importGlob";
 
 declare global {
   declare interface ViteEnv {
@@ -14,7 +15,7 @@ declare global {
     VITE_GLOB_APP_TITLE: string;
     VITE_GLOB_APP_SHORT_NAME: string;
     VITE_USE_CDN: boolean;
-    VITE_BUILD_COMPRESS: 'gzip' | 'brotli' | 'none';
+    VITE_BUILD_COMPRESS: "gzip" | "brotli" | "none";
     VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE: boolean;
     VITE_LEGACY: boolean;
     VITE_USE_IMAGEMIN: boolean;
@@ -24,4 +25,10 @@ declare global {
   }
 
   declare type Recordable<T = any> = Record<string, T>;
+  declare type ReadonlyRecordable<T = any> = {
+    readonly [key: string]: T;
+  };
+  declare type Nullable<T> = T | null;
+  declare type PropType<T> = VuePropType<T>;
+
 }

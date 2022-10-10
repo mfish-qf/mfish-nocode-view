@@ -3,9 +3,10 @@
  * @author     ：qiufeng
  * @date       ：2022/10/9 11:43
  */
-import { warn } from "/@/utils/log";
+import { warn } from "/@/utils/MFLog";
 import { getConfigFileName } from "../../build/utils";
 import { GlobConfig, GlobEnvConfig } from "/#/config";
+import pkg from "../../package.json";
 
 export function getEnvConfig(): Readonly<GlobConfig> {
   const ENV_NAME = getConfigFileName(import.meta.env);
@@ -35,4 +36,28 @@ export function getEnvConfig(): Readonly<GlobConfig> {
     uploadUrl: VITE_GLOB_UPLOAD_URL
   };
   return glob as Readonly<GlobConfig>;
+}
+
+export function getCommonStoragePrefix() {
+  return `${getEnvConfig()}__${getEnv()}`.toUpperCase();
+}
+
+// 根据版本生成换成key
+export function getStorageShortName() {
+  return `${getCommonStoragePrefix()}${`__${pkg.version}`}__`.toUpperCase();
+}
+
+//获取当前环境
+export function getEnv(): string {
+  return import.meta.env.MODE;
+}
+
+//是否开发模式
+export function isDevMode(): boolean {
+  return import.meta.env.DEV;
+}
+
+//是否生成模式
+export function isProdMode(): boolean {
+  return import.meta.env.PROD;
 }
