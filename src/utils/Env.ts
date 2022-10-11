@@ -3,8 +3,8 @@
  * @author     ：qiufeng
  * @date       ：2022/10/9 11:43
  */
-import { warn } from "/@/utils/MFLog";
-import { getConfigFileName } from "../../build/utils";
+import { warn } from "/@/utils/Log";
+import { getConfigFileName } from "../../build/Utils";
 import { GlobConfig, GlobEnvConfig } from "/#/config";
 import pkg from "../../package.json";
 

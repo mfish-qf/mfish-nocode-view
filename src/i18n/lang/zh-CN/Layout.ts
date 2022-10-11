@@ -51,7 +51,7 @@ export default {
     minute: '分钟',
 
     operatingTitle: '操作成功',
-    operatingContent: '复制成功,请到 src/settings/projectSetting.ts 中修改配置！',
+    operatingContent: '复制成功,请到 src/settings/ProjectSetting.ts 中修改配置！',
     resetSuccess: '重置成功！',
 
     copyBtn: '拷贝',

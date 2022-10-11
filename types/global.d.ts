@@ -4,7 +4,6 @@
  * @date       ：2022/9/22 18:02
  */
 import type {} from "vue";
-import { ImportGlobOptions, KnownAsTypeMap } from "vite/types/importGlob";
 
 declare global {
   declare interface ViteEnv {
@@ -25,10 +24,18 @@ declare global {
   }
 
   declare type Recordable<T = any> = Record<string, T>;
+
   declare type ReadonlyRecordable<T = any> = {
     readonly [key: string]: T;
   };
   declare type Nullable<T> = T | null;
   declare type PropType<T> = VuePropType<T>;
+
+  declare interface ChangeEvent extends Event {
+    target: HTMLInputElement;
+  }
+
+  declare type TimeoutHandle = ReturnType<typeof setTimeout>;
+  declare type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]>; };
 
 }

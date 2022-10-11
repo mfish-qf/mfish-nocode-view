@@ -43,7 +43,7 @@ export default {
     fireResourceError: 'Fire resource error',
     fireAjaxError: 'Fire ajax error',
 
-    enableMessage: 'Only effective when useErrorHandle=true in `/src/settings/projectSetting.ts`.',
+    enableMessage: 'Only effective when useErrorHandle=true in `/src/settings/ProjectSetting.ts`.',
   },
   exception: {
     backLogin: 'Back Login',

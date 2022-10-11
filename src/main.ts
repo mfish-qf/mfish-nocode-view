@@ -1,16 +1,30 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router";
+import { router, setupRouter } from "./router";
 import "./assets/main.css";
 import { setupStore } from "/@/stores";
 import { setupI18n } from "/@/i18n/SetupI18n";
+import { registerGlobComponent } from "/@/components/RegisterGlobComponent";
+import { setupRouterGuard } from "/@/router/guard";
+import { initAppConfigStore } from "/@/logics/InitAppConfig";
+import { setupErrorHandle } from "/@/logics/error-handle";
 
 async function initApp() {
   const app = createApp(App);
   //配置缓存
   setupStore(app);
+  // 初始化内部系统配置
+  initAppConfigStore();
+  //注册全局组件
+  registerGlobComponent(app);
+  //设置国际化
   await setupI18n(app);
-  app.use(router);
+  // 配置路由
+  setupRouter(app);
+  // 路由守卫
+  setupRouterGuard(router);
+  // 配置全局错误处理
+  setupErrorHandle(app);
   app.mount("#app");
 }
 

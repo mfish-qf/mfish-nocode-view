@@ -11,7 +11,7 @@ type GenerateTheme = 'default' | 'dark';
 export interface GenerateColorsParams {
   mixLighten: Fn;
   mixDarken: Fn;
-  tinyColor: any;
+  tinycolor: any;
   color?: string;
 }
 
@@ -31,11 +31,11 @@ export function getThemeColors(color?: string) {
 }
 
 export function generateColors({
-  color = primaryColor,
-  mixLighten,
-  mixDarken,
-  tinyColor,
-}: GenerateColorsParams) {
+                                 color = primaryColor,
+                                 mixLighten,
+                                 mixDarken,
+                                 tinycolor,
+                               }: GenerateColorsParams) {
   const arr = new Array(19).fill(0);
   const lightens = arr.map((_t, i) => {
     return mixLighten(color, i / 5);
@@ -46,24 +46,24 @@ export function generateColors({
   });
 
   const alphaColors = arr.map((_t, i) => {
-    return tinyColor(color)
+    return tinycolor(color)
       .setAlpha(i / 20)
       .toRgbString();
   });
 
   const shortAlphaColors = alphaColors.map((item) => item.replace(/\s/g, '').replace(/0\./g, '.'));
 
-  const tinyColorLightens = arr
+  const tinycolorLightens = arr
     .map((_t, i) => {
-      return tinyColor(color)
+      return tinycolor(color)
         .lighten(i * 5)
         .toHexString();
     })
     .filter((item) => item !== '#ffffff');
 
-  const tinyColorDarkens = arr
+  const tinycolorDarkens = arr
     .map((_t, i) => {
-      return tinyColor(color)
+      return tinycolor(color)
         .darken(i * 5)
         .toHexString();
     })
@@ -73,7 +73,7 @@ export function generateColors({
     ...darkens,
     ...alphaColors,
     ...shortAlphaColors,
-    ...tinyColorDarkens,
-    ...tinyColorLightens,
+    ...tinycolorDarkens,
+    ...tinycolorLightens,
   ].filter((item) => !item.includes('-'));
 }
