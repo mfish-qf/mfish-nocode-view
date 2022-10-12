@@ -1,5 +1,5 @@
 import { ConfigEnv, loadEnv, UserConfig } from "vite";
-import { createProxy } from "./build/vite/proxy";
+import { createProxy } from "./build/vite/Proxy";
 import { wrapperEnv } from "./build/Utils";
 import { resolve } from "path";
 import pkg from "./package.json";
@@ -90,11 +90,11 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       }
     },
 
-    // The vite plugin used by the project. The quantity is large, so it is separately extracted and managed
+    // 单独管理Vite插件
     plugins: createVitePlugins(viteEnv, isBuild),
 
     optimizeDeps: {
-      // @iconify/iconify: The dependency is dynamically and virtually loaded by @purge-icons/generated, so it needs to be specified explicitly
+      // @iconify/iconify: 依赖项是由@purge-icons/generated动态虚拟加载的，因此需要明确指定
       include: [
         "@vue/runtime-core",
         "@vue/shared",

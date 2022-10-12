@@ -8,6 +8,16 @@ import { registerGlobComponent } from "/@/components/RegisterGlobComponent";
 import { setupRouterGuard } from "/@/router/guard";
 import { initAppConfigStore } from "/@/logics/InitAppConfig";
 import { setupErrorHandle } from "/@/logics/error-handle";
+import "/@/design/index.less";
+import "virtual:svg-icons-register";
+import "virtual:windi-base.css";
+import "virtual:windi-components.css";
+import "virtual:windi-utilities.css";
+import { isDevMode } from "/@/utils/Env";
+
+if (isDevMode()) {
+  import("ant-design-vue/es/style");
+}
 
 async function initApp() {
   const app = createApp(App);

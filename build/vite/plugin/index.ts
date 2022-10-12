@@ -9,9 +9,12 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueSetupExtend from "vite-plugin-vue-setup-extend";
 import VitePluginCertificate from "vite-plugin-mkcert";
 import { configHtmlPlugin } from "./Html";
+import { configSvgIconsPlugin } from "./SvgSprite";
+import Windicss from "vite-plugin-windicss";
+import legacy from "@vitejs/plugin-legacy";
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
-  const {} = viteEnv;
+  const { VITE_LEGACY } = viteEnv;
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // have to
     vue(),
@@ -23,6 +26,9 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
       source: "coding"
     })
   ];
+  VITE_LEGACY && isBuild && vitePlugins.push(legacy());
   vitePlugins.push(configHtmlPlugin(viteEnv, isBuild));
+  vitePlugins.push(configSvgIconsPlugin(isBuild));
+  vitePlugins.push(Windicss());
   return vitePlugins;
 }
