@@ -24,18 +24,37 @@ declare global {
   }
 
   declare type Recordable<T = any> = Record<string, T>;
-
   declare type ReadonlyRecordable<T = any> = {
     readonly [key: string]: T;
   };
   declare type Nullable<T> = T | null;
   declare type PropType<T> = VuePropType<T>;
+  declare type TimeoutHandle = ReturnType<typeof setTimeout>;
+  declare type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]>; };
+  declare type VueNode = VNodeChild | JSX.Element;
 
   declare interface ChangeEvent extends Event {
     target: HTMLInputElement;
   }
 
-  declare type TimeoutHandle = ReturnType<typeof setTimeout>;
-  declare type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]>; };
+  declare function parseInt(s: string | number, radix?: number): number;
+  declare function parseFloat(string: string | number): number;
+  namespace JSX {
+    // tslint:disable no-empty-interface
+    type Element = VNode;
+    // tslint:disable no-empty-interface
+    type ElementClass = ComponentRenderProxy;
 
+    interface ElementAttributesProperty {
+      $props: any;
+    }
+
+    interface IntrinsicElements {
+      [elem: string]: any;
+    }
+
+    interface IntrinsicAttributes {
+      [elem: string]: any;
+    }
+  }
 }

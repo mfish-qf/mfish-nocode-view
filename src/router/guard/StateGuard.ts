@@ -1,8 +1,8 @@
 import type { Router } from "vue-router";
-import { useAppStore } from "/@/stores/modules/App";
-import { useMultipleTabStore } from "/@/stores/modules/MultipleTab";
-import { useUserStore } from "/@/stores/modules/User";
-import { usePermissionStore } from "/@/stores/modules/Permission";
+import { useAppStore } from "/@/store/modules/App";
+import { useMultipleTabStore } from "/@/store/modules/MultipleTab";
+import { useUserStore } from "/@/store/modules/User";
+import { usePermissionStore } from "/@/store/modules/Permission";
 import { PageEnum } from "/@/enums/PageEnum";
 import { removeTabChangeListener } from "/@/logics/mitt/RouteChange";
 

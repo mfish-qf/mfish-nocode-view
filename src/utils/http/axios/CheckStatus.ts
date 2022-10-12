@@ -1,7 +1,7 @@
 import type { ErrorMessageMode } from "/#/axios";
 import { useMessage } from "/@/hooks/web/UseMessage";
 import { useI18n } from "/@/hooks/web/UseI18n";
-import { useUserStoreWithOut } from "/@/stores/modules/User";
+import { useUserStoreWithOut } from "/@/store/modules/User";
 import projectSetting from "/@/settings/ProjectSetting";
 import { SessionTimeoutProcessingEnum } from "/@/enums/AppEnum";
 

@@ -9,7 +9,7 @@
   import { computed, unref } from 'vue';
   import { SvgIcon } from '/@/components/Icon';
   import { useDesign } from '/@/hooks/web/UseDesign';
-  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
+  import { useRootSetting } from '/@/hooks/setting/UseRootSetting';
   import { updateHeaderBgColor, updateSidebarBgColor } from '/@/logics/theme/UpdateBackground';
   import { updateDarkTheme } from '/@/logics/theme/Dark';
   import { ThemeEnum } from '/@/enums/AppEnum';

@@ -5,7 +5,7 @@
  */
 import { App, Plugin } from "vue";
 import { isObject } from "/@/utils/Is";
-import type { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router';
+import type { RouteLocationNormalized, RouteRecordNormalized } from "vue-router";
 
 //组件安装
 export const withInstall = <T>(component: T, alias?: string) => {
@@ -39,12 +39,12 @@ export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
  *  ==>www.baidu.com?a=3&b=4
  */
 export function setObjToUrlParams(baseUrl: string, obj: any): string {
-  let parameters = '';
+  let parameters = "";
   for (const key in obj) {
-    parameters += key + '=' + encodeURIComponent(obj[key]) + '&';
+    parameters += key + "=" + encodeURIComponent(obj[key]) + "&";
   }
-  parameters = parameters.replace(/&$/, '');
-  return /\?$/.test(baseUrl) ? baseUrl + parameters : baseUrl.replace(/\/?$/, '?') + parameters;
+  parameters = parameters.replace(/&$/, "");
+  return /\?$/.test(baseUrl) ? baseUrl + parameters : baseUrl.replace(/\/?$/, "?") + parameters;
 }
 
 export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormalized {
@@ -56,8 +56,16 @@ export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormal
       ? matched.map((item) => ({
         meta: item.meta,
         name: item.name,
-        path: item.path,
+        path: item.path
       }))
-      : undefined) as RouteRecordNormalized[],
+      : undefined) as RouteRecordNormalized[]
   };
+}
+
+export function openWindow(url: string, opt?: { target?: TargetContext | string; noopener?: boolean; noreferrer?: boolean }) {
+  const { target = "__blank", noopener = true, noreferrer = true } = opt || {};
+  const feature: string[] = [];
+  noopener && feature.push("noopener=yes");
+  noreferrer && feature.push("noreferrer=yes");
+  window.open(url, target, feature.join(","));
 }

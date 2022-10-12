@@ -12,8 +12,8 @@ import { updateGrayMode } from '/@/logics/theme/UpdateGrayMode';
 import { updateDarkTheme } from '/@/logics/theme/Dark';
 import { changeTheme } from '/@/logics/theme';
 
-import { useAppStore } from '/@/stores/modules/App';
-import { useLocaleStore } from '/@/stores/modules/I18n';
+import { useAppStore } from '/@/store/modules/App';
+import { useLocaleStore } from '/@/store/modules/I18n';
 
 import { getCommonStoragePrefix, getStorageShortName } from '/@/utils/Env';
 

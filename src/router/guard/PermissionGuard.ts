@@ -1,7 +1,7 @@
 import type { Router, RouteRecordRaw } from "vue-router";
-import { usePermissionStoreWithOut } from "/@/stores/modules/Permission";
+import { usePermissionStoreWithOut } from "/@/store/modules/Permission";
 import { PageEnum } from "/@/enums/PageEnum";
-import { useUserStoreWithOut } from "/@/stores/modules/User";
+import { useUserStoreWithOut } from "/@/store/modules/User";
 import { PAGE_NOT_FOUND_ROUTE } from "/@/router/routers/Basic";
 import { RootRoute } from "/@/router/routers";
 

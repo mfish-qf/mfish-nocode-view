@@ -7,19 +7,19 @@ import type { RequestOptions, Result } from "/#/axios";
 import type { AxiosTransform, CreateAxiosOptions } from "./AxiosTransform";
 import { VAxios } from "./Axios";
 import { checkStatus } from "./CheckStatus";
-import { getEnvConfig } from "/@/utils/Env";
+import { useGlobSetting } from '/@/hooks/setting';
 import { useMessage } from "/@/hooks/web/UseMessage";
 import { RequestEnum, ResultEnum, ContentTypeEnum } from "/@/enums/HttpEnum";
 import { isString } from "/@/utils/Is";
 import { getToken } from "/@/utils/auth";
 import { setObjToUrlParams, deepMerge } from "/@/utils";
-import { useErrorLogStoreWithOut } from "/@/stores/modules/ErrorLog";
+import { useErrorLogStoreWithOut } from "/@/store/modules/ErrorLog";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { joinTimestamp, formatRequestDate } from "./Helper";
-import { useUserStoreWithOut } from "/@/stores/modules/User";
+import { useUserStoreWithOut } from "/@/store/modules/User";
 import { AxiosRetry } from "/@/utils/http/axios/AxiosRetry";
 
-const globSetting = getEnvConfig();
+const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix;
 const { createMessage, createErrorModal } = useMessage();
 

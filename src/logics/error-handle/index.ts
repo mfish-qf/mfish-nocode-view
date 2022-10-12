@@ -4,7 +4,7 @@
 
 import type { ErrorLogInfo } from '/#/store';
 
-import { useErrorLogStoreWithOut } from '/@/stores/modules/ErrorLog';
+import { useErrorLogStoreWithOut } from '/@/store/modules/ErrorLog';
 
 import { ErrorTypeEnum } from '/@/enums/ExceptionEnum';
 import { App } from 'vue';

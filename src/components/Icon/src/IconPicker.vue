@@ -73,7 +73,7 @@
   import SvgIcon from './SvgIcon.vue';
 
   import iconsData from '../data/icons.data';
-  import { propTypes } from '/@/utils/propTypes';
+  import { propTypes } from '/@/utils/PropTypes';
   import { usePagination } from '/@/hooks/web/usePagination';
   import { useDebounceFn } from '@vueuse/core';
   import { useI18n } from '/@/hooks/web/UseI18n';

@@ -7,15 +7,17 @@ import { unref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useTitle as usePageTitle } from "@vueuse/core";
 import { REDIRECT_NAME } from "/@/router/Constant";
-import { getEnvConfig } from "/@/utils/Env";
-import { useI18n } from '/@/hooks/web/UseI18n';
+import { useGlobSetting } from "/@/hooks/setting";
+import { useI18n } from "/@/hooks/web/UseI18n";
+import { useLocaleStore } from "/@/store/modules/I18n";
 
 export function useTitle() {
-  const { title } = getEnvConfig();
+  const { title } = useGlobSetting();
   const { currentRoute } = useRouter();
   const pageTitle = usePageTitle();
   const { t } = useI18n();
-  watch([() => currentRoute.value.path], () => {
+  const localeStore = useLocaleStore();
+  watch([() => currentRoute.value.path, () => localeStore.getLocale], () => {
       const route = unref(currentRoute);
       if (route.name === REDIRECT_NAME) {
         return;

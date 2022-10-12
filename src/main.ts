@@ -1,8 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import { router, setupRouter } from "./router";
-import "./assets/main.css";
-import { setupStore } from "/@/stores";
+import { setupStore } from "/@/store";
 import { setupI18n } from "/@/i18n/SetupI18n";
 import { registerGlobComponent } from "/@/components/RegisterGlobComponent";
 import { setupRouterGuard } from "/@/router/guard";

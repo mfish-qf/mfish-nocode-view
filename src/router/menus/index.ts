@@ -1,8 +1,8 @@
 import type { Menu, MenuModule } from "/@/router/Types";
 import type { RouteRecordNormalized } from "vue-router";
 
-import { useAppStoreWithOut } from "/@/stores/modules/App";
-import { usePermissionStore } from "/@/stores/modules/Permission";
+import { useAppStoreWithOut } from "/@/store/modules/App";
+import { usePermissionStore } from "/@/store/modules/Permission";
 import { transformMenuModule, getAllParentPath } from "/@/router/helper/MenuHelper";
 import { filter } from "/@/utils/helper/TreeHelper";
 import { isUrl } from "/@/utils/Is";

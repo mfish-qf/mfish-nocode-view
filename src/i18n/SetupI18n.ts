@@ -4,7 +4,7 @@ import type { I18n, I18nOptions } from "vue-i18n";
 import { createI18n } from "vue-i18n";
 import { setHtmlPageLang, setLoadLocalePool } from "./Helper";
 import { localeSetting } from "/@/settings/I18nSetting";
-import { useLocaleStoreWithOut } from "/@/stores/modules/I18n";
+import { useLocaleStoreWithOut } from "/@/store/modules/I18n";
 
 const { fallback, availableLocales } = localeSetting;
 

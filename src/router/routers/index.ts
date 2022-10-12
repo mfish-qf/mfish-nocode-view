@@ -39,8 +39,7 @@ export const LoginRoute: AppRouteRecordRaw = {
   }
 };
 
-// Basic routing without permission
-// 未经许可的基本路由
+// 无需权限的基本路由
 export const basicRoutes = [
   LoginRoute,
   RootRoute,
