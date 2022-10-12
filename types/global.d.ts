@@ -6,6 +6,15 @@
 import type {} from "vue";
 
 declare global {
+  const __APP_INFO__: {
+    pkg: {
+      name: string;
+      version: string;
+      dependencies: Recordable<string>;
+      devDependencies: Recordable<string>;
+    };
+    lastBuildTime: string;
+  };
   declare interface ViteEnv {
     VITE_PORT: number;
     VITE_PUBLIC_PATH: string;
@@ -30,6 +39,7 @@ declare global {
   declare type Nullable<T> = T | null;
   declare type PropType<T> = VuePropType<T>;
   declare type TimeoutHandle = ReturnType<typeof setTimeout>;
+  declare type IntervalHandle = ReturnType<typeof setInterval>;
   declare type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]>; };
   declare type VueNode = VNodeChild | JSX.Element;
 

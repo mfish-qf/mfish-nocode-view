@@ -1,26 +1,26 @@
 /**
  * Application configuration
  */
-import type { ProjectConfig } from '/#/config';
+import type { ProjectConfig } from "/#/config";
 
-import { PROJ_CFG_KEY } from '/@/enums/CacheEnum';
-import projectSetting from '/@/settings/ProjectSetting';
+import { PROJ_CFG_KEY } from "/@/enums/CacheEnum";
+import projectSetting from "/@/settings/ProjectSetting";
 
-import { updateHeaderBgColor, updateSidebarBgColor } from '/@/logics/theme/UpdateBackground';
-import { updateColorWeak } from '/@/logics/theme/UpdateColorWeak';
-import { updateGrayMode } from '/@/logics/theme/UpdateGrayMode';
-import { updateDarkTheme } from '/@/logics/theme/Dark';
-import { changeTheme } from '/@/logics/theme';
+import { updateHeaderBgColor, updateSidebarBgColor } from "/@/logics/theme/UpdateBackground";
+import { updateColorWeak } from "/@/logics/theme/UpdateColorWeak";
+import { updateGrayMode } from "/@/logics/theme/UpdateGrayMode";
+import { updateDarkTheme } from "/@/logics/theme/Dark";
+import { changeTheme } from "/@/logics/theme";
 
-import { useAppStore } from '/@/store/modules/App';
-import { useLocaleStore } from '/@/store/modules/I18n';
+import { useAppStore } from "/@/store/modules/App";
+import { useLocaleStore } from "/@/store/modules/I18n";
 
-import { getCommonStoragePrefix, getStorageShortName } from '/@/utils/Env';
+import { getCommonStoragePrefix, getStorageShortName } from "/@/utils/Env";
 
-import { primaryColor } from '../../build/config/ThemeConfig';
-import { Persistent } from '/@/utils/cache/Persistent';
-import { deepMerge } from '/@/utils';
-import { ThemeEnum } from '/@/enums/AppEnum';
+import { primaryColor } from "../../build/config/ThemeConfig";
+import { Persistent } from "/@/utils/cache/Persistent";
+import { deepMerge } from "/@/utils";
+import { ThemeEnum } from "/@/enums/AppEnum";
 
 // Initial project configuration
 export function initAppConfigStore() {
@@ -35,7 +35,7 @@ export function initAppConfigStore() {
     themeColor,
 
     headerSetting: { bgColor: headerBgColor } = {},
-    menuSetting: { bgColor } = {},
+    menuSetting: { bgColor } = {}
   } = projCfg;
   try {
     if (themeColor && themeColor !== primaryColor) {

@@ -1,12 +1,12 @@
-import type { Menu } from '/@/router/Types';
-import { ref, onBeforeMount, unref, Ref, nextTick } from 'vue';
-import { getMenus } from '/@/router/menus';
-import { cloneDeep } from 'lodash-es';
-import { filter, forEach } from '/@/utils/helper/TreeHelper';
-import { useGo } from '/@/hooks/web/UsePage';
-import { useScrollTo } from '/@/hooks/event/UseScrollTo';
-import { onKeyStroke, useDebounceFn } from '@vueuse/core';
-import { useI18n } from '/@/hooks/web/UseI18n';
+import type { Menu } from "/@/router/Types";
+import { ref, onBeforeMount, unref, Ref, nextTick } from "vue";
+import { getMenus } from "/@/router/menus";
+import { cloneDeep } from "lodash-es";
+import { filter, forEach } from "/@/utils/helper/TreeHelper";
+import { useGo } from "/@/hooks/web/UsePage";
+import { useScrollTo } from "/@/hooks/event/UseScrollTo";
+import { onKeyStroke, useDebounceFn } from "@vueuse/core";
+import { useI18n } from "/@/hooks/web/UseI18n";
 
 export interface SearchResult {
   name: string;
@@ -16,19 +16,19 @@ export interface SearchResult {
 
 // Translate special characters
 function transform(c: string) {
-  const code: string[] = ['$', '(', ')', '*', '+', '.', '[', ']', '?', '\\', '^', '{', '}', '|'];
+  const code: string[] = ["$", "(", ")", "*", "+", ".", "[", "]", "?", "\\", "^", "{", "}", "|"];
   return code.includes(c) ? `\\${c}` : c;
 }
 
 function createSearchReg(key: string) {
   const keys = [...key].map((item) => transform(item));
-  const str = ['', ...keys, ''].join('.*');
+  const str = ["", ...keys, ""].join(".*");
   return new RegExp(str);
 }
 
 export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit: EmitType) {
   const searchResult = ref<SearchResult[]>([]);
-  const keyword = ref('');
+  const keyword = ref("");
   const activeIndex = ref(-1);
 
   let menuList: Menu[] = [];
@@ -69,7 +69,7 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
         ret.push({
           name: parent?.name ? `${parent.name} > ${name}` : name,
           path,
-          icon,
+          icon
         });
       }
       if (!meta?.hideChildrenInMenu && Array.isArray(children) && children.length) {
@@ -127,7 +127,7 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
     const { start } = useScrollTo({
       el: wrapEl,
       duration: 100,
-      to: scrollHeight - wrapHeight,
+      to: scrollHeight - wrapHeight
     });
     start();
   }
@@ -151,16 +151,16 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
   // close search modal
   function handleClose() {
     searchResult.value = [];
-    emit('close');
+    emit("close");
   }
 
   // enter search
-  onKeyStroke('Enter', handleEnter);
+  onKeyStroke("Enter", handleEnter);
   // Monitor keyboard arrow keys
-  onKeyStroke('ArrowUp', handleUp);
-  onKeyStroke('ArrowDown', handleDown);
+  onKeyStroke("ArrowUp", handleUp);
+  onKeyStroke("ArrowDown", handleDown);
   // esc close
-  onKeyStroke('Escape', handleClose);
+  onKeyStroke("Escape", handleClose);
 
   return { handleSearch, searchResult, keyword, activeIndex, handleMouseenter, handleEnter };
 }

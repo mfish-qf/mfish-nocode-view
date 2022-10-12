@@ -1,11 +1,11 @@
-import type { AxiosRequestConfig, Canceler } from 'axios';
-import axios from 'axios';
-import { isFunction } from '/@/utils/Is';
+import type { AxiosRequestConfig, Canceler } from "axios";
+import axios from "axios";
+import { isFunction } from "/@/utils/Is";
 
 // Used to store the identification and cancellation function of each request
 let pendingMap = new Map<string, Canceler>();
 
-export const getPendingUrl = (config: AxiosRequestConfig) => [config.method, config.url].join('&');
+export const getPendingUrl = (config: AxiosRequestConfig) => [config.method, config.url].join("&");
 
 export class AxiosCanceler {
   /**

@@ -34,7 +34,6 @@ export function useLocale() {
   const getShowLocalePicker = computed(() => localeStore.getShowPicker);
 
   const getAntdLocale = computed((): any => {
-    // @ts-ignore  antdLocale en.ts,zh_CN.ts中增加的属性
     return i18n.global.getLocaleMessage(unref(getLocale))?.antdLocale ?? {};
   });
 

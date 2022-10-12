@@ -34,7 +34,6 @@ const feat: AppRouteModule = {
     {
       path: 'request',
       name: 'RequestDemo',
-      // @ts-ignore
       component: () => import('/@/views/demo/feat/request-demo/index.vue'),
       meta: {
         title: t('routes.demo.feat.requestDemo'),

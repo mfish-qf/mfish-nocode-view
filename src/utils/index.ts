@@ -6,7 +6,10 @@
 import { App, Plugin } from "vue";
 import { isObject } from "/@/utils/Is";
 import type { RouteLocationNormalized, RouteRecordNormalized } from "vue-router";
+import { unref } from "vue";
 
+export const noop = () => {
+};
 //组件安装
 export const withInstall = <T>(component: T, alias?: string) => {
   const comp = component as any;
@@ -68,4 +71,21 @@ export function openWindow(url: string, opt?: { target?: TargetContext | string;
   noopener && feature.push("noopener=yes");
   noreferrer && feature.push("noreferrer=yes");
   window.open(url, target, feature.join(","));
+}
+
+/**
+ * 获取上层容器
+ */
+export function getPopupContainer(node?: HTMLElement): HTMLElement {
+  return (node?.parentNode as HTMLElement) ?? document.body;
+}
+
+//获取动态属性
+export function getDynamicProps<T, U>(props: T): Partial<U> {
+  const ret: Recordable = {};
+  Object.keys(props).map((key) => {
+    ret[key] = unref((props as Recordable)[key]);
+  });
+
+  return ret as Partial<U>;
 }

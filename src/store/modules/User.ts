@@ -1,21 +1,21 @@
-import type { UserInfo } from '/#/store';
-import type { ErrorMessageMode } from '/#/axios';
-import { defineStore } from 'pinia';
-import { store } from '/@/store';
-import { RoleEnum } from '/@/enums/RoleEnum';
-import { PageEnum } from '/@/enums/PageEnum';
-import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/CacheEnum';
-import { getAuthCache, setAuthCache } from '/@/utils/auth';
-import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/UserModel';
-import { doLogout, getUserInfo, loginApi } from '/@/api/sys/User';
-import { useI18n } from '/@/hooks/web/UseI18n';
-import { useMessage } from '/@/hooks/web/UseMessage';
-import { router } from '/@/router';
-import { usePermissionStore } from '/@/store/modules/Permission';
-import { RouteRecordRaw } from 'vue-router';
-import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routers/Basic';
-import { isArray } from '/@/utils/Is';
-import { h } from 'vue';
+import type { UserInfo } from "/#/store";
+import type { ErrorMessageMode } from "/#/axios";
+import { defineStore } from "pinia";
+import { store } from "/@/store";
+import { RoleEnum } from "/@/enums/RoleEnum";
+import { PageEnum } from "/@/enums/PageEnum";
+import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from "/@/enums/CacheEnum";
+import { getAuthCache, setAuthCache } from "/@/utils/auth";
+import { GetUserInfoModel, LoginParams } from "/@/api/sys/model/UserModel";
+import { doLogout, getUserInfo, loginApi } from "/@/api/sys/User";
+import { useI18n } from "/@/hooks/web/UseI18n";
+import { useMessage } from "/@/hooks/web/UseMessage";
+import { router } from "/@/router";
+import { usePermissionStore } from "/@/store/modules/Permission";
+import { RouteRecordRaw } from "vue-router";
+import { PAGE_NOT_FOUND_ROUTE } from "/@/router/routers/Basic";
+import { isArray } from "/@/utils/Is";
+import { h } from "vue";
 
 interface UserState {
   userInfo: Nullable<UserInfo>;
@@ -26,7 +26,7 @@ interface UserState {
 }
 
 export const useUserStore = defineStore({
-  id: 'app-user',
+  id: "app-user",
   state: (): UserState => ({
     // user info
     userInfo: null,
@@ -37,7 +37,7 @@ export const useUserStore = defineStore({
     // Whether the login expired
     sessionTimeout: false,
     // Last fetch time
-    lastUpdateTime: 0,
+    lastUpdateTime: 0
   }),
   getters: {
     getUserInfo(): UserInfo {
@@ -54,11 +54,11 @@ export const useUserStore = defineStore({
     },
     getLastUpdateTime(): number {
       return this.lastUpdateTime;
-    },
+    }
   },
   actions: {
     setToken(info: string | undefined) {
-      this.token = info ? info : ''; // for null or undefined value
+      this.token = info ? info : ""; // for null or undefined value
       setAuthCache(TOKEN_KEY, info);
     },
     setRoleList(roleList: RoleEnum[]) {
@@ -75,7 +75,7 @@ export const useUserStore = defineStore({
     },
     resetState() {
       this.userInfo = null;
-      this.token = '';
+      this.token = "";
       this.roleList = [];
       this.sessionTimeout = false;
     },
@@ -86,7 +86,7 @@ export const useUserStore = defineStore({
       params: LoginParams & {
         goHome?: boolean;
         mode?: ErrorMessageMode;
-      },
+      }
     ): Promise<GetUserInfoModel | null> {
       try {
         const { goHome = true, mode, ...loginParams } = params;
@@ -144,7 +144,7 @@ export const useUserStore = defineStore({
         try {
           await doLogout();
         } catch {
-          console.log('注销Token失败');
+          console.log("注销Token失败");
         }
       }
       this.setToken(undefined);
@@ -160,15 +160,15 @@ export const useUserStore = defineStore({
       const { createConfirm } = useMessage();
       const { t } = useI18n();
       createConfirm({
-        iconType: 'warning',
-        title: () => h('span', t('sys.app.logoutTip')),
-        content: () => h('span', t('sys.app.logoutMessage')),
+        iconType: "warning",
+        title: () => h("span", t("sys.app.logoutTip")),
+        content: () => h("span", t("sys.app.logoutMessage")),
         onOk: async () => {
           await this.logout(true);
-        },
+        }
       });
-    },
-  },
+    }
+  }
 });
 
 // Need to be used outside the setup

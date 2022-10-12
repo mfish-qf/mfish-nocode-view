@@ -3,19 +3,19 @@ import type {
   HeaderSetting,
   MenuSetting,
   TransitionSetting,
-  MultiTabsSetting,
-} from '/#/config';
-import type { BeforeMiniState } from '/#/store';
+  MultiTabsSetting
+} from "/#/config";
+import type { BeforeMiniState } from "/#/store";
 
-import { defineStore } from 'pinia';
-import { store } from '/@/store';
+import { defineStore } from "pinia";
+import { store } from "/@/store";
 
-import { ThemeEnum } from '/@/enums/AppEnum';
-import { APP_DARK_MODE_KEY_, PROJ_CFG_KEY } from '/@/enums/CacheEnum';
-import { Persistent } from '/@/utils/cache/Persistent';
-import { darkMode } from '/@/settings/DesignSetting';
-import { resetRouter } from '/@/router';
-import { deepMerge } from '/@/utils';
+import { ThemeEnum } from "/@/enums/AppEnum";
+import { APP_DARK_MODE_KEY_, PROJ_CFG_KEY } from "/@/enums/CacheEnum";
+import { Persistent } from "/@/utils/cache/Persistent";
+import { darkMode } from "/@/settings/DesignSetting";
+import { resetRouter } from "/@/router";
+import { deepMerge } from "/@/utils";
 
 interface AppState {
   darkMode?: ThemeEnum;
@@ -26,20 +26,21 @@ interface AppState {
   // When the window shrinks, remember some states, and restore these states when the window is restored
   beforeMiniInfo: BeforeMiniState;
 }
+
 let timeId: TimeoutHandle;
 export const useAppStore = defineStore({
-  id: 'app',
+  id: "app",
   state: (): AppState => ({
     darkMode: undefined,
     pageLoading: false,
     projectConfig: Persistent.getLocal(PROJ_CFG_KEY),
-    beforeMiniInfo: {},
+    beforeMiniInfo: {}
   }),
   getters: {
     getPageLoading(): boolean {
       return this.pageLoading;
     },
-    getDarkMode(): 'light' | 'dark' | string {
+    getDarkMode(): "light" | "dark" | string {
       return this.darkMode || localStorage.getItem(APP_DARK_MODE_KEY_) || darkMode;
     },
 
@@ -62,7 +63,7 @@ export const useAppStore = defineStore({
     },
     getMultiTabsSetting(): MultiTabsSetting {
       return this.getProjectConfig.multiTabsSetting;
-    },
+    }
   },
   actions: {
     setPageLoading(loading: boolean): void {
@@ -98,8 +99,8 @@ export const useAppStore = defineStore({
         this.setPageLoading(loading);
         clearTimeout(timeId);
       }
-    },
-  },
+    }
+  }
 });
 
 // Need to be used outside the setup

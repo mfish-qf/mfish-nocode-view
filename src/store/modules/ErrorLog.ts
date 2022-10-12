@@ -1,12 +1,12 @@
-import type { ErrorLogInfo } from '/#/store';
+import type { ErrorLogInfo } from "/#/store";
 
-import { defineStore } from 'pinia';
-import { store } from '/@/store';
+import { defineStore } from "pinia";
+import { store } from "/@/store";
 
-import { formatToDateTime } from '/@/utils/DateUtil';
-import projectSetting from '/@/settings/ProjectSetting';
+import { formatToDateTime } from "/@/utils/DateUtil";
+import projectSetting from "/@/settings/ProjectSetting";
 
-import { ErrorTypeEnum } from '/@/enums/ExceptionEnum';
+import { ErrorTypeEnum } from "/@/enums/ExceptionEnum";
 import dayjs from "dayjs";
 
 export interface ErrorLogState {
@@ -15,10 +15,10 @@ export interface ErrorLogState {
 }
 
 export const useErrorLogStore = defineStore({
-  id: 'app-error-log',
+  id: "app-error-log",
   state: (): ErrorLogState => ({
     errorLogInfoList: null,
-    errorLogListCount: 0,
+    errorLogListCount: 0
   }),
   getters: {
     getErrorLogInfoList(): ErrorLogInfo[] {
@@ -26,13 +26,13 @@ export const useErrorLogStore = defineStore({
     },
     getErrorLogListCount(): number {
       return this.errorLogListCount;
-    },
+    }
   },
   actions: {
     addErrorLogInfo(info: ErrorLogInfo) {
       const item = {
         ...info,
-        time: formatToDateTime(dayjs()),
+        time: formatToDateTime(dayjs())
       };
       this.errorLogInfoList = [item, ...(this.errorLogInfoList || [])];
       this.errorLogListCount += 1;
@@ -54,22 +54,22 @@ export const useErrorLogStore = defineStore({
       }
       const errInfo: Partial<ErrorLogInfo> = {
         message: error.message,
-        type: ErrorTypeEnum.AJAX,
+        type: ErrorTypeEnum.AJAX
       };
       if (error.response) {
         const {
-          config: { url = '', data: params = '', method = 'get', headers = {} } = {},
-          data = {},
+          config: { url = "", data: params = "", method = "get", headers = {} } = {},
+          data = {}
         } = error.response;
         errInfo.url = url;
-        errInfo.name = 'Ajax Error!';
-        errInfo.file = '-';
+        errInfo.name = "Ajax Error!";
+        errInfo.file = "-";
         errInfo.stack = JSON.stringify(data);
         errInfo.detail = JSON.stringify({ params, method, headers });
       }
       this.addErrorLogInfo(errInfo as ErrorLogInfo);
-    },
-  },
+    }
+  }
 });
 
 // Need to be used outside the setup

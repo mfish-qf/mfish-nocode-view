@@ -1,28 +1,28 @@
-import type { AppRouteRecordRaw, Menu } from '/@/router/Types';
+import type { AppRouteRecordRaw, Menu } from "/@/router/Types";
 
-import { defineStore } from 'pinia';
-import { store } from '/@/store';
-import { useI18n } from '/@/hooks/web/UseI18n';
-import { useUserStore } from './User';
-import { useAppStoreWithOut } from './App';
-import { toRaw } from 'vue';
-import { transformObjToRoute, flatMultiLevelRoutes } from '/@/router/helper/RouteHelper';
-import { transformRouteToMenu } from '/@/router/helper/MenuHelper';
+import { defineStore } from "pinia";
+import { store } from "/@/store";
+import { useI18n } from "/@/hooks/web/UseI18n";
+import { useUserStore } from "./User";
+import { useAppStoreWithOut } from "./App";
+import { toRaw } from "vue";
+import { transformObjToRoute, flatMultiLevelRoutes } from "/@/router/helper/RouteHelper";
+import { transformRouteToMenu } from "/@/router/helper/MenuHelper";
 
-import projectSetting from '/@/settings/ProjectSetting';
+import projectSetting from "/@/settings/ProjectSetting";
 
-import { PermissionModeEnum } from '/@/enums/AppEnum';
+import { PermissionModeEnum } from "/@/enums/AppEnum";
 
-import { asyncRoutes } from '/@/router/routers';
-import { ERROR_LOG_ROUTE, PAGE_NOT_FOUND_ROUTE } from '/@/router/routers/Basic';
+import { asyncRoutes } from "/@/router/routers";
+import { ERROR_LOG_ROUTE, PAGE_NOT_FOUND_ROUTE } from "/@/router/routers/Basic";
 
-import { filter } from '/@/utils/helper/TreeHelper';
+import { filter } from "/@/utils/helper/TreeHelper";
 
-import { getMenuList } from '/@/api/sys/Menu';
-import { getPermCode } from '/@/api/sys/User';
+import { getMenuList } from "/@/api/sys/Menu";
+import { getPermCode } from "/@/api/sys/User";
 
-import { useMessage } from '/@/hooks/web/UseMessage';
-import { PageEnum } from '/@/enums/PageEnum';
+import { useMessage } from "/@/hooks/web/UseMessage";
+import { PageEnum } from "/@/enums/PageEnum";
 
 interface PermissionState {
   // Permission code list
@@ -42,7 +42,7 @@ interface PermissionState {
 }
 
 export const usePermissionStore = defineStore({
-  id: 'app-permission',
+  id: "app-permission",
   state: (): PermissionState => ({
     // 权限代码列表
     permCodeList: [],
@@ -57,7 +57,7 @@ export const usePermissionStore = defineStore({
     backMenuList: [],
     // menu List
     // 菜单列表
-    frontMenuList: [],
+    frontMenuList: []
   }),
   getters: {
     getPermCodeList(): string[] | number[] {
@@ -74,7 +74,7 @@ export const usePermissionStore = defineStore({
     },
     getIsDynamicAddedRoute(): boolean {
       return this.isDynamicAddedRoute;
-    },
+    }
   },
   actions: {
     setPermCodeList(codeList: string[]) {
@@ -143,17 +143,17 @@ export const usePermissionStore = defineStore({
         if (!routes || routes.length === 0) return;
         let homePath: string = userStore.getUserInfo.homePath || PageEnum.BASE_HOME;
 
-        function patcher(routes: AppRouteRecordRaw[], parentPath = '') {
-          if (parentPath) parentPath = parentPath + '/';
+        function patcher(routes: AppRouteRecordRaw[], parentPath = "") {
+          if (parentPath) parentPath = parentPath + "/";
           routes.forEach((route: AppRouteRecordRaw) => {
             const { path, children, redirect } = route;
-            const currentPath = path.startsWith('/') ? path : parentPath + path;
+            const currentPath = path.startsWith("/") ? path : parentPath + path;
             if (currentPath === homePath) {
               if (redirect) {
                 homePath = route.redirect! as string;
               } else {
                 route.meta = Object.assign({}, route.meta, { affix: true });
-                throw new Error('end');
+                throw new Error("end");
               }
             }
             children && children.length > 0 && patcher(children, currentPath);
@@ -211,8 +211,8 @@ export const usePermissionStore = defineStore({
           const { createMessage } = useMessage();
 
           createMessage.loading({
-            content: t('sys.app.menuLoading'),
-            duration: 1,
+            content: t("sys.app.menuLoading"),
+            duration: 1
           });
 
           // !Simulate to obtain permission codes from the background,
@@ -249,8 +249,8 @@ export const usePermissionStore = defineStore({
       routes.push(ERROR_LOG_ROUTE);
       patchHomeAffix(routes);
       return routes;
-    },
-  },
+    }
+  }
 });
 
 // Need to be used outside the setup

@@ -1,7 +1,7 @@
-import { cacheCipher } from '/@/settings/EncryptionSetting';
-import type { EncryptionParams } from '/@/utils/Cipher';
-import { AesEncryption } from '/@/utils/Cipher';
-import { isNullOrUnDef } from '/@/utils/Is';
+import { cacheCipher } from "/@/settings/EncryptionSetting";
+import type { EncryptionParams } from "/@/utils/Cipher";
+import { AesEncryption } from "/@/utils/Cipher";
+import { isNullOrUnDef } from "/@/utils/Is";
 
 export interface CreateStorageParams extends EncryptionParams {
   prefixKey: string;
@@ -9,16 +9,17 @@ export interface CreateStorageParams extends EncryptionParams {
   hasEncrypt: boolean;
   timeout?: Nullable<number>;
 }
+
 export const createStorage = ({
-  prefixKey = '',
-  storage = sessionStorage,
-  key = cacheCipher.key,
-  iv = cacheCipher.iv,
-  timeout = null,
-  hasEncrypt = true,
-}: Partial<CreateStorageParams> = {}) => {
+                                prefixKey = "",
+                                storage = sessionStorage,
+                                key = cacheCipher.key,
+                                iv = cacheCipher.iv,
+                                timeout = null,
+                                hasEncrypt = true
+                              }: Partial<CreateStorageParams> = {}) => {
   if (hasEncrypt && [key.length, iv.length].some((item) => item !== 16)) {
-    throw new Error('When hasEncrypt is true, the key or iv must be 16 bits!');
+    throw new Error("When hasEncrypt is true, the key or iv must be 16 bits!");
   }
 
   const encryption = new AesEncryption({ key, iv });
@@ -34,6 +35,7 @@ export const createStorage = ({
     private prefixKey?: string;
     private encryption: AesEncryption;
     private hasEncrypt: boolean;
+
     /**
      *
      * @param {*} storage
@@ -60,7 +62,7 @@ export const createStorage = ({
       const stringData = JSON.stringify({
         value,
         time: Date.now(),
-        expire: !isNullOrUnDef(expire) ? new Date().getTime() + expire * 1000 : null,
+        expire: !isNullOrUnDef(expire) ? new Date().getTime() + expire * 1000 : null
       });
       const stringifyValue = this.hasEncrypt
         ? this.encryption.encryptByAES(stringData)
