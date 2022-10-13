@@ -1,12 +1,12 @@
-import { generate } from '@ant-design/colors';
+import { generate } from "@ant-design/colors";
 
-export const primaryColor = '#0960bd';
+export const primaryColor = "#0960bd";
 
-export const darkMode = 'light';
+export const darkMode = "light";
 
 type Fn = (...arg: any) => any;
 
-type GenerateTheme = 'default' | 'dark';
+type GenerateTheme = "default" | "dark";
 
 export interface GenerateColorsParams {
   mixLighten: Fn;
@@ -15,9 +15,9 @@ export interface GenerateColorsParams {
   color?: string;
 }
 
-export function generateAntColors(color: string, theme: GenerateTheme = 'default') {
+export function generateAntColors(color: string, theme: GenerateTheme = "default") {
   return generate(color, {
-    theme,
+    theme
   });
 }
 
@@ -25,8 +25,8 @@ export function getThemeColors(color?: string) {
   const tc = color || primaryColor;
   const lightColors = generateAntColors(tc);
   const primary = lightColors[5];
-  const modeColors = generateAntColors(primary, 'dark');
-
+  const modeColors = generateAntColors(primary, "dark");
+  debugger
   return [...lightColors, ...modeColors];
 }
 
@@ -34,7 +34,7 @@ export function generateColors({
                                  color = primaryColor,
                                  mixLighten,
                                  mixDarken,
-                                 tinycolor,
+                                 tinycolor
                                }: GenerateColorsParams) {
   const arr = new Array(19).fill(0);
   const lightens = arr.map((_t, i) => {
@@ -51,7 +51,7 @@ export function generateColors({
       .toRgbString();
   });
 
-  const shortAlphaColors = alphaColors.map((item) => item.replace(/\s/g, '').replace(/0\./g, '.'));
+  const shortAlphaColors = alphaColors.map((item) => item.replace(/\s/g, "").replace(/0\./g, "."));
 
   const tinycolorLightens = arr
     .map((_t, i) => {
@@ -59,7 +59,7 @@ export function generateColors({
         .lighten(i * 5)
         .toHexString();
     })
-    .filter((item) => item !== '#ffffff');
+    .filter((item) => item !== "#ffffff");
 
   const tinycolorDarkens = arr
     .map((_t, i) => {
@@ -67,13 +67,13 @@ export function generateColors({
         .darken(i * 5)
         .toHexString();
     })
-    .filter((item) => item !== '#000000');
+    .filter((item) => item !== "#000000");
   return [
     ...lightens,
     ...darkens,
     ...alphaColors,
     ...shortAlphaColors,
     ...tinycolorDarkens,
-    ...tinycolorLightens,
-  ].filter((item) => !item.includes('-'));
+    ...tinycolorLightens
+  ].filter((item) => !item.includes("-"));
 }

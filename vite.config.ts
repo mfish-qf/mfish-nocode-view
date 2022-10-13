@@ -6,7 +6,7 @@ import pkg from "./package.json";
 import dayjs from "dayjs";
 import { createVitePlugins } from "./build/vite/plugin";
 import { generateModifyVars } from "./build/generate/GenerateModifyVars";
-import { OUTPUT_DIR } from "./build/vite/Constant";
+import { OUTPUT_DIR } from "./build/Constant";
 
 function pathResolve(dir: string) {
   return resolve(process.cwd(), ".", dir);

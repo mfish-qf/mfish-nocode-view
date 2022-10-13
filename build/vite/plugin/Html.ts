@@ -3,7 +3,7 @@
  * @author     ：qiufeng
  * @date       ：2022/10/9 10:22
  */
-import { GLOB_CONFIG_FILE_NAME } from "../Constant";
+import { GLOB_CONFIG_FILE_NAME } from "../../Constant";
 import pkg from "../../../package.json";
 import { createHtmlPlugin } from "vite-plugin-html";
 
