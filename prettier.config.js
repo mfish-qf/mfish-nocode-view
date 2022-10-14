@@ -2,7 +2,7 @@ module.exports = {
   printWidth: 100,
   semi: true,
   vueIndentScriptAndStyle: true,
-  singleQuote: true,
+  singleQuote: false,
   trailingComma: 'all',
   proseWrap: 'never',
   htmlWhitespaceSensitivity: 'strict',

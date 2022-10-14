@@ -4,7 +4,6 @@
  * @date       ：2022/10/9 17:12
  */
 import { LocaleType } from "/#/config";
-
 import { i18n } from "./SetupI18n";
 import { useLocaleStoreWithOut } from "/@/store/modules/I18n";
 import { unref, computed } from "vue";

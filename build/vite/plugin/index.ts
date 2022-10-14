@@ -3,6 +3,7 @@
  * @author     ：qiufeng
  * @date       ：2022/9/23 22:21
  */
+import purgeIcons from "vite-plugin-purge-icons";
 import { PluginOption } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
@@ -15,7 +16,6 @@ import legacy from "@vitejs/plugin-legacy";
 import { configStyleImportPlugin } from "./StyleImport";
 import { configThemePlugin } from "./Theme";
 import { configImageminPlugin } from "./Imagemin";
-import purgeIcons from "vite-plugin-purge-icons";
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const { VITE_LEGACY, VITE_USE_IMAGEMIN } = viteEnv;
