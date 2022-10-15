@@ -14,8 +14,8 @@
   ></span>
 </template>
 <script lang="ts">
-import type { PropType } from "vue";
 import {
+  PropType,
   defineComponent,
   ref,
   watch,

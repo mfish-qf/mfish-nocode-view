@@ -39,4 +39,4 @@ async function initApp() {
   app.mount("#app");
 }
 
-initApp();
+initApp().then();

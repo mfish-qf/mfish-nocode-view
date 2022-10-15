@@ -3,10 +3,9 @@
  * @author     ：qiufeng
  * @date       ：2022/10/9 17:49
  */
-import { App, Plugin } from "vue";
+import { App, Plugin, unref } from "vue";
 import { isObject } from "/@/utils/Is";
 import type { RouteLocationNormalized, RouteRecordNormalized } from "vue-router";
-import { unref } from "vue";
 
 export const noop = () => {
 };
