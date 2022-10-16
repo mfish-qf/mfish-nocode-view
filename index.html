@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0" />
     <title><%= title %></title>
     <style>
-        html[main-theme='dark'] .app-loading {
+        html[data-theme='dark'] .app-loading {
             background-color: #2C344A;
         }
 
-        html[main-theme='dark'] .app-loading .app-loading-title {
+        html[data-theme='dark'] .app-loading .app-loading-title {
             color: rgba(255, 255, 255, 0.85);
         }
 
@@ -137,9 +137,9 @@
     <script>
       (() => {
         let main = document.getElementById("mainHtml");
-        let theme = window.localStorage.getItem("__APP__THEME_MODE__");
+        let theme = window.localStorage.getItem("__APP__DARK__MODE__");
         if (main && theme) {
-          main.setAttribute("main-theme", theme);
+          main.setAttribute("data-theme", theme);
         }
       })();
     </script>
