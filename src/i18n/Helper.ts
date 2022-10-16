@@ -21,7 +21,7 @@ export function genMessage(langMap: Record<string, Record<string, any>>, prefix 
     const lastIndex = fileName.lastIndexOf('.');
     fileName = fileName.substring(0, lastIndex);
     const keyList = fileName.split('/');
-    const moduleName = keyList.shift();
+    const moduleName = keyList.shift().toLowerCase();
     const objKey = keyList.join('.');
 
     if (moduleName) {
