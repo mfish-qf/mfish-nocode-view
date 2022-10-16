@@ -34,7 +34,7 @@
 
       const { prefixCls } = toRefs(props);
 
-      // Inject variables into the global
+      // 将变量注入全局
       createAppProviderContext({ prefixCls, isMobile });
 
       /**
