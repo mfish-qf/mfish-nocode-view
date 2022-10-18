@@ -13,7 +13,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { Tooltip, Badge } from "ant-design-vue";
-import Icon from "/@/components/Icon";
+import { Icon } from "/@/components/Icon";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { useErrorLogStore } from "/@/store/modules/ErrorLog";
 import { PageEnum } from "/@/enums/PageEnum";

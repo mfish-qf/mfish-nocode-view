@@ -7,7 +7,7 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 
-import Icon from "/@/components/Icon/index";
+import { Icon } from "/@/components/Icon";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { contentProps } from "../Props";

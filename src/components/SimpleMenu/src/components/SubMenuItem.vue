@@ -74,7 +74,7 @@ import { propTypes } from "/@/utils/PropTypes";
 import { useMenuItem } from "./UseMenu";
 import { useSimpleRootMenuContext } from "./UseSimpleMenuContext";
 import { CollapseTransition } from "/@/components/Transition";
-import Icon from "/@/components/Icon";
+import { Icon } from "/@/components/Icon";
 import { Popover } from "ant-design-vue";
 import { isBoolean, isObject } from "/@/utils/Is";
 import mitt from "/@/utils/Mitt";

@@ -12,7 +12,6 @@
      */
     prefixCls: { type: String, default: prefixCls },
   };
-
   export default defineComponent({
     name: 'AppProvider',
     inheritAttrs: false,
@@ -20,9 +19,7 @@
     setup(props, { slots }) {
       const isMobile = ref(false);
       const isSetState = ref(false);
-
       const appStore = useAppStore();
-
       // 监视屏幕更改
       createBreakpointListen(({ screenMap, sizeEnum, width }) => {
         const lgWidth = screenMap.get(sizeEnum.LG);
@@ -31,12 +28,9 @@
         }
         handleRestoreState();
       });
-
       const { prefixCls } = toRefs(props);
-
       // 将变量注入全局
       createAppProviderContext({ prefixCls, isMobile });
-
       /**
        * 用于维护窗口更改前的状态
        */

@@ -19,7 +19,7 @@ import { useRouter } from "vue-router";
 import type { Menu } from "/@/router/Types";
 import { defineComponent, ref, watchEffect } from "vue";
 import { Breadcrumb } from "ant-design-vue";
-import Icon from "/@/components/Icon";
+import { Icon } from "/@/components/Icon";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
 import { useGo } from "/@/hooks/web/UsePage";
