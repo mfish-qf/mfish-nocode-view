@@ -5,7 +5,7 @@ import {
   TopMenuAlignEnum,
   TriggerEnum,
   MixSidebarTriggerEnum
-} from "/@/enums/menuEnum";
+} from "/@/enums/MenuEnum";
 import { useI18n } from "/@/hooks/web/UseI18n";
 
 const { t } = useI18n();

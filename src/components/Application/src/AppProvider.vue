@@ -4,11 +4,11 @@
   import { createBreakpointListen } from '/@/hooks/event/UseBreakpoint';
   import { prefixCls } from '/@/settings/DesignSetting';
   import { useAppStore } from '/@/store/modules/App';
-  import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
+  import { MenuModeEnum, MenuTypeEnum } from '/@/enums/MenuEnum';
 
   const props = {
     /**
-     * class style prefix
+     * 样式前缀
      */
     prefixCls: { type: String, default: prefixCls },
   };
@@ -23,7 +23,7 @@
 
       const appStore = useAppStore();
 
-      // Monitor screen breakpoint information changes
+      // 监视屏幕更改
       createBreakpointListen(({ screenMap, sizeEnum, width }) => {
         const lgWidth = screenMap.get(sizeEnum.LG);
         if (lgWidth) {
@@ -38,7 +38,7 @@
       createAppProviderContext({ prefixCls, isMobile });
 
       /**
-       * Used to maintain the state before the window changes
+       * 用于维护窗口更改前的状态
        */
       function handleRestoreState() {
         if (unref(isMobile)) {

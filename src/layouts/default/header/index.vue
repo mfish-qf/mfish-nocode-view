@@ -72,7 +72,7 @@ import { UserDropDown, LayoutBreadcrumb, FullScreen, Notify, ErrorAction } from 
 import { useAppInject } from "/@/hooks/web/UseAppInject";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
-import { useLocale } from "/@/i18n/useLocale";
+import { useLocale } from "/@/i18n/UseLocale";
 
 export default defineComponent({
   name: "LayoutHeader",
