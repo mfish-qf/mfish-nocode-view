@@ -13,7 +13,7 @@ import nProgress from "nprogress";
 import projectSetting from "/@/settings/ProjectSetting";
 import { createParamMenuGuard } from "./ParamMenuGuard";
 
-// Don't change the order of creation
+// 不要更改创建顺序
 export function setupRouterGuard(router: Router) {
   createPageGuard(router);
   createPageLoadingGuard(router);
@@ -22,12 +22,13 @@ export function setupRouterGuard(router: Router) {
   createMessageGuard(router);
   createProgressGuard(router);
   createPermissionGuard(router);
-  createParamMenuGuard(router); // must after createPermissionGuard (menu has been built.)
+  // 必须在createPermissionGuard之后(菜单已完成创建)
+  createParamMenuGuard(router);
   createStateGuard(router);
 }
 
 /**
- * Hooks for handling page state
+ * 处理页面状态
  */
 function createPageGuard(router: Router) {
   const loadedPageMap = new Map<string, boolean>();
@@ -46,7 +47,7 @@ function createPageGuard(router: Router) {
   });
 }
 
-// Used to handle page loading status
+// 处理页面加载状态
 function createPageLoadingGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const appStore = useAppStoreWithOut();
@@ -79,7 +80,7 @@ function createPageLoadingGuard(router: Router) {
 }
 
 /**
- * The interface used to close the current page to complete the request when the route is switched
+ * 切换路由时用于关闭当前页面以完成请求
  * @param router
  */
 function createHttpGuard(router: Router) {
@@ -95,7 +96,7 @@ function createHttpGuard(router: Router) {
   });
 }
 
-// Routing switch back to the top
+// 切换路由时返回顶部
 function createScrollGuard(router: Router) {
   const isHash = (href: string) => {
     return /^#/.test(href);
@@ -111,7 +112,7 @@ function createScrollGuard(router: Router) {
 }
 
 /**
- * Used to close the message instance when the route is switched
+ * 切换路由时关闭消息
  * @param router
  */
 export function createMessageGuard(router: Router) {

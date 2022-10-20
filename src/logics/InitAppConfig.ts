@@ -22,7 +22,7 @@ import { Persistent } from "/@/utils/cache/Persistent";
 import { deepMerge } from "/@/utils";
 import { ThemeEnum } from "/@/enums/AppEnum";
 
-// Initial project configuration
+// 初始化项目配置
 export function initAppConfigStore() {
   const localeStore = useLocaleStore();
   const appStore = useAppStore();

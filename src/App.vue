@@ -11,9 +11,9 @@ useTitle();
 </script>
 
 <template>
-  <config-provider :locale="getAntdLocale">
+  <ConfigProvider :locale="getAntdLocale">
     <AppProvider>
       <RouterView />
     </AppProvider>
-  </config-provider>
+  </ConfigProvider>
 </template>

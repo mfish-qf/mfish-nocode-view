@@ -3,7 +3,7 @@
  * @author     ：qiufeng
  * @date       ：2022/9/22 18:02
  */
-import type {} from "vue";
+import type { VNode, VNodeChild, ComponentRenderProxy, PropType as VuePropType } from "vue";
 
 declare global {
   const __APP_INFO__: {
@@ -15,6 +15,7 @@ declare global {
     };
     lastBuildTime: string;
   };
+
   declare interface ViteEnv {
     VITE_PORT: number;
     VITE_PUBLIC_PATH: string;
@@ -48,7 +49,9 @@ declare global {
   }
 
   declare function parseInt(s: string | number, radix?: number): number;
+
   declare function parseFloat(string: string | number): number;
+
   namespace JSX {
     // tslint:disable no-empty-interface
     type Element = VNode;

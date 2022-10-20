@@ -19,8 +19,8 @@ if (isDevMode()) {
 }
 
 async function initApp() {
+  console.log("start init");
   const app = createApp(App);
-
   //配置缓存
   setupStore(app);
   // 初始化内部系统配置
@@ -35,7 +35,6 @@ async function initApp() {
   setupRouterGuard(router);
   // 配置全局错误处理
   setupErrorHandle(app);
-
   app.mount("#app");
 }
 

@@ -9,9 +9,10 @@ import {
   ThemeEnum,
   RouterTransitionEnum,
   SettingButtonPositionEnum,
-  SessionTimeoutProcessingEnum,
-} from '/@/enums/AppEnum';
-
+  SessionTimeoutProcessingEnum
+} from "/@/enums/AppEnum";
+import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from "/@/enums/MenuEnum";
+import { CacheTypeEnum } from '/@/enums/CacheEnum';
 //全局环境配置
 export interface GlobEnvConfig {
   // Site title

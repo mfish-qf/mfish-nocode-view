@@ -6,10 +6,8 @@ import type {
   MultiTabsSetting
 } from "/#/config";
 import type { BeforeMiniState } from "/#/store";
-
 import { defineStore } from "pinia";
 import { store } from "/@/store";
-
 import { ThemeEnum } from "/@/enums/AppEnum";
 import { APP_DARK_MODE_KEY_, PROJ_CFG_KEY } from "/@/enums/CacheEnum";
 import { Persistent } from "/@/utils/cache/Persistent";
@@ -19,11 +17,11 @@ import { deepMerge } from "/@/utils";
 
 interface AppState {
   darkMode?: ThemeEnum;
-  // Page loading status
+  // 页面加载状态
   pageLoading: boolean;
-  // project config
+  // 项目配置
   projectConfig: ProjectConfig | null;
-  // When the window shrinks, remember some states, and restore these states when the window is restored
+  // 当窗口缩小时，记住一些状态，并在恢复窗口时恢复这些状态
   beforeMiniInfo: BeforeMiniState;
 }
 
