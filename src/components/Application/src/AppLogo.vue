@@ -12,7 +12,7 @@ import { useGlobSetting } from "/@/hooks/setting";
 import { useGo } from "/@/hooks/web/UsePage";
 import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
 import { useDesign } from "/@/hooks/web/UseDesign";
-import { PageEnum } from "/@/enums/pageEnum";
+import { PageEnum } from "/@/enums/PageEnum";
 import { useUserStore } from "/@/store/modules/User";
 
 const props = defineProps({

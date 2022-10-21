@@ -28,15 +28,15 @@ interface UserState {
 export const useUserStore = defineStore({
   id: "app-user",
   state: (): UserState => ({
-    // user info
+    // 用户信息
     userInfo: null,
-    // token
+    // token信息
     token: undefined,
-    // roleList
+    // 角色列表
     roleList: [],
-    // Whether the login expired
+    // token时长
     sessionTimeout: false,
-    // Last fetch time
+    // 最后获取时间
     lastUpdateTime: 0
   }),
   getters: {
@@ -102,7 +102,7 @@ export const useUserStore = defineStore({
     },
     async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
       if (!this.getToken) return null;
-      // get user info
+      // 获取用户信息
       const userInfo = await this.getUserInfoAction();
 
       const sessionTimeout = this.sessionTimeout;

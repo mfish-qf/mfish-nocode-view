@@ -7,9 +7,10 @@ export type Component<T = any> =
   | (() => Promise<typeof import("*.vue")>)
   | (() => Promise<T>);
 
-export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, "meta"> {
+export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, "children"> {
   name: string;
   meta: RouteMeta;
+  redirect?: string;
   component?: Component | string;
   components?: Component;
   children?: AppRouteRecordRaw[];

@@ -121,7 +121,6 @@ export const usePermissionStore = defineStore({
       // 路由过滤器 在 函数filter 作为回调传入遍历使用
       const routeFilter = (route: AppRouteRecordRaw) => {
         const { meta } = route;
-        // 抽出角色
         const { roles } = meta || {};
         if (!roles) return true;
         // 进行角色权限判断
@@ -159,12 +158,7 @@ export const usePermissionStore = defineStore({
             children && children.length > 0 && patcher(children, currentPath);
           });
         }
-
-        try {
-          patcher(routes);
-        } catch (e) {
-          // 已处理完毕跳出循环
-        }
+        patcher(routes);
         return;
       };
 

@@ -2,14 +2,14 @@ import type { AxiosRequestConfig, Canceler } from "axios";
 import axios from "axios";
 import { isFunction } from "/@/utils/Is";
 
-// Used to store the identification and cancellation function of each request
+// 用于存储每个请求的标识和取消功能
 let pendingMap = new Map<string, Canceler>();
 
 export const getPendingUrl = (config: AxiosRequestConfig) => [config.method, config.url].join("&");
 
 export class AxiosCanceler {
   /**
-   * Add request
+   * 增加请求
    * @param {Object} config
    */
   addPending(config: AxiosRequestConfig) {
@@ -19,14 +19,14 @@ export class AxiosCanceler {
       config.cancelToken ||
       new axios.CancelToken((cancel) => {
         if (!pendingMap.has(url)) {
-          // If there is no current request in pending, add it
+          // 如果当前没有挂起的请求，请将其添加
           pendingMap.set(url, cancel);
         }
       });
   }
 
   /**
-   * @description: Clear all pending
+   * 清除所有的挂起操作
    */
   removeAllPending() {
     pendingMap.forEach((cancel) => {
@@ -36,15 +36,14 @@ export class AxiosCanceler {
   }
 
   /**
-   * Removal request
+   * 删除请求
    * @param {Object} config
    */
   removePending(config: AxiosRequestConfig) {
     const url = getPendingUrl(config);
 
     if (pendingMap.has(url)) {
-      // If there is a current request identifier in pending,
-      // the current request needs to be cancelled and removed
+      // 如果存在未完成请求标识符，当前请求需要取消并删除
       const cancel = pendingMap.get(url);
       cancel && cancel(url);
       pendingMap.delete(url);
@@ -52,7 +51,7 @@ export class AxiosCanceler {
   }
 
   /**
-   * @description: reset
+   * 重置
    */
   reset(): void {
     pendingMap = new Map<string, Canceler>();

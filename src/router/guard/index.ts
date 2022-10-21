@@ -32,13 +32,11 @@ export function setupRouterGuard(router: Router) {
  */
 function createPageGuard(router: Router) {
   const loadedPageMap = new Map<string, boolean>();
-
   router.beforeEach(async (to) => {
-    // The page has already been loaded, it will be faster to open it again, you don’t need to do loading and other processing
+    // 页面已经加载，再次打开会更快，您不需要进行加载和其他处理
     to.meta.loaded = !!loadedPageMap.get(to.path);
-    // Notify routing changes
+    // 通知路由更改
     setRouteChange(to);
-
     return true;
   });
 
@@ -59,18 +57,16 @@ function createPageLoadingGuard(router: Router) {
     if (to.meta.loaded) {
       return true;
     }
-
     if (unref(getOpenPageLoading)) {
       appStore.setPageLoadingAction(true);
       return true;
     }
-
     return true;
   });
   router.afterEach(async () => {
     if (unref(getOpenPageLoading)) {
       // TODO Looking for a better way
-      // The timer simulates the loading time to prevent flashing too fast,
+      // 增加一个延迟防止山所过快
       setTimeout(() => {
         appStore.setPageLoading(false);
       }, 220);
@@ -101,11 +97,9 @@ function createScrollGuard(router: Router) {
   const isHash = (href: string) => {
     return /^#/.test(href);
   };
-
   const body = document.body;
-
   router.afterEach(async (to) => {
-    // scroll top
+    // 返回顶部
     isHash((to as RouteLocationNormalized & { href: string })?.href) && body.scrollTo(0, 0);
     return true;
   });
@@ -117,9 +111,9 @@ function createScrollGuard(router: Router) {
  */
 export function createMessageGuard(router: Router) {
   const { closeMessageOnSwitch } = projectSetting;
-
   router.beforeEach(async () => {
     try {
+      //判断切换界面时是否删除未关闭的消息并通知
       if (closeMessageOnSwitch) {
         Modal.destroyAll();
         notification.destroy();

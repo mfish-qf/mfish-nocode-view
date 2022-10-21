@@ -22,10 +22,8 @@ export function createPermissionGuard(router: Router) {
       next(userStore.getUserInfo.homePath);
       return;
     }
-
     const token = userStore.getToken;
-
-    // Whitelist can be directly entered
+    // 白名单路径允许直接访问
     if (whitePathList.includes(to.path as PageEnum)) {
       if (to.path === LOGIN_PATH && token) {
         const isSessionTimeout = userStore.getSessionTimeout;
@@ -41,16 +39,14 @@ export function createPermissionGuard(router: Router) {
       next();
       return;
     }
-
-    // token does not exist
+    // 如果token不存在
     if (!token) {
-      // You can access without permission. You need to set the routing meta.ignoreAuth to true
+      // 如果设置ignoreAuth为true，允许直接访问
       if (to.meta.ignoreAuth) {
         next();
         return;
       }
-
-      // redirect login page
+      //重定向到登录页面
       const redirectData: { path: string; replace: boolean; query?: Recordable<string> } = {
         path: LOGIN_PATH,
         replace: true
@@ -64,7 +60,6 @@ export function createPermissionGuard(router: Router) {
       next(redirectData);
       return;
     }
-
     // Jump to the 404 page after processing the login
     if (
       from.path === LOGIN_PATH &&
@@ -74,8 +69,7 @@ export function createPermissionGuard(router: Router) {
       next(userStore.getUserInfo.homePath || PageEnum.BASE_HOME);
       return;
     }
-
-    // get userinfo while last fetch time is empty
+    // 如果还未获取用户信息，获取用户信息
     if (userStore.getLastUpdateTime === 0) {
       try {
         await userStore.getUserInfoAction();
@@ -84,18 +78,14 @@ export function createPermissionGuard(router: Router) {
         return;
       }
     }
-
     if (permissionStore.getIsDynamicAddedRoute) {
       next();
       return;
     }
-
     const routes = await permissionStore.buildRoutesAction();
-
     routes.forEach((route) => {
       router.addRoute(route as unknown as RouteRecordRaw);
     });
-
     router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
 
     permissionStore.setDynamicAddedRoute(true);

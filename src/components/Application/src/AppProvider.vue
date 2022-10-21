@@ -17,7 +17,6 @@ export default defineComponent({
   inheritAttrs: false,
   props,
   setup(props, { slots }) {
-    console.log("App包装")
     const isMobile = ref(false);
     const isSetState = ref(false);
     const appStore = useAppStore();

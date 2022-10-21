@@ -19,7 +19,6 @@ if (isDevMode()) {
 }
 
 async function initApp() {
-  console.log("start init");
   const app = createApp(App);
   //配置缓存
   setupStore(app);

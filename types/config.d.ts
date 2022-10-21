@@ -150,13 +150,13 @@ export interface MenuSetting {
 }
 
 export interface TransitionSetting {
-  //  Whether to open the page switching animation
+  // 是否打开页面切换动画
   enable: boolean;
-  // Route basic switching animation
+  // 路由切换动画
   basicTransition: RouterTransitionEnum;
-  // Whether to open page switching loading
+  // 是否打开页面切换加载
   openPageLoading: boolean;
-  // Whether to open the top progress bar
+  // 是否打开顶部进度条
   openNProgress: boolean;
 }
 
