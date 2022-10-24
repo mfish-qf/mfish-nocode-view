@@ -4,7 +4,7 @@
   "author": {
     "name": "mfish",
     "email": "qiufeng9862@qq.com",
-    "url": "https://github.com/qiufeng9862"
+    "url": "https://github.com/mfish-qf"
   },
   "scripts": {
     "dev": "vite",
@@ -116,13 +116,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/qiufeng9862/mfish-nocode-view.git"
+    "url": "git+https://github.com/mfish-qf/mfish-nocode-view.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/qiufeng9862/mfish-nocode-view/issues"
+    "url": "https://github.com/mfish-qf/mfish-nocode-view/issues"
   },
-  "homepage": "https://github.com/qiufeng9862/mfish-nocode-view",
+  "homepage": "https://github.com/mfish-qf/mfish-nocode-view",
   "engines": {
     "node": "^12 || >=14"
   },
