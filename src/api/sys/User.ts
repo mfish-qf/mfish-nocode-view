@@ -1,27 +1,28 @@
-import { defHttp } from '/@/utils/http/axios';
-import { LoginParams, LoginResultModel, GetUserInfoModel } from './model/UserModel';
-import { ErrorMessageMode } from '/#/axios';
+import { defHttp, otherHttp } from "/@/utils/http/axios";
+import { LoginParams, LoginResultModel, GetUserInfoModel } from "./model/UserModel";
+import { ErrorMessageMode } from "/#/axios";
+import { ContentTypeEnum } from "/@/enums/HttpEnum";
 
 enum Api {
-  Login = '/login',
-  Logout = '/logout',
-  GetUserInfo = '/getUserInfo',
-  GetPermCode = '/getPermCode',
-  TestRetry = '/testRetry',
+  Login = "/oauth2/accessToken",
+  Logout = "/logout",
+  GetUserInfo = "/getUserInfo",
+  GetPermCode = "/getPermCode",
+  TestRetry = "/testRetry",
 }
 
 /**
  * @description: user login api
  */
-export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') {
-  return defHttp.post<LoginResultModel>(
+export function loginApi(params: LoginParams, mode: ErrorMessageMode = "modal") {
+  return otherHttp({ headers: { "Content-Type": ContentTypeEnum.FORM_URLENCODED } }).post<LoginResultModel>(
     {
       url: Api.Login,
-      params,
+      params
     },
     {
-      errorMessageMode: mode,
-    },
+      errorMessageMode: mode
+    }
   );
 }
 
@@ -29,7 +30,7 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: 'none' });
+  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: "none" });
 }
 
 export function getPermCode() {
@@ -47,8 +48,8 @@ export function testRetry() {
       retryRequest: {
         isOpenRetry: true,
         count: 5,
-        waitTime: 1000,
-      },
-    },
+        waitTime: 1000
+      }
+    }
   );
 }

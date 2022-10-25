@@ -138,7 +138,6 @@ export class VAxios {
           });
           return;
         }
-
         formData.append(key, params.data![key]);
       });
     }
@@ -149,7 +148,6 @@ export class VAxios {
       data: formData,
       headers: {
         "Content-type": ContentTypeEnum.FORM_DATA,
-        // @ts-ignore
         ignoreCancelToken: true
       }
     });

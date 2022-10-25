@@ -7,7 +7,7 @@ import type { RequestOptions, Result } from "/#/axios";
 import type { AxiosTransform, CreateAxiosOptions } from "./AxiosTransform";
 import { VAxios } from "./Axios";
 import { checkStatus } from "./CheckStatus";
-import { useGlobSetting } from '/@/hooks/setting';
+import { useGlobSetting } from "/@/hooks/setting";
 import { useMessage } from "/@/hooks/web/UseMessage";
 import { RequestEnum, ResultEnum, ContentTypeEnum } from "/@/enums/HttpEnum";
 import { isString } from "/@/utils/Is";
@@ -217,7 +217,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
 
         headers: { "Content-Type": ContentTypeEnum.JSON },
         // 如果是form-data格式
-        // headers: { 'Content-Type': ContentTypeEnum.FORM_URLENCODED },
+        // headers: { "Content-Type": ContentTypeEnum.FORM_URLENCODED },
         // 数据处理方式
         transform: clone(transform),
         // 配置项，下面的选项都可以在独立的接口请求中覆盖
@@ -257,6 +257,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
 }
 
 export const defHttp = createAxios();
+export const otherHttp = createAxios;
 
 // other api url
 // export const otherHttp = createAxios({

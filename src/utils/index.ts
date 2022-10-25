@@ -80,7 +80,7 @@ export function getPopupContainer(node?: HTMLElement): HTMLElement {
 }
 
 //获取动态属性
-export function getDynamicProps<T, U>(props: T): Partial<U> {
+export function getDynamicProps<T extends Object, U>(props: T): Partial<U> {
   const ret: Recordable = {};
   Object.keys(props).map((key) => {
     ret[key] = unref((props as Recordable)[key]);

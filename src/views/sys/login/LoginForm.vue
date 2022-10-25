@@ -77,6 +77,7 @@ import { useMessage } from "/@/hooks/web/UseMessage";
 import { useUserStore } from "/@/store/modules/User";
 import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from "./UseLogin";
 import { useDesign } from "/@/hooks/web/UseDesign";
+import system from "/@/router/routers/modules/demo/system";
 
 const ACol = Col;
 const ARow = Row;
@@ -95,8 +96,8 @@ const loading = ref(false);
 const rememberMe = ref(false);
 
 const formData = reactive({
-  account: "mfish",
-  password: "123456"
+  account: "admin",
+  password: "!QAZ2wsx"
 });
 
 const { validForm } = useFormValid(formRef);
@@ -113,6 +114,10 @@ async function handleLogin() {
     const userInfo = await userStore.login({
       password: data.password,
       username: data.account,
+      client_id: "system",
+      client_secret: "system",
+      grant_type: "password",
+      redirect_uri: "http://baidu.com",
       mode: "none" //不要默认的错误提示
     });
     if (userInfo) {
