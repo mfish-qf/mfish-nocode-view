@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 import { store } from "/@/store";
 import { RoleEnum } from "/@/enums/RoleEnum";
 import { PageEnum } from "/@/enums/PageEnum";
-import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from "/@/enums/CacheEnum";
+import { REFRESH_TOKEN_KEY, ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from "/@/enums/CacheEnum";
 import { getAuthCache, setAuthCache } from "/@/utils/auth";
 import { GetUserInfoModel, LoginParams } from "/@/api/sys/model/UserModel";
 import { doLogout, getUserInfo, loginApi } from "/@/api/sys/User";
@@ -20,6 +20,7 @@ import { h } from "vue";
 interface UserState {
   userInfo: Nullable<UserInfo>;
   token?: string;
+  refreshToken?: string;
   roleList: RoleEnum[];
   sessionTimeout?: boolean;
   lastUpdateTime: number;
@@ -32,6 +33,8 @@ export const useUserStore = defineStore({
     userInfo: null,
     // token信息
     token: undefined,
+    //过期后刷新token
+    refreshToken: undefined,
     // 角色列表
     roleList: [],
     // token时长
@@ -60,6 +63,10 @@ export const useUserStore = defineStore({
     setToken(info: string | undefined) {
       this.token = info ? info : ""; // for null or undefined value
       setAuthCache(TOKEN_KEY, info);
+    },
+    setRefreshToken(refreshToken: string | undefined) {
+      this.refreshToken = refreshToken ? refreshToken : "";
+      setAuthCache(REFRESH_TOKEN_KEY, refreshToken);
     },
     setRoleList(roleList: RoleEnum[]) {
       this.roleList = roleList;
@@ -90,11 +97,11 @@ export const useUserStore = defineStore({
     ): Promise<GetUserInfoModel | null> {
       try {
         const { goHome = true, mode, ...loginParams } = params;
-        const data = await loginApi(loginParams, mode);
-        const { token } = data;
+        const result = await loginApi(loginParams, mode);
+        const { access_token } = result.data;
 
         // save token
-        this.setToken(token);
+        this.setToken(access_token);
         return this.afterLoginAction(goHome);
       } catch (error) {
         return Promise.reject(error);

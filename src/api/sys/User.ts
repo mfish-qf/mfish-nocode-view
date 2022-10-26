@@ -1,12 +1,12 @@
-import { defHttp, otherHttp } from "/@/utils/http/axios";
-import { LoginParams, LoginResultModel, GetUserInfoModel } from "./model/UserModel";
-import { ErrorMessageMode } from "/#/axios";
+import { defHttp } from "/@/utils/http/axios";
+import { LoginParams, GetUserInfoModel, AccessToken } from "./model/UserModel";
+import { ErrorMessageMode, Result } from "/#/axios";
 import { ContentTypeEnum } from "/@/enums/HttpEnum";
 
 enum Api {
   Login = "/oauth2/accessToken",
   Logout = "/logout",
-  GetUserInfo = "/getUserInfo",
+  GetUserInfo = "/oauth2/user/info",
   GetPermCode = "/getPermCode",
   TestRetry = "/testRetry",
 }
@@ -15,10 +15,11 @@ enum Api {
  * @description: user login api
  */
 export function loginApi(params: LoginParams, mode: ErrorMessageMode = "modal") {
-  return otherHttp({ headers: { "Content-Type": ContentTypeEnum.FORM_URLENCODED } }).post<LoginResultModel>(
+  return defHttp.post<Result<AccessToken>>(
     {
       url: Api.Login,
-      params
+      params,
+      headers: { "Content-Type": ContentTypeEnum.FORM_URLENCODED }
     },
     {
       errorMessageMode: mode

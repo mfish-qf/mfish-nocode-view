@@ -113,11 +113,9 @@ export const usePermissionStore = defineStore({
       const { t } = useI18n();
       const userStore = useUserStore();
       const appStore = useAppStoreWithOut();
-
       let routes: AppRouteRecordRaw[] = [];
       const roleList = toRaw(userStore.getRoleList) || [];
       const { permissionMode = projectSetting.permissionMode } = appStore.getProjectConfig;
-
       // 路由过滤器 在 函数filter 作为回调传入遍历使用
       const routeFilter = (route: AppRouteRecordRaw) => {
         const { meta } = route;
@@ -126,7 +124,6 @@ export const usePermissionStore = defineStore({
         // 进行角色权限判断
         return roleList.some((role) => roles.includes(role));
       };
-
       const routeRemoveIgnoreFilter = (route: AppRouteRecordRaw) => {
         const { meta } = route;
         // ignoreRoute 为true 则路由仅用于菜单生成，不会在实际的路由表中出现
@@ -134,7 +131,6 @@ export const usePermissionStore = defineStore({
         // arr.filter 返回 true 表示该元素通过测试
         return !ignoreRoute;
       };
-
       /**
        * @description 根据设置的首页path，修正routes中的affix标记（固定首页）
        * */
@@ -144,24 +140,24 @@ export const usePermissionStore = defineStore({
 
         function patcher(routes: AppRouteRecordRaw[], parentPath = "") {
           if (parentPath) parentPath = parentPath + "/";
-          routes.forEach((route: AppRouteRecordRaw) => {
+          for (let route of routes) {
             const { path, children, redirect } = route;
             const currentPath = path.startsWith("/") ? path : parentPath + path;
             if (currentPath === homePath) {
-              if (redirect) {
-                homePath = route.redirect! as string;
-              } else {
+              if (!redirect) {
                 route.meta = Object.assign({}, route.meta, { affix: true });
-                throw new Error("end");
+                break;
+
               }
+              homePath = route.redirect! as string;
             }
             children && children.length > 0 && patcher(children, currentPath);
-          });
+          }
         }
+
         patcher(routes);
         return;
       };
-
       switch (permissionMode) {
         // 角色权限
         case PermissionModeEnum.ROLE:
@@ -173,7 +169,6 @@ export const usePermissionStore = defineStore({
           // 将多级路由转换为 2 级路由
           routes = flatMultiLevelRoutes(routes);
           break;
-
         // 路由映射， 默认进入该case
         case PermissionModeEnum.ROUTE_MAPPING:
           // 对非一级路由进行过滤
@@ -198,8 +193,6 @@ export const usePermissionStore = defineStore({
           // 将多级路由转换为 2 级路由
           routes = flatMultiLevelRoutes(routes);
           break;
-
-        //  If you are sure that you do not need to do background dynamic permissions, please comment the entire judgment below
         //  如果确定不需要做后台动态权限，请在下方评论整个判断
         case PermissionModeEnum.BACK:
           const { createMessage } = useMessage();
@@ -239,7 +232,6 @@ export const usePermissionStore = defineStore({
           routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];
           break;
       }
-
       routes.push(ERROR_LOG_ROUTE);
       patchHomeAffix(routes);
       return routes;

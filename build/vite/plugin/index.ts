@@ -7,7 +7,6 @@ import purgeIcons from "vite-plugin-purge-icons";
 import { PluginOption } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-// import vueSetupExtend from "vite-plugin-vue-setup-extend";
 import VitePluginCertificate from "vite-plugin-mkcert";
 import { configHtmlPlugin } from "./Html";
 import { configSvgIconsPlugin } from "./SvgSprite";
@@ -22,8 +21,6 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     vue(),
     vueJsx(),
-    // support name
-    // vueSetupExtend(),
     VitePluginCertificate({
       source: "coding"
     })

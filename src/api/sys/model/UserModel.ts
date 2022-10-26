@@ -26,6 +26,12 @@ export interface LoginResultModel {
   role: RoleInfo;
 }
 
+export interface AccessToken {
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
+}
+
 //获取用户信息返回值
 export interface GetUserInfoModel {
   roles: RoleInfo[];
