@@ -19,9 +19,7 @@ export default defineComponent({
   components: { FramePage },
   setup() {
     const { getFramePages, hasRenderFrame, showIframe } = useFrameKeepAlive();
-
     const showFrame = computed(() => unref(getFramePages).length > 0);
-
     return { getFramePages, hasRenderFrame, showIframe, showFrame };
   }
 });

@@ -13,6 +13,7 @@ import { initAppConfigStore } from "/@/logics/InitAppConfig";
 import { setupErrorHandle } from "/@/logics/error-handle";
 import { isDevMode } from "/@/utils/Env";
 import { registerGlobComponent } from "/@/components/RegisterGlobComponent";
+import { setupGlobDirectives } from "./directives";
 
 if (isDevMode()) {
   import("ant-design-vue/es/style");
@@ -32,6 +33,8 @@ async function initApp() {
   setupRouter(app);
   // 路由守卫
   setupRouterGuard(router);
+  //注册全局指令v-loading,v-auth
+  setupGlobDirectives(app);
   // 配置全局错误处理
   setupErrorHandle(app);
   app.mount("#app");

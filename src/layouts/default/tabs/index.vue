@@ -39,7 +39,7 @@ import { useUserStore } from "/@/store/modules/User";
 import { initAffixTabs, useTabsDrag } from "./UseMultipleTabs";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { useMultipleTabSetting } from "/@/hooks/setting/UseMultipleTabSetting";
-import { REDIRECT_NAME } from "/@/router/constant";
+import { REDIRECT_NAME } from "/@/router/Constant";
 import { listenerRouteChange } from "/@/logics/mitt/RouteChange";
 import { useRouter } from "vue-router";
 

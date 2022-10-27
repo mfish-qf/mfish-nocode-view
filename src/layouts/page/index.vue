@@ -41,20 +41,15 @@ export default defineComponent({
   setup() {
     const { getShowMultipleTab } = useMultipleTabSetting();
     const tabStore = useMultipleTabStore();
-
     const { getOpenKeepAlive, getCanEmbedIFramePage } = useRootSetting();
-
     const { getBasicTransition, getEnableTransition } = useTransitionSetting();
-
     const openCache = computed(() => unref(getOpenKeepAlive) && unref(getShowMultipleTab));
-
     const getCaches = computed((): string[] => {
       if (!unref(getOpenKeepAlive)) {
         return [];
       }
       return tabStore.getCachedTabList;
     });
-
     return {
       getTransitionName,
       openCache,

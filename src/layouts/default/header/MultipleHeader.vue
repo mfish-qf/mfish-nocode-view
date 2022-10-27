@@ -7,10 +7,8 @@
 </template>
 <script lang="ts">
   import { defineComponent, unref, computed, CSSProperties } from 'vue';
-
   import LayoutHeader from './index.vue';
   import MultipleTabs from '../tabs/index.vue';
-
   import { useHeaderSetting } from '/@/hooks/setting/UseHeaderSetting';
   import { useMenuSetting } from '/@/hooks/setting/UseMenuSetting';
   import { useFullContent } from '/@/hooks/web/UseFullContent';
