@@ -1,17 +1,12 @@
 <template>
-  <Drawer
-    v-if="getIsMobile"
-    placement="left"
-    :class="prefixCls"
-    :width="getMenuWidth"
-    :getContainer="null"
-    :visible="!getCollapsed"
-    @close="handleClose"
-  >
-    <Sider />
-  </Drawer>
-  <MixSider v-else-if="getIsMixSidebar" />
-  <Sider v-else />
+  <div :class="`${prefixCls}-wrapper`">
+    <Drawer v-if="getIsMobile" placement="left" :class="`${prefixCls}-drawer`" :width="getMenuWidth"
+            :getContainer="null" :visible="!getCollapsed" @close="handleClose">
+      <Sider />
+    </Drawer>
+    <MixSider v-else-if="getIsMixSidebar" />
+    <Sider v-else />
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -26,7 +21,7 @@ export default defineComponent({
   name: "SiderWrapper",
   components: { Sider, Drawer, MixSider },
   setup() {
-    const { prefixCls } = useDesign("layout-sider-wrapper");
+    const { prefixCls } = useDesign("layout-sider");
     const { getIsMobile } = useAppInject();
     const { setMenuSetting, getCollapsed, getMenuWidth, getIsMixSidebar } = useMenuSetting();
 
@@ -41,16 +36,18 @@ export default defineComponent({
 });
 </script>
 <style lang="less">
-@prefix-cls: ~'@{namespace}-layout-sider-wrapper';
+@prefix-cls: ~'@{namespace}-layout-sider';
 
 .@{prefix-cls} {
-  .ant-drawer-body {
-    height: 100vh;
-    padding: 0;
-  }
+  &-drawer {
+    .ant-drawer-body {
+      height: 100vh;
+      padding: 0;
+    }
 
-  .ant-drawer-header-no-title {
-    display: none;
+    .ant-drawer-header-no-title {
+      display: none;
+    }
   }
 }
 </style>

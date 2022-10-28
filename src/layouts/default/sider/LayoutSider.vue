@@ -1,23 +1,9 @@
 <template>
-  <div
-    v-if="getMenuFixed && !getIsMobile"
-    :style="getHiddenDomStyle"
-    v-show="showClassSideBarRef"
-  ></div>
-  <Sider
-    v-show="showClassSideBarRef"
-    ref="sideRef"
-    breakpoint="lg"
-    collapsible
-    :class="getSiderClass"
-    :width="getMenuWidth"
-    :collapsed="getCollapsed"
-    :collapsedWidth="getCollapsedWidth"
-    :theme="getMenuTheme"
-    @breakpoint="onBreakpointChange"
-    :trigger="getTrigger"
-    v-bind="getTriggerAttr"
-  >
+  <div v-if="getMenuFixed && !getIsMobile" :style="getHiddenDomStyle" v-show="showClassSideBarRef"></div>
+  <Sider v-show="showClassSideBarRef" ref="sideRef" breakpoint="lg" :class="getSiderClass"
+         :width="getMenuWidth" :collapsed="getCollapsed" :collapsedWidth="getCollapsedWidth"
+         :theme="getMenuTheme" @breakpoint="onBreakpointChange" :trigger="getTrigger"
+         v-bind="getTriggerAttr" collapsible>
     <template #trigger v-if="getShowTrigger">
       <LayoutTrigger />
     </template>

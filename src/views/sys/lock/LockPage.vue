@@ -85,7 +85,7 @@ import { useI18n } from "/@/hooks/web/UseI18n";
 import { useNow } from "./UseNow";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { LockOutlined } from "@ant-design/icons-vue";
-import headerImg from "/@/assets/images/header.jpg";
+import headerImg from "/@/assets/images/header.png";
 
 const InputPassword = Input.Password;
 

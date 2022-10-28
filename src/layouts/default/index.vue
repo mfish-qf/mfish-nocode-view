@@ -43,10 +43,8 @@ export default defineComponent({
     const { getIsMobile } = useAppInject();
     const { getShowFullHeaderRef } = useHeaderSetting();
     const { getShowSidebar, getIsMixSidebar, getShowMenu } = useMenuSetting();
-
-    // Create a lock screen monitor
+    //创建一个锁定屏幕的监听
     const lockEvents = useLockPage();
-
     const layoutClass = computed(() => {
       let cls: string[] = ["ant-layout"];
       if (unref(getIsMixSidebar) || unref(getShowMenu)) {
@@ -84,6 +82,9 @@ export default defineComponent({
   &-main {
     width: 100%;
     margin-left: 1px;
+  }
+  &-siderbar{
+
   }
 }
 </style>
