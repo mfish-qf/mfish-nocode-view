@@ -11,7 +11,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-
 import { InputNumber } from "ant-design-vue";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { baseHandler } from "../Handler";
@@ -51,7 +50,7 @@ export default defineComponent({
   margin: 16px 0;
 
   &-input-number {
-    width: 126px;
+    width: 80px;
   }
 }
 </style>

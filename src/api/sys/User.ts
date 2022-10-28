@@ -5,7 +5,7 @@ import { ContentTypeEnum } from "/@/enums/HttpEnum";
 
 enum Api {
   Login = "/oauth2/accessToken",
-  Logout = "/logout",
+  Logout = "/oauth2/user/revoke",
   GetUserInfo = "/oauth2/user/info",
   GetPermCode = "/getPermCode",
   TestRetry = "/testRetry",
@@ -31,7 +31,7 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = "modal") 
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: "none" });
+  return defHttp.get<Result<GetUserInfoModel>>({ url: Api.GetUserInfo }, { errorMessageMode: "none" });
 }
 
 export function getPermCode() {

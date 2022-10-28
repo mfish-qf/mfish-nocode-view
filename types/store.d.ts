@@ -38,8 +38,8 @@ export interface ErrorLogInfo {
 //用户信息
 export interface UserInfo {
   userId: string | number;
-  username: string;
-  realName: string;
+  account: string;
+  nickname: string;
   avatar: string;
   desc?: string;
   homePath?: string;

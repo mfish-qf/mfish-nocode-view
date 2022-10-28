@@ -36,10 +36,14 @@ export const useLockStore = defineStore({
       }
       const tryLogin = async () => {
         try {
-          const username = userStore.getUserInfo?.username;
+          const username = userStore.getUserInfo?.account;
           const res = await userStore.login({
             username,
             password: password!,
+            client_id: "system",
+            client_secret: "system",
+            grant_type: "password",
+            redirect_uri: "http://baidu.com",
             goHome: false,
             mode: "none"
           });
