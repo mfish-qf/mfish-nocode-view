@@ -1,6 +1,5 @@
 import type { Menu, MenuModule } from "/@/router/Types";
 import type { RouteRecordNormalized } from "vue-router";
-
 import { useAppStoreWithOut } from "/@/store/modules/App";
 import { usePermissionStore } from "/@/store/modules/Permission";
 import { transformMenuModule, getAllParentPath } from "/@/router/helper/MenuHelper";
@@ -11,7 +10,6 @@ import { PermissionModeEnum } from "/@/enums/AppEnum";
 import { pathToRegexp } from "path-to-regexp";
 
 const modules = import.meta.globEager("./modules/**/*.ts");
-
 const menuModules: MenuModule[] = [];
 
 Object.keys(modules).forEach((key) => {

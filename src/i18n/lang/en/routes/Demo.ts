@@ -166,21 +166,8 @@ export default {
   setup: {
     page: 'Intro page',
   },
-  system: {
-    moduleName: 'System management',
-
-    account: 'Account management',
-    account_detail: 'Account detail',
-    password: 'Change password',
-
-    dept: 'Department management',
-
-    menu: 'Menu management',
-    role: 'Role management',
-  },
   table: {
     table: 'Table',
-
     basic: 'Basic',
     treeTable: 'Tree',
     fetchTable: 'Remote loading',

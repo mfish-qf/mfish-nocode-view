@@ -77,7 +77,7 @@ import { useMessage } from "/@/hooks/web/UseMessage";
 import { useUserStore } from "/@/store/modules/User";
 import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from "./UseLogin";
 import { useDesign } from "/@/hooks/web/UseDesign";
-import system from "/@/router/routers/modules/demo/system";
+import system from "/@/router/routers/modules/sys/system";
 
 const ACol = Col;
 const ARow = Row;
