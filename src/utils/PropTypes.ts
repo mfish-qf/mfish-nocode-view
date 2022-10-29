@@ -1,10 +1,9 @@
-import { CSSProperties } from 'vue';
-import { createTypes, VueTypeValidableDef, VueTypesInterface } from 'vue-types';
+import { CSSProperties } from "vue";
+import { createTypes, VueTypeValidableDef, VueTypesInterface } from "vue-types";
 
 type PropTypes = VueTypesInterface & {
   readonly style: VueTypeValidableDef<CSSProperties>;
   readonly VNodeChild: VueTypeValidableDef<VueNode>;
-  // readonly trueBool: VueTypeValidableDef<boolean>;
 };
 
 const propTypes = createTypes({
@@ -13,20 +12,20 @@ const propTypes = createTypes({
   string: undefined,
   number: undefined,
   object: undefined,
-  integer: undefined,
+  integer: undefined
 }) as PropTypes;
 
 propTypes.extend([
   {
-    name: 'style',
+    name: "style",
     getter: true,
     type: [String, Object],
-    default: undefined,
+    default: undefined
   },
   {
-    name: 'VNodeChild',
+    name: "VNodeChild",
     getter: true,
-    type: undefined,
-  },
+    type: undefined
+  }
 ]);
 export { propTypes };

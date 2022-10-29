@@ -1,12 +1,6 @@
 <template>
-  <BasicDrawer
-    v-bind="$attrs"
-    @register="registerDrawer"
-    showFooter
-    :title="getTitle"
-    width="50%"
-    @ok="handleSubmit"
-  >
+  <BasicDrawer v-bind="$attrs" @register="registerDrawer" showFooter
+    :title="getTitle" width="50%" @ok="handleSubmit">
     <BasicForm @register="registerForm" />
   </BasicDrawer>
 </template>
@@ -32,7 +26,7 @@ export default defineComponent({
     });
 
     const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
-      resetFields();
+      await resetFields();
       setDrawerProps({ confirmLoading: false });
       isUpdate.value = !!data?.isUpdate;
 

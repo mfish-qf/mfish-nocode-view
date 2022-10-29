@@ -46,10 +46,7 @@ import FormItem from "./components/FormItem.vue";
 import FormAction from "./components/FormAction.vue";
 import { dateItemType } from "./Helper";
 import { dateUtil } from "/@/utils/DateUtil";
-
-// import { cloneDeep } from 'lodash-es';
 import { deepMerge } from "/@/utils";
-
 import { useFormValues } from "./hooks/UseFormValues";
 import useAdvanced from "./hooks/UseAdvanced";
 import { useFormEvents } from "./hooks/UseFormEvents";
@@ -57,9 +54,8 @@ import { createFormContext } from "./hooks/UseFormContext";
 import { useAutoFocus } from "./hooks/UseAutoFocus";
 import { useModalContext } from "/@/components/Modal";
 import { useDebounceFn } from "@vueuse/core";
-
 import { basicProps } from "./Props";
-import { useDesign } from "/@/hooks/web/useDesign";
+import { useDesign } from "/@/hooks/web/UseDesign";
 import { cloneDeep } from "lodash-es";
 
 export default defineComponent({
