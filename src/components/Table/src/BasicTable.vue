@@ -45,7 +45,6 @@ import type {
   SizeType,
   ColumnChangeParam
 } from "./types/Table";
-
 import { defineComponent, ref, computed, unref, toRaw, inject, watchEffect } from "vue";
 import { Table } from "ant-design-vue";
 import { BasicForm, useForm } from "/@/components/Form/index";

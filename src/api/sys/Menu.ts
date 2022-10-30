@@ -2,7 +2,7 @@ import { defHttp } from '/@/utils/http/axios';
 import { getMenuListResultModel } from './model/MenuModel';
 
 enum Api {
-  GetMenuList = '/getMenuList',
+  GetMenuList = '/oauth2/ssoMenu',
 }
 
 /**

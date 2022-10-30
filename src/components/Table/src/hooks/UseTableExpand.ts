@@ -47,7 +47,11 @@ export function useTableExpand(
   function getAllKeys(data?: Recordable[]) {
     const keys: string[] = [];
     const { childrenColumnName } = unref(propsRef);
-    toRaw(data || unref(tableData)).forEach((item) => {
+    const dataArray = toRaw(data || unref(tableData));
+    if (dataArray === undefined || dataArray === null) {
+      return keys;
+    }
+    dataArray.forEach((item) => {
       keys.push(item[unref(getRowKey) as string]);
       const children = item[childrenColumnName || "children"];
       if (children?.length) {
