@@ -47,7 +47,7 @@ export default defineComponent({
       api: getMenuList,
       columns,
       formConfig: {
-        labelWidth: 120,
+        labelWidth: 100,
         schemas: searchFormSchema
       },
       isTreeTable: true,

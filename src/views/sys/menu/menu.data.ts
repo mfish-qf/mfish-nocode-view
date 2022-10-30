@@ -61,7 +61,7 @@ export const searchFormSchema: FormSchema[] = [
     field: 'menuName',
     label: '菜单名称',
     component: 'Input',
-    colProps: { span: 8 },
+    colProps: { span: 4 },
   },
   {
     field: 'status',
@@ -73,7 +73,7 @@ export const searchFormSchema: FormSchema[] = [
         { label: '停用', value: '1' },
       ],
     },
-    colProps: { span: 8 },
+    colProps: { span: 4 },
   },
 ];
 
