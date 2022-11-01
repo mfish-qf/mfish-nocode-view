@@ -1,23 +1,11 @@
 <template>
-  <Form
-    v-bind="getBindValue"
-    :class="getFormClass"
-    ref="formElRef"
-    :model="formModel"
-    @keypress.enter="handleEnterPress"
-  >
+  <Form v-bind="getBindValue" :class="getFormClass" ref="formElRef" :model="formModel" @keypress.enter="handleEnterPress">
     <Row v-bind="getRow">
       <slot name="formHeader"></slot>
       <template v-for="schema in getSchema" :key="schema.field">
-        <FormItem
-          :tableAction="tableAction"
-          :formActionType="formActionType"
-          :schema="schema"
-          :formProps="getProps"
-          :allDefaultValues="defaultValueRef"
-          :formModel="formModel"
-          :setFormModel="setFormModel"
-        >
+        <FormItem :tableAction="tableAction" :formActionType="formActionType"
+                  :schema="schema" :formProps="getProps" :allDefaultValues="defaultValueRef"
+                  :formModel="formModel" :setFormModel="setFormModel">
           <template #[item]="data" v-for="item in Object.keys($slots)">
             <slot :name="item" v-bind="data || {}"></slot>
           </template>
@@ -25,10 +13,7 @@
       </template>
 
       <FormAction v-bind="getFormActionBindProps" @toggle-advanced="handleToggleAdvanced">
-        <template
-          #[item]="data"
-          v-for="item in ['resetBefore', 'submitBefore', 'advanceBefore', 'advanceAfter']"
-        >
+        <template #[item]="data" v-for="item in ['resetBefore', 'submitBefore', 'advanceBefore', 'advanceAfter']">
           <slot :name="item" v-bind="data || {}"></slot>
         </template>
       </FormAction>
@@ -66,27 +51,22 @@ export default defineComponent({
   setup(props, { emit, attrs }) {
     const formModel = reactive<Recordable>({});
     const modalFn = useModalContext();
-
     const advanceState = reactive<AdvanceState>({
       isAdvanced: true,
       hideAdvanceBtn: false,
       isLoad: false,
       actionSpan: 6
     });
-
     const defaultValueRef = ref<Recordable>({});
     const isInitedDefaultRef = ref(false);
-    const propsRef = ref<Partial<FormProps>>({});
+    const propsRef = ref<Partial<FormProps>>();
     const schemaRef = ref<Nullable<FormSchema[]>>(null);
     const formElRef = ref<Nullable<FormActionType>>(null);
-
     const { prefixCls } = useDesign("basic-form");
-
-    // Get the basic configuration of the form
+    //获取表单的基本配置
     const getProps = computed((): FormProps => {
       return { ...props, ...unref(propsRef) } as FormProps;
     });
-
     const getFormClass = computed(() => {
       return [
         prefixCls,
@@ -95,8 +75,7 @@ export default defineComponent({
         }
       ];
     });
-
-    // Get uniform row style and Row configuration for the entire form
+    // 为整个表单获取统一的行样式和行配置
     const getRow = computed((): Recordable => {
       const { baseRowStyle = {}, rowProps } = unref(getProps);
       return {
@@ -113,7 +92,7 @@ export default defineComponent({
       const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any);
       for (const schema of schemas) {
         const { defaultValue, component } = schema;
-        // handle date type
+        // 句柄日期类型
         if (defaultValue && dateItemType.includes(component)) {
           if (!Array.isArray(defaultValue)) {
             schema.defaultValue = dateUtil(defaultValue);

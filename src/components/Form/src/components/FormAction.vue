@@ -2,35 +2,16 @@
   <a-col v-bind="actionColOpt" v-if="showActionButtonGroup">
     <div style="width: 100%" :style="{ textAlign: actionColOpt.style.textAlign }">
       <FormItem>
-        <slot name="resetBefore"></slot>
-        <Button
-          type="default"
-          class="mr-2"
-          v-bind="getResetBtnOptions"
-          @click="resetAction"
-          v-if="showResetButton"
-        >
-          {{ getResetBtnOptions.text }}
-        </Button>
         <slot name="submitBefore"></slot>
-
-        <Button
-          type="primary"
-          class="mr-2"
-          v-bind="getSubmitBtnOptions"
-          @click="submitAction"
-          v-if="showSubmitButton"
-        >
+        <Button type="primary" class="ml-2" v-bind="getSubmitBtnOptions" @click="submitAction" v-if="showSubmitButton">
           {{ getSubmitBtnOptions.text }}
         </Button>
-
+        <slot name="resetBefore"></slot>
+        <Button type="default" class="ml-2" v-bind="getResetBtnOptions" @click="resetAction" v-if="showResetButton">
+          {{ getResetBtnOptions.text }}
+        </Button>
         <slot name="advanceBefore"></slot>
-        <Button
-          type="link"
-          size="small"
-          @click="toggleAdvanced"
-          v-if="showAdvancedButton && !hideAdvanceBtn"
-        >
+        <Button type="link" size="small" @click="toggleAdvanced" v-if="showAdvancedButton && !hideAdvanceBtn">
           {{ isAdvanced ? t("component.form.putAway") : t("component.form.unfold") }}
           <BasicArrow class="ml-1" :expand="!isAdvanced" up />
         </Button>
@@ -91,7 +72,7 @@ export default defineComponent({
         ? { span: actionSpan < 6 ? 24 : actionSpan }
         : {};
       const actionColOpt: Partial<ColEx> = {
-        style: { textAlign: "right" },
+        style: { textAlign: "left" },
         span: showAdvancedButton ? 6 : 4,
         ...advancedSpanObj,
         ...actionColOptions

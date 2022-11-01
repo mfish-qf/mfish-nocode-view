@@ -1,27 +1,16 @@
 <template>
   <div ref="wrapRef" :class="getWrapperClass">
-    <BasicForm
-      ref="formRef"
-      submitOnReset
-      v-bind="getFormProps"
-      v-if="getBindValues.useSearchForm"
-      :tableAction="tableAction"
-      @register="registerForm"
-      @submit="handleSearchInfoChange"
-      @advanced-change="redoHeight"
-    >
+    <BasicForm ref="formRef" submitOnReset v-bind="getFormProps"
+               v-if="getBindValues.useSearchForm" :tableAction="tableAction"
+               @register="registerForm" @submit="handleSearchInfoChange" @advanced-change="redoHeight">
+
       <template #[replaceFormSlotKey(item)]="data" v-for="item in getFormSlotKeys">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
     </BasicForm>
 
-    <Table
-      ref="tableElRef"
-      v-bind="getBindValues"
-      :rowClassName="getRowClassName"
-      v-show="getEmptyDataIsShowTable"
-      @change="handleTableChange"
-    >
+    <Table ref="tableElRef" v-bind="getBindValues" :rowClassName="getRowClassName"
+           v-show="getEmptyDataIsShowTable" @change="handleTableChange">
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
@@ -32,9 +21,6 @@
       <template #bodyCell="data">
         <slot name="bodyCell" v-bind="data || {}"></slot>
       </template>
-      <!--      <template #[`header-${column.dataIndex}`] v-for="(column, index) in columns" :key="index">-->
-      <!--        <HeaderCell :column="column" />-->
-      <!--      </template>-->
     </Table>
   </div>
 </template>
@@ -99,11 +85,9 @@ export default defineComponent({
   setup(props, { attrs, emit, slots, expose }) {
     const tableElRef = ref(null);
     const tableData = ref<Recordable[]>([]);
-
     const wrapRef = ref(null);
     const formRef = ref(null);
     const innerPropsRef = ref<Partial<BasicTableProps>>();
-
     const { prefixCls } = useDesign("basic-table");
     const [registerForm, formActions] = useForm();
 
