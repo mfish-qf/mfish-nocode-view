@@ -32,7 +32,7 @@
 <script lang="ts">
 import { defineComponent, nextTick } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
-import { getMenuList } from "/@/api/sys/Menu";
+import { getMenuTree } from "/@/api/sys/Menu";
 import { useDrawer } from "/@/components/Drawer";
 import MenuDrawer from "./MenuDrawer.vue";
 import { columns, searchFormSchema } from "./menu.data";
@@ -44,7 +44,7 @@ export default defineComponent({
     const [registerDrawer, { openDrawer }] = useDrawer();
     const [registerTable, { reload, expandAll }] = useTable({
       title: "菜单列表",
-      api: getMenuList,
+      api: getMenuTree,
       columns,
       formConfig: {
         labelWidth: 100,

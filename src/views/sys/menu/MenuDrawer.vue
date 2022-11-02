@@ -1,6 +1,5 @@
 <template>
-  <BasicDrawer v-bind="$attrs" @register="registerDrawer" showFooter
-    :title="getTitle" width="50%" @ok="handleSubmit">
+  <BasicDrawer v-bind="$attrs" @register="registerDrawer" showFooter :title="getTitle" width="50%" @ok="handleSubmit">
     <BasicForm @register="registerForm" />
   </BasicDrawer>
 </template>
@@ -9,7 +8,7 @@ import { defineComponent, ref, computed, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { formSchema } from "./menu.data";
 import { BasicDrawer, useDrawerInner } from "/@/components/Drawer";
-import { getMenuList } from "/@/api/sys/Menu";
+import { getMenuTree } from "/@/api/sys/Menu";
 
 export default defineComponent({
   name: "MenuDrawer",
@@ -17,31 +16,27 @@ export default defineComponent({
   emits: ["success", "register"],
   setup(_, { emit }) {
     const isUpdate = ref(true);
-
     const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
       labelWidth: 100,
       schemas: formSchema,
       showActionButtonGroup: false,
       baseColProps: { lg: 12, md: 24 }
     });
-
     const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
       await resetFields();
       setDrawerProps({ confirmLoading: false });
       isUpdate.value = !!data?.isUpdate;
-
       if (unref(isUpdate)) {
         setFieldsValue({
           ...data.record
-        });
+        }).then();
       }
-      const treeData = await getMenuList();
+      const treeData = await getMenuTree();
       updateSchema({
         field: "parentMenu",
         componentProps: { treeData }
-      });
+      }).then();
     });
-
     const getTitle = computed(() => (!unref(isUpdate) ? "新增菜单" : "编辑菜单"));
 
     async function handleSubmit() {

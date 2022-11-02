@@ -1,14 +1,21 @@
-import { defHttp } from '/@/utils/http/axios';
-import { getMenuListResultModel } from './model/MenuModel';
+import { defHttp } from "/@/utils/http/axios";
+import { MenuRouteModel, MenuTreeModel, MenuParams } from "./model/MenuModel";
 
 enum Api {
-  GetMenuList = '/oauth2/ssoMenu',
+  getMenuTree = "/oauth2/ssoMenu/tree",
+  getMenuRoute = "/oauth2/ssoMenu/route",
 }
 
 /**
- * @description: Get user menu based on id
+ * 获取菜单树
+ * @param params
  */
-
-export const getMenuList = () => {
-  return defHttp.get<getMenuListResultModel>({ url: Api.GetMenuList });
+export const getMenuTree = (params?: MenuParams) => {
+  return defHttp.get<MenuTreeModel>({ url: Api.getMenuTree, params });
 };
+
+/**
+ * 获取菜单路由
+ */
+export const getMenuRoute = () =>
+  defHttp.get<MenuRouteModel>({ url: Api.getMenuRoute });

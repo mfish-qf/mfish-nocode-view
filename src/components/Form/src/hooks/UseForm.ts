@@ -51,26 +51,26 @@ export function useForm(props?: Props): UseFormReturnType {
   const methods: FormActionType = {
     scrollToField: async (name: NamePath, options?: ScrollOptions | undefined) => {
       const form = await getForm();
-      form.scrollToField(name, options);
+      form.scrollToField(name, options).then();
     },
     setProps: async (formProps: Partial<FormProps>) => {
       const form = await getForm();
-      form.setProps(formProps);
+      form.setProps(formProps).then();
     },
 
     updateSchema: async (data: Partial<FormSchema> | Partial<FormSchema>[]) => {
       const form = await getForm();
-      form.updateSchema(data);
+      form.updateSchema(data).then();
     },
 
     resetSchema: async (data: Partial<FormSchema> | Partial<FormSchema>[]) => {
       const form = await getForm();
-      form.resetSchema(data);
+      form.resetSchema(data).then();
     },
 
     clearValidate: async (name?: string | string[]) => {
       const form = await getForm();
-      form.clearValidate(name);
+      form.clearValidate(name).then();
     },
 
     resetFields: async () => {
@@ -88,9 +88,9 @@ export function useForm(props?: Props): UseFormReturnType {
       return unref(formRef)?.getFieldsValue() as T;
     },
 
-    setFieldsValue: async <T>(values: T) => {
+    setFieldsValue: async (values: Recordable) => {
       const form = await getForm();
-      form.setFieldsValue<T>(values);
+      form.setFieldsValue(values).then();
     },
 
     appendSchemaByField: async (
@@ -99,7 +99,7 @@ export function useForm(props?: Props): UseFormReturnType {
       first: boolean
     ) => {
       const form = await getForm();
-      form.appendSchemaByField(schema, prefixField, first);
+      form.appendSchemaByField(schema, prefixField, first).then();
     },
 
     submit: async (): Promise<any> => {
