@@ -4,16 +4,14 @@ import { unref, computed, h, nextTick, watchEffect } from "vue";
 import TableFooter from "../components/TableFooter.vue";
 import { useEventListener } from "/@/hooks/event/UseEventListener";
 
-export function useTableFooter(
-  propsRef: ComputedRef<BasicTableProps>,
-  scrollRef: ComputedRef<{
-    x: string | number | true;
-    y: string | number | null;
-    scrollToFirstRowOnChange: boolean;
-  }>,
-  tableElRef: Ref<ComponentRef>,
-  getDataSourceRef: ComputedRef<Recordable>
-) {
+type scrollRefType = ComputedRef<{
+  x: string | number | true;
+  y: string | number | null;
+  scrollToFirstRowOnChange: boolean;
+}>;
+
+export function useTableFooter(propsRef: ComputedRef<BasicTableProps>, scrollRef: scrollRefType,
+                               tableElRef: Ref<ComponentRef>, getDataSourceRef: ComputedRef<Recordable>) {
   const getIsEmptyData = computed(() => {
     return (unref(getDataSourceRef) || []).length === 0;
   });

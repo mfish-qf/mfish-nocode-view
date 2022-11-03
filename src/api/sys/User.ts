@@ -1,6 +1,6 @@
 import { defHttp } from "/@/utils/http/axios";
 import { LoginParams, GetUserInfoModel, AccessToken } from "./model/UserModel";
-import { ErrorMessageMode, Result } from "/#/axios";
+import { ErrorMessageMode } from "/#/axios";
 import { ContentTypeEnum } from "/@/enums/HttpEnum";
 
 enum Api {
@@ -15,7 +15,7 @@ enum Api {
  * @description: user login api
  */
 export function loginApi(params: LoginParams, mode: ErrorMessageMode = "modal") {
-  return defHttp.post<Result<AccessToken>>(
+  return defHttp.post<AccessToken>(
     {
       url: Api.Login,
       params,
@@ -31,7 +31,7 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = "modal") 
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<Result<GetUserInfoModel>>({ url: Api.GetUserInfo }, { errorMessageMode: "none" });
+  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: "none" });
 }
 
 export function getPermCode() {

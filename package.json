@@ -67,7 +67,7 @@
     "@types/jsdom": "^20.0.0",
     "@types/lodash-es": "^4.17.6",
     "@types/mockjs": "^1.0.7",
-    "@types/node": "^18.8.5",
+    "@types/node": "18.8.0",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "@vitejs/plugin-legacy": "^2.2.0",

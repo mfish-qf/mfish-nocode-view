@@ -16,9 +16,8 @@ export function renderEditCell(column: BasicColumn) {
         const validFns = (record?.validCbs || []).map((fn) => fn());
         const res = await Promise.all(validFns);
         return res.every((item) => !!item);
-      } else {
-        return false;
       }
+      return false;
     };
 
     record.onEdit = async (edit: boolean, submit = false) => {

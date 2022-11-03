@@ -31,18 +31,15 @@ interface SearchState {
   filterInfo: Record<string, string[]>;
 }
 
-export function useDataSource(
-  propsRef: ComputedRef<BasicTableProps>,
-  {
-    getPaginationInfo,
-    setPagination,
-    setLoading,
-    getFieldsValue,
-    clearSelectedRowKeys,
-    tableData
-  }: ActionType,
-  emit: EmitType
-) {
+export function useDataSource(propsRef: ComputedRef<BasicTableProps>,
+                              {
+                                getPaginationInfo,
+                                setPagination,
+                                setLoading,
+                                getFieldsValue,
+                                clearSelectedRowKeys,
+                                tableData
+                              }: ActionType, emit: EmitType) {
   const searchState = reactive<SearchState>({
     sortInfo: {},
     filterInfo: {}
@@ -53,7 +50,6 @@ export function useDataSource(
   watchEffect(() => {
     tableData.value = unref(dataSourceRef);
   });
-
   watch(
     () => unref(propsRef).dataSource,
     () => {
@@ -230,13 +226,6 @@ export function useDataSource(
       return ret;
     };
 
-    // const row = dataSourceRef.value.find(r => {
-    //   if (typeof rowKeyName === 'function') {
-    //     return (rowKeyName(r) as string) === rowKey
-    //   } else {
-    //     return Reflect.has(r, rowKeyName) && r[rowKeyName] === rowKey
-    //   }
-    // })
     return findRow(dataSourceRef.value);
   }
 
@@ -334,7 +323,7 @@ export function useDataSource(
     }
   }
 
-  function setTableData<T = Recordable>(values: T[]) {
+  function setTableData<T extends Recordable = Recordable>(values: T[]) {
     dataSourceRef.value = values;
   }
 

@@ -38,7 +38,7 @@ export const columns: BasicColumn[] = [
     dataIndex: "isVisible",
     width: 80,
     customRender: ({ record }) => {
-      const status = record.status;
+      const status = record.isVisible;
       const enable = ~~status === 1;
       const color = enable ? "green" : "red";
       const text = enable ? "显示" : "隐藏";
@@ -112,7 +112,7 @@ export const formSchema: FormSchema[] = [
     required: true
   },
   {
-    field: "parentMenu",
+    field: "parentId",
     label: "上级菜单",
     component: "TreeSelect",
     componentProps: {

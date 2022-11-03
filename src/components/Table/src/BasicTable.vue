@@ -90,11 +90,9 @@ export default defineComponent({
     const innerPropsRef = ref<Partial<BasicTableProps>>();
     const { prefixCls } = useDesign("basic-table");
     const [registerForm, formActions] = useForm();
-
     const getProps = computed(() => {
       return { ...props, ...unref(innerPropsRef) } as BasicTableProps;
     });
-
     const isFixedHeightPage = inject(PageWrapperFixedHeightKey, false);
     watchEffect(() => {
       unref(isFixedHeightPage) &&
@@ -103,7 +101,6 @@ export default defineComponent({
         "'canResize' of BasicTable may not work in PageWrapper with 'fixedHeight' (especially in hot updates)"
       );
     });
-
     const { getLoading, setLoading } = useLoading(getProps);
     const {
       getPaginationInfo,
@@ -112,7 +109,6 @@ export default defineComponent({
       setShowPagination,
       getShowPagination
     } = usePagination(getProps);
-
     const {
       getRowSelection,
       getRowSelectionRef,
@@ -122,7 +118,6 @@ export default defineComponent({
       deleteSelectRowByKey,
       setSelectedRowKeys
     } = useRowSelection(getProps, tableData, emit);
-
     const {
       handleTableChange: onTableChange,
       getDataSourceRef,
@@ -167,7 +162,6 @@ export default defineComponent({
       getColumnsRef,
       getCacheColumns
     } = useColumns(getProps, getPaginationInfo);
-
     const { getScrollRef, redoHeight } = useTableScroll(
       getProps,
       tableElRef,
@@ -177,9 +171,7 @@ export default defineComponent({
       wrapRef,
       formRef
     );
-
     const { scrollTo } = useTableScrollTo(tableElRef, getDataSourceRef);
-
     const { customRow } = useCustomRow(getProps, {
       setSelectedRowKeys,
       getSelectRowKeys,
@@ -187,15 +179,12 @@ export default defineComponent({
       getAutoCreateKey,
       emit
     });
-
     const { getRowClassName } = useTableStyle(getProps, prefixCls);
-
     const { getExpandOption, expandAll, expandRows, collapseAll } = useTableExpand(
       getProps,
       tableData,
       emit
     );
-
     const handlers: InnerHandlers = {
       onColumnsChange: (data: ColumnChangeParam[]) => {
         emit("columns-change", data);
@@ -203,9 +192,7 @@ export default defineComponent({
         unref(getProps).onColumnsChange?.(data);
       }
     };
-
     const { getHeaderProps } = useTableHeader(getProps, slots, handlers);
-
     const { getFooterProps } = useTableFooter(
       getProps,
       getScrollRef,
@@ -234,9 +221,6 @@ export default defineComponent({
         footer: unref(getFooterProps),
         ...unref(getExpandOption)
       };
-      // if (slots.expandedRowRender) {
-      //   propsData = omit(propsData, 'scroll');
-      // }
 
       propsData = omit(propsData, ["class", "onChange"]);
       return propsData;
@@ -303,11 +287,8 @@ export default defineComponent({
       }
     };
     createTableContext({ ...tableAction, wrapRef, getBindValues });
-
     expose(tableAction);
-
     emit("register", tableAction, formActions);
-
     return {
       formRef,
       tableElRef,
