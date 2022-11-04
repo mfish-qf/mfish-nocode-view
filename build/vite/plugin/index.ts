@@ -33,7 +33,6 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   vitePlugins.push(configSvgIconsPlugin(isBuild));
   // 使用mock调试
   VITE_USE_MOCK && vitePlugins.push(configMockPlugin(isBuild));
-  console.log(VITE_USE_MOCK, "mock")
   //组件样式按需引入
   vitePlugins.push(configStyleImportPlugin(isBuild));
   //引入windi css

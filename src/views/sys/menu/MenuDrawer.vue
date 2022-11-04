@@ -1,5 +1,5 @@
 <template>
-  <BasicDrawer v-bind="$attrs" @register="registerDrawer" showFooter :title="getTitle" width="50%" @ok="handleSubmit">
+  <BasicDrawer v-bind="$attrs" @register="registerDrawer" showFooter :title="getTitle" width="40%" @ok="handleSubmit">
     <BasicForm @register="registerForm" />
   </BasicDrawer>
 </template>
@@ -8,7 +8,8 @@ import { defineComponent, ref, computed, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { formSchema } from "./menu.data";
 import { BasicDrawer, useDrawerInner } from "/@/components/Drawer";
-import { getMenuTree } from "/@/api/sys/Menu";
+import { getMenuTree, insertMenu } from "/@/api/sys/Menu";
+import { MenuListItem } from "/@/api/sys/model/MenuModel";
 
 export default defineComponent({
   name: "MenuDrawer",
@@ -33,7 +34,7 @@ export default defineComponent({
       }
       const treeData = await getMenuTree();
       updateSchema({
-        field: "parentMenu",
+        field: "parentId",
         componentProps: { treeData }
       }).then();
     });
@@ -41,12 +42,15 @@ export default defineComponent({
 
     async function handleSubmit() {
       try {
-        const values = await validate();
+        let values = (await validate()) as MenuListItem;
+        values.clientId = "system";
         setDrawerProps({ confirmLoading: true });
-        // TODO custom api
-        console.log(values);
-        closeDrawer();
-        emit("success");
+        insertMenu(values).then(() => {
+          emit("success");
+        }).finally(() => {
+            closeDrawer();
+          }
+        );
       } finally {
         setDrawerProps({ confirmLoading: false });
       }

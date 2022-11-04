@@ -19,12 +19,24 @@ export interface RouteItem {
 
 export interface MenuListItem {
   id: string;
-  orderNo: string;
-  createTime: string;
-  status: number;
-  icon: string;
+  parentId: string;
+  clientId: string;
+  menuName: string;
+  menuType: number;
+  menuIcon: string;
+  menuSort: number;
+  routePath: string;
   component: string;
-  permission: string;
+  isKeepalive: number;
+  isExternal: number;
+  remark: string;
+  createBy: string;
+  createTime: string;
+  updateBy: string;
+  updateTime: string;
+  isVisible: number;
+  permissions: string;
+  children: MenuListItem[];
 }
 
 export type MenuParams = {
