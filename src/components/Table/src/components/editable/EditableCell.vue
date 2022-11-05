@@ -152,7 +152,6 @@ export default defineComponent({
     });
 
     watchEffect(() => {
-      defaultValueRef.value = props.value;
       currentValueRef.value = props.value;
     });
 

@@ -32,7 +32,7 @@
 <script lang="ts">
 import { defineComponent, nextTick } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
-import { getMenuTree } from "/@/api/sys/Menu";
+import { deleteMenu, getMenuTree } from "/@/api/sys/Menu";
 import { useDrawer } from "/@/components/Drawer";
 import MenuDrawer from "./MenuDrawer.vue";
 import { columns, searchFormSchema } from "./menu.data";
@@ -81,7 +81,9 @@ export default defineComponent({
     }
 
     function handleDelete(record: Recordable) {
-      console.log(record);
+      deleteMenu(record.id).then(() => {
+        handleSuccess();
+      });
     }
 
     function handleSuccess() {

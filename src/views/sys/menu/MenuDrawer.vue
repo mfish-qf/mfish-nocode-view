@@ -8,7 +8,7 @@ import { defineComponent, ref, computed, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { formSchema } from "./menu.data";
 import { BasicDrawer, useDrawerInner } from "/@/components/Drawer";
-import { getMenuTree, insertMenu } from "/@/api/sys/Menu";
+import { getMenuTree, insertMenu, updateMenu } from "/@/api/sys/Menu";
 import { MenuListItem } from "/@/api/sys/model/MenuModel";
 
 export default defineComponent({
@@ -45,15 +45,23 @@ export default defineComponent({
         let values = (await validate()) as MenuListItem;
         values.clientId = "system";
         setDrawerProps({ confirmLoading: true });
-        insertMenu(values).then(() => {
-          emit("success");
-        }).finally(() => {
-            closeDrawer();
-          }
-        );
+        if (unref(isUpdate)) {
+          saveMenu(updateMenu, values);
+        } else {
+          saveMenu(insertMenu, values);
+        }
       } finally {
         setDrawerProps({ confirmLoading: false });
       }
+    }
+
+    function saveMenu(save, values) {
+      save(values).then(() => {
+        emit("success");
+      }).finally(() => {
+          closeDrawer();
+        }
+      );
     }
 
     return { registerDrawer, registerForm, getTitle, handleSubmit };

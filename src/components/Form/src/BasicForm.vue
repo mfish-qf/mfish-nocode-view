@@ -91,9 +91,9 @@ export default defineComponent({
     const getSchema = computed((): FormSchema[] => {
       const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any);
       for (const schema of schemas) {
-        const { defaultValue, component } = schema;
+        const { defaultValue, component, isHandleDateDefaultValue = true } = schema;
         // 句柄日期类型
-        if (defaultValue && dateItemType.includes(component)) {
+        if (isHandleDateDefaultValue && defaultValue && dateItemType.includes(component)) {
           if (!Array.isArray(defaultValue)) {
             schema.defaultValue = dateUtil(defaultValue);
           } else {
@@ -147,7 +147,7 @@ export default defineComponent({
       updateSchema,
       resetSchema,
       appendSchemaByField,
-      removeSchemaByFiled,
+      removeSchemaByField,
       resetFields,
       scrollToField
     } = useFormEvents({
@@ -242,7 +242,7 @@ export default defineComponent({
       updateSchema,
       resetSchema,
       setProps,
-      removeSchemaByFiled,
+      removeSchemaByField: removeSchemaByField,
       appendSchemaByField,
       clearValidate,
       validateFields,

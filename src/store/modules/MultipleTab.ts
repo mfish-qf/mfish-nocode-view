@@ -163,7 +163,7 @@ export const useMultipleTabStore = defineStore({
         }
         this.tabList.push(route);
       }
-      this.updateCacheTab();
+      this.updateCacheTab().then();
       cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList);
     },
 
@@ -183,6 +183,7 @@ export const useMultipleTabStore = defineStore({
       if (path !== tab.path) {
         // Closed is not the activation tab
         close(tab);
+        this.updateCacheTab().then();
         return;
       }
 

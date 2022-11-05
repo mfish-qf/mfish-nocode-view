@@ -18,10 +18,11 @@ import { useI18n } from "/@/hooks/web/UseI18n";
 import { joinTimestamp, formatRequestDate } from "./Helper";
 import { useUserStoreWithOut } from "/@/store/modules/User";
 import { AxiosRetry } from "/@/utils/http/axios/AxiosRetry";
+import axios from "axios";
 
 const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix;
-const { createMessage, createErrorModal } = useMessage();
+const { createMessage, createErrorModal, createSuccessModal } = useMessage();
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -47,10 +48,18 @@ const transform: AxiosTransform = {
       // 抛出请求异常
       throw new Error(t("sys.api.apiRequestFailed"));
     }
-    const { code, msg } = data;
+    let { code, msg } = data;
     // 这里逻辑可以根据项目进行修改
     const hasSuccess = data && code === ResultEnum.SUCCESS;
     if (hasSuccess) {
+      if (msg === null || msg === undefined || msg === "") {
+        msg = "操作成功";
+      }
+      if (options.successMessageMode === "modal") {
+        createSuccessModal({ title: t("sys.api.successTip"), content: msg });
+      } else if (options.successMessageMode === "message") {
+        createMessage.success(msg);
+      }
       return data.data;
     }
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
@@ -162,6 +171,9 @@ const transform: AxiosTransform = {
     const err: string = error?.toString?.() ?? "";
     let errMessage = "";
 
+    if (axios.isCancel(error)) {
+      return Promise.reject(error);
+    }
     try {
       if (code === "ECONNABORTED" && message.indexOf("timeout") !== -1) {
         errMessage = t("sys.api.apiTimeoutMessage");
@@ -219,7 +231,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           joinParamsToUrl: false,
           // 格式化提交参数时间
           formatDate: true,
-          // 消息提示类型
+          // 错误消息提示类型
           errorMessageMode: "message",
           // 接口地址
           apiUrl: globSetting.apiUrl,

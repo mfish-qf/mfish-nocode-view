@@ -115,7 +115,7 @@ import type { CheckboxChangeEvent } from "ant-design-vue/lib/checkbox/interface"
 import { SettingOutlined, DragOutlined } from "@ant-design/icons-vue";
 import { Icon } from "/@/components/Icon";
 import { ScrollContainer } from "/@/components/Container";
-import { useI18n } from "/@/hooks/web/useI18n";
+import { useI18n } from "/@/hooks/web/UseI18n";
 import { useTableContext } from "../../hooks/UseTableContext";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { isFunction, isNullAndUnDef } from "/@/utils/Is";
@@ -210,9 +210,8 @@ export default defineComponent({
 
     function init() {
       const columns = getColumns();
-
       const checkList = table
-        .getColumns({ ignoreAction: true })
+        .getColumns({ ignoreAction: true, ignoreIndex: true })
         .map((item) => {
           if (item.defaultHidden) {
             return "";
@@ -227,10 +226,6 @@ export default defineComponent({
         cachePlainOptions.value = columns;
         state.defaultCheckList = checkList;
       } else {
-        // const fixedColumns = columns.filter((item) =>
-        //   Reflect.has(item, 'fixed')
-        // ) as BasicColumn[];
-
         unref(plainOptions).forEach((item: BasicColumn) => {
           const findItem = columns.find((col: BasicColumn) => col.dataIndex === item.dataIndex);
           if (findItem) {
@@ -257,7 +252,6 @@ export default defineComponent({
     const indeterminate = computed(() => {
       const len = plainOptions.value.length;
       let checkedLen = state.checkedList.length;
-      unref(checkIndex) && checkedLen--;
       return checkedLen > 0 && checkedLen < len;
     });
 

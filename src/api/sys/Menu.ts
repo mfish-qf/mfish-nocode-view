@@ -19,7 +19,13 @@ export const getMenuTree = (params?: MenuParams) => {
  * @param params
  */
 export const insertMenu = (params: MenuListItem) => {
-  return defHttp.post<MenuListItem>({ url: Api.ssoMenu, params });
+  return defHttp.post<MenuListItem>({ url: Api.ssoMenu, params }, { successMessageMode: "modal" });
+};
+export const updateMenu = (params: MenuListItem) => {
+  return defHttp.put<MenuListItem>({ url: Api.ssoMenu, params }, { successMessageMode: "modal" });
+};
+export const deleteMenu = (params: string) => {
+  return defHttp.delete({ url: `${Api.ssoMenu}/${params}` }, { successMessageMode: "message" });
 };
 /**
  * 获取菜单路由
