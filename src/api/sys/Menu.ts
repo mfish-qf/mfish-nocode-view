@@ -19,10 +19,10 @@ export const getMenuTree = (params?: MenuParams) => {
  * @param params
  */
 export const insertMenu = (params: MenuListItem) => {
-  return defHttp.post<MenuListItem>({ url: Api.ssoMenu, params }, { successMessageMode: "modal" });
+  return defHttp.post<MenuListItem>({ url: Api.ssoMenu, params }, { successMessageMode: "message" });
 };
 export const updateMenu = (params: MenuListItem) => {
-  return defHttp.put<MenuListItem>({ url: Api.ssoMenu, params }, { successMessageMode: "modal" });
+  return defHttp.put<MenuListItem>({ url: Api.ssoMenu, params }, { successMessageMode: "message" });
 };
 export const deleteMenu = (params: string) => {
   return defHttp.delete({ url: `${Api.ssoMenu}/${params}` }, { successMessageMode: "message" });

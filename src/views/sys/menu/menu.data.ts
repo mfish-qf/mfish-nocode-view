@@ -92,6 +92,12 @@ export const searchFormSchema: FormSchema[] = [
 
 export const formSchema: FormSchema[] = [
   {
+    label: 'id',
+    field: 'id',
+    component: 'Input',
+    show: false,
+  },
+  {
     field: "menuType",
     label: "菜单类型",
     component: "RadioButtonGroup",
