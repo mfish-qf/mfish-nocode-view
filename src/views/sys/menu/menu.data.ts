@@ -194,8 +194,8 @@ export const formSchema: FormSchema[] = [
     defaultValue: 1,
     componentProps: {
       options: [
-        { label: "否", value: 0 },
-        { label: "是", value: 1 }
+        { label: "是", value: 1 },
+        { label: "否", value: 0 }
       ]
     },
     ifShow: ({ values }) => isMenu(values.menuType)
