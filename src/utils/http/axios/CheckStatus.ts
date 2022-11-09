@@ -1,4 +1,4 @@
-import type { ErrorMessageMode } from "/#/axios";
+import type { MessageMode } from "/#/axios";
 import { useMessage } from "/@/hooks/web/UseMessage";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { useUserStoreWithOut } from "/@/store/modules/User";
@@ -12,7 +12,7 @@ const stp = projectSetting.sessionTimeoutProcessing;
 export function checkStatus(
   status: number,
   msg: string,
-  errorMessageMode: ErrorMessageMode = "message"
+  errorMessageMode: MessageMode = "message"
 ): void {
   const { t } = useI18n();
   const userStore = useUserStoreWithOut();

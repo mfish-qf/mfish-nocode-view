@@ -1,5 +1,5 @@
 import type { UserInfo } from "/#/store";
-import type { ErrorMessageMode } from "/#/axios";
+import type { MessageMode } from "/#/axios";
 import { defineStore } from "pinia";
 import { store } from "/@/store";
 import { RoleEnum } from "/@/enums/RoleEnum";
@@ -92,7 +92,7 @@ export const useUserStore = defineStore({
     async login(
       params: LoginParams & {
         goHome?: boolean;
-        mode?: ErrorMessageMode;
+        mode?: MessageMode;
       }
     ): Promise<GetUserInfoModel | null> {
       try {

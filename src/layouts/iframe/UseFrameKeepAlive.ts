@@ -1,4 +1,4 @@
-import type { AppRouteRecordRaw } from "/@/router/types";
+import type { AppRouteRecordRaw } from "/@/router/Types";
 import { computed, toRaw, unref } from "vue";
 import { useMultipleTabStore } from "/@/store/modules/MultipleTab";
 import { uniqBy } from "lodash-es";

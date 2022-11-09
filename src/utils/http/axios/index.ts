@@ -2,23 +2,23 @@
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
 import type { AxiosResponse } from "axios";
+import axios from "axios";
 import { clone } from "lodash-es";
-import type { RequestOptions, Result } from "/#/axios";
+import type { MessageMode, RequestOptions, Result } from "/#/axios";
 import type { AxiosTransform, CreateAxiosOptions } from "./AxiosTransform";
 import { VAxios } from "./Axios";
 import { checkStatus } from "./CheckStatus";
 import { useGlobSetting } from "/@/hooks/setting";
 import { useMessage } from "/@/hooks/web/UseMessage";
-import { RequestEnum, ResultEnum, ContentTypeEnum } from "/@/enums/HttpEnum";
+import { ContentTypeEnum, RequestEnum, ResultEnum } from "/@/enums/HttpEnum";
 import { isString } from "/@/utils/Is";
 import { getToken } from "/@/utils/auth";
-import { setObjToUrlParams, deepMerge } from "/@/utils";
+import { deepMerge, setObjToUrlParams } from "/@/utils";
 import { useErrorLogStoreWithOut } from "/@/store/modules/ErrorLog";
 import { useI18n } from "/@/hooks/web/UseI18n";
-import { joinTimestamp, formatRequestDate } from "./Helper";
+import { formatRequestDate, joinTimestamp } from "./Helper";
 import { useUserStoreWithOut } from "/@/store/modules/User";
 import { AxiosRetry } from "/@/utils/http/axios/AxiosRetry";
-import axios from "axios";
 
 const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix;
@@ -44,6 +44,7 @@ const transform: AxiosTransform = {
       return res.data;
     }
     const { data } = res;
+
     if (!data) {
       // 抛出请求异常
       throw new Error(t("sys.api.apiRequestFailed"));
@@ -55,36 +56,23 @@ const transform: AxiosTransform = {
       if (msg === null || msg === undefined || msg === "") {
         msg = "操作成功";
       }
-      if (options.successMessageMode === "modal") {
-        createSuccessModal({ title: t("sys.api.successTip"), content: msg });
-      } else if (options.successMessageMode === "message") {
-        createMessage.success(msg);
-      }
+      messageTips(options.successMessageMode, msg, false);
       return data.data;
     }
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
     // 如果不希望中断当前请求，请return数据，否则直接抛出异常即可
-    let errorMsg = "";
     switch (code) {
       case ResultEnum.TIMEOUT:
-        errorMsg = t("sys.api.timeoutMessage");
+        msg = t("sys.api.timeoutMessage");
         const userStore = useUserStoreWithOut();
         userStore.setToken(undefined);
         userStore.logout(true);
         break;
-      default:
-        if (msg) {
-          errorMsg = msg;
-        }
     }
     // errorMessageMode=‘modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
     // errorMessageMode='none' 一般是调用时明确表示不希望自动弹出错误提示
-    if (options.errorMessageMode === "modal") {
-      createErrorModal({ title: t("sys.api.errorTip"), content: errorMsg });
-    } else if (options.errorMessageMode === "message") {
-      createMessage.error(errorMsg);
-    }
-    throw new Error(errorMsg || t("sys.api.apiRequestFailed"));
+    messageTips(options.errorMessageMode, msg, true);
+    throw new Error(msg || t("sys.api.apiRequestFailed"));
   },
 
   // 请求之前处理config
@@ -193,9 +181,7 @@ const transform: AxiosTransform = {
     } catch (error) {
       throw new Error(error as unknown as string);
     }
-
     checkStatus(error?.response?.status, msg, errorMessageMode);
-
     // 添加自动重试机制 保险起见 只针对GET请求
     const retryRequest = new AxiosRetry();
     const { isOpenRetry } = config.requestOptions?.retryRequest;
@@ -205,6 +191,25 @@ const transform: AxiosTransform = {
     return Promise.reject(error);
   }
 };
+
+function messageTips(messageMode: MessageMode, msg: string, isError: boolean): void {
+  const { t } = useI18n();
+  if (messageMode === "message") {
+    if (isError) {
+      createMessage.error(msg);
+      return;
+    }
+    createMessage.success(msg);
+    return;
+  }
+  if (messageMode === "modal") {
+    if (isError) {
+      createErrorModal({ title: t("sys.api.errorTip"), content: msg });
+      return;
+    }
+    createSuccessModal({ title: t("sys.api.successTip"), content: msg });
+  }
+}
 
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
   return new VAxios(
