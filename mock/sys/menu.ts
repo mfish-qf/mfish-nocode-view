@@ -191,13 +191,13 @@ const sysRoute = {
       component: "/demo/system/menu/index"
     },
     {
-      path: "dept",
+      path: "org",
       name: "DeptManagement",
       meta: {
-        title: "routes.demo.system.dept",
+        title: "routes.demo.system.org",
         ignoreKeepAlive: true
       },
-      component: "/demo/system/dept/index"
+      component: "/demo/system/org/index"
     },
     {
       path: "changePassword",

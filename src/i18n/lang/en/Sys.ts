@@ -107,7 +107,7 @@ export default {
     account: "Account management",
     account_detail: "Account detail",
     password: "Change password",
-    dept: "Department management",
+    org: "Organization management",
     menu: "Menu management",
     role: "Role management"
   }

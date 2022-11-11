@@ -55,13 +55,13 @@ const system: AppRouteModule = {
       component: () => import("/@/views/sys/menu/index.vue")
     },
     {
-      path: "dept",
+      path: "org",
       name: "DeptManagement",
       meta: {
-        title: t("sys.system.dept"),
+        title: t("sys.system.org"),
         ignoreKeepAlive: true
       },
-      component: () => import("/@/views/sys/dept/index.vue")
+      component: () => import("/@/views/sys/org/index.vue")
     },
     {
       path: "changePassword",

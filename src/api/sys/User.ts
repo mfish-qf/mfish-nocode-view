@@ -7,8 +7,8 @@ enum Api {
   Login = "/oauth2/accessToken",
   Logout = "/oauth2/user/revoke",
   GetUserInfo = "/oauth2/user/info",
-  GetPermCode = "/getPermCode",
-  TestRetry = "/testRetry",
+  SendMsg = "/oauth2/sendMsg",
+  Captche = "/captcha"
 }
 
 /**
@@ -35,22 +35,9 @@ export function getUserInfo() {
 }
 
 export function getPermCode() {
-  return defHttp.get<string[]>({ url: Api.GetPermCode });
+  return defHttp.get<string[]>({ url: Api.Captche });
 }
 
 export function doLogout() {
   return defHttp.get({ url: Api.Logout });
-}
-
-export function testRetry() {
-  return defHttp.get(
-    { url: Api.TestRetry },
-    {
-      retryRequest: {
-        isOpenRetry: true,
-        count: 5,
-        waitTime: 1000
-      }
-    }
-  );
 }
