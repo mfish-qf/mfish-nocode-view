@@ -34,8 +34,8 @@ import { defineComponent } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
 import { getSsoOrgTree } from "/@/api/sys/SsoOrg";
 import { useModal } from "/@/components/Modal";
-import DeptModal from "./DeptModal.vue";
-import { columns, searchFormSchema } from "./dept.data";
+import DeptModal from "./OrgModal.vue";
+import { columns, searchFormSchema } from "./org.data";
 
 export default defineComponent({
   name: "DeptManagement",

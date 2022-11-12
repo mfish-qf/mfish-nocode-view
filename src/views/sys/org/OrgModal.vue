@@ -7,7 +7,7 @@
 import { defineComponent, ref, computed, unref } from "vue";
 import { BasicModal, useModalInner } from "/@/components/Modal";
 import { BasicForm, useForm } from "/@/components/Form/index";
-import { formSchema } from "./dept.data";
+import { formSchema } from "./org.data";
 import { getSsoOrgTree, insertSsoOrg, updateSsoOrg } from "/@/api/sys/SsoOrg";
 
 export default defineComponent({
@@ -46,6 +46,7 @@ export default defineComponent({
     async function handleSubmit() {
       try {
         const values = await validate();
+        values.clientId = "system";
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
           saveOrg(updateSsoOrg, values);

@@ -8,6 +8,7 @@ import { BasicFetchResult } from "/@/api/model/baseModel";
 export interface SsoOrg {
   id: string;
   parentId: string;
+  clientId: string;
   orgCode: string;
   orgLevel: string;
   orgName: string;
