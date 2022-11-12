@@ -90,7 +90,6 @@ export default defineComponent({
     }
 
     function onFetchSuccess() {
-      // 演示默认展开所有表项
       nextTick(expandAll);
     }
 

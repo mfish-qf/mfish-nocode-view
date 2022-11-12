@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BasicTable @register="registerTable">
+    <BasicTable @register="registerTable" @fetch-success="onFetchSuccess">
       <template #toolbar>
         <a-button type="primary" @click="handleCreate">新增组织</a-button>
       </template>
@@ -30,9 +30,9 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, nextTick } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
-import { getSsoOrgTree } from "/@/api/sys/SsoOrg";
+import { deleteSsoOrg, getSsoOrgTree } from "/@/api/sys/SsoOrg";
 import { useModal } from "/@/components/Modal";
 import DeptModal from "./OrgModal.vue";
 import { columns, searchFormSchema } from "./org.data";
@@ -42,12 +42,12 @@ export default defineComponent({
   components: { BasicTable, DeptModal, TableAction },
   setup() {
     const [registerModal, { openModal }] = useModal();
-    const [registerTable, { reload }] = useTable({
+    const [registerTable, { reload, expandAll }] = useTable({
       title: "部门列表",
       api: getSsoOrgTree,
       columns,
       formConfig: {
-        labelWidth: 120,
+        labelWidth: 100,
         schemas: searchFormSchema
       },
       pagination: false,
@@ -61,7 +61,6 @@ export default defineComponent({
         width: 80,
         title: "操作",
         dataIndex: "action",
-        // slots: { customRender: 'action' },
         fixed: undefined
       }
     });
@@ -80,11 +79,17 @@ export default defineComponent({
     }
 
     function handleDelete(record: Recordable) {
-      console.log(record);
+      deleteSsoOrg(record.id).then(() => {
+        handleSuccess();
+      });
     }
 
     function handleSuccess() {
       reload();
+    }
+
+    function onFetchSuccess() {
+      nextTick(expandAll)
     }
 
     return {
@@ -93,7 +98,8 @@ export default defineComponent({
       handleCreate,
       handleEdit,
       handleDelete,
-      handleSuccess
+      handleSuccess,
+      onFetchSuccess
     };
   }
 });
