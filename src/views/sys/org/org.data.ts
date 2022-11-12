@@ -28,13 +28,28 @@ export const columns: BasicColumn[] = [
     }
   },
   {
+    title: "负责人",
+    dataIndex: "leader",
+    width: 120,
+  },
+  {
+    title: "手机号",
+    dataIndex: "phone",
+    width: 120
+  },
+  {
+    title: "邮箱",
+    dataIndex: "email",
+    width: 180,
+  },
+  {
     title: "创建时间",
     dataIndex: "createTime",
     width: 180
   },
   {
     title: "备注",
-    dataIndex: "remark"
+    dataIndex: "remark",
   }
 ];
 
