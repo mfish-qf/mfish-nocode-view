@@ -30,7 +30,7 @@ export const columns: BasicColumn[] = [
   {
     title: "负责人",
     dataIndex: "leader",
-    width: 120,
+    width: 120
   },
   {
     title: "手机号",
@@ -40,7 +40,7 @@ export const columns: BasicColumn[] = [
   {
     title: "邮箱",
     dataIndex: "email",
-    width: 180,
+    width: 180
   },
   {
     title: "创建时间",
@@ -49,7 +49,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: "备注",
-    dataIndex: "remark",
+    dataIndex: "remark"
   }
 ];
 
@@ -121,17 +121,17 @@ export const formSchema: FormSchema[] = [
   {
     field: "leader",
     label: "负责人",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "phone",
     label: "手机号",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "email",
     label: "邮箱",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "status",
@@ -149,6 +149,7 @@ export const formSchema: FormSchema[] = [
   {
     label: "备注",
     field: "remark",
-    component: "InputTextArea"
+    component: "InputTextArea",
+    colProps: { span: 24 }
   }
 ];

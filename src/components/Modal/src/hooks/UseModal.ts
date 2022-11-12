@@ -36,7 +36,7 @@ export function useModal(): UseModalReturnType {
 
   function register(modalMethod: ModalMethods, uuid: string) {
     if (!getCurrentInstance()) {
-      throw new Error("useModal() can only be used inside setup() or functional components!");
+      throw new Error("useModal（）只能在setup（）或功能组件中使用！");
     }
     uid.value = uuid;
     isProdMode() &&
@@ -57,7 +57,7 @@ export function useModal(): UseModalReturnType {
   const getInstance = () => {
     const instance = unref(modal);
     if (!instance) {
-      error("useModal instance is undefined!");
+      error("useModal实例为定义");
     }
     return instance;
   };

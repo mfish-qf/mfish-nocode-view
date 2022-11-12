@@ -19,14 +19,14 @@ export default defineComponent({
 
     const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
       labelWidth: 100,
-      baseColProps: { span: 24 },
+      baseColProps: { span: 12 },
       schemas: formSchema,
       showActionButtonGroup: false
     });
 
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
-      setModalProps({ confirmLoading: false });
+      setModalProps({ confirmLoading: false, width: 800 });
       isUpdate.value = !!data?.isUpdate;
 
       if (unref(isUpdate)) {
