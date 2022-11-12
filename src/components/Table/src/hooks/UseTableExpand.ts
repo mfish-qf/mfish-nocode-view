@@ -38,7 +38,7 @@ export function useTableExpand(
   }
 
   function expandRows(keys: string[]) {
-    // use row ID expands the specified table row
+    //使用行KEY展开指定的行
     const { isTreeTable } = unref(propsRef);
     if (!isTreeTable) return;
     expandedRowKeys.value = [...expandedRowKeys.value, ...keys];

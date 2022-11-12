@@ -26,7 +26,7 @@
         </template>
       </template>
     </BasicTable>
-    <DeptModal @register="registerModal" @success="handleSuccess" />
+    <OrgModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
@@ -34,12 +34,12 @@ import { defineComponent, nextTick } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
 import { deleteSsoOrg, getSsoOrgTree } from "/@/api/sys/SsoOrg";
 import { useModal } from "/@/components/Modal";
-import DeptModal from "./OrgModal.vue";
+import OrgModal from "./OrgModal.vue";
 import { columns, searchFormSchema } from "./org.data";
 
 export default defineComponent({
-  name: "DeptManagement",
-  components: { BasicTable, DeptModal, TableAction },
+  name: "OrgManagement",
+  components: { BasicTable, OrgModal, TableAction },
   setup() {
     const [registerModal, { openModal }] = useModal();
     const [registerTable, { reload, expandAll }] = useTable({
@@ -50,6 +50,7 @@ export default defineComponent({
         labelWidth: 100,
         schemas: searchFormSchema
       },
+      isTreeTable: true,
       pagination: false,
       striped: false,
       useSearchForm: true,

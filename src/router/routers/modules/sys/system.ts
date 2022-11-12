@@ -56,7 +56,7 @@ const system: AppRouteModule = {
     },
     {
       path: "org",
-      name: "DeptManagement",
+      name: "OrgManagement",
       meta: {
         title: t("sys.system.org"),
         ignoreKeepAlive: true

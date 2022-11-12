@@ -11,7 +11,7 @@ import { formSchema } from "./org.data";
 import { getSsoOrgTree, insertSsoOrg, updateSsoOrg } from "/@/api/sys/SsoOrg";
 
 export default defineComponent({
-  name: "DeptModal",
+  name: "OrgModal",
   components: { BasicModal, BasicForm },
   emits: ["success", "register"],
   setup(_, { emit }) {
@@ -28,13 +28,13 @@ export default defineComponent({
       resetFields().then();
       setModalProps({ confirmLoading: false, width: "40%" });
       isUpdate.value = !!data?.isUpdate;
-
       if (unref(isUpdate)) {
         setFieldsValue({
           ...data.record
         }).then();
       }
       const treeData = await getSsoOrgTree();
+      debugger
       updateSchema({
         field: "parentId",
         componentProps: { treeData }
