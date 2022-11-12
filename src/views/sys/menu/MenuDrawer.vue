@@ -1,19 +1,19 @@
 <template>
-  <BasicDrawer v-bind="$attrs" @register="registerDrawer" showFooter :title="getTitle" width="40%" @ok="handleSubmit">
+  <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
     <BasicForm @register="registerForm" />
-  </BasicDrawer>
+  </BasicModal>
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { formSchema } from "./menu.data";
-import { BasicDrawer, useDrawerInner } from "/@/components/Drawer";
+import { BasicModal, useModalInner } from "/@/components/Modal";
 import { getMenuTree, insertMenu, updateMenu } from "/@/api/sys/Menu";
 import { MenuListItem } from "/@/api/sys/model/MenuModel";
 
 export default defineComponent({
   name: "MenuDrawer",
-  components: { BasicDrawer, BasicForm },
+  components: { BasicModal, BasicForm },
   emits: ["success", "register"],
   setup(_, { emit }) {
     const isUpdate = ref(true);
@@ -23,9 +23,9 @@ export default defineComponent({
       showActionButtonGroup: false,
       baseColProps: { lg: 12, md: 24 }
     });
-    const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
+    const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       await resetFields();
-      setDrawerProps({ confirmLoading: false });
+      setModalProps({ confirmLoading: false, width: "40%" });
       isUpdate.value = !!data?.isUpdate;
       if (unref(isUpdate)) {
         setFieldsValue({
@@ -44,14 +44,14 @@ export default defineComponent({
       try {
         let values = (await validate()) as MenuListItem;
         values.clientId = "system";
-        setDrawerProps({ confirmLoading: true });
+        setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
           saveMenu(updateMenu, values);
         } else {
           saveMenu(insertMenu, values);
         }
       } finally {
-        setDrawerProps({ confirmLoading: false });
+        setModalProps({ confirmLoading: false });
       }
     }
 
@@ -59,12 +59,12 @@ export default defineComponent({
       save(values).then(() => {
         emit("success");
       }).finally(() => {
-          closeDrawer();
+          closeModal();
         }
       );
     }
 
-    return { registerDrawer, registerForm, getTitle, handleSubmit };
+    return { registerModal, registerForm, getTitle, handleSubmit };
   }
 });
 </script>

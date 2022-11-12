@@ -26,22 +26,22 @@
         </template>
       </template>
     </BasicTable>
-    <MenuDrawer @register="registerDrawer" @success="handleSuccess" />
+    <MenuDrawer @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, nextTick } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
 import { deleteMenu, getMenuTree } from "/@/api/sys/Menu";
-import { useDrawer } from "/@/components/Drawer";
 import MenuDrawer from "./MenuDrawer.vue";
 import { columns, searchFormSchema } from "./menu.data";
+import { useModal } from "/@/components/Modal";
 
 export default defineComponent({
   name: "MenuManagement",
   components: { BasicTable, MenuDrawer, TableAction },
   setup() {
-    const [registerDrawer, { openDrawer }] = useDrawer();
+    const [registerModal, { openModal }] = useModal();
     const [registerTable, { reload, expandAll }] = useTable({
       title: "菜单列表",
       api: getMenuTree,
@@ -67,13 +67,13 @@ export default defineComponent({
     });
 
     function handleCreate() {
-      openDrawer(true, {
+      openModal(true, {
         isUpdate: false
       });
     }
 
     function handleEdit(record: Recordable) {
-      openDrawer(true, {
+      openModal(true, {
         record,
         isUpdate: true
       });
@@ -95,7 +95,7 @@ export default defineComponent({
 
     return {
       registerTable,
-      registerDrawer,
+      registerModal,
       handleCreate,
       handleEdit,
       handleDelete,

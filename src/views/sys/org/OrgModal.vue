@@ -26,7 +26,7 @@ export default defineComponent({
 
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
-      setModalProps({ confirmLoading: false, width: 800 });
+      setModalProps({ confirmLoading: false, width: "40%" });
       isUpdate.value = !!data?.isUpdate;
 
       if (unref(isUpdate)) {
