@@ -1,10 +1,10 @@
-摸鱼低代码开发平台（Vue3前端）
+摸鱼低代码开发平台（前端）
 ===============
 当前最新版本： 1.0.0
 
 
 ## 简介
-mfish-Vue3采用 Vue3.0、Vite、 Ant-Design-Vue、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
+mfish-nocode-view采用 Vue3.0、Vite、 Ant-Design-Vue、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
 是在 Vben-Admin 基础上研发的，适合于mfish低代码平台的VUE3版前端解决方案，目前已是稳定版本，可用于生产项目。
 
 ##  项目源码
@@ -13,10 +13,10 @@ mfish-Vue3采用 Vue3.0、Vite、 Ant-Design-Vue、TypeScript 等新技术方案
 
 ##### 项目说明
 
-| 项目名                | 说明                     | 
-|--------------------|------------------------|
-| `mfish-vue3` | Vue3版前端代码 | 
-| `mfish-nocode`    | JAVA后台（支持微服务）        |  
+| 项目名                 | 说明                     | 
+|---------------------|------------------------|
+| `mfish-nocode-view` | Vue3版前端代码 | 
+| `mfish-nocode`      | JAVA后台（支持微服务）        |  
 
 ## 技术文档
 
@@ -36,7 +36,7 @@ git clone https://****.git
 - Installation dependencies
 
 ```bash
-cd mfish-vue3
+cd mfish-nocode-view
 
 yarn install
 
@@ -73,9 +73,9 @@ yarn build
 - 下载项目
 
 ```bash
-git clone https://*****-vue3.git
+git clone https://*****-.git
 
-cd mfish-vue3
+cd mfish-nocode-view
 
 ```
 - 修改后台域名
@@ -95,11 +95,6 @@ yarn install
 yarn build
 ```
 
-- 启动容器
-```bash
-docker build -t mfish-vue3 .
-docker run --name mfish-vue3-nginx -p 80:80 -d mfish-vue3
-```
 
 - 访问前台
 
