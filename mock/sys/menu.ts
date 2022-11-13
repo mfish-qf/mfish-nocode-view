@@ -309,7 +309,7 @@ const menuTree = (() => {
 
 export default [
   {
-    url: "/api/oauth2/ssoMenu/route",
+    url: "/api/oauth2/menu/route",
     timeout: 1000,
     method: "get",
     response: (request: requestParams) => {
@@ -341,7 +341,7 @@ export default [
     }
   },
   {
-    url: '/api/oauth2/ssoMenu/tree',
+    url: '/api/oauth2/menu/tree',
     timeout: 100,
     method: 'get',
     response: () => {

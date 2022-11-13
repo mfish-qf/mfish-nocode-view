@@ -8,7 +8,7 @@ import { defineComponent, ref, computed, unref } from "vue";
 import { BasicModal, useModalInner } from "/@/components/Modal";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { formSchema } from "./org.data";
-import { getSsoOrgTree, insertSsoOrg, updateSsoOrg } from "/@/api/sys/SsoOrg";
+import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
 
 export default defineComponent({
   name: "OrgModal",
@@ -33,8 +33,7 @@ export default defineComponent({
           ...data.record
         }).then();
       }
-      const treeData = await getSsoOrgTree();
-      debugger
+      const treeData = await getOrgTree();
       updateSchema({
         field: "parentId",
         componentProps: { treeData }
@@ -49,9 +48,9 @@ export default defineComponent({
         values.clientId = "system";
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
-          saveOrg(updateSsoOrg, values);
+          saveOrg(updateOrg, values);
         } else {
-          saveOrg(insertSsoOrg, values);
+          saveOrg(insertOrg, values);
         }
         emit("success");
       } finally {

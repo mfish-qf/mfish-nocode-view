@@ -32,7 +32,7 @@
 <script lang="ts">
 import { defineComponent, nextTick } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
-import { deleteSsoOrg, getSsoOrgTree } from "/@/api/sys/SsoOrg";
+import { deleteOrg, getOrgTree } from "/@/api/sys/Org";
 import { useModal } from "/@/components/Modal";
 import OrgModal from "./OrgModal.vue";
 import { columns, searchFormSchema } from "./org.data";
@@ -44,7 +44,7 @@ export default defineComponent({
     const [registerModal, { openModal }] = useModal();
     const [registerTable, { reload, expandAll }] = useTable({
       title: "部门列表",
-      api: getSsoOrgTree,
+      api: getOrgTree,
       columns,
       formConfig: {
         labelWidth: 100,
@@ -80,7 +80,7 @@ export default defineComponent({
     }
 
     function handleDelete(record: Recordable) {
-      deleteSsoOrg(record.id).then(() => {
+      deleteOrg(record.id).then(() => {
         handleSuccess();
       });
     }
