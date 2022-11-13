@@ -30,7 +30,7 @@ mfish-nocode-view采用 Vue3.0、Vite、 Ant-Design-Vue、TypeScript 等新技�
 - Get the project code
 
 ```bash
-git clone https://****.git
+git clone https://github.com/mfish-qf/mfish-nocode-view.git
 ```
 
 - Installation dependencies
