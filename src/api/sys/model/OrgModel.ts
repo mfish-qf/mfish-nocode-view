@@ -10,14 +10,14 @@ export interface SsoOrg {
   parentId: string;
   clientId: string;
   orgCode: string;
-  orgLevel: string;
+  orgLevel: number;
   orgName: string;
-  orgSort: string;
+  orgSort: number;
   leader: string;
   phone: string;
   email: string;
-  status: string;
-  delFlag: string;
+  status: number;
+  delFlag: number;
   createBy: string;
   createTime: string;
   updateBy: string;
