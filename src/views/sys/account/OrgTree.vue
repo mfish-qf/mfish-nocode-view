@@ -20,11 +20,9 @@
   export default defineComponent({
     name: 'OrgTree',
     components: { BasicTree },
-
     emits: ['select'],
     setup(_, { emit }) {
       const treeData = ref<TreeItem[]>([]);
-
       async function fetch() {
         treeData.value = (await getOrgTree()) as unknown as TreeItem[];
       }

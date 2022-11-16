@@ -61,9 +61,9 @@ export default defineComponent({
       rowKey: "id",
       columns,
       formConfig: {
-        labelWidth: 120,
+        labelWidth: 80,
         schemas: searchFormSchema,
-        autoSubmitOnEnter: true
+        autoSubmitOnEnter: true,
       },
       useSearchForm: true,
       showTableSetting: true,
@@ -76,7 +76,6 @@ export default defineComponent({
         width: 120,
         title: "操作",
         dataIndex: "action"
-        // slots: { customRender: 'action' },
       }
     });
 
@@ -109,8 +108,8 @@ export default defineComponent({
       }
     }
 
-    function handleSelect(deptId = "") {
-      searchInfo.deptId = deptId;
+    function handleSelect(orgId = "") {
+      searchInfo.orgId = orgId;
       reload();
     }
 

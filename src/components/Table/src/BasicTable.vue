@@ -98,7 +98,7 @@ export default defineComponent({
       unref(isFixedHeightPage) &&
       props.canResize &&
       warn(
-        "'canResize' of BasicTable may not work in PageWrapper with 'fixedHeight' (especially in hot updates)"
+        "BasicTable的'canResize'可能无法在具有'fixedHeight'的PageWrapper中工作（尤其是在热更新中）"
       );
     });
     const { getLoading, setLoading } = useLoading(getProps);

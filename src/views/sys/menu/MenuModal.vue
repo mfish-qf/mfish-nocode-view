@@ -12,7 +12,7 @@ import { getMenuTree, insertMenu, updateMenu } from "/@/api/sys/Menu";
 import { MenuListItem } from "/@/api/sys/model/MenuModel";
 
 export default defineComponent({
-  name: "MenuDrawer",
+  name: "MenuModal",
   components: { BasicModal, BasicForm },
   emits: ["success", "register"],
   setup(_, { emit }) {

@@ -75,24 +75,13 @@ export const accountFormSchema: FormSchema[] = [
     field: "account",
     label: "用户名",
     component: "Input",
-    helpMessage: ["本字段演示异步验证", "不能输入带有admin的用户名"],
-    rules: [
-      {
-        required: true,
-        message: "请输入用户名"
-      },
-      {
-        validator(_, value) {
-          return new Promise((resolve, reject) => {
-            isAccountExist(value)
-              .then(() => resolve())
-              .catch((err) => {
-                reject(err.message || "验证失败");
-              });
-          });
-        }
-      }
-    ]
+    helpMessage: ["不能输入带有admin的用户名"]
+  },
+  {
+    field: "password",
+    label: "密码",
+    component: "InputPassword",
+    required: true
   },
   {
     field: "phone",
@@ -111,25 +100,21 @@ export const accountFormSchema: FormSchema[] = [
                 reject(err.message || "验证失败");
               });
           });
-        }
-      }
-    ]
-  },
-  {
-    field: "password",
-    label: "密码",
-    component: "InputPassword",
-    required: true,
-    ifShow: false
+        },
+        trigger: "blur"
+      },
+    ],
   },
   {
     label: "角色",
     field: "role",
     component: "ApiSelect",
     componentProps: {
+      mode: "multiple",
       api: getRoleList,
+      apiFieldName: "records",
       labelField: "roleName",
-      valueField: "roleValue"
+      valueField: "id"
     },
     required: true
   },
@@ -181,7 +166,7 @@ export const accountFormSchema: FormSchema[] = [
   },
   {
     field: "birthday",
-    label: "座机",
+    label: "生日",
     component: "DatePicker"
   },
   {
@@ -209,5 +194,5 @@ export const accountFormSchema: FormSchema[] = [
       ]
     },
     required: true
-  },
+  }
 ];
