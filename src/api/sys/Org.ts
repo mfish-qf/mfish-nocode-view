@@ -4,7 +4,7 @@
  * @date       ：2022/11/9 18:12
  */
 import { defHttp } from "/@/utils/http/axios";
-import { OrgTreeModel, SsoOrg } from "/@/api/sys/model/OrgModel";
+import { SsoOrg } from "/@/api/sys/model/OrgModel";
 
 enum Api {
   org = "/oauth2/org",
@@ -12,7 +12,7 @@ enum Api {
 }
 
 export const getOrgTree = (params?: SsoOrg) => {
-  return defHttp.get<OrgTreeModel>({ url: Api.orgTree, params });
+  return defHttp.get<SsoOrg[]>({ url: Api.orgTree, params });
 };
 
 export function insertOrg(params: SsoOrg) {

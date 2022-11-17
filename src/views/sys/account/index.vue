@@ -63,7 +63,7 @@ export default defineComponent({
       formConfig: {
         labelWidth: 80,
         schemas: searchFormSchema,
-        autoSubmitOnEnter: true,
+        autoSubmitOnEnter: true
       },
       useSearchForm: true,
       showTableSetting: true,

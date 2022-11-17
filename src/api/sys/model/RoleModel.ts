@@ -1,4 +1,4 @@
-import { BasicFetchResult } from "/@/api/model/baseModel";
+import { PageResult } from "/@/api/model/baseModel";
 
 /**
  * @description：角色信息
@@ -19,4 +19,4 @@ export interface SsoRole {
   updateTime: string;
 }
 
-export type RoleListModel = BasicFetchResult<SsoRole>;
+export type RolePageModel = PageResult<SsoRole>;

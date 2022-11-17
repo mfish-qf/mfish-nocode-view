@@ -34,10 +34,10 @@ export const columns: BasicColumn[] = [
   {
     title: "性别",
     dataIndex: "sex",
-    width: 120,
+    width: 60,
     customRender: ({ record }) => {
-      const status = record.status;
-      const enable = ~~status === 1;
+      const sex = record.sex;
+      const enable = ~~sex === 1;
       const color = enable ? "green" : "red";
       const text = enable ? "男" : "女";
       return h(Tag, { color: color }, () => text);
@@ -67,6 +67,24 @@ export const searchFormSchema: FormSchema[] = [
     label: "昵称",
     component: "Input",
     colProps: { span: 4 }
+  },
+  {
+    field: "phone",
+    label: "手机号",
+    component: "Input",
+    colProps: { span: 4 }
+  },
+  {
+    field: "status",
+    label: "状态",
+    component: "Select",
+    componentProps: {
+      options: [
+        { label: "正常", value: 0 },
+        { label: "停用", value: 1 }
+      ]
+    },
+    colProps: { span: 4 }
   }
 ];
 
@@ -87,23 +105,6 @@ export const accountFormSchema: FormSchema[] = [
     field: "phone",
     label: "手机号",
     component: "Input",
-    rules: [
-      {
-        validator(_, value) {
-          if (value === undefined || value === null || value === "") {
-            return;
-          }
-          return new Promise((resolve, reject) => {
-            isAccountExist(value)
-              .then(() => resolve())
-              .catch((err) => {
-                reject(err.message || "验证失败");
-              });
-          });
-        },
-        trigger: "blur"
-      },
-    ],
   },
   {
     label: "角色",

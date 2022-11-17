@@ -1,5 +1,5 @@
 import { defHttp } from "/@/utils/http/axios";
-import { SsoRole } from "/@/api/sys/model/RoleModel";
+import { RolePageModel, SsoRole } from "/@/api/sys/model/RoleModel";
 
 /**
  * @description：角色请求类
@@ -8,9 +8,12 @@ import { SsoRole } from "/@/api/sys/model/RoleModel";
  */
 enum Api {
   role = "/oauth2/role",
-
+  allRole = "/oauth2/role/all",
 }
 
 export const getRoleList = (params?: SsoRole) => {
-  return defHttp.get<SsoRole[]>({ url: Api.role, params });
+  return defHttp.get<RolePageModel>({ url: Api.role, params });
+};
+export const getAllRoleList = (params?: SsoRole) => {
+  return defHttp.get<SsoRole[]>({ url: Api.allRole, params });
 };
