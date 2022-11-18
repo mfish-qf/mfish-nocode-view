@@ -73,7 +73,6 @@ export default defineComponent({
 
     const getOptions = computed(() => {
       const { labelField, valueField, numberToString } = props;
-
       return unref(options).reduce((prev, next: Recordable) => {
         if (next) {
           const value = next[valueField];

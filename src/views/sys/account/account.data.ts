@@ -1,5 +1,4 @@
-import { getRoleList } from "/@/api/sys/Role";
-import { isAccountExist } from "/@/api/sys/User";
+import { getAllRoleList } from "/@/api/sys/Role";
 import { BasicColumn } from "/@/components/Table";
 import { FormSchema } from "/@/components/Table";
 import { h } from "vue";
@@ -87,24 +86,29 @@ export const searchFormSchema: FormSchema[] = [
     colProps: { span: 4 }
   }
 ];
-
 export const accountFormSchema: FormSchema[] = [
+  {
+    field: "id",
+    label: "唯一ID",
+    component: "Input",
+    required: true,
+    show: false
+  },
   {
     field: "account",
     label: "用户名",
     component: "Input",
-    helpMessage: ["不能输入带有admin的用户名"]
+    required: true
   },
   {
     field: "password",
     label: "密码",
-    component: "InputPassword",
-    required: true
+    component: "InputPassword"
   },
   {
     field: "phone",
     label: "手机号",
-    component: "Input",
+    component: "Input"
   },
   {
     label: "角色",
@@ -112,8 +116,7 @@ export const accountFormSchema: FormSchema[] = [
     component: "ApiSelect",
     componentProps: {
       mode: "multiple",
-      api: getRoleList,
-      apiFieldName: "records",
+      api: getAllRoleList,
       labelField: "roleName",
       valueField: "id"
     },
@@ -136,29 +139,12 @@ export const accountFormSchema: FormSchema[] = [
   {
     field: "nickname",
     label: "昵称",
-    component: "Input",
-    required: true
+    component: "Input"
   },
   {
     label: "邮箱",
     field: "email",
-    component: "Input",
-    rules: [
-      {
-        validator(_, value) {
-          if (value === undefined || value === null || value === "") {
-            return;
-          }
-          return new Promise((resolve, reject) => {
-            isAccountExist(value)
-              .then(() => resolve())
-              .catch((err) => {
-                reject(err.message || "验证失败");
-              });
-          });
-        }
-      }
-    ]
+    component: "Input"
   },
   {
     field: "telephone",
