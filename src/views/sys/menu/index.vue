@@ -26,20 +26,20 @@
         </template>
       </template>
     </BasicTable>
-    <MenuDrawer @register="registerModal" @success="handleSuccess" />
+    <MenuModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, nextTick } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
 import { deleteMenu, getMenuTree } from "/@/api/sys/Menu";
-import MenuDrawer from "./MenuDrawer.vue";
+import MenuModal from "./MenuModal.vue";
 import { columns, searchFormSchema } from "./menu.data";
 import { useModal } from "/@/components/Modal";
 
 export default defineComponent({
   name: "MenuManagement",
-  components: { BasicTable, MenuDrawer, TableAction },
+  components: { BasicTable, MenuModal, TableAction },
   setup() {
     const [registerModal, { openModal }] = useModal();
     const [registerTable, { reload, expandAll }] = useTable({
@@ -48,7 +48,8 @@ export default defineComponent({
       columns,
       formConfig: {
         labelWidth: 100,
-        schemas: searchFormSchema
+        schemas: searchFormSchema,
+        autoSubmitOnEnter: true
       },
       isTreeTable: true,
       pagination: false,

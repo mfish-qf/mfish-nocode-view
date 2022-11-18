@@ -1,5 +1,3 @@
-import { BasicFetchResult } from "/@/api/model/baseModel";
-
 /**
  * @description：组织结构信息
  * @author     ：qiufeng
@@ -10,19 +8,17 @@ export interface SsoOrg {
   parentId: string;
   clientId: string;
   orgCode: string;
-  orgLevel: string;
+  orgLevel: number;
   orgName: string;
-  orgSort: string;
+  orgSort: number;
   leader: string;
   phone: string;
   email: string;
-  status: string;
-  delFlag: string;
+  status: number;
+  delFlag: number;
   createBy: string;
   createTime: string;
   updateBy: string;
   updateTime: string;
   children: SsoOrg[];
 }
-
-export type OrgTreeModel = BasicFetchResult<SsoOrg>;

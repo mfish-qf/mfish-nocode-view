@@ -1,5 +1,5 @@
 import { defHttp } from "/@/utils/http/axios";
-import { MenuRouteModel, MenuTreeModel, MenuParams, MenuListItem } from "./model/MenuModel";
+import { MenuRouteModel, MenuParams, MenuListItem } from "./model/MenuModel";
 
 enum Api {
   menu = "/oauth2/menu",
@@ -12,7 +12,7 @@ enum Api {
  * @param params
  */
 export const getMenuTree = (params?: MenuParams) => {
-  return defHttp.get<MenuTreeModel>({ url: Api.menuTree, params });
+  return defHttp.get<MenuListItem[]>({ url: Api.menuTree, params });
 };
 /**
  * 插入菜单、目录、按钮

@@ -46,3 +46,26 @@ export interface GetUserInfoModel {
   // 介绍+
   desc?: string;
 }
+
+export interface SsoUser {
+  id: string;
+  orgName: string;
+  account: string;
+  phone: string;
+  email: string;
+  password: string;
+  oldPassword: string;
+  nickname: string;
+  headImgUrl: string;
+  telephone: string;
+  birthday: string;
+  sex: number;
+  status: number;
+  del_flag: number;
+  salt: string;
+  openid: string;
+  createBy: string;
+  createTime: string;
+  updateBy: string;
+  updateTime: string;
+}

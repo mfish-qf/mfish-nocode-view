@@ -59,7 +59,7 @@ export default defineComponent({
     immediate: propTypes.bool.def(true),
     alwaysLoad: propTypes.bool.def(false)
   },
-  emits: ['options-change', 'change', 'update:value'],
+  emits: ["options-change", "change", "update:value"],
   setup(props, { emit }) {
     const options = ref<OptionsItem[]>([]);
     const loading = ref(false);
@@ -73,7 +73,6 @@ export default defineComponent({
 
     const getOptions = computed(() => {
       const { labelField, valueField, numberToString } = props;
-
       return unref(options).reduce((prev, next: Recordable) => {
         if (next) {
           const value = next[valueField];

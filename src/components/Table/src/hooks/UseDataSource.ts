@@ -249,18 +249,14 @@ export function useDataSource(propsRef: ComputedRef<BasicTableProps>,
         fetchSetting
       );
       let pageParams: Recordable = {};
-
       const { current = 1, pageSize = PAGE_SIZE } = unref(getPaginationInfo) as PaginationProps;
-
       if ((isBoolean(pagination) && !pagination) || isBoolean(getPaginationInfo)) {
         pageParams = {};
       } else {
         pageParams[pageField] = (opt && opt.page) || current;
         pageParams[sizeField] = pageSize;
       }
-
       const { sortInfo = {}, filterInfo } = searchState;
-
       let params: Recordable = merge(
         pageParams,
         useSearchForm ? getFieldsValue() : {},
@@ -275,15 +271,11 @@ export function useDataSource(propsRef: ComputedRef<BasicTableProps>,
       if (beforeFetch && isFunction(beforeFetch)) {
         params = (await beforeFetch(params)) || params;
       }
-
       const res = await api(params);
       rawDataSourceRef.value = res;
-
       const isArrayResult = Array.isArray(res);
-
       let resultItems: Recordable[] = isArrayResult ? res : get(res, listField);
       const resultTotal: number = isArrayResult ? res.length : get(res, totalField);
-
       // 假如数据变少，导致总页数变少并小于当前选中页码，通过getPaginationRef获取到的页码是不正确的，需获取正确的页码再次执行
       if (resultTotal) {
         const currentTotalPage = Math.ceil(resultTotal / pageSize);
@@ -294,7 +286,6 @@ export function useDataSource(propsRef: ComputedRef<BasicTableProps>,
           return await fetch(opt);
         }
       }
-
       if (afterFetch && isFunction(afterFetch)) {
         resultItems = (await afterFetch(resultItems)) || resultItems;
       }

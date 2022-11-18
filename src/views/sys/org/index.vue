@@ -48,7 +48,8 @@ export default defineComponent({
       columns,
       formConfig: {
         labelWidth: 100,
-        schemas: searchFormSchema
+        schemas: searchFormSchema,
+        autoSubmitOnEnter: true
       },
       isTreeTable: true,
       pagination: false,
