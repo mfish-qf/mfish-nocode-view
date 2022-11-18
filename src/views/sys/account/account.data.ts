@@ -91,7 +91,6 @@ export const accountFormSchema: FormSchema[] = [
     field: "id",
     label: "唯一ID",
     component: "Input",
-    required: true,
     show: false
   },
   {
@@ -112,7 +111,7 @@ export const accountFormSchema: FormSchema[] = [
   },
   {
     label: "角色",
-    field: "role",
+    field: "roles",
     component: "ApiSelect",
     componentProps: {
       mode: "multiple",
