@@ -46,11 +46,6 @@ export const columns: BasicColumn[] = [
     title: "生日",
     dataIndex: "birthday",
     width: 180
-  },
-  {
-    title: "角色",
-    dataIndex: "role",
-    width: 200
   }
 ];
 
@@ -96,8 +91,8 @@ export const accountFormSchema: FormSchema[] = [
   {
     field: "account",
     label: "用户名",
-    component: "Input",
-    required: true
+    component: "Input"
+    // required: true
   },
   {
     field: "password",
@@ -117,7 +112,8 @@ export const accountFormSchema: FormSchema[] = [
       mode: "multiple",
       api: getAllRoleList,
       labelField: "roleName",
-      valueField: "id"
+      valueField: "id",
+      resultField: "id"
     },
     required: true
   },
@@ -132,8 +128,8 @@ export const accountFormSchema: FormSchema[] = [
         value: "id"
       },
       getPopupContainer: () => document.body
-    },
-    required: true
+    }
+    // required: true
   },
   {
     field: "nickname",
@@ -165,8 +161,8 @@ export const accountFormSchema: FormSchema[] = [
         { label: "男", value: 1 },
         { label: "女", value: 0 }
       ]
-    },
-    required: true
+    }
+    // required: true
   },
   {
     field: "status",
@@ -178,7 +174,7 @@ export const accountFormSchema: FormSchema[] = [
         { label: "启用", value: 0 },
         { label: "停用", value: 1 }
       ]
-    },
-    required: true
+    }
+    // required: true
   }
 ];

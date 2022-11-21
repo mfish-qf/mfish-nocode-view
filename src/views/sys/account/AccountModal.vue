@@ -53,9 +53,9 @@ export default defineComponent({
         const values = await validate();
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
+          values.roles = values.roles.join(",");
           saveAccount(updateUser, values);
         } else {
-
           saveAccount(insertUser, values);
         }
       } finally {
