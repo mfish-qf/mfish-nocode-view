@@ -53,7 +53,6 @@ export default defineComponent({
         const values = await validate();
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
-          values.roles = values.roles.join(",");
           saveAccount(updateUser, values);
         } else {
           saveAccount(insertUser, values);
@@ -66,7 +65,10 @@ export default defineComponent({
     function saveAccount(save, values) {
       save(values).then(() => {
         emit("success", { isUpdate: unref(isUpdate), values: { ...values, id: rowId.value } });
-      }).finally(() => {
+      }).catch(err => {
+          console.log(err, "errororororororro");
+        }
+      ).finally(() => {
           closeModal();
         }
       );
