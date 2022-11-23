@@ -55,7 +55,6 @@ export default defineComponent({
         if (unref(isUpdate)) {
           saveAccount(updateUser, values);
         } else {
-
           saveAccount(insertUser, values);
         }
       } finally {
@@ -66,7 +65,10 @@ export default defineComponent({
     function saveAccount(save, values) {
       save(values).then(() => {
         emit("success", { isUpdate: unref(isUpdate), values: { ...values, id: rowId.value } });
-      }).finally(() => {
+      }).catch(err => {
+          console.log(err, "errororororororro");
+        }
+      ).finally(() => {
           closeModal();
         }
       );

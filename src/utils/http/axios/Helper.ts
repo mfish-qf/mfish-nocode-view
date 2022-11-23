@@ -1,4 +1,9 @@
 import { isObject, isString } from "/@/utils/Is";
+import { MessageMode } from "/#/axios";
+import { useI18n } from "/@/hooks/web/UseI18n";
+import { useMessage } from "/@/hooks/web/UseMessage";
+
+const { createMessage, createErrorModal, createSuccessModal } = useMessage();
 
 const DATE_TIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
 
@@ -44,5 +49,31 @@ export function formatRequestDate(params: Recordable) {
     if (isObject(params[key])) {
       formatRequestDate(params[key]);
     }
+  }
+}
+
+export function messageTips(messageMode: MessageMode, msg: string, isError: boolean, retryCount: number = 0): void {
+  const { t } = useI18n();
+  if (messageMode === "message") {
+    if (!isError) {
+      createMessage.success(msg);
+      return;
+    }
+    //重试请求不重复进行错误提示
+    if (retryCount > 0) {
+      return;
+    }
+    createMessage.error(msg);
+    return;
+  }
+  if (messageMode === "modal") {
+    if (!isError) {
+      createSuccessModal({ title: t("sys.api.successTip"), content: msg });
+    }
+    if (retryCount > 0) {
+      return;
+    }
+    createErrorModal({ title: t("sys.api.errorTip"), content: msg });
+    return;
   }
 }

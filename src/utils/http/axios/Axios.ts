@@ -73,32 +73,23 @@ export class VAxios {
       responseInterceptors,
       responseInterceptorsCatch
     } = transform;
-
     const axiosCanceler = new AxiosCanceler();
-
-    // Request interceptor configuration processing
+    // 请求拦截器配置处理
     this.axiosInstance.interceptors.request.use((config: CreateAxiosOptions) => {
       // 如果取消重复请求已打开，则禁止取消重复请求
-      // @ts-ignore
-      const { ignoreCancelToken } = config.requestOptions;
-      const ignoreCancel =
-        ignoreCancelToken !== undefined
-          ? ignoreCancelToken
-          : this.options.requestOptions?.ignoreCancelToken;
-
-      !ignoreCancel && axiosCanceler.addPending(config);
+      const ignoreCancelToken = config?.requestOptions?.ignoreCancelToken ?? true;
+      !ignoreCancelToken && axiosCanceler.addPending(config);
       if (requestInterceptors && isFunction(requestInterceptors)) {
         config = requestInterceptors(config, this.options);
       }
       return config;
     }, undefined);
-
-    // Request interceptor error capture
+    // 请求拦截器错误捕获
     requestInterceptorsCatch &&
     isFunction(requestInterceptorsCatch) &&
     this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch);
 
-    // Response result interceptor processing
+    // 响应结果拦截器处理
     this.axiosInstance.interceptors.response.use((res: AxiosResponse<any>) => {
       res && axiosCanceler.removePending(res.config);
       if (responseInterceptors && isFunction(responseInterceptors)) {
@@ -107,11 +98,10 @@ export class VAxios {
       return res;
     }, undefined);
 
-    // Response result interceptor error capture
-    responseInterceptorsCatch &&
-    isFunction(responseInterceptorsCatch) &&
+    // 响应结果拦截器错误捕获
+    responseInterceptorsCatch && isFunction(responseInterceptorsCatch) &&
     this.axiosInstance.interceptors.response.use(undefined, (error) => {
-      // @ts-ignore
+      console.log(error, "error");
       return responseInterceptorsCatch(this.axiosInstance, error);
     });
   }
@@ -154,10 +144,9 @@ export class VAxios {
   }
 
   // support form-data
-  supportFormData(config: AxiosRequestConfig) {
+  supportFormData(config: CreateAxiosOptions) {
     const headers = config.headers || this.options.headers;
     const contentType = headers?.["Content-Type"] || headers?.["content-type"];
-
     if (
       contentType !== ContentTypeEnum.FORM_URLENCODED ||
       !Reflect.has(config, "data") ||
@@ -165,7 +154,6 @@ export class VAxios {
     ) {
       return config;
     }
-
     return {
       ...config,
       data: qs.stringify(config.data, { arrayFormat: "brackets" })
@@ -189,21 +177,17 @@ export class VAxios {
   }
 
   request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    let conf: CreateAxiosOptions = cloneDeep(config);
+    let conf = <CreateAxiosOptions>cloneDeep(config);
     const transform = this.getTransform();
-
     const { requestOptions } = this.options;
-
     const opt: RequestOptions = Object.assign({}, requestOptions, options);
-
     const { beforeRequestHook, requestCatchHook, transformResponseHook } = transform || {};
     if (beforeRequestHook && isFunction(beforeRequestHook)) {
       conf = beforeRequestHook(conf, opt);
     }
     conf.requestOptions = opt;
-
     conf = this.supportFormData(conf);
-
+    console.log(conf,"conf")
     return new Promise((resolve, reject) => {
       this.axiosInstance
         .request<any, AxiosResponse<Result>>(conf)
@@ -213,7 +197,7 @@ export class VAxios {
               const ret = transformResponseHook(res, opt);
               resolve(ret);
             } catch (err) {
-              reject(err || new Error("request error!"));
+              reject(err || new Error("请求错误!"));
             }
             return;
           }
