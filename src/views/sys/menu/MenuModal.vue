@@ -58,10 +58,8 @@ export default defineComponent({
     function saveMenu(save, values) {
       save(values).then(() => {
         emit("success");
-      }).finally(() => {
-          closeModal();
-        }
-      );
+        closeModal();
+      });
     }
 
     return { registerModal, registerForm, getTitle, handleSubmit };
