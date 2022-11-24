@@ -40,7 +40,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
-import { getUserList } from "/@/api/sys/User";
+import { deleteUser, getUserList } from "/@/api/sys/User";
 import { PageWrapper } from "/@/components/Page";
 import OrgTree from "./OrgTree.vue";
 import { useModal } from "/@/components/Modal";
@@ -93,7 +93,9 @@ export default defineComponent({
     }
 
     function handleDelete(record: Recordable) {
-      console.log(record);
+      deleteUser(record.id).then(() => {
+        handleSuccess({ isUpdate: false, values: null });
+      });
     }
 
     function handleSuccess({ isUpdate, values }) {

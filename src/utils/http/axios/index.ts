@@ -49,7 +49,7 @@ const transform: AxiosTransform = {
     const hasSuccess = data && code === ResultEnum.SUCCESS;
     if (hasSuccess) {
       if (msg === null || msg === undefined || msg === "") {
-        msg = "操作成功";
+        msg = t("sys.api.operationSuccess");
       }
       messageTips(options.successMessageMode, msg, false, 0);
       return data.data;

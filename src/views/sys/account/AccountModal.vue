@@ -65,13 +65,8 @@ export default defineComponent({
     function saveAccount(save, values) {
       save(values).then(() => {
         emit("success", { isUpdate: unref(isUpdate), values: { ...values, id: rowId.value } });
-      }).catch(err => {
-          console.log(err, "errororororororro");
-        }
-      ).finally(() => {
-          closeModal();
-        }
-      );
+        closeModal();
+      });
     }
 
     return { registerModal, registerForm, getTitle, handleSubmit };

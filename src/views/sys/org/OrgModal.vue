@@ -61,10 +61,8 @@ export default defineComponent({
     function saveOrg(save, values) {
       save(values).then(() => {
         emit("success");
-      }).finally(() => {
-          closeModal();
-        }
-      );
+        closeModal();
+      });
     }
 
     return { registerModal, registerForm, getTitle, handleSubmit };
