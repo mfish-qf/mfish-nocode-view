@@ -46,7 +46,6 @@ export function useModal(): UseModalReturnType {
       dataTransfer[unref(uid)] = null;
     });
     if (unref(loaded) && isProdMode() && modalMethod === unref(modal)) return;
-
     modal.value = modalMethod;
     loaded.value = true;
     modalMethod.emitVisible = (visible: boolean, uid: number) => {
@@ -108,7 +107,7 @@ export const useModalInner = (callbackFn?: Fn): UseModalInnerReturnType => {
   const getInstance = () => {
     const instance = unref(modalInstanceRef);
     if (!instance) {
-      error("useModalInner instance is undefined!");
+      error("useModalInner实例未定义!");
     }
     return instance;
   };

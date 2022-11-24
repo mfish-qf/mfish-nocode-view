@@ -18,7 +18,6 @@ export function checkStatus(status: number, msg: string, errorMessageMode: Messa
   const { t } = useI18n();
   const userStore = useUserStoreWithOut();
   let errMessage = "";
-
   switch (status) {
     case 400:
       break;
