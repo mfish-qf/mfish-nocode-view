@@ -4,6 +4,7 @@
       title="部门列表"
       toolbar
       search
+      ref="asyncExpandTreeRef"
       treeWrapperClassName="h-[calc(100%-35px)] overflow-auto"
       :clickRowToExpand="false"
       :treeData="treeData"
@@ -13,28 +14,33 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, onMounted, ref } from 'vue';
-  import { BasicTree, TreeItem } from '/@/components/Tree';
-  import { getOrgTree} from '/@/api/sys/Org';
+import { defineComponent, onMounted, ref, unref, nextTick } from "vue";
+import { BasicTree, TreeActionType, TreeItem } from "/@/components/Tree";
+import { getOrgTree } from "/@/api/sys/Org";
 
-  export default defineComponent({
-    name: 'OrgTree',
-    components: { BasicTree },
-    emits: ['select'],
-    setup(_, { emit }) {
-      const treeData = ref<TreeItem[]>([]);
-      async function fetch() {
-        treeData.value = (await getOrgTree()) as unknown as TreeItem[];
-      }
+export default defineComponent({
+  name: "OrgTree",
+  components: { BasicTree },
+  emits: ["select"],
+  setup(_, { emit }) {
+    const treeData = ref<TreeItem[]>([]);
+    const asyncExpandTreeRef = ref<Nullable<TreeActionType>>(null);
 
-      function handleSelect(keys) {
-        emit('select', keys[0]);
-      }
-
-      onMounted(() => {
-        fetch();
+    async function fetch() {
+      treeData.value = (await getOrgTree()) as unknown as TreeItem[];
+      nextTick(() => {
+        unref(asyncExpandTreeRef)?.expandAll(true);
       });
-      return { treeData, handleSelect };
-    },
-  });
+    }
+
+    function handleSelect(keys) {
+      emit("select", keys[0]);
+    }
+
+    onMounted(() => {
+      fetch();
+    });
+    return { treeData, handleSelect, asyncExpandTreeRef };
+  }
+});
 </script>

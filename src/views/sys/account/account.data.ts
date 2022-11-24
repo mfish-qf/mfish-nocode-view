@@ -48,7 +48,6 @@ export const columns: BasicColumn[] = [
     width: 180
   }
 ];
-
 export const searchFormSchema: FormSchema[] = [
   {
     field: "account",
@@ -91,8 +90,8 @@ export const accountFormSchema: FormSchema[] = [
   {
     field: "account",
     label: "用户名",
-    component: "Input"
-    // required: true
+    component: "Input",
+    required: true
   },
   {
     field: "password",
@@ -128,8 +127,8 @@ export const accountFormSchema: FormSchema[] = [
         value: "id"
       },
       getPopupContainer: () => document.body
-    }
-    // required: true
+    },
+    required: true
   },
   {
     field: "nickname",
@@ -161,8 +160,8 @@ export const accountFormSchema: FormSchema[] = [
         { label: "男", value: 1 },
         { label: "女", value: 0 }
       ]
-    }
-    // required: true
+    },
+    required: true
   },
   {
     field: "status",
@@ -174,7 +173,7 @@ export const accountFormSchema: FormSchema[] = [
         { label: "启用", value: 0 },
         { label: "停用", value: 1 }
       ]
-    }
-    // required: true
+    },
+    required: true
   }
 ];

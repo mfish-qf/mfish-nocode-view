@@ -196,14 +196,12 @@ export function useFormEvents({
     if (isArray(data)) {
       updateData = [...data];
     }
-
     const hasField = updateData.every(
       (item) => item.component === "Divider" || (Reflect.has(item, "field") && item.field)
     );
-
     if (!hasField) {
       error(
-        "All children of the form Schema array that need to be updated must contain the `field` field"
+        "需要更新的表单架构数组的所有子级必须包含“字段”字段"
       );
       return;
     }
@@ -219,7 +217,6 @@ export function useFormEvents({
       });
     });
     _setDefaultValue(schema);
-
     schemaRef.value = uniqBy(schema, "field");
   }
 
@@ -245,7 +242,7 @@ export function useFormEvents({
         obj[item.field] = item.defaultValue;
       }
     });
-    setFieldsValue(obj);
+    setFieldsValue(obj).then();
   }
 
   function getFieldsValue(): Recordable {

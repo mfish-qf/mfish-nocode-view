@@ -84,7 +84,7 @@ const ARow = Row;
 const FormItem = Form.Item;
 const InputPassword = Input.Password;
 const { t } = useI18n();
-const { notification, createErrorModal } = useMessage();
+const { notification } = useMessage();
 const { prefixCls } = useDesign("login");
 const userStore = useUserStore();
 
@@ -118,7 +118,7 @@ async function handleLogin() {
       client_secret: "system",
       grant_type: "password",
       redirect_uri: "http://baidu.com",
-      mode: "none" //不要默认的错误提示
+      mode: "modal"
     });
     if (userInfo) {
       notification.success({
@@ -127,12 +127,6 @@ async function handleLogin() {
         duration: 3
       });
     }
-  } catch (error) {
-    createErrorModal({
-      title: t("sys.api.errorTip"),
-      content: (error as unknown as Error).message || t("sys.api.networkExceptionMsg"),
-      getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body
-    });
   } finally {
     loading.value = false;
   }

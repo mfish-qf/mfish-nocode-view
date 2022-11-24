@@ -31,12 +31,20 @@ export default defineComponent({
       resetFields().then();
       setModalProps({ confirmLoading: false, width: "40%" });
       isUpdate.value = !!data?.isUpdate;
-
       if (unref(isUpdate)) {
         rowId.value = data.record.id;
         setFieldsValue({
           ...data.record
         }).then();
+        updateSchema([{
+          field: "password",
+          ifShow: false
+        }]).then();
+      } else {
+        updateSchema([{
+          field: "password",
+          ifShow: true
+        }]).then();
       }
       const treeData = await getOrgTree();
       updateSchema([
