@@ -1,7 +1,7 @@
 <template>
   <div class="m-4 mr-0 overflow-hidden bg-white">
     <BasicTree
-      title="部门列表"
+      title="组织列表"
       toolbar
       search
       ref="asyncExpandTreeRef"

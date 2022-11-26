@@ -20,6 +20,11 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
+    title: "组织",
+    dataIndex: "orgName",
+    width: 120
+  },
+  {
     title: "邮箱",
     dataIndex: "email",
     width: 120

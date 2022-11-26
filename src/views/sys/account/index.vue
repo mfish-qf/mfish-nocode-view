@@ -49,7 +49,7 @@ export default defineComponent({
   setup() {
     const [registerModal, { openModal }] = useModal();
     const searchInfo = reactive<Recordable>({});
-    const [registerTable, { reload, updateTableDataRecord }] = useTable({
+    const [registerTable, { reload }] = useTable({
       title: "账号列表",
       api: getUserList,
       rowKey: "id",
@@ -88,18 +88,12 @@ export default defineComponent({
 
     function handleDelete(record: Recordable) {
       deleteUser(record.id).then(() => {
-        handleSuccess({ isUpdate: false, values: null });
+        handleSuccess();
       });
     }
 
-    function handleSuccess({ isUpdate, values }) {
-      if (isUpdate) {
-        // 演示不刷新表格直接更新内部数据。
-        // 注意：updateTableDataRecord要求表格的rowKey属性为string并且存在于每一行的record的keys中
-        updateTableDataRecord(values.id, values);
-      } else {
-        reload();
-      }
+    function handleSuccess() {
+      reload();
     }
 
     function handleSelect(orgId = "") {
