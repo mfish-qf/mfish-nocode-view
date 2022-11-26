@@ -10,11 +10,6 @@
           <TableAction
             :actions="[
               {
-                icon: 'clarity:info-standard-line',
-                tooltip: '查看用户详情',
-                onClick: handleView.bind(null, record),
-              },
-              {
                 icon: 'clarity:note-edit-line',
                 tooltip: '编辑用户资料',
                 onClick: handleEdit.bind(null, record),
@@ -28,6 +23,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
+                ifShow: record.account === 'admin'? false:true
               },
             ]"
           />
@@ -113,10 +109,6 @@ export default defineComponent({
       reload();
     }
 
-    function handleView(record: Recordable) {
-      go("/system/account_detail/" + record.id);
-    }
-
     return {
       registerTable,
       registerModal,
@@ -125,7 +117,6 @@ export default defineComponent({
       handleDelete,
       handleSuccess,
       handleSelect,
-      handleView,
       searchInfo
     };
   }

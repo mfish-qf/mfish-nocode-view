@@ -1,4 +1,3 @@
-// import { getAllRoleList } from "/@/api/sys/Role";
 import { BasicColumn } from "/@/components/Table";
 import { FormSchema } from "/@/components/Table";
 import { h } from "vue";
