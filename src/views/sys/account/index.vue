@@ -42,13 +42,11 @@ import OrgTree from "./OrgTree.vue";
 import { useModal } from "/@/components/Modal";
 import AccountModal from "./AccountModal.vue";
 import { columns, searchFormSchema } from "./account.data";
-import { useGo } from "/@/hooks/web/UsePage";
 
 export default defineComponent({
   name: "AccountManagement",
   components: { BasicTable, PageWrapper, OrgTree, AccountModal, TableAction },
   setup() {
-    const go = useGo();
     const [registerModal, { openModal }] = useModal();
     const searchInfo = reactive<Recordable>({});
     const [registerTable, { reload, updateTableDataRecord }] = useTable({

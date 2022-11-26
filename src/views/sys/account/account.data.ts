@@ -155,7 +155,11 @@ export const accountFormSchema: FormSchema[] = [
   {
     field: "birthday",
     label: "生日",
-    component: "DatePicker"
+    component: "DatePicker",
+    componentProps: {
+      valueFormat: 'YYYY-MM-DD',
+      format: 'YYYY-MM-DD',
+    }
   },
   {
     field: "sex",
