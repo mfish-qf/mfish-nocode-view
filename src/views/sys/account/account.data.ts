@@ -1,4 +1,4 @@
-import { getAllRoleList } from "/@/api/sys/Role";
+// import { getAllRoleList } from "/@/api/sys/Role";
 import { BasicColumn } from "/@/components/Table";
 import { FormSchema } from "/@/components/Table";
 import { h } from "vue";
@@ -46,6 +46,18 @@ export const columns: BasicColumn[] = [
     title: "生日",
     dataIndex: "birthday",
     width: 180
+  },
+  {
+    title: "状态",
+    dataIndex: "status",
+    width: 60,
+    customRender: ({ record }) => {
+      const status = record.status;
+      const enable = ~~status === 0;
+      const color = enable ? "green" : "red";
+      const text = enable ? "启用" : "停用";
+      return h(Tag, { color: color }, () => text);
+    }
   }
 ];
 export const searchFormSchema: FormSchema[] = [
@@ -73,7 +85,7 @@ export const searchFormSchema: FormSchema[] = [
     component: "Select",
     componentProps: {
       options: [
-        { label: "正常", value: 0 },
+        { label: "启用", value: 0 },
         { label: "停用", value: 1 }
       ]
     },
@@ -106,15 +118,11 @@ export const accountFormSchema: FormSchema[] = [
   {
     label: "角色",
     field: "roles",
-    component: "ApiSelect",
+    component: "Select",
     componentProps: {
       mode: "multiple",
-      api: getAllRoleList,
-      labelField: "roleName",
-      valueField: "id",
-      resultField: "id"
     },
-    required: true
+    rules: [{ required: true, message: "请选择角色",type: "array" }]
   },
   {
     field: "orgId",
