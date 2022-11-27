@@ -1,7 +1,7 @@
 <template>
   <Select
     @dropdown-visible-change="handleFetch"
-    v-bind="$attrs"
+    v-bind="attrs"
     @change="handleChange"
     :options="getOptions"
     v-model:value="state"
@@ -31,7 +31,7 @@ import { LoadingOutlined } from "@ant-design/icons-vue";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { propTypes } from "/@/utils/PropTypes";
 
-type OptionsItem = { label: string; value: string; disabled?: boolean };
+type OptionsItem = {label: string; value: string; disabled?: boolean };
 
 export default defineComponent({
   name: "ApiSelect",
@@ -39,7 +39,7 @@ export default defineComponent({
     Select,
     LoadingOutlined
   },
-  inheritAttrs: false,
+  // inheritAttrs: false,
   props: {
     value: [Array, Object, String, Number],
     numberToString: propTypes.bool,
@@ -67,10 +67,8 @@ export default defineComponent({
     const emitData = ref<any[]>([]);
     const attrs = useAttrs();
     const { t } = useI18n();
-
-    // Embedded in the form, just use the hook binding to perform form verification
+    // 嵌入表单中，只需使用钩子绑定执行表单验证
     const [state] = useRuleFormItem(props, "value", "change", emitData);
-
     const getOptions = computed(() => {
       const { labelField, valueField, numberToString } = props;
       return unref(options).reduce((prev, next: Recordable) => {

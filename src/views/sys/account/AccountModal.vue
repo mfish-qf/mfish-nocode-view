@@ -10,6 +10,7 @@ import { BasicForm, useForm } from "/@/components/Form/index";
 import { accountFormSchema } from "./account.data";
 import { getOrgTree } from "/@/api/sys/Org";
 import { insertUser, updateUser } from "/@/api/sys/User";
+import { getAllRoleList } from "/@/api/sys/Role";
 
 export default defineComponent({
   name: "AccountModal",
@@ -39,18 +40,38 @@ export default defineComponent({
         updateSchema([{
           field: "password",
           ifShow: false
+        }, {
+          field: "account",
+          dynamicDisabled: true
         }]).then();
       } else {
         updateSchema([{
           field: "password",
           ifShow: true
+        }, {
+          field: "account",
+          dynamicDisabled: false
         }]).then();
       }
       const treeData = await getOrgTree();
+      const roles = await getAllRoleList();
+      const options = roles.reduce((prev, next: Recordable) => {
+        if (next) {
+          prev.push({
+            key: next["id"],
+            label: next["roleName"],
+            value: next["id"]
+          });
+        }
+        return prev;
+      }, [] as any);
       updateSchema([
         {
           field: "orgId",
           componentProps: { treeData }
+        }, {
+          field: "roles",
+          componentProps: { options }
         }
       ]).then();
     });
