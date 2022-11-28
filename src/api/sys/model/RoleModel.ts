@@ -11,6 +11,7 @@ export interface SsoRole {
   roleName: string;
   roleCode: string;
   roleSort: number;
+  status: number;
   remark: string;
   delFlag: number;
   createBy: string;
