@@ -1,7 +1,7 @@
 <template>
-  <BasicDrawer
+  <BasicModal
     v-bind="$attrs"
-    @register="registerDrawer"
+    @register="registerModal"
     showFooter
     :title="getTitle"
     width="500px"
@@ -19,64 +19,71 @@
         />
       </template>
     </BasicForm>
-  </BasicDrawer>
+  </BasicModal>
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { formSchema } from "./role.data";
-import { BasicDrawer, useDrawerInner } from "/@/components/Drawer";
+import { BasicModal, useModalInner } from "/@/components/Modal";
 import { BasicTree, TreeItem } from "/@/components/Tree";
-import { getMenuTree } from "/@/api/sys/Menu";
+import { getMenuTree} from "/@/api/sys/Menu";
+import { MenuListItem } from "/@/api/sys/model/MenuModel";
+import { insertRole, updateRole } from "/@/api/sys/Role";
 
 export default defineComponent({
-  name: "RoleDrawer",
-  components: { BasicDrawer, BasicForm, BasicTree },
+  name: "RoleModal",
+  components: { BasicModal, BasicForm, BasicTree },
   emits: ["success", "register"],
   setup(_, { emit }) {
     const isUpdate = ref(true);
     const treeData = ref<TreeItem[]>([]);
-
     const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-      labelWidth: 90,
-      baseColProps: { span: 24 },
+      labelWidth: 100,
+      baseColProps: { span: 12 },
       schemas: formSchema,
       showActionButtonGroup: false
     });
-
-    const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
-      resetFields();
-      setDrawerProps({ confirmLoading: false });
+    const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
+      resetFields().then();
+      setModalProps({ confirmLoading: false, width: "40%" });
       // 需要在setFieldsValue之前先填充treeData，否则Tree组件可能会报key not exist警告
       if (unref(treeData).length === 0) {
         treeData.value = (await getMenuTree()) as any as TreeItem[];
       }
       isUpdate.value = !!data?.isUpdate;
-
       if (unref(isUpdate)) {
         setFieldsValue({
           ...data.record
-        });
+        }).then();
       }
     });
-
     const getTitle = computed(() => (!unref(isUpdate) ? "新增角色" : "编辑角色"));
 
     async function handleSubmit() {
       try {
-        const values = await validate();
-        setDrawerProps({ confirmLoading: true });
-        // TODO custom api
-        console.log(values);
-        closeDrawer();
-        emit("success");
+        let values = (await validate()) as MenuListItem;
+        values.clientId = "system";
+        setModalProps({ confirmLoading: true });
+        if (unref(isUpdate)) {
+          saveRole(updateRole, values);
+        } else {
+          saveRole(insertRole, values);
+        }
       } finally {
-        setDrawerProps({ confirmLoading: false });
+        setModalProps({ confirmLoading: false });
       }
     }
 
+    function saveRole(save, values) {
+      save(values).then(() => {
+        emit("success");
+        closeModal();
+      });
+    }
+
     return {
-      registerDrawer,
+      registerModal,
       registerForm,
       getTitle,
       handleSubmit,

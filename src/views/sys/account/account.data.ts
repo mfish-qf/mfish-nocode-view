@@ -2,6 +2,7 @@ import { BasicColumn } from "/@/components/Table";
 import { FormSchema } from "/@/components/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
+import { RenderCallbackParams } from "/@/components/Form";
 
 export const columns: BasicColumn[] = [
   {
@@ -126,7 +127,8 @@ export const accountFormSchema: FormSchema[] = [
     componentProps: {
       mode: "multiple",
     },
-    rules: [{ required: true, message: "请选择角色",type: "array" }]
+    rules: [{ required: true, message: "请选择角色",type: "array" }],
+    dynamicDisabled: ((renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin" ? true : false)
   },
   {
     field: "orgId",

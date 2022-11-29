@@ -26,28 +26,28 @@
         </template>
       </template>
     </BasicTable>
-    <RoleDrawer @register="registerDrawer" @success="handleSuccess" />
+    <RoleModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
-import { getRoleList } from "/@/api/sys/Role";
-import { useDrawer } from "/@/components/Drawer";
-import RoleDrawer from "./RoleDrawer.vue";
+import { deleteRole, getRoleList } from "/@/api/sys/Role";
+import { useModal } from "/@/components/Modal";
+import RoleModal from "./RoleModal.vue";
 import { columns, searchFormSchema } from "./role.data";
 
 export default defineComponent({
   name: "RoleManagement",
-  components: { BasicTable, RoleDrawer, TableAction },
+  components: { BasicTable, RoleModal, TableAction },
   setup() {
-    const [registerDrawer, { openDrawer }] = useDrawer();
+    const [registerModal, { openModal }] = useModal();
     const [registerTable, { reload }] = useTable({
       title: "角色列表",
       api: getRoleList,
       columns,
       formConfig: {
-        labelWidth: 120,
+        labelWidth: 100,
         schemas: searchFormSchema
       },
       useSearchForm: true,
@@ -58,26 +58,27 @@ export default defineComponent({
         width: 80,
         title: "操作",
         dataIndex: "action",
-        // slots: { customRender: 'action' },
         fixed: undefined
       }
     });
 
     function handleCreate() {
-      openDrawer(true, {
+      openModal(true, {
         isUpdate: false
       });
     }
 
     function handleEdit(record: Recordable) {
-      openDrawer(true, {
+      openModal(true, {
         record,
         isUpdate: true
       });
     }
 
     function handleDelete(record: Recordable) {
-      console.log(record);
+      deleteRole(record.id).then(() => {
+        handleSuccess();
+      });
     }
 
     function handleSuccess() {
@@ -86,7 +87,7 @@ export default defineComponent({
 
     return {
       registerTable,
-      registerDrawer,
+      registerModal,
       handleCreate,
       handleEdit,
       handleDelete,

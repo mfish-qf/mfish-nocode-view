@@ -9,6 +9,7 @@ import { RolePageModel, SsoRole } from "/@/api/sys/model/RoleModel";
 enum Api {
   role = "/oauth2/role",
   allRole = "/oauth2/role/all",
+  setStatus = "/oauth2/role/status"
 }
 
 export const getRoleList = (params?: SsoRole) => {
@@ -16,4 +17,16 @@ export const getRoleList = (params?: SsoRole) => {
 };
 export const getAllRoleList = (params?: SsoRole) => {
   return defHttp.get<SsoRole[]>({ url: Api.allRole, params });
+};
+export const insertRole = (params: SsoRole) => {
+  return defHttp.post<SsoRole>({ url: Api.role, params }, { successMessageMode: "message" });
+};
+export const updateRole = (params: SsoRole) => {
+  return defHttp.put<SsoRole>({ url: Api.role, params }, { successMessageMode: "message" });
+};
+export const setRoleStatus = (roleId: string, status: number) => {
+  return defHttp.put<Boolean>({ url: Api.role, params: { "id": roleId, "status": status } });
+};
+export const deleteRole = (params: string) => {
+  return defHttp.delete({ url: `${Api.role}/${params}` }, { successMessageMode: "message" });
 };

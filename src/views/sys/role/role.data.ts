@@ -2,8 +2,8 @@ import { BasicColumn } from "/@/components/Table";
 import { FormSchema } from "/@/components/Table";
 import { h } from "vue";
 import { Switch } from "ant-design-vue";
-// import { setRoleStatus } from '/@/api/sys/Role';
-// import { useMessage } from "/@/hooks/web/UseMessage";
+import { setRoleStatus } from "/@/api/sys/Role";
+import { RenderCallbackParams } from "/@/components/Form";
 
 export const columns: BasicColumn[] = [
   {
@@ -30,26 +30,21 @@ export const columns: BasicColumn[] = [
         record.pendingStatus = false;
       }
       return h(Switch, {
-        checked: record.status === "1",
+        checked: record.status === 0,
         checkedChildren: "已启用",
-        unCheckedChildren: "已禁用",
+        unCheckedChildren: "已停用",
         loading: record.pendingStatus,
         onChange(checked: boolean) {
           record.pendingStatus = true;
           console.log(checked);
-          // const newStatus = checked ? '1' : '0';
-          // const { createMessage } = useMessage();
-          // setRoleStatus(record.id, newStatus)
-          //   .then(() => {
-          //     record.status = newStatus;
-          //     createMessage.success(`已成功修改角色状态`);
-          //   })
-          //   .catch(() => {
-          //     createMessage.error('修改角色状态失败');
-          //   })
-          //   .finally(() => {
-          //     record.pendingStatus = false;
-          //   });
+          const newStatus = checked ? 0 : 1;
+          setRoleStatus(record.id, newStatus)
+            .then(() => {
+              record.status = newStatus;
+            })
+            .finally(() => {
+              record.pendingStatus = false;
+            });
         }
       });
     }
@@ -67,7 +62,7 @@ export const columns: BasicColumn[] = [
 
 export const searchFormSchema: FormSchema[] = [
   {
-    field: "roleNme",
+    field: "roleName",
     label: "角色名称",
     component: "Input",
     colProps: { span: 4 }
@@ -84,8 +79,8 @@ export const searchFormSchema: FormSchema[] = [
     component: "Select",
     componentProps: {
       options: [
-        { label: "启用", value: "0" },
-        { label: "停用", value: "1" }
+        { label: "启用", value: 0 },
+        { label: "停用", value: 1 }
       ]
     },
     colProps: { span: 4 }
@@ -93,6 +88,12 @@ export const searchFormSchema: FormSchema[] = [
 ];
 
 export const formSchema: FormSchema[] = [
+  {
+    label: "id",
+    field: "id",
+    component: "Input",
+    show: false
+  },
   {
     field: "roleName",
     label: "角色名称",
@@ -103,7 +104,8 @@ export const formSchema: FormSchema[] = [
     field: "roleCode",
     label: "角色编码",
     required: true,
-    component: "Input"
+    component: "Input",
+    dynamicDisabled: ((renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["roleCode"] === "admin" ? true : false)
   },
   {
     label: "排序",
@@ -114,23 +116,25 @@ export const formSchema: FormSchema[] = [
     field: "status",
     label: "状态",
     component: "RadioButtonGroup",
-    defaultValue: "0",
+    defaultValue: 0,
     componentProps: {
       options: [
-        { label: "启用", value: "0" },
-        { label: "停用", value: "1" }
+        { label: "启用", value: 0 },
+        { label: "停用", value: 1 }
       ]
     }
   },
   {
     label: "备注",
     field: "remark",
-    component: "InputTextArea"
+    component: "InputTextArea",
+    colProps: { span: 24 }
   },
   {
     label: " ",
     field: "menu",
     slot: "menu",
-    component: "Input"
+    component: "Input",
+    colProps: { span: 24 }
   }
 ];
