@@ -148,7 +148,7 @@ export interface FormSchema {
   // Disable the adjustment of labelWidth with global settings of formModel, and manually set labelCol and wrapperCol by yourself
   disabledLabelWidth?: boolean;
   // render component
-  component: ComponentType;
+  component?: ComponentType;
   // Component parameters
   componentProps?:
     | ((opt: {
