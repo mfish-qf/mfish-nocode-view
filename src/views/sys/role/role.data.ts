@@ -132,8 +132,8 @@ export const formSchema: FormSchema[] = [
   },
   {
     label: " ",
-    field: "menu",
-    slot: "menu",
+    field: "menus",
+    slot: "menus",
     component: "Input",
     colProps: { span: 24 }
   }

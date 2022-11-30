@@ -25,7 +25,7 @@ export const updateRole = (params: SsoRole) => {
   return defHttp.put<SsoRole>({ url: Api.role, params }, { successMessageMode: "message" });
 };
 export const setRoleStatus = (roleId: string, status: number) => {
-  return defHttp.put<Boolean>({ url: Api.role, params: { "id": roleId, "status": status } });
+  return defHttp.put<Boolean>({ url: Api.setStatus, params: { "id": roleId, "status": status } });
 };
 export const deleteRole = (params: string) => {
   return defHttp.delete({ url: `${Api.role}/${params}` }, { successMessageMode: "message" });
