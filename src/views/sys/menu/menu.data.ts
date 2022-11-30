@@ -172,7 +172,8 @@ export const formSchema: FormSchema[] = [
         { label: "显示", value: 1 },
         { label: "隐藏", value: 0 }
       ]
-    }
+    },
+    ifShow: ({ values }) => !isButton(values.menuType)
   },
   {
     field: "isExternal",

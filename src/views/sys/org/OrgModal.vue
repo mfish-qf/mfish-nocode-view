@@ -21,6 +21,7 @@ export default defineComponent({
       labelWidth: 100,
       baseColProps: { span: 12 },
       schemas: formSchema,
+      autoSubmitOnEnter: true,
       showActionButtonGroup: false
     });
 

@@ -24,6 +24,7 @@ export default defineComponent({
       baseColProps: { span: 12 },
       schemas: accountFormSchema,
       showActionButtonGroup: false,
+      autoSubmitOnEnter: true,
       actionColOptions: {
         span: 23
       }

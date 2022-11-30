@@ -42,7 +42,8 @@ export default defineComponent({
       labelWidth: 100,
       baseColProps: { span: 12 },
       schemas: formSchema,
-      showActionButtonGroup: false
+      showActionButtonGroup: false,
+      autoSubmitOnEnter: true,
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
