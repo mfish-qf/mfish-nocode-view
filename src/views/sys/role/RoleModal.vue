@@ -7,7 +7,7 @@
     width="500px"
     @ok="handleSubmit"
   >
-    <BasicForm @register="registerForm">
+    <BasicForm @register="registerForm" @submit="handleSubmit">
       <template #menus="{ model, field }">
         <BasicTree
           v-model:value="model[field]"
@@ -42,7 +42,8 @@ export default defineComponent({
       labelWidth: 100,
       baseColProps: { span: 12 },
       schemas: formSchema,
-      showActionButtonGroup: false
+      showActionButtonGroup: false,
+      autoSubmitOnEnter: true,
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();

@@ -1,6 +1,6 @@
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
-    <BasicForm @register="registerForm" />
+    <BasicForm @register="registerForm" @submit="handleSubmit" @field-value-change="valueChange" />
   </BasicModal>
 </template>
 <script lang="ts">
@@ -9,7 +9,7 @@ import { BasicForm, useForm } from "/@/components/Form/index";
 import { formSchema } from "./menu.data";
 import { BasicModal, useModalInner } from "/@/components/Modal";
 import { getMenuTree, insertMenu, updateMenu } from "/@/api/sys/Menu";
-import { MenuListItem } from "/@/api/sys/model/MenuModel";
+import { MenuListItem, MenuParams } from "/@/api/sys/model/MenuModel";
 
 export default defineComponent({
   name: "MenuModal",
@@ -21,7 +21,8 @@ export default defineComponent({
       labelWidth: 100,
       schemas: formSchema,
       showActionButtonGroup: false,
-      baseColProps: { lg: 12, md: 24 }
+      baseColProps: { lg: 12, md: 24 },
+      autoSubmitOnEnter: true
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       await resetFields();
@@ -32,13 +33,30 @@ export default defineComponent({
           ...data.record
         }).then();
       }
-      const treeData = await getMenuTree();
+      setTreeData({ menuType: 0 }).then();
+    });
+    const getTitle = computed(() => (!unref(isUpdate) ? "新增菜单" : "编辑菜单"));
+
+    async function setTreeData(params?: MenuParams) {
+      const treeData = await getMenuTree(params);
       updateSchema({
         field: "parentId",
         componentProps: { treeData }
       }).then();
-    });
-    const getTitle = computed(() => (!unref(isUpdate) ? "新增菜单" : "编辑菜单"));
+    }
+
+    function valueChange(key, value) {
+      if (key !== "menuType") {
+        return;
+      }
+      //菜单类型为目录时，查询目录级别菜单
+      //其他类型查询上级目录菜单
+      if (value === 0) {
+        value = 1;
+      }
+      setFieldsValue({ "parentId": null }).then();
+      setTreeData({ "menuType": --value });
+    }
 
     async function handleSubmit() {
       try {
@@ -62,7 +80,7 @@ export default defineComponent({
       });
     }
 
-    return { registerModal, registerForm, getTitle, handleSubmit };
+    return { registerModal, registerForm, getTitle, handleSubmit, valueChange };
   }
 });
 </script>

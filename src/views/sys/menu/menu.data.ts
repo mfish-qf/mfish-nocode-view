@@ -51,8 +51,6 @@ export const columns: BasicColumn[] = [
     width: 180
   }
 ];
-
-const isDir = (type: number) => type === 0;
 const isMenu = (type: number) => type === 1;
 const isButton = (type: number) => type === 2;
 
@@ -92,10 +90,10 @@ export const searchFormSchema: FormSchema[] = [
 
 export const formSchema: FormSchema[] = [
   {
-    label: 'id',
-    field: 'id',
-    component: 'Input',
-    show: false,
+    label: "id",
+    field: "id",
+    component: "Input",
+    show: false
   },
   {
     field: "menuType",
@@ -160,7 +158,7 @@ export const formSchema: FormSchema[] = [
     field: "permissions",
     label: "权限标识",
     component: "Input",
-    ifShow: ({ values }) => !isDir(values.menuType)
+    ifShow: ({ values }) => isButton(values.menuType)
   },
   {
     field: "isVisible",
@@ -172,7 +170,8 @@ export const formSchema: FormSchema[] = [
         { label: "显示", value: 1 },
         { label: "隐藏", value: 0 }
       ]
-    }
+    },
+    ifShow: ({ values }) => !isButton(values.menuType)
   },
   {
     field: "isExternal",

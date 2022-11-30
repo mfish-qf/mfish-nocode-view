@@ -1,6 +1,6 @@
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
-    <BasicForm @register="registerForm" />
+    <BasicForm @register="registerForm" @submit="handleSubmit" />
   </BasicModal>
 </template>
 <script lang="ts">
@@ -24,6 +24,7 @@ export default defineComponent({
       baseColProps: { span: 12 },
       schemas: accountFormSchema,
       showActionButtonGroup: false,
+      autoSubmitOnEnter: true,
       actionColOptions: {
         span: 23
       }

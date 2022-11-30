@@ -93,7 +93,7 @@ export default defineComponent({
       for (const schema of schemas) {
         const { defaultValue, component, isHandleDateDefaultValue = true } = schema;
         // 句柄日期类型
-        if (isHandleDateDefaultValue && defaultValue && dateItemType.includes(component)) {
+        if (isHandleDateDefaultValue && defaultValue && component !== undefined && dateItemType.includes(component)) {
           if (!Array.isArray(defaultValue)) {
             schema.defaultValue = dateUtil(defaultValue);
           } else {
