@@ -7,7 +7,7 @@
     width="500px"
     @ok="handleSubmit"
   >
-    <BasicForm @register="registerForm">
+    <BasicForm @register="registerForm" @submit="handleSubmit">
       <template #menus="{ model, field }">
         <BasicTree
           v-model:value="model[field]"

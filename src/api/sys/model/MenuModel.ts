@@ -40,6 +40,7 @@ export interface MenuListItem {
 
 export type MenuParams = {
   menuName?: string;
+  menuType?: number;
   status?: string;
 };
 

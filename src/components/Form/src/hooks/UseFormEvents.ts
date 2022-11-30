@@ -256,7 +256,8 @@ export function useFormEvents({
    */
   function itemIsDateType(key: string) {
     return unref(getSchema).some((item) => {
-      return item.field === key ? dateItemType.includes(item.component) : false;
+      const component = item.component;
+      return item.field === key ? component !== undefined && dateItemType.includes(component) : false;
     });
   }
 
