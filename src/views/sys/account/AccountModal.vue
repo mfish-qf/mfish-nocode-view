@@ -71,7 +71,7 @@ export default defineComponent({
           field: "orgId",
           componentProps: { treeData }
         }, {
-          field: "roles",
+          field: "roleIds",
           componentProps: { options }
         }
       ]).then();

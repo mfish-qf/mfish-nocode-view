@@ -87,23 +87,16 @@ const { t } = useI18n();
 const { notification } = useMessage();
 const { prefixCls } = useDesign("login");
 const userStore = useUserStore();
-
 const { setLoginState, getLoginState } = useLoginState();
 const { getFormRules } = useFormRules();
-
 const formRef = ref();
 const loading = ref(false);
 const rememberMe = ref(false);
-
 const formData = reactive({
   account: "admin",
   password: "!QAZ2wsx"
 });
-
 const { validForm } = useFormValid(formRef);
-
-//onKeyStroke('Enter', handleLogin);
-
 const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
 
 async function handleLogin() {

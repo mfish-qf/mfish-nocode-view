@@ -122,7 +122,7 @@ export const accountFormSchema: FormSchema[] = [
   },
   {
     label: "角色",
-    field: "roles",
+    field: "roleIds",
     component: "Select",
     componentProps: {
       mode: "multiple",
