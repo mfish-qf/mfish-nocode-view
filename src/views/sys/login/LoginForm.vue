@@ -70,7 +70,7 @@
 </template>
 <script lang="ts" setup>
 import { reactive, ref, unref, computed } from "vue";
-import { Checkbox, Form, Input, Row, Col, Button, Divider } from "ant-design-vue";
+import { Checkbox, Form, Input, Row, Col, Button } from "ant-design-vue";
 import LoginFormTitle from "./LoginFormTitle.vue";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { useMessage } from "/@/hooks/web/UseMessage";

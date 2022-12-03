@@ -4,7 +4,6 @@
 <script lang="ts">
 import type { PropType } from "vue";
 import { defineComponent } from "vue";
-import { RoleEnum } from "/@/enums/RoleEnum";
 import { usePermission } from "/@/hooks/web/UsePermission";
 import { getSlot } from "/@/utils/helper/TsxHelper";
 
@@ -18,7 +17,7 @@ export default defineComponent({
      * @default ''
      */
     value: {
-      type: [Number, Array, String] as PropType<RoleEnum | RoleEnum[] | string | string[]>,
+      type: [Number, Array, String] as PropType<string | string[]>,
       default: ""
     }
   },

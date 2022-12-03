@@ -1,5 +1,4 @@
 import type { RouteRecordRaw, RouteMeta } from "vue-router";
-import { RoleEnum } from "/@/enums/RoleEnum";
 import { defineComponent } from "vue";
 
 export type Component<T = any> =
@@ -40,7 +39,7 @@ export interface Menu {
 
   orderNo?: number;
 
-  roles?: RoleEnum[];
+  roles?: string[];
 
   meta?: Partial<RouteMeta>;
 

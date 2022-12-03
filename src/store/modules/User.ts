@@ -1,12 +1,10 @@
-import type { UserInfo } from "/#/store";
 import type { MessageMode } from "/#/axios";
 import { defineStore } from "pinia";
 import { store } from "/@/store";
-import { RoleEnum } from "/@/enums/RoleEnum";
 import { PageEnum } from "/@/enums/PageEnum";
-import { REFRESH_TOKEN_KEY, ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from "/@/enums/CacheEnum";
+import { REFRESH_TOKEN_KEY, ROLES_INFO_KEY, ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from "/@/enums/CacheEnum";
 import { getAuthCache, setAuthCache } from "/@/utils/auth";
-import { GetUserInfoModel, LoginParams } from "/@/api/sys/model/UserModel";
+import { SsoUser, LoginParams, RoleInfo } from "/@/api/sys/model/UserModel";
 import { doLogout, getUserInfo, loginApi } from "/@/api/sys/User";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { useMessage } from "/@/hooks/web/UseMessage";
@@ -18,10 +16,11 @@ import { isArray } from "/@/utils/Is";
 import { h } from "vue";
 
 interface UserState {
-  userInfo: Nullable<UserInfo>;
+  userInfo: Nullable<SsoUser>;
   token?: string;
   refreshToken?: string;
-  roleList: RoleEnum[];
+  roleInfoList: RoleInfo[];
+  roleList: string[];
   sessionTimeout?: boolean;
   lastUpdateTime: number;
 }
@@ -35,7 +34,9 @@ export const useUserStore = defineStore({
     token: undefined,
     //过期后刷新token
     refreshToken: undefined,
-    // 角色列表
+    //角色信息列表
+    roleInfoList: [],
+    // 角色code列表
     roleList: [],
     // token时长
     sessionTimeout: false,
@@ -43,14 +44,17 @@ export const useUserStore = defineStore({
     lastUpdateTime: 0
   }),
   getters: {
-    getUserInfo(): UserInfo {
-      return this.userInfo || getAuthCache<UserInfo>(USER_INFO_KEY) || {};
+    getUserInfo(): SsoUser {
+      return this.userInfo || getAuthCache<SsoUser>(USER_INFO_KEY) || {};
     },
     getToken(): string {
       return this.token || getAuthCache<string>(TOKEN_KEY);
     },
-    getRoleList(): RoleEnum[] {
-      return this.roleList.length > 0 ? this.roleList : getAuthCache<RoleEnum[]>(ROLES_KEY);
+    getRoleInfoList(): RoleInfo[] {
+      return this.roleList.length > 0 ? this.roleInfoList : getAuthCache<RoleInfo[]>(ROLES_KEY);
+    },
+    getRoleList(): string[] {
+      return this.roleList.length > 0 ? this.roleList : getAuthCache<string[]>(ROLES_KEY);
     },
     getSessionTimeout(): boolean {
       return !!this.sessionTimeout;
@@ -65,14 +69,19 @@ export const useUserStore = defineStore({
       setAuthCache(TOKEN_KEY, info);
     },
     setRefreshToken(refreshToken: string | undefined) {
+      debugger
       this.refreshToken = refreshToken ? refreshToken : "";
       setAuthCache(REFRESH_TOKEN_KEY, refreshToken);
     },
-    setRoleList(roleList: RoleEnum[]) {
+    setRoleInfoList(roleList: RoleInfo[]) {
+      this.roleInfoList = roleList;
+      setAuthCache(ROLES_INFO_KEY, roleList);
+    },
+    setRoleList(roleList: string[]) {
       this.roleList = roleList;
       setAuthCache(ROLES_KEY, roleList);
     },
-    setUserInfo(info: UserInfo | null) {
+    setUserInfo(info: SsoUser | null) {
       this.userInfo = info;
       this.lastUpdateTime = new Date().getTime();
       setAuthCache(USER_INFO_KEY, info);
@@ -94,23 +103,23 @@ export const useUserStore = defineStore({
         goHome?: boolean;
         mode?: MessageMode;
       }
-    ): Promise<GetUserInfoModel | null> {
+    ): Promise<SsoUser | null> {
       try {
         const { goHome = true, mode, ...loginParams } = params;
         const result = await loginApi(loginParams, mode);
-        const { access_token } = result;
+        const { access_token, refresh_token } = result;
         // save token
         this.setToken(access_token);
+        this.setRefreshToken(refresh_token);
         return this.afterLoginAction(goHome);
       } catch (error) {
         return Promise.reject(error);
       }
     },
-    async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
+    async afterLoginAction(goHome?: boolean): Promise<SsoUser | null> {
       if (!this.getToken) return null;
       // 获取用户信息
       const userInfo = await this.getUserInfoAction();
-
       const sessionTimeout = this.sessionTimeout;
       if (sessionTimeout) {
         this.setSessionTimeout(false);
@@ -124,19 +133,21 @@ export const useUserStore = defineStore({
           router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
           permissionStore.setDynamicAddedRoute(true);
         }
-        goHome && (await router.replace(userInfo?.homePath || PageEnum.BASE_HOME));
+        goHome && (await router.replace(PageEnum.BASE_HOME));
       }
       return userInfo;
     },
-    async getUserInfoAction(): Promise<UserInfo | null> {
+    async getUserInfoAction(): Promise<SsoUser | null> {
       if (!this.getToken) return null;
       const userInfo = await getUserInfo();
-      const { roles = [] } = userInfo;
-      if (isArray(roles)) {
-        const roleList = roles.map((item) => item.value) as RoleEnum[];
+      const { userRoles = [] } = userInfo;
+      if (isArray(userRoles)) {
+        this.setRoleInfoList(userRoles);
+        const roleList = userRoles.map((item) => item.roleCode);
         this.setRoleList(roleList);
       } else {
-        userInfo.roles = [];
+        userInfo.userRoles = [];
+        this.setRoleInfoList([]);
         this.setRoleList([]);
       }
       this.setUserInfo(userInfo);
