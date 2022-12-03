@@ -12,7 +12,9 @@
         <BasicTree
           v-model:value="model[field]"
           :treeData="treeData"
+          search
           :fieldNames="{ title: 'menuName', key: 'id' }"
+          clickRowToExpand="true"
           checkable
           toolbar
           title="菜单分配"

@@ -1,5 +1,4 @@
 import type { AppRouteRecordRaw, Menu } from "/@/router/Types";
-
 import { defineStore } from "pinia";
 import { store } from "/@/store";
 import { useI18n } from "/@/hooks/web/UseI18n";
@@ -8,19 +7,13 @@ import { useAppStoreWithOut } from "./App";
 import { toRaw } from "vue";
 import { transformObjToRoute, flatMultiLevelRoutes } from "/@/router/helper/RouteHelper";
 import { transformRouteToMenu } from "/@/router/helper/MenuHelper";
-
 import projectSetting from "/@/settings/ProjectSetting";
-
 import { PermissionModeEnum } from "/@/enums/AppEnum";
-
 import { asyncRoutes } from "/@/router/routers";
 import { ERROR_LOG_ROUTE, PAGE_NOT_FOUND_ROUTE } from "/@/router/routers/Basic";
-
 import { filter } from "/@/utils/helper/TreeHelper";
-
 import { getMenuRoute } from "/@/api/sys/Menu";
 import { getPermCode } from "/@/api/sys/User";
-
 import { useMessage } from "/@/hooks/web/UseMessage";
 import { PageEnum } from "/@/enums/PageEnum";
 
@@ -136,7 +129,7 @@ export const usePermissionStore = defineStore({
        * */
       const patchHomeAffix = (routes: AppRouteRecordRaw[]) => {
         if (!routes || routes.length === 0) return;
-        let homePath: string = userStore.getUserInfo.homePath || PageEnum.BASE_HOME;
+        let homePath: string = PageEnum.BASE_HOME;
 
         function patcher(routes: AppRouteRecordRaw[], parentPath = "") {
           if (parentPath) parentPath = parentPath + "/";

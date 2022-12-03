@@ -35,17 +35,6 @@ export interface ErrorLogInfo {
   time?: string;
 }
 
-//用户信息
-export interface UserInfo {
-  userId: string | number;
-  account: string;
-  nickname: string;
-  avatar: string;
-  desc?: string;
-  homePath?: string;
-  roles: RoleInfo[];
-}
-
 export interface BeforeMiniState {
   menuCollapsed?: boolean;
   menuSplit?: boolean;

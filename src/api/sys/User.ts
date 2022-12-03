@@ -1,5 +1,5 @@
 import { defHttp } from "/@/utils/http/axios";
-import { LoginParams, GetUserInfoModel, AccessToken, SsoUser } from "./model/UserModel";
+import { LoginParams, AccessToken, SsoUser } from "./model/UserModel";
 import { MessageMode } from "/#/axios";
 import { ContentTypeEnum } from "/@/enums/HttpEnum";
 
@@ -33,7 +33,7 @@ export function loginApi(params: LoginParams, mode: MessageMode = "modal") {
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: "none" });
+  return defHttp.get<SsoUser>({ url: Api.GetUserInfo }, { errorMessageMode: "none" });
 }
 
 export function getPermCode() {

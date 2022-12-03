@@ -15,36 +15,15 @@ export interface LoginParams {
 }
 
 export interface RoleInfo {
+  id: string;
   roleName: string;
-  value: string;
-}
-
-//登录接口返回值
-export interface LoginResultModel {
-  userId: string | number;
-  token: string;
-  role: RoleInfo;
+  roleCode: string;
 }
 
 export interface AccessToken {
   access_token: string;
   refresh_token: string;
   expires_in: number;
-}
-
-//获取用户信息返回值
-export interface GetUserInfoModel {
-  roles: RoleInfo[];
-  // 用户id
-  userId: string | number;
-  // 用户名
-  account: string;
-  // 昵称
-  nickname: string;
-  // 头像
-  avatar: string;
-  // 介绍+
-  desc?: string;
 }
 
 export interface SsoUser {
@@ -68,4 +47,7 @@ export interface SsoUser {
   createTime: string;
   updateBy: string;
   updateTime: string;
+  roleIds: string[];
+  userRoles: RoleInfo[];
+  permissions: string[];
 }

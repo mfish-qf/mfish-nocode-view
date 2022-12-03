@@ -6,12 +6,10 @@ import { useTabs } from "./UseTabs";
 import { router, resetRouter } from "/@/router";
 import projectSetting from "/@/settings/ProjectSetting";
 import { PermissionModeEnum } from "/@/enums/AppEnum";
-import { RoleEnum } from "/@/enums/RoleEnum";
 import { intersection } from "lodash-es";
 import { isArray } from "/@/utils/Is";
 import { useMultipleTabStore } from "/@/store/modules/MultipleTab";
 
-// User permissions related operations
 export function usePermission() {
   const userStore = useUserStore();
   const appStore = useAppStore();
@@ -49,9 +47,9 @@ export function usePermission() {
   }
 
   /**
-   * Determine whether there is permission
+   * 是否有权限
    */
-  function hasPermission(value?: RoleEnum | RoleEnum[] | string | string[], def = true): boolean {
+  function hasPermission(value?: string | string[], def = true): boolean {
     // Visible by default
     if (!value) {
       return def;
@@ -61,9 +59,9 @@ export function usePermission() {
 
     if ([PermissionModeEnum.ROUTE_MAPPING, PermissionModeEnum.ROLE].includes(permMode)) {
       if (!isArray(value)) {
-        return userStore.getRoleList?.includes(value as RoleEnum);
+        return userStore.getRoleList?.includes(value);
       }
-      return (intersection(value, userStore.getRoleList) as RoleEnum[]).length > 0;
+      return (intersection(value, userStore.getRoleList)).length > 0;
     }
 
     if (PermissionModeEnum.BACK === permMode) {
@@ -77,29 +75,11 @@ export function usePermission() {
   }
 
   /**
-   * Change roles
-   * @param roles
-   */
-  async function changeRole(roles: RoleEnum | RoleEnum[]): Promise<void> {
-    if (projectSetting.permissionMode !== PermissionModeEnum.ROUTE_MAPPING) {
-      throw new Error(
-        "Please switch PermissionModeEnum to ROUTE_MAPPING mode in the configuration to operate!"
-      );
-    }
-
-    if (!isArray(roles)) {
-      roles = [roles];
-    }
-    userStore.setRoleList(roles);
-    await resume();
-  }
-
-  /**
    * refresh menu data
    */
   async function refreshMenu() {
     resume();
   }
 
-  return { changeRole, hasPermission, togglePermissionMode, refreshMenu };
+  return { hasPermission, togglePermissionMode, refreshMenu };
 }
