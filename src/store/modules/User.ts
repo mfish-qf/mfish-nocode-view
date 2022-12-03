@@ -69,7 +69,6 @@ export const useUserStore = defineStore({
       setAuthCache(TOKEN_KEY, info);
     },
     setRefreshToken(refreshToken: string | undefined) {
-      debugger
       this.refreshToken = refreshToken ? refreshToken : "";
       setAuthCache(REFRESH_TOKEN_KEY, refreshToken);
     },
