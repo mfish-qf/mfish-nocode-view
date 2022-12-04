@@ -1,7 +1,7 @@
-import type { AppRouteModule } from '/@/router/Types';
+import type { AppRouteModule } from "/@/router/Types";
 
-import { LAYOUT } from '/@/router/Constant';
-import { t } from '/@/hooks/web/UseI18n';
+import { LAYOUT } from "/@/router/Constant";
+import { t } from "/@/hooks/web/UseI18n";
 
 const about: AppRouteModule = {
   path: '/about',

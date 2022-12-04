@@ -4,10 +4,10 @@ import { LAYOUT } from "/@/router/Constant";
 const IFrame = () => import("/@/views/sys/iframe/FrameBlank.vue");
 
 const iframe: AppRouteModule = {
-  path: "/frame",
+  path: "/doc",
   name: "Frame",
   component: LAYOUT,
-  redirect: "/frame/swagger",
+  redirect: "/doc/swagger",
   meta: {
     orderNo: 1000,
     icon: "ion:tv-outline",
