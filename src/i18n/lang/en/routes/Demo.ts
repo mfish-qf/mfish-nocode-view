@@ -113,12 +113,6 @@ export default {
     appendForm: 'Append',
     tabsForm: 'TabsForm',
   },
-  iframe: {
-    frame: 'External',
-    antv: 'antVue doc (embedded)',
-    doc: 'Project doc (embedded)',
-    docExternal: 'Project doc (external)',
-  },
   level: { level: 'MultiMenu' },
   page: {
     page: 'Page',
