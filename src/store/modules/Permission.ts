@@ -10,7 +10,7 @@ import { transformRouteToMenu } from "/@/router/helper/MenuHelper";
 import projectSetting from "/@/settings/ProjectSetting";
 import { PermissionModeEnum } from "/@/enums/AppEnum";
 import { asyncRoutes } from "/@/router/routers";
-import { ERROR_LOG_ROUTE, PAGE_NOT_FOUND_ROUTE } from "/@/router/routers/Basic";
+import { PAGE_NOT_FOUND_ROUTE } from "/@/router/routers/Basic";
 import { filter } from "/@/utils/helper/TreeHelper";
 import { getMenuRoute } from "/@/api/sys/Menu";
 import { getPermCode } from "/@/api/sys/User";
@@ -18,16 +18,12 @@ import { useMessage } from "/@/hooks/web/UseMessage";
 import { PageEnum } from "/@/enums/PageEnum";
 
 interface PermissionState {
-  // Permission code list
   // 权限代码列表
   permCodeList: string[] | number[];
-  // Whether the route has been dynamically added
-  // 路由是否动态添加
+  // 是否已经动态添加路由
   isDynamicAddedRoute: boolean;
-  // To trigger a menu update
   // 触发菜单更新
   lastBuildMenuTime: number;
-  // Backstage menu list
   // 后台菜单列表
   backMenuList: Menu[];
   // 菜单列表
@@ -39,13 +35,10 @@ export const usePermissionStore = defineStore({
   state: (): PermissionState => ({
     // 权限代码列表
     permCodeList: [],
-    // Whether the route has been dynamically added
-    // 路由是否动态添加
+    // 是否已经动态添加路由
     isDynamicAddedRoute: false,
-    // To trigger a menu update
     // 触发菜单更新
     lastBuildMenuTime: 0,
-    // Backstage menu list
     // 后台菜单列表
     backMenuList: [],
     // menu List
@@ -103,6 +96,7 @@ export const usePermissionStore = defineStore({
 
     // 构建路由
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
+      console.log("buildRoutes");
       const { t } = useI18n();
       const userStore = useUserStore();
       const appStore = useAppStoreWithOut();
@@ -225,7 +219,6 @@ export const usePermissionStore = defineStore({
           routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];
           break;
       }
-      routes.push(ERROR_LOG_ROUTE);
       patchHomeAffix(routes);
       return routes;
     }

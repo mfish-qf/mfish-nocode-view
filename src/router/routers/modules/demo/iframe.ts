@@ -1,48 +1,46 @@
-import type { AppRouteModule } from '/@/router/Types';
+import type { AppRouteModule } from "/@/router/Types";
 
-import { LAYOUT } from '/@/router/Constant';
-const IFrame = () => import('/@/views/sys/iframe/FrameBlank.vue');
-import { t } from '/@/hooks/web/UseI18n';
+import { LAYOUT } from "/@/router/Constant";
+
+const IFrame = () => import("/@/views/sys/iframe/FrameBlank.vue");
 
 const iframe: AppRouteModule = {
-  path: '/frame',
-  name: 'Frame',
+  path: "/frame",
+  name: "Frame",
   component: LAYOUT,
-  redirect: '/frame/doc',
+  redirect: "/frame/doc",
   meta: {
     orderNo: 1000,
-    icon: 'ion:tv-outline',
-    title: t('routes.demo.iframe.frame'),
+    icon: "ion:tv-outline",
+    title: "项目文档"
   },
 
   children: [
     {
-      path: 'doc',
-      name: 'Doc',
+      path: "swagger",
+      name: "Swagger",
       component: IFrame,
       meta: {
-        frameSrc: 'https://vvbin.cn/doc-next/',
-        title: t('routes.demo.iframe.doc'),
-      },
+        frameSrc: "http://localhost:8888/swagger-ui/index.html",
+        title: "接口地址"
+      }
     },
     {
-      path: 'antv',
-      name: 'Antv',
-      component: IFrame,
+      path: "https://github.com/mfish-qf/mfish-nocode",
+      name: "Git",
       meta: {
-        frameSrc: 'https://2x.antdv.com/docs/vue/introduce-cn/',
-        title: t('routes.demo.iframe.antv'),
-      },
+        frameSrc: "",
+        title: "Git地址"
+      }
     },
     {
-      path: 'https://vvbin.cn/doc-next/',
-      name: 'DocExternal',
-      component: IFrame,
+      path: "https://2x.antdv.com/docs/vue/introduce-cn/",
+      name: "DocExternal",
       meta: {
-        title: t('routes.demo.iframe.docExternal'),
-      },
-    },
-  ],
+        title: "AntDesign地址"
+      }
+    }
+  ]
 };
 
 export default iframe;
