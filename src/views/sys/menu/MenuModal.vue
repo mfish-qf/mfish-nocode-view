@@ -33,7 +33,7 @@ export default defineComponent({
           ...data.record
         }).then();
       }
-      setTreeData({ menuType: 0 }).then();
+      setTreeData({ menuType: data.record.menuType }).then();
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增菜单" : "编辑菜单"));
 
