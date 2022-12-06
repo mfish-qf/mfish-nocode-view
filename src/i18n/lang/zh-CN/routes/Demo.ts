@@ -109,12 +109,6 @@ export default {
     appendForm: '表单增删示例',
     tabsForm: '标签页+多级field',
   },
-  iframe: {
-    frame: '外部页面',
-    antv: 'antVue文档(内嵌)',
-    doc: '项目文档(内嵌)',
-    docExternal: '项目文档(外链)',
-  },
   level: { level: '多级菜单' },
   page: {
     page: '页面',
