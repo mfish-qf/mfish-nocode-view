@@ -13,10 +13,10 @@ export const mainOutRoutes: AppRouteModule[] = [
     name: "MainOut",
     component: () => import("/@/views/demo/main-out/index.vue"),
     meta: {
-      title: "MainOut",
+      title: "外部页面",
       ignoreAuth: true
     }
   }
 ];
 
-export const mainOutRouteNames = mainOutRoutes.map((item) => item.name);
+export default mainOutRoutes;

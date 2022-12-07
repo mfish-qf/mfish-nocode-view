@@ -1,9 +1,8 @@
-import type { Router, RouteRecordRaw } from "vue-router";
+import type { Router } from "vue-router";
 import { usePermissionStoreWithOut } from "/@/store/modules/Permission";
 import { PageEnum } from "/@/enums/PageEnum";
 import { useUserStoreWithOut } from "/@/store/modules/User";
-import { PAGE_NOT_FOUND_ROUTE } from "/@/router/routers/Basic";
-import { RootRoute } from "/@/router/routers";
+import { PAGE_NOT_FOUND_ROUTE, RootRoute } from "/@/router/routers/Basic";
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
 const ROOT_PATH = RootRoute.path;
@@ -27,13 +26,10 @@ export function createPermissionGuard(router: Router) {
     if (whitePathList.includes(to.path as PageEnum)) {
       if (to.path === LOGIN_PATH && token) {
         const isSessionTimeout = userStore.getSessionTimeout;
-        try {
-          await userStore.afterLoginAction();
-          if (!isSessionTimeout) {
-            next((to.query?.redirect as string) || "/");
-            return;
-          }
-        } catch {
+        await userStore.afterLoginAction();
+        if (!isSessionTimeout) {
+          next((to.query?.redirect as string) || "/");
+          return;
         }
       }
       next();
@@ -52,15 +48,12 @@ export function createPermissionGuard(router: Router) {
         replace: true
       };
       if (to.path) {
-        redirectData.query = {
-          ...redirectData.query,
-          redirect: to.path
-        };
+        redirectData.query = { redirect: to.path };
       }
       next(redirectData);
       return;
     }
-    // Jump to the 404 page after processing the login
+    // 处理登录后跳转到404页面
     if (
       from.path === LOGIN_PATH &&
       to.name === PAGE_NOT_FOUND_ROUTE.name &&
@@ -82,14 +75,7 @@ export function createPermissionGuard(router: Router) {
       next();
       return;
     }
-    const routes = await permissionStore.buildRoutesAction();
-    routes.forEach((route) => {
-      router.addRoute(route as unknown as RouteRecordRaw);
-    });
-    router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
-
-    permissionStore.setDynamicAddedRoute(true);
-
+    await permissionStore.addRouter(router);
     if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
       // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
       next({ path: to.fullPath, replace: true, query: to.query });

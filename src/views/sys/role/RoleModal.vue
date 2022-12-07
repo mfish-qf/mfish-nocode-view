@@ -14,7 +14,7 @@
           :treeData="treeData"
           search
           :fieldNames="{ title: 'menuName', key: 'id' }"
-          clickRowToExpand="true"
+          :clickRowToExpand="true"
           checkable
           toolbar
           title="菜单分配"
@@ -29,7 +29,7 @@ import { BasicForm, useForm } from "/@/components/Form/index";
 import { formSchema } from "./role.data";
 import { BasicModal, useModalInner } from "/@/components/Modal";
 import { BasicTree, TreeItem } from "/@/components/Tree";
-import { getMenuTree} from "/@/api/sys/Menu";
+import { getMenuTree } from "/@/api/sys/Menu";
 import { MenuListItem } from "/@/api/sys/model/MenuModel";
 import { insertRole, updateRole } from "/@/api/sys/Role";
 
@@ -45,7 +45,7 @@ export default defineComponent({
       baseColProps: { span: 12 },
       schemas: formSchema,
       showActionButtonGroup: false,
-      autoSubmitOnEnter: true,
+      autoSubmitOnEnter: true
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();

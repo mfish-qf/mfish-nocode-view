@@ -10,8 +10,6 @@ import { useI18n } from "/@/hooks/web/UseI18n";
 import { useMessage } from "/@/hooks/web/UseMessage";
 import { router } from "/@/router";
 import { usePermissionStore } from "/@/store/modules/Permission";
-import { RouteRecordRaw } from "vue-router";
-import { PAGE_NOT_FOUND_ROUTE } from "/@/router/routers/Basic";
 import { isArray } from "/@/utils/Is";
 import { h } from "vue";
 
@@ -125,12 +123,7 @@ export const useUserStore = defineStore({
       } else {
         const permissionStore = usePermissionStore();
         if (!permissionStore.isDynamicAddedRoute) {
-          const routes = await permissionStore.buildRoutesAction();
-          routes.forEach((route) => {
-            router.addRoute(route as unknown as RouteRecordRaw);
-          });
-          router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
-          permissionStore.setDynamicAddedRoute(true);
+          await permissionStore.addRouter(router);
         }
         goHome && (await router.replace(userInfo?.homePath || PageEnum.BASE_HOME));
       }

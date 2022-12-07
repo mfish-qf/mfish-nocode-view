@@ -1,16 +1,14 @@
 import type { AppRouteRecordRaw, Menu } from "/@/router/Types";
+import type { Router, RouteRecordRaw } from "vue-router";
 import { defineStore } from "pinia";
 import { store } from "/@/store";
 import { useI18n } from "/@/hooks/web/UseI18n";
-import { useUserStore } from "./User";
 import { useAppStoreWithOut } from "./App";
-import { toRaw } from "vue";
 import { transformObjToRoute, flatMultiLevelRoutes } from "/@/router/helper/RouteHelper";
 import { transformRouteToMenu } from "/@/router/helper/MenuHelper";
 import projectSetting from "/@/settings/ProjectSetting";
 import { PermissionModeEnum } from "/@/enums/AppEnum";
 import { asyncRoutes } from "/@/router/routers";
-import { PAGE_NOT_FOUND_ROUTE } from "/@/router/routers/Basic";
 import { filter } from "/@/utils/helper/TreeHelper";
 import { getMenuRoute } from "/@/api/sys/Menu";
 import { getPermCode } from "/@/api/sys/User";
@@ -96,21 +94,10 @@ export const usePermissionStore = defineStore({
 
     // 构建路由
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
-      console.log("buildRoutes");
       const { t } = useI18n();
-      const userStore = useUserStore();
       const appStore = useAppStoreWithOut();
       let routes: AppRouteRecordRaw[] = [];
-      const roleList = toRaw(userStore.getRoleList) || [];
       const { permissionMode = projectSetting.permissionMode } = appStore.getProjectConfig;
-      // 路由过滤器 在 函数filter 作为回调传入遍历使用
-      const routeFilter = (route: AppRouteRecordRaw) => {
-        const { meta } = route;
-        const { roles } = meta || {};
-        if (!roles) return true;
-        // 进行角色权限判断
-        return roleList.some((role) => roles.includes(role));
-      };
       const routeRemoveIgnoreFilter = (route: AppRouteRecordRaw) => {
         const { meta } = route;
         // ignoreRoute 为true 则路由仅用于菜单生成，不会在实际的路由表中出现
@@ -145,23 +132,11 @@ export const usePermissionStore = defineStore({
         patcher(routes);
         return;
       };
+      routes = asyncRoutes;
+      console.log(routes, "routes");
       switch (permissionMode) {
-        // 角色权限
-        case PermissionModeEnum.ROLE:
-          // 对非一级路由进行过滤
-          routes = filter(asyncRoutes, routeFilter);
-          // 对一级路由根据角色权限过滤
-          routes = routes.filter(routeFilter);
-          // Convert multi-level routing to level 2 routing
-          // 将多级路由转换为 2 级路由
-          routes = flatMultiLevelRoutes(routes);
-          break;
         // 路由映射， 默认进入该case
         case PermissionModeEnum.ROUTE_MAPPING:
-          // 对非一级路由进行过滤
-          routes = filter(asyncRoutes, routeFilter);
-          // 对一级路由再次根据角色权限过滤
-          routes = routes.filter(routeFilter);
           // 将路由转换成菜单
           const menuList = transformRouteToMenu(routes, true);
           // 移除掉 ignoreRoute: true 的路由 非一级路由
@@ -172,10 +147,8 @@ export const usePermissionStore = defineStore({
           menuList.sort((a, b) => {
             return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0);
           });
-
           // 设置菜单列表
           this.setFrontMenuList(menuList);
-
           // Convert multi-level routing to level 2 routing
           // 将多级路由转换为 2 级路由
           routes = flatMultiLevelRoutes(routes);
@@ -183,15 +156,11 @@ export const usePermissionStore = defineStore({
         //  如果确定不需要做后台动态权限，请在下方评论整个判断
         case PermissionModeEnum.BACK:
           const { createMessage } = useMessage();
-
           createMessage.loading({
             content: t("sys.app.menuLoading"),
             duration: 1
           });
-
-          // !Simulate to obtain permission codes from the background,
           // 模拟从后台获取权限码，
-          // this function may only need to be executed once, and the actual project can be put at the right time by itself
           // 这个功能可能只需要执行一次，实际项目可以自己放在合适的时间
           let routeList: AppRouteRecordRaw[] = [];
           try {
@@ -200,32 +169,31 @@ export const usePermissionStore = defineStore({
           } catch (error) {
             console.error(error);
           }
-
-          // Dynamically introduce components
           // 动态引入组件
           routeList = transformObjToRoute(routeList);
-
-          //  Background routing to menu structure
           //  后台路由到菜单结构
           const backMenuList = transformRouteToMenu(routeList);
           this.setBackMenuList(backMenuList);
-
-          // remove meta.ignoreRoute item
           // 删除 meta.ignoreRoute 项
           routeList = filter(routeList, routeRemoveIgnoreFilter);
           routeList = routeList.filter(routeRemoveIgnoreFilter);
-
-          routeList = flatMultiLevelRoutes(routeList);
-          routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];
+          routes = flatMultiLevelRoutes(routeList);
           break;
       }
       patchHomeAffix(routes);
       return routes;
+    },
+
+    async addRouter(router: Router) {
+      const routes = await this.buildRoutesAction();
+      routes.forEach((route) => {
+        router.addRoute(route as unknown as RouteRecordRaw);
+      });
+      this.setDynamicAddedRoute(true);
     }
   }
 });
 
-// Need to be used outside the setup
 // 需要在设置之外使用
 export function usePermissionStoreWithOut() {
   return usePermissionStore(store);
