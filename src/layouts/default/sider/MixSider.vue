@@ -195,7 +195,7 @@ export default defineComponent({
 
     // Menu changes
     watch(
-      [() => permissionStore.getLastBuildMenuTime, () => permissionStore.getBackMenuList],
+      [() => permissionStore.getLastBuildMenuTime, () => permissionStore.getMenuList],
       async () => {
         menuModules.value = await getShallowMenus();
       },

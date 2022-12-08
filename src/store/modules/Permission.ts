@@ -23,10 +23,8 @@ interface PermissionState {
   isDynamicAddedRoute: boolean;
   // 触发菜单更新
   lastBuildMenuTime: number;
-  // 后台菜单列表
-  backMenuList: Menu[];
   // 菜单列表
-  frontMenuList: Menu[];
+  menuList: Menu[];
 }
 
 export const usePermissionStore = defineStore({
@@ -38,21 +36,15 @@ export const usePermissionStore = defineStore({
     isDynamicAddedRoute: false,
     // 触发菜单更新
     lastBuildMenuTime: 0,
-    // 后台菜单列表
-    backMenuList: [],
-    // menu List
     // 菜单列表
-    frontMenuList: []
+    menuList: []
   }),
   getters: {
     getPermCodeList(): string[] | number[] {
       return this.permCodeList;
     },
-    getBackMenuList(): Menu[] {
-      return this.backMenuList;
-    },
-    getFrontMenuList(): Menu[] {
-      return this.frontMenuList;
+    getMenuList(): Menu[] {
+      return this.menuList;
     },
     getLastBuildMenuTime(): number {
       return this.lastBuildMenuTime;
@@ -66,13 +58,9 @@ export const usePermissionStore = defineStore({
       this.permCodeList = codeList;
     },
 
-    setBackMenuList(list: Menu[]) {
-      this.backMenuList = list;
+    setMenuList(list: Menu[]) {
+      this.menuList = list;
       list?.length > 0 && this.setLastBuildMenuTime();
-    },
-
-    setFrontMenuList(list: Menu[]) {
-      this.frontMenuList = list;
     },
 
     setLastBuildMenuTime() {
@@ -85,7 +73,7 @@ export const usePermissionStore = defineStore({
     resetState(): void {
       this.isDynamicAddedRoute = false;
       this.permCodeList = [];
-      this.backMenuList = [];
+      this.menuList = [];
       this.lastBuildMenuTime = 0;
     },
     async changePermissionCode() {
@@ -148,7 +136,7 @@ export const usePermissionStore = defineStore({
             return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0);
           });
           // 设置菜单列表
-          this.setFrontMenuList(menuList);
+          this.setMenuList(menuList);
           // Convert multi-level routing to level 2 routing
           // 将多级路由转换为 2 级路由
           routes = flatMultiLevelRoutes(routes);
@@ -175,7 +163,7 @@ export const usePermissionStore = defineStore({
           //  后台路由到菜单结构
           const backMenuList = transformRouteToMenu(routeList);
 
-          this.setBackMenuList(backMenuList);
+          this.setMenuList(backMenuList);
           // 删除 meta.ignoreRoute 项
           routeList = filter(routeList, routeRemoveIgnoreFilter);
           routeList = routeList.filter(routeRemoveIgnoreFilter);

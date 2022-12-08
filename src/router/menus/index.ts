@@ -1,24 +1,10 @@
 import type { Menu } from "/@/router/Types";
-import { useAppStoreWithOut } from "/@/store/modules/App";
 import { usePermissionStore } from "/@/store/modules/Permission";
 import { getAllParentPath } from "/@/router/helper/MenuHelper";
-import { PermissionModeEnum } from "/@/enums/AppEnum";
-
-const getPermissionMode = () => {
-  const appStore = useAppStoreWithOut();
-  return appStore.getProjectConfig.permissionMode;
-};
-
-const isRouteMappingMode = () => {
-  return getPermissionMode() === PermissionModeEnum.ROUTE_MAPPING;
-};
 
 async function getAsyncMenus() {
   const permissionStore = usePermissionStore();
-  if (isRouteMappingMode()) {
-    return permissionStore.getFrontMenuList.filter((item) => !item.hideMenu);
-  }
-  return permissionStore.getBackMenuList.filter((item) => !item.meta?.hideMenu && !item.hideMenu);
+  return permissionStore.getMenuList.filter((item) => !item.meta?.hideMenu && !item.hideMenu);
 }
 
 export const getMenus = async (): Promise<Menu[]> => {
