@@ -1,5 +1,5 @@
 import { AppRouteModule } from "/@/router/Types";
-import type { MenuModule, Menu, AppRouteRecordRaw } from "/@/router/Types";
+import type { Menu, AppRouteRecordRaw } from "/@/router/Types";
 import { findPath, treeMap } from "/@/utils/helper/TreeHelper";
 import { cloneDeep } from "lodash-es";
 import { isUrl } from "/@/utils/Is";
@@ -29,16 +29,6 @@ function joinParentPath(menus: Menu[], parentPath = "") {
       joinParentPath(menu.children, menu.meta?.hidePathForChildren ? parentPath : menu.path);
     }
   }
-}
-
-// Parsing the menu module
-export function transformMenuModule(menuModule: MenuModule): Menu {
-  const { menu } = menuModule;
-
-  const menuList = [menu];
-
-  joinParentPath(menuList);
-  return menuList[0];
 }
 
 // 将路由转换成菜单

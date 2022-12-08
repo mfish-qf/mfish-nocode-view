@@ -9,7 +9,7 @@ const system: AppRouteModule = {
   component: LAYOUT,
   redirect: "/system/account",
   meta: {
-    orderNo: 2000,
+    orderNo: 20,
     icon: "ion:settings-outline",
     title: t("sys.system.moduleName")
   },

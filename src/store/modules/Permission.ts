@@ -14,6 +14,7 @@ import { getMenuRoute } from "/@/api/sys/Menu";
 import { getPermCode } from "/@/api/sys/User";
 import { useMessage } from "/@/hooks/web/UseMessage";
 import { PageEnum } from "/@/enums/PageEnum";
+import { useUserStore } from "/@/store/modules/User";
 
 interface PermissionState {
   // 权限代码列表
@@ -96,6 +97,7 @@ export const usePermissionStore = defineStore({
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
       const { t } = useI18n();
       const appStore = useAppStoreWithOut();
+      const userStore = useUserStore();
       let routes: AppRouteRecordRaw[] = [];
       const { permissionMode = projectSetting.permissionMode } = appStore.getProjectConfig;
       const routeRemoveIgnoreFilter = (route: AppRouteRecordRaw) => {
@@ -110,7 +112,7 @@ export const usePermissionStore = defineStore({
        * */
       const patchHomeAffix = (routes: AppRouteRecordRaw[]) => {
         if (!routes || routes.length === 0) return;
-        let homePath: string = PageEnum.BASE_HOME;
+        let homePath: string = userStore.getUserInfo.homePath || PageEnum.BASE_HOME;
 
         function patcher(routes: AppRouteRecordRaw[], parentPath = "") {
           if (parentPath) parentPath = parentPath + "/";
@@ -121,7 +123,6 @@ export const usePermissionStore = defineStore({
               if (!redirect) {
                 route.meta = Object.assign({}, route.meta, { affix: true });
                 break;
-
               }
               homePath = route.redirect! as string;
             }
@@ -130,7 +131,6 @@ export const usePermissionStore = defineStore({
         }
 
         patcher(routes);
-        return;
       };
       routes = asyncRoutes;
       console.log(routes, "routes");
@@ -171,8 +171,10 @@ export const usePermissionStore = defineStore({
           }
           // 动态引入组件
           routeList = transformObjToRoute(routeList);
+
           //  后台路由到菜单结构
           const backMenuList = transformRouteToMenu(routeList);
+
           this.setBackMenuList(backMenuList);
           // 删除 meta.ignoreRoute 项
           routeList = filter(routeList, routeRemoveIgnoreFilter);

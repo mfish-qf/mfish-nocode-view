@@ -8,18 +8,16 @@ import { usePermissionStoreWithOut } from "/@/store/modules/Permission";
 export function createParamMenuGuard(router: Router) {
   const permissionStore = usePermissionStoreWithOut();
   router.beforeEach(async (to, _, next) => {
-    // filter no name route
+    // 过滤没有name的路由
     if (!to.name) {
       next();
       return;
     }
-
-    // menu has been built.
+    //是否已经动态添加路由
     if (!permissionStore.getIsDynamicAddedRoute) {
       next();
       return;
     }
-
     let menus: Menu[] = [];
     if (isBackMode()) {
       menus = permissionStore.getBackMenuList;

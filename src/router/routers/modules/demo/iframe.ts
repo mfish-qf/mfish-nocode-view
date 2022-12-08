@@ -9,7 +9,7 @@ const iframe: AppRouteModule = {
   component: LAYOUT,
   redirect: "/doc/swagger",
   meta: {
-    orderNo: 1000,
+    orderNo: 19,
     icon: "ion:tv-outline",
     title: "项目文档"
   },

@@ -14,7 +14,8 @@ export const mainOutRoutes: AppRouteModule[] = [
     component: () => import("/@/views/demo/main-out/index.vue"),
     meta: {
       title: "外部页面",
-      ignoreAuth: true
+      ignoreAuth: true,
+      orderNo: 10000
     }
   }
 ];
