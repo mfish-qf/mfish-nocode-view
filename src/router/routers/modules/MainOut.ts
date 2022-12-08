@@ -15,7 +15,7 @@ export const mainOutRoutes: AppRouteModule[] = [
     meta: {
       title: "外部页面",
       ignoreAuth: true,
-      orderNo: 10000
+      menuSort: 10000
     }
   }
 ];

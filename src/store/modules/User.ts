@@ -124,7 +124,7 @@ export const useUserStore = defineStore({
         if (!permissionStore.isDynamicAddedRoute) {
           await permissionStore.addRouter(router);
         }
-        goHome && (await router.replace(userInfo?.homePath || PageEnum.BASE_HOME));
+        goHome && (await router.replace(permissionStore.homePath));
       }
       return userInfo;
     },

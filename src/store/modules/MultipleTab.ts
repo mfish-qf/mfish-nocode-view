@@ -9,7 +9,7 @@ import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "/@/router/routers/Basic";
 import { getRawRoute } from "/@/utils";
 import { MULTIPLE_TABS_KEY } from "/@/enums/CacheEnum";
 import projectSetting from "/@/settings/ProjectSetting";
-import { useUserStore } from "/@/store/modules/User";
+import { usePermissionStore } from "/@/store/modules/Permission";
 
 export interface MultipleTabState {
   cacheTabList: Set<string>;
@@ -102,7 +102,6 @@ export const useMultipleTabStore = defineStore({
       const { path } = unref(router.currentRoute);
 
       let toPath: PageEnum | string = PageEnum.BASE_HOME;
-
       if (len > 0) {
         const page = this.tabList[len - 1];
         const p = page.fullPath || page.path;
@@ -110,13 +109,13 @@ export const useMultipleTabStore = defineStore({
           toPath = p;
         }
       }
-      // Jump to the current page and report an error
+      // 跳转到当前页面
       path !== toPath && go(toPath as PageEnum, true);
     },
 
     async addTab(route: RouteLocationNormalized) {
       const { path, name, fullPath, params, query, meta } = getRawRoute(route);
-      // 404  The page does not need to add a tab
+      // 404页面不需要添加tab
       if (
         path === PageEnum.ERROR_PAGE ||
         path === PageEnum.BASE_LOGIN ||
@@ -132,7 +131,6 @@ export const useMultipleTabStore = defineStore({
         updateIndex = index;
         return (tab.fullPath || tab.path) === (fullPath || path);
       });
-
       // If the tab already exists, perform the update operation
       if (tabHasExits) {
         const curTab = toRaw(this.tabList)[updateIndex];
@@ -196,8 +194,8 @@ export const useMultipleTabStore = defineStore({
       if (index === 0) {
         // There is only one tab, then jump to the homepage, otherwise jump to the right tab
         if (this.tabList.length === 1) {
-          const userStore = useUserStore();
-          toTarget = userStore.getUserInfo.homePath || PageEnum.BASE_HOME;
+          const permissionStore = usePermissionStore();
+          toTarget = permissionStore.homePath;
         } else {
           //  Jump to the right tab
           const page = this.tabList[index + 1];
@@ -262,9 +260,9 @@ export const useMultipleTabStore = defineStore({
             pathList.push(item.fullPath);
           }
         }
-        this.bulkCloseTabs(pathList);
+        this.bulkCloseTabs(pathList).then();
       }
-      this.updateCacheTab();
+      this.updateCacheTab().then();
       handleGotoPage(router);
     },
 
@@ -282,9 +280,9 @@ export const useMultipleTabStore = defineStore({
             pathList.push(item.fullPath);
           }
         }
-        this.bulkCloseTabs(pathList);
+        this.bulkCloseTabs(pathList).then();
       }
-      this.updateCacheTab();
+      this.updateCacheTab().then();
       handleGotoPage(router);
     },
 
@@ -314,8 +312,8 @@ export const useMultipleTabStore = defineStore({
           }
         }
       }
-      this.bulkCloseTabs(pathList);
-      this.updateCacheTab();
+      this.bulkCloseTabs(pathList).then();
+      this.updateCacheTab().then();
       handleGotoPage(router);
     },
 

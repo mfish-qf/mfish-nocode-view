@@ -37,7 +37,7 @@ export interface Menu {
 
   children?: Menu[];
 
-  orderNo?: number;
+  menuSort?: number;
 
   roles?: string[];
 

@@ -8,7 +8,7 @@ const setup: AppRouteModule = {
   component: LAYOUT,
   redirect: "/setup/index",
   meta: {
-    orderNo: 21,
+    menuSort: 21,
     hideChildrenInMenu: true,
     icon: "whh:paintroll",
     title: t("routes.demo.setup.page")

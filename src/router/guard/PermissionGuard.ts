@@ -12,15 +12,6 @@ export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const permissionStore = usePermissionStoreWithOut();
   router.beforeEach(async (to, from, next) => {
-    if (
-      from.path === ROOT_PATH &&
-      to.path === PageEnum.BASE_HOME &&
-      userStore.getUserInfo.homePath &&
-      userStore.getUserInfo.homePath !== PageEnum.BASE_HOME
-    ) {
-      next(userStore.getUserInfo.homePath);
-      return;
-    }
     const token = userStore.getToken;
     // 白名单路径允许直接访问
     if (whitePathList.includes(to.path as PageEnum)) {
@@ -53,15 +44,6 @@ export function createPermissionGuard(router: Router) {
       next(redirectData);
       return;
     }
-    // 处理登录后跳转到404页面
-    if (
-      from.path === LOGIN_PATH &&
-      to.name === PAGE_NOT_FOUND_ROUTE.name &&
-      to.fullPath !== (userStore.getUserInfo.homePath || PageEnum.BASE_HOME)
-    ) {
-      next(userStore.getUserInfo.homePath || PageEnum.BASE_HOME);
-      return;
-    }
     // 如果还未获取用户信息，获取用户信息
     if (userStore.getLastUpdateTime === 0) {
       try {
@@ -76,6 +58,14 @@ export function createPermissionGuard(router: Router) {
       return;
     }
     await permissionStore.addRouter(router);
+    if (
+      from.path === ROOT_PATH &&
+      to.path === PageEnum.BASE_HOME &&
+      permissionStore.homePath !== PageEnum.BASE_HOME
+    ) {
+      next(permissionStore.homePath);
+      return;
+    }
     if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
       // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
       next({ path: to.fullPath, replace: true, query: to.query });

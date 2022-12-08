@@ -14,7 +14,6 @@ import { getMenuRoute } from "/@/api/sys/Menu";
 import { getPermCode } from "/@/api/sys/User";
 import { useMessage } from "/@/hooks/web/UseMessage";
 import { PageEnum } from "/@/enums/PageEnum";
-import { useUserStore } from "/@/store/modules/User";
 
 interface PermissionState {
   // 权限代码列表
@@ -25,6 +24,8 @@ interface PermissionState {
   lastBuildMenuTime: number;
   // 菜单列表
   menuList: Menu[];
+  // 首页
+  homePath: string;
 }
 
 export const usePermissionStore = defineStore({
@@ -37,7 +38,9 @@ export const usePermissionStore = defineStore({
     // 触发菜单更新
     lastBuildMenuTime: 0,
     // 菜单列表
-    menuList: []
+    menuList: [],
+    //首页
+    homePath: PageEnum.BASE_HOME
   }),
   getters: {
     getPermCodeList(): string[] | number[] {
@@ -70,6 +73,9 @@ export const usePermissionStore = defineStore({
     setDynamicAddedRoute(added: boolean) {
       this.isDynamicAddedRoute = added;
     },
+    setHomePath(homePath: string) {
+      this.homePath = homePath || PageEnum.BASE_HOME;
+    },
     resetState(): void {
       this.isDynamicAddedRoute = false;
       this.permCodeList = [];
@@ -85,7 +91,6 @@ export const usePermissionStore = defineStore({
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
       const { t } = useI18n();
       const appStore = useAppStoreWithOut();
-      const userStore = useUserStore();
       let routes: AppRouteRecordRaw[] = [];
       const { permissionMode = projectSetting.permissionMode } = appStore.getProjectConfig;
       const routeRemoveIgnoreFilter = (route: AppRouteRecordRaw) => {
@@ -100,7 +105,7 @@ export const usePermissionStore = defineStore({
        * */
       const patchHomeAffix = (routes: AppRouteRecordRaw[]) => {
         if (!routes || routes.length === 0) return;
-        let homePath: string = userStore.getUserInfo.homePath || PageEnum.BASE_HOME;
+        let homePath: string = this.homePath || PageEnum.BASE_HOME;
 
         function patcher(routes: AppRouteRecordRaw[], parentPath = "") {
           if (parentPath) parentPath = parentPath + "/";
@@ -121,56 +126,41 @@ export const usePermissionStore = defineStore({
         patcher(routes);
       };
       routes = asyncRoutes;
-      console.log(routes, "routes");
-      switch (permissionMode) {
-        // 路由映射， 默认进入该case
-        case PermissionModeEnum.ROUTE_MAPPING:
-          // 将路由转换成菜单
-          const menuList = transformRouteToMenu(routes, true);
-          // 移除掉 ignoreRoute: true 的路由 非一级路由
-          routes = filter(routes, routeRemoveIgnoreFilter);
-          // 移除掉 ignoreRoute: true 的路由 一级路由；
-          routes = routes.filter(routeRemoveIgnoreFilter);
-          // 对菜单进行排序
-          menuList.sort((a, b) => {
-            return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0);
-          });
-          // 设置菜单列表
-          this.setMenuList(menuList);
-          // Convert multi-level routing to level 2 routing
-          // 将多级路由转换为 2 级路由
-          routes = flatMultiLevelRoutes(routes);
-          break;
-        //  如果确定不需要做后台动态权限，请在下方评论整个判断
-        case PermissionModeEnum.BACK:
-          const { createMessage } = useMessage();
-          createMessage.loading({
-            content: t("sys.app.menuLoading"),
-            duration: 1
-          });
-          // 模拟从后台获取权限码，
-          // 这个功能可能只需要执行一次，实际项目可以自己放在合适的时间
-          let routeList: AppRouteRecordRaw[] = [];
-          try {
-            await this.changePermissionCode();
-            routeList = (await getMenuRoute()) as AppRouteRecordRaw[];
-          } catch (error) {
-            console.error(error);
-          }
-          // 动态引入组件
-          routeList = transformObjToRoute(routeList);
-
-          //  后台路由到菜单结构
-          const backMenuList = transformRouteToMenu(routeList);
-
-          this.setMenuList(backMenuList);
-          // 删除 meta.ignoreRoute 项
-          routeList = filter(routeList, routeRemoveIgnoreFilter);
-          routeList = routeList.filter(routeRemoveIgnoreFilter);
-          routes = flatMultiLevelRoutes(routeList);
-          break;
+      if (permissionMode === PermissionModeEnum.BACK) {
+        const { createMessage } = useMessage();
+        createMessage.loading({
+          content: t("sys.app.menuLoading"),
+          duration: 1
+        });
+        // 模拟从后台获取权限码，
+        // 这个功能可能只需要执行一次，实际项目可以自己放在合适的时间
+        try {
+          await this.changePermissionCode();
+          routes = (await getMenuRoute()) as AppRouteRecordRaw[];
+        } catch (error) {
+          console.error(error);
+        }
+        // 动态引入组件
+        routes = transformObjToRoute(routes);
       }
+      // 将路由转换成菜单
+      const menuList = transformRouteToMenu(routes, true);
+      // 对菜单进行排序
+      menuList.sort((a, b) => {
+        return (a.meta?.menuSort || 0) - (b.meta?.menuSort || 0);
+      });
+      //todo 后面实现
+      this.setHomePath("/system");
+      // 设置菜单列表
+      this.setMenuList(menuList);
+      // 移除掉 ignoreRoute: true 的路由 非一级路由
+      routes = filter(routes, routeRemoveIgnoreFilter);
+      // 移除掉 ignoreRoute: true 的路由 一级路由；
+      routes = routes.filter(routeRemoveIgnoreFilter);
+      // 将多级路由转换为 2 级路由
+      routes = flatMultiLevelRoutes(routes);
       patchHomeAffix(routes);
+
       return routes;
     },
 

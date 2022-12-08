@@ -50,5 +50,4 @@ export interface SsoUser {
   roleIds: string[];
   userRoles: RoleInfo[];
   permissions: string[];
-  homePath: string;
 }
