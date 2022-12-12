@@ -1,9 +1,9 @@
-import type { AppRouteModule } from "/@/router/Types";
 import { LAYOUT } from "/@/router/Constant";
+import { AppRouteRecordRaw } from "/@/router/Types";
 
 const IFrame = () => import("/@/views/sys/iframe/FrameBlank.vue");
 
-const iframe: AppRouteModule = {
+const iframe: AppRouteRecordRaw = {
   path: "/doc",
   name: "Frame",
   component: LAYOUT,

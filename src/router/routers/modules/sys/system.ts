@@ -1,9 +1,9 @@
-import type { AppRouteModule } from "/@/router/Types";
 
 import { LAYOUT } from "/@/router/Constant";
 import { t } from "/@/hooks/web/UseI18n";
+import { AppRouteRecordRaw } from "/@/router/Types";
 
-const system: AppRouteModule = {
+const system: AppRouteRecordRaw = {
   path: "/system",
   name: "System",
   component: LAYOUT,

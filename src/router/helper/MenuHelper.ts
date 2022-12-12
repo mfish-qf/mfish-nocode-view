@@ -1,4 +1,3 @@
-import { AppRouteModule } from "/@/router/Types";
 import type { Menu, AppRouteRecordRaw } from "/@/router/Types";
 import { findPath, treeMap } from "/@/utils/helper/TreeHelper";
 import { cloneDeep } from "lodash-es";
@@ -32,7 +31,7 @@ function joinParentPath(menus: Menu[], parentPath = "") {
 }
 
 // 将路由转换成菜单
-export function transformRouteToMenu(routeModList: AppRouteModule[], routerMapping = false) {
+export function transformRouteToMenu(routeModList: AppRouteRecordRaw[], routerMapping = false) {
   // 借助 lodash 深拷贝
   const cloneRouteModList = cloneDeep(routeModList);
   const routeList: AppRouteRecordRaw[] = [];
@@ -56,12 +55,12 @@ export function transformRouteToMenu(routeModList: AppRouteModule[], routerMappi
       const { meta: { title, hideMenu = false } = {} } = node;
 
       return {
-        ...(node.meta || {}),
+        // ...(node.meta || {}),
         meta: node.meta,
         name: title,
         hideMenu,
         path: node.path,
-        ...(node.redirect ? { redirect: node.redirect } : {})
+        // ...(node.redirect ? { redirect: node.redirect } : {})
       };
     }
   });

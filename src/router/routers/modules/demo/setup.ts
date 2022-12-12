@@ -1,8 +1,8 @@
-import type { AppRouteModule } from "/@/router/Types";
 import { LAYOUT } from "/@/router/Constant";
 import { t } from "/@/hooks/web/UseI18n";
+import { AppRouteRecordRaw } from "/@/router/Types";
 
-const setup: AppRouteModule = {
+const setup: AppRouteRecordRaw = {
   path: "/setup",
   name: "SetupDemo",
   component: LAYOUT,

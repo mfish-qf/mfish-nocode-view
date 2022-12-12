@@ -47,5 +47,3 @@ export interface Menu {
 
   hideMenu?: boolean;
 }
-
-export type AppRouteModule = AppRouteRecordRaw;

@@ -1,33 +1,17 @@
 import type { RouteRecordRaw } from "vue-router";
-import { useAppStore } from "/@/store/modules/App";
 import { usePermissionStore } from "/@/store/modules/Permission";
 import { useUserStore } from "/@/store/modules/User";
 import { useTabs } from "./UseTabs";
 import { router, resetRouter } from "/@/router";
-import projectSetting from "/@/settings/ProjectSetting";
-import { PermissionModeEnum } from "/@/enums/AppEnum";
-import { intersection } from "lodash-es";
 import { isArray } from "/@/utils/Is";
 import { useMultipleTabStore } from "/@/store/modules/MultipleTab";
 
 export function usePermission() {
   const userStore = useUserStore();
-  const appStore = useAppStore();
   const permissionStore = usePermissionStore();
   const { closeAll } = useTabs(router);
-
-  /**
-   * Change permission mode
-   */
-  async function togglePermissionMode() {
-    appStore.setProjectConfig({
-      permissionMode:
-        projectSetting.permissionMode === PermissionModeEnum.BACK
-          ? PermissionModeEnum.ROUTE_MAPPING
-          : PermissionModeEnum.BACK
-    });
-    location.reload();
-  }
+  const ALL_PERMISSION = "*:*:*";
+  const SUPER_ROLE = "superAdmin";
 
   /**
    * Reset and regain authority resource information
@@ -43,43 +27,51 @@ export function usePermission() {
       router.addRoute(route as unknown as RouteRecordRaw);
     });
     permissionStore.setLastBuildMenuTime();
-    closeAll();
+    closeAll().then();
+  }
+
+  /**
+   * 是否有角色
+   * @param value
+   */
+  function hasRole(value: string | string[]): boolean {
+    const roles = userStore.getRoleList;
+    //超户角色返回有权限
+    if (roles.has(SUPER_ROLE)) {
+      return true;
+    }
+    return hasValue(value, roles);
   }
 
   /**
    * 是否有权限
    */
   function hasPermission(value?: string | string[], def = true): boolean {
-    // Visible by default
     if (!value) {
       return def;
     }
+    const permissions = permissionStore.getPermissions;
+    return hasValue(value, permissions);
+  }
 
-    const permMode = projectSetting.permissionMode;
-
-    if ([PermissionModeEnum.ROUTE_MAPPING, PermissionModeEnum.ROLE].includes(permMode)) {
-      if (!isArray(value)) {
-        return userStore.getRoleList?.includes(value);
-      }
-      return (intersection(value, userStore.getRoleList)).length > 0;
+  function hasValue(value, values: Set<string>) {
+    if (!isArray(value)) {
+      return values.has(value);
     }
-
-    if (PermissionModeEnum.BACK === permMode) {
-      const allCodeList = permissionStore.getPermCodeList as string[];
-      if (!isArray(value)) {
-        return allCodeList.includes(value);
+    for (let val of value) {
+      if (values.has(val)) {
+        return true;
       }
-      return (intersection(value, allCodeList) as string[]).length > 0;
     }
-    return true;
+    return false;
   }
 
   /**
    * refresh menu data
    */
   async function refreshMenu() {
-    resume();
+    resume().then();
   }
 
-  return { hasPermission, togglePermissionMode, refreshMenu };
+  return { hasPermission, hasRole, refreshMenu, ALL_PERMISSION, SUPER_ROLE };
 }

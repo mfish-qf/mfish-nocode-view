@@ -64,8 +64,6 @@ export interface ProjectConfig {
   showDarkModeToggle: boolean;
   // Configure where the button is displayed
   settingButtonPosition: SettingButtonPositionEnum;
-  // Permission mode
-  permissionMode: PermissionModeEnum;
   // Session timeout processing
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
   // Website gray mode, open for possible mourning dates

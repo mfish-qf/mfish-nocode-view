@@ -1,31 +1,30 @@
-import type { AppRouteModule } from "/@/router/Types";
-
 import { LAYOUT } from "/@/router/Constant";
 import { t } from "/@/hooks/web/UseI18n";
+import { AppRouteRecordRaw } from "/@/router/Types";
 
-const about: AppRouteModule = {
-  path: '/about',
-  name: 'About',
+const about: AppRouteRecordRaw = {
+  path: "/about",
+  name: "About",
   component: LAYOUT,
-  redirect: '/about/index',
+  redirect: "/about/index",
   meta: {
     hideChildrenInMenu: true,
-    icon: 'simple-icons:about-dot-me',
-    title: t('routes.dashboard.about'),
-    menuSort: 100,
+    icon: "simple-icons:about-dot-me",
+    title: t("routes.dashboard.about"),
+    menuSort: 100
   },
   children: [
     {
-      path: 'index',
-      name: 'AboutPage',
-      component: () => import('/@/views/sys/about/index.vue'),
+      path: "index",
+      name: "AboutPage",
+      component: () => import("/@/views/sys/about/index.vue"),
       meta: {
-        title: t('routes.dashboard.about'),
-        icon: 'simple-icons:about-dot-me',
-        hideMenu: true,
-      },
-    },
-  ],
+        title: t("routes.dashboard.about"),
+        icon: "simple-icons:about-dot-me",
+        hideMenu: true
+      }
+    }
+  ]
 };
 
 export default about;

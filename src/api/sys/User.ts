@@ -10,7 +10,7 @@ enum Api {
   User = "/oauth2/user",
   isAccountExist = "/oauth2/user/exist",
   SendMsg = "/oauth2/sendMsg",
-  Captche = "/captcha"
+  Permissions = "/oauth2/user/permissions"
 }
 
 /**
@@ -36,8 +36,11 @@ export function getUserInfo() {
   return defHttp.get<SsoUser>({ url: Api.GetUserInfo }, { errorMessageMode: "none" });
 }
 
-export function getPermCode() {
-  return defHttp.get<string[]>({ url: Api.Captche });
+/**
+ * 获取权限信息
+ */
+export function getPermissions() {
+  return defHttp.get<Set<string>>({ url: Api.Permissions }, { errorMessageMode: "none" });
 }
 
 export function doLogout() {

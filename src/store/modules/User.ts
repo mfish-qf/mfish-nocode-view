@@ -18,7 +18,7 @@ interface UserState {
   token?: string;
   refreshToken?: string;
   roleInfoList: RoleInfo[];
-  roleList: string[];
+  roleList: Set<string>,
   sessionTimeout?: boolean;
   lastUpdateTime: number;
 }
@@ -35,7 +35,7 @@ export const useUserStore = defineStore({
     //角色信息列表
     roleInfoList: [],
     // 角色code列表
-    roleList: [],
+    roleList: new Set<string>(),
     // token时长
     sessionTimeout: false,
     // 最后获取时间
@@ -49,10 +49,10 @@ export const useUserStore = defineStore({
       return this.token || getAuthCache<string>(TOKEN_KEY);
     },
     getRoleInfoList(): RoleInfo[] {
-      return this.roleList.length > 0 ? this.roleInfoList : getAuthCache<RoleInfo[]>(ROLES_KEY);
+      return this.roleInfoList.length > 0 ? this.roleInfoList : getAuthCache<RoleInfo[]>(ROLES_KEY);
     },
-    getRoleList(): string[] {
-      return this.roleList.length > 0 ? this.roleList : getAuthCache<string[]>(ROLES_KEY);
+    getRoleList(): Set<string> {
+      return this.roleList.size > 0 ? this.roleList : getAuthCache<Set<string>>(ROLES_KEY);
     },
     getSessionTimeout(): boolean {
       return !!this.sessionTimeout;
@@ -74,7 +74,7 @@ export const useUserStore = defineStore({
       this.roleInfoList = roleList;
       setAuthCache(ROLES_INFO_KEY, roleList);
     },
-    setRoleList(roleList: string[]) {
+    setRoleList(roleList: Set<string>) {
       this.roleList = roleList;
       setAuthCache(ROLES_KEY, roleList);
     },
@@ -89,7 +89,7 @@ export const useUserStore = defineStore({
     resetState() {
       this.userInfo = null;
       this.token = "";
-      this.roleList = [];
+      this.roleList = new Set<string>();
       this.sessionTimeout = false;
     },
     /**
@@ -121,6 +121,7 @@ export const useUserStore = defineStore({
         this.setSessionTimeout(false);
       } else {
         const permissionStore = usePermissionStore();
+        permissionStore.setPermissions(userInfo?.permissions ?? new Set());
         if (!permissionStore.isDynamicAddedRoute) {
           await permissionStore.addRouter(router);
         }
@@ -134,12 +135,12 @@ export const useUserStore = defineStore({
       const { userRoles = [] } = userInfo;
       if (isArray(userRoles)) {
         this.setRoleInfoList(userRoles);
-        const roleList = userRoles.map((item) => item.roleCode);
+        const roleList = new Set<string>(userRoles.map((item) => item.roleCode));
         this.setRoleList(roleList);
       } else {
         userInfo.userRoles = [];
         this.setRoleInfoList([]);
-        this.setRoleList([]);
+        this.setRoleList(new Set<string>());
       }
       this.setUserInfo(userInfo);
       return userInfo;
