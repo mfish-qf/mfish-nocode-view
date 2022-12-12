@@ -55,12 +55,12 @@ export function transformRouteToMenu(routeModList: AppRouteRecordRaw[], routerMa
       const { meta: { title, hideMenu = false } = {} } = node;
 
       return {
-        // ...(node.meta || {}),
+        ...(node.meta || {}),
         meta: node.meta,
         name: title,
         hideMenu,
         path: node.path,
-        // ...(node.redirect ? { redirect: node.redirect } : {})
+        ...(node.redirect ? { redirect: node.redirect } : {})
       };
     }
   });
