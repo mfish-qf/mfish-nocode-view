@@ -58,7 +58,7 @@ function createPageLoadingGuard(router: Router) {
       return true;
     }
     if (unref(getOpenPageLoading)) {
-      appStore.setPageLoadingAction(true);
+      appStore.setPageLoadingAction(true).then();
       return true;
     }
     return true;
@@ -86,7 +86,7 @@ function createHttpGuard(router: Router) {
     axiosCanceler = new AxiosCanceler();
   }
   router.beforeEach(async () => {
-    // Switching the route will delete the previous request
+    // 切换路由将删除先前的请求
     axiosCanceler?.removeAllPending();
     return true;
   });

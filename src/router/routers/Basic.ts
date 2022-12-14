@@ -5,6 +5,28 @@ import {
   EXCEPTION_COMPONENT,
   PAGE_NOT_FOUND_NAME
 } from "/@/router/Constant";
+import { PageEnum } from "/@/enums/PageEnum";
+import { t } from "/@/hooks/web/UseI18n";
+
+// 根路由
+export const RootRoute: AppRouteRecordRaw = {
+  path: "/",
+  name: "Root",
+  redirect: PageEnum.BASE_HOME,
+  meta: {
+    title: "Root"
+  }
+};
+
+//登录路由
+export const LoginRoute: AppRouteRecordRaw = {
+  path: "/login",
+  name: "Login",
+  component: () => import("/@/views/sys/login/Login.vue"),
+  meta: {
+    title: t("routes.basic.login")
+  }
+};
 
 // 404 on a page
 export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {

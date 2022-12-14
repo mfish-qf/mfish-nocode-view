@@ -53,7 +53,7 @@ export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
 
   // Menu changes
   watch(
-    [() => permissionStore.getLastBuildMenuTime, () => permissionStore.getBackMenuList],
+    [() => permissionStore.getLastBuildMenuTime, () => permissionStore.getMenuList],
     () => {
       genMenus();
     },

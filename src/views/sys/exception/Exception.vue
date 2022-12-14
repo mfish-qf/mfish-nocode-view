@@ -9,7 +9,7 @@ import { useRoute } from "vue-router";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { useGo, useRedo } from "/@/hooks/web/UsePage";
-import { PageEnum } from "/@/enums/PageEnum";
+import { usePermissionStore } from "/@/store/modules/Permission";
 
 interface MapValue {
   title: string;
@@ -46,32 +46,28 @@ export default defineComponent({
   },
   setup(props) {
     const statusMapRef = ref(new Map<string | number, MapValue>());
-
     const { query } = useRoute();
     const go = useGo();
     const redo = useRedo();
     const { t } = useI18n();
     const { prefixCls } = useDesign("app-exception-page");
-
     const getStatus = computed(() => {
       const { status: routeStatus } = query;
       const { status } = props;
       return Number(routeStatus) || status;
     });
-
     const getMapValue = computed((): MapValue => {
       return unref(statusMapRef).get(unref(getStatus)) as MapValue;
     });
-
     const backLoginI18n = t("sys.exception.backLogin");
     const backHomeI18n = t("sys.exception.backHome");
-
+    const permissionStore = usePermissionStore();
     unref(statusMapRef).set(ExceptionEnum.PAGE_NOT_ACCESS, {
       title: "403",
       status: `${ExceptionEnum.PAGE_NOT_ACCESS}`,
       subTitle: t("sys.exception.subTitle403"),
       btnText: props.full ? backLoginI18n : backHomeI18n,
-      handler: () => (props.full ? go(PageEnum.BASE_LOGIN) : go())
+      handler: () => (props.full ? go(permissionStore.homePath) : go())
     });
 
     unref(statusMapRef).set(ExceptionEnum.PAGE_NOT_FOUND, {
@@ -79,7 +75,7 @@ export default defineComponent({
       status: `${ExceptionEnum.PAGE_NOT_FOUND}`,
       subTitle: t("sys.exception.subTitle404"),
       btnText: props.full ? backLoginI18n : backHomeI18n,
-      handler: () => (props.full ? go(PageEnum.BASE_LOGIN) : go())
+      handler: () => (props.full ? go(permissionStore.homePath) : go())
     });
 
     unref(statusMapRef).set(ExceptionEnum.ERROR, {

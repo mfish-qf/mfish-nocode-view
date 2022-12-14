@@ -1,5 +1,4 @@
-import { AppRouteModule } from "/@/router/Types";
-import type { MenuModule, Menu, AppRouteRecordRaw } from "/@/router/Types";
+import type { Menu, AppRouteRecordRaw } from "/@/router/Types";
 import { findPath, treeMap } from "/@/utils/helper/TreeHelper";
 import { cloneDeep } from "lodash-es";
 import { isUrl } from "/@/utils/Is";
@@ -9,6 +8,14 @@ import { toRaw } from "vue";
 export function getAllParentPath<T = Recordable>(treeData: T[], path: string) {
   const menuList = findPath(treeData, (n) => n.path === path) as Menu[];
   return (menuList || []).map((item) => item.path);
+}
+
+//非URL增加 /
+export function formatPath(path: string) {
+  if (path.startsWith("/") || isUrl(path)) {
+    return path;
+  }
+  return `/${path}`;
 }
 
 // 路径处理
@@ -31,18 +38,8 @@ function joinParentPath(menus: Menu[], parentPath = "") {
   }
 }
 
-// Parsing the menu module
-export function transformMenuModule(menuModule: MenuModule): Menu {
-  const { menu } = menuModule;
-
-  const menuList = [menu];
-
-  joinParentPath(menuList);
-  return menuList[0];
-}
-
 // 将路由转换成菜单
-export function transformRouteToMenu(routeModList: AppRouteModule[], routerMapping = false) {
+export function transformRouteToMenu(routeModList: AppRouteRecordRaw[], routerMapping = false) {
   // 借助 lodash 深拷贝
   const cloneRouteModList = cloneDeep(routeModList);
   const routeList: AppRouteRecordRaw[] = [];

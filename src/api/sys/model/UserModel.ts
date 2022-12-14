@@ -49,6 +49,5 @@ export interface SsoUser {
   updateTime: string;
   roleIds: string[];
   userRoles: RoleInfo[];
-  permissions: string[];
-  homePath: string;
+  permissions: Set<string>;
 }

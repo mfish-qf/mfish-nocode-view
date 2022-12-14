@@ -15,6 +15,7 @@ export const EXCEPTION_COMPONENT = () => import("/@/views/sys/exception/Exceptio
  * @description: 默认布局
  */
 export const LAYOUT = () => import("/@/layouts/default/index.vue");
+export const IFRAME = () => import("/@/views/sys/iframe/FrameBlank.vue");
 
 /**
  * @description: 父布局
@@ -27,3 +28,7 @@ export const getParentLayout = (_name?: string) => {
       });
     });
 };
+
+export const LayoutMap = new Map<string, () => Promise<typeof import("*.vue")>>;
+LayoutMap.set("LAYOUT", LAYOUT);
+LayoutMap.set("IFRAME", IFRAME);

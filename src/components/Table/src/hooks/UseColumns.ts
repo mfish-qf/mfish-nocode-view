@@ -15,6 +15,7 @@ function handleItem(item: BasicColumn, ellipsis: boolean) {
   item.align = item.align || DEFAULT_ALIGN;
   if (ellipsis) {
     if (!key) {
+      // @ts-ignore
       item.key = dataIndex;
     }
     if (!isBoolean(item.ellipsis)) {
@@ -156,8 +157,7 @@ export function useColumns(
         const { slots, customRender, format, edit, editRow, flag } = column;
 
         if (!slots || !slots?.title) {
-          // column.slots = { title: `header-${dataIndex}`, ...(slots || {}) };
-          column.customTitle = column.title;
+          column.customTitle = <string>column.title;
           Reflect.deleteProperty(column, "title");
         }
         const isDefaultAction = [INDEX_COLUMN_FLAG, ACTION_COLUMN_FLAG].includes(flag!);

@@ -3,8 +3,8 @@
  * Used for fine-grained control of component permissions
  * @Example
  */
-import type { App, Directive, DirectiveBinding } from 'vue';
-import { usePermission } from '/@/hooks/web/UsePermission';
+import type { App, Directive, DirectiveBinding } from "vue";
+import { usePermission } from "/@/hooks/web/UsePermission";
 
 function isAuth(el: Element, binding: any) {
   const { hasPermission } = usePermission();
@@ -21,11 +21,11 @@ const mounted = (el: Element, binding: DirectiveBinding<any>) => {
 };
 
 const authDirective: Directive = {
-  mounted,
+  mounted
 };
 
 export function setupPermissionDirective(app: App) {
-  app.directive('auth', authDirective);
+  app.directive("auth", authDirective);
 }
 
 export default authDirective;

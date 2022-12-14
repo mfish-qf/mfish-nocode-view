@@ -2,7 +2,8 @@ export {};
 
 declare module "vue-router" {
   interface RouteMeta extends Record<string | number | symbol, unknown> {
-    orderNo?: number;
+    //菜单排序
+    menuSort?: number;
     // title
     title: string;
     // dynamic router level.

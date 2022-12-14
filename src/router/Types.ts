@@ -37,7 +37,7 @@ export interface Menu {
 
   children?: Menu[];
 
-  orderNo?: number;
+  menuSort?: number;
 
   roles?: string[];
 
@@ -46,12 +46,8 @@ export interface Menu {
   tag?: MenuTag;
 
   hideMenu?: boolean;
-}
 
-export interface MenuModule {
-  orderNo?: number;
-  menu: Menu;
+  isExternal?: boolean;
+  //隐藏子菜单，当只有一级菜单时为true
+  hideChildrenInMenu?: boolean;
 }
-
-// export type AppRouteModule = RouteModule | AppRouteRecordRaw;
-export type AppRouteModule = AppRouteRecordRaw;

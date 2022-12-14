@@ -9,7 +9,7 @@ import { BasicForm, useForm } from "/@/components/Form/index";
 import { formSchema } from "./menu.data";
 import { BasicModal, useModalInner } from "/@/components/Modal";
 import { getMenuTree, insertMenu, updateMenu } from "/@/api/sys/Menu";
-import { MenuListItem, MenuParams } from "/@/api/sys/model/MenuModel";
+import { MenuListItem, MenuParams, MenuType } from "/@/api/sys/model/MenuModel";
 
 export default defineComponent({
   name: "MenuModal",
@@ -33,7 +33,7 @@ export default defineComponent({
           ...data.record
         }).then();
       }
-      setTreeData({ menuType: data.record.menuType }).then();
+      setTreeData({ menuType: !data.record ? MenuType.目录 : data.record.menuType }).then();
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增菜单" : "编辑菜单"));
 

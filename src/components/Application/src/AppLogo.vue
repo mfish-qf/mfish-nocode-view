@@ -13,7 +13,7 @@ import { useGo } from "/@/hooks/web/UsePage";
 import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { PageEnum } from "/@/enums/PageEnum";
-import { useUserStore } from "/@/store/modules/User";
+import { usePermissionStore } from "/@/store/modules/Permission";
 
 const props = defineProps({
   /**
@@ -32,7 +32,7 @@ const props = defineProps({
 
 const { prefixCls } = useDesign("app-logo");
 const { getCollapsedShowTitle } = useMenuSetting();
-const userStore = useUserStore();
+const permissionStore = usePermissionStore();
 const { title } = useGlobSetting();
 const go = useGo();
 
@@ -50,7 +50,7 @@ const getTitleClass = computed(() => [
 ]);
 
 function goHome() {
-  go(userStore.getUserInfo.homePath || PageEnum.BASE_HOME);
+  go(permissionStore.homePath);
 }
 </script>
 <style lang="less" scoped>
