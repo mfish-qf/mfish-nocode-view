@@ -127,25 +127,26 @@ export const usePermissionStore = defineStore({
                 route.component = IFRAME;
               }
             } else {
-              route.component = component(menu.component);
+              route.component = () => component(menu.component);
             }
             break;
         }
         return route;
       };
+      const index = "index";
       const directMenu = (menu: MenuListItem): Menu => {
         const newMenu: Menu = buildMenu(menu);
-        newMenu.path = newMenu.path + "/index";
+        newMenu.path = `${newMenu.path}/${index}`;
         newMenu.meta = { hideChildrenInMenu: true };
         return newMenu;
       };
       const directRoute = (menu: MenuListItem): AppRouteRecordRaw => {
         const route = buildRoute(menu);
-        route.redirect = `${route.path}/index`;
+        route.redirect = `${route.path}/${index}`;
         route.component = LAYOUT;
         route.children = [
           {
-            path: "index",
+            path: index,
             name: menu.menuName,
             meta: { title: menu.menuName, icon: menu.menuIcon },
             component: () => component(menu.component)
@@ -191,6 +192,8 @@ export const usePermissionStore = defineStore({
           }
           pRoute.children?.push(cRoute);
           if (menu.children != null && menu.children.length > 0) {
+            cMenu.children = [];
+            cRoute.children = [];
             buildChildMenuRoute(menu.children, cMenu, cRoute);
           }
         }
