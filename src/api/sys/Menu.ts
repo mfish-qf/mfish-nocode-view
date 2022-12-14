@@ -30,5 +30,5 @@ export const deleteMenu = (params: string) => {
 /**
  * 获取菜单路由
  */
-export const getMenuRoute = () =>
-  defHttp.get<MenuRouteModel>({ url: Api.menuRoute });
+export const getMenuRoute = (params?: MenuListItem) =>
+  defHttp.get<MenuRouteModel>({ url: Api.menuRoute, params }, { successMessageMode: "none" });

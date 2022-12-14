@@ -16,17 +16,24 @@ export interface RouteItem {
   children?: RouteItem[];
 }
 
+export enum MenuType {
+  目录,
+  菜单,
+  按钮
+}
+
 export interface MenuListItem {
   id: string;
   parentId: string;
   clientId: string;
   menuName: string;
-  menuType: number;
+  menuType: MenuType;
   menuIcon: string;
   menuSort: number;
   routePath: string;
   component: string;
   isKeepalive: number;
+  //外部打开
   isExternal: number;
   remark: string;
   createBy: string;
@@ -40,7 +47,7 @@ export interface MenuListItem {
 
 export type MenuParams = {
   menuName?: string;
-  menuType?: number;
+  menuType?: MenuType;
   status?: string;
 };
 

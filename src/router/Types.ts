@@ -46,4 +46,8 @@ export interface Menu {
   tag?: MenuTag;
 
   hideMenu?: boolean;
+
+  isExternal?: boolean;
+  //隐藏子菜单，当只有一级菜单时为true
+  hideChildrenInMenu?: boolean;
 }

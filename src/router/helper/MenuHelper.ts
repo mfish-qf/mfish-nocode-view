@@ -10,6 +10,14 @@ export function getAllParentPath<T = Recordable>(treeData: T[], path: string) {
   return (menuList || []).map((item) => item.path);
 }
 
+//非URL增加 /
+export function formatPath(path: string) {
+  if (path.startsWith("/") || isUrl(path)) {
+    return path;
+  }
+  return `/${path}`;
+}
+
 // 路径处理
 function joinParentPath(menus: Menu[], parentPath = "") {
   for (let index = 0; index < menus.length; index++) {
