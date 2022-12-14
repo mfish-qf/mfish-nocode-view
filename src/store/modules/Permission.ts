@@ -195,7 +195,8 @@ export const usePermissionStore = defineStore({
           cMenu.isExternal = menu.isExternal === 1 ? true : false;
           pMenu.children?.push(cMenu);
           let cRoute: AppRouteRecordRaw = buildRoute(menu);
-          if (!isUrl(menu.component)) {
+          //如果组件不是外部地址，菜单不是外部打开。采用内部路由path处理
+          if (!isUrl(menu.component) || !menu.isExternal) {
             if (i++ == 0) {
               pRoute.redirect = pRoute.path + cRoute.path;
             }
@@ -224,8 +225,10 @@ export const usePermissionStore = defineStore({
       }
       // 设置菜单列表
       this.setMenuList(menuList);
+      console.log(menuList, "菜单");
       // 将多级路由转换为 2 级路由
       routes = flatMultiLevelRoutes(routes);
+      console.log(routes, "路由");
       return routes;
     },
 
