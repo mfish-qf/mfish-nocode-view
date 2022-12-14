@@ -156,6 +156,12 @@ export const usePermissionStore = defineStore({
       };
       buildMenuRoute(menus, menuList, routes);
 
+      /**
+       * 构建第一级目录
+       * @param menus
+       * @param menuList
+       * @param routes
+       */
       function buildMenuRoute(menus: MenuListItem[], menuList: Menu[], routes: AppRouteRecordRaw[]) {
         for (let menu of menus) {
           if (menu.children != null && menu.children.length > 0) {
@@ -176,6 +182,12 @@ export const usePermissionStore = defineStore({
         }
       }
 
+      /**
+       * 递归构建子集目录
+       * @param menus
+       * @param pMenu
+       * @param pRoute
+       */
       function buildChildMenuRoute(menus: MenuListItem[], pMenu: Menu, pRoute: AppRouteRecordRaw) {
         let i = 0;
         for (let menu of menus) {
@@ -212,10 +224,8 @@ export const usePermissionStore = defineStore({
       }
       // 设置菜单列表
       this.setMenuList(menuList);
-      console.log(menuList, "菜单");
       // 将多级路由转换为 2 级路由
       routes = flatMultiLevelRoutes(routes);
-      console.log(routes, "路由");
       return routes;
     },
 
