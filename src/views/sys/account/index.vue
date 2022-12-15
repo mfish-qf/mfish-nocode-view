@@ -52,7 +52,6 @@ export default defineComponent({
     const [registerTable, { reload }] = useTable({
       title: "账号列表",
       api: getUserList,
-      rowKey: "id",
       columns,
       formConfig: {
         labelWidth: 80,

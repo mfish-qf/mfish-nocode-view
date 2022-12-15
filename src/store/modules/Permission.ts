@@ -9,7 +9,7 @@ import { getPermissions } from "/@/api/sys/User";
 import { MenuListItem, MenuType } from "/@/api/sys/model/MenuModel";
 import { IFRAME, LAYOUT } from "/@/router/Constant";
 import { formatPath, transformRouteToMenu } from "/@/router/helper/MenuHelper";
-import { flatMultiLevelRoutes } from "/@/router/helper/RouteHelper";
+import { flatMultiLevelRoutes,importComponent } from "/@/router/helper/RouteHelper";
 import { isUrl } from "/@/utils/Is";
 
 interface PermissionState {
@@ -83,9 +83,8 @@ export const usePermissionStore = defineStore({
     // 构建路由
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
       const menus = await getMenuTree({ menuType: MenuType.菜单 });
-      let menuList: Menu[] = [];
-      let routes: AppRouteRecordRaw[] = [];
-      const component = (path) => import(`/@/views${path}`);
+      const menuList: Menu[] = [];
+      const routes: AppRouteRecordRaw[] = [];
       const buildMenu = (menu: MenuListItem): Menu => {
         const newMenu: Menu = {
           name: menu.menuName,
@@ -127,7 +126,7 @@ export const usePermissionStore = defineStore({
                 route.component = IFRAME;
               }
             } else {
-              route.component = () => component(menu.component);
+              route.component = importComponent(menu.component);
             }
             break;
         }
@@ -149,7 +148,7 @@ export const usePermissionStore = defineStore({
             path: index,
             name: menu.menuName,
             meta: { title: menu.menuName, icon: menu.menuIcon },
-            component: () => component(menu.component)
+            component: importComponent(menu.component)
           }
         ];
         return route;
@@ -195,7 +194,8 @@ export const usePermissionStore = defineStore({
           cMenu.isExternal = menu.isExternal === 1 ? true : false;
           pMenu.children?.push(cMenu);
           let cRoute: AppRouteRecordRaw = buildRoute(menu);
-          if (!isUrl(menu.component)) {
+          //如果组件不是外部地址，菜单不是外部打开。采用内部路由path处理
+          if (!isUrl(menu.component) || !menu.isExternal) {
             if (i++ == 0) {
               pRoute.redirect = pRoute.path + cRoute.path;
             }
@@ -224,9 +224,9 @@ export const usePermissionStore = defineStore({
       }
       // 设置菜单列表
       this.setMenuList(menuList);
+      console.log(menuList, "菜单");
       // 将多级路由转换为 2 级路由
-      routes = flatMultiLevelRoutes(routes);
-      return routes;
+      return flatMultiLevelRoutes(routes);
     },
 
     async addRouter(router: Router) {

@@ -138,7 +138,6 @@ export const formSchema: FormSchema[] = [
     field: "menuIcon",
     label: "图标",
     component: "IconPicker",
-    required: true,
     ifShow: ({ values }) => !isButton(values.menuType)
   },
   {
@@ -184,7 +183,7 @@ export const formSchema: FormSchema[] = [
         { label: "否", value: 0 }
       ]
     },
-    ifShow: ({ values }) => !isButton(values.menuType)
+    ifShow: ({ values }) => isMenu(values.menuType)
   },
   {
     field: "isKeepalive",

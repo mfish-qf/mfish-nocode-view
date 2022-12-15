@@ -58,6 +58,7 @@ import { isFunction } from "/@/utils/Is";
 import { warn } from "/@/utils/Log";
 
 export default defineComponent({
+  name:'BasicTable',
   components: {
     Table,
     BasicForm,

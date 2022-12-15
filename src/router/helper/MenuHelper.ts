@@ -12,7 +12,7 @@ export function getAllParentPath<T = Recordable>(treeData: T[], path: string) {
 
 //非URL增加 /
 export function formatPath(path: string) {
-  if (path.startsWith("/") || isUrl(path)) {
+  if (!!path && (path.startsWith("/") || isUrl(path))) {
     return path;
   }
   return `/${path}`;
