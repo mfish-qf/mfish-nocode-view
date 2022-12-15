@@ -75,7 +75,7 @@ export default defineComponent({
 
     function saveMenu(save, values) {
       save(values).then(() => {
-        emit("success");
+        emit("success", { isUpdate: unref(isUpdate), values: { ...values} });
         closeModal();
       });
     }

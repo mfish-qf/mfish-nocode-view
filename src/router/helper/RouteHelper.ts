@@ -3,6 +3,17 @@ import type { Router, RouteRecordNormalized } from "vue-router";
 import { cloneDeep, omit } from "lodash-es";
 import { createRouter, createWebHashHistory } from "vue-router";
 
+const viewsModules = import.meta.glob("../../views/**/*.{vue,tsx}");
+
+/**
+ * 动态引入组件
+ * @param component
+ */
+export function importComponent(component: string) {
+  const view = viewsModules[`../../views${component}`];
+  return !view ? null : view;
+}
+
 /**
  * Convert multi-level routing to level 2 routing
  * 将多级路由转换为 2 级路由

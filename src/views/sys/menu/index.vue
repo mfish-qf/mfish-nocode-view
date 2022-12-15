@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BasicTable @register="registerTable" @fetch-success="onFetchSuccess">
+    <BasicTable @register="registerTable">
       <template #toolbar>
         <a-button type="primary" @click="handleCreate">新增菜单</a-button>
       </template>
@@ -30,7 +30,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, nextTick } from "vue";
+import { defineComponent } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
 import { deleteMenu, getMenuTree } from "/@/api/sys/Menu";
 import MenuModal from "./MenuModal.vue";
@@ -42,9 +42,10 @@ export default defineComponent({
   components: { BasicTable, MenuModal, TableAction },
   setup() {
     const [registerModal, { openModal }] = useModal();
-    const [registerTable, { reload, expandAll }] = useTable({
+    const [registerTable, { reload, updateTableDataRecord, deleteTableDataRecord }] = useTable({
       title: "菜单列表",
       api: getMenuTree,
+      rowKey: "id",
       columns,
       formConfig: {
         labelWidth: 100,
@@ -82,16 +83,17 @@ export default defineComponent({
 
     function handleDelete(record: Recordable) {
       deleteMenu(record.id).then(() => {
-        handleSuccess();
+        debugger
+        deleteTableDataRecord(record.id);
       });
     }
 
-    function handleSuccess() {
-      reload();
-    }
-
-    function onFetchSuccess() {
-      nextTick(expandAll);
+    function handleSuccess({ isUpdate, values }) {
+      if (isUpdate) {
+        updateTableDataRecord(values.id, values);
+      } else {
+        reload();
+      }
     }
 
     return {
@@ -100,8 +102,7 @@ export default defineComponent({
       handleCreate,
       handleEdit,
       handleDelete,
-      handleSuccess,
-      onFetchSuccess
+      handleSuccess
     };
   }
 });
