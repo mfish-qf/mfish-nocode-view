@@ -2,14 +2,14 @@ import type { AppRouteRecordRaw, Menu } from "/@/router/Types";
 import type { Router, RouteRecordRaw } from "vue-router";
 import { defineStore } from "pinia";
 import { store } from "/@/store";
-import { getMenuTree } from "/@/api/sys/Menu";
+import { getRoleMenuTree } from "/@/api/sys/Menu";
 import { PageEnum } from "/@/enums/PageEnum";
 import { routeModuleList } from "/@/router/routers";
 import { getPermissions } from "/@/api/sys/User";
 import { MenuListItem, MenuType } from "/@/api/sys/model/MenuModel";
 import { IFRAME, LAYOUT } from "/@/router/Constant";
 import { formatPath, transformRouteToMenu } from "/@/router/helper/MenuHelper";
-import { flatMultiLevelRoutes,importComponent } from "/@/router/helper/RouteHelper";
+import { flatMultiLevelRoutes, importComponent } from "/@/router/helper/RouteHelper";
 import { isUrl } from "/@/utils/Is";
 
 interface PermissionState {
@@ -82,7 +82,7 @@ export const usePermissionStore = defineStore({
     },
     // 构建路由
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
-      const menus = await getMenuTree({ menuType: MenuType.菜单 });
+      const menus = await getRoleMenuTree();
       const menuList: Menu[] = [];
       const routes: AppRouteRecordRaw[] = [];
       const buildMenu = (menu: MenuListItem): Menu => {

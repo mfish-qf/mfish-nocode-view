@@ -4,6 +4,7 @@ import { MenuRouteModel, MenuParams, MenuListItem } from "./model/MenuModel";
 enum Api {
   menu = "/oauth2/menu",
   menuTree = "/oauth2/menu/tree",
+  roleMenuTree = "/oauth2/menu/roleTree",
   menuRoute = "/oauth2/menu/route",
 }
 
@@ -13,6 +14,12 @@ enum Api {
  */
 export const getMenuTree = (params?: MenuParams) => {
   return defHttp.get<MenuListItem[]>({ url: Api.menuTree, params });
+};
+/**
+ * 获取角色菜单
+ */
+export const getRoleMenuTree = () => {
+  return defHttp.get<MenuListItem[]>({ url: Api.roleMenuTree });
 };
 /**
  * 插入菜单、目录、按钮
