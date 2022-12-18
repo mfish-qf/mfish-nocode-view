@@ -17,17 +17,22 @@ export function createPermissionGuard(router: Router) {
     if (whitePathList.includes(to.path as PageEnum)) {
       if (to.path === LOGIN_PATH && token) {
         const isSessionTimeout = userStore.getSessionTimeout;
-        await userStore.afterLoginAction();
-        if (!isSessionTimeout) {
-          next((to.query?.redirect as string) || "/");
-          return;
+        //增加try catch方式请求异常造成无法返回首页
+        try {
+          await userStore.afterLoginAction();
+          if (!isSessionTimeout) {
+            next((to.query?.redirect as string) || "/");
+            return;
+          }
+        } catch {
         }
       }
       next();
       return;
     }
-    // 如果token不存在
-    if (!token) {
+    const user = userStore.getUserInfo;
+    // 如果token或者user不存在
+    if (!token || !user) {
       // 如果设置ignoreAuth为true，允许直接访问
       if (to.meta.ignoreAuth) {
         next();
