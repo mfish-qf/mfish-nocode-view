@@ -43,7 +43,7 @@ export const useUserStore = defineStore({
   }),
   getters: {
     getUserInfo(): SsoUser {
-      return this.userInfo || getAuthCache<SsoUser>(USER_INFO_KEY) || {};
+      return this.userInfo || getAuthCache<SsoUser>(USER_INFO_KEY);
     },
     getToken(): string {
       return this.token || getAuthCache<string>(TOKEN_KEY);

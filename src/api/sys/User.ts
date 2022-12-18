@@ -33,7 +33,7 @@ export function loginApi(params: LoginParams, mode: MessageMode = "modal") {
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<SsoUser>({ url: Api.GetUserInfo }, { errorMessageMode: "none" });
+  return defHttp.get<SsoUser>({ url: Api.GetUserInfo });
 }
 
 /**
