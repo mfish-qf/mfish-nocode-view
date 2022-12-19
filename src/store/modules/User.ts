@@ -2,9 +2,9 @@ import type { MessageMode } from "/#/axios";
 import { defineStore } from "pinia";
 import { store } from "/@/store";
 import { PageEnum } from "/@/enums/PageEnum";
-import { REFRESH_TOKEN_KEY, ROLES_INFO_KEY, ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from "/@/enums/CacheEnum";
+import { REFRESH_TOKEN_KEY, TOKEN_KEY } from "/@/enums/CacheEnum";
 import { getAuthCache, setAuthCache } from "/@/utils/auth";
-import { SsoUser, LoginParams, RoleInfo } from "/@/api/sys/model/UserModel";
+import { LoginParams, RoleInfo, SsoUser } from "/@/api/sys/model/UserModel";
 import { doLogout, getUserInfo, loginApi } from "/@/api/sys/User";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { useMessage } from "/@/hooks/web/UseMessage";
@@ -12,15 +12,15 @@ import { router } from "/@/router";
 import { usePermissionStore } from "/@/store/modules/Permission";
 import { isArray } from "/@/utils/Is";
 import { h } from "vue";
+import { Nullable } from "/@/utils/Types";
 
 interface UserState {
   userInfo: Nullable<SsoUser>;
   token?: string;
   refreshToken?: string;
   roleInfoList: RoleInfo[];
-  roleList: Set<string>,
+  roleList: Set<string>;
   sessionTimeout?: boolean;
-  lastUpdateTime: number;
 }
 
 export const useUserStore = defineStore({
@@ -37,28 +37,26 @@ export const useUserStore = defineStore({
     // 角色code列表
     roleList: new Set<string>(),
     // token时长
-    sessionTimeout: false,
-    // 最后获取时间
-    lastUpdateTime: 0
+    sessionTimeout: false
   }),
   getters: {
-    getUserInfo(): SsoUser {
-      return this.userInfo || getAuthCache<SsoUser>(USER_INFO_KEY);
+    getUserInfo(): Nullable<SsoUser> {
+      return this.userInfo;
     },
     getToken(): string {
       return this.token || getAuthCache<string>(TOKEN_KEY);
     },
+    getRefreshToken(): string {
+      return this.refreshToken || getAuthCache<string>(REFRESH_TOKEN_KEY);
+    },
     getRoleInfoList(): RoleInfo[] {
-      return this.roleInfoList.length > 0 ? this.roleInfoList : getAuthCache<RoleInfo[]>(ROLES_KEY);
+      return this.roleInfoList;
     },
     getRoleList(): Set<string> {
-      return this.roleList.size > 0 ? this.roleList : getAuthCache<Set<string>>(ROLES_KEY);
+      return this.roleList;
     },
     getSessionTimeout(): boolean {
       return !!this.sessionTimeout;
-    },
-    getLastUpdateTime(): number {
-      return this.lastUpdateTime;
     }
   },
   actions: {
@@ -72,16 +70,12 @@ export const useUserStore = defineStore({
     },
     setRoleInfoList(roleList: RoleInfo[]) {
       this.roleInfoList = roleList;
-      setAuthCache(ROLES_INFO_KEY, roleList);
     },
     setRoleList(roleList: Set<string>) {
       this.roleList = roleList;
-      setAuthCache(ROLES_KEY, roleList);
     },
     setUserInfo(info: SsoUser | null) {
       this.userInfo = info;
-      this.lastUpdateTime = new Date().getTime();
-      setAuthCache(USER_INFO_KEY, info);
     },
     setSessionTimeout(flag: boolean) {
       this.sessionTimeout = flag;
@@ -116,15 +110,15 @@ export const useUserStore = defineStore({
       if (!this.getToken) return null;
       // 获取用户信息
       const userInfo = await this.getUserInfoAction();
+      const permissionStore = usePermissionStore();
+      permissionStore.setPermissions(userInfo?.permissions ? new Set(userInfo?.permissions) : new Set());
+      if (!permissionStore.isDynamicAddedRoute) {
+        await permissionStore.addRouter(router);
+      }
       const sessionTimeout = this.sessionTimeout;
       if (sessionTimeout) {
         this.setSessionTimeout(false);
       } else {
-        const permissionStore = usePermissionStore();
-        permissionStore.setPermissions(userInfo?.permissions ?? new Set());
-        if (!permissionStore.isDynamicAddedRoute) {
-          await permissionStore.addRouter(router);
-        }
         //更换为新首页
         goHome && (await router.replace(permissionStore.homePath));
       }

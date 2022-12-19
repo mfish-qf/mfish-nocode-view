@@ -2,7 +2,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate"> 新增角色</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:role:insert')">新增角色</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -11,6 +11,7 @@
               {
                 icon: 'clarity:note-edit-line',
                 onClick: handleEdit.bind(null, record),
+                auth: 'sys:role:update'
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -20,6 +21,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
+                auth: 'sys:role:delete'
               },
             ]"
           />
@@ -36,11 +38,13 @@ import { deleteRole, getRoleList } from "/@/api/sys/Role";
 import { useModal } from "/@/components/Modal";
 import RoleModal from "./RoleModal.vue";
 import { columns, searchFormSchema } from "./role.data";
+import { usePermission } from "/@/hooks/web/UsePermission";
 
 export default defineComponent({
   name: "RoleManagement",
   components: { BasicTable, RoleModal, TableAction },
   setup() {
+    const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
     const [registerTable, { reload }] = useTable({
       title: "角色列表",
@@ -91,7 +95,8 @@ export default defineComponent({
       handleCreate,
       handleEdit,
       handleDelete,
-      handleSuccess
+      handleSuccess,
+      hasPermission
     };
   }
 });

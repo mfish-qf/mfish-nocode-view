@@ -6,25 +6,19 @@ import { createLocalStorage, createSessionStorage } from "/@/utils/cache";
 import { Memory } from "./Memory";
 import {
   TOKEN_KEY,
-  USER_INFO_KEY,
-  ROLES_KEY,
   LOCK_INFO_KEY,
   PROJ_CFG_KEY,
   APP_LOCAL_CACHE_KEY,
   APP_SESSION_CACHE_KEY,
-  MULTIPLE_TABS_KEY, REFRESH_TOKEN_KEY, ROLES_INFO_KEY
+  MULTIPLE_TABS_KEY, REFRESH_TOKEN_KEY
 } from "/@/enums/CacheEnum";
 import { DEFAULT_CACHE_TIME } from "/@/settings/EncryptionSetting";
 import { toRaw } from "vue";
 import { pick, omit } from "lodash-es";
-import { SsoUser } from "/@/api/sys/model/UserModel";
 
 interface BasicStore {
   [TOKEN_KEY]: string | number | null | undefined;
   [REFRESH_TOKEN_KEY]: string | null | undefined;
-  [USER_INFO_KEY]: SsoUser;
-  [ROLES_KEY]: string[];
-  [ROLES_INFO_KEY]: string[];
   [LOCK_INFO_KEY]: LockInfo;
   [PROJ_CFG_KEY]: ProjectConfig;
   [MULTIPLE_TABS_KEY]: RouteLocationNormalized[];
@@ -105,11 +99,11 @@ window.addEventListener("beforeunload", function() {
   // LOCK_INFO_KEY 在锁屏和解锁时写入，此处也不应修改
   ls.set(APP_LOCAL_CACHE_KEY, {
     ...omit(localMemory.getCache, LOCK_INFO_KEY),
-    ...pick(ls.get(APP_LOCAL_CACHE_KEY), [TOKEN_KEY, USER_INFO_KEY, LOCK_INFO_KEY])
+    ...pick(ls.get(APP_LOCAL_CACHE_KEY), [TOKEN_KEY, LOCK_INFO_KEY])
   });
   ss.set(APP_SESSION_CACHE_KEY, {
     ...omit(sessionMemory.getCache, LOCK_INFO_KEY),
-    ...pick(ss.get(APP_SESSION_CACHE_KEY), [TOKEN_KEY, USER_INFO_KEY, LOCK_INFO_KEY])
+    ...pick(ss.get(APP_SESSION_CACHE_KEY), [TOKEN_KEY, LOCK_INFO_KEY])
   });
 });
 

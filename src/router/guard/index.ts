@@ -66,7 +66,7 @@ function createPageLoadingGuard(router: Router) {
   router.afterEach(async () => {
     if (unref(getOpenPageLoading)) {
       // TODO Looking for a better way
-      // 增加一个延迟防止山所过快
+      // 增加一个延迟防止闪烁过快
       setTimeout(() => {
         appStore.setPageLoading(false);
       }, 220);

@@ -2,7 +2,7 @@
   <div>
     <BasicTable @register="registerTable" @fetch-success="onFetchSuccess">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate">新增组织</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:org:insert')">新增组织</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -11,6 +11,7 @@
               {
                 icon: 'clarity:note-edit-line',
                 onClick: handleEdit.bind(null, record),
+                auth: 'sys:org:update'
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -20,6 +21,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
+                auth: 'sys:org:delete'
               },
             ]"
           />
@@ -36,11 +38,13 @@ import { deleteOrg, getOrgTree } from "/@/api/sys/Org";
 import { useModal } from "/@/components/Modal";
 import OrgModal from "./OrgModal.vue";
 import { columns, searchFormSchema } from "./org.data";
+import { usePermission } from "/@/hooks/web/UsePermission";
 
 export default defineComponent({
   name: "OrgManagement",
   components: { BasicTable, OrgModal, TableAction },
   setup() {
+    const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
     const [registerTable, { reload, expandAll }] = useTable({
       title: "部门列表",
@@ -91,7 +95,7 @@ export default defineComponent({
     }
 
     function onFetchSuccess() {
-      nextTick(expandAll)
+      nextTick(expandAll);
     }
 
     return {
@@ -101,7 +105,8 @@ export default defineComponent({
       handleEdit,
       handleDelete,
       handleSuccess,
-      onFetchSuccess
+      onFetchSuccess,
+      hasPermission
     };
   }
 });
