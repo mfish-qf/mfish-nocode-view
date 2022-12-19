@@ -21,6 +21,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
+                ifShow: record.id === '1'? false:true,
                 auth: 'sys:role:delete'
               },
             ]"

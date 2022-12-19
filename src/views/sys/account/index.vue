@@ -24,7 +24,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
-                ifShow: record.account === 'admin'? false:true,
+                ifShow: record.id === '1'? false:true,
                 auth: 'sys:account:delete'
               },
             ]"
