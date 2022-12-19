@@ -125,6 +125,7 @@ export const useUserStore = defineStore({
         if (!permissionStore.isDynamicAddedRoute) {
           await permissionStore.addRouter(router);
         }
+        //更换为新首页
         goHome && (await router.replace(permissionStore.homePath));
       }
       return userInfo;
