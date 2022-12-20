@@ -25,16 +25,6 @@ export enum SessionTimeoutProcessingEnum {
   PAGE_COVERAGE,
 }
 
-/**
- * 权限模式
- */
-export enum PermissionModeEnum {
-  // 后端
-  BACK = 'BACK',
-  // 路由映射
-  ROUTE_MAPPING = 'ROUTE_MAPPING',
-}
-
 // Route switching animation
 // 路由切换动画
 export enum RouterTransitionEnum {

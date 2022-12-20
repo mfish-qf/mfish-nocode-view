@@ -51,6 +51,10 @@ export function usePermission() {
       return def;
     }
     const permissions = permissionStore.getPermissions;
+    //包含*:*:*用户拥有所有按钮权限
+    if (permissions.has("*:*:*")) {
+      return true;
+    }
     return hasValue(value, permissions);
   }
 

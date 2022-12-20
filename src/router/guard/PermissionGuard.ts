@@ -15,6 +15,7 @@ export function createPermissionGuard(router: Router) {
     const token = userStore.getToken;
     // 白名单路径允许直接访问
     if (whitePathList.includes(to.path as PageEnum)) {
+      //如果访问登陆页面且token存在，判断token是否有效直接进入redirect地址或首页地址
       if (to.path === LOGIN_PATH && token) {
         const isSessionTimeout = userStore.getSessionTimeout;
         //增加try catch方式请求异常造成无法返回首页
@@ -49,25 +50,12 @@ export function createPermissionGuard(router: Router) {
       next(redirectData);
       return;
     }
-    // 如果还未获取用户信息，获取用户信息
-    if (userStore.getLastUpdateTime === 0) {
-      try {
-        await userStore.getUserInfoAction();
-      } catch (err) {
-        next();
-        return;
-      }
-    }
     if (permissionStore.getIsDynamicAddedRoute) {
       next();
       return;
     }
     await permissionStore.addRouter(router);
-    if (
-      from.path === ROOT_PATH &&
-      to.path === PageEnum.BASE_HOME &&
-      permissionStore.homePath !== PageEnum.BASE_HOME
-    ) {
+    if (from.path === ROOT_PATH && to.path === PageEnum.BASE_HOME && permissionStore.homePath !== PageEnum.BASE_HOME) {
       next(permissionStore.homePath);
       return;
     }

@@ -2,7 +2,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate">新增菜单</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:account:insert')">新增菜单</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -11,6 +11,7 @@
               {
                 icon: 'clarity:note-edit-line',
                 onClick: handleEdit.bind(null, record),
+                auth: 'sys:menu:update'
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -20,6 +21,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
+                auth: 'sys:menu:delete'
               },
             ]"
           />
@@ -36,11 +38,13 @@ import { deleteMenu, getMenuTree } from "/@/api/sys/Menu";
 import MenuModal from "./MenuModal.vue";
 import { columns, searchFormSchema } from "./menu.data";
 import { useModal } from "/@/components/Modal";
+import { usePermission } from "/@/hooks/web/UsePermission";
 
 export default defineComponent({
   name: "MenuManagement",
   components: { BasicTable, MenuModal, TableAction },
   setup() {
+    const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
     const [registerTable, { reload, updateTableDataRecord, deleteTableDataRecord }] = useTable({
       title: "菜单列表",
@@ -83,7 +87,6 @@ export default defineComponent({
 
     function handleDelete(record: Recordable) {
       deleteMenu(record.id).then(() => {
-        debugger
         deleteTableDataRecord(record.id);
       });
     }
@@ -102,7 +105,8 @@ export default defineComponent({
       handleCreate,
       handleEdit,
       handleDelete,
-      handleSuccess
+      handleSuccess,
+      hasPermission
     };
   }
 });

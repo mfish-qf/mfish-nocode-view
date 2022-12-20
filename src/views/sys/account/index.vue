@@ -3,7 +3,7 @@
     <OrgTree class="w-1/4 xl:w-1/5" @select="handleSelect" />
     <BasicTable @register="registerTable" class="w-3/4 xl:w-4/5" :searchInfo="searchInfo">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate">新增账号</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:account:insert')">新增账号</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -13,6 +13,7 @@
                 icon: 'clarity:note-edit-line',
                 tooltip: '编辑用户资料',
                 onClick: handleEdit.bind(null, record),
+                auth: 'sys:account:update'
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -23,7 +24,8 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
-                ifShow: record.account === 'admin'? false:true
+                ifShow: record.id === '1'? false:true,
+                auth: 'sys:account:delete'
               },
             ]"
           />
@@ -42,11 +44,13 @@ import OrgTree from "./OrgTree.vue";
 import { useModal } from "/@/components/Modal";
 import AccountModal from "./AccountModal.vue";
 import { columns, searchFormSchema } from "./account.data";
+import { usePermission } from "/@/hooks/web/UsePermission";
 
 export default defineComponent({
   name: "AccountManagement",
   components: { BasicTable, PageWrapper, OrgTree, AccountModal, TableAction },
   setup() {
+    const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
     const searchInfo = reactive<Recordable>({});
     const [registerTable, { reload }] = useTable({
@@ -107,7 +111,8 @@ export default defineComponent({
       handleDelete,
       handleSuccess,
       handleSelect,
-      searchInfo
+      searchInfo,
+      hasPermission
     };
   }
 });

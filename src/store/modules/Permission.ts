@@ -210,7 +210,6 @@ export const usePermissionStore = defineStore({
           }
         }
       }
-
       //如果存在前端路由信息，补充到到后台
       routes.push(...routeModuleList);
       if (routeModuleList != null && routeModuleList.length > 0) {
@@ -221,6 +220,10 @@ export const usePermissionStore = defineStore({
         menuList.sort((a, b) => {
           return (a.meta?.menuSort || 0) - (b.meta?.menuSort || 0);
         });
+      }
+      if (menuList.length > 0) {
+        //设置第一个菜单为首页
+        this.setHomePath(menuList[0].path);
       }
       // 设置菜单列表
       this.setMenuList(menuList);

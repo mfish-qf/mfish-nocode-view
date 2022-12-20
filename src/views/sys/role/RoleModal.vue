@@ -40,7 +40,7 @@ export default defineComponent({
   setup(_, { emit }) {
     const isUpdate = ref(true);
     const treeData = ref<TreeItem[]>([]);
-    const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
+    const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
       labelWidth: 100,
       baseColProps: { span: 12 },
       schemas: formSchema,
@@ -59,6 +59,22 @@ export default defineComponent({
         setFieldsValue({
           ...data.record
         }).then();
+        // 超户不允许修改roleName,roleCode
+        if (data.record.id === "1") {
+          disableInput(true);
+          return;
+        }
+      }
+      disableInput(false);
+
+      function disableInput(disable) {
+        updateSchema([{
+          field: "roleName",
+          dynamicDisabled: disable
+        }, {
+          field: "roleCode",
+          dynamicDisabled: disable
+        }]).then();
       }
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增角色" : "编辑角色"));
