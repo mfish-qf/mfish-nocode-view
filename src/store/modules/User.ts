@@ -89,24 +89,21 @@ export const useUserStore = defineStore({
     /**
      * @description: login
      */
-    async login(
-      params: LoginParams & {
-        goHome?: boolean;
-        mode?: MessageMode;
-      }
-    ): Promise<SsoUser | null> {
+    async login(params: LoginParams & { mode?: MessageMode; }): Promise<SsoUser | null> {
       try {
-        const { goHome = true, mode, ...loginParams } = params;
+        const { mode, ...loginParams } = params;
         const result = await loginApi(loginParams, mode);
         const { access_token, refresh_token } = result;
         this.setToken(access_token);
         this.setRefreshToken(refresh_token);
-        return this.afterLoginAction(goHome);
+        const userInfo = await this.getAccountInfo();
+        await router.replace(usePermissionStore().getHomePath);
+        return userInfo;
       } catch (error) {
         return Promise.reject(error);
       }
     },
-    async afterLoginAction(goHome?: boolean): Promise<SsoUser | null> {
+    async getAccountInfo(): Promise<SsoUser | null> {
       if (!this.getToken) return null;
       // 获取用户信息
       const userInfo = await this.getUserInfoAction();
@@ -118,9 +115,6 @@ export const useUserStore = defineStore({
       const sessionTimeout = this.sessionTimeout;
       if (sessionTimeout) {
         this.setSessionTimeout(false);
-      } else {
-        //更换为新首页
-        goHome && (await router.replace(permissionStore.homePath));
       }
       return userInfo;
     },

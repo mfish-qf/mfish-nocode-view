@@ -11,6 +11,7 @@ import { IFRAME, LAYOUT } from "/@/router/Constant";
 import { formatPath, transformRouteToMenu } from "/@/router/helper/MenuHelper";
 import { flatMultiLevelRoutes, importComponent } from "/@/router/helper/RouteHelper";
 import { isUrl } from "/@/utils/Is";
+import { RootRoute } from "/@/router/routers/Basic";
 
 interface PermissionState {
   // 权限代码列表
@@ -51,6 +52,9 @@ export const usePermissionStore = defineStore({
     },
     getIsDynamicAddedRoute(): boolean {
       return this.isDynamicAddedRoute;
+    },
+    getHomePath(): string {
+      return this.homePath;
     }
   },
   actions: {
@@ -210,6 +214,7 @@ export const usePermissionStore = defineStore({
           }
         }
       }
+
       //如果存在前端路由信息，补充到到后台
       routes.push(...routeModuleList);
       if (routeModuleList != null && routeModuleList.length > 0) {
@@ -234,6 +239,9 @@ export const usePermissionStore = defineStore({
 
     async addRouter(router: Router) {
       const routes = await this.buildRoutesAction();
+      //添加基础路由
+      router.addRoute(RootRoute(this.getHomePath) as unknown as RouteRecordRaw);
+      //添加其他路由
       routes.forEach((route) => {
         router.addRoute(route as unknown as RouteRecordRaw);
       });

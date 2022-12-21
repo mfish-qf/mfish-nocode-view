@@ -5,7 +5,7 @@ import { useUserStoreWithOut } from "/@/store/modules/User";
 import { PAGE_NOT_FOUND_ROUTE, RootRoute } from "/@/router/routers/Basic";
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
-const ROOT_PATH = RootRoute.path;
+const ROOT_PATH = RootRoute().path;
 const whitePathList: PageEnum[] = [LOGIN_PATH];
 
 export function createPermissionGuard(router: Router) {
@@ -20,7 +20,7 @@ export function createPermissionGuard(router: Router) {
         const isSessionTimeout = userStore.getSessionTimeout;
         //增加try catch方式请求异常造成无法返回首页
         try {
-          await userStore.afterLoginAction();
+          await userStore.getAccountInfo();
           if (!isSessionTimeout) {
             next((to.query?.redirect as string) || "/");
             return;

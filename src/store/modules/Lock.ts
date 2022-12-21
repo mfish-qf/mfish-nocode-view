@@ -38,7 +38,7 @@ export const useLockStore = defineStore({
         try {
           const username = userStore.getUserInfo?.account;
           const res = await userStore.login({
-            username,
+            username: username!,
             password: password!,
             client_id: "system",
             client_secret: "system",
