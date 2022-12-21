@@ -9,6 +9,7 @@ enum Api {
   GetUserInfo = "/oauth2/user/info",
   User = "/oauth2/user",
   isAccountExist = "/oauth2/user/exist",
+  pwd = "/oauth2/user/pwd",
   SendMsg = "/oauth2/sendMsg",
   Permissions = "/oauth2/user/permissions"
 }
@@ -69,4 +70,8 @@ export function updateUser(params: SsoUser) {
 
 export function deleteUser(params: string) {
   return defHttp.delete<SsoUser>({ url: `${Api.User}/${params}` }, { successMessageMode: "message" });
+}
+
+export function changePwd(params: { userId: string, oldPwd?: string, newPwd: string }) {
+  return defHttp.put({ url: Api.pwd, params }, { successMessageMode: "message" });
 }
