@@ -25,7 +25,7 @@
 import type { FormActionType, FormProps, FormSchema } from "./types/Form";
 import type { AdvanceState } from "./types/Hooks";
 import type { Ref } from "vue";
-import { defineComponent, reactive, ref, computed, unref, onMounted, watch, nextTick } from "vue";
+import { reactive, ref, computed, unref, onMounted, watch, nextTick } from "vue";
 import { Form, Row } from "ant-design-vue";
 import FormItem from "./components/FormItem.vue";
 import FormAction from "./components/FormAction.vue";
@@ -43,7 +43,7 @@ import { basicProps } from "./Props";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { cloneDeep } from "lodash-es";
 
-export default defineComponent({
+export default {
   name: "BasicForm",
   components: { FormItem, Form, Row, FormAction },
   props: basicProps,
@@ -55,7 +55,7 @@ export default defineComponent({
       isAdvanced: true,
       hideAdvanceBtn: false,
       isLoad: false,
-      actionSpan: 6
+      actionSpan: 6,
     });
     const defaultValueRef = ref<Recordable>({});
     const isInitedDefaultRef = ref(false);
@@ -276,7 +276,7 @@ export default defineComponent({
       ...formActionType
     };
   }
-});
+};
 </script>
 <style lang="less">
 @prefix-cls: ~'@{namespace}-basic-form';

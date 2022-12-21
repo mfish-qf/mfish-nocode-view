@@ -27,12 +27,20 @@
                 ifShow: record.id === '1'? false:true,
                 auth: 'sys:account:delete'
               },
+              {
+                icon: 'ant-design:lock-outlined',
+                color: 'warning',
+                tooltip: '重置密码',
+                onClick: handleChangePwd.bind(null,record.id),
+                ifShow: hasRole(SUPER_ROLE),
+              }
             ]"
           />
         </template>
       </template>
     </BasicTable>
     <AccountModal @register="registerModal" @success="handleSuccess" />
+    <PasswordModal @register="registerPwdModal" />
   </PageWrapper>
 </template>
 <script lang="ts">
@@ -45,13 +53,15 @@ import { useModal } from "/@/components/Modal";
 import AccountModal from "./AccountModal.vue";
 import { columns, searchFormSchema } from "./account.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
+import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
 
 export default defineComponent({
   name: "AccountManagement",
-  components: { BasicTable, PageWrapper, OrgTree, AccountModal, TableAction },
+  components: { PasswordModal, BasicTable, PageWrapper, OrgTree, AccountModal, TableAction },
   setup() {
-    const { hasPermission } = usePermission();
+    const { hasPermission, hasRole, SUPER_ROLE } = usePermission();
     const [registerModal, { openModal }] = useModal();
+    const [registerPwdModal, { openModal: openPwdModal }] = useModal();
     const searchInfo = reactive<Recordable>({});
     const [registerTable, { reload }] = useTable({
       title: "账号列表",
@@ -94,6 +104,10 @@ export default defineComponent({
       });
     }
 
+    function handleChangePwd(id: string) {
+      openPwdModal(true, { userId: id });
+    }
+
     function handleSuccess() {
       reload();
     }
@@ -112,7 +126,12 @@ export default defineComponent({
       handleSuccess,
       handleSelect,
       searchInfo,
-      hasPermission
+      hasPermission,
+      hasRole,
+      SUPER_ROLE,
+      registerPwdModal,
+      openPwdModal,
+      handleChangePwd
     };
   }
 });

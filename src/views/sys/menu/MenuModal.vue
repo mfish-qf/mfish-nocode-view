@@ -61,6 +61,7 @@ export default defineComponent({
     async function handleSubmit() {
       try {
         let values = (await validate()) as MenuListItem;
+        console.log(values,"menu")
         values.clientId = "system";
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
