@@ -9,13 +9,15 @@ import { PageEnum } from "/@/enums/PageEnum";
 import { t } from "/@/hooks/web/UseI18n";
 
 // 根路由
-export const RootRoute: AppRouteRecordRaw = {
-  path: "/",
-  name: "Root",
-  redirect: PageEnum.BASE_HOME,
-  meta: {
-    title: "Root"
-  }
+export const RootRoute = (redirect: string = PageEnum.BASE_HOME): AppRouteRecordRaw => {
+  return {
+    path: "/",
+    name: "Root",
+    redirect: redirect,
+    meta: {
+      title: "Root"
+    }
+  };
 };
 
 //登录路由

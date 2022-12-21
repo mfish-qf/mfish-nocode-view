@@ -1,4 +1,4 @@
-import { LoginRoute, PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE, RootRoute } from "/@/router/routers/Basic";
+import { LoginRoute, PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "/@/router/routers/Basic";
 import { AppRouteRecordRaw } from "/@/router/Types";
 
 // import.meta.globEager() 直接引入所有的模块 Vite 独有的功能
@@ -17,7 +17,6 @@ Object.keys(modules).forEach((key) => {
 
 // 无需权限的基本路由
 export const basicRoutes = [
-  RootRoute,
   LoginRoute,
   REDIRECT_ROUTE,
   PAGE_NOT_FOUND_ROUTE
