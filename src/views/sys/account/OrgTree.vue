@@ -14,11 +14,11 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref, unref, nextTick } from "vue";
+import { onMounted, ref, unref, nextTick } from "vue";
 import { BasicTree, TreeActionType, TreeItem } from "/@/components/Tree";
 import { getOrgTree } from "/@/api/sys/Org";
 
-export default defineComponent({
+export default {
   name: "OrgTree",
   components: { BasicTree },
   emits: ["select"],
@@ -42,5 +42,5 @@ export default defineComponent({
     });
     return { treeData, handleSelect, asyncExpandTreeRef };
   }
-});
+};
 </script>

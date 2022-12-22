@@ -4,7 +4,7 @@
   </BasicModal>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed, unref } from "vue";
+import { ref, computed, unref } from "vue";
 import { BasicModal, useModalInner } from "/@/components/Modal";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { accountFormSchema } from "./account.data";
@@ -12,7 +12,7 @@ import { getOrgTree } from "/@/api/sys/Org";
 import { insertUser, updateUser } from "/@/api/sys/User";
 import { getAllRoleList } from "/@/api/sys/Role";
 
-export default defineComponent({
+export default {
   name: "AccountModal",
   components: { BasicModal, BasicForm },
   emits: ["success", "register"],
@@ -101,5 +101,5 @@ export default defineComponent({
 
     return { registerModal, registerForm, getTitle, handleSubmit };
   }
-});
+};
 </script>

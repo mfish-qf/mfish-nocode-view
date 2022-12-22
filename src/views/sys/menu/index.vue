@@ -32,7 +32,6 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
 import { deleteMenu, getMenuTree } from "/@/api/sys/Menu";
 import MenuModal from "./MenuModal.vue";
@@ -40,7 +39,7 @@ import { columns, searchFormSchema } from "./menu.data";
 import { useModal } from "/@/components/Modal";
 import { usePermission } from "/@/hooks/web/UsePermission";
 
-export default defineComponent({
+export default {
   name: "MenuManagement",
   components: { BasicTable, MenuModal, TableAction },
   setup() {
@@ -109,5 +108,5 @@ export default defineComponent({
       hasPermission
     };
   }
-});
+};
 </script>
