@@ -28,7 +28,7 @@
                 auth: 'sys:account:delete'
               },
               {
-                icon: 'ant-design:lock-outlined',
+                icon: 'ant-design:key-outlined',
                 color: 'warning',
                 tooltip: '重置密码',
                 onClick: handleChangePwd.bind(null,record.id),
