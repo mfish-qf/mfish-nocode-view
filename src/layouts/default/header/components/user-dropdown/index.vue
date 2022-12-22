@@ -1,14 +1,13 @@
 <template>
   <Dropdown placement="bottomLeft" :overlayClassName="`${prefixCls}-dropdown-overlay`">
     <span :class="[prefixCls, `${prefixCls}--${theme}`]" class="flex">
-      <img :class="`${prefixCls}__header`" :src="getUserInfo.avatar" />
+      <img :class="`${prefixCls}__header`" :src="getUserInfo.headImgUrl" />
       <span :class="`${prefixCls}__info hidden md:block`">
         <span :class="`${prefixCls}__name  `" class="truncate">
           {{ getUserInfo.nickname }}
         </span>
       </span>
     </span>
-
     <template #overlay>
       <Menu @click="handleMenuClick">
         <MenuItem
@@ -25,6 +24,12 @@
           icon="ion:lock-closed-outline"
         />
         <MenuItem
+          key="changePwd"
+          :text="t('layout.header.dropdownItemChangePwd')"
+          icon="ion:key-outline"
+        />
+        <MenuDivider />
+        <MenuItem
           key="logout"
           :text="t('layout.header.dropdownItemLoginOut')"
           icon="ion:power-outline"
@@ -33,12 +38,12 @@
     </template>
   </Dropdown>
   <LockAction @register="register" />
+  <PasswordModal @register="registerPwd"></PasswordModal>
 </template>
 <script lang="ts">
-// components
 import { Dropdown, Menu } from "ant-design-vue";
 import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
-import { defineComponent, computed } from "vue";
+import { computed,unref } from "vue";
 import { DOC_URL } from "/@/settings/SiteSetting";
 import { useUserStore } from "/@/store/modules/User";
 import { useHeaderSetting } from "/@/hooks/setting/UseHeaderSetting";
@@ -49,12 +54,14 @@ import headerImg from "/@/assets/images/header.png";
 import { propTypes } from "/@/utils/PropTypes";
 import { openWindow } from "/@/utils";
 import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
+import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
 
-type MenuEvent = "logout" | "doc" | "lock";
+type MenuEvent = "logout" | "doc" | "lock" | "changePwd";
 
-export default defineComponent({
+export default {
   name: "UserDropdown",
   components: {
+    PasswordModal,
     Dropdown,
     Menu,
     MenuItem: createAsyncComponent(() => import("./DropMenuItem.vue")),
@@ -69,13 +76,12 @@ export default defineComponent({
     const { t } = useI18n();
     const { getShowDoc, getUseLockPage } = useHeaderSetting();
     const userStore = useUserStore();
-
     const getUserInfo = computed(() => {
-      const { realName = "", avatar, desc } = userStore.getUserInfo || {};
-      return { realName, avatar: avatar || headerImg, desc };
+      const { nickname = "", headImgUrl, id } = userStore.getUserInfo || {};
+      return { nickname, headImgUrl: headImgUrl || headerImg, id };
     });
-
     const [register, { openModal }] = useModal();
+    const [registerPwd, { openModal: openPwdModal }] = useModal();
 
     function handleLock() {
       openModal(true);
@@ -91,6 +97,10 @@ export default defineComponent({
       openWindow(DOC_URL);
     }
 
+    function changePwd() {
+      openPwdModal(true, { userId: unref(getUserInfo).id });
+    }
+
     function handleMenuClick(e: MenuInfo) {
       switch (e.key as MenuEvent) {
         case "logout":
@@ -102,6 +112,9 @@ export default defineComponent({
         case "lock":
           handleLock();
           break;
+        case "changePwd":
+          changePwd();
+          break;
       }
     }
 
@@ -112,10 +125,11 @@ export default defineComponent({
       handleMenuClick,
       getShowDoc,
       register,
-      getUseLockPage
+      getUseLockPage,
+      registerPwd
     };
   }
-});
+};
 </script>
 <style lang="less">
 @prefix-cls: ~'@{namespace}-header-user-dropdown';
