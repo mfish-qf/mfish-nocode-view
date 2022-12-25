@@ -9,7 +9,7 @@
           <TableAction
             :actions="[
               {
-                icon: 'clarity:note-edit-line',
+                icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
                 auth: 'sys:org:update'
               },
@@ -32,7 +32,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, nextTick } from "vue";
+import { nextTick } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
 import { deleteOrg, getOrgTree } from "/@/api/sys/Org";
 import { useModal } from "/@/components/Modal";
@@ -40,7 +40,7 @@ import OrgModal from "./OrgModal.vue";
 import { columns, searchFormSchema } from "./org.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 
-export default defineComponent({
+export default {
   name: "OrgManagement",
   components: { BasicTable, OrgModal, TableAction },
   setup() {
@@ -109,5 +109,5 @@ export default defineComponent({
       hasPermission
     };
   }
-});
+};
 </script>

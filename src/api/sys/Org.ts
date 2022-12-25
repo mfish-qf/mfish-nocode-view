@@ -17,12 +17,12 @@ export const getOrgTree = (params?: SsoOrg) => {
 
 export function insertOrg(params: SsoOrg) {
   return defHttp.post<SsoOrg>({ url: Api.org, params }, { successMessageMode: "message" });
-}
+};
 
 export function updateOrg(params: SsoOrg) {
   return defHttp.put<SsoOrg>({ url: Api.org, params }, { successMessageMode: "message" });
-}
+};
 
 export function deleteOrg(params: string) {
   return defHttp.delete<SsoOrg>({ url: `${Api.org}/${params}` }, { successMessageMode: "message" });
-}
+};

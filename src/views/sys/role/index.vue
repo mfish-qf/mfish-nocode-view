@@ -9,7 +9,7 @@
           <TableAction
             :actions="[
               {
-                icon: 'clarity:note-edit-line',
+                icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
                 auth: 'sys:role:update'
               },
@@ -33,7 +33,6 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
 import { deleteRole, getRoleList } from "/@/api/sys/Role";
 import { useModal } from "/@/components/Modal";
@@ -41,7 +40,7 @@ import RoleModal from "./RoleModal.vue";
 import { columns, searchFormSchema } from "./role.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 
-export default defineComponent({
+export default {
   name: "RoleManagement",
   components: { BasicTable, RoleModal, TableAction },
   setup() {
@@ -100,5 +99,5 @@ export default defineComponent({
       hasPermission
     };
   }
-});
+};
 </script>

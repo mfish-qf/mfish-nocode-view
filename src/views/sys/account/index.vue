@@ -10,7 +10,7 @@
           <TableAction
             :actions="[
               {
-                icon: 'clarity:note-edit-line',
+                icon: 'ant-design:edit-outlined',
                 tooltip: '编辑用户资料',
                 onClick: handleEdit.bind(null, record),
                 auth: 'sys:account:update'
@@ -44,7 +44,7 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { reactive } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/Table";
 import { deleteUser, getUserList } from "/@/api/sys/User";
 import { PageWrapper } from "/@/components/Page";
@@ -55,7 +55,7 @@ import { columns, searchFormSchema } from "./account.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
 
-export default defineComponent({
+export default {
   name: "AccountManagement",
   components: { PasswordModal, BasicTable, PageWrapper, OrgTree, AccountModal, TableAction },
   setup() {
@@ -134,5 +134,5 @@ export default defineComponent({
       handleChangePwd
     };
   }
-});
+};
 </script>

@@ -4,13 +4,13 @@
   </BasicModal>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed, unref } from "vue";
+import { ref, computed, unref } from "vue";
 import { BasicModal, useModalInner } from "/@/components/Modal";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { formSchema } from "./org.data";
 import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
 
-export default defineComponent({
+export default {
   name: "OrgModal",
   components: { BasicModal, BasicForm },
   emits: ["success", "register"],
@@ -68,5 +68,5 @@ export default defineComponent({
 
     return { registerModal, registerForm, getTitle, handleSubmit };
   }
-});
+};
 </script>

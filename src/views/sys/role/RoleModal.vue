@@ -1,12 +1,5 @@
 <template>
-  <BasicModal
-    v-bind="$attrs"
-    @register="registerModal"
-    showFooter
-    :title="getTitle"
-    width="500px"
-    @ok="handleSubmit"
-  >
+  <BasicModal v-bind="$attrs" @register="registerModal" showFooter :title="getTitle" @ok="handleSubmit">
     <BasicForm @register="registerForm" @submit="handleSubmit">
       <template #menus="{ model, field }">
         <BasicTree
@@ -24,16 +17,15 @@
   </BasicModal>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed, unref } from "vue";
+import { ref, computed, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { formSchema } from "./role.data";
 import { BasicModal, useModalInner } from "/@/components/Modal";
 import { BasicTree, TreeItem } from "/@/components/Tree";
 import { getMenuTree } from "/@/api/sys/Menu";
-import { MenuListItem } from "/@/api/sys/model/MenuModel";
 import { insertRole, updateRole } from "/@/api/sys/Role";
 
-export default defineComponent({
+export default {
   name: "RoleModal",
   components: { BasicModal, BasicForm, BasicTree },
   emits: ["success", "register"],
@@ -81,7 +73,7 @@ export default defineComponent({
 
     async function handleSubmit() {
       try {
-        let values = (await validate()) as MenuListItem;
+        let values = await validate();
         values.clientId = "system";
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
@@ -109,5 +101,5 @@ export default defineComponent({
       treeData
     };
   }
-});
+};
 </script>
