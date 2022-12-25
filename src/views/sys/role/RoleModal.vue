@@ -23,7 +23,6 @@ import { formSchema } from "./role.data";
 import { BasicModal, useModalInner } from "/@/components/Modal";
 import { BasicTree, TreeItem } from "/@/components/Tree";
 import { getMenuTree } from "/@/api/sys/Menu";
-import { MenuListItem } from "/@/api/sys/model/MenuModel";
 import { insertRole, updateRole } from "/@/api/sys/Role";
 
 export default {
@@ -74,7 +73,7 @@ export default {
 
     async function handleSubmit() {
       try {
-        let values = (await validate()) as MenuListItem;
+        let values = await validate();
         values.clientId = "system";
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
