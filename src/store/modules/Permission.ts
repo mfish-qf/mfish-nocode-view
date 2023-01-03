@@ -234,7 +234,9 @@ export const usePermissionStore = defineStore({
       this.setMenuList(menuList);
       console.log(menuList, "菜单");
       // 将多级路由转换为 2 级路由
-      return flatMultiLevelRoutes(routes);
+      const route: AppRouteRecordRaw[] = flatMultiLevelRoutes(routes);
+      console.log(route, "路由");
+      return route;
     },
 
     async addRouter(router: Router) {

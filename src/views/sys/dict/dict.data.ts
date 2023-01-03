@@ -1,0 +1,101 @@
+import { BasicColumn } from "/@/components/Table";
+import { FormSchema } from "/@/components/Table";
+import { h } from "vue";
+import { Tag } from "ant-design-vue";
+
+/**
+ * @Description: 字典
+ * @Author: mfish
+ * @Date: 2023-01-03
+ * @Version: V1.0.0
+ */
+export const columns: BasicColumn[] = [
+  {
+    title: "字典名称",
+    dataIndex: "dictName",
+    width: 120
+  },
+  {
+    title: "字典编码",
+    dataIndex: "dictCode",
+    width: 120
+  },
+  {
+    title: "状态",
+    dataIndex: "status",
+    width: 60,
+    customRender: ({ record }) => {
+      const status = record.status;
+      const enable = ~~status === 0;
+      const color = enable ? "green" : "red";
+      const text = enable ? "启用" : "停用";
+      return h(Tag, { color: color }, () => text);
+    }
+  },
+  {
+    title: "备注",
+    dataIndex: "remark"
+  },
+];
+//todo 查询条件暂时用来装样子，后面增加配置条件后修改模版
+export const searchFormSchema: FormSchema[] = [
+  {
+    field: "dictName",
+    label: "字典名称",
+    component: "Input",
+    colProps: { span: 4 }
+  },
+  {
+    field: "dictCode",
+    label: "字典编码",
+    component: "Input",
+    colProps: { span: 4 }
+  },
+  {
+    field: "status",
+    label: "状态",
+    component: "Select",
+    componentProps: {
+      options: [
+        { label: "启用", value: 0 },
+        { label: "停用", value: 1 }
+      ]
+    },
+    colProps: { span: 4 }
+  },
+];
+export const dictFormSchema: FormSchema[] = [
+  {
+    field: "id",
+    label: "唯一ID",
+    component: "Input",
+    show: false
+  },
+  {
+    field: "dictName",
+    label: "字典名称",
+    component: "Input",
+  },
+  {
+    field: "dictCode",
+    label: "字典编码",
+    component: "Input",
+  },
+  {
+    field: "status",
+    label: "状态",
+    component: "RadioButtonGroup",
+    defaultValue: 0,
+    componentProps: {
+      options: [
+        { label: "启用", value: 0 },
+        { label: "停用", value: 1 }
+      ]
+    },
+  },
+  {
+    field: "remark",
+    label: "备注",
+    component: "Input",
+  },
+];

@@ -47,7 +47,7 @@ export default defineComponent({
     const { t } = useI18n();
     watchEffect(async () => {
       if (currentRoute.value.name === REDIRECT_NAME) return;
-      const menus = await getMenus();
+      const menus = getMenus();
 
       const routeMatched = currentRoute.value.matched;
       const cur = routeMatched?.[routeMatched.length - 1];

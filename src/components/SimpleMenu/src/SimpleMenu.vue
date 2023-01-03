@@ -19,7 +19,7 @@
 </template>
 <script lang="ts">
 import type { MenuState } from "./Types";
-import type { Menu as MenuType } from "/@/router/types";
+import type { Menu as MenuType } from "/@/router/Types";
 import type { RouteLocationNormalizedLoaded } from "vue-router";
 import { defineComponent, computed, ref, unref, reactive, toRefs, watch } from "vue";
 import { useDesign } from "/@/hooks/web/UseDesign";
