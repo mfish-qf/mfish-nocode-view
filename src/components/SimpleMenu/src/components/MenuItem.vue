@@ -94,7 +94,6 @@ export default defineComponent({
               (item.proxy as any).active = true;
             }
           });
-
           rootMenuEmitter.emit("on-update-active-name:submenu", uidList);
         } else {
           active.value = false;

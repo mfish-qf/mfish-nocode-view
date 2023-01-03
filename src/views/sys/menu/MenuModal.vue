@@ -39,10 +39,13 @@ export default {
 
     async function setTreeData(params?: MenuParams) {
       const treeData = await getMenuTree(params);
-      updateSchema({
+      updateSchema([{
         field: "parentId",
         componentProps: { treeData }
-      }).then();
+      }, {
+        field: "activeMenu",
+        componentProps: { treeData }
+      }]).then();
     }
 
     function valueChange(key, value) {
@@ -75,7 +78,7 @@ export default {
 
     function saveMenu(save, values) {
       save(values).then(() => {
-        emit("success", { isUpdate: unref(isUpdate), values: { ...values} });
+        emit("success", { isUpdate: unref(isUpdate), values: { ...values } });
         closeModal();
       });
     }

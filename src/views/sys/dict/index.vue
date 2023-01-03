@@ -97,7 +97,7 @@ export default {
     }
 
     function handleItem(record: Recordable) {
-      go("/system/dictItem/" + record.dictCode);
+      go("/system/dict/" + record.dictCode);
     }
 
     function handleSuccess() {
