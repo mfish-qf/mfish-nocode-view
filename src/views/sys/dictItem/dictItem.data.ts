@@ -1,5 +1,7 @@
 import { BasicColumn } from "/@/components/Table";
 import { FormSchema } from "/@/components/Table";
+import { h } from "vue";
+import { Tag } from "ant-design-vue";
 
 /**
  * @Description: 字典项
@@ -29,9 +31,16 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "状态(0正常 1停用)",
+    title: "状态",
     dataIndex: "status",
-    width: 120
+    width: 60,
+    customRender: ({ record }) => {
+      const status = record.status;
+      const enable = ~~status === 0;
+      const color = enable ? "green" : "red";
+      const text = enable ? "启用" : "停用";
+      return h(Tag, { color: color }, () => text);
+    }
   },
   {
     title: "备注",
