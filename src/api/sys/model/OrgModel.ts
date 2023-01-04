@@ -1,7 +1,7 @@
 /**
- * @description：组织结构信息
- * @author     ：qiufeng
- * @date       ：2022/11/9 18:14
+ * @description: 组织结构信息
+ * @author: mfish
+ * @date: 2022/11/9 18:14
  */
 export interface SsoOrg {
   id: string;

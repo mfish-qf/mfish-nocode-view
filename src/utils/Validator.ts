@@ -1,7 +1,7 @@
 /**
- * @description：通用校验类
- * @author     ：qiufeng
- * @date       ：2022/11/16 20:54
+ * @description: 通用校验类
+ * @author: mfish
+ * @date: 2022/11/16 20:54
  */
 import { dateUtil } from "/@/utils/DateUtil";
 

@@ -1,7 +1,7 @@
 /**
- * @description：构建运行
- * @author     ：qiufeng
- * @date       ：2022/10/9 16:23
+ * @description: 构建运行
+ * @author: mfish
+ * @date: 2022/10/9 16:23
  */
 import { runBuildConfig } from "./BuildConfig";
 import pkg from "../../package.json";

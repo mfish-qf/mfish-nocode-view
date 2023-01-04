@@ -1,7 +1,7 @@
 <!--
- @description：字典项
+ @description: 字典项
  @author     ：mfish
- @date       ：2023-01-03
+ @date: 2023-01-03
 -->
 <template>
   <PageWrapper :title="`字典${dictCode}`" @back="goBack">

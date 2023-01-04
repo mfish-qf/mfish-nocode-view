@@ -1,7 +1,7 @@
 /**
- * @description：插件引用
- * @author     ：qiufeng
- * @date       ：2022/9/23 22:21
+ * @description: 插件引用
+ * @author: mfish
+ * @date: 2022/9/23 22:21
  */
 import purgeIcons from "vite-plugin-purge-icons";
 import { PluginOption } from "vite";

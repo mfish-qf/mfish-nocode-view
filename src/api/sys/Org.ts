@@ -1,7 +1,7 @@
 /**
- * @description：组织请求类
- * @author     ：qiufeng
- * @date       ：2022/11/9 18:12
+ * @description: 组织请求类
+ * @author: mfish
+ * @date: 2022/11/9 18:12
  */
 import { defHttp } from "/@/utils/http/axios";
 import { SsoOrg } from "/@/api/sys/model/OrgModel";

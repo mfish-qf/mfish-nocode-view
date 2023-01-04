@@ -1,7 +1,7 @@
 /**
- * @description：异常枚举
- * @author     ：qiufeng
- * @date       ：2022/10/11 15:24
+ * @description: 异常枚举
+ * @author: mfish
+ * @date: 2022/10/11 15:24
  */
 export enum ExceptionEnum {
   // page not access

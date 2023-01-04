@@ -1,7 +1,7 @@
 /**
- * @description：国际化设置
- * @author     ：qiufeng
- * @date       ：2022/10/9 17:37
+ * @description: 国际化设置
+ * @author: mfish
+ * @date: 2022/10/9 17:37
  */
 import type { DropMenu } from '../components/Dropdown';
 import type { LocaleSetting, LocaleType } from '/#/config';

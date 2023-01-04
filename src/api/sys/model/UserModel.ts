@@ -1,7 +1,7 @@
 /**
- * @description：用户信息
- * @author     ：qiufeng
- * @date       ：2022/10/11 15:28
+ * @description: 用户信息
+ * @author: mfish
+ * @date: 2022/10/11 15:28
  */
 
 //登录接口参数

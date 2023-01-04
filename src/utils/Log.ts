@@ -1,7 +1,7 @@
 /**
- * @description：记录错误日志
- * @author     ：qiufeng
- * @date       ：2022/10/9 12:01
+ * @description: 记录错误日志
+ * @author: mfish
+ * @date: 2022/10/9 12:01
  */
 const projectName = import.meta.env.VITE_GLOB_APP_TITLE;
 

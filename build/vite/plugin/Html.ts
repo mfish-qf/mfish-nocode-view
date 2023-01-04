@@ -1,7 +1,7 @@
 /**
- * @description：html插件
- * @author     ：qiufeng
- * @date       ：2022/10/9 10:22
+ * @description: html插件
+ * @author: mfish
+ * @date: 2022/10/9 10:22
  */
 import { GLOB_CONFIG_FILE_NAME } from "../../Constant";
 import pkg from "../../../package.json";

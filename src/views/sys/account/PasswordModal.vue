@@ -1,7 +1,7 @@
 <!--
- @description：修改密码窗体
- @author     ：qiufeng
- @date       ：2022/12/21 15:58
+ @description: 修改密码窗体
+ @author: mfish
+ @date: 2022/12/21 15:58
 -->
 <template>
   <BasicModal title="修改密码" @register="registerModal" @ok="handleSubmit">

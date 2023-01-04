@@ -4,7 +4,7 @@ import { h } from "vue";
 import { Tag } from "ant-design-vue";
 
 /**
- * @Description: 字典
+ * @description: 字典
  * @Author: mfish
  * @Date: 2023-01-03
  * @Version: V1.0.0

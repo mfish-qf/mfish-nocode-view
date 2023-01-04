@@ -1,7 +1,7 @@
 /**
- * @description：缓存主文件
- * @author     ：qiufeng
- * @date       ：2022/9/26 15:29
+ * @description: 缓存主文件
+ * @author: mfish
+ * @date: 2022/9/26 15:29
  */
 import { App } from "vue";
 import { createPinia } from "pinia";

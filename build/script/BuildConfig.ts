@@ -1,7 +1,7 @@
 /**
- * @description：构建配置
- * @author     ：qiufeng
- * @date       ：2022/10/9 15:58
+ * @description: 构建配置
+ * @author: mfish
+ * @date: 2022/10/9 15:58
  */
 import { GLOB_CONFIG_FILE_NAME, OUTPUT_DIR } from "../Constant";
 import fs, { writeFileSync } from "fs-extra";

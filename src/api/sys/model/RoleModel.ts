@@ -1,9 +1,9 @@
 import { PageResult } from "/@/api/model/BaseModel";
 
 /**
- * @description：角色信息
- * @author     ：qiufeng
- * @date       ：2022/11/14 16:24
+ * @description: 角色信息
+ * @author: mfish
+ * @date: 2022/11/14 16:24
  */
 export interface SsoRole {
   id: string;
