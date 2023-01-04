@@ -44,11 +44,9 @@ export const columns: BasicColumn[] = [
   },
   {
     title: "备注",
-    dataIndex: "remark",
-    width: 120
-  },
+    dataIndex: "remark"
+  }
 ];
-//todo 查询条件暂时用来装样子，后面增加配置条件后修改模版
 export const searchFormSchema: FormSchema[] = [
   {
     field: "dictLabel",
@@ -61,7 +59,7 @@ export const searchFormSchema: FormSchema[] = [
     label: "字典键值",
     component: "Input",
     colProps: { span: 4 }
-  },
+  }
 ];
 export const dictItemFormSchema: FormSchema[] = [
   {
@@ -71,33 +69,43 @@ export const dictItemFormSchema: FormSchema[] = [
     show: false
   },
   {
+    field: "status",
+    label: "状态",
+    component: "RadioButtonGroup",
+    defaultValue: 0,
+    componentProps: {
+      options: [
+        { label: "启用", value: 0 },
+        { label: "停用", value: 1 }
+      ]
+    }
+  },
+  {
     field: "dictCode",
     label: "字典编码",
     component: "Input",
+    dynamicDisabled: true
   },
   {
     field: "dictLabel",
     label: "字典标签",
     component: "Input",
+    required: true
   },
   {
     field: "dictValue",
     label: "字典键值",
     component: "Input",
+    required: true
   },
   {
     field: "dictSort",
     label: "字典排序",
-    component: "Input",
-  },
-  {
-    field: "status",
-    label: "状态(0正常 1停用)",
-    component: "Input",
+    component: "InputNumber"
   },
   {
     field: "remark",
     label: "备注",
-    component: "Input",
-  },
+    component: "InputTextArea"
+  }
 ];

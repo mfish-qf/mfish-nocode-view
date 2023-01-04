@@ -80,10 +80,11 @@ export default {
     });
 
     const { setTitle } = useTabs();
-    setTitle(`字典: ${unref(dictCode)}`);
+    setTitle(`字典项: ${unref(dictCode)}`);
 
     function handleCreate() {
       openModal(true, {
+        record: { dictCode: dictCode },
         isUpdate: false
       });
     }

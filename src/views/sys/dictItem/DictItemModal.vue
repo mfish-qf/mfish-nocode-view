@@ -23,20 +23,18 @@ export default {
     const isUpdate = ref(true);
     const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
       labelWidth: 100,
-      baseColProps: { span: 12 },
+      baseColProps: { span: 24 },
       schemas: dictItemFormSchema,
       showActionButtonGroup: false,
       autoSubmitOnEnter: true
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
-      setModalProps({ confirmLoading: false, width: "40%" });
+      setModalProps({ confirmLoading: false, width: "30%" });
       isUpdate.value = !!data?.isUpdate;
-      if (unref(isUpdate)) {
-        setFieldsValue({
-          ...data.record
-        }).then();
-      }
+      setFieldsValue({
+        ...data.record
+      }).then();
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增字典项" : "编辑字典项"));
 

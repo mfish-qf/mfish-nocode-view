@@ -35,9 +35,8 @@ export const columns: BasicColumn[] = [
   {
     title: "备注",
     dataIndex: "remark"
-  },
+  }
 ];
-//todo 查询条件暂时用来装样子，后面增加配置条件后修改模版
 export const searchFormSchema: FormSchema[] = [
   {
     field: "dictName",
@@ -62,7 +61,7 @@ export const searchFormSchema: FormSchema[] = [
       ]
     },
     colProps: { span: 4 }
-  },
+  }
 ];
 export const dictFormSchema: FormSchema[] = [
   {
@@ -70,16 +69,6 @@ export const dictFormSchema: FormSchema[] = [
     label: "唯一ID",
     component: "Input",
     show: false
-  },
-  {
-    field: "dictName",
-    label: "字典名称",
-    component: "Input",
-  },
-  {
-    field: "dictCode",
-    label: "字典编码",
-    component: "Input",
   },
   {
     field: "status",
@@ -91,11 +80,22 @@ export const dictFormSchema: FormSchema[] = [
         { label: "启用", value: 0 },
         { label: "停用", value: 1 }
       ]
-    },
+    }
+  },
+  {
+    field: "dictName",
+    label: "字典名称",
+    component: "Input"
+  },
+  {
+    field: "dictCode",
+    label: "字典编码",
+    component: "Input",
+    required: true
   },
   {
     field: "remark",
     label: "备注",
-    component: "Input",
-  },
+    component: "InputTextArea"
+  }
 ];

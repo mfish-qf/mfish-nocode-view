@@ -14,8 +14,8 @@
           <TableAction
             :actions="[
               {
-                icon: 'clarity:info-standard-line',
-                tooltip: '查看字典项',
+                icon: 'ant-design:menu-outlined',
+                tooltip: '字典项',
                 onClick: handleItem.bind(null, record),
               },
               {
