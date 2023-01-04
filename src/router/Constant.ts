@@ -28,7 +28,3 @@ export const getParentLayout = (_name?: string) => {
       });
     });
 };
-
-export const LayoutMap = new Map<string, () => Promise<typeof import("*.vue")>>;
-LayoutMap.set("LAYOUT", LAYOUT);
-LayoutMap.set("IFRAME", IFRAME);
