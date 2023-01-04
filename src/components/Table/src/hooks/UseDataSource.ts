@@ -185,7 +185,7 @@ export function useDataSource(propsRef: ComputedRef<BasicTableProps>,
           }
           if (row.children?.length > 0) {
             const result = findRow(row.children, key);
-            if(result!= null){
+            if (result != null) {
               return result;
             }
           }

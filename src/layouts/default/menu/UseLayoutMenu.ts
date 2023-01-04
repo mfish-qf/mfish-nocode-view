@@ -92,14 +92,13 @@ export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
   async function genMenus() {
     // normal mode
     if (unref(normalType) || unref(getIsMobile)) {
-      menusRef.value = await getMenus();
+      menusRef.value = getMenus();
       return;
     }
 
     // split-top
     if (unref(getSpiltTop)) {
       const shallowMenus = await getShallowMenus();
-
       menusRef.value = shallowMenus;
       return;
     }

@@ -125,9 +125,9 @@ export const accountFormSchema: FormSchema[] = [
     field: "roleIds",
     component: "Select",
     componentProps: {
-      mode: "multiple",
+      mode: "multiple"
     },
-    rules: [{ required: true, message: "请选择角色",type: "array" }],
+    rules: [{ required: true, message: "请选择角色", type: "array" }],
     dynamicDisabled: ((renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin" ? true : false)
   },
   {
@@ -164,8 +164,8 @@ export const accountFormSchema: FormSchema[] = [
     label: "生日",
     component: "DatePicker",
     componentProps: {
-      valueFormat: 'YYYY-MM-DD',
-      format: 'YYYY-MM-DD',
+      valueFormat: "YYYY-MM-DD",
+      format: "YYYY-MM-DD"
     }
   },
   {
@@ -193,5 +193,11 @@ export const accountFormSchema: FormSchema[] = [
       ]
     },
     required: true
+  },
+  {
+    field: "remark",
+    label: "备注",
+    component: "InputTextArea",
+    colProps: { span: 24 }
   }
 ];

@@ -173,6 +173,20 @@ export const formSchema: FormSchema[] = [
     ifShow: ({ values }) => !isButton(values.menuType)
   },
   {
+    field: "activeMenu",
+    label: "激活菜单",
+    component: "TreeSelect",
+    componentProps: {
+      fieldNames: {
+        label: "menuName",
+        key: "menuCode",
+        value: "menuCode"
+      },
+      getPopupContainer: () => document.body
+    },
+    ifShow: ({ values }) => isMenu(values.menuType) && values.isVisible === 0
+  },
+  {
     field: "isExternal",
     label: "是否外链",
     component: "RadioButtonGroup",

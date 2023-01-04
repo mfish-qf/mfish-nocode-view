@@ -49,7 +49,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     title: propTypes.string,
-    dense: propTypes.bool,
+    dense: propTypes.bool.def(true),
     ghost: propTypes.bool,
     content: propTypes.string,
     contentStyle: {

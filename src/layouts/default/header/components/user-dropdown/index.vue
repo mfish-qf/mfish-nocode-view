@@ -11,12 +11,17 @@
     <template #overlay>
       <Menu @click="handleMenuClick">
         <MenuItem
+          key="userInfo"
+          :text="t('layout.header.dropdownUserInfo')"
+          icon="ion:person"
+        />
+        <MenuItem
           key="doc"
           :text="t('layout.header.dropdownItemDoc')"
           icon="ion:document-text-outline"
           v-if="getShowDoc"
         />
-        <MenuDivider v-if="getShowDoc" />
+        <MenuDivider />
         <MenuItem
           v-if="getUseLockPage"
           key="lock"
@@ -55,8 +60,9 @@ import { propTypes } from "/@/utils/PropTypes";
 import { openWindow } from "/@/utils";
 import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
 import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
+import { useGo } from "/@/hooks/web/UsePage";
 
-type MenuEvent = "logout" | "doc" | "lock" | "changePwd";
+type MenuEvent = "logout" | "doc" | "lock" | "changePwd" | "userInfo";
 
 export default {
   name: "UserDropdown",
@@ -82,6 +88,7 @@ export default {
     });
     const [register, { openModal }] = useModal();
     const [registerPwd, { openModal: openPwdModal }] = useModal();
+    const go = useGo();
 
     function handleLock() {
       openModal(true);
@@ -114,6 +121,9 @@ export default {
           break;
         case "changePwd":
           changePwd();
+          break;
+        case "userInfo":
+          go("/system/account/setting")
           break;
       }
     }

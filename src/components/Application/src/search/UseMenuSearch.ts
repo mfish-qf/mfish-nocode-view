@@ -38,7 +38,7 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
   const handleSearch = useDebounceFn(search, 200);
 
   onBeforeMount(async () => {
-    const list = await getMenus();
+    const list = getMenus();
     menuList = cloneDeep(list);
     forEach(menuList, (item) => {
       item.name = t(item.name);

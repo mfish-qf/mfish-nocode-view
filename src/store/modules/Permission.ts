@@ -87,6 +87,36 @@ export const usePermissionStore = defineStore({
     // 构建路由
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
       const menus = await getRoleMenuTree();
+      const getActiveMenu = (menus: MenuListItem[], menuCode: string): string => {
+        if (!menuCode) {
+          return "";
+        }
+        let fMenus: Nullable<MenuListItem[]> = menus;
+        let path = "";
+        for (let i = 0; i < menuCode.length / 5; i++) {
+          const code = menuCode.substring(0, (i + 1) * 5);
+          const fMenu = findMenu(fMenus, code);
+          if (fMenu != null) {
+            path += formatPath(fMenu.routePath);
+            fMenus = fMenu.children;
+          }
+        }
+        return path;
+
+        function findMenu(menus: Nullable<MenuListItem[]>, code: string) {
+          if (menus === null) {
+            return null;
+          }
+          for (const menu of menus) {
+            if (menu.menuCode === code) {
+              return menu;
+            }
+          }
+          return null;
+        }
+
+        return menuCode;
+      };
       const menuList: Menu[] = [];
       const routes: AppRouteRecordRaw[] = [];
       const buildMenu = (menu: MenuListItem): Menu => {
@@ -97,7 +127,7 @@ export const usePermissionStore = defineStore({
           menuSort: menu.menuSort,
           icon: menu.menuIcon
         };
-        //如果
+        //如果菜单类型是菜单而且是url链接并且是从外部打开，path直接使用外部路径
         if (menu.menuType === MenuType.菜单 && isUrl(menu.component) && menu.isExternal) {
           newMenu.path = menu.component;
         }
@@ -131,6 +161,10 @@ export const usePermissionStore = defineStore({
               }
             } else {
               route.component = importComponent(menu.component);
+            }
+            //如果菜单为隐藏菜单且设置了选中时激活菜单
+            if (!menu.isVisible && menu.activeMenu) {
+              route.meta.currentActiveMenu = getActiveMenu(menus, menu.activeMenu);
             }
             break;
         }
@@ -234,7 +268,9 @@ export const usePermissionStore = defineStore({
       this.setMenuList(menuList);
       console.log(menuList, "菜单");
       // 将多级路由转换为 2 级路由
-      return flatMultiLevelRoutes(routes);
+      const route: AppRouteRecordRaw[] = flatMultiLevelRoutes(routes);
+      console.log(route, "路由");
+      return route;
     },
 
     async addRouter(router: Router) {

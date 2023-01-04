@@ -44,7 +44,7 @@
 </template>
 <script lang="ts">
 import type { PropType } from "vue";
-import type { Menu } from "/@/router/types";
+import type { Menu } from "/@/router/Types";
 import { defineComponent, computed } from "vue";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { Icon } from "/@/components/Icon";

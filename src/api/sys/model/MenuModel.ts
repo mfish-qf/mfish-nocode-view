@@ -28,6 +28,8 @@ export interface MenuListItem {
   clientId: string;
   menuName: string;
   menuType: MenuType;
+  menuCode: string;
+  menuLevel: number;
   menuIcon: string;
   menuSort: number;
   routePath: string;
@@ -41,6 +43,7 @@ export interface MenuListItem {
   updateBy: string;
   updateTime: string;
   isVisible: number;
+  activeMenu: string;
   permissions: string;
   children: MenuListItem[];
 }
