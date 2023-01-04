@@ -1,7 +1,7 @@
 /**
- * @description：公用方法
- * @author     ：qiufeng
- * @date       ：2022/10/9 17:49
+ * @description: 公用方法
+ * @author: mfish
+ * @date: 2022/10/9 17:49
  */
 import { App, Plugin, unref } from "vue";
 import { isObject } from "/@/utils/Is";

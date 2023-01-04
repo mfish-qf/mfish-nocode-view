@@ -138,8 +138,7 @@ export default defineComponent({
     }
 
     /**
-     * @description:
-     */
+     * @description: */
     function renderFeatures() {
       let triggerDef = unref(getTrigger);
 

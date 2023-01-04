@@ -1,7 +1,7 @@
 /**
- * @description：模块类型
- * @author     ：qiufeng
- * @date       ：2022/10/10 11:51
+ * @description: 模块类型
+ * @author: mfish
+ * @date: 2022/10/10 11:51
  */
 declare module '*.vue' {
   import { DefineComponent } from 'vue';

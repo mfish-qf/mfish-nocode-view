@@ -1,7 +1,7 @@
 <!--
- @description：字典
+ @description: 字典
  @author     ：mfish
- @date       ：2023-01-03
+ @date: 2023-01-03
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">

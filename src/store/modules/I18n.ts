@@ -1,7 +1,7 @@
 /**
- * @description：国际化缓存
- * @author     ：qiufeng
- * @date       ：2022/10/9 17:16
+ * @description: 国际化缓存
+ * @author: mfish
+ * @date: 2022/10/9 17:16
  */
 import type { LocaleSetting, LocaleType } from "/#/config";
 import { defineStore } from "pinia";

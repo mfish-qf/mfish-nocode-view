@@ -1,7 +1,7 @@
 /**
- * @description：全局配置信息定义
- * @author     ：qiufeng
- * @date       ：2022/9/22 18:02
+ * @description: 全局配置信息定义
+ * @author: mfish
+ * @date: 2022/9/22 18:02
  */
 import type { VNode, VNodeChild, ComponentRenderProxy, PropType as VuePropType } from "vue";
 

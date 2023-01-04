@@ -1,7 +1,7 @@
 /**
- * @description：菜单枚举
- * @author     ：qiufeng
- * @date       ：2022/10/11 15:25
+ * @description: 菜单枚举
+ * @author: mfish
+ * @date: 2022/10/11 15:25
  */
 export enum MenuTypeEnum {
   // left menu

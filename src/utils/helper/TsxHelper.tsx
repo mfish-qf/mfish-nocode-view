@@ -2,7 +2,7 @@ import { Slots } from "vue";
 import { isFunction } from "/@/utils/Is";
 
 /**
- * @description:  获取插槽
+ * @description: 获取插槽
  */
 export function getSlot(slots: Slots, slot = "default", data?: any) {
   if (!slots || !Reflect.has(slots, slot)) {

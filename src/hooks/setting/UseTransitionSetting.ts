@@ -1,7 +1,7 @@
 /**
- * @description：过度设置
- * @author     ：qiufeng
- * @date       ：2022/10/11 17:57
+ * @description: 过度设置
+ * @author: mfish
+ * @date: 2022/10/11 17:57
  */
 import type { TransitionSetting } from "/#/config";
 import { computed } from "vue";

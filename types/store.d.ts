@@ -1,7 +1,7 @@
 /**
- * @description：缓存定义
- * @author     ：qiufeng
- * @date       ：2022/10/11 15:23
+ * @description: 缓存定义
+ * @author: mfish
+ * @date: 2022/10/11 15:23
  */
 import { ErrorTypeEnum } from "/@/enums/ExceptionEnum";
 import { MenuModeEnum, MenuTypeEnum } from "/@/enums/MenuEnum";

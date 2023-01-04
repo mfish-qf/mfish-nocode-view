@@ -1,7 +1,7 @@
 /**
- * @description：环境变量通用方法
- * @author     ：qiufeng
- * @date       ：2022/10/9 11:43
+ * @description: 环境变量通用方法
+ * @author: mfish
+ * @date: 2022/10/9 11:43
  */
 import { warn } from "/@/utils/Log";
 import { getConfigFileName } from "../../build/Utils";

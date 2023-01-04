@@ -1,7 +1,7 @@
 /**
- * @description：页面类型定义
- * @author     ：qiufeng
- * @date       ：2022/10/9 17:41
+ * @description: 页面类型定义
+ * @author: mfish
+ * @date: 2022/10/9 17:41
  */
 declare interface Fn<T = any, R = T> {
   (...arg: T[]): R;

@@ -1,7 +1,7 @@
 /**
- * @description：配置定义
- * @author     ：qiufeng
- * @date       ：2022/10/8 17:42
+ * @description: 配置定义
+ * @author: mfish
+ * @date: 2022/10/8 17:42
  */
 import {
   ContentEnum,

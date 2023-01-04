@@ -85,7 +85,7 @@ export default defineComponent({
     });
 
     /**
-     * @description:设置desc
+     * @description: 设置desc
      */
     function setDescProps(descProps: Partial<DescriptionProps>): void {
       // Keep the last setDrawerProps

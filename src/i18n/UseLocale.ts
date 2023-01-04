@@ -1,7 +1,7 @@
 /**
- * @description：多语言操作
- * @author     ：qiufeng
- * @date       ：2022/10/9 17:12
+ * @description: 多语言操作
+ * @author: mfish
+ * @date: 2022/10/9 17:12
  */
 import { LocaleType } from "/#/config";
 import { i18n } from "./SetupI18n";

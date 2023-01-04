@@ -1,7 +1,7 @@
 /**
- * @description：菜单测试接口
- * @author     ：qiufeng
- * @date       ：2022/11/2 17:48
+ * @description: 菜单测试接口
+ * @author: mfish
+ * @date: 2022/11/2 17:48
  */
 import { resultSuccess, resultError, getRequestToken, requestParams } from "../_util";
 import { MockMethod } from "vite-plugin-mock";

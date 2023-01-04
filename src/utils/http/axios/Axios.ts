@@ -11,7 +11,7 @@ import { ContentTypeEnum, RequestEnum } from "/@/enums/HttpEnum";
 export * from "./AxiosTransform";
 
 /**
- * @description:  axios module
+ * @description: axios module
  */
 export class VAxios {
   private axiosInstance: AxiosInstance;
@@ -24,7 +24,7 @@ export class VAxios {
   }
 
   /**
-   * @description:  Create axios instance
+   * @description: Create axios instance
    */
   private createAxios(config: CreateAxiosOptions): void {
     this.axiosInstance = axios.create(config);
@@ -107,7 +107,7 @@ export class VAxios {
   }
 
   /**
-   * @description:  File Upload
+   * @description: File Upload
    */
   uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams) {
     const formData = new window.FormData();

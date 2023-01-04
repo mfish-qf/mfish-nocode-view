@@ -1,7 +1,7 @@
 /**
- * @description：HTTP请求枚举
- * @author     ：qiufeng
- * @date       ：2022/10/11 17:08
+ * @description: HTTP请求枚举
+ * @author: mfish
+ * @date: 2022/10/11 17:08
  */
 //请求结果
 export enum ResultEnum {

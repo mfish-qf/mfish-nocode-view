@@ -1,7 +1,7 @@
 /**
- * @description：页面枚举
- * @author     ：qiufeng
- * @date       ：2022/10/11 15:32
+ * @description: 页面枚举
+ * @author: mfish
+ * @date: 2022/10/11 15:32
  */
 export enum PageEnum {
   // 登录页路径
