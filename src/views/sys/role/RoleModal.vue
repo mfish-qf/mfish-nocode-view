@@ -72,17 +72,13 @@ export default {
     const getTitle = computed(() => (!unref(isUpdate) ? "新增角色" : "编辑角色"));
 
     async function handleSubmit() {
-      try {
-        let values = await validate();
-        values.clientId = "system";
-        setModalProps({ confirmLoading: true });
-        if (unref(isUpdate)) {
-          saveRole(updateRole, values);
-        } else {
-          saveRole(insertRole, values);
-        }
-      } finally {
-        setModalProps({ confirmLoading: false });
+      let values = await validate();
+      values.clientId = "system";
+      setModalProps({ confirmLoading: true });
+      if (unref(isUpdate)) {
+        saveRole(updateRole, values);
+      } else {
+        saveRole(insertRole, values);
       }
     }
 
@@ -90,6 +86,8 @@ export default {
       save(values).then(() => {
         emit("success");
         closeModal();
+      }).finally(() => {
+        setModalProps({ confirmLoading: false });
       });
     }
 

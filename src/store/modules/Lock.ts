@@ -44,7 +44,6 @@ export const useLockStore = defineStore({
             client_secret: "system",
             grant_type: "password",
             redirect_uri: "http://baidu.com",
-            goHome: false,
             mode: "none"
           });
           if (res) {

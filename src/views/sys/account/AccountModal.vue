@@ -79,16 +79,12 @@ export default {
     const getTitle = computed(() => (!unref(isUpdate) ? "新增账号" : "编辑账号"));
 
     async function handleSubmit() {
-      try {
-        const values = await validate();
-        setModalProps({ confirmLoading: true });
-        if (unref(isUpdate)) {
-          saveAccount(updateUser, values);
-        } else {
-          saveAccount(insertUser, values);
-        }
-      } finally {
-        setModalProps({ confirmLoading: false });
+      const values = await validate();
+      setModalProps({ confirmLoading: true });
+      if (unref(isUpdate)) {
+        saveAccount(updateUser, values);
+      } else {
+        saveAccount(insertUser, values);
       }
     }
 
@@ -96,6 +92,8 @@ export default {
       save(values).then(() => {
         emit("success", { isUpdate: unref(isUpdate), values: { ...values, id: rowId.value } });
         closeModal();
+      }).finally(() => {
+        setModalProps({ confirmLoading: false });
       });
     }
 

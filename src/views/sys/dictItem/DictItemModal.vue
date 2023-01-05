@@ -39,16 +39,12 @@ export default {
     const getTitle = computed(() => (!unref(isUpdate) ? "新增字典项" : "编辑字典项"));
 
     async function handleSubmit() {
-      try {
-        let values = await validate();
-        setModalProps({ confirmLoading: true });
-        if (unref(isUpdate)) {
-          saveDictItem(updateDictItem, values);
-        } else {
-          saveDictItem(insertDictItem, values);
-        }
-      } finally {
-        setModalProps({ confirmLoading: false });
+      let values = await validate();
+      setModalProps({ confirmLoading: true });
+      if (unref(isUpdate)) {
+        saveDictItem(updateDictItem, values);
+      } else {
+        saveDictItem(insertDictItem, values);
       }
     }
 
@@ -56,6 +52,8 @@ export default {
       save(values).then(() => {
         emit("success");
         closeModal();
+      }).finally(() => {
+        setModalProps({ confirmLoading: false });
       });
     }
 

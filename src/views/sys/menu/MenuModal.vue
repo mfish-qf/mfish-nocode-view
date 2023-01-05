@@ -62,17 +62,13 @@ export default {
     }
 
     async function handleSubmit() {
-      try {
-        let values = (await validate()) as MenuListItem;
-        values.clientId = "system";
-        setModalProps({ confirmLoading: true });
-        if (unref(isUpdate)) {
-          saveMenu(updateMenu, values);
-        } else {
-          saveMenu(insertMenu, values);
-        }
-      } finally {
-        setModalProps({ confirmLoading: false });
+      let values = (await validate()) as MenuListItem;
+      values.clientId = "system";
+      setModalProps({ confirmLoading: true });
+      if (unref(isUpdate)) {
+        saveMenu(updateMenu, values);
+      } else {
+        saveMenu(insertMenu, values);
       }
     }
 
@@ -80,6 +76,8 @@ export default {
       save(values).then(() => {
         emit("success", { isUpdate: unref(isUpdate), values: { ...values } });
         closeModal();
+      }).finally(() => {
+        setModalProps({ confirmLoading: false });
       });
     }
 

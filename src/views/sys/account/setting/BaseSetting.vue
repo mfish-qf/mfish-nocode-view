@@ -31,9 +31,8 @@ import { computed, defineComponent, onMounted } from "vue";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { CollapseContainer } from "/@/components/Container";
 import { CropperAvatar } from "/@/components/Cropper";
-import { useMessage } from "/@/hooks/web/UseMessage";
 import headerImg from "/@/assets/images/header.png";
-import { getUserInfo, insertUser, updateUser } from "/@/api/sys/User";
+import { getUserInfo, updateUser } from "/@/api/sys/User";
 import { baseSetSchemas } from "./setting.data";
 import { useUserStore } from "/@/store/modules/User";
 import { uploadApi } from "/@/api/sys/Upload";
@@ -54,10 +53,13 @@ export default defineComponent({
       schemas: baseSetSchemas,
       showActionButtonGroup: false
     });
-
+    let userInfo = userStore.getUserInfo;
     onMounted(async () => {
-      const data = await getUserInfo();
-      setFieldsValue(data).then();
+      const user = await getUserInfo();
+      if (userInfo != null) {
+        userInfo = Object.assign(userInfo, user);
+        setFieldsValue(userInfo).then();
+      }
     });
 
     const avatar = computed(() => {
@@ -65,9 +67,11 @@ export default defineComponent({
     });
 
     function updateAvatar({ src, data }) {
-      const userinfo = userStore.getUserInfo;
-      userinfo.headImgUrl = src;
-      userStore.setUserInfo(userinfo);
+      if (userInfo != null) {
+        userInfo.headImgUrl = src;
+        userStore.setUserInfo(userInfo);
+        console.log(userInfo, "用户");
+      }
       console.log("data", data);
     }
 

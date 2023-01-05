@@ -44,7 +44,7 @@ export default defineComponent({
     const userStore = useUserStore();
     const lockStore = useLockStore();
 
-    const getRealName = computed(() => userStore.getUserInfo?.realName);
+    const getRealName = computed(() => userStore.getUserInfo?.nickname);
     const [register, { closeModal }] = useModalInner();
 
     const [registerForm, { validateFields, resetFields }] = useForm({
@@ -75,8 +75,7 @@ export default defineComponent({
     }
 
     const avatar = computed(() => {
-      const { avatar } = userStore.getUserInfo;
-      return avatar || headerImg;
+      return userStore.getUserInfo?.headImgUrl || headerImg;
     });
 
     return {
