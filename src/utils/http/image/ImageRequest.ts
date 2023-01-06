@@ -41,3 +41,12 @@ export const imageSrc = async (url) => {
   let img = await defHttp.get({ url, responseType: "blob" }, { isTransformResponse: false });
   return URL.createObjectURL(img);
 };
+
+/**
+ * 获取Base64图片
+ * @param url
+ */
+export const imageBase64 = async (url) => {
+  let img = await defHttp.get({ url, responseType: "arraybuffer" }, { isTransformResponse: false });
+  return "data:image/png;base64," + btoa(new Uint8Array(img).reduce((data, byte) => data + String.fromCharCode(byte), ""));
+};
