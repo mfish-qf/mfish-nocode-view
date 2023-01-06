@@ -17,8 +17,6 @@ import { useUserStoreWithOut } from "/@/store/modules/User";
 import { AxiosRetry } from "/@/utils/http/axios/AxiosRetry";
 
 const globSetting = useGlobSetting();
-const urlPrefix = globSetting.urlPrefix;
-
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -28,7 +26,6 @@ const transform: AxiosTransform = {
    * @description: 处理响应数据。如果数据不是预期格式，可直接抛出错误
    */
   transformResponseHook: (res: AxiosResponse<Result>, options: RequestOptions) => {
-    const { t } = useI18n();
     const { isTransformResponse, isReturnNativeResponse } = options;
     // 是否返回原生响应头 比如：需要获取响应头时使用该属性
     if (isReturnNativeResponse) {
@@ -40,7 +37,7 @@ const transform: AxiosTransform = {
       return res.data;
     }
     const { data } = res;
-
+    const { t } = useI18n();
     if (!data) {
       // 抛出请求异常
       throw new Error(t("sys.api.apiRequestFailed"));
@@ -75,10 +72,7 @@ const transform: AxiosTransform = {
    * @param options
    */
   beforeRequestHook: (config, options) => {
-    const { apiUrl, joinPrefix, joinParamsToUrl, formatDate, joinTime = true, urlPrefix } = options;
-    if (joinPrefix) {
-      config.url = `${urlPrefix}${config.url}`;
-    }
+    const { apiUrl, joinParamsToUrl, formatDate, joinTime = true } = options;
     if (apiUrl && isString(apiUrl)) {
       config.url = `${apiUrl}${config.url}`;
     }
@@ -198,8 +192,6 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           errorMessageMode: "message",
           // 接口地址
           apiUrl: globSetting.apiUrl,
-          // 接口拼接地址
-          urlPrefix: urlPrefix,
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求

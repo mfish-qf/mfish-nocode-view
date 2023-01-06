@@ -48,7 +48,7 @@
 <script lang="ts">
 import { Dropdown, Menu } from "ant-design-vue";
 import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
-import { computed,unref } from "vue";
+import { computed, unref } from "vue";
 import { DOC_URL } from "/@/settings/SiteSetting";
 import { useUserStore } from "/@/store/modules/User";
 import { useHeaderSetting } from "/@/hooks/setting/UseHeaderSetting";
@@ -61,6 +61,7 @@ import { openWindow } from "/@/utils";
 import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
 import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
 import { useGo } from "/@/hooks/web/UsePage";
+import { imageUrl } from "/@/utils/http/image/ImageRequest";
 
 type MenuEvent = "logout" | "doc" | "lock" | "changePwd" | "userInfo";
 
@@ -84,7 +85,7 @@ export default {
     const userStore = useUserStore();
     const getUserInfo = computed(() => {
       const { nickname = "", headImgUrl, id } = userStore.getUserInfo || {};
-      return { nickname, headImgUrl: headImgUrl || headerImg, id };
+      return { nickname, headImgUrl: imageUrl("/storage/file/" + headImgUrl) || headerImg, id };
     });
     const [register, { openModal }] = useModal();
     const [registerPwd, { openModal: openPwdModal }] = useModal();
@@ -123,7 +124,7 @@ export default {
           changePwd();
           break;
         case "userInfo":
-          go("/system/account/setting")
+          go("/system/account/setting");
           break;
       }
     }

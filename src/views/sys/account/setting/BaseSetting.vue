@@ -27,16 +27,16 @@
 </template>
 <script lang="ts">
 import { Button, Row, Col } from "ant-design-vue";
-import { computed, defineComponent, onMounted } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { CollapseContainer } from "/@/components/Container";
 import { CropperAvatar } from "/@/components/Cropper";
-import { useMessage } from "/@/hooks/web/UseMessage";
 import headerImg from "/@/assets/images/header.png";
-import { getUserInfo, insertUser, updateUser } from "/@/api/sys/User";
+import { getUserInfo, updateUser } from "/@/api/sys/User";
 import { baseSetSchemas } from "./setting.data";
 import { useUserStore } from "/@/store/modules/User";
 import { uploadApi } from "/@/api/sys/Upload";
+import { imageUrl } from "/@/utils/http/image/ImageRequest";
 
 export default defineComponent({
   components: {
@@ -54,21 +54,28 @@ export default defineComponent({
       schemas: baseSetSchemas,
       showActionButtonGroup: false
     });
-
+    let userInfo = userStore.getUserInfo;
+    let picImg = ref("");
     onMounted(async () => {
-      const data = await getUserInfo();
-      setFieldsValue(data).then();
+      const user = await getUserInfo();
+      if (userInfo != null) {
+        userInfo = Object.assign(userInfo, user);
+        setFieldsValue(userInfo).then();
+      }
     });
 
-    const avatar = computed(() => {
-      return userStore.getUserInfo?.headImgUrl || headerImg;
+    let avatar = computed(() => {
+      return imageUrl("/storage/file/" + userStore.getUserInfo?.headImgUrl) || headerImg;
     });
 
-    function updateAvatar({ src, data }) {
-      const userinfo = userStore.getUserInfo;
-      userinfo.headImgUrl = src;
-      userStore.setUserInfo(userinfo);
-      console.log("data", data);
+    function updateAvatar({ data }) {
+      if (userInfo != null) {
+        userInfo.headImgUrl = data;
+        userStore.setUserInfo(userInfo);
+        if (data) {
+          updateUser(userInfo).then();
+        }
+      }
     }
 
     async function handleSubmit() {
@@ -79,9 +86,10 @@ export default defineComponent({
     return {
       avatar,
       register,
-      uploadApi: uploadApi as any,
+      uploadApi,
       updateAvatar,
-      handleSubmit
+      handleSubmit,
+      picImg
     };
   }
 });

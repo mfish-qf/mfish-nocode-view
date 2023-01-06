@@ -44,25 +44,23 @@ export default {
     const getTitle = computed(() => (!unref(isUpdate) ? "新增组织" : "编辑组织"));
 
     async function handleSubmit() {
-      try {
-        const values = await validate();
-        values.clientId = "system";
-        setModalProps({ confirmLoading: true });
-        if (unref(isUpdate)) {
-          saveOrg(updateOrg, values);
-        } else {
-          saveOrg(insertOrg, values);
-        }
-        emit("success");
-      } finally {
-        setModalProps({ confirmLoading: false });
+      const values = await validate();
+      values.clientId = "system";
+      setModalProps({ confirmLoading: true });
+      if (unref(isUpdate)) {
+        saveOrg(updateOrg, values);
+      } else {
+        saveOrg(insertOrg, values);
       }
+      emit("success");
     }
 
     function saveOrg(save, values) {
       save(values).then(() => {
         emit("success");
         closeModal();
+      }).finally(() => {
+        setModalProps({ confirmLoading: false });
       });
     }
 
