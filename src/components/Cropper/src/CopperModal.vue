@@ -111,7 +111,7 @@
   </BasicModal>
 </template>
 <script lang="ts">
-import type { CropendResult, Cropper } from "./typing";
+import type { ApiFunParams, CropendResult, Cropper } from "./typing";
 import { defineComponent, ref } from "vue";
 import CropperImage from "./Cropper.vue";
 import { Space, Upload, Avatar, Tooltip } from "ant-design-vue";
@@ -121,12 +121,10 @@ import { dataURLtoBlob } from "/@/utils/file/Base64Conver";
 import { isFunction } from "/@/utils/Is";
 import { useI18n } from "/@/hooks/web/UseI18n";
 
-type apiFunParams = { file: Blob; name: string; filename: string };
-
 const props = {
   circled: { type: Boolean, default: true },
   uploadApi: {
-    type: Function as PropType<(params: apiFunParams) => Promise<any>>
+    type: Function as PropType<(params: ApiFunParams) => Promise<any>>
   }
 };
 
@@ -185,7 +183,7 @@ export default defineComponent({
         try {
           setModalProps({ confirmLoading: true });
           const result = await uploadApi({ name: "file", file: blob, filename });
-          emit("uploadSuccess", { source: previewSource.value, data: result.url });
+          emit("uploadSuccess", { source: previewSource.value, data: result.fileKey });
           closeModal();
         } finally {
           setModalProps({ confirmLoading: false });

@@ -63,16 +63,17 @@ export default defineComponent({
     });
 
     const avatar = computed(() => {
-      return userStore.getUserInfo?.headImgUrl || headerImg;
+      return "/api/storage/file/"+userStore.getUserInfo?.headImgUrl || headerImg;
     });
 
-    function updateAvatar({ src, data }) {
+    function updateAvatar({ data }) {
       if (userInfo != null) {
-        userInfo.headImgUrl = src;
+        userInfo.headImgUrl = data
         userStore.setUserInfo(userInfo);
-        console.log(userInfo, "用户");
+        if(data){
+          updateUser(userInfo).then();
+        }
       }
-      console.log("data", data);
     }
 
     async function handleSubmit() {
@@ -83,7 +84,7 @@ export default defineComponent({
     return {
       avatar,
       register,
-      uploadApi: uploadApi as any,
+      uploadApi,
       updateAvatar,
       handleSubmit
     };

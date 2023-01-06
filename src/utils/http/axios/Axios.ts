@@ -1,5 +1,5 @@
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from "axios";
-import type { RequestOptions, Result, UploadFileParams } from "/#/axios";
+import type { RequestOptions, Result } from "/#/axios";
 import type { CreateAxiosOptions } from "./AxiosTransform";
 import axios from "axios";
 import qs from "qs";
@@ -106,43 +106,6 @@ export class VAxios {
     });
   }
 
-  /**
-   * @description: File Upload
-   */
-  uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams) {
-    const formData = new window.FormData();
-    const customFilename = params.name || "file";
-
-    if (params.filename) {
-      formData.append(customFilename, params.file, params.filename);
-    } else {
-      formData.append(customFilename, params.file);
-    }
-
-    if (params.data) {
-      Object.keys(params.data).forEach((key) => {
-        const value = params.data![key];
-        if (Array.isArray(value)) {
-          value.forEach((item) => {
-            formData.append(`${key}[]`, item);
-          });
-          return;
-        }
-        formData.append(key, params.data![key]);
-      });
-    }
-
-    return this.axiosInstance.request<T>({
-      ...config,
-      method: "POST",
-      data: formData,
-      headers: {
-        "Content-type": ContentTypeEnum.FORM_DATA,
-        ignoreCancelToken: true
-      }
-    });
-  }
-
   // support form-data
   supportFormData(config: CreateAxiosOptions) {
     const headers = config.headers || this.options.headers;
@@ -176,6 +139,36 @@ export class VAxios {
     return this.request({ ...config, method: "DELETE" }, options);
   }
 
+  upload<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+    const formData = new window.FormData();
+    const params = config.params;
+    const customFilename = params?.name || "file";
+    if (params?.filename) {
+      formData.append(customFilename, params?.file, params.filename);
+    } else {
+      formData.append(customFilename, params?.file);
+    }
+    if (params?.data) {
+      Object.keys(params.data).forEach((key) => {
+        const value = params.data![key];
+        if (Array.isArray(value)) {
+          value.forEach((item) => {
+            formData.append(`${key}[]`, item);
+          });
+          return;
+        }
+        formData.append(key, params.data![key]);
+      });
+    }
+    delete config.params;
+    return this.request({
+      ...config,
+      method: "POST",
+      data: formData,
+      headers: { "Content-Type": ContentTypeEnum.FORM_DATA, ignoreCancelToken: true }
+    }, options);
+  }
+
   request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     let conf = <CreateAxiosOptions>cloneDeep(config);
     const transform = this.getTransform();
@@ -187,6 +180,7 @@ export class VAxios {
     }
     conf.requestOptions = opt;
     conf = this.supportFormData(conf);
+    console.log(conf,"请求配置");
     return new Promise((resolve, reject) => {
       this.axiosInstance
         .request<any, AxiosResponse<Result>>(conf)

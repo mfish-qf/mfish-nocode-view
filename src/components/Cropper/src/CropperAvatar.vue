@@ -46,6 +46,7 @@ import { useMessage } from "/@/hooks/web/UseMessage";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import type { ButtonProps } from "/@/components/Button";
 import { Icon } from "/@/components/Icon";
+import { ApiFunParams } from "/@/components/Cropper";
 
 const props = {
   width: { type: [String, Number], default: "200px" },
@@ -53,7 +54,7 @@ const props = {
   showBtn: { type: Boolean, default: true },
   btnProps: { type: Object as PropType<ButtonProps> },
   btnText: { type: String, default: "" },
-  uploadApi: { type: Function as PropType<({ file: Blob, name: string }) => Promise<void>> }
+  uploadApi: { type: Function as PropType<(params: ApiFunParams) => Promise<any>> }
 };
 
 export default defineComponent({
