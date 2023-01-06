@@ -27,7 +27,7 @@
 </template>
 <script lang="ts">
 import { Button, Row, Col } from "ant-design-vue";
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted } from "vue";
 import { BasicForm, useForm } from "/@/components/Form/index";
 import { CollapseContainer } from "/@/components/Container";
 import { CropperAvatar } from "/@/components/Cropper";
@@ -55,7 +55,6 @@ export default defineComponent({
       showActionButtonGroup: false
     });
     let userInfo = userStore.getUserInfo;
-    let picImg = ref("");
     onMounted(async () => {
       const user = await getUserInfo();
       if (userInfo != null) {
