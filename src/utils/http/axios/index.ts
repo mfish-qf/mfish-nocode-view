@@ -17,8 +17,6 @@ import { useUserStoreWithOut } from "/@/store/modules/User";
 import { AxiosRetry } from "/@/utils/http/axios/AxiosRetry";
 
 const globSetting = useGlobSetting();
-const urlPrefix = globSetting.urlPrefix;
-
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -75,10 +73,7 @@ const transform: AxiosTransform = {
    * @param options
    */
   beforeRequestHook: (config, options) => {
-    const { apiUrl, joinPrefix, joinParamsToUrl, formatDate, joinTime = true, urlPrefix } = options;
-    if (joinPrefix) {
-      config.url = `${urlPrefix}${config.url}`;
-    }
+    const { apiUrl, joinParamsToUrl, formatDate, joinTime = true } = options;
     if (apiUrl && isString(apiUrl)) {
       config.url = `${apiUrl}${config.url}`;
     }
@@ -198,8 +193,6 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           errorMessageMode: "message",
           // 接口地址
           apiUrl: globSetting.apiUrl,
-          // 接口拼接地址
-          urlPrefix: urlPrefix,
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求

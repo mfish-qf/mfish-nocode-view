@@ -36,6 +36,7 @@ import { getUserInfo, updateUser } from "/@/api/sys/User";
 import { baseSetSchemas } from "./setting.data";
 import { useUserStore } from "/@/store/modules/User";
 import { uploadApi } from "/@/api/sys/Upload";
+import { imageUrl } from "/@/utils/http/image/ImageRequest";
 
 export default defineComponent({
   components: {
@@ -63,14 +64,14 @@ export default defineComponent({
     });
 
     const avatar = computed(() => {
-      return "/api/storage/file/"+userStore.getUserInfo?.headImgUrl || headerImg;
+      return imageUrl("/storage/file/" + userStore.getUserInfo?.headImgUrl) || headerImg;
     });
 
     function updateAvatar({ data }) {
       if (userInfo != null) {
-        userInfo.headImgUrl = data
+        userInfo.headImgUrl = data;
         userStore.setUserInfo(userInfo);
-        if(data){
+        if (data) {
           updateUser(userInfo).then();
         }
       }

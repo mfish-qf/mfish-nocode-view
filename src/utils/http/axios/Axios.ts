@@ -180,7 +180,6 @@ export class VAxios {
     }
     conf.requestOptions = opt;
     conf = this.supportFormData(conf);
-    console.log(conf,"请求配置");
     return new Promise((resolve, reject) => {
       this.axiosInstance
         .request<any, AxiosResponse<Result>>(conf)
