@@ -12,6 +12,7 @@ const globSetting = useGlobSetting();
 
 /**
  * 获取图片url自动添加token防止图片无权限获取
+ * 同步获取
  * @param url
  */
 export const imageUrl = (url) => {
@@ -36,6 +37,7 @@ export const imageUrl = (url) => {
  * @param url
  */
 export const imageSrc = async (url) => {
+  //isTransformResponse返回值不执行普通请求的结果处理
   let img = await defHttp.get({ url, responseType: "blob" }, { isTransformResponse: false });
   return URL.createObjectURL(img);
 };
