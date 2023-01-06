@@ -1,6 +1,7 @@
 import { useGlobSetting } from "/@/hooks/setting";
 import { isString } from "/@/utils/Is";
 import { getToken } from "/@/utils/auth";
+import { defHttp } from "/@/utils/http/axios";
 
 /**
  * @description: 图片请求
@@ -15,15 +16,26 @@ const globSetting = useGlobSetting();
  */
 export const imageUrl = (url) => {
   const { apiUrl } = globSetting;
-  const token = getToken();
   if (apiUrl && isString(apiUrl)) {
     url = `${apiUrl}${url}`;
   }
-  if (url.indexOf("?") >= 0) {
-    url += "&";
-  } else {
-    url += "?";
+  const token = getToken();
+  if (token) {
+    if (url.indexOf("?") >= 0) {
+      url += "&";
+    } else {
+      url += "?";
+    }
+    url += `access_token=${token}`;
   }
-  url += `access_token=${token}`;
   return url;
+};
+
+/**
+ * 异步获取图片源
+ * @param url
+ */
+export const imageSrc = async (url) => {
+  let img = await defHttp.get({ url, responseType: "blob" }, { isTransformResponse: false });
+  return URL.createObjectURL(img);
 };

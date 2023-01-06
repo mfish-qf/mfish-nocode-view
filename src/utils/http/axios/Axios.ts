@@ -30,13 +30,12 @@ export class VAxios {
     this.axiosInstance = axios.create(config);
   }
 
-  private getTransform() {
-    const { transform } = this.options;
-    return transform;
-  }
-
   getAxios(): AxiosInstance {
     return this.axiosInstance;
+  }
+
+  getOptions(): CreateAxiosOptions {
+    return this.options;
   }
 
   /**
@@ -63,7 +62,7 @@ export class VAxios {
    * @description: Interceptor configuration 拦截器配置
    */
   private setupInterceptors() {
-    const transform = this.getTransform();
+    const { transform } = this.options;
     if (!transform) {
       return;
     }
@@ -171,8 +170,7 @@ export class VAxios {
 
   request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     let conf = <CreateAxiosOptions>cloneDeep(config);
-    const transform = this.getTransform();
-    const { requestOptions } = this.options;
+    const { transform, requestOptions } = this.options;
     const opt: RequestOptions = Object.assign({}, requestOptions, options);
     const { beforeRequestHook, requestCatchHook, transformResponseHook } = transform || {};
     if (beforeRequestHook && isFunction(beforeRequestHook)) {

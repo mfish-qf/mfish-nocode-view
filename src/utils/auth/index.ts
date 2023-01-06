@@ -5,8 +5,8 @@ import projectSetting from "/@/settings/ProjectSetting";
 const { permissionCacheType } = projectSetting;
 const isLocal = permissionCacheType === CacheTypeEnum.LOCAL;
 
-export function getToken() {
-  return getAuthCache(TOKEN_KEY);
+export function getToken<T>() {
+  return getAuthCache<T>(TOKEN_KEY);
 }
 
 export function getAuthCache<T>(key: BasicKeys) {
