@@ -85,7 +85,7 @@ export default {
     const userStore = useUserStore();
     const getUserInfo = computed(() => {
       const { nickname = "", headImgUrl, id } = userStore.getUserInfo || {};
-      return { nickname, headImgUrl: imageUrl("/storage/file/" + headImgUrl) || headerImg, id };
+      return { nickname, headImgUrl: headImgUrl ? imageUrl("/storage/file/" + headImgUrl) : headerImg, id };
     });
     const [register, { openModal }] = useModal();
     const [registerPwd, { openModal: openPwdModal }] = useModal();

@@ -76,7 +76,8 @@ export default defineComponent({
     }
 
     const avatar = computed(() => {
-      return imageUrl("/storage/file/" + userStore.getUserInfo?.headImgUrl) || headerImg;
+      const imgUrl = userStore.getUserInfo?.headImgUrl;
+      return imgUrl ? imageUrl("/storage/file/" + imgUrl) : headerImg;
     });
 
     return {
