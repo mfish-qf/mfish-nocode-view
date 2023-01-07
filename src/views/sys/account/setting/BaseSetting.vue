@@ -87,8 +87,7 @@ export default defineComponent({
       register,
       uploadApi,
       updateAvatar,
-      handleSubmit,
-      picImg
+      handleSubmit
     };
   }
 });
