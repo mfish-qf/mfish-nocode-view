@@ -132,7 +132,6 @@ export default defineComponent({
       if (!cropper.value) {
         return;
       }
-      debugger
       let imgInfo = cropper.value.getData();
       const canvas = props.circled ? getRoundedCanvas() : cropper.value.getCroppedCanvas();
       canvas.toBlob((blob) => {
