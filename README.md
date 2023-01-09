@@ -4,7 +4,7 @@
 
 
 ## 简介
-mfish-nocode-view采用 Vue3.0、Vite、 Ant-Design-Vue、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
+mfish-nocode-view采用 Vue3.0、Vite4.0、 Ant-Design-Vue、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
 是在 Vben-Admin 基础上研发的，适合于mfish低代码平台的VUE3版前端解决方案，目前已是稳定版本，可用于生产项目。
 
 ##  项目源码
