@@ -10,7 +10,7 @@ import {
   mixLighten,
   mixDarken,
   tinycolor
-} from "vite-plugin-theme";
+} from "@kirklin/vite-plugin-vben-theme";
 import { getThemeColors, generateColors } from "../../config/ThemeConfig";
 import { generateModifyVars } from "../../generate/GenerateModifyVars";
 

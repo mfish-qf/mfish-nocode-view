@@ -7,12 +7,13 @@ import { BaseEntity, PageResult } from "/@/api/model/BaseModel";
  * @Version: V1.0.0
  */
 export interface DictItem extends BaseEntity<string> {
-  dictCode: string
-  dictLabel: string
-  dictValue: string
-  dictSort: number
-  status: number
-  remark: string
+  dictCode: string;
+  dictLabel: string;
+  dictValue: string;
+  dictSort: number;
+  color: string;
+  status: number;
+  remark: string;
 }
 
 export interface ReqDictItem {
