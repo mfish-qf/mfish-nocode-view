@@ -28,10 +28,8 @@ export function createPlaceholderMessage(component: ComponentType) {
   return "";
 }
 
-const DATE_TYPE = ["DatePicker", "MonthPicker", "WeekPicker", "TimePicker"];
-
 function genType() {
-  return [...DATE_TYPE, "RangePicker"];
+  return ["DatePicker", "MonthPicker", "WeekPicker", "TimePicker", "RangePicker"];
 }
 
 export function setComponentRuleType(

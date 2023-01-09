@@ -7,16 +7,13 @@
 <template>
   <div>
     <BasicTable @register="registerTable">
-      <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:sysLog:insert')">新增系统日志</a-button>
-      </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
             :actions="[
               {
-                icon: 'ant-design:edit-outlined',
-                onClick: handleEdit.bind(null, record),
+                icon: 'ant-design:info-circle-outlined',
+                onClick: handleQuery.bind(null, record),
                 auth: 'sys:sysLog:update'
               },
               {
@@ -71,16 +68,9 @@ export default {
       }
     });
 
-    function handleCreate() {
+    function handleQuery(record: Recordable) {
       openModal(true, {
-        isUpdate: false
-      });
-    }
-
-    function handleEdit(record: Recordable) {
-      openModal(true, {
-        record,
-        isUpdate: true
+        record
       });
     }
 
@@ -97,8 +87,7 @@ export default {
     return {
       registerTable,
       registerModal,
-      handleCreate,
-      handleEdit,
+      handleQuery,
       handleDelete,
       handleSuccess,
       hasPermission

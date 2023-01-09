@@ -1,5 +1,8 @@
 import { BasicColumn } from "/@/components/Table";
 import { FormSchema } from "/@/components/Table";
+import { h } from "vue";
+import { Tag } from "ant-design-vue";
+import { dateUtil } from "/@/utils/DateUtil";
 
 /**
  * @description: 系统日志
@@ -11,12 +14,7 @@ export const columns: BasicColumn[] = [
   {
     title: "中文标题",
     dataIndex: "title",
-    width: 120
-  },
-  {
-    title: "方法",
-    dataIndex: "method",
-    width: 120
+    width: 150
   },
   {
     title: "请求类型",
@@ -29,17 +27,28 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "请求参数",
-    dataIndex: "reqParam",
-    width: 120
-  },
-  {
-    title: "请求来源（0其它 1后台用户 2手机端用户）",
+    title: "请求来源",
     dataIndex: "reqSource",
-    width: 120
+    width: 120,
+    customRender: ({ record }) => {
+      const source = record.reqSource;
+      let color;
+      let text;
+      if (source === 0) {
+        color = "orange";
+        text = "其他";
+      } else if (source === 1) {
+        color = "blue";
+        text = "后台用户";
+      } else {
+        color = "pink";
+        text = "手机用户";
+      }
+      return h(Tag, { color: color }, () => text);
+    }
   },
   {
-    title: "操作类型（0其它 1查询 2新增 3修改 4删除 5授权 6导入 7导出...）",
+    title: "操作类型",
     dataIndex: "operType",
     width: 120
   },
@@ -49,17 +58,36 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "操作状态（0正常 1异常）",
+    title: "操作状态",
     dataIndex: "operStatus",
+    width: 120,
+    customRender: ({ record }) => {
+      const status = record.operStatus;
+      const enable = ~~status === 0;
+      const color = enable ? "green" : "red";
+      const text = enable ? "正常" : "异常";
+      return h(Tag, { color: color }, () => text);
+    }
+  },
+  {
+    title: "操作时间",
+    dataIndex: "createTime",
+    width: 180
+  },
+  {
+    title: "操作人",
+    dataIndex: "createBy",
     width: 120
   },
   {
-    title: "描述信息",
-    dataIndex: "remark",
-    width: 120
+    title: "方法",
+    dataIndex: "method"
   },
+  {
+    title: "请求参数",
+    dataIndex: "reqParam"
+  }
 ];
-//todo 查询条件暂时用来装样子，后面增加配置条件后修改模版
 export const searchFormSchema: FormSchema[] = [
   {
     field: "title",
@@ -79,6 +107,65 @@ export const searchFormSchema: FormSchema[] = [
     component: "Input",
     colProps: { span: 4 }
   },
+  {
+    field: "reqUri",
+    label: "请求路径",
+    component: "Input",
+    colProps: { span: 4 }
+  },
+  {
+    field: "[startTime, endTime]",
+    label: "时间范围",
+    component: "RangePicker",
+    componentProps: {
+      format: "YYYY-MM-DD HH:mm:ss",
+      placeholder: ["开始时间", "结束时间"],
+      showTime: {
+        hideDisabledOptions: true,
+        defaultValue: [dateUtil("00:00:00", "HH:mm:ss"), dateUtil("11:59:59", "HH:mm:ss")]
+      },
+      ranges: {
+        ["今天"]: [dateUtil().startOf("day"), dateUtil()],
+        ["昨天"]: [dateUtil().startOf("day").subtract(1, "days"), dateUtil().startOf("day").subtract(1, "days")],
+        ["最近一周"]: [dateUtil().startOf("day").subtract(1, "weeks"), dateUtil()],
+        ["最近两周"]: [dateUtil().startOf("day").subtract(2, "weeks"), dateUtil()],
+        ["最近1个月"]: [dateUtil().startOf("day").subtract(1, "months"), dateUtil()],
+        ["最近3个月"]: [dateUtil().startOf("day").subtract(3, "months"), dateUtil()]
+      }
+    },
+    colProps: { span: 6 }
+  },
+  {
+    field: "reqSource",
+    label: "请求来源",
+    component: "Input",
+    colProps: { span: 4 }
+  },
+  {
+    field: "operType",
+    label: "操作类型",
+    component: "Input",
+    colProps: { span: 4 }
+  },
+  {
+    field: "operIp",
+    label: "操作IP",
+    component: "Input",
+    colProps: { span: 4 }
+  },
+  {
+    field: "operStatus",
+    label: "操作状态",
+    component: "Select",
+    componentProps: {
+      options: [
+        { label: "正常", value: 0 },
+        { label: "异常", value: 1 }
+      ]
+    },
+    colProps: { span: 4 }
+  }
+
 ];
 export const sysLogFormSchema: FormSchema[] = [
   {
@@ -90,51 +177,51 @@ export const sysLogFormSchema: FormSchema[] = [
   {
     field: "title",
     label: "中文标题",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "method",
     label: "方法",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "reqType",
     label: "请求类型",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "reqUri",
     label: "请求路径",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "reqParam",
     label: "请求参数",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "reqSource",
-    label: "请求来源（0其它 1后台用户 2手机端用户）",
-    component: "Input",
+    label: "请求来源",
+    component: "Input"
   },
   {
     field: "operType",
-    label: "操作类型（0其它 1查询 2新增 3修改 4删除 5授权 6导入 7导出...）",
-    component: "Input",
+    label: "操作类型",
+    component: "Input"
   },
   {
     field: "operIp",
     label: "操作IP",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "operStatus",
-    label: "操作状态（0正常 1异常）",
-    component: "Input",
+    label: "操作状态",
+    component: "Input"
   },
   {
     field: "remark",
-    label: "描述信息",
-    component: "Input",
-  },
+    label: "返回信息",
+    component: "Input"
+  }
 ];

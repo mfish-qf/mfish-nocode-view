@@ -26,6 +26,18 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
+    title: "字典颜色",
+    dataIndex: "color",
+    width: 120,
+    customRender: ({ record }) => {
+      const color = record.color;
+      if (color) {
+        return h(Tag, { color: color }, () => record.color);
+      }
+      return color;
+    }
+  },
+  {
     title: "字典排序",
     dataIndex: "dictSort",
     width: 120
@@ -102,6 +114,11 @@ export const dictItemFormSchema: FormSchema[] = [
     field: "dictSort",
     label: "字典排序",
     component: "InputNumber"
+  },
+  {
+    field: "color",
+    label: "字典颜色",
+    component: "Input"
   },
   {
     field: "remark",

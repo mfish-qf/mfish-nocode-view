@@ -22,6 +22,14 @@ export const getDictItemList = (reqDictItem?: ReqDictItem) => {
 };
 
 /**
+ * 通过字典编码获取字典项目
+ * @param dictCode
+ */
+export const getDictItems = (dictCode: string) => {
+  return defHttp.get<DictItem[]>({ url: Api.DictItem + "/" + dictCode });
+};
+
+/**
  * 新增字典项
  *
  * @param dictItem
