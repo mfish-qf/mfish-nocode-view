@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { PageWrapper } from "/@/components/Page";
+import { PageWrapper } from "/@/components/general/Page";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import intro from "intro.js";
 import "intro.js/minified/introjs.min.css";

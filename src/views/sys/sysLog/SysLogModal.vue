@@ -11,9 +11,9 @@
 </template>
 <script lang="ts">
 import { ref, computed, unref } from "vue";
-import { BasicForm, useForm } from "/@/components/Form/index";
+import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { sysLogFormSchema } from "./sysLog.data";
-import { BasicModal, useModalInner } from "/@/components/Modal";
+import { BasicModal, useModalInner } from "/@/components/general/Modal";
 
 export default {
   name: "SysLogModal",

@@ -33,9 +33,9 @@
   </div>
 </template>
 <script lang="ts">
-import { BasicTable, useTable, TableAction } from "/@/components/Table";
+import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { deleteRole, getRoleList } from "/@/api/sys/Role";
-import { useModal } from "/@/components/Modal";
+import { useModal } from "/@/components/general/Modal";
 import RoleModal from "./RoleModal.vue";
 import { columns, searchFormSchema } from "./role.data";
 import { usePermission } from "/@/hooks/web/UsePermission";

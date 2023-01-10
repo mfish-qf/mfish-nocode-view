@@ -10,9 +10,9 @@
 </template>
 <script lang="ts">
 import { ref, computed, unref } from "vue";
-import { BasicForm, useForm } from "/@/components/Form/index";
+import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { dictFormSchema } from "./dict.data";
-import { BasicModal, useModalInner } from "/@/components/Modal";
+import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { insertDict, updateDict } from "/@/api/sys/Dict";
 
 export default {

@@ -15,7 +15,7 @@
 </template>
 <script lang="ts">
 import { onMounted, ref, unref, nextTick } from "vue";
-import { BasicTree, TreeActionType, TreeItem } from "/@/components/Tree";
+import { BasicTree, TreeActionType, TreeItem } from "/@/components/general/Tree";
 import { getOrgTree } from "/@/api/sys/Org";
 
 export default {

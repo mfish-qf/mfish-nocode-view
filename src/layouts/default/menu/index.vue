@@ -1,12 +1,12 @@
 <script lang="tsx">
 import type { PropType, CSSProperties } from "vue";
 import { computed, defineComponent, unref, toRef } from "vue";
-import { BasicMenu } from "/@/components/Menu";
-import { SimpleMenu } from "/@/components/SimpleMenu";
-import { AppLogo } from "/@/components/Application";
+import { BasicMenu } from "/@/components/general/Menu";
+import { SimpleMenu } from "/@/components/general/SimpleMenu";
+import { AppLogo } from "/@/components/general/Application";
 import { MenuModeEnum, MenuSplitTyeEnum } from "/@/enums/MenuEnum";
 import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
-import { ScrollContainer } from "/@/components/Container";
+import { ScrollContainer } from "/@/components/general/Container";
 import { useGo } from "/@/hooks/web/UsePage";
 import { useSplitMenu } from "./UseLayoutMenu";
 import { openWindow } from "/@/utils";
