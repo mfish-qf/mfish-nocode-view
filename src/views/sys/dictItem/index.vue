@@ -39,10 +39,10 @@
 <script lang="ts">
 import { unref, ref } from "vue";
 import { useRoute } from "vue-router";
-import { PageWrapper } from "/@/components/Page";
-import { BasicTable, useTable, TableAction } from "/@/components/Table";
+import { PageWrapper } from "/@/components/general/Page";
+import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { deleteDictItem, getDictItemList } from "/@/api/sys/DictItem";
-import { useModal } from "/@/components/Modal";
+import { useModal } from "/@/components/general/Modal";
 import DictItemModal from "./DictItemModal.vue";
 import { columns, searchFormSchema } from "./dictItem.data";
 import { usePermission } from "/@/hooks/web/UsePermission";

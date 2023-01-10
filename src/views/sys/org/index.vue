@@ -33,9 +33,9 @@
 </template>
 <script lang="ts">
 import { nextTick } from "vue";
-import { BasicTable, useTable, TableAction } from "/@/components/Table";
+import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { deleteOrg, getOrgTree } from "/@/api/sys/Org";
-import { useModal } from "/@/components/Modal";
+import { useModal } from "/@/components/general/Modal";
 import OrgModal from "./OrgModal.vue";
 import { columns, searchFormSchema } from "./org.data";
 import { usePermission } from "/@/hooks/web/UsePermission";

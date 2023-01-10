@@ -5,7 +5,7 @@
  */
 import { App } from "vue";
 import { Input, Layout } from "ant-design-vue";
-import { Button } from "/@/components/Button";
+import { Button } from "/@/components/general/Button";
 
 export function registerGlobComponent(app: App) {
   app.use(Input).use(Layout).use(Button);

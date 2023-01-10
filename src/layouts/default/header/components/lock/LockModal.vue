@@ -28,8 +28,8 @@
 import { defineComponent, computed } from "vue";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { useDesign } from "/@/hooks/web/UseDesign";
-import { BasicModal, useModalInner } from "/@/components/Modal/index";
-import { BasicForm, useForm } from "/@/components/Form/index";
+import { BasicModal, useModalInner } from "/@/components/general/Modal/index";
+import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { useUserStore } from "/@/store/modules/User";
 import { useLockStore } from "/@/store/modules/Lock";
 import headerImg from "/@/assets/images/header.png";

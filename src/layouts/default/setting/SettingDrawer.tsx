@@ -1,5 +1,5 @@
 import { defineComponent, computed, unref } from "vue";
-import { BasicDrawer } from "/@/components/Drawer/index";
+import { BasicDrawer } from "/@/components/general/Drawer/index";
 import { Divider } from "ant-design-vue";
 import {
   TypePicker,
@@ -9,7 +9,7 @@ import {
   SelectItem,
   InputNumberItem
 } from "./components";
-import { AppDarkModeToggle } from "/@/components/Application";
+import { AppDarkModeToggle } from "/@/components/general/Application";
 import { MenuTypeEnum, TriggerEnum } from "/@/enums/MenuEnum";
 import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
 import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";

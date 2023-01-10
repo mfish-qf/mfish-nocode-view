@@ -9,7 +9,7 @@
 <script lang="ts">
 import { Menu } from "ant-design-vue";
 import { computed, defineComponent, getCurrentInstance } from "vue";
-import { Icon } from "/@/components/Icon";
+import { Icon } from "/@/components/general/Icon";
 import { propTypes } from "/@/utils/PropTypes";
 
 export default defineComponent({

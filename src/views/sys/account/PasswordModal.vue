@@ -15,8 +15,8 @@
 </template>
 
 <script lang="ts">
-import { BasicModal, useModalInner } from "/@/components/Modal";
-import { BasicForm, useForm } from "/@/components/Form";
+import { BasicModal, useModalInner } from "/@/components/general/Modal";
+import { BasicForm, useForm } from "/@/components/general/Form";
 import { formSchema } from "/@/views/sys/account/pwd.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 import { changePwd } from "/@/api/sys/User";

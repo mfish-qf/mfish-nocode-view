@@ -5,9 +5,9 @@
 </template>
 <script lang="ts">
 import { ref, computed, unref } from "vue";
-import { BasicForm, useForm } from "/@/components/Form/index";
+import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { formSchema } from "./menu.data";
-import { BasicModal, useModalInner } from "/@/components/Modal";
+import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { getMenuTree, insertMenu, updateMenu } from "/@/api/sys/Menu";
 import { MenuListItem, MenuParams, MenuType } from "/@/api/sys/model/MenuModel";
 

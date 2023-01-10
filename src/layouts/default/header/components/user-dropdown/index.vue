@@ -54,7 +54,7 @@ import { useUserStore } from "/@/store/modules/User";
 import { useHeaderSetting } from "/@/hooks/setting/UseHeaderSetting";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { useDesign } from "/@/hooks/web/UseDesign";
-import { useModal } from "/@/components/Modal";
+import { useModal } from "/@/components/general/Modal";
 import headerImg from "/@/assets/images/header.png";
 import { propTypes } from "/@/utils/PropTypes";
 import { openWindow } from "/@/utils";

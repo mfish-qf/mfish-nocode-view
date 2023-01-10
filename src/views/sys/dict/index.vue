@@ -42,9 +42,9 @@
   </div>
 </template>
 <script lang="ts">
-import { BasicTable, useTable, TableAction } from "/@/components/Table";
+import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { deleteDict, getDictList } from "/@/api/sys/Dict";
-import { useModal } from "/@/components/Modal";
+import { useModal } from "/@/components/general/Modal";
 import DictModal from "./DictModal.vue";
 import { columns, searchFormSchema } from "./dict.data";
 import { usePermission } from "/@/hooks/web/UsePermission";

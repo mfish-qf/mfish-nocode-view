@@ -1,9 +1,9 @@
-import { BasicColumn } from "/@/components/Table";
-import { FormSchema } from "/@/components/Table";
+import { BasicColumn } from "/@/components/general/Table";
+import { FormSchema } from "/@/components/general/Table";
 import { h } from "vue";
 import { Switch } from "ant-design-vue";
 import { setRoleStatus } from "/@/api/sys/Role";
-import { RenderCallbackParams } from "/@/components/Form";
+import { RenderCallbackParams } from "/@/components/general/Form";
 
 export const columns: BasicColumn[] = [
   {

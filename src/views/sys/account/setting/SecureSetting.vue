@@ -22,7 +22,7 @@
 <script lang="ts">
 import { List } from "ant-design-vue";
 import { defineComponent } from "vue";
-import { CollapseContainer } from "/@/components/Container/index";
+import { CollapseContainer } from "/@/components/general/Container/index";
 import { ListItem } from "./setting.data";
 import { useUserStore } from "/@/store/modules/User";
 

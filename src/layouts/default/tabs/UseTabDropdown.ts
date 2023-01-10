@@ -1,5 +1,5 @@
 import type { TabContentProps } from "./types";
-import type { DropMenu } from "/@/components/Dropdown";
+import type { DropMenu } from "/@/components/general/Dropdown";
 import type { ComputedRef } from "vue";
 import { computed, unref, reactive } from "vue";
 import { MenuEventEnum } from "./types";

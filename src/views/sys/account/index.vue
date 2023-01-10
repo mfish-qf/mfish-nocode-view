@@ -45,11 +45,11 @@
 </template>
 <script lang="ts">
 import { reactive } from "vue";
-import { BasicTable, useTable, TableAction } from "/@/components/Table";
+import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { deleteUser, getUserList } from "/@/api/sys/User";
-import { PageWrapper } from "/@/components/Page";
+import { PageWrapper } from "/@/components/general/Page";
 import OrgTree from "./OrgTree.vue";
-import { useModal } from "/@/components/Modal";
+import { useModal } from "/@/components/general/Modal";
 import AccountModal from "./AccountModal.vue";
 import { columns, searchFormSchema } from "./account.data";
 import { usePermission } from "/@/hooks/web/UsePermission";

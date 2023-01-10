@@ -5,8 +5,8 @@
 </template>
 <script lang="ts">
 import { ref, computed, unref } from "vue";
-import { BasicModal, useModalInner } from "/@/components/Modal";
-import { BasicForm, useForm } from "/@/components/Form/index";
+import { BasicModal, useModalInner } from "/@/components/general/Modal";
+import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { formSchema } from "./org.data";
 import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
 

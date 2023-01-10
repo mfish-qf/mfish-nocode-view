@@ -35,9 +35,9 @@
   </div>
 </template>
 <script lang="ts">
-import { BasicTable, useTable, TableAction } from "/@/components/Table";
+import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { deleteSysLog, getSysLogList } from "/@/api/sys/SysLog";
-import { useModal } from "/@/components/Modal";
+import { useModal } from "/@/components/general/Modal";
 import SysLogModal from "./SysLogModal.vue";
 import { columns, searchFormSchema } from "./sysLog.data";
 import { usePermission } from "/@/hooks/web/UsePermission";

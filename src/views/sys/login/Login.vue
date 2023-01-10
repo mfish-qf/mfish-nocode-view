@@ -49,7 +49,7 @@
 </template>
 <script lang="ts" setup>
 import { computed } from "vue";
-import { AppLogo, AppLocalePicker, AppDarkModeToggle } from "/@/components/Application";
+import { AppLogo, AppLocalePicker, AppDarkModeToggle } from "/@/components/general/Application";
 import LoginForm from "./LoginForm.vue";
 import ForgetPasswordForm from "./ForgetPasswordForm.vue";
 import RegisterForm from "./RegisterForm.vue";

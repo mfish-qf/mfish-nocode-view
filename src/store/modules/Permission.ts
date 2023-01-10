@@ -248,7 +248,6 @@ export const usePermissionStore = defineStore({
           }
         }
       }
-
       //如果存在前端路由信息，补充到到后台
       routes.push(...routeModuleList);
       if (routeModuleList != null && routeModuleList.length > 0) {

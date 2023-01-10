@@ -18,10 +18,10 @@
 </template>
 <script lang="ts">
 import { ref, computed, unref } from "vue";
-import { BasicForm, useForm } from "/@/components/Form/index";
+import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { formSchema } from "./role.data";
-import { BasicModal, useModalInner } from "/@/components/Modal";
-import { BasicTree, TreeItem } from "/@/components/Tree";
+import { BasicModal, useModalInner } from "/@/components/general/Modal";
+import { BasicTree, TreeItem } from "/@/components/general/Tree";
 import { getMenuTree } from "/@/api/sys/Menu";
 import { insertRole, updateRole } from "/@/api/sys/Role";
 

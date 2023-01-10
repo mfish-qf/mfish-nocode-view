@@ -28,9 +28,9 @@
 <script lang="ts">
 import { Button, Row, Col } from "ant-design-vue";
 import { computed, defineComponent, onMounted } from "vue";
-import { BasicForm, useForm } from "/@/components/Form/index";
-import { CollapseContainer } from "/@/components/Container";
-import { CropperAvatar } from "/@/components/Cropper";
+import { BasicForm, useForm } from "/@/components/general/Form/index";
+import { CollapseContainer } from "/@/components/general/Container";
+import { CropperAvatar } from "/@/components/general/Cropper";
 import headerImg from "/@/assets/images/header.png";
 import { getUserInfo, updateUser } from "/@/api/sys/User";
 import { baseSetSchemas } from "./setting.data";

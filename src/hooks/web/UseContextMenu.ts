@@ -1,6 +1,6 @@
 import { onUnmounted, getCurrentInstance } from "vue";
-import { createContextMenu, destroyContextMenu } from "/@/components/ContextMenu";
-import type { ContextMenuItem } from "/@/components/ContextMenu";
+import { createContextMenu, destroyContextMenu } from "/@/components/general/ContextMenu";
+import type { ContextMenuItem } from "/@/components/general/ContextMenu";
 
 export type { ContextMenuItem };
 
