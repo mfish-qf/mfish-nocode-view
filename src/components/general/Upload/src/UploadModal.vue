@@ -46,15 +46,11 @@
 import { defineComponent, reactive, ref, toRefs, unref, computed, PropType } from "vue";
 import { Upload, Alert } from "ant-design-vue";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
-//   import { BasicTable, useTable } from '/@/components/Table';
-// hooks
 import { useUploadType } from "./UseUpload";
 import { useMessage } from "/@/hooks/web/UseMessage";
-//   types
 import { FileItem, UploadResultStatus } from "./Typing";
 import { basicProps } from "./Props";
 import { createTableColumns, createActionColumn } from "./data";
-// utils
 import { checkImgType, getBase64WithFile } from "./Helper";
 import { buildUUID } from "/@/utils/Uuid";
 import { isFunction } from "/@/utils/Is";

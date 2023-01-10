@@ -256,7 +256,7 @@ export const usePermissionStore = defineStore({
         menuList.push(...frontMenu);
         // 对菜单进行排序
         menuList.sort((a, b) => {
-          return (a.meta?.menuSort || 0) - (b.meta?.menuSort || 0);
+          return (a.menuSort || 0) - (b.menuSort || 0);
         });
       }
       if (menuList.length > 0) {

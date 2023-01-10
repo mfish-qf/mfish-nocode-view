@@ -5,7 +5,7 @@ import { defHttp } from "/@/utils/http/axios";
 
 /**
  * @description: 图片请求
- * @author: qiufeng
+ * @author: mfish
  * @date: 2023/1/6 21:14
  */
 const globSetting = useGlobSetting();

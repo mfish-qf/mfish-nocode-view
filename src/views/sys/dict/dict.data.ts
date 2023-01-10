@@ -85,7 +85,8 @@ export const dictFormSchema: FormSchema[] = [
   {
     field: "dictName",
     label: "字典名称",
-    component: "Input"
+    component: "Input",
+    required: true
   },
   {
     field: "dictCode",

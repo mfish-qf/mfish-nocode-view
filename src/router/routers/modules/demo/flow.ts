@@ -2,13 +2,13 @@ import type { AppRouteRecordRaw } from "/@/router/Types";
 import { LAYOUT } from "/@/router/Constant";
 import { t } from "/@/hooks/web/UseI18n";
 
-const charts: AppRouteRecordRaw = {
+const flows: AppRouteRecordRaw = {
   path: "/flow",
   name: "FlowDemo",
   component: LAYOUT,
   redirect: "/flow/flowChart",
   meta: {
-    orderNo: 5000,
+    menuSort: 18,
     icon: "tabler:chart-dots",
     title: t("routes.demo.flow.name")
   },
@@ -24,4 +24,4 @@ const charts: AppRouteRecordRaw = {
   ]
 };
 
-export default charts;
+export default flows;
