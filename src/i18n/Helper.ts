@@ -1,28 +1,26 @@
-import type { LocaleType } from '/#/config';
-
-import { set } from 'lodash-es';
+import type { LocaleType } from "/#/config";
+import { set } from "lodash-es";
 
 export const loadLocalePool: LocaleType[] = [];
 
 export function setHtmlPageLang(locale: LocaleType) {
-  document.querySelector('html')?.setAttribute('lang', locale);
+  document.querySelector("html")?.setAttribute("lang", locale);
 }
 
 export function setLoadLocalePool(cb: (loadLocalePool: LocaleType[]) => void) {
   cb(loadLocalePool);
 }
 
-export function genMessage(langMap: Record<string, Record<string, any>>, prefix = 'lang') {
+export function genMessage(langMap: Record<string, any>, prefix = "lang") {
   const obj: Recordable = {};
-
-  Object.keys(langMap).forEach((key) => {
-    const langFileModule = langMap[key].default;
-    let fileName = key.replace(`./${prefix}/`, '').replace(/^\.\//, '');
-    const lastIndex = fileName.lastIndexOf('.');
+  Object.keys(langMap).forEach((path) => {
+    const langFileModule = langMap[path].default;
+    let fileName = path.replace(`./${prefix}/`, "").replace(/^\.\//, "");
+    const lastIndex = fileName.lastIndexOf(".");
     fileName = fileName.substring(0, lastIndex);
-    const keyList = fileName.split('/');
-    const moduleName = keyList.shift().toLowerCase();
-    const objKey = keyList.join('.').toLowerCase();
+    const keyList: string[] = fileName.split("/");
+    const moduleName = keyList.shift()?.toLowerCase();
+    const objKey = keyList.join(".").toLowerCase();
 
     if (moduleName) {
       if (objKey) {
