@@ -41,6 +41,7 @@ import { useModal } from "/@/components/general/Modal";
 import SysLogModal from "./SysLogModal.vue";
 import { columns, searchFormSchema } from "./sysLog.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
+import { getDictItems } from "/@/api/sys/DictItem";
 
 export default {
   name: "SysLogManagement",
@@ -48,6 +49,7 @@ export default {
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
+    const operType = getDictItems("");
     const [registerTable, { reload }] = useTable({
       title: "系统日志列表",
       api: getSysLogList,

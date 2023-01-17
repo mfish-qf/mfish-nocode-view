@@ -30,6 +30,16 @@ export const LoginRoute: AppRouteRecordRaw = {
   }
 };
 
+//oauth2登录
+export const Oauth2Route: AppRouteRecordRaw = {
+  path: "/oauth2",
+  name: "Oauth2",
+  component: () => import("/@/views/sys/login/oauth2.vue"),
+  meta: {
+    title: "oauth2"
+  }
+};
+
 // 404 on a page
 export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
   path: "/:path(.*)*",

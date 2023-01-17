@@ -1,4 +1,4 @@
-import { LoginRoute, PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "/@/router/routers/Basic";
+import { LoginRoute, Oauth2Route, PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "/@/router/routers/Basic";
 import { AppRouteRecordRaw } from "/@/router/Types";
 
 const modules = import.meta.glob("./modules/**/*.ts");
@@ -19,6 +19,7 @@ Object.keys(modules).map((path)=>{
 // 无需权限的基本路由
 export const basicRoutes = [
   LoginRoute,
+  Oauth2Route,
   REDIRECT_ROUTE,
   PAGE_NOT_FOUND_ROUTE
 ];
