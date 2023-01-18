@@ -190,7 +190,7 @@ VITE_GLOB_API_URL=/mfish
 *   [TypeScript](https://www.typescriptlang.org/)
 *   [Vue-router](https://next.router.vuejs.org/)
 *   [Ant-Design-Vue](https://2x.antdv.com/docs/vue/introduce-cn/)
-*   [Vben文档](https://vvbin.cn/doc-next)
+*   [Vben文档](https://doc.vvbin.cn/)
 *   [Es6](https://es6.ruanyifeng.com/)
 *   [Vitejs](https://vitejs.dev/)
 *   [Pinia(vuex替代方案)](https://pinia.esm.dev/introduction.html)
