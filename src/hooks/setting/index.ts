@@ -17,7 +17,7 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     );
   }
 
-  // Take global configuration
+  // 采用全局配置
   const glob: Readonly<GlobConfig> = {
     title: VITE_GLOB_APP_TITLE,
     apiUrl: VITE_GLOB_API_URL,

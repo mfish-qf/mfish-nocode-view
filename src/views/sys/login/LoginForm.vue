@@ -77,7 +77,7 @@ import { useMessage } from "/@/hooks/web/UseMessage";
 import { useUserStore } from "/@/store/modules/User";
 import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from "./UseLogin";
 import { useDesign } from "/@/hooks/web/UseDesign";
-import { LoginType, oauth2Config } from "/@/settings/LoginSetting";
+import { oauth2Config } from "/@/settings/LoginSetting";
 
 const ACol = Col;
 const ARow = Row;
