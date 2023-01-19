@@ -31,7 +31,7 @@ export const rules = {
           if (required && !value) {
             return Promise.reject("请输入手机号码1!");
           }
-          if (!new RegExp(/^1[3|4|5|7|8|9][0-9]\d{8}$/).test(value)) {
+          if (!new RegExp(/^1[3-9][0-9]\d{8}$/).test(value)) {
             return Promise.reject("手机号码格式有误");
           }
           return Promise.resolve();

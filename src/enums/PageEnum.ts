@@ -5,11 +5,13 @@
  */
 export enum PageEnum {
   // 登录页路径
-  BASE_LOGIN = '/login',
+  BASE_LOGIN = "/login",
+  // oauth2登录页面
+  OAUTH_LOGIN = "/oauth2",
   // 首页路径
-  BASE_HOME = '/dashboard',
+  BASE_HOME = "/dashboard",
   // 错误页路径
-  ERROR_PAGE = '/exception',
+  ERROR_PAGE = "/exception",
   // 错误日志页
-  ERROR_LOG_PAGE = '/error-log/list',
+  ERROR_LOG_PAGE = "/error-log/list",
 }

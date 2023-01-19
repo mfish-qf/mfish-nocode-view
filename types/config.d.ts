@@ -12,7 +12,8 @@ import {
   SessionTimeoutProcessingEnum
 } from "/@/enums/AppEnum";
 import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from "/@/enums/MenuEnum";
-import { CacheTypeEnum } from '/@/enums/CacheEnum';
+import { CacheTypeEnum } from "/@/enums/CacheEnum";
+
 //全局环境配置
 export interface GlobEnvConfig {
   // Site title
@@ -23,6 +24,12 @@ export interface GlobEnvConfig {
   VITE_GLOB_APP_SHORT_NAME: string;
   // Upload url
   VITE_GLOB_UPLOAD_URL?: string;
+  // 登录类型
+  VITE_LOGIN_TYPE: string;
+  // oauth2登录地址
+  VITE_OAUTH2_URL?: string;
+  // oauth2回调地址
+  VITE_OAUTH2_REDIRECT_URI?: string;
 }
 
 //环境配置转换为只读属性提供使用
@@ -35,6 +42,12 @@ export interface GlobConfig {
   shortName: string;
   // Upload url
   uploadUrl?: string;
+  // 登录类型
+  loginType: string;
+  // oauth2登录地址
+  oauth2Url?: string;
+  // oauth2回调地址
+  oauth2RedirectUri?: string;
 }
 
 //国际化类型

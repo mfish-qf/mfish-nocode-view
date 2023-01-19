@@ -225,11 +225,11 @@ const linkRoute = {
       name: "Doc",
       meta: {
         title: "routes.demo.iframe.doc",
-        frameSrc: "https://vvbin.cn/doc-next/"
+        frameSrc: "https://doc.vvbin.cn/"
       }
     },
     {
-      path: "https://vvbin.cn/doc-next/",
+      path: "https://doc.vvbin.cn/",
       name: "DocExternal",
       component: "LAYOUT",
       meta: {

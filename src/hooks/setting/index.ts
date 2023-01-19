@@ -8,21 +8,25 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     VITE_GLOB_APP_TITLE,
     VITE_GLOB_API_URL,
     VITE_GLOB_APP_SHORT_NAME,
-    VITE_GLOB_UPLOAD_URL
+    VITE_GLOB_UPLOAD_URL,
+    VITE_LOGIN_TYPE,
+    VITE_OAUTH2_URL,
+    VITE_OAUTH2_REDIRECT_URI
   } = getAppEnvConfig();
-
   if (!/[a-zA-Z\_]*/.test(VITE_GLOB_APP_SHORT_NAME)) {
     warn(
       `VITE_GLOB_APP_SHORT_NAME Variables can only be characters/underscores, please modify in the environment variables and re-running.`
     );
   }
-
-  // Take global configuration
+  // 采用全局配置
   const glob: Readonly<GlobConfig> = {
     title: VITE_GLOB_APP_TITLE,
     apiUrl: VITE_GLOB_API_URL,
     shortName: VITE_GLOB_APP_SHORT_NAME,
-    uploadUrl: VITE_GLOB_UPLOAD_URL
+    uploadUrl: VITE_GLOB_UPLOAD_URL,
+    loginType: VITE_LOGIN_TYPE,
+    oauth2Url: VITE_OAUTH2_URL,
+    oauth2RedirectUri: VITE_OAUTH2_REDIRECT_URI
   };
   return glob as Readonly<GlobConfig>;
 };

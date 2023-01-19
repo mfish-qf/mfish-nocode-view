@@ -3,10 +3,10 @@ import { usePermissionStoreWithOut } from "/@/store/modules/Permission";
 import { PageEnum } from "/@/enums/PageEnum";
 import { useUserStoreWithOut } from "/@/store/modules/User";
 import { PAGE_NOT_FOUND_ROUTE, RootRoute } from "/@/router/routers/Basic";
+import { curLoginType, oauth2Config } from "/@/settings/LoginSetting";
 
-const LOGIN_PATH = PageEnum.BASE_LOGIN;
 const ROOT_PATH = RootRoute().path;
-const whitePathList: PageEnum[] = [LOGIN_PATH];
+const whitePathList: PageEnum[] = [PageEnum.BASE_LOGIN, PageEnum.OAUTH_LOGIN];
 
 export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
@@ -16,7 +16,7 @@ export function createPermissionGuard(router: Router) {
     // 白名单路径允许直接访问
     if (whitePathList.includes(to.path as PageEnum)) {
       //如果访问登陆页面且token存在，判断token是否有效直接进入redirect地址或首页地址
-      if (to.path === LOGIN_PATH && token) {
+      if (to.path === PageEnum.BASE_LOGIN && token) {
         const isSessionTimeout = userStore.getSessionTimeout;
         //增加try catch方式请求异常造成无法返回首页
         try {
@@ -27,6 +27,20 @@ export function createPermissionGuard(router: Router) {
           }
         } catch {
         }
+      }
+      //如果登录类型为code方式走统一认证登录
+      if (to.path === PageEnum.BASE_LOGIN && curLoginType === "authorization_code") {
+        debugger
+        let url = oauth2Config.url + "?";
+        Object.keys(oauth2Config).forEach((key) => {
+          if (key === "url") return;
+          url += `${key}=${oauth2Config[key]}&`;
+        });
+        if (url.endsWith("&")) {
+          url = url.substring(0, url.length - 1);
+        }
+        window.location.href = url;
+        return;
       }
       next();
       return;
@@ -41,7 +55,7 @@ export function createPermissionGuard(router: Router) {
       }
       //重定向到登录页面
       const redirectData: { path: string; replace: boolean; query?: Recordable<string> } = {
-        path: LOGIN_PATH,
+        path: PageEnum.BASE_LOGIN,
         replace: true
       };
       if (to.path) {

@@ -3,15 +3,23 @@
  * @author: mfish
  * @date: 2022/10/11 15:28
  */
+import { LoginType } from "/@/settings/LoginSetting";
 
 //登录接口参数
 export interface LoginParams {
-  username: string;
-  password: string;
+  //password方式登录时使用
+  username?: string;
+  //password方式登录时使用
+  password?: string;
   client_id: string;
   client_secret: string;
-  grant_type: string;
+  grant_type: LoginType;
   redirect_uri: string;
+  //auth_code方式登录时使用
+  code?: string;
+  state?: string;
+  //刷新token时使用
+  refresh_token?:string;
 }
 
 export interface RoleInfo {

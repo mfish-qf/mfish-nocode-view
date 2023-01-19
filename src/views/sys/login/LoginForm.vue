@@ -77,7 +77,7 @@ import { useMessage } from "/@/hooks/web/UseMessage";
 import { useUserStore } from "/@/store/modules/User";
 import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from "./UseLogin";
 import { useDesign } from "/@/hooks/web/UseDesign";
-import system from "/@/router/routers/modules/sys/system";
+import { oauth2Config } from "/@/settings/LoginSetting";
 
 const ACol = Col;
 const ARow = Row;
@@ -107,10 +107,10 @@ async function handleLogin() {
     const userInfo = await userStore.login({
       password: data.password,
       username: data.account,
-      client_id: "system",
-      client_secret: "system",
+      client_id: oauth2Config.client_id,
+      client_secret: oauth2Config.client_secret,
       grant_type: "password",
-      redirect_uri: "http://baidu.com",
+      redirect_uri: oauth2Config.redirect_uri,
       mode: "modal"
     });
     if (userInfo) {
