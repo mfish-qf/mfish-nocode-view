@@ -4,15 +4,15 @@
  @date: 2023/1/17 17:38
 -->
 <template>
-    <div class="app-loading">
-      <div class="app-loading-wrap">
-        <img src="/resource/img/logo.png" class="app-loading-logo" alt="Logo">
-        <div>
-          <span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
-        </div>
-        <div class="app-loading-title">{{ title }}</div>
+  <div class="app-loading">
+    <div class="app-loading-wrap">
+      <img src="/resource/img/logo.png" class="app-loading-logo" alt="Logo">
+      <div>
+        <span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
       </div>
+      <div class="app-loading-title">{{ title }}</div>
     </div>
+  </div>
 </template>
 
 <script lang="ts">

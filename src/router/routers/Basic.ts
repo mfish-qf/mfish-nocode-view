@@ -34,7 +34,7 @@ export const LoginRoute: AppRouteRecordRaw = {
 export const Oauth2Route: AppRouteRecordRaw = {
   path: "/oauth2",
   name: "Oauth2",
-  component: () => import("/@/views/sys/login/oauth2.vue"),
+  component: () => import("/@/views/sys/login/Oauth2.vue"),
   meta: {
     title: "oauth2"
   }

@@ -30,6 +30,7 @@ export function createPermissionGuard(router: Router) {
       }
       //如果登录类型为code方式走统一认证登录
       if (to.path === PageEnum.BASE_LOGIN && curLoginType === "authorization_code") {
+        debugger
         let url = oauth2Config.url + "?";
         Object.keys(oauth2Config).forEach((key) => {
           if (key === "url") return;
