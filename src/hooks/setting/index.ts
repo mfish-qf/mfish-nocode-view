@@ -9,9 +9,9 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     VITE_GLOB_API_URL,
     VITE_GLOB_APP_SHORT_NAME,
     VITE_GLOB_UPLOAD_URL,
-    VITE_LOGIN_TYPE,
-    VITE_OAUTH2_URL,
-    VITE_OAUTH2_REDIRECT_URI
+    VITE_GLOB_LOGIN_TYPE,
+    VITE_GLOB_OAUTH2_URL,
+    VITE_GLOB_OAUTH2_REDIRECT_URI
   } = getAppEnvConfig();
   if (!/[a-zA-Z\_]*/.test(VITE_GLOB_APP_SHORT_NAME)) {
     warn(
@@ -24,9 +24,9 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     apiUrl: VITE_GLOB_API_URL,
     shortName: VITE_GLOB_APP_SHORT_NAME,
     uploadUrl: VITE_GLOB_UPLOAD_URL,
-    loginType: VITE_LOGIN_TYPE,
-    oauth2Url: VITE_OAUTH2_URL,
-    oauth2RedirectUri: VITE_OAUTH2_REDIRECT_URI
+    loginType: VITE_GLOB_LOGIN_TYPE,
+    oauth2Url: VITE_GLOB_OAUTH2_URL,
+    oauth2RedirectUri: VITE_GLOB_OAUTH2_REDIRECT_URI
   };
   return glob as Readonly<GlobConfig>;
 };
