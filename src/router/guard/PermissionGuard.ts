@@ -30,15 +30,21 @@ export function createPermissionGuard(router: Router) {
       }
       //如果登录类型为code方式走统一认证登录
       if (to.path === PageEnum.BASE_LOGIN && curLoginType === "authorization_code") {
-        debugger
         let url = oauth2Config.url + "?";
+        const redirect_uri = to.redirectedFrom?.path;
         Object.keys(oauth2Config).forEach((key) => {
           if (key === "url") return;
-          url += `${key}=${oauth2Config[key]}&`;
+          //如果存在当前域的重定向地址，补充回调地址。否则使用默认回调地址
+          if (key === "redirect_uri" && redirect_uri) {
+            url += `${key}=${oauth2Config[key]}?redirect=${redirect_uri}&`;
+          } else {
+            url += `${key}=${oauth2Config[key]}&`;
+          }
         });
         if (url.endsWith("&")) {
           url = url.substring(0, url.length - 1);
         }
+
         window.location.href = url;
         return;
       }

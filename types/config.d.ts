@@ -25,11 +25,11 @@ export interface GlobEnvConfig {
   // Upload url
   VITE_GLOB_UPLOAD_URL?: string;
   // 登录类型
-  VITE_LOGIN_TYPE: string;
+  VITE_GLOB_LOGIN_TYPE: string;
   // oauth2登录地址
-  VITE_OAUTH2_URL?: string;
+  VITE_GLOB_OAUTH2_URL?: string;
   // oauth2回调地址
-  VITE_OAUTH2_REDIRECT_URI?: string;
+  VITE_GLOB_OAUTH2_REDIRECT_URI?: string;
 }
 
 //环境配置转换为只读属性提供使用
