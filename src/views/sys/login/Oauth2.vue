@@ -31,7 +31,9 @@ export default ({
     const { notification } = useMessage();
     const { t } = useI18n();
     const { title } = useGlobSetting();
-    const code = useRoute().query.code as string;
+    const route = useRoute();
+    const code = route.query.code as string;
+    const routeRedirect = route.query.redirect as string;
     const router = useRouter();
     onBeforeMount(() => {
       if (code) {
@@ -42,12 +44,17 @@ export default ({
     });
 
     function handleLogin() {
+      let redirectUri = oauth2Config.redirect_uri;
+      if (routeRedirect) {
+        redirectUri += `?redirect=${routeRedirect}`;
+      }
       userStore.login({
         client_id: oauth2Config.client_id,
         client_secret: oauth2Config.client_secret,
         grant_type: "authorization_code",
-        redirect_uri: oauth2Config.redirect_uri,
+        redirect_uri: redirectUri,
         code: code,
+        route_redirect: routeRedirect,
         mode: "modal"
       }).then((userInfo) => {
         if (userInfo) {

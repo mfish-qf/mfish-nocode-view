@@ -87,17 +87,22 @@ export const useUserStore = defineStore({
       this.sessionTimeout = false;
     },
     /**
-     * @description: login
+     * 登录
+     * @param params  route_redirect //路由重定向地址，统一认证后跳转
      */
-    async login(params: LoginParams & { mode?: MessageMode; }): Promise<SsoUser | null> {
+    async login(params: LoginParams & { mode?: MessageMode; route_redirect?: string; }): Promise<SsoUser | null> {
       try {
-        const { mode, ...loginParams } = params;
+        const { mode, route_redirect, ...loginParams } = params;
         const result = await loginApi(loginParams, mode);
         const { access_token, refresh_token } = result;
         this.setToken(access_token);
         this.setRefreshToken(refresh_token);
         const userInfo = await this.getAccountInfo();
-        await router.replace(usePermissionStore().getHomePath);
+        if (route_redirect) {
+          await router.replace(route_redirect);
+        } else {
+          await router.replace(usePermissionStore().getHomePath);
+        }
         return userInfo;
       } catch (error) {
         return Promise.reject(error);

@@ -3,8 +3,6 @@
  * @author: mfish
  * @date: 2022/10/11 15:28
  */
-import { LoginType } from "/@/settings/LoginSetting";
-
 //登录接口参数
 export interface LoginParams {
   //password方式登录时使用
@@ -13,7 +11,7 @@ export interface LoginParams {
   password?: string;
   client_id: string;
   client_secret: string;
-  grant_type: LoginType;
+  grant_type: string;
   redirect_uri: string;
   //auth_code方式登录时使用
   code?: string;
