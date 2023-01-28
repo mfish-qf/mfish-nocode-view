@@ -9,7 +9,12 @@ mfish-nocode-view采用 Vue3.0、Vite4.0、 Ant-Design-Vue、TypeScript 等新�
 
 ##  项目源码
 
-
+## 后端地址
+* *[后端----github地址](https://github.com/mfish-qf/mfish-nocode)*
+* *[后端----gitee地址](https://gitee.com/qiufeng9862/mfish-nocode)*
+* 
+## 演示环境
+* *[demo地址](http://app.mfish.com.cn:11119)*
 
 ##### 项目说明
 
