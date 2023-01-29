@@ -33,7 +33,7 @@ export function createPermissionGuard(router: Router) {
         let url = oauth2Config.url + "?";
         const redirect_uri = to.redirectedFrom?.path;
         Object.keys(oauth2Config).forEach((key) => {
-          if (key === "url") return;
+          if (key === "url" || key === "client_secret") return;
           //如果存在当前域的重定向地址，补充回调地址。否则使用默认回调地址
           if (key === "redirect_uri" && redirect_uri) {
             url += `${key}=${oauth2Config[key]}?redirect=${redirect_uri}&`;
@@ -44,7 +44,6 @@ export function createPermissionGuard(router: Router) {
         if (url.endsWith("&")) {
           url = url.substring(0, url.length - 1);
         }
-
         window.location.href = url;
         return;
       }
