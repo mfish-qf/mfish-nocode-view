@@ -30,6 +30,16 @@ export const LoginRoute: AppRouteRecordRaw = {
   }
 };
 
+//错误登录路由
+export const ErrorLoginRoute: AppRouteRecordRaw = {
+  path: "/error-login",
+  name: "ErrorLogin",
+  component: () => import("/@/views/sys/login/Login.vue"),
+  meta: {
+    title: t("routes.basic.login")
+  }
+};
+
 //oauth2登录
 export const Oauth2Route: AppRouteRecordRaw = {
   path: "/oauth2",

@@ -6,7 +6,7 @@ import { PAGE_NOT_FOUND_ROUTE, RootRoute } from "/@/router/routers/Basic";
 import { curLoginType, oauth2Config } from "/@/settings/LoginSetting";
 
 const ROOT_PATH = RootRoute().path;
-const whitePathList: PageEnum[] = [PageEnum.BASE_LOGIN, PageEnum.OAUTH_LOGIN];
+const whitePathList: PageEnum[] = [PageEnum.BASE_LOGIN, PageEnum.OAUTH_LOGIN, PageEnum.ERROR_LOGIN];
 
 export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
