@@ -8,6 +8,8 @@ export enum PageEnum {
   BASE_LOGIN = "/login",
   // oauth2登录页面
   OAUTH_LOGIN = "/oauth2",
+  // oauth2登录出错后使用应急登录页面
+  ERROR_LOGIN = "/error-login",
   // 首页路径
   BASE_HOME = "/dashboard",
   // 错误页路径

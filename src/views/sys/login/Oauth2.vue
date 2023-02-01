@@ -65,7 +65,8 @@ export default ({
           });
         }
       }).catch(() => {
-        router.push("/login");
+        //token获取失败，跳转应急登录页面登录
+        router.push("/error-login");
       });
     };
     return {
