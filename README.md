@@ -2,6 +2,10 @@
 ======================================
 当前最新版本： 1.0.0
 
+[![AUR](https://img.shields.io/badge/license-MIT%20License%20-blue.svg)](https://github.com/mfish-qf/mfish-nocode-view/blob/main/LICENSE)
+[![](https://img.shields.io/badge/Author-mfish-orange.svg)](http://www.mfish.com.cn)
+[![](https://img.shields.io/badge/Blog-个人博客-yellow.svg)](http://www.mfish.com.cn)
+[![](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/mfish-qf/mfish-nocode-view/releases/tag/v1.0.0)
 
 ## 简介
 mfish-nocode-view采用 Vue3.0、Vite4.0、 Ant-Design-Vue、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
