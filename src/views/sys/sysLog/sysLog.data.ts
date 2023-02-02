@@ -3,6 +3,8 @@ import { FormSchema } from "/@/components/general/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
 import { dateUtil } from "/@/utils/DateUtil";
+import { getDictProps } from "/@/utils/DictUtils";
+import { DescItem } from "/@/components/general/Description";
 
 /**
  * @description: 系统日志
@@ -12,14 +14,14 @@ import { dateUtil } from "/@/utils/DateUtil";
  */
 export const columns: BasicColumn[] = [
   {
-    title: "中文标题",
+    title: "日志信息",
     dataIndex: "title",
-    width: 150
+    width: 200
   },
   {
     title: "请求类型",
     dataIndex: "reqType",
-    width: 120
+    width: 80
   },
   {
     title: "请求路径",
@@ -29,28 +31,12 @@ export const columns: BasicColumn[] = [
   {
     title: "请求来源",
     dataIndex: "reqSource",
-    width: 120,
-    customRender: ({ record }) => {
-      const source = record.reqSource;
-      let color;
-      let text;
-      if (source === 0) {
-        color = "orange";
-        text = "其他";
-      } else if (source === 1) {
-        color = "blue";
-        text = "后台用户";
-      } else {
-        color = "pink";
-        text = "手机用户";
-      }
-      return h(Tag, { color: color }, () => text);
-    }
+    width: 90
   },
   {
     title: "操作类型",
     dataIndex: "operType",
-    width: 120
+    width: 90
   },
   {
     title: "操作IP",
@@ -72,12 +58,12 @@ export const columns: BasicColumn[] = [
   {
     title: "操作时间",
     dataIndex: "createTime",
-    width: 180
+    width: 160
   },
   {
     title: "操作人",
     dataIndex: "createBy",
-    width: 120
+    width: 80
   },
   {
     title: "方法",
@@ -104,7 +90,8 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: "reqType",
     label: "请求类型",
-    component: "Input",
+    component: "ApiSelect",
+    componentProps: getDictProps("sys_req_type"),
     colProps: { span: 4 }
   },
   {
@@ -138,13 +125,15 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: "reqSource",
     label: "请求来源",
-    component: "Input",
+    component: "ApiSelect",
+    componentProps: getDictProps("sys_req_source"),
     colProps: { span: 4 }
   },
   {
     field: "operType",
     label: "操作类型",
-    component: "Input",
+    component: "ApiSelect",
+    componentProps: getDictProps("sys_log_type"),
     colProps: { span: 4 }
   },
   {
@@ -167,61 +156,39 @@ export const searchFormSchema: FormSchema[] = [
   }
 
 ];
-export const sysLogFormSchema: FormSchema[] = [
-  {
-    field: "id",
-    label: "唯一ID",
-    component: "Input",
-    show: false
-  },
+export const sysLogSchema: DescItem[] = [
   {
     field: "title",
-    label: "中文标题",
-    component: "Input"
+    label: "中文标题"
   },
   {
     field: "method",
-    label: "方法",
-    component: "Input"
+    label: "方法"
   },
   {
     field: "reqType",
-    label: "请求类型",
-    component: "Input"
+    label: "请求类型"
   },
   {
     field: "reqUri",
-    label: "请求路径",
-    component: "Input"
-  },
-  {
-    field: "reqParam",
-    label: "请求参数",
-    component: "Input"
+    label: "请求路径"
   },
   {
     field: "reqSource",
-    label: "请求来源",
-    component: "Input"
+    label: "请求来源"
   },
   {
     field: "operType",
-    label: "操作类型",
-    component: "Input"
+    label: "操作类型"
   },
   {
     field: "operIp",
-    label: "操作IP",
-    component: "Input"
+    label: "操作IP"
   },
   {
     field: "operStatus",
-    label: "操作状态",
-    component: "Input"
-  },
-  {
-    field: "remark",
-    label: "返回信息",
-    component: "Input"
+    label: "操作状态"
   }
+
 ];
+

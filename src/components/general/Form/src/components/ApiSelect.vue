@@ -31,7 +31,7 @@ import { LoadingOutlined } from "@ant-design/icons-vue";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { propTypes } from "/@/utils/PropTypes";
 
-type OptionsItem = {label: string; value: string; disabled?: boolean };
+type OptionsItem = { label: string; value: string; disabled?: boolean };
 
 export default defineComponent({
   name: "ApiSelect",
@@ -48,10 +48,7 @@ export default defineComponent({
       default: null
     },
     // api params
-    params: {
-      type: Object as PropType<Recordable>,
-      default: () => ({})
-    },
+    params: propTypes.any.def({}),
     // support xxx.xxx.xx
     resultField: propTypes.string.def(""),
     labelField: propTypes.string.def("label"),
