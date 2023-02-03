@@ -2,18 +2,23 @@
 ======================================
 当前最新版本： 1.0.0
 
-[![AUR](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/mfish-qf/mfish-nocode-view/blob/main/LICENSE)
-[![](https://img.shields.io/badge/Author-mfish-orange.svg)](http://www.mfish.com.cn)
-[![](https://img.shields.io/badge/Blog-个人博客-yellow.svg)](http://www.mfish.com.cn)
-[![](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/mfish-qf/mfish-nocode-view/releases/tag/v1.0.0)
+[![Author](https://img.shields.io/badge/Author-mfish-orange.svg)](http://www.mfish.com.cn)
+[![Blog](https://img.shields.io/badge/Blog-个人博客-yellow.svg)](http://www.mfish.com.cn)
+[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/mfish-qf/mfish-nocode-view/releases/tag/v1.0.0)
+[![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/mfish-qf/mfish-nocode-view/blob/main/LICENSE)
 
-## 简介
+[![GitHub watches](https://img.shields.io/github/watchers/mfish-qf/mfish-nocode-view.svg?style=social&label=Watch)](https://github.com/mfish-qf/mfish-nocode-view)
+[![GitHub stars](https://img.shields.io/github/stars/mfish-qf/mfish-nocode-view.svg?style=social&label=Stars)](https://github.com/mfish-qf/mfish-nocode-view)
+[![GitHub forks](https://img.shields.io/github/forks/mfish-qf/mfish-nocode-view.svg?style=social&label=Fork)](https://github.com/mfish-qf/mfish-nocode-view)
+
+## 项目介绍
 mfish-nocode-view采用 Vue3.0、Vite4.0、 Ant-Design-Vue、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
-是在 Vben-Admin 基础上研发的，适合于mfish低代码平台的VUE3版前端解决方案，目前已是稳定版本，可用于生产项目。
+是在Vben-Admin基础上进行优化研发的适合于摸鱼低代码平台的前端解决方案，目前已是稳定版本，可用于生产项目。
 
 ##  后端源码地址
-* *[后端----github地址](https://github.com/mfish-qf/mfish-nocode)*
-* *[后端----gitee地址](https://gitee.com/qiufeng9862/mfish-nocode)*
+[![github](https://img.shields.io/badge/后端地址-github-red.svg)](https://github.com/mfish-qf/mfish-nocode)
+[![gitee](https://img.shields.io/badge/后端地址-gitee-lightgrey.svg)](https://gitee.com/qiufeng9862/mfish-nocode)
+
 ## 演示环境
 * *[demo地址](http://app.mfish.com.cn:11119)*
 
