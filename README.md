@@ -70,8 +70,6 @@ pnpm run dev
 ```bash
 pnpm run build
 ```
-
-
 - 访问前台
 
 http://localhost:5281
