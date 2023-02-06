@@ -57,14 +57,11 @@ pnpm install
 ```bash
 .env.development
 ```
-
 - run
 
 ```bash
 pnpm run dev
 ```
-
-
 - build
 
 ```bash
