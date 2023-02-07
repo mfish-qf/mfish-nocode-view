@@ -13,7 +13,11 @@ export interface Job extends BaseEntity<string> {
   invokeMethod: string;
   invokeParam: string;
   allowConcurrent: number;
-  misfireHandler: string;
+  misfireHandler: number;
+  priority: number;
+  startTime: string;
+  endTime: string;
+  timeZone: string;
   status: number;
   remark: string;
 }
