@@ -14,6 +14,6 @@ export function answer(question: QuestionModel) {
   return defHttp.post<CompletionResult>({
     url: Api.Question,
     params: question,
-    timeout: 5 * 60 * 1000
+    timeout: 10 * 60 * 1000
   }, { successMessageMode: "none" });
 };
