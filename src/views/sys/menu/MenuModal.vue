@@ -33,7 +33,7 @@ export default {
           ...data.record
         }).then();
       }
-      setTreeData({ menuType: !data.record ? MenuType.目录 : data.record.menuType }).then();
+      valueChange("menuType", !data.record ? MenuType.目录 : data.record.menuType);
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增菜单" : "编辑菜单"));
 
