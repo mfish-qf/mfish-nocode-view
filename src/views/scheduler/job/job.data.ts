@@ -4,7 +4,7 @@ import { FormSchema } from "/@/components/general/Table";
 /**
  * @description: 定时调度任务
  * @author: mfish
- * @date: 2023-02-03
+ * @date: 2023-02-20
  * @version: V1.0.0
  */
 export const columns: BasicColumn[] = [
@@ -19,22 +19,27 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "cron表达式",
-    dataIndex: "cron",
+    title: "任务类型(0 本地任务 1 RPC远程调用任务 2 MQ消息任务)",
+    dataIndex: "jobType",
     width: 120
   },
   {
-    title: "调用方法",
-    dataIndex: "invokeMethod",
+    title: "类名称",
+    dataIndex: "className",
+    width: 120
+  },
+  {
+    title: "方法名称",
+    dataIndex: "methodName",
     width: 120
   },
   {
     title: "调用参数",
-    dataIndex: "invokeParam",
+    dataIndex: "params",
     width: 120
   },
   {
-    title: "允许并发执行（1允许 0不允许）",
+    title: "允许并发执行（0不允许 1允许）",
     dataIndex: "allowConcurrent",
     width: 120
   },
@@ -69,8 +74,8 @@ export const searchFormSchema: FormSchema[] = [
     colProps: { span: 4 }
   },
   {
-    field: "cron",
-    label: "cron表达式",
+    field: "jobType",
+    label: "任务类型(0 本地任务 1 RPC远程调用任务 2 MQ消息任务)",
     component: "Input",
     colProps: { span: 4 }
   },
@@ -95,24 +100,29 @@ export const jobFormSchema: FormSchema[] = [
     required: true
   },
   {
-    field: "cron",
-    label: "cron表达式",
+    field: "jobType",
+    label: "任务类型(0 本地任务 1 RPC远程调用任务 2 MQ消息任务)",
     component: "Input",
   },
   {
-    field: "invokeMethod",
-    label: "调用方法",
+    field: "className",
+    label: "类名称",
     component: "Input",
     required: true
   },
   {
-    field: "invokeParam",
+    field: "methodName",
+    label: "方法名称",
+    component: "Input",
+  },
+  {
+    field: "params",
     label: "调用参数",
     component: "Input",
   },
   {
     field: "allowConcurrent",
-    label: "允许并发执行（1允许 0不允许）",
+    label: "允许并发执行（0不允许 1允许）",
     component: "Input",
   },
   {

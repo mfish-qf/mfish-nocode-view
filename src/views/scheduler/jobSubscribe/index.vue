@@ -1,5 +1,5 @@
 <!--
- @description: 定时调度任务
+ @description: 任务订阅表
  @author: mfish
  @date: 2023-02-20
  @version: V1.0.0
@@ -8,7 +8,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:job:insert')">新增定时调度任务</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:jobSubscribe:insert')">新增任务订阅表</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -17,7 +17,7 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                auth: 'sys:job:update'
+                auth: 'sys:jobSubscribe:update'
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -27,33 +27,33 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
-                auth: 'sys:job:delete'
+                auth: 'sys:jobSubscribe:delete'
               },
             ]"
           />
         </template>
       </template>
     </BasicTable>
-    <JobModal @register="registerModal" @success="handleSuccess" />
+    <JobSubscribeModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-import { deleteJob, getJobList } from "/@/api/scheduler/Job";
+import { deleteJobSubscribe, getJobSubscribeList } from "/@/api/scheduler/JobSubscribe";
 import { useModal } from "/@/components/general/Modal";
-import JobModal from "./JobModal.vue";
-import { columns, searchFormSchema } from "./job.data";
+import JobSubscribeModal from "./JobSubscribeModal.vue";
+import { columns, searchFormSchema } from "./jobSubscribe.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 
 export default {
-  name: "JobManagement",
-  components: { BasicTable, JobModal, TableAction },
+  name: "JobSubscribeManagement",
+  components: { BasicTable, JobSubscribeModal, TableAction },
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
     const [registerTable, { reload }] = useTable({
-      title: "定时调度任务列表",
-      api: getJobList,
+      title: "任务订阅表列表",
+      api: getJobSubscribeList,
       columns,
       formConfig: {
         labelWidth: 100,
@@ -85,7 +85,7 @@ export default {
     }
 
     function handleDelete(record: Recordable) {
-      deleteJob(record.id).then(() => {
+      deleteJobSubscribe(record.id).then(() => {
         handleSuccess();
       });
     }

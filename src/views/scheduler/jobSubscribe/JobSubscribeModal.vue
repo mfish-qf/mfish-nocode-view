@@ -1,5 +1,5 @@
 <!--
- @description: 定时调度任务
+ @description: 任务订阅表
  @author: mfish
  @date: 2023-02-20
  @version: V1.0.0
@@ -12,12 +12,12 @@
 <script lang="ts">
 import { ref, computed, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/general/Form/index";
-import { jobFormSchema } from "./job.data";
+import { jobSubscribeFormSchema } from "./jobSubscribe.data";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
-import { insertJob, updateJob } from "/@/api/scheduler/Job";
+import { insertJobSubscribe, updateJobSubscribe } from "/@/api/scheduler/JobSubscribe";
 
 export default {
-  name: "JobModal",
+  name: "JobSubscribeModal",
   components: { BasicModal, BasicForm },
   emits: ["success", "register"],
   setup(_, { emit }) {
@@ -25,7 +25,7 @@ export default {
     const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
       labelWidth: 100,
       baseColProps: { span: 12 },
-      schemas: jobFormSchema,
+      schemas: jobSubscribeFormSchema,
       showActionButtonGroup: false,
       autoSubmitOnEnter: true
     });
@@ -39,19 +39,19 @@ export default {
         }).then();
       }
     });
-    const getTitle = computed(() => (!unref(isUpdate) ? "新增定时调度任务" : "编辑定时调度任务"));
+    const getTitle = computed(() => (!unref(isUpdate) ? "新增任务订阅表" : "编辑任务订阅表"));
 
     async function handleSubmit() {
       let values = await validate();
       setModalProps({ confirmLoading: true });
       if (unref(isUpdate)) {
-        saveJob(updateJob, values);
+        saveJobSubscribe(updateJobSubscribe, values);
       } else {
-        saveJob(insertJob, values);
+        saveJobSubscribe(insertJobSubscribe, values);
       }
     }
 
-    function saveJob(save, values) {
+    function saveJobSubscribe(save, values) {
       save(values).then(() => {
         emit("success");
         closeModal();
