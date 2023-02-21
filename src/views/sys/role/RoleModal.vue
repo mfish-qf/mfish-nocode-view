@@ -66,7 +66,11 @@ export default {
         }, {
           field: "roleCode",
           dynamicDisabled: disable
-        }]).then();
+        },{
+          field: "status",
+          dynamicDisabled: disable
+        }
+        ]).then();
       }
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增角色" : "编辑角色"));
