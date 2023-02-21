@@ -8,7 +8,8 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:job:insert')">新增定时调度任务</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:job:insert')">新增任务
+        </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -32,22 +33,41 @@
             ]"
           />
         </template>
+        <template v-if="column.key === 'jobType'">
+          <Tag v-for="item in jobTypes" v-show="record.jobType == item.dictValue" :color="item.color">
+            {{ item.dictLabel }}
+          </Tag>
+        </template>
+        <template v-if="column.key === 'misfireHandler'">
+          <Tag v-for="item in misfireHandlers" v-show="record.misfireHandler == item.dictValue" :color="item.color">
+            {{ item.dictLabel }}
+          </Tag>
+        </template>
+        <template v-if="column.key === 'timeZone'">
+          <Tag v-for="item in timeZones" v-show="record.timeZone == item.dictValue" :color="item.color">
+            {{ item.dictLabel }}
+          </Tag>
+        </template>
       </template>
     </BasicTable>
     <JobModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
+import { ref, onBeforeMount } from "VUE";
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
+import { Tag } from "ant-design-vue";
 import { deleteJob, getJobList } from "/@/api/scheduler/Job";
 import { useModal } from "/@/components/general/Modal";
 import JobModal from "./JobModal.vue";
 import { columns, searchFormSchema } from "./job.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
+import { getDictItems } from "/@/api/sys/DictItem";
+import { DictItem } from "/@/api/sys/model/DictItemModel";
 
 export default {
   name: "JobManagement",
-  components: { BasicTable, JobModal, TableAction },
+  components: { BasicTable, JobModal, TableAction, Tag },
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
@@ -70,6 +90,32 @@ export default {
         fixed: undefined
       }
     });
+    let jobTypes = ref<DictItem[]>([]);
+    let misfireHandlers = ref<DictItem[]>([]);
+    let timeZones = ref<DictItem[]>([]);
+    onBeforeMount(() => {
+      getJobTypes();
+      getMisfireHandlers();
+      getTimeZone();
+    });
+
+    function getJobTypes() {
+      getDictItems("sys_job_type").then((res) => {
+        jobTypes.value = res;
+      });
+    }
+
+    function getMisfireHandlers() {
+      getDictItems("sys_job_misfire").then((res) => {
+        misfireHandlers.value = res;
+      });
+    }
+
+    function getTimeZone() {
+      getDictItems("sys_time_zone").then((res) => {
+        timeZones.value = res;
+      });
+    }
 
     function handleCreate() {
       openModal(true, {
@@ -101,7 +147,10 @@ export default {
       handleEdit,
       handleDelete,
       handleSuccess,
-      hasPermission
+      hasPermission,
+      jobTypes,
+      misfireHandlers,
+      timeZones
     };
   }
 };

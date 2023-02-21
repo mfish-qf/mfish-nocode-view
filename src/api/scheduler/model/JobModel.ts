@@ -16,6 +16,8 @@ export interface Job extends BaseEntity<string> {
   allowConcurrent: number;
   misfireHandler: number;
   status: number;
+  timeZone: string;
+  priority: number;
   remark: string;
 }
 

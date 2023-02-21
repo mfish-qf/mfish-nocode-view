@@ -10,6 +10,7 @@ export interface DictItem extends BaseEntity<string> {
   dictCode: string;
   dictLabel: string;
   dictValue: string;
+  valueType: number;
   dictSort: number;
   color: string;
   status: number;

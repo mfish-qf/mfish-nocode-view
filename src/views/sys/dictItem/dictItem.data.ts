@@ -38,6 +38,17 @@ export const columns: BasicColumn[] = [
     }
   },
   {
+    title: "值类型",
+    dataIndex: "valueType",
+    width: 80,
+    customRender: ({ record }) => {
+      const enable = ~~record.valueType === 0;
+      const color = enable ? "green" : "blue";
+      const text = enable ? "字符" : "数字";
+      return h(Tag, { color: color }, () => text);
+    }
+  },
+  {
     title: "字典排序",
     dataIndex: "dictSort",
     width: 120
@@ -109,6 +120,18 @@ export const dictItemFormSchema: FormSchema[] = [
     label: "字典键值",
     component: "Input",
     required: true
+  },
+  {
+    field: "valueType",
+    label: "键值类型",
+    component: "RadioButtonGroup",
+    defaultValue: 0,
+    componentProps: {
+      options: [
+        { label: "字符", value: 0 },
+        { label: "数字", value: 1 }
+      ]
+    }
   },
   {
     field: "dictSort",

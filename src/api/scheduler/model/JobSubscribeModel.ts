@@ -9,10 +9,9 @@ import { BaseEntity, PageResult } from "/@/api/model/BaseModel";
 export interface JobSubscribe extends BaseEntity<string> {
   jobId: string;
   cron: string;
-  timeZone: string;
-  priority: number;
   startTime: string;
   endTime: string;
+  status: number;
 }
 
 export interface ReqJobSubscribe {
