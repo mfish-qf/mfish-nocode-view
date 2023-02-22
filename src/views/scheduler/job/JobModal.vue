@@ -6,7 +6,11 @@
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
-    <BasicForm @register="registerForm" @submit="handleSubmit" />
+    <BasicForm @register="registerForm" @submit="handleSubmit">
+      <template #params="{ model, field }">
+        <CodeEditor style="border: 1px solid #d9d9d9;" v-model:value="model[field]" mode="application/json" />
+      </template>
+    </BasicForm>
   </BasicModal>
 </template>
 <script lang="ts">
@@ -15,10 +19,11 @@ import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { jobFormSchema } from "./job.data";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { insertJob, updateJob } from "/@/api/scheduler/Job";
+import { CodeEditor } from "/@/components/general/CodeEditor";
 
 export default {
   name: "JobModal",
-  components: { BasicModal, BasicForm },
+  components: { BasicModal, BasicForm, CodeEditor },
   emits: ["success", "register"],
   setup(_, { emit }) {
     const isUpdate = ref(true);

@@ -54,7 +54,7 @@
   </div>
 </template>
 <script lang="ts">
-import { ref, onBeforeMount } from "VUE";
+import { ref, onBeforeMount } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { Tag } from "ant-design-vue";
 import { deleteJob, getJobList } from "/@/api/scheduler/Job";
