@@ -23,7 +23,7 @@ import { formSchema } from "./role.data";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { BasicTree, TreeItem } from "/@/components/general/Tree";
 import { getMenuTree } from "/@/api/sys/Menu";
-import { insertRole, updateRole } from "/@/api/sys/Role";
+import { getRoleMenus, insertRole, updateRole } from "/@/api/sys/Role";
 
 export default {
   name: "RoleModal",
@@ -48,9 +48,12 @@ export default {
       }
       isUpdate.value = !!data?.isUpdate;
       if (unref(isUpdate)) {
-        setFieldsValue({
-          ...data.record
-        }).then();
+        getRoleMenus(data.record.id).then((res) => {
+          data.record.menus = res;
+          setFieldsValue({
+            ...data.record
+          }).then();
+        });
         // 超户不允许修改roleName,roleCode
         if (data.record.id === "1") {
           disableInput(true);
@@ -66,7 +69,11 @@ export default {
         }, {
           field: "roleCode",
           dynamicDisabled: disable
-        }]).then();
+        }, {
+          field: "status",
+          dynamicDisabled: disable
+        }
+        ]).then();
       }
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增角色" : "编辑角色"));

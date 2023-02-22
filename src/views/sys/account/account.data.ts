@@ -1,8 +1,9 @@
 import { BasicColumn } from "/@/components/general/Table";
 import { FormSchema } from "/@/components/general/Table";
 import { h } from "vue";
-import { Tag } from "ant-design-vue";
+import { Tag, Switch } from "ant-design-vue";
 import { RenderCallbackParams } from "/@/components/general/Form";
+import { setUserStatus } from "/@/api/sys/User";
 
 export const columns: BasicColumn[] = [
   {
@@ -57,11 +58,27 @@ export const columns: BasicColumn[] = [
     dataIndex: "status",
     width: 60,
     customRender: ({ record }) => {
-      const status = record.status;
-      const enable = ~~status === 0;
-      const color = enable ? "green" : "red";
-      const text = enable ? "启用" : "停用";
-      return h(Tag, { color: color }, () => text);
+      if (!Reflect.has(record, "pendingStatus")) {
+        record.pendingStatus = false;
+      }
+      return h(Switch, {
+        checked: record.status === 0,
+        checkedChildren: "已启用",
+        unCheckedChildren: "已停用",
+        disabled: record.id === "1",
+        loading: record.pendingStatus,
+        onChange(checked: boolean) {
+          record.pendingStatus = true;
+          const newStatus = checked ? 0 : 1;
+          setUserStatus(record.id, newStatus)
+            .then(() => {
+              record.status = newStatus;
+            })
+            .finally(() => {
+              record.pendingStatus = false;
+            });
+        }
+      });
     }
   }
 ];

@@ -1,14 +1,15 @@
 /**
  * @description: 定时调度任务
  * @author: mfish
- * @date: 2023-02-03
+ * @date: 2023-02-20
  * @version: V1.0.0
  */
 import { defHttp } from "/@/utils/http/axios";
 import { Job, ReqJob, JobPageModel } from "/@/api/scheduler/model/JobModel";
 
 enum Api {
-  Job = "/scheduler/job"
+  Job = "/scheduler/job",
+  setStatus = "/scheduler/job/status"
 }
 
 /**
@@ -49,4 +50,13 @@ export function updateJob(job: Job) {
  */
 export function deleteJob(id: string) {
   return defHttp.delete<Job>({ url: Api.Job + "/" + id }, { successMessageMode: "message" });
+};
+
+/**
+ * 设置任务状态
+ * @param roleId
+ * @param status
+ */
+export const setJobStatus = (roleId: string, status: number) => {
+  return defHttp.put<Boolean>({ url: Api.setStatus, params: { "id": roleId, "status": status } });
 };

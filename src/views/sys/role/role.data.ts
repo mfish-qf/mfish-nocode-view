@@ -33,10 +33,10 @@ export const columns: BasicColumn[] = [
         checked: record.status === 0,
         checkedChildren: "已启用",
         unCheckedChildren: "已停用",
+        disabled: record.id === "1",
         loading: record.pendingStatus,
         onChange(checked: boolean) {
           record.pendingStatus = true;
-          console.log(checked);
           const newStatus = checked ? 0 : 1;
           setRoleStatus(record.id, newStatus)
             .then(() => {
