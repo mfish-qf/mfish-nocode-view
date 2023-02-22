@@ -9,7 +9,8 @@ import { RolePageModel, SsoRole } from "/@/api/sys/model/RoleModel";
 enum Api {
   role = "/oauth2/role",
   allRole = "/oauth2/role/all",
-  setStatus = "/oauth2/role/status"
+  setStatus = "/oauth2/role/status",
+  menus = "/oauth2/role/menus"
 }
 
 export const getRoleList = (params?: SsoRole) => {
@@ -17,6 +18,9 @@ export const getRoleList = (params?: SsoRole) => {
 };
 export const getAllRoleList = (params?: SsoRole) => {
   return defHttp.get<SsoRole[]>({ url: Api.allRole, params });
+};
+export const getRoleMenus = (roleId?: string) => {
+  return defHttp.get<String[]>({ url: `${Api.menus}/${roleId}`});
 };
 export const insertRole = (params: SsoRole) => {
   return defHttp.post<SsoRole>({ url: Api.role, params }, { successMessageMode: "message" });

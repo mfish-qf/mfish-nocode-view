@@ -11,7 +11,8 @@ enum Api {
   isAccountExist = "/oauth2/user/exist",
   pwd = "/oauth2/user/pwd",
   SendMsg = "/oauth2/sendMsg",
-  Permissions = "/oauth2/user/permissions"
+  Permissions = "/oauth2/user/permissions",
+  setStatus = "/oauth2/user/status"
 }
 
 /**
@@ -75,3 +76,7 @@ export function deleteUser(params: string) {
 export function changePwd(params: { userId: string, oldPwd?: string, newPwd: string }) {
   return defHttp.put({ url: Api.pwd, params }, { successMessageMode: "message" });
 }
+
+export const setUserStatus = (userId: string, status: number) => {
+  return defHttp.put<Boolean>({ url: Api.setStatus, params: { "id": userId, "status": status } });
+};

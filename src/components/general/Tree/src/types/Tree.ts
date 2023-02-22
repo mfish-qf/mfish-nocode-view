@@ -41,7 +41,7 @@ export type CheckKeys =
 
 export const treeProps = buildProps({
   value: {
-    type: [Object, Array] as PropType<KeyType[] | CheckKeys>
+    type: [Object, Array, String] as PropType<KeyType[] | CheckKeys>
   },
 
   renderIcon: {
