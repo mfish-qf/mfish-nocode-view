@@ -187,6 +187,7 @@ export const jobFormSchema: FormSchema[] = [
   {
     field: "params",
     label: "调用参数",
+    slot: "params",
     component: "Input",
     colProps: { span: 24 }
   },
