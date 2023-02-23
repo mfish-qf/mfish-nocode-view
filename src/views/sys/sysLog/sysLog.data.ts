@@ -48,8 +48,7 @@ export const columns: BasicColumn[] = [
     dataIndex: "operStatus",
     width: 120,
     customRender: ({ record }) => {
-      const status = record.operStatus;
-      const enable = ~~status === 0;
+      const enable = ~~record.operStatus === 0;
       const color = enable ? "green" : "red";
       const text = enable ? "正常" : "异常";
       return h(Tag, { color: color }, () => text);
@@ -109,15 +108,15 @@ export const searchFormSchema: FormSchema[] = [
       placeholder: ["开始时间", "结束时间"],
       showTime: {
         hideDisabledOptions: true,
-        defaultValue: [dateUtil("00:00:00", "HH:mm:ss"), dateUtil("11:59:59", "HH:mm:ss")]
+        defaultValue: [dateUtil("00:00:00", "HH:mm:ss"), dateUtil("23:59:59", "HH:mm:ss")]
       },
       ranges: {
         ["今天"]: [dateUtil().startOf("day"), dateUtil()],
-        ["昨天"]: [dateUtil().startOf("day").subtract(1, "days"), dateUtil().startOf("day").subtract(1, "days")],
-        ["最近一周"]: [dateUtil().startOf("day").subtract(1, "weeks"), dateUtil()],
-        ["最近两周"]: [dateUtil().startOf("day").subtract(2, "weeks"), dateUtil()],
-        ["最近1个月"]: [dateUtil().startOf("day").subtract(1, "months"), dateUtil()],
-        ["最近3个月"]: [dateUtil().startOf("day").subtract(3, "months"), dateUtil()]
+        ["昨天"]: [dateUtil().startOf("day").subtract(1, "days"), dateUtil().endOf("day").subtract(1, "days")],
+        ["最近一周"]: [dateUtil().subtract(1, "weeks"), dateUtil()],
+        ["最近两周"]: [dateUtil().subtract(2, "weeks"), dateUtil()],
+        ["最近1个月"]: [dateUtil().subtract(1, "months"), dateUtil()],
+        ["最近3个月"]: [dateUtil().subtract(3, "months"), dateUtil()]
       }
     },
     colProps: { span: 6 }

@@ -39,7 +39,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: "调用参数",
-    dataIndex: "params",
+    dataIndex: "params"
   },
   {
     title: "允许并发",
@@ -83,11 +83,9 @@ export const columns: BasicColumn[] = [
         onChange(checked: boolean) {
           record.pendingStatus = true;
           const newStatus = checked ? 0 : 1;
-          setJobStatus(record.id, newStatus)
-            .then(() => {
+          setJobStatus(record.id, newStatus).then(() => {
               record.status = newStatus;
-            })
-            .finally(() => {
+            }).finally(() => {
               record.pendingStatus = false;
             });
         }
@@ -173,25 +171,6 @@ export const jobFormSchema: FormSchema[] = [
     defaultValue: "Asia/Shanghai"
   },
   {
-    field: "className",
-    label: "类名称",
-    component: "Input",
-    required: true
-  },
-  {
-    field: "methodName",
-    label: "方法名称",
-    component: "Input",
-    required: true
-  },
-  {
-    field: "params",
-    label: "调用参数",
-    slot: "params",
-    component: "Input",
-    colProps: { span: 24 }
-  },
-  {
     field: "allowConcurrent",
     label: "允许并发",
     component: "RadioButtonGroup",
@@ -214,6 +193,25 @@ export const jobFormSchema: FormSchema[] = [
         { label: "放弃执行", value: 2 }
       ]
     }
+  },
+  {
+    field: "className",
+    label: "类名称",
+    component: "Input",
+    required: true
+  },
+  {
+    field: "methodName",
+    label: "方法名称",
+    component: "Input",
+    required: true
+  },
+  {
+    field: "params",
+    label: "调用参数",
+    slot: "params",
+    component: "Input",
+    colProps: { span: 24 }
   },
   {
     label: "备注",

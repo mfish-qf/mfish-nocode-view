@@ -8,17 +8,13 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:jobSubscribe:insert')">新增任务订阅表</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:job:insert')">新增策略
+        </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
             :actions="[
-              {
-                icon: 'ant-design:edit-outlined',
-                onClick: handleEdit.bind(null, record),
-                auth: 'sys:jobSubscribe:update'
-              },
               {
                 icon: 'ant-design:delete-outlined',
                 color: 'error',
@@ -27,67 +23,60 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
-                auth: 'sys:jobSubscribe:delete'
+                auth: 'sys:job:delete'
               },
             ]"
           />
         </template>
       </template>
     </BasicTable>
-    <JobSubscribeModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-import { deleteJobSubscribe, getJobSubscribeList } from "/@/api/scheduler/JobSubscribe";
-import { useModal } from "/@/components/general/Modal";
+import { getJobSubscribeList } from "/@/api/scheduler/JobSubscribe";
 import JobSubscribeModal from "./JobSubscribeModal.vue";
-import { columns, searchFormSchema } from "./jobSubscribe.data";
+import { columns } from "./jobSubscribe.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
+import { dateUtil } from "/@/utils/DateUtil";
+import { buildUUID } from "/@/utils/Uuid";
 
 export default {
   name: "JobSubscribeManagement",
   components: { BasicTable, JobSubscribeModal, TableAction },
   setup() {
     const { hasPermission } = usePermission();
-    const [registerModal, { openModal }] = useModal();
-    const [registerTable, { reload }] = useTable({
-      title: "任务订阅表列表",
+    const [registerTable, { reload, insertTableDataRecord, deleteTableDataRecord }] = useTable({
+      title: "触发策略列表",
       api: getJobSubscribeList,
+      rowKey: "id",
       columns,
-      formConfig: {
-        labelWidth: 100,
-        schemas: searchFormSchema
-      },
-      useSearchForm: true,
-      showTableSetting: true,
       bordered: true,
       showIndexColumn: false,
+      maxHeight: 500,
+      canResize: true,
+      pagination: false,
       actionColumn: {
-        width: 80,
-        title: "操作",
+        width: 40,
+        title: "",
         dataIndex: "action",
         fixed: undefined
       }
     });
 
     function handleCreate() {
-      openModal(true, {
-        isUpdate: false
-      });
-    }
-
-    function handleEdit(record: Recordable) {
-      openModal(true, {
-        record,
-        isUpdate: true
-      });
+      const value = {
+        id: buildUUID(),
+        cron: "",
+        startTime: dateUtil().toString(),
+        endTime: dateUtil().add(2, "year").toString(),
+        status: 0
+      };
+      insertTableDataRecord(value, 0);
     }
 
     function handleDelete(record: Recordable) {
-      deleteJobSubscribe(record.id).then(() => {
-        handleSuccess();
-      });
+      deleteTableDataRecord(record.id);
     }
 
     function handleSuccess() {
@@ -96,9 +85,7 @@ export default {
 
     return {
       registerTable,
-      registerModal,
       handleCreate,
-      handleEdit,
       handleDelete,
       handleSuccess,
       hasPermission
