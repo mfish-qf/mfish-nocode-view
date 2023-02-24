@@ -1,6 +1,6 @@
 <!--
  @description:oauth2认证页面
- @author: qiufeng
+ @author: mfish
  @date: 2023/1/17 17:38
 -->
 <template>

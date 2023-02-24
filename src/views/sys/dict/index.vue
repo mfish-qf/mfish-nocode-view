@@ -21,7 +21,8 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                auth: 'sys:dict:update'
+                auth: 'sys:dict:update',
+                tooltip: '修改',
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -31,7 +32,8 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
-                auth: 'sys:dict:delete'
+                auth: 'sys:dict:delete',
+                tooltip: '删除',
               },
             ]"
           />

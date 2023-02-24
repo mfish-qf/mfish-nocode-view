@@ -1,5 +1,7 @@
 import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
+import { h } from "vue";
+import { Input, RangePicker, Switch } from "ant-design-vue";
+import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
 
 /**
  * @description: 任务订阅表
@@ -9,92 +11,68 @@ import { FormSchema } from "/@/components/general/Table";
  */
 export const columns: BasicColumn[] = [
   {
-    title: "任务ID",
-    dataIndex: "jobId",
-    width: 120
-  },
-  {
     title: "cron表达式",
-    dataIndex: "cron",
-    width: 120
+    width: 260,
+    customRender: ({ record }) => {
+      return h(Input, {
+        defaultValue: record.cron,
+        placeholder: "输入cron表达式:格式0 1 * ? *",
+        onChange(e) {
+          record.cron = e.target.value;
+        },
+      });
+    }
   },
   {
-    title: "时区",
-    dataIndex: "timeZone",
-    width: 120
+    title: "调度周期",
+    customRender: ({ record }) => {
+      return h(RangePicker, {
+        format: "YYYY-MM-DD HH:mm:ss",
+        placeholder: ["开始时间", "结束时间"],
+        showTime: {
+          hideDisabledOptions: true,
+          defaultValue: [dateUtil(), dateUtil("23:59:59", "HH:mm:ss")]
+        },
+        defaultValue: [dateUtil(record.startTime), dateUtil(record.endTime)],
+        ranges: {
+          ["一周"]: [dateUtil(), dateUtil().add(1, "weeks")],
+          ["一月"]: [dateUtil(), dateUtil().add(1, "months")],
+          ["三个月"]: [dateUtil(), dateUtil().add(3, "months")],
+          ["一年"]: [dateUtil(), dateUtil().add(1, "years")],
+          ["两年"]: [dateUtil(), dateUtil().add(2, "years")],
+          ["三年"]: [dateUtil(), dateUtil().add(3, "years")]
+        },
+        onChange(value: any) {
+          if (value && value.length == 2) {
+            record.startTime = formatToDateTime(value[0]);
+            record.endTime = formatToDateTime(value[1]);
+          } else {
+            record.startTime = null;
+            record.endTime = null;
+          }
+        }
+      });
+    }
   },
   {
-    title: "优先级",
-    dataIndex: "priority",
-    width: 120
-  },
-  {
-    title: "开始时间",
-    dataIndex: "startTime",
-    width: 120
-  },
-  {
-    title: "结束时间",
-    dataIndex: "endTime",
-    width: 120
-  },
-];
-//todo 查询条件暂时用来装样子，后面增加配置条件后修改模版
-export const searchFormSchema: FormSchema[] = [
-  {
-    field: "jobId",
-    label: "任务ID",
-    component: "Input",
-    colProps: { span: 4 }
-  },
-  {
-    field: "cron",
-    label: "cron表达式",
-    component: "Input",
-    colProps: { span: 4 }
-  },
-  {
-    field: "timeZone",
-    label: "时区",
-    component: "Input",
-    colProps: { span: 4 }
-  },
-];
-export const jobSubscribeFormSchema: FormSchema[] = [
-  {
-    field: "id",
-    label: "唯一ID",
-    component: "Input",
-    show: false
-  },
-  {
-    field: "jobId",
-    label: "任务ID",
-    component: "Input",
-  },
-  {
-    field: "cron",
-    label: "cron表达式",
-    component: "Input",
-  },
-  {
-    field: "timeZone",
-    label: "时区",
-    component: "Input",
-  },
-  {
-    field: "priority",
-    label: "优先级",
-    component: "Input",
-  },
-  {
-    field: "startTime",
-    label: "开始时间",
-    component: "Input",
-  },
-  {
-    field: "endTime",
-    label: "结束时间",
-    component: "Input",
-  },
+    title: "状态",
+    dataIndex: "status",
+    width: 100,
+    customRender: ({ record }) => {
+      if (!Reflect.has(record, "pendingStatus")) {
+        record.pendingStatus = false;
+      }
+      return h(Switch, {
+        checked: record.status === 0,
+        checkedChildren: "已启用",
+        unCheckedChildren: "已停用",
+        loading: record.pendingStatus,
+        onChange(checked: boolean) {
+          record.pendingStatus = true;
+          record.status = checked ? 0 : 1;
+          record.pendingStatus = false;
+        }
+      });
+    }
+  }
 ];

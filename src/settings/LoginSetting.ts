@@ -1,6 +1,6 @@
 /**
  * @description: 登录设置
- * @author: qiufeng
+ * @author: mfish
  * @date: 2023/1/17 16:51
  */
 import { useGlobSetting } from "/@/hooks/setting";

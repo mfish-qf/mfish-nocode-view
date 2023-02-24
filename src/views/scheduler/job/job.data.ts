@@ -39,7 +39,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: "调用参数",
-    dataIndex: "params",
+    dataIndex: "params"
   },
   {
     title: "允许并发",
@@ -83,21 +83,18 @@ export const columns: BasicColumn[] = [
         onChange(checked: boolean) {
           record.pendingStatus = true;
           const newStatus = checked ? 0 : 1;
-          setJobStatus(record.id, newStatus)
-            .then(() => {
-              record.status = newStatus;
-            })
-            .finally(() => {
-              record.pendingStatus = false;
-            });
+          setJobStatus(record.id, newStatus).then(() => {
+            record.status = newStatus;
+          }).finally(() => {
+            record.pendingStatus = false;
+          });
         }
       });
     }
   },
   {
     title: "备注信息",
-    dataIndex: "remark",
-    width: 120
+    dataIndex: "remark"
   }
 ];
 export const searchFormSchema: FormSchema[] = [
@@ -163,7 +160,8 @@ export const jobFormSchema: FormSchema[] = [
   {
     field: "priority",
     label: "优先级",
-    component: "InputNumber"
+    component: "InputNumber",
+    defaultValue: 1
   },
   {
     field: "timeZone",
@@ -171,25 +169,6 @@ export const jobFormSchema: FormSchema[] = [
     component: "ApiSelect",
     componentProps: getDictProps("sys_time_zone"),
     defaultValue: "Asia/Shanghai"
-  },
-  {
-    field: "className",
-    label: "类名称",
-    component: "Input",
-    required: true
-  },
-  {
-    field: "methodName",
-    label: "方法名称",
-    component: "Input",
-    required: true
-  },
-  {
-    field: "params",
-    label: "调用参数",
-    slot: "params",
-    component: "Input",
-    colProps: { span: 24 }
   },
   {
     field: "allowConcurrent",
@@ -214,6 +193,25 @@ export const jobFormSchema: FormSchema[] = [
         { label: "放弃执行", value: 2 }
       ]
     }
+  },
+  {
+    field: "className",
+    label: "类名称",
+    component: "Input",
+    required: true
+  },
+  {
+    field: "methodName",
+    label: "方法名称",
+    component: "Input",
+    required: true
+  },
+  {
+    field: "params",
+    label: "调用参数",
+    slot: "params",
+    component: "Input",
+    colProps: { span: 24 }
   },
   {
     label: "备注",

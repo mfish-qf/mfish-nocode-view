@@ -7,22 +7,22 @@ import { defHttp } from "/@/utils/http/axios";
 import { SsoOrg } from "/@/api/sys/model/OrgModel";
 
 enum Api {
-  org = "/oauth2/org",
-  orgTree = "/oauth2/org/tree",
+  Org = "/oauth2/org",
+  OrgTree = "/oauth2/org/tree",
 }
 
 export const getOrgTree = (params?: SsoOrg) => {
-  return defHttp.get<SsoOrg[]>({ url: Api.orgTree, params });
+  return defHttp.get<SsoOrg[]>({ url: Api.OrgTree, params });
 };
 
 export function insertOrg(params: SsoOrg) {
-  return defHttp.post<SsoOrg>({ url: Api.org, params }, { successMessageMode: "message" });
+  return defHttp.post<SsoOrg>({ url: Api.Org, params }, { successMessageMode: "message" });
 };
 
 export function updateOrg(params: SsoOrg) {
-  return defHttp.put<SsoOrg>({ url: Api.org, params }, { successMessageMode: "message" });
+  return defHttp.put<SsoOrg>({ url: Api.Org, params }, { successMessageMode: "message" });
 };
 
 export function deleteOrg(params: string) {
-  return defHttp.delete<SsoOrg>({ url: `${Api.org}/${params}` }, { successMessageMode: "message" });
+  return defHttp.delete<SsoOrg>({ url: `${Api.Org}/${params}` }, { successMessageMode: "message" });
 };

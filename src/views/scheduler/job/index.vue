@@ -18,7 +18,8 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                auth: 'sys:job:update'
+                auth: 'sys:job:update',
+                tooltip: '修改'
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -28,8 +29,19 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
-                auth: 'sys:job:delete'
+                auth: 'sys:job:delete',
+                tooltip: '删除'
               },
+              {
+                icon: 'ant-design:caret-right-outlined',
+                auth: 'sys:job:execute',
+                popConfirm: {
+                  title: '是否确认执行',
+                  placement: 'left',
+                  confirm: handleExecute.bind(null, record),
+                },
+                tooltip: '立即执行'
+              }
             ]"
           />
         </template>
@@ -57,13 +69,14 @@
 import { ref, onBeforeMount } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { Tag } from "ant-design-vue";
-import { deleteJob, getJobList } from "/@/api/scheduler/Job";
+import { deleteJob, executeJob, getJobList } from "/@/api/scheduler/Job";
 import { useModal } from "/@/components/general/Modal";
 import JobModal from "./JobModal.vue";
 import { columns, searchFormSchema } from "./job.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 import { getDictItems } from "/@/api/sys/DictItem";
 import { DictItem } from "/@/api/sys/model/DictItemModel";
+import { Job } from "/@/api/scheduler/model/JobModel";
 
 export default {
   name: "JobManagement",
@@ -84,7 +97,7 @@ export default {
       bordered: true,
       showIndexColumn: false,
       actionColumn: {
-        width: 80,
+        width: 100,
         title: "操作",
         dataIndex: "action",
         fixed: undefined
@@ -123,14 +136,18 @@ export default {
       });
     }
 
-    function handleEdit(record: Recordable) {
+    function handleExecute(record: Job) {
+      executeJob(record).then();
+    }
+
+    function handleEdit(record: Job) {
       openModal(true, {
         record,
         isUpdate: true
       });
     }
 
-    function handleDelete(record: Recordable) {
+    function handleDelete(record: Job) {
       deleteJob(record.id).then(() => {
         handleSuccess();
       });
@@ -144,6 +161,7 @@ export default {
       registerTable,
       registerModal,
       handleCreate,
+      handleExecute,
       handleEdit,
       handleDelete,
       handleSuccess,
