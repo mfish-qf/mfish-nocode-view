@@ -1,5 +1,4 @@
 import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
 import { h } from "vue";
 import { Input, RangePicker, Switch } from "ant-design-vue";
 import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
@@ -75,28 +74,5 @@ export const columns: BasicColumn[] = [
         }
       });
     }
-  }
-];
-export const jobSubscribeFormSchema: FormSchema[] = [
-  {
-    field: "id",
-    label: "唯一ID",
-    component: "Input",
-    show: false
-  },
-  {
-    field: "cron",
-    label: "cron表达式",
-    component: "Input"
-  },
-  {
-    field: "startTime",
-    label: "开始时间",
-    component: "Input"
-  },
-  {
-    field: "endTime",
-    label: "结束时间",
-    component: "Input"
   }
 ];

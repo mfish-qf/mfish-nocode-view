@@ -94,8 +94,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: "备注信息",
-    dataIndex: "remark",
-    width: 120
+    dataIndex: "remark"
   }
 ];
 export const searchFormSchema: FormSchema[] = [

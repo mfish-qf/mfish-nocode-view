@@ -5,7 +5,7 @@
  @version: V1.0.0
 -->
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
+  <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit" @cancel="clearJob">
     <div class="step-form-form">
       <a-steps :current="currentStep">
         <a-step title="任务基础配置" @click="stepChange(0)" />
@@ -15,8 +15,8 @@
     <JobConfig ref="jobConfig" v-show="currentStep === 0" :jobInfo="jobInfo" />
     <JobSubscribeManagement ref="triggerConfig" v-show="currentStep === 1" :jobId="jobId" />
     <template #centerFooter>
-      <a-button v-show="currentStep === 0" @click="stepChange(1)">下一步</a-button>
-      <a-button v-show="currentStep === 1" @click="stepChange(0)">上一步</a-button>
+      <a-button v-show="currentStep === 0" @click="stepChange(1)" type="primary" danger>下一步</a-button>
+      <a-button v-show="currentStep === 1" @click="stepChange(0)" type="primary" danger>上一步</a-button>
     </template>
   </BasicModal>
 </template>
@@ -58,8 +58,6 @@ export default {
       currentStep.value = 0;
       setModalProps({ confirmLoading: false, width: "40%" });
       isUpdate.value = !!data?.isUpdate;
-      jobInfo.value = null;
-      jobId.value = "";
       if (unref(isUpdate)) {
         jobInfo.value = { ...data.record };
         jobId.value = data.record.id;
@@ -69,6 +67,11 @@ export default {
 
     function stepChange(value) {
       currentStep.value = value;
+    }
+
+    function clearJob(){
+      jobInfo.value = null;
+      jobId.value = "";
     }
 
     async function handleSubmit() {
@@ -95,6 +98,7 @@ export default {
       handleSubmit,
       currentStep,
       stepChange,
+      clearJob,
       jobInfo,
       jobId,
       jobConfig,

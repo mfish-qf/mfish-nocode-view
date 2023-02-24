@@ -36,7 +36,6 @@
 import { watch } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { getJobSubscribeById } from "/@/api/scheduler/JobSubscribe";
-import JobSubscribeModal from "./JobSubscribeModal.vue";
 import { columns } from "./jobSubscribe.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
@@ -44,7 +43,7 @@ import { buildUUID } from "/@/utils/Uuid";
 
 export default {
   name: "JobSubscribeManagement",
-  components: { BasicTable, JobSubscribeModal, TableAction },
+  components: { BasicTable, TableAction },
   props: {
     jobId: { type: String, default: "" }
   },
