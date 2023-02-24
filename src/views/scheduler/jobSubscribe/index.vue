@@ -33,22 +33,31 @@
   </div>
 </template>
 <script lang="ts">
+import { watch } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-import { getJobSubscribeList } from "/@/api/scheduler/JobSubscribe";
+import { getJobSubscribeById } from "/@/api/scheduler/JobSubscribe";
 import JobSubscribeModal from "./JobSubscribeModal.vue";
 import { columns } from "./jobSubscribe.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
-import { dateUtil } from "/@/utils/DateUtil";
+import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
 import { buildUUID } from "/@/utils/Uuid";
 
 export default {
   name: "JobSubscribeManagement",
   components: { BasicTable, JobSubscribeModal, TableAction },
-  setup() {
+  props: {
+    jobId: { type: String, default: "" }
+  },
+  setup(props) {
     const { hasPermission } = usePermission();
-    const [registerTable, { reload, insertTableDataRecord, deleteTableDataRecord }] = useTable({
+    const [registerTable, {
+      reload,
+      insertTableDataRecord,
+      deleteTableDataRecord,
+      setTableData,
+      getDataSource
+    }] = useTable({
       title: "触发策略列表",
-      api: getJobSubscribeList,
       rowKey: "id",
       columns,
       bordered: true,
@@ -63,13 +72,27 @@ export default {
         fixed: undefined
       }
     });
+    const getValue = () => {
+      return getDataSource();
+    };
+
+    watch(() => props.jobId
+      , (newVal, oldVal) => {
+        if (newVal && newVal !== oldVal) {
+          getJobSubscribeById(newVal).then((res) => {
+            setTableData(res);
+          });
+        } else {
+          setTableData([]);
+        }
+      });
 
     function handleCreate() {
       const value = {
         id: buildUUID(),
         cron: "",
-        startTime: dateUtil().toString(),
-        endTime: dateUtil().add(2, "year").toString(),
+        startTime: formatToDateTime(dateUtil()),
+        endTime: formatToDateTime(dateUtil().add(2, "year")),
         status: 0
       };
       insertTableDataRecord(value, 0);
@@ -88,7 +111,8 @@ export default {
       handleCreate,
       handleDelete,
       handleSuccess,
-      hasPermission
+      hasPermission,
+      getValue
     };
   }
 };

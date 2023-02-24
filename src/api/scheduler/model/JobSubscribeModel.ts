@@ -15,7 +15,7 @@ export interface JobSubscribe {
 }
 
 export interface ReqJobSubscribe {
-
+  jobId: string;
 }
 
 export type JobSubscribePageModel = PageResult<JobSubscribe>;

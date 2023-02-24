@@ -19,30 +19,21 @@ import { CodeEditor } from "/@/components/general/CodeEditor";
 
 export default {
   name: "JobConfig",
-  emits: ["next"],
   props: {
     jobInfo: { type: Object, default: {} }
   },
   components: {
     BasicForm, CodeEditor
   },
-  setup(props, { emit }) {
-    const customSubmitFunc = async () => {
-      const values = await validate();
-      emit("next", values);
+  setup(props) {
+    const getValue = async () => {
+      return await validate();
     };
     const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
       labelWidth: 100,
       baseColProps: { span: 12 },
       schemas: jobFormSchema,
-      showResetButton: false,
-      submitButtonOptions: {
-        text: "下一步"
-      },
-      actionColOptions: {
-        offset: 11
-      },
-      submitFunc: customSubmitFunc
+      showActionButtonGroup: false
     });
     watch(() => props.jobInfo
       , (newVal) => {
@@ -52,12 +43,9 @@ export default {
           setFieldsValue(newVal).then();
         }
       });
-
-
-
     return {
       registerForm,
-      customSubmitFunc
+      getValue
     };
   }
 };

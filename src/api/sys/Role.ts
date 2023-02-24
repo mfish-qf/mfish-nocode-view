@@ -7,30 +7,30 @@ import { RolePageModel, SsoRole } from "/@/api/sys/model/RoleModel";
  * @date: 2022/11/14 16:23
  */
 enum Api {
-  role = "/oauth2/role",
-  allRole = "/oauth2/role/all",
-  setStatus = "/oauth2/role/status",
-  menus = "/oauth2/role/menus"
+  Role = "/oauth2/role",
+  AllRole = "/oauth2/role/all",
+  SetStatus = "/oauth2/role/status",
+  Menus = "/oauth2/role/menus"
 }
 
 export const getRoleList = (params?: SsoRole) => {
-  return defHttp.get<RolePageModel>({ url: Api.role, params });
+  return defHttp.get<RolePageModel>({ url: Api.Role, params });
 };
 export const getAllRoleList = (params?: SsoRole) => {
-  return defHttp.get<SsoRole[]>({ url: Api.allRole, params });
+  return defHttp.get<SsoRole[]>({ url: Api.AllRole, params });
 };
 export const getRoleMenus = (roleId?: string) => {
-  return defHttp.get<String[]>({ url: `${Api.menus}/${roleId}`});
+  return defHttp.get<String[]>({ url: `${Api.Menus}/${roleId}`});
 };
 export const insertRole = (params: SsoRole) => {
-  return defHttp.post<SsoRole>({ url: Api.role, params }, { successMessageMode: "message" });
+  return defHttp.post<SsoRole>({ url: Api.Role, params }, { successMessageMode: "message" });
 };
 export const updateRole = (params: SsoRole) => {
-  return defHttp.put<SsoRole>({ url: Api.role, params }, { successMessageMode: "message" });
+  return defHttp.put<SsoRole>({ url: Api.Role, params }, { successMessageMode: "message" });
 };
 export const setRoleStatus = (roleId: string, status: number) => {
-  return defHttp.put<Boolean>({ url: Api.setStatus, params: { "id": roleId, "status": status } });
+  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { "id": roleId, "status": status } });
 };
 export const deleteRole = (params: string) => {
-  return defHttp.delete({ url: `${Api.role}/${params}` }, { successMessageMode: "message" });
+  return defHttp.delete({ url: `${Api.Role}/${params}` }, { successMessageMode: "message" });
 };

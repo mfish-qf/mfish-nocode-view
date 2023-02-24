@@ -13,13 +13,14 @@ import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
 export const columns: BasicColumn[] = [
   {
     title: "cron表达式",
+    width: 260,
     customRender: ({ record }) => {
       return h(Input, {
         defaultValue: record.cron,
-        placeholder: "输入cron表达式:格式0 1 * * *",
+        placeholder: "输入cron表达式:格式0 1 * ? *",
         onChange(e) {
           record.cron = e.target.value;
-        }
+        },
       });
     }
   },
@@ -35,12 +36,12 @@ export const columns: BasicColumn[] = [
         },
         defaultValue: [dateUtil(record.startTime), dateUtil(record.endTime)],
         ranges: {
-          ["一周"]: [dateUtil(),dateUtil().add(1,"weeks")],
+          ["一周"]: [dateUtil(), dateUtil().add(1, "weeks")],
           ["一月"]: [dateUtil(), dateUtil().add(1, "months")],
           ["三个月"]: [dateUtil(), dateUtil().add(3, "months")],
           ["一年"]: [dateUtil(), dateUtil().add(1, "years")],
           ["两年"]: [dateUtil(), dateUtil().add(2, "years")],
-          ["三年"]: [dateUtil(), dateUtil().add(3, "years")],
+          ["三年"]: [dateUtil(), dateUtil().add(3, "years")]
         },
         onChange(value: any) {
           if (value && value.length == 2) {

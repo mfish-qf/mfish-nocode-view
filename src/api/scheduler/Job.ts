@@ -9,7 +9,8 @@ import { Job, ReqJob, JobPageModel } from "/@/api/scheduler/model/JobModel";
 
 enum Api {
   Job = "/scheduler/job",
-  setStatus = "/scheduler/job/status"
+  SetStatus = "/scheduler/job/status",
+  ExecuteJob = "/scheduler/job/execute"
 }
 
 /**
@@ -58,5 +59,13 @@ export function deleteJob(id: string) {
  * @param status
  */
 export const setJobStatus = (roleId: string, status: number) => {
-  return defHttp.put<Boolean>({ url: Api.setStatus, params: { "id": roleId, "status": status } });
+  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { "id": roleId, "status": status } });
+};
+
+/**
+ * 立即执行任务
+ * @param job
+ */
+export function executeJob(job: Job) {
+  return defHttp.put<Boolean>({ url: Api.ExecuteJob, params: job }, { successMessageMode: "message" });
 };

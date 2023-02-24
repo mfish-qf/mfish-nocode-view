@@ -2,10 +2,10 @@ import { defHttp } from "/@/utils/http/axios";
 import { MenuRouteModel, MenuParams, MenuListItem } from "./model/MenuModel";
 
 enum Api {
-  menu = "/oauth2/menu",
-  menuTree = "/oauth2/menu/tree",
-  roleMenuTree = "/oauth2/menu/roleTree",
-  menuRoute = "/oauth2/menu/route",
+  Menu = "/oauth2/menu",
+  MenuTree = "/oauth2/menu/tree",
+  RoleMenuTree = "/oauth2/menu/roleTree",
+  MenuRoute = "/oauth2/menu/route",
 }
 
 /**
@@ -13,29 +13,29 @@ enum Api {
  * @param params
  */
 export const getMenuTree = (params?: MenuParams) => {
-  return defHttp.get<MenuListItem[]>({ url: Api.menuTree, params });
+  return defHttp.get<MenuListItem[]>({ url: Api.MenuTree, params });
 };
 /**
  * 获取角色菜单
  */
 export const getRoleMenuTree = () => {
-  return defHttp.get<MenuListItem[]>({ url: Api.roleMenuTree });
+  return defHttp.get<MenuListItem[]>({ url: Api.RoleMenuTree });
 };
 /**
  * 插入菜单、目录、按钮
  * @param params
  */
 export const insertMenu = (params: MenuListItem) => {
-  return defHttp.post<MenuListItem>({ url: Api.menu, params }, { successMessageMode: "message" });
+  return defHttp.post<MenuListItem>({ url: Api.Menu, params }, { successMessageMode: "message" });
 };
 export const updateMenu = (params: MenuListItem) => {
-  return defHttp.put<MenuListItem>({ url: Api.menu, params }, { successMessageMode: "message" });
+  return defHttp.put<MenuListItem>({ url: Api.Menu, params }, { successMessageMode: "message" });
 };
 export const deleteMenu = (params: string) => {
-  return defHttp.delete({ url: `${Api.menu}/${params}` }, { successMessageMode: "message" });
+  return defHttp.delete({ url: `${Api.Menu}/${params}` }, { successMessageMode: "message" });
 };
 /**
  * 获取菜单路由
  */
 export const getMenuRoute = (params?: MenuListItem) =>
-  defHttp.get<MenuRouteModel>({ url: Api.menuRoute, params }, { successMessageMode: "none" });
+  defHttp.get<MenuRouteModel>({ url: Api.MenuRoute, params }, { successMessageMode: "none" });

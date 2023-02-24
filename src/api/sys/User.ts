@@ -8,11 +8,11 @@ enum Api {
   Logout = "/oauth2/user/revoke",
   GetUserInfo = "/oauth2/user/info",
   User = "/oauth2/user",
-  isAccountExist = "/oauth2/user/exist",
-  pwd = "/oauth2/user/pwd",
+  IsAccountExist = "/oauth2/user/exist",
+  Pwd = "/oauth2/user/pwd",
   SendMsg = "/oauth2/sendMsg",
   Permissions = "/oauth2/user/permissions",
-  setStatus = "/oauth2/user/status"
+  SetStatus = "/oauth2/user/status"
 }
 
 /**
@@ -54,7 +54,7 @@ export function doLogout() {
  * @param account
  */
 export const isAccountExist = (account: string) => {
-  return defHttp.get<any>({ url: `${Api.isAccountExist}/${account}` }, { errorMessageMode: "none" });
+  return defHttp.get<any>({ url: `${Api.IsAccountExist}/${account}` }, { errorMessageMode: "none" });
 };
 
 export const getUserList = (params?: SsoUser) => {
@@ -74,9 +74,9 @@ export function deleteUser(params: string) {
 }
 
 export function changePwd(params: { userId: string, oldPwd?: string, newPwd: string }) {
-  return defHttp.put({ url: Api.pwd, params }, { successMessageMode: "message" });
+  return defHttp.put({ url: Api.Pwd, params }, { successMessageMode: "message" });
 }
 
 export const setUserStatus = (userId: string, status: number) => {
-  return defHttp.put<Boolean>({ url: Api.setStatus, params: { "id": userId, "status": status } });
+  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { "id": userId, "status": status } });
 };

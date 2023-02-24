@@ -84,10 +84,10 @@ export const columns: BasicColumn[] = [
           record.pendingStatus = true;
           const newStatus = checked ? 0 : 1;
           setJobStatus(record.id, newStatus).then(() => {
-              record.status = newStatus;
-            }).finally(() => {
-              record.pendingStatus = false;
-            });
+            record.status = newStatus;
+          }).finally(() => {
+            record.pendingStatus = false;
+          });
         }
       });
     }
@@ -161,7 +161,8 @@ export const jobFormSchema: FormSchema[] = [
   {
     field: "priority",
     label: "优先级",
-    component: "InputNumber"
+    component: "InputNumber",
+    defaultValue: 1
   },
   {
     field: "timeZone",

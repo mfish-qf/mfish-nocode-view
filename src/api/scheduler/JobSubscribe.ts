@@ -22,6 +22,14 @@ export const getJobSubscribeList = (reqJobSubscribe?: ReqJobSubscribe) => {
 };
 
 /**
+ * 通过ID获取策略列表
+ * @param jobId
+ */
+export const getJobSubscribeById = (jobId: string) => {
+  return defHttp.get<JobSubscribe[]>({ url: `${Api.JobSubscribe}/${jobId}` });
+};
+
+/**
  * 新增任务订阅表
  *
  * @param jobSubscribe
