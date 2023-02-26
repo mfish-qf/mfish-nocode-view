@@ -11,6 +11,9 @@
         <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:job:insert')">新增任务
         </a-button>
       </template>
+      <template #expandedRowRender="{ record }">
+        <JobSubscribeList :subscribes="record.subscribes" />
+      </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
@@ -77,10 +80,12 @@ import { usePermission } from "/@/hooks/web/UsePermission";
 import { getDictItems } from "/@/api/sys/DictItem";
 import { DictItem } from "/@/api/sys/model/DictItemModel";
 import { Job } from "/@/api/scheduler/model/JobModel";
+import JobSubscribeManagement from "/@/views/scheduler/jobSubscribe/index.vue";
+import JobSubscribeList from "/@/views/scheduler/job/JobSubscribeList.vue";
 
 export default {
   name: "JobManagement",
-  components: { BasicTable, JobModal, TableAction, Tag },
+  components: { JobSubscribeList, BasicTable, JobModal, TableAction, Tag, JobSubscribeManagement },
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
@@ -96,6 +101,7 @@ export default {
       showTableSetting: true,
       bordered: true,
       showIndexColumn: false,
+      expandRowByClick: true,
       actionColumn: {
         width: 100,
         title: "操作",
@@ -103,6 +109,7 @@ export default {
         fixed: undefined
       }
     });
+
     let jobTypes = ref<DictItem[]>([]);
     let misfireHandlers = ref<DictItem[]>([]);
     let timeZones = ref<DictItem[]>([]);

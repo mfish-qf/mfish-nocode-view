@@ -188,6 +188,5 @@ export const sysLogSchema: DescItem[] = [
     field: "operStatus",
     label: "操作状态"
   }
-
 ];
 

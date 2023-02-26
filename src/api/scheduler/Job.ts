@@ -55,11 +55,11 @@ export function deleteJob(id: string) {
 
 /**
  * 设置任务状态
- * @param roleId
+ * @param jobId
  * @param status
  */
-export const setJobStatus = (roleId: string, status: number) => {
-  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { "id": roleId, "status": status } });
+export const setJobStatus = (jobId: string, status: number) => {
+  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { "id": jobId, "status": status } });
 };
 
 /**
