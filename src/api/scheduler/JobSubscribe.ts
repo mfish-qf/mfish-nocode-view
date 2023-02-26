@@ -8,7 +8,8 @@ import { defHttp } from "/@/utils/http/axios";
 import { JobSubscribe, ReqJobSubscribe, JobSubscribePageModel } from "/@/api/scheduler/model/JobSubscribeModel";
 
 enum Api {
-  JobSubscribe = "/scheduler/jobSubscribe"
+  JobSubscribe = "/scheduler/jobSubscribe",
+  SetStatus = "/scheduler/jobSubscribe/status"
 }
 
 /**
@@ -57,4 +58,13 @@ export function updateJobSubscribe(jobSubscribe: JobSubscribe) {
  */
 export function deleteJobSubscribe(id: string) {
   return defHttp.delete<JobSubscribe>({ url: Api.JobSubscribe + "/" + id }, { successMessageMode: "message" });
+};
+
+/**
+ * 设置任务状态
+ * @param subscribeId
+ * @param status
+ */
+export const setJobSubscribeStatus = (subscribeId: string, status: number) => {
+  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { "id": subscribeId, "status": status } });
 };

@@ -11,19 +11,6 @@ import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
  */
 export const columns: BasicColumn[] = [
   {
-    title: "cron表达式",
-    width: 260,
-    customRender: ({ record }) => {
-      return h(Input, {
-        defaultValue: record.cron,
-        placeholder: "输入cron表达式:格式0 1 * ? *",
-        onChange(e) {
-          record.cron = e.target.value;
-        },
-      });
-    }
-  },
-  {
     title: "调度周期",
     customRender: ({ record }) => {
       return h(RangePicker, {
@@ -51,6 +38,19 @@ export const columns: BasicColumn[] = [
             record.endTime = null;
           }
         }
+      });
+    }
+  },
+  {
+    title: "cron表达式",
+    width: 260,
+    customRender: ({ record }) => {
+      return h(Input, {
+        defaultValue: record.cron,
+        placeholder: "输入cron表达式:格式0 1 * ? *",
+        onChange(e) {
+          record.cron = e.target.value;
+        },
       });
     }
   },

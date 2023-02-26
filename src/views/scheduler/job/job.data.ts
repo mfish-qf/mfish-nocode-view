@@ -68,7 +68,7 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "状态",
+    title: "任务状态",
     dataIndex: "status",
     width: 100,
     customRender: ({ record }) => {
@@ -220,3 +220,4 @@ export const jobFormSchema: FormSchema[] = [
     colProps: { span: 24 }
   }
 ];
+
