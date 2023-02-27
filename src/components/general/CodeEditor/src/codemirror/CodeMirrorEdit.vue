@@ -7,7 +7,7 @@ import { ref, onMounted, onUnmounted, watchEffect, watch, unref, nextTick } from
 import { useDebounceFn } from "@vueuse/core";
 import { useAppStore } from "/@/store/modules/App";
 import { useWindowSizeFn } from "/@/hooks/event/UseWindowSizeFn";
-import * as CodeMirror from "codemirror";
+import CodeMirror from "codemirror";
 import { MODE } from "../Typing";
 // css
 import "./codemirror.css";
