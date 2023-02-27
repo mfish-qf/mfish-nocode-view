@@ -12,6 +12,7 @@ import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
 export const columns: BasicColumn[] = [
   {
     title: "调度周期",
+    width: 350,
     customRender: ({ record }) => {
       return h(RangePicker, {
         format: "YYYY-MM-DD HH:mm:ss",
@@ -43,7 +44,6 @@ export const columns: BasicColumn[] = [
   },
   {
     title: "cron表达式",
-    width: 260,
     customRender: ({ record }) => {
       return h(Input, {
         defaultValue: record.cron,

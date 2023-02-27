@@ -43,6 +43,7 @@
                   placement: 'left',
                   confirm: handleExecute.bind(null, record),
                 },
+                color: 'warning',
                 tooltip: '立即执行'
               }
             ]"
@@ -105,8 +106,7 @@ export default {
       actionColumn: {
         width: 100,
         title: "操作",
-        dataIndex: "action",
-        fixed: undefined
+        dataIndex: "action"
       }
     });
 

@@ -5,16 +5,15 @@
  @version: V1.0.0
 -->
 <template>
-  <div>
-    <BasicTable @register="registerTable">
-      <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:job:insert')">新增策略
-        </a-button>
-      </template>
-      <template #bodyCell="{ column, record }">
-        <template v-if="column.key === 'action'">
-          <TableAction
-            :actions="[
+  <BasicTable @register="registerTable">
+    <template #toolbar>
+      <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:job:insert')">新增策略
+      </a-button>
+    </template>
+    <template #bodyCell="{ column, record }">
+      <template v-if="column.key === 'action'">
+        <TableAction
+          :actions="[
               {
                 icon: 'ant-design:delete-outlined',
                 color: 'error',
@@ -26,11 +25,10 @@
                 auth: 'sys:job:delete'
               },
             ]"
-          />
-        </template>
+        />
       </template>
-    </BasicTable>
-  </div>
+    </template>
+  </BasicTable>
 </template>
 <script lang="ts">
 import { watch } from "vue";
@@ -61,8 +59,7 @@ export default {
       columns,
       bordered: true,
       showIndexColumn: false,
-      maxHeight: 500,
-      canResize: true,
+      maxHeight: 300,
       pagination: false,
       actionColumn: {
         width: 40,
