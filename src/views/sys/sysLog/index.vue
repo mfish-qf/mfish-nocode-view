@@ -14,7 +14,8 @@
               {
                 icon: 'ant-design:info-circle-outlined',
                 onClick: handleQuery.bind(null, record),
-                auth: 'sys:sysLog:update'
+                auth: 'sys:sysLog:query',
+                tooltip: '日志详情'
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -24,7 +25,8 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
-                auth: 'sys:sysLog:delete'
+                auth: 'sys:sysLog:delete',
+                tooltip: '删除'
               },
             ]"
           />
@@ -50,7 +52,7 @@
   </div>
 </template>
 <script lang="ts">
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, h } from "vue";
 import { Tag } from "ant-design-vue";
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { deleteSysLog, getSysLogList } from "/@/api/sys/SysLog";
@@ -60,6 +62,8 @@ import { columns, searchFormSchema } from "./sysLog.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 import { getDictItems } from "/@/api/sys/DictItem";
 import { DictItem } from "/@/api/sys/model/DictItemModel";
+import { SysLog } from "/@/api/sys/model/SysLogModel";
+import { buildDictTag } from "/@/utils/DictUtils";
 
 export default {
   name: "SysLogManagement",
@@ -113,11 +117,14 @@ export default {
       });
     }
 
-    function handleQuery(record: Recordable) {
-      openModal(true, record);
+    function handleQuery(record: SysLog) {
+      const reqSourceTag = buildDictTag(record.reqSource, reqSource.value);
+      const operTypeTag = buildDictTag(record.operType, operType.value);
+      const reqTypeTag = buildDictTag(record.reqType, reqType.value);
+      openModal(true, { ...record, reqSourceTag, operTypeTag, reqTypeTag });
     }
 
-    function handleDelete(record: Recordable) {
+    function handleDelete(record: SysLog) {
       deleteSysLog(record.id).then(() => {
         handleSuccess();
       });

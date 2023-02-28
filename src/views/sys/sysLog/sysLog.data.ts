@@ -5,6 +5,7 @@ import { Tag } from "ant-design-vue";
 import { dateUtil } from "/@/utils/DateUtil";
 import { getDictProps } from "/@/utils/DictUtils";
 import { DescItem } from "/@/components/general/Description";
+import { buildJsonPreview } from "/@/utils/HBuildUtils";
 
 /**
  * @description: 系统日志
@@ -119,7 +120,7 @@ export const searchFormSchema: FormSchema[] = [
         ["最近3个月"]: [dateUtil().subtract(3, "months"), dateUtil()]
       }
     },
-    colProps: { span: 6 }
+    colProps: { span: 8 }
   },
   {
     field: "reqSource",
@@ -158,35 +159,64 @@ export const searchFormSchema: FormSchema[] = [
 export const sysLogSchema: DescItem[] = [
   {
     field: "title",
-    label: "中文标题"
+    label: "中文标题",
+    labelMinWidth: 60
   },
   {
     field: "method",
-    label: "方法"
+    label: "方法",
+    labelMinWidth: 60
   },
   {
-    field: "reqType",
-    label: "请求类型"
+    field: "reqTypeTag",
+    label: "请求类型",
+    labelMinWidth: 60
   },
   {
     field: "reqUri",
-    label: "请求路径"
+    label: "请求路径",
+    labelMinWidth: 60
+  },
+
+  {
+    field: "reqSourceTag",
+    label: "请求来源",
+    labelMinWidth: 60
   },
   {
-    field: "reqSource",
-    label: "请求来源"
-  },
-  {
-    field: "operType",
-    label: "操作类型"
+    field: "operTypeTag",
+    label: "操作类型",
+    labelMinWidth: 60
   },
   {
     field: "operIp",
-    label: "操作IP"
+    label: "操作IP",
+    labelMinWidth: 60
   },
   {
     field: "operStatus",
-    label: "操作状态"
+    label: "操作状态",
+    labelMinWidth: 60,
+    render: (record) => {
+      const enable = ~~record === 0;
+      const color = enable ? "green" : "red";
+      const text = enable ? "正常" : "异常";
+      return h(Tag, { color: color }, () => text);
+    }
+  },
+  {
+    field: "reqParam",
+    label: "请求参数",
+    render: (record) => buildJsonPreview(record),
+    span: 2
+  },
+  {
+    field: "remark",
+    label: "备注",
+    render: (record) => buildJsonPreview(record),
+    span: 2
   }
 ];
+
+
 

@@ -7,17 +7,15 @@
 <template>
   <div>
     <BasicTable @register="registerTable">
-      <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:jobLog:insert')">新增任务日志</a-button>
-      </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
             :actions="[
               {
-                icon: 'ant-design:edit-outlined',
-                onClick: handleEdit.bind(null, record),
-                auth: 'sys:jobLog:update'
+                icon: 'ant-design:info-circle-outlined',
+                onClick: handleQuery.bind(null, record),
+                auth: 'sys:jobLog:query',
+                tooltip: '日志详情'
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -27,10 +25,21 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
-                auth: 'sys:jobLog:delete'
+                auth: 'sys:jobLog:delete',
+                tooltip: '删除'
               },
             ]"
           />
+        </template>
+        <template v-if="column.key === 'jobType'">
+          <Tag v-for="item in jobTypes" v-show="record.jobType === item.dictValue" :color="item.color">
+            {{ item.dictLabel }}
+          </Tag>
+        </template>
+        <template v-if="column.key === 'status'">
+          <Tag v-for="item in jobStatus" v-show="record.status === item.dictValue" :color="item.color">
+            {{ item.dictLabel }}
+          </Tag>
         </template>
       </template>
     </BasicTable>
@@ -38,16 +47,22 @@
   </div>
 </template>
 <script lang="ts">
+import { ref, onBeforeMount } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { deleteJobLog, getJobLogList } from "/@/api/scheduler/JobLog";
-import { useModal } from "/@/components/general/Modal";
-import JobLogModal from "./JobLogModal.vue";
 import { columns, searchFormSchema } from "./jobLog.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
+import { getDictItems } from "/@/api/sys/DictItem";
+import { DictItem } from "/@/api/sys/model/DictItemModel";
+import { Tag } from "ant-design-vue";
+import { useModal } from "/@/components/general/Modal";
+import JobLogModal from "/@/views/scheduler/jobLog/JobLogModal.vue";
+import { buildDictTag } from "/@/utils/DictUtils";
+import { Job } from "/@/api/scheduler/model/JobModel";
 
 export default {
   name: "JobLogManagement",
-  components: { BasicTable, JobLogModal, TableAction },
+  components: { JobLogModal, BasicTable, TableAction, Tag },
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
@@ -66,21 +81,25 @@ export default {
       actionColumn: {
         width: 80,
         title: "操作",
-        dataIndex: "action",
-        fixed: undefined
+        dataIndex: "action"
       }
     });
+    let jobTypes = ref<DictItem[]>([]);
+    let jobStatus = ref<DictItem[]>([]);
+    onBeforeMount(() => {
+      getJobTypes();
+      getJobStatus();
+    });
 
-    function handleCreate() {
-      openModal(true, {
-        isUpdate: false
+    function getJobTypes() {
+      getDictItems("sys_job_type").then((res) => {
+        jobTypes.value = res;
       });
     }
 
-    function handleEdit(record: Recordable) {
-      openModal(true, {
-        record,
-        isUpdate: true
+    function getJobStatus() {
+      getDictItems("sys_job_status").then((res) => {
+        jobStatus.value = res;
       });
     }
 
@@ -90,6 +109,12 @@ export default {
       });
     }
 
+    function handleQuery(record: Job) {
+      const jobTypesTag = buildDictTag(record.jobType, jobTypes.value);
+      const jobStatusTag = buildDictTag(record.status, jobStatus.value);
+      openModal(true, { ...record, jobTypesTag, jobStatusTag });
+    }
+
     function handleSuccess() {
       reload();
     }
@@ -97,11 +122,12 @@ export default {
     return {
       registerTable,
       registerModal,
-      handleCreate,
-      handleEdit,
+      handleQuery,
       handleDelete,
       handleSuccess,
-      hasPermission
+      hasPermission,
+      jobTypes,
+      jobStatus
     };
   }
 };

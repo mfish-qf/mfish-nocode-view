@@ -47,6 +47,6 @@ export function updateSysLog(sysLog: SysLog) {
  * @param id 唯一ID
  * @return
  */
-export function deleteSysLog(id: string) {
+export function deleteSysLog(id: number) {
   return defHttp.delete<SysLog>({ url: Api.SysLog + "/" + id }, { successMessageMode: "message" });
 };
