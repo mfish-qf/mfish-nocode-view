@@ -33,18 +33,29 @@ export default {
       resetFields().then();
       setModalProps({ confirmLoading: false, width: "40%" });
       isUpdate.value = !!data?.isUpdate;
+      const status = {
+        field: "status",
+        dynamicDisabled: false
+      };
       if (unref(isUpdate)) {
         rowId.value = data.record.id;
         setFieldsValue({
           ...data.record
         }).then();
-        updateSchema([{
+        const schema = [{
           field: "password",
           ifShow: false
         }, {
           field: "account",
           dynamicDisabled: true
-        }]).then();
+        }];
+        // 超户不允许修改用户状态
+        if (data.record.id === "1") {
+          status.dynamicDisabled = true;
+        } else {
+          status.dynamicDisabled = false;
+        }
+        updateSchema([...schema, status]).then();
       } else {
         updateSchema([{
           field: "password",
@@ -52,7 +63,7 @@ export default {
         }, {
           field: "account",
           dynamicDisabled: false
-        }]).then();
+        }, status]).then();
       }
       const treeData = await getOrgTree();
       const roles = await getAllRoleList();
