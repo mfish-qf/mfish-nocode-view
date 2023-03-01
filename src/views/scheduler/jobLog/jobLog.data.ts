@@ -48,12 +48,12 @@ export const columns: BasicColumn[] = [
     width: 100
   },
   {
-    title: "开始时间",
+    title: "生效时间",
     dataIndex: "startTime",
     width: 150
   },
   {
-    title: "结束时间",
+    title: "失效时间",
     dataIndex: "endTime",
     width: 150
   },
@@ -68,7 +68,7 @@ export const columns: BasicColumn[] = [
     width: 80
   },
   {
-    title: "日志时间",
+    title: "创建时间",
     dataIndex: "createTime",
     width: 150
   }
@@ -139,12 +139,12 @@ export const jobLogSchema: DescItem[] = [
   },
   {
     field: "startTime",
-    label: "开始时间",
+    label: "生效时间",
     labelMinWidth: 60
   },
   {
     field: "endTime",
-    label: "结束时间",
+    label: "失效时间",
     labelMinWidth: 60
   },
   {
@@ -157,7 +157,16 @@ export const jobLogSchema: DescItem[] = [
     label: "执行状态",
     labelMinWidth: 60
   },
-
+  {
+    field: "createTime",
+    label: "创建时间",
+    labelMinWidth: 60
+  },
+  {
+    field: "createTime",
+    label: "更新时间",
+    labelMinWidth: 60
+  },
   {
     field: "remark",
     label: "备注信息",
