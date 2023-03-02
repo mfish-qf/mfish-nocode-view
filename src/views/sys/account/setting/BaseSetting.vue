@@ -35,7 +35,7 @@ import headerImg from "/@/assets/images/header.png";
 import { getUserInfo, updateUser } from "/@/api/sys/User";
 import { baseSetSchemas } from "./setting.data";
 import { useUserStore } from "/@/store/modules/User";
-import { uploadApi } from "/@/api/sys/Upload";
+import { uploadApi } from "/@/api/storage/Upload";
 import { imageUrl } from "/@/utils/http/image/ImageRequest";
 
 export default defineComponent({
