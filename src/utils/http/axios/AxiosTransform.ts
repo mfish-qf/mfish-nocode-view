@@ -1,7 +1,7 @@
-import type { AxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios";
+import type { InternalAxiosRequestConfig,AxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios";
 import type { RequestOptions, Result } from "/#/axios";
 
-export interface CreateAxiosOptions extends AxiosRequestConfig {
+export interface CreateAxiosOptions extends InternalAxiosRequestConfig {
   authenticationScheme?: string;
   transform?: AxiosTransform;
   requestOptions?: RequestOptions;
@@ -11,7 +11,7 @@ export abstract class AxiosTransform {
   /**
    * @description: 请求前的流程配置
    */
-  beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => AxiosRequestConfig;
+  beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => InternalAxiosRequestConfig;
 
   /**
    * @description: 处理响应数据
@@ -29,7 +29,7 @@ export abstract class AxiosTransform {
   requestInterceptors?: (
     config: AxiosRequestConfig,
     options: CreateAxiosOptions
-  ) => AxiosRequestConfig;
+  ) => InternalAxiosRequestConfig;
 
   /**
    * @description: 请求之后的拦截器

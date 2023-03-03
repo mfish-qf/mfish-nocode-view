@@ -141,24 +141,13 @@ export class VAxios {
   upload<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     const formData = new window.FormData();
     const params = config.params;
-    const customFilename = params?.name || "file";
-    if (params?.filename) {
-      formData.append(customFilename, params?.file, params.filename);
-    } else {
-      formData.append(customFilename, params?.file);
-    }
-    if (params?.data) {
-      Object.keys(params.data).forEach((key) => {
-        const value = params.data![key];
-        if (Array.isArray(value)) {
-          value.forEach((item) => {
-            formData.append(`${key}[]`, item);
-          });
-          return;
-        }
-        formData.append(key, params.data![key]);
-      });
-    }
+    Object.keys(params).forEach((key) => {
+      const value = params[key];
+      if (value !== undefined && value !== null) {
+        formData.append(key, value);
+      }
+    });
+    //参数已添加到formData中，删除params
     delete config.params;
     return this.request({
       ...config,

@@ -9,8 +9,7 @@
     <BasicTable @register="registerTable">
       <template #toolbar>
         <BasicUpload
-          :maxSize="20"
-          :maxNumber="10"
+          :maxSize="10"
           @change="handleChange"
           :api="uploadApi"
         />
@@ -19,12 +18,6 @@
         <template v-if="column.key === 'action'">
           <TableAction
             :actions="[
-              {
-                icon: 'ant-design:edit-outlined',
-                onClick: handleEdit.bind(null, record),
-                auth: 'sys:sysFile:update',
-                tooltip: '修改',
-              },
               {
                 icon: 'ant-design:delete-outlined',
                 color: 'error',

@@ -1,6 +1,6 @@
 <!--
  @description:策略订阅列表
- @author: qiufeng
+ @author: mfish
  @date: 2023/2/26 16:40
 -->
 <template>

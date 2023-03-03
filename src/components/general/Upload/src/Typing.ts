@@ -18,12 +18,6 @@ export interface FileItem {
   uuid: string;
 }
 
-export interface PreviewFileItem {
-  url: string;
-  name: string;
-  type: string;
-}
-
 export interface FileBasicColumn {
   /**
    * Renderer of the table cell. The return value should be a VNode, or an object for colSpan/rowSpan config

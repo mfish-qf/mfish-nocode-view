@@ -1,6 +1,6 @@
 <template>
   <BasicModal
-    width="800px"
+    width="40%"
     :title="t('component.upload.upload')"
     :okText="t('component.upload.save')"
     v-bind="$attrs"
@@ -26,7 +26,6 @@
 
     <div class="upload-modal-toolbar">
       <Alert :message="getHelpText" type="info" banner class="upload-modal-toolbar__text" />
-
       <Upload
         :accept="getStringAccept"
         :multiple="multiple"
@@ -43,7 +42,7 @@
   </BasicModal>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref, toRefs, unref, computed, PropType } from "vue";
+import { defineComponent, reactive, ref, toRefs, unref, computed } from "vue";
 import { Upload, Alert } from "ant-design-vue";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { useUploadType } from "./UseUpload";
@@ -61,11 +60,7 @@ import { useI18n } from "/@/hooks/web/UseI18n";
 export default defineComponent({
   components: { BasicModal, Upload, Alert, FileList },
   props: {
-    ...basicProps,
-    previewFileList: {
-      type: Array as PropType<string[]>,
-      default: () => []
-    }
+    ...basicProps
   },
   emits: ["change", "register", "delete"],
   setup(props, { emit }) {
@@ -161,14 +156,6 @@ export default defineComponent({
       emit("delete", record);
     }
 
-    // 预览
-    // function handlePreview(record: FileItem) {
-    //   const { thumbUrl = '' } = record;
-    //   createImgPreview({
-    //     imageList: [thumbUrl],
-    //   });
-    // }
-
     async function uploadApiByItem(item: FileItem) {
       const { api } = props;
       if (!api || !isFunction(api)) {
@@ -178,12 +165,8 @@ export default defineComponent({
         item.status = UploadResultStatus.UPLOADING;
         const { data } = await props.api?.(
           {
-            data: {
-              ...(props.uploadParams || {})
-            },
-            file: item.file,
-            name: props.name,
-            filename: props.filename
+            ...(props.uploadParams || {}),
+            file: item.file
           },
           function onUploadProgress(progressEvent: ProgressEvent) {
             const complete = ((progressEvent.loaded / progressEvent.total) * 100) | 0;
@@ -209,7 +192,7 @@ export default defineComponent({
     // 点击开始上传
     async function handleStartUpload() {
       const { maxNumber } = props;
-      if ((fileListRef.value.length + props.previewFileList?.length ?? 0) > maxNumber) {
+      if (fileListRef.value.length > maxNumber) {
         return createMessage.warning(t("component.upload.maxNumber", [maxNumber]));
       }
       try {
@@ -279,7 +262,6 @@ export default defineComponent({
       getStringAccept,
       getOkButtonProps,
       beforeUpload,
-      // registerTable,
       fileListRef,
       state,
       isUploadingRef,

@@ -5,6 +5,7 @@ import { Switch } from "ant-design-vue";
 import { getToken } from "/@/utils/auth";
 import TableImage from "/@/components/general/Table/src/components/TableImg.vue";
 import { setFileStatus } from "/@/api/storage/SysFile";
+import { Icon } from "/@/components/general/Icon/index";
 
 /**
  * @description: 文件存储
@@ -14,13 +15,6 @@ import { setFileStatus } from "/@/api/storage/SysFile";
  */
 export const columns: BasicColumn[] = [
   {
-    title: "文件名",
-    dataIndex: "fileName",
-    customRender: ({ record }) => {
-      return h("a", { href: record.fileUrl + "?access_token=" + getToken(), target: "_blank" }, record.fileName);
-    }
-  },
-  {
     title: "文件",
     dataIndex: "fileUrl",
     customRender: ({ record }) => {
@@ -28,19 +22,85 @@ export const columns: BasicColumn[] = [
       if (record.fileType.toLowerCase().startsWith("image")) {
         return h(TableImage, { size: 40, simpleShow: true, imgList: imgList });
       }
-      return h("div", record.fileUrl);
+      const index = record.fileName.lastIndexOf(".");
+      if (index > 0) {
+        let name = record.fileName.substring(index + 1);
+        switch (name) {
+          case "txt":
+            name = "text";
+            break;
+          case "doc":
+          case "docx":
+            name = "word";
+            break;
+          case "xls":
+          case "xlsx":
+            name = "excel";
+            break;
+          case "pptx":
+            name = "ppt";
+            break;
+          case "rar":
+            name = "zip";
+            break;
+          case "zip":
+          case "ppt":
+          case "pdf":
+            break;
+          default:
+            return h(Icon, { size: 40, icon: `ant-design:file-unknown-outlined`, color: "#ee4f12" });
+        }
+        return h(Icon, { size: 40, icon: `ant-design:file-${name}-outlined`, color: "#ee4f12" });
+      }
+      return h(Icon, { size: 40, icon: `ant-design:file-unknown-outlined`, color: "#ee4f12" });
     },
     width: 120
   },
   {
+    title: "文件名",
+    dataIndex: "fileName",
+    customRender: ({ record }) => {
+      return h("a", { href: record.fileUrl + "?access_token=" + getToken(), target: "_blank" }, record.fileName);
+    }
+  },
+  {
     title: "文件类型",
     dataIndex: "fileType",
-    width: 120
+    width: 260
   },
   {
     title: "文件大小",
     dataIndex: "fileSize",
-    width: 120
+    width: 120,
+    customRender: ({ record }) => {
+      function calcSize(fileSize, level) {
+        let size = fileSize / 1024;
+        if (size >= 1024) {
+          return calcSize(size, level + 1);
+        }
+        let unit = "";
+        switch (level) {
+          case 1:
+            unit = "KB";
+            break;
+          case 2:
+            unit = "MB";
+            break;
+          case 3:
+            unit = "GB";
+            break;
+          case 4:
+            unit = "TB";
+            break;
+        }
+        return size.toFixed(2) + " " + unit;
+      }
+
+      if (record.fileSize) {
+        return calcSize(record.fileSize, 1);
+      }
+      return "";
+    }
   },
   {
     title: "存储路径",

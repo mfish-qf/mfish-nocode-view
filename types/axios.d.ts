@@ -40,14 +40,12 @@ export interface Result<T = any> {
 
 // multipart/form-data: upload file
 export interface UploadFileParams {
-  // Other parameters
-  data?: Recordable;
-  // File parameter interface field name
-  name?: string;
-  // file name
+  // 文件
   file: File | Blob;
-  // file name
-  filename?: string;
-
-  [key: string]: any;
+  //文件名(不传直接采用file中的名称)
+  fileName?: string;
+  // 路径 设置默认路径(后端会再按照日期生成子目录)
+  path?: string;
+  // 是否私有路径
+  isPrivate?: number;
 }

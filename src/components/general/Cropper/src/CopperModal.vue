@@ -111,7 +111,7 @@
   </BasicModal>
 </template>
 <script lang="ts">
-import type { ApiFunParams, CropendResult, Cropper } from "./typing";
+import type { CropendResult, Cropper } from "./typing";
 import { defineComponent, ref } from "vue";
 import CropperImage from "./Cropper.vue";
 import { Space, Upload, Avatar, Tooltip } from "ant-design-vue";
@@ -120,11 +120,12 @@ import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { dataURLtoBlob } from "/@/utils/file/Base64Conver";
 import { isFunction } from "/@/utils/Is";
 import { useI18n } from "/@/hooks/web/UseI18n";
+import { UploadFileParams } from "/#/axios";
 
 const props = {
   circled: { type: Boolean, default: true },
   uploadApi: {
-    type: Function as PropType<(params: ApiFunParams) => Promise<any>>
+    type: Function as PropType<(params: UploadFileParams) => Promise<any>>
   },
   src: { type: String }
 };
@@ -135,7 +136,7 @@ export default defineComponent({
   props,
   emits: ["uploadSuccess", "register"],
   setup(props, { emit }) {
-    let filename = "";
+    let fileName = "";
     const src = ref(props.src || "");
     const previewSource = ref("");
     const cropper = ref<Cropper>();
@@ -154,7 +155,7 @@ export default defineComponent({
       previewSource.value = "";
       reader.onload = function(e) {
         src.value = (e.target?.result as string) ?? "";
-        filename = file.name;
+        fileName = file.name;
       };
       return false;
     }
@@ -183,7 +184,7 @@ export default defineComponent({
         const blob = dataURLtoBlob(previewSource.value);
         try {
           setModalProps({ confirmLoading: true });
-          const result = await uploadApi({ name: "file", file: blob, filename });
+          const result = await uploadApi({ file: blob, fileName, path: "avatar" });
           emit("uploadSuccess", { source: previewSource.value, data: result.fileKey });
           closeModal();
         } finally {
