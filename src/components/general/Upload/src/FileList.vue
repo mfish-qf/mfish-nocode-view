@@ -1,7 +1,6 @@
 <script lang="tsx">
-import { defineComponent, CSSProperties, watch, nextTick } from "vue";
+import { defineComponent, watch, nextTick } from "vue";
 import { fileListProps } from "./Props";
-import { isFunction } from "/@/utils/Is";
 import { useModalContext } from "/@/components/general/Modal/src/hooks/UseModalContext";
 import { Table } from "ant-design-vue";
 
@@ -24,51 +23,7 @@ export default defineComponent({
       const columnList = [...columns, actionColumn];
       const scroll = { x: 800 };
       return (
-        <Table columns={columnList} data-source={dataSource} pagination={false} scroll={scroll} bordered>
-        </Table>
-        // <table class="file-table">
-        //   <colgroup>
-        //     {columnList.map((item) => {
-        //       const { width = 0, dataIndex } = item;
-        //       const style: CSSProperties = {
-        //         width: `${width}px`,
-        //         minWidth: `${width}px`
-        //       };
-        //       return <col style={width ? style : {}} key={dataIndex} />;
-        //     })}
-        //   </colgroup>
-        //   <thead>
-        //     <tr>
-        //       {columnList.map((item) => {
-        //         const { title = "", align = "center", dataIndex } = item;
-        //         return (
-        //           <th class={["file-table-th", align]} key={dataIndex}>
-        //             {title}
-        //           </th>
-        //         );
-        //       })}
-        //     </tr>
-        //   </thead>
-        //   <tbody>
-        //     {dataSource.map((record = {}, index) => {
-        //       return (
-        //         <tr key={`${index + record.name || ""}`}>
-        //           {columnList.map((item) => {
-        //             const { dataIndex = "", customRender, align = "center" } = item;
-        //             const render = customRender && isFunction(customRender);
-        //             return (
-        //               <td class={["file-table-td", align]} key={dataIndex}>
-        //                 {render
-        //                   ? customRender?.({ text: record[dataIndex], record })
-        //                   : record[dataIndex]}
-        //               </td>
-        //             );
-        //           })}
-        //         </tr>
-        //       );
-        //     })}
-        //   </tbody>
-        // </table>
+        <Table columns={columnList as any} data-source={dataSource} pagination={false} scroll={scroll} bordered />
       );
     };
   }

@@ -47,6 +47,7 @@ import { usePermission } from "/@/hooks/web/UsePermission";
 import { useMessage } from "/@/hooks/web/UseMessage";
 import { uploadApi } from "/@/api/storage/Upload";
 import BasicUpload from "/@/components/general/Upload/src/BasicUpload.vue";
+import { SysFile } from "/@/api/storage/model/SysFileModel";
 
 export default {
   name: "SysFileManagement",
@@ -55,7 +56,7 @@ export default {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
     const { createMessage } = useMessage();
-    const [registerTable, { reload }] = useTable({
+    const [registerTable, { reload, insertTableDataRecord }] = useTable({
       title: "文件列表",
       api: getSysFileList,
       columns,
@@ -98,8 +99,10 @@ export default {
     }
 
     return {
-      handleChange: (list: string[]) => {
-        createMessage.info(`已上传文件${JSON.stringify(list)}`);
+      handleChange: (files: SysFile[]) => {
+        files.forEach((file) => {
+          insertTableDataRecord(file, 0);
+        });
       },
       registerTable,
       registerModal,

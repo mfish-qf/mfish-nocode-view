@@ -1,4 +1,4 @@
-import { UploadApiResult } from "/@/api/sys/model/UploadModel";
+import { SysFile } from "/@/api/storage/model/SysFileModel";
 
 export enum UploadResultStatus {
   SUCCESS = "success",
@@ -16,7 +16,7 @@ export interface FileItem {
   percent: number;
   file: File;
   status?: UploadResultStatus;
-  responseData?: UploadApiResult;
+  responseData?: SysFile;
   uuid: string;
 }
 

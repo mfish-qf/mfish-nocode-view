@@ -2,16 +2,13 @@
   <BasicModal
     width="40%"
     :title="t('component.upload.upload')"
-    :okText="t('component.upload.save')"
+    :okText="t('component.upload.close')"
     v-bind="$attrs"
     @register="register"
     @ok="handleOk"
-    :closeFunc="handleCloseFunc"
-    :maskClosable="false"
-    :keyboard="false"
+    :afterClose="handleCloseFunc"
     class="upload-modal"
-    :okButtonProps="getOkButtonProps"
-    :cancelButtonProps="{ disabled: isUploadingRef }"
+    :showCancelBtn="false"
   >
     <template #centerFooter>
       <a-button
@@ -56,6 +53,7 @@ import { isFunction } from "/@/utils/Is";
 import { warn } from "/@/utils/Log";
 import FileList from "./FileList.vue";
 import { useI18n } from "/@/hooks/web/UseI18n";
+import { SysFile } from "/@/api/storage/model/SysFileModel";
 
 export default defineComponent({
   components: { BasicModal, Upload, Alert, FileList },
@@ -67,40 +65,25 @@ export default defineComponent({
     const state = reactive<{ fileList: FileItem[] }>({
       fileList: []
     });
-
     //   是否正在上传
     const isUploadingRef = ref(false);
     const fileListRef = ref<FileItem[]>([]);
     const { accept, helpText, maxNumber, maxSize } = toRefs(props);
-
     const { t } = useI18n();
     const [register, { closeModal }] = useModalInner();
-
     const { getStringAccept, getHelpText } = useUploadType({
       acceptRef: accept,
       helpTextRef: helpText,
       maxNumberRef: maxNumber,
       maxSizeRef: maxSize
     });
-
     const { createMessage } = useMessage();
-
     const getIsSelectFile = computed(() => {
       return (
         fileListRef.value.length > 0 &&
         !fileListRef.value.every((item) => item.status === UploadResultStatus.SUCCESS)
       );
     });
-
-    const getOkButtonProps = computed(() => {
-      const someSuccess = fileListRef.value.some(
-        (item) => item.status === UploadResultStatus.SUCCESS
-      );
-      return {
-        disabled: isUploadingRef.value || fileListRef.value.length === 0 || !someSuccess
-      };
-    });
-
     const getUploadBtnText = computed(() => {
       const someError = fileListRef.value.some(
         (item) => item.status === UploadResultStatus.ERROR
@@ -162,7 +145,7 @@ export default defineComponent({
       }
       try {
         item.status = UploadResultStatus.UPLOADING;
-        const { data } = await props.api?.(
+        const result = await props.api(
           {
             ...(props.uploadParams || {}),
             file: item.file,
@@ -175,7 +158,7 @@ export default defineComponent({
           }
         );
         item.status = UploadResultStatus.SUCCESS;
-        item.responseData = data;
+        item.responseData = result;
         return {
           success: true,
           error: null
@@ -215,41 +198,26 @@ export default defineComponent({
       }
     }
 
-    //   点击保存
     function handleOk() {
-      const { maxNumber } = props;
-
-      if (fileListRef.value.length > maxNumber) {
-        return createMessage.warning(t("component.upload.maxNumber", [maxNumber]));
-      }
-      if (isUploadingRef.value) {
-        return createMessage.warning(t("component.upload.saveWarn"));
-      }
-      const fileList: string[] = [];
-
-      for (const item of fileListRef.value) {
-        const { status, responseData } = item;
-        if (status === UploadResultStatus.SUCCESS && responseData) {
-          fileList.push(responseData.url);
-        }
-      }
-      // 存在一个上传成功的即可保存
-      if (fileList.length <= 0) {
-        return createMessage.warning(t("component.upload.saveError"));
-      }
-      fileListRef.value = [];
       closeModal();
-      emit("change", fileList);
     }
 
-    // 点击关闭：则所有操作不保存，包括上传的
     async function handleCloseFunc() {
-      if (!isUploadingRef.value) {
+      if (isUploadingRef.value) {
+        return createMessage.warning(t("component.upload.closeWarn"));
+      }
+      if (fileListRef.value.length > 0) {
+        const fileList: SysFile[] = [];
+        for (const item of fileListRef.value) {
+          const { status, responseData } = item;
+          if (status === UploadResultStatus.SUCCESS && responseData) {
+            fileList.push(responseData);
+          }
+        }
         fileListRef.value = [];
-        return true;
-      } else {
-        createMessage.warning(t("component.upload.uploadWait"));
-        return false;
+        if (fileList.length > 0) {
+          emit("change", fileList);
+        }
       }
     }
 
@@ -257,10 +225,8 @@ export default defineComponent({
       columns: createTableColumns() as any[],
       actionColumn: createActionColumn(handleRemove) as any,
       register,
-      closeModal,
       getHelpText,
       getStringAccept,
-      getOkButtonProps,
       beforeUpload,
       fileListRef,
       state,
