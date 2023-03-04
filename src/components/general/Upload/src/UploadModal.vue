@@ -50,7 +50,7 @@ import { useMessage } from "/@/hooks/web/UseMessage";
 import { FileItem, UploadResultStatus } from "./Typing";
 import { basicProps } from "./Props";
 import { createTableColumns, createActionColumn } from "./data";
-import { checkImgType, getBase64WithFile } from "./Helper";
+import { checkImgType, getBase64WithFile } from "/@/utils/FileUtils";
 import { buildUUID } from "/@/utils/Uuid";
 import { isFunction } from "/@/utils/Is";
 import { warn } from "/@/utils/Log";
@@ -121,9 +121,10 @@ export default defineComponent({
         createMessage.error(t("component.upload.maxSizeMultiple", [maxSize]));
         return false;
       }
-
       const commonItem = {
         uuid: buildUUID(),
+        isPrivate: 1,
+        path: "",
         file,
         size,
         name,
@@ -132,8 +133,6 @@ export default defineComponent({
       };
       // 生成图片缩略图
       if (checkImgType(file)) {
-        // beforeUpload，如果异步会调用自带上传方法
-        // file.thumbUrl = await getBase64(file);
         getBase64WithFile(file).then(({ result: thumbUrl }) => {
           fileListRef.value = [
             ...unref(fileListRef),
@@ -159,14 +158,16 @@ export default defineComponent({
     async function uploadApiByItem(item: FileItem) {
       const { api } = props;
       if (!api || !isFunction(api)) {
-        return warn("upload api must exist and be a function");
+        return warn("上传接口必须是一个方法");
       }
       try {
         item.status = UploadResultStatus.UPLOADING;
         const { data } = await props.api?.(
           {
             ...(props.uploadParams || {}),
-            file: item.file
+            file: item.file,
+            isPrivate: item.isPrivate,
+            path: item.path
           },
           function onUploadProgress(progressEvent: ProgressEvent) {
             const complete = ((progressEvent.loaded / progressEvent.total) * 100) | 0;
@@ -180,7 +181,6 @@ export default defineComponent({
           error: null
         };
       } catch (e) {
-        console.log(e);
         item.status = UploadResultStatus.ERROR;
         return {
           success: false,

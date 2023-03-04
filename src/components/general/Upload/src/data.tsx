@@ -1,9 +1,10 @@
 import type { BasicColumn, ActionItem } from "/@/components/general/Table";
 import { FileItem, UploadResultStatus } from "./Typing";
-import { Progress, Tag, Switch } from "ant-design-vue";
+import { Progress, Switch, Input } from "ant-design-vue";
 import TableAction from "/@/components/general/Table/src/components/TableAction.vue";
 import ThumbUrl from "./ThumbUrl.vue";
 import { useI18n } from "/@/hooks/web/UseI18n";
+import { calcSize, getFileIcon } from "/@/utils/FileUtils";
 
 const { t } = useI18n();
 
@@ -13,16 +14,21 @@ export function createTableColumns(): BasicColumn[] {
     {
       dataIndex: "thumbUrl",
       title: t("component.upload.legend"),
-      width: 100,
+      width: 80,
+      align: "center",
       customRender: ({ record }) => {
         const { thumbUrl } = (record as FileItem) || {};
-        return thumbUrl && <ThumbUrl fileUrl={thumbUrl} />;
+        if (thumbUrl) {
+          return <ThumbUrl fileUrl={thumbUrl} />;
+        }
+        return getFileIcon(record.name);
       }
     },
     {
       title: "文件公开",
       dataIndex: "isPrivate",
-      width: 100,
+      width: 80,
+      align: "center",
       customRender: ({ record }) => {
         function onChange(checked: boolean) {
           record.isPrivate = checked ? 0 : 1;
@@ -34,8 +40,8 @@ export function createTableColumns(): BasicColumn[] {
     {
       dataIndex: "name",
       title: t("component.upload.fileName"),
-      align: "left",
       width: 150,
+      align: "center",
       customRender: ({ text, record }) => {
         const { percent, status: uploadStatus } = (record as FileItem) || {};
         let status: "normal" | "exception" | "active" | "success" = "normal";
@@ -57,47 +63,47 @@ export function createTableColumns(): BasicColumn[] {
       }
     },
     {
+      title: "文件目录",
+      dataIndex: "path",
+      width: 150,
+      align: "center",
+      customRender: ({ record }) => {
+        function onChange(e) {
+          record.path = e.target.value;
+        }
+
+        return <Input placeholder={"为空采用默认路径"} onChange={onChange} />;
+      }
+    },
+    {
       dataIndex: "size",
       title: t("component.upload.fileSize"),
-      width: 100,
+      width: 80,
+      align: "center",
       customRender: ({ text = 0 }) => {
-        return text && (text / 1024).toFixed(2) + "KB";
+        return text && calcSize(text, 1);
       }
     },
     {
       dataIndex: "type",
       title: "文件类型",
-      width: 100
-    },
-    {
-      dataIndex: "status",
-      title: t("component.upload.fileStatue"),
-      width: 100,
-      customRender: ({ text }) => {
-        if (text === UploadResultStatus.SUCCESS) {
-          return <Tag color="green">{() => t("component.upload.uploadSuccess")}</Tag>;
-        } else if (text === UploadResultStatus.ERROR) {
-          return <Tag color="red">{() => t("component.upload.uploadError")}</Tag>;
-        } else if (text === UploadResultStatus.UPLOADING) {
-          return <Tag color="blue">{() => t("component.upload.uploading")}</Tag>;
-        }
-        return text;
-      }
+      width: 80,
+      align: "center"
     }
   ];
 }
 
 export function createActionColumn(handleRemove: Function): BasicColumn {
   return {
-    width: 80,
+    width: 50,
     title: t("component.upload.operating"),
     dataIndex: "action",
-    fixed: true,
+    fixed: "right",
+    align: "center",
     customRender: ({ record }) => {
       const actions: ActionItem[] = [
         {
           icon: "ant-design:delete-outlined",
-          label: t("component.upload.del"),
           color: "error",
           onClick: handleRemove.bind(null, record)
         }

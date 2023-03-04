@@ -8,6 +8,8 @@ export enum UploadResultStatus {
 
 export interface FileItem {
   thumbUrl?: string;
+  isPrivate: number;
+  path?: string;
   name: string;
   size: string | number;
   type?: string;
