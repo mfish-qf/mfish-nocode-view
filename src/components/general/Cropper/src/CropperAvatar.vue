@@ -46,7 +46,7 @@ import { useMessage } from "/@/hooks/web/UseMessage";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import type { ButtonProps } from "/@/components/general/Button";
 import { Icon } from "/@/components/general/Icon";
-import { ApiFunParams } from "/@/components/general/Cropper";
+import { UploadFileParams } from "/#/axios";
 
 const props = {
   width: { type: [String, Number], default: "200px" },
@@ -54,7 +54,7 @@ const props = {
   showBtn: { type: Boolean, default: true },
   btnProps: { type: Object as PropType<ButtonProps> },
   btnText: { type: String, default: "" },
-  uploadApi: { type: Function as PropType<(params: ApiFunParams) => Promise<any>> }
+  uploadApi: { type: Function as PropType<(params: UploadFileParams) => Promise<any>> }
 };
 
 export default defineComponent({

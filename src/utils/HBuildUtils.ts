@@ -3,7 +3,7 @@ import { JsonPreview } from "/@/components/general/CodeEditor";
 
 /**
  * @description: vue通过h动态创建组件
- * @author: qiufeng
+ * @author: mfish
  * @date: 2023/2/28 21:03
  */
 export function buildJsonPreview(data) {

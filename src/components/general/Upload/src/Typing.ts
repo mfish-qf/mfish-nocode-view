@@ -1,4 +1,4 @@
-import { UploadApiResult } from "/@/api/sys/model/UploadModel";
+import { SysFile } from "/@/api/storage/model/SysFileModel";
 
 export enum UploadResultStatus {
   SUCCESS = "success",
@@ -8,20 +8,16 @@ export enum UploadResultStatus {
 
 export interface FileItem {
   thumbUrl?: string;
+  isPrivate: number;
+  path?: string;
   name: string;
   size: string | number;
   type?: string;
   percent: number;
   file: File;
   status?: UploadResultStatus;
-  responseData?: UploadApiResult;
+  responseData?: SysFile;
   uuid: string;
-}
-
-export interface PreviewFileItem {
-  url: string;
-  name: string;
-  type: string;
 }
 
 export interface FileBasicColumn {
