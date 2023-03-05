@@ -30,6 +30,7 @@ export const columns: BasicColumn[] = [
     title: "文件名",
     dataIndex: "fileName",
     customRender: ({ record }) => {
+      //超链接访问文件，直接访问后台存储文件地址
       return h("a", { href: record.fileUrl + "?access_token=" + getToken(), target: "_blank" }, record.fileName);
     }
   },

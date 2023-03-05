@@ -8,7 +8,6 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     VITE_GLOB_APP_TITLE,
     VITE_GLOB_API_URL,
     VITE_GLOB_APP_SHORT_NAME,
-    VITE_GLOB_UPLOAD_URL,
     VITE_GLOB_LOGIN_TYPE,
     VITE_GLOB_OAUTH2_URL,
     VITE_GLOB_OAUTH2_REDIRECT_URI
@@ -23,7 +22,6 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     title: VITE_GLOB_APP_TITLE,
     apiUrl: VITE_GLOB_API_URL,
     shortName: VITE_GLOB_APP_SHORT_NAME,
-    uploadUrl: VITE_GLOB_UPLOAD_URL,
     loginType: VITE_GLOB_LOGIN_TYPE,
     oauth2Url: VITE_GLOB_OAUTH2_URL,
     oauth2RedirectUri: VITE_GLOB_OAUTH2_REDIRECT_URI
