@@ -22,8 +22,6 @@ export interface GlobEnvConfig {
   VITE_GLOB_API_URL: string;
   // Project abbreviation
   VITE_GLOB_APP_SHORT_NAME: string;
-  // Upload url
-  VITE_GLOB_UPLOAD_URL?: string;
   // 登录类型
   VITE_GLOB_LOGIN_TYPE: string;
   // oauth2登录地址
@@ -40,8 +38,6 @@ export interface GlobConfig {
   apiUrl: string;
   // Project abbreviation
   shortName: string;
-  // Upload url
-  uploadUrl?: string;
   // 登录类型
   loginType: string;
   // oauth2登录地址

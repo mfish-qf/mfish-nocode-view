@@ -13,6 +13,14 @@ enum Api {
 }
 
 /**
+ * 获取本地存储文件文件路径
+ * @param fileKey
+ */
+export const getLocalFileUrl = (fileKey: string) => {
+  return "/storage/file/" + fileKey;
+};
+
+/**
  * 分页列表查询
  *
  * @param reqSysFile

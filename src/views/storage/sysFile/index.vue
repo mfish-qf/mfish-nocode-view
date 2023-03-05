@@ -44,7 +44,6 @@ import { useModal } from "/@/components/general/Modal";
 import SysFileModal from "./SysFileModal.vue";
 import { columns, searchFormSchema } from "./sysFile.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
-import { useMessage } from "/@/hooks/web/UseMessage";
 import { uploadApi } from "/@/api/storage/Upload";
 import BasicUpload from "/@/components/general/Upload/src/BasicUpload.vue";
 import { SysFile } from "/@/api/storage/model/SysFileModel";
@@ -55,7 +54,6 @@ export default {
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
-    const { createMessage } = useMessage();
     const [registerTable, { reload, insertTableDataRecord }] = useTable({
       title: "文件列表",
       api: getSysFileList,

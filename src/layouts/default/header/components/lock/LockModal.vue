@@ -33,7 +33,7 @@ import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { useUserStore } from "/@/store/modules/User";
 import { useLockStore } from "/@/store/modules/Lock";
 import headerImg from "/@/assets/images/header.png";
-import { imageUrl } from "/@/utils/http/image/ImageRequest";
+import { imageUrl } from "/@/utils/FileUtils";
 
 export default defineComponent({
   name: "LockModal",
