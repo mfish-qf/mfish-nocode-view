@@ -61,7 +61,7 @@ import { openWindow } from "/@/utils";
 import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
 import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
 import { useGo } from "/@/hooks/web/UsePage";
-import { imageUrl } from "/@/utils/http/image/ImageRequest";
+import { imageUrl } from "/@/utils/FileUtils";
 
 type MenuEvent = "logout" | "doc" | "lock" | "changePwd" | "userInfo";
 

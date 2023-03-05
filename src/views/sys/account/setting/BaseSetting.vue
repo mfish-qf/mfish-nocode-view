@@ -36,7 +36,8 @@ import { getUserInfo, updateUser } from "/@/api/sys/User";
 import { baseSetSchemas } from "./setting.data";
 import { useUserStore } from "/@/store/modules/User";
 import { uploadApi } from "/@/api/storage/Upload";
-import { imageUrl } from "/@/utils/http/image/ImageRequest";
+import { imageUrl } from "/@/utils/FileUtils";
+import { getLocalFileUrl } from "/@/api/storage/SysFile";
 
 export default defineComponent({
   components: {
@@ -65,7 +66,7 @@ export default defineComponent({
 
     let avatar = computed(() => {
       const imgUrl = userStore.getUserInfo?.headImgUrl;
-      return imgUrl ? imageUrl("/storage/file/" + imgUrl) : headerImg;
+      return imgUrl ? imageUrl(getLocalFileUrl(imgUrl)) : headerImg;
     });
 
     function updateAvatar({ data }) {

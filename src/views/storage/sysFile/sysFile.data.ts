@@ -4,8 +4,8 @@ import { h } from "vue";
 import { Switch } from "ant-design-vue";
 import { getToken } from "/@/utils/auth";
 import TableImage from "/@/components/general/Table/src/components/TableImg.vue";
-import { setFileStatus } from "/@/api/storage/SysFile";
-import { getFileIcon, calcSize } from "/@/utils/FileUtils";
+import { getLocalFileUrl, setFileStatus } from "/@/api/storage/SysFile";
+import { getFileIcon, calcSize, imageUrl } from "/@/utils/FileUtils";
 
 /**
  * @description: 文件存储
@@ -18,7 +18,7 @@ export const columns: BasicColumn[] = [
     title: "文件",
     dataIndex: "fileUrl",
     customRender: ({ record }) => {
-      const imgList = [record.fileUrl + "?access_token=" + getToken()];
+      const imgList = [imageUrl(getLocalFileUrl(record.fileKey))];
       if (record.fileType.toLowerCase().startsWith("image")) {
         return h(TableImage, { size: 40, simpleShow: true, imgList: imgList });
       }

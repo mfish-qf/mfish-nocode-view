@@ -28,7 +28,7 @@
       <div :class="`${prefixCls}-entry`" v-show="!showDate">
         <div :class="`${prefixCls}-entry-content`">
           <div :class="`${prefixCls}-entry__header enter-x`">
-            <img :src="userinfo.avatar || headerImg" :class="`${prefixCls}-entry__header-img`" />
+            <img :src="avatar" :class="`${prefixCls}-entry__header-img`" />
             <p :class="`${prefixCls}-entry__header-name`">
               {{ userinfo.nickname }}
             </p>
@@ -86,6 +86,7 @@ import { useNow } from "./UseNow";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { LockOutlined } from "@ant-design/icons-vue";
 import headerImg from "/@/assets/images/header.png";
+import { imageUrl } from "/@/utils/FileUtils";
 
 const InputPassword = Input.Password;
 
@@ -97,7 +98,10 @@ const showDate = ref(true);
 const { prefixCls } = useDesign("lock-page");
 const lockStore = useLockStore();
 const userStore = useUserStore();
-
+const avatar = computed(() => {
+  const imgUrl = userStore.getUserInfo?.headImgUrl;
+  return imgUrl ? imageUrl("/storage/file/" + imgUrl) : headerImg;
+});
 const { hour, month, minute, meridiem, year, day, week } = useNow(true);
 
 const { t } = useI18n();
