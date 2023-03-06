@@ -72,12 +72,6 @@ html[data-theme='light'] {
           }
         }
 
-        // > div {
-        //   display: flex;
-        //   justify-content: center;
-        //   align-items: center;
-        // }
-
         svg {
           fill: @text-color-base;
         }
@@ -85,14 +79,14 @@ html[data-theme='light'] {
 
       .ant-tabs-tab:not(.ant-tabs-tab-active) {
         &:hover {
-          color: @primary-color;
+          color: @primary-color !important;
         }
       }
 
       .ant-tabs-tab-active {
         position: relative;
         padding-left: 18px;
-        background: @primary-color;
+        background: @primary-color !important;
         border: 0;
         transition: none;
 
