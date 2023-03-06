@@ -49,8 +49,6 @@ export function updateHeaderBgColor(color?: string) {
  */
 export function updateSidebarBgColor(color?: string) {
   const appStore = useAppStore();
-
-  // if (!isHexColor(color)) return;
   const darkMode = appStore.getDarkMode === ThemeEnum.DARK;
   if (!color) {
     if (darkMode) {

@@ -9,7 +9,6 @@ export async function changeTheme(color: string) {
     tinycolor,
     color
   });
-
   return await replaceStyleVariables({
     colorVariables: [...getThemeColors(color), ...colors]
   });
