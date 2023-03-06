@@ -2,23 +2,23 @@ import { darkCssIsReady, loadDarkThemeCss } from "@kirklin/vite-plugin-vben-them
 import { addClass, hasClass, removeClass } from "/@/utils/DomUtils";
 
 export async function updateDarkTheme(mode: string | null = "light") {
-  const htmlRoot = document.getElementById("htmlRoot");
-  if (!htmlRoot) {
+  const mainHtml = document.getElementById("mainHtml");
+  if (!mainHtml) {
     return;
   }
-  const hasDarkClass = hasClass(htmlRoot, "dark");
+  const hasDarkClass = hasClass(mainHtml, "dark");
   if (mode === "dark") {
     if (import.meta.env.PROD && !darkCssIsReady) {
       await loadDarkThemeCss();
     }
-    htmlRoot.setAttribute("data-theme", "dark");
+    mainHtml.setAttribute("data-theme", "dark");
     if (!hasDarkClass) {
-      addClass(htmlRoot, "dark");
+      addClass(mainHtml, "dark");
     }
   } else {
-    htmlRoot.setAttribute("data-theme", "light");
+    mainHtml.setAttribute("data-theme", "light");
     if (hasDarkClass) {
-      removeClass(htmlRoot, "dark");
+      removeClass(mainHtml, "dark");
     }
   }
 }
