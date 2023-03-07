@@ -57,9 +57,9 @@ export default {
     resetSuccess: "重置成功！",
 
     copyBtn: "拷贝",
-    clearBtn: "清空缓存并返回登录页",
+    saveBtn: "保存",
 
-    drawerTitle: "项目配置",
+    drawerTitle: "界面风格",
 
     darkMode: "主题",
     navMode: "导航栏模式",

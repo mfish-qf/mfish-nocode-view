@@ -4,7 +4,7 @@
  * @date: 2022/10/9 11:43
  */
 import { warn } from "/@/utils/Log";
-import { getConfigFileName } from "../../build/Utils";
+import { getConfigFileName } from "../../build/BuildUtils";
 import { GlobEnvConfig } from "/#/config";
 import pkg from "../../package.json";
 

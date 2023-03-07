@@ -1,6 +1,6 @@
 import { ConfigEnv, loadEnv, UserConfig } from "vite";
 import { createProxy } from "./build/vite/Proxy";
-import { wrapperEnv } from "./build/Utils";
+import { wrapperEnv } from "./build/BuildUtils";
 import { resolve } from "path";
 import pkg from "./package.json";
 import dayjs from "dayjs";

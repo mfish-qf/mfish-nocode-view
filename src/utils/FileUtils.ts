@@ -4,6 +4,7 @@ import { useGlobSetting } from "/@/hooks/setting";
 import { isString } from "/@/utils/Is";
 import { getToken } from "/@/utils/auth";
 import { defHttp } from "/@/utils/http/axios";
+import { useAppStore } from "/@/store/modules/App";
 
 /**
  * @description: 文件通用类
@@ -86,6 +87,8 @@ export const imageBase64 = async (url) => {
  * @param fileName
  */
 export function getFileIcon(fileName: string) {
+  const appStore = useAppStore();
+  const color = appStore.getProjectConfig.themeColor || "#ee4f12";
   const index = fileName.lastIndexOf(".");
   if (index > 0) {
     let name = fileName.substring(index + 1);
@@ -112,11 +115,11 @@ export function getFileIcon(fileName: string) {
       case "pdf":
         break;
       default:
-        return h(Icon, { size: 40, icon: `ant-design:file-unknown-outlined`, color: "#ee4f12" });
+        return h(Icon, { size: 40, icon: `ant-design:file-unknown-outlined`, color: color });
     }
-    return h(Icon, { size: 40, icon: `ant-design:file-${name}-outlined`, color: "#ee4f12" });
+    return h(Icon, { size: 40, icon: `ant-design:file-${name}-outlined`, color: color });
   }
-  return h(Icon, { size: 40, icon: `ant-design:file-unknown-outlined`, color: "#ee4f12" });
+  return h(Icon, { size: 40, icon: `ant-design:file-unknown-outlined`, color: color });
 }
 
 /**

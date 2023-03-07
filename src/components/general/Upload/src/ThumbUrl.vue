@@ -1,6 +1,6 @@
 <template>
   <span class="thumb">
-    <Image v-if="fileUrl" :src="fileUrl" :width="104" />
+    <Image v-if="fileUrl" :src="fileUrl" :width="60" />
   </span>
 </template>
 <script lang="ts">

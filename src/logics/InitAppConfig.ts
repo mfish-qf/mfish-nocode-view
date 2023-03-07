@@ -2,46 +2,57 @@
  * Application configuration
  */
 import type { ProjectConfig } from "/#/config";
-
-import { PROJ_CFG_KEY } from "/@/enums/CacheEnum";
 import projectSetting from "/@/settings/ProjectSetting";
-
 import { updateHeaderBgColor, updateSidebarBgColor } from "/@/logics/theme/UpdateBackground";
 import { updateColorWeak } from "/@/logics/theme/UpdateColorWeak";
 import { updateGrayMode } from "/@/logics/theme/UpdateGrayMode";
 import { updateDarkTheme } from "/@/logics/theme/Dark";
 import { changeTheme } from "/@/logics/theme";
-
 import { useAppStore } from "/@/store/modules/App";
-import { useLocaleStore } from "/@/store/modules/I18n";
-
 import { getCommonStoragePrefix, getStorageShortName } from "/@/utils/Env";
-
 import { primaryColor } from "../../build/config/ThemeConfig";
-import { Persistent } from "/@/utils/cache/Persistent";
 import { deepMerge } from "/@/utils";
 import { ThemeEnum } from "/@/enums/AppEnum";
+import { getSysConfig } from "/@/api/sys/SysConfig";
+import { useUserStoreWithOut } from "/@/store/modules/User";
+import { sleep } from "/@/utils/Utils";
+
+export async function initAppConfigStore() {
+  const userStore = useUserStoreWithOut();
+  let token = userStore.getToken;
+  while (!token) {
+    token = userStore.getToken;
+    await sleep(100);
+  }
+  setAppConfigStore().then();
+}
+
 
 // 初始化项目配置
-export function initAppConfigStore() {
-  const localeStore = useLocaleStore();
+async function setAppConfigStore() {
   const appStore = useAppStore();
-  let projCfg: ProjectConfig = Persistent.getLocal(PROJ_CFG_KEY) as ProjectConfig;
-  projCfg = deepMerge(projectSetting, projCfg || {});
+  let projCfg: ProjectConfig;
+
+  const sysConfig = await getSysConfig();
+
+  if (sysConfig) {
+    projCfg = JSON.parse(sysConfig.config) as ProjectConfig;
+    projCfg = deepMerge(projectSetting, projCfg || {});
+  } else {
+    projCfg = projectSetting;
+  }
   const darkMode = appStore.getDarkMode;
   const {
     colorWeak,
     grayMode,
     themeColor,
-
     headerSetting: { bgColor: headerBgColor } = {},
     menuSetting: { bgColor } = {}
   } = projCfg;
   try {
     if (themeColor && themeColor !== primaryColor) {
-      changeTheme(themeColor);
+      changeTheme(themeColor).then();
     }
-
     grayMode && updateGrayMode(grayMode);
     colorWeak && updateColorWeak(colorWeak);
   } catch (error) {
@@ -50,7 +61,7 @@ export function initAppConfigStore() {
   appStore.setProjectConfig(projCfg);
 
   // init dark mode
-  updateDarkTheme(darkMode);
+  updateDarkTheme(darkMode).then();
   if (darkMode === ThemeEnum.DARK) {
     updateHeaderBgColor();
     updateSidebarBgColor();
@@ -58,8 +69,6 @@ export function initAppConfigStore() {
     headerBgColor && updateHeaderBgColor(headerBgColor);
     bgColor && updateSidebarBgColor(bgColor);
   }
-  // init store
-  localeStore.initLocale();
 
   setTimeout(() => {
     clearObsoleteStorage();
