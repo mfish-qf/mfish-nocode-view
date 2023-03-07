@@ -95,7 +95,7 @@ export function createTableColumns(): BasicColumn[] {
 
 export function createActionColumn(handleRemove: Function): BasicColumn {
   return {
-    width: 50,
+    width: 60,
     title: t("component.upload.operating"),
     dataIndex: "action",
     fixed: "right",

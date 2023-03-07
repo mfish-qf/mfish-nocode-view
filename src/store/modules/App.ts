@@ -9,7 +9,7 @@ import type { BeforeMiniState } from "/#/store";
 import { defineStore } from "pinia";
 import { store } from "/@/store";
 import { ThemeEnum } from "/@/enums/AppEnum";
-import { APP_DARK_MODE_KEY_, PROJ_CFG_KEY } from "/@/enums/CacheEnum";
+import { APP_DARK_MODE_KEY_ } from "/@/enums/CacheEnum";
 import { Persistent } from "/@/utils/cache/Persistent";
 import { darkMode } from "/@/settings/DesignSetting";
 import { resetRouter } from "/@/router";
@@ -31,7 +31,7 @@ export const useAppStore = defineStore({
   state: (): AppState => ({
     darkMode: undefined,
     pageLoading: false,
-    projectConfig: Persistent.getLocal(PROJ_CFG_KEY),
+    projectConfig: null,
     beforeMiniInfo: {}
   }),
   getters: {
@@ -79,7 +79,8 @@ export const useAppStore = defineStore({
 
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
       this.projectConfig = deepMerge(this.projectConfig || {}, config);
-      Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
+      //界面配置已存储到服务端，下面这段存储本地缓存可以根据自己需求放开
+      // Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
     },
 
     async resetAllState() {

@@ -39,14 +39,10 @@ export default defineComponent({
       if (unref(isMobile)) {
         if (!unref(isSetState)) {
           isSetState.value = true;
-          const {
-            menuSetting: {
-              type: menuType,
-              mode: menuMode,
-              collapsed: menuCollapsed,
-              split: menuSplit
-            }
-          } = appStore.getProjectConfig;
+          const menuType = appStore.getProjectConfig?.menuSetting?.type ?? MenuTypeEnum.SIDEBAR;
+          const menuMode = appStore.getProjectConfig?.menuSetting?.mode ?? MenuModeEnum.INLINE;
+          const menuCollapsed = appStore.getProjectConfig?.menuSetting?.collapsed ?? false;
+          const menuSplit = appStore.getProjectConfig?.menuSetting?.split ?? false;
           appStore.setProjectConfig({
             menuSetting: {
               type: MenuTypeEnum.SIDEBAR,
@@ -71,6 +67,7 @@ export default defineComponent({
         }
       }
     }
+
     return () => slots.default?.();
   }
 });

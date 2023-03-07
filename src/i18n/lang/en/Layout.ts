@@ -56,9 +56,9 @@ export default {
     resetSuccess: "Successfully reset!",
 
     copyBtn: "Copy",
-    clearBtn: "Clear cache and to the login page",
+    saveBtn: "Save",
 
-    drawerTitle: "Configuration",
+    drawerTitle: "Theme Style",
 
     darkMode: "Dark mode",
     navMode: "Navigation mode",

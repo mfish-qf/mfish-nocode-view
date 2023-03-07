@@ -5,7 +5,7 @@
  */
 import { GLOB_CONFIG_FILE_NAME, OUTPUT_DIR } from "../Constant";
 import fs, { writeFileSync } from "fs-extra";
-import { getConfigFileName, getEnvConfig, getRootPath } from "../Utils";
+import { getConfigFileName, getEnvConfig, getRootPath } from "../BuildUtils";
 import pkg from "../../package.json";
 import colors from "picocolors";
 

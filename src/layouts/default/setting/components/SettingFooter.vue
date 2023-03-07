@@ -1,28 +1,24 @@
 <template>
   <div :class="prefixCls">
-    <a-button type="primary" block @click="handleCopy">
+    <a-button type="primary" @click="handleSave">
+      <SaveOutlined class="mr-2" />
+      {{ t("layout.setting.saveBtn") }}
+    </a-button>
+
+    <a-button type="warning" @click="handleCopy">
       <CopyOutlined class="mr-2" />
       {{ t("layout.setting.copyBtn") }}
     </a-button>
-
-    <a-button color="warning" block @click="handleResetSetting" class="my-3">
+    <a-button color="error" @click="handleResetSetting">
       <RedoOutlined class="mr-2" />
       {{ t("common.resetText") }}
-    </a-button>
-
-    <a-button color="error" block @click="handleClearAndRedo">
-      <RedoOutlined class="mr-2" />
-      {{ t("layout.setting.clearBtn") }}
     </a-button>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, unref } from "vue";
-import { CopyOutlined, RedoOutlined } from "@ant-design/icons-vue";
+import { CopyOutlined, RedoOutlined, SaveOutlined } from "@ant-design/icons-vue";
 import { useAppStore } from "/@/store/modules/App";
-import { usePermissionStore } from "/@/store/modules/Permission";
-import { useMultipleTabStore } from "/@/store/modules/MultipleTab";
-import { useUserStore } from "/@/store/modules/User";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { useMessage } from "/@/hooks/web/UseMessage";
@@ -30,18 +26,21 @@ import { useCopyToClipboard } from "/@/hooks/web/UseCopyToClipboard";
 import { updateColorWeak } from "/@/logics/theme/UpdateColorWeak";
 import { updateGrayMode } from "/@/logics/theme/UpdateGrayMode";
 import defaultSetting from "/@/settings/ProjectSetting";
+import { changeTheme } from "/@/logics/theme";
+import { saveSysConfig } from "/@/api/sys/SysConfig";
 
 export default defineComponent({
   name: "SettingFooter",
-  components: { CopyOutlined, RedoOutlined },
+  components: { SaveOutlined, CopyOutlined, RedoOutlined },
   setup() {
-    const permissionStore = usePermissionStore();
     const { prefixCls } = useDesign("setting-footer");
     const { t } = useI18n();
     const { createSuccessModal, createMessage } = useMessage();
-    const tabStore = useMultipleTabStore();
-    const userStore = useUserStore();
     const appStore = useAppStore();
+
+    function handleSave() {
+      saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)) }).then();
+    }
 
     function handleCopy() {
       const { isSuccessRef } = useCopyToClipboard(
@@ -57,8 +56,8 @@ export default defineComponent({
     function handleResetSetting() {
       try {
         appStore.setProjectConfig(defaultSetting);
-        const { colorWeak, grayMode } = defaultSetting;
-        // updateTheme(themeColor);
+        const { colorWeak, grayMode, themeColor } = defaultSetting;
+        changeTheme(themeColor);
         updateColorWeak(colorWeak);
         updateGrayMode(grayMode);
         createMessage.success(t("layout.setting.resetSuccess"));
@@ -67,21 +66,12 @@ export default defineComponent({
       }
     }
 
-    function handleClearAndRedo() {
-      localStorage.clear();
-      appStore.resetAllState();
-      permissionStore.resetState();
-      tabStore.resetState();
-      userStore.resetState();
-      location.reload();
-    }
-
     return {
       prefixCls,
       t,
+      handleSave,
       handleCopy,
-      handleResetSetting,
-      handleClearAndRedo
+      handleResetSetting
     };
   }
 });
@@ -91,7 +81,6 @@ export default defineComponent({
 
 .@{prefix-cls} {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
 }
 </style>

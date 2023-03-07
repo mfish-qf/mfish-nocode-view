@@ -8,8 +8,7 @@ import {
   SettingButtonPositionEnum,
   SessionTimeoutProcessingEnum
 } from "/@/enums/AppEnum";
-import { SIDE_BAR_BG_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST } from "./DesignSetting";
-import { primaryColor } from "../../build/config/ThemeConfig";
+import { SIDE_BAR_BG_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, APP_PRESET_COLOR_LIST } from "./DesignSetting";
 
 // ! You need to clear the browser cache after the change
 const setting: ProjectConfig = {
@@ -17,7 +16,7 @@ const setting: ProjectConfig = {
   showSettingButton: true,
 
   // Whether to show the theme switch button
-  showDarkModeToggle: true,
+  showDarkModeToggle: false,
 
   // `Settings` button position
   settingButtonPosition: SettingButtonPositionEnum.AUTO,
@@ -29,7 +28,7 @@ const setting: ProjectConfig = {
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum.ROUTE_JUMP,
 
   // color
-  themeColor: primaryColor,
+  themeColor: APP_PRESET_COLOR_LIST[0],
 
   // Website gray mode, open for possible mourning dates
   grayMode: false,

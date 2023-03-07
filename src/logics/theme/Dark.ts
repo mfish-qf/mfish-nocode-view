@@ -15,10 +15,10 @@ export async function updateDarkTheme(mode: string | null = "light") {
     if (!hasDarkClass) {
       addClass(mainHtml, "dark");
     }
-  } else {
-    mainHtml.setAttribute("data-theme", "light");
-    if (hasDarkClass) {
-      removeClass(mainHtml, "dark");
-    }
+    return;
+  }
+  mainHtml.setAttribute("data-theme", "light");
+  if (hasDarkClass) {
+    removeClass(mainHtml, "dark");
   }
 }

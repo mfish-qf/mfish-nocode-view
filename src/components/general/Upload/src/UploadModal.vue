@@ -1,6 +1,6 @@
 <template>
   <BasicModal
-    width="40%"
+    width="50%"
     :title="t('component.upload.upload')"
     :okText="t('component.upload.close')"
     v-bind="$attrs"

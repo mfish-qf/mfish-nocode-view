@@ -12,9 +12,9 @@ export interface PageResult<T> {
  * 对象基类
  */
 export interface BaseEntity<T> {
-  id: T;
-  createBy: string;
-  createTime: string;
-  updateBy: string;
-  updateTime: string;
+  id?: T;
+  createBy?: string;
+  createTime?: string;
+  updateBy?: string;
+  updateTime?: string;
 }

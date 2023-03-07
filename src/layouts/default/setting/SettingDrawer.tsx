@@ -396,6 +396,7 @@ export default defineComponent({
         width={330}
         class="setting-drawer"
       >
+        <SettingFooter />
         {unref(getShowDarkModeToggle) && <Divider>{() => t("layout.setting.darkMode")}</Divider>}
         {unref(getShowDarkModeToggle) && <AppDarkModeToggle class="mx-auto" />}
         <Divider>{() => t("layout.setting.navMode")}</Divider>
@@ -412,8 +413,6 @@ export default defineComponent({
         {renderContent()}
         <Divider>{() => t("layout.setting.animation")}</Divider>
         {renderTransition()}
-        <Divider />
-        <SettingFooter />
       </BasicDrawer>
     );
   }
