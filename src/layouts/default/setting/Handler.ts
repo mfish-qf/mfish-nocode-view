@@ -12,7 +12,7 @@ export function baseHandler(event: HandlerEnum, value: any) {
   const appStore = useAppStore();
   const config = handler(event, value);
   appStore.setProjectConfig(config);
-  if (event === HandlerEnum.CHANGE_THEME) {
+  if (event === HandlerEnum.CHANGE_THEME || event === HandlerEnum.CHANGE_LAYOUT) {
     updateHeaderBgColor();
     updateSidebarBgColor();
   }

@@ -96,7 +96,7 @@ const setting: ProjectConfig = {
     // Menu type
     type: MenuTypeEnum.SIDEBAR,
     // Menu theme
-    theme: ThemeEnum.DARK,
+    theme: ThemeEnum.LIGHT,
     // Split menu
     split: false,
     // Top menu layout
