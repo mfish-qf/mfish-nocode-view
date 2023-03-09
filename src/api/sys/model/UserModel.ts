@@ -1,3 +1,5 @@
+import { PageResult } from "/@/api/model/BaseModel";
+
 /**
  * @description: 用户信息
  * @author: mfish
@@ -17,7 +19,7 @@ export interface LoginParams {
   code?: string;
   state?: string;
   //刷新token时使用
-  refresh_token?:string;
+  refresh_token?: string;
 }
 
 export interface RoleInfo {
@@ -57,3 +59,17 @@ export interface SsoUser {
   userRoles: RoleInfo[];
   permissions: Set<string>;
 }
+
+export interface OnlineUser {
+  account: string;
+  loginMode: number;
+  ip: string;
+  clientId: string;
+  token: string;
+  loginTime: string;
+  expire: string;
+}
+
+export type SsoUserPageModel = PageResult<SsoUser>;
+
+export type OnlineUserPageModel = PageResult<OnlineUser>;

@@ -28,12 +28,12 @@ export default {
       await resetFields();
       setModalProps({ confirmLoading: false, width: "40%" });
       isUpdate.value = !!data?.isUpdate;
+      valueChange("menuType", !data.record ? MenuType.目录 : data.record.menuType);
       if (unref(isUpdate)) {
         setFieldsValue({
           ...data.record
         }).then();
       }
-      valueChange("menuType", !data.record ? MenuType.目录 : data.record.menuType);
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增菜单" : "编辑菜单"));
 
@@ -48,6 +48,11 @@ export default {
       }]).then();
     }
 
+    /**
+     * 过滤不同类型树层级
+     * @param key
+     * @param value
+     */
     function valueChange(key, value) {
       if (key !== "menuType") {
         return;
@@ -57,7 +62,6 @@ export default {
       if (value === 0) {
         value = 1;
       }
-      setFieldsValue({ "parentId": null }).then();
       setTreeData({ "menuType": --value });
     }
 

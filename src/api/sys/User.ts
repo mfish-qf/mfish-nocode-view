@@ -1,7 +1,8 @@
 import { defHttp } from "/@/utils/http/axios";
-import { LoginParams, AccessToken, SsoUser } from "./model/UserModel";
+import { LoginParams, AccessToken, SsoUser, SsoUserPageModel, OnlineUserPageModel } from "./model/UserModel";
 import { MessageMode } from "/#/axios";
 import { ContentTypeEnum } from "/@/enums/HttpEnum";
+import { ReqPage } from "/@/api/model/BaseModel";
 
 enum Api {
   Login = "/oauth2/accessToken",
@@ -12,7 +13,8 @@ enum Api {
   Pwd = "/oauth2/user/pwd",
   SendMsg = "/oauth2/sendMsg",
   Permissions = "/oauth2/user/permissions",
-  SetStatus = "/oauth2/user/status"
+  SetStatus = "/oauth2/user/status",
+  Online = "/oauth2/user/online"
 }
 
 /**
@@ -45,8 +47,19 @@ export function getPermissions() {
   return defHttp.get<Set<string>>({ url: Api.Permissions }, { errorMessageMode: "none" });
 }
 
+/**
+ * 当前用户登出
+ */
 export function doLogout() {
   return defHttp.get({ url: Api.Logout });
+}
+
+/**
+ * 登出指定用户
+ * @param token
+ */
+export function logoutUser(token: string) {
+  return defHttp.get({ url: `${Api.Logout}/${token}` });
 }
 
 /**
@@ -58,7 +71,7 @@ export const isAccountExist = (account: string) => {
 };
 
 export const getUserList = (params?: SsoUser) => {
-  return defHttp.get<SsoUser>({ url: Api.User, params });
+  return defHttp.get<SsoUserPageModel>({ url: Api.User, params });
 };
 
 export function insertUser(params: SsoUser) {
@@ -79,4 +92,8 @@ export function changePwd(params: { userId: string, oldPwd?: string, newPwd: str
 
 export const setUserStatus = (userId: string, status: number) => {
   return defHttp.put<Boolean>({ url: Api.SetStatus, params: { "id": userId, "status": status } });
+};
+
+export const getOnlineList = (params?: ReqPage) => {
+  return defHttp.get<OnlineUserPageModel>({ url: Api.Online, params });
 };

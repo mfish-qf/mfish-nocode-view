@@ -1,5 +1,13 @@
 /**
- * 分页查询包装类
+ * 分页查询请求参数
+ */
+export interface ReqPage {
+  pageNum: number;
+  pageSize: number;
+}
+
+/**
+ * 分页查询结果包装类
  */
 export interface PageResult<T> {
   pageNum: number;
@@ -12,7 +20,7 @@ export interface PageResult<T> {
  * 对象基类
  */
 export interface BaseEntity<T> {
-  id?: T;
+  id: T;
   createBy?: string;
   createTime?: string;
   updateBy?: string;
