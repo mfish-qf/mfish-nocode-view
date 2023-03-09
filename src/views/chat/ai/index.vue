@@ -76,7 +76,9 @@ export default {
       chats.value.push({
         id: "1",
         user: botName,
-        chat: "您好，我是摸鱼机器人！\n要是喜欢我，给我的开源项目点个star吧！\n <a href='https://github.com/mfish-qf/mfish-nocode' target='_blank'>GitHub地址</a>"
+        chat: "您好，我是摸鱼机器人！\n要是喜欢我，给我的开源项目点个star吧！\n" +
+          "<a href='https://github.com/mfish-qf/mfish-nocode' target='_blank'>GitHub地址</a>\n" +
+          "<a href='https://gitee.com/qiufeng9862/mfish-nocode' target='_blank'>Gitee地址</a>"
       });
       scrollBottom();
     });

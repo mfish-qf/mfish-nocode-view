@@ -62,7 +62,7 @@
     "vue-types": "^4.2.1"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.31",
+    "@iconify/json": "^2.2.32",
     "@kirklin/vite-plugin-vben-theme": "^0.1.1",
     "@logicflow/core": "^1.1.31",
     "@logicflow/extension": "^1.1.31",

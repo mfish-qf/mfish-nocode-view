@@ -15,6 +15,7 @@ import { isUrl } from "/@/utils/Is";
 import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
 import { useAppInject } from "/@/hooks/web/UseAppInject";
 import { useDesign } from "/@/hooks/web/UseDesign";
+import { ThemeEnum } from "/@/enums/AppEnum";
 
 export default defineComponent({
   name: "LayoutMenu",
@@ -136,13 +137,16 @@ export default defineComponent({
     }
 
     function renderMenu() {
+
       const { menus, ...menuProps } = unref(getCommonProps);
       if (!menus || !menus.length) return null;
+      //菜单为头部菜单时，强制设置菜单样式为light，重写light的字体颜色，查看updateBackground.ts
       return !props.isHorizontal ? (
         <SimpleMenu {...menuProps} isSplitMenu={unref(getSplit)} items={menus} />
       ) : (
         <BasicMenu
           {...(menuProps as any)}
+          theme={ThemeEnum.LIGHT}
           isHorizontal={props.isHorizontal}
           type={unref(getMenuType)}
           showLogo={unref(getIsShowLogo)}

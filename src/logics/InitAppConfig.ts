@@ -59,7 +59,6 @@ async function setAppConfigStore() {
     console.log(error);
   }
   appStore.setProjectConfig(projCfg);
-
   // init dark mode
   updateDarkTheme(darkMode).then();
   if (darkMode === ThemeEnum.DARK) {
