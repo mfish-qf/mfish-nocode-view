@@ -21,7 +21,7 @@ export default {
       labelWidth: 100,
       schemas: formSchema,
       showActionButtonGroup: false,
-      baseColProps: { lg: 12, md: 24 },
+      baseColProps: { span: 12},
       autoSubmitOnEnter: true
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {

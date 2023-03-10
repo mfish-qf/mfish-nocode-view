@@ -107,7 +107,7 @@ export const formSchema: FormSchema[] = [
         { label: "按钮", value: 2 }
       ]
     },
-    colProps: { lg: 24, md: 24 }
+    colProps: { span: 24 }
   },
   {
     field: "menuName",
