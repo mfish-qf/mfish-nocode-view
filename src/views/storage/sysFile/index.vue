@@ -12,6 +12,7 @@
           :maxSize="10"
           @change="handleChange"
           :api="uploadApi"
+          v-if="hasPermission('sys:file:upload')"
         />
       </template>
       <template #bodyCell="{ column, record }">
@@ -26,7 +27,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
-                auth: 'sys:sysFile:delete',
+                auth: 'sys:file:delete',
                 tooltip: '删除',
               },
             ]"

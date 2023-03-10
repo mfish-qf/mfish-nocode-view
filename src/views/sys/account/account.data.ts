@@ -51,12 +51,12 @@ export const columns: BasicColumn[] = [
   {
     title: "生日",
     dataIndex: "birthday",
-    width: 180
+    width: 120
   },
   {
     title: "状态",
     dataIndex: "status",
-    width: 60,
+    width: 80,
     customRender: ({ record }) => {
       if (!Reflect.has(record, "pendingStatus")) {
         record.pendingStatus = false;

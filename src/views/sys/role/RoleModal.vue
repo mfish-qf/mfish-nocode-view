@@ -41,7 +41,7 @@ export default {
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
-      setModalProps({ confirmLoading: false, width: "40%" });
+      setModalProps({ confirmLoading: false, width: "800px" });
       // 需要在setFieldsValue之前先填充treeData，否则Tree组件可能会报key not exist警告
       if (unref(treeData).length === 0) {
         treeData.value = (await getMenuTree()) as any as TreeItem[];

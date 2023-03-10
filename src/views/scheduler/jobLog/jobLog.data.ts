@@ -48,19 +48,14 @@ export const columns: BasicColumn[] = [
     width: 100
   },
   {
-    title: "生效时间",
-    dataIndex: "startTime",
-    width: 150
-  },
-  {
-    title: "失效时间",
-    dataIndex: "endTime",
-    width: 150
-  },
-  {
     title: "执行状态",
     dataIndex: "status",
     width: 120
+  },
+  {
+    title: "执行时间",
+    dataIndex: "createTime",
+    width: 150
   },
   {
     title: "耗时(ms)",
@@ -68,8 +63,13 @@ export const columns: BasicColumn[] = [
     width: 80
   },
   {
-    title: "创建时间",
-    dataIndex: "createTime",
+    title: "生效时间",
+    dataIndex: "startTime",
+    width: 150
+  },
+  {
+    title: "失效时间",
+    dataIndex: "endTime",
     width: 150
   }
 ];

@@ -22,7 +22,7 @@ export default {
   setup() {
     let jobLogData = ref();
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
-      setModalProps({ confirmLoading: false, width: "40%" });
+      setModalProps({ confirmLoading: false, width: "800px" });
       jobLogData.value = { ...data };
     });
     const [registerDesc] = useDescription({

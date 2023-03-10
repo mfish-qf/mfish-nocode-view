@@ -51,6 +51,11 @@ export const columns: BasicColumn[] = [
     }
   },
   {
+    title: "上传时间",
+    dataIndex: "createTime",
+    width: 200
+  },
+  {
     title: "存储路径",
     dataIndex: "filePath",
     width: 200

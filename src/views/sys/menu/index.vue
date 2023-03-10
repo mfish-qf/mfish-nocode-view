@@ -2,7 +2,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:account:insert')">新增菜单</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:menu:insert')">新增菜单</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -33,7 +33,7 @@
 </template>
 <script lang="ts">
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-import { deleteMenu, getMenuTree } from "/@/api/sys/Menu";
+import { deleteMenu, getMenuList } from "/@/api/sys/Menu";
 import MenuModal from "./MenuModal.vue";
 import { columns, searchFormSchema } from "./menu.data";
 import { useModal } from "/@/components/general/Modal";
@@ -45,9 +45,9 @@ export default {
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
-    const [registerTable, { reload, updateTableDataRecord, deleteTableDataRecord }] = useTable({
+    const [registerTable, { reload, setTableData, deleteTableDataRecord }] = useTable({
       title: "菜单列表",
-      api: getMenuTree,
+      api: getMenuList,
       rowKey: "id",
       columns,
       formConfig: {
@@ -89,9 +89,11 @@ export default {
       });
     }
 
-    function handleSuccess({ isUpdate, values }) {
+    function handleSuccess({ isUpdate }) {
       if (isUpdate) {
-        updateTableDataRecord(values.id, values);
+        getMenuList().then((res)=>{
+          setTableData(res)
+        })
       } else {
         reload();
       }
