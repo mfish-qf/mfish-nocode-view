@@ -56,7 +56,7 @@ export default {
     const jobId = ref("");
     const [registerModal, { setModalProps, closeModal }] = useModalInner((data) => {
       currentStep.value = 0;
-      setModalProps({ confirmLoading: false, width: "40%" });
+      setModalProps({ confirmLoading: false, width: "800px" });
       isUpdate.value = !!data?.isUpdate;
       if (unref(isUpdate)) {
         jobInfo.value = { ...data.record };

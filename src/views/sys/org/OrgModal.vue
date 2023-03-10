@@ -9,6 +9,7 @@ import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { formSchema } from "./org.data";
 import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
+import { SsoOrg } from "/@/api/sys/model/OrgModel";
 
 export default {
   name: "OrgModal",
@@ -27,14 +28,14 @@ export default {
 
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
-      setModalProps({ confirmLoading: false, width: "40%" });
+      setModalProps({ confirmLoading: false, width: "800px" });
       isUpdate.value = !!data?.isUpdate;
+      const treeData = await getOrgTree();
       if (unref(isUpdate)) {
         setFieldsValue({
           ...data.record
         }).then();
       }
-      const treeData = await getOrgTree();
       updateSchema({
         field: "parentId",
         componentProps: { treeData }

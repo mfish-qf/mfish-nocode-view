@@ -30,7 +30,7 @@ export default {
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
-      setModalProps({ confirmLoading: false, width: "30%" });
+      setModalProps({ confirmLoading: false, width: "600px" });
       isUpdate.value = !!data?.isUpdate;
       setFieldsValue({
         ...data.record

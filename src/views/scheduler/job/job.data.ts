@@ -29,11 +29,11 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "类名称",
+    title: "调用类",
     dataIndex: "className"
   },
   {
-    title: "方法名称",
+    title: "调用方法",
     dataIndex: "methodName",
     width: 120
   },
@@ -196,19 +196,23 @@ export const jobFormSchema: FormSchema[] = [
   },
   {
     field: "className",
-    label: "类名称",
+    label: "调用类",
+    helpMessage: ["调用类包含包名全路径 例如：", "cn.com.mfish.scheduler.job.MfJob"],
     component: "Input",
     required: true
   },
   {
     field: "methodName",
-    label: "方法名称",
+    label: "调用方法",
+    helpMessage: ["执行方法 例如：", "test"],
+    helpComponentProps: { position: "left" },
     component: "Input",
     required: true
   },
   {
     field: "params",
     label: "调用参数",
+    helpMessage: ["参数支持普通对象数组类型 例如:[\"****\",11]", "复杂对象数组类型，属性包括type、value 例如：", "[{\"type\":\"java.lang.String\",\"value\":\"inner\"},{\"type\":\"cn.com.mfish.sys.api.entity.SysLog\",\"value\":{\"title\":\"aaaa\"}}]"],
     slot: "params",
     component: "Input",
     colProps: { span: 24 }

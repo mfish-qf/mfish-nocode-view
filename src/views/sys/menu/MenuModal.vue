@@ -8,7 +8,7 @@ import { ref, computed, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { formSchema } from "./menu.data";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
-import { getMenuTree, insertMenu, updateMenu } from "/@/api/sys/Menu";
+import { getMenuList, insertMenu, updateMenu } from "/@/api/sys/Menu";
 import { MenuListItem, MenuParams, MenuType } from "/@/api/sys/model/MenuModel";
 
 export default {
@@ -21,12 +21,12 @@ export default {
       labelWidth: 100,
       schemas: formSchema,
       showActionButtonGroup: false,
-      baseColProps: { lg: 12, md: 24 },
+      baseColProps: { span: 12},
       autoSubmitOnEnter: true
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       await resetFields();
-      setModalProps({ confirmLoading: false, width: "40%" });
+      setModalProps({ confirmLoading: false, width: "800px" });
       isUpdate.value = !!data?.isUpdate;
       valueChange("menuType", !data.record ? MenuType.目录 : data.record.menuType);
       if (unref(isUpdate)) {
@@ -38,7 +38,7 @@ export default {
     const getTitle = computed(() => (!unref(isUpdate) ? "新增菜单" : "编辑菜单"));
 
     async function setTreeData(params?: MenuParams) {
-      const treeData = await getMenuTree(params);
+      const treeData = await getMenuList(params);
       updateSchema([{
         field: "parentId",
         componentProps: { treeData }

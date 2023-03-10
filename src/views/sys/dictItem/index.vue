@@ -7,7 +7,7 @@
   <PageWrapper :title="`字典${dictCode}`" @back="goBack">
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:dictItem:insert')">新增字典项</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:dict:insert')">新增字典项</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -16,7 +16,7 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                auth: 'sys:dictItem:update'
+                auth: 'sys:dict:update'
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -26,7 +26,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
-                auth: 'sys:dictItem:delete'
+                auth: 'sys:dict:delete'
               },
             ]"
           />

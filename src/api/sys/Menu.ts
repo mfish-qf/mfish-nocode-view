@@ -8,6 +8,9 @@ enum Api {
   MenuRoute = "/oauth2/menu/route",
 }
 
+export const getMenuList = (params?: MenuParams) => {
+  return defHttp.get<MenuListItem[]>({ url: Api.Menu, params });
+};
 /**
  * 获取菜单树
  * @param params

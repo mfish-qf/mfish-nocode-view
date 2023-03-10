@@ -30,7 +30,7 @@ export default {
       return await validate();
     };
     const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-      labelWidth: 100,
+      labelWidth: 120,
       baseColProps: { span: 12 },
       schemas: jobFormSchema,
       showActionButtonGroup: false
