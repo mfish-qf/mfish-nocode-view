@@ -91,13 +91,13 @@ export const searchFormSchema: FormSchema[] = [
     field: "fileName",
     label: "文件名",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   },
   {
     field: "fileType",
     label: "文件类型",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   }
 ];
 export const sysFileFormSchema: FormSchema[] = [

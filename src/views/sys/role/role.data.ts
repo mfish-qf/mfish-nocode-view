@@ -65,13 +65,13 @@ export const searchFormSchema: FormSchema[] = [
     field: "roleName",
     label: "角色名称",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   },
   {
     field: "roleCode",
     label: "角色编码",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   },
   {
     field: "status",
@@ -83,7 +83,7 @@ export const searchFormSchema: FormSchema[] = [
         { label: "停用", value: 1 }
       ]
     },
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   }
 ];
 

@@ -79,25 +79,25 @@ export const searchFormSchema: FormSchema[] = [
     label: "任务类型",
     component: "ApiSelect",
     componentProps: getDictProps("sys_job_type"),
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   },
   {
     field: "jobName",
     label: "任务名称",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   },
   {
     field: "jobGroup",
     label: "任务组",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   },
   {
     field: "cron",
     label: "cron表达式",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   }
 ];
 export const jobLogSchema: DescItem[] = [
