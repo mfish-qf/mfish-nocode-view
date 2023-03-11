@@ -2,6 +2,11 @@
  * Independent time operation tool to facilitate subsequent switch to dayjs
  */
 import dayjs from "dayjs";
+import "dayjs/locale/zh-cn";
+import { useLocaleStoreWithOut } from "/@/store/modules/I18n";
+
+const localeStore = useLocaleStoreWithOut();
+dayjs.locale(localeStore.getLocale);
 
 const DATE_TIME_FORMAT = "YYYY-MM-DD HH:mm:ss";
 const DATE_FORMAT = "YYYY-MM-DD";

@@ -52,7 +52,7 @@
   </div>
 </template>
 <script lang="ts">
-import { onBeforeMount, ref, h } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { Tag } from "ant-design-vue";
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { deleteSysLog, getSysLogList } from "/@/api/sys/SysLog";
