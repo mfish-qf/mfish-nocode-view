@@ -8,7 +8,10 @@ const { t } = useI18n();
 /**
  * @description: 生成placeholder
  */
-export function createPlaceholderMessage(component: ComponentType) {
+export function createPlaceholderMessage(component?: ComponentType) {
+  if (!component) {
+    return "";
+  }
   if (component.includes("Input") || component.includes("Complete")) {
     return t("common.inputText");
   }

@@ -75,13 +75,13 @@ export const searchFormSchema: FormSchema[] = [
     field: "dictLabel",
     label: "字典标签",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   },
   {
     field: "dictValue",
     label: "字典键值",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   }
 ];
 export const dictItemFormSchema: FormSchema[] = [

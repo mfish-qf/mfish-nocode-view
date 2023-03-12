@@ -35,7 +35,7 @@ export default defineComponent({
       prefixCls: "account-setting",
       settingList,
       tabBarStyle: {
-        width: "220px"
+        width: "110px"
       }
     };
   }

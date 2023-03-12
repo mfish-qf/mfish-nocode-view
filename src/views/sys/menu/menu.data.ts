@@ -59,7 +59,7 @@ export const searchFormSchema: FormSchema[] = [
     field: "menuName",
     label: "菜单名称",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   },
   {
     field: "menuType",
@@ -72,7 +72,7 @@ export const searchFormSchema: FormSchema[] = [
         { label: "按钮", value: 2 }
       ]
     },
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   },
   {
     field: "isVisible",
@@ -84,7 +84,7 @@ export const searchFormSchema: FormSchema[] = [
         { label: "隐藏", value: 0 }
       ]
     },
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 6 }
   }
 ];
 

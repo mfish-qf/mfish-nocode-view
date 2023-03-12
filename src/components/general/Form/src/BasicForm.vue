@@ -3,7 +3,8 @@
     <Row v-bind="getRow">
       <slot name="formHeader"></slot>
       <template v-for="schema in getSchema" :key="schema.field">
-        <FormItem :tableAction="tableAction" :formActionType="formActionType"
+        <FormItem :isAdvanced="fieldsIsAdvancedMap[schema.field]"
+                  :tableAction="tableAction" :formActionType="formActionType"
                   :schema="schema" :formProps="getProps" :allDefaultValues="defaultValueRef"
                   :formModel="formModel" :setFormModel="setFormModel">
           <template #[item]="data" v-for="item in Object.keys($slots)">
@@ -55,7 +56,7 @@ export default {
       isAdvanced: true,
       hideAdvanceBtn: false,
       isLoad: false,
-      actionSpan: 6,
+      actionSpan: 6
     });
     const defaultValueRef = ref<Recordable>({});
     const isInitedDefaultRef = ref(false);
@@ -114,7 +115,7 @@ export default {
       }
     });
 
-    const { handleToggleAdvanced } = useAdvanced({
+    const { handleToggleAdvanced, fieldsIsAdvancedMap } = useAdvanced({
       advanceState,
       emit,
       getProps,
@@ -273,6 +274,7 @@ export default {
       getFormActionBindProps: computed(
         (): Recordable => ({ ...getProps.value, ...advanceState })
       ),
+      fieldsIsAdvancedMap,
       ...formActionType
     };
   }

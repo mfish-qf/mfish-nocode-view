@@ -15,7 +15,7 @@ import { buildJsonPreview } from "/@/utils/HBuildUtils";
  */
 export const columns: BasicColumn[] = [
   {
-    title: "日志信息",
+    title: "日志标签",
     dataIndex: "title",
     width: 200
   },
@@ -79,26 +79,58 @@ export const searchFormSchema: FormSchema[] = [
     field: "title",
     label: "中文标题",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 5 }
   },
   {
     field: "method",
     label: "方法",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 5 }
   },
   {
     field: "reqType",
     label: "请求类型",
     component: "ApiSelect",
     componentProps: getDictProps("sys_req_type"),
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 5 }
   },
   {
     field: "reqUri",
     label: "请求路径",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 5 }
+  },
+  {
+    field: "reqSource",
+    label: "请求来源",
+    component: "ApiSelect",
+    componentProps: getDictProps("sys_req_source"),
+    colProps: { lg: 4, md: 5 }
+  },
+  {
+    field: "operType",
+    label: "操作类型",
+    component: "ApiSelect",
+    componentProps: getDictProps("sys_log_type"),
+    colProps: { lg: 4, md: 5 }
+  },
+  {
+    field: "operIp",
+    label: "操作IP",
+    component: "Input",
+    colProps: { lg: 4, md: 5 }
+  },
+  {
+    field: "operStatus",
+    label: "操作状态",
+    component: "Select",
+    componentProps: {
+      options: [
+        { label: "正常", value: 0 },
+        { label: "异常", value: 1 }
+      ]
+    },
+    colProps: { lg: 4, md: 5 }
   },
   {
     field: "[startTime, endTime]",
@@ -120,46 +152,14 @@ export const searchFormSchema: FormSchema[] = [
         ["最近3个月"]: [dateUtil().subtract(3, "months"), dateUtil()]
       }
     },
-    colProps: { span: 8 }
-  },
-  {
-    field: "reqSource",
-    label: "请求来源",
-    component: "ApiSelect",
-    componentProps: getDictProps("sys_req_source"),
-    colProps: { span: 4 }
-  },
-  {
-    field: "operType",
-    label: "操作类型",
-    component: "ApiSelect",
-    componentProps: getDictProps("sys_log_type"),
-    colProps: { span: 4 }
-  },
-  {
-    field: "operIp",
-    label: "操作IP",
-    component: "Input",
-    colProps: { span: 4 }
-  },
-  {
-    field: "operStatus",
-    label: "操作状态",
-    component: "Select",
-    componentProps: {
-      options: [
-        { label: "正常", value: 0 },
-        { label: "异常", value: 1 }
-      ]
-    },
-    colProps: { span: 4 }
+    colProps: { lg: 5, md: 6 }
   }
 
 ];
 export const sysLogSchema: DescItem[] = [
   {
     field: "title",
-    label: "中文标题",
+    label: "日志标签",
     labelMinWidth: 60
   },
   {
