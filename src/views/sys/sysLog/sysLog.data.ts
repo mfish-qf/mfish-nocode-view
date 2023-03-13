@@ -152,7 +152,7 @@ export const searchFormSchema: FormSchema[] = [
         ["最近3个月"]: [dateUtil().subtract(3, "months"), dateUtil()]
       }
     },
-    colProps: { lg: 5, md: 6 }
+    colProps: { lg: 7, md: 8 }
   }
 
 ];
