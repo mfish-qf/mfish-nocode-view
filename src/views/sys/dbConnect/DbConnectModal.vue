@@ -6,7 +6,15 @@
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
-    <BasicForm @register="registerForm" @submit="handleSubmit" />
+    <Tabs tab-position="left">
+      <TabPane key="1" tab="基础属性">
+        <BasicForm @register="registerForm" @submit="handleSubmit" />
+      </TabPane>
+      <TabPane key="2" tab="连接池配置项">
+
+      </TabPane>
+    </Tabs>
+
   </BasicModal>
 </template>
 <script lang="ts">
@@ -15,23 +23,24 @@ import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { dbConnectFormSchema } from "./dbConnect.data";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { insertDbConnect, updateDbConnect } from "/@/api/sys/DbConnect";
+import { Tabs } from "ant-design-vue";
 
 export default {
   name: "DbConnectModal",
-  components: { BasicModal, BasicForm },
+  components: { BasicModal, BasicForm, Tabs, TabPane: Tabs.TabPane },
   emits: ["success", "register"],
   setup(_, { emit }) {
     const isUpdate = ref(true);
     const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
       labelWidth: 100,
-      baseColProps: { span: 12 },
+      baseColProps: { span: 24 },
       schemas: dbConnectFormSchema,
       showActionButtonGroup: false,
       autoSubmitOnEnter: true
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
-      setModalProps({ confirmLoading: false, width: "40%" });
+      setModalProps({ confirmLoading: false, width: "600px" });
       isUpdate.value = !!data?.isUpdate;
       if (unref(isUpdate)) {
         setFieldsValue({

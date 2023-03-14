@@ -8,7 +8,7 @@ import { useAppStore } from "/@/store/modules/App";
 
 /**
  * @description: 文件通用类
- * @author: qiufeng
+ * @author: mfish
  * @date: 2023/3/4 10:56
  */
 export function checkFileType(file: File, accepts: string[]) {

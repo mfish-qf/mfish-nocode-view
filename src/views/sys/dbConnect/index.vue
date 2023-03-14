@@ -34,22 +34,36 @@
             ]"
           />
         </template>
+        <template v-if="column.key === 'dbType'">
+          <Tag v-for="item in dbType" v-show="record.dbType == item.dictValue" :color="item.color">
+            {{ item.dictLabel }}
+          </Tag>
+        </template>
+        <template v-if="column.key === 'poolType'">
+          <Tag v-for="item in poolType" v-show="record.poolType == item.dictValue" :color="item.color">
+            {{ item.dictLabel }}
+          </Tag>
+        </template>
       </template>
     </BasicTable>
     <DbConnectModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
+import { ref, onMounted } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import { deleteDbConnect, getDbConnectList } from "/@/api/sys/DbConnect";
 import { useModal } from "/@/components/general/Modal";
 import DbConnectModal from "./DbConnectModal.vue";
 import { columns, searchFormSchema } from "./dbConnect.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
+import { DictItem } from "/@/api/sys/model/DictItemModel";
+import { getDictItems } from "/@/api/sys/DictItem";
+import { Tag } from "ant-design-vue";
 
 export default {
   name: "DbConnectManagement",
-  components: { BasicTable, DbConnectModal, TableAction },
+  components: { BasicTable, DbConnectModal, TableAction, Tag },
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
@@ -71,6 +85,24 @@ export default {
         dataIndex: "action"
       }
     });
+    let dbType = ref<DictItem[]>([]);
+    let poolType = ref<DictItem[]>([]);
+    onMounted(() => {
+      getDBType();
+      getPoolType();
+    });
+
+    function getDBType() {
+      getDictItems("sys_db_type").then((res) => {
+        dbType.value = res;
+      });
+    }
+
+    function getPoolType() {
+      getDictItems("sys_db_pool").then((res) => {
+        poolType.value = res;
+      });
+    }
 
     function handleCreate() {
       openModal(true, {
@@ -102,7 +134,9 @@ export default {
       handleEdit,
       handleDelete,
       handleSuccess,
-      hasPermission
+      hasPermission,
+      dbType,
+      poolType
     };
   }
 };

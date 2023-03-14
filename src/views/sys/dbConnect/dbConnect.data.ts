@@ -1,5 +1,6 @@
 import { BasicColumn } from "/@/components/general/Table";
 import { FormSchema } from "/@/components/general/Table";
+import { getDictProps } from "/@/utils/DictUtils";
 
 /**
  * @description: 数据库连接
@@ -16,12 +17,12 @@ export const columns: BasicColumn[] = [
   {
     title: "库类型",
     dataIndex: "dbType",
-    width: 120
+    width: 80
   },
   {
     title: "连接池",
     dataIndex: "poolType",
-    width: 120
+    width: 80
   },
   {
     title: "主机",
@@ -39,16 +40,6 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "用户名",
-    dataIndex: "username",
-    width: 120
-  },
-  {
-    title: "密码",
-    dataIndex: "password",
-    width: 120
-  },
-  {
     title: "备注",
     dataIndex: "remark",
     width: 120
@@ -59,25 +50,26 @@ export const searchFormSchema: FormSchema[] = [
     field: "dbTitle",
     label: "连接名",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 5 }
   },
   {
     field: "dbType",
     label: "库类型",
-    component: "Input",
-    colProps: { span: 4 }
+    component: "ApiSelect",
+    componentProps: getDictProps("sys_db_type"),
+    colProps: { lg: 4, md: 5 }
   },
   {
     field: "host",
     label: "主机",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 5 }
   },
   {
     field: "dbName",
     label: "数据库",
     component: "Input",
-    colProps: { span: 4 }
+    colProps: { lg: 4, md: 5 }
   }
 ];
 export const dbConnectFormSchema: FormSchema[] = [
@@ -95,13 +87,17 @@ export const dbConnectFormSchema: FormSchema[] = [
   {
     field: "dbType",
     label: "数据库类型",
-    component: "Input",
+    component: "ApiSelect",
+    componentProps: getDictProps("sys_db_type"),
+    defaultValue: 0,
     required: true
   },
   {
     field: "poolType",
     label: "连接池类型",
-    component: "Input",
+    component: "ApiSelect",
+    componentProps: getDictProps("sys_db_pool"),
+    defaultValue: "db_pool_hikari",
     required: true
   },
   {
@@ -113,7 +109,7 @@ export const dbConnectFormSchema: FormSchema[] = [
   {
     field: "port",
     label: "端口号",
-    component: "Input",
+    component: "InputNumber",
     required: true
   },
   {
@@ -130,7 +126,7 @@ export const dbConnectFormSchema: FormSchema[] = [
   {
     field: "password",
     label: "密码",
-    component: "Input",
+    component: "InputPassword",
     required: true
   },
   {
