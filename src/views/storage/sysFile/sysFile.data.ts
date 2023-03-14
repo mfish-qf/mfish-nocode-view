@@ -24,7 +24,7 @@ export const columns: BasicColumn[] = [
       }
       return getFileIcon(record.fileName);
     },
-    width: 120
+    width: 60
   },
   {
     title: "文件名",
@@ -32,17 +32,18 @@ export const columns: BasicColumn[] = [
     customRender: ({ record }) => {
       //超链接访问文件，直接访问后台存储文件地址
       return h("a", { href: record.fileUrl + "?access_token=" + getToken(), target: "_blank" }, record.fileName);
-    }
+    },
+    width: 260
   },
   {
     title: "文件类型",
     dataIndex: "fileType",
-    width: 260
+    width: 200
   },
   {
     title: "文件大小",
     dataIndex: "fileSize",
-    width: 120,
+    width: 100,
     customRender: ({ record }) => {
       if (record.fileSize) {
         return calcSize(record.fileSize, 1);
@@ -53,12 +54,12 @@ export const columns: BasicColumn[] = [
   {
     title: "上传时间",
     dataIndex: "createTime",
-    width: 200
+    width: 120
   },
   {
     title: "存储路径",
     dataIndex: "filePath",
-    width: 200
+    width: 150
   },
   {
     title: "文件公开",

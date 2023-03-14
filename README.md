@@ -51,7 +51,6 @@ cd mfish-nocode-view
 pnpm install
 
 ```
-
 - 配置后台接口地址
 ```bash
 .env.development
@@ -74,6 +73,8 @@ http://localhost:5281
 > vue3版本已经实现了系统管理、系统监控、各种组件、权限、GUI代码生成、完全可以用于生产环境。
 
 ```
+├─ChatGpt
+│  ├─聊天
 ├─驾驶舱
 │  ├─工作台
 ├─系统管理
@@ -83,15 +84,23 @@ http://localhost:5281
 │  ├─帐号管理
 │  ├─字典管理
 │  ├─个人管理
-│  └─日志管理
+│  ├─日志管理
+│  ├─文件管理
+│  ├─在线用户
+│  └─数据库配置
 ├─系统监控
 │  ├─监控中心
+├─任务调度
+│  ├─任务管理
+│  ├─任务日志
 ├─项目文档
 │  ├─接口地址
-│  ├─Git地址
+│  ├─Github地址
+│  ├─Gitee地址
 │  ├─AntDesign文档
-│  ├─Vben文档
+│  └─Vben文档
 ├─多级目录
+├─图形编辑器
 ├─引导页
 ├─关于
 └─其他模块 
@@ -109,6 +118,18 @@ http://localhost:5281
 ![](https://oscimg.oschina.net/oscnet/up-4f34924c18c4f5df0fb7823feef7431227d.png)
 
 ![](https://oscimg.oschina.net/oscnet/up-57d93c91b93340387c44d5d30e984e914d7.png)
+
+![](https://oscimg.oschina.net/oscnet/up-0ff2d7b640896b9a9156af832baebcb313f.png)
+
+![](https://oscimg.oschina.net/oscnet/up-81d9f856cdd794843d172c47874b69ff503.png)
+
+![](https://oscimg.oschina.net/oscnet/up-c26c5a79214ed2e242512d0f5f4accca63b.png)
+
+![](https://oscimg.oschina.net/oscnet/up-36d63fb4e8dd0a0844ff64a8f4c28682296.png)
+
+![](https://oscimg.oschina.net/oscnet/up-434781fa769d2da21e396bfccbbe13c8f15.png)
+
+![](https://oscimg.oschina.net/oscnet/up-7b2eeb5e679f75d889a841de61f9845c026.png)
 
 ## 平台交流
 微信:  

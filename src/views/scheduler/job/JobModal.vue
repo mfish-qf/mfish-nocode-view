@@ -63,7 +63,7 @@ export default {
         jobId.value = data.record.id;
       }
     });
-    const getTitle = computed(() => (!unref(isUpdate) ? "新增定时调度任务" : "编辑定时调度任务"));
+    const getTitle = computed(() => (!unref(isUpdate) ? "新增调度任务" : "编辑调度任务"));
 
     function stepChange(value) {
       currentStep.value = value;

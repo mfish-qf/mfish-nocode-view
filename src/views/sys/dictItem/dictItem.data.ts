@@ -42,9 +42,22 @@ export const columns: BasicColumn[] = [
     dataIndex: "valueType",
     width: 80,
     customRender: ({ record }) => {
-      const enable = ~~record.valueType === 0;
-      const color = enable ? "green" : "blue";
-      const text = enable ? "字符" : "数字";
+      let color;
+      let text;
+      switch (record.valueType) {
+        case 1:
+          color = "blue";
+          text = "数字";
+          break;
+        case 2:
+          color = "cyan";
+          text = "布尔";
+          break;
+        default:
+          color = "green";
+          text = "字符";
+          break;
+      }
       return h(Tag, { color: color }, () => text);
     }
   },
@@ -129,7 +142,8 @@ export const dictItemFormSchema: FormSchema[] = [
     componentProps: {
       options: [
         { label: "字符", value: 0 },
-        { label: "数字", value: 1 }
+        { label: "数字", value: 1 },
+        { label: "布尔", value: 2 }
       ]
     }
   },
