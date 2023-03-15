@@ -23,11 +23,9 @@ import { useDesign } from "/@/hooks/web/UseDesign";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { useMessage } from "/@/hooks/web/UseMessage";
 import { useCopyToClipboard } from "/@/hooks/web/UseCopyToClipboard";
-import { updateColorWeak } from "/@/logics/theme/UpdateColorWeak";
-import { updateGrayMode } from "/@/logics/theme/UpdateGrayMode";
 import defaultSetting from "/@/settings/ProjectSetting";
-import { changeTheme } from "/@/logics/theme";
 import { saveSysConfig } from "/@/api/sys/SysConfig";
+import { changeAppConfig } from "/@/logics/InitAppConfig";
 
 export default defineComponent({
   name: "SettingFooter",
@@ -55,11 +53,7 @@ export default defineComponent({
 
     function handleResetSetting() {
       try {
-        appStore.setProjectConfig(defaultSetting);
-        const { colorWeak, grayMode, themeColor } = defaultSetting;
-        changeTheme(themeColor);
-        updateColorWeak(colorWeak);
-        updateGrayMode(grayMode);
+        changeAppConfig(defaultSetting)
         createMessage.success(t("layout.setting.resetSuccess"));
       } catch (error: any) {
         createMessage.error(error);

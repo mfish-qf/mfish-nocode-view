@@ -10,8 +10,6 @@ import { updateDarkTheme } from "/@/logics/theme/Dark";
 import { changeTheme } from "/@/logics/theme";
 import { useAppStore } from "/@/store/modules/App";
 import { getCommonStoragePrefix, getStorageShortName } from "/@/utils/Env";
-import { primaryColor } from "../../build/config/ThemeConfig";
-import { deepMerge } from "/@/utils";
 import { ThemeEnum } from "/@/enums/AppEnum";
 import { getSysConfig } from "/@/api/sys/SysConfig";
 import { useUserStoreWithOut } from "/@/store/modules/User";
@@ -30,17 +28,18 @@ export async function initAppConfigStore() {
 
 // 初始化项目配置
 async function setAppConfigStore() {
-  const appStore = useAppStore();
   let projCfg: ProjectConfig;
-
   const sysConfig = await getSysConfig();
-
   if (sysConfig) {
     projCfg = JSON.parse(sysConfig.config) as ProjectConfig;
-    projCfg = deepMerge(projectSetting, projCfg || {});
   } else {
     projCfg = projectSetting;
   }
+  changeAppConfig(projCfg);
+}
+
+export function changeAppConfig(projCfg: ProjectConfig) {
+  const appStore = useAppStore();
   const darkMode = appStore.getDarkMode;
   const {
     colorWeak,
@@ -50,7 +49,7 @@ async function setAppConfigStore() {
     menuSetting: { bgColor } = {}
   } = projCfg;
   try {
-    if (themeColor && themeColor !== primaryColor) {
+    if (themeColor) {
       changeTheme(themeColor).then();
     }
     grayMode && updateGrayMode(grayMode);
