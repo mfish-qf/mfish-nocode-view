@@ -6,7 +6,7 @@
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
-    <Tabs tab-position="left" tabBarStyle="width:50px;">
+    <Tabs tab-position="left" :tabBarStyle="{width:'20px'}">
       <TabPane key="1">
         <template #tab>
           <span style="writing-mode:vertical-rl;">
@@ -31,7 +31,7 @@
       </TabPane>
     </Tabs>
     <template #centerFooter>
-      <a-button @click="resetFields" type="primary" danger>测试连接</a-button>
+      <a-button @click="testConnect" type="primary" danger>测试连接</a-button>
     </template>
   </BasicModal>
 </template>
@@ -40,10 +40,11 @@ import { ref, computed, unref, Ref, onBeforeMount } from "vue";
 import { BasicForm, FormSchema, useForm } from "/@/components/general/Form/index";
 import { dbConnectFormSchema } from "./dbConnect.data";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
-import { insertDbConnect, updateDbConnect } from "/@/api/sys/DbConnect";
+import { insertDbConnect, testDbConnect, updateDbConnect } from "/@/api/sys/DbConnect";
 import { Tabs } from "ant-design-vue";
 import { getDictItems } from "/@/api/sys/DictItem";
 import { ComponentType } from "/@/components/general/Form/src/types";
+import { buildSm2Key, sm2Encrypt } from "/@/utils/Cipher";
 
 export default {
   name: "DbConnectModal",
@@ -56,6 +57,7 @@ export default {
     const druid = ref({});
     const hikariSchema = ref([]) as Ref<FormSchema[]>;
     const druidSchema = ref([]) as Ref<FormSchema[]>;
+    const publicKey = "04bca0425cfbd596d83d53be4d5f94128f28a6453a5530ba6daf7b150bb53d36616c9b3841815c5d52d5d7e9f58214548f199ab94ed21fd78d8bf874390546c00e";
 
     enum PoolEnum {
       NoPool = "db_no_pool",
@@ -160,6 +162,13 @@ export default {
       });
     }
 
+    async function testConnect() {
+      let values = await validate();
+      buildSm2Key();
+      values.password = sm2Encrypt(values.password, publicKey);
+      testDbConnect(values).then();
+    }
+
     async function handleSubmit() {
       let values = await validate();
       switch (values.poolType) {
@@ -184,6 +193,7 @@ export default {
     }
 
     function saveDbConnect(save, values) {
+      values.password = sm2Encrypt(values.password, publicKey);
       save(values).then(() => {
         emit("success");
         closeModal();
@@ -201,7 +211,8 @@ export default {
       handleSubmit,
       valueChange,
       poolType,
-      PoolEnum
+      PoolEnum,
+      testConnect
     };
   }
 };

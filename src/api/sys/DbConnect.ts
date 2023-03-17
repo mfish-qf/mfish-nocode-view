@@ -8,7 +8,8 @@ import { defHttp } from "/@/utils/http/axios";
 import { DbConnect, ReqDbConnect, DbConnectPageModel } from "/@/api/sys/model/DbConnectModel";
 
 enum Api {
-  DbConnect = "/sys/dbConnect"
+  DbConnect = "/sys/dbConnect",
+  TestConnect = "/sys/dbConnect/test"
 }
 
 /**
@@ -49,4 +50,12 @@ export function updateDbConnect(dbConnect: DbConnect) {
  */
 export function deleteDbConnect(id: string) {
   return defHttp.delete<DbConnect>({ url: Api.DbConnect + "/" + id }, { successMessageMode: "message" });
+};
+
+/**
+ * 测试数据库连接
+ * @param dbConnect
+ */
+export function testDbConnect(dbConnect: DbConnect) {
+  return defHttp.post<DbConnect>({ url: Api.TestConnect, params: dbConnect }, { successMessageMode: "message" });
 };
