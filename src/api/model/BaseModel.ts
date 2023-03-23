@@ -12,6 +12,7 @@ export interface ReqPage {
 export interface PageResult<T> {
   pageNum: number;
   pageSize: number;
+  pages: number;
   list: T[];
   total: number;
 }
