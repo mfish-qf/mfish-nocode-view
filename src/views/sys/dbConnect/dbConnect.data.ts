@@ -82,7 +82,8 @@ export const dbConnectFormSchema: FormSchema[] = [
   {
     field: "dbTitle",
     label: "连接名",
-    component: "Input"
+    component: "Input",
+    required: true
   },
   {
     field: "dbType",
@@ -115,7 +116,8 @@ export const dbConnectFormSchema: FormSchema[] = [
   {
     field: "dbName",
     label: "数据库名",
-    component: "Input"
+    component: "Input",
+    required: true
   },
   {
     field: "username",
