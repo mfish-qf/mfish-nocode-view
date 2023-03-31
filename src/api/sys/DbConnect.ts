@@ -9,7 +9,8 @@ import { DbConnect, ReqDbConnect, DbConnectPageModel } from "/@/api/sys/model/Db
 
 enum Api {
   DbConnect = "/sys/dbConnect",
-  TestConnect = "/sys/dbConnect/test"
+  TestConnect = "/sys/dbConnect/test",
+  TABLES = "/sys/dbConnect/tables",
 }
 
 /**
@@ -20,6 +21,10 @@ enum Api {
  */
 export const getDbConnectList = (reqDbConnect?: ReqDbConnect) => {
   return defHttp.get<DbConnectPageModel>({ url: Api.DbConnect, params: reqDbConnect });
+};
+
+export const getTableList = (connectId: string, tableName?: string) => {
+  return defHttp.get<any>({ url: Api.TABLES, params: { connectId, tableName } });
 };
 
 /**

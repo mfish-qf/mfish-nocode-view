@@ -8,7 +8,7 @@ import { BaseEntity, PageResult } from "/@/api/model/BaseModel";
  */
 export interface DbConnect extends BaseEntity<string> {
   dbTitle: string;
-  dbType: string;
+  dbType: number;
   poolType: string;
   host: string;
   port: string;
