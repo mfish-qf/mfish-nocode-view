@@ -12,7 +12,7 @@ export function buildJsonPreview(data) {
   }
   try {
     const json = JSON.parse(data);
-    return h(JsonPreview, { data: json });
+    return h(JsonPreview, { data: json, deep: 2 });
   } catch (e) {
     return h("div", data);
   }

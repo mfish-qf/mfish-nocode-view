@@ -6,7 +6,7 @@
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="查看系统日志" :showOkBtn="false" cancelText="关闭">
-    <Description @register="registerDesc" />
+    <Description @register="registerDesc" :contentStyle="{wordBreak: 'normal'}"/>
   </BasicModal>
 </template>
 <script lang="ts">
