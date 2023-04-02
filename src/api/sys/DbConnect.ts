@@ -5,12 +5,14 @@
  * @version: V1.0.0
  */
 import { defHttp } from "/@/utils/http/axios";
-import { DbConnect, ReqDbConnect, DbConnectPageModel } from "/@/api/sys/model/DbConnectModel";
+import { DbConnect, ReqDbConnect, DbConnectPageModel, ReqTable } from "/@/api/sys/model/DbConnectModel";
+import { PageResult } from "/@/api/model/BaseModel";
 
 enum Api {
   DbConnect = "/sys/dbConnect",
   TestConnect = "/sys/dbConnect/test",
   TABLES = "/sys/dbConnect/tables",
+  FIELDS = "/sys/dbConnect/fields",
 }
 
 /**
@@ -23,8 +25,12 @@ export const getDbConnectList = (reqDbConnect?: ReqDbConnect) => {
   return defHttp.get<DbConnectPageModel>({ url: Api.DbConnect, params: reqDbConnect });
 };
 
-export const getTableList = (connectId: string, tableName?: string) => {
-  return defHttp.get<any>({ url: Api.TABLES, params: { connectId, tableName } });
+export const getTableList = (params: ReqTable) => {
+  return defHttp.get<PageResult<any>>({ url: Api.TABLES, params: params });
+};
+
+export const getFieldList = (params: ReqTable) => {
+  return defHttp.get<any>({ url: Api.FIELDS, params: params });
 };
 
 /**

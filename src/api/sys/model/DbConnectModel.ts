@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult } from "/@/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
 
 /**
  * @description: 数据库连接
@@ -21,6 +21,11 @@ export interface DbConnect extends BaseEntity<string> {
 
 export interface ReqDbConnect {
 
+}
+
+export interface ReqTable extends ReqPage {
+  connectId: string;
+  tableName?: string;
 }
 
 export type DbConnectPageModel = PageResult<DbConnect>;
