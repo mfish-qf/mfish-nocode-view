@@ -19,8 +19,38 @@ export interface DbConnect extends BaseEntity<string> {
   remark: string;
 }
 
+/**
+ * 数据库连接请求
+ */
 export interface ReqDbConnect {
+  dbTitle: string;
+  dbType: number;
+  host: string;
+  dbName: string;
+}
 
+/**
+ * 表信息
+ */
+export interface TableInfo {
+  idType: string;
+  tableName: string;
+  tableComment: string;
+  tableSchema: string;
+  columns: string;
+}
+
+/**
+ * 字段信息
+ */
+export interface FieldInfo {
+  fieldName: string;
+  isPrimary: boolean;
+  type: string;
+  dbType: string;
+  columnType: string;
+  nullAble: boolean;
+  comment: string;
 }
 
 export interface ReqTable extends ReqPage {

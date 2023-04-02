@@ -5,7 +5,7 @@
 -->
 <template>
   <PageWrapper dense contentFullHeight fixedHeight contentClass="flex">
-    <DBTree class="w-1/4 xl:w-1/5" :showIcon="true" @select="changeSelect" />
+    <DBTree ref="dbTree" class="w-1/4 xl:w-1/5" :showIcon="true" @select="changeSelect" />
     <a-list class="w-3/4 xl:w-4/5">
       <a-row :gutter="16">
         <template v-for="item in tableList" :key="item.tableName">
@@ -32,7 +32,6 @@
 import { ref, onBeforeMount } from "vue";
 import { PageWrapper } from "/@/components/general/Page";
 import DBTree from "./DBTree.vue";
-import { getTableList } from "/@/api/sys/DbConnect";
 import { Icon } from "/@/components/general/Icon/index";
 import { Card, Row, Col, List } from "ant-design-vue";
 
@@ -46,12 +45,20 @@ export default {
     [Col.name]: Col
   },
   setup() {
-    let tableList = ref([]);
+    let tableList = ref<any[]>([]);
+    const dbTree = ref();
 
-    async function changeSelect(connectId) {
-      const result = await getTableList({ connectId: connectId, pageNum: 1, pageSize: 10000 });
-      if (result) {
-        tableList.value = result.list;
+    async function changeSelect(record) {
+      if (record.children) {
+        tableList.value = record.children;
+        return;
+      }
+      //如果是数据库节点，构建下面表信息
+      if (record.dbType) {
+        dbTree.value.buildTableTree(record.id).then((res) => {
+            tableList.value = res;
+          }
+        );
       }
     }
 
@@ -59,10 +66,10 @@ export default {
 
     });
 
-
     return {
       changeSelect,
-      tableList
+      tableList,
+      dbTree
     };
   }
 
