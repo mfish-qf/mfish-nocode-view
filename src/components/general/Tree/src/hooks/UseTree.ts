@@ -76,7 +76,7 @@ export function useTree(treeDataRef: Ref<TreeDataItem[]>, getFieldNames: Compute
       const children = element[childrenField];
 
       if (element[keyField] === key) {
-        treeData[index] = { ...treeData[index], ...node };
+        treeData[index] = Object.assign(treeData[index], node);
         break;
       } else if (children && children.length) {
         updateNodeByKey(key, node, element[childrenField]);
