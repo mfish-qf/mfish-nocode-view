@@ -5,7 +5,7 @@
 -->
 <template>
   <BasicTree
-    class="m-4 mr-0 overflow-hidden bg-white"
+    class="mr-0 overflow-hidden bg-white"
     title="数据库列表"
     toolbar
     search
@@ -16,23 +16,27 @@
     :load-data="getTables"
     v-model:selectedKeys="selectedKeys"
     @select="handleSelect"
+    @update:searchValue="handleSearch"
   />
 </template>
 <script lang="ts">
 import { BasicTree, TreeActionType, TreeItem } from "/@/components/general/Tree";
-import { onMounted, ref, unref } from "vue";
+import { onMounted, ref, unref, computed } from "vue";
 import { getDbConnectList, getTableList } from "/@/api/sys/DbConnect";
 import { PageResult } from "/@/api/model/BaseModel";
 import { TableInfo } from "/@/api/sys/model/DbConnectModel";
+import { useAppStore } from "/@/store/modules/App";
 
 export default {
   name: "DBTree",
   components: { BasicTree },
-  emits: ["select"],
+  emits: ["select", "search"],
   setup(_, { emit }) {
     const treeData = ref<TreeItem[]>([]);
     const asyncTreeRef = ref<Nullable<TreeActionType>>(null);
     let selectedKeys = ref<TreeItem[]>([]);
+    const appStore = useAppStore();
+    const color = computed(() => appStore.getProjectConfig.themeColor);
 
     async function fetch() {
       const dbList = (await getDbConnectList()).list;
@@ -40,12 +44,17 @@ export default {
         db["title"] = db.dbName;
         db["key"] = db.id;
         db["icon"] = "simple-icons:" + (db.dbType === 1 ? "postgresql" : db.dbType === 2 ? "oracle" : "mysql");
+        db["iconColor"] = color;
       });
       treeData.value = dbList as unknown as TreeItem[];
     }
 
     function handleSelect(_, e) {
       emit("select", e.node.dataRef);
+    }
+
+    function handleSearch(search, value) {
+      emit("search", search, value);
     }
 
     async function getTables(treeNode) {
@@ -71,8 +80,9 @@ export default {
       const asyncTreeAction: TreeActionType | null = unref(asyncTreeRef);
       result.list.forEach((db) => {
         db["title"] = db.tableName + (db.tableComment ? "[" + db.tableComment + "]" : "");
-        db["key"] = db.tableName;
+        db["key"] = key + "," + db.tableName;
         db["icon"] = "ant-design:table-outlined";
+        db["iconColor"] = color;
         db["isLeaf"] = true;
       });
       asyncTreeAction?.updateNodeByKey(key, { children: result.list });
@@ -88,7 +98,7 @@ export default {
         }
       });
     });
-    return { treeData, handleSelect, asyncTreeRef, getTables, selectedKeys, buildTableTree };
+    return { treeData, handleSelect, asyncTreeRef, getTables, selectedKeys, buildTableTree, handleSearch };
   }
 };
 </script>

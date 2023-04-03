@@ -216,8 +216,8 @@ export default defineComponent({
 
     function handleSearch(searchValue: string) {
       if (searchValue !== searchState.searchText) searchState.searchText = searchValue;
-      emit("update:searchValue", searchValue);
       if (!searchValue) {
+        emit("update:searchValue", searchValue, unref(treeDataRef));
         searchState.startSearch = false;
         return;
       }
@@ -240,7 +240,7 @@ export default defineComponent({
         },
         unref(getFieldNames)
       );
-
+      emit("update:searchValue", searchValue, searchState.searchData);
       if (expandOnSearch) {
         const expandKeys = treeToList(searchState.searchData).map((val) => {
           return val[keyField];
@@ -377,8 +377,13 @@ export default defineComponent({
         } = unref(getFieldNames);
 
         const icon = getIcon(item, item.icon);
+        let colorIcon;
+        if (item.iconColor) {
+          colorIcon = { icon: icon, color: item.iconColor };
+        } else {
+          colorIcon = { icon: icon };
+        }
         const title = get(item, titleField);
-
         const searchIdx = searchText ? title.indexOf(searchText) : -1;
         const isHighlight =
           searchState.startSearch && !isEmpty(searchText) && highlight && searchIdx !== -1;
@@ -398,11 +403,9 @@ export default defineComponent({
             class={`${bem("title")} pl-2`}
             onClick={handleClickNode.bind(null, item[keyField], item[childrenField])}
           >
-              {slots?.title ? (
-                getSlot(slots, "title", item)
-              ) : (
+              {slots?.title ? (getSlot(slots, "title", item)) : (
                 <>
-                  {icon && <TreeIcon icon={icon} />}
+                  {icon && <TreeIcon props={colorIcon} />}
                   {titleDom}
                   <span class={bem("actions")}>{renderAction(item)}</span>
                 </>
