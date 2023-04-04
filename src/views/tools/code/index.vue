@@ -7,7 +7,7 @@
   <PageWrapper contentFullHeight fixedHeight contentClass="flex">
     <DBTree ref="dbTree" class="m-4" :showIcon="true" @select="changeSelect" @search="changeSearch" />
     <ScrollContainer class="m-4">
-      <a-row>
+      <a-row v-if="curNode?.dbName">
         <a-col :xs="{span:24}" :md="{span:8}" :lg="{span:5}" v-for="(item,index) in getTableList" :key="index" :class="`${prefixCls}-card`">
           <div :class="`${prefixCls}-card-item`" @click="">
             <Icon class="icon img" icon="ant-design:table-outlined" :color="color" />
@@ -22,6 +22,7 @@
           </div>
         </a-col>
       </a-row>
+      <TableDetail v-else :cur-node="curNode"></TableDetail>
     </ScrollContainer>
   </PageWrapper>
 </template>
@@ -36,10 +37,12 @@ import { Tooltip, Row, Col } from "ant-design-vue";
 import { TableInfo } from "/@/api/sys/model/DbConnectModel";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { useAppStore } from "/@/store/modules/App";
+import TableDetail from "/@/views/tools/code/TableDetail.vue";
 
 export default {
   name: "codeBuild",
   components: {
+    TableDetail,
     DBTree, PageWrapper, Icon, ScrollContainer, Tooltip, [Row.name]: Row,
     [Col.name]: Col
   },
@@ -51,19 +54,23 @@ export default {
     const color = computed(() => appStore.getProjectConfig.themeColor);
     const startSearch = ref(false);
     const searchTable = ref<TableInfo[]>([]);
+    const curNode = ref({});
 
     async function changeSelect(record) {
-      if (record.children) {
-        tableList.value = record.children;
-        return;
-      }
+      curNode.value = toRaw(record);
       //如果是数据库节点，构建下面表信息
       if (record.dbName) {
+        if (record.children) {
+          tableList.value = record.children;
+          return;
+        }
         dbTree.value.buildTableTree(record.id).then((res) => {
             tableList.value = res;
           }
         );
+        return;
       }
+
     }
 
     function changeSearch(search, value) {
@@ -94,7 +101,8 @@ export default {
       getTableList,
       dbTree,
       prefixCls,
-      color
+      color,
+      curNode
     };
   }
 

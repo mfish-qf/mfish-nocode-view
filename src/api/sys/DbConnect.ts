@@ -20,6 +20,7 @@ enum Api {
   TestConnect = "/sys/dbConnect/test",
   TABLES = "/sys/dbConnect/tables",
   FIELDS = "/sys/dbConnect/fields",
+  DATATABLE = "/sys/dbConnect/data",
 }
 
 /**
@@ -46,6 +47,14 @@ export const getTableList = (params: ReqTable) => {
  */
 export const getFieldList = (params: ReqTable) => {
   return defHttp.get<PageResult<FieldInfo>>({ url: Api.FIELDS, params: params });
+};
+
+/**
+ * 获取表数据
+ * @param params
+ */
+export const getDataTable = (params: ReqTable) => {
+    return defHttp.get<PageResult<Record<string, any>>>({ url: Api.DATATABLE, params: params });
 };
 
 /**
