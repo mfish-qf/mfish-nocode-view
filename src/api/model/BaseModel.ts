@@ -2,8 +2,8 @@
  * 分页查询请求参数
  */
 export interface ReqPage {
-  pageNum: number;
-  pageSize: number;
+  pageNum?: number;
+  pageSize?: number;
 }
 
 /**
