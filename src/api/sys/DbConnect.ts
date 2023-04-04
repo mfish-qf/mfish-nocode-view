@@ -11,7 +11,7 @@ import {
   DbConnectPageModel,
   ReqTable,
   TableInfo,
-  FieldInfo
+  FieldInfo, DataTable
 } from "/@/api/sys/model/DbConnectModel";
 import { PageResult } from "/@/api/model/BaseModel";
 
@@ -54,7 +54,7 @@ export const getFieldList = (params: ReqTable) => {
  * @param params
  */
 export const getDataTable = (params: ReqTable) => {
-    return defHttp.get<PageResult<Record<string, any>>>({ url: Api.DATATABLE, params: params });
+    return defHttp.get<DataTable>({ url: Api.DATATABLE, params: params });
 };
 
 /**

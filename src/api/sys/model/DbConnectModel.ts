@@ -53,6 +53,11 @@ export interface FieldInfo {
   comment: string;
 }
 
+export interface DataTable {
+  table: PageResult<Record<string, any>>;
+  header: Record<string, any>;
+}
+
 export interface ReqTable extends ReqPage {
   connectId: string;
   tableName?: string;

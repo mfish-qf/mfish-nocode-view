@@ -103,19 +103,16 @@ export default {
       await nextTick();
       tableLoading(true);
       getDataTable(condition.value).then((res) => {
-        const dataSource = res.list;
-        setDataTable(res.list);
-        setPagination({ total: res.total, pageSize: res.pageSize, current: res.pageNum });
         let columns: BasicColumn[] = [];
-        if (dataSource && dataSource.length > 0) {
-          Object.keys(dataSource[0]).forEach((key) => {
-            columns.push({
-              title: key,
-              dataIndex: key
-            });
+        Object.keys(res.header).forEach((key) => {
+          columns.push({
+            title: key,
+            dataIndex: key
           });
-          setColumns(columns);
-        }
+        });
+        setColumns(columns);
+        setDataTable(res.table.list);
+        setPagination({ total: res.table.total, pageSize: res.table.pageSize, current: res.table.pageNum });
       }).catch(() => {
         setColumns([]);
       }).finally(() => {
