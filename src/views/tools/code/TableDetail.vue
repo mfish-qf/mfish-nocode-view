@@ -81,10 +81,9 @@ export default {
       setPagination,
       setLoading: tableLoading
     }] = useTable({
-      api: getDataTable,
-      searchInfo: condition,
       bordered: true,
-      showIndexColumn: false
+      showIndexColumn: false,
+      onChange: buildTableData
     });
     watch(() => props.curNode?.key
       , () => {
@@ -96,13 +95,19 @@ export default {
         setFields();
         return;
       }
-      buildTableData();
+      buildTableData(undefined);
     }
 
-    async function buildTableData() {
+    async function buildTableData(page) {
       await nextTick();
       tableLoading(true);
-      getDataTable(condition.value).then((res) => {
+      let pageNum = 1;
+      let pageSize = 10;
+      if (page) {
+        pageNum = page.current;
+        pageSize = page.pageSize;
+      }
+      getDataTable({ ...condition.value, pageNum, pageSize }).then((res) => {
         let columns: BasicColumn[] = [];
         Object.keys(res.header).forEach((key) => {
           columns.push({
