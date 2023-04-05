@@ -6,7 +6,7 @@
 <template>
   <PageWrapper :title="`数据表：${curNode?.tableName?.toUpperCase()}`" contentBackground contentFullHeight fixedHeight>
     <template #extra>
-<!--      <a-button type="primary">生成代码</a-button>-->
+      <slot name="button"></slot>
     </template>
     <template #footer>
       <a-tabs default-active-key="1" @change="changeTab">
@@ -36,7 +36,7 @@ import { PageWrapper } from "/@/components/general/Page";
 import { Descriptions, Tabs } from "ant-design-vue";
 import { ReqTable, TableInfo } from "/@/api/sys/model/DbConnectModel";
 import { getDataTable, getFieldList } from "/@/api/sys/DbConnect";
-import { columns } from "/@/views/tools/code/tableInfo.data";
+import { columns } from "/@/views/sys/database/tableInfo.data";
 
 export default {
   name: "TableDetail",

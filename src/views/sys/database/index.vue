@@ -38,12 +38,12 @@ import { ref, unref, onBeforeMount, computed, toRaw } from "vue";
 import { PageWrapper } from "/@/components/general/Page";
 import { ScrollContainer } from "/@/components/general/Container";
 import DBTree from "./DBTree.vue";
-import { Icon } from "/@/components/general/Icon/index";
+import { Icon } from "/@/components/general/Icon";
 import { Tooltip, Row, Col, Breadcrumb, BreadcrumbItem } from "ant-design-vue";
 import { TableInfo } from "/@/api/sys/model/DbConnectModel";
 import { useDesign } from "/@/hooks/web/UseDesign";
 import { useAppStore } from "/@/store/modules/App";
-import TableDetail from "/@/views/tools/code/TableDetail.vue";
+import TableDetail from "/@/views/sys/database/TableDetail.vue";
 import { TreeItem } from "/@/components/general/Tree";
 
 export default {
