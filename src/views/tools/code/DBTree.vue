@@ -11,7 +11,6 @@
     search
     ref="asyncTreeRef"
     treeWrapperClassName="h-[calc(100%-35px)] overflow-auto"
-    :clickRowToExpand="false"
     :treeData="treeData"
     :load-data="getTables"
     v-model:selectedKeys="selectedKeys"
@@ -50,7 +49,20 @@ export default {
     }
 
     function handleSelect(_, e) {
-      emit("select", e.node.dataRef);
+      emit("select", e.node.dataRef, e.node?.parent?.node);
+    }
+
+    function setSelect(key) {
+      if (key) {
+        selectedKeys.value = [key];
+        const keys = key.split(",");
+        if (keys && keys.length === 2) {
+          asyncTreeRef.value?.setExpandedKeys([keys[0]]);
+          emit("select", asyncTreeRef.value?.getSelectedNode(key), asyncTreeRef.value?.getSelectedNode(keys[0]));
+          return;
+        }
+        emit("select", asyncTreeRef.value?.getSelectedNode(key));
+      }
     }
 
     function handleSearch(search, value) {
@@ -98,7 +110,7 @@ export default {
         }
       });
     });
-    return { treeData, handleSelect, asyncTreeRef, getTables, selectedKeys, buildTableTree, handleSearch };
+    return { treeData, handleSelect, setSelect, asyncTreeRef, getTables, selectedKeys, buildTableTree, handleSearch };
   }
 };
 </script>
