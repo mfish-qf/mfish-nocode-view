@@ -16,7 +16,8 @@
     </template>
     <div class="pt-2 m-6 desc-wrap" v-if="curTab === '1'">
       <a-descriptions size="small">
-        <a-descriptions-item label="描述">{{ curNode?.tableComment }}</a-descriptions-item>
+        <a-descriptions-item label="描述">{{ curNode?.tableComment ? curNode?.tableComment : "无" }}
+        </a-descriptions-item>
       </a-descriptions>
       <a-descriptions title="字段信息" class="mt-4">
         <a-descriptions-item>

@@ -95,14 +95,14 @@ export default {
     const breadList = computed(() => {
       const list: any[] = [];
       if (parentNode.value) {
-        list.push({ icon: parentNode.value.icon, title: parentNode.value.dbName, key: parentNode.value.key });
+        list.push({ icon: parentNode.value.icon, title: parentNode.value.dbTitle, key: parentNode.value.key });
         if (curNode.value) {
           list.push({ icon: curNode.value.icon, title: curNode.value.tableName, key: curNode.value.key });
         }
         return list;
       }
       if (curNode.value) {
-        list.push({ icon: curNode.value.icon, title: curNode.value.dbName, key: curNode.value.key });
+        list.push({ icon: curNode.value.icon, title: curNode.value.dbTitle, key: curNode.value.key });
       }
       return list;
     });

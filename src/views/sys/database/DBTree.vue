@@ -30,7 +30,6 @@
       </template>
     </BasicTree>
     <DbConnectModal @register="registerModal" @success="handleSuccess" />
-
   </div>
 </template>
 <script lang="ts">
