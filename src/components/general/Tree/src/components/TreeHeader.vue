@@ -16,6 +16,9 @@
           v-model:value="searchValue"
         />
       </div>
+      <div class="flex">
+        <slot name="headerTools"></slot>
+      </div>
       <Dropdown @click.prevent v-if="toolbar">
         <Icon icon="ion:ellipsis-vertical" />
         <template #overlay>

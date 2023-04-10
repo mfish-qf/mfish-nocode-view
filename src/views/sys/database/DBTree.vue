@@ -4,48 +4,113 @@
  @date: 2023/3/31 21:29
 -->
 <template>
-  <BasicTree
-    class="mr-0 overflow-hidden bg-white"
-    title="数据库列表"
-    toolbar
-    search
-    ref="asyncTreeRef"
-    treeWrapperClassName="h-[calc(100%-35px)] overflow-auto"
-    :treeData="treeData"
-    :load-data="getTables"
-    v-model:selectedKeys="selectedKeys"
-    @select="handleSelect"
-    @update:searchValue="handleSearch"
-  />
+  <div>
+    <BasicTree
+      class="mr-0 overflow-hidden bg-white"
+      title="数据库列表"
+      toolbar
+      search
+      ref="asyncTreeRef"
+      treeWrapperClassName="h-[calc(100%-35px)] overflow-auto"
+      :treeData="treeData"
+      :load-data="getTables"
+      v-model:selectedKeys="selectedKeys"
+      @select="handleSelect"
+      @update:searchValue="handleSearch"
+      :beforeRightClick="getRightMenuList"
+    >
+      <template #headerTools>
+        <Tooltip title="新增数据库" v-if="hasPermission('sys:database:insert')">
+          <Button type="text" size="small" @click="DBCreate">
+            <template #icon>
+              <Icon icon="ion:add-outline" />
+            </template>
+          </Button>
+        </Tooltip>
+      </template>
+    </BasicTree>
+    <DbConnectModal @register="registerModal" @success="handleSuccess" />
+
+  </div>
 </template>
 <script lang="ts">
-import { BasicTree, TreeActionType, TreeItem } from "/@/components/general/Tree";
-import { onMounted, ref, unref, computed } from "vue";
-import { getDbConnectList, getTableList } from "/@/api/sys/DbConnect";
+import { BasicTree, ContextMenuItem, TreeActionType, TreeItem } from "/@/components/general/Tree";
+import { onMounted, ref, unref, computed, createVNode } from "vue";
+import { deleteDbConnect, getDbConnectList, getTableList } from "/@/api/sys/DbConnect";
 import { PageResult } from "/@/api/model/BaseModel";
 import { TableInfo } from "/@/api/sys/model/DbConnectModel";
 import { useAppStore } from "/@/store/modules/App";
+import Icon from "/@/components/general/Icon/src/Icon.vue";
+import { Button, Tooltip, Modal } from "ant-design-vue";
+import { usePermission } from "/@/hooks/web/UsePermission";
+import DbConnectModal from "/@/views/sys/db-connect/DbConnectModal.vue";
+import { useModal } from "/@/components/general/Modal";
 
 export default {
   name: "DBTree",
-  components: { BasicTree },
+  components: { DbConnectModal, Icon, Tooltip, Button, BasicTree, Modal },
   emits: ["select", "search"],
   setup(_, { emit }) {
+    const { hasPermission } = usePermission();
     const treeData = ref<TreeItem[]>([]);
     const asyncTreeRef = ref<Nullable<TreeActionType>>(null);
     let selectedKeys = ref<TreeItem[]>([]);
+    const [registerModal, { openModal }] = useModal();
     const appStore = useAppStore();
     const color = computed(() => appStore.getProjectConfig.themeColor);
 
     async function fetch() {
       const dbList = (await getDbConnectList()).list;
       dbList.forEach((db) => {
-        db["title"] = db.dbName;
+        db["title"] = db.dbTitle;
         db["key"] = db.id;
         db["icon"] = "simple-icons:" + (db.dbType === 1 ? "postgresql" : db.dbType === 2 ? "oracle" : "mysql");
         db["iconColor"] = color;
       });
       treeData.value = dbList as unknown as TreeItem[];
+      if (dbList?.length > 0) {
+        let id = treeData.value[0].id;
+        selectedKeys.value = [id];
+        emit("select", treeData.value[0]);
+      }
+    }
+
+    const showDeleteConfirm = (node) => {
+      Modal.confirm({
+        title: "确认删除提醒",
+        content: createVNode("div", { style: "color:red;" }, "是否确认删除数据库"),
+        onOk() {
+          DBDelete(node);
+        },
+        class: "test"
+      });
+    };
+
+    function getRightMenuList(node: any): ContextMenuItem[] {
+      setSelect(node.key);
+      if (!node.dbName) {
+        return [];
+      }
+      const menus: ContextMenuItem[] = [];
+      if (hasPermission("sys:database:update")) {
+        menus.push({
+          label: "修改",
+          handler: () => {
+            DBEdit(node);
+          },
+          icon: "ant-design:edit-outlined"
+        });
+      }
+      if (hasPermission("sys:database:delete")) {
+        menus.push({
+          label: "删除",
+          handler: () => {
+            showDeleteConfirm(node);
+          },
+          icon: "ant-design:delete-outlined"
+        });
+      }
+      return menus;
     }
 
     function handleSelect(_, e) {
@@ -76,6 +141,29 @@ export default {
       await buildTableTree(treeNode.eventKey);
     };
 
+    function DBCreate() {
+      openModal(true, {
+        isUpdate: false
+      });
+    }
+
+    function DBEdit(record: Recordable) {
+      openModal(true, {
+        record,
+        isUpdate: true
+      });
+    }
+
+    function DBDelete(record: Recordable) {
+      deleteDbConnect(record.id).then(() => {
+        handleSuccess();
+      });
+    }
+
+    function handleSuccess() {
+      fetch().then();
+    }
+
     /**
      * 构建数据库下面的表列表
      * @param key
@@ -102,15 +190,23 @@ export default {
     }
 
     onMounted(() => {
-      fetch().then(() => {
-        if (treeData.value?.length > 0) {
-          let id = treeData.value[0].id;
-          selectedKeys.value = [id];
-          emit("select", treeData.value[0]);
-        }
-      });
+      fetch();
     });
-    return { treeData, handleSelect, setSelect, asyncTreeRef, getTables, selectedKeys, buildTableTree, handleSearch };
+    return {
+      hasPermission,
+      registerModal,
+      DBCreate,
+      handleSuccess,
+      treeData,
+      handleSelect,
+      setSelect,
+      asyncTreeRef,
+      getTables,
+      selectedKeys,
+      buildTableTree,
+      handleSearch,
+      getRightMenuList
+    };
   }
 };
 </script>
