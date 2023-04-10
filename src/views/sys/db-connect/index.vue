@@ -8,7 +8,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:dbConnect:insert')">新增连接</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:database:insert')">新增连接</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -17,7 +17,7 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                auth: 'sys:dbConnect:update',
+                auth: 'sys:database:update',
                 tooltip: '修改',
               },
               {
@@ -28,7 +28,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record),
                 },
-                auth: 'sys:dbConnect:delete',
+                auth: 'sys:database:delete',
                 tooltip: '删除',
               },
             ]"
