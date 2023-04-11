@@ -13,7 +13,7 @@
 import { ref } from "vue";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { Description, useDescription } from "/@/components/general/Description";
-import { sysLogSchema } from "/@/views/sys/sysLog/sysLog.data";
+import { sysLogSchema } from "/@/views/sys/sys-log/sysLog.data";
 
 export default {
   name: "SysLogModal",

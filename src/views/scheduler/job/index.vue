@@ -81,7 +81,7 @@ import { usePermission } from "/@/hooks/web/UsePermission";
 import { getDictItems } from "/@/api/sys/DictItem";
 import { DictItem } from "/@/api/sys/model/DictItemModel";
 import { Job } from "/@/api/scheduler/model/JobModel";
-import JobSubscribeManagement from "/@/views/scheduler/jobSubscribe/index.vue";
+import JobSubscribeManagement from "/@/views/scheduler/job-subscribe/index.vue";
 import JobSubscribeList from "/@/views/scheduler/job/JobSubscribeList.vue";
 
 export default {

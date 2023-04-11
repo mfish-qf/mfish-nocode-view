@@ -29,7 +29,7 @@ import { CodeEditor } from "/@/components/general/CodeEditor";
 import { CollapseContainer } from "/@/components/general/Container";
 import { Steps } from "ant-design-vue";
 import JobConfig from "/@/views/scheduler/job/JobConfig.vue";
-import JobSubscribeManagement from "/@/views/scheduler/jobSubscribe/index.vue";
+import JobSubscribeManagement from "/@/views/scheduler/job-subscribe/index.vue";
 
 
 export default {
