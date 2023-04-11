@@ -13,7 +13,7 @@
 import { ref } from "vue";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { Description, useDescription } from "/@/components/general/Description";
-import { jobLogSchema } from "/@/views/scheduler/jobLog/jobLog.data";
+import { jobLogSchema } from "/@/views/scheduler/job-log/jobLog.data";
 
 export default {
   name: "JobLogModal",

@@ -56,7 +56,7 @@ import { getDictItems } from "/@/api/sys/DictItem";
 import { DictItem } from "/@/api/sys/model/DictItemModel";
 import { Tag } from "ant-design-vue";
 import { useModal } from "/@/components/general/Modal";
-import JobLogModal from "/@/views/scheduler/jobLog/JobLogModal.vue";
+import JobLogModal from "/@/views/scheduler/job-log/JobLogModal.vue";
 import { buildDictTag } from "/@/utils/DictUtils";
 import { Job } from "/@/api/scheduler/model/JobModel";
 
