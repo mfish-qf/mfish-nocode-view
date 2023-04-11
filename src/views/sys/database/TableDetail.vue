@@ -20,10 +20,8 @@
         </a-descriptions-item>
       </a-descriptions>
       <a-descriptions title="字段信息" class="mt-4">
-        <a-descriptions-item>
-          <BasicTable @register="registerFieldTable" />
-        </a-descriptions-item>
       </a-descriptions>
+      <BasicTable @register="registerFieldTable" />
     </div>
     <div class="pt-2 m-6 desc-wrap" v-else>
       <BasicTable @register="registerDataTable" />
