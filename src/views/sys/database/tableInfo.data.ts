@@ -1,6 +1,7 @@
 import { BasicColumn } from "/@/components/general/Table";
 import { Checkbox } from "ant-design-vue";
 import { h } from "vue";
+
 /**
  * @description: 表信息
  * @author: mfish
@@ -10,12 +11,12 @@ export const columns: BasicColumn[] = [
   {
     title: "字段名称",
     dataIndex: "fieldName",
-    width: 120
+    width: 150
   },
   {
     title: "字段类型",
     dataIndex: "columnType",
-    width: 120
+    width: 150
   },
   {
     title: "非空",
@@ -26,7 +27,7 @@ export const columns: BasicColumn[] = [
         disabled: true
       });
     },
-    width: 120
+    width: 60
   },
   {
     title: "主键",
@@ -37,11 +38,10 @@ export const columns: BasicColumn[] = [
         disabled: true
       });
     },
-    width: 120
+    width: 60
   },
   {
     title: "字段描述",
-    dataIndex: "comment",
-    width: 120
+    dataIndex: "comment"
   }
 ];
