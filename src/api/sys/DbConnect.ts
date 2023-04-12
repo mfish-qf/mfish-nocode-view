@@ -11,16 +11,17 @@ import {
   DbConnectPageModel,
   ReqTable,
   TableInfo,
-  FieldInfo, DataTable
+  FieldInfo, DataTable, DBTreeNode
 } from "/@/api/sys/model/DbConnectModel";
 import { PageResult } from "/@/api/model/BaseModel";
 
 enum Api {
   DbConnect = "/sys/dbConnect",
   TestConnect = "/sys/dbConnect/test",
-  TABLES = "/sys/dbConnect/tables",
-  FIELDS = "/sys/dbConnect/fields",
-  DATATABLE = "/sys/dbConnect/data",
+  Tables = "/sys/dbConnect/tables",
+  Fields = "/sys/dbConnect/fields",
+  DataTable = "/sys/dbConnect/data",
+  Tree = "/sys/dbConnect/tree"
 }
 
 /**
@@ -34,11 +35,19 @@ export const getDbConnectList = (reqDbConnect?: ReqDbConnect) => {
 };
 
 /**
+ * 获取数据库的树
+ * @param parentId id不传获取数据库 传id获取数据库下的表
+ */
+export const getDBTree = (params?: any) => {
+  return defHttp.get<DBTreeNode[]>({ url: Api.Tree, params: params });
+};
+
+/**
  * 获取表列表
  * @param params
  */
 export const getTableList = (params: ReqTable) => {
-  return defHttp.get<PageResult<TableInfo>>({ url: Api.TABLES, params: params });
+  return defHttp.get<PageResult<TableInfo>>({ url: Api.Tables, params: params });
 };
 
 /**
@@ -46,7 +55,7 @@ export const getTableList = (params: ReqTable) => {
  * @param params
  */
 export const getFieldList = (params: ReqTable) => {
-  return defHttp.get<PageResult<FieldInfo>>({ url: Api.FIELDS, params: params });
+  return defHttp.get<PageResult<FieldInfo>>({ url: Api.Fields, params: params });
 };
 
 /**
@@ -54,7 +63,7 @@ export const getFieldList = (params: ReqTable) => {
  * @param params
  */
 export const getDataTable = (params: ReqTable) => {
-    return defHttp.get<DataTable>({ url: Api.DATATABLE, params: params });
+  return defHttp.get<DataTable>({ url: Api.DataTable, params: params });
 };
 
 /**

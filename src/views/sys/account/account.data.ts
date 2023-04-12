@@ -9,12 +9,12 @@ export const columns: BasicColumn[] = [
   {
     title: "用户名",
     dataIndex: "account",
-    width: 120
+    width: 180
   },
   {
     title: "昵称",
     dataIndex: "nickname",
-    width: 120
+    width: 180
   },
   {
     title: "手机号",
@@ -29,7 +29,7 @@ export const columns: BasicColumn[] = [
   {
     title: "邮箱",
     dataIndex: "email",
-    width: 120
+    width: 180
   },
   {
     title: "座机",

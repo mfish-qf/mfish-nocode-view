@@ -22,27 +22,26 @@ export default {
   emits: ["success", "register"],
   setup(_, { emit }) {
     const isUpdate = ref(true);
-    const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-      labelWidth: 100,
-      baseColProps: { span: 12 },
+    const [registerForm, { validate }] = useForm({
+      labelWidth: 120,
+      baseColProps: { span: 24 },
       schemas: codeBuildFormSchema,
       showActionButtonGroup: false,
       autoSubmitOnEnter: true
     });
-    const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
-      resetFields().then();
-      setModalProps({ confirmLoading: false, width: "800px" });
-      isUpdate.value = !!data?.isUpdate;
-      if (unref(isUpdate)) {
-        setFieldsValue({
-          ...data.record
-        }).then();
-      }
+    const [registerModal, { setModalProps, closeModal }] = useModalInner(async () => {
+      setModalProps({ confirmLoading: false, width: "600px" });
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增代码构建" : "编辑代码构建"));
 
     async function handleSubmit() {
       let values = await validate();
+      if (values.dataBase && values.dataBase.length === 2) {
+        values.connectId = values.dataBase[0];
+        values.tableName = values.dataBase[1];
+      } else {
+        throw new Error("请选择数据库和表!");
+      }
       setModalProps({ confirmLoading: true });
       if (unref(isUpdate)) {
         saveCodeBuild(updateCodeBuild, values);

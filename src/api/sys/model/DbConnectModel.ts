@@ -63,4 +63,11 @@ export interface ReqTable extends ReqPage {
   tableName?: string;
 }
 
+export interface DBTreeNode {
+  code: string;
+  parentCode: string;
+  label: string;
+  type: number;
+}
+
 export type DbConnectPageModel = PageResult<DbConnect>;

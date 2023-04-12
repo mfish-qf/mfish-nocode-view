@@ -1,5 +1,6 @@
 import { BasicColumn } from "/@/components/general/Table";
 import { FormSchema } from "/@/components/general/Table";
+import { getDBTree } from "/@/api/sys/DbConnect";
 
 /**
  * @description: 代码构建
@@ -34,9 +35,13 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "表描述",
-    dataIndex: "tableComment",
+    title: "创建时间",
+    dataIndex: "createTime",
     width: 120
+  },
+  {
+    title: "表描述",
+    dataIndex: "tableComment"
   }
 ];
 export const searchFormSchema: FormSchema[] = [
@@ -67,22 +72,30 @@ export const codeBuildFormSchema: FormSchema[] = [
     show: false
   },
   {
-    field: "connectId",
-    label: "数据库连接ID",
-    component: "Input",
-    required: true
-  },
-  {
-    field: "tableName",
-    label: "表名",
-    component: "Input",
-    required: true
+    field: "dataBase",
+    component: "ApiCascader",
+    label: "数据库表",
+    required: true,
+    helpMessage: ["选择生成代码相关数据库和表"],
+    componentProps: {
+      api: getDBTree,
+      apiParamKey: "parentId",
+      asyncFetchParamKey: "parentId",
+      labelField: "label",
+      valueField: "code",
+      initFetchParams: {
+        parentId: ""
+      },
+      isLeaf: (record) => {
+        return record.type === 1;
+      }
+    }
   },
   {
     field: "apiPrefix",
     label: "接口路径前缀",
     component: "Input",
-    helpMessage: [" 例如:/oauth2/user接口前缀为oauth2", "不传会使用packageName，最底层包名 例如:cn.com.mfish.sys包会使用sys"]
+    helpMessage: ["例如:/oauth2/user接口前缀为oauth2", "不传会使用packageName，最底层包名 例如:cn.com.mfish.sys包会使用sys"]
   },
   {
     field: "entityName",
