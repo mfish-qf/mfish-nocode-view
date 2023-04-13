@@ -5,12 +5,11 @@
  @version: V1.0.0
 -->
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
+  <BasicModal v-bind="$attrs" @register="registerModal" title="代码构建" @ok="handleSubmit">
     <BasicForm @register="registerForm" @submit="handleSubmit" />
   </BasicModal>
 </template>
 <script lang="ts">
-import { ref, computed, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { codeBuildFormSchema } from "./codeBuild.data";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
@@ -21,7 +20,6 @@ export default {
   components: { BasicModal, BasicForm },
   emits: ["success", "register"],
   setup(_, { emit }) {
-    const isUpdate = ref(true);
     const [registerForm, { resetFields, validate }] = useForm({
       labelWidth: 120,
       baseColProps: { span: 24 },
@@ -33,7 +31,6 @@ export default {
       resetFields().then();
       setModalProps({ confirmLoading: false, width: "600px" });
     });
-    const getTitle = computed(() => (!unref(isUpdate) ? "新增代码构建" : "编辑代码构建"));
 
     async function handleSubmit() {
       let values = await validate();
@@ -55,7 +52,6 @@ export default {
     return {
       registerModal,
       registerForm,
-      getTitle,
       handleSubmit
     };
   }
