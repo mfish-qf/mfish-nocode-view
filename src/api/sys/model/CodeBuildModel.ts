@@ -16,6 +16,12 @@ export interface CodeBuild extends BaseEntity<number> {
   queryParams: string;
 }
 
+export interface CodeVo {
+  path: string;
+  name: string;
+  code: string;
+}
+
 export interface ReqCodeBuild {
 
 }

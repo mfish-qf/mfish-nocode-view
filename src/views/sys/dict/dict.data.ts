@@ -13,12 +13,12 @@ export const columns: BasicColumn[] = [
   {
     title: "字典名称",
     dataIndex: "dictName",
-    width: 120
+    width: 180
   },
   {
     title: "字典编码",
     dataIndex: "dictCode",
-    width: 120
+    width: 150
   },
   {
     title: "状态",

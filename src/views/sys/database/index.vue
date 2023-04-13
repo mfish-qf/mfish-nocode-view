@@ -28,7 +28,11 @@
           </div>
         </a-col>
       </a-row>
-      <TableDetail v-else :cur-node="curNode" class="mt-3"></TableDetail>
+      <TableDetail v-else :cur-node="curNode" class="mt-3">
+        <template #[item]="data" v-for="item in Object.keys($slots)">
+          <slot :name="item" v-bind="data || {}"></slot>
+        </template>
+      </TableDetail>
     </ScrollContainer>
   </PageWrapper>
 </template>

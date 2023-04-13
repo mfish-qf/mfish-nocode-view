@@ -8,17 +8,23 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:codeBuild:insert')">新增代码构建</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:codeBuild:insert')">构建代码</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
             :actions="[
               {
-                icon: 'ant-design:edit-outlined',
-                onClick: handleEdit.bind(null, record),
-                auth: 'sys:codeBuild:update',
-                tooltip: '修改',
+                icon: 'ant-design:search-outlined',
+                onClick: handleQuery.bind(null, record),
+                auth: 'sys:codeBuild:query',
+                tooltip: '查看代码',
+              },
+              {
+                icon: 'ant-design:download-outlined',
+                onClick: handleQuery.bind(null, record),
+                auth: 'sys:codeBuild:query',
+                tooltip: '下载代码',
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -37,6 +43,7 @@
       </template>
     </BasicTable>
     <CodeBuildModal @register="registerModal" @success="handleSuccess" />
+    <CodeQueryModal @register="registerQueryModal" />
   </div>
 </template>
 <script lang="ts">
@@ -46,13 +53,17 @@ import { useModal } from "/@/components/general/Modal";
 import CodeBuildModal from "./CodeBuildModal.vue";
 import { columns, searchFormSchema } from "./codeBuild.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
+import DataBaseModal from "/@/views/sys/database/DataBaseModal.vue";
+import { Button } from "ant-design-vue";
+import CodeQueryModal from "/@/views/sys/code-build/CodeQueryModal.vue";
 
 export default {
   name: "CodeBuildManagement",
-  components: { BasicTable, CodeBuildModal, TableAction },
+  components: { CodeQueryModal, DataBaseModal, BasicTable, CodeBuildModal, TableAction, Button },
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
+    const [registerQueryModal,{openModal: openQueryModal}] = useModal();
     const [registerTable, { reload }] = useTable({
       title: "代码构建列表",
       api: getCodeBuildList,
@@ -66,7 +77,7 @@ export default {
       bordered: true,
       showIndexColumn: false,
       actionColumn: {
-        width: 80,
+        width: 120,
         title: "操作",
         dataIndex: "action"
       }
@@ -78,10 +89,9 @@ export default {
       });
     }
 
-    function handleEdit(record: Recordable) {
-      openModal(true, {
-        record,
-        isUpdate: true
+    function handleQuery(record: Recordable) {
+      openQueryModal(true, {
+        ...record
       });
     }
 
@@ -98,8 +108,9 @@ export default {
     return {
       registerTable,
       registerModal,
+      registerQueryModal,
       handleCreate,
-      handleEdit,
+      handleQuery,
       handleDelete,
       handleSuccess,
       hasPermission

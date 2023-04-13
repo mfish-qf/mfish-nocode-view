@@ -14,7 +14,7 @@ import { ref, computed, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { codeBuildFormSchema } from "./codeBuild.data";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
-import { insertCodeBuild, updateCodeBuild } from "/@/api/sys/CodeBuild";
+import { insertCodeBuild } from "/@/api/sys/CodeBuild";
 
 export default {
   name: "CodeBuildModal",
@@ -22,37 +22,29 @@ export default {
   emits: ["success", "register"],
   setup(_, { emit }) {
     const isUpdate = ref(true);
-    const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-      labelWidth: 100,
-      baseColProps: { span: 12 },
+    const [registerForm, { resetFields, validate }] = useForm({
+      labelWidth: 120,
+      baseColProps: { span: 24 },
       schemas: codeBuildFormSchema,
       showActionButtonGroup: false,
       autoSubmitOnEnter: true
     });
-    const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
+    const [registerModal, { setModalProps, closeModal }] = useModalInner(async () => {
       resetFields().then();
-      setModalProps({ confirmLoading: false, width: "800px" });
-      isUpdate.value = !!data?.isUpdate;
-      if (unref(isUpdate)) {
-        setFieldsValue({
-          ...data.record
-        }).then();
-      }
+      setModalProps({ confirmLoading: false, width: "600px" });
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增代码构建" : "编辑代码构建"));
 
     async function handleSubmit() {
       let values = await validate();
-      setModalProps({ confirmLoading: true });
-      if (unref(isUpdate)) {
-        saveCodeBuild(updateCodeBuild, values);
+      if (values.dataBase && values.dataBase.length === 2) {
+        values.connectId = values.dataBase[0];
+        values.tableName = values.dataBase[1];
       } else {
-        saveCodeBuild(insertCodeBuild, values);
+        throw new Error("请选择数据库和表!");
       }
-    }
-
-    function saveCodeBuild(save, values) {
-      save(values).then(() => {
+      setModalProps({ confirmLoading: true });
+      insertCodeBuild(values).then(() => {
         emit("success");
         closeModal();
       }).finally(() => {
