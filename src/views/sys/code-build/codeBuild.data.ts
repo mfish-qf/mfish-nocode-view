@@ -10,14 +10,9 @@ import { getDBTree } from "/@/api/sys/DbConnect";
  */
 export const columns: BasicColumn[] = [
   {
-    title: "数据库连接ID",
-    dataIndex: "connectId",
-    width: 120
-  },
-  {
     title: "表名",
     dataIndex: "tableName",
-    width: 120
+    width: 180
   },
   {
     title: "接口路径前缀",
@@ -27,17 +22,17 @@ export const columns: BasicColumn[] = [
   {
     title: "实体类名",
     dataIndex: "entityName",
-    width: 120
+    width: 150
   },
   {
     title: "项目包名",
     dataIndex: "packageName",
-    width: 120
+    width: 180
   },
   {
     title: "创建时间",
     dataIndex: "createTime",
-    width: 120
+    width: 150
   },
   {
     title: "表描述",

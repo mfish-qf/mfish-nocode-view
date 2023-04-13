@@ -14,7 +14,7 @@ import { ref, computed, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { codeBuildFormSchema } from "./codeBuild.data";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
-import { insertCodeBuild, updateCodeBuild } from "/@/api/sys/CodeBuild";
+import { insertCodeBuild } from "/@/api/sys/CodeBuild";
 
 export default {
   name: "CodeBuildModal",
@@ -22,7 +22,7 @@ export default {
   emits: ["success", "register"],
   setup(_, { emit }) {
     const isUpdate = ref(true);
-    const [registerForm, { validate }] = useForm({
+    const [registerForm, { resetFields, validate }] = useForm({
       labelWidth: 120,
       baseColProps: { span: 24 },
       schemas: codeBuildFormSchema,
@@ -30,6 +30,7 @@ export default {
       autoSubmitOnEnter: true
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async () => {
+      resetFields().then();
       setModalProps({ confirmLoading: false, width: "600px" });
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增代码构建" : "编辑代码构建"));
@@ -43,15 +44,7 @@ export default {
         throw new Error("请选择数据库和表!");
       }
       setModalProps({ confirmLoading: true });
-      if (unref(isUpdate)) {
-        saveCodeBuild(updateCodeBuild, values);
-      } else {
-        saveCodeBuild(insertCodeBuild, values);
-      }
-    }
-
-    function saveCodeBuild(save, values) {
-      save(values).then(() => {
+      insertCodeBuild(values).then(() => {
         emit("success");
         closeModal();
       }).finally(() => {

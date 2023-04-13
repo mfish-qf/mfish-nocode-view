@@ -5,10 +5,11 @@
  * @version: V1.0.0
  */
 import { defHttp } from "/@/utils/http/axios";
-import { CodeBuild, ReqCodeBuild, CodeBuildPageModel } from "/@/api/sys/model/CodeBuildModel";
+import { CodeBuild, ReqCodeBuild, CodeBuildPageModel, CodeVo } from "/@/api/sys/model/CodeBuildModel";
 
 enum Api {
-  CodeBuild = "/sys/codeBuild"
+  CodeBuild = "/sys/codeBuild",
+  View = "/sys/codeBuild/view"
 }
 
 /**
@@ -29,6 +30,14 @@ export const getCodeBuildList = (reqCodeBuild?: ReqCodeBuild) => {
  */
 export function insertCodeBuild(codeBuild: CodeBuild) {
   return defHttp.post<CodeBuild>({ url: Api.CodeBuild, params: codeBuild }, { successMessageMode: "message" });
+};
+
+/**
+ * 查看代码
+ * @param codeBuild
+ */
+export function viewCode(codeBuild: CodeBuild) {
+  return defHttp.get<CodeVo[]>({ url: Api.View, params: codeBuild });
 };
 
 /**

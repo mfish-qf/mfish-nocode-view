@@ -43,6 +43,7 @@
       </template>
     </BasicTable>
     <CodeBuildModal @register="registerModal" @success="handleSuccess" />
+    <CodeQueryModal @register="registerQueryModal" />
   </div>
 </template>
 <script lang="ts">
@@ -54,13 +55,15 @@ import { columns, searchFormSchema } from "./codeBuild.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 import DataBaseModal from "/@/views/sys/database/DataBaseModal.vue";
 import { Button } from "ant-design-vue";
+import CodeQueryModal from "/@/views/sys/code-build/CodeQueryModal.vue";
 
 export default {
   name: "CodeBuildManagement",
-  components: { DataBaseModal, BasicTable, CodeBuildModal, TableAction, Button },
+  components: { CodeQueryModal, DataBaseModal, BasicTable, CodeBuildModal, TableAction, Button },
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
+    const [registerQueryModal,{openModal: openQueryModal}] = useModal();
     const [registerTable, { reload }] = useTable({
       title: "代码构建列表",
       api: getCodeBuildList,
@@ -87,9 +90,8 @@ export default {
     }
 
     function handleQuery(record: Recordable) {
-      openModal(true, {
-        record,
-        isUpdate: true
+      openQueryModal(true, {
+        ...record
       });
     }
 
@@ -106,6 +108,7 @@ export default {
     return {
       registerTable,
       registerModal,
+      registerQueryModal,
       handleCreate,
       handleQuery,
       handleDelete,
