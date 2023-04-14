@@ -2,9 +2,9 @@
   <PageWrapper title="关于">
     <template #headerContent>
       <div class="flex justify-between items-center">
-        <span class="flex-1">
-          <a :href="GITHUB_URL" target="_blank">{{ name }}</a>
-          是一个基于Vue3.0、Vite4.0、Ant-Design-Vue、TypeScript的后台管理解决方案，目标是为中大型项目开发,提供现成的开箱解决方案及丰富的示例,原则上不会限制任何代码用于商用。
+        <span>
+          摸鱼低代码平台前端<a :href="GITHUB_URL" target="_blank">{{ name + "-view" }}</a>基于Vue3.0、Vite4.0、Ant-Design-Vue、TypeScript，后端<a :href="GITHUB_BACK_URL" target="_blank">{{ name
+          }}</a>基于JAVA、Spring Cloud Alibaba的后台管理解决方案，目标是为中大型项目开发,提供现成的开箱解决方案及丰富的示例，原则上不会限制任何代码用于商用。
         </span>
       </div>
     </template>
@@ -18,7 +18,7 @@ import { h } from "vue";
 import { Tag } from "ant-design-vue";
 import { PageWrapper } from "/@/components/general/Page";
 import { Description, DescItem, useDescription } from "/@/components/general/Description/index";
-import { GITHUB_URL, SITE_URL, DOC_URL } from "/@/settings/SiteSetting";
+import { GITHUB_URL, GITHUB_BACK_URL, SITE_URL, DOC_URL } from "/@/settings/SiteSetting";
 
 const { pkg, lastBuildTime } = __APP_INFO__;
 
@@ -37,7 +37,7 @@ const infoSchema: DescItem[] = [
     render: commonTagRender("blue")
   },
   {
-    label: "最后编译时间",
+    label: "编译时间",
     field: "lastBuildTime",
     render: commonTagRender("blue")
   },
@@ -52,9 +52,24 @@ const infoSchema: DescItem[] = [
     render: commonLinkRender("预览地址")
   },
   {
-    label: "Github",
+    label: "前端-Github",
     field: "github",
-    render: commonLinkRender("Github")
+    render: commonLinkRender(name + "-view")
+  },
+  {
+    label: "后端-Github",
+    field: "backGithub",
+    render: commonLinkRender(name)
+  },
+  {
+    label: "前端-Gitee",
+    field: "gitee",
+    render: commonLinkRender(name + "-view")
+  },
+  {
+    label: "后端-Gitee",
+    field: "backGitee",
+    render: commonLinkRender(name)
   }
 ];
 
@@ -63,7 +78,10 @@ const infoData = {
   lastBuildTime,
   doc: DOC_URL,
   preview: SITE_URL,
-  github: GITHUB_URL
+  github: GITHUB_URL,
+  backGithub: GITHUB_BACK_URL,
+  gitee: "https://gitee.com/qiufeng9862/mfish-nocode-view",
+  backGitee: "https://gitee.com/qiufeng9862/mfish-nocode"
 };
 
 Object.keys(dependencies).forEach((key) => {
@@ -75,14 +93,14 @@ Object.keys(devDependencies).forEach((key) => {
 });
 
 const [register] = useDescription({
-  title: "生产环境依赖",
+  title: "前端生产环境依赖",
   data: dependencies,
   schema: schema,
   column: 3
 });
 
 const [registerDev] = useDescription({
-  title: "开发环境依赖",
+  title: "前端开发环境依赖",
   data: devDependencies,
   schema: devSchema,
   column: 3
