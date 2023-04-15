@@ -66,6 +66,19 @@ const transform: AxiosTransform = {
     messageTips(options.errorMessageMode, msg, true, 0);
     throw new Error(msg || t("sys.api.apiRequestFailed"));
   },
+  //下载文件返回处理
+  downloadResponseHook: (res: any) => {
+    const { data } = res;
+    const url = window.URL.createObjectURL(data);
+    const link = document.createElement("a");
+    link.href = url;
+    const fileName = res.headers["content-disposition"].split("=")[1];
+    if (fileName) {
+      link.download = fileName;
+    }
+    link.click();
+    URL.revokeObjectURL(url);
+  },
   /**
    * 请求之前处理config
    * @param config

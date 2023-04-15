@@ -9,7 +9,8 @@ import { CodeBuild, ReqCodeBuild, CodeBuildPageModel, CodeVo } from "/@/api/sys/
 
 enum Api {
   CodeBuild = "/sys/codeBuild",
-  View = "/sys/codeBuild/view"
+  View = "/sys/codeBuild/view",
+  Download = "/sys/codeBuild/download"
 }
 
 /**
@@ -38,6 +39,17 @@ export function insertCodeBuild(codeBuild: CodeBuild) {
  */
 export function viewCode(codeBuild: CodeBuild) {
   return defHttp.get<CodeVo[]>({ url: Api.View, params: codeBuild });
+};
+
+/**
+ * 下载代码
+ * @param codeBuild
+ */
+export function downloadCode(codeBuild: CodeBuild) {
+  return defHttp.download<CodeVo[]>({
+    url: Api.Download,
+    params: codeBuild
+  });
 };
 
 /**

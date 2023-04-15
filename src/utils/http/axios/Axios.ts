@@ -157,13 +157,25 @@ export class VAxios {
     }, options);
   }
 
-  request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+  download<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+    return this.request({
+      ...config,
+      method: "get",
+      responseType: "blob",
+      // headers: { "Content-Type": ContentTypeEnum.OCTET_STREAM}
+    }, options,this.options.transform?.downloadResponseHook);
+  }
+
+  request<T = any>(config: AxiosRequestConfig, options?: RequestOptions, transformResponseHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any): Promise<T> {
     let conf = <CreateAxiosOptions>cloneDeep(config);
     const { transform, requestOptions } = this.options;
     const opt: RequestOptions = Object.assign({}, requestOptions, options);
-    const { beforeRequestHook, requestCatchHook, transformResponseHook } = transform || {};
+    const { beforeRequestHook, requestCatchHook } = transform || {};
     if (beforeRequestHook && isFunction(beforeRequestHook)) {
       conf = beforeRequestHook(conf, opt);
+    }
+    if(!transformResponseHook){
+      transformResponseHook = transform?.transformResponseHook;
     }
     conf.requestOptions = opt;
     conf = this.supportFormData(conf);

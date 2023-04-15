@@ -19,6 +19,11 @@ export abstract class AxiosTransform {
   transformResponseHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any;
 
   /**
+   * 下载响应处理
+   */
+  downloadResponseHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any;
+
+  /**
    * @description: 请求失败处理
    */
   requestCatchHook?: (e: Error, options: RequestOptions) => Promise<any>;
