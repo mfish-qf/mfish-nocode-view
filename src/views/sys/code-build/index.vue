@@ -22,7 +22,7 @@
               },
               {
                 icon: 'ant-design:download-outlined',
-                onClick: handleQuery.bind(null, record),
+                onClick: handleDownload.bind(null, record),
                 auth: 'sys:codeBuild:query',
                 tooltip: '下载代码',
               },
@@ -48,7 +48,7 @@
 </template>
 <script lang="ts">
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-import { deleteCodeBuild, getCodeBuildList } from "/@/api/sys/CodeBuild";
+import { deleteCodeBuild, downloadCode, getCodeBuildList } from "/@/api/sys/CodeBuild";
 import { useModal } from "/@/components/general/Modal";
 import CodeBuildModal from "./CodeBuildModal.vue";
 import { columns, searchFormSchema } from "./codeBuild.data";
@@ -56,6 +56,7 @@ import { usePermission } from "/@/hooks/web/UsePermission";
 import DataBaseModal from "/@/views/sys/database/DataBaseModal.vue";
 import { Button } from "ant-design-vue";
 import CodeQueryModal from "/@/views/sys/code-build/CodeQueryModal.vue";
+import { CodeBuild } from "/@/api/sys/model/CodeBuildModel";
 
 export default {
   name: "CodeBuildManagement",
@@ -63,7 +64,7 @@ export default {
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
-    const [registerQueryModal,{openModal: openQueryModal}] = useModal();
+    const [registerQueryModal, { openModal: openQueryModal }] = useModal();
     const [registerTable, { reload }] = useTable({
       title: "代码构建列表",
       api: getCodeBuildList,
@@ -95,6 +96,10 @@ export default {
       });
     }
 
+    function handleDownload(record: CodeBuild) {
+      downloadCode(record).then();
+    }
+
     function handleDelete(record: Recordable) {
       deleteCodeBuild(record.id).then(() => {
         handleSuccess();
@@ -111,6 +116,7 @@ export default {
       registerQueryModal,
       handleCreate,
       handleQuery,
+      handleDownload,
       handleDelete,
       handleSuccess,
       hasPermission
