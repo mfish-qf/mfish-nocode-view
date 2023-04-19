@@ -19,8 +19,9 @@ mfish-nocode-view采用 Vue3.0、Vite4.0、 Ant-Design-Vue、TypeScript 等新�
 [![github](https://img.shields.io/badge/后端地址-github-red.svg)](https://github.com/mfish-qf/mfish-nocode)
 [![gitee](https://img.shields.io/badge/后端地址-gitee-lightgrey.svg)](https://gitee.com/qiufeng9862/mfish-nocode)
 
-## 演示环境
-* *[demo地址](http://app.mfish.com.cn:11119)*
+## 文档地址
++ [文档地址](http://www.mfish.com.cn)
++ [在线预览](http://app.mfish.com.cn:11119)
 
 ##### 项目说明
 
@@ -69,9 +70,7 @@ pnpm run build
 
 http://localhost:5281
 
-## 功能模块（开发中...）
-> vue3版本已经实现了系统管理、系统监控、各种组件、权限、GUI代码生成、完全可以用于生产环境。
-
+## 功能模块
 ```
 ├─ChatGpt
 │  ├─聊天
@@ -87,7 +86,8 @@ http://localhost:5281
 │  ├─日志管理
 │  ├─文件管理
 │  ├─在线用户
-│  └─数据库配置
+│  ├─数据库
+│  └─数据源
 ├─系统监控
 │  ├─监控中心
 ├─任务调度
@@ -100,12 +100,14 @@ http://localhost:5281
 │  ├─AntDesign文档
 │  └─Vben文档
 ├─多级目录
+├─系统工具
+│  ├─代码生成
 ├─图形编辑器
 ├─引导页
 ├─关于
 └─其他模块 
-   └─更多功能开发中。。 
-   
+   └─更多功能开发中。。
+
 ```
 
 #### 项目截图
@@ -130,6 +132,10 @@ http://localhost:5281
 ![](https://oscimg.oschina.net/oscnet/up-434781fa769d2da21e396bfccbbe13c8f15.png)
 
 ![](https://oscimg.oschina.net/oscnet/up-7b2eeb5e679f75d889a841de61f9845c026.png)
+
+![](https://oscimg.oschina.net/oscnet/up-c413a81f353a0175bbbd09cc32a7fb8d5bf.png)
+
+![](https://oscimg.oschina.net/oscnet/up-736398ce5030ce21b6dda45ba9f24af4a72.png)
 
 ## 平台交流
 微信:  
