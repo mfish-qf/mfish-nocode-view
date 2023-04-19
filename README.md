@@ -23,6 +23,13 @@ mfish-nocode-view采用 Vue3.0、Vite4.0、 Ant-Design-Vue、TypeScript 等新�
 + [文档地址](http://www.mfish.com.cn)
 + [在线预览](http://app.mfish.com.cn:11119)
 
+## 平台交流
+### 微信:
+![](https://oscimg.oschina.net/oscnet/up-aaf63a91b96c092ad240b2e9755d926ba62.png)
+
+### QQ群:
+[![加入QQ群](https://img.shields.io/badge/522792773-blue.svg)](https://jq.qq.com/?_wv=1027&k=0A2bxoZX) 点击链接加入群聊【摸鱼低代码交流群】
+
 ##### 项目说明
 
 | 项目名                 | 说明             | 
@@ -137,15 +144,6 @@ http://localhost:5281
 ![](https://oscimg.oschina.net/oscnet/up-c413a81f353a0175bbbd09cc32a7fb8d5bf.png)
 
 ![](https://oscimg.oschina.net/oscnet/up-736398ce5030ce21b6dda45ba9f24af4a72.png)
-
-## 平台交流
-微信:  
-![](https://oscimg.oschina.net/oscnet/up-aaf63a91b96c092ad240b2e9755d926ba62.png)
-
-QQ群:
-[![加入QQ群](https://img.shields.io/badge/522792773-blue.svg)](https://jq.qq.com/?_wv=1027&k=0A2bxoZX)
-
-点击链接加入群聊【摸鱼低代码交流群】
 
 ## 入门必备
 
