@@ -21,7 +21,7 @@ export default {
       labelWidth: 100,
       schemas: formSchema,
       showActionButtonGroup: false,
-      baseColProps: { span: 12},
+      baseColProps: { span: 12 },
       autoSubmitOnEnter: true
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
@@ -39,12 +39,13 @@ export default {
 
     async function setTreeData(params?: MenuParams) {
       const treeData = await getMenuList(params);
+      const menuData = await getMenuList({ menuType: MenuType.菜单 });
       updateSchema([{
         field: "parentId",
         componentProps: { treeData }
       }, {
         field: "activeMenu",
-        componentProps: { treeData }
+        componentProps: { treeData: menuData }
       }]).then();
     }
 
