@@ -135,7 +135,7 @@ export const usePermissionStore = defineStore({
       };
       const buildRoute = (menu: MenuListItem): AppRouteRecordRaw => {
         const route: AppRouteRecordRaw = {
-          name: menu.menuName,
+          name: menu.id,
           path: formatPath(menu.routePath),
           meta: {
             title: menu.menuName,
@@ -184,7 +184,7 @@ export const usePermissionStore = defineStore({
         route.children = [
           {
             path: index,
-            name: menu.menuName,
+            name: menu.id,
             meta: { title: menu.menuName, icon: menu.menuIcon },
             component: importComponent(menu.component)
           }
