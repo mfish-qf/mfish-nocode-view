@@ -116,6 +116,18 @@ export const searchFormSchema: FormSchema[] = [
     component: "ApiSelect",
     componentProps: getDictProps("sys_job_type"),
     colProps: { lg: 4, md: 6 }
+  },
+  {
+    label: "任务状态",
+    field: "status",
+    component: "Select",
+    componentProps: {
+      options: [
+        { label: "启用", value: 0 },
+        { label: "停用", value: 1 }
+      ]
+    },
+    colProps: { lg: 4, md: 6 }
   }
 ];
 export const jobFormSchema: FormSchema[] = [
