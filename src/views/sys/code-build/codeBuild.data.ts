@@ -90,7 +90,7 @@ export const codeBuildFormSchema: FormSchema[] = [
     field: "apiPrefix",
     label: "接口路径前缀",
     component: "Input",
-    helpMessage: ["例如:/oauth2/user接口前缀为oauth2", "不传会使用packageName，最底层包名 例如:cn.com.mfish.sys包会使用sys"]
+    helpMessage: ["网关path中的路由匹配前缀", "例如:网关中认证服务访问路径为Path=/oauth2/**接口前缀为oauth2", "不传会使用packageName，最底层包名 例如:cn.com.mfish.sys包会使用sys"]
   },
   {
     field: "entityName",

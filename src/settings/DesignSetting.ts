@@ -14,12 +14,12 @@ export const APP_PRESET_COLOR_LIST: string[] = [
   "#ee4f12",
   "#0096c7",
   "#9c27b0",
+  "#fdd001",
   "#ff9800",
   "#5172DC",
   "#018ffb",
   "#409eff",
-  "#394664",
-  "#24292e"
+  "#646cff"
 ];
 
 // header preset color
@@ -30,7 +30,9 @@ export const HEADER_PRESET_BG_COLOR_LIST: string[] = [
   "#5172DC",
   "#018ffb",
   "#409eff",
+  "#9c27b0",
   "#e74c3c",
+  "#ff9800",
   "#24292e",
   "#394664",
   "#001529",
