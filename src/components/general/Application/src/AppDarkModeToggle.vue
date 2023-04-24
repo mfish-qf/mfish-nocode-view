@@ -1,8 +1,9 @@
 <template>
   <div :class="getClass" @click="toggleDarkMode">
-    <div :class="`${prefixCls}-inner`"></div>
-    <SvgIcon size="14" name="sun" />
-    <SvgIcon size="14" name="moon" />
+    <div :class="`${prefixCls}-inner`">
+      <SvgIcon :class="`${prefixCls}-icon`" v-if="isDark" size="14" name="moon" />
+      <SvgIcon :class="`${prefixCls}-icon`" v-else size="14" name="sun" />
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -37,13 +38,8 @@ function toggleDarkMode() {
 <style lang="less" scoped>
 @prefix-cls: ~'@{namespace}-dark-switch';
 
-html[data-theme='dark'] {
-  .@{prefix-cls} {
-    border: 1px solid rgb(196 188 188);
-  }
-}
-
 .@{prefix-cls} {
+  border: 1px solid rgb(196 188 188);
   position: relative;
   display: flex;
   width: 50px;
@@ -51,7 +47,6 @@ html[data-theme='dark'] {
   padding: 0 6px;
   margin-left: auto;
   cursor: pointer;
-  background-color: #151515;
   border-radius: 30px;
   justify-content: space-between;
   align-items: center;
@@ -65,11 +60,17 @@ html[data-theme='dark'] {
     border-radius: 50%;
     transition: transform 0.5s, background-color 0.5s;
     will-change: transform;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-
+  &-icon {
+    position: absolute;
+  }
   &--dark {
     .@{prefix-cls}-inner {
       transform: translateX(calc(100% + 2px));
+      background-color: #151515;
     }
   }
 }
