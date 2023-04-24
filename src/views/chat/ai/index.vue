@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="dialog-panel">
+    <div :class="`${prefixCls}-panel`">
       <ScrollContainer ref="scrollRef">
         <template v-for="(item,index) in chats" :key="index">
-          <div class="chat-wrapper" v-if="item.user === 'chatGpt'">
+          <div :class="`${prefixCls}-wrapper`" v-if="item.user === 'chatGpt'">
             <img class="chat-img" src="/resource/img/logo.png">
             <div class="chat-text" v-if="item.chat !== undefined && item.chat !==null&&item.chat!==''" v-html="item.chat"></div>
           </div>
-          <div v-else class="chat-wrapper right">
+          <div v-else :class="`${prefixCls}-wrapper`" class="right">
             <div class="chat-text right">{{ item.chat }}</div>
             <SvgIcon name="dynamic-avatar-1" size="32" />
           </div>
@@ -34,12 +34,14 @@ import { InputSearch } from "ant-design-vue";
 import { answer } from "/@/api/chat/chat";
 import { ChatsModel } from "/@/api/chat/model/QuestionModel";
 import { buildUUID } from "/@/utils/Uuid";
+import { useDesign } from "/@/hooks/web/UseDesign";
 
 export default {
   name: "chartGpt",
   components: { SvgIcon, ScrollContainer, InputSearch },
   setup() {
     const scrollRef = ref<Nullable<ScrollActionType>>(null);
+    const { prefixCls } = useDesign("ai-chat");
     const getScroll = () => {
       const scroll = unref(scrollRef);
       if (!scroll) {
@@ -88,6 +90,7 @@ export default {
     }
 
     return {
+      prefixCls,
       chats,
       msg,
       scrollRef,
@@ -97,14 +100,30 @@ export default {
 };
 </script>
 <style lang="less">
-.dialog-panel {
+@prefix-cls: ~'@{namespace}-ai-chat';
+[data-theme='dark'] {
+  .@{prefix-cls}-wrapper {
+    .chat-text {
+      background-color: #313136;
+    }
+
+    .chat-text.right {
+      background-color: #112c03;
+    }
+  }
+  .@{prefix-cls}-panel {
+    box-shadow: 0 0 15px 2px #2b2d34;
+  }
+}
+
+.@{prefix-cls}-panel {
   overflow-y: auto;
   height: calc(100vh - 200px);
   margin: 15px;
   box-shadow: 0 0 15px 2px #c9d7f8;
 }
 
-.chat-wrapper {
+.@{prefix-cls}-wrapper {
   display: flex;
   margin: 10px;
   align-items: stretch;

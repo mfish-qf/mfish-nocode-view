@@ -25,28 +25,17 @@ export interface MenuTag {
 
 export interface Menu {
   name: string;
-
   icon?: string;
-
   path: string;
-
   // path contains param, auto assignment.
   paramPath?: string;
-
   disabled?: boolean;
-
   children?: Menu[];
-
   menuSort?: number;
-
   roles?: string[];
-
   meta?: Partial<RouteMeta>;
-
   tag?: MenuTag;
-
   hideMenu?: boolean;
-
   isExternal?: boolean;
   //隐藏子菜单，当只有一级菜单时为true
   hideChildrenInMenu?: boolean;

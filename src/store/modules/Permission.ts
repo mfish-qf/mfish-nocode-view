@@ -240,14 +240,18 @@ export const usePermissionStore = defineStore({
             cRoute.path = cRoute.path.substring(1);
             cMenu.path = pMenu.path + cMenu.path;
           }
-          pRoute.children?.push(cRoute);
           if (menu.children != null && menu.children.length > 0) {
             cMenu.children = [];
             cRoute.children = [];
             buildChildMenuRoute(menu.children, cMenu, cRoute);
+          } else if (menu.menuType === MenuType.目录) {
+            //没有子菜单的路由不push到路由中
+            continue;
           }
+          pRoute.children?.push(cRoute);
         }
       }
+
       //如果存在前端路由信息，补充到到后台
       routes.push(...routeModuleList);
       if (routeModuleList != null && routeModuleList.length > 0) {

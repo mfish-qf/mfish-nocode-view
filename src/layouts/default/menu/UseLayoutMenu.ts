@@ -55,7 +55,7 @@ export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
   watch(
     [() => permissionStore.getLastBuildMenuTime, () => permissionStore.getMenuList],
     () => {
-      genMenus();
+      getMenuList().then();
     },
     {
       immediate: true
@@ -67,7 +67,7 @@ export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
     () => getSplit.value,
     () => {
       if (unref(splitNotLeft)) return;
-      genMenus();
+      getMenuList().then();
     }
   );
 
@@ -89,7 +89,7 @@ export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
   }
 
   // get menus
-  async function genMenus() {
+  async function getMenuList() {
     // normal mode
     if (unref(normalType) || unref(getIsMobile)) {
       menusRef.value = getMenus();
