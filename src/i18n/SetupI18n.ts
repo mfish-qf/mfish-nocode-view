@@ -12,6 +12,7 @@ export let i18n: ReturnType<typeof createI18n>;
 async function createI18nOptions(): Promise<I18nOptions> {
   const localeStore = useLocaleStoreWithOut();
   const locale = localeStore.getLocale;
+  // 这里改成接口获取
   const defaultLocal = await import(`./lang/${locale}.ts`);
   const message = defaultLocal.default?.message ?? {};
 
