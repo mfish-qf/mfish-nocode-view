@@ -133,7 +133,7 @@ export default defineComponent({
 <style lang="less">
 @prefix-cls: ~'@{namespace}-flow-chart-toolbar';
 
-html[data-theme='dark'] {
+[data-theme='dark'] {
   .lf-dnd {
     background: #080808;
   }

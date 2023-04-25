@@ -46,6 +46,7 @@ export function useLocale() {
       setI18nLanguage(locale);
       return locale;
     }
+    // 这里改成接口获取
     const langModule = ((await import(`./lang/${locale}.ts`)) as any).default as LangModule;
     if (!langModule) return;
     const { message } = langModule;

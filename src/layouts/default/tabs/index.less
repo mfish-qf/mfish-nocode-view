@@ -1,14 +1,21 @@
 @prefix-cls: ~'@{namespace}-multiple-tabs';
 
-html[data-theme='dark'] {
+[data-theme='dark'] {
   .@{prefix-cls} {
     .ant-tabs-tab {
-      border-bottom: 1px solid @border-color-base;
+      //border-bottom: 1px solid @border-color-base;
+    }
+    &-content {
+      &__extra-quick,
+      &__extra-redo,
+      &__extra-fold {
+        border-left: 0px solid @border-color-base;
+      }
     }
   }
 }
 
-html[data-theme='light'] {
+[data-theme='light'] {
   .@{prefix-cls} {
     .ant-tabs-tab:not(.ant-tabs-tab-active) {
       border: 1px solid #d9d9d9 !important;
@@ -18,10 +25,10 @@ html[data-theme='light'] {
 
 .@{prefix-cls} {
   z-index: 10;
-  height: @multiple-height + 2;
-  line-height: @multiple-height + 2;
+  //height: @multiple-height + 2;
+  //line-height: @multiple-height + 2;
   background-color: @component-background;
-  border-bottom: 1px solid @border-color-base;
+  //border-bottom: 1px solid @border-color-base;
 
   .ant-tabs-small {
     height: @multiple-height;
@@ -145,7 +152,7 @@ html[data-theme='light'] {
       color: @text-color-secondary;
       text-align: center;
       cursor: pointer;
-      border-left: 1px solid @border-color-base;
+      //border-left: 1px solid @border-color-base;
 
       &:hover {
         color: @text-color-base;
