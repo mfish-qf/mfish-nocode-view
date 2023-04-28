@@ -1,4 +1,4 @@
-import type { ValidationRule } from "ant-design-vue/lib/form/Form";
+import type { RuleObject } from "ant-design-vue/lib/form/interface";
 import type { ComponentType } from "./types";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { isNumber } from "/@/utils/Is";
@@ -36,7 +36,7 @@ function genType() {
 }
 
 export function setComponentRuleType(
-  rule: ValidationRule,
+  rule: RuleObject,
   component: ComponentType,
   valueFormat: string
 ) {
