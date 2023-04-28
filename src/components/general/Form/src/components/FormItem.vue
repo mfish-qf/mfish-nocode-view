@@ -2,7 +2,7 @@
 import type { PropType, Ref } from "vue";
 import { computed, defineComponent, toRefs, unref } from "vue";
 import type { FormActionType, FormProps, FormSchema } from "../types/Form";
-import type { ValidationRule } from "ant-design-vue/lib/form/Form";
+import type { RuleObject } from "ant-design-vue/lib/form/interface";
 import type { TableActionType } from "/@/components/general/Table";
 import { Col, Divider, Form } from "ant-design-vue";
 import { componentMap } from "../ComponentMap";
@@ -126,7 +126,7 @@ export default defineComponent({
       return { isShow, isIfShow };
     }
 
-    function handleRules(): ValidationRule[] {
+    function handleRules(): RuleObject[] {
       const {
         rules: defRules = [],
         component,
@@ -137,10 +137,10 @@ export default defineComponent({
       } = props.schema;
 
       if (isFunction(dynamicRules)) {
-        return dynamicRules(unref(getValues)) as ValidationRule[];
+        return dynamicRules(unref(getValues)) as RuleObject[];
       }
 
-      let rules: ValidationRule[] = cloneDeep(defRules) as ValidationRule[];
+      let rules: RuleObject[] = cloneDeep(defRules) as RuleObject[];
       const { rulesMessageJoinLabel: globalRulesMessageJoinLabel } = props.formProps;
 
       const joinLabel = Reflect.has(props.schema, "rulesMessageJoinLabel")
@@ -361,7 +361,7 @@ export default defineComponent({
 
     return () => {
       const { colProps = {}, colSlot, renderColContent, component } = props.schema;
-      if (!componentMap.has(component)) {
+      if (component === undefined || !componentMap.has(component)) {
         return null;
       }
 
