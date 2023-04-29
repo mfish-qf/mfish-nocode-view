@@ -14,13 +14,14 @@ import { Persistent } from "/@/utils/cache/Persistent";
 import { darkMode } from "/@/settings/DesignSetting";
 import { resetRouter } from "/@/router";
 import { deepMerge } from "/@/utils";
+import projectSetting from "/@/settings/ProjectSetting";
 
 interface AppState {
   darkMode?: ThemeEnum;
   // 页面加载状态
   pageLoading: boolean;
   // 项目配置
-  projectConfig: ProjectConfig | null;
+  projectConfig: ProjectConfig;
   // 当窗口缩小时，记住一些状态，并在恢复窗口时恢复这些状态
   beforeMiniInfo: BeforeMiniState;
 }
@@ -31,7 +32,7 @@ export const useAppStore = defineStore({
   state: (): AppState => ({
     darkMode: undefined,
     pageLoading: false,
-    projectConfig: null,
+    projectConfig: projectSetting,
     beforeMiniInfo: {}
   }),
   getters: {
