@@ -41,12 +41,6 @@ export const columns: BasicColumn[] = [
 ];
 export const searchFormSchema: FormSchema[] = [
   {
-    field: "connectId",
-    label: "数据库连接ID",
-    component: "Input",
-    colProps: { lg: 4, md: 5 }
-  },
-  {
     field: "tableName",
     label: "表名",
     component: "Input",
@@ -55,6 +49,12 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: "apiPrefix",
     label: "接口路径前缀",
+    component: "Input",
+    colProps: { lg: 4, md: 5 }
+  },
+  {
+    field: "entityName",
+    label: "实体类名",
     component: "Input",
     colProps: { lg: 4, md: 5 }
   }

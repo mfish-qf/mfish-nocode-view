@@ -133,6 +133,11 @@ export const accountFormSchema: FormSchema[] = [
     component: "InputPassword"
   },
   {
+    field: "nickname",
+    label: "昵称",
+    component: "Input"
+  },
+  {
     field: "phone",
     label: "手机号",
     component: "Input"
@@ -160,11 +165,6 @@ export const accountFormSchema: FormSchema[] = [
       getPopupContainer: () => document.body
     },
     required: true
-  },
-  {
-    field: "nickname",
-    label: "昵称",
-    component: "Input"
   },
   {
     label: "邮箱",

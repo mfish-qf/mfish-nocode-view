@@ -25,9 +25,6 @@ export default {
       schemas: accountFormSchema,
       showActionButtonGroup: false,
       autoSubmitOnEnter: true,
-      actionColOptions: {
-        span: 23
-      }
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
@@ -42,20 +39,19 @@ export default {
         setFieldsValue({
           ...data.record
         }).then();
-        const schema = [{
-          field: "password",
-          ifShow: false
-        }, {
-          field: "account",
-          dynamicDisabled: true
-        }];
         // 超户不允许修改用户状态
         if (data.record.id === "1") {
           status.dynamicDisabled = true;
         } else {
           status.dynamicDisabled = false;
         }
-        updateSchema([...schema, status]).then();
+        updateSchema([{
+          field: "password",
+          ifShow: false
+        }, {
+          field: "account",
+          dynamicDisabled: true
+        }, status]).then();
       } else {
         updateSchema([{
           field: "password",
