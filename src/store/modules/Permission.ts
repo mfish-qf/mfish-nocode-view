@@ -174,7 +174,7 @@ export const usePermissionStore = defineStore({
       const directMenu = (menu: MenuListItem): Menu => {
         const newMenu: Menu = buildMenu(menu);
         newMenu.path = `${newMenu.path}/${index}`;
-        newMenu.meta = { hideChildrenInMenu: true };
+        newMenu.meta = { title: newMenu.name, hideChildrenInMenu: true };
         return newMenu;
       };
       const directRoute = (menu: MenuListItem): AppRouteRecordRaw => {
