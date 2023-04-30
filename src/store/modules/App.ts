@@ -32,7 +32,7 @@ export const useAppStore = defineStore({
   state: (): AppState => ({
     darkMode: undefined,
     pageLoading: false,
-    projectConfig: projectSetting,
+    projectConfig: JSON.parse(JSON.stringify(projectSetting)),
     beforeMiniInfo: {}
   }),
   getters: {
@@ -79,7 +79,8 @@ export const useAppStore = defineStore({
     },
 
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
-      this.projectConfig = deepMerge(this.projectConfig || {}, config);
+      let pConfig = JSON.parse(JSON.stringify(this.projectConfig));
+      this.projectConfig = deepMerge(pConfig || {}, config);
       //界面配置已存储到服务端，下面这段存储本地缓存可以根据自己需求放开
       // Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
     },
