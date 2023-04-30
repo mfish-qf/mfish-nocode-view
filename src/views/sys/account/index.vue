@@ -68,6 +68,7 @@ export default {
       api: getUserList,
       columns,
       formConfig: {
+        name: "search_form_item",
         labelWidth: 80,
         schemas: searchFormSchema,
         autoSubmitOnEnter: true

@@ -51,6 +51,7 @@ export default {
       api: getRoleList,
       columns,
       formConfig: {
+        name: "search_form_item",
         labelWidth: 100,
         schemas: searchFormSchema,
         autoSubmitOnEnter: true
