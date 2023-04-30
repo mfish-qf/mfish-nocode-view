@@ -95,6 +95,7 @@ export default {
       api: getJobList,
       columns,
       formConfig: {
+        name: "search_form_item",
         labelWidth: 100,
         schemas: searchFormSchema,
         autoSubmitOnEnter: true

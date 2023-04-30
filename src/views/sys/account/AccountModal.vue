@@ -20,6 +20,7 @@ export default {
     const isUpdate = ref(true);
     const rowId = ref("");
     const [registerForm, { setFieldsValue, updateSchema, resetFields, validate }] = useForm({
+      name: "model_form_item",
       labelWidth: 100,
       baseColProps: { span: 12 },
       schemas: accountFormSchema,

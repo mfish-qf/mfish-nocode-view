@@ -64,6 +64,7 @@ export default {
       searchInfo: { dictCode: dictCode },
       columns,
       formConfig: {
+        name: "search_form_item",
         labelWidth: 100,
         schemas: searchFormSchema,
         autoSubmitOnEnter: true
