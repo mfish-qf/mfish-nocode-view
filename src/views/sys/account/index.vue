@@ -68,6 +68,7 @@ export default {
       api: getUserList,
       columns,
       formConfig: {
+        name: "accountManage",
         labelWidth: 80,
         schemas: searchFormSchema,
         autoSubmitOnEnter: true
