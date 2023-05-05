@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import { store } from "/@/store";
 import { PageEnum } from "/@/enums/PageEnum";
 import { REFRESH_TOKEN_KEY, TOKEN_KEY } from "/@/enums/CacheEnum";
-import { getAuthCache, setAuthCache } from "/@/utils/auth";
+import { clearAuthCache, getAuthCache, setAuthCache } from "/@/utils/auth";
 import { LoginParams, RoleInfo, SsoUser } from "/@/api/sys/model/UserModel";
 import { doLogout, getUserInfo, loginApi } from "/@/api/sys/User";
 import { useI18n } from "/@/hooks/web/UseI18n";
@@ -145,15 +145,19 @@ export const useUserStore = defineStore({
     async logout(goLogin = false) {
       if (this.getToken) {
         try {
-          await doLogout();
+          let result = await doLogout();
+          if (result) {
+            this.setToken(undefined);
+            this.setRefreshToken(undefined);
+            this.setSessionTimeout(false);
+            this.setUserInfo(null);
+            clearAuthCache(true);
+            goLogin && router.push(PageEnum.BASE_LOGIN);
+          }
         } catch {
-          console.log("注销Token失败");
+          throw new Error("注销Token失败");
         }
       }
-      this.setToken(undefined);
-      this.setSessionTimeout(false);
-      this.setUserInfo(null);
-      goLogin && router.push(PageEnum.BASE_LOGIN);
     },
 
     /**
