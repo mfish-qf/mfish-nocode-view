@@ -21,6 +21,7 @@ interface UserState {
   roleInfoList: RoleInfo[];
   roleList: Set<string>;
   sessionTimeout?: boolean;
+  isLogout?: boolean;
 }
 
 export const useUserStore = defineStore({
@@ -37,7 +38,9 @@ export const useUserStore = defineStore({
     // 角色code列表
     roleList: new Set<string>(),
     // token时长
-    sessionTimeout: false
+    sessionTimeout: false,
+    //判断是否登出操作
+    isLogout: false
   }),
   getters: {
     getUserInfo(): Nullable<SsoUser> {
@@ -57,6 +60,9 @@ export const useUserStore = defineStore({
     },
     getSessionTimeout(): boolean {
       return !!this.sessionTimeout;
+    },
+    getIsLogout(): boolean {
+      return !!this.isLogout;
     }
   },
   actions: {
@@ -80,11 +86,15 @@ export const useUserStore = defineStore({
     setSessionTimeout(flag: boolean) {
       this.sessionTimeout = flag;
     },
+    setIsLogout(flag: boolean) {
+      this.isLogout = flag;
+    },
     resetState() {
       this.userInfo = null;
       this.token = "";
       this.roleList = new Set<string>();
       this.sessionTimeout = false;
+      this.isLogout = false;
     },
     /**
      * 登录
@@ -142,7 +152,7 @@ export const useUserStore = defineStore({
     /**
      * @description: logout
      */
-    async logout(goLogin = false) {
+    async logout() {
       if (this.getToken) {
         try {
           let result = await doLogout();
@@ -152,7 +162,9 @@ export const useUserStore = defineStore({
             this.setSessionTimeout(false);
             this.setUserInfo(null);
             clearAuthCache(true);
-            goLogin && router.push(PageEnum.BASE_LOGIN);
+            this.setIsLogout(true);
+            debugger
+            router.push(PageEnum.BASE_LOGIN);
           }
         } catch {
           throw new Error("注销Token失败");
@@ -171,7 +183,7 @@ export const useUserStore = defineStore({
         title: () => h("span", t("sys.app.logoutTip")),
         content: () => h("span", t("sys.app.logoutMessage")),
         onOk: async () => {
-          await this.logout(true);
+          await this.logout();
         }
       });
     }

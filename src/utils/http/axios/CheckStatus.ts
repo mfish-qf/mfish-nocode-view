@@ -29,7 +29,7 @@ export function checkStatus(status: number, msg: string, errorMessageMode: Messa
         userStore.setSessionTimeout(true);
         break;
       }
-      userStore.logout(true);
+      userStore.logout();
       break;
     case 403:
       errMessage = t("sys.api.errMsg403");

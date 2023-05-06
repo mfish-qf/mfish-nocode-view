@@ -128,7 +128,7 @@ async function unLock() {
 }
 
 function goLogin() {
-  userStore.logout(true);
+  userStore.logout();
   lockStore.resetLockInfo();
 }
 
