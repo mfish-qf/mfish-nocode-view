@@ -44,6 +44,10 @@ export function createPermissionGuard(router: Router) {
         if (url.endsWith("&")) {
           url = url.substring(0, url.length - 1);
         }
+        if (userStore.getIsLogout) {
+          url += "&force_login=1";
+          userStore.setIsLogout(false);
+        }
         window.location.href = url;
         return;
       }
