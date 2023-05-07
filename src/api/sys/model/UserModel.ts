@@ -65,7 +65,7 @@ export interface OnlineUser {
   loginMode: number;
   ip: string;
   clientId: string;
-  token: string;
+  sid: string;
   loginTime: string;
   expire: string;
 }

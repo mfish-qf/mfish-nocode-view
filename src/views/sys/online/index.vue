@@ -70,7 +70,7 @@ export default {
     }
 
     function handleLogout(record: OnlineUser) {
-      logoutUser(record.token).then(() => {
+      logoutUser(record.sid).then(() => {
         reload();
       });
     }
