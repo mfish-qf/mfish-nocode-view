@@ -58,8 +58,8 @@ export function doLogout() {
  * 登出指定用户
  * @param token
  */
-export function logoutUser(token: string) {
-  return defHttp.get({ url: `${Api.Logout}/${token}` });
+export function logoutUser(sid: string) {
+  return defHttp.get({ url: `${Api.Logout}/${sid}` });
 }
 
 /**
