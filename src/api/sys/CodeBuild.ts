@@ -38,7 +38,7 @@ export function insertCodeBuild(codeBuild: CodeBuild) {
  * @param codeBuild
  */
 export function viewCode(codeBuild: CodeBuild) {
-  return defHttp.get<CodeVo[]>({ url: Api.View, params: codeBuild });
+  return defHttp.get<CodeVo[]>({ url: Api.View + "/" + codeBuild.id });
 };
 
 /**
@@ -46,10 +46,7 @@ export function viewCode(codeBuild: CodeBuild) {
  * @param codeBuild
  */
 export function downloadCode(codeBuild: CodeBuild) {
-  return defHttp.download<CodeVo[]>({
-    url: Api.Download,
-    params: codeBuild
-  });
+  return defHttp.download<CodeVo[]>({ url: Api.Download + "/" + codeBuild.id });
 };
 
 /**
