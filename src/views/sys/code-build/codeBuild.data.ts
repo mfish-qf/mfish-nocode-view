@@ -107,7 +107,9 @@ export const codeBuildFormSchema: FormSchema[] = [
   {
     field: "tableComment",
     label: "表描述",
-    component: "Input",
-    helpMessage: ["表相关描述信息", "不传会获取数据库表中的中文描述，如果也为空则使用表名"]
+    component: "InputTextArea",
+    helpMessage: ["表相关描述信息", "不传会获取数据库表中的中文描述，如果也为空则使用表名"],
+    colProps: { span: 24 }
   }
 ];
+
