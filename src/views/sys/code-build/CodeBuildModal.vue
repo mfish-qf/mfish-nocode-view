@@ -164,7 +164,10 @@ export default {
       getFieldList({ connectId: value[0], tableName: value[1], pageNum: 1, pageSize: 10000 }).then(res => {
         if (res && res.list) {
           res.list.forEach((field) => {
-            fields.value.push({ label: field.comment ? field.comment : field.fieldName, value: field.fieldName });
+            //暂时只支持string类型做查询条件
+            if (field.type === "String") {
+              fields.value.push({ label: field.comment ? field.comment : field.fieldName, value: field.fieldName });
+            }
           });
         }
       });
