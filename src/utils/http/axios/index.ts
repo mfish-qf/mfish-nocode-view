@@ -67,17 +67,19 @@ const transform: AxiosTransform = {
     throw new Error(msg || t("sys.api.apiRequestFailed"));
   },
   //下载文件返回处理
-  downloadResponseHook: (res: any) => {
+  downloadResponseHook: (res: any, options: RequestOptions) => {
     const { data } = res;
     const url = window.URL.createObjectURL(data);
     const link = document.createElement("a");
     link.href = url;
-    const fileName = res.headers["content-disposition"].split("=")[1];
+    const fileName = res.headers["content-disposition"]?.split("=")[1];
     if (fileName) {
       link.download = fileName;
+      link.click();
+      URL.revokeObjectURL(url);
+    } else {
+      messageTips(options.errorMessageMode, "错误:下载文件出错", true, 0);
     }
-    link.click();
-    URL.revokeObjectURL(url);
   },
   /**
    * 请求之前处理config
