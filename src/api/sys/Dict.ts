@@ -8,7 +8,8 @@ import { defHttp } from "/@/utils/http/axios";
 import { Dict, ReqDict, DictPageModel } from "/@/api/sys/model/DictModel";
 
 enum Api {
-  Dict = "/sys/dict"
+  Dict = "/sys/dict",
+  Export = "/sys/dict/export"
 }
 
 /**
@@ -20,6 +21,15 @@ enum Api {
 export const getDictList = (reqDict?: ReqDict) => {
   return defHttp.get<DictPageModel>({ url: Api.Dict, params: reqDict });
 };
+
+/**
+ * 导出字典
+ * @param reqDict
+ */
+export function exportDict(reqDict?: ReqDict) {
+  return defHttp.download({ url: Api.Export, params: reqDict });
+};
+
 
 /**
  * 新增字典

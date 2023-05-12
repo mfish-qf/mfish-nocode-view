@@ -72,9 +72,12 @@ const transform: AxiosTransform = {
     const url = window.URL.createObjectURL(data);
     const link = document.createElement("a");
     link.href = url;
-    const fileName = res.headers["content-disposition"]?.split("=")[1];
+    let fileName = res.headers["content-disposition"]?.split("=")[1];
     if (fileName) {
-      link.download = fileName;
+      if (fileName.startsWith("utf-8'zh_cn'")) {
+        fileName = fileName.replace("utf-8'zh_cn'", "");
+      }
+      link.download = decodeURI(fileName);
       link.click();
       URL.revokeObjectURL(url);
     } else {

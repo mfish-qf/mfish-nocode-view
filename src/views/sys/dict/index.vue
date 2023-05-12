@@ -7,7 +7,8 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:dict:insert')">新增字典</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:dict:insert')">新增</a-button>
+        <a-button type="error" @click="handleExport" v-if="hasPermission('sys:dict:export')">导出</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -45,12 +46,13 @@
 </template>
 <script lang="ts">
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-import { deleteDict, getDictList } from "/@/api/sys/Dict";
+import { deleteDict, exportDict, getDictList } from "/@/api/sys/Dict";
 import { useModal } from "/@/components/general/Modal";
 import DictModal from "./DictModal.vue";
 import { columns, searchFormSchema } from "./dict.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 import { useGo } from "/@/hooks/web/UsePage";
+import { Dict } from "/@/api/sys/model/DictModel";
 
 export default {
   name: "DictManagement",
@@ -59,7 +61,7 @@ export default {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
     const go = useGo();
-    const [registerTable, { reload }] = useTable({
+    const [registerTable, { reload, getForm }] = useTable({
       title: "字典列表",
       api: getDictList,
       columns,
@@ -87,20 +89,24 @@ export default {
       });
     }
 
-    function handleEdit(record: Recordable) {
+    function handleExport() {
+      exportDict({ ...getForm().getFieldsValue(), pageNum: 1, pageSize: 1000 });
+    }
+
+    function handleEdit(record: Dict) {
       openModal(true, {
         record,
         isUpdate: true
       });
     }
 
-    function handleDelete(record: Recordable) {
+    function handleDelete(record: Dict) {
       deleteDict(record.id).then(() => {
         handleSuccess();
       });
     }
 
-    function handleItem(record: Recordable) {
+    function handleItem(record: Dict) {
       go("/system/dict/" + record.dictCode);
     }
 
@@ -112,6 +118,7 @@ export default {
       registerTable,
       registerModal,
       handleCreate,
+      handleExport,
       handleEdit,
       handleItem,
       handleDelete,
