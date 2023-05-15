@@ -76,6 +76,7 @@ export default {
       useSearchForm: true,
       showTableSetting: true,
       bordered: true,
+      showIndexColumn: false,
       actionColumn: {
         width: 120,
         title: "操作",
