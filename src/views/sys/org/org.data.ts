@@ -11,6 +11,11 @@ export const columns: BasicColumn[] = [
     align: "left"
   },
   {
+    dataIndex: "orgFixCode",
+    title: "组织编码",
+    width: 160
+  },
+  {
     title: "排序",
     dataIndex: "orgSort",
     width: 50
@@ -100,6 +105,11 @@ export const formSchema: FormSchema[] = [
     required: true
   },
   {
+    field: "orgFixCode",
+    label: "组织编码",
+    component: "Input"
+  },
+  {
     field: "parentId",
     label: "上级部门",
     component: "TreeSelect",
@@ -115,8 +125,7 @@ export const formSchema: FormSchema[] = [
   {
     field: "orgSort",
     label: "排序",
-    component: "InputNumber",
-    required: true
+    component: "InputNumber"
   },
   {
     field: "leader",

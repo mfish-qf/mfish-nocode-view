@@ -24,7 +24,7 @@ import { useI18n } from "/@/hooks/web/UseI18n";
 import { useRouter, useRoute } from "vue-router";
 import { useGlobSetting } from "/@/hooks/setting";
 
-export default ({
+export default {
   name: "Oauth2",
   setup() {
     const userStore = useUserStore();
@@ -73,5 +73,5 @@ export default ({
       title
     };
   }
-});
+};
 </script>
