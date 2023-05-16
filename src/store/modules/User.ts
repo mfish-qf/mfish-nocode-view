@@ -163,7 +163,6 @@ export const useUserStore = defineStore({
             this.setUserInfo(null);
             clearAuthCache(true);
             this.setIsLogout(true);
-            debugger
             router.push(PageEnum.BASE_LOGIN);
           }
         } catch {

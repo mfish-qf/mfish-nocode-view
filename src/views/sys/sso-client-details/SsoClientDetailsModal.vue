@@ -25,25 +25,26 @@ export default {
     const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
       name: "model_form_item",
       labelWidth: 100,
-      baseColProps: { span: 12 },
+      baseColProps: { span: 24 },
       schemas: ssoClientDetailsFormSchema,
       showActionButtonGroup: false,
       autoSubmitOnEnter: true
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
-      setModalProps({ confirmLoading: false, width: "800px" });
+      setModalProps({ confirmLoading: false, width: "600px" });
       isUpdate.value = !!data?.isUpdate;
-      if (unref(isUpdate)) {
-        setFieldsValue({
-          ...data.record
-        }).then();
-      }
+      setFieldsValue({
+        ...data.record
+      }).then();
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增客户端信息" : "编辑客户端信息"));
 
     async function handleSubmit() {
       let values = await validate();
+      if (values.grantTypeGroup && values.grantTypeGroup.length > 0) {
+        values.grantTypes = values.grantTypeGroup.join(",");
+      }
       setModalProps({ confirmLoading: true });
       if (unref(isUpdate)) {
         saveSsoClientDetails(updateSsoClientDetails, values);
