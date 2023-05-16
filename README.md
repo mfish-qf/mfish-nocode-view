@@ -158,7 +158,7 @@ http://localhost:5281
 *   [Pinia(vuex替代方案)](https://pinia.esm.dev/introduction.html)
 *   [Vue-RFCS](https://github.com/vuejs/rfcs)
 *   [Vue2 迁移到 3](https://v3.vuejs.org/guide/migration/introduction.html)
-*   [WindiCss](https://windicss.netlify.app/)
+*   [Unocss](https://uno.antfu.me/)
 
 
 ##   浏览器支持
