@@ -1,6 +1,5 @@
-import "virtual:windi-base.css";
-import "virtual:windi-components.css";
-import "virtual:windi-utilities.css";
+import 'virtual:uno.css';
+import 'virtual:unocss-devtools';
 import "/@/design/index.less";
 import "virtual:svg-icons-register";
 import App from "./App.vue";

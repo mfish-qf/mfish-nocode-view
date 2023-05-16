@@ -42,7 +42,6 @@ mfish-nocode-view采用 Vue3.0、Vite4.0、 Ant-Design-Vue、TypeScript 等新�
 
 ### 安装与使用
 
-
 > 环境要求: Node.js版本要求16.x以上。
 
 
@@ -159,7 +158,7 @@ http://localhost:5281
 *   [Pinia(vuex替代方案)](https://pinia.esm.dev/introduction.html)
 *   [Vue-RFCS](https://github.com/vuejs/rfcs)
 *   [Vue2 迁移到 3](https://v3.vuejs.org/guide/migration/introduction.html)
-*   [WindiCss](https://windicss.netlify.app/)
+*   [Unocss](https://uno.antfu.me/)
 
 
 ##   浏览器支持
