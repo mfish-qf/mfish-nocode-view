@@ -1,5 +1,6 @@
 import { BasicColumn } from "/@/components/general/Table";
 import { FormSchema } from "/@/components/general/Table";
+import { getDictProps } from "/@/utils/DictUtils";
 
 /**
  * @description: 客户端信息
@@ -9,50 +10,28 @@ import { FormSchema } from "/@/components/general/Table";
  */
 export const columns: BasicColumn[] = [
   {
-    title: "客户端ID",
-    dataIndex: "clientId",
-    width: 120
-  },
-  {
     title: "客户端名称",
     dataIndex: "clientName",
-    width: 120
+    width: 180
   },
   {
-    title: "客户端能访问的资源集合",
-    dataIndex: "resourceIds",
-    width: 120
+    title: "客户端ID",
+    dataIndex: "clientId",
+    width: 260
   },
   {
     title: "客户端密钥",
     dataIndex: "clientSecret",
-    width: 120
+    width: 260
   },
   {
-    title: "指定客户端权限范围",
-    dataIndex: "scope",
-    width: 120
+    title: "认证方式",
+    dataIndex: "grantTypes"
   },
   {
-    title: "认证方式 授权码模式:authorization_code,密码模式:password,刷新token: refresh_token",
-    dataIndex: "grantTypes",
-    width: 120
-  },
-  {
-    title: "客户端重定向url，authorization_code认证回调地址",
-    dataIndex: "redirectUrl",
-    width: 120
-  },
-  {
-    title: "指定用户的权限范围",
-    dataIndex: "authorities",
-    width: 120
-  },
-  {
-    title: "跳过授权页,默认true,适用于authorization_code模式",
-    dataIndex: "autoApprove",
-    width: 120
-  },
+    title: "回调地址",
+    dataIndex: "redirectUrl"
+  }
 ];
 export const searchFormSchema: FormSchema[] = [
   {
@@ -66,7 +45,7 @@ export const searchFormSchema: FormSchema[] = [
     label: "客户端ID",
     component: "Input",
     colProps: { lg: 4, md: 5 }
-  },
+  }
 ];
 export const ssoClientDetailsFormSchema: FormSchema[] = [
   {
@@ -76,49 +55,34 @@ export const ssoClientDetailsFormSchema: FormSchema[] = [
     show: false
   },
   {
-    field: "clientId",
-    label: "客户端ID",
-    component: "Input",
-    required: true
-  },
-  {
     field: "clientName",
     label: "客户端名称",
     component: "Input",
+    // required: true
   },
   {
-    field: "resourceIds",
-    label: "客户端能访问的资源集合",
+    field: "clientId",
+    label: "客户端ID",
     component: "Input",
+    dynamicDisabled: true
   },
   {
     field: "clientSecret",
     label: "客户端密钥",
     component: "Input",
+    dynamicDisabled: true
   },
   {
-    field: "scope",
-    label: "指定客户端权限范围",
-    component: "Input",
-  },
-  {
-    field: "grantTypes",
-    label: "认证方式 授权码模式:authorization_code,密码模式:password,刷新token: refresh_token",
-    component: "Input",
+    field: "grantTypeGroup",
+    label: "认证方式",
+    component: "ApiSelect",
+    componentProps: { ...getDictProps("sso_grant_type"), mode: "multiple" },
+    // required: true
   },
   {
     field: "redirectUrl",
-    label: "客户端重定向url，authorization_code认证回调地址",
-    component: "Input",
-  },
-  {
-    field: "authorities",
-    label: "指定用户的权限范围",
-    component: "Input",
-  },
-  {
-    field: "autoApprove",
-    label: "跳过授权页,默认true,适用于authorization_code模式",
-    component: "Input",
-  },
+    label: "回调地址",
+    component: "InputTextArea",
+    // required: true
+  }
 ];

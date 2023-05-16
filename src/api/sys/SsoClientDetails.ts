@@ -5,10 +5,15 @@
  * @version: V1.0.0
  */
 import { defHttp } from "/@/utils/http/axios";
-import { SsoClientDetails, ReqSsoClientDetails, SsoClientDetailsPageModel } from "/@/api/sys/model/SsoClientDetailsModel";
+import {
+  SsoClientDetails,
+  ReqSsoClientDetails,
+  SsoClientDetailsPageModel
+} from "/@/api/sys/model/SsoClientDetailsModel";
 
 enum Api {
-  SsoClientDetails = "/oauth2/ssoClientDetails"
+  SsoClientDetails = "/oauth2/ssoClientDetails",
+  Secret = "/oauth2/ssoClientDetails/secret"
 }
 
 /**
@@ -21,12 +26,12 @@ export const getSsoClientDetailsList = (reqSsoClientDetails?: ReqSsoClientDetail
   return defHttp.get<SsoClientDetailsPageModel>({ url: Api.SsoClientDetails, params: reqSsoClientDetails });
 };
 
- /**
+/**
  * 导出客户端信息
  * @param reqSsoClientDetails
  */
 export function exportSsoClientDetails(reqSsoClientDetails?: ReqSsoClientDetails) {
-  return defHttp.download({ url: Api.SsoClientDetails+"/export", params: reqSsoClientDetails });
+  return defHttp.download({ url: Api.SsoClientDetails + "/export", params: reqSsoClientDetails });
 };
 
 /**
@@ -36,7 +41,10 @@ export function exportSsoClientDetails(reqSsoClientDetails?: ReqSsoClientDetails
  * @return
  */
 export function insertSsoClientDetails(ssoClientDetails: SsoClientDetails) {
-  return defHttp.post<SsoClientDetails>({ url: Api.SsoClientDetails, params: ssoClientDetails }, { successMessageMode: "message" });
+  return defHttp.post<SsoClientDetails>({
+    url: Api.SsoClientDetails,
+    params: ssoClientDetails
+  }, { successMessageMode: "message" });
 };
 
 /**
@@ -46,7 +54,20 @@ export function insertSsoClientDetails(ssoClientDetails: SsoClientDetails) {
  * @return
  */
 export function updateSsoClientDetails(ssoClientDetails: SsoClientDetails) {
-  return defHttp.put<SsoClientDetails>({ url: Api.SsoClientDetails, params: ssoClientDetails }, { successMessageMode: "message" });
+  return defHttp.put<SsoClientDetails>({
+    url: Api.SsoClientDetails,
+    params: ssoClientDetails
+  }, { successMessageMode: "message" });
+};
+
+/**
+ * 重置密钥
+ * @param id
+ */
+export function resetSecret(id: string) {
+  return defHttp.put<SsoClientDetails>({
+    url: Api.Secret + "/" + id
+  }, { successMessageMode: "message" });
 };
 
 /**

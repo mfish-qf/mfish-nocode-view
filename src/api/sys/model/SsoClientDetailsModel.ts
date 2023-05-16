@@ -13,6 +13,7 @@ export interface SsoClientDetails extends BaseEntity<string> {
   clientSecret: string;
   scope: string;
   grantTypes: string;
+  grantTypeGroup: string[];
   redirectUrl: string;
   authorities: string;
   autoApprove: string;

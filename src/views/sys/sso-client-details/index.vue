@@ -8,7 +8,8 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:ssoClientDetails:insert')">新增</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:ssoClientDetails:insert')">新增
+        </a-button>
         <a-button type="error" @click="handleExport" v-if="hasPermission('sys:ssoClientDetails:export')">导出</a-button>
       </template>
       <template #bodyCell="{ column, record }">
@@ -20,6 +21,16 @@
                 onClick: handleEdit.bind(null, record),
                 auth: 'sys:ssoClientDetails:update',
                 tooltip: '修改',
+              },
+              {
+                icon: 'ant-design:reload-outlined',
+                popConfirm: {
+                  title: '是否确认重置',
+                  placement: 'left',
+                  confirm: handleReset.bind(null, record),
+                },
+                auth: 'sys:ssoClientDetails:update',
+                tooltip: '重置密钥',
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -41,13 +52,20 @@
   </div>
 </template>
 <script lang="ts">
+import { onMounted, ref } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-import { deleteSsoClientDetails, exportSsoClientDetails, getSsoClientDetailsList } from "/@/api/sys/SsoClientDetails";
+import {
+  deleteSsoClientDetails,
+  exportSsoClientDetails,
+  getSsoClientDetailsList,
+  resetSecret
+} from "/@/api/sys/SsoClientDetails";
 import { useModal } from "/@/components/general/Modal";
 import SsoClientDetailsModal from "./SsoClientDetailsModal.vue";
 import { columns, searchFormSchema } from "./ssoClientDetails.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 import { ReqSsoClientDetails, SsoClientDetails } from "/@/api/sys/model/SsoClientDetailsModel";
+import { getDictItems } from "/@/api/sys/DictItem";
 
 export default {
   name: "SsoClientDetailsManagement",
@@ -70,20 +88,32 @@ export default {
       bordered: true,
       showIndexColumn: false,
       actionColumn: {
-        width: 80,
+        width: 120,
         title: "操作",
         dataIndex: "action"
       }
     });
+    const grantTypes = ref<string[]>([]);
 
     /**
      * 新建
      */
     function handleCreate() {
       openModal(true, {
+        record: { grantTypeGroup: grantTypes },
         isUpdate: false
       });
     }
+
+    onMounted(() => {
+      getDictItems("sso_grant_type").then((res) => {
+        if (res && res.length > 0) {
+          res.forEach((item) => {
+            grantTypes.value.push(item.dictValue);
+          });
+        }
+      });
+    });
 
     /**
      *  导出
@@ -97,10 +127,17 @@ export default {
      * @param
      */
     function handleEdit(ssoClientDetails: SsoClientDetails) {
+      if (ssoClientDetails.grantTypes) {
+        ssoClientDetails.grantTypeGroup = ssoClientDetails.grantTypes.split(",");
+      }
       openModal(true, {
         record: ssoClientDetails,
         isUpdate: true
       });
+    }
+
+    function handleReset(ssoClientDetails: SsoClientDetails) {
+      resetSecret(ssoClientDetails.id);
     }
 
     /**
@@ -125,6 +162,7 @@ export default {
       registerModal,
       handleCreate,
       handleEdit,
+      handleReset,
       handleDelete,
       handleExport,
       handleSuccess,
