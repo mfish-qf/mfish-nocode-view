@@ -10,7 +10,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import VitePluginCertificate from "vite-plugin-mkcert";
 import { configHtmlPlugin } from "./Html";
 import { configSvgIconsPlugin } from "./SvgSprite";
-import windiCSS from "vite-plugin-windicss";
+import UnoCSS from "unocss/vite";
 import legacy from "@vitejs/plugin-legacy";
 import { configStyleImportPlugin } from "./StyleImport";
 import { configThemePlugin } from "./Theme";
@@ -23,8 +23,8 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     vue(),
     vueJsx(),
     VitePluginCertificate({
-      source: "coding"
-    })
+      source: "coding",
+    }),
   ];
   VITE_LEGACY && isBuild && vitePlugins.push(legacy());
   // 用于html模版转换，可以在html文件内进行书写模版语法
@@ -35,8 +35,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   VITE_USE_MOCK && vitePlugins.push(configMockPlugin(isBuild));
   //组件样式按需引入
   vitePlugins.push(configStyleImportPlugin(isBuild));
-  //引入windi css
-  vitePlugins.push(windiCSS());
+  vitePlugins.push(UnoCSS());
   //请求icon不产生http请求
   vitePlugins.push(purgeIcons());
   //配置主题
