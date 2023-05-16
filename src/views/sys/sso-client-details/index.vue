@@ -42,12 +42,12 @@
 </template>
 <script lang="ts">
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-import { deleteSsoClientDetails, exportSsoClientDetails, getSsoClientDetailsList } from "/@/api/oauth2/SsoClientDetails";
+import { deleteSsoClientDetails, exportSsoClientDetails, getSsoClientDetailsList } from "/@/api/sys/SsoClientDetails";
 import { useModal } from "/@/components/general/Modal";
 import SsoClientDetailsModal from "./SsoClientDetailsModal.vue";
 import { columns, searchFormSchema } from "./ssoClientDetails.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
-import { SsoClientDetails } from "/@/api/oauth2/model/SsoClientDetails";
+import { ReqSsoClientDetails, SsoClientDetails } from "/@/api/sys/model/SsoClientDetailsModel";
 
 export default {
   name: "SsoClientDetailsManagement",
@@ -89,7 +89,7 @@ export default {
      *  导出
      */
     function handleExport() {
-      exportSsoClientDetails(getForm().getFieldsValue());
+      exportSsoClientDetails(getForm().getFieldsValue() as ReqSsoClientDetails);
     }
 
     /**
@@ -98,7 +98,7 @@ export default {
      */
     function handleEdit(ssoClientDetails: SsoClientDetails) {
       openModal(true, {
-        ssoClientDetails,
+        record: ssoClientDetails,
         isUpdate: true
       });
     }

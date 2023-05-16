@@ -11,10 +11,10 @@
 </template>
 <script lang="ts">
 import { ref, computed, unref } from "vue";
-import { BasicForm, useForm } from "/@/components/general/Form/index";
+import { BasicForm, useForm } from "/@/components/general/Form";
 import { ssoClientDetailsFormSchema } from "./ssoClientDetails.data";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
-import { insertSsoClientDetails, updateSsoClientDetails } from "/@/api/oauth2/SsoClientDetails";
+import { insertSsoClientDetails, updateSsoClientDetails } from "/@/api/sys/SsoClientDetails";
 
 export default {
   name: "SsoClientDetailsModal",

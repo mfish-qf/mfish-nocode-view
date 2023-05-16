@@ -5,7 +5,7 @@
  * @version: V1.0.0
  */
 import { defHttp } from "/@/utils/http/axios";
-import { SsoClientDetails, ReqSsoClientDetails, SsoClientDetailsPageModel } from "/@/api/oauth2/model/SsoClientDetailsModel";
+import { SsoClientDetails, ReqSsoClientDetails, SsoClientDetailsPageModel } from "/@/api/sys/model/SsoClientDetailsModel";
 
 enum Api {
   SsoClientDetails = "/oauth2/ssoClientDetails"
