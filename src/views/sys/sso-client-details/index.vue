@@ -5,7 +5,7 @@
  @version: V1.0.0
 -->
 <template>
-  <div>
+  <div :class="prefixCls">
     <BasicTable @register="registerTable">
       <template #toolbar>
         <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:ssoClientDetails:insert')">新增
@@ -46,6 +46,19 @@
             ]"
           />
         </template>
+        <template v-else-if="column.key === 'clientSecret'">
+          <div class="secret">
+            <TableAction v-if="record.clientSecret.startsWith('**********')"
+                         :actions="[
+              {
+                icon: 'ant-design:eye-outlined',
+                onClick: showSecret.bind(null, record),
+                auth: 'sys:ssoClientDetails:query',
+                tooltip: '显示密钥',
+              }]" />
+            <div>{{ record.clientSecret }}</div>
+          </div>
+        </template>
       </template>
     </BasicTable>
     <SsoClientDetailsModal @register="registerModal" @success="handleSuccess" />
@@ -56,7 +69,7 @@ import { onMounted, ref } from "vue";
 import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
 import {
   deleteSsoClientDetails,
-  exportSsoClientDetails,
+  exportSsoClientDetails, getSecret,
   getSsoClientDetailsList,
   resetSecret
 } from "/@/api/sys/SsoClientDetails";
@@ -66,10 +79,12 @@ import { columns, searchFormSchema } from "./ssoClientDetails.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
 import { ReqSsoClientDetails, SsoClientDetails } from "/@/api/sys/model/SsoClientDetailsModel";
 import { getDictItems } from "/@/api/sys/DictItem";
+import Icon from "/@/components/general/Icon/src/Icon.vue";
+import { useDesign } from "/@/hooks/web/UseDesign";
 
 export default {
   name: "SsoClientDetailsManagement",
-  components: { BasicTable, SsoClientDetailsModal, TableAction },
+  components: { Icon, BasicTable, SsoClientDetailsModal, TableAction },
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
@@ -94,6 +109,13 @@ export default {
       }
     });
     const grantTypes = ref<string[]>([]);
+    const { prefixCls } = useDesign("client-details");
+
+    function showSecret(ssoClientDetails: SsoClientDetails) {
+      getSecret(ssoClientDetails.id).then((res) => {
+        ssoClientDetails.clientSecret = res;
+      });
+    }
 
     /**
      * 新建
@@ -137,7 +159,9 @@ export default {
     }
 
     function handleReset(ssoClientDetails: SsoClientDetails) {
-      resetSecret(ssoClientDetails.id);
+      resetSecret(ssoClientDetails.id).then(res => {
+        ssoClientDetails.clientSecret = res;
+      });
     }
 
     /**
@@ -166,8 +190,21 @@ export default {
       handleDelete,
       handleExport,
       handleSuccess,
-      hasPermission
+      hasPermission,
+      prefixCls,
+      showSecret
     };
   }
 };
 </script>
+<style lang="less">
+@prefix-cls: ~'@{namespace}-client-details';
+.@{prefix-cls} {
+  .secret {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+</style>

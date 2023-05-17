@@ -39,7 +39,12 @@ export default {
 
     async function setTreeData(params?: MenuParams) {
       const treeData = await getMenuList(params);
-      const menuData = await getMenuList({ menuType: MenuType.菜单 });
+      let menuData;
+      if(params?.menuType === MenuType.菜单){
+        menuData = treeData;
+      }else{
+        menuData = await getMenuList({ menuType: MenuType.菜单 });
+      }
       updateSchema([{
         field: "parentId",
         componentProps: { treeData }

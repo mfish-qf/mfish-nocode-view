@@ -58,31 +58,19 @@ export const ssoClientDetailsFormSchema: FormSchema[] = [
     field: "clientName",
     label: "客户端名称",
     component: "Input",
-    // required: true
-  },
-  {
-    field: "clientId",
-    label: "客户端ID",
-    component: "Input",
-    dynamicDisabled: true
-  },
-  {
-    field: "clientSecret",
-    label: "客户端密钥",
-    component: "Input",
-    dynamicDisabled: true
+    required: true
   },
   {
     field: "grantTypeGroup",
     label: "认证方式",
     component: "ApiSelect",
     componentProps: { ...getDictProps("sso_grant_type"), mode: "multiple" },
-    // required: true
+    required: true
   },
   {
     field: "redirectUrl",
     label: "回调地址",
     component: "InputTextArea",
-    // required: true
+    required: true
   }
 ];
