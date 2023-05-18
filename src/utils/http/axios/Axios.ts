@@ -161,9 +161,9 @@ export class VAxios {
     return this.request({
       ...config,
       method: "get",
-      responseType: "blob",
+      responseType: "blob"
       // headers: { "Content-Type": ContentTypeEnum.OCTET_STREAM}
-    }, options,this.options.transform?.downloadResponseHook);
+    }, options, this.options.transform?.downloadResponseHook);
   }
 
   request<T = any>(config: AxiosRequestConfig, options?: RequestOptions, transformResponseHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any): Promise<T> {
@@ -174,7 +174,7 @@ export class VAxios {
     if (beforeRequestHook && isFunction(beforeRequestHook)) {
       conf = beforeRequestHook(conf, opt);
     }
-    if(!transformResponseHook){
+    if (!transformResponseHook) {
       transformResponseHook = transform?.transformResponseHook;
     }
     conf.requestOptions = opt;

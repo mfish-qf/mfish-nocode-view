@@ -59,6 +59,13 @@
             <div>{{ record.clientSecret }}</div>
           </div>
         </template>
+        <template v-else-if="column.key === 'grantTypes'">
+          <template v-for="type in record.grantTypes.split(',')">
+            <Tag v-for="item in grantTypes" v-show="type == item.dictValue" :color="item.color">
+              {{ item.dictLabel }}
+            </Tag>
+          </template>
+        </template>
       </template>
     </BasicTable>
     <SsoClientDetailsModal @register="registerModal" @success="handleSuccess" />
@@ -81,10 +88,12 @@ import { ReqSsoClientDetails, SsoClientDetails } from "/@/api/sys/model/SsoClien
 import { getDictItems } from "/@/api/sys/DictItem";
 import Icon from "/@/components/general/Icon/src/Icon.vue";
 import { useDesign } from "/@/hooks/web/UseDesign";
+import { Tag } from "ant-design-vue";
+import { DictItem } from "/@/api/sys/model/DictItemModel";
 
 export default {
   name: "SsoClientDetailsManagement",
-  components: { Icon, BasicTable, SsoClientDetailsModal, TableAction },
+  components: { Icon, BasicTable, SsoClientDetailsModal, TableAction, Tag },
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
@@ -108,7 +117,7 @@ export default {
         dataIndex: "action"
       }
     });
-    const grantTypes = ref<string[]>([]);
+    const grantTypes = ref<DictItem[]>([]);
     const { prefixCls } = useDesign("client-details");
 
     function showSecret(ssoClientDetails: SsoClientDetails) {
@@ -121,19 +130,19 @@ export default {
      * 新建
      */
     function handleCreate() {
+      let types: string[] = [];
+      grantTypes.value.forEach(type => {
+        types.push(type.dictValue);
+      });
       openModal(true, {
-        record: { grantTypeGroup: grantTypes },
+        record: { grantTypeGroup: types },
         isUpdate: false
       });
     }
 
     onMounted(() => {
       getDictItems("sso_grant_type").then((res) => {
-        if (res && res.length > 0) {
-          res.forEach((item) => {
-            grantTypes.value.push(item.dictValue);
-          });
-        }
+        grantTypes.value = res;
       });
     });
 
@@ -192,7 +201,8 @@ export default {
       handleSuccess,
       hasPermission,
       prefixCls,
-      showSecret
+      showSecret,
+      grantTypes
     };
   }
 };
