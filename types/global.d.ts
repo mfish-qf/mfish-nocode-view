@@ -30,7 +30,6 @@ declare global {
     VITE_USE_IMAGEMIN: boolean;
     VITE_GENERATE_UI: string;
     VITE_USE_MOCK: boolean;
-    VITE_USE_PWA: boolean;
   }
 
   declare type Recordable<T = any> = Record<string, T>;

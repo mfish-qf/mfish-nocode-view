@@ -65,9 +65,19 @@ export function updateSsoClientDetails(ssoClientDetails: SsoClientDetails) {
  * @param id
  */
 export function resetSecret(id: string) {
-  return defHttp.put<SsoClientDetails>({
+  return defHttp.put<string>({
     url: Api.Secret + "/" + id
   }, { successMessageMode: "message" });
+};
+
+/**
+ * 获取密钥
+ * @param id
+ */
+export function getSecret(id: string) {
+  return defHttp.get<string>({
+    url: Api.Secret + "/" + id
+  });
 };
 
 /**
