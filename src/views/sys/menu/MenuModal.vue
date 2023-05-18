@@ -4,12 +4,12 @@
   </BasicModal>
 </template>
 <script lang="ts">
-import { ref, computed, unref } from "vue";
+import { computed, ref, unref } from "vue";
 import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { formSchema } from "./menu.data";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { getMenuList, insertMenu, updateMenu } from "/@/api/sys/Menu";
-import { MenuListItem, MenuParams, MenuType } from "/@/api/sys/model/MenuModel";
+import { MenuListItem, MenuType } from "/@/api/sys/model/MenuModel";
 
 export default {
   name: "MenuModal",
@@ -37,12 +37,17 @@ export default {
     });
     const getTitle = computed(() => (!unref(isUpdate) ? "新增菜单" : "编辑菜单"));
 
-    async function setTreeData(params?: MenuParams) {
-      const treeData = await getMenuList(params);
+    async function setTreeData(type: MenuType) {
+      //菜单类型为目录时，查询目录级别菜单
+      //其他类型查询上级目录菜单
+      let treeData;
+      if (type === MenuType.目录) {
+        treeData = await getMenuList({ menuType: MenuType.目录 });
+      } else {
+        treeData = await getMenuList({ menuType: type - 1 });
+      }
       let menuData;
-      if(params?.menuType === MenuType.菜单){
-        menuData = treeData;
-      }else{
+      if (type === MenuType.菜单) {
         menuData = await getMenuList({ menuType: MenuType.菜单 });
       }
       updateSchema([{
@@ -63,12 +68,7 @@ export default {
       if (key !== "menuType") {
         return;
       }
-      //菜单类型为目录时，查询目录级别菜单
-      //其他类型查询上级目录菜单
-      if (value === 0) {
-        value = 1;
-      }
-      setTreeData({ "menuType": --value });
+      setTreeData(value);
     }
 
     async function handleSubmit() {

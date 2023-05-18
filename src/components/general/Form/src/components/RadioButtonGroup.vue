@@ -2,9 +2,9 @@
  * @description: It is troublesome to implement radio button group in the form. So it is extracted independently as a separate component
 -->
 <template>
-  <RadioGroup v-bind="attrs" v-model:value="state" button-style="solid">
+  <RadioGroup v-bind="attrs" v-model:value="state" button-style="solid" @change="handleChange">
     <template v-for="item in getOptions" :key="`${item.value}`">
-      <RadioButton :value="item.value" :disabled="item.disabled" @click="handleClick(item)">
+      <RadioButton :value="item.value" :disabled="item.disabled">
         {{ item.label }}
       </RadioButton>
     </template>
@@ -35,11 +35,12 @@ export default defineComponent({
       default: () => []
     }
   },
+  emits: ["change"],
   setup(props) {
     const attrs = useAttrs();
     const emitData = ref<any[]>([]);
     // Embedded in the form, just use the hook binding to perform form verification
-    const [state] = useRuleFormItem(props, "value", "change", emitData);
+    const [state] = useRuleFormItem(props);
     // Processing options value
     const getOptions = computed((): OptionsItem[] => {
       const { options } = props;
@@ -51,11 +52,11 @@ export default defineComponent({
       return options.map((item) => ({ label: item, value: item })) as OptionsItem[];
     });
 
-    function handleClick(...args) {
+    function handleChange(_, ...args) {
       emitData.value = args;
     }
 
-    return { state, getOptions, attrs, handleClick };
+    return { state, getOptions, attrs, handleChange };
   }
 });
 </script>

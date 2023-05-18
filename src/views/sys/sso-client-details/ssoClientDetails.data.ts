@@ -71,6 +71,7 @@ export const ssoClientDetailsFormSchema: FormSchema[] = [
     field: "redirectUrl",
     label: "回调地址",
     component: "InputTextArea",
+    helpMessage: ["必须是http://或者https:// 开头", "多个回调地址英文逗号分隔，不能以逗号结尾"],
     required: true
   }
 ];
