@@ -157,14 +157,14 @@ export const jobFormSchema: FormSchema[] = [
     required: true
   },
   {
-    field: "status",
-    label: "状态",
+    field: "allowConcurrent",
+    label: "允许并发",
     component: "RadioButtonGroup",
     defaultValue: 0,
     componentProps: {
       options: [
-        { label: "启用", value: 0 },
-        { label: "停用", value: 1 }
+        { label: "禁止", value: 0 },
+        { label: "允许", value: 1 }
       ]
     },
     required: true
@@ -183,16 +183,17 @@ export const jobFormSchema: FormSchema[] = [
     defaultValue: "Asia/Shanghai"
   },
   {
-    field: "allowConcurrent",
-    label: "允许并发",
+    field: "status",
+    label: "任务状态",
     component: "RadioButtonGroup",
     defaultValue: 0,
     componentProps: {
       options: [
-        { label: "不允许", value: 0 },
-        { label: "允许", value: 1 }
+        { label: "启用", value: 0 },
+        { label: "停用", value: 1 }
       ]
-    }
+    },
+    required: true
   },
   {
     field: "misfireHandler",
@@ -204,22 +205,38 @@ export const jobFormSchema: FormSchema[] = [
         { label: "立即执行", value: 1 },
         { label: "放弃执行", value: 2 }
       ]
-    }
+    },
+    required: true
+  },
+  {
+    field: "logType",
+    label: "日志类型",
+    component: "RadioButtonGroup",
+    defaultValue: 0,
+    componentProps: {
+      options: [
+        { label: "入库日志", value: 0 },
+        { label: "文件日志", value: 1 }
+      ]
+    },
+    required: true
   },
   {
     field: "className",
     label: "调用类",
     helpMessage: ["调用类包含包名全路径 例如：", "cn.com.mfish.scheduler.job.MfJob"],
     component: "Input",
-    required: true
+    required: true,
+    colProps: { span: 24 }
   },
   {
     field: "methodName",
     label: "调用方法",
-    helpMessage: ["执行方法 例如：", "test"],
+    helpMessage: ["执行方法 例如：", "Mfjob类中的test方法,直接输入test"],
     helpComponentProps: { position: "left" },
     component: "Input",
-    required: true
+    required: true,
+    colProps: { span: 24 }
   },
   {
     field: "params",
