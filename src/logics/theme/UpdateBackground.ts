@@ -37,8 +37,7 @@ export function updateHeaderBgColor(color?: string) {
 
   // Determine the depth of the color value and automatically switch the theme
   const isDark = colorIsDark(color!);
-
-  if (appStore.getMenuSetting.type === MenuTypeEnum.TOP_MENU) {
+  if (appStore.getMenuSetting.type === MenuTypeEnum.TOP_MENU || appStore.getMenuSetting.type === MenuTypeEnum.MIX) {
     //为头部菜单时强制设置字体颜色，判断当前背景为深色时候设置浅色字体
     if (isDark) {
       setCssVar(HEADER_COLOR, "white");

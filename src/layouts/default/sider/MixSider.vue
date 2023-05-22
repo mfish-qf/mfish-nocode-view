@@ -454,7 +454,7 @@ export default defineComponent({
   &-module {
     position: relative;
     padding-top: 1px;
-
+    display: contents;
     &__item {
       position: relative;
       padding: 12px 0;
@@ -467,7 +467,6 @@ export default defineComponent({
         color: @white;
       }
 
-      // &:hover,
       &--active {
         font-weight: 700;
         color: @white;
