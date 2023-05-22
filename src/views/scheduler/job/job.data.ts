@@ -219,6 +219,7 @@ export const jobFormSchema: FormSchema[] = [
         { label: "文件日志", value: 1 }
       ]
     },
+    helpMessage: ["设置日志记录方式 入库日志会记录到数据库，文件日志只记录文本文件", "高频调度推荐使用文件日志，提高调度效率"],
     required: true
   },
   {
