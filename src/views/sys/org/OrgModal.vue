@@ -9,7 +9,7 @@ import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { formSchema } from "./org.data";
 import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
-import { SsoOrg } from "/@/api/sys/model/OrgModel";
+import { getAllRoleList } from "/@/api/sys/Role";
 
 export default {
   name: "OrgModal",
@@ -36,10 +36,23 @@ export default {
           ...data.record
         }).then();
       }
-      updateSchema({
+      const roles = await getAllRoleList();
+      const options = roles.reduce((prev, next: Recordable) => {
+        if (next) {
+          prev.push({
+            label: next["roleName"],
+            value: next["id"]
+          });
+        }
+        return prev;
+      }, [] as any);
+      updateSchema([{
         field: "parentId",
         componentProps: { treeData }
-      }).then();
+      },{
+          field: "roleIds",
+          componentProps: { options }
+        }]).then();
     });
 
     const getTitle = computed(() => (!unref(isUpdate) ? "新增组织" : "编辑组织"));

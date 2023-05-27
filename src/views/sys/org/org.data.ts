@@ -2,12 +2,13 @@ import { BasicColumn } from "/@/components/general/Table";
 import { FormSchema } from "/@/components/general/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
+import { RenderCallbackParams } from "/@/components/general/Form";
 
 export const columns: BasicColumn[] = [
   {
     title: "组织名称",
     dataIndex: "orgName",
-    width: 160,
+    width: 240,
     align: "left"
   },
   {
@@ -121,6 +122,16 @@ export const formSchema: FormSchema[] = [
       },
       getPopupContainer: () => document.body
     }
+  },
+  {
+    label: "角色",
+    field: "roleIds",
+    component: "Select",
+    componentProps: {
+      mode: "multiple",
+      showSearch: true
+    },
+    dynamicDisabled: ((renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin" ? true : false)
   },
   {
     field: "orgSort",
