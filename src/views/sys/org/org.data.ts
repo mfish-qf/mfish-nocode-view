@@ -2,7 +2,6 @@ import { BasicColumn } from "/@/components/general/Table";
 import { FormSchema } from "/@/components/general/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { RenderCallbackParams } from "/@/components/general/Form";
 
 export const columns: BasicColumn[] = [
   {
@@ -130,8 +129,7 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       mode: "multiple",
       showSearch: true
-    },
-    dynamicDisabled: ((renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin" ? true : false)
+    }
   },
   {
     field: "orgSort",

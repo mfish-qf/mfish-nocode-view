@@ -80,7 +80,7 @@ export default {
           componentProps: { treeData }
         }, {
           field: "roleIds",
-          componentProps: { options }
+          componentProps: { options, optionFilterProp: "label" }
         }
       ]).then();
     });

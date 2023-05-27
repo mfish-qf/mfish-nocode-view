@@ -39,20 +39,22 @@ export default {
       const roles = await getAllRoleList();
       const options = roles.reduce((prev, next: Recordable) => {
         if (next) {
-          prev.push({
-            label: next["roleName"],
-            value: next["id"]
-          });
+          if (next["id"] !== "1") {
+            prev.push({
+              label: next["roleName"],
+              value: next["id"]
+            });
+          }
         }
         return prev;
       }, [] as any);
       updateSchema([{
         field: "parentId",
         componentProps: { treeData }
-      },{
-          field: "roleIds",
-          componentProps: { options }
-        }]).then();
+      }, {
+        field: "roleIds",
+        componentProps: { options, optionFilterProp: "label" }
+      }]).then();
     });
 
     const getTitle = computed(() => (!unref(isUpdate) ? "新增组织" : "编辑组织"));
