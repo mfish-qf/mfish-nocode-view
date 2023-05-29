@@ -26,6 +26,7 @@ export interface RoleInfo {
   id: string;
   roleName: string;
   roleCode: string;
+  source: number;
 }
 
 export interface AccessToken {

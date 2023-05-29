@@ -149,7 +149,6 @@ export const accountFormSchema: FormSchema[] = [
     componentProps: {
       mode: "multiple"
     },
-    rules: [{ required: true, message: "请选择角色", type: "array" }],
     dynamicDisabled: ((renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin" ? true : false)
   },
   {

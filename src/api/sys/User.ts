@@ -1,5 +1,5 @@
 import { defHttp } from "/@/utils/http/axios";
-import { LoginParams, AccessToken, SsoUser, SsoUserPageModel, OnlineUserPageModel } from "./model/UserModel";
+import { LoginParams, AccessToken, SsoUser, SsoUserPageModel, OnlineUserPageModel, RoleInfo } from "./model/UserModel";
 import { MessageMode } from "/#/axios";
 import { ContentTypeEnum } from "/@/enums/HttpEnum";
 import { ReqPage } from "/@/api/model/BaseModel";
@@ -14,7 +14,8 @@ enum Api {
   SendMsg = "/oauth2/sendMsg",
   Permissions = "/oauth2/user/permissions",
   SetStatus = "/oauth2/user/status",
-  Online = "/oauth2/user/online"
+  Online = "/oauth2/user/online",
+  UserRoles = "/oauth2/user/roles"
 }
 
 /**
@@ -38,6 +39,14 @@ export function loginApi(params: LoginParams, mode: MessageMode = "modal") {
  */
 export function getUserInfo() {
   return defHttp.get<SsoUser>({ url: Api.GetUserInfo });
+}
+
+/**
+ * 获取用户角色信息
+ * @param params
+ */
+export function getUserRoles(params: { userId?: string, clientId?: string }) {
+  return defHttp.get<RoleInfo[]>({ url: Api.UserRoles, params });
 }
 
 /**
