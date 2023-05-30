@@ -143,15 +143,6 @@ export const accountFormSchema: FormSchema[] = [
     component: "Input"
   },
   {
-    label: "角色",
-    field: "roleIds",
-    component: "Select",
-    componentProps: {
-      mode: "multiple"
-    },
-    dynamicDisabled: ((renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin" ? true : false)
-  },
-  {
     field: "orgId",
     label: "所属部门",
     component: "TreeSelect",
@@ -161,9 +152,18 @@ export const accountFormSchema: FormSchema[] = [
         key: "id",
         value: "id"
       },
-      getPopupContainer: () => document.body
+      getPopupContainer: () => document.body,
     },
-    required: true
+    required: true,
+  },
+  {
+    label: "角色",
+    field: "roleIds",
+    component: "Select",
+    componentProps: {
+      mode: "multiple"
+    },
+    dynamicDisabled: ((renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin" ? true : false)
   },
   {
     label: "邮箱",
