@@ -7,7 +7,7 @@ export const columns: BasicColumn[] = [
   {
     title: "组织名称",
     dataIndex: "orgName",
-    width: 160,
+    width: 240,
     align: "left"
   },
   {
@@ -120,6 +120,15 @@ export const formSchema: FormSchema[] = [
         value: "id"
       },
       getPopupContainer: () => document.body
+    }
+  },
+  {
+    label: "角色",
+    field: "roleIds",
+    component: "Select",
+    componentProps: {
+      mode: "multiple",
+      showSearch: true
     }
   },
   {

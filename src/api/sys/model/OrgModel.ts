@@ -21,4 +21,5 @@ export interface SsoOrg {
   updateBy: string;
   updateTime: string;
   children: SsoOrg[];
+  roleIds: string[];
 }

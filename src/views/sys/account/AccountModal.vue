@@ -9,7 +9,7 @@ import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { accountFormSchema } from "./account.data";
 import { getOrgTree } from "/@/api/sys/Org";
-import { insertUser, updateUser } from "/@/api/sys/User";
+import { getUserRoles, insertUser, updateUser } from "/@/api/sys/User";
 import { getAllRoleList } from "/@/api/sys/Role";
 
 export default {
@@ -18,14 +18,14 @@ export default {
   emits: ["success", "register"],
   setup(_, { emit }) {
     const isUpdate = ref(true);
-    const rowId = ref("");
+    const curRow = ref();
     const [registerForm, { setFieldsValue, updateSchema, resetFields, validate }] = useForm({
       name: "model_form_item",
       labelWidth: 100,
       baseColProps: { span: 12 },
       schemas: accountFormSchema,
       showActionButtonGroup: false,
-      autoSubmitOnEnter: true,
+      autoSubmitOnEnter: true
     });
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
@@ -36,7 +36,7 @@ export default {
         dynamicDisabled: false
       };
       if (unref(isUpdate)) {
-        rowId.value = data.record.id;
+        curRow.value = data.record;
         setFieldsValue({
           ...data.record
         }).then();
@@ -64,12 +64,29 @@ export default {
       }
       const treeData = await getOrgTree();
       const roles = await getAllRoleList();
+      const userRoles = await getUserRoles({ userId: data.record.id });
+      curRow.value.userRoles = userRoles;
       const options = roles.reduce((prev, next: Recordable) => {
         if (next) {
+          let disable = false;
+          if (next["id"] === "1") {
+            disable = true;
+          } else {
+            for (const role of userRoles) {
+              if (next["id"] !== role.id) {
+                continue;
+              }
+              if (role.source === 1) {
+                disable = true;
+                break;
+              }
+            }
+          }
           prev.push({
             key: next["id"],
             label: next["roleName"],
-            value: next["id"]
+            value: next["id"],
+            disabled: disable
           });
         }
         return prev;
@@ -80,7 +97,7 @@ export default {
           componentProps: { treeData }
         }, {
           field: "roleIds",
-          componentProps: { options }
+          componentProps: { options, optionFilterProp: "label" }
         }
       ]).then();
     });
@@ -88,6 +105,17 @@ export default {
 
     async function handleSubmit() {
       const values = await validate();
+      values.roleIds = values.roleIds.filter((item) => {
+        for (const role of curRow.value.userRoles) {
+          if (role.source !== 1) {
+            continue;
+          }
+          if (item === role.id) {
+            return false;
+          }
+        }
+        return true;
+      });
       setModalProps({ confirmLoading: true });
       if (unref(isUpdate)) {
         saveAccount(updateUser, values);
@@ -98,7 +126,7 @@ export default {
 
     function saveAccount(save, values) {
       save(values).then(() => {
-        emit("success", { isUpdate: unref(isUpdate), values: { ...values, id: rowId.value } });
+        emit("success", { isUpdate: unref(isUpdate), values: { ...values, id: curRow.value.id } });
         closeModal();
       }).finally(() => {
         setModalProps({ confirmLoading: false });
