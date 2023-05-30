@@ -53,14 +53,13 @@ import { useModal } from "/@/components/general/Modal";
 import CodeBuildModal from "./CodeBuildModal.vue";
 import { columns, searchFormSchema } from "./codeBuild.data";
 import { usePermission } from "/@/hooks/web/UsePermission";
-import DataBaseModal from "/@/views/sys/database/DataBaseModal.vue";
 import { Button } from "ant-design-vue";
 import CodeQueryModal from "/@/views/sys/code-build/CodeQueryModal.vue";
 import { CodeBuild } from "/@/api/sys/model/CodeBuildModel";
 
 export default {
   name: "CodeBuildManagement",
-  components: { CodeQueryModal, DataBaseModal, BasicTable, CodeBuildModal, TableAction, Button },
+  components: { CodeQueryModal, BasicTable, CodeBuildModal, TableAction, Button },
   setup() {
     const { hasPermission } = usePermission();
     const [registerModal, { openModal }] = useModal();
