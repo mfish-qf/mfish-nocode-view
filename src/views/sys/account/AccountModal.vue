@@ -1,6 +1,6 @@
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
-    <BasicForm @register="registerForm" @submit="handleSubmit" />
+    <BasicForm @register="registerForm" @submit="handleSubmit" @field-value-change="valueChange" />
   </BasicModal>
 </template>
 <script lang="ts">
@@ -8,9 +8,10 @@ import { ref, computed, unref } from "vue";
 import { BasicModal, useModalInner } from "/@/components/general/Modal";
 import { BasicForm, useForm } from "/@/components/general/Form/index";
 import { accountFormSchema } from "./account.data";
-import { getOrgTree } from "/@/api/sys/Org";
+import { getOrgRoles, getOrgTree } from "/@/api/sys/Org";
 import { getUserRoles, insertUser, updateUser } from "/@/api/sys/User";
 import { getAllRoleList } from "/@/api/sys/Role";
+import { RoleInfo } from "/@/api/sys/model/UserModel";
 
 export default {
   name: "AccountModal",
@@ -18,7 +19,7 @@ export default {
   emits: ["success", "register"],
   setup(_, { emit }) {
     const isUpdate = ref(true);
-    const curRow = ref();
+    let curRow;
     const [registerForm, { setFieldsValue, updateSchema, resetFields, validate }] = useForm({
       name: "model_form_item",
       labelWidth: 100,
@@ -27,6 +28,7 @@ export default {
       showActionButtonGroup: false,
       autoSubmitOnEnter: true
     });
+    let roles;
     const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
       resetFields().then();
       setModalProps({ confirmLoading: false, width: "800px" });
@@ -35,8 +37,8 @@ export default {
         field: "status",
         dynamicDisabled: false
       };
+      curRow = data.record;
       if (unref(isUpdate)) {
-        curRow.value = data.record;
         setFieldsValue({
           ...data.record
         }).then();
@@ -63,9 +65,21 @@ export default {
         }, status]).then();
       }
       const treeData = await getOrgTree();
-      const roles = await getAllRoleList();
+      updateSchema({
+        field: "orgId",
+        componentProps: { treeData }
+      }).then();
+      roles = await getAllRoleList();
       const userRoles = await getUserRoles({ userId: data.record.id });
-      curRow.value.userRoles = userRoles;
+      setRole(userRoles);
+    });
+    const getTitle = computed(() => (!unref(isUpdate) ? "新增账号" : "编辑账号"));
+
+    function setRole(userRoles) {
+      if (!roles) {
+        return;
+      }
+      curRow.userRoles = userRoles;
       const options = roles.reduce((prev, next: Recordable) => {
         if (next) {
           let disable = false;
@@ -91,22 +105,16 @@ export default {
         }
         return prev;
       }, [] as any);
-      updateSchema([
-        {
-          field: "orgId",
-          componentProps: { treeData }
-        }, {
-          field: "roleIds",
-          componentProps: { options, optionFilterProp: "label" }
-        }
-      ]).then();
-    });
-    const getTitle = computed(() => (!unref(isUpdate) ? "新增账号" : "编辑账号"));
+      updateSchema({
+        field: "roleIds",
+        componentProps: { options, optionFilterProp: "label" }
+      }).then();
+    }
 
     async function handleSubmit() {
       const values = await validate();
       values.roleIds = values.roleIds.filter((item) => {
-        for (const role of curRow.value.userRoles) {
+        for (const role of curRow.userRoles) {
           if (role.source !== 1) {
             continue;
           }
@@ -124,16 +132,34 @@ export default {
       }
     }
 
+    function valueChange(key, value) {
+      if (key !== "orgId") {
+        return;
+      }
+      getOrgRoles(value).then((res) => {
+        let userRoles: RoleInfo[] = [];
+        if (curRow?.userRoles && curRow?.userRoles.length > 0) {
+          userRoles = curRow.userRoles.filter((item) => item.source !== 1);
+        }
+        userRoles = userRoles.concat(res);
+        const roleIds = userRoles.map(item => {
+          return item.id;
+        });
+        setFieldsValue({ roleIds });
+        setRole(userRoles);
+      });
+    }
+
     function saveAccount(save, values) {
       save(values).then(() => {
-        emit("success", { isUpdate: unref(isUpdate), values: { ...values, id: curRow.value.id } });
+        emit("success", { isUpdate: unref(isUpdate), values: { ...values, id: curRow.id } });
         closeModal();
       }).finally(() => {
         setModalProps({ confirmLoading: false });
       });
     }
 
-    return { registerModal, registerForm, getTitle, handleSubmit };
+    return { registerModal, registerForm, getTitle, handleSubmit, valueChange };
   }
 };
 </script>
