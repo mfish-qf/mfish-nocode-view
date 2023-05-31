@@ -144,7 +144,14 @@ export default {
         userRoles = userRoles.concat(res);
         const roleIds = userRoles.map(item => {
           return item.id;
-        });
+        }).reduce((prev, next:string) => {
+          if(next){
+            if(!prev.includes(next)){
+              prev.push(next);
+            }
+          }
+          return prev;
+        },[] as string[]);
         setFieldsValue({ roleIds });
         setRole(userRoles);
       });
