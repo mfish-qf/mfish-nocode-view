@@ -21,15 +21,15 @@ interface UseFormActionContext {
 }
 
 export function useFormEvents({
-                                emit,
-                                getProps,
-                                formModel,
-                                getSchema,
-                                defaultValueRef,
-                                formElRef,
-                                schemaRef,
-                                handleFormValues
-                              }: UseFormActionContext) {
+  emit,
+  getProps,
+  formModel,
+  getSchema,
+  defaultValueRef,
+  formElRef,
+  schemaRef,
+  handleFormValues
+}: UseFormActionContext) {
   async function resetFields(): Promise<void> {
     const { resetFunc, submitOnReset } = unref(getProps);
     resetFunc && isFunction(resetFunc) && (await resetFunc());
@@ -108,8 +108,7 @@ export function useFormEvents({
         });
       }
     });
-    validateFields(validKeys).catch((_) => {
-    });
+    validateFields(validKeys).catch((_) => {});
   }
 
   /**
@@ -180,9 +179,7 @@ export function useFormEvents({
     );
 
     if (!hasField) {
-      error(
-        "All children of the form Schema array that need to be updated must contain the `field` field"
-      );
+      error("All children of the form Schema array that need to be updated must contain the `field` field");
       return;
     }
     schemaRef.value = updateData as FormSchema[];
@@ -200,9 +197,7 @@ export function useFormEvents({
       (item) => item.component === "Divider" || (Reflect.has(item, "field") && item.field)
     );
     if (!hasField) {
-      error(
-        "需要更新的表单架构数组的所有子级必须包含“字段”字段"
-      );
+      error("需要更新的表单架构数组的所有子级必须包含“字段”字段");
       return;
     }
     const schema: FormSchema[] = [];

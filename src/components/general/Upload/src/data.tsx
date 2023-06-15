@@ -34,7 +34,14 @@ export function createTableColumns(): BasicColumn[] {
           record.isPrivate = checked ? 0 : 1;
         }
 
-        return <Switch checked={record.isPrivate === 0} checkedChildren="已公开" unCheckedChildren="已私密" onChange={onChange} />;
+        return (
+          <Switch
+            checked={record.isPrivate === 0}
+            checkedChildren='已公开'
+            unCheckedChildren='已私密'
+            onChange={onChange}
+          />
+        );
       }
     },
     {
@@ -54,10 +61,10 @@ export function createTableColumns(): BasicColumn[] {
         }
         return (
           <span>
-            <p class="truncate mb-1" title={text}>
+            <p class='truncate mb-1' title={text}>
               {text}
             </p>
-            <Progress percent={percent} size="small" status={status} />
+            <Progress percent={percent} size='small' status={status} />
           </span>
         );
       }

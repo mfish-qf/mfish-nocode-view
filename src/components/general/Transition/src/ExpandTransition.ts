@@ -15,7 +15,7 @@ interface HTMLExpandElement extends HTMLElement {
   };
 }
 
-export default function(expandedParentClass = "", x = false) {
+export default function (expandedParentClass = "", x = false) {
   const sizeProperty = x ? "width" : ("height" as "width" | "height");
   const offsetProperty = `offset${upperFirst(sizeProperty)}` as "offsetHeight" | "offsetWidth";
 

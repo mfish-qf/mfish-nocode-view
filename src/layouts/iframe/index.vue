@@ -10,17 +10,17 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, unref, computed } from "vue";
-import FramePage from "/@/views/sys/iframe/index.vue";
-import { useFrameKeepAlive } from "./UseFrameKeepAlive";
+  import { defineComponent, unref, computed } from "vue";
+  import FramePage from "/@/views/sys/iframe/index.vue";
+  import { useFrameKeepAlive } from "./UseFrameKeepAlive";
 
-export default defineComponent({
-  name: "FrameLayout",
-  components: { FramePage },
-  setup() {
-    const { getFramePages, hasRenderFrame, showIframe } = useFrameKeepAlive();
-    const showFrame = computed(() => unref(getFramePages).length > 0);
-    return { getFramePages, hasRenderFrame, showIframe, showFrame };
-  }
-});
+  export default defineComponent({
+    name: "FrameLayout",
+    components: { FramePage },
+    setup() {
+      const { getFramePages, hasRenderFrame, showIframe } = useFrameKeepAlive();
+      const showFrame = computed(() => unref(getFramePages).length > 0);
+      return { getFramePages, hasRenderFrame, showIframe, showFrame };
+    }
+  });
 </script>

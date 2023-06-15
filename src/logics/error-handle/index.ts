@@ -19,13 +19,13 @@ function processStackMsg(error: Error) {
     return "";
   }
   let stack = error.stack
-    .replace(/\n/gi, "") // Remove line breaks to save the size of the transmitted content
-    .replace(/\bat\b/gi, "@") // At in chrome, @ in ff
-    .split("@") // Split information with @
-    .slice(0, 9) // The maximum stack length (Error.stackTraceLimit = 10), so only take the first 10
-    .map((v) => v.replace(/^\s*|\s*$/g, "")) // Remove extra spaces
-    .join("~") // Manually add separators for later display
-    .replace(/\?[^:]+/gi, ""); // Remove redundant parameters of js file links (?x=1 and the like)
+  .replace(/\n/gi, "") // Remove line breaks to save the size of the transmitted content
+  .replace(/\bat\b/gi, "@") // At in chrome, @ in ff
+  .split("@") // Split information with @
+  .slice(0, 9) // The maximum stack length (Error.stackTraceLimit = 10), so only take the first 10
+  .map((v) => v.replace(/^\s*|\s*$/g, "")) // Remove extra spaces
+  .join("~") // Manually add separators for later display
+  .replace(/\?[^:]+/gi, ""); // Remove redundant parameters of js file links (?x=1 and the like)
   const msg = error.toString();
   if (stack.indexOf(msg) < 0) {
     stack = msg + "@" + stack;
@@ -65,7 +65,7 @@ function formatComponentName(vm: any) {
 
 function vueErrorHandler(err: Error, vm: any, info: string) {
   const errorLogStore = useErrorLogStoreWithOut();
-  const { name, path } = formatComponentName(vm);
+  const {name, path} = formatComponentName(vm);
   errorLogStore.addErrorLogInfo({
     type: ErrorTypeEnum.VUE,
     name,
@@ -117,7 +117,7 @@ export function scriptErrorHandler(
 function registerPromiseErrorHandler() {
   window.addEventListener(
     "unhandledrejection",
-    function(event) {
+    function (event) {
       const errorLogStore = useErrorLogStoreWithOut();
       errorLogStore.addErrorLogInfo({
         type: ErrorTypeEnum.PROMISE,
@@ -140,7 +140,7 @@ function registerResourceErrorHandler() {
   // Monitoring resource loading error(img,script,css,and jsonp)
   window.addEventListener(
     "error",
-    function(e: Event) {
+    function (e: Event) {
       const target = e.target ? e.target : (e.srcElement as any);
       const errorLogStore = useErrorLogStoreWithOut();
       errorLogStore.addErrorLogInfo({
@@ -166,7 +166,7 @@ function registerResourceErrorHandler() {
  * @param app
  */
 export function setupErrorHandle(app: App) {
-  const { useErrorHandle } = projectSetting;
+  const {useErrorHandle} = projectSetting;
   if (!useErrorHandle) {
     return;
   }

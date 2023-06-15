@@ -7,20 +7,18 @@ import { BaseEntity, PageResult } from "/@/api/model/BaseModel";
  * @version: V1.0.0
  */
 export interface SysLog extends BaseEntity<number> {
-  title: string
-  method: string
-  reqType: string
-  reqUri: string
-  reqParam: string
-  reqSource: number
-  operType: string
-  operIp: string
-  operStatus: number
-  remark: string
+  title: string;
+  method: string;
+  reqType: string;
+  reqUri: string;
+  reqParam: string;
+  reqSource: number;
+  operType: string;
+  operIp: string;
+  operStatus: number;
+  remark: string;
 }
 
-export interface ReqSysLog {
-
-}
+export interface ReqSysLog {}
 
 export type SysLogPageModel = PageResult<SysLog>;

@@ -2,7 +2,11 @@
 @import 'easing';
 @import 'breakpoint';
 
-@namespace: mfish;
+@namespace
+
+: mfish
+
+;
 
 // tabs
 @multiple-height: 30px;
@@ -33,7 +37,7 @@
 @page-footer-z-index: 99;
 
 .bem(@n; @content) {
-  @{namespace}-@{n} {
+    @{namespace}-@{n} {
     @content();
   }
 }

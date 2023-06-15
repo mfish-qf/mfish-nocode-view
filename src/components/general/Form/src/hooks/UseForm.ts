@@ -27,10 +27,10 @@ export function useForm(props?: Props): UseFormReturnType {
 
   function register(instance: FormActionType) {
     isProdMode() &&
-    onUnmounted(() => {
-      formRef.value = null;
-      loadedRef.value = null;
-    });
+      onUnmounted(() => {
+        formRef.value = null;
+        loadedRef.value = null;
+      });
     if (unref(loadedRef) && isProdMode() && instance === unref(formRef)) return;
 
     formRef.value = instance;
@@ -93,11 +93,7 @@ export function useForm(props?: Props): UseFormReturnType {
       form.setFieldsValue(values).then();
     },
 
-    appendSchemaByField: async (
-      schema: FormSchema,
-      prefixField: string | undefined,
-      first: boolean
-    ) => {
+    appendSchemaByField: async (schema: FormSchema, prefixField: string | undefined, first: boolean) => {
       const form = await getForm();
       form.appendSchemaByField(schema, prefixField, first).then();
     },

@@ -61,15 +61,15 @@ export function toLogicFlowData(data) {
   };
   const list = data.flowElementList;
   list &&
-  list.length > 0 &&
-  list.forEach((element) => {
-    if (element.type === TurboType.SEQUENCE_FLOW) {
-      const edge = convertFlowElementToEdge(element);
-      lfData.edges.push(edge);
-    } else {
-      const node = convertFlowElementToNode(element);
-      lfData.nodes.push(node);
-    }
-  });
+    list.length > 0 &&
+    list.forEach((element) => {
+      if (element.type === TurboType.SEQUENCE_FLOW) {
+        const edge = convertFlowElementToEdge(element);
+        lfData.edges.push(edge);
+      } else {
+        const node = convertFlowElementToNode(element);
+        lfData.nodes.push(node);
+      }
+    });
   return lfData;
 }

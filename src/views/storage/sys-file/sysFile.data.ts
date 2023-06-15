@@ -77,11 +77,13 @@ export const columns: BasicColumn[] = [
         onChange(checked: boolean) {
           record.pendingStatus = true;
           const newStatus = checked ? 0 : 1;
-          setFileStatus(record.id, newStatus).then(() => {
-            record.isPrivate = newStatus;
-          }).finally(() => {
-            record.pendingStatus = false;
-          });
+          setFileStatus(record.id, newStatus)
+            .then(() => {
+              record.isPrivate = newStatus;
+            })
+            .finally(() => {
+              record.pendingStatus = false;
+            });
         }
       });
     }

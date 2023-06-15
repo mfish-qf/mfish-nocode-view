@@ -1,12 +1,12 @@
+import { defHttp } from "/@/utils/http/axios";
+import { SysLog, ReqSysLog, SysLogPageModel } from "/@/api/sys/model/SysLogModel";
+
 /**
  * @description: 系统日志
  * @author: mfish
  * @date: 2023-01-08
  * @version: V1.0.0
  */
-import { defHttp } from "/@/utils/http/axios";
-import { SysLog, ReqSysLog, SysLogPageModel } from "/@/api/sys/model/SysLogModel";
-
 enum Api {
   SysLog = "/sys/sysLog"
 }
@@ -29,7 +29,7 @@ export const getSysLogList = (reqSysLog?: ReqSysLog) => {
  */
 export function insertSysLog(sysLog: SysLog) {
   return defHttp.post<SysLog>({ url: Api.SysLog, params: sysLog }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 修改系统日志
@@ -39,7 +39,7 @@ export function insertSysLog(sysLog: SysLog) {
  */
 export function updateSysLog(sysLog: SysLog) {
   return defHttp.put<SysLog>({ url: Api.SysLog, params: sysLog }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 删除系统日志
@@ -49,4 +49,4 @@ export function updateSysLog(sysLog: SysLog) {
  */
 export function deleteSysLog(id: number) {
   return defHttp.delete<SysLog>({ url: Api.SysLog + "/" + id }, { successMessageMode: "message" });
-};
+}

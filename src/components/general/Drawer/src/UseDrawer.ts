@@ -5,16 +5,7 @@ import type {
   DrawerProps,
   UseDrawerInnerReturnType
 } from "./Typing";
-import {
-  ref,
-  getCurrentInstance,
-  unref,
-  reactive,
-  watchEffect,
-  nextTick,
-  toRaw,
-  computed
-} from "vue";
+import { ref, getCurrentInstance, unref, reactive, watchEffect, nextTick, toRaw, computed } from "vue";
 import { isProdMode } from "/@/utils/Env";
 import { isFunction } from "/@/utils/Is";
 import { tryOnUnmounted } from "@vueuse/core";
@@ -38,11 +29,11 @@ export function useDrawer(): UseDrawerReturnType {
 
   function register(drawerInstance: DrawerInstance, uuid: string) {
     isProdMode() &&
-    tryOnUnmounted(() => {
-      drawer.value = null;
-      loaded.value = null;
-      dataTransferRef[unref(uid)] = null;
-    });
+      tryOnUnmounted(() => {
+        drawer.value = null;
+        loaded.value = null;
+        dataTransferRef[unref(uid)] = null;
+      });
 
     if (unref(loaded) && isProdMode() && drawerInstance === unref(drawer)) {
       return;
@@ -117,9 +108,9 @@ export const useDrawerInner = (callbackFn?: Fn): UseDrawerInnerReturnType => {
 
   const register = (modalInstance: DrawerInstance, uuid: string) => {
     isProdMode() &&
-    tryOnUnmounted(() => {
-      drawerInstanceRef.value = null;
-    });
+      tryOnUnmounted(() => {
+        drawerInstanceRef.value = null;
+      });
 
     uidRef.value = uuid;
     drawerInstanceRef.value = modalInstance;

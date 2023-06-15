@@ -1,17 +1,17 @@
-import path from 'path';
-import fs from 'fs-extra';
-import inquirer from 'inquirer';
-import colors from 'picocolors';
-import pkg from '../../../package.json';
+import path from "path";
+import fs from "fs-extra";
+import inquirer from "inquirer";
+import colors from "picocolors";
+import pkg from "../../../package.json";
 
 async function generateIcon() {
-  const dir = path.resolve(process.cwd(), 'node_modules/@iconify/json');
+  const dir = path.resolve(process.cwd(), "node_modules/@iconify/json");
 
-  const raw = await fs.readJSON(path.join(dir, 'collections.json'));
+  const raw = await fs.readJSON(path.join(dir, "collections.json"));
 
   const collections = Object.entries(raw).map(([id, v]) => ({
     ...(v as any),
-    id,
+    id
   }));
 
   const choices = collections.map((item) => ({ key: item.id, value: item.id, name: item.name }));
@@ -19,26 +19,26 @@ async function generateIcon() {
   inquirer
     .prompt([
       {
-        type: 'list',
-        name: 'useType',
+        type: "list",
+        name: "useType",
         choices: [
-          { key: 'local', value: 'local', name: 'Local' },
-          { key: 'onLine', value: 'onLine', name: 'OnLine' },
+          { key: "local", value: "local", name: "Local" },
+          { key: "onLine", value: "onLine", name: "OnLine" }
         ],
-        message: 'How to use icons?',
+        message: "How to use icons?"
       },
       {
-        type: 'list',
-        name: 'iconSet',
+        type: "list",
+        name: "iconSet",
         choices: choices,
-        message: 'Select the icon set that needs to be generated?',
+        message: "Select the icon set that needs to be generated?"
       },
       {
-        type: 'input',
-        name: 'output',
-        message: 'Select the icon set that needs to be generated?',
-        default: 'src/components/Icon/data',
-      },
+        type: "input",
+        name: "output",
+        message: "Select the icon set that needs to be generated?",
+        default: "src/components/Icon/data"
+      }
     ])
     .then(async (answers) => {
       const { iconSet, output, useType } = answers;
@@ -47,25 +47,21 @@ async function generateIcon() {
       const genCollections = collections.filter((item) => [iconSet].includes(item.id));
       const prefixSet: string[] = [];
       for (const info of genCollections) {
-        const data = await fs.readJSON(path.join(dir, 'json', `${info.id}.json`));
+        const data = await fs.readJSON(path.join(dir, "json", `${info.id}.json`));
         if (data) {
           const { prefix } = data;
-          const isLocal = useType === 'local';
-          const icons = Object.keys(data.icons).map(
-            (item) => `${isLocal ? prefix + ':' : ''}${item}`,
-          );
+          const isLocal = useType === "local";
+          const icons = Object.keys(data.icons).map((item) => `${isLocal ? prefix + ":" : ""}${item}`);
 
           await fs.writeFileSync(
             path.join(output, `icons.data.ts`),
-            `export default ${isLocal ? JSON.stringify(icons) : JSON.stringify({ prefix, icons })}`,
+            `export default ${isLocal ? JSON.stringify(icons) : JSON.stringify({ prefix, icons })}`
           );
           prefixSet.push(prefix);
         }
       }
-      fs.emptyDir(path.join(process.cwd(), 'node_modules/.vite'));
-      console.log(
-        `✨ ${colors.cyan(`[${pkg.name}]`)}` + ' - Icon generated successfully:' + `[${prefixSet}]`,
-      );
+      fs.emptyDir(path.join(process.cwd(), "node_modules/.vite"));
+      console.log(`✨ ${colors.cyan(`[${pkg.name}]`)}` + " - Icon generated successfully:" + `[${prefixSet}]`);
     });
 }
 

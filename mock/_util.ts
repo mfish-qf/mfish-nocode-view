@@ -9,12 +9,7 @@ export function resultSuccess<T = Recordable>(data: T, { msg = "ok" } = {}) {
   };
 }
 
-export function resultPageSuccess<T = any>(
-  page: number,
-  pageSize: number,
-  list: T[],
-  { message = "ok" } = {}
-) {
+export function resultPageSuccess<T = any>(page: number, pageSize: number, list: T[], { message = "ok" } = {}) {
   const pageData = pagination(page, pageSize, list);
 
   return {

@@ -1,11 +1,5 @@
 import { ContentEnum, RouterTransitionEnum } from "/@/enums/AppEnum";
-import {
-  MenuModeEnum,
-  MenuTypeEnum,
-  TopMenuAlignEnum,
-  TriggerEnum,
-  MixSidebarTriggerEnum
-} from "/@/enums/MenuEnum";
+import { MenuModeEnum, MenuTypeEnum, TopMenuAlignEnum, TriggerEnum, MixSidebarTriggerEnum } from "/@/enums/MenuEnum";
 import { useI18n } from "/@/hooks/web/UseI18n";
 
 const { t } = useI18n();
@@ -55,7 +49,7 @@ export enum HandlerEnum {
   ROUTER_TRANSITION,
   OPEN_PROGRESS,
   OPEN_PAGE_LOADING,
-  OPEN_ROUTE_TRANSITION,
+  OPEN_ROUTE_TRANSITION
 }
 
 export const contentModeOptions = [
@@ -97,11 +91,11 @@ export const getMenuTriggerOptions = (hideTop: boolean) => {
     ...(hideTop
       ? []
       : [
-        {
-          value: TriggerEnum.HEADER,
-          label: t("layout.setting.menuTriggerTop")
-        }
-      ])
+          {
+            value: TriggerEnum.HEADER,
+            label: t("layout.setting.menuTriggerTop")
+          }
+        ])
   ];
 };
 

@@ -1,6 +1,6 @@
-import ResizeObserver from 'resize-observer-polyfill';
+import ResizeObserver from "resize-observer-polyfill";
 
-const isServer = typeof window === 'undefined';
+const isServer = typeof window === "undefined";
 
 /* istanbul ignore next */
 function resizeHandler(entries: any[]) {
@@ -35,8 +35,8 @@ export function removeResizeListener(element: any, fn: () => any) {
 }
 
 export function triggerWindowResize() {
-  const event = document.createEvent('HTMLEvents');
-  event.initEvent('resize', true, true);
-  (event as any).eventType = 'message';
+  const event = document.createEvent("HTMLEvents");
+  event.initEvent("resize", true, true);
+  (event as any).eventType = "message";
   window.dispatchEvent(event);
 }

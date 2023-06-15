@@ -14,8 +14,7 @@ export function useMenuSetting() {
 
   const getShowSidebar = computed(() => {
     return (
-      unref(getSplit) ||
-      (unref(getShowMenu) && unref(getMenuMode) !== MenuModeEnum.HORIZONTAL && !unref(fullContent))
+      unref(getSplit) || (unref(getShowMenu) && unref(getMenuMode) !== MenuModeEnum.HORIZONTAL && !unref(fullContent))
     );
   });
 
@@ -51,9 +50,7 @@ export function useMenuSetting() {
 
   const getTopMenuAlign = computed(() => appStore.getMenuSetting.topMenuAlign);
 
-  const getCloseMixSidebarOnChange = computed(
-    () => appStore.getMenuSetting.closeMixSidebarOnChange
-  );
+  const getCloseMixSidebarOnChange = computed(() => appStore.getMenuSetting.closeMixSidebarOnChange);
 
   const getIsSidebarType = computed(() => unref(getMenuType) === MenuTypeEnum.SIDEBAR);
 
@@ -66,11 +63,7 @@ export function useMenuSetting() {
   });
 
   const getShowHeaderTrigger = computed(() => {
-    if (
-      unref(getMenuType) === MenuTypeEnum.TOP_MENU ||
-      !unref(getShowMenu) ||
-      unref(getMenuHidden)
-    ) {
+    if (unref(getMenuType) === MenuTypeEnum.TOP_MENU || !unref(getShowMenu) || unref(getMenuHidden)) {
       return false;
     }
 
@@ -91,20 +84,14 @@ export function useMenuSetting() {
 
   const getRealWidth = computed(() => {
     if (unref(getIsMixSidebar)) {
-      return unref(getCollapsed) && !unref(getMixSideFixed)
-        ? unref(getMiniWidthNumber)
-        : unref(getMenuWidth);
+      return unref(getCollapsed) && !unref(getMixSideFixed) ? unref(getMiniWidthNumber) : unref(getMenuWidth);
     }
     return unref(getCollapsed) ? unref(getMiniWidthNumber) : unref(getMenuWidth);
   });
 
   const getMiniWidthNumber = computed(() => {
     const { collapsedShowTitle, siderHidden } = appStore.getMenuSetting;
-    return siderHidden
-      ? 0
-      : collapsedShowTitle
-        ? SIDE_BAR_SHOW_TIT_MINI_WIDTH
-        : SIDE_BAR_MINI_WIDTH;
+    return siderHidden ? 0 : collapsedShowTitle ? SIDE_BAR_SHOW_TIT_MINI_WIDTH : SIDE_BAR_MINI_WIDTH;
   });
 
   const getCalcContentWidth = computed(() => {
@@ -112,9 +99,9 @@ export function useMenuSetting() {
       unref(getIsTopMenu) || !unref(getShowMenu) || (unref(getSplit) && unref(getMenuHidden))
         ? 0
         : unref(getIsMixSidebar)
-          ? (unref(getCollapsed) ? SIDE_BAR_MINI_WIDTH : SIDE_BAR_SHOW_TIT_MINI_WIDTH) +
+        ? (unref(getCollapsed) ? SIDE_BAR_MINI_WIDTH : SIDE_BAR_SHOW_TIT_MINI_WIDTH) +
           (unref(getMixSideFixed) && unref(mixSideHasChildren) ? unref(getRealWidth) : 0)
-          : unref(getRealWidth);
+        : unref(getRealWidth);
 
     return `calc(100% - ${unref(width)}px)`;
   });

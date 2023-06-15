@@ -154,7 +154,6 @@ export const searchFormSchema: FormSchema[] = [
     },
     colProps: { lg: 7, md: 8 }
   }
-
 ];
 export const sysLogSchema: DescItem[] = [
   {
@@ -217,6 +216,3 @@ export const sysLogSchema: DescItem[] = [
     span: 2
   }
 ];
-
-
-

@@ -66,12 +66,8 @@ export class VAxios {
     if (!transform) {
       return;
     }
-    const {
-      requestInterceptors,
-      requestInterceptorsCatch,
-      responseInterceptors,
-      responseInterceptorsCatch
-    } = transform;
+    const { requestInterceptors, requestInterceptorsCatch, responseInterceptors, responseInterceptorsCatch } =
+      transform;
     const axiosCanceler = new AxiosCanceler();
     // 请求拦截器配置处理
     this.axiosInstance.interceptors.request.use((config: CreateAxiosOptions) => {
@@ -85,8 +81,8 @@ export class VAxios {
     }, undefined);
     // 请求拦截器错误捕获
     requestInterceptorsCatch &&
-    isFunction(requestInterceptorsCatch) &&
-    this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch);
+      isFunction(requestInterceptorsCatch) &&
+      this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch);
 
     // 响应结果拦截器处理
     this.axiosInstance.interceptors.response.use((res: AxiosResponse<any>) => {
@@ -98,11 +94,12 @@ export class VAxios {
     }, undefined);
 
     // 响应结果拦截器错误捕获
-    responseInterceptorsCatch && isFunction(responseInterceptorsCatch) &&
-    this.axiosInstance.interceptors.response.use(undefined, (error) => {
-      console.log(error, "error");
-      return responseInterceptorsCatch(this.axiosInstance, error);
-    });
+    responseInterceptorsCatch &&
+      isFunction(responseInterceptorsCatch) &&
+      this.axiosInstance.interceptors.response.use(undefined, (error) => {
+        console.log(error, "error");
+        return responseInterceptorsCatch(this.axiosInstance, error);
+      });
   }
 
   // support form-data
@@ -149,24 +146,35 @@ export class VAxios {
     });
     //参数已添加到formData中，删除params
     delete config.params;
-    return this.request({
-      ...config,
-      method: "POST",
-      data: formData,
-      headers: { "Content-Type": ContentTypeEnum.FORM_DATA, ignoreCancelToken: true }
-    }, options);
+    return this.request(
+      {
+        ...config,
+        method: "POST",
+        data: formData,
+        headers: { "Content-Type": ContentTypeEnum.FORM_DATA, ignoreCancelToken: true }
+      },
+      options
+    );
   }
 
   download<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    return this.request({
-      ...config,
-      method: "get",
-      responseType: "blob"
-      // headers: { "Content-Type": ContentTypeEnum.OCTET_STREAM}
-    }, options, this.options.transform?.downloadResponseHook);
+    return this.request(
+      {
+        ...config,
+        method: "get",
+        responseType: "blob"
+        // headers: { "Content-Type": ContentTypeEnum.OCTET_STREAM}
+      },
+      options,
+      this.options.transform?.downloadResponseHook
+    );
   }
 
-  request<T = any>(config: AxiosRequestConfig, options?: RequestOptions, transformResponseHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any): Promise<T> {
+  request<T = any>(
+    config: AxiosRequestConfig,
+    options?: RequestOptions,
+    transformResponseHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any
+  ): Promise<T> {
     let conf = <CreateAxiosOptions>cloneDeep(config);
     const { transform, requestOptions } = this.options;
     const opt: RequestOptions = Object.assign({}, requestOptions, options);

@@ -13,7 +13,7 @@ enum TableActionEnum {
   CLOSE_RIGHT,
   CLOSE_OTHER,
   CLOSE_CURRENT,
-  CLOSE,
+  CLOSE
 }
 
 export function useTabs(_router?: Router) {

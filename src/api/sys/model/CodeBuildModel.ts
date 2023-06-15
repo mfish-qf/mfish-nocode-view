@@ -22,8 +22,6 @@ export interface CodeVo {
   code: string;
 }
 
-export interface ReqCodeBuild {
-
-}
+export interface ReqCodeBuild {}
 
 export type CodeBuildPageModel = PageResult<CodeBuild>;

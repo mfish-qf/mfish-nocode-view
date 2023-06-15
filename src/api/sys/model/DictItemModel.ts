@@ -17,8 +17,6 @@ export interface DictItem extends BaseEntity<string> {
   remark: string;
 }
 
-export interface ReqDictItem {
-
-}
+export interface ReqDictItem {}
 
 export type DictItemPageModel = PageResult<DictItem>;

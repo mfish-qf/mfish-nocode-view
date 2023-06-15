@@ -1,12 +1,13 @@
-import { getCurrentInstance, reactive, shallowRef, watchEffect } from 'vue';
-import type { Ref } from 'vue';
+import { getCurrentInstance, reactive, shallowRef, watchEffect } from "vue";
+import type { Ref } from "vue";
+
 interface Params {
   excludeListeners?: boolean;
   excludeKeys?: string[];
   excludeDefaultKeys?: boolean;
 }
 
-const DEFAULT_EXCLUDE_KEYS = ['class', 'style'];
+const DEFAULT_EXCLUDE_KEYS = ["class", "style"];
 const LISTENER_PREFIX = /^on[A-Z]/;
 
 export function entries<T>(obj: Recordable<T>): [string, T][] {

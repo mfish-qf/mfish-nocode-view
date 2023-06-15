@@ -50,7 +50,7 @@ export const columns: BasicColumn[] = [
         placeholder: "输入cron表达式:格式0 1 * ? * *",
         onChange(e) {
           record.cron = e.target.value;
-        },
+        }
       });
     }
   },

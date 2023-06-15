@@ -6,16 +6,14 @@
 <template>
   <div>
     多级页面
-    <br>
+    <br />
   </div>
 </template>
 
 <script>
-export default {
-  name: "LevelMenu"
-};
+  export default {
+    name: "LevelMenu"
+  };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

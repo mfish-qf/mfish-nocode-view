@@ -26,81 +26,81 @@
   </CollapseContainer>
 </template>
 <script lang="ts">
-import { Button, Row, Col } from "ant-design-vue";
-import { computed, defineComponent, onMounted } from "vue";
-import { BasicForm, useForm } from "/@/components/general/Form/index";
-import { CollapseContainer } from "/@/components/general/Container";
-import { CropperAvatar } from "/@/components/general/Cropper";
-import headerImg from "/@/assets/images/header.png";
-import { getUserInfo, updateUser } from "/@/api/sys/User";
-import { baseSetSchemas } from "./setting.data";
-import { useUserStore } from "/@/store/modules/User";
-import { uploadApi } from "/@/api/storage/Upload";
-import { imageUrl } from "/@/utils/FileUtils";
-import { getLocalFileUrl } from "/@/api/storage/SysFile";
+  import { Button, Row, Col } from "ant-design-vue";
+  import { computed, defineComponent, onMounted } from "vue";
+  import { BasicForm, useForm } from "/@/components/general/Form/index";
+  import { CollapseContainer } from "/@/components/general/Container";
+  import { CropperAvatar } from "/@/components/general/Cropper";
+  import headerImg from "/@/assets/images/header.png";
+  import { getUserInfo, updateUser } from "/@/api/sys/User";
+  import { baseSetSchemas } from "./setting.data";
+  import { useUserStore } from "/@/store/modules/User";
+  import { uploadApi } from "/@/api/storage/Upload";
+  import { imageUrl } from "/@/utils/FileUtils";
+  import { getLocalFileUrl } from "/@/api/storage/SysFile";
 
-export default defineComponent({
-  components: {
-    BasicForm,
-    CollapseContainer,
-    Button,
-    ARow: Row,
-    ACol: Col,
-    CropperAvatar
-  },
-  setup() {
-    const userStore = useUserStore();
-    const [register, { setFieldsValue, validate }] = useForm({
-      labelWidth: 120,
-      schemas: baseSetSchemas,
-      showActionButtonGroup: false
-    });
-    let userInfo = userStore.getUserInfo;
-    onMounted(async () => {
-      const user = await getUserInfo();
-      if (userInfo != null) {
-        userInfo = Object.assign(userInfo, user);
-        setFieldsValue(userInfo).then();
-      }
-    });
+  export default defineComponent({
+    components: {
+      BasicForm,
+      CollapseContainer,
+      Button,
+      ARow: Row,
+      ACol: Col,
+      CropperAvatar
+    },
+    setup() {
+      const userStore = useUserStore();
+      const [register, { setFieldsValue, validate }] = useForm({
+        labelWidth: 120,
+        schemas: baseSetSchemas,
+        showActionButtonGroup: false
+      });
+      let userInfo = userStore.getUserInfo;
+      onMounted(async () => {
+        const user = await getUserInfo();
+        if (userInfo != null) {
+          userInfo = Object.assign(userInfo, user);
+          setFieldsValue(userInfo).then();
+        }
+      });
 
-    let avatar = computed(() => {
-      const imgUrl = userStore.getUserInfo?.headImgUrl;
-      return imgUrl ? imageUrl(getLocalFileUrl(imgUrl)) : headerImg;
-    });
+      let avatar = computed(() => {
+        const imgUrl = userStore.getUserInfo?.headImgUrl;
+        return imgUrl ? imageUrl(getLocalFileUrl(imgUrl)) : headerImg;
+      });
 
-    function updateAvatar({ data }) {
-      if (userInfo != null) {
-        userInfo.headImgUrl = data;
-        userStore.setUserInfo(userInfo);
-        if (data) {
-          updateUser(userInfo).then();
+      function updateAvatar({ data }) {
+        if (userInfo != null) {
+          userInfo.headImgUrl = data;
+          userStore.setUserInfo(userInfo);
+          if (data) {
+            updateUser(userInfo).then();
+          }
         }
       }
-    }
 
-    async function handleSubmit() {
-      const values = await validate();
-      updateUser(values).then();
-    }
+      async function handleSubmit() {
+        const values = await validate();
+        updateUser(values).then();
+      }
 
-    return {
-      avatar,
-      register,
-      uploadApi,
-      updateAvatar,
-      handleSubmit
-    };
-  }
-});
+      return {
+        avatar,
+        register,
+        uploadApi,
+        updateAvatar,
+        handleSubmit
+      };
+    }
+  });
 </script>
 
 <style lang="less" scoped>
-.change-avatar {
-  img {
-    display: block;
-    margin-bottom: 15px;
-    border-radius: 50%;
+  .change-avatar {
+    img {
+      display: block;
+      margin-bottom: 15px;
+      border-radius: 50%;
+    }
   }
-}
 </style>

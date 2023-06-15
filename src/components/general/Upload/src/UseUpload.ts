@@ -4,11 +4,11 @@ import { useI18n } from "/@/hooks/web/UseI18n";
 const { t } = useI18n();
 
 export function useUploadType({
-                                acceptRef,
-                                helpTextRef,
-                                maxNumberRef,
-                                maxSizeRef
-                              }: {
+  acceptRef,
+  helpTextRef,
+  maxNumberRef,
+  maxSizeRef
+}: {
   acceptRef: Ref<string[]>;
   helpTextRef: Ref<string>;
   maxNumberRef: Ref<number>;

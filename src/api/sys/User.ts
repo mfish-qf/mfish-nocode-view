@@ -45,7 +45,7 @@ export function getUserInfo() {
  * 获取用户角色信息
  * @param params
  */
-export function getUserRoles(params: { userId?: string, clientId?: string }) {
+export function getUserRoles(params: { userId?: string; clientId?: string }) {
   return defHttp.get<RoleInfo[]>({ url: Api.UserRoles, params });
 }
 
@@ -65,7 +65,7 @@ export function doLogout() {
 
 /**
  * 登出指定用户
- * @param token
+ * @param sid
  */
 export function logoutUser(sid: string) {
   return defHttp.get({ url: `${Api.Logout}/${sid}` });
@@ -95,12 +95,12 @@ export function deleteUser(params: string) {
   return defHttp.delete<SsoUser>({ url: `${Api.User}/${params}` }, { successMessageMode: "message" });
 }
 
-export function changePwd(params: { userId: string, oldPwd?: string, newPwd: string }) {
+export function changePwd(params: { userId: string; oldPwd?: string; newPwd: string }) {
   return defHttp.put({ url: Api.Pwd, params }, { successMessageMode: "message" });
 }
 
 export const setUserStatus = (userId: string, status: number) => {
-  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { "id": userId, "status": status } });
+  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { id: userId, status: status } });
 };
 
 export const getOnlineList = (params?: ReqPage) => {

@@ -8,7 +8,7 @@ export enum ToolbarEnum {
   EXPAND_ALL,
   UN_EXPAND_ALL,
   CHECK_STRICTLY,
-  CHECK_UN_STRICTLY,
+  CHECK_UN_STRICTLY
 }
 
 export const treeEmits = [
@@ -35,9 +35,7 @@ export interface FieldNames {
 
 export type KeyType = string | number;
 
-export type CheckKeys =
-  | KeyType[]
-  | { checked: string[] | number[]; halfChecked: string[] | number[] };
+export type CheckKeys = KeyType[] | { checked: string[] | number[]; halfChecked: string[] | number[] };
 
 export const treeProps = buildProps({
   value: {
@@ -184,9 +182,5 @@ export interface TreeActionType {
   updateNodeByKey: (key: string, node: Omit<TreeDataItem, "key">) => void;
   setSearchValue: (value: string) => void;
   getSearchValue: () => string;
-  getSelectedNode: (
-    key: KeyType,
-    treeList?: TreeItem[],
-    selectNode?: TreeItem | null
-  ) => TreeItem | null;
+  getSelectedNode: (key: KeyType, treeList?: TreeItem[], selectNode?: TreeItem | null) => TreeItem | null;
 }

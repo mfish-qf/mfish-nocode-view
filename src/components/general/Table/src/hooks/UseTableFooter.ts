@@ -10,8 +10,12 @@ type scrollRefType = ComputedRef<{
   scrollToFirstRowOnChange: boolean;
 }>;
 
-export function useTableFooter(propsRef: ComputedRef<BasicTableProps>, scrollRef: scrollRefType,
-                               tableElRef: Ref<ComponentRef>, getDataSourceRef: ComputedRef<Recordable>) {
+export function useTableFooter(
+  propsRef: ComputedRef<BasicTableProps>,
+  scrollRef: scrollRefType,
+  tableElRef: Ref<ComponentRef>,
+  getDataSourceRef: ComputedRef<Recordable>
+) {
   const getIsEmptyData = computed(() => {
     return (unref(getDataSourceRef) || []).length === 0;
   });
@@ -39,9 +43,7 @@ export function useTableFooter(propsRef: ComputedRef<BasicTableProps>, scrollRef
         el: bodyDom,
         name: "scroll",
         listener: () => {
-          const footerBodyDom = tableEl.$el.querySelector(
-            ".ant-table-footer .ant-table-content"
-          ) as HTMLDivElement;
+          const footerBodyDom = tableEl.$el.querySelector(".ant-table-footer .ant-table-content") as HTMLDivElement;
           if (!footerBodyDom || !bodyDom) return;
           footerBodyDom.scrollLeft = bodyDom.scrollLeft;
         },

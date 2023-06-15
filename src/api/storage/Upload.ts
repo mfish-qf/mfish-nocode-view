@@ -7,11 +7,9 @@ import { SysFile } from "/@/api/storage/model/SysFileModel";
  * @description: Upload interface
  */
 export function uploadApi(params: UploadFileParams, onUploadProgress: (progressEvent: AxiosProgressEvent) => void) {
-  return defHttp.upload<SysFile>(
-    {
-      url: "/storage/file",
-      params,
-      onUploadProgress
-    }
-  );
+  return defHttp.upload<SysFile>({
+    url: "/storage/file",
+    params,
+    onUploadProgress
+  });
 }

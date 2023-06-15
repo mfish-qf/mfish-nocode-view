@@ -1,12 +1,12 @@
+import { defHttp } from "/@/utils/http/axios";
+import { DictItem, ReqDictItem, DictItemPageModel } from "/@/api/sys/model/DictItemModel";
+
 /**
  * @description: 字典项
  * @Author: mfish
  * @Date: 2023-01-03
  * @Version: V1.0.0
  */
-import { defHttp } from "/@/utils/http/axios";
-import { DictItem, ReqDictItem, DictItemPageModel } from "/@/api/sys/model/DictItemModel";
-
 enum Api {
   DictItem = "/sys/dictItem"
 }
@@ -37,7 +37,7 @@ export const getDictItems = (dictCode: string) => {
  */
 export function insertDictItem(dictItem: DictItem) {
   return defHttp.post<DictItem>({ url: Api.DictItem, params: dictItem }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 修改字典项
@@ -47,7 +47,7 @@ export function insertDictItem(dictItem: DictItem) {
  */
 export function updateDictItem(dictItem: DictItem) {
   return defHttp.put<DictItem>({ url: Api.DictItem, params: dictItem }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 删除字典项
@@ -57,4 +57,4 @@ export function updateDictItem(dictItem: DictItem) {
  */
 export function deleteDictItem(id: string) {
   return defHttp.delete<DictItem>({ url: Api.DictItem + "/" + id }, { successMessageMode: "message" });
-};
+}

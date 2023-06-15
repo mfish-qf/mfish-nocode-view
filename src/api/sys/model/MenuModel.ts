@@ -1,10 +1,10 @@
+import type { RouteMeta } from "vue-router";
+
 /**
  * @description: 菜单信息
  * @author: mfish
  * @date: 2022/10/11 15:28
  */
-import type { RouteMeta } from "vue-router";
-
 export interface RouteItem {
   path: string;
   component: any;
@@ -19,7 +19,7 @@ export interface RouteItem {
 export enum MenuType {
   目录,
   菜单,
-  按钮
+  按钮,
 }
 
 export interface MenuListItem {

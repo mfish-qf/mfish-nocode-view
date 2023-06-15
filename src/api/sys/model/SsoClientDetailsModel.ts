@@ -20,8 +20,8 @@ export interface SsoClientDetails extends BaseEntity<string> {
 }
 
 export interface ReqSsoClientDetails {
- clientName: string;
- clientId: string;
+  clientName: string;
+  clientId: string;
 }
 
 export type SsoClientDetailsPageModel = PageResult<SsoClientDetails>;

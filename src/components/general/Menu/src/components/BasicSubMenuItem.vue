@@ -16,42 +16,42 @@
   </SubMenu>
 </template>
 <script lang="ts">
-import type { Menu as MenuType } from "/@/router/Types";
-import { defineComponent, computed } from "vue";
-import { Menu } from "ant-design-vue";
-import { useDesign } from "/@/hooks/web/UseDesign";
-import { itemProps } from "../Props";
-import BasicMenuItem from "./BasicMenuItem.vue";
-import MenuItemContent from "./MenuItemContent.vue";
+  import type { Menu as MenuType } from "/@/router/Types";
+  import { defineComponent, computed } from "vue";
+  import { Menu } from "ant-design-vue";
+  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { itemProps } from "../Props";
+  import BasicMenuItem from "./BasicMenuItem.vue";
+  import MenuItemContent from "./MenuItemContent.vue";
 
-export default defineComponent({
-  name: "BasicSubMenuItem",
-  isSubMenu: true,
-  components: {
-    BasicMenuItem,
-    SubMenu: Menu.SubMenu,
-    MenuItemContent
-  },
-  props: itemProps,
-  setup(props) {
-    const { prefixCls } = useDesign("basic-menu-item");
+  export default defineComponent({
+    name: "BasicSubMenuItem",
+    isSubMenu: true,
+    components: {
+      BasicMenuItem,
+      SubMenu: Menu.SubMenu,
+      MenuItemContent
+    },
+    props: itemProps,
+    setup(props) {
+      const { prefixCls } = useDesign("basic-menu-item");
 
-    const getShowMenu = computed(() => !props.item.meta?.hideMenu);
+      const getShowMenu = computed(() => !props.item.meta?.hideMenu);
 
-    function menuHasChildren(menuTreeItem: MenuType): boolean {
-      return (
-        !menuTreeItem.meta?.hideChildrenInMenu &&
-        Reflect.has(menuTreeItem, "children") &&
-        !!menuTreeItem.children &&
-        menuTreeItem.children.length > 0
-      );
+      function menuHasChildren(menuTreeItem: MenuType): boolean {
+        return (
+          !menuTreeItem.meta?.hideChildrenInMenu &&
+          Reflect.has(menuTreeItem, "children") &&
+          !!menuTreeItem.children &&
+          menuTreeItem.children.length > 0
+        );
+      }
+
+      return {
+        prefixCls,
+        menuHasChildren,
+        getShowMenu
+      };
     }
-
-    return {
-      prefixCls,
-      menuHasChildren,
-      getShowMenu
-    };
-  }
-});
+  });
 </script>

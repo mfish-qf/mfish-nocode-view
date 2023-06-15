@@ -1,56 +1,51 @@
 <template>
   <div :class="prefixCls">
     <span> {{ title }}</span>
-    <InputNumber
-      v-bind="$attrs"
-      size="small"
-      :class="`${prefixCls}-input-number`"
-      @change="handleChange"
-    />
+    <InputNumber v-bind="$attrs" size="small" :class="`${prefixCls}-input-number`" @change="handleChange" />
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
-import { InputNumber } from "ant-design-vue";
-import { useDesign } from "/@/hooks/web/UseDesign";
-import { baseHandler } from "../Handler";
-import { HandlerEnum } from "../Enum";
+  import { defineComponent, PropType } from "vue";
+  import { InputNumber } from "ant-design-vue";
+  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { baseHandler } from "../Handler";
+  import { HandlerEnum } from "../Enum";
 
-export default defineComponent({
-  name: "InputNumberItem",
-  components: { InputNumber },
-  props: {
-    event: {
-      type: Number as PropType<HandlerEnum>
+  export default defineComponent({
+    name: "InputNumberItem",
+    components: { InputNumber },
+    props: {
+      event: {
+        type: Number as PropType<HandlerEnum>
+      },
+      title: {
+        type: String
+      }
     },
-    title: {
-      type: String
-    }
-  },
-  setup(props) {
-    const { prefixCls } = useDesign("setting-input-number-item");
+    setup(props) {
+      const { prefixCls } = useDesign("setting-input-number-item");
 
-    function handleChange(e) {
-      props.event && baseHandler(props.event, e);
-    }
+      function handleChange(e) {
+        props.event && baseHandler(props.event, e);
+      }
 
-    return {
-      prefixCls,
-      handleChange
-    };
-  }
-});
+      return {
+        prefixCls,
+        handleChange
+      };
+    }
+  });
 </script>
 <style lang="less" scoped>
-@prefix-cls: ~'@{namespace}-setting-input-number-item';
+  @prefix-cls: ~"@{namespace}-setting-input-number-item";
 
-.@{prefix-cls} {
-  display: flex;
-  justify-content: space-between;
-  margin: 16px 0;
+  .@{prefix-cls} {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0;
 
-  &-input-number {
-    width: 80px;
+    &-input-number {
+      width: 80px;
+    }
   }
-}
 </style>

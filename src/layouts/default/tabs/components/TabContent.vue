@@ -15,59 +15,59 @@
   </Dropdown>
 </template>
 <script lang="ts">
-import type { PropType } from "vue";
-import type { RouteLocationNormalized } from "vue-router";
-import { defineComponent, computed, unref } from "vue";
-import { Dropdown } from "/@/components/general/Dropdown/index";
-import { Icon } from "/@/components/general/Icon";
-import { TabContentProps } from "../types";
-import { useDesign } from "/@/hooks/web/UseDesign";
-import { useI18n } from "/@/hooks/web/UseI18n";
-import { useTabDropdown } from "../UseTabDropdown";
+  import type { PropType } from "vue";
+  import type { RouteLocationNormalized } from "vue-router";
+  import { defineComponent, computed, unref } from "vue";
+  import { Dropdown } from "/@/components/general/Dropdown/index";
+  import { Icon } from "/@/components/general/Icon";
+  import { TabContentProps } from "../types";
+  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useTabDropdown } from "../UseTabDropdown";
 
-export default defineComponent({
-  name: "TabContent",
-  components: { Dropdown, Icon },
-  props: {
-    tabItem: {
-      type: Object as PropType<RouteLocationNormalized>,
-      default: null
+  export default defineComponent({
+    name: "TabContent",
+    components: { Dropdown, Icon },
+    props: {
+      tabItem: {
+        type: Object as PropType<RouteLocationNormalized>,
+        default: null
+      },
+      isExtra: Boolean
     },
-    isExtra: Boolean
-  },
-  setup(props) {
-    const { prefixCls } = useDesign("multiple-tabs-content");
-    const { t } = useI18n();
+    setup(props) {
+      const { prefixCls } = useDesign("multiple-tabs-content");
+      const { t } = useI18n();
 
-    const getTitle = computed(() => {
-      const { tabItem: { meta } = {} } = props;
-      return meta && t(meta.title as string);
-    });
+      const getTitle = computed(() => {
+        const { tabItem: { meta } = {} } = props;
+        return meta && t(meta.title as string);
+      });
 
-    const getIsTabs = computed(() => !props.isExtra);
+      const getIsTabs = computed(() => !props.isExtra);
 
-    const getTrigger = computed((): ("contextmenu" | "click" | "hover")[] =>
-      unref(getIsTabs) ? ["contextmenu"] : ["click"]
-    );
+      const getTrigger = computed((): ("contextmenu" | "click" | "hover")[] =>
+        unref(getIsTabs) ? ["contextmenu"] : ["click"]
+      );
 
-    const { getDropMenuList, handleMenuEvent, handleContextMenu } = useTabDropdown(
-      props as TabContentProps,
-      getIsTabs
-    );
+      const { getDropMenuList, handleMenuEvent, handleContextMenu } = useTabDropdown(
+        props as TabContentProps,
+        getIsTabs
+      );
 
-    function handleContext(e) {
-      props.tabItem && handleContextMenu(props.tabItem)(e);
+      function handleContext(e) {
+        props.tabItem && handleContextMenu(props.tabItem)(e);
+      }
+
+      return {
+        prefixCls,
+        getDropMenuList,
+        handleMenuEvent,
+        handleContext,
+        getTrigger,
+        getIsTabs,
+        getTitle
+      };
     }
-
-    return {
-      prefixCls,
-      getDropMenuList,
-      handleMenuEvent,
-      handleContext,
-      getTrigger,
-      getIsTabs,
-      getTitle
-    };
-  }
-});
+  });
 </script>

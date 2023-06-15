@@ -1,10 +1,10 @@
+import type { VNode, VNodeChild, ComponentRenderProxy, PropType as VuePropType } from "vue";
+
 /**
  * @description: 全局配置信息定义
  * @author: mfish
  * @date: 2022/9/22 18:02
  */
-import type { VNode, VNodeChild, ComponentRenderProxy, PropType as VuePropType } from "vue";
-
 declare global {
   const __APP_INFO__: {
     pkg: {
@@ -40,7 +40,7 @@ declare global {
   declare type PropType<T> = VuePropType<T>;
   declare type TimeoutHandle = ReturnType<typeof setTimeout>;
   declare type IntervalHandle = ReturnType<typeof setInterval>;
-  declare type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]>; };
+  declare type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
   declare type VueNode = VNodeChild | JSX.Element;
 
   declare interface ChangeEvent extends Event {

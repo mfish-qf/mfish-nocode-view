@@ -17,8 +17,6 @@ export interface SysFile extends BaseEntity<string> {
   delFlag: number;
 }
 
-export interface ReqSysFile {
-
-}
+export interface ReqSysFile {}
 
 export type SysFilePageModel = PageResult<SysFile>;

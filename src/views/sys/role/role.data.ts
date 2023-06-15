@@ -105,7 +105,8 @@ export const formSchema: FormSchema[] = [
     label: "角色编码",
     required: true,
     component: "Input",
-    dynamicDisabled: ((renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["roleCode"] === "admin" ? true : false)
+    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
+      renderCallbackParams.values["roleCode"] === "admin" ? true : false
   },
   {
     label: "排序",

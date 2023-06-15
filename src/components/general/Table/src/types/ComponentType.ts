@@ -8,7 +8,7 @@ export type ComponentType =
   | "Checkbox"
   | "Switch"
   | "DatePicker"
-  | 'TimePicker'
-  | 'RadioGroup'
-  | 'RadioButtonGroup'
-  | 'ApiRadioGroup';
+  | "TimePicker"
+  | "RadioGroup"
+  | "RadioButtonGroup"
+  | "ApiRadioGroup";

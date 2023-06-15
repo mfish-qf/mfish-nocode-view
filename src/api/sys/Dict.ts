@@ -1,12 +1,12 @@
+import { defHttp } from "/@/utils/http/axios";
+import { Dict, ReqDict, DictPageModel } from "/@/api/sys/model/DictModel";
+
 /**
  * @description: 字典
  * @Author: mfish
  * @Date: 2023-01-03
  * @Version: V1.0.0
  */
-import { defHttp } from "/@/utils/http/axios";
-import { Dict, ReqDict, DictPageModel } from "/@/api/sys/model/DictModel";
-
 enum Api {
   Dict = "/sys/dict",
   Export = "/sys/dict/export"
@@ -28,8 +28,7 @@ export const getDictList = (reqDict?: ReqDict) => {
  */
 export function exportDict(reqDict?: ReqDict) {
   return defHttp.download({ url: Api.Export, params: reqDict });
-};
-
+}
 
 /**
  * 新增字典
@@ -39,7 +38,7 @@ export function exportDict(reqDict?: ReqDict) {
  */
 export function insertDict(dict: Dict) {
   return defHttp.post<Dict>({ url: Api.Dict, params: dict }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 修改字典
@@ -49,7 +48,7 @@ export function insertDict(dict: Dict) {
  */
 export function updateDict(dict: Dict) {
   return defHttp.put<Dict>({ url: Api.Dict, params: dict }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 删除字典
@@ -59,4 +58,4 @@ export function updateDict(dict: Dict) {
  */
 export function deleteDict(id: string) {
   return defHttp.delete<Dict>({ url: Api.Dict + "/" + id }, { successMessageMode: "message" });
-};
+}

@@ -1,12 +1,11 @@
+import { ErrorTypeEnum } from "/@/enums/ExceptionEnum";
+import { MenuModeEnum, MenuTypeEnum } from "/@/enums/MenuEnum";
+
 /**
  * @description: 缓存定义
  * @author: mfish
  * @date: 2022/10/11 15:23
  */
-import { ErrorTypeEnum } from "/@/enums/ExceptionEnum";
-import { MenuModeEnum, MenuTypeEnum } from "/@/enums/MenuEnum";
-import { RoleInfo } from "/@/api/sys/model/UserModel";
-
 // 锁屏信息
 export interface LockInfo {
   // Password required

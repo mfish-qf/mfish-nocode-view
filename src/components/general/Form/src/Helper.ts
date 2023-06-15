@@ -35,11 +35,7 @@ function genType() {
   return ["DatePicker", "MonthPicker", "WeekPicker", "TimePicker", "RangePicker"];
 }
 
-export function setComponentRuleType(
-  rule: RuleObject,
-  component: ComponentType,
-  valueFormat: string
-) {
+export function setComponentRuleType(rule: RuleObject, component: ComponentType, valueFormat: string) {
   if (["DatePicker", "MonthPicker", "WeekPicker", "TimePicker"].includes(component)) {
     rule.type = valueFormat ? "string" : "object";
   } else if (["RangePicker", "Upload", "CheckboxGroup", "TimePicker"].includes(component)) {

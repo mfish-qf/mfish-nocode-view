@@ -1,3 +1,3 @@
-export { createContextMenu, destroyContextMenu } from './src/CreateContextMenu';
+export { createContextMenu, destroyContextMenu } from "./src/CreateContextMenu";
 
-export * from './src/Typing';
+export * from "./src/Typing";

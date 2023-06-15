@@ -4,16 +4,16 @@
   </span>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { propTypes } from '/@/utils/PropTypes';
-  import { Image } from 'ant-design-vue';
+  import { defineComponent } from "vue";
+  import { propTypes } from "/@/utils/PropTypes";
+  import { Image } from "ant-design-vue";
 
   export default defineComponent({
     components: { Image },
     props: {
-      fileUrl: propTypes.string.def(''),
-      fileName: propTypes.string.def(''),
-    },
+      fileUrl: propTypes.string.def(""),
+      fileName: propTypes.string.def("")
+    }
   });
 </script>
 <style lang="less">

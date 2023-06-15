@@ -1,10 +1,10 @@
+import { on, once } from "/@/utils/DomUtils";
+import type { Directive, DirectiveBinding } from "vue";
+
 /**
  * Prevent repeated clicks
  * @Example v-repeat-click="()=>{}"
  */
-import { on, once } from "/@/utils/DomUtils";
-import type { Directive, DirectiveBinding } from "vue";
-
 const repeatDirective: Directive = {
   beforeMount(el: Element, binding: DirectiveBinding<any>) {
     let interval: Nullable<IntervalHandle> = null;

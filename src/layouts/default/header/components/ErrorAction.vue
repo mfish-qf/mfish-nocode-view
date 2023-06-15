@@ -11,36 +11,36 @@
   </Tooltip>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from "vue";
-import { Tooltip, Badge } from "ant-design-vue";
-import { Icon } from "/@/components/general/Icon";
-import { useI18n } from "/@/hooks/web/UseI18n";
-import { useErrorLogStore } from "/@/store/modules/ErrorLog";
-import { PageEnum } from "/@/enums/PageEnum";
-import { useRouter } from "vue-router";
+  import { defineComponent, computed } from "vue";
+  import { Tooltip, Badge } from "ant-design-vue";
+  import { Icon } from "/@/components/general/Icon";
+  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useErrorLogStore } from "/@/store/modules/ErrorLog";
+  import { PageEnum } from "/@/enums/PageEnum";
+  import { useRouter } from "vue-router";
 
-export default defineComponent({
-  name: "ErrorAction",
-  components: { Icon, Tooltip, Badge },
+  export default defineComponent({
+    name: "ErrorAction",
+    components: { Icon, Tooltip, Badge },
 
-  setup() {
-    const { t } = useI18n();
-    const { push } = useRouter();
-    const errorLogStore = useErrorLogStore();
+    setup() {
+      const { t } = useI18n();
+      const { push } = useRouter();
+      const errorLogStore = useErrorLogStore();
 
-    const getCount = computed(() => errorLogStore.getErrorLogListCount);
+      const getCount = computed(() => errorLogStore.getErrorLogListCount);
 
-    function handleToErrorList() {
-      push(PageEnum.ERROR_LOG_PAGE).then(() => {
-        errorLogStore.setErrorLogListCount(0);
-      });
+      function handleToErrorList() {
+        push(PageEnum.ERROR_LOG_PAGE).then(() => {
+          errorLogStore.setErrorLogListCount(0);
+        });
+      }
+
+      return {
+        t,
+        getCount,
+        handleToErrorList
+      };
     }
-
-    return {
-      t,
-      getCount,
-      handleToErrorList
-    };
-  }
-});
+  });
 </script>

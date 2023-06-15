@@ -5,11 +5,7 @@ import { ROW_KEY } from "../Const";
 import { omit } from "lodash-es";
 import { findNodeAll } from "/@/utils/helper/TreeHelper";
 
-export function useRowSelection(
-  propsRef: ComputedRef<BasicTableProps>,
-  tableData: Ref<Recordable[]>,
-  emit: EmitType
-) {
+export function useRowSelection(propsRef: ComputedRef<BasicTableProps>, tableData: Ref<Recordable[]>, emit: EmitType) {
   const selectedRowKeysRef = ref<string[]>([]);
   const selectedRowRef = ref<Recordable[]>([]);
 

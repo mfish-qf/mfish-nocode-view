@@ -1,11 +1,5 @@
-/**
- * @description: 配置定义
- * @author: mfish
- * @date: 2022/10/8 17:42
- */
 import {
   ContentEnum,
-  PermissionModeEnum,
   ThemeEnum,
   RouterTransitionEnum,
   SettingButtonPositionEnum,
@@ -14,6 +8,11 @@ import {
 import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from "/@/enums/MenuEnum";
 import { CacheTypeEnum } from "/@/enums/CacheEnum";
 
+/**
+ * @description: 配置定义
+ * @author: mfish
+ * @date: 2022/10/8 17:42
+ */
 //全局环境配置
 export interface GlobEnvConfig {
   // Site title

@@ -7,7 +7,7 @@ export enum LoginStateEnum {
   REGISTER,
   RESET_PASSWORD,
   MOBILE,
-  QR_CODE,
+  QR_CODE
 }
 
 const currentState = ref(LoginStateEnum.LOGIN);
@@ -77,9 +77,7 @@ export function useFormRules(formData?: Recordable) {
         return {
           account: accountFormRule,
           password: passwordFormRule,
-          confirmPassword: [
-            { validator: validateConfirmPassword(formData?.password), trigger: "change" }
-          ],
+          confirmPassword: [{ validator: validateConfirmPassword(formData?.password), trigger: "change" }],
           policy: [{ validator: validatePolicy, trigger: "change" }],
           ...mobileRule
         };

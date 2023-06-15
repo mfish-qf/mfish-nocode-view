@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { computed, defineComponent, h, unref } from 'vue';
-  import BasicButton from './BasicButton.vue';
-  import { Popconfirm } from 'ant-design-vue';
-  import { extendSlots } from '/@/utils/helper/TsxHelper';
-  import { omit } from 'lodash-es';
-  import { useAttrs } from '/@/hooks/core/UseAttrs';
-  import { useI18n } from '/@/hooks/web/UseI18n';
+  import { computed, defineComponent, h, unref } from "vue";
+  import BasicButton from "./BasicButton.vue";
+  import { Popconfirm } from "ant-design-vue";
+  import { extendSlots } from "/@/utils/helper/TsxHelper";
+  import { omit } from "lodash-es";
+  import { useAttrs } from "/@/hooks/core/UseAttrs";
+  import { useI18n } from "/@/hooks/web/UseI18n";
 
   const props = {
     /**
@@ -14,12 +14,12 @@
      */
     enable: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
   };
 
   export default defineComponent({
-    name: 'PopButton',
+    name: "PopButton",
     inheritAttrs: false,
     props,
     setup(props, { slots }) {
@@ -30,17 +30,17 @@
       const getBindValues = computed(() => {
         return Object.assign(
           {
-            okText: t('common.okText'),
-            cancelText: t('common.cancelText'),
+            okText: t("common.okText"),
+            cancelText: t("common.cancelText")
           },
-          { ...props, ...unref(attrs) },
+          { ...props, ...unref(attrs) }
         );
       });
 
       return () => {
-        const bindValues = omit(unref(getBindValues), 'icon');
-        const btnBind = omit(bindValues, 'title') as Recordable;
-        if (btnBind.disabled) btnBind.color = '';
+        const bindValues = omit(unref(getBindValues), "icon");
+        const btnBind = omit(bindValues, "title") as Recordable;
+        if (btnBind.disabled) btnBind.color = "";
         const Button = h(BasicButton, btnBind, extendSlots(slots));
 
         // If it is not enabled, it is a normal button
@@ -49,6 +49,6 @@
         }
         return h(Popconfirm, bindValues, { default: () => Button });
       };
-    },
+    }
   });
 </script>

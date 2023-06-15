@@ -6,36 +6,31 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, unref, computed, CSSProperties } from 'vue';
-  import LayoutHeader from './index.vue';
-  import MultipleTabs from '../tabs/index.vue';
-  import { useHeaderSetting } from '/@/hooks/setting/UseHeaderSetting';
-  import { useMenuSetting } from '/@/hooks/setting/UseMenuSetting';
-  import { useFullContent } from '/@/hooks/web/UseFullContent';
-  import { useMultipleTabSetting } from '/@/hooks/setting/UseMultipleTabSetting';
-  import { useAppInject } from '/@/hooks/web/UseAppInject';
-  import { useDesign } from '/@/hooks/web/UseDesign';
-  import { useLayoutHeight } from '../content/UseContentViewHeight';
+  import { defineComponent, unref, computed, CSSProperties } from "vue";
+  import LayoutHeader from "./index.vue";
+  import MultipleTabs from "../tabs/index.vue";
+  import { useHeaderSetting } from "/@/hooks/setting/UseHeaderSetting";
+  import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
+  import { useFullContent } from "/@/hooks/web/UseFullContent";
+  import { useMultipleTabSetting } from "/@/hooks/setting/UseMultipleTabSetting";
+  import { useAppInject } from "/@/hooks/web/UseAppInject";
+  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useLayoutHeight } from "../content/UseContentViewHeight";
 
   const HEADER_HEIGHT = 48;
 
   const TABS_HEIGHT = 32;
   export default defineComponent({
-    name: 'LayoutMultipleHeader',
+    name: "LayoutMultipleHeader",
     components: { LayoutHeader, MultipleTabs },
     setup() {
       const { setHeaderHeight } = useLayoutHeight();
-      const { prefixCls } = useDesign('layout-multiple-header');
+      const { prefixCls } = useDesign("layout-multiple-header");
 
       const { getCalcContentWidth, getSplit } = useMenuSetting();
       const { getIsMobile } = useAppInject();
-      const {
-        getFixed,
-        getShowInsetHeaderRef,
-        getShowFullHeaderRef,
-        getHeaderTheme,
-        getShowHeader,
-      } = useHeaderSetting();
+      const { getFixed, getShowInsetHeaderRef, getShowFullHeaderRef, getHeaderTheme, getShowHeader } =
+        useHeaderSetting();
 
       const { getFullContent } = useFullContent();
 
@@ -52,7 +47,7 @@
       const getWrapStyle = computed((): CSSProperties => {
         const style: CSSProperties = {};
         if (unref(getFixed)) {
-          style.width = unref(getIsMobile) ? '100%' : unref(getCalcContentWidth);
+          style.width = unref(getIsMobile) ? "100%" : unref(getCalcContentWidth);
         }
         if (unref(getShowFullHeaderRef)) {
           style.top = `${HEADER_HEIGHT}px`;
@@ -66,11 +61,7 @@
 
       const getPlaceholderDomStyle = computed((): CSSProperties => {
         let height = 0;
-        if (
-          (unref(getShowFullHeaderRef) || !unref(getSplit)) &&
-          unref(getShowHeader) &&
-          !unref(getFullContent)
-        ) {
+        if ((unref(getShowFullHeaderRef) || !unref(getSplit)) && unref(getShowHeader) && !unref(getFullContent)) {
           height += HEADER_HEIGHT;
         }
         if (unref(getShowMultipleTab) && !unref(getFullContent)) {
@@ -78,16 +69,12 @@
         }
         setHeaderHeight(height);
         return {
-          height: `${height}px`,
+          height: `${height}px`
         };
       });
 
       const getClass = computed(() => {
-        return [
-          prefixCls,
-          `${prefixCls}--${unref(getHeaderTheme)}`,
-          { [`${prefixCls}--fixed`]: unref(getIsFixed) },
-        ];
+        return [prefixCls, `${prefixCls}--${unref(getHeaderTheme)}`, { [`${prefixCls}--fixed`]: unref(getIsFixed) }];
       });
 
       return {
@@ -98,13 +85,13 @@
         getWrapStyle,
         getIsShowPlaceholderDom,
         getShowTabs,
-        getShowInsetHeaderRef,
+        getShowInsetHeaderRef
       };
-    },
+    }
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-layout-multiple-header';
+  @prefix-cls: ~"@{namespace}-layout-multiple-header";
 
   .@{prefix-cls} {
     transition: width 0.2s;

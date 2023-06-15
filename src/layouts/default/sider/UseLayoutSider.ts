@@ -36,11 +36,7 @@ export function useTrigger(getIsMobile: Ref<boolean>) {
   const getShowTrigger = computed(() => {
     const trigger = unref(getTrigger);
 
-    return (
-      trigger !== TriggerEnum.NONE &&
-      !unref(getIsMobile) &&
-      (trigger === TriggerEnum.FOOTER || unref(getSplit))
-    );
+    return trigger !== TriggerEnum.NONE && !unref(getIsMobile) && (trigger === TriggerEnum.FOOTER || unref(getSplit));
   });
 
   const getTriggerAttr = computed(() => {
@@ -80,7 +76,7 @@ export function useDragLine(siderRef: Ref<any>, dragBarRef: Ref<any>, mix = fals
   }
 
   function handleMouseMove(ele: HTMLElement, wrap: HTMLElement, clientX: number) {
-    document.onmousemove = function(innerE) {
+    document.onmousemove = function (innerE) {
       let iT = (ele as any).left + (innerE.clientX - clientX);
       innerE = innerE || window.event;
       const maxT = 800;
@@ -96,7 +92,7 @@ export function useDragLine(siderRef: Ref<any>, dragBarRef: Ref<any>, mix = fals
   // Drag and drop in the menu area-release the mouse
   function removeMouseup(ele: any) {
     const wrap = getEl(siderRef);
-    document.onmouseup = function() {
+    document.onmouseup = function () {
       document.onmousemove = null;
       document.onmouseup = null;
       wrap.style.transition = "width 0.2s";
@@ -105,9 +101,7 @@ export function useDragLine(siderRef: Ref<any>, dragBarRef: Ref<any>, mix = fals
       if (!mix) {
         const miniWidth = unref(getMiniWidthNumber);
         if (!unref(getCollapsed)) {
-          width > miniWidth + 20
-            ? setMenuSetting({ menuWidth: width })
-            : setMenuSetting({ collapsed: true });
+          width > miniWidth + 20 ? setMenuSetting({ menuWidth: width }) : setMenuSetting({ collapsed: true });
         } else {
           width > miniWidth && setMenuSetting({ collapsed: false, menuWidth: width });
         }

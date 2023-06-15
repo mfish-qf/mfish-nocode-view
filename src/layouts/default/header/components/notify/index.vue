@@ -23,69 +23,69 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
-import { Popover, Tabs, Badge } from "ant-design-vue";
-import { BellOutlined } from "@ant-design/icons-vue";
-import { tabListData, ListItem } from "./Data";
-import NoticeList from "./NoticeList.vue";
-import { useDesign } from "/@/hooks/web/UseDesign";
-import { useMessage } from "/@/hooks/web/UseMessage";
+  import { computed, defineComponent, ref } from "vue";
+  import { Popover, Tabs, Badge } from "ant-design-vue";
+  import { BellOutlined } from "@ant-design/icons-vue";
+  import { tabListData, ListItem } from "./Data";
+  import NoticeList from "./NoticeList.vue";
+  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useMessage } from "/@/hooks/web/UseMessage";
 
-export default defineComponent({
-  components: { Popover, BellOutlined, Tabs, TabPane: Tabs.TabPane, Badge, NoticeList },
-  setup() {
-    const { prefixCls } = useDesign("header-notify");
-    const { createMessage } = useMessage();
-    const listData = ref(tabListData);
+  export default defineComponent({
+    components: { Popover, BellOutlined, Tabs, TabPane: Tabs.TabPane, Badge, NoticeList },
+    setup() {
+      const { prefixCls } = useDesign("header-notify");
+      const { createMessage } = useMessage();
+      const listData = ref(tabListData);
 
-    const count = computed(() => {
-      let count = 0;
-      for (let i = 0; i < tabListData.length; i++) {
-        count += tabListData[i].list.length;
+      const count = computed(() => {
+        let count = 0;
+        for (let i = 0; i < tabListData.length; i++) {
+          count += tabListData[i].list.length;
+        }
+        return count;
+      });
+
+      function onNoticeClick(record: ListItem) {
+        createMessage.success("你点击了通知，ID=" + record.id);
+        // 可以直接将其标记为已读（为标题添加删除线）,此处演示的代码会切换删除线状态
+        record.titleDelete = !record.titleDelete;
       }
-      return count;
-    });
 
-    function onNoticeClick(record: ListItem) {
-      createMessage.success("你点击了通知，ID=" + record.id);
-      // 可以直接将其标记为已读（为标题添加删除线）,此处演示的代码会切换删除线状态
-      record.titleDelete = !record.titleDelete;
+      return {
+        prefixCls,
+        listData,
+        count,
+        onNoticeClick,
+        numberStyle: {}
+      };
     }
-
-    return {
-      prefixCls,
-      listData,
-      count,
-      onNoticeClick,
-      numberStyle: {}
-    };
-  }
-});
+  });
 </script>
 <style lang="less">
-@prefix-cls: ~'@{namespace}-header-notify';
+  @prefix-cls: ~"@{namespace}-header-notify";
 
-.@{prefix-cls} {
-  padding-top: 2px;
+  .@{prefix-cls} {
+    padding-top: 2px;
 
-  &__overlay {
-    max-width: 360px;
-  }
-
-  .ant-tabs-content {
-    width: 300px;
-  }
-
-  .ant-badge {
-    font-size: 18px;
-
-    .ant-badge-multiple-words {
-      padding: 0 4px;
+    &__overlay {
+      max-width: 360px;
     }
 
-    svg {
-      width: 0.9em;
+    .ant-tabs-content {
+      width: 300px;
+    }
+
+    .ant-badge {
+      font-size: 18px;
+
+      .ant-badge-multiple-words {
+        padding: 0 4px;
+      }
+
+      svg {
+        width: 0.9em;
+      }
     }
   }
-}
 </style>

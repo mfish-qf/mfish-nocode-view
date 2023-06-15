@@ -1,10 +1,5 @@
 import type { AppRouteRecordRaw } from "/@/router/Types";
-import {
-  REDIRECT_NAME,
-  LAYOUT,
-  EXCEPTION_COMPONENT,
-  PAGE_NOT_FOUND_NAME
-} from "/@/router/Constant";
+import { REDIRECT_NAME, LAYOUT, EXCEPTION_COMPONENT, PAGE_NOT_FOUND_NAME } from "/@/router/Constant";
 import { PageEnum } from "/@/enums/PageEnum";
 import { t } from "/@/hooks/web/UseI18n";
 

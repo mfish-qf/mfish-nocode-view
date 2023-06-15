@@ -51,7 +51,7 @@ export function setObjToUrlParams(baseUrl: string, obj: any): string {
 
 export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormalized {
   if (!route) return route;
-  const { matched, ...opt } = route;
+  const {matched, ...opt} = route;
   return {
     ...opt,
     matched: (matched
@@ -64,8 +64,12 @@ export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormal
   };
 }
 
-export function openWindow(url: string, opt?: { target?: TargetContext | string; noopener?: boolean; noreferrer?: boolean }) {
-  const { target = "__blank", noopener = true, noreferrer = true } = opt || {};
+export function openWindow(url: string, opt?: {
+  target?: TargetContext | string;
+  noopener?: boolean;
+  noreferrer?: boolean
+}) {
+  const {target = "__blank", noopener = true, noreferrer = true} = opt || {};
   const feature: string[] = [];
   noopener && feature.push("noopener=yes");
   noreferrer && feature.push("noreferrer=yes");

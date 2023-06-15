@@ -4,19 +4,19 @@
   </BasicTitle>
 </template>
 <script lang="ts">
-import type { PropType } from "vue";
-import { defineComponent } from "vue";
-import { BasicTitle } from "/@/components/general/Basic";
+  import type { PropType } from "vue";
+  import { defineComponent } from "vue";
+  import { BasicTitle } from "/@/components/general/Basic";
 
-export default defineComponent({
-  name: "BasicModalHeader",
-  components: { BasicTitle },
-  props: {
-    helpMessage: {
-      type: [String, Array] as PropType<string | string[]>
+  export default defineComponent({
+    name: "BasicModalHeader",
+    components: { BasicTitle },
+    props: {
+      helpMessage: {
+        type: [String, Array] as PropType<string | string[]>
+      },
+      title: { type: String }
     },
-    title: { type: String }
-  },
-  emits: ["dblclick"]
-});
+    emits: ["dblclick"]
+  });
 </script>

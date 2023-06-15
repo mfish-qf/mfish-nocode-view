@@ -5,7 +5,7 @@ enum Api {
   Menu = "/oauth2/menu",
   MenuTree = "/oauth2/menu/tree",
   RoleMenuTree = "/oauth2/menu/roleTree",
-  MenuRoute = "/oauth2/menu/route",
+  MenuRoute = "/oauth2/menu/route"
 }
 
 export const getMenuList = (params?: MenuParams) => {

@@ -152,9 +152,9 @@ export const accountFormSchema: FormSchema[] = [
         key: "id",
         value: "id"
       },
-      getPopupContainer: () => document.body,
+      getPopupContainer: () => document.body
     },
-    required: true,
+    required: true
   },
   {
     label: "角色",
@@ -163,7 +163,8 @@ export const accountFormSchema: FormSchema[] = [
     componentProps: {
       mode: "multiple"
     },
-    dynamicDisabled: ((renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin" ? true : false)
+    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
+      renderCallbackParams.values["account"] === "admin" ? true : false
   },
   {
     label: "邮箱",
