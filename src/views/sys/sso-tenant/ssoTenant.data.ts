@@ -3,6 +3,10 @@ import { FormSchema } from "/@/components/general/Table";
 import { getDictProps } from "/@/utils/DictUtils";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
+import { imageUrl } from "/@/utils/FileUtils";
+import { getLocalFileUrl } from "/@/api/storage/SysFile";
+import TableImage from "/@/components/general/Table/src/components/TableImg.vue";
+
 /**
  * @description: 租户信息表
  * @author: mfish
@@ -10,6 +14,20 @@ import { Tag } from "ant-design-vue";
  * @version: V1.0.0
  */
 export const columns: BasicColumn[] = [
+  {
+    title: "logo",
+    dataIndex: "logo",
+    customRender: ({ record }) => {
+      const imgList = [imageUrl(getLocalFileUrl(record.logo))];
+      return h(TableImage, { size: 40, simpleShow: true, imgList: imgList });
+    },
+    width: 120
+  },
+  {
+    title: "租户类型",
+    dataIndex: "tenantType",
+    width: 60
+  },
   {
     title: "租户名称",
     dataIndex: "name",
@@ -36,6 +54,20 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
+    title: "域名",
+    dataIndex: "domain",
+    customRender: ({ record }) => {
+      //超链接访问文件，直接访问后台存储文件地址
+      return h("a", { href: record.domain, target: "_blank" }, record.domain);
+    },
+    width: 120
+  },
+  {
+    title: "管理员",
+    dataIndex: "userName",
+    width: 120
+  },
+  {
     title: "状态",
     dataIndex: "status",
     width: 80,
@@ -46,26 +78,6 @@ export const columns: BasicColumn[] = [
       const text = enable ? "正常" : "注销";
       return h(Tag, { color: color }, () => text);
     }
-  },
-  {
-    title: "logo",
-    dataIndex: "logo",
-    width: 120
-  },
-  {
-    title: "域名",
-    dataIndex: "domain",
-    width: 120
-  },
-  {
-    title: "管理员",
-    dataIndex: "userName",
-    width: 120
-  },
-  {
-    title: "租户类型",
-    dataIndex: "tenantType",
-    width: 120
   }
 ];
 export const searchFormSchema: FormSchema[] = [
@@ -137,7 +149,7 @@ export const ssoTenantFormSchema: FormSchema[] = [
     field: "trade",
     label: "所属行业",
     component: "ApiSelect",
-    componentProps: getDictProps("tenant_corp_industry"),
+    componentProps: getDictProps("tenant_corp_trade"),
     required: true
   },
   {
@@ -163,5 +175,5 @@ export const ssoTenantFormSchema: FormSchema[] = [
       ]
     },
     required: true
-  },
+  }
 ];
