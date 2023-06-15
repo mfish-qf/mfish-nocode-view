@@ -7,109 +7,105 @@
 <template>
   <BasicTable @register="registerTable">
     <template #toolbar>
-      <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:job:insert')">新增策略
-      </a-button>
+      <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:job:insert')">新增策略 </a-button>
     </template>
     <template #bodyCell="{ column, record }">
       <template v-if="column.key === 'action'">
         <TableAction
           :actions="[
-              {
-                icon: 'ant-design:delete-outlined',
-                color: 'error',
-                popConfirm: {
-                  title: '是否确认删除',
-                  placement: 'left',
-                  confirm: handleDelete.bind(null, record),
-                },
-                auth: 'sys:job:delete'
+            {
+              icon: 'ant-design:delete-outlined',
+              color: 'error',
+              popConfirm: {
+                title: '是否确认删除',
+                placement: 'left',
+                confirm: handleDelete.bind(null, record)
               },
-            ]"
+              auth: 'sys:job:delete'
+            }
+          ]"
         />
       </template>
     </template>
   </BasicTable>
 </template>
 <script lang="ts">
-import { watch } from "vue";
-import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-import { getJobSubscribeById } from "/@/api/scheduler/JobSubscribe";
-import { columns } from "./jobSubscribe.data";
-import { usePermission } from "/@/hooks/web/UsePermission";
-import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
-import { buildUUID } from "/@/utils/Uuid";
+  import { watch } from "vue";
+  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
+  import { getJobSubscribeById } from "/@/api/scheduler/JobSubscribe";
+  import { columns } from "./jobSubscribe.data";
+  import { usePermission } from "/@/hooks/web/UsePermission";
+  import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
+  import { buildUUID } from "/@/utils/Uuid";
 
-export default {
-  name: "JobSubscribeManagement",
-  components: { BasicTable, TableAction },
-  props: {
-    jobId: { type: String, default: "" }
-  },
-  setup(props) {
-    const { hasPermission } = usePermission();
-    const [registerTable, {
-      reload,
-      insertTableDataRecord,
-      deleteTableDataRecord,
-      setTableData,
-      getDataSource
-    }] = useTable({
-      title: "触发策略列表",
-      rowKey: "id",
-      columns,
-      bordered: true,
-      showIndexColumn: false,
-      maxHeight: 300,
-      pagination: false,
-      actionColumn: {
-        width: 40,
-        title: "",
-        dataIndex: "action",
-        fixed: undefined
-      }
-    });
-    const getValue = () => {
-      return getDataSource();
-    };
-
-    watch(() => props.jobId
-      , (newVal, oldVal) => {
-        if (newVal && newVal !== oldVal) {
-          getJobSubscribeById(newVal).then((res) => {
-            setTableData(res);
-          });
-        } else {
-          setTableData([]);
-        }
-      });
-
-    function handleCreate() {
-      const value = {
-        id: buildUUID(),
-        cron: "",
-        startTime: formatToDateTime(dateUtil()),
-        endTime: formatToDateTime(dateUtil().add(2, "year")),
-        status: 0
+  export default {
+    name: "JobSubscribeManagement",
+    components: { BasicTable, TableAction },
+    props: {
+      jobId: { type: String, default: "" }
+    },
+    setup(props) {
+      const { hasPermission } = usePermission();
+      const [registerTable, { reload, insertTableDataRecord, deleteTableDataRecord, setTableData, getDataSource }] =
+        useTable({
+          title: "触发策略列表",
+          rowKey: "id",
+          columns,
+          bordered: true,
+          showIndexColumn: false,
+          maxHeight: 300,
+          pagination: false,
+          actionColumn: {
+            width: 40,
+            title: "",
+            dataIndex: "action",
+            fixed: undefined
+          }
+        });
+      const getValue = () => {
+        return getDataSource();
       };
-      insertTableDataRecord(value, 0);
-    }
 
-    function handleDelete(record: Recordable) {
-      deleteTableDataRecord(record.id);
-    }
+      watch(
+        () => props.jobId,
+        (newVal, oldVal) => {
+          if (newVal && newVal !== oldVal) {
+            getJobSubscribeById(newVal).then((res) => {
+              setTableData(res);
+            });
+          } else {
+            setTableData([]);
+          }
+        }
+      );
 
-    function handleSuccess() {
-      reload();
-    }
+      function handleCreate() {
+        const value = {
+          id: buildUUID(),
+          cron: "",
+          startTime: formatToDateTime(dateUtil()),
+          endTime: formatToDateTime(dateUtil().add(2, "year")),
+          status: 0
+        };
+        insertTableDataRecord(value, 0);
+      }
 
-    return {
-      registerTable,
-      handleCreate,
-      handleDelete,
-      handleSuccess,
-      hasPermission,
-      getValue
-    };
-  }
-};
+      function handleDelete(record: Recordable) {
+        deleteTableDataRecord(record.id);
+      }
+
+      function handleSuccess() {
+        reload();
+      }
+
+      return {
+        registerTable,
+        handleCreate,
+        handleDelete,
+        handleSuccess,
+        hasPermission,
+        getValue
+      };
+    }
+  };
 </script>

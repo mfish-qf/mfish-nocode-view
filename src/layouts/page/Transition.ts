@@ -7,12 +7,12 @@ export interface DefaultContext {
 }
 
 export function getTransitionName({
-                                    route,
-                                    openCache,
-                                    cacheTabs,
-                                    enableTransition,
-                                    def
-                                  }: Pick<DefaultContext, "route"> & {
+  route,
+  openCache,
+  cacheTabs,
+  enableTransition,
+  def
+}: Pick<DefaultContext, "route"> & {
   enableTransition: boolean;
   openCache: boolean;
   def: string;

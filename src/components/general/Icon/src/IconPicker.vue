@@ -7,19 +7,10 @@
     v-model:value="currentSelect"
   >
     <template #addonAfter>
-      <a-popover
-        placement="bottomLeft"
-        trigger="click"
-        v-model="visible"
-        :overlayClassName="`${prefixCls}-popover`"
-      >
+      <a-popover placement="bottomLeft" trigger="click" v-model="visible" :overlayClassName="`${prefixCls}-popover`">
         <template #title>
           <div class="flex justify-between">
-            <a-input
-              :placeholder="t('component.icon.search')"
-              @change="debounceHandleSearchChange"
-              allowClear
-            />
+            <a-input :placeholder="t('component.icon.search')" @change="debounceHandleSearchChange" allowClear />
           </div>
         </template>
 
@@ -51,8 +42,7 @@
               />
             </div>
           </div>
-          <template v-else
-          >
+          <template v-else>
             <div class="p-5">
               <a-empty />
             </div>
@@ -68,126 +58,123 @@
   </a-input>
 </template>
 <script lang="ts" setup>
-import { ref, watchEffect, watch, unref } from "vue";
-import { useDesign } from "/@/hooks/web/UseDesign";
-import { ScrollContainer } from "/@/components/general/Container";
-import { Input, Popover, Pagination, Empty } from "ant-design-vue";
-import Icon from "./Icon.vue";
-import SvgIcon from "./SvgIcon.vue";
-import iconsData from "../data/icons.data";
-import { propTypes } from "/@/utils/PropTypes";
-import { usePagination } from "/@/hooks/web/UsePagination";
-import { useDebounceFn } from "@vueuse/core";
-import { useI18n } from "/@/hooks/web/UseI18n";
-import { useCopyToClipboard } from "/@/hooks/web/UseCopyToClipboard";
-import { useMessage } from "/@/hooks/web/UseMessage";
-import svgIcons from "virtual:svg-icons-names";
+  import { ref, watchEffect, watch, unref } from "vue";
+  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { ScrollContainer } from "/@/components/general/Container";
+  import { Input, Popover, Pagination, Empty } from "ant-design-vue";
+  import Icon from "./Icon.vue";
+  import SvgIcon from "./SvgIcon.vue";
+  import iconsData from "../data/icons.data";
+  import { propTypes } from "/@/utils/PropTypes";
+  import { usePagination } from "/@/hooks/web/UsePagination";
+  import { useDebounceFn } from "@vueuse/core";
+  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useCopyToClipboard } from "/@/hooks/web/UseCopyToClipboard";
+  import { useMessage } from "/@/hooks/web/UseMessage";
+  import svgIcons from "virtual:svg-icons-names";
 
-// 没有使用别名引入，是因为WebStorm当前版本还不能正确识别，会报unused警告
-const AInput = Input;
-const APopover = Popover;
-const APagination = Pagination;
-const AEmpty = Empty;
+  // 没有使用别名引入，是因为WebStorm当前版本还不能正确识别，会报unused警告
+  const AInput = Input;
+  const APopover = Popover;
+  const APagination = Pagination;
+  const AEmpty = Empty;
 
-function getIcons() {
-  const data = iconsData as any;
-  const prefix: string = data?.prefix ?? "";
-  let result: string[] = [];
-  if (prefix) {
-    result = (data?.icons ?? []).map((item) => `${prefix}:${item}`);
-  } else if (Array.isArray(iconsData)) {
-    result = iconsData as string[];
+  function getIcons() {
+    const data = iconsData as any;
+    const prefix: string = data?.prefix ?? "";
+    let result: string[] = [];
+    if (prefix) {
+      result = (data?.icons ?? []).map((item) => `${prefix}:${item}`);
+    } else if (Array.isArray(iconsData)) {
+      result = iconsData as string[];
+    }
+    return result;
   }
-  return result;
-}
 
-function getSvgIcons() {
-  return svgIcons.map((icon) => icon.replace("icon-", ""));
-}
-
-const props = defineProps({
-  value: propTypes.string,
-  width: propTypes.string.def("100%"),
-  pageSize: propTypes.number.def(140),
-  copy: propTypes.bool.def(false),
-  mode: propTypes.oneOf<("svg" | "iconify")[]>(["svg", "iconify"]).def("iconify")
-});
-
-const emit = defineEmits(["change", "update:value"]);
-
-const isSvgMode = props.mode === "svg";
-const icons = isSvgMode ? getSvgIcons() : getIcons();
-
-const currentSelect = ref("");
-const visible = ref(false);
-const currentList = ref(icons);
-
-const { t } = useI18n();
-const { prefixCls } = useDesign("icon-picker");
-
-const debounceHandleSearchChange = useDebounceFn(handleSearchChange, 100);
-const { clipboardRef, isSuccessRef } = useCopyToClipboard(props.value);
-const { createMessage } = useMessage();
-
-const { getPaginationList, getTotal, setCurrentPage } = usePagination(
-  currentList,
-  props.pageSize
-);
-
-watchEffect(() => {
-  currentSelect.value = props.value;
-});
-
-watch(
-  () => currentSelect.value,
-  (v) => {
-    emit("update:value", v);
-    return emit("change", v);
+  function getSvgIcons() {
+    return svgIcons.map((icon) => icon.replace("icon-", ""));
   }
-);
 
-function handlePageChange(page: number) {
-  setCurrentPage(page);
-}
+  const props = defineProps({
+    value: propTypes.string,
+    width: propTypes.string.def("100%"),
+    pageSize: propTypes.number.def(140),
+    copy: propTypes.bool.def(false),
+    mode: propTypes.oneOf<("svg" | "iconify")[]>(["svg", "iconify"]).def("iconify")
+  });
 
-function handleClick(icon: string) {
-  currentSelect.value = icon;
-  if (props.copy) {
-    clipboardRef.value = icon;
-    if (unref(isSuccessRef)) {
-      createMessage.success(t("component.icon.copy"));
+  const emit = defineEmits(["change", "update:value"]);
+
+  const isSvgMode = props.mode === "svg";
+  const icons = isSvgMode ? getSvgIcons() : getIcons();
+
+  const currentSelect = ref("");
+  const visible = ref(false);
+  const currentList = ref(icons);
+
+  const { t } = useI18n();
+  const { prefixCls } = useDesign("icon-picker");
+
+  const debounceHandleSearchChange = useDebounceFn(handleSearchChange, 100);
+  const { clipboardRef, isSuccessRef } = useCopyToClipboard(props.value);
+  const { createMessage } = useMessage();
+
+  const { getPaginationList, getTotal, setCurrentPage } = usePagination(currentList, props.pageSize);
+
+  watchEffect(() => {
+    currentSelect.value = props.value;
+  });
+
+  watch(
+    () => currentSelect.value,
+    (v) => {
+      emit("update:value", v);
+      return emit("change", v);
+    }
+  );
+
+  function handlePageChange(page: number) {
+    setCurrentPage(page);
+  }
+
+  function handleClick(icon: string) {
+    currentSelect.value = icon;
+    if (props.copy) {
+      clipboardRef.value = icon;
+      if (unref(isSuccessRef)) {
+        createMessage.success(t("component.icon.copy"));
+      }
     }
   }
-}
 
-function handleSearchChange(e: ChangeEvent) {
-  const value = e.target.value;
-  if (!value) {
-    setCurrentPage(1);
-    currentList.value = icons;
-    return;
+  function handleSearchChange(e: ChangeEvent) {
+    const value = e.target.value;
+    if (!value) {
+      setCurrentPage(1);
+      currentList.value = icons;
+      return;
+    }
+    currentList.value = icons.filter((item) => item.includes(value));
   }
-  currentList.value = icons.filter((item) => item.includes(value));
-}
 </script>
 <style lang="less">
-@prefix-cls: ~'@{namespace}-icon-picker';
+  @prefix-cls: ~"@{namespace}-icon-picker";
 
-.@{prefix-cls} {
-  .ant-input-group-addon {
-    padding: 0;
-  }
-
-  &-popover {
-    width: 300px;
-
-    .ant-popover-inner-content {
+  .@{prefix-cls} {
+    .ant-input-group-addon {
       padding: 0;
     }
 
-    .scrollbar {
-      height: 220px;
+    &-popover {
+      width: 300px;
+
+      .ant-popover-inner-content {
+        padding: 0;
+      }
+
+      .scrollbar {
+        height: 220px;
+      }
     }
   }
-}
 </style>

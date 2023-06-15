@@ -1,23 +1,20 @@
-import type { EChartsOption } from 'echarts';
-import type { Ref } from 'vue';
-import { useTimeoutFn } from '/@/hooks/core/UseTimeout';
-import { tryOnUnmounted } from '@vueuse/core';
-import { unref, nextTick, watch, computed, ref } from 'vue';
-import { useDebounceFn } from '@vueuse/core';
-import { useEventListener } from '/@/hooks/event/UseEventListener';
-import { useBreakpoint } from '/@/hooks/event/UseBreakpoint';
-import echarts from '/@/utils/lib/Echarts';
-import { useRootSetting } from '/@/hooks/setting/UseRootSetting';
-import { useMenuSetting } from '/@/hooks/setting/UseMenuSetting';
+import type { EChartsOption } from "echarts";
+import type { Ref } from "vue";
+import { useTimeoutFn } from "/@/hooks/core/UseTimeout";
+import { tryOnUnmounted } from "@vueuse/core";
+import { unref, nextTick, watch, computed, ref } from "vue";
+import { useDebounceFn } from "@vueuse/core";
+import { useEventListener } from "/@/hooks/event/UseEventListener";
+import { useBreakpoint } from "/@/hooks/event/UseBreakpoint";
+import echarts from "/@/utils/lib/Echarts";
+import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
+import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
 
-export function useECharts(
-  elRef: Ref<HTMLDivElement>,
-  theme: 'light' | 'dark' | 'default' = 'default',
-) {
+export function useECharts(elRef: Ref<HTMLDivElement>, theme: "light" | "dark" | "default" = "default") {
   const { getDarkMode: getSysDarkMode } = useRootSetting();
   const { getCollapsed } = useMenuSetting();
   const getDarkMode = computed(() => {
-    return theme === 'default' ? getSysDarkMode.value : theme;
+    return theme === "default" ? getSysDarkMode.value : theme;
   });
   let chartInstance: echarts.ECharts | null = null;
   let resizeFn: Fn = resize;
@@ -27,12 +24,12 @@ export function useECharts(
   resizeFn = useDebounceFn(resize, 200);
 
   const getOptions = computed(() => {
-    if (getDarkMode.value !== 'dark') {
+    if (getDarkMode.value !== "dark") {
       return cacheOptions.value as EChartsOption;
     }
     return {
-      backgroundColor: 'transparent',
-      ...cacheOptions.value,
+      backgroundColor: "transparent",
+      ...cacheOptions.value
     } as EChartsOption;
   });
 
@@ -45,8 +42,8 @@ export function useECharts(
     chartInstance = echarts.init(el, t);
     const { removeEvent } = useEventListener({
       el: window,
-      name: 'resize',
-      listener: resizeFn,
+      name: "resize",
+      listener: resizeFn
     });
     removeResizeFn = removeEvent;
     const { widthRef, screenEnum } = useBreakpoint();
@@ -68,7 +65,7 @@ export function useECharts(
     nextTick(() => {
       useTimeoutFn(() => {
         if (!chartInstance) {
-          initCharts(getDarkMode.value as 'default');
+          initCharts(getDarkMode.value as "default");
 
           if (!chartInstance) return;
         }
@@ -83,8 +80,8 @@ export function useECharts(
     chartInstance?.resize({
       animation: {
         duration: 300,
-        easing: 'quadraticIn',
-      },
+        easing: "quadraticIn"
+      }
     });
   }
 
@@ -93,10 +90,10 @@ export function useECharts(
     (theme) => {
       if (chartInstance) {
         chartInstance.dispose();
-        initCharts(theme as 'default');
+        initCharts(theme as "default");
         setOptions(cacheOptions.value);
       }
-    },
+    }
   );
 
   watch(getCollapsed, (_) => {
@@ -114,7 +111,7 @@ export function useECharts(
 
   function getInstance(): echarts.ECharts | null {
     if (!chartInstance) {
-      initCharts(getDarkMode.value as 'default');
+      initCharts(getDarkMode.value as "default");
     }
     return chartInstance;
   }
@@ -123,6 +120,6 @@ export function useECharts(
     setOptions,
     resize,
     echarts,
-    getInstance,
+    getInstance
   };
 }

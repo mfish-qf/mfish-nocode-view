@@ -14,7 +14,12 @@ const stp = projectSetting.sessionTimeoutProcessing;
  * @param msg
  * @param errorMessageMode
  */
-export function checkStatus(status: number, msg: string, errorMessageMode: MessageMode = "none", retryCount: number): void {
+export function checkStatus(
+  status: number,
+  msg: string,
+  errorMessageMode: MessageMode = "none",
+  retryCount: number
+): void {
   const { t } = useI18n();
   const userStore = useUserStoreWithOut();
   let errMessage = "";

@@ -18,14 +18,14 @@ export default {
       totalField: "total"
     },
     // 可选的分页选项
-    pageSizeOptions: ["10", "20" ,"50", "100","1000"],
+    pageSizeOptions: ["10", "20", "50", "100", "1000"],
     // 默认每页显示多少条
     defaultPageSize: 10,
     // 默认大小
     defaultSize: "middle",
     // 默认排序方法
     defaultSortFn: (sortInfo: SorterResult) => {
-      const { field, order } = sortInfo;
+      const {field, order} = sortInfo;
       if (field && order) {
         return {
           // 排序字段

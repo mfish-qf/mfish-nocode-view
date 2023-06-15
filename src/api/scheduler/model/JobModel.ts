@@ -21,8 +21,6 @@ export interface Job extends BaseEntity<string> {
   remark: string;
 }
 
-export interface ReqJob {
-
-}
+export interface ReqJob {}
 
 export type JobPageModel = PageResult<Job>;

@@ -115,7 +115,11 @@ const transform: AxiosTransform = {
       config.params = undefined;
       return config;
     }
-    if (Reflect.has(config, "data") && config.data && (Object.keys(config.data).length > 0 || config.data instanceof FormData)) {
+    if (
+      Reflect.has(config, "data") &&
+      config.data &&
+      (Object.keys(config.data).length > 0 || config.data instanceof FormData)
+    ) {
       config.data = data;
       config.params = params;
     } else {
@@ -124,10 +128,7 @@ const transform: AxiosTransform = {
       config.params = undefined;
     }
     if (joinParamsToUrl) {
-      config.url = setObjToUrlParams(
-        config.url as string,
-        Object.assign({}, config.params, config.data)
-      );
+      config.url = setObjToUrlParams(config.url as string, Object.assign({}, config.params, config.data));
     }
     return config;
   },
@@ -175,8 +176,7 @@ const transform: AxiosTransform = {
     // 添加自动重试机制 保险起见 只针对GET请求
     const retryRequest = new AxiosRetry();
     const { isOpenRetry } = config.requestOptions?.retryRequest;
-    config.method?.toUpperCase() === RequestEnum.GET && isOpenRetry &&
-    retryRequest.retry(axiosInstance, error);
+    config.method?.toUpperCase() === RequestEnum.GET && isOpenRetry && retryRequest.retry(axiosInstance, error);
     return Promise.reject(error);
   }
 };

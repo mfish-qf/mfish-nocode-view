@@ -56,8 +56,7 @@ export function useTableScroll(
   let bodyEl: HTMLElement | null;
 
   async function calcTableHeight() {
-    const { resizeHeightOffset, pagination, maxHeight, isCanResizeParent, useSearchForm } =
-      unref(propsRef);
+    const { resizeHeightOffset, pagination, maxHeight, isCanResizeParent, useSearchForm } = unref(propsRef);
     const table = unref(tableElRef);
     if (!table) return;
 
@@ -73,15 +72,13 @@ export function useTableScroll(
     const hasScrollBarX = bodyEl.scrollWidth > bodyEl.clientWidth;
 
     if (hasScrollBarY) {
-      tableEl.classList.contains("hide-scrollbar-y") &&
-      tableEl.classList.remove("hide-scrollbar-y");
+      tableEl.classList.contains("hide-scrollbar-y") && tableEl.classList.remove("hide-scrollbar-y");
     } else {
       !tableEl.classList.contains("hide-scrollbar-y") && tableEl.classList.add("hide-scrollbar-y");
     }
 
     if (hasScrollBarX) {
-      tableEl.classList.contains("hide-scrollbar-x") &&
-      tableEl.classList.remove("hide-scrollbar-x");
+      tableEl.classList.contains("hide-scrollbar-x") && tableEl.classList.remove("hide-scrollbar-x");
     } else {
       !tableEl.classList.contains("hide-scrollbar-x") && tableEl.classList.add("hide-scrollbar-x");
     }
@@ -147,23 +144,16 @@ export function useTableScroll(
         paddingHeight = 0;
       }
 
-      const headerCellHeight =
-        (tableEl.querySelector(".ant-table-title") as HTMLElement)?.offsetHeight ?? 0;
+      const headerCellHeight = (tableEl.querySelector(".ant-table-title") as HTMLElement)?.offsetHeight ?? 0;
 
       console.log(wrapHeight - formHeight - headerCellHeight - tablePadding - paginationMargin);
-      bottomIncludeBody =
-        wrapHeight - formHeight - headerCellHeight - tablePadding - paginationMargin;
+      bottomIncludeBody = wrapHeight - formHeight - headerCellHeight - tablePadding - paginationMargin;
     } else {
       // Table height from bottom
       bottomIncludeBody = getViewportOffset(headEl).bottomIncludeBody;
     }
     let height =
-      bottomIncludeBody -
-      (resizeHeightOffset || 0) -
-      paddingHeight -
-      paginationHeight -
-      footerHeight -
-      headerHeight;
+      bottomIncludeBody - (resizeHeightOffset || 0) - paddingHeight - paginationHeight - footerHeight - headerHeight;
     height = (height > maxHeight! ? (maxHeight as number) : height) ?? height;
     setHeight(height);
 

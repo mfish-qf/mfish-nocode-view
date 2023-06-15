@@ -22,4 +22,5 @@ async function runBuild() {
     process.exit(1);
   }
 }
+
 runBuild().then();

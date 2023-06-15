@@ -1,8 +1,3 @@
-/**
- * @description: 插件引用
- * @author: mfish
- * @date: 2022/9/23 22:21
- */
 import purgeIcons from "vite-plugin-purge-icons";
 import { PluginOption } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -17,14 +12,19 @@ import { configThemePlugin } from "./Theme";
 import { configImageminPlugin } from "./Imagemin";
 import { configMockPlugin } from "./Mock";
 
+/**
+ * @description: 插件引用
+ * @author: mfish
+ * @date: 2022/9/23 22:21
+ */
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const { VITE_LEGACY, VITE_USE_IMAGEMIN, VITE_USE_MOCK } = viteEnv;
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     vue(),
     vueJsx(),
     VitePluginCertificate({
-      source: "coding",
-    }),
+      source: "coding"
+    })
   ];
   VITE_LEGACY && isBuild && vitePlugins.push(legacy());
   // 用于html模版转换，可以在html文件内进行书写模版语法

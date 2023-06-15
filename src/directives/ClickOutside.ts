@@ -4,11 +4,13 @@ import type { ComponentPublicInstance, DirectiveBinding, ObjectDirective } from 
 
 type DocumentHandler = <T extends MouseEvent>(mouseup: T, mousedown: T) => void;
 
-type FlushList = Map<HTMLElement,
+type FlushList = Map<
+  HTMLElement,
   {
     documentHandler: DocumentHandler;
     bindingFn: (...args: unknown[]) => unknown;
-  }>;
+  }
+>;
 
 const nodeList: FlushList = new Map();
 
@@ -31,7 +33,7 @@ function createDocumentHandler(el: HTMLElement, binding: DirectiveBinding): Docu
     // due to current implementation on binding type is wrong the type casting is necessary here
     excludes.push(binding.arg as unknown as HTMLElement);
   }
-  return function(mouseup, mousedown) {
+  return function (mouseup, mousedown) {
     const popperRef = (
       binding.instance as ComponentPublicInstance<{
         popperRef: Nullable<HTMLElement>;
@@ -47,16 +49,8 @@ function createDocumentHandler(el: HTMLElement, binding: DirectiveBinding): Docu
     const isTargetExcluded =
       (excludes.length && excludes.some((item) => item?.contains(mouseUpTarget))) ||
       (excludes.length && excludes.includes(mouseDownTarget as HTMLElement));
-    const isContainedByPopper =
-      popperRef && (popperRef.contains(mouseUpTarget) || popperRef.contains(mouseDownTarget));
-    if (
-      isBound ||
-      isTargetExists ||
-      isContainedByEl ||
-      isSelf ||
-      isTargetExcluded ||
-      isContainedByPopper
-    ) {
+    const isContainedByPopper = popperRef && (popperRef.contains(mouseUpTarget) || popperRef.contains(mouseDownTarget));
+    if (isBound || isTargetExists || isContainedByEl || isSelf || isTargetExcluded || isContainedByPopper) {
       return;
     }
     binding.value();

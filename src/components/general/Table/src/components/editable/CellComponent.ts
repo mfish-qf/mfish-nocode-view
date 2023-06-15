@@ -14,13 +14,7 @@ export interface ComponentProps {
 }
 
 export const CellComponent: FunctionalComponent = (
-  {
-    component = "Input",
-    rule = true,
-    ruleMessage,
-    popoverVisible,
-    getPopupContainer
-  }: ComponentProps,
+  { component = "Input", rule = true, ruleMessage, popoverVisible, getPopupContainer }: ComponentProps,
   { attrs }
 ) => {
   const Comp = componentMap.get(component) as typeof defineComponent;

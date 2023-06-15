@@ -1,9 +1,3 @@
-/**
- * @description: 数据库连接
- * @author: mfish
- * @date: 2023-03-13
- * @version: V1.0.0
- */
 import { defHttp } from "/@/utils/http/axios";
 import {
   DbConnect,
@@ -11,10 +5,18 @@ import {
   DbConnectPageModel,
   ReqTable,
   TableInfo,
-  FieldInfo, DataTable, DBTreeNode
+  FieldInfo,
+  DataTable,
+  DBTreeNode
 } from "/@/api/sys/model/DbConnectModel";
 import { PageResult } from "/@/api/model/BaseModel";
 
+/**
+ * @description: 数据库连接
+ * @author: mfish
+ * @date: 2023-03-13
+ * @version: V1.0.0
+ */
 enum Api {
   DbConnect = "/sys/dbConnect",
   TestConnect = "/sys/dbConnect/test",
@@ -36,7 +38,7 @@ export const getDbConnectList = (reqDbConnect?: ReqDbConnect) => {
 
 /**
  * 获取数据库的树
- * @param parentId id不传获取数据库 传id获取数据库下的表
+ * @param params id不传获取数据库 传id获取数据库下的表
  */
 export const getDBTree = (params?: any) => {
   return defHttp.get<DBTreeNode[]>({ url: Api.Tree, params: params });
@@ -74,7 +76,7 @@ export const getDataTable = (params: ReqTable) => {
  */
 export function insertDbConnect(dbConnect: DbConnect) {
   return defHttp.post<DbConnect>({ url: Api.DbConnect, params: dbConnect }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 修改数据库连接
@@ -84,7 +86,7 @@ export function insertDbConnect(dbConnect: DbConnect) {
  */
 export function updateDbConnect(dbConnect: DbConnect) {
   return defHttp.put<DbConnect>({ url: Api.DbConnect, params: dbConnect }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 删除数据库连接
@@ -94,7 +96,7 @@ export function updateDbConnect(dbConnect: DbConnect) {
  */
 export function deleteDbConnect(id: string) {
   return defHttp.delete<DbConnect>({ url: Api.DbConnect + "/" + id }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 测试数据库连接
@@ -102,4 +104,4 @@ export function deleteDbConnect(id: string) {
  */
 export function testDbConnect(dbConnect: DbConnect) {
   return defHttp.post<DbConnect>({ url: Api.TestConnect, params: dbConnect }, { successMessageMode: "message" });
-};
+}

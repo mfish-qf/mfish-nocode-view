@@ -45,8 +45,8 @@ export function changeAppConfig(projCfg: ProjectConfig) {
     colorWeak,
     grayMode,
     themeColor,
-    headerSetting: { bgColor: headerBgColor } = {},
-    menuSetting: { bgColor } = {}
+    headerSetting: {bgColor: headerBgColor} = {},
+    menuSetting: {bgColor} = {}
   } = projCfg;
   try {
     if (themeColor) {

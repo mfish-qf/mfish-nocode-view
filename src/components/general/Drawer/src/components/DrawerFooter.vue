@@ -25,59 +25,59 @@
   </div>
 </template>
 <script lang="ts">
-import type { CSSProperties } from "vue";
-import { defineComponent, computed } from "vue";
-import { useDesign } from "/@/hooks/web/UseDesign";
-import { footerProps } from "../Props";
+  import type { CSSProperties } from "vue";
+  import { defineComponent, computed } from "vue";
+  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { footerProps } from "../Props";
 
-export default defineComponent({
-  name: "BasicDrawerFooter",
-  props: {
-    ...footerProps,
-    height: {
-      type: String,
-      default: "60px"
+  export default defineComponent({
+    name: "BasicDrawerFooter",
+    props: {
+      ...footerProps,
+      height: {
+        type: String,
+        default: "60px"
+      }
+    },
+    emits: ["ok", "close"],
+    setup(props, { emit }) {
+      const { prefixCls } = useDesign("basic-drawer-footer");
+
+      const getStyle = computed((): CSSProperties => {
+        const heightStr = `${props.height}`;
+        return {
+          height: heightStr,
+          lineHeight: `calc(${heightStr} - 1px)`
+        };
+      });
+
+      function handleOk() {
+        emit("ok");
+      }
+
+      function handleClose() {
+        emit("close");
+      }
+
+      return { handleOk, prefixCls, handleClose, getStyle };
     }
-  },
-  emits: ["ok", "close"],
-  setup(props, { emit }) {
-    const { prefixCls } = useDesign("basic-drawer-footer");
-
-    const getStyle = computed((): CSSProperties => {
-      const heightStr = `${props.height}`;
-      return {
-        height: heightStr,
-        lineHeight: `calc(${heightStr} - 1px)`
-      };
-    });
-
-    function handleOk() {
-      emit("ok");
-    }
-
-    function handleClose() {
-      emit("close");
-    }
-
-    return { handleOk, prefixCls, handleClose, getStyle };
-  }
-});
+  });
 </script>
 
 <style lang="less">
-@prefix-cls: ~'@{namespace}-basic-drawer-footer';
-@footer-height: 60px;
-.@{prefix-cls} {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 0 12px 0 20px;
-  text-align: right;
-  background-color: @component-background;
-  border-top: 1px solid @border-color-base;
+  @prefix-cls: ~"@{namespace}-basic-drawer-footer";
+  @footer-height: 60px;
+  .@{prefix-cls} {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0 12px 0 20px;
+    text-align: right;
+    background-color: @component-background;
+    border-top: 1px solid @border-color-base;
 
-  > * {
-    margin-right: 8px;
+    > * {
+      margin-right: 8px;
+    }
   }
-}
 </style>

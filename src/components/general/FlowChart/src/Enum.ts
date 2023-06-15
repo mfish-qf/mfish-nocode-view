@@ -7,5 +7,5 @@ export enum ToolbarTypeEnum {
   REDO = "redo",
 
   SNAPSHOT = "snapshot",
-  VIEW_DATA = "viewData",
+  VIEW_DATA = "viewData"
 }

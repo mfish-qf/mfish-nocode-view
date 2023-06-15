@@ -1,10 +1,10 @@
-import type { DescriptionProps, DescInstance, UseDescReturnType } from './Typing';
-import { ref, getCurrentInstance, unref } from 'vue';
-import { isProdMode } from '/@/utils/Env';
+import type { DescriptionProps, DescInstance, UseDescReturnType } from "./Typing";
+import { ref, getCurrentInstance, unref } from "vue";
+import { isProdMode } from "/@/utils/Env";
 
 export function useDescription(props?: Partial<DescriptionProps>): UseDescReturnType {
   if (!getCurrentInstance()) {
-    throw new Error('useDescription() can only be used inside setup() or functional components!');
+    throw new Error("useDescription() can only be used inside setup() or functional components!");
   }
   const desc = ref<Nullable<DescInstance>>(null);
   const loaded = ref(false);
@@ -21,7 +21,7 @@ export function useDescription(props?: Partial<DescriptionProps>): UseDescReturn
   const methods: DescInstance = {
     setDescProps: (descProps: Partial<DescriptionProps>): void => {
       unref(desc)?.setDescProps(descProps);
-    },
+    }
   };
 
   return [register, methods];

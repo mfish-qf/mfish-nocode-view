@@ -69,59 +69,59 @@
   </Form>
 </template>
 <script lang="ts" setup>
-import { reactive, ref, unref, computed } from "vue";
-import { Checkbox, Form, Input, Row, Col, Button } from "ant-design-vue";
-import LoginFormTitle from "./LoginFormTitle.vue";
-import { useI18n } from "/@/hooks/web/UseI18n";
-import { useMessage } from "/@/hooks/web/UseMessage";
-import { useUserStore } from "/@/store/modules/User";
-import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from "./UseLogin";
-import { useDesign } from "/@/hooks/web/UseDesign";
-import { oauth2Config } from "/@/settings/LoginSetting";
+  import { reactive, ref, unref, computed } from "vue";
+  import { Checkbox, Form, Input, Row, Col, Button } from "ant-design-vue";
+  import LoginFormTitle from "./LoginFormTitle.vue";
+  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useMessage } from "/@/hooks/web/UseMessage";
+  import { useUserStore } from "/@/store/modules/User";
+  import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from "./UseLogin";
+  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { oauth2Config } from "/@/settings/LoginSetting";
 
-const ACol = Col;
-const ARow = Row;
-const FormItem = Form.Item;
-const InputPassword = Input.Password;
-const { t } = useI18n();
-const { notification } = useMessage();
-const { prefixCls } = useDesign("login");
-const userStore = useUserStore();
-const { setLoginState, getLoginState } = useLoginState();
-const { getFormRules } = useFormRules();
-const formRef = ref();
-const loading = ref(false);
-const rememberMe = ref(false);
-const formData = reactive({
-  account: "admin",
-  password: "!QAZ2wsx"
-});
-const { validForm } = useFormValid(formRef);
-const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
+  const ACol = Col;
+  const ARow = Row;
+  const FormItem = Form.Item;
+  const InputPassword = Input.Password;
+  const { t } = useI18n();
+  const { notification } = useMessage();
+  const { prefixCls } = useDesign("login");
+  const userStore = useUserStore();
+  const { setLoginState, getLoginState } = useLoginState();
+  const { getFormRules } = useFormRules();
+  const formRef = ref();
+  const loading = ref(false);
+  const rememberMe = ref(false);
+  const formData = reactive({
+    account: "admin",
+    password: "!QAZ2wsx"
+  });
+  const { validForm } = useFormValid(formRef);
+  const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
 
-async function handleLogin() {
-  const data = await validForm();
-  if (!data) return;
-  try {
-    loading.value = true;
-    const userInfo = await userStore.login({
-      password: data.password,
-      username: data.account,
-      client_id: oauth2Config.client_id,
-      client_secret: oauth2Config.client_secret,
-      grant_type: "password",
-      redirect_uri: oauth2Config.redirect_uri,
-      mode: "modal"
-    });
-    if (userInfo) {
-      notification.success({
-        message: t("sys.login.loginSuccessTitle"),
-        description: `${t("sys.login.loginSuccessDesc")}: ${userInfo.nickname}`,
-        duration: 3
+  async function handleLogin() {
+    const data = await validForm();
+    if (!data) return;
+    try {
+      loading.value = true;
+      const userInfo = await userStore.login({
+        password: data.password,
+        username: data.account,
+        client_id: oauth2Config.client_id,
+        client_secret: oauth2Config.client_secret,
+        grant_type: "password",
+        redirect_uri: oauth2Config.redirect_uri,
+        mode: "modal"
       });
+      if (userInfo) {
+        notification.success({
+          message: t("sys.login.loginSuccessTitle"),
+          description: `${t("sys.login.loginSuccessDesc")}: ${userInfo.nickname}`,
+          duration: 3
+        });
+      }
+    } finally {
+      loading.value = false;
     }
-  } finally {
-    loading.value = false;
   }
-}
 </script>

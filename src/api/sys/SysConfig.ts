@@ -1,20 +1,19 @@
+import { defHttp } from "/@/utils/http/axios";
+import { SysConfig } from "/@/api/sys/model/SysConfigModel";
+
 /**
  * @description: 界面配置
  * @author: mfish
  * @date: 2023-03-07
  * @version: V1.0.0
  */
-import { defHttp } from "/@/utils/http/axios";
-import { SysConfig } from "/@/api/sys/model/SysConfigModel";
-
 enum Api {
   SysConfig = "/sys/sysConfig"
 }
 
 /**
- * 分页列表查询
+ * 获取系统配置
  *
- * @param reqSysConfig
  * @return
  */
 export const getSysConfig = () => {
@@ -29,8 +28,7 @@ export const getSysConfig = () => {
  */
 export function saveSysConfig(sysConfig: SysConfig) {
   return defHttp.post<SysConfig>({ url: Api.SysConfig, params: sysConfig }, { successMessageMode: "message" });
-};
-
+}
 
 /**
  * 删除界面配置
@@ -40,4 +38,4 @@ export function saveSysConfig(sysConfig: SysConfig) {
  */
 export function deleteSysConfig(id: string) {
   return defHttp.delete<SysConfig>({ url: Api.SysConfig + "/" + id }, { successMessageMode: "message" });
-};
+}

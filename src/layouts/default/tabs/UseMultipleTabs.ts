@@ -19,11 +19,11 @@ export function initAffixTabs(): string[] {
   function filterAffixTabs(routes: RouteLocationNormalized[]) {
     const tabs: RouteLocationNormalized[] = [];
     routes &&
-    routes.forEach((route) => {
-      if (route.meta && route.meta.affix) {
-        tabs.push(toRaw(route));
-      }
-    });
+      routes.forEach((route) => {
+        if (route.meta && route.meta.affix) {
+          tabs.push(toRaw(route));
+        }
+      });
     return tabs;
   }
 
@@ -57,9 +57,7 @@ export function useTabsDrag(affixTextList: string[]) {
   const { prefixCls } = useDesign("multiple-tabs");
   nextTick(() => {
     if (!multiTabsSetting.canDrag) return;
-    const el = document.querySelectorAll(
-      `.${prefixCls} .ant-tabs-nav-wrap > div`
-    )?.[0] as HTMLElement;
+    const el = document.querySelectorAll(`.${prefixCls} .ant-tabs-nav-wrap > div`)?.[0] as HTMLElement;
     const { initSortable } = useSortable(el, {
       filter: (e: ChangeEvent) => {
         const text = e?.target?.innerText;

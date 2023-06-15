@@ -22,8 +22,7 @@ function createConfig(params: ConfigParams) {
     let configStr = `${windowConf}=${JSON.stringify(config)};`;
     configStr += `
       Object.freeze(${windowConf});
-      Object.defineProperty(window, "${configName}", {configurable: false,writable: false,});`
-      .replace(/\s/g, "");
+      Object.defineProperty(window, "${configName}", {configurable: false,writable: false,});`.replace(/\s/g, "");
     fs.mkdirp(getRootPath(OUTPUT_DIR)).then();
     writeFileSync(getRootPath(`${OUTPUT_DIR}/${configFileName}`), configStr);
     console.log(colors.cyan(`[${pkg.name}] - configuration file is build successfully:`));

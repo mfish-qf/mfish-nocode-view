@@ -7,7 +7,7 @@
   <PageWrapper :title="`字典${dictCode}`" @back="goBack">
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:dict:insert')">新增字典项</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:dict:insert')">新增字典项 </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -24,10 +24,10 @@
                 popConfirm: {
                   title: '是否确认删除',
                   placement: 'left',
-                  confirm: handleDelete.bind(null, record),
+                  confirm: handleDelete.bind(null, record)
                 },
                 auth: 'sys:dict:delete'
-              },
+              }
             ]"
           />
         </template>
@@ -37,92 +37,92 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-import { unref, ref } from "vue";
-import { useRoute } from "vue-router";
-import { PageWrapper } from "/@/components/general/Page";
-import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-import { deleteDictItem, getDictItemList } from "/@/api/sys/DictItem";
-import { useModal } from "/@/components/general/Modal";
-import DictItemModal from "./DictItemModal.vue";
-import { columns, searchFormSchema } from "./dictItem.data";
-import { usePermission } from "/@/hooks/web/UsePermission";
-import { useGo } from "/@/hooks/web/UsePage";
-import { useTabs } from "/@/hooks/web/UseTabs";
+  import { unref, ref } from "vue";
+  import { useRoute } from "vue-router";
+  import { PageWrapper } from "/@/components/general/Page";
+  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
+  import { deleteDictItem, getDictItemList } from "/@/api/sys/DictItem";
+  import { useModal } from "/@/components/general/Modal";
+  import DictItemModal from "./DictItemModal.vue";
+  import { columns, searchFormSchema } from "./dictItem.data";
+  import { usePermission } from "/@/hooks/web/UsePermission";
+  import { useGo } from "/@/hooks/web/UsePage";
+  import { useTabs } from "/@/hooks/web/UseTabs";
 
-export default {
-  name: "DictItemManagement",
-  components: { BasicTable, DictItemModal, TableAction, PageWrapper },
-  setup() {
-    const { hasPermission } = usePermission();
-    const [registerModal, { openModal }] = useModal();
-    const go = useGo();
-    const route = useRoute();
-    const dictCode = ref(route.params?.dictCode);
-    const [registerTable, { reload }] = useTable({
-      title: "字典项列表",
-      api: getDictItemList,
-      searchInfo: { dictCode: dictCode },
-      columns,
-      formConfig: {
-        name: "search_form_item",
-        labelWidth: 100,
-        schemas: searchFormSchema,
-        autoSubmitOnEnter: true
-      },
-      useSearchForm: true,
-      showTableSetting: true,
-      bordered: true,
-      showIndexColumn: false,
-      actionColumn: {
-        width: 80,
-        title: "操作",
-        dataIndex: "action",
-        fixed: undefined
+  export default {
+    name: "DictItemManagement",
+    components: { BasicTable, DictItemModal, TableAction, PageWrapper },
+    setup() {
+      const { hasPermission } = usePermission();
+      const [registerModal, { openModal }] = useModal();
+      const go = useGo();
+      const route = useRoute();
+      const dictCode = ref(route.params?.dictCode);
+      const [registerTable, { reload }] = useTable({
+        title: "字典项列表",
+        api: getDictItemList,
+        searchInfo: { dictCode: dictCode },
+        columns,
+        formConfig: {
+          name: "search_form_item",
+          labelWidth: 100,
+          schemas: searchFormSchema,
+          autoSubmitOnEnter: true
+        },
+        useSearchForm: true,
+        showTableSetting: true,
+        bordered: true,
+        showIndexColumn: false,
+        actionColumn: {
+          width: 80,
+          title: "操作",
+          dataIndex: "action",
+          fixed: undefined
+        }
+      });
+
+      const { setTitle } = useTabs();
+      setTitle(`字典项: ${unref(dictCode)}`);
+
+      function handleCreate() {
+        openModal(true, {
+          record: { dictCode: dictCode },
+          isUpdate: false
+        });
       }
-    });
 
-    const { setTitle } = useTabs();
-    setTitle(`字典项: ${unref(dictCode)}`);
+      function handleEdit(record: Recordable) {
+        openModal(true, {
+          record,
+          isUpdate: true
+        });
+      }
 
-    function handleCreate() {
-      openModal(true, {
-        record: { dictCode: dictCode },
-        isUpdate: false
-      });
+      function handleDelete(record: Recordable) {
+        deleteDictItem(record.id).then(() => {
+          handleSuccess();
+        });
+      }
+
+      function handleSuccess() {
+        reload();
+      }
+
+      function goBack() {
+        go("/system/dict");
+      }
+
+      return {
+        registerTable,
+        registerModal,
+        handleCreate,
+        handleEdit,
+        handleDelete,
+        handleSuccess,
+        hasPermission,
+        dictCode,
+        goBack
+      };
     }
-
-    function handleEdit(record: Recordable) {
-      openModal(true, {
-        record,
-        isUpdate: true
-      });
-    }
-
-    function handleDelete(record: Recordable) {
-      deleteDictItem(record.id).then(() => {
-        handleSuccess();
-      });
-    }
-
-    function handleSuccess() {
-      reload();
-    }
-
-    function goBack() {
-      go("/system/dict");
-    }
-
-    return {
-      registerTable,
-      registerModal,
-      handleCreate,
-      handleEdit,
-      handleDelete,
-      handleSuccess,
-      hasPermission,
-      dictCode,
-      goBack
-    };
-  }
-};
+  };
 </script>

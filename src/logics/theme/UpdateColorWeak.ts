@@ -1,9 +1,9 @@
-import { toggleClass } from './Util';
+import { toggleClass } from "./Util";
 
 /**
  * Change the status of the project's color weakness mode
  * @param colorWeak
  */
 export function updateColorWeak(colorWeak: boolean) {
-  toggleClass(colorWeak, 'color-weak', document.documentElement);
+  toggleClass(colorWeak, "color-weak", document.documentElement);
 }

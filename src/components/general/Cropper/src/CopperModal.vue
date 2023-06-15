@@ -16,7 +16,7 @@
             :src="src"
             height="300px"
             :circled="circled"
-            @cropend="handleCropend"
+            @cropper="handleCropper"
             @ready="handleReady"
           />
         </div>
@@ -111,168 +111,160 @@
   </BasicModal>
 </template>
 <script lang="ts">
-import type { CropendResult, Cropper } from "./typing";
-import { defineComponent, ref } from "vue";
-import CropperImage from "./Cropper.vue";
-import { Space, Upload, Avatar, Tooltip } from "ant-design-vue";
-import { useDesign } from "/@/hooks/web/UseDesign";
-import { BasicModal, useModalInner } from "/@/components/general/Modal";
-import { dataURLtoBlob } from "/@/utils/file/Base64Conver";
-import { isFunction } from "/@/utils/Is";
-import { useI18n } from "/@/hooks/web/UseI18n";
-import { UploadFileParams } from "/#/axios";
+  import type { CropperResult, Cropper } from "./typing";
+  import { defineComponent, ref } from "vue";
+  import CropperImage from "./Cropper.vue";
+  import { Space, Upload, Avatar, Tooltip } from "ant-design-vue";
+  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { BasicModal, useModalInner } from "/@/components/general/Modal";
+  import { dataURLtoBlob } from "/@/utils/file/Base64Conver";
+  import { isFunction } from "/@/utils/Is";
+  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { UploadFileParams } from "/#/axios";
 
-const props = {
-  circled: { type: Boolean, default: true },
-  uploadApi: {
-    type: Function as PropType<(params: UploadFileParams) => Promise<any>>
-  },
-  src: { type: String }
-};
+  const props = {
+    circled: { type: Boolean, default: true },
+    uploadApi: {
+      type: Function as PropType<(params: UploadFileParams) => Promise<any>>
+    },
+    src: { type: String }
+  };
 
-export default defineComponent({
-  name: "CropperModal",
-  components: { BasicModal, Space, CropperImage, Upload, Avatar, Tooltip },
-  props,
-  emits: ["uploadSuccess", "register"],
-  setup(props, { emit }) {
-    let fileName = "";
-    const src = ref(props.src || "");
-    const previewSource = ref("");
-    const cropper = ref<Cropper>();
-    let scaleX = 1;
-    let scaleY = 1;
+  export default defineComponent({
+    name: "CropperModal",
+    components: { BasicModal, Space, CropperImage, Upload, Avatar, Tooltip },
+    props,
+    emits: ["uploadSuccess", "register"],
+    setup(props, { emit }) {
+      let fileName = "";
+      const src = ref(props.src || "");
+      const previewSource = ref("");
+      const cropper = ref<Cropper>();
+      let scaleX = 1;
+      let scaleY = 1;
 
-    const { prefixCls } = useDesign("cropper-am");
-    const [register, { closeModal, setModalProps }] = useModalInner();
-    const { t } = useI18n();
+      const { prefixCls } = useDesign("cropper-am");
+      const [register, { closeModal, setModalProps }] = useModalInner();
+      const { t } = useI18n();
 
-    // Block upload
-    function handleBeforeUpload(file: File) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      src.value = "";
-      previewSource.value = "";
-      reader.onload = function(e) {
-        src.value = (e.target?.result as string) ?? "";
-        fileName = file.name;
-      };
-      return false;
-    }
-
-    function handleCropend({ imgBase64 }: CropendResult) {
-      previewSource.value = imgBase64;
-    }
-
-    function handleReady(cropperInstance: Cropper) {
-      cropper.value = cropperInstance;
-    }
-
-    function handlerToolbar(event: string, arg?: number) {
-      if (event === "scaleX") {
-        scaleX = arg = scaleX === -1 ? 1 : -1;
+      // Block upload
+      function handleBeforeUpload(file: File) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        src.value = "";
+        previewSource.value = "";
+        reader.onload = function (e) {
+          src.value = (e.target?.result as string) ?? "";
+          fileName = file.name;
+        };
+        return false;
       }
-      if (event === "scaleY") {
-        scaleY = arg = scaleY === -1 ? 1 : -1;
-      }
-      cropper?.value?.[event]?.(arg);
-    }
 
-    async function handleOk() {
-      const uploadApi = props.uploadApi;
-      if (uploadApi && isFunction(uploadApi)) {
-        const blob = dataURLtoBlob(previewSource.value);
-        try {
-          setModalProps({ confirmLoading: true });
-          const result = await uploadApi({ file: blob, fileName, path: "avatar" });
-          emit("uploadSuccess", { source: previewSource.value, data: result.fileKey });
-          closeModal();
-        } finally {
-          setModalProps({ confirmLoading: false });
+      function handleCropper({ imgBase64 }: CropperResult) {
+        previewSource.value = imgBase64;
+      }
+
+      function handleReady(cropperInstance: Cropper) {
+        cropper.value = cropperInstance;
+      }
+
+      function handlerToolbar(event: string, arg?: number) {
+        if (event === "scaleX") {
+          scaleX = arg = scaleX === -1 ? 1 : -1;
+        }
+        if (event === "scaleY") {
+          scaleY = arg = scaleY === -1 ? 1 : -1;
+        }
+        cropper?.value?.[event]?.(arg);
+      }
+
+      async function handleOk() {
+        const uploadApi = props.uploadApi;
+        if (uploadApi && isFunction(uploadApi)) {
+          const blob = dataURLtoBlob(previewSource.value);
+          try {
+            setModalProps({ confirmLoading: true });
+            const result = await uploadApi({ file: blob, fileName, path: "avatar" });
+            emit("uploadSuccess", { source: previewSource.value, data: result.fileKey });
+            closeModal();
+          } finally {
+            setModalProps({ confirmLoading: false });
+          }
         }
       }
-    }
 
-    return {
-      t,
-      prefixCls,
-      src,
-      register,
-      previewSource,
-      handleBeforeUpload,
-      handleCropend,
-      handleReady,
-      handlerToolbar,
-      handleOk
-    };
-  }
-});
+      return {
+        t,
+        prefixCls,
+        src,
+        register,
+        previewSource,
+        handleBeforeUpload,
+        handleCropper,
+        handleReady,
+        handlerToolbar,
+        handleOk
+      };
+    }
+  });
 </script>
 
 <style lang="less">
-@prefix-cls: ~'@{namespace}-cropper-am';
+  @prefix-cls: ~"@{namespace}-cropper-am";
 
-.@{prefix-cls} {
-  display: flex;
-
-  &-left,
-  &-right {
-    height: 340px;
-  }
-
-  &-left {
-    width: 55%;
-  }
-
-  &-right {
-    width: 45%;
-  }
-
-  &-cropper {
-    height: 300px;
-    background: #eee;
-    background-image: linear-gradient(45deg,
-    rgb(0 0 0 / 25%) 25%,
-    transparent 0,
-    transparent 75%,
-    rgb(0 0 0 / 25%) 0),
-    linear-gradient(45deg,
-    rgb(0 0 0 / 25%) 25%,
-    transparent 0,
-    transparent 75%,
-    rgb(0 0 0 / 25%) 0);
-    background-position: 0 0, 12px 12px;
-    background-size: 24px 24px;
-  }
-
-  &-toolbar {
+  .@{prefix-cls} {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-  }
 
-  &-preview {
-    width: 220px;
-    height: 220px;
-    margin: 0 auto;
-    overflow: hidden;
-    border: 1px solid @border-color-base;
-    border-radius: 50%;
+    &-left,
+    &-right {
+      height: 340px;
+    }
 
-    img {
-      width: 100%;
-      height: 100%;
+    &-left {
+      width: 55%;
+    }
+
+    &-right {
+      width: 45%;
+    }
+
+    &-cropper {
+      height: 300px;
+      background: #eee;
+      background-image: linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0, transparent 75%, rgb(0 0 0 / 25%) 0),
+        linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0, transparent 75%, rgb(0 0 0 / 25%) 0);
+      background-position: 0 0, 12px 12px;
+      background-size: 24px 24px;
+    }
+
+    &-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    &-preview {
+      width: 220px;
+      height: 220px;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid @border-color-base;
+      border-radius: 50%;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &-group {
+      display: flex;
+      padding-top: 8px;
+      margin-top: 8px;
+      border-top: 1px solid @border-color-base;
+      justify-content: space-around;
+      align-items: center;
     }
   }
-
-  &-group {
-    display: flex;
-    padding-top: 8px;
-    margin-top: 8px;
-    border-top: 1px solid @border-color-base;
-    justify-content: space-around;
-    align-items: center;
-  }
-}
 </style>

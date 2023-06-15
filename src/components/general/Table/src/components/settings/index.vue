@@ -11,31 +11,31 @@
   </div>
 </template>
 <script lang="ts">
-  import type { PropType } from 'vue';
-  import type { TableSetting, ColumnChangeParam } from '../../types/Table';
-  import { defineComponent, computed, unref } from 'vue';
-  import ColumnSetting from './ColumnSetting.vue';
-  import SizeSetting from './SizeSetting.vue';
-  import RedoSetting from './RedoSetting.vue';
-  import FullScreenSetting from './FullScreenSetting.vue';
-  import { useI18n } from '/@/hooks/web/UseI18n';
-  import { useTableContext } from '../../hooks/UseTableContext';
+  import type { PropType } from "vue";
+  import type { TableSetting, ColumnChangeParam } from "../../types/Table";
+  import { defineComponent, computed, unref } from "vue";
+  import ColumnSetting from "./ColumnSetting.vue";
+  import SizeSetting from "./SizeSetting.vue";
+  import RedoSetting from "./RedoSetting.vue";
+  import FullScreenSetting from "./FullScreenSetting.vue";
+  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useTableContext } from "../../hooks/UseTableContext";
 
   export default defineComponent({
-    name: 'TableSetting',
+    name: "TableSetting",
     components: {
       ColumnSetting,
       SizeSetting,
       RedoSetting,
-      FullScreenSetting,
+      FullScreenSetting
     },
     props: {
       setting: {
         type: Object as PropType<TableSetting>,
-        default: () => ({}),
-      },
+        default: () => ({})
+      }
     },
-    emits: ['columns-change'],
+    emits: ["columns-change"],
     setup(props, { emit }) {
       const { t } = useI18n();
       const table = useTableContext();
@@ -46,12 +46,12 @@
           size: true,
           setting: true,
           fullScreen: false,
-          ...props.setting,
+          ...props.setting
         };
       });
 
       function handleColumnChange(data: ColumnChangeParam[]) {
-        emit('columns-change', data);
+        emit("columns-change", data);
       }
 
       function getTableContainer() {
@@ -59,7 +59,7 @@
       }
 
       return { getSetting, t, handleColumnChange, getTableContainer };
-    },
+    }
   });
 </script>
 <style lang="less">

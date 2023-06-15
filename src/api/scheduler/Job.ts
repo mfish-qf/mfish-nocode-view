@@ -1,12 +1,12 @@
+import { defHttp } from "/@/utils/http/axios";
+import { Job, ReqJob, JobPageModel } from "/@/api/scheduler/model/JobModel";
+
 /**
  * @description: 定时调度任务
  * @author: mfish
  * @date: 2023-02-20
  * @version: V1.0.0
  */
-import { defHttp } from "/@/utils/http/axios";
-import { Job, ReqJob, JobPageModel } from "/@/api/scheduler/model/JobModel";
-
 enum Api {
   Job = "/scheduler/job",
   SetStatus = "/scheduler/job/status",
@@ -31,7 +31,7 @@ export const getJobList = (reqJob?: ReqJob) => {
  */
 export function insertJob(job: Job) {
   return defHttp.post<Job>({ url: Api.Job, params: job }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 修改定时调度任务
@@ -41,7 +41,7 @@ export function insertJob(job: Job) {
  */
 export function updateJob(job: Job) {
   return defHttp.put<Job>({ url: Api.Job, params: job }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 删除定时调度任务
@@ -51,7 +51,7 @@ export function updateJob(job: Job) {
  */
 export function deleteJob(id: string) {
   return defHttp.delete<Job>({ url: Api.Job + "/" + id }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 设置任务状态
@@ -59,7 +59,7 @@ export function deleteJob(id: string) {
  * @param status
  */
 export const setJobStatus = (jobId: string, status: number) => {
-  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { "id": jobId, "status": status } });
+  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { id: jobId, status: status } });
 };
 
 /**
@@ -68,4 +68,4 @@ export const setJobStatus = (jobId: string, status: number) => {
  */
 export function executeJob(job: Job) {
   return defHttp.put<Boolean>({ url: Api.ExecuteJob, params: job }, { successMessageMode: "message" });
-};
+}

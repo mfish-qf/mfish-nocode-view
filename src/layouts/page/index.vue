@@ -8,7 +8,7 @@
             openCache,
             enableTransition: getEnableTransition,
             cacheTabs: getCaches,
-            def: getBasicTransition,
+            def: getBasicTransition
           })
         "
         mode="out-in"
@@ -27,37 +27,37 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, unref } from "vue";
-import FrameLayout from "/@/layouts/iframe/index.vue";
-import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
-import { useTransitionSetting } from "/@/hooks/setting/UseTransitionSetting";
-import { useMultipleTabSetting } from "/@/hooks/setting/UseMultipleTabSetting";
-import { getTransitionName } from "./Transition";
-import { useMultipleTabStore } from "/@/store/modules/MultipleTab";
+  import { computed, defineComponent, unref } from "vue";
+  import FrameLayout from "/@/layouts/iframe/index.vue";
+  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
+  import { useTransitionSetting } from "/@/hooks/setting/UseTransitionSetting";
+  import { useMultipleTabSetting } from "/@/hooks/setting/UseMultipleTabSetting";
+  import { getTransitionName } from "./Transition";
+  import { useMultipleTabStore } from "/@/store/modules/MultipleTab";
 
-export default defineComponent({
-  name: "PageLayout",
-  components: { FrameLayout },
-  setup() {
-    const { getShowMultipleTab } = useMultipleTabSetting();
-    const tabStore = useMultipleTabStore();
-    const { getOpenKeepAlive, getCanEmbedIFramePage } = useRootSetting();
-    const { getBasicTransition, getEnableTransition } = useTransitionSetting();
-    const openCache = computed(() => unref(getOpenKeepAlive) && unref(getShowMultipleTab));
-    const getCaches = computed((): string[] => {
-      if (!unref(getOpenKeepAlive)) {
-        return [];
-      }
-      return tabStore.getCachedTabList;
-    });
-    return {
-      getTransitionName,
-      openCache,
-      getEnableTransition,
-      getBasicTransition,
-      getCaches,
-      getCanEmbedIFramePage
-    };
-  }
-});
+  export default defineComponent({
+    name: "PageLayout",
+    components: { FrameLayout },
+    setup() {
+      const { getShowMultipleTab } = useMultipleTabSetting();
+      const tabStore = useMultipleTabStore();
+      const { getOpenKeepAlive, getCanEmbedIFramePage } = useRootSetting();
+      const { getBasicTransition, getEnableTransition } = useTransitionSetting();
+      const openCache = computed(() => unref(getOpenKeepAlive) && unref(getShowMultipleTab));
+      const getCaches = computed((): string[] => {
+        if (!unref(getOpenKeepAlive)) {
+          return [];
+        }
+        return tabStore.getCachedTabList;
+      });
+      return {
+        getTransitionName,
+        openCache,
+        getEnableTransition,
+        getBasicTransition,
+        getCaches,
+        getCanEmbedIFramePage
+      };
+    }
+  });
 </script>

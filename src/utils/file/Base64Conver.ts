@@ -11,7 +11,7 @@ export function dataURLtoBlob(base64Buf: string): Blob {
   while (n--) {
     u8arr[n] = bstr.charCodeAt(n);
   }
-  return new Blob([u8arr], { type: mime });
+  return new Blob([u8arr], {type: mime});
 }
 
 /**

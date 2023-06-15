@@ -83,11 +83,13 @@ export const columns: BasicColumn[] = [
         onChange(checked: boolean) {
           record.pendingStatus = true;
           const newStatus = checked ? 0 : 1;
-          setJobStatus(record.id, newStatus).then(() => {
-            record.status = newStatus;
-          }).finally(() => {
-            record.pendingStatus = false;
-          });
+          setJobStatus(record.id, newStatus)
+            .then(() => {
+              record.status = newStatus;
+            })
+            .finally(() => {
+              record.pendingStatus = false;
+            });
         }
       });
     }
@@ -219,7 +221,10 @@ export const jobFormSchema: FormSchema[] = [
         { label: "文件日志", value: 1 }
       ]
     },
-    helpMessage: ["设置日志记录方式 入库日志会记录到数据库，文件日志只记录文本文件", "高频调度推荐使用文件日志，提高调度效率"],
+    helpMessage: [
+      "设置日志记录方式 入库日志会记录到数据库，文件日志只记录文本文件",
+      "高频调度推荐使用文件日志，提高调度效率"
+    ],
     required: true
   },
   {
@@ -242,7 +247,11 @@ export const jobFormSchema: FormSchema[] = [
   {
     field: "params",
     label: "调用参数",
-    helpMessage: ["参数支持普通对象数组类型 例如:[\"****\",11]", "复杂对象数组类型，属性包括type、value 例如：", "[{\"type\":\"java.lang.String\",\"value\":\"inner\"},{\"type\":\"cn.com.mfish.sys.api.entity.SysLog\",\"value\":{\"title\":\"aaaa\"}}]"],
+    helpMessage: [
+      '参数支持普通对象数组类型 例如:["****",11]',
+      "复杂对象数组类型，属性包括type、value 例如：",
+      '[{"type":"java.lang.String","value":"inner"},{"type":"cn.com.mfish.sys.api.entity.SysLog","value":{"title":"aaaa"}}]'
+    ],
     slot: "params",
     component: "Input",
     colProps: { span: 24 }

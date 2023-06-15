@@ -15,9 +15,7 @@ export function isProdFn(mode: string): boolean {
  * @param env
  */
 export function getConfigFileName(env: Record<string, any>) {
-  return `__${env.VITE_GLOB_APP_SHORT_NAME || "__APP"}__PRODUCTION__CONF__`
-    .toUpperCase()
-    .replace(/\s/g, "");
+  return `__${env.VITE_GLOB_APP_SHORT_NAME || "__APP"}__PRODUCTION__CONF__`.toUpperCase().replace(/\s/g, "");
 }
 
 /**
@@ -40,7 +38,7 @@ export function wrapperEnv(envConf: Recordable): ViteEnv {
     }
     if (envName === "VITE_PROXY" && realName) {
       try {
-        realName = JSON.parse(realName.replace(/'/g, "\""));
+        realName = JSON.parse(realName.replace(/'/g, '"'));
       } catch (error) {
         realName = "";
       }

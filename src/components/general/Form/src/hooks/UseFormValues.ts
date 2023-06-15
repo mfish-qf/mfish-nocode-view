@@ -48,12 +48,7 @@ function tryDeconstructObject(key: string, value: any, target: Recordable) {
   }
 }
 
-export function useFormValues({
-                                defaultValueRef,
-                                getSchema,
-                                formModel,
-                                getProps
-                              }: UseFormValuesContext) {
+export function useFormValues({ defaultValueRef, getSchema, formModel, getProps }: UseFormValuesContext) {
   // Processing form values
   function handleFormValues(values: Recordable) {
     if (!isObject(values)) {
@@ -96,7 +91,7 @@ export function useFormValues({
       return values;
     }
 
-    for (const [field, [startTimeKey, endTimeKey], format = 'YYYY-MM-DD'] of fieldMapToTime) {
+    for (const [field, [startTimeKey, endTimeKey], format = "YYYY-MM-DD"] of fieldMapToTime) {
       if (!field || !startTimeKey || !endTimeKey) {
         continue;
       }

@@ -1,5 +1,8 @@
 export const buttonProps = {
-  color: { type: String, validator: (v) => ["primary", "error", "warning", "success", ""].includes(v) },
+  color: {
+    type: String,
+    validator: (v) => ["primary", "error", "warning", "success", ""].includes(v)
+  },
   loading: { type: Boolean },
   disabled: { type: Boolean },
   /**

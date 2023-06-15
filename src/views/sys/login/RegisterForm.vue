@@ -27,11 +27,7 @@
         />
       </FormItem>
       <FormItem name="password" class="enter-x">
-        <StrengthMeter
-          size="large"
-          v-model:value="formData.password"
-          :placeholder="t('sys.login.password')"
-        />
+        <StrengthMeter size="large" v-model:value="formData.password" :placeholder="t('sys.login.password')" />
       </FormItem>
       <FormItem name="confirmPassword" class="enter-x">
         <InputPassword
@@ -45,34 +41,27 @@
       <FormItem class="enter-x" name="policy">
         <!-- No logic, you need to deal with it yourself -->
         <Checkbox v-model:checked="formData.policy" size="small">
-          {{ t('sys.login.policy') }}
+          {{ t("sys.login.policy") }}
         </Checkbox>
       </FormItem>
 
-      <Button
-        type="primary"
-        class="enter-x"
-        size="large"
-        block
-        @click="handleRegister"
-        :loading="loading"
-      >
-        {{ t('sys.login.registerButton') }}
+      <Button type="primary" class="enter-x" size="large" block @click="handleRegister" :loading="loading">
+        {{ t("sys.login.registerButton") }}
       </Button>
       <Button size="large" block class="mt-4 enter-x" @click="handleBackLogin">
-        {{ t('sys.login.backSignIn') }}
+        {{ t("sys.login.backSignIn") }}
       </Button>
     </Form>
   </template>
 </template>
 <script lang="ts" setup>
-  import { reactive, ref, unref, computed } from 'vue';
-  import LoginFormTitle from './LoginFormTitle.vue';
-  import { Form, Input, Button, Checkbox } from 'ant-design-vue';
-  import { StrengthMeter } from '/@/components/general/StrengthMeter';
-  import { CountdownInput } from '/@/components/general/CountDown';
-  import { useI18n } from '/@/hooks/web/UseI18n';
-  import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './UseLogin';
+  import { reactive, ref, unref, computed } from "vue";
+  import LoginFormTitle from "./LoginFormTitle.vue";
+  import { Form, Input, Button, Checkbox } from "ant-design-vue";
+  import { StrengthMeter } from "/@/components/general/StrengthMeter";
+  import { CountdownInput } from "/@/components/general/CountDown";
+  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from "./UseLogin";
 
   const FormItem = Form.Item;
   const InputPassword = Input.Password;
@@ -83,12 +72,12 @@
   const loading = ref(false);
 
   const formData = reactive({
-    account: '',
-    password: '',
-    confirmPassword: '',
-    mobile: '',
-    sms: '',
-    policy: false,
+    account: "",
+    password: "",
+    confirmPassword: "",
+    mobile: "",
+    sms: "",
+    policy: false
   });
 
   const { getFormRules } = useFormRules(formData);

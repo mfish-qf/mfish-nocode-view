@@ -12,6 +12,7 @@ import { localeSetting } from "/@/settings/I18nSetting";
 
 const ls = createLocalStorage();
 const lsLocaleSetting = (ls.get(LOCALE_KEY) || localeSetting) as LocaleSetting;
+
 interface LocaleState {
   localInfo: LocaleSetting;
 }
@@ -35,7 +36,7 @@ export const useLocaleStore = defineStore({
      * @param info multilingual info
      */
     setLocaleInfo(info: Partial<LocaleSetting>) {
-      this.localInfo = { ...this.localInfo, ...info };
+      this.localInfo = {...this.localInfo, ...info};
       ls.set(LOCALE_KEY, this.localInfo);
     },
     /**

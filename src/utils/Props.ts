@@ -92,11 +92,11 @@ export function buildProp<T = never,
   R extends boolean = false,
   V = never,
   C = never,
-  >(option: BuildPropOption<T, D, R, V, C>, key?: string): BuildPropReturn<T, D, R, V, C> {
+>(option: BuildPropOption<T, D, R, V, C>, key?: string): BuildPropReturn<T, D, R, V, C> {
   // filter native prop type and nested prop, e.g `null`, `undefined` (from `buildProps`)
   if (!isObject(option) || !!option[propKey]) return option as any;
 
-  const { values, required, default: defaultValue, type, validator } = option;
+  const {values, required, default: defaultValue, type, validator} = option;
 
   const _validator =
     values || validator
@@ -112,8 +112,8 @@ export function buildProp<T = never,
 
         if (!valid && allowedValues.length > 0) {
           const allowValuesText = [...new Set(allowedValues)]
-            .map((value) => JSON.stringify(value))
-            .join(", ");
+          .map((value) => JSON.stringify(value))
+          .join(", ");
           warn(
             `Invalid prop: validation failed${
               key ? ` for prop "${key}"` : ""
@@ -151,7 +151,7 @@ export const buildProps = <O extends {
           : never
         : never;
 },
-  >(
+>(
   props: O
 ) =>
   fromPairs(
@@ -171,7 +171,7 @@ export const buildProps = <O extends {
           : never;
   };
 
-export const definePropType = <T>(val: any) => ({ [wrapperKey]: val } as PropWrapper<T>);
+export const definePropType = <T>(val: any) => ({[wrapperKey]: val} as PropWrapper<T>);
 
 // export const keyOf = <T>(arr: T) => Object.keys(arr) as Array<keyof T>;
 export const mutable = <T extends readonly any[] | Record<string, unknown>>(val: T) =>

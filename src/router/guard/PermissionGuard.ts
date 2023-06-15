@@ -25,8 +25,7 @@ export function createPermissionGuard(router: Router) {
             next((to.query?.redirect as string) || "/");
             return;
           }
-        } catch {
-        }
+        } catch {}
       }
       //如果登录类型为code方式走统一认证登录
       if (to.path === PageEnum.BASE_LOGIN && curLoginType === "authorization_code") {

@@ -23,16 +23,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { computed } from "vue";
-import { Avatar } from "ant-design-vue";
-import { useUserStore } from "/@/store/modules/User";
-import headerImg from "/@/assets/images/header.png";
-import { imageUrl } from "/@/utils/FileUtils";
+  import { computed } from "vue";
+  import { Avatar } from "ant-design-vue";
+  import { useUserStore } from "/@/store/modules/User";
+  import headerImg from "/@/assets/images/header.png";
+  import { imageUrl } from "/@/utils/FileUtils";
 
-const userStore = useUserStore();
-const userinfo = computed(() => userStore.getUserInfo);
-const avatar = computed(() => {
-  const imgUrl = userStore.getUserInfo?.headImgUrl;
-  return imgUrl ? imageUrl("/storage/file/" + imgUrl) : headerImg;
-});
+  const userStore = useUserStore();
+  const userinfo = computed(() => userStore.getUserInfo);
+  const avatar = computed(() => {
+    const imgUrl = userStore.getUserInfo?.headImgUrl;
+    return imgUrl ? imageUrl("/storage/file/" + imgUrl) : headerImg;
+  });
 </script>

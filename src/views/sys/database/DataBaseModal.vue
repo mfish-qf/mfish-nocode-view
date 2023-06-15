@@ -14,23 +14,21 @@
 </template>
 
 <script lang="ts">
-import { BasicModal, useModalInner } from "/@/components/general/Modal";
-import CodeBuild from "/@/views/sys/database/index.vue";
+  import { BasicModal, useModalInner } from "/@/components/general/Modal";
+  import CodeBuild from "/@/views/sys/database/index.vue";
 
-export default {
-  name: "DataBaseModal",
-  components: { CodeBuild, BasicModal },
-  setup() {
-    const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
-      setModalProps({ confirmLoading: false, width: 1200, height: 600 });
-    });
-    return {
-      registerModal
-    };
-  }
-};
+  export default {
+    name: "DataBaseModal",
+    components: { CodeBuild, BasicModal },
+    setup() {
+      const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
+        setModalProps({ confirmLoading: false, width: 1200, height: 600 });
+      });
+      return {
+        registerModal
+      };
+    }
+  };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

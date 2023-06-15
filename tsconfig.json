@@ -32,18 +32,27 @@
     // 启用实验性的ES装饰器。
     "experimentalDecorators": true,
     // 编译过程中需要引入的库文件的列表。
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     // 在表达式和声明上有隐含的 any类型时报错。
     "noImplicitAny": false,
     // 忽略所有的声明文件（ *.d.ts）的类型检查。
     "skipLibCheck": true,
     // 要包含的类型声明文件名列表。
-    "types": ["vite/client"],
+    "types": [
+      "vite/client"
+    ],
     "removeComments": true,
     // 模块名到基于 baseUrl的路径映射的列表。查看模块解析文档了解详情。
     "paths": {
-      "/@/*": ["src/*"],
-      "/#/*": ["types/*"]
+      "/@/*": [
+        "src/*"
+      ],
+      "/#/*": [
+        "types/*"
+      ]
     }
   },
   "include": [
@@ -58,5 +67,9 @@
     "mock/**/*.ts",
     "vite.config.ts"
   ],
-  "exclude": ["node_modules", "dist", "**/*.js"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.js"
+  ]
 }

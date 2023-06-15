@@ -15,7 +15,6 @@ export const getDictProps = (param) => {
   };
 };
 
-
 export const buildDictTag = (value: String | number, dict: DictItem[]) => {
   for (const source of dict) {
     if (source.dictValue === value) {

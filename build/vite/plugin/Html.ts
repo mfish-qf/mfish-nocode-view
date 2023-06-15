@@ -17,12 +17,16 @@ export function configHtmlPlugin(env: ViteEnv, isBuild: boolean) {
       data: {
         title: VITE_GLOB_APP_TITLE
       },
-      tags: isBuild ? [{
-        tag: "script",
-        attrs: {
-          src: getAppConfigSrc
-        }
-      }] : []
+      tags: isBuild
+        ? [
+            {
+              tag: "script",
+              attrs: {
+                src: getAppConfigSrc
+              }
+            }
+          ]
+        : []
     }
   });
 }

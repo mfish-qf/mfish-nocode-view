@@ -4,31 +4,31 @@
   </span>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import { RedoOutlined } from "@ant-design/icons-vue";
-import { useDesign } from "/@/hooks/web/UseDesign";
-import { useTabs } from "/@/hooks/web/UseTabs";
+  import { defineComponent, ref } from "vue";
+  import { RedoOutlined } from "@ant-design/icons-vue";
+  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useTabs } from "/@/hooks/web/UseTabs";
 
-export default defineComponent({
-  name: "TabRedo",
-  components: { RedoOutlined },
+  export default defineComponent({
+    name: "TabRedo",
+    components: { RedoOutlined },
 
-  setup() {
-    const loading = ref(false);
+    setup() {
+      const loading = ref(false);
 
-    const { prefixCls } = useDesign("multiple-tabs-content");
-    const { refreshPage } = useTabs();
+      const { prefixCls } = useDesign("multiple-tabs-content");
+      const { refreshPage } = useTabs();
 
-    async function handleRedo() {
-      loading.value = true;
-      await refreshPage();
-      setTimeout(() => {
-        loading.value = false;
-        // Animation execution time
-      }, 1200);
+      async function handleRedo() {
+        loading.value = true;
+        await refreshPage();
+        setTimeout(() => {
+          loading.value = false;
+          // Animation execution time
+        }, 1200);
+      }
+
+      return { prefixCls, handleRedo, loading };
     }
-
-    return { prefixCls, handleRedo, loading };
-  }
-});
+  });
 </script>

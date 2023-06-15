@@ -79,8 +79,8 @@ function handleIndexColumn(
     },
     ...(isFixedLeft
       ? {
-        fixed: "left"
-      }
+          fixed: "left"
+        }
       : {}),
     ...indexColumnProps
   });
@@ -121,10 +121,7 @@ export function useColumns(
     columns.forEach((item) => {
       const { customRender, slots } = item;
 
-      handleItem(
-        item,
-        Reflect.has(item, "ellipsis") ? !!item.ellipsis : !!ellipsis && !customRender && !slots
-      );
+      handleItem(item, Reflect.has(item, "ellipsis") ? !!item.ellipsis : !!ellipsis && !customRender && !slots);
     });
     return columns;
   });
@@ -282,9 +279,7 @@ function sortFixedColumn(columns: BasicColumn[]) {
     }
     defColumns.push(column);
   }
-  return [...fixedLeftColumns, ...defColumns, ...fixedRightColumns].filter(
-    (item) => !item.defaultHidden
-  );
+  return [...fixedLeftColumns, ...defColumns, ...fixedRightColumns].filter((item) => !item.defaultHidden);
 }
 
 // format cell

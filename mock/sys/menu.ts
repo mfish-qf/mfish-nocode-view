@@ -244,64 +244,64 @@ const menuTree = (() => {
   for (let index = 0; index < 3; index++) {
     result.push({
       id: `${index}`,
-      menuIcon: ['ion:layers-outline', 'ion:git-compare-outline', 'ion:tv-outline'][index],
-      component: 'LAYOUT',
-      menuType: '0',
-      menuName: ['Dashboard', '权限管理', '功能'][index],
-      permissions: '',
+      menuIcon: ["ion:layers-outline", "ion:git-compare-outline", "ion:tv-outline"][index],
+      component: "LAYOUT",
+      menuType: "0",
+      menuName: ["Dashboard", "权限管理", "功能"][index],
+      permissions: "",
       menuSort: index + 1,
-      createTime: '@datetime',
-      'isVisible|1': ['0', '0', '1'],
+      createTime: "@datetime",
+      "isVisible|1": ["0", "0", "1"],
       children: (() => {
         const children: any[] = [];
         for (let j = 0; j < 4; j++) {
           children.push({
             id: `${index}-${j}`,
-            menuType: '1',
-            menuName: ['菜单1', '菜单2', '菜单3', '菜单4'][j],
-            menuIcon: 'ion:document',
-            permissions: ['menu1:view', 'menu2:add', 'menu3:update', 'menu4:del'][index],
+            menuType: "1",
+            menuName: ["菜单1", "菜单2", "菜单3", "菜单4"][j],
+            menuIcon: "ion:document",
+            permissions: ["menu1:view", "menu2:add", "menu3:update", "menu4:del"][index],
             component: [
-              '/dashboard/welcome/index',
-              '/dashboard/analysis/index',
-              '/dashboard/workbench/index',
-              '/dashboard/test/index',
+              "/dashboard/welcome/index",
+              "/dashboard/analysis/index",
+              "/dashboard/workbench/index",
+              "/dashboard/test/index"
             ][j],
             menuSort: j + 1,
-            createTime: '@datetime',
-            'isVisible|1': ['0', '1'],
+            createTime: "@datetime",
+            "isVisible|1": ["0", "1"],
             parentId: `${index}`,
             children: (() => {
               const children: any[] = [];
               for (let k = 0; k < 4; k++) {
                 children.push({
                   id: `${index}-${j}-${k}`,
-                  menuType: '2',
-                  menuName: '按钮' + (j + 1) + '-' + (k + 1),
-                  menuIcon: '',
+                  menuType: "2",
+                  menuName: "按钮" + (j + 1) + "-" + (k + 1),
+                  menuIcon: "",
                   permissions:
-                    ['menu1:view', 'menu2:add', 'menu3:update', 'menu4:del'][index] +
-                    ':btn' +
+                    ["menu1:view", "menu2:add", "menu3:update", "menu4:del"][index] +
+                    ":btn" +
                     (k + 1),
                   component: [
-                    '/dashboard/welcome/index',
-                    '/dashboard/analysis/index',
-                    '/dashboard/workbench/index',
-                    '/dashboard/test/index',
+                    "/dashboard/welcome/index",
+                    "/dashboard/analysis/index",
+                    "/dashboard/workbench/index",
+                    "/dashboard/test/index"
                   ][j],
                   menuSort: j + 1,
-                  createTime: '@datetime',
-                  'isVisible|1': ['0', '1'],
+                  createTime: "@datetime",
+                  "isVisible|1": ["0", "1"],
                   parentId: `${index}-${j}`,
-                  children: undefined,
+                  children: undefined
                 });
               }
               return children;
-            })(),
+            })()
           });
         }
         return children;
-      })(),
+      })()
     });
   }
   return result;
@@ -341,11 +341,11 @@ export default [
     }
   },
   {
-    url: '/api/oauth2/menu/tree',
+    url: "/api/oauth2/menu/tree",
     timeout: 100,
-    method: 'get',
+    method: "get",
     response: () => {
       return resultSuccess(menuTree);
-    },
-  },
+    }
+  }
 ] as MockMethod[];

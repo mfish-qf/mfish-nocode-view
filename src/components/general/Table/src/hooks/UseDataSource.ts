@@ -1,16 +1,6 @@
 import type { BasicTableProps, FetchParams, SorterResult } from "../types/Table";
 import type { PaginationProps } from "../types/Pagination";
-import {
-  ref,
-  unref,
-  ComputedRef,
-  computed,
-  onMounted,
-  watch,
-  reactive,
-  Ref,
-  watchEffect
-} from "vue";
+import { ref, unref, ComputedRef, computed, onMounted, watch, reactive, Ref, watchEffect } from "vue";
 import { useTimeoutFn } from "/@/hooks/core/UseTimeout";
 import { buildUUID } from "/@/utils/Uuid";
 import { isFunction, isBoolean } from "/@/utils/Is";
@@ -31,15 +21,11 @@ interface SearchState {
   filterInfo: Record<string, string[]>;
 }
 
-export function useDataSource(propsRef: ComputedRef<BasicTableProps>,
-                              {
-                                getPaginationInfo,
-                                setPagination,
-                                setLoading,
-                                getFieldsValue,
-                                clearSelectedRowKeys,
-                                tableData
-                              }: ActionType, emit: EmitType) {
+export function useDataSource(
+  propsRef: ComputedRef<BasicTableProps>,
+  { getPaginationInfo, setPagination, setLoading, getFieldsValue, clearSelectedRowKeys, tableData }: ActionType,
+  emit: EmitType
+) {
   const searchState = reactive<SearchState>({
     sortInfo: {},
     filterInfo: {}
@@ -143,10 +129,7 @@ export function useDataSource(propsRef: ComputedRef<BasicTableProps>,
     return dataSourceRef.value[index];
   }
 
-  function updateTableDataRecord(
-    rowKey: string | number,
-    record: Recordable
-  ): Recordable | undefined {
+  function updateTableDataRecord(rowKey: string | number, record: Recordable): Recordable | undefined {
     const row = findTableDataRecord(rowKey);
 
     if (row) {
@@ -164,7 +147,7 @@ export function useDataSource(propsRef: ComputedRef<BasicTableProps>,
     const rowKeys = !Array.isArray(rowKey) ? [rowKey] : rowKey;
 
     function deleteRow(data, key) {
-      let row: { index: number, data: [] } = findRow(data, key);
+      let row: { index: number; data: [] } = findRow(data, key);
       if (row === null || row.index === -1) {
         return;
       }
@@ -241,24 +224,12 @@ export function useDataSource(propsRef: ComputedRef<BasicTableProps>,
   }
 
   async function fetch(opt?: FetchParams) {
-    const {
-      api,
-      searchInfo,
-      defSort,
-      fetchSetting,
-      beforeFetch,
-      afterFetch,
-      useSearchForm,
-      pagination
-    } = unref(propsRef);
+    const { api, searchInfo, defSort, fetchSetting, beforeFetch, afterFetch, useSearchForm, pagination } =
+      unref(propsRef);
     if (!api || !isFunction(api)) return;
     try {
       setLoading(true);
-      const { pageField, sizeField, listField, totalField } = Object.assign(
-        {},
-        FETCH_SETTING,
-        fetchSetting
-      );
+      const { pageField, sizeField, listField, totalField } = Object.assign({}, FETCH_SETTING, fetchSetting);
       let pageParams: Recordable = {};
       const { current = 1, pageSize = PAGE_SIZE } = unref(getPaginationInfo) as PaginationProps;
       if ((isBoolean(pagination) && !pagination) || isBoolean(getPaginationInfo)) {

@@ -100,7 +100,7 @@ export const useUserStore = defineStore({
      * 登录
      * @param params  route_redirect //路由重定向地址，统一认证后跳转
      */
-    async login(params: LoginParams & { mode?: MessageMode; route_redirect?: string; }): Promise<SsoUser | null> {
+    async login(params: LoginParams & { mode?: MessageMode; route_redirect?: string }): Promise<SsoUser | null> {
       try {
         const { mode, route_redirect, ...loginParams } = params;
         const result = await loginApi(loginParams, mode);

@@ -1,5 +1,5 @@
-import 'virtual:uno.css';
-import 'virtual:unocss-devtools';
+import "virtual:uno.css";
+import "virtual:unocss-devtools";
 import "/@/design/index.less";
 import "virtual:svg-icons-register";
 import App from "./App.vue";
