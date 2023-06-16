@@ -147,7 +147,7 @@ export function useDataSource(
     const rowKeys = !Array.isArray(rowKey) ? [rowKey] : rowKey;
 
     function deleteRow(data, key) {
-      let row: { index: number; data: [] } = findRow(data, key);
+      const row: { index: number; data: [] } = findRow(data, key);
       if (row === null || row.index === -1) {
         return;
       }
