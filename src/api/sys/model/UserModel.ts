@@ -1,4 +1,4 @@
-import { PageResult } from "/@/api/model/BaseModel";
+import { PageResult, ReqPage } from "/@/api/model/BaseModel";
 
 /**
  * @description: 用户信息
@@ -33,6 +33,15 @@ export interface AccessToken {
   access_token: string;
   refresh_token: string;
   expires_in: number;
+}
+
+export interface ReqSsoUser extends ReqPage {
+  clientId?: string;
+  orgId?: string;
+  account?: string;
+  phone?: string;
+  nickname?: string;
+  status?: number;
 }
 
 export interface SsoUser {

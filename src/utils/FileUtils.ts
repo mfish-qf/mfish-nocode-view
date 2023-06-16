@@ -69,7 +69,7 @@ export const imageUrl = (url) => {
  */
 export const imageSrc = async (url) => {
   //isTransformResponse返回值不执行普通请求的结果处理
-  let img = await defHttp.get({ url, responseType: "blob" }, { isTransformResponse: false });
+  const img = await defHttp.get({ url, responseType: "blob" }, { isTransformResponse: false });
   return URL.createObjectURL(img);
 };
 
@@ -78,7 +78,7 @@ export const imageSrc = async (url) => {
  * @param url
  */
 export const imageBase64 = async (url) => {
-  let img = await defHttp.get({ url, responseType: "arraybuffer" }, { isTransformResponse: false });
+  const img = await defHttp.get({ url, responseType: "arraybuffer" }, { isTransformResponse: false });
   return (
     "data:image/png;base64," + btoa(new Uint8Array(img).reduce((data, byte) => data + String.fromCharCode(byte), ""))
   );
@@ -130,7 +130,7 @@ export function getFileIcon(fileName: string) {
  * @param level
  */
 export function calcSize(fileSize, level) {
-  let size = fileSize / 1024;
+  const size = fileSize / 1024;
   if (size >= 1024) {
     return calcSize(size, level + 1);
   }

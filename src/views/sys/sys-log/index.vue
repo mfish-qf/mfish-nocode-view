@@ -34,7 +34,7 @@
         <template v-if="column.key === 'reqSource'">
           <Tag
             v-for="item in reqSource"
-            :key="item.dictCode"
+            :key="item.dictCode + item.dictValue"
             v-show="record.reqSource == item.dictValue"
             :color="item.color"
           >
@@ -44,7 +44,7 @@
         <template v-if="column.key === 'operType'">
           <Tag
             v-for="item in operType"
-            :key="item.dictCode"
+            :key="item.dictCode + item.dictValue"
             v-show="record.operType == item.dictValue"
             :color="item.color"
           >
@@ -54,7 +54,7 @@
         <template v-if="column.key === 'reqType'">
           <Tag
             v-for="item in reqType"
-            :key="item.dictCode"
+            :key="item.dictCode + item.dictValue"
             v-show="record.reqType == item.dictValue"
             :color="item.color"
           >
@@ -106,9 +106,9 @@
           dataIndex: "action"
         }
       });
-      let reqSource = ref<DictItem[]>([]);
-      let operType = ref<DictItem[]>([]);
-      let reqType = ref<DictItem[]>([]);
+      const reqSource = ref<DictItem[]>([]);
+      const operType = ref<DictItem[]>([]);
+      const reqType = ref<DictItem[]>([]);
       onBeforeMount(() => {
         getReqSource();
         getOperType();

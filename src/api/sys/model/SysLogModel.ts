@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult } from "/@/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
 
 /**
  * @description: 系统日志
@@ -19,6 +19,17 @@ export interface SysLog extends BaseEntity<number> {
   remark: string;
 }
 
-export interface ReqSysLog {}
+export interface ReqSysLog extends ReqPage {
+  title?: string;
+  method?: string;
+  reqType?: string;
+  reqUri?: string;
+  reqSource?: number;
+  operType?: string;
+  operIp?: string;
+  operStatus?: number;
+  startTime?: string;
+  endTime?: string;
+}
 
 export type SysLogPageModel = PageResult<SysLog>;

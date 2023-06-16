@@ -30,6 +30,10 @@ export const getSysFileList = (reqSysFile?: ReqSysFile) => {
   return defHttp.get<SysFilePageModel>({ url: Api.SysFile, params: reqSysFile });
 };
 
+export const getSysFileByKey = (fileKey: string) => {
+  return defHttp.get<SysFile>({ url: Api.SysFile + "/" + fileKey });
+};
+
 /**
  * 新增文件存储
  *

@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult } from "/@/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
 
 /**
  * @description: 字典
@@ -13,6 +13,10 @@ export interface Dict extends BaseEntity<string> {
   remark: string;
 }
 
-export interface ReqDict {}
+export interface ReqDict extends ReqPage {
+  dictName?: string;
+  dictCode?: string;
+  status?: number;
+}
 
 export type DictPageModel = PageResult<Dict>;
