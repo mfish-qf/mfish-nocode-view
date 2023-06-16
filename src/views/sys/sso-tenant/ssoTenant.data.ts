@@ -126,7 +126,8 @@ export const ssoTenantFormSchema: FormSchema[] = [
   {
     field: "userId",
     label: "管理员",
-    component: "Input"
+    component: "Input",
+    slot: "userSearch"
   },
   {
     field: "address",
@@ -152,15 +153,15 @@ export const ssoTenantFormSchema: FormSchema[] = [
     componentProps: getDictProps("tenant_corp_trade")
   },
   {
+    field: "domain",
+    label: "域名",
+    component: "Input"
+  },
+  {
     field: "logo",
     label: "logo",
     component: "Input",
     slot: "logoImg"
-  },
-  {
-    field: "domain",
-    label: "域名",
-    component: "Input"
   },
   {
     field: "status",

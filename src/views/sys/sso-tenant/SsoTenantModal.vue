@@ -7,10 +7,11 @@
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
     <BasicForm @register="registerForm" @submit="handleSubmit">
-      <template #logoImg="{ model, field }">
+      <template #logoImg>
         <Upload
           v-model:file-list="logoList"
           name="file"
+          label-in-value
           :max-count="1"
           accept="image/*"
           list-type="picture-card"
@@ -26,13 +27,30 @@
           <img alt="example" style="width: 100%" :src="previewImage" />
         </Modal>
       </template>
+      <template #userSearch>
+        <a-select
+          v-model:value="userId"
+          show-search
+          allowClear
+          placeholder="检索帐号"
+          :filter-option="false"
+          :not-found-content="fetching ? undefined : null"
+          :options="userList"
+          @search="fetchUser"
+          @change="changeUser"
+        >
+          <template v-if="fetching" #notFoundContent>
+            <Spin size="small" />
+          </template>
+        </a-select>
+      </template>
     </BasicForm>
   </BasicModal>
 </template>
 <script lang="ts">
-  import { ref, computed, unref } from "vue";
+  import { computed, reactive, ref, toRefs, unref } from "vue";
   import { BasicForm, useForm } from "/@/components/general/Form";
-  import { Upload, Modal, UploadProps } from "ant-design-vue";
+  import { Modal, Select as ASelect, Spin, Upload, UploadProps } from "ant-design-vue";
   import { ssoTenantFormSchema } from "./ssoTenant.data";
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
   import { insertSsoTenant, updateSsoTenant } from "/@/api/sys/SsoTenant";
@@ -41,10 +59,12 @@
   import Icon from "/@/components/general/Icon/src/Icon.vue";
   import { SysFile } from "/@/api/storage/model/SysFileModel";
   import { getLocalFileUrl, getSysFileByKey } from "/@/api/storage/SysFile";
+  import { debounce } from "lodash-es";
+  import { getUserById, getUserList } from "/@/api/sys/User";
 
   export default {
     name: "SsoTenantModal",
-    components: { Icon, BasicModal, BasicForm, Upload, Modal },
+    components: { Icon, BasicModal, BasicForm, Upload, Modal, ASelect, Spin },
     emits: ["success", "register"],
     setup(_, { emit }) {
       const isUpdate = ref(true);
@@ -60,6 +80,15 @@
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
         resetFields().then();
         logoList.value = [];
+        if (data.record?.userId) {
+          accountList.userId = data.record.userId;
+          getUserById(data.record.userId).then((res) => {
+            accountList.userList = [{ label: res.account, value: res.id }];
+          });
+        } else {
+          accountList.userId = "";
+          accountList.userList = [];
+        }
         setModalProps({ confirmLoading: false, width: "800px" });
         isUpdate.value = !!data?.isUpdate;
         if (unref(isUpdate)) {
@@ -93,6 +122,13 @@
         } else {
           saveSsoTenant(insertSsoTenant, values);
         }
+      }
+
+      function changeUser(id) {
+        if (!id) {
+          id = "";
+        }
+        setFieldsValue({ userId: id }).then();
       }
 
       function saveSsoTenant(save, values) {
@@ -141,6 +177,25 @@
         previewVisible.value = false;
         previewTitle.value = "";
       };
+
+      const accountList = reactive({
+        userList: [] as { label: string; value: string }[],
+        userId: "",
+        fetching: false
+      });
+
+      const fetchUser = debounce((value) => {
+        accountList.userList = [];
+        accountList.fetching = true;
+        getUserList({ account: value, pageNum: 1, pageSize: 20 }).then((res) => {
+          accountList.userList = res.list.map((user) => ({
+            label: user.account,
+            value: user.id
+          }));
+          accountList.fetching = false;
+        });
+      }, 300);
+
       return {
         registerModal,
         registerForm,
@@ -152,7 +207,10 @@
         previewVisible,
         previewImage,
         previewTitle,
-        handleCancel
+        handleCancel,
+        fetchUser,
+        changeUser,
+        ...toRefs(accountList)
       };
     }
   };

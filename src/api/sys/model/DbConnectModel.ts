@@ -22,11 +22,11 @@ export interface DbConnect extends BaseEntity<string> {
 /**
  * 数据库连接请求
  */
-export interface ReqDbConnect {
-  dbTitle: string;
-  dbType: number;
-  host: string;
-  dbName: string;
+export interface ReqDbConnect extends ReqPage {
+  dbTitle?: string;
+  dbType?: number;
+  host?: string;
+  dbName?: string;
 }
 
 /**

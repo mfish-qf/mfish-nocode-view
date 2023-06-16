@@ -1,5 +1,13 @@
 import { defHttp } from "/@/utils/http/axios";
-import { LoginParams, AccessToken, SsoUser, SsoUserPageModel, OnlineUserPageModel, RoleInfo } from "./model/UserModel";
+import {
+  LoginParams,
+  AccessToken,
+  SsoUser,
+  SsoUserPageModel,
+  OnlineUserPageModel,
+  RoleInfo,
+  ReqSsoUser
+} from "./model/UserModel";
 import { MessageMode } from "/#/axios";
 import { ContentTypeEnum } from "/@/enums/HttpEnum";
 import { ReqPage } from "/@/api/model/BaseModel";
@@ -42,6 +50,14 @@ export function getUserInfo() {
 }
 
 /**
+ * 通过用户ID获取用户
+ * @param id
+ */
+export function getUserById(id: string) {
+  return defHttp.get<SsoUser>({ url: Api.User + "/" + id });
+}
+
+/**
  * 获取用户角色信息
  * @param params
  */
@@ -79,7 +95,7 @@ export const isAccountExist = (account: string) => {
   return defHttp.get<any>({ url: `${Api.IsAccountExist}/${account}` }, { errorMessageMode: "none" });
 };
 
-export const getUserList = (params?: SsoUser) => {
+export const getUserList = (params?: ReqSsoUser) => {
   return defHttp.get<SsoUserPageModel>({ url: Api.User, params });
 };
 

@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult } from "/@/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
 
 /**
  * @description: 代码构建
@@ -22,6 +22,10 @@ export interface CodeVo {
   code: string;
 }
 
-export interface ReqCodeBuild {}
+export interface ReqCodeBuild extends ReqPage {
+  tableName?: string;
+  apiPrefix?: string;
+  entityName?: string;
+}
 
 export type CodeBuildPageModel = PageResult<CodeBuild>;

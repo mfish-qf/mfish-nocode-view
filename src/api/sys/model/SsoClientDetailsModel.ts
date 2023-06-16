@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult } from "/@/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
 
 /**
  * @description: 客户端信息
@@ -19,7 +19,7 @@ export interface SsoClientDetails extends BaseEntity<string> {
   autoApprove: string;
 }
 
-export interface ReqSsoClientDetails {
+export interface ReqSsoClientDetails extends ReqPage {
   clientName: string;
   clientId: string;
 }
