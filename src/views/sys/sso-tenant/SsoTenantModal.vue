@@ -32,14 +32,15 @@
 <script lang="ts">
   import { ref, computed, unref } from "vue";
   import { BasicForm, useForm } from "/@/components/general/Form";
-  import { Upload, Modal } from "ant-design-vue";
+  import { Upload, Modal, UploadProps } from "ant-design-vue";
   import { ssoTenantFormSchema } from "./ssoTenant.data";
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
   import { insertSsoTenant, updateSsoTenant } from "/@/api/sys/SsoTenant";
   import { uploadApi } from "/@/api/storage/Upload";
-  import { getBase64WithFile } from "/@/utils/FileUtils";
+  import { getBase64WithFile, imageUrl } from "/@/utils/FileUtils";
   import Icon from "/@/components/general/Icon/src/Icon.vue";
   import { SysFile } from "/@/api/storage/model/SysFileModel";
+  import { getLocalFileUrl, getSysFileByKey } from "/@/api/storage/SysFile";
 
   export default {
     name: "SsoTenantModal",
@@ -55,12 +56,28 @@
         showActionButtonGroup: false,
         autoSubmitOnEnter: true
       });
-      const logoList = ref<any[]>([]);
+      const logoList = ref<UploadProps["fileList"]>([]);
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
         resetFields().then();
+        logoList.value = [];
         setModalProps({ confirmLoading: false, width: "800px" });
         isUpdate.value = !!data?.isUpdate;
         if (unref(isUpdate)) {
+          const logo = data.record.logo;
+          if (logo) {
+            getSysFileByKey(logo).then((res) => {
+              if (res) {
+                logoList.value = [
+                  {
+                    uid: res.fileKey,
+                    name: res.fileName,
+                    status: "done",
+                    url: imageUrl(getLocalFileUrl(logo))
+                  }
+                ];
+              }
+            });
+          }
           setFieldsValue({
             ...data.record
           }).then();
@@ -79,9 +96,12 @@
       }
 
       function saveSsoTenant(save, values) {
-        console.log(logoList, "logoList");
         if (logoList.value && logoList.value.length > 0) {
-          values.logo = (logoList.value[0].response as SysFile).fileKey;
+          if (logoList.value[0].response) {
+            values.logo = (logoList.value[0].response as SysFile).fileKey;
+          }
+        } else {
+          values.logo = "";
         }
         save(values)
           .then(() => {

@@ -18,8 +18,10 @@ export const columns: BasicColumn[] = [
     title: "logo",
     dataIndex: "logo",
     customRender: ({ record }) => {
-      const imgList = [imageUrl(getLocalFileUrl(record.logo))];
-      return h(TableImage, { size: 40, simpleShow: true, imgList: imgList });
+      if (record.logo) {
+        const imgList = [imageUrl(getLocalFileUrl(record.logo))];
+        return h(TableImage, { size: 40, simpleShow: true, imgList: imgList });
+      }
     },
     width: 120
   },
@@ -64,7 +66,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: "管理员",
-    dataIndex: "userName",
+    dataIndex: "account",
     width: 120
   },
   {
@@ -135,22 +137,19 @@ export const ssoTenantFormSchema: FormSchema[] = [
     field: "corpSize",
     label: "公司规模",
     component: "ApiSelect",
-    componentProps: getDictProps("tenant_corp_size"),
-    required: true
+    componentProps: getDictProps("tenant_corp_size")
   },
   {
     field: "corpYears",
     label: "营业年限",
     component: "ApiSelect",
-    componentProps: getDictProps("tenant_corp_years"),
-    required: true
+    componentProps: getDictProps("tenant_corp_years")
   },
   {
     field: "trade",
     label: "所属行业",
     component: "ApiSelect",
-    componentProps: getDictProps("tenant_corp_trade"),
-    required: true
+    componentProps: getDictProps("tenant_corp_trade")
   },
   {
     field: "logo",
