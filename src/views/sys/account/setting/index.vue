@@ -19,7 +19,7 @@
   import { settingList } from "./setting.data";
   import BaseSetting from "./BaseSetting.vue";
   import SecureSetting from "./SecureSetting.vue";
-  import AccountBind from "./AccountBind.vue";
+  import TenantSetting from "./TenantSetting.vue";
 
   export default defineComponent({
     components: {
@@ -28,7 +28,7 @@
       TabPane: Tabs.TabPane,
       BaseSetting,
       SecureSetting,
-      AccountBind
+      TenantSetting
     },
     setup() {
       return {

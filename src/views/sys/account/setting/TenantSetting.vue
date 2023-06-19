@@ -1,6 +1,6 @@
 <template>
-  <CollapseContainer title="账号绑定" :canExpan="false">
-    <List>
+  <CollapseContainer title="租户信息" :canExpan="false">
+    <List :grid="{ gutter: 16, column: 4 }">
       <template v-for="item in list" :key="item.key">
         <ListItem>
           <ListItemMeta>
@@ -24,11 +24,11 @@
 </template>
 <script lang="ts">
   import { List } from "ant-design-vue";
-  import { defineComponent } from "vue";
-  import { CollapseContainer } from "/@/components/general/Container/index";
+  import { defineComponent, onMounted, ref } from "vue";
+  import { CollapseContainer } from "/@/components/general/Container";
   import { Icon } from "/@/components/general/Icon/index";
 
-  import { accountBindList } from "./setting.data";
+  import { ListItem } from "./setting.data";
 
   export default defineComponent({
     components: {
@@ -39,6 +39,38 @@
       Icon
     },
     setup() {
+      onMounted(() => {
+        getTenant();
+      });
+      const tenantList = ref([]);
+      function getTenant() {}
+      // 账号绑定 list
+      const accountBindList: ListItem[] = [
+        {
+          key: "1",
+          title: "绑定淘宝",
+          description: "当前未绑定淘宝账号",
+          extra: "绑定",
+          avatar: "ri:taobao-fill",
+          color: "#ff4000"
+        },
+        {
+          key: "2",
+          title: "绑定支付宝",
+          description: "当前未绑定支付宝账号",
+          extra: "绑定",
+          avatar: "fa-brands:alipay",
+          color: "#2eabff"
+        },
+        {
+          key: "3",
+          title: "绑定钉钉",
+          description: "当前未绑定钉钉账号",
+          extra: "绑定",
+          avatar: "ri:dingding-fill",
+          color: "#2eabff"
+        }
+      ];
       return {
         list: accountBindList
       };

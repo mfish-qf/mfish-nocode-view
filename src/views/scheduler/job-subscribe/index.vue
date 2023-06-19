@@ -58,8 +58,7 @@
           actionColumn: {
             width: 40,
             title: "",
-            dataIndex: "action",
-            fixed: undefined
+            dataIndex: "action"
           }
         });
       const getValue = () => {

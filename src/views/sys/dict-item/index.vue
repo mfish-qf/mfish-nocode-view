@@ -76,8 +76,7 @@
         actionColumn: {
           width: 80,
           title: "操作",
-          dataIndex: "action",
-          fixed: undefined
+          dataIndex: "action"
         }
       });
 

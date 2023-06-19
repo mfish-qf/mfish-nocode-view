@@ -13,7 +13,7 @@ export interface ListItem {
 export const settingList = [
   {
     key: "1",
-    name: "基本设置",
+    name: "个人信息",
     component: "BaseSetting"
   },
   {
@@ -23,8 +23,8 @@ export const settingList = [
   },
   {
     key: "3",
-    name: "账号绑定",
-    component: "AccountBind"
+    name: "租户信息",
+    component: "TenantSetting"
   }
 ];
 
@@ -88,34 +88,6 @@ export const baseSetSchemas: FormSchema[] = [
     component: "InputTextArea",
     label: "个人简介",
     colProps: { span: 18 }
-  }
-];
-
-// 账号绑定 list
-export const accountBindList: ListItem[] = [
-  {
-    key: "1",
-    title: "绑定淘宝",
-    description: "当前未绑定淘宝账号",
-    extra: "绑定",
-    avatar: "ri:taobao-fill",
-    color: "#ff4000"
-  },
-  {
-    key: "2",
-    title: "绑定支付宝",
-    description: "当前未绑定支付宝账号",
-    extra: "绑定",
-    avatar: "fa-brands:alipay",
-    color: "#2eabff"
-  },
-  {
-    key: "3",
-    title: "绑定钉钉",
-    description: "当前未绑定钉钉账号",
-    extra: "绑定",
-    avatar: "ri:dingding-fill",
-    color: "#2eabff"
   }
 ];
 
