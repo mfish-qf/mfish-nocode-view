@@ -158,12 +158,6 @@ export const ssoTenantFormSchema: FormSchema[] = [
     component: "Input"
   },
   {
-    field: "logo",
-    label: "logo",
-    component: "Input",
-    slot: "logoImg"
-  },
-  {
     field: "status",
     label: "状态",
     component: "RadioButtonGroup",
@@ -175,5 +169,11 @@ export const ssoTenantFormSchema: FormSchema[] = [
       ]
     },
     required: true
+  },
+  {
+    field: "logo",
+    label: "logo",
+    component: "Input",
+    slot: "logoImg"
   }
 ];

@@ -1,4 +1,4 @@
-import { FormSchema } from "/@/components/general/Form/index";
+import { FormSchema } from "/@/components/general/Form";
 
 export interface ListItem {
   key: string;
@@ -7,6 +7,7 @@ export interface ListItem {
   extra?: string;
   avatar?: string;
   color?: string;
+  tenantType?: number;
 }
 
 // tab的list
@@ -18,13 +19,13 @@ export const settingList = [
   },
   {
     key: "2",
-    name: "安全设置",
-    component: "SecureSetting"
+    name: "租户信息",
+    component: "TenantSetting"
   },
   {
     key: "3",
-    name: "租户信息",
-    component: "TenantSetting"
+    name: "安全设置",
+    component: "SecureSetting"
   }
 ];
 
@@ -88,24 +89,5 @@ export const baseSetSchemas: FormSchema[] = [
     component: "InputTextArea",
     label: "个人简介",
     colProps: { span: 18 }
-  }
-];
-
-// 新消息通知 list
-export const msgNotifyList: ListItem[] = [
-  {
-    key: "1",
-    title: "账户密码",
-    description: "其他用户的消息将以站内信的形式通知"
-  },
-  {
-    key: "2",
-    title: "系统消息",
-    description: "系统消息将以站内信的形式通知"
-  },
-  {
-    key: "3",
-    title: "待办任务",
-    description: "待办任务将以站内信的形式通知"
   }
 ];

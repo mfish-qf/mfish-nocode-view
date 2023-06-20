@@ -15,7 +15,7 @@
 <script lang="ts">
   import { defineComponent } from "vue";
   import { Tabs } from "ant-design-vue";
-  import { ScrollContainer } from "/@/components/general/Container/index";
+  import { ScrollContainer } from "/@/components/general/Container";
   import { settingList } from "./setting.data";
   import BaseSetting from "./BaseSetting.vue";
   import SecureSetting from "./SecureSetting.vue";
@@ -35,7 +35,8 @@
         prefixCls: "account-setting",
         settingList,
         tabBarStyle: {
-          width: "110px"
+          width: "110px",
+          height: "calc(100vh - 122px)"
         }
       };
     }

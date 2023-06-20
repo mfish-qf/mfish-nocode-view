@@ -6,28 +6,34 @@
           <ListItemMeta>
             <template #title>
               {{ item.title }}
-              <div class="extra" v-if="item.extra">
-                {{ item.extra }}
-              </div>
             </template>
             <template #description>
               <div>{{ item.description }}</div>
             </template>
           </ListItemMeta>
+          <template #actions>
+            <AButton type="link" size="small" v-if="item.extra">
+              <template #icon>
+                <Icon icon="ant-design:edit-outlined" />
+              </template>
+              {{ item.extra }}
+            </AButton>
+          </template>
         </ListItem>
       </template>
     </List>
   </CollapseContainer>
 </template>
 <script lang="ts">
-  import { List } from "ant-design-vue";
+  import { List, Button as AButton } from "ant-design-vue";
   import { defineComponent } from "vue";
-  import { CollapseContainer } from "/@/components/general/Container/index";
+  import { CollapseContainer } from "/@/components/general/Container";
   import { ListItem } from "./setting.data";
   import { useUserStore } from "/@/store/modules/User";
+  import { Icon } from "/@/components/general/Icon";
 
   export default defineComponent({
-    components: { CollapseContainer, List, ListItem: List.Item, ListItemMeta: List.Item.Meta },
+    components: { AButton, Icon, CollapseContainer, List, ListItem: List.Item, ListItemMeta: List.Item.Meta },
     setup() {
       const userStore = useUserStore();
       const userInfo = userStore.getUserInfo;
@@ -71,13 +77,3 @@
     }
   });
 </script>
-<style lang="less" scoped>
-  .extra {
-    float: right;
-    margin-top: 10px;
-    margin-right: 30px;
-    font-weight: normal;
-    color: #1890ff;
-    cursor: pointer;
-  }
-</style>

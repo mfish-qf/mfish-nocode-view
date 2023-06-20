@@ -1,5 +1,5 @@
 import { defHttp } from "/@/utils/http/axios";
-import { SsoTenant, ReqSsoTenant, SsoTenantPageModel } from "/@/api/sys/model/SsoTenantModel";
+import { SsoTenant, ReqSsoTenant, SsoTenantPageModel, TenantVo } from "/@/api/sys/model/SsoTenantModel";
 
 /**
  * @description: 租户信息表
@@ -8,7 +8,8 @@ import { SsoTenant, ReqSsoTenant, SsoTenantPageModel } from "/@/api/sys/model/Ss
  * @version: V1.0.0
  */
 enum Api {
-  SsoTenant = "/oauth2/ssoTenant"
+  SsoTenant = "/oauth2/ssoTenant",
+  UserTenant = "/oauth2/ssoTenant/list"
 }
 
 /**
@@ -19,6 +20,13 @@ enum Api {
  */
 export const getSsoTenantList = (reqSsoTenant?: ReqSsoTenant) => {
   return defHttp.get<SsoTenantPageModel>({ url: Api.SsoTenant, params: reqSsoTenant });
+};
+
+/**
+ * 获取当前用户租户列表
+ */
+export const getUserTenantList = () => {
+  return defHttp.get<TenantVo[]>({ url: Api.UserTenant });
 };
 
 /**

@@ -5,7 +5,14 @@
  @version: V1.0.0
 -->
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
+  <BasicModal
+    v-bind="$attrs"
+    @register="registerModal"
+    :title="getTitle"
+    @ok="handleSubmit"
+    :showOkBtn="showSave"
+    cancelText="关闭"
+  >
     <BasicForm @register="registerForm" @submit="handleSubmit">
       <template #logoImg>
         <Upload
@@ -68,7 +75,7 @@
     emits: ["success", "register"],
     setup(_, { emit }) {
       const isUpdate = ref(true);
-      const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
+      const [registerForm, { resetFields, setFieldsValue, validate, updateSchema }] = useForm({
         name: "model_form_item",
         labelWidth: 100,
         baseColProps: { span: 12 },
@@ -77,9 +84,11 @@
         autoSubmitOnEnter: true
       });
       const logoList = ref<UploadProps["fileList"]>([]);
+      const showSave = ref<boolean>(true);
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
         resetFields().then();
         logoList.value = [];
+        showSave.value = true;
         if (data.record?.userId) {
           accountList.userId = data.record.userId;
           getUserById(data.record.userId).then((res) => {
@@ -107,9 +116,25 @@
               }
             });
           }
+          //来源1 表示自己修改租户信息，不允许修改用户
+          if (data?.source === 1) {
+            updateSchema([
+              {
+                field: "userId",
+                ifShow: false
+              },
+              {
+                field: "tenantType",
+                dynamicDisabled: true
+              }
+            ]).then();
+          }
           setFieldsValue({
             ...data.record
           }).then();
+          if (data?.disabled === 1) {
+            showSave.value = false;
+          }
         }
       });
       const getTitle = computed(() => (!unref(isUpdate) ? "新增租户信息表" : "编辑租户信息表"));
@@ -209,6 +234,7 @@
         previewTitle,
         handleCancel,
         fetchUser,
+        showSave,
         changeUser,
         ...toRefs(accountList)
       };
