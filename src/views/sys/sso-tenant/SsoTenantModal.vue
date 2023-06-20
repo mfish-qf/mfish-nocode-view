@@ -137,7 +137,7 @@
           }
         }
       });
-      const getTitle = computed(() => (!unref(isUpdate) ? "新增租户信息表" : "编辑租户信息表"));
+      const getTitle = computed(() => (!unref(isUpdate) ? "新增租户信息" : "编辑租户信息"));
 
       async function handleSubmit() {
         let values = await validate();
