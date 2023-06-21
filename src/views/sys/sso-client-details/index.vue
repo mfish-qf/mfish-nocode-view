@@ -110,7 +110,7 @@
         columns,
         formConfig: {
           name: "search_form_item",
-          labelWidth: 100,
+          labelWidth: 80,
           schemas: searchFormSchema,
           autoSubmitOnEnter: true
         },
