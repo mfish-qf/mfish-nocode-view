@@ -19,13 +19,23 @@ export const settingList = [
   },
   {
     key: "2",
+    name: "安全设置",
+    component: "SecureSetting"
+  },
+  {
+    key: "3",
     name: "租户信息",
     component: "TenantSetting"
   },
   {
-    key: "3",
-    name: "安全设置",
-    component: "SecureSetting"
+    key: "4",
+    name: "租户组织",
+    component: "TenantOrgSetting"
+  },
+  {
+    key: "5",
+    name: "租户角色",
+    component: "TenantRoleSetting"
   }
 ];
 

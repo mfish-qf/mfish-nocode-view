@@ -21,34 +21,49 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
-                auth: 'sys:org:delete'
+                auth: 'sys:org:delete',
+                ifShow: !record?.tenantId
               }
             ]"
           />
         </template>
       </template>
     </BasicTable>
-    <OrgModal @register="registerModal" @success="handleSuccess" />
+    <OrgModal @register="registerModal" @success="handleSuccess" :source="$props.source" />
   </div>
 </template>
 <script lang="ts">
-  import { nextTick } from "vue";
+  import { ref } from "vue";
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { deleteOrg, getOrgTree } from "/@/api/sys/Org";
   import { useModal } from "/@/components/general/Modal";
   import OrgModal from "./OrgModal.vue";
   import { columns, searchFormSchema } from "./org.data";
   import { usePermission } from "/@/hooks/web/UsePermission";
+  import { getTenantOrgTree } from "/@/api/sys/SsoTenant";
 
   export default {
     name: "OrgManagement",
     components: { BasicTable, OrgModal, TableAction },
-    setup() {
+    props: {
+      source: {
+        type: Number,
+        default: null
+      }
+    },
+    setup(props) {
       const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
-      const [registerTable, { reload, expandAll }] = useTable({
+      const api = ref();
+      if (props.source == 1) {
+        api.value = getTenantOrgTree;
+      } else {
+        api.value = getOrgTree;
+      }
+      const [registerTable, { reload, expandRows }] = useTable({
         title: "部门列表",
-        api: getOrgTree,
+        rowKey: "id",
+        api: api,
         columns,
         formConfig: {
           name: "search_form_item",
@@ -94,8 +109,10 @@
         reload();
       }
 
-      function onFetchSuccess() {
-        nextTick(expandAll);
+      function onFetchSuccess(record) {
+        if (record?.items?.length > 0) {
+          expandRows([record.items[0].id]);
+        }
       }
 
       return {

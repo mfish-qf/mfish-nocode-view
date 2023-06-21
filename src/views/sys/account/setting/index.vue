@@ -1,10 +1,10 @@
 <template>
   <ScrollContainer>
-    <div ref="wrapperRef" :class="prefixCls">
+    <div ref="wrapperRef" class="account-setting">
       <Tabs tab-position="left" :tabBarStyle="tabBarStyle">
         <template v-for="item in settingList" :key="item.key">
-          <TabPane :tab="item.name">
-            <component :is="item.component" />
+          <TabPane :tab="item.name" class="base-title">
+            <component :is="item.component" :source="1" />
           </TabPane>
         </template>
       </Tabs>
@@ -13,13 +13,15 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent, onMounted, ref } from "vue";
   import { Tabs } from "ant-design-vue";
   import { ScrollContainer } from "/@/components/general/Container";
   import { settingList } from "./setting.data";
   import BaseSetting from "./BaseSetting.vue";
   import SecureSetting from "./SecureSetting.vue";
   import TenantSetting from "./TenantSetting.vue";
+  import TenantOrgSetting from "./TenantOrgSetting.vue";
+  import TenantRoleSetting from "./TenantRoleSetting.vue";
 
   export default defineComponent({
     components: {
@@ -28,27 +30,33 @@
       TabPane: Tabs.TabPane,
       BaseSetting,
       SecureSetting,
-      TenantSetting
+      TenantSetting,
+      TenantOrgSetting,
+      TenantRoleSetting
     },
     setup() {
+      const tenantId = ref("");
+      onMounted(() => {
+        tenantId.value = "57e357ca632f8654c8745dc00092bf79";
+      });
       return {
-        prefixCls: "account-setting",
         settingList,
         tabBarStyle: {
           width: "110px",
           height: "calc(100vh - 122px)"
-        }
+        },
+        tenantId
       };
     }
   });
 </script>
-<style lang="less">
+<style lang="less" scoped>
   .account-setting {
     margin: 12px;
     background-color: @component-background;
 
     .base-title {
-      padding-left: 0;
+      padding: 0 16px 0 16px !important;
     }
 
     .ant-tabs-tab-active {

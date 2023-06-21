@@ -16,6 +16,16 @@ export const columns: BasicColumn[] = [
     width: 160
   },
   {
+    title: "负责人",
+    dataIndex: "leader",
+    width: 120
+  },
+  {
+    title: "手机号",
+    dataIndex: "phone",
+    width: 120
+  },
+  {
     title: "排序",
     dataIndex: "orgSort",
     width: 50
@@ -31,30 +41,6 @@ export const columns: BasicColumn[] = [
       const text = enable ? "启用" : "停用";
       return h(Tag, { color: color }, () => text);
     }
-  },
-  {
-    title: "负责人",
-    dataIndex: "leader",
-    width: 120
-  },
-  {
-    title: "手机号",
-    dataIndex: "phone",
-    width: 120
-  },
-  {
-    title: "邮箱",
-    dataIndex: "email",
-    width: 180
-  },
-  {
-    title: "创建时间",
-    dataIndex: "createTime",
-    width: 180
-  },
-  {
-    title: "备注",
-    dataIndex: "remark"
   }
 ];
 

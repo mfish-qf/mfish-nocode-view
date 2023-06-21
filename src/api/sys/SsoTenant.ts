@@ -1,5 +1,6 @@
 import { defHttp } from "/@/utils/http/axios";
 import { SsoTenant, ReqSsoTenant, SsoTenantPageModel, TenantVo } from "/@/api/sys/model/SsoTenantModel";
+import { SsoOrg } from "/@/api/sys/model/OrgModel";
 
 /**
  * @description: 租户信息表
@@ -9,7 +10,9 @@ import { SsoTenant, ReqSsoTenant, SsoTenantPageModel, TenantVo } from "/@/api/sy
  */
 enum Api {
   SsoTenant = "/oauth2/ssoTenant",
-  UserTenant = "/oauth2/ssoTenant/list"
+  MeTenant = "/oauth2/ssoTenant/me",
+  UserTenant = "/oauth2/ssoTenant/list",
+  TenantOrg = "/oauth2/ssoTenant/org"
 }
 
 /**
@@ -58,6 +61,14 @@ export function updateSsoTenant(ssoTenant: SsoTenant) {
 }
 
 /**
+ * 管理员更新自己租户信息
+ * @param ssoTenant
+ */
+export function updateMeTenant(ssoTenant: SsoTenant) {
+  return defHttp.put<SsoTenant>({ url: Api.MeTenant, params: ssoTenant }, { successMessageMode: "message" });
+}
+
+/**
  * 删除租户信息表
  *
  * @param id 唯一ID
@@ -65,4 +76,24 @@ export function updateSsoTenant(ssoTenant: SsoTenant) {
  */
 export function deleteSsoTenant(id: string) {
   return defHttp.delete<SsoTenant>({ url: Api.SsoTenant + "/" + id }, { successMessageMode: "message" });
+}
+
+/**
+ * 获取租户组织树
+ * @param params
+ */
+export const getTenantOrgTree = (params?: SsoOrg) => {
+  return defHttp.get<SsoOrg[]>({ url: Api.TenantOrg, params });
+};
+
+export function insertTenantOrg(params: SsoOrg) {
+  return defHttp.post<SsoOrg>({ url: Api.TenantOrg, params }, { successMessageMode: "message" });
+}
+
+export function updateTenantOrg(params: SsoOrg) {
+  return defHttp.put<SsoOrg>({ url: Api.TenantOrg, params }, { successMessageMode: "message" });
+}
+
+export function deleteTenantOrg(params: string) {
+  return defHttp.delete<SsoOrg>({ url: `${Api.TenantOrg}/${params}` }, { successMessageMode: "message" });
 }

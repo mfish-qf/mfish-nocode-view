@@ -10,12 +10,19 @@
   import { formSchema } from "./org.data";
   import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
   import { getAllRoleList } from "/@/api/sys/Role";
+  import { getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "/@/api/sys/SsoTenant";
 
   export default {
     name: "OrgModal",
     components: { BasicModal, BasicForm },
+    props: {
+      source: {
+        type: Number,
+        default: null
+      }
+    },
     emits: ["success", "register"],
-    setup(_, { emit }) {
+    setup(props, { emit }) {
       const isUpdate = ref(true);
 
       const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
@@ -28,13 +35,23 @@
 
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
         resetFields().then();
+        tenantDisabled(false);
         setModalProps({ confirmLoading: false, width: "800px" });
         isUpdate.value = !!data?.isUpdate;
-        const treeData = await getOrgTree();
+        let treeData;
+        if (props.source == 1) {
+          treeData = await getTenantOrgTree();
+        } else {
+          treeData = await getOrgTree();
+        }
         if (unref(isUpdate)) {
           setFieldsValue({
             ...data.record
           }).then();
+          //如果是租户组织，不允许在此界面修改名称、编码等属性
+          if (data.record.tenantId) {
+            tenantDisabled(true);
+          }
         }
         const roles = await getAllRoleList();
         const options = roles.reduce((prev, next: Recordable) => {
@@ -60,6 +77,23 @@
         ]).then();
       });
 
+      function tenantDisabled(disabled) {
+        updateSchema([
+          {
+            field: "orgName",
+            dynamicDisabled: disabled
+          },
+          {
+            field: "orgFixCode",
+            dynamicDisabled: disabled
+          },
+          {
+            field: "parentId",
+            dynamicDisabled: disabled
+          }
+        ]).then();
+      }
+
       const getTitle = computed(() => (!unref(isUpdate) ? "新增组织" : "编辑组织"));
 
       async function handleSubmit() {
@@ -67,9 +101,17 @@
         values.clientId = "system";
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
-          saveOrg(updateOrg, values);
+          if (props.source == 1) {
+            saveOrg(updateTenantOrg, values);
+          } else {
+            saveOrg(updateOrg, values);
+          }
         } else {
-          saveOrg(insertOrg, values);
+          if (props.source == 1) {
+            saveOrg(insertTenantOrg, values);
+          } else {
+            saveOrg(insertOrg, values);
+          }
         }
         emit("success");
       }

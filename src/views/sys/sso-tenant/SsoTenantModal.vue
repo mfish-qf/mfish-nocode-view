@@ -60,7 +60,7 @@
   import { Modal, Select as ASelect, Spin, Upload, UploadProps } from "ant-design-vue";
   import { ssoTenantFormSchema } from "./ssoTenant.data";
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { insertSsoTenant, updateSsoTenant } from "/@/api/sys/SsoTenant";
+  import { insertSsoTenant, updateMeTenant, updateSsoTenant } from "/@/api/sys/SsoTenant";
   import { uploadApi } from "/@/api/storage/Upload";
   import { getBase64WithFile, imageUrl } from "/@/utils/FileUtils";
   import Icon from "/@/components/general/Icon/src/Icon.vue";
@@ -75,6 +75,7 @@
     emits: ["success", "register"],
     setup(_, { emit }) {
       const isUpdate = ref(true);
+      let source = 0;
       const [registerForm, { resetFields, setFieldsValue, validate, updateSchema }] = useForm({
         name: "model_form_item",
         labelWidth: 100,
@@ -118,10 +119,11 @@
           }
           //来源1 表示自己修改租户信息，不允许修改用户
           if (data?.source === 1) {
+            source = 1;
             updateSchema([
               {
                 field: "userId",
-                ifShow: false
+                show: false
               },
               {
                 field: "tenantType",
@@ -143,7 +145,11 @@
         let values = await validate();
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
-          saveSsoTenant(updateSsoTenant, values);
+          if (source === 1) {
+            saveSsoTenant(updateMeTenant, values);
+          } else {
+            saveSsoTenant(updateSsoTenant, values);
+          }
         } else {
           saveSsoTenant(insertSsoTenant, values);
         }
