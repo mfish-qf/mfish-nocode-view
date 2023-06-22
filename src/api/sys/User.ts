@@ -11,6 +11,7 @@ import {
 import { MessageMode } from "/#/axios";
 import { ContentTypeEnum } from "/@/enums/HttpEnum";
 import { ReqPage } from "/@/api/model/BaseModel";
+import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
 
 enum Api {
   Login = "/oauth2/accessToken",
@@ -23,7 +24,8 @@ enum Api {
   Permissions = "/oauth2/user/permissions",
   SetStatus = "/oauth2/user/status",
   Online = "/oauth2/user/online",
-  UserRoles = "/oauth2/user/roles"
+  UserRoles = "/oauth2/user/roles",
+  Tenants = "/oauth2/user/Tenants"
 }
 
 /**
@@ -61,7 +63,7 @@ export function getUserById(id: string) {
  * 获取用户角色信息
  * @param params
  */
-export function getUserRoles(params: { userId?: string; clientId?: string }) {
+export function getUserRoles(params: { userId?: string; tenantId?: string }) {
   return defHttp.get<RoleInfo[]>({ url: Api.UserRoles, params });
 }
 
@@ -71,6 +73,13 @@ export function getUserRoles(params: { userId?: string; clientId?: string }) {
 export function getPermissions() {
   return defHttp.get<Set<string>>({ url: Api.Permissions }, { errorMessageMode: "none" });
 }
+
+/**
+ * 获取当前用户租户列表
+ */
+export const getUserTenants = () => {
+  return defHttp.get<TenantVo[]>({ url: Api.Tenants });
+};
 
 /**
  * 当前用户登出

@@ -19,13 +19,13 @@ export interface RouteItem {
 export enum MenuType {
   目录,
   菜单,
-  按钮,
+  按钮
 }
 
 export interface MenuListItem {
   id: string;
   parentId: string;
-  clientId: string;
+  tenantId: string;
   menuName: string;
   menuType: MenuType;
   menuCode: string;

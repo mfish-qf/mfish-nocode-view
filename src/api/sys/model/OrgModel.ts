@@ -6,7 +6,6 @@
 export interface SsoOrg {
   id: string;
   parentId: string;
-  clientId: string;
   tenantId: string;
   orgCode: string;
   orgLevel: number;

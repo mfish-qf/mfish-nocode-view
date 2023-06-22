@@ -7,7 +7,7 @@ import { PageResult } from "/@/api/model/BaseModel";
  */
 export interface SsoRole {
   id: string;
-  clientId: string;
+  tenantId: string;
   roleName: string;
   roleCode: string;
   roleSort: number;

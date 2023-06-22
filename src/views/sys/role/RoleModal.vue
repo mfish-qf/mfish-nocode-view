@@ -83,7 +83,6 @@
 
       async function handleSubmit() {
         let values = await validate();
-        values.clientId = "system";
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
           saveRole(updateRole, values);

@@ -98,7 +98,6 @@
 
       async function handleSubmit() {
         const values = await validate();
-        values.clientId = "system";
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
           if (props.source == 1) {

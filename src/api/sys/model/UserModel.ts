@@ -36,7 +36,7 @@ export interface AccessToken {
 }
 
 export interface ReqSsoUser extends ReqPage {
-  clientId?: string;
+  tenantId?: string;
   orgId?: string;
   account?: string;
   phone?: string;

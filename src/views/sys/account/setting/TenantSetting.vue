@@ -52,7 +52,6 @@
   import { Avatar, List, Button as AButton, Tag } from "ant-design-vue";
   import { defineComponent, onMounted, ref } from "vue";
   import { CollapseContainer } from "/@/components/general/Container";
-  import { getUserTenantList } from "/@/api/sys/SsoTenant";
   import { imageUrl } from "/@/utils/FileUtils";
   import { Icon } from "/@/components/general/Icon";
   import { DictItem } from "/@/api/sys/model/DictItemModel";
@@ -60,6 +59,7 @@
   import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
   import SsoTenantModal from "/@/views/sys/sso-tenant/SsoTenantModal.vue";
   import { useModal } from "/@/components/general/Modal";
+  import { getUserTenants } from "/@/api/sys/User";
 
   export default defineComponent({
     components: {
@@ -89,7 +89,7 @@
       }
 
       function getTenant() {
-        getUserTenantList().then((res) => {
+        getUserTenants().then((res) => {
           tenantList.value = res;
         });
       }
