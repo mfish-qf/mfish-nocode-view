@@ -76,7 +76,6 @@
   import { useMessage } from "/@/hooks/web/UseMessage";
   import { useUserStore } from "/@/store/modules/User";
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from "./UseLogin";
-  import { useDesign } from "/@/hooks/web/UseDesign";
   import { oauth2Config } from "/@/settings/LoginSetting";
 
   const ACol = Col;
@@ -85,7 +84,6 @@
   const InputPassword = Input.Password;
   const { t } = useI18n();
   const { notification } = useMessage();
-  const { prefixCls } = useDesign("login");
   const userStore = useUserStore();
   const { setLoginState, getLoginState } = useLoginState();
   const { getFormRules } = useFormRules();

@@ -36,6 +36,7 @@
         :showText="false"
         :class="`${prefixCls}-action__item`"
       />
+      <TenantDropDown :theme="getHeaderTheme" />
       <UserDropDown :theme="getHeaderTheme" />
       <AppDarkModeToggle class="mx-auto" />
       <SettingDrawer v-if="getShowSetting" :class="`${prefixCls}-action__item`" />
@@ -56,7 +57,7 @@
   import { MenuModeEnum, MenuSplitTyeEnum } from "/@/enums/MenuEnum";
   import { SettingButtonPositionEnum } from "/@/enums/AppEnum";
   import { AppLocalePicker } from "/@/components/general/Application";
-  import { UserDropDown, LayoutBreadcrumb, FullScreen, Notify, ErrorAction } from "./components";
+  import { UserDropDown, TenantDropDown, LayoutBreadcrumb, FullScreen, Notify, ErrorAction } from "./components";
   import { useAppInject } from "/@/hooks/web/UseAppInject";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
@@ -73,6 +74,7 @@
       LayoutBreadcrumb,
       LayoutMenu,
       UserDropDown,
+      TenantDropDown,
       AppLocalePicker,
       FullScreen,
       Notify,

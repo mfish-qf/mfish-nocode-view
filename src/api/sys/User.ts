@@ -25,7 +25,7 @@ enum Api {
   SetStatus = "/oauth2/user/status",
   Online = "/oauth2/user/online",
   UserRoles = "/oauth2/user/roles",
-  Tenants = "/oauth2/user/Tenants"
+  Tenants = "/oauth2/user/tenants"
 }
 
 /**

@@ -10,6 +10,7 @@ import { SsoOrg } from "/@/api/sys/model/OrgModel";
  */
 enum Api {
   SsoTenant = "/oauth2/ssoTenant",
+  ChangeTenant = "/oauth2/ssoTenant/change",
   MeTenant = "/oauth2/ssoTenant/me",
   TenantOrg = "/oauth2/ssoTenant/org"
 }
@@ -50,6 +51,14 @@ export function insertSsoTenant(ssoTenant: SsoTenant) {
  */
 export function updateSsoTenant(ssoTenant: SsoTenant) {
   return defHttp.put<SsoTenant>({ url: Api.SsoTenant, params: ssoTenant }, { successMessageMode: "message" });
+}
+
+/**
+ * 切换租户
+ * @param tenantId
+ */
+export function changeSsoTenant(tenantId: String) {
+  return defHttp.put<string>({ url: Api.ChangeTenant + "/" + tenantId }, { successMessageMode: "message" });
 }
 
 /**

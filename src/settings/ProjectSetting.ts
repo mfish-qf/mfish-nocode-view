@@ -22,7 +22,7 @@ const setting: ProjectConfig = {
   settingButtonPosition: SettingButtonPositionEnum.AUTO,
 
   // Permission-related cache is stored in sessionStorage or localStorage
-  permissionCacheType: CacheTypeEnum.SESSION,
+  permissionCacheType: CacheTypeEnum.LOCAL,
 
   // Session timeout processing
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum.ROUTE_JUMP,

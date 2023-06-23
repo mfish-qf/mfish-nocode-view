@@ -1,4 +1,5 @@
 import { PageResult, ReqPage } from "/@/api/model/BaseModel";
+import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
 
 /**
  * @description: 用户信息
@@ -68,6 +69,7 @@ export interface SsoUser {
   roleIds: string[];
   userRoles: RoleInfo[];
   permissions: Set<string>;
+  tenants: TenantVo[];
 }
 
 export interface OnlineUser {
