@@ -25,7 +25,6 @@ export enum MenuType {
 export interface MenuListItem {
   id: string;
   parentId: string;
-  tenantId: string;
   menuName: string;
   menuType: MenuType;
   menuCode: string;

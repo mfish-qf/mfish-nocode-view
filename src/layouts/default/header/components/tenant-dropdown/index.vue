@@ -63,9 +63,12 @@
       });
 
       function handleMenuClick(e: MenuInfo) {
-        changeSsoTenant(e.key as string).then((res) => {
+        const tenantId = e.key as string;
+        if (tenantId === userStore.getTenantId) {
+          return;
+        }
+        changeSsoTenant(tenantId).then((res) => {
           userStore.setTenantId(res);
-          // userStore.getAccountInfo();
           router.go(0);
         });
       }
