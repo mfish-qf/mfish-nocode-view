@@ -31,7 +31,7 @@
     </template>
   </Dropdown>
   <LockAction @register="register" />
-  <PasswordModal @register="registerPwd"></PasswordModal>
+  <PasswordModal @register="registerPwd" />
 </template>
 <script lang="ts">
   import { Dropdown, Menu } from "ant-design-vue";

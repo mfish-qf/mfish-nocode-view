@@ -30,6 +30,7 @@
                   confirm: handleDelete.bind(null, record)
                 },
                 auth: 'sys:ssoTenant:delete',
+                ifShow: record.id !== '1',
                 tooltip: '删除'
               }
             ]"

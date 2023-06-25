@@ -5,13 +5,10 @@
 -->
 <template>
   <CollapseContainer title="租户角色" :canExpan="false">
-    <RoleManagement :source="props.source" />
+    <RoleManagement :source="1" />
   </CollapseContainer>
 </template>
 <script lang="ts" setup>
   import { CollapseContainer } from "/@/components/general/Container";
   import RoleManagement from "../../role/index.vue";
-  const props = defineProps({
-    source: { type: Number, default: null }
-  });
 </script>

@@ -1,12 +1,10 @@
 <template>
   <ScrollContainer>
     <div ref="wrapperRef" class="account-setting">
-      <Tabs tab-position="left" :tabBarStyle="tabBarStyle">
-        <template v-for="item in settingList" :key="item.key">
-          <TabPane :tab="item.name" class="base-title">
-            <component :is="item.component" :source="1" />
-          </TabPane>
-        </template>
+      <Tabs tab-position="left" :tabBarStyle="tabBarStyle" :activeKey="tabType" @change="tabChange">
+        <TabPane v-for="item in settingList" :key="item.key" :tab="item.name" class="base-title">
+          <component :is="item.component" />
+        </TabPane>
       </Tabs>
     </div>
   </ScrollContainer>
@@ -22,6 +20,7 @@
   import TenantSetting from "./TenantSetting.vue";
   import TenantOrgSetting from "./TenantOrgSetting.vue";
   import TenantRoleSetting from "./TenantRoleSetting.vue";
+  import { useRoute } from "vue-router";
 
   export default defineComponent({
     components: {
@@ -35,17 +34,28 @@
       TenantRoleSetting
     },
     setup() {
-      const tenantId = ref("");
+      const route = useRoute();
+      const tabType = ref(1);
       onMounted(() => {
-        tenantId.value = "57e357ca632f8654c8745dc00092bf79";
+        const index = route.path.lastIndexOf("/");
+        if (index) {
+          const type = parseInt(route.path.substring(index + 1));
+          if (!Number.isNaN(type)) {
+            tabType.value = type;
+          }
+        }
       });
+      function tabChange(e) {
+        tabType.value = e;
+      }
       return {
         settingList,
         tabBarStyle: {
           width: "110px",
           height: "calc(100vh - 122px)"
         },
-        tenantId
+        tabType,
+        tabChange
       };
     }
   });

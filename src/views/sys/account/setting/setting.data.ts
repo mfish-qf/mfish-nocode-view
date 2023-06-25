@@ -13,27 +13,27 @@ export interface ListItem {
 // tab的list
 export const settingList = [
   {
-    key: "1",
+    key: 1,
     name: "个人信息",
     component: "BaseSetting"
   },
   {
-    key: "2",
+    key: 2,
     name: "安全设置",
     component: "SecureSetting"
   },
   {
-    key: "3",
+    key: 3,
     name: "租户信息",
     component: "TenantSetting"
   },
   {
-    key: "4",
+    key: 4,
     name: "租户组织",
     component: "TenantOrgSetting"
   },
   {
-    key: "5",
+    key: 5,
     name: "租户角色",
     component: "TenantRoleSetting"
   }

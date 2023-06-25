@@ -5,13 +5,10 @@
 -->
 <template>
   <CollapseContainer title="租户组织" :canExpan="false">
-    <OrgManagement :source="props.source" />
+    <OrgManagement :source="1" />
   </CollapseContainer>
 </template>
 <script lang="ts" setup>
   import { CollapseContainer } from "/@/components/general/Container";
   import OrgManagement from "../../org/index.vue";
-  const props = defineProps({
-    source: { type: Number, default: null }
-  });
 </script>
