@@ -27,7 +27,7 @@
 </template>
 <script lang="ts">
   import { List, Button as AButton } from "ant-design-vue";
-  import { defineComponent, unref } from "vue";
+  import { defineComponent } from "vue";
   import { CollapseContainer } from "/@/components/general/Container";
   import { ListItem } from "./setting.data";
   import { useUserStore } from "/@/store/modules/User";
