@@ -1,6 +1,7 @@
 import { defHttp } from "/@/utils/http/axios";
 import { SsoTenant, ReqSsoTenant, SsoTenantPageModel } from "/@/api/sys/model/SsoTenantModel";
 import { SsoOrg } from "/@/api/sys/model/OrgModel";
+import { ReqSsoRole, SsoRole } from "/@/api/sys/model/RoleModel";
 
 /**
  * @description: 租户信息表
@@ -12,7 +13,8 @@ enum Api {
   SsoTenant = "/oauth2/ssoTenant",
   ChangeTenant = "/oauth2/ssoTenant/change",
   MeTenant = "/oauth2/ssoTenant/me",
-  TenantOrg = "/oauth2/ssoTenant/org"
+  TenantOrg = "/oauth2/ssoTenant/org",
+  TenantRole = "/oauth2/ssoTenant/role"
 }
 
 /**
@@ -98,3 +100,17 @@ export function updateTenantOrg(params: SsoOrg) {
 export function deleteTenantOrg(params: string) {
   return defHttp.delete<SsoOrg>({ url: `${Api.TenantOrg}/${params}` }, { successMessageMode: "message" });
 }
+
+export const getTenantRole = (params?: ReqSsoRole) => {
+  return defHttp.get<SsoOrg[]>({ url: Api.TenantRole, params });
+};
+
+export const insertTenantRole = (params: SsoRole) => {
+  return defHttp.post<SsoRole>({ url: Api.TenantRole, params }, { successMessageMode: "message" });
+};
+export const updateTenantRole = (params: SsoRole) => {
+  return defHttp.put<SsoRole>({ url: Api.TenantRole, params }, { successMessageMode: "message" });
+};
+export const deleteTenantRole = (params: string) => {
+  return defHttp.delete({ url: `${Api.TenantRole}/${params}` }, { successMessageMode: "message" });
+};

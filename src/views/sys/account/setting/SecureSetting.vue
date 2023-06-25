@@ -37,8 +37,8 @@
     setup() {
       const userStore = useUserStore();
       const userInfo = userStore.getUserInfo;
-      const phone = userInfo?.phone.replace(/(\d{3})\d*(\d{4})/, "$1****$2");
-      const email = userInfo?.email.replace(/(\w)\w*(@\w+\.\w+)/, "$1***$2");
+      const phone = userInfo?.phone?.replace(/(\d{3})\d*(\d{4})/, "$1****$2");
+      const email = userInfo?.email?.replace(/(\w)\w*(@\w+\.\w+)/, "$1***$2");
       const secureSettingList: ListItem[] = [
         {
           key: "1",

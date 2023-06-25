@@ -4,6 +4,7 @@ import { h } from "vue";
 import { Tag, Switch } from "ant-design-vue";
 import { RenderCallbackParams } from "/@/components/general/Form";
 import { setUserStatus } from "/@/api/sys/User";
+import { usePermission } from "/@/hooks/web/UsePermission";
 
 export const columns: BasicColumn[] = [
   {
@@ -65,7 +66,7 @@ export const columns: BasicColumn[] = [
         checked: record.status === 0,
         checkedChildren: "已启用",
         unCheckedChildren: "已停用",
-        disabled: record.id === "1",
+        disabled: record.id === "1" || !usePermission().hasPermission("sys:account:update"),
         loading: record.pendingStatus,
         onChange(checked: boolean) {
           record.pendingStatus = true;
@@ -163,8 +164,7 @@ export const accountFormSchema: FormSchema[] = [
     componentProps: {
       mode: "multiple"
     },
-    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
-      renderCallbackParams.values["account"] === "admin" ? true : false
+    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin"
   },
   {
     label: "邮箱",

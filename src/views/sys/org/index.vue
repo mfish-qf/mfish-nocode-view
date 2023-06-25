@@ -2,7 +2,12 @@
   <div>
     <BasicTable @register="registerTable" @fetch-success="onFetchSuccess">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:org:insert')">新增组织 </a-button>
+        <a-button
+          type="primary"
+          @click="handleCreate"
+          v-if="$props.source === 1 ? hasTenant() : hasPermission('sys:org:insert')"
+          >新增组织
+        </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -11,7 +16,7 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                auth: 'sys:org:update'
+                ifShow: $props.source === 1 ? hasTenant() : hasPermission('sys:org:update')
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -21,8 +26,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
-                auth: 'sys:org:delete',
-                ifShow: !record?.tenantId
+                ifShow: !record?.tenantId && ($props.source === 1 ? hasTenant() : hasPermission('sys:org:delete'))
               }
             ]"
           />
@@ -40,7 +44,7 @@
   import OrgModal from "./OrgModal.vue";
   import { columns, searchFormSchema } from "./org.data";
   import { usePermission } from "/@/hooks/web/UsePermission";
-  import { getTenantOrgTree } from "/@/api/sys/SsoTenant";
+  import { deleteTenantOrg, getTenantOrgTree } from "/@/api/sys/SsoTenant";
 
   export default {
     name: "OrgManagement",
@@ -52,7 +56,7 @@
       }
     },
     setup(props) {
-      const { hasPermission } = usePermission();
+      const { hasPermission, hasTenant } = usePermission();
       const [registerModal, { openModal }] = useModal();
       const api = ref();
       if (props.source == 1) {
@@ -100,6 +104,12 @@
       }
 
       function handleDelete(record: Recordable) {
+        if (props.source == 1) {
+          deleteTenantOrg(record.id).then(() => {
+            handleSuccess();
+          });
+          return;
+        }
         deleteOrg(record.id).then(() => {
           handleSuccess();
         });
@@ -123,7 +133,8 @@
         handleDelete,
         handleSuccess,
         onFetchSuccess,
-        hasPermission
+        hasPermission,
+        hasTenant
       };
     }
   };

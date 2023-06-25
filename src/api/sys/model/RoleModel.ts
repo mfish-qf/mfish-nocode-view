@@ -1,4 +1,4 @@
-import { PageResult } from "/@/api/model/BaseModel";
+import { PageResult, ReqPage } from "/@/api/model/BaseModel";
 
 /**
  * @description: 角色信息
@@ -18,6 +18,13 @@ export interface SsoRole {
   createTime: string;
   updateBy: string;
   updateTime: string;
+}
+
+export interface ReqSsoRole extends ReqPage {
+  tenantId: string;
+  roleName: string;
+  roleCode: string;
+  status: number;
 }
 
 export type RolePageModel = PageResult<SsoRole>;

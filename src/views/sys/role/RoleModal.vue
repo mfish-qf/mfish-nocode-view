@@ -24,12 +24,19 @@
   import { BasicTree, TreeItem } from "/@/components/general/Tree";
   import { getMenuTree } from "/@/api/sys/Menu";
   import { getRoleMenus, insertRole, updateRole } from "/@/api/sys/Role";
+  import { insertTenantRole, updateTenantRole } from "/@/api/sys/SsoTenant";
 
   export default {
     name: "RoleModal",
     components: { BasicModal, BasicForm, BasicTree },
+    props: {
+      source: {
+        type: Number,
+        default: null
+      }
+    },
     emits: ["success", "register"],
-    setup(_, { emit }) {
+    setup(props, { emit }) {
       const isUpdate = ref(true);
       const treeData = ref<TreeItem[]>([]);
       const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
@@ -85,9 +92,17 @@
         let values = await validate();
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
-          saveRole(updateRole, values);
+          if (props.source === 1) {
+            saveRole(updateTenantRole, values);
+          } else {
+            saveRole(updateRole, values);
+          }
         } else {
-          saveRole(insertRole, values);
+          if (props.source === 1) {
+            saveRole(insertTenantRole, values);
+          } else {
+            saveRole(insertRole, values);
+          }
         }
       }
 
