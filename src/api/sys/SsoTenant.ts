@@ -14,7 +14,8 @@ enum Api {
   ChangeTenant = "/oauth2/ssoTenant/change",
   MeTenant = "/oauth2/ssoTenant/me",
   TenantOrg = "/oauth2/ssoTenant/org",
-  TenantRole = "/oauth2/ssoTenant/role"
+  TenantRole = "/oauth2/ssoTenant/role",
+  TenantALLRole = "/oauth2/ssoTenant/role/all"
 }
 
 /**
@@ -103,6 +104,10 @@ export function deleteTenantOrg(params: string) {
 
 export const getTenantRole = (params?: ReqSsoRole) => {
   return defHttp.get<SsoOrg[]>({ url: Api.TenantRole, params });
+};
+
+export const getTenantAllRole = (params?: ReqSsoRole) => {
+  return defHttp.get<SsoRole[]>({ url: Api.TenantALLRole, params });
 };
 
 export const insertTenantRole = (params: SsoRole) => {

@@ -18,6 +18,7 @@ enum Api {
   Logout = "/oauth2/user/revoke",
   GetUserInfo = "/oauth2/user/info",
   User = "/oauth2/user",
+  Me = "/oauth2/user/me",
   IsAccountExist = "/oauth2/user/exist",
   Pwd = "/oauth2/user/pwd",
   SendMsg = "/oauth2/sendMsg",
@@ -114,6 +115,10 @@ export function insertUser(params: SsoUser) {
 
 export function updateUser(params: SsoUser) {
   return defHttp.put<SsoUser>({ url: Api.User, params }, { successMessageMode: "message" });
+}
+
+export function updateMe(params: SsoUser) {
+  return defHttp.put<SsoUser>({ url: Api.Me, params }, { successMessageMode: "message" });
 }
 
 export function deleteUser(params: string) {

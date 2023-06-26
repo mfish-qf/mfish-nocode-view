@@ -10,7 +10,7 @@
   import { formSchema } from "./org.data";
   import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
   import { getAllRoleList } from "/@/api/sys/Role";
-  import { getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "/@/api/sys/SsoTenant";
+  import { getTenantAllRole, getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "/@/api/sys/SsoTenant";
 
   export default {
     name: "OrgModal",
@@ -53,7 +53,12 @@
             tenantDisabled(true);
           }
         }
-        const roles = await getAllRoleList();
+        let roles;
+        if (props.source === 1) {
+          roles = await getTenantAllRole();
+        } else {
+          roles = await getAllRoleList();
+        }
         const options = roles.reduce((prev, next: Recordable) => {
           if (next) {
             if (next["id"] !== "1") {
@@ -100,13 +105,13 @@
         const values = await validate();
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
-          if (props.source == 1) {
+          if (props.source === 1) {
             saveOrg(updateTenantOrg, values);
           } else {
             saveOrg(updateOrg, values);
           }
         } else {
-          if (props.source == 1) {
+          if (props.source === 1) {
             saveOrg(insertTenantOrg, values);
           } else {
             saveOrg(insertOrg, values);

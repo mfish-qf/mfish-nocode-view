@@ -5,7 +5,6 @@ import { store } from "/@/store";
 import { getRoleMenuTree } from "/@/api/sys/Menu";
 import { PageEnum } from "/@/enums/PageEnum";
 import { routeModuleList } from "/@/router/routers";
-import { getPermissions } from "/@/api/sys/User";
 import { MenuListItem, MenuType } from "/@/api/sys/model/MenuModel";
 import { IFRAME, LAYOUT } from "/@/router/Constant";
 import { formatPath, transformRouteToMenu } from "/@/router/helper/MenuHelper";
@@ -79,10 +78,6 @@ export const usePermissionStore = defineStore({
       this.permissions = new Set();
       this.menuList = [];
       this.lastBuildMenuTime = 0;
-    },
-    async changePermissionCode() {
-      const permissions = await getPermissions();
-      this.setPermissions(permissions);
     },
     // 构建路由
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {

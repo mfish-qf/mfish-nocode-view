@@ -153,6 +153,7 @@ export const accountFormSchema: FormSchema[] = [
         key: "id",
         value: "id"
       },
+      multiple: true,
       getPopupContainer: () => document.body
     },
     required: true
