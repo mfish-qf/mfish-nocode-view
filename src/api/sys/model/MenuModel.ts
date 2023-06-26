@@ -51,6 +51,8 @@ export type MenuParams = {
   menuName?: string;
   menuType?: MenuType;
   status?: string;
+  permission?: string;
+  noButton?: boolean;
 };
 
 /**

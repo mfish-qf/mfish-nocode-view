@@ -24,7 +24,7 @@
   import { BasicTree, TreeItem } from "/@/components/general/Tree";
   import { getMenuTree } from "/@/api/sys/Menu";
   import { getRoleMenus, insertRole, updateRole } from "/@/api/sys/Role";
-  import { insertTenantRole, updateTenantRole } from "/@/api/sys/SsoTenant";
+  import { getTenantMenuTree, getTenantRoleMenus, insertTenantRole, updateTenantRole } from "/@/api/sys/SsoTenant";
 
   export default {
     name: "RoleModal",
@@ -51,11 +51,21 @@
         setModalProps({ confirmLoading: false, width: "800px" });
         // 需要在setFieldsValue之前先填充treeData，否则Tree组件可能会报key not exist警告
         if (unref(treeData).length === 0) {
-          treeData.value = (await getMenuTree()) as any as TreeItem[];
+          if (props.source === 1) {
+            treeData.value = (await getTenantMenuTree()) as any as TreeItem[];
+          } else {
+            treeData.value = (await getMenuTree()) as any as TreeItem[];
+          }
         }
         isUpdate.value = !!data?.isUpdate;
+        let getMenus;
+        if (props.source === 1) {
+          getMenus = getTenantRoleMenus;
+        } else {
+          getMenus = getRoleMenus;
+        }
         if (unref(isUpdate)) {
-          getRoleMenus(data.record.id).then((res) => {
+          getMenus(data.record.id).then((res) => {
             data.record.menus = res;
             setFieldsValue({
               ...data.record

@@ -2,6 +2,7 @@ import { defHttp } from "/@/utils/http/axios";
 import { SsoTenant, ReqSsoTenant, SsoTenantPageModel } from "/@/api/sys/model/SsoTenantModel";
 import { SsoOrg } from "/@/api/sys/model/OrgModel";
 import { ReqSsoRole, SsoRole } from "/@/api/sys/model/RoleModel";
+import { MenuListItem, MenuParams } from "/@/api/sys/model/MenuModel";
 
 /**
  * @description: 租户信息表
@@ -15,7 +16,9 @@ enum Api {
   MeTenant = "/oauth2/ssoTenant/me",
   TenantOrg = "/oauth2/ssoTenant/org",
   TenantRole = "/oauth2/ssoTenant/role",
-  TenantALLRole = "/oauth2/ssoTenant/role/all"
+  TenantALLRole = "/oauth2/ssoTenant/role/all",
+  TenantRoleMenu = "/oauth2/ssoTenant/role/menus",
+  TenantMenuTree = "/oauth2/ssoTenant/menu/tree"
 }
 
 /**
@@ -108,6 +111,18 @@ export const getTenantRole = (params?: ReqSsoRole) => {
 
 export const getTenantAllRole = (params?: ReqSsoRole) => {
   return defHttp.get<SsoRole[]>({ url: Api.TenantALLRole, params });
+};
+
+export const getTenantRoleMenus = (roleId?: string) => {
+  return defHttp.get<String[]>({ url: `${Api.TenantRoleMenu}/${roleId}` });
+};
+
+/**
+ * 获取租户菜单树
+ * @param params
+ */
+export const getTenantMenuTree = (params?: MenuParams) => {
+  return defHttp.get<MenuListItem[]>({ url: Api.TenantMenuTree, params });
 };
 
 export const insertTenantRole = (params: SsoRole) => {
