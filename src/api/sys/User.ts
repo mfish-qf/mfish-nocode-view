@@ -22,7 +22,6 @@ enum Api {
   IsAccountExist = "/oauth2/user/exist",
   Pwd = "/oauth2/user/pwd",
   SendMsg = "/oauth2/sendMsg",
-  Permissions = "/oauth2/user/permissions",
   SetStatus = "/oauth2/user/status",
   Online = "/oauth2/user/online",
   UserRoles = "/oauth2/user/roles",
@@ -66,13 +65,6 @@ export function getUserById(id: string) {
  */
 export function getUserRoles(params: { userId?: string; tenantId?: string }) {
   return defHttp.get<RoleInfo[]>({ url: Api.UserRoles, params });
-}
-
-/**
- * 获取权限信息
- */
-export function getPermissions() {
-  return defHttp.get<Set<string>>({ url: Api.Permissions }, { errorMessageMode: "none" });
 }
 
 /**

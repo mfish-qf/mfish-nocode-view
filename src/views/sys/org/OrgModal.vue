@@ -11,6 +11,8 @@
   import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
   import { getAllRoleList } from "/@/api/sys/Role";
   import { getTenantAllRole, getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "/@/api/sys/SsoTenant";
+  import { useMessage } from "/@/hooks/web/UseMessage";
+  import { isNullOrUnDef } from "/@/utils/Is";
 
   export default {
     name: "OrgModal",
@@ -24,7 +26,7 @@
     emits: ["success", "register"],
     setup(props, { emit }) {
       const isUpdate = ref(true);
-
+      const { createMessage } = useMessage();
       const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
         labelWidth: 100,
         baseColProps: { span: 12 },
@@ -54,10 +56,12 @@
           }
         }
         let roles;
-        if (props.source === 1) {
-          roles = await getTenantAllRole();
+        if (isNullOrUnDef(data.record.tenantId)) {
+          //租户子组织获取系统默认角色
+          roles = await getAllRoleList({ orgId: data.record.id });
         } else {
-          roles = await getAllRoleList();
+          //租户父组织获取系统默认角色
+          roles = await getAllRoleList({ tenantId: "1" });
         }
         const options = roles.reduce((prev, next: Recordable) => {
           if (next) {
@@ -89,6 +93,10 @@
             dynamicDisabled: disabled
           },
           {
+            field: "roleIds",
+            dynamicDisabled: disabled
+          },
+          {
             field: "orgFixCode",
             dynamicDisabled: disabled
           },
@@ -103,6 +111,13 @@
 
       async function handleSubmit() {
         const values = await validate();
+        if (
+          (values.tenantId === null || values.tenantId === undefined || values.tenantId === "") &&
+          (values.parentId === null || values.parentId === undefined || values.parentId === "")
+        ) {
+          createMessage.error("错误:请选择父组织");
+          return;
+        }
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
           if (props.source === 1) {

@@ -24,7 +24,7 @@
 <script lang="ts">
   import { Dropdown, Menu as AMenu } from "ant-design-vue";
   import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
-  import { computed, onMounted, ref } from "vue";
+  import { computed, onBeforeMount, ref } from "vue";
   import { useUserStore } from "/@/store/modules/User";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { propTypes } from "/@/utils/PropTypes";
@@ -58,7 +58,7 @@
             }
           : {};
       });
-      onMounted(() => {
+      onBeforeMount(() => {
         tenants.value = userStore.getUserInfo?.tenants ? userStore.getUserInfo.tenants : [];
       });
 

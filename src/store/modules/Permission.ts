@@ -224,7 +224,7 @@ export const usePermissionStore = defineStore({
         let i = 0;
         for (const menu of menus) {
           const cMenu: Menu = buildMenu(menu);
-          cMenu.isExternal = menu.isExternal === 1 ? true : false;
+          cMenu.isExternal = menu.isExternal === 1;
           pMenu.children?.push(cMenu);
           const cRoute: AppRouteRecordRaw = buildRoute(menu);
           //如果组件不是外部地址，菜单不是外部打开。采用内部路由path处理

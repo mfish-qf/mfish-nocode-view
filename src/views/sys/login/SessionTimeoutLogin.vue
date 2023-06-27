@@ -11,12 +11,11 @@
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { useUserStore } from "/@/store/modules/User";
   import { usePermissionStore } from "/@/store/modules/Permission";
-  import { useAppStore } from "/@/store/modules/App";
 
   const { prefixCls } = useDesign("st-login");
   const userStore = useUserStore();
   const permissionStore = usePermissionStore();
-  const appStore = useAppStore();
+
   const userId = ref<Nullable<number | string>>(0);
 
   onMounted(() => {

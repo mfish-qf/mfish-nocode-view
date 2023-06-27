@@ -2,13 +2,26 @@ import { BasicColumn } from "/@/components/general/Table";
 import { FormSchema } from "/@/components/general/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
+import { Icon } from "/@/components/general/Icon";
+import { useAppStore } from "/@/store/modules/App";
 
 export const columns: BasicColumn[] = [
   {
     title: "组织名称",
     dataIndex: "orgName",
     width: 240,
-    align: "left"
+    align: "left",
+    customRender: ({ record }) => {
+      const appStore = useAppStore();
+      const tenantId = record.tenantId;
+      if (tenantId) {
+        return h("div", { style: "display: flex;align-items: center;" }, [
+          h(Icon, { icon: "ion:business", color: appStore.getProjectConfig.themeColor }),
+          h("div", { style: "margin-left: 6px;color:" + appStore.getProjectConfig.themeColor }, record.orgName)
+        ]);
+      }
+      return record.orgName;
+    }
   },
   {
     dataIndex: "orgFixCode",
@@ -81,6 +94,12 @@ export const formSchema: FormSchema[] = [
   {
     field: "id",
     label: "id",
+    component: "Input",
+    show: false
+  },
+  {
+    field: "tenantId",
+    label: "tenantId",
     component: "Input",
     show: false
   },

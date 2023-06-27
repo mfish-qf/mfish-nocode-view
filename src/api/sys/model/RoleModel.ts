@@ -21,10 +21,11 @@ export interface SsoRole {
 }
 
 export interface ReqSsoRole extends ReqPage {
-  tenantId: string;
-  roleName: string;
-  roleCode: string;
-  status: number;
+  tenantId?: string;
+  orgId?: string;
+  roleName?: string;
+  roleCode?: string;
+  status?: number;
 }
 
 export type RolePageModel = PageResult<SsoRole>;

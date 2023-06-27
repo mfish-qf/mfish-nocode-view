@@ -13,6 +13,7 @@ const stp = projectSetting.sessionTimeoutProcessing;
  * @param status
  * @param msg
  * @param errorMessageMode
+ * @param retryCount
  */
 export function checkStatus(
   status: number,
@@ -82,6 +83,7 @@ export function checkStatus(
  * 判断错误
  * @param error
  * @param errorMessageMode
+ * @param retryCount
  */
 export function checkError(error: AxiosError, errorMessageMode: MessageMode = "none", retryCount: number): boolean {
   const { code, message } = error;
