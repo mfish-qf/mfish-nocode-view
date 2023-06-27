@@ -139,15 +139,11 @@ export const accountFormSchema: FormSchema[] = [
     component: "Input"
   },
   {
-    field: "phone",
-    label: "手机号",
-    component: "Input"
-  },
-  {
     field: "orgId",
     label: "所属部门",
     component: "TreeSelect",
     componentProps: {
+      maxTagCount: 8,
       fieldNames: {
         label: "orgName",
         key: "id",
@@ -156,6 +152,7 @@ export const accountFormSchema: FormSchema[] = [
       multiple: true,
       getPopupContainer: () => document.body
     },
+    colProps: { span: 24 },
     required: true
   },
   {
@@ -163,9 +160,16 @@ export const accountFormSchema: FormSchema[] = [
     field: "roleIds",
     component: "Select",
     componentProps: {
+      maxTagCount: 8,
       mode: "multiple"
     },
+    colProps: { span: 24 },
     dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin"
+  },
+  {
+    field: "phone",
+    label: "手机号",
+    component: "Input"
   },
   {
     label: "邮箱",
