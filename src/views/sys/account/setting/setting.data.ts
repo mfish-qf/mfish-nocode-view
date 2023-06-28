@@ -36,6 +36,11 @@ export const settingList = [
     key: 5,
     name: "租户角色",
     component: "TenantRoleSetting"
+  },
+  {
+    key: 6,
+    name: "租户人员",
+    component: "TenantUserSetting"
   }
 ];
 

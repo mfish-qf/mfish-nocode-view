@@ -74,5 +74,9 @@
   .@{prefix-cls} {
     display: flex;
     justify-content: space-between;
+    button {
+      display: flex;
+      align-items: center;
+    }
   }
 </style>

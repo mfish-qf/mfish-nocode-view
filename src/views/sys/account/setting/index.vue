@@ -20,6 +20,7 @@
   import TenantSetting from "./TenantSetting.vue";
   import TenantOrgSetting from "./TenantOrgSetting.vue";
   import TenantRoleSetting from "./TenantRoleSetting.vue";
+  import TenantUserSetting from "./TenantUserSetting.vue";
   import { useRoute } from "vue-router";
 
   export default defineComponent({
@@ -31,7 +32,8 @@
       SecureSetting,
       TenantSetting,
       TenantOrgSetting,
-      TenantRoleSetting
+      TenantRoleSetting,
+      TenantUserSetting
     },
     setup() {
       const route = useRoute();

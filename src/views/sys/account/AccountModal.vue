@@ -16,6 +16,12 @@
   export default {
     name: "AccountModal",
     components: { BasicModal, BasicForm },
+    props: {
+      source: {
+        type: Number,
+        default: null
+      }
+    },
     emits: ["success", "register"],
     setup(_, { emit }) {
       const isUpdate = ref(true);

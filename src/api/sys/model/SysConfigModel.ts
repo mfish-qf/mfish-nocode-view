@@ -8,5 +8,5 @@ import { BaseEntity } from "/@/api/model/BaseModel";
  */
 export interface SysConfig extends BaseEntity<number> {
   userId?: string;
-  config: string;
+  config?: string;
 }

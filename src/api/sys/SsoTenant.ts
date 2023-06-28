@@ -3,6 +3,7 @@ import { SsoTenant, ReqSsoTenant, SsoTenantPageModel } from "/@/api/sys/model/Ss
 import { SsoOrg } from "/@/api/sys/model/OrgModel";
 import { ReqSsoRole, SsoRole } from "/@/api/sys/model/RoleModel";
 import { MenuListItem, MenuParams } from "/@/api/sys/model/MenuModel";
+import { ReqSsoUser, SsoUserPageModel } from "/@/api/sys/model/UserModel";
 
 /**
  * @description: 租户信息表
@@ -18,7 +19,8 @@ enum Api {
   TenantRole = "/oauth2/ssoTenant/role",
   TenantALLRole = "/oauth2/ssoTenant/role/all",
   TenantRoleMenu = "/oauth2/ssoTenant/role/menus",
-  TenantMenuTree = "/oauth2/ssoTenant/menu/tree"
+  TenantMenuTree = "/oauth2/ssoTenant/menu/tree",
+  TenantUser = "/oauth2/ssoTenant/user"
 }
 
 /**
@@ -133,4 +135,8 @@ export const updateTenantRole = (params: SsoRole) => {
 };
 export const deleteTenantRole = (params: string) => {
   return defHttp.delete({ url: `${Api.TenantRole}/${params}` }, { successMessageMode: "message" });
+};
+
+export const getTenantUserList = (params?: ReqSsoUser) => {
+  return defHttp.get<SsoUserPageModel>({ url: Api.TenantUser, params });
 };

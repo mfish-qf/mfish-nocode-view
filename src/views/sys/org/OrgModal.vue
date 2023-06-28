@@ -10,9 +10,16 @@
   import { formSchema } from "./org.data";
   import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
   import { getAllRoleList } from "/@/api/sys/Role";
-  import { getTenantAllRole, getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "/@/api/sys/SsoTenant";
+  import {
+    getTenantAllRole,
+    getTenantOrgTree,
+    getTenantRole,
+    insertTenantOrg,
+    updateTenantOrg
+  } from "/@/api/sys/SsoTenant";
   import { useMessage } from "/@/hooks/web/UseMessage";
   import { isNullOrUnDef } from "/@/utils/Is";
+  import { SsoOrg } from "/@/api/sys/model/OrgModel";
 
   export default {
     name: "OrgModal",
@@ -37,7 +44,7 @@
 
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
         resetFields().then();
-        tenantDisabled(false);
+        tenantDisabled(false, props.source);
         setModalProps({ confirmLoading: false, width: "800px" });
         isUpdate.value = !!data?.isUpdate;
         let treeData;
@@ -50,18 +57,36 @@
           setFieldsValue({
             ...data.record
           }).then();
-          //如果是租户组织，不允许在此界面修改名称、编码等属性
+          //如果是租户父组织，不允许在此界面修改名称、编码等属性
           if (data.record.tenantId) {
-            tenantDisabled(true);
+            tenantDisabled(true, props.source);
           }
         }
+        updateSchema([
+          {
+            field: "parentId",
+            componentProps: { treeData }
+          }
+        ]).then();
+        initRoles(data.record as SsoOrg, unref(isUpdate)).then();
+      });
+
+      async function initRoles(record: SsoOrg, isUpdate: boolean) {
         let roles;
-        if (isNullOrUnDef(data.record.tenantId)) {
-          //租户子组织获取系统默认角色
-          roles = await getAllRoleList({ orgId: data.record.id });
+        if (isUpdate) {
+          if (isNullOrUnDef(record.tenantId)) {
+            //租户子组织获取系统默认角色
+            roles = await getAllRoleList({ orgId: record.id });
+          } else {
+            //租户父组织获取系统默认角色
+            roles = await getAllRoleList({ tenantId: "1" });
+          }
         } else {
-          //租户父组织获取系统默认角色
-          roles = await getAllRoleList({ tenantId: "1" });
+          if (props.source === 1) {
+            roles = await getTenantAllRole();
+          } else {
+            roles = await getAllRoleList({ tenantId: "1" });
+          }
         }
         const options = roles.reduce((prev, next: Recordable) => {
           if (next) {
@@ -76,24 +101,16 @@
         }, [] as any);
         updateSchema([
           {
-            field: "parentId",
-            componentProps: { treeData }
-          },
-          {
             field: "roleIds",
             componentProps: { options, optionFilterProp: "label" }
           }
         ]).then();
-      });
+      }
 
-      function tenantDisabled(disabled) {
+      function tenantDisabled(disabled, source) {
         updateSchema([
           {
             field: "orgName",
-            dynamicDisabled: disabled
-          },
-          {
-            field: "roleIds",
             dynamicDisabled: disabled
           },
           {
@@ -103,6 +120,10 @@
           {
             field: "parentId",
             dynamicDisabled: disabled
+          },
+          {
+            field: "roleIds",
+            dynamicDisabled: source === 1 && disabled
           }
         ]).then();
       }
