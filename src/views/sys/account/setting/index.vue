@@ -1,25 +1,27 @@
 <template>
   <ScrollContainer>
-    <div ref="wrapperRef" :class="prefixCls">
-      <Tabs tab-position="left" :tabBarStyle="tabBarStyle">
-        <template v-for="item in settingList" :key="item.key">
-          <TabPane :tab="item.name">
-            <component :is="item.component" />
-          </TabPane>
-        </template>
+    <div ref="wrapperRef" class="account-setting">
+      <Tabs tab-position="left" :tabBarStyle="tabBarStyle" :activeKey="tabType" @change="tabChange">
+        <TabPane v-for="item in settingList" :key="item.key" :tab="item.name" class="base-title">
+          <component :is="item.component" />
+        </TabPane>
       </Tabs>
     </div>
   </ScrollContainer>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent, onMounted, ref } from "vue";
   import { Tabs } from "ant-design-vue";
-  import { ScrollContainer } from "/@/components/general/Container/index";
+  import { ScrollContainer } from "/@/components/general/Container";
   import { settingList } from "./setting.data";
   import BaseSetting from "./BaseSetting.vue";
   import SecureSetting from "./SecureSetting.vue";
-  import AccountBind from "./AccountBind.vue";
+  import TenantSetting from "./TenantSetting.vue";
+  import TenantOrgSetting from "./TenantOrgSetting.vue";
+  import TenantRoleSetting from "./TenantRoleSetting.vue";
+  import TenantUserSetting from "./TenantUserSetting.vue";
+  import { useRoute } from "vue-router";
 
   export default defineComponent({
     components: {
@@ -28,26 +30,45 @@
       TabPane: Tabs.TabPane,
       BaseSetting,
       SecureSetting,
-      AccountBind
+      TenantSetting,
+      TenantOrgSetting,
+      TenantRoleSetting,
+      TenantUserSetting
     },
     setup() {
+      const route = useRoute();
+      const tabType = ref(1);
+      onMounted(() => {
+        const index = route.path.lastIndexOf("/");
+        if (index) {
+          const type = parseInt(route.path.substring(index + 1));
+          if (!Number.isNaN(type)) {
+            tabType.value = type;
+          }
+        }
+      });
+      function tabChange(e) {
+        tabType.value = e;
+      }
       return {
-        prefixCls: "account-setting",
         settingList,
         tabBarStyle: {
-          width: "110px"
-        }
+          width: "110px",
+          height: "calc(100vh - 122px)"
+        },
+        tabType,
+        tabChange
       };
     }
   });
 </script>
-<style lang="less">
+<style lang="less" scoped>
   .account-setting {
     margin: 12px;
     background-color: @component-background;
 
     .base-title {
-      padding-left: 0;
+      padding: 0 16px 0 16px !important;
     }
 
     .ant-tabs-tab-active {

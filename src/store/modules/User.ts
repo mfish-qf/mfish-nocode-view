@@ -2,7 +2,7 @@ import type { MessageMode } from "/#/axios";
 import { defineStore } from "pinia";
 import { store } from "/@/store";
 import { PageEnum } from "/@/enums/PageEnum";
-import { REFRESH_TOKEN_KEY, TOKEN_KEY } from "/@/enums/CacheEnum";
+import { REFRESH_TOKEN_KEY, TENANT_ID_KEY, TOKEN_KEY } from "/@/enums/CacheEnum";
 import { clearAuthCache, getAuthCache, setAuthCache } from "/@/utils/auth";
 import { LoginParams, RoleInfo, SsoUser } from "/@/api/sys/model/UserModel";
 import { doLogout, getUserInfo, loginApi } from "/@/api/sys/User";
@@ -16,6 +16,7 @@ import { Nullable } from "/@/utils/Types";
 
 interface UserState {
   userInfo: Nullable<SsoUser>;
+  tenantId?: string;
   token?: string;
   refreshToken?: string;
   roleInfoList: RoleInfo[];
@@ -29,6 +30,8 @@ export const useUserStore = defineStore({
   state: (): UserState => ({
     // 用户信息
     userInfo: null,
+    //当前租户ID
+    tenantId: undefined,
     // token信息
     token: undefined,
     //过期后刷新token
@@ -45,6 +48,9 @@ export const useUserStore = defineStore({
   getters: {
     getUserInfo(): Nullable<SsoUser> {
       return this.userInfo;
+    },
+    getTenantId(): Nullable<string> {
+      return this.tenantId || getAuthCache<string>(TENANT_ID_KEY);
     },
     getToken(): string {
       return this.token || getAuthCache<string>(TOKEN_KEY);
@@ -70,6 +76,10 @@ export const useUserStore = defineStore({
       this.token = info ? info : ""; // for null or undefined value
       setAuthCache(TOKEN_KEY, info);
     },
+    setTenantId(id: string) {
+      this.tenantId = id;
+      setAuthCache(TENANT_ID_KEY, id);
+    },
     setRefreshToken(refreshToken: string | undefined) {
       this.refreshToken = refreshToken ? refreshToken : "";
       setAuthCache(REFRESH_TOKEN_KEY, refreshToken);
@@ -92,6 +102,7 @@ export const useUserStore = defineStore({
     resetState() {
       this.userInfo = null;
       this.token = "";
+      this.tenantId = undefined;
       this.roleList = new Set<string>();
       this.sessionTimeout = false;
       this.isLogout = false;
@@ -136,7 +147,7 @@ export const useUserStore = defineStore({
     async getUserInfoAction(): Promise<SsoUser | null> {
       if (!this.getToken) return null;
       const userInfo = await getUserInfo();
-      const { userRoles = [] } = userInfo;
+      const { userRoles = [], tenants } = userInfo;
       if (isArray(userRoles)) {
         this.setRoleInfoList(userRoles);
         const roleList = new Set<string>(userRoles.map((item) => item.roleCode));
@@ -145,6 +156,9 @@ export const useUserStore = defineStore({
         userInfo.userRoles = [];
         this.setRoleInfoList([]);
         this.setRoleList(new Set<string>());
+      }
+      if (this.getTenantId === undefined && tenants?.length > 0) {
+        this.setTenantId(tenants[0].id);
       }
       this.setUserInfo(userInfo);
       return userInfo;
@@ -155,7 +169,7 @@ export const useUserStore = defineStore({
     async logout() {
       if (this.getToken) {
         try {
-          let result = await doLogout();
+          const result = await doLogout();
           if (result) {
             this.setToken(undefined);
             this.setRefreshToken(undefined);
@@ -163,7 +177,7 @@ export const useUserStore = defineStore({
             this.setUserInfo(null);
             clearAuthCache(true);
             this.setIsLogout(true);
-            router.push(PageEnum.BASE_LOGIN);
+            await router.push(PageEnum.BASE_LOGIN);
           }
         } catch {
           throw new Error("注销Token失败");

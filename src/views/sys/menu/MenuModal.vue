@@ -76,7 +76,6 @@
 
       async function handleSubmit() {
         let values = (await validate()) as MenuListItem;
-        values.clientId = "system";
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
           saveMenu(updateMenu, values);

@@ -23,9 +23,14 @@ export interface SsoTenant extends BaseEntity<string> {
   tenantType?: number;
 }
 
+export interface TenantVo extends SsoTenant {
+  account?: string;
+  master?: number;
+}
+
 export interface ReqSsoTenant extends ReqPage {
   domain?: string;
   name?: string;
 }
 
-export type SsoTenantPageModel = PageResult<SsoTenant>;
+export type SsoTenantPageModel = PageResult<TenantVo>;

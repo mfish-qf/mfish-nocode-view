@@ -1,10 +1,6 @@
 import { BasicColumn } from "/@/components/general/Table";
 import { FormSchema } from "/@/components/general/Table";
-import { h } from "vue";
-import { Switch } from "ant-design-vue";
-import { setRoleStatus } from "/@/api/sys/Role";
 import { RenderCallbackParams } from "/@/components/general/Form";
-
 export const columns: BasicColumn[] = [
   {
     title: "角色名称",
@@ -24,30 +20,7 @@ export const columns: BasicColumn[] = [
   {
     title: "状态",
     dataIndex: "status",
-    width: 120,
-    customRender: ({ record }) => {
-      if (!Reflect.has(record, "pendingStatus")) {
-        record.pendingStatus = false;
-      }
-      return h(Switch, {
-        checked: record.status === 0,
-        checkedChildren: "已启用",
-        unCheckedChildren: "已停用",
-        disabled: record.id === "1",
-        loading: record.pendingStatus,
-        onChange(checked: boolean) {
-          record.pendingStatus = true;
-          const newStatus = checked ? 0 : 1;
-          setRoleStatus(record.id, newStatus)
-            .then(() => {
-              record.status = newStatus;
-            })
-            .finally(() => {
-              record.pendingStatus = false;
-            });
-        }
-      });
-    }
+    width: 120
   },
   {
     title: "创建时间",
@@ -105,8 +78,7 @@ export const formSchema: FormSchema[] = [
     label: "角色编码",
     required: true,
     component: "Input",
-    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
-      renderCallbackParams.values["roleCode"] === "admin" ? true : false
+    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["roleCode"] === "admin"
   },
   {
     label: "排序",

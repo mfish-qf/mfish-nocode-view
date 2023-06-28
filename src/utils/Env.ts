@@ -10,10 +10,10 @@ import pkg from "../../package.json";
 
 export function getAppEnvConfig() {
   const ENV_NAME = getConfigFileName(import.meta.env);
-
   //获取全局配置(打包时将独立提取配置)
-  const ENV = (import.meta.env.DEV ?
-    (import.meta.env as unknown as GlobEnvConfig) : window[ENV_NAME as any]) as unknown as GlobEnvConfig;
+  const ENV = (import.meta.env.DEV
+    ? (import.meta.env as unknown as GlobEnvConfig)
+    : window[ENV_NAME as any]) as unknown as GlobEnvConfig;
 
   const {
     VITE_GLOB_APP_TITLE,
@@ -24,7 +24,7 @@ export function getAppEnvConfig() {
     VITE_GLOB_OAUTH2_REDIRECT_URI
   } = ENV;
 
-  if (!/^[a-zA-Z\_]*$/.test(VITE_GLOB_APP_SHORT_NAME)) {
+  if (!/^[a-zA-Z_]*$/.test(VITE_GLOB_APP_SHORT_NAME)) {
     warn(
       `VITE_GLOB_APP_SHORT_NAME Variables can only be characters/underscores, please modify in the environment variables and re-running.`
     );
@@ -46,7 +46,7 @@ export function getCommonStoragePrefix() {
 
 // 根据版本生成换成key
 export function getStorageShortName() {
-  return `${getCommonStoragePrefix()}${`__${pkg.version}`}__`.toUpperCase();
+  return `${getCommonStoragePrefix()}__${pkg.version}__`.toUpperCase();
 }
 
 //获取当前环境

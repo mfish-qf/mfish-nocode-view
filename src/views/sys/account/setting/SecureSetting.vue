@@ -6,33 +6,51 @@
           <ListItemMeta>
             <template #title>
               {{ item.title }}
-              <div class="extra" v-if="item.extra">
-                {{ item.extra }}
-              </div>
             </template>
             <template #description>
               <div>{{ item.description }}</div>
             </template>
           </ListItemMeta>
+          <template #actions>
+            <AButton type="link" size="small" v-if="item.extra" @click="handleClick(item)">
+              <template #icon>
+                <Icon icon="ant-design:edit-outlined" />
+              </template>
+              {{ item.extra }}
+            </AButton>
+          </template>
         </ListItem>
       </template>
     </List>
   </CollapseContainer>
+  <PasswordModal @register="registerPwd" />
 </template>
 <script lang="ts">
-  import { List } from "ant-design-vue";
+  import { List, Button as AButton } from "ant-design-vue";
   import { defineComponent } from "vue";
-  import { CollapseContainer } from "/@/components/general/Container/index";
+  import { CollapseContainer } from "/@/components/general/Container";
   import { ListItem } from "./setting.data";
   import { useUserStore } from "/@/store/modules/User";
+  import { Icon } from "/@/components/general/Icon";
+  import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
+  import { useModal } from "/@/components/general/Modal";
 
   export default defineComponent({
-    components: { CollapseContainer, List, ListItem: List.Item, ListItemMeta: List.Item.Meta },
+    components: {
+      PasswordModal,
+      AButton,
+      Icon,
+      CollapseContainer,
+      List,
+      ListItem: List.Item,
+      ListItemMeta: List.Item.Meta
+    },
     setup() {
       const userStore = useUserStore();
       const userInfo = userStore.getUserInfo;
-      const phone = userInfo?.phone.replace(/(\d{3})\d*(\d{4})/, "$1****$2");
-      const email = userInfo?.email.replace(/(\w)\w*(@\w+\.\w+)/, "$1***$2");
+      const phone = userInfo?.phone?.replace(/(\d{3})\d*(\d{4})/, "$1****$2");
+      const email = userInfo?.email?.replace(/(\w)\w*(@\w+\.\w+)/, "$1***$2");
+      const [registerPwd, { openModal: openPwdModal }] = useModal();
       const secureSettingList: ListItem[] = [
         {
           key: "1",
@@ -65,19 +83,23 @@
           extra: "修改"
         }
       ];
+      function handleClick(e) {
+        switch (e.key) {
+          case "1":
+            changePwd();
+            break;
+          default:
+            break;
+        }
+      }
+      function changePwd() {
+        openPwdModal(true, { userId: userInfo?.id });
+      }
       return {
-        list: secureSettingList
+        list: secureSettingList,
+        registerPwd,
+        handleClick
       };
     }
   });
 </script>
-<style lang="less" scoped>
-  .extra {
-    float: right;
-    margin-top: 10px;
-    margin-right: 30px;
-    font-weight: normal;
-    color: #1890ff;
-    cursor: pointer;
-  }
-</style>

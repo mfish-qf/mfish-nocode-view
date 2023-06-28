@@ -3,6 +3,7 @@ export const TOKEN_KEY = "TOKEN__";
 //refreshToken key
 export const REFRESH_TOKEN_KEY = "REFRESH__TOKEN__";
 
+export const TENANT_ID_KEY = "TENANT__ID__";
 export const LOCALE_KEY = "LOCALE__";
 
 // project config key
@@ -23,5 +24,5 @@ export const APP_SESSION_CACHE_KEY = "COMMON__SESSION__KEY__";
 
 export enum CacheTypeEnum {
   SESSION,
-  LOCAL,
+  LOCAL
 }

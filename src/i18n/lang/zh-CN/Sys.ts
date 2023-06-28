@@ -68,7 +68,7 @@ export default {
     forgetFormTitle: "重置密码",
 
     signInTitle: "摸鱼低代码平台",
-    signInDesc: "输入您的个人详细信息开始使用！",
+    signInDesc: "摸鱼低代码平台希望打造一个基于低代码的无代码平台。即能给程序员使用，也能满足非专业人士的需求",
     policy: "我同意xxx隐私政策",
     scanSign: `扫码后点击"确认"，即可完成登录`,
 

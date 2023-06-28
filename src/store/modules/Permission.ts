@@ -5,7 +5,6 @@ import { store } from "/@/store";
 import { getRoleMenuTree } from "/@/api/sys/Menu";
 import { PageEnum } from "/@/enums/PageEnum";
 import { routeModuleList } from "/@/router/routers";
-import { getPermissions } from "/@/api/sys/User";
 import { MenuListItem, MenuType } from "/@/api/sys/model/MenuModel";
 import { IFRAME, LAYOUT } from "/@/router/Constant";
 import { formatPath, transformRouteToMenu } from "/@/router/helper/MenuHelper";
@@ -79,10 +78,6 @@ export const usePermissionStore = defineStore({
       this.permissions = new Set();
       this.menuList = [];
       this.lastBuildMenuTime = 0;
-    },
-    async changePermissionCode() {
-      const permissions = await getPermissions();
-      this.setPermissions(permissions);
     },
     // 构建路由
     async buildRoutesAction(): Promise<AppRouteRecordRaw[]> {
@@ -200,11 +195,11 @@ export const usePermissionStore = defineStore({
        * @param routes
        */
       function buildMenuRoute(menus: MenuListItem[], menuList: Menu[], routes: AppRouteRecordRaw[]) {
-        for (let menu of menus) {
+        for (const menu of menus) {
           if (menu.children != null && menu.children.length > 0) {
-            let cMenu: Menu = buildMenu(menu);
+            const cMenu: Menu = buildMenu(menu);
             menuList.push(cMenu);
-            let cRoute: AppRouteRecordRaw = buildRoute(menu);
+            const cRoute: AppRouteRecordRaw = buildRoute(menu);
             routes.push(cRoute);
             cMenu.children = [];
             cRoute.children = [];
@@ -227,11 +222,11 @@ export const usePermissionStore = defineStore({
        */
       function buildChildMenuRoute(menus: MenuListItem[], pMenu: Menu, pRoute: AppRouteRecordRaw) {
         let i = 0;
-        for (let menu of menus) {
-          let cMenu: Menu = buildMenu(menu);
-          cMenu.isExternal = menu.isExternal === 1 ? true : false;
+        for (const menu of menus) {
+          const cMenu: Menu = buildMenu(menu);
+          cMenu.isExternal = menu.isExternal === 1;
           pMenu.children?.push(cMenu);
-          let cRoute: AppRouteRecordRaw = buildRoute(menu);
+          const cRoute: AppRouteRecordRaw = buildRoute(menu);
           //如果组件不是外部地址，菜单不是外部打开。采用内部路由path处理
           if (!isUrl(menu.component) || !menu.isExternal) {
             if (i++ == 0) {

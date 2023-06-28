@@ -16,6 +16,12 @@
   export default {
     name: "AccountModal",
     components: { BasicModal, BasicForm },
+    props: {
+      source: {
+        type: Number,
+        default: null
+      }
+    },
     emits: ["success", "register"],
     setup(_, { emit }) {
       const isUpdate = ref(true);
@@ -37,7 +43,7 @@
           field: "status",
           dynamicDisabled: false
         };
-        curRow = data.record;
+        curRow = data.record ? data.record : {};
         if (unref(isUpdate)) {
           setFieldsValue({
             ...data.record
@@ -78,8 +84,10 @@
           componentProps: { treeData }
         }).then();
         roles = await getAllRoleList();
-        const userRoles = await getUserRoles({ userId: data.record.id });
-        setRole(userRoles);
+        if (data.record?.id) {
+          const userRoles = await getUserRoles({ userId: data.record.id });
+          setRole(userRoles);
+        }
       });
       const getTitle = computed(() => (!unref(isUpdate) ? "新增账号" : "编辑账号"));
 
@@ -122,12 +130,14 @@
       async function handleSubmit() {
         const values = await validate();
         values.roleIds = values.roleIds.filter((item) => {
-          for (const role of curRow.userRoles) {
-            if (role.source !== 1) {
-              continue;
-            }
-            if (item === role.id) {
-              return false;
+          if (curRow?.userRoles && curRow?.userRoles.length > 0) {
+            for (const role of curRow.userRoles) {
+              if (role.source !== 1) {
+                continue;
+              }
+              if (item === role.id) {
+                return false;
+              }
             }
           }
           return true;

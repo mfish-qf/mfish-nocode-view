@@ -2,7 +2,12 @@
   <div>
     <BasicTable @register="registerTable" @fetch-success="onFetchSuccess">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:org:insert')">新增组织 </a-button>
+        <a-button
+          type="primary"
+          @click="handleCreate"
+          v-if="$props.source === 1 ? hasTenant() : hasPermission('sys:org:insert')"
+          >新增组织
+        </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -11,7 +16,7 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                auth: 'sys:org:update'
+                ifShow: $props.source === 1 ? hasTenant() : hasPermission('sys:org:update')
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -21,38 +26,52 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
-                auth: 'sys:org:delete'
+                ifShow: !record?.tenantId && ($props.source === 1 ? hasTenant() : hasPermission('sys:org:delete'))
               }
             ]"
           />
         </template>
       </template>
     </BasicTable>
-    <OrgModal @register="registerModal" @success="handleSuccess" />
+    <OrgModal @register="registerModal" @success="handleSuccess" :source="$props.source" />
   </div>
 </template>
 <script lang="ts">
-  import { nextTick } from "vue";
+  import { ref } from "vue";
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { deleteOrg, getOrgTree } from "/@/api/sys/Org";
   import { useModal } from "/@/components/general/Modal";
   import OrgModal from "./OrgModal.vue";
   import { columns, searchFormSchema } from "./org.data";
   import { usePermission } from "/@/hooks/web/UsePermission";
+  import { deleteTenantOrg, getTenantOrgTree } from "/@/api/sys/SsoTenant";
 
   export default {
     name: "OrgManagement",
     components: { BasicTable, OrgModal, TableAction },
-    setup() {
-      const { hasPermission } = usePermission();
+    props: {
+      source: {
+        type: Number,
+        default: null
+      }
+    },
+    setup(props) {
+      const { hasPermission, hasTenant } = usePermission();
       const [registerModal, { openModal }] = useModal();
-      const [registerTable, { reload, expandAll }] = useTable({
+      const api = ref();
+      if (props.source == 1) {
+        api.value = getTenantOrgTree;
+      } else {
+        api.value = getOrgTree;
+      }
+      const [registerTable, { reload, expandRows }] = useTable({
         title: "部门列表",
-        api: getOrgTree,
+        rowKey: "id",
+        api: api,
         columns,
         formConfig: {
           name: "search_form_item",
-          labelWidth: 100,
+          labelWidth: 80,
           schemas: searchFormSchema,
           autoSubmitOnEnter: true
         },
@@ -67,8 +86,7 @@
         actionColumn: {
           width: 80,
           title: "操作",
-          dataIndex: "action",
-          fixed: undefined
+          dataIndex: "action"
         }
       });
 
@@ -86,6 +104,12 @@
       }
 
       function handleDelete(record: Recordable) {
+        if (props.source == 1) {
+          deleteTenantOrg(record.id).then(() => {
+            handleSuccess();
+          });
+          return;
+        }
         deleteOrg(record.id).then(() => {
           handleSuccess();
         });
@@ -95,8 +119,10 @@
         reload();
       }
 
-      function onFetchSuccess() {
-        nextTick(expandAll);
+      function onFetchSuccess(record) {
+        if (record?.items?.length > 0) {
+          expandRows([record.items[0].id]);
+        }
       }
 
       return {
@@ -107,7 +133,8 @@
         handleDelete,
         handleSuccess,
         onFetchSuccess,
-        hasPermission
+        hasPermission,
+        hasTenant
       };
     }
   };

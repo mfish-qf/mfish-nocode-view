@@ -4,6 +4,7 @@ import { h } from "vue";
 import { Tag, Switch } from "ant-design-vue";
 import { RenderCallbackParams } from "/@/components/general/Form";
 import { setUserStatus } from "/@/api/sys/User";
+import { usePermission } from "/@/hooks/web/UsePermission";
 
 export const columns: BasicColumn[] = [
   {
@@ -65,7 +66,7 @@ export const columns: BasicColumn[] = [
         checked: record.status === 0,
         checkedChildren: "已启用",
         unCheckedChildren: "已停用",
-        disabled: record.id === "1",
+        disabled: record.id === "1" || !usePermission().hasPermission("sys:account:update"),
         loading: record.pendingStatus,
         onChange(checked: boolean) {
           record.pendingStatus = true;
@@ -138,22 +139,20 @@ export const accountFormSchema: FormSchema[] = [
     component: "Input"
   },
   {
-    field: "phone",
-    label: "手机号",
-    component: "Input"
-  },
-  {
     field: "orgId",
     label: "所属部门",
     component: "TreeSelect",
     componentProps: {
+      maxTagCount: 8,
       fieldNames: {
         label: "orgName",
         key: "id",
         value: "id"
       },
+      multiple: true,
       getPopupContainer: () => document.body
     },
+    colProps: { span: 24 },
     required: true
   },
   {
@@ -161,10 +160,16 @@ export const accountFormSchema: FormSchema[] = [
     field: "roleIds",
     component: "Select",
     componentProps: {
+      maxTagCount: 8,
       mode: "multiple"
     },
-    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
-      renderCallbackParams.values["account"] === "admin" ? true : false
+    colProps: { span: 24 },
+    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin"
+  },
+  {
+    field: "phone",
+    label: "手机号",
+    component: "Input"
   },
   {
     label: "邮箱",

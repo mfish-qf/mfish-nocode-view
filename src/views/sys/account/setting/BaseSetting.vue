@@ -1,5 +1,5 @@
 <template>
-  <CollapseContainer title="基本设置" :canExpan="false">
+  <CollapseContainer title="个人信息" :canExpan="false">
     <a-row :gutter="24">
       <a-col :span="14">
         <BasicForm @register="register" />
@@ -20,7 +20,7 @@
     </a-row>
     <a-row :gutter="24">
       <a-col :offset="5">
-        <Button type="primary" @click="handleSubmit">更新基本信息</Button>
+        <AButton type="primary" @click="handleSubmit">更新基本信息</AButton>
       </a-col>
     </a-row>
   </CollapseContainer>
@@ -32,7 +32,7 @@
   import { CollapseContainer } from "/@/components/general/Container";
   import { CropperAvatar } from "/@/components/general/Cropper";
   import headerImg from "/@/assets/images/header.png";
-  import { getUserInfo, updateUser } from "/@/api/sys/User";
+  import { getUserInfo, updateMe } from "/@/api/sys/User";
   import { baseSetSchemas } from "./setting.data";
   import { useUserStore } from "/@/store/modules/User";
   import { uploadApi } from "/@/api/storage/Upload";
@@ -43,7 +43,7 @@
     components: {
       BasicForm,
       CollapseContainer,
-      Button,
+      AButton: Button,
       ARow: Row,
       ACol: Col,
       CropperAvatar
@@ -74,14 +74,14 @@
           userInfo.headImgUrl = data;
           userStore.setUserInfo(userInfo);
           if (data) {
-            updateUser(userInfo).then();
+            updateMe(userInfo).then();
           }
         }
       }
 
       async function handleSubmit() {
         const values = await validate();
-        updateUser(values).then();
+        updateMe(values).then();
       }
 
       return {

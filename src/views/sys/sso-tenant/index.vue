@@ -30,6 +30,7 @@
                   confirm: handleDelete.bind(null, record)
                 },
                 auth: 'sys:ssoTenant:delete',
+                ifShow: record.id !== '1',
                 tooltip: '删除'
               }
             ]"
@@ -105,7 +106,7 @@
         columns,
         formConfig: {
           name: "search_form_item",
-          labelWidth: 100,
+          labelWidth: 80,
           schemas: searchFormSchema,
           autoSubmitOnEnter: true
         },

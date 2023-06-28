@@ -67,7 +67,7 @@
         columns,
         formConfig: {
           name: "search_form_item",
-          labelWidth: 100,
+          labelWidth: 80,
           schemas: searchFormSchema,
           autoSubmitOnEnter: true
         },
@@ -78,8 +78,7 @@
         actionColumn: {
           width: 120,
           title: "操作",
-          dataIndex: "action",
-          fixed: undefined
+          dataIndex: "action"
         }
       });
 

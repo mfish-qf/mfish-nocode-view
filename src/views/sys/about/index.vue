@@ -19,7 +19,7 @@
   import { h } from "vue";
   import { Tag } from "ant-design-vue";
   import { PageWrapper } from "/@/components/general/Page";
-  import { Description, DescItem, useDescription } from "/@/components/general/Description/index";
+  import { Description, DescItem, useDescription } from "/@/components/general/Description";
   import { GITHUB_URL, GITHUB_BACK_URL, SITE_URL, DOC_URL } from "/@/settings/SiteSetting";
 
   const { pkg, lastBuildTime } = __APP_INFO__;

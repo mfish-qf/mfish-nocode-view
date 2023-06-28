@@ -58,11 +58,23 @@ export function usePermission() {
     return hasValue(value, permissions);
   }
 
+  /**
+   * 判断是否为租户管理员
+   */
+  function hasTenant(): boolean {
+    const tenants = userStore.getUserInfo?.tenants;
+    if (tenants) {
+      const tenant = tenants.find((tenant) => tenant.id === userStore.getTenantId);
+      return !!tenant && tenant.master === 1;
+    }
+    return false;
+  }
+
   function hasValue(value, values: Set<string>) {
     if (!isArray(value)) {
       return values.has(value);
     }
-    for (let val of value) {
+    for (const val of value) {
       if (values.has(val)) {
         return true;
       }
@@ -77,5 +89,5 @@ export function usePermission() {
     resume().then();
   }
 
-  return { hasPermission, hasRole, refreshMenu, ALL_PERMISSION, SUPER_ROLE };
+  return { hasPermission, hasRole, hasTenant, refreshMenu, ALL_PERMISSION, SUPER_ROLE };
 }

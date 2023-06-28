@@ -12,7 +12,7 @@ export const getMenuList = (params?: MenuParams) => {
   return defHttp.get<MenuListItem[]>({ url: Api.Menu, params });
 };
 /**
- * 获取菜单树
+ * 获取所有菜单树
  * @param params
  */
 export const getMenuTree = (params?: MenuParams) => {

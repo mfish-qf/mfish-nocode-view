@@ -24,12 +24,19 @@
   import { BasicTree, TreeItem } from "/@/components/general/Tree";
   import { getMenuTree } from "/@/api/sys/Menu";
   import { getRoleMenus, insertRole, updateRole } from "/@/api/sys/Role";
+  import { getTenantMenuTree, getTenantRoleMenus, insertTenantRole, updateTenantRole } from "/@/api/sys/SsoTenant";
 
   export default {
     name: "RoleModal",
     components: { BasicModal, BasicForm, BasicTree },
+    props: {
+      source: {
+        type: Number,
+        default: null
+      }
+    },
     emits: ["success", "register"],
-    setup(_, { emit }) {
+    setup(props, { emit }) {
       const isUpdate = ref(true);
       const treeData = ref<TreeItem[]>([]);
       const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
@@ -44,11 +51,21 @@
         setModalProps({ confirmLoading: false, width: "800px" });
         // 需要在setFieldsValue之前先填充treeData，否则Tree组件可能会报key not exist警告
         if (unref(treeData).length === 0) {
-          treeData.value = (await getMenuTree()) as any as TreeItem[];
+          if (props.source === 1) {
+            treeData.value = (await getTenantMenuTree()) as any as TreeItem[];
+          } else {
+            treeData.value = (await getMenuTree()) as any as TreeItem[];
+          }
         }
         isUpdate.value = !!data?.isUpdate;
+        let getMenus;
+        if (props.source === 1) {
+          getMenus = getTenantRoleMenus;
+        } else {
+          getMenus = getRoleMenus;
+        }
         if (unref(isUpdate)) {
-          getRoleMenus(data.record.id).then((res) => {
+          getMenus(data.record.id).then((res) => {
             data.record.menus = res;
             setFieldsValue({
               ...data.record
@@ -83,12 +100,19 @@
 
       async function handleSubmit() {
         let values = await validate();
-        values.clientId = "system";
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
-          saveRole(updateRole, values);
+          if (props.source === 1) {
+            saveRole(updateTenantRole, values);
+          } else {
+            saveRole(updateRole, values);
+          }
         } else {
-          saveRole(insertRole, values);
+          if (props.source === 1) {
+            saveRole(insertTenantRole, values);
+          } else {
+            saveRole(insertRole, values);
+          }
         }
       }
 

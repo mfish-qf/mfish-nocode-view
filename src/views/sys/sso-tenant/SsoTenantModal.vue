@@ -5,7 +5,14 @@
  @version: V1.0.0
 -->
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
+  <BasicModal
+    v-bind="$attrs"
+    @register="registerModal"
+    :title="getTitle"
+    @ok="handleSubmit"
+    :showOkBtn="showSave"
+    cancelText="关闭"
+  >
     <BasicForm @register="registerForm" @submit="handleSubmit">
       <template #logoImg>
         <Upload
@@ -53,7 +60,7 @@
   import { Modal, Select as ASelect, Spin, Upload, UploadProps } from "ant-design-vue";
   import { ssoTenantFormSchema } from "./ssoTenant.data";
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { insertSsoTenant, updateSsoTenant } from "/@/api/sys/SsoTenant";
+  import { insertSsoTenant, updateMeTenant, updateSsoTenant } from "/@/api/sys/SsoTenant";
   import { uploadApi } from "/@/api/storage/Upload";
   import { getBase64WithFile, imageUrl } from "/@/utils/FileUtils";
   import Icon from "/@/components/general/Icon/src/Icon.vue";
@@ -68,7 +75,8 @@
     emits: ["success", "register"],
     setup(_, { emit }) {
       const isUpdate = ref(true);
-      const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
+      let source = 0;
+      const [registerForm, { resetFields, setFieldsValue, validate, updateSchema }] = useForm({
         name: "model_form_item",
         labelWidth: 100,
         baseColProps: { span: 12 },
@@ -77,9 +85,11 @@
         autoSubmitOnEnter: true
       });
       const logoList = ref<UploadProps["fileList"]>([]);
+      const showSave = ref<boolean>(true);
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
         resetFields().then();
         logoList.value = [];
+        showSave.value = true;
         if (data.record?.userId) {
           accountList.userId = data.record.userId;
           getUserById(data.record.userId).then((res) => {
@@ -107,18 +117,39 @@
               }
             });
           }
+          //来源1 表示自己修改租户信息，不允许修改用户
+          if (data?.source === 1) {
+            source = 1;
+            updateSchema([
+              {
+                field: "userId",
+                show: false
+              },
+              {
+                field: "tenantType",
+                dynamicDisabled: true
+              }
+            ]).then();
+          }
           setFieldsValue({
             ...data.record
           }).then();
+          if (data?.disabled === 1) {
+            showSave.value = false;
+          }
         }
       });
-      const getTitle = computed(() => (!unref(isUpdate) ? "新增租户信息表" : "编辑租户信息表"));
+      const getTitle = computed(() => (!unref(isUpdate) ? "新增租户信息" : "编辑租户信息"));
 
       async function handleSubmit() {
         let values = await validate();
         setModalProps({ confirmLoading: true });
         if (unref(isUpdate)) {
-          saveSsoTenant(updateSsoTenant, values);
+          if (source === 1) {
+            saveSsoTenant(updateMeTenant, values);
+          } else {
+            saveSsoTenant(updateSsoTenant, values);
+          }
         } else {
           saveSsoTenant(insertSsoTenant, values);
         }
@@ -209,6 +240,7 @@
         previewTitle,
         handleCancel,
         fetchUser,
+        showSave,
         changeUser,
         ...toRefs(accountList)
       };

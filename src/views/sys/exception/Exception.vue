@@ -10,6 +10,7 @@
   import { useI18n } from "/@/hooks/web/UseI18n";
   import { useGo, useRedo } from "/@/hooks/web/UsePage";
   import { usePermissionStore } from "/@/store/modules/Permission";
+  import { PageEnum } from "/@/enums/PageEnum";
 
   interface MapValue {
     title: string;
@@ -67,7 +68,7 @@
         status: `${ExceptionEnum.PAGE_NOT_ACCESS}`,
         subTitle: t("sys.exception.subTitle403"),
         btnText: props.full ? backLoginI18n : backHomeI18n,
-        handler: () => (props.full ? go(permissionStore.homePath) : go())
+        handler: () => (props.full ? go(PageEnum.BASE_LOGIN) : go(permissionStore.homePath))
       });
 
       unref(statusMapRef).set(ExceptionEnum.PAGE_NOT_FOUND, {
@@ -75,7 +76,7 @@
         status: `${ExceptionEnum.PAGE_NOT_FOUND}`,
         subTitle: t("sys.exception.subTitle404"),
         btnText: props.full ? backLoginI18n : backHomeI18n,
-        handler: () => (props.full ? go(permissionStore.homePath) : go())
+        handler: () => (props.full ? go(PageEnum.BASE_LOGIN) : go(permissionStore.homePath))
       });
 
       unref(statusMapRef).set(ExceptionEnum.ERROR, {

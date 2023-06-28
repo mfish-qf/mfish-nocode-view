@@ -19,13 +19,12 @@ export interface RouteItem {
 export enum MenuType {
   目录,
   菜单,
-  按钮,
+  按钮
 }
 
 export interface MenuListItem {
   id: string;
   parentId: string;
-  clientId: string;
   menuName: string;
   menuType: MenuType;
   menuCode: string;
@@ -52,6 +51,8 @@ export type MenuParams = {
   menuName?: string;
   menuType?: MenuType;
   status?: string;
+  permission?: string;
+  noButton?: boolean;
 };
 
 /**

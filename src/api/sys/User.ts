@@ -11,19 +11,21 @@ import {
 import { MessageMode } from "/#/axios";
 import { ContentTypeEnum } from "/@/enums/HttpEnum";
 import { ReqPage } from "/@/api/model/BaseModel";
+import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
 
 enum Api {
   Login = "/oauth2/accessToken",
   Logout = "/oauth2/user/revoke",
   GetUserInfo = "/oauth2/user/info",
   User = "/oauth2/user",
+  Me = "/oauth2/user/me",
   IsAccountExist = "/oauth2/user/exist",
   Pwd = "/oauth2/user/pwd",
   SendMsg = "/oauth2/sendMsg",
-  Permissions = "/oauth2/user/permissions",
   SetStatus = "/oauth2/user/status",
   Online = "/oauth2/user/online",
-  UserRoles = "/oauth2/user/roles"
+  UserRoles = "/oauth2/user/roles",
+  Tenants = "/oauth2/user/tenants"
 }
 
 /**
@@ -61,16 +63,16 @@ export function getUserById(id: string) {
  * 获取用户角色信息
  * @param params
  */
-export function getUserRoles(params: { userId?: string; clientId?: string }) {
+export function getUserRoles(params: { userId?: string; tenantId?: string }) {
   return defHttp.get<RoleInfo[]>({ url: Api.UserRoles, params });
 }
 
 /**
- * 获取权限信息
+ * 获取当前用户租户列表
  */
-export function getPermissions() {
-  return defHttp.get<Set<string>>({ url: Api.Permissions }, { errorMessageMode: "none" });
-}
+export const getUserTenants = () => {
+  return defHttp.get<TenantVo[]>({ url: Api.Tenants });
+};
 
 /**
  * 当前用户登出
@@ -105,6 +107,10 @@ export function insertUser(params: SsoUser) {
 
 export function updateUser(params: SsoUser) {
   return defHttp.put<SsoUser>({ url: Api.User, params }, { successMessageMode: "message" });
+}
+
+export function updateMe(params: SsoUser) {
+  return defHttp.put<SsoUser>({ url: Api.Me, params }, { successMessageMode: "message" });
 }
 
 export function deleteUser(params: string) {

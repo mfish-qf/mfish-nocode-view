@@ -86,7 +86,7 @@
       "mr-1",
       "w-full",
       {
-        ["ml-5"]: titleExists
+        ["ml-3"]: titleExists
       }
     ];
   });
