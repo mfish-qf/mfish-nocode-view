@@ -186,9 +186,11 @@
        * @param
        */
       function handleDelete(ssoTenant: SsoTenant) {
-        deleteSsoTenant(ssoTenant.id).then(() => {
-          handleSuccess();
-        });
+        if (ssoTenant.id) {
+          deleteSsoTenant(ssoTenant.id).then(() => {
+            handleSuccess();
+          });
+        }
       }
 
       /**

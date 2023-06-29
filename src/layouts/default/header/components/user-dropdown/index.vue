@@ -9,7 +9,7 @@
       </span>
     </span>
     <template #overlay>
-      <Menu @click="handleMenuClick">
+      <AMenu @click="handleMenuClick">
         <MenuItem key="userInfo" :text="t('layout.header.dropdownUserInfo')" icon="ion:person" />
         <MenuItem
           key="doc"
@@ -27,7 +27,7 @@
         <MenuItem key="changePwd" :text="t('layout.header.dropdownItemChangePwd')" icon="ion:key-outline" />
         <MenuDivider />
         <MenuItem key="logout" :text="t('layout.header.dropdownItemLoginOut')" icon="ion:power-outline" />
-      </Menu>
+      </AMenu>
     </template>
   </Dropdown>
   <LockAction @register="register" />
@@ -58,7 +58,7 @@
     components: {
       PasswordModal,
       Dropdown,
-      Menu,
+      AMenu: Menu,
       MenuItem: createAsyncComponent(() => import("./DropMenuItem.vue")),
       MenuDivider: Menu.Divider,
       LockAction: createAsyncComponent(() => import("../lock/LockModal.vue"))
@@ -116,7 +116,7 @@
             changePwd();
             break;
           case "userInfo":
-            go("/system/account/setting");
+            go("/tenant/info/1");
             break;
         }
       }
