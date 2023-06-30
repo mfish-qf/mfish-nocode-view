@@ -1,5 +1,5 @@
 <template>
-  <Header :class="getHeaderClass">
+  <AHeader :class="getHeaderClass">
     <!-- left start -->
     <div :class="`${prefixCls}-left`">
       <!-- logo -->
@@ -41,7 +41,7 @@
       <AppDarkModeToggle class="mx-auto" />
       <SettingDrawer v-if="getShowSetting" :class="`${prefixCls}-action__item`" />
     </div>
-  </Header>
+  </AHeader>
 </template>
 <script lang="ts">
   import { defineComponent, unref, computed } from "vue";
@@ -68,7 +68,7 @@
     name: "LayoutHeader",
     components: {
       AppDarkModeToggle,
-      Header: Layout.Header,
+      AHeader: Layout.Header,
       AppLogo,
       LayoutTrigger,
       LayoutBreadcrumb,

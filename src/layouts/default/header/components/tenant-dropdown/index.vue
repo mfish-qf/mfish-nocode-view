@@ -1,5 +1,5 @@
 <template>
-  <Dropdown v-if="getTenant.name" placement="bottomLeft" :overlayClassName="`${prefixCls}-dropdown-overlay`">
+  <Dropdown v-if="getTenant.id" placement="bottomLeft" :overlayClassName="`${prefixCls}-dropdown-overlay`">
     <span :class="[prefixCls, `${prefixCls}--${theme}`]" class="flex">
       <img :class="`${prefixCls}__header`" :src="getTenant.headImgUrl" :alt="getTenant.name" />
       <span :class="`${prefixCls}__info hidden md:block`">
@@ -33,6 +33,7 @@
   import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
   import { changeSsoTenant } from "/@/api/sys/SsoTenant";
   import { router } from "/@/router";
+  import { getUserInfo } from "/@/api/sys/User";
 
   export default {
     name: "TenantDropdown",
@@ -58,8 +59,13 @@
             }
           : {};
       });
-      onBeforeMount(() => {
-        tenants.value = userStore.getUserInfo?.tenants ? userStore.getUserInfo.tenants : [];
+      onBeforeMount(async () => {
+        if (userStore.getUserInfo) {
+          tenants.value = userStore.getUserInfo.tenants;
+        } else {
+          const userInfo = await getUserInfo();
+          tenants.value = userInfo.tenants;
+        }
       });
 
       function handleMenuClick(e: MenuInfo) {

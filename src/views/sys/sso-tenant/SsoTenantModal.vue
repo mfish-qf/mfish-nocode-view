@@ -68,6 +68,7 @@
   import { getLocalFileUrl, getSysFileByKey } from "/@/api/storage/SysFile";
   import { debounce } from "lodash-es";
   import { getUserById, getUserList } from "/@/api/sys/User";
+  import { getAllRoleList } from "/@/api/sys/Role";
 
   export default {
     name: "SsoTenantModal",
@@ -126,6 +127,10 @@
                 show: false
               },
               {
+                field: "roleIds",
+                show: false
+              },
+              {
                 field: "tenantType",
                 dynamicDisabled: true
               }
@@ -138,7 +143,32 @@
             showSave.value = false;
           }
         }
+        //来源1 表示自己修改租户信息，不允许修改角色信息
+        if (data?.source !== 1) {
+          initRoles().then();
+        }
       });
+
+      async function initRoles() {
+        let roles = await getAllRoleList({ tenantId: "1" });
+        const options = roles.reduce((prev, next: Recordable) => {
+          if (next) {
+            if (next["id"] !== "1") {
+              prev.push({
+                label: next["roleName"],
+                value: next["id"]
+              });
+            }
+          }
+          return prev;
+        }, [] as any);
+        updateSchema([
+          {
+            field: "roleIds",
+            componentProps: { options, optionFilterProp: "label" }
+          }
+        ]).then();
+      }
       const getTitle = computed(() => (!unref(isUpdate) ? "新增租户信息" : "编辑租户信息"));
 
       async function handleSubmit() {
