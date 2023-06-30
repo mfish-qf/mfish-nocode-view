@@ -10,13 +10,7 @@
   import { formSchema } from "./org.data";
   import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
   import { getAllRoleList } from "/@/api/sys/Role";
-  import {
-    getTenantAllRole,
-    getTenantOrgTree,
-    getTenantRole,
-    insertTenantOrg,
-    updateTenantOrg
-  } from "/@/api/sys/SsoTenant";
+  import { getTenantAllRole, getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "/@/api/sys/SsoTenant";
   import { useMessage } from "/@/hooks/web/UseMessage";
   import { isNullOrUnDef } from "/@/utils/Is";
   import { SsoOrg } from "/@/api/sys/model/OrgModel";

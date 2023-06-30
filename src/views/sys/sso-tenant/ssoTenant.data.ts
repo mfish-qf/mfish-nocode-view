@@ -130,6 +130,15 @@ export const ssoTenantFormSchema: FormSchema[] = [
     slot: "userSearch"
   },
   {
+    label: "角色",
+    field: "roleIds",
+    component: "Select",
+    componentProps: {
+      mode: "multiple",
+      showSearch: true
+    }
+  },
+  {
     field: "address",
     label: "地址",
     component: "Input"

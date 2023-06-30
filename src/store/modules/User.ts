@@ -157,7 +157,7 @@ export const useUserStore = defineStore({
         this.setRoleInfoList([]);
         this.setRoleList(new Set<string>());
       }
-      if (this.getTenantId === undefined && tenants?.length > 0) {
+      if (this.getTenantId === undefined && tenants?.length > 0 && tenants[0].id) {
         this.setTenantId(tenants[0].id);
       }
       this.setUserInfo(userInfo);
