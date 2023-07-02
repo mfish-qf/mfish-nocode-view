@@ -31,8 +31,8 @@ export function deleteOrg(params: string) {
 
 /**
  * 获取组织角色
- * @param params
+ * @param orgId
  */
-export function getOrgRoles(params: string) {
-  return defHttp.get<RoleInfo[]>({ url: `${Api.OrgRoles}/${params}` });
+export function getOrgRoles(orgId: string) {
+  return defHttp.get<RoleInfo[]>({ url: `${Api.OrgRoles}/${orgId}` });
 }
