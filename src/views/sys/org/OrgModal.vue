@@ -16,11 +16,11 @@
   </BasicModal>
 </template>
 <script lang="ts">
-  import { ref, computed, unref } from "vue";
+  import { ref, computed, unref, toRaw } from "vue";
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
   import { BasicForm, useForm } from "/@/components/general/Form/index";
   import { formSchema } from "./org.data";
-  import { getOrgRoles, getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
+  import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
   import { getAllRoleList } from "/@/api/sys/Role";
   import { getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "/@/api/sys/SsoTenant";
   import { useMessage } from "/@/hooks/web/UseMessage";
@@ -79,47 +79,31 @@
           if (data.record.tenantId) {
             tenantDisabled(true, props.source);
           }
-          initRoles(data.record as SsoOrg).then();
+          let roleIds = toRaw(data.record.roleIds);
+          if (!roleIds) {
+            roleIds = [];
+          }
+          let roles;
+          if (isNullOrUnDef(data.record.tenantId) || data.record.tenantId === "") {
+            //租户子组织获取系统默认角色
+            roles = await getAllRoleList({ orgIds: data.record.id });
+          } else {
+            //租户父组织获取系统默认角色
+            roles = await getAllRoleList({ tenantId: "1" });
+          }
+          setRoles(roles, roleIds);
+          return;
         }
+        const roles = await getAllRoleList({ tenantId: "1" });
+        setRoles(roles, []);
       });
 
-      async function initRoles(record: SsoOrg) {
-        let roles;
-        if (isNullOrUnDef(record.tenantId)) {
-          //租户子组织获取系统默认角色
-          roles = await getAllRoleList({ orgId: record.id });
-        } else {
-          //租户父组织获取系统默认角色
-          roles = await getAllRoleList({ tenantId: "1" });
-        }
-        let orgRoles;
-        if (record.parentId) {
-          orgRoles = await getOrgRoles(record.parentId);
-        } else {
-          orgRoles = [];
-        }
-        setRoles(roles, orgRoles);
-      }
-
-      function setRoles(roles, orgRoles) {
-        if (!orgRoles) {
-          orgRoles = [];
-        }
+      function setRoles(roles, roleIds) {
         const options = roles.reduce((prev, next: Recordable) => {
           if (next) {
             let disable = false;
             if (next["id"] === "1") {
               disable = true;
-            } else {
-              for (const role of orgRoles) {
-                if (next["id"] !== role.id) {
-                  continue;
-                }
-                if (role.source === 1) {
-                  disable = true;
-                  break;
-                }
-              }
             }
             prev.push({
               key: next["id"],
@@ -134,6 +118,8 @@
           field: "roleIds",
           componentProps: { options, optionFilterProp: "label" }
         }).then();
+        const roleValues = roleIds.filter((roleId) => roles.some((role) => role.id !== roleId));
+        setFieldsValue({ roleIds: roleValues }).then();
       }
 
       function tenantDisabled(disabled, source) {
@@ -159,7 +145,14 @@
 
       async function orgChange(orgId, _, extra) {
         setFieldsValue({ parentId: orgId }).then();
-        initRoles(extra.triggerNode.props).then();
+        const id = extra.triggerNode?.props?.id;
+        let roles;
+        if (id) {
+          roles = await getAllRoleList({ orgIds: id });
+        } else {
+          roles = await getAllRoleList({ tenantId: "1" });
+        }
+        setRoles(roles, []);
       }
 
       const getTitle = computed(() => (!unref(isUpdate) ? "新增组织" : "编辑组织"));
