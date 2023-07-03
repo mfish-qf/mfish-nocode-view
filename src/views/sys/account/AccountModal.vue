@@ -42,6 +42,7 @@
         setModalProps({ confirmLoading: false, width: "800px" });
         isUpdate.value = !!data?.isUpdate;
         curRow = data.record ? data.record : {};
+        let orgRoles: RoleInfo[] = [];
         if (unref(isUpdate)) {
           setFieldsValue({
             ...data.record
@@ -58,6 +59,7 @@
           ]).then();
           if (data.record.orgIds) {
             roles = await getAllRoleList({ orgIds: data.record.orgIds.join(",") });
+            orgRoles = await getOrgRoles(data.record.orgIds);
           }
         } else {
           updateSchema([
@@ -82,12 +84,12 @@
         }).then();
         if (data.record?.id) {
           const userRoles = await getUserRoles({ userId: data.record.id });
-          setRole(userRoles);
+          setRole(userRoles, orgRoles);
         }
       });
       const getTitle = computed(() => (!unref(isUpdate) ? "新增账号" : "编辑账号"));
 
-      function setRole(userRoles) {
+      function setRole(userRoles, orgRoles) {
         if (!roles) {
           return;
         }
@@ -117,9 +119,17 @@
           }
           return prev;
         }, [] as any);
+        const opts = options.concat(
+          orgRoles.map((orgRole) => ({
+            key: orgRole.id,
+            label: orgRole.roleName,
+            value: orgRole.id,
+            disabled: orgRole.source === 1
+          }))
+        );
         updateSchema({
           field: "roleIds",
-          componentProps: { options, optionFilterProp: "label" }
+          componentProps: { options: opts, optionFilterProp: "label" }
         }).then();
       }
 
@@ -178,7 +188,7 @@
           }, [] as string[]);
         const roleValues = roleIds.filter((roleId) => roles.some((role) => role.id !== roleId));
         setFieldsValue({ roleIds: roleValues }).then();
-        setRole(userRoles);
+        setRole(userRoles, orgRoles);
       }
 
       function saveAccount(save, values) {
