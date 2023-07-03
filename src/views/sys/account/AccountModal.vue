@@ -119,13 +119,16 @@
           }
           return prev;
         }, [] as any);
+        //合并组织拥有的角色，如果已经包含该角色则过滤掉
         const opts = options.concat(
-          orgRoles.map((orgRole) => ({
-            key: orgRole.id,
-            label: orgRole.roleName,
-            value: orgRole.id,
-            disabled: orgRole.source === 1
-          }))
+          orgRoles
+            .map((orgRole) => ({
+              key: orgRole.id,
+              label: orgRole.roleName,
+              value: orgRole.id,
+              disabled: orgRole.source === 1
+            }))
+            .filter((item) => !options.some((opt) => opt.key === item.key))
         );
         updateSchema({
           field: "roleIds",
