@@ -139,7 +139,7 @@ export const accountFormSchema: FormSchema[] = [
     component: "Input"
   },
   {
-    field: "orgId",
+    field: "orgIds",
     label: "所属部门",
     component: "TreeSelect",
     componentProps: {
@@ -153,6 +153,7 @@ export const accountFormSchema: FormSchema[] = [
       getPopupContainer: () => document.body
     },
     colProps: { span: 24 },
+    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["id"] === "1",
     required: true
   },
   {
@@ -164,7 +165,7 @@ export const accountFormSchema: FormSchema[] = [
       mode: "multiple"
     },
     colProps: { span: 24 },
-    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["account"] === "admin"
+    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["id"] === "1"
   },
   {
     field: "phone",
@@ -214,6 +215,7 @@ export const accountFormSchema: FormSchema[] = [
         { label: "停用", value: 1 }
       ]
     },
+    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["id"] === "1",
     required: true
   },
   {

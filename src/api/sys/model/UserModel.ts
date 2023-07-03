@@ -67,6 +67,7 @@ export interface SsoUser {
   updateBy: string;
   updateTime: string;
   roleIds: string[];
+  orgIds: string[];
   userRoles: RoleInfo[];
   permissions: Set<string>;
   tenants: TenantVo[];

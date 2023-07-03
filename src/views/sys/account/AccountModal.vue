@@ -12,6 +12,7 @@
   import { getUserRoles, insertUser, updateUser } from "/@/api/sys/User";
   import { getAllRoleList } from "/@/api/sys/Role";
   import { RoleInfo } from "/@/api/sys/model/UserModel";
+  import { SsoRole } from "/@/api/sys/model/RoleModel";
 
   export default {
     name: "AccountModal",
@@ -34,26 +35,18 @@
         showActionButtonGroup: false,
         autoSubmitOnEnter: true
       });
-      let roles;
+      let roles: SsoRole[] = [];
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
         resetFields().then();
+        roles = [];
         setModalProps({ confirmLoading: false, width: "800px" });
         isUpdate.value = !!data?.isUpdate;
-        const status = {
-          field: "status",
-          dynamicDisabled: false
-        };
         curRow = data.record ? data.record : {};
+        let orgRoles: RoleInfo[] = [];
         if (unref(isUpdate)) {
           setFieldsValue({
             ...data.record
           }).then();
-          // 超户不允许修改用户状态
-          if (data.record.id === "1") {
-            status.dynamicDisabled = true;
-          } else {
-            status.dynamicDisabled = false;
-          }
           updateSchema([
             {
               field: "password",
@@ -62,9 +55,12 @@
             {
               field: "account",
               dynamicDisabled: true
-            },
-            status
+            }
           ]).then();
+          if (data.record.orgIds) {
+            roles = await getAllRoleList({ orgIds: data.record.orgIds.join(",") });
+            orgRoles = await getOrgRoles(data.record.orgIds);
+          }
         } else {
           updateSchema([
             {
@@ -75,23 +71,25 @@
               field: "account",
               dynamicDisabled: false
             },
-            status
+            {
+              field: "roleIds",
+              componentProps: { options: [], optionFilterProp: "label" }
+            }
           ]).then();
         }
         const treeData = await getOrgTree();
         updateSchema({
-          field: "orgId",
+          field: "orgIds",
           componentProps: { treeData }
         }).then();
-        roles = await getAllRoleList();
         if (data.record?.id) {
           const userRoles = await getUserRoles({ userId: data.record.id });
-          setRole(userRoles);
+          setRole(userRoles, orgRoles);
         }
       });
       const getTitle = computed(() => (!unref(isUpdate) ? "新增账号" : "编辑账号"));
 
-      function setRole(userRoles) {
+      function setRole(userRoles, orgRoles) {
         if (!roles) {
           return;
         }
@@ -121,9 +119,20 @@
           }
           return prev;
         }, [] as any);
+        //合并组织拥有的角色，如果已经包含该角色则过滤掉
+        const opts = options.concat(
+          orgRoles
+            .map((orgRole) => ({
+              key: orgRole.id,
+              label: orgRole.roleName,
+              value: orgRole.id,
+              disabled: orgRole.source === 1
+            }))
+            .filter((item) => !options.some((opt) => opt.key === item.key))
+        );
         updateSchema({
           field: "roleIds",
-          componentProps: { options, optionFilterProp: "label" }
+          componentProps: { options: opts, optionFilterProp: "label" }
         }).then();
       }
 
@@ -150,31 +159,39 @@
         }
       }
 
-      function valueChange(key, value) {
-        if (key !== "orgId") {
+      async function valueChange(key, value) {
+        if (key !== "orgIds") {
           return;
         }
-        getOrgRoles(value).then((res) => {
-          let userRoles: RoleInfo[] = [];
-          if (curRow?.userRoles && curRow?.userRoles.length > 0) {
-            userRoles = curRow.userRoles.filter((item) => item.source !== 1);
-          }
-          userRoles = userRoles.concat(res);
-          const roleIds = userRoles
-            .map((item) => {
-              return item.id;
-            })
-            .reduce((prev, next: string) => {
-              if (next) {
-                if (!prev.includes(next)) {
-                  prev.push(next);
-                }
+        if (value && value.length > 0) {
+          roles = await getAllRoleList({ orgIds: value.join(",") });
+        } else {
+          roles = [];
+        }
+        //获取组织已设置的角色
+        const orgRoles = await getOrgRoles(value);
+        let userRoles: RoleInfo[] = [];
+        //移除属于组织的角色
+        if (curRow?.userRoles && curRow?.userRoles.length > 0) {
+          userRoles = curRow.userRoles.filter((item) => item.source !== 1);
+        }
+        //合并新的组织角色
+        userRoles = userRoles.concat(orgRoles);
+        const roleIds = userRoles
+          .map((item) => {
+            return item.id;
+          })
+          .reduce((prev, next: string) => {
+            if (next) {
+              if (!prev.includes(next)) {
+                prev.push(next);
               }
-              return prev;
-            }, [] as string[]);
-          setFieldsValue({ roleIds });
-          setRole(userRoles);
-        });
+            }
+            return prev;
+          }, [] as string[]);
+        const roleValues = roleIds.filter((roleId) => roles.some((role) => role.id !== roleId));
+        setFieldsValue({ roleIds: roleValues }).then();
+        setRole(userRoles, orgRoles);
       }
 
       function saveAccount(save, values) {

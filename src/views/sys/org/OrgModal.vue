@@ -1,23 +1,36 @@
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
-    <BasicForm @register="registerForm" @submit="handleSubmit" />
+    <BasicForm @register="registerForm" @submit="handleSubmit">
+      <template #parentId>
+        <TreeSelect
+          v-model:value="curOrg"
+          show-search
+          allow-clear
+          treeNodeFilterProp="orgName"
+          :tree-data="treeData"
+          :fieldNames="fieldNames"
+          @change="orgChange"
+        />
+      </template>
+    </BasicForm>
   </BasicModal>
 </template>
 <script lang="ts">
-  import { ref, computed, unref } from "vue";
+  import { ref, computed, unref, toRaw } from "vue";
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
   import { BasicForm, useForm } from "/@/components/general/Form/index";
   import { formSchema } from "./org.data";
   import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
   import { getAllRoleList } from "/@/api/sys/Role";
-  import { getTenantAllRole, getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "/@/api/sys/SsoTenant";
+  import { getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "/@/api/sys/SsoTenant";
   import { useMessage } from "/@/hooks/web/UseMessage";
   import { isNullOrUnDef } from "/@/utils/Is";
   import { SsoOrg } from "/@/api/sys/model/OrgModel";
+  import { TreeSelect } from "ant-design-vue";
 
   export default {
     name: "OrgModal",
-    components: { BasicModal, BasicForm },
+    components: { BasicModal, BasicForm, TreeSelect },
     props: {
       source: {
         type: Number,
@@ -35,19 +48,30 @@
         autoSubmitOnEnter: true,
         showActionButtonGroup: false
       });
-
+      const fieldNames = {
+        label: "orgName",
+        key: "id",
+        value: "id"
+      };
+      const curOrg = ref("");
+      const treeData = ref<SsoOrg[]>([]);
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
         resetFields().then();
+        curOrg.value = "";
+        updateSchema({
+          field: "roleIds",
+          componentProps: { options: [] }
+        }).then();
         tenantDisabled(false, props.source);
         setModalProps({ confirmLoading: false, width: "800px" });
         isUpdate.value = !!data?.isUpdate;
-        let treeData;
         if (props.source == 1) {
-          treeData = await getTenantOrgTree();
+          treeData.value = await getTenantOrgTree();
         } else {
-          treeData = await getOrgTree();
+          treeData.value = await getOrgTree();
         }
         if (unref(isUpdate)) {
+          curOrg.value = data.record.parentId;
           setFieldsValue({
             ...data.record
           }).then();
@@ -55,50 +79,47 @@
           if (data.record.tenantId) {
             tenantDisabled(true, props.source);
           }
-        }
-        updateSchema([
-          {
-            field: "parentId",
-            componentProps: { treeData }
+          let roleIds = toRaw(data.record.roleIds);
+          if (!roleIds) {
+            roleIds = [];
           }
-        ]).then();
-        initRoles(data.record as SsoOrg, unref(isUpdate)).then();
-      });
-
-      async function initRoles(record: SsoOrg, isUpdate: boolean) {
-        let roles;
-        if (isUpdate) {
-          if (isNullOrUnDef(record.tenantId)) {
+          let roles;
+          if (isNullOrUnDef(data.record.tenantId) || data.record.tenantId === "") {
             //租户子组织获取系统默认角色
-            roles = await getAllRoleList({ orgId: record.id });
+            roles = await getAllRoleList({ orgIds: data.record.id });
           } else {
             //租户父组织获取系统默认角色
             roles = await getAllRoleList({ tenantId: "1" });
           }
-        } else {
-          if (props.source === 1) {
-            roles = await getTenantAllRole();
-          } else {
-            roles = await getAllRoleList({ tenantId: "1" });
-          }
+          setRoles(roles, roleIds);
+          return;
         }
+        const roles = await getAllRoleList({ tenantId: "1" });
+        setRoles(roles, []);
+      });
+
+      function setRoles(roles, roleIds) {
         const options = roles.reduce((prev, next: Recordable) => {
           if (next) {
-            if (next["id"] !== "1") {
-              prev.push({
-                label: next["roleName"],
-                value: next["id"]
-              });
+            let disable = false;
+            if (next["id"] === "1") {
+              disable = true;
             }
+            prev.push({
+              key: next["id"],
+              label: next["roleName"],
+              value: next["id"],
+              disabled: disable
+            });
           }
           return prev;
         }, [] as any);
-        updateSchema([
-          {
-            field: "roleIds",
-            componentProps: { options, optionFilterProp: "label" }
-          }
-        ]).then();
+        updateSchema({
+          field: "roleIds",
+          componentProps: { options, optionFilterProp: "label" }
+        }).then();
+        const roleValues = roleIds.filter((roleId) => roles.some((role) => role.id !== roleId));
+        setFieldsValue({ roleIds: roleValues }).then();
       }
 
       function tenantDisabled(disabled, source) {
@@ -120,6 +141,18 @@
             dynamicDisabled: source === 1 && disabled
           }
         ]).then();
+      }
+
+      async function orgChange(orgId, _, extra) {
+        setFieldsValue({ parentId: orgId }).then();
+        const id = extra.triggerNode?.props?.id;
+        let roles;
+        if (id) {
+          roles = await getAllRoleList({ orgIds: id });
+        } else {
+          roles = await getAllRoleList({ tenantId: "1" });
+        }
+        setRoles(roles, []);
       }
 
       const getTitle = computed(() => (!unref(isUpdate) ? "新增组织" : "编辑组织"));
@@ -161,7 +194,7 @@
           });
       }
 
-      return { registerModal, registerForm, getTitle, handleSubmit };
+      return { registerModal, registerForm, getTitle, handleSubmit, fieldNames, treeData, orgChange, curOrg };
     }
   };
 </script>

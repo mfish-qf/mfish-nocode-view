@@ -125,7 +125,8 @@ export const formSchema: FormSchema[] = [
         value: "id"
       },
       getPopupContainer: () => document.body
-    }
+    },
+    slot: "parentId"
   },
   {
     label: "角色",

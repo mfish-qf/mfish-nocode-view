@@ -22,7 +22,7 @@ export interface SsoRole {
 
 export interface ReqSsoRole extends ReqPage {
   tenantId?: string;
-  orgId?: string;
+  orgIds?: string;
   roleName?: string;
   roleCode?: string;
   status?: number;
