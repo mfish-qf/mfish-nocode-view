@@ -1,6 +1,5 @@
 import { BasicColumn } from "/@/components/general/Table";
 import { FormSchema } from "/@/components/general/Table";
-import { RenderCallbackParams } from "/@/components/general/Form";
 export const columns: BasicColumn[] = [
   {
     title: "角色名称",
@@ -77,8 +76,7 @@ export const formSchema: FormSchema[] = [
     field: "roleCode",
     label: "角色编码",
     required: true,
-    component: "Input",
-    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["roleCode"] === "admin"
+    component: "Input"
   },
   {
     label: "排序",

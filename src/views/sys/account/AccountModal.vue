@@ -35,10 +35,8 @@
         showActionButtonGroup: false,
         autoSubmitOnEnter: true
       });
-      let roles: SsoRole[] = [];
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
         resetFields().then();
-        roles = [];
         setModalProps({ confirmLoading: false, width: "800px" });
         isUpdate.value = !!data?.isUpdate;
         curRow = data.record ? data.record : {};
@@ -57,10 +55,13 @@
               dynamicDisabled: true
             }
           ]).then();
+          let roles: SsoRole[] = [];
           if (data.record.orgIds) {
             roles = await getAllRoleList({ orgIds: data.record.orgIds.join(",") });
             orgRoles = await getOrgRoles(data.record.orgIds);
           }
+          const userRoles = await getUserRoles({ userId: data.record.id });
+          setRole(roles, userRoles, orgRoles);
         } else {
           updateSchema([
             {
@@ -82,14 +83,10 @@
           field: "orgIds",
           componentProps: { treeData }
         }).then();
-        if (data.record?.id) {
-          const userRoles = await getUserRoles({ userId: data.record.id });
-          setRole(userRoles, orgRoles);
-        }
       });
       const getTitle = computed(() => (!unref(isUpdate) ? "新增账号" : "编辑账号"));
 
-      function setRole(userRoles, orgRoles) {
+      function setRole(roles, userRoles, orgRoles) {
         if (!roles) {
           return;
         }
@@ -134,6 +131,7 @@
           field: "roleIds",
           componentProps: { options: opts, optionFilterProp: "label" }
         }).then();
+        return opts;
       }
 
       async function handleSubmit() {
@@ -163,6 +161,7 @@
         if (key !== "orgIds") {
           return;
         }
+        let roles: SsoRole[];
         if (value && value.length > 0) {
           roles = await getAllRoleList({ orgIds: value.join(",") });
         } else {
@@ -177,6 +176,7 @@
         }
         //合并新的组织角色
         userRoles = userRoles.concat(orgRoles);
+        const opts = setRole(roles, userRoles, orgRoles);
         const roleIds = userRoles
           .map((item) => {
             return item.id;
@@ -189,9 +189,8 @@
             }
             return prev;
           }, [] as string[]);
-        const roleValues = roleIds.filter((roleId) => roles.some((role) => role.id !== roleId));
+        const roleValues = roleIds.filter((roleId) => opts.some((role) => role.id !== roleId));
         setFieldsValue({ roleIds: roleValues }).then();
-        setRole(userRoles, orgRoles);
       }
 
       function saveAccount(save, values) {

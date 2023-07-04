@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BasicTable @register="registerTable" @fetch-success="onFetchSuccess">
+    <BasicTable @register="registerTable" @fetch-success="onFetchSuccess" :class="$props.source === 1 ? prefixCls : ''">
       <template #toolbar>
         <a-button
           type="primary"
@@ -45,6 +45,7 @@
   import { columns, searchFormSchema } from "./org.data";
   import { usePermission } from "/@/hooks/web/UsePermission";
   import { deleteTenantOrg, getTenantOrgTree } from "/@/api/sys/SsoTenant";
+  import { useDesign } from "/@/hooks/web/UseDesign";
 
   export default {
     name: "OrgManagement",
@@ -58,6 +59,7 @@
     setup(props) {
       const { hasPermission, hasTenant } = usePermission();
       const [registerModal, { openModal }] = useModal();
+      const { prefixCls } = useDesign("org");
       const api = ref();
       if (props.source == 1) {
         api.value = getTenantOrgTree;
@@ -134,8 +136,15 @@
         handleSuccess,
         onFetchSuccess,
         hasPermission,
-        hasTenant
+        hasTenant,
+        prefixCls
       };
     }
   };
 </script>
+<style lang="less">
+  @prefix-cls: ~"@{namespace}-org";
+  .@{prefix-cls} {
+    padding: 0;
+  }
+</style>
