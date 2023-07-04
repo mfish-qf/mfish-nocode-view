@@ -1,7 +1,12 @@
 <template>
-  <PageWrapper dense contentFullHeight fixedHeight contentClass="flex">
+  <PageWrapper contentClass="flex">
     <OrgTree class="w-1/4 xl:w-1/5" @select="handleSelect" :source="$props.source" />
-    <BasicTable @register="registerTable" class="w-3/4 xl:w-4/5" :searchInfo="searchInfo">
+    <BasicTable
+      @register="registerTable"
+      class="w-3/4 xl:w-4/5"
+      :searchInfo="searchInfo"
+      :class="$props.source === 1 ? prefixCls : ''"
+    >
       <template #toolbar>
         <a-button type="primary" @click="handleCreate" v-if="$props.source !== 1 && hasPermission('sys:account:insert')"
           >新增账号
@@ -58,6 +63,7 @@
   import { usePermission } from "/@/hooks/web/UsePermission";
   import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
   import { getTenantUserList } from "/@/api/sys/SsoTenant";
+  import { useDesign } from "/@/hooks/web/UseDesign";
 
   export default {
     name: "AccountManagement",
@@ -73,6 +79,7 @@
       const [registerModal, { openModal }] = useModal();
       const [registerPwdModal, { openModal: openPwdModal }] = useModal();
       const searchInfo = reactive<Recordable>({});
+      const { prefixCls } = useDesign("account");
       const api = ref();
       if (props.source === 1) {
         api.value = getTenantUserList;
@@ -93,6 +100,7 @@
         showTableSetting: true,
         bordered: true,
         showIndexColumn: false,
+        resizeHeightOffset: props.source === 1 ? 18 : 0,
         actionColumn: {
           width: 120,
           title: "操作",
@@ -146,8 +154,21 @@
         SUPER_ROLE,
         registerPwdModal,
         openPwdModal,
-        handleChangePwd
+        handleChangePwd,
+        prefixCls
       };
     }
   };
 </script>
+<style lang="less">
+  @prefix-cls: ~"@{namespace}-account";
+  [data-theme="dark"] {
+    .@{prefix-cls}{
+      border-left: 1px solid #303030
+    }
+  }
+  .@{prefix-cls} {
+    padding: 0 0 0 5px;
+    border-left: 1px solid #d9d9d9;
+  }
+</style>

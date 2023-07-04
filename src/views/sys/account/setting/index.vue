@@ -1,19 +1,16 @@
 <template>
-  <ScrollContainer>
-    <div ref="wrapperRef" class="account-setting">
-      <Tabs tab-position="left" :tabBarStyle="tabBarStyle" :activeKey="tabType" @change="tabChange">
-        <TabPane v-for="item in settingList" :key="item.key" :tab="item.name" class="base-title">
-          <component :is="item.component" />
-        </TabPane>
-      </Tabs>
-    </div>
-  </ScrollContainer>
+  <div ref="wrapperRef" class="account-setting">
+    <Tabs tab-position="left" :tabBarStyle="tabBarStyle" :activeKey="tabType" @change="tabChange">
+      <TabPane v-for="item in settingList" :key="item.key" :tab="item.name" class="base-title">
+        <component :is="item.component" />
+      </TabPane>
+    </Tabs>
+  </div>
 </template>
 
 <script lang="ts">
   import { defineComponent, onMounted, ref } from "vue";
   import { Tabs } from "ant-design-vue";
-  import { ScrollContainer } from "/@/components/general/Container";
   import { settingList } from "./setting.data";
   import BaseSetting from "./BaseSetting.vue";
   import SecureSetting from "./SecureSetting.vue";
@@ -25,7 +22,6 @@
 
   export default defineComponent({
     components: {
-      ScrollContainer,
       Tabs,
       TabPane: Tabs.TabPane,
       BaseSetting,

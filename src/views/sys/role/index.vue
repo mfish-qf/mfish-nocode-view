@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BasicTable @register="registerTable">
+    <BasicTable @register="registerTable" :class="$props.source === 1 ? prefixCls : ''">
       <template #toolbar>
         <a-button
           type="primary"
@@ -57,6 +57,7 @@
   import { deleteTenantRole, getTenantRole } from "/@/api/sys/SsoTenant";
   import { Switch as ASwitch } from "ant-design-vue";
   import { SsoRole } from "/@/api/sys/model/RoleModel";
+  import { useDesign } from "/@/hooks/web/UseDesign";
 
   export default {
     name: "RoleManagement",
@@ -70,6 +71,7 @@
     setup(props) {
       const { hasPermission, hasTenant } = usePermission();
       const [registerModal, { openModal }] = useModal();
+      const { prefixCls } = useDesign("role");
       const api = ref();
 
       if (props.source === 1) {
@@ -90,6 +92,7 @@
         useSearchForm: true,
         showTableSetting: true,
         bordered: true,
+        resizeHeightOffset: props.source === 1 ? 18 : 0,
         showIndexColumn: false,
         actionColumn: {
           width: 80,
@@ -112,7 +115,8 @@
       }
       const statusLoading = ref(false);
       const statusDisabled = (record) =>
-        record.id === "1" || props.source === 1 ? !hasTenant() : !hasPermission("sys:role:update");
+        record.id === "1" || (props.source === 1 ? !hasTenant() : !hasPermission("sys:role:update"));
+
       function handleStatus(record: SsoRole) {
         statusLoading.value = true;
         const newStatus = record.status === 0 ? 1 : 0;
@@ -152,8 +156,15 @@
         hasTenant,
         handleStatus,
         statusLoading,
-        statusDisabled
+        statusDisabled,
+        prefixCls
       };
     }
   };
 </script>
+<style lang="less">
+  @prefix-cls: ~"@{namespace}-role";
+  .@{prefix-cls} {
+    padding: 0;
+  }
+</style>
