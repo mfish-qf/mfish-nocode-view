@@ -35,6 +35,9 @@
     setup() {
       const route = useRoute();
       const tabType = ref(1);
+      const { isSuperTenant, isSuperAdmin } = usePermission();
+      const setting = ref<{ key: number; name: string; component: string }[]>([]);
+
       onMounted(() => {
         const index = route.path.lastIndexOf("/");
         if (index) {
@@ -43,18 +46,17 @@
             tabType.value = type;
           }
         }
+        //如果是系统默认租户，但不是管理员，不显示租户配置信息
+        if (isSuperTenant() && !isSuperAdmin()) {
+          setting.value = settingList.filter((set) => set.key === 1 || set.key === 2);
+        } else {
+          setting.value = settingList;
+        }
       });
       function tabChange(e) {
         tabType.value = e;
       }
-      const { isSuperTenant, isSuperAdmin } = usePermission();
-      let setting;
-      //如果是系统默认租户，但不是管理员，不显示租户配置信息
-      if (isSuperTenant() && !isSuperAdmin()) {
-        setting = settingList.filter((set) => set.key === 1 || set.key === 2);
-      } else {
-        setting = settingList;
-      }
+
       return {
         settingList: setting,
         tabBarStyle: {
