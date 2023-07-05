@@ -1,6 +1,6 @@
 {
   "name": "mfish-nocode",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "mfish",
     "email": "qiufeng9862@qq.com",
@@ -31,7 +31,7 @@
     "@ant-design/colors": "^7.0.0",
     "@ant-design/icons-vue": "^6.1.0",
     "@iconify/iconify": "^3.1.1",
-    "@types/qrcode": "^1.5.0",
+    "@types/qrcode": "^1.5.1",
     "@vue/runtime-core": "^3.3.4",
     "@vue/shared": "^3.3.4",
     "@vueuse/core": "^9.13.0",
@@ -42,7 +42,7 @@
     "codemirror": "^5.65.13",
     "cropperjs": "^1.5.13",
     "crypto-js": "^4.1.1",
-    "dayjs": "^1.11.8",
+    "dayjs": "^1.11.9",
     "echarts": "^5.4.2",
     "intro.js": "^6.0.0",
     "lodash-es": "^4.17.21",
@@ -63,7 +63,7 @@
     "vue-types": "^4.2.1"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.84",
+    "@iconify/json": "^2.2.86",
     "@kirklin/vite-plugin-vben-theme": "^0.1.2",
     "@logicflow/core": "^1.2.9",
     "@logicflow/extension": "^1.2.9",
@@ -77,10 +77,10 @@
     "@types/jsdom": "^20.0.1",
     "@types/lodash-es": "^4.17.7",
     "@types/mockjs": "^1.0.7",
-    "@types/node": "^18.16.18",
+    "@types/node": "^18.16.19",
     "@types/sm-crypto": "^0.3.0",
-    "@typescript-eslint/eslint-plugin": "^5.60.1",
-    "@typescript-eslint/parser": "^5.60.1",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
     "@vitejs/plugin-legacy": "^3.0.2",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
@@ -91,7 +91,7 @@
     "autoprefixer": "^10.4.14",
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
-    "eslint": "^8.43.0",
+    "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.15.1",
@@ -104,7 +104,7 @@
     "picocolors": "^1.0.0",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
-    "prettier-plugin-packagejson": "^2.4.3",
+    "prettier-plugin-packagejson": "^2.4.4",
     "rimraf": "^3.0.2",
     "rollup": "^2.79.1",
     "rollup-plugin-visualizer": "^5.9.2",
@@ -125,7 +125,7 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-eslint-parser": "^9.3.1",
-    "vue-tsc": "^1.8.3"
+    "vue-tsc": "^1.8.4"
   },
   "resolutions": {
     "bin-wrapper": "npm:bin-wrapper-china",

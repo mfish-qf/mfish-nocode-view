@@ -89,5 +89,13 @@ export function usePermission() {
     resume().then();
   }
 
-  return { hasPermission, hasRole, hasTenant, refreshMenu, ALL_PERMISSION, SUPER_ROLE };
+  function isSuperTenant() {
+    return userStore.getTenantId === "1";
+  }
+
+  function isSuperAdmin() {
+    return userStore.getUserInfo?.id === "1";
+  }
+
+  return { hasPermission, hasRole, hasTenant, refreshMenu, ALL_PERMISSION, SUPER_ROLE, isSuperTenant, isSuperAdmin };
 }

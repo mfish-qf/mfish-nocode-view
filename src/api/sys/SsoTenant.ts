@@ -3,7 +3,7 @@ import { SsoTenant, ReqSsoTenant, SsoTenantPageModel } from "/@/api/sys/model/Ss
 import { SsoOrg } from "/@/api/sys/model/OrgModel";
 import { ReqSsoRole, SsoRole } from "/@/api/sys/model/RoleModel";
 import { MenuListItem, MenuParams } from "/@/api/sys/model/MenuModel";
-import { ReqSsoUser, SsoUserPageModel } from "/@/api/sys/model/UserModel";
+import { ReqSsoUser, SsoUserPageModel, UserOrg } from "/@/api/sys/model/UserModel";
 
 /**
  * @description: 租户信息表
@@ -20,7 +20,8 @@ enum Api {
   TenantALLRole = "/oauth2/ssoTenant/role/all",
   TenantRoleMenu = "/oauth2/ssoTenant/role/menus",
   TenantMenuTree = "/oauth2/ssoTenant/menu/tree",
-  TenantUser = "/oauth2/ssoTenant/user"
+  TenantUser = "/oauth2/ssoTenant/user",
+  TenantUserOrg = "/oauth2/ssoTenant/user/org"
 }
 
 /**
@@ -140,3 +141,11 @@ export const deleteTenantRole = (params: string) => {
 export const getTenantUserList = (params?: ReqSsoUser) => {
   return defHttp.get<SsoUserPageModel>({ url: Api.TenantUser, params });
 };
+
+export function bindUserOrg(params: UserOrg) {
+  return defHttp.post<Boolean>({ url: Api.TenantUserOrg, params }, { successMessageMode: "message" });
+}
+
+export function deleteUserOrg(params: UserOrg) {
+  return defHttp.delete<Boolean>({ url: Api.TenantUserOrg, params }, { successMessageMode: "message" });
+}

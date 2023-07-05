@@ -73,6 +73,11 @@ export interface SsoUser {
   tenants: TenantVo[];
 }
 
+export interface UserOrg {
+  orgId: string;
+  userId: string;
+}
+
 export interface OnlineUser {
   account: string;
   loginMode: number;

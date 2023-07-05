@@ -19,6 +19,7 @@
   import TenantRoleSetting from "./TenantRoleSetting.vue";
   import TenantUserSetting from "./TenantUserSetting.vue";
   import { useRoute } from "vue-router";
+  import { usePermission } from "/@/hooks/web/UsePermission";
 
   export default defineComponent({
     components: {
@@ -46,8 +47,16 @@
       function tabChange(e) {
         tabType.value = e;
       }
+      const { isSuperTenant, isSuperAdmin } = usePermission();
+      let setting;
+      //如果是系统默认租户，但不是管理员，不显示租户配置信息
+      if (isSuperTenant() && !isSuperAdmin()) {
+        setting = settingList.filter((set) => set.key === 1 || set.key === 2);
+      } else {
+        setting = settingList;
+      }
       return {
-        settingList,
+        settingList: setting,
         tabBarStyle: {
           width: "110px",
           height: "calc(100vh - 122px)"

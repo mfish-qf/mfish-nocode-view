@@ -263,4 +263,3 @@ export const jobFormSchema: FormSchema[] = [
     colProps: { span: 24 }
   }
 ];
-
