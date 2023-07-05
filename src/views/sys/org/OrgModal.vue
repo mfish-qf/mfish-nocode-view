@@ -9,6 +9,7 @@
           treeNodeFilterProp="orgName"
           :tree-data="treeData"
           :fieldNames="fieldNames"
+          :disabled="parentIdDisabled"
           @change="orgChange"
         />
       </template>
@@ -54,6 +55,7 @@
         value: "id"
       };
       const curOrg = ref("");
+      const parentIdDisabled = ref(false);
       const treeData = ref<SsoOrg[]>([]);
       const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
         resetFields().then();
@@ -123,6 +125,7 @@
       }
 
       function tenantDisabled(disabled, source) {
+        parentIdDisabled.value = disabled;
         updateSchema([
           {
             field: "orgName",
@@ -130,10 +133,6 @@
           },
           {
             field: "orgFixCode",
-            dynamicDisabled: disabled
-          },
-          {
-            field: "parentId",
             dynamicDisabled: disabled
           },
           {
@@ -194,7 +193,17 @@
           });
       }
 
-      return { registerModal, registerForm, getTitle, handleSubmit, fieldNames, treeData, orgChange, curOrg };
+      return {
+        registerModal,
+        registerForm,
+        getTitle,
+        handleSubmit,
+        fieldNames,
+        treeData,
+        orgChange,
+        curOrg,
+        parentIdDisabled
+      };
     }
   };
 </script>
