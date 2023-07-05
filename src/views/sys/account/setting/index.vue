@@ -19,6 +19,7 @@
   import TenantRoleSetting from "./TenantRoleSetting.vue";
   import TenantUserSetting from "./TenantUserSetting.vue";
   import { useRoute } from "vue-router";
+  import { usePermission } from "/@/hooks/web/UsePermission";
 
   export default defineComponent({
     components: {
@@ -46,8 +47,15 @@
       function tabChange(e) {
         tabType.value = e;
       }
+      const { isSuperTenant } = usePermission();
+      let setting;
+      if (isSuperTenant()) {
+        setting = settingList.filter((set) => set.key === 1 || set.key === 2);
+      } else {
+        setting = settingList;
+      }
       return {
-        settingList,
+        settingList: setting,
         tabBarStyle: {
           width: "110px",
           height: "calc(100vh - 122px)"
