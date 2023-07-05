@@ -1,7 +1,13 @@
 <template>
   <div ref="wrapperRef" class="account-setting">
-    <Tabs tab-position="left" :tabBarStyle="tabBarStyle" :activeKey="tabType" @change="tabChange">
-      <TabPane v-for="item in settingList" :key="item.key" :tab="item.name" class="base-title">
+    <Tabs
+      destroyInactiveTabPane
+      tab-position="left"
+      :tabBarStyle="tabBarStyle"
+      :activeKey="tabType"
+      @change="tabChange"
+    >
+      <TabPane v-for="item in setting" :key="item.key" :tab="item.name" class="base-title">
         <component :is="item.component" />
       </TabPane>
     </Tabs>
@@ -34,7 +40,15 @@
     },
     setup() {
       const route = useRoute();
-      const tabType = ref(1);
+      const tabType = ref<number>(1);
+      const { isSuperTenant, isSuperAdmin } = usePermission();
+      let setting: { key: number; name: string; component: string }[];
+      //如果是系统默认租户，但不是管理员，不显示租户配置信息
+      if (isSuperTenant() && !isSuperAdmin()) {
+        setting = [...settingList.filter((set) => set.key === 1 || set.key === 2)];
+      } else {
+        setting = [...settingList];
+      }
       onMounted(() => {
         const index = route.path.lastIndexOf("/");
         if (index) {
@@ -47,16 +61,9 @@
       function tabChange(e) {
         tabType.value = e;
       }
-      const { isSuperTenant, isSuperAdmin } = usePermission();
-      let setting;
-      //如果是系统默认租户，但不是管理员，不显示租户配置信息
-      if (isSuperTenant() && !isSuperAdmin()) {
-        setting = settingList.filter((set) => set.key === 1 || set.key === 2);
-      } else {
-        setting = settingList;
-      }
+
       return {
-        settingList: setting,
+        setting,
         tabBarStyle: {
           width: "110px",
           height: "calc(100vh - 122px)"
