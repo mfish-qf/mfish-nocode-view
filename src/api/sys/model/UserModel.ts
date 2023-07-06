@@ -1,6 +1,10 @@
 import { PageResult, ReqPage } from "/@/api/model/BaseModel";
 import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
 
+export interface CaptchaInfo {
+  captchaKey: string;
+  img: string;
+}
 /**
  * @description: 用户信息
  * @author: mfish
@@ -21,6 +25,7 @@ export interface LoginParams {
   state?: string;
   //刷新token时使用
   refresh_token?: string;
+  rememberMe?: boolean;
 }
 
 export interface RoleInfo {

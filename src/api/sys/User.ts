@@ -6,7 +6,8 @@ import {
   SsoUserPageModel,
   OnlineUserPageModel,
   RoleInfo,
-  ReqSsoUser
+  ReqSsoUser,
+  CaptchaInfo
 } from "./model/UserModel";
 import { MessageMode } from "/#/axios";
 import { ContentTypeEnum } from "/@/enums/HttpEnum";
@@ -14,6 +15,7 @@ import { ReqPage } from "/@/api/model/BaseModel";
 import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
 
 enum Api {
+  Captcha = "/captcha",
   Login = "/oauth2/accessToken",
   Logout = "/oauth2/user/revoke",
   GetUserInfo = "/oauth2/user/info",
@@ -28,6 +30,9 @@ enum Api {
   Tenants = "/oauth2/user/tenants"
 }
 
+export function getCaptcha() {
+  return defHttp.get<CaptchaInfo>({ url: Api.Captcha });
+}
 /**
  * @description: user login api
  */
