@@ -39,6 +39,7 @@
     "@zxcvbn-ts/core": "^2.2.1",
     "ant-design-vue": "^3.2.20",
     "axios": "^1.4.0",
+    "bootstrap": "^5.3.0",
     "codemirror": "^5.65.13",
     "cropperjs": "^1.5.13",
     "crypto-js": "^4.1.1",
