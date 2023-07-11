@@ -63,10 +63,10 @@
         tenants.value = userInfo.tenants;
         const tenant: TenantVo = tenants.value?.find((tenant) => tenant.id == userStore.getTenantId) as TenantVo;
         if (tenant) {
+          getTenant.id = tenant.id;
+          getTenant.name = tenant.name;
           imageSrc("/storage/file/" + tenant.logo, { errorMessageMode: "none" }).then((img) => {
-            getTenant.id = tenant.id;
-            getTenant.name = tenant.name;
-            getTenant.headImgUrl = tenant.logo ? (img ? img : "/resource/img/logo.png") : "";
+            getTenant.headImgUrl = img ? img : "/resource/img/logo.png";
           });
         }
       });

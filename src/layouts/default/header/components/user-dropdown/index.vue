@@ -36,20 +36,20 @@
 <script lang="ts">
   import { Dropdown, Menu } from "ant-design-vue";
   import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
-  import { computed, unref } from "vue";
+  import { onBeforeMount, reactive, toRaw, unref } from "vue";
   import { DOC_URL } from "/@/settings/SiteSetting";
   import { useUserStore } from "/@/store/modules/User";
   import { useHeaderSetting } from "/@/hooks/setting/UseHeaderSetting";
   import { useI18n } from "/@/hooks/web/UseI18n";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { useModal } from "/@/components/general/Modal";
-  import headerImg from "/@/assets/images/header.png";
   import { propTypes } from "/@/utils/PropTypes";
   import { openWindow } from "/@/utils";
   import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
   import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
   import { useGo } from "/@/hooks/web/UsePage";
-  import { imageUrl } from "/@/utils/FileUtils";
+  import { imageSrc } from "/@/utils/FileUtils";
+  import { sleep } from "/@/utils/Utils";
 
   type MenuEvent = "logout" | "doc" | "lock" | "changePwd" | "userInfo";
 
@@ -71,13 +71,22 @@
       const { t } = useI18n();
       const { getShowDoc, getUseLockPage } = useHeaderSetting();
       const userStore = useUserStore();
-      const getUserInfo = computed(() => {
-        const { nickname = "", headImgUrl, id, account } = userStore.getUserInfo || {};
-        return {
-          nickname: nickname ? nickname : account,
-          headImgUrl: headImgUrl ? imageUrl("/storage/file/" + headImgUrl) : headerImg,
-          id
-        };
+      const getUserInfo = reactive<{ nickname?: string; headImgUrl?: string; id?: string }>({
+        nickname: "",
+        headImgUrl: "",
+        id: ""
+      });
+      onBeforeMount(async () => {
+        let userInfo = toRaw(userStore.getUserInfo);
+        while (!userInfo) {
+          userInfo = toRaw(userStore.getUserInfo);
+          await sleep(100);
+        }
+        getUserInfo.id = userInfo.id;
+        getUserInfo.nickname = userInfo.nickname ? userInfo.nickname : userInfo.account;
+        imageSrc("/storage/file/" + userInfo.headImgUrl, { errorMessageMode: "none" }).then((img) => {
+          getUserInfo.headImgUrl = img ? img : "/resource/img/logo.png";
+        });
       });
       const [register, { openModal }] = useModal();
       const [registerPwd, { openModal: openPwdModal }] = useModal();
