@@ -1,10 +1,10 @@
 摸鱼低代码开发平台（前端）
 ======================================
-当前最新版本： 1.0.0
+当前最新版本： V1.1.0
 
 [![Author](https://img.shields.io/badge/Author-mfish-orange.svg)](http://www.mfish.com.cn)
 [![Blog](https://img.shields.io/badge/Blog-个人博客-yellow.svg)](http://www.mfish.com.cn)
-[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/mfish-qf/mfish-nocode-view/releases/tag/v1.0.0)
+[![Version](https://img.shields.io/badge/version-1.1.0-brightgreen.svg)](https://github.com/mfish-qf/mfish-nocode-view/releases/tag/v1.0.0)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/mfish-qf/mfish-nocode-view/blob/main/LICENSE)
 
 [![GitHub watches](https://img.shields.io/github/watchers/mfish-qf/mfish-nocode-view.svg?style=social&label=Watch)](https://github.com/mfish-qf/mfish-nocode-view)
