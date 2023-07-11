@@ -14,7 +14,7 @@
               {
                 icon: 'ant-design:info-circle-outlined',
                 onClick: handleQuery.bind(null, record),
-                auth: 'sys.log:query',
+                auth: 'sys:log:query',
                 tooltip: '日志详情'
               },
               {
@@ -25,7 +25,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
-                auth: 'sys.log.delete',
+                auth: 'sys:log:delete',
                 tooltip: '删除'
               }
             ]"
