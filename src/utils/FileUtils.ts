@@ -5,6 +5,7 @@ import { isString } from "/@/utils/Is";
 import { getToken } from "/@/utils/auth";
 import { defHttp } from "/@/utils/http/axios";
 import { useAppStore } from "/@/store/modules/App";
+import { RequestOptions } from "/#/axios";
 
 /**
  * @description: 文件通用类
@@ -66,11 +67,16 @@ export const imageUrl = (url) => {
 /**
  * 异步获取图片源
  * @param url
+ * @param option 请求参数
  */
-export const imageSrc = async (url) => {
+export const imageSrc = async (url, option?: RequestOptions) => {
   //isTransformResponse返回值不执行普通请求的结果处理
-  const img = await defHttp.get({ url, responseType: "blob" }, { isTransformResponse: false });
-  return URL.createObjectURL(img);
+  try {
+    const img = await defHttp.get({ url, responseType: "blob" }, { isTransformResponse: false, ...option });
+    return URL.createObjectURL(img);
+  } catch (ex) {
+    return "";
+  }
 };
 
 /**

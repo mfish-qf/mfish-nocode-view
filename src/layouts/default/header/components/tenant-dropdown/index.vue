@@ -24,16 +24,16 @@
 <script lang="ts">
   import { Dropdown, Menu as AMenu } from "ant-design-vue";
   import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
-  import { computed, onBeforeMount, ref } from "vue";
+  import { onBeforeMount, reactive, ref, toRaw } from "vue";
   import { useUserStore } from "/@/store/modules/User";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { propTypes } from "/@/utils/PropTypes";
   import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
-  import { imageUrl } from "/@/utils/FileUtils";
+  import { imageSrc } from "/@/utils/FileUtils";
   import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
   import { changeSsoTenant } from "/@/api/sys/SsoTenant";
   import { router } from "/@/router";
-  import { getUserInfo } from "/@/api/sys/User";
+  import { sleep } from "/@/utils/Utils";
 
   export default {
     name: "TenantDropdown",
@@ -49,22 +49,25 @@
       const { prefixCls } = useDesign("header-tenant-dropdown");
       const userStore = useUserStore();
       const tenants = ref<TenantVo[]>([]);
-      const getTenant = computed((): { name?: string; headImgUrl?: string; id?: string } => {
-        const tenant: TenantVo = tenants.value?.find((tenant) => tenant.id == userStore.getTenantId) as TenantVo;
-        return tenant
-          ? {
-              name: tenant.name,
-              headImgUrl: tenant.logo ? imageUrl("/storage/file/" + tenant.logo) : "",
-              id: tenant.id
-            }
-          : {};
+      const getTenant = reactive<{ name?: string; headImgUrl?: string; id?: string }>({
+        name: "",
+        headImgUrl: "",
+        id: ""
       });
       onBeforeMount(async () => {
-        if (userStore.getUserInfo) {
-          tenants.value = userStore.getUserInfo.tenants;
-        } else {
-          const userInfo = await getUserInfo();
-          tenants.value = userInfo.tenants;
+        let userInfo = toRaw(userStore.getUserInfo);
+        while (!userInfo) {
+          userInfo = toRaw(userStore.getUserInfo);
+          await sleep(100);
+        }
+        tenants.value = userInfo.tenants;
+        const tenant: TenantVo = tenants.value?.find((tenant) => tenant.id == userStore.getTenantId) as TenantVo;
+        if (tenant) {
+          imageSrc("/storage/file/" + tenant.logo, { errorMessageMode: "none" }).then((img) => {
+            getTenant.id = tenant.id;
+            getTenant.name = tenant.name;
+            getTenant.headImgUrl = tenant.logo ? (img ? img : "/resource/img/logo.png") : "";
+          });
         }
       });
 

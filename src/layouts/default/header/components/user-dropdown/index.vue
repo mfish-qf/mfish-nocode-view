@@ -72,9 +72,9 @@
       const { getShowDoc, getUseLockPage } = useHeaderSetting();
       const userStore = useUserStore();
       const getUserInfo = computed(() => {
-        const { nickname = "", headImgUrl, id } = userStore.getUserInfo || {};
+        const { nickname = "", headImgUrl, id, account } = userStore.getUserInfo || {};
         return {
-          nickname,
+          nickname: nickname ? nickname : account,
           headImgUrl: headImgUrl ? imageUrl("/storage/file/" + headImgUrl) : headerImg,
           id
         };

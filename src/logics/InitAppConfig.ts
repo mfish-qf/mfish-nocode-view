@@ -25,12 +25,11 @@ export async function initAppConfigStore() {
   setAppConfigStore().then();
 }
 
-
 // 初始化项目配置
 async function setAppConfigStore() {
   let projCfg: ProjectConfig;
   const sysConfig = await getSysConfig();
-  if (sysConfig) {
+  if (sysConfig && sysConfig.config != null) {
     projCfg = JSON.parse(sysConfig.config) as ProjectConfig;
   } else {
     projCfg = projectSetting;
@@ -45,8 +44,8 @@ export function changeAppConfig(projCfg: ProjectConfig) {
     colorWeak,
     grayMode,
     themeColor,
-    headerSetting: {bgColor: headerBgColor} = {},
-    menuSetting: {bgColor} = {}
+    headerSetting: { bgColor: headerBgColor } = {},
+    menuSetting: { bgColor } = {}
   } = projCfg;
   try {
     if (themeColor) {
