@@ -1,7 +1,7 @@
 <template>
   <Dropdown v-if="getTenant.id" placement="bottomLeft" :overlayClassName="`${prefixCls}-dropdown-overlay`">
     <span :class="[prefixCls, `${prefixCls}--${theme}`]" class="flex">
-      <img :class="`${prefixCls}__header`" :src="getTenant.headImgUrl" :alt="getTenant.name" />
+      <img :class="`${prefixCls}__header`" :src="tenantImg" :alt="getTenant.name" />
       <span :class="`${prefixCls}__info hidden md:block`">
         <span :class="`${prefixCls}__name`" class="truncate">
           <div style="font-weight: bold">租户：</div>
@@ -29,12 +29,11 @@
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { propTypes } from "/@/utils/PropTypes";
   import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
-  import { imageSrc } from "/@/utils/FileUtils";
+  import { setHeaderImg } from "/@/utils/FileUtils";
   import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
   import { changeSsoTenant } from "/@/api/sys/SsoTenant";
   import { router } from "/@/router";
   import { sleep } from "/@/utils/Utils";
-
   export default {
     name: "TenantDropdown",
     components: {
@@ -49,11 +48,11 @@
       const { prefixCls } = useDesign("header-tenant-dropdown");
       const userStore = useUserStore();
       const tenants = ref<TenantVo[]>([]);
-      const getTenant = reactive<{ name?: string; headImgUrl?: string; id?: string }>({
+      const getTenant = reactive<{ name?: string; id?: string }>({
         name: "",
-        headImgUrl: "",
         id: ""
       });
+      const tenantImg = ref("");
       onBeforeMount(async () => {
         let userInfo = toRaw(userStore.getUserInfo);
         while (!userInfo) {
@@ -65,9 +64,7 @@
         if (tenant) {
           getTenant.id = tenant.id;
           getTenant.name = tenant.name;
-          imageSrc("/storage/file/" + tenant.logo, { errorMessageMode: "none" }).then((img) => {
-            getTenant.headImgUrl = img ? img : "/resource/img/logo.png";
-          });
+          setHeaderImg(tenant.logo, tenantImg);
         }
       });
 
@@ -86,7 +83,8 @@
         prefixCls,
         getTenant,
         handleMenuClick,
-        tenants
+        tenants,
+        tenantImg
       };
     }
   };

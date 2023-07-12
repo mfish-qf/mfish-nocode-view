@@ -1,7 +1,7 @@
 <template>
   <Dropdown placement="bottomLeft" :overlayClassName="`${prefixCls}-dropdown-overlay`">
     <span :class="[prefixCls, `${prefixCls}--${theme}`]" class="flex">
-      <img :class="`${prefixCls}__header`" :src="getUserInfo.headImgUrl" />
+      <img :class="`${prefixCls}__header`" :src="userImg" />
       <span :class="`${prefixCls}__info hidden md:block`">
         <span :class="`${prefixCls}__name  `" class="truncate">
           {{ getUserInfo.nickname }}
@@ -36,7 +36,7 @@
 <script lang="ts">
   import { Dropdown, Menu } from "ant-design-vue";
   import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
-  import { onBeforeMount, reactive, toRaw, unref } from "vue";
+  import { onBeforeMount, reactive, ref, toRaw, unref } from "vue";
   import { DOC_URL } from "/@/settings/SiteSetting";
   import { useUserStore } from "/@/store/modules/User";
   import { useHeaderSetting } from "/@/hooks/setting/UseHeaderSetting";
@@ -48,7 +48,7 @@
   import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
   import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
   import { useGo } from "/@/hooks/web/UsePage";
-  import { imageSrc } from "/@/utils/FileUtils";
+  import { setHeaderImg } from "/@/utils/FileUtils";
   import { sleep } from "/@/utils/Utils";
 
   type MenuEvent = "logout" | "doc" | "lock" | "changePwd" | "userInfo";
@@ -71,11 +71,11 @@
       const { t } = useI18n();
       const { getShowDoc, getUseLockPage } = useHeaderSetting();
       const userStore = useUserStore();
-      const getUserInfo = reactive<{ nickname?: string; headImgUrl?: string; id?: string }>({
+      const getUserInfo = reactive<{ nickname?: string; id?: string }>({
         nickname: "",
-        headImgUrl: "",
         id: ""
       });
+      const userImg = ref("");
       onBeforeMount(async () => {
         let userInfo = toRaw(userStore.getUserInfo);
         while (!userInfo) {
@@ -84,9 +84,7 @@
         }
         getUserInfo.id = userInfo.id;
         getUserInfo.nickname = userInfo.nickname ? userInfo.nickname : userInfo.account;
-        imageSrc("/storage/file/" + userInfo.headImgUrl, { errorMessageMode: "none" }).then((img) => {
-          getUserInfo.headImgUrl = img ? img : "/resource/img/logo.png";
-        });
+        setHeaderImg(userInfo.headImgUrl, userImg);
       });
       const [register, { openModal }] = useModal();
       const [registerPwd, { openModal: openPwdModal }] = useModal();
@@ -138,7 +136,8 @@
         getShowDoc,
         register,
         getUseLockPage,
-        registerPwd
+        registerPwd,
+        userImg
       };
     }
   };

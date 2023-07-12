@@ -8,7 +8,7 @@
   >
     <div :class="`${prefixCls}__entry`">
       <div :class="`${prefixCls}__header`">
-        <img :src="avatar" :class="`${prefixCls}__header-img`" />
+        <img :src="avatar" :class="`${prefixCls}__header-img`" alt="head" />
         <p :class="`${prefixCls}__header-name`">
           {{ getRealName }}
         </p>
@@ -25,15 +25,14 @@
   </BasicModal>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from "vue";
+  import { defineComponent, computed, ref, onBeforeMount } from "vue";
   import { useI18n } from "/@/hooks/web/UseI18n";
   import { useDesign } from "/@/hooks/web/UseDesign";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal/index";
+  import { BasicModal, useModalInner } from "/@/components/general/Modal";
   import { BasicForm, useForm } from "/@/components/general/Form/index";
   import { useUserStore } from "/@/store/modules/User";
   import { useLockStore } from "/@/store/modules/Lock";
-  import headerImg from "/@/assets/images/header.png";
-  import { imageUrl } from "/@/utils/FileUtils";
+  import { setHeaderImg } from "/@/utils/FileUtils";
 
   export default defineComponent({
     name: "LockModal",
@@ -75,9 +74,10 @@
         await resetFields();
       }
 
-      const avatar = computed(() => {
+      const avatar = ref("");
+      onBeforeMount(() => {
         const imgUrl = userStore.getUserInfo?.headImgUrl;
-        return imgUrl ? imageUrl("/storage/file/" + imgUrl) : headerImg;
+        setHeaderImg(imgUrl, avatar);
       });
 
       return {

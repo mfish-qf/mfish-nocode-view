@@ -64,7 +64,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref, computed } from "vue";
+  import { ref, computed, onBeforeMount } from "vue";
   import { Input } from "ant-design-vue";
   import { useUserStore } from "/@/store/modules/User";
   import { useLockStore } from "/@/store/modules/Lock";
@@ -72,8 +72,7 @@
   import { useNow } from "./UseNow";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { LockOutlined } from "@ant-design/icons-vue";
-  import headerImg from "/@/assets/images/header.png";
-  import { imageUrl } from "/@/utils/FileUtils";
+  import { setHeaderImg } from "/@/utils/FileUtils";
 
   const InputPassword = Input.Password;
 
@@ -85,10 +84,12 @@
   const { prefixCls } = useDesign("lock-page");
   const lockStore = useLockStore();
   const userStore = useUserStore();
-  const avatar = computed(() => {
+  const avatar = ref("");
+  onBeforeMount(() => {
     const imgUrl = userStore.getUserInfo?.headImgUrl;
-    return imgUrl ? imageUrl("/storage/file/" + imgUrl) : headerImg;
+    setHeaderImg(imgUrl, avatar);
   });
+
   const { hour, month, minute, meridiem, year, day, week } = useNow(true);
 
   const { t } = useI18n();

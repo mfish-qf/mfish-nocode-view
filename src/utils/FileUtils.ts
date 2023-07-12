@@ -1,4 +1,4 @@
-import { h } from "vue";
+import { h, Ref } from "vue";
 import { Icon } from "/@/components/general/Icon";
 import { useGlobSetting } from "/@/hooks/setting";
 import { isString } from "/@/utils/Is";
@@ -6,6 +6,8 @@ import { getToken } from "/@/utils/auth";
 import { defHttp } from "/@/utils/http/axios";
 import { useAppStore } from "/@/store/modules/App";
 import { RequestOptions } from "/#/axios";
+import { getLocalFileUrl } from "/@/api/storage/SysFile";
+import logo from "/@/assets/images/logo.png";
 
 /**
  * @description: 文件通用类
@@ -156,4 +158,19 @@ export function calcSize(fileSize, level) {
       break;
   }
   return size.toFixed(2) + " " + unit;
+}
+
+/**
+ * 设置头像
+ * @param fileKey 图片key
+ * @param setImg 图片设置Ref对象
+ */
+export function setHeaderImg(fileKey, setImg: Ref) {
+  if (fileKey) {
+    imageSrc(getLocalFileUrl(fileKey), { errorMessageMode: "none" }).then((img) => {
+      setImg.value = img ? img : logo;
+    });
+  } else {
+    setImg.value = logo;
+  }
 }
