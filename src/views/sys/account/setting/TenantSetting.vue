@@ -6,7 +6,7 @@
           <ListItem>
             <ListItemMeta>
               <template #avatar>
-                <Avatar :src="imageUrl('/storage/file/' + item.logo)" :size="60" class="!mx-auto !block" />
+                <Avatar :src="imageUrl(getLocalFileUrl(item.logo))" :size="60" class="!mx-auto !block" />
               </template>
               <template #title>
                 <div style="display: flex">
@@ -60,6 +60,7 @@
   import SsoTenantModal from "/@/views/sys/sso-tenant/SsoTenantModal.vue";
   import { useModal } from "/@/components/general/Modal";
   import { getUserTenants } from "/@/api/sys/User";
+  import { getLocalFileUrl } from "/@/api/storage/SysFile";
 
   export default defineComponent({
     components: {
@@ -125,6 +126,6 @@
         handleSuccess
       };
     },
-    methods: { imageUrl }
+    methods: { getLocalFileUrl, imageUrl }
   });
 </script>

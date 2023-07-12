@@ -5,7 +5,7 @@
  */
 import { useGlobSetting } from "/@/hooks/setting";
 
-const {oauth2Url, oauth2RedirectUri, loginType} = useGlobSetting();
+const { oauth2Url, oauth2RedirectUri, loginType } = useGlobSetting();
 
 //oauth2配置
 export const oauth2Config = {

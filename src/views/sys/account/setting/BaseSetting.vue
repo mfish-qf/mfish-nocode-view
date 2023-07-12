@@ -27,17 +27,15 @@
 </template>
 <script lang="ts">
   import { Button, Row, Col } from "ant-design-vue";
-  import { computed, defineComponent, onMounted } from "vue";
+  import { defineComponent, onBeforeMount, onMounted, ref } from "vue";
   import { BasicForm, useForm } from "/@/components/general/Form/index";
   import { CollapseContainer } from "/@/components/general/Container";
   import { CropperAvatar } from "/@/components/general/Cropper";
-  import headerImg from "/@/assets/images/header.png";
   import { getUserInfo, updateMe } from "/@/api/sys/User";
   import { baseSetSchemas } from "./setting.data";
   import { useUserStore } from "/@/store/modules/User";
   import { uploadApi } from "/@/api/storage/Upload";
-  import { imageUrl } from "/@/utils/FileUtils";
-  import { getLocalFileUrl } from "/@/api/storage/SysFile";
+  import { setHeaderImg } from "/@/utils/FileUtils";
 
   export default defineComponent({
     components: {
@@ -64,9 +62,10 @@
         }
       });
 
-      let avatar = computed(() => {
+      const avatar = ref("");
+      onBeforeMount(() => {
         const imgUrl = userStore.getUserInfo?.headImgUrl;
-        return imgUrl ? imageUrl(getLocalFileUrl(imgUrl)) : headerImg;
+        setHeaderImg(imgUrl, avatar);
       });
 
       function updateAvatar({ data }) {
