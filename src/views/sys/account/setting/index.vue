@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted, ref } from "vue";
+  import { defineComponent, onBeforeMount, ref } from "vue";
   import { Tabs } from "ant-design-vue";
   import { settingList } from "./setting.data";
   import BaseSetting from "./BaseSetting.vue";
@@ -45,11 +45,11 @@
       let setting: { key: number; name: string; component: string }[];
       //如果是系统默认租户，但不是管理员，不显示租户配置信息
       if (isSuperTenant() && !isSuperAdmin()) {
-        setting = [...settingList.filter((set) => set.key === 1 || set.key === 2)];
+        setting = [...settingList.filter((set) => set.key <= 3)];
       } else {
         setting = [...settingList];
       }
-      onMounted(() => {
+      onBeforeMount(() => {
         const index = route.path.lastIndexOf("/");
         if (index) {
           const type = parseInt(route.path.substring(index + 1));
