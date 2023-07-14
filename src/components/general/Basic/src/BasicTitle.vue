@@ -28,7 +28,11 @@
      * Whether to default the text, that is, not bold
      * @default: false
      */
-    normal: { type: Boolean }
+    normal: { type: Boolean },
+    /**
+     * 字段加粗
+     */
+    bold: { type: Boolean }
   });
 
   const { prefixCls } = useDesign("basic-title");
@@ -36,7 +40,8 @@
   const getClass = computed(() => [
     prefixCls,
     { [`${prefixCls}-show-span`]: props.span && slots.default },
-    { [`${prefixCls}-normal`]: props.normal }
+    { [`${prefixCls}-normal`]: props.normal },
+    { [`${prefixCls}-bold`]: props.bold }
   ]);
 </script>
 <style lang="less" scoped>
@@ -56,6 +61,11 @@
     &-normal {
       font-size: 14px;
       font-weight: 500;
+    }
+
+    &-bold {
+      font-size: 14px;
+      font-weight: 700;
     }
 
     &-show-span::before {

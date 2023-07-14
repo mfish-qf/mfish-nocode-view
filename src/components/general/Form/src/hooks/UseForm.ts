@@ -15,13 +15,13 @@ export function useForm(props?: Props): UseFormReturnType {
   const loadedRef = ref<Nullable<boolean>>(false);
 
   async function getForm() {
+    await nextTick();
     const form = unref(formRef);
     if (!form) {
       error(
         "The form instance has not been obtained, please make sure that the form has been rendered when performing the form operation!"
       );
     }
-    await nextTick();
     return form as FormActionType;
   }
 
