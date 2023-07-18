@@ -66,7 +66,7 @@
         setting,
         tabBarStyle: {
           width: "110px",
-          height: "calc(100vh - 122px)"
+          height: "calc(100vh - 112px)"
         },
         tabType,
         tabChange
@@ -76,7 +76,7 @@
 </script>
 <style lang="less" scoped>
   .account-setting {
-    margin: 12px;
+    margin: 16px;
     background-color: @component-background;
 
     .base-title {
