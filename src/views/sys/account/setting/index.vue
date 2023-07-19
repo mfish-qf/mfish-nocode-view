@@ -41,10 +41,10 @@
     setup() {
       const route = useRoute();
       const tabType = ref<number>(1);
-      const { isSuperTenant, isSuperAdmin } = usePermission();
+      const { isSuperTenant, isSuperAdmin, isTenant } = usePermission();
       let setting: { key: number; name: string; component: string }[];
-      //如果是系统默认租户，但不是管理员，不显示租户配置信息
-      if (isSuperTenant() && !isSuperAdmin()) {
+      //如果不是租户或者是系统默认租户，但不是超级管理员，不显示租户配置信息
+      if (!isTenant() || (isSuperTenant() && !isSuperAdmin())) {
         setting = [...settingList.filter((set) => set.key <= 3)];
       } else {
         setting = [...settingList];

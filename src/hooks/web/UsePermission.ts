@@ -89,13 +89,36 @@ export function usePermission() {
     resume().then();
   }
 
+  /**
+   * 是否租户
+   */
+  function isTenant() {
+    return userStore.getTenantId !== undefined && userStore.getTenantId !== "";
+  }
+
+  /**
+   * 是否租户管理员
+   */
   function isSuperTenant() {
     return userStore.getTenantId === "1";
   }
 
+  /**
+   * 是否超级管理员
+   */
   function isSuperAdmin() {
     return userStore.getUserInfo?.id === "1";
   }
 
-  return { hasPermission, hasRole, hasTenant, refreshMenu, ALL_PERMISSION, SUPER_ROLE, isSuperTenant, isSuperAdmin };
+  return {
+    hasPermission,
+    hasRole,
+    hasTenant,
+    refreshMenu,
+    ALL_PERMISSION,
+    SUPER_ROLE,
+    isTenant,
+    isSuperTenant,
+    isSuperAdmin
+  };
 }
