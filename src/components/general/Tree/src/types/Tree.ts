@@ -1,4 +1,3 @@
-import type { ExtractPropTypes } from "vue";
 import type { TreeDataItem } from "ant-design-vue/es/tree/Tree";
 import { buildProps } from "/@/utils/Props";
 
@@ -131,8 +130,6 @@ export const treeProps = buildProps({
   },
   treeWrapperClassName: String
 });
-
-export type TreeProps = ExtractPropTypes<typeof treeProps>;
 
 export interface ContextMenuItem {
   label: string;

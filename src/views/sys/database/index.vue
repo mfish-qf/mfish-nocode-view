@@ -5,8 +5,8 @@
 -->
 <template>
   <PageWrapper contentFullHeight fixedHeight contentClass="flex">
-    <DBTree ref="dbTree" class="m-4" :showIcon="true" @select="changeSelect" @search="changeSearch" />
-    <ScrollContainer class="m-4">
+    <DBTree ref="dbTree" class="mt-3 ml-4 mb-4 mr-0" :showIcon="true" @select="changeSelect" @search="changeSearch" />
+    <ScrollContainer class="m-3">
       <a-breadcrumb separator=">">
         <a-breadcrumb-item v-for="(item, index) in breadList" :key="index">
           <Icon :icon="item.icon" />
@@ -58,7 +58,7 @@
   import { TreeItem } from "/@/components/general/Tree";
 
   export default {
-    name: "codeBuild",
+    name: "CodeBuild",
     components: {
       TableDetail,
       DBTree,
