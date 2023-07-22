@@ -31,15 +31,14 @@
     >
       <template #title="{ title, data }">
         <ADropdown :trigger="['contextmenu']">
-          <template v-if="data.isNew">
+          <template v-if="data.isEdit">
             <span
               ><AInput
                 ref="folderInputRef"
                 size="small"
                 v-model:value="inputValue"
                 style="width: calc(100% - 24px); margin-top: 1px"
-                @blur="saveFolder(data)"
-                @keydown.enter="saveFolder(data)"
+                @keydown.enter="saveFolder(data.key)"
             /></span>
           </template>
           <template v-else>
@@ -53,7 +52,7 @@
           <template #overlay>
             <AMenu @click="({ key: menuKey }) => onContextMenuClick(menuKey, data.key)">
               <AMenuItem key="1">新增子目录</AMenuItem>
-              <AMenuItem key="2">修改</AMenuItem>
+              <AMenuItem key="2">重命名</AMenuItem>
               <AMenuItem key="3">删除</AMenuItem>
             </AMenu>
           </template>
@@ -63,7 +62,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { PropType, ref, watch, nextTick, unref } from "vue";
+  import { PropType, ref, watch, unref } from "vue";
   import {
     Button,
     DirectoryTree as ADirectoryTree,
@@ -79,13 +78,18 @@
   import Icon from "/@/components/general/Icon/src/Icon.vue";
   import { buildUUID } from "/@/utils/Uuid";
   import { findNode } from "/@/utils/helper/TreeHelper";
+  import { useEventListener, useFocus } from "@vueuse/core";
 
   const props = defineProps({
     treeData: {
       type: Array as PropType<TreeDataItem[]>
     },
+    //节点key
     nodeKey: { type: String, default: "id" },
-    nodeTitle: { type: String, default: "id" }
+    //节点标题
+    nodeTitle: { type: String, default: "id" },
+    //顶部节点父节点key
+    topNodeParentKey: { type: String, default: "" }
   });
   const gData = ref<any[]>([]);
   const dataList: TreeProps["treeData"] = [];
@@ -94,12 +98,12 @@
   const newNode = () => {
     const key = buildUUID();
     return {
+      id: key,
+      parentId: props.topNodeParentKey,
       key,
       title: newFolder,
-      isNew: true,
-      isLeaf: false,
-      [props.nodeKey]: key,
-      [props.nodeTitle]: newFolder
+      isEdit: true,
+      isLeaf: false
     };
   };
   const inputValue = ref<string>("");
@@ -234,13 +238,16 @@
     return parentKey;
   };
   const addFolder = () => {
-    addChildFolder(undefined);
+    addChildFolder(props.topNodeParentKey);
   };
 
+  let inputBlur;
+  const { focused } = useFocus(folderInputRef, { initialValue: true });
   const addChildFolder = (treeKey) => {
     let node;
-    //treeKey为空添加到最顶级目录，不为空添加子目录
-    if (!treeKey) {
+    const child = newNode();
+    //treeKey等于顶级节点父节点ID，直接添加在最顶层
+    if (treeKey === props.topNodeParentKey) {
       node = gData.value;
     } else {
       const parent = findNode(gData.value, (node) => node.key === treeKey);
@@ -248,35 +255,70 @@
       if (!parent.children) {
         parent.children = [];
       }
+      child.parentId = parent.id;
       node = parent.children;
     }
     inputValue.value = newFolder;
-    const child = newNode();
     if (node) {
       node.push(child);
     }
-    expandedKeys.value = [treeKey];
-    autoExpandParent.value = true;
+    if (treeKey) {
+      expandedKeys.value = [treeKey];
+      autoExpandParent.value = true;
+    }
     selectedKeys.value = [child.key];
-    nextTick(() => {
-      unref(folderInputRef)?.focus();
+    focused.value = true;
+    //此处延迟注册事件防止第一次加入新增时候触发blur事件,时间太短不生效(暂时不知道原因)
+    setTimeout(() => {
+      inputBlur = useEventListener(folderInputRef, "blur", () => {
+        saveFolder(child.key);
+      });
+    }, 300);
+  };
+
+  const saveFolder = (key) => {
+    //注销事件监听
+    inputBlur();
+    const node = findNode(gData.value, (node) => node.key === key);
+    if (!node) return;
+    node.title = unref(inputValue);
+    node.isEdit = false;
+    dataList.push({ key: node.key, title: node.title });
+  };
+
+  const editFolder = (treeKey) => {
+    const node = findNode(gData.value, (node) => node.key === treeKey);
+    inputValue.value = node.title;
+    node.isEdit = true;
+    inputBlur = useEventListener(folderInputRef, "blur", () => {
+      saveFolder(node.key);
     });
   };
 
-  const saveFolder = (data) => {
-    debugger;
-    data.title = unref(inputValue);
-    data.isNew = false;
-    dataList.push({ key: data.id, title: data.title });
-    //回车不离开input设置展开会强制离开input
-    expandedKeys.value = [data.id];
-    autoExpandParent.value = true;
+  const deleteFolder = (treeKey) => {
+    const loop = (treeKey, nodes) => {
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].key === treeKey) {
+          nodes.splice(i, 1);
+          return;
+        }
+        if (nodes[i].children) {
+          loop(treeKey, nodes[i].children);
+        }
+      }
+    };
+    loop(treeKey, gData.value);
   };
-
   const onContextMenuClick = (menuKey: string, treeKey: string) => {
     switch (menuKey) {
       case "1":
         addChildFolder(treeKey);
+        break;
+      case "2":
+        editFolder(treeKey);
+        break;
+      case "3":
+        deleteFolder(treeKey);
         break;
     }
   };
