@@ -12,11 +12,12 @@ export interface ApiFolder extends BaseEntity<string> {
   name?: string;
   folderSort?: number;
   delFlag?: number;
+  children?: ApiFolder[];
 }
 
 export interface ReqApiFolder extends ReqPage {
- id?: string;
- name?: string;
+  id?: string;
+  name?: string;
 }
 
 export type ApiFolderPageModel = PageResult<ApiFolder>;

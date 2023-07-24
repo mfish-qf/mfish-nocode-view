@@ -6,7 +6,15 @@
 -->
 <template>
   <PageWrapper contentClass="flex">
-    <DragFolderTree class="w-1/4 xl:w-1/5" :tree-data="genData" node-title="menuName" />
+    <DragFolderTree
+      class="w-1/4 xl:w-1/5"
+      :tree-data="genData"
+      node-title="name"
+      @save:drag="dragTree"
+      @save:insert="insertTree"
+      @save:update="updateTree"
+      @save:delete="deleteTree"
+    />
     <BasicTable class="w-3/4 xl:w-4/5" @register="registerTable">
       <template #toolbar>
         <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:apiCategory:insert')">新增</a-button>
@@ -51,9 +59,14 @@
   import { DragFolderTree } from "/@/components/general/DragTree";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { onMounted, ref } from "vue";
-  import { getMenuList } from "/@/api/sys/Menu";
-  import { MenuListItem } from "/@/api/sys/model/MenuModel";
-  import { deleteApiFolder, exportApiFolder, getApiFolderList } from "/@/api/nocode/ApiFolder";
+  import {
+    deleteApiFolder,
+    dragApiFolder,
+    exportApiFolder,
+    getApiFolderList,
+    insertApiFolder,
+    updateApiFolder
+  } from "/@/api/nocode/ApiFolder";
   import { ApiFolder } from "/@/api/nocode/model/ApiFolderModel";
   export default {
     name: "ApiFolderManagement",
@@ -84,7 +97,7 @@
       });
       const genData = ref();
       onMounted(() => {
-        getMenuList().then((res) => {
+        getApiFolderList().then((res) => {
           genData.value = res;
         });
       });
@@ -134,6 +147,22 @@
         reload();
       }
 
+      function dragTree(_, nodes) {
+        debugger;
+        dragApiFolder(nodes).then();
+      }
+
+      function insertTree(node) {
+        insertApiFolder({ ...node, name: node.title }).then();
+      }
+
+      function updateTree(node) {
+        updateApiFolder({ ...node, name: node.title }).then();
+      }
+
+      function deleteTree(node) {
+        deleteApiFolder(node.id).then();
+      }
       return {
         registerTable,
         registerModal,
@@ -144,7 +173,11 @@
         handleSuccess,
         hasPermission,
         prefixCls,
-        genData
+        genData,
+        dragTree,
+        insertTree,
+        updateTree,
+        deleteTree
       };
     }
   };

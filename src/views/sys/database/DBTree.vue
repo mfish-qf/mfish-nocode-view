@@ -23,7 +23,7 @@
         <Tooltip title="新增数据库" v-if="hasPermission('sys:database:insert')">
           <Button type="text" size="small" @click="DBCreate">
             <template #icon>
-              <Icon icon="ion:add-outline" />
+              <Icon icon="ant-design:plus-circle-outlined" />
             </template>
           </Button>
         </Tooltip>

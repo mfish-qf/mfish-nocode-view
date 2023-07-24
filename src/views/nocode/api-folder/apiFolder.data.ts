@@ -9,6 +9,11 @@ import { FormSchema } from "/@/components/general/Table";
  */
 export const columns: BasicColumn[] = [
   {
+    title: "目录名称",
+    dataIndex: "name",
+    width: 120
+  },
+  {
     title: "父节点",
     dataIndex: "parentId",
     width: 120
@@ -19,20 +24,10 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "目录名称",
-    dataIndex: "name",
-    width: 120
-  },
-  {
     title: "文件夹排序",
     dataIndex: "folderSort",
     width: 120
-  },
-  {
-    title: "删除标签",
-    dataIndex: "delFlag",
-    width: 120
-  },
+  }
 ];
 export const searchFormSchema: FormSchema[] = [
   {
@@ -46,7 +41,7 @@ export const searchFormSchema: FormSchema[] = [
     label: "目录名称",
     component: "Input",
     colProps: { lg: 4, md: 5 }
-  },
+  }
 ];
 export const apiFolderFormSchema: FormSchema[] = [
   {
@@ -58,26 +53,26 @@ export const apiFolderFormSchema: FormSchema[] = [
   {
     field: "parentId",
     label: "父节点",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "tenantId",
     label: "租户ID",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "name",
     label: "目录名称",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "folderSort",
     label: "文件夹排序",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "delFlag",
     label: "删除标签",
-    component: "Input",
-  },
+    component: "Input"
+  }
 ];
