@@ -1,5 +1,5 @@
 import { defineConfig } from "unocss";
-import { primaryColor } from "./build/config/themeConfig";
+import { primaryColor } from "./build/config/ThemeConfig";
 
 export default defineConfig({
   rules: [

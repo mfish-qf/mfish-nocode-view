@@ -86,7 +86,7 @@
       async function handleSubmit() {
         let values = await validate();
         if (props.orgId == undefined || props.orgId === "") {
-          createMessage.error("错误:请先选择组织树");
+          createMessage.error("错误:请先选择用户所属组织");
           return;
         }
         bindUserOrg({ orgId: props.orgId, userId: values.userId }).then(() => {
