@@ -55,24 +55,24 @@
           </template>
           <template #overlay>
             <AMenu @click="({ key: menuKey }) => onContextMenuClick(menuKey, data.key)">
-              <AMenuItem key="1">
+              <AMenu.Item key="1">
                 <template #icon>
                   <Icon icon="ant-design:sisternode-outlined" />
                 </template>
                 新增子目录
-              </AMenuItem>
-              <AMenuItem key="2">
+              </AMenu.Item>
+              <AMenu.Item key="2">
                 <template #icon>
                   <Icon icon="ant-design:tool-outlined" />
                 </template>
                 重命名
-              </AMenuItem>
-              <AMenuItem key="3">
+              </AMenu.Item>
+              <AMenu.Item key="3">
                 <template #icon>
                   <Icon icon="ant-design:delete-outlined" />
                 </template>
                 删除
-              </AMenuItem>
+              </AMenu.Item>
             </AMenu>
           </template>
         </ADropdown>
@@ -81,16 +81,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { PropType, ref, watch, unref, toRaw } from "vue";
-  import {
-    Button,
-    DirectoryTree as ADirectoryTree,
-    Tooltip,
-    Input as AInput,
-    Dropdown as ADropdown,
-    Menu as AMenu,
-    MenuItem as AMenuItem
-  } from "ant-design-vue";
+  import { PropType, ref, watch, unref } from "vue";
+  import { Button, Tree, Tooltip, Input as AInput, Dropdown as ADropdown, Menu as AMenu } from "ant-design-vue";
   import type { AntTreeNodeDropEvent, TreeProps } from "ant-design-vue/es/tree";
   import { TreeDataItem } from "ant-design-vue/es/tree/Tree";
   import TreeHeader from "/@/components/general/Tree/src/components/TreeHeader.vue";
@@ -98,6 +90,7 @@
   import { buildUUID } from "/@/utils/Uuid";
   import { findNode, findNodeAll } from "/@/utils/helper/TreeHelper";
   import { useEventListener, useFocus } from "@vueuse/core";
+  const ADirectoryTree = Tree.DirectoryTree;
 
   const props = defineProps({
     treeData: {

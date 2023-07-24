@@ -147,7 +147,8 @@
         reload();
       }
 
-      function dragTree(nodes) {
+      function dragTree(_, nodes) {
+        debugger;
         dragApiFolder(nodes).then();
       }
 
