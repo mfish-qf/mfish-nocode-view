@@ -368,9 +368,9 @@
 
           const titleDom = isHighlight ? (
             <span class={unref(getBindValues)?.blockNode ? `${bem("content")}` : ""}>
-              <span>{title.substr(0, searchIdx)}</span>
+              <span>{title.substring(0, searchIdx)}</span>
               <span style={highlightStyle}>{searchText}</span>
-              <span>{title.substr(searchIdx + (searchText as string).length)}</span>
+              <span>{title.substring(searchIdx + (searchText as string).length)}</span>
             </span>
           ) : (
             title
