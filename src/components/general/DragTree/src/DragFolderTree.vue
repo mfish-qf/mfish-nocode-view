@@ -10,7 +10,7 @@
         <Tooltip title="新增目录">
           <Button type="text" size="small" @click="addFolder()">
             <template #icon>
-              <Icon icon="ion:add-outline" />
+              <Icon icon="ant-design:folder-add-outlined" />
             </template>
           </Button>
         </Tooltip>
@@ -18,7 +18,7 @@
     </TreeHeader>
     <ADirectoryTree
       class="draggable-tree"
-      draggable
+      :draggable="draggable"
       block-node
       :tree-data="gData"
       @drop="onDrop"
@@ -29,6 +29,10 @@
       :auto-expand-parent="autoExpandParent"
       @right-click="onRightClick"
     >
+      <template #icon="{ key }">
+        <Icon v-if="expandedKeys.includes(key)" icon="ant-design:folder-open-outlined" />
+        <Icon v-else icon="ant-design:folder-outlined" />
+      </template>
       <template #title="{ title, data }">
         <ADropdown :trigger="['contextmenu']">
           <template v-if="data.isEdit">
@@ -51,9 +55,24 @@
           </template>
           <template #overlay>
             <AMenu @click="({ key: menuKey }) => onContextMenuClick(menuKey, data.key)">
-              <AMenuItem key="1">新增子目录</AMenuItem>
-              <AMenuItem key="2">重命名</AMenuItem>
-              <AMenuItem key="3">删除</AMenuItem>
+              <AMenuItem key="1">
+                <template #icon>
+                  <Icon icon="ant-design:sisternode-outlined" />
+                </template>
+                新增子目录
+              </AMenuItem>
+              <AMenuItem key="2">
+                <template #icon>
+                  <Icon icon="ant-design:tool-outlined" />
+                </template>
+                重命名
+              </AMenuItem>
+              <AMenuItem key="3">
+                <template #icon>
+                  <Icon icon="ant-design:delete-outlined" />
+                </template>
+                删除
+              </AMenuItem>
             </AMenu>
           </template>
         </ADropdown>
@@ -62,7 +81,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { PropType, ref, watch, unref } from "vue";
+  import { PropType, ref, watch, unref, toRaw } from "vue";
   import {
     Button,
     DirectoryTree as ADirectoryTree,
@@ -77,7 +96,7 @@
   import TreeHeader from "/@/components/general/Tree/src/components/TreeHeader.vue";
   import Icon from "/@/components/general/Icon/src/Icon.vue";
   import { buildUUID } from "/@/utils/Uuid";
-  import { findNode } from "/@/utils/helper/TreeHelper";
+  import { findNode, findNodeAll } from "/@/utils/helper/TreeHelper";
   import { useEventListener, useFocus } from "@vueuse/core";
 
   const props = defineProps({
@@ -91,6 +110,8 @@
     //顶部节点父节点key
     topNodeParentKey: { type: String, default: "" }
   });
+  const emit = defineEmits(["select", "expand", "save:insert", "save:update", "save:delete", "save:drag"]);
+  const draggable = ref<boolean>(true);
   const gData = ref<any[]>([]);
   const dataList: TreeProps["treeData"] = [];
   const folderInputRef = ref<Nullable<HTMLElement>>(null);
@@ -103,7 +124,7 @@
       key,
       title: newFolder,
       isEdit: true,
-      isLeaf: false
+      isLeaf: true
     };
   };
   const inputValue = ref<string>("");
@@ -121,13 +142,15 @@
 
   const initData = (nodes: any[]) => {
     for (const node of nodes) {
+      let isLeaf = true;
       if (node.children && node.children.length > 0) {
+        isLeaf = false;
         initData(node.children);
       }
       dataList.push({ key: node[props.nodeKey], title: node[props.nodeTitle] });
       node["key"] = node[props.nodeKey];
       node["title"] = node[props.nodeTitle];
-      node["isLeaf"] = false;
+      node["isLeaf"] = isLeaf;
     }
   };
 
@@ -141,9 +164,11 @@
   const onExpand = (keys: string[]) => {
     expandedKeys.value = keys;
     autoExpandParent.value = false;
+    emit("expand", keys);
   };
   const onSelect = (keys: string[]) => {
     selectedKeys.value = keys;
+    emit("select", keys);
   };
   watch(searchValue, (value) => {
     if (value) {
@@ -158,6 +183,7 @@
     } else {
       expandedKeys.value = [];
     }
+    emit("expand", expandedKeys.value);
     autoExpandParent.value = true;
   });
   function handleSearch(value: string) {
@@ -166,6 +192,7 @@
 
   const onRightClick = (event) => {
     selectedKeys.value = [event.node.key];
+    emit("select", selectedKeys.value);
   };
   const onDrop = (info: AntTreeNodeDropEvent) => {
     console.log(info, "onDrop");
@@ -192,6 +219,9 @@
       dragObj = item;
     });
     let dropObj;
+    let oldPId;
+    let expandChange = false;
+    //调整顺序或拖出父节点
     if (info.dropToGap) {
       let ar: TreeProps["treeData"] = [];
       let i = 0;
@@ -200,6 +230,7 @@
         i = index;
         dropObj = item;
       });
+      oldPId = dragObj.parentId;
       dragObj.parentId = dropObj.parentId;
       if (dropPosition === -1) {
         ar.splice(i, 0, dragObj);
@@ -207,17 +238,44 @@
         ar.splice(i + 1, 0, dragObj);
       }
     } else {
-      // Drop on the content
+      //拖为子节点
+      oldPId = dragObj.parentId;
       loop(data, dropKey, (item) => {
         dropObj = item;
         item.children = item.children || [];
-        /// where to insert 示例添加到头部，可以是随意位置
         item.children.unshift(dragObj);
         dragObj.parentId = dropObj.id;
+        dropObj.isLeaf = false;
       });
+      expandedKeys.value?.push(dropObj.key);
+      expandChange = true;
     }
-    console.log(dropObj, "dropObj");
+    if (parentIconChange(oldPId) || expandChange) {
+      emit("expand", expandedKeys.value);
+    }
+    selectedKeys.value = [dragObj.key];
+    emit("select", selectedKeys.value);
     gData.value = data;
+    emit("save:drag", dragObj, getChangeData(dragObj.parentId));
+  };
+
+  /**
+   * 原父节点样式变化
+   * @param oldPId 父ID
+   */
+  const parentIconChange = (oldPId) => {
+    const pNode = findNode(gData.value, (node) => node.key === oldPId);
+    if (pNode) {
+      pNode.isLeaf = !(pNode.children && pNode.children.length > 0);
+      if (pNode.isLeaf) {
+        expandedKeys.value = expandedKeys.value.filter((item) => item !== oldPId);
+        return true;
+      }
+    }
+    return false;
+  };
+  const getChangeData = (pId) => {
+    return findNodeAll(gData.value, (node) => node.parentId === pId);
   };
 
   const getParentKey = (key: string | number, tree: TreeProps["treeData"]): string | number | undefined => {
@@ -264,10 +322,13 @@
     }
     if (treeKey) {
       expandedKeys.value = [treeKey];
+      emit("expand", expandedKeys.value);
       autoExpandParent.value = true;
     }
     selectedKeys.value = [child.key];
+    emit("select", selectedKeys.value);
     focused.value = true;
+    draggable.value = false;
     //此处延迟注册事件防止第一次加入新增时候触发blur事件,时间太短不生效(暂时不知道原因)
     setTimeout(() => {
       inputBlur = useEventListener(folderInputRef, "blur", () => {
@@ -277,13 +338,24 @@
   };
 
   const saveFolder = (key) => {
-    //注销事件监听
-    inputBlur();
-    const node = findNode(gData.value, (node) => node.key === key);
-    if (!node) return;
-    node.title = unref(inputValue);
-    node.isEdit = false;
-    dataList.push({ key: node.key, title: node.title });
+    try {
+      //注销事件监听
+      inputBlur();
+      const node = findNode(gData.value, (node) => node.key === key);
+      if (!node) return;
+      node.title = unref(inputValue);
+      node.isEdit = false;
+      const data = dataList.find((data) => data.key === key);
+      if (data) {
+        emit("save:update", { ...node });
+        data.title = node.title;
+      } else {
+        emit("save:insert", { ...node });
+        dataList.push({ key: node.key, title: node.title });
+      }
+    } finally {
+      draggable.value = true;
+    }
   };
 
   const editFolder = (treeKey) => {
@@ -299,6 +371,7 @@
     const loop = (treeKey, nodes) => {
       for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].key === treeKey) {
+          emit("save:delete", nodes[i]);
           nodes.splice(i, 1);
           return;
         }
@@ -323,4 +396,3 @@
     }
   };
 </script>
-<style scoped lang="less"></style>
