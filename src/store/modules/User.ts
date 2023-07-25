@@ -50,7 +50,7 @@ export const useUserStore = defineStore({
       return this.userInfo;
     },
     getTenantId(): Nullable<string> {
-      return this.tenantId || getAuthCache<string>(TENANT_ID_KEY);
+      return this.tenantId || getAuthCache<string>(TENANT_ID_KEY + this.getToken);
     },
     getToken(): string {
       return this.token || getAuthCache<string>(TOKEN_KEY);
@@ -76,9 +76,9 @@ export const useUserStore = defineStore({
       this.token = info ? info : ""; // for null or undefined value
       setAuthCache(TOKEN_KEY, info);
     },
-    setTenantId(id: string) {
-      this.tenantId = id;
-      setAuthCache(TENANT_ID_KEY, id);
+    setTenantId(id: string | undefined) {
+      this.tenantId = id ? id : "";
+      setAuthCache(TENANT_ID_KEY + this.getToken, id);
     },
     setRefreshToken(refreshToken: string | undefined) {
       this.refreshToken = refreshToken ? refreshToken : "";
@@ -157,10 +157,10 @@ export const useUserStore = defineStore({
         this.setRoleInfoList([]);
         this.setRoleList(new Set<string>());
       }
+      this.setUserInfo(userInfo);
       if (this.getTenantId === undefined && tenants?.length > 0 && tenants[0].id) {
         this.setTenantId(tenants[0].id);
       }
-      this.setUserInfo(userInfo);
       return userInfo;
     },
     /**
@@ -175,6 +175,7 @@ export const useUserStore = defineStore({
             this.setRefreshToken(undefined);
             this.setSessionTimeout(false);
             this.setUserInfo(null);
+            this.setTenantId(undefined);
             clearAuthCache(true);
             this.setIsLogout(true);
             await router.push(PageEnum.BASE_LOGIN);

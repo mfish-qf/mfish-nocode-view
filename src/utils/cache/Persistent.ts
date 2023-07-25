@@ -49,16 +49,16 @@ function initPersistentMemory() {
 }
 
 export class Persistent {
-  static getLocal<T>(key: LocalKeys) {
+  static getLocal<T>(key: LocalKeys | string) {
     return localMemory.get(key)?.value as Nullable<T>;
   }
 
-  static setLocal(key: LocalKeys, value: LocalStore[LocalKeys], immediate = false): void {
+  static setLocal(key: LocalKeys | string, value: LocalStore[LocalKeys], immediate = false): void {
     localMemory.set(key, toRaw(value));
     immediate && ls.set(APP_LOCAL_CACHE_KEY, localMemory.getCache);
   }
 
-  static removeLocal(key: LocalKeys, immediate = false): void {
+  static removeLocal(key: LocalKeys | string, immediate = false): void {
     localMemory.remove(key);
     immediate && ls.set(APP_LOCAL_CACHE_KEY, localMemory.getCache);
   }
@@ -68,16 +68,16 @@ export class Persistent {
     immediate && ls.clear();
   }
 
-  static getSession<T>(key: SessionKeys) {
+  static getSession<T>(key: SessionKeys | string) {
     return sessionMemory.get(key)?.value as Nullable<T>;
   }
 
-  static setSession(key: SessionKeys, value: SessionStore[SessionKeys], immediate = false): void {
+  static setSession(key: SessionKeys | string, value: SessionStore[SessionKeys], immediate = false): void {
     sessionMemory.set(key, toRaw(value));
     immediate && ss.set(APP_SESSION_CACHE_KEY, sessionMemory.getCache);
   }
 
-  static removeSession(key: SessionKeys, immediate = false): void {
+  static removeSession(key: SessionKeys | string, immediate = false): void {
     sessionMemory.remove(key);
     immediate && ss.set(APP_SESSION_CACHE_KEY, sessionMemory.getCache);
   }
