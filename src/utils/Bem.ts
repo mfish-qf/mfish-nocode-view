@@ -33,9 +33,7 @@ export function buildBEM(name: string) {
       mods = el;
       el = "";
     }
-
     el = el ? `${name}__${el}` : name;
-
     return `${el}${genBem(el, mods)}`;
   };
 }

@@ -5,9 +5,9 @@
  @version: V1.1.0
 -->
 <template>
-  <PageWrapper contentClass="flex">
+  <PageWrapper contentClass="flex" contentFullHeight fixedHeight>
     <DragFolderTree
-      class="w-1/4 xl:w-1/5"
+      class="mt-3 mr-0 mb-3 ml-3 w-1/4 xl:w-1/5"
       :tree-data="genData"
       node-title="name"
       @save:drag="dragTree"
@@ -17,8 +17,8 @@
     />
     <BasicTable class="w-3/4 xl:w-4/5" @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:apiCategory:insert')">新增</a-button>
-        <a-button type="error" @click="handleExport" v-if="hasPermission('sys:apiCategory:export')">导出</a-button>
+        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:api:insert')">新增</a-button>
+        <a-button type="error" @click="handleExport" v-if="hasPermission('sys:api:export')">导出</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -27,7 +27,7 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                auth: 'sys:apiCategory:update',
+                auth: 'sys:api:update',
                 tooltip: '修改'
               },
               {
@@ -38,7 +38,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
-                auth: 'sys:apiCategory:delete',
+                auth: 'sys:api:delete',
                 tooltip: '删除'
               }
             ]"
@@ -148,7 +148,6 @@
       }
 
       function dragTree(_, nodes) {
-        debugger;
         dragApiFolder(nodes).then();
       }
 

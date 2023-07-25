@@ -4,9 +4,9 @@
  @date: 2023/7/18
 -->
 <template>
-  <div>
+  <div class="overflow-hidden bg-white">
     <TreeHeader title="目录" :search="true" :toolbar="true" @search="handleSearch" :expandAll="expandAll">
-      <template #headerTools>
+      <template #headerTools v-if="allowAdd">
         <Tooltip title="新增目录">
           <Button type="text" size="small" @click="addFolder()">
             <template #icon>
@@ -16,68 +16,70 @@
         </Tooltip>
       </template>
     </TreeHeader>
-    <ADirectoryTree
-      class="draggable-tree"
-      :draggable="draggable"
-      block-node
-      :tree-data="gData"
-      @drop="onDrop"
-      :expanded-keys="expandedKeys"
-      :selected-keys="selectedKeys"
-      @expand="onExpand"
-      @select="onSelect"
-      :auto-expand-parent="autoExpandParent"
-      @right-click="onRightClick"
-    >
-      <template #icon="{ key }">
-        <Icon v-if="expandedKeys.includes(key)" icon="ant-design:folder-open-outlined" />
-        <Icon v-else icon="ant-design:folder-outlined" />
-      </template>
-      <template #title="{ title, data }">
-        <ADropdown :trigger="['contextmenu']">
-          <template v-if="data.isEdit">
-            <span
-              ><AInput
-                ref="folderInputRef"
-                size="small"
-                v-model:value="inputValue"
-                style="width: calc(100% - 24px); margin-top: 1px"
-                @keydown.enter="saveFolder(data.key)"
-            /></span>
-          </template>
-          <template v-else>
-            <span v-if="searchValue !== '' && title.indexOf(searchValue) > -1">
-              {{ title.substring(0, title.indexOf(searchValue)) }}
-              <span style="font-weight: bold">{{ searchValue }}</span>
-              {{ title.substring(title.indexOf(searchValue) + searchValue.length) }}
-            </span>
-            <span v-else>{{ title }}</span>
-          </template>
-          <template #overlay>
-            <AMenu @click="({ key: menuKey }) => onContextMenuClick(menuKey, data.key)">
-              <AMenu.Item key="1">
-                <template #icon>
-                  <Icon icon="ant-design:sisternode-outlined" />
-                </template>
-                新增子目录
-              </AMenu.Item>
-              <AMenu.Item key="2">
-                <template #icon>
-                  <Icon icon="ant-design:tool-outlined" />
-                </template>
-                重命名
-              </AMenu.Item>
-              <AMenu.Item key="3">
-                <template #icon>
-                  <Icon icon="ant-design:delete-outlined" />
-                </template>
-                删除
-              </AMenu.Item>
-            </AMenu>
-          </template>
-        </ADropdown>
-      </template>
-    </ADirectoryTree>
+    <ScrollContainer>
+      <ADirectoryTree
+        class="draggable-tree"
+        :draggable="allowDrag && draggable"
+        block-node
+        :tree-data="gData"
+        @drop="onDrop"
+        :expanded-keys="expandedKeys"
+        :selected-keys="selectedKeys"
+        @expand="onExpand"
+        @select="onSelect"
+        :auto-expand-parent="autoExpandParent"
+        @right-click="onRightClick"
+      >
+        <template #icon="{ key }">
+          <Icon v-if="expandedKeys.includes(key)" icon="ant-design:folder-open-outlined" />
+          <Icon v-else icon="ant-design:folder-outlined" />
+        </template>
+        <template #title="{ title, data }">
+          <ADropdown :trigger="['contextmenu']">
+            <template v-if="data.isEdit">
+              <span
+                ><AInput
+                  ref="folderInputRef"
+                  size="small"
+                  v-model:value="inputValue"
+                  style="width: calc(100% - 24px); margin-top: 1px"
+                  @keydown.enter="saveFolder(data.key)"
+              /></span>
+            </template>
+            <template v-else>
+              <span v-if="searchValue !== '' && title.indexOf(searchValue) > -1">
+                {{ title.substring(0, title.indexOf(searchValue)) }}
+                <span style="font-weight: bold">{{ searchValue }}</span>
+                {{ title.substring(title.indexOf(searchValue) + searchValue.length) }}
+              </span>
+              <span v-else>{{ title }}</span>
+            </template>
+            <template #overlay>
+              <AMenu @click="({ key: menuKey }) => onContextMenuClick(menuKey, data.key)">
+                <AMenu.Item key="1" v-if="allowAdd">
+                  <template #icon>
+                    <Icon icon="ant-design:sisternode-outlined" />
+                  </template>
+                  新增子目录
+                </AMenu.Item>
+                <AMenu.Item key="2" v-if="allowEdit">
+                  <template #icon>
+                    <Icon icon="ant-design:tool-outlined" />
+                  </template>
+                  重命名
+                </AMenu.Item>
+                <AMenu.Item key="3" v-if="allowDelete">
+                  <template #icon>
+                    <Icon icon="ant-design:delete-outlined" />
+                  </template>
+                  删除
+                </AMenu.Item>
+              </AMenu>
+            </template>
+          </ADropdown>
+        </template>
+      </ADirectoryTree>
+    </ScrollContainer>
   </div>
 </template>
 <script lang="ts" setup>
@@ -89,7 +91,9 @@
   import Icon from "/@/components/general/Icon/src/Icon.vue";
   import { buildUUID } from "/@/utils/Uuid";
   import { findNode, findNodeAll } from "/@/utils/helper/TreeHelper";
-  import { useEventListener, useFocus } from "@vueuse/core";
+  import { useDebounceFn, useEventListener, useFocus } from "@vueuse/core";
+  import { ScrollContainer } from "/@/components/general/Container";
+  import "/@/components/general/Tree/style";
   const ADirectoryTree = Tree.DirectoryTree;
 
   const props = defineProps({
@@ -101,7 +105,11 @@
     //节点标题
     nodeTitle: { type: String, default: "id" },
     //顶部节点父节点key
-    topNodeParentKey: { type: String, default: "" }
+    topNodeParentKey: { type: String, default: "" },
+    allowDrag: { type: Boolean, default: true },
+    allowAdd: { type: Boolean, default: true },
+    allowEdit: { type: Boolean, default: true },
+    allowDelete: { type: Boolean, default: true }
   });
   const emit = defineEmits(["select", "expand", "save:insert", "save:update", "save:delete", "save:drag"]);
   const draggable = ref<boolean>(true);
@@ -288,13 +296,20 @@
     }
     return parentKey;
   };
-  const addFolder = () => {
-    addChildFolder(props.topNodeParentKey);
-  };
 
-  let inputBlur;
+  const addFolder = useDebounceFn(() => {
+    addChildFolder(props.topNodeParentKey);
+  }, 200);
+
   const { focused } = useFocus(folderInputRef, { initialValue: true });
+  const inputBlurs = new Map();
   const addChildFolder = (treeKey) => {
+    //判断是否存在未保存记录
+    if (inputBlurs.size > 0) {
+      for (const key of inputBlurs.keys()) {
+        saveFolder(key);
+      }
+    }
     let node;
     const child = newNode();
     //treeKey等于顶级节点父节点ID，直接添加在最顶层
@@ -307,6 +322,7 @@
         parent.children = [];
       }
       child.parentId = parent.id;
+      parent.isLeaf = false;
       node = parent.children;
     }
     inputValue.value = newFolder;
@@ -324,16 +340,17 @@
     draggable.value = false;
     //此处延迟注册事件防止第一次加入新增时候触发blur事件,时间太短不生效(暂时不知道原因)
     setTimeout(() => {
-      inputBlur = useEventListener(folderInputRef, "blur", () => {
-        saveFolder(child.key);
-      });
+      inputBlurs.set(
+        child.key,
+        useEventListener(folderInputRef, "blur", () => {
+          saveFolder(child.key);
+        })
+      );
     }, 300);
   };
 
   const saveFolder = (key) => {
     try {
-      //注销事件监听
-      inputBlur();
       const node = findNode(gData.value, (node) => node.key === key);
       if (!node) return;
       node.title = unref(inputValue);
@@ -348,16 +365,27 @@
       }
     } finally {
       draggable.value = true;
+      if (inputBlurs.has(key)) {
+        const blur = inputBlurs.get(key);
+        if (blur) {
+          inputBlurs.delete(key);
+          blur();
+        }
+      }
     }
   };
 
   const editFolder = (treeKey) => {
+    draggable.value = false;
     const node = findNode(gData.value, (node) => node.key === treeKey);
     inputValue.value = node.title;
     node.isEdit = true;
-    inputBlur = useEventListener(folderInputRef, "blur", () => {
-      saveFolder(node.key);
-    });
+    inputBlurs.set(
+      node.key,
+      useEventListener(folderInputRef, "blur", () => {
+        saveFolder(node.key);
+      })
+    );
   };
 
   const deleteFolder = (treeKey) => {
@@ -375,7 +403,7 @@
     };
     loop(treeKey, gData.value);
   };
-  const onContextMenuClick = (menuKey: string, treeKey: string) => {
+  const onContextMenuClick = useDebounceFn((menuKey: string, treeKey: string) => {
     switch (menuKey) {
       case "1":
         addChildFolder(treeKey);
@@ -387,5 +415,5 @@
         deleteFolder(treeKey);
         break;
     }
-  };
+  }, 200);
 </script>
