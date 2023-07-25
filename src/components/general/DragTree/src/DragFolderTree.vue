@@ -4,7 +4,7 @@
  @date: 2023/7/18
 -->
 <template>
-  <div class="overflow-hidden bg-white">
+  <div class="overflow-hidden bg-white" style="display: flex; flex-direction: column">
     <TreeHeader title="目录" :search="true" :toolbar="true" @search="handleSearch" :expandAll="expandAll">
       <template #headerTools v-if="allowAdd">
         <Tooltip title="新增目录">
