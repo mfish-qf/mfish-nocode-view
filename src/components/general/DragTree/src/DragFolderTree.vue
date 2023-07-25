@@ -83,7 +83,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { PropType, ref, watch, unref } from "vue";
+  import { PropType, ref, watch, unref, reactive } from "vue";
   import { Button, Tree, Tooltip, Input as AInput, Dropdown as ADropdown, Menu as AMenu } from "ant-design-vue";
   import type { AntTreeNodeDropEvent, TreeProps } from "ant-design-vue/es/tree";
   import { TreeDataItem } from "ant-design-vue/es/tree/Tree";
@@ -302,13 +302,11 @@
   }, 200);
 
   const { focused } = useFocus(folderInputRef, { initialValue: true });
-  const inputBlurs = new Map();
+  const inputBlur = reactive({ key: "", inputBlur: () => {} });
   const addChildFolder = (treeKey) => {
     //判断是否存在未保存记录
-    if (inputBlurs.size > 0) {
-      for (const key of inputBlurs.keys()) {
-        saveFolder(key);
-      }
+    if (inputBlur.key) {
+      saveFolder(inputBlur.key);
     }
     let node;
     const child = newNode();
@@ -340,12 +338,10 @@
     draggable.value = false;
     //此处延迟注册事件防止第一次加入新增时候触发blur事件,时间太短不生效(暂时不知道原因)
     setTimeout(() => {
-      inputBlurs.set(
-        child.key,
-        useEventListener(folderInputRef, "blur", () => {
-          saveFolder(child.key);
-        })
-      );
+      inputBlur.key = child.key;
+      inputBlur.inputBlur = useEventListener(folderInputRef, "blur", () => {
+        saveFolder(child.key);
+      });
     }, 300);
   };
 
@@ -365,12 +361,10 @@
       }
     } finally {
       draggable.value = true;
-      if (inputBlurs.has(key)) {
-        const blur = inputBlurs.get(key);
-        if (blur) {
-          inputBlurs.delete(key);
-          blur();
-        }
+      if (inputBlur.key) {
+        inputBlur.inputBlur();
+        inputBlur.key = "";
+        inputBlur.inputBlur = () => {};
       }
     }
   };
@@ -380,12 +374,10 @@
     const node = findNode(gData.value, (node) => node.key === treeKey);
     inputValue.value = node.title;
     node.isEdit = true;
-    inputBlurs.set(
-      node.key,
-      useEventListener(folderInputRef, "blur", () => {
-        saveFolder(node.key);
-      })
-    );
+    inputBlur.key = node.key;
+    inputBlur.inputBlur = useEventListener(folderInputRef, "blur", () => {
+      saveFolder(node.key);
+    });
   };
 
   const deleteFolder = (treeKey) => {
