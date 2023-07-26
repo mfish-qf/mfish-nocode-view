@@ -5,42 +5,50 @@
 -->
 <template>
   <PageWrapper contentFullHeight fixedHeight contentClass="flex" class="mt-3 ml-3 mr-3">
-    <DBTree ref="dbTree" class="mr-3" :showIcon="true" @select="changeSelect" @search="changeSearch" />
-    <ScrollContainer class="bg-white">
+    <DBTree
+      ref="dbTree"
+      class="xs:w-1/2 s:w-1/4 xl:w-1/5"
+      :showIcon="true"
+      @select="changeSelect"
+      @search="changeSearch"
+    />
+    <div class="bg-white xs:w-1/2 s:w-3/4 xl:w-4/5" :class="prefixCls" style="display: flex; flex-direction: column">
       <a-breadcrumb separator=">" class="m-3">
         <a-breadcrumb-item v-for="(item, index) in breadList" :key="index">
           <Icon :icon="item.icon" />
           <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
         </a-breadcrumb-item>
       </a-breadcrumb>
-      <a-row v-if="curNode?.dbName" class="ml-3">
-        <a-col
-          :xs="{ span: 24 }"
-          :md="{ span: 8 }"
-          :lg="{ span: 5 }"
-          v-for="(item, index) in getTableList"
-          :key="index"
-          :class="`${prefixCls}-card`"
-        >
-          <div :class="`${prefixCls}-card-item`" @click="setSelect(item.key)">
-            <Icon class="icon img" icon="ant-design:table-outlined" :color="color" />
-            <div :class="`${prefixCls}-card-item-info`">
-              <Tooltip :title="item.tableName">
-                {{ item.tableName }}
-              </Tooltip>
-              <Tooltip :title="item.tableComment">
-                {{ item.tableComment }}
-              </Tooltip>
+      <ScrollContainer v-if="curNode?.dbName">
+        <a-row class="ml-3">
+          <a-col
+            :xs="{ span: 24 }"
+            :md="{ span: 8 }"
+            :lg="{ span: 5 }"
+            v-for="(item, index) in getTableList"
+            :key="index"
+            :class="`${prefixCls}-card`"
+          >
+            <div :class="`${prefixCls}-card-item`" @click="setSelect(item.key)">
+              <Icon class="icon img" icon="ant-design:table-outlined" :color="color" />
+              <div :class="`${prefixCls}-card-item-info`">
+                <Tooltip :title="item.tableName">
+                  {{ item.tableName }}
+                </Tooltip>
+                <Tooltip :title="item.tableComment">
+                  {{ item.tableComment }}
+                </Tooltip>
+              </div>
             </div>
-          </div>
-        </a-col>
-      </a-row>
+          </a-col>
+        </a-row>
+      </ScrollContainer>
       <TableDetail v-else :cur-node="curNode">
         <template #[item]="data" v-for="item in Object.keys($slots)">
           <slot :name="item" v-bind="data || {}"></slot>
         </template>
       </TableDetail>
-    </ScrollContainer>
+    </div>
   </PageWrapper>
 </template>
 
@@ -171,6 +179,15 @@
     .@{prefix-cls}-card-item {
       background: #212121;
     }
+  }
+  [data-theme="dark"] {
+    .@{prefix-cls}{
+      border-left: 1px solid #303030
+    }
+  }
+  .@{prefix-cls} {
+    //padding: 0 0 0 5px;
+    border-left: 1px solid #d9d9d9;
   }
 
   .@{prefix-cls}-card {
