@@ -420,12 +420,16 @@
                 {extendSlots(slots)}
               </TreeHeader>
             )}
-            <Spin wrapperClassName={unref(props.treeWrapperClassName)} spinning={unref(props.loading)} tip='加载中...'>
-              <ScrollContainer style={scrollStyle} v-show={!unref(getNotFound)}>
+            <ScrollContainer style={scrollStyle} v-show={!unref(getNotFound)}>
+              <Spin
+                wrapperClassName={unref(props.treeWrapperClassName)}
+                spinning={unref(props.loading)}
+                tip='加载中...'
+              >
                 <Tree {...unref(getBindValues)} showIcon={false} treeData={treeData.value} />
-              </ScrollContainer>
-              <Empty v-show={unref(getNotFound)} image={Empty.PRESENTED_IMAGE_SIMPLE} class='!mt-4' />
-            </Spin>
+              </Spin>
+            </ScrollContainer>
+            <Empty v-show={unref(getNotFound)} image={Empty.PRESENTED_IMAGE_SIMPLE} class='!mt-4' />
           </div>
         );
       };

@@ -4,16 +4,16 @@
  @date: 2023/3/31 20:17
 -->
 <template>
-  <PageWrapper contentFullHeight fixedHeight contentClass="flex">
-    <DBTree ref="dbTree" class="mt-3 ml-4 mb-4 mr-0" :showIcon="true" @select="changeSelect" @search="changeSearch" />
-    <ScrollContainer class="m-3">
-      <a-breadcrumb separator=">">
+  <PageWrapper contentFullHeight fixedHeight contentClass="flex" class="mt-3 ml-3 mr-3">
+    <DBTree ref="dbTree" class="mr-3" :showIcon="true" @select="changeSelect" @search="changeSearch" />
+    <ScrollContainer class="bg-white">
+      <a-breadcrumb separator=">" class="m-3">
         <a-breadcrumb-item v-for="(item, index) in breadList" :key="index">
           <Icon :icon="item.icon" />
-          <a href="#" @click="setSelect(item.key)">{{ item.title }}</a>
+          <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
         </a-breadcrumb-item>
       </a-breadcrumb>
-      <a-row v-if="curNode?.dbName" class="mt-2">
+      <a-row v-if="curNode?.dbName" class="ml-3">
         <a-col
           :xs="{ span: 24 }"
           :md="{ span: 8 }"
@@ -35,7 +35,7 @@
           </div>
         </a-col>
       </a-row>
-      <TableDetail v-else :cur-node="curNode" class="mt-3">
+      <TableDetail v-else :cur-node="curNode">
         <template #[item]="data" v-for="item in Object.keys($slots)">
           <slot :name="item" v-bind="data || {}"></slot>
         </template>

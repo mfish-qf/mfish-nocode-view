@@ -3,12 +3,12 @@
  * @author: mfish
  * @date: 2022/10/9 17:37
  */
-import type { DropMenu } from '../components/general/Dropdown';
-import type { LocaleSetting, LocaleType } from '/#/config';
+import type { DropMenu } from "../components/general/Dropdown";
+import type { LocaleSetting, LocaleType } from "/#/config";
 
 export const LOCALE: { [key: string]: LocaleType } = {
-  ZH_CN: 'zh_CN',
-  EN_US: 'en'
+  ZH_CN: "zh_CN",
+  EN_US: "en"
 };
 
 export const localeSetting: LocaleSetting = {
@@ -24,11 +24,11 @@ export const localeSetting: LocaleSetting = {
 // locale list
 export const localeList: DropMenu[] = [
   {
-    text: '简体中文',
+    text: "简体中文",
     event: LOCALE.ZH_CN
   },
   {
-    text: 'English',
+    text: "English",
     event: LOCALE.EN_US
   }
 ];
