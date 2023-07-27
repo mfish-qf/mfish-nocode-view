@@ -5,150 +5,75 @@
  @version: V1.1.0
 -->
 <template>
-  <PageWrapper contentClass="flex">
+  <PageWrapper contentClass="flex" contentFullHeight fixedHeight class="mt-3 ml-3 mr-3">
     <DragFolderTree
-      class="w-1/4 xl:w-1/5"
+      class="mr-3"
       :tree-data="genData"
       node-title="name"
       @save:drag="dragTree"
       @save:insert="insertTree"
       @save:update="updateTree"
       @save:delete="deleteTree"
+      @select="selectFolder"
     />
-    <BasicTable class="w-3/4 xl:w-4/5" @register="registerTable">
-      <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:apiCategory:insert')">新增</a-button>
-        <a-button type="error" @click="handleExport" v-if="hasPermission('sys:apiCategory:export')">导出</a-button>
-      </template>
-      <template #bodyCell="{ column, record }">
-        <template v-if="column.key === 'action'">
-          <TableAction
-            :actions="[
-              {
-                icon: 'ant-design:edit-outlined',
-                onClick: handleEdit.bind(null, record),
-                auth: 'sys:apiCategory:update',
-                tooltip: '修改'
-              },
-              {
-                icon: 'ant-design:delete-outlined',
-                color: 'error',
-                popConfirm: {
-                  title: '是否确认删除',
-                  placement: 'left',
-                  confirm: handleDelete.bind(null, record)
-                },
-                auth: 'sys:apiCategory:delete',
-                tooltip: '删除'
-              }
-            ]"
-          />
-        </template>
-      </template>
-    </BasicTable>
-    <ApiFolderModal @register="registerModal" @success="handleSuccess" />
+    <ScrollContainer class="bg-white">
+      <a-breadcrumb separator=">" class="m-3">
+        <a-breadcrumb-item v-for="(item, index) in breadList" :key="index">
+          <Icon :icon="item.icon" />
+          <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
+        </a-breadcrumb-item>
+      </a-breadcrumb>
+    </ScrollContainer>
   </PageWrapper>
 </template>
 <script lang="ts">
   import { PageWrapper } from "/@/components/general/Page";
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { useModal } from "/@/components/general/Modal";
-  import ApiFolderModal from "./ApiFolderModal.vue";
-  import { columns, searchFormSchema } from "./apiFolder.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
+  import { Breadcrumb } from "ant-design-vue";
   import { DragFolderTree } from "/@/components/general/DragTree";
   import { useDesign } from "/@/hooks/web/UseDesign";
-  import { onMounted, ref } from "vue";
+  import { computed, onMounted, ref } from "vue";
   import {
     deleteApiFolder,
     dragApiFolder,
-    exportApiFolder,
     getApiFolderList,
     insertApiFolder,
     updateApiFolder
   } from "/@/api/nocode/ApiFolder";
-  import { ApiFolder } from "/@/api/nocode/model/ApiFolderModel";
+  import { Icon } from "/@/components/general/Icon";
+  import { TreeItem } from "/@/components/general/Tree";
+  import { ScrollContainer } from "/@/components/general/Container";
   export default {
     name: "ApiFolderManagement",
-    components: { PageWrapper, DragFolderTree, BasicTable, ApiFolderModal, TableAction },
+    components: {
+      ScrollContainer,
+      Icon,
+      PageWrapper,
+      DragFolderTree,
+      ABreadcrumb: Breadcrumb,
+      ABreadcrumbItem: Breadcrumb.Item
+    },
     setup() {
-      const { hasPermission } = usePermission();
-      const [registerModal, { openModal }] = useModal();
       const { prefixCls } = useDesign("no-code-api");
-      const [registerTable, { reload, getForm }] = useTable({
-        title: "API目录列表",
-        api: getApiFolderList,
-        columns,
-        formConfig: {
-          name: "search_form_item",
-          labelWidth: 100,
-          schemas: searchFormSchema,
-          autoSubmitOnEnter: true
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        actionColumn: {
-          width: 80,
-          title: "操作",
-          dataIndex: "action"
-        }
-      });
       const genData = ref();
+
       onMounted(() => {
         getApiFolderList().then((res) => {
           genData.value = res;
         });
       });
-      /**
-       * 新建
-       */
-      function handleCreate() {
-        openModal(true, {
-          isUpdate: false
+      const curNode = ref<TreeItem>();
+      const breadList = computed(() => {
+        const list: any[] = [];
+        list.push({
+          icon: "ant-design:folder-outline",
+          title: "aaaa",
+          key: "aaaa"
         });
-      }
 
-      /**
-       *  导出自动生成支持导出1000条可自行修改
-       */
-      function handleExport() {
-        exportApiFolder({ ...getForm().getFieldsValue(), pageNum: 1, pageSize: 1000 });
-      }
-
-      /**
-       * 修改
-       * @param
-       */
-      function handleEdit(apiFolder: ApiFolder) {
-        openModal(true, {
-          record: apiFolder,
-          isUpdate: true
-        });
-      }
-
-      /**
-       * 删除
-       * @param
-       */
-      function handleDelete(apiFolder: ApiFolder) {
-        if (apiFolder.id) {
-          deleteApiFolder(apiFolder.id).then(() => {
-            handleSuccess();
-          });
-        }
-      }
-
-      /**
-       * 处理完成
-       */
-      function handleSuccess() {
-        reload();
-      }
+        return list;
+      });
 
       function dragTree(_, nodes) {
-        debugger;
         dragApiFolder(nodes).then();
       }
 
@@ -163,21 +88,18 @@
       function deleteTree(node) {
         deleteApiFolder(node.id).then();
       }
+      function selectFolder(keys) {
+        console.log(keys, "keys");
+      }
       return {
-        registerTable,
-        registerModal,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleExport,
-        handleSuccess,
-        hasPermission,
         prefixCls,
         genData,
         dragTree,
         insertTree,
         updateTree,
-        deleteTree
+        deleteTree,
+        breadList,
+        selectFolder
       };
     }
   };

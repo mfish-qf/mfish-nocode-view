@@ -4,9 +4,8 @@
  @date: 2023/3/31 21:29
 -->
 <template>
-  <div>
+  <div class="mr-0 bg-white">
     <BasicTree
-      class="mr-0 overflow-hidden bg-white"
       title="数据库列表"
       toolbar
       search
@@ -209,5 +208,3 @@
     }
   };
 </script>
-
-<style scoped></style>

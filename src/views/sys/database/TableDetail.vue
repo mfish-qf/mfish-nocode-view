@@ -14,16 +14,16 @@
         <a-tab-pane key="2" tab="数据预览" />
       </a-tabs>
     </template>
-    <div class="pt-2 m-6 desc-wrap" v-if="curTab === '1'">
+    <div class="m-4 desc-wrap" v-if="curTab === '1'">
       <a-descriptions size="small">
-        <a-descriptions-item label="描述"
-          >{{ curNode?.tableComment ? curNode?.tableComment : "无" }}
+        <a-descriptions-item label="描述">
+          {{ curNode?.tableComment ? curNode?.tableComment : "无" }}
         </a-descriptions-item>
       </a-descriptions>
-      <a-descriptions title="字段信息" class="mt-4"></a-descriptions>
+      <a-descriptions title="字段信息" class="mt-3" />
       <BasicTable @register="registerFieldTable" />
     </div>
-    <div class="pt-2 m-6 desc-wrap" v-else>
+    <div v-else class="m-4">
       <BasicTable @register="registerDataTable" />
     </div>
   </PageWrapper>
