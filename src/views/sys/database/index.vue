@@ -6,7 +6,7 @@
 <template>
   <PageWrapper contentFullHeight fixedHeight contentClass="flex" class="mt-3 ml-3 mr-3">
     <DBTree
-      ref="dbTree"
+      ref="dbTreeRef"
       class="xs:w-1/2 s:w-1/4 xl:w-1/5"
       :showIcon="true"
       @select="changeSelect"
@@ -81,7 +81,7 @@
     },
     setup() {
       let tableList = ref<TableInfo[]>([]);
-      const dbTree = ref();
+      const dbTreeRef = ref();
       const { prefixCls } = useDesign("code-build");
       const appStore = useAppStore();
       const color = computed(() => appStore.getProjectConfig.themeColor);
@@ -103,7 +103,7 @@
             tableList.value = record.children;
             return;
           }
-          dbTree.value.buildTableTree(record.id).then((res) => {
+          dbTreeRef.value.buildTableTree(record.id).then((res) => {
             tableList.value = res;
           });
           return;
@@ -138,7 +138,8 @@
       });
 
       function setSelect(key) {
-        dbTree.value.setSelect(key);
+        console.log(dbTreeRef.value, "dbtree");
+        dbTreeRef.value.setSelect(key);
       }
 
       function changeSearch(search, value) {
@@ -164,7 +165,7 @@
         setSelect,
         changeSearch,
         getTableList,
-        dbTree,
+        dbTreeRef,
         prefixCls,
         color,
         curNode,
@@ -186,7 +187,6 @@
     }
   }
   .@{prefix-cls} {
-    //padding: 0 0 0 5px;
     border-left: 1px solid #d9d9d9;
   }
 

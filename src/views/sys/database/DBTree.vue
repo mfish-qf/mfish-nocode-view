@@ -20,11 +20,11 @@
     >
       <template #headerTools>
         <Tooltip title="新增数据库" v-if="hasPermission('sys:database:insert')">
-          <Button type="text" size="small" @click="DBCreate">
+          <AButton type="text" size="small" @click="DBCreate">
             <template #icon>
               <Icon icon="ant-design:plus-circle-outlined" />
             </template>
-          </Button>
+          </AButton>
         </Tooltip>
       </template>
     </BasicTree>
@@ -46,7 +46,7 @@
 
   export default {
     name: "DBTree",
-    components: { DbConnectModal, Icon, Tooltip, Button, BasicTree, Modal },
+    components: { DbConnectModal, Icon, Tooltip, AButton: Button, BasicTree, Modal },
     emits: ["select", "search"],
     setup(_, { emit }) {
       const { hasPermission } = usePermission();
