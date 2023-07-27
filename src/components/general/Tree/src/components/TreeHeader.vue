@@ -6,7 +6,14 @@
     </BasicTitle>
     <div class="flex items-center flex-1 cursor-pointer justify-self-stretch" v-if="search || toolbar">
       <div :class="getInputSearchCls" v-if="search">
-        <InputSearch :placeholder="t('common.searchText')" size="small" allowClear v-model:value="searchValue" />
+        <InputSearch
+          :placeholder="t('common.searchText')"
+          size="small"
+          allowClear
+          v-model:value="searchValue"
+          @search="enterSearch"
+          :enter-button="props.enterButton"
+        />
       </div>
       <div class="flex">
         <slot name="headerTools"></slot>
@@ -29,14 +36,14 @@
 </template>
 <script lang="ts" setup>
   import { computed, ref, watch, useSlots } from "vue";
-  import { Dropdown, Menu, MenuItem, MenuDivider, InputSearch } from "ant-design-vue";
+  import { Dropdown, Menu, MenuItem, MenuDivider, Input } from "ant-design-vue";
   import { Icon } from "/@/components/general/Icon";
   import { BasicTitle } from "/@/components/general/Basic";
   import { useI18n } from "/@/hooks/web/UseI18n";
   import { useDebounceFn } from "@vueuse/core";
   import { createBEM } from "/@/utils/Bem";
   import { ToolbarEnum } from "../types/Tree";
-
+  const InputSearch = Input.Search;
   const searchValue = ref("");
 
   const [bem] = createBEM("tree-header");
@@ -73,10 +80,13 @@
     expandAll: {
       type: Function,
       default: undefined
+    },
+    enterButton: {
+      type: Boolean,
+      default: false
     }
   } as const);
-  const emit = defineEmits(["strictly-change", "search"]);
-
+  const emit = defineEmits(["strictly-change", "search", "enterSearch"]);
   const slots = useSlots();
   const { t } = useI18n();
 
@@ -141,6 +151,9 @@
     }
   }
 
+  function enterSearch(value) {
+    emit("enterSearch", value);
+  }
   function emitChange(value?: string): void {
     emit("search", value);
   }

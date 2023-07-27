@@ -5,7 +5,14 @@
 -->
 <template>
   <div class="overflow-hidden bg-white" style="display: flex; flex-direction: column">
-    <TreeHeader title="目录" :search="true" :toolbar="true" @search="handleSearch" :expandAll="expandAll">
+    <TreeHeader
+      :title="props.showHeadTitle ? '目录' : ''"
+      :search="true"
+      :toolbar="true"
+      @search="handleSearch"
+      :expandAll="expandAll"
+      :enterButton="props.enterButton"
+    >
       <template #headerTools v-if="allowAdd">
         <Tooltip title="新增目录">
           <Button type="text" size="small" @click="addFolder()">
@@ -95,6 +102,7 @@
   import { useDebounceFn, useEventListener, useFocus } from "@vueuse/core";
   import { ScrollContainer } from "/@/components/general/Container";
   import "/@/components/general/Tree/style";
+  import { cloneDeep } from "lodash-es";
   const ADirectoryTree = Tree.DirectoryTree;
   const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
 
@@ -108,10 +116,12 @@
     nodeTitle: { type: String, default: "id" },
     //顶部节点父节点key
     topNodeParentKey: { type: String, default: "" },
+    showHeadTitle: { type: Boolean, default: true },
     allowDrag: { type: Boolean, default: true },
     allowAdd: { type: Boolean, default: true },
     allowEdit: { type: Boolean, default: true },
-    allowDelete: { type: Boolean, default: true }
+    allowDelete: { type: Boolean, default: true },
+    enterButton: { type: Boolean, default: false }
   });
   const emit = defineEmits(["select", "expand", "save:insert", "save:update", "save:delete", "save:drag"]);
   const draggable = ref<boolean>(true);
@@ -126,6 +136,7 @@
     title: string;
     isEdit: boolean;
     isLeaf: boolean;
+    parent?: NodeType;
   }
   const newNode = (): NodeType => {
     const key = buildUUID();
@@ -179,7 +190,7 @@
   };
   const onSelect = (keys: string[], e) => {
     selectedKeys.value = keys;
-    emit("select", e.node);
+    selectEmit(undefined, e);
   };
   watch(searchValue, (value) => {
     if (value) {
@@ -203,13 +214,46 @@
 
   const onRightClick = (event) => {
     selectedKeys.value = [event.node.key];
-    emit("select", event.node);
+    selectEmit(undefined, event);
   };
+
+  const buildFullNode = (node: NodeType, data: NodeType[]) => {
+    if (!node.parentId) return;
+    const pNode = findNode(data, (item) => item.id === node.parentId);
+    if (!pNode) return;
+    node.parent = pNode;
+    buildFullNode(pNode, data);
+  };
+
+  const selectEmit = (node?, e?) => {
+    if (!node) {
+      node = { ...e.node.dataRef };
+    }
+    buildFullNode(node, cloneDeep(gData.value));
+    emit("select", node);
+  };
+
+  function setSelect(key: string) {
+    if (key) {
+      const node = findNode(gData.value, (item) => item.id === key);
+      if (!node) return;
+      selectedKeys.value = [key];
+      selectEmit({ ...node });
+    }
+  }
+
+  /**
+   * 拖动处理逻辑
+   * @param info 拖动事件
+   */
   const onDrop = (info: AntTreeNodeDropEvent) => {
     const dropKey = info.node.key;
     const dragKey = info.dragNode.key;
     const dropPos = info.node.pos?.split("-") || [];
     const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1]);
+    const data: NodeType[] = gData.value ? cloneDeep(gData.value) : [];
+    let dragObj: NodeType | undefined;
+    let dropObj: NodeType | undefined;
     const loop = (data: TreeProps["treeData"], key: string | number, callback: any) => {
       data?.forEach((item, index) => {
         if (item.key === key) {
@@ -220,15 +264,35 @@
         }
       });
     };
-    const data = gData.value ? [...gData.value] : [];
-
-    let dragObj: NodeType | undefined;
+    /**
+     * 获取拖动后需要改变的数据列表
+     * @param pId 父ID
+     * @param data 数据
+     */
+    const getChangeData = (pId: string, data: NodeType[]) => {
+      return findNodeAll(data, (node) => node.parentId === pId);
+    };
+    /**
+     * 原父节点样式变化
+     * @param oldPId 父ID
+     * @param data 数据集
+     */
+    const parentIconChange = (oldPId: string, data: NodeType[]): boolean => {
+      const pNode = findNode(data, (node) => node.key === oldPId);
+      if (pNode) {
+        pNode.isLeaf = !(pNode.children && pNode.children.length > 0);
+        if (pNode.isLeaf) {
+          expandedKeys.value = expandedKeys.value.filter((item) => item !== oldPId);
+          return true;
+        }
+      }
+      return false;
+    };
     loop(data, dragKey, (item: NodeType, index: number, arr: TreeProps["treeData"]) => {
       arr?.splice(index, 1);
       dragObj = item;
     });
     if (!dragObj) return;
-    let dropObj: NodeType | undefined;
     let oldPId: string;
     let expandChange = false;
     //调整顺序或拖出父节点
@@ -259,44 +323,30 @@
         dragObj.parentId = dropObj.id;
         dropObj.isLeaf = false;
       });
-      if (dropObj) {
-        expandedKeys.value?.push(dropObj.key);
-        expandChange = true;
+      expandChange = !!dropObj;
+    }
+    emit("save:drag", dragObj, getChangeData(dragObj.parentId, data), (res: boolean) => {
+      //拖动成功更新节点位置
+      if (res) {
+        if (expandChange && dropObj) {
+          expandedKeys.value?.push(dropObj.key);
+        }
+        if (parentIconChange(oldPId, data) || expandChange) {
+          emit("expand", expandedKeys.value);
+        }
+        gData.value = data;
+        if (dragObj) {
+          setSelect(dragObj.key);
+        }
       }
-    }
-    if (parentIconChange(oldPId) || expandChange) {
-      emit("expand", expandedKeys.value);
-    }
-    selectedKeys.value = [dragObj.key];
-    emit("select", dragObj);
-    gData.value = data;
-    emit("save:drag", dragObj, getChangeData(dragObj.parentId));
-  };
-
-  /**
-   * 原父节点样式变化
-   * @param oldPId 父ID
-   */
-  const parentIconChange = (oldPId: string) => {
-    const pNode = findNode(gData.value, (node) => node.key === oldPId);
-    if (pNode) {
-      pNode.isLeaf = !(pNode.children && pNode.children.length > 0);
-      if (pNode.isLeaf) {
-        expandedKeys.value = expandedKeys.value.filter((item) => item !== oldPId);
-        return true;
-      }
-    }
-    return false;
-  };
-  const getChangeData = (pId: string) => {
-    return findNodeAll(gData.value, (node) => node.parentId === pId);
+    });
   };
 
   const getParentKey = (key: string | number, tree: TreeProps["treeData"]): string | number | undefined => {
     if (!tree) {
       return undefined;
     }
-    let parentKey;
+    let parentKey: string | number | undefined;
     for (let i = 0; i < tree.length; i++) {
       const node = tree[i];
       if (node.children) {
@@ -345,8 +395,7 @@
       emit("expand", expandedKeys.value);
       autoExpandParent.value = true;
     }
-    selectedKeys.value = [child.key];
-    emit("select", child);
+    setSelect(child.key);
     focused.value = true;
     draggable.value = false;
     //此处延迟注册事件防止第一次加入新增时候触发blur事件,时间太短不生效(暂时不知道原因)
@@ -365,13 +414,15 @@
       node.title = unref(inputValue);
       node.isEdit = false;
       const data = dataList.find((data) => data.key === key);
+      const newNode = { ...node };
       if (data) {
-        emit("save:update", { ...node });
+        emit("save:update", newNode);
         data.title = node.title;
       } else {
-        emit("save:insert", { ...node });
-        dataList.push({ key: node.key, title: node.title });
+        emit("save:insert", newNode);
+        dataList.push({ key: newNode.key, title: newNode.title });
       }
+      selectEmit(newNode);
     } finally {
       draggable.value = true;
       if (inputBlur.key) {
@@ -397,8 +448,11 @@
     const loop = (treeKey, nodes) => {
       for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].key === treeKey) {
-          emit("save:delete", nodes[i]);
-          nodes.splice(i, 1);
+          emit("save:delete", nodes[i], (res) => {
+            if (res) {
+              nodes.splice(i, 1);
+            }
+          });
           return;
         }
         if (nodes[i].children) {
@@ -421,4 +475,5 @@
         break;
     }
   }, 200);
+  defineExpose({ setSelect });
 </script>
