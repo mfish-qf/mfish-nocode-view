@@ -8,7 +8,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <BasicUpload :maxSize="10" @change="handleChange" :api="uploadApi" v-if="hasPermission('sys:file:upload')" />
+        <BasicUpload :maxSize="10" @change="handleChange" :api="uploadApi" v-auth="'sys:file:upload'" />
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -39,7 +39,6 @@
   import { useModal } from "/@/components/general/Modal";
   import SysFileModal from "./SysFileModal.vue";
   import { columns, searchFormSchema } from "./sysFile.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
   import { uploadApi } from "/@/api/storage/Upload";
   import BasicUpload from "/@/components/general/Upload/src/BasicUpload.vue";
   import { SysFile } from "/@/api/storage/model/SysFileModel";
@@ -48,7 +47,6 @@
     name: "SysFileManagement",
     components: { BasicUpload, BasicTable, SysFileModal, TableAction },
     setup() {
-      const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
       const [registerTable, { reload, insertTableDataRecord }] = useTable({
         title: "文件列表",
@@ -106,7 +104,6 @@
         handleEdit,
         handleDelete,
         handleSuccess,
-        hasPermission,
         uploadApi
       };
     }

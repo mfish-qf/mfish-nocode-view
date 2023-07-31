@@ -8,8 +8,8 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:ssoTenant:insert')">新增</a-button>
-        <a-button type="error" @click="handleExport" v-if="hasPermission('sys:ssoTenant:export')">导出</a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:ssoTenant:insert'">新增</a-button>
+        <a-button type="error" @click="handleExport" v-auth="'sys:ssoTenant:export'">导出</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -87,7 +87,6 @@
   import { useModal } from "/@/components/general/Modal";
   import SsoTenantModal from "./SsoTenantModal.vue";
   import { columns, searchFormSchema } from "./ssoTenant.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
   import { SsoTenant } from "/@/api/sys/model/SsoTenantModel";
   import { Tag } from "ant-design-vue";
   import { onBeforeMount, ref } from "vue";
@@ -98,7 +97,6 @@
     name: "SsoTenantManagement",
     components: { Tag, BasicTable, SsoTenantModal, TableAction },
     setup() {
-      const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
       const [registerTable, { reload, getForm }] = useTable({
         title: "租户信息表列表",
@@ -208,7 +206,6 @@
         handleDelete,
         handleExport,
         handleSuccess,
-        hasPermission,
         corpSize,
         corpYears,
         trade,

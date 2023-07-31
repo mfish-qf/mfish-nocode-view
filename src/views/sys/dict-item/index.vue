@@ -7,7 +7,7 @@
   <PageWrapper :title="`字典${dictCode}`" @back="goBack">
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:dict:insert')">新增字典项 </a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:dict:insert'">新增字典项 </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -45,7 +45,6 @@
   import { useModal } from "/@/components/general/Modal";
   import DictItemModal from "./DictItemModal.vue";
   import { columns, searchFormSchema } from "./dictItem.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
   import { useGo } from "/@/hooks/web/UsePage";
   import { useTabs } from "/@/hooks/web/UseTabs";
 
@@ -53,7 +52,6 @@
     name: "DictItemManagement",
     components: { BasicTable, DictItemModal, TableAction, PageWrapper },
     setup() {
-      const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
       const go = useGo();
       const route = useRoute();
@@ -118,7 +116,6 @@
         handleEdit,
         handleDelete,
         handleSuccess,
-        hasPermission,
         dictCode,
         goBack
       };

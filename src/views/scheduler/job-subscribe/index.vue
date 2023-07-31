@@ -7,7 +7,7 @@
 <template>
   <BasicTable @register="registerTable">
     <template #toolbar>
-      <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:job:insert')">新增策略 </a-button>
+      <a-button type="primary" @click="handleCreate" v-auth="'sys:job:insert'">新增策略</a-button>
     </template>
     <template #bodyCell="{ column, record }">
       <template v-if="column.key === 'action'">
@@ -34,7 +34,6 @@
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { getJobSubscribeById } from "/@/api/scheduler/JobSubscribe";
   import { columns } from "./jobSubscribe.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
   import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
   import { buildUUID } from "/@/utils/Uuid";
 
@@ -45,7 +44,6 @@
       jobId: { type: String, default: "" }
     },
     setup(props) {
-      const { hasPermission } = usePermission();
       const [registerTable, { reload, insertTableDataRecord, deleteTableDataRecord, setTableData, getDataSource }] =
         useTable({
           title: "触发策略列表",
@@ -102,7 +100,6 @@
         handleCreate,
         handleDelete,
         handleSuccess,
-        hasPermission,
         getValue
       };
     }

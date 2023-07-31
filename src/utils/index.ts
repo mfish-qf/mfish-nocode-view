@@ -7,8 +7,7 @@ import { App, Plugin, unref } from "vue";
 import { isObject } from "/@/utils/Is";
 import type { RouteLocationNormalized, RouteRecordNormalized } from "vue-router";
 
-export const noop = () => {
-};
+export const noop = () => {};
 //组件安装
 export const withInstall = <T>(component: T, alias?: string) => {
   const comp = component as any;
@@ -51,25 +50,28 @@ export function setObjToUrlParams(baseUrl: string, obj: any): string {
 
 export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormalized {
   if (!route) return route;
-  const {matched, ...opt} = route;
+  const { matched, ...opt } = route;
   return {
     ...opt,
     matched: (matched
       ? matched.map((item) => ({
-        meta: item.meta,
-        name: item.name,
-        path: item.path
-      }))
+          meta: item.meta,
+          name: item.name,
+          path: item.path
+        }))
       : undefined) as RouteRecordNormalized[]
   };
 }
 
-export function openWindow(url: string, opt?: {
-  target?: TargetContext | string;
-  noopener?: boolean;
-  noreferrer?: boolean
-}) {
-  const {target = "__blank", noopener = true, noreferrer = true} = opt || {};
+export function openWindow(
+  url: string,
+  opt?: {
+    target?: TargetContext | string;
+    noopener?: boolean;
+    noreferrer?: boolean;
+  }
+) {
+  const { target = "__blank", noopener = true, noreferrer = true } = opt || {};
   const feature: string[] = [];
   noopener && feature.push("noopener=yes");
   noreferrer && feature.push("noreferrer=yes");
