@@ -40,6 +40,7 @@
                         name="username"
                         placeholder="用户名"
                         @blur="validateUserName"
+                        @keydown.enter="login"
                       />
                       <label for="inputUsername">用户名</label>
                       <div class="invalid-feedback" v-if="error.username.show">
@@ -57,6 +58,7 @@
                           name="password"
                           placeholder="密码"
                           @blur="validatePassword"
+                          @keydown.enter="login"
                         />
                         <label for="inputPassword">密码</label>
                         <div class="invalid-feedback" v-if="error.password.show">
@@ -112,6 +114,7 @@
                           name="captchaValue"
                           placeholder="验证码"
                           @blur="validateCaptcha"
+                          @keydown.enter="login"
                         />
                         <input type="hidden" name="captchaKey" v-model="captchaKey" />
                         <label for="inputCaptcha">验证码</label>
