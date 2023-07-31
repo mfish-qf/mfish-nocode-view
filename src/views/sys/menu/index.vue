@@ -2,7 +2,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:menu:insert')">新增菜单 </a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:menu:insert'">新增菜单</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -37,13 +37,11 @@
   import MenuModal from "./MenuModal.vue";
   import { columns, searchFormSchema } from "./menu.data";
   import { useModal } from "/@/components/general/Modal";
-  import { usePermission } from "/@/hooks/web/UsePermission";
 
   export default {
     name: "MenuManagement",
     components: { BasicTable, MenuModal, TableAction },
     setup() {
-      const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
       const [registerTable, { reload, setTableData, deleteTableDataRecord }] = useTable({
         title: "菜单列表",
@@ -105,8 +103,7 @@
         handleCreate,
         handleEdit,
         handleDelete,
-        handleSuccess,
-        hasPermission
+        handleSuccess
       };
     }
   };

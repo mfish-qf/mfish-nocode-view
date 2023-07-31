@@ -30,14 +30,6 @@ export const getSsoClientDetailsList = (reqSsoClientDetails?: ReqSsoClientDetail
 };
 
 /**
- * 导出客户端信息
- * @param reqSsoClientDetails
- */
-export function exportSsoClientDetails(reqSsoClientDetails?: ReqSsoClientDetails) {
-  return defHttp.download({ url: Api.SsoClientDetails + "/export", params: reqSsoClientDetails });
-}
-
-/**
  * 新增客户端信息
  *
  * @param ssoClientDetails

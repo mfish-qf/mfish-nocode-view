@@ -51,7 +51,6 @@
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { deleteJobLog, getJobLogList } from "/@/api/scheduler/JobLog";
   import { columns, searchFormSchema } from "./jobLog.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
   import { getDictItems } from "/@/api/sys/DictItem";
   import { DictItem } from "/@/api/sys/model/DictItemModel";
   import { Tag } from "ant-design-vue";
@@ -64,7 +63,6 @@
     name: "JobLogManagement",
     components: { JobLogModal, BasicTable, TableAction, Tag },
     setup() {
-      const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
       const [registerTable, { reload }] = useTable({
         title: "任务日志列表",
@@ -127,7 +125,6 @@
         handleQuery,
         handleDelete,
         handleSuccess,
-        hasPermission,
         jobTypes,
         jobStatus
       };

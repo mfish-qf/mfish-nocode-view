@@ -8,12 +8,7 @@
   <div :class="prefixCls">
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:ssoClientDetails:insert')"
-          >新增
-        </a-button>
-        <a-button type="error" @click="handleExport" v-if="hasPermission('sys:ssoClientDetails:export')"
-          >导出
-        </a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:client:insert'">新增 </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -22,7 +17,7 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                auth: 'sys:ssoClientDetails:update',
+                auth: 'sys:client:update',
                 tooltip: '修改'
               },
               {
@@ -32,7 +27,7 @@
                   placement: 'left',
                   confirm: handleReset.bind(null, record)
                 },
-                auth: 'sys:ssoClientDetails:update',
+                auth: 'sys:client:update',
                 tooltip: '重置密钥'
               },
               {
@@ -43,7 +38,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
-                auth: 'sys:ssoClientDetails:delete',
+                auth: 'sys:client:delete',
                 tooltip: '删除'
               }
             ]"
@@ -80,31 +75,22 @@
 <script lang="ts">
   import { onMounted, ref } from "vue";
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import {
-    deleteSsoClientDetails,
-    exportSsoClientDetails,
-    getSecret,
-    getSsoClientDetailsList,
-    resetSecret
-  } from "/@/api/sys/SsoClientDetails";
+  import { deleteSsoClientDetails, getSecret, getSsoClientDetailsList, resetSecret } from "/@/api/sys/SsoClientDetails";
   import { useModal } from "/@/components/general/Modal";
   import SsoClientDetailsModal from "./SsoClientDetailsModal.vue";
   import { columns, searchFormSchema } from "./ssoClientDetails.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
-  import { ReqSsoClientDetails, SsoClientDetails } from "/@/api/sys/model/SsoClientDetailsModel";
+  import { SsoClientDetails } from "/@/api/sys/model/SsoClientDetailsModel";
   import { getDictItems } from "/@/api/sys/DictItem";
-  import Icon from "/@/components/general/Icon/src/Icon.vue";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { Tag } from "ant-design-vue";
   import { DictItem } from "/@/api/sys/model/DictItemModel";
 
   export default {
     name: "SsoClientDetailsManagement",
-    components: { Icon, BasicTable, SsoClientDetailsModal, TableAction, Tag },
+    components: { BasicTable, SsoClientDetailsModal, TableAction, Tag },
     setup() {
-      const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
-      const [registerTable, { reload, getForm }] = useTable({
+      const [registerTable, { reload }] = useTable({
         title: "客户端信息列表",
         api: getSsoClientDetailsList,
         columns,
@@ -128,9 +114,11 @@
       const { prefixCls } = useDesign("client-details");
 
       function showSecret(ssoClientDetails: SsoClientDetails) {
-        getSecret(ssoClientDetails.id).then((res) => {
-          ssoClientDetails.clientSecret = res;
-        });
+        if (ssoClientDetails.id) {
+          getSecret(ssoClientDetails.id).then((res) => {
+            ssoClientDetails.clientSecret = res;
+          });
+        }
       }
 
       /**
@@ -154,13 +142,6 @@
       });
 
       /**
-       *  导出
-       */
-      function handleExport() {
-        exportSsoClientDetails(getForm().getFieldsValue() as ReqSsoClientDetails);
-      }
-
-      /**
        * 修改
        * @param
        */
@@ -175,9 +156,10 @@
       }
 
       function handleReset(ssoClientDetails: SsoClientDetails) {
-        resetSecret(ssoClientDetails.id).then((res) => {
-          ssoClientDetails.clientSecret = res;
-        });
+        if (ssoClientDetails.id)
+          resetSecret(ssoClientDetails.id).then((res) => {
+            ssoClientDetails.clientSecret = res;
+          });
       }
 
       /**
@@ -185,9 +167,11 @@
        * @param
        */
       function handleDelete(ssoClientDetails: SsoClientDetails) {
-        deleteSsoClientDetails(ssoClientDetails.id).then(() => {
-          handleSuccess();
-        });
+        if (ssoClientDetails.id) {
+          deleteSsoClientDetails(ssoClientDetails.id).then(() => {
+            handleSuccess();
+          });
+        }
       }
 
       /**
@@ -204,9 +188,7 @@
         handleEdit,
         handleReset,
         handleDelete,
-        handleExport,
         handleSuccess,
-        hasPermission,
         prefixCls,
         showSecret,
         grantTypes

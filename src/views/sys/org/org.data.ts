@@ -17,7 +17,7 @@ export const columns: BasicColumn[] = [
       if (tenantId) {
         return h("div", { style: "display: flex;align-items: center;" }, [
           h(Icon, { icon: "ion:business", color: appStore.getProjectConfig.themeColor }),
-          h("div", { style: "margin-left: 6px;color:" + appStore.getProjectConfig.themeColor }, record.orgName)
+          h("div", { style: "margin-left: 12px;color:" + appStore.getProjectConfig.themeColor }, record.orgName)
         ]);
       }
       return record.orgName;

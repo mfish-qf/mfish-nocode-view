@@ -7,8 +7,8 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:dict:insert')">新增 </a-button>
-        <a-button type="error" @click="handleExport" v-if="hasPermission('sys:dict:export')">导出 </a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:dict:insert'">新增 </a-button>
+        <a-button type="error" @click="handleExport" v-auth="'sys:dict:export'">导出 </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -50,7 +50,6 @@
   import { useModal } from "/@/components/general/Modal";
   import DictModal from "./DictModal.vue";
   import { columns, searchFormSchema } from "./dict.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
   import { useGo } from "/@/hooks/web/UsePage";
   import { Dict } from "/@/api/sys/model/DictModel";
 
@@ -58,7 +57,6 @@
     name: "DictManagement",
     components: { BasicTable, DictModal, TableAction },
     setup() {
-      const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
       const go = useGo();
       const [registerTable, { reload, getForm }] = useTable({
@@ -100,9 +98,11 @@
       }
 
       function handleDelete(record: Dict) {
-        deleteDict(record.id).then(() => {
-          handleSuccess();
-        });
+        if (record.id) {
+          deleteDict(record.id).then(() => {
+            handleSuccess();
+          });
+        }
       }
 
       function handleItem(record: Dict) {
@@ -121,8 +121,7 @@
         handleEdit,
         handleItem,
         handleDelete,
-        handleSuccess,
-        hasPermission
+        handleSuccess
       };
     }
   };

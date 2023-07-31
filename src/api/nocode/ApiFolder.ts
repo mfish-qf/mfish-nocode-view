@@ -8,18 +8,19 @@ import { ApiFolder, ReqApiFolder } from "/@/api/nocode/model/ApiFolderModel";
  * @version: V1.0.0
  */
 enum Api {
+  APIFolderTree = "/nocode/apiFolder/tree",
   ApiFolder = "/nocode/apiFolder",
   ApiFolderDrag = "/nocode/apiFolder/drag"
 }
 
 /**
- * 分页列表查询
+ * 查询目录树
  *
  * @param reqApiFolder
  * @return
  */
-export const getApiFolderList = (reqApiFolder?: ReqApiFolder) => {
-  return defHttp.get<ApiFolder[]>({ url: Api.ApiFolder, params: reqApiFolder });
+export const getApiFolderTree = (reqApiFolder?: ReqApiFolder) => {
+  return defHttp.get<ApiFolder[]>({ url: Api.APIFolderTree, params: reqApiFolder });
 };
 
 /**

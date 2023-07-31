@@ -8,7 +8,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:codeBuild:insert')">构建代码 </a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:codeBuild:insert'">构建代码 </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -52,7 +52,6 @@
   import { useModal } from "/@/components/general/Modal";
   import CodeBuildModal from "./CodeBuildModal.vue";
   import { columns, searchFormSchema } from "./codeBuild.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
   import { Button } from "ant-design-vue";
   import CodeQueryModal from "/@/views/sys/code-build/CodeQueryModal.vue";
   import { CodeBuild } from "/@/api/sys/model/CodeBuildModel";
@@ -61,7 +60,6 @@
     name: "CodeBuildManagement",
     components: { CodeQueryModal, BasicTable, CodeBuildModal, TableAction, Button },
     setup() {
-      const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
       const [registerQueryModal, { openModal: openQueryModal }] = useModal();
       const [registerTable, { reload }] = useTable({
@@ -119,8 +117,7 @@
         handleQuery,
         handleDownload,
         handleDelete,
-        handleSuccess,
-        hasPermission
+        handleSuccess
       };
     }
   };

@@ -8,7 +8,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:database:insert')">新增连接 </a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:database:insert'">新增连接 </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -56,7 +56,6 @@
   import { useModal } from "/@/components/general/Modal";
   import DbConnectModal from "./DbConnectModal.vue";
   import { columns, searchFormSchema } from "./dbConnect.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
   import { DictItem } from "/@/api/sys/model/DictItemModel";
   import { getDictItems } from "/@/api/sys/DictItem";
   import { Tag } from "ant-design-vue";
@@ -65,7 +64,6 @@
     name: "DbConnectManagement",
     components: { BasicTable, DbConnectModal, TableAction, Tag },
     setup() {
-      const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
       const [registerTable, { reload }] = useTable({
         title: "数据库连接列表",
@@ -136,7 +134,6 @@
         handleEdit,
         handleDelete,
         handleSuccess,
-        hasPermission,
         dbType,
         poolType
       };

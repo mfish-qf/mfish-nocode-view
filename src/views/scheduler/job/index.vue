@@ -8,7 +8,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="hasPermission('sys:job:insert')">新增任务 </a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:job:insert'">新增任务</a-button>
       </template>
       <template #expandedRowRender="{ record }">
         <JobSubscribeList :subscribes="record.subscribes" />
@@ -76,11 +76,9 @@
   import { useModal } from "/@/components/general/Modal";
   import JobModal from "./JobModal.vue";
   import { columns, searchFormSchema } from "./job.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
   import { getDictItems } from "/@/api/sys/DictItem";
   import { DictItem } from "/@/api/sys/model/DictItemModel";
   import { Job } from "/@/api/scheduler/model/JobModel";
-  import JobSubscribeManagement from "/@/views/scheduler/job-subscribe/index.vue";
   import JobSubscribeList from "/@/views/scheduler/job/JobSubscribeList.vue";
 
   export default {
@@ -90,11 +88,9 @@
       BasicTable,
       JobModal,
       TableAction,
-      Tag,
-      JobSubscribeManagement
+      Tag
     },
     setup() {
-      const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
       const [registerTable, { reload }] = useTable({
         title: "定时调度任务列表",
@@ -163,9 +159,11 @@
       }
 
       function handleDelete(record: Job) {
-        deleteJob(record.id).then(() => {
-          handleSuccess();
-        });
+        if (record.id) {
+          deleteJob(record.id).then(() => {
+            handleSuccess();
+          });
+        }
       }
 
       function handleSuccess() {
@@ -180,7 +178,6 @@
         handleEdit,
         handleDelete,
         handleSuccess,
-        hasPermission,
         jobTypes,
         misfireHandlers,
         timeZones

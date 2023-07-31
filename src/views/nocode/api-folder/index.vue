@@ -25,6 +25,7 @@
           <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
         </a-breadcrumb-item>
       </a-breadcrumb>
+      <mf-api-management />
     </div>
   </PageWrapper>
 </template>
@@ -37,15 +38,17 @@
   import {
     deleteApiFolder,
     dragApiFolder,
-    getApiFolderList,
+    getApiFolderTree,
     insertApiFolder,
     updateApiFolder
   } from "/@/api/nocode/ApiFolder";
   import { Icon } from "/@/components/general/Icon";
+  import MfApiManagement from "/@/views/nocode/mf-api/index.vue";
 
   export default {
     name: "ApiFolderManagement",
     components: {
+      MfApiManagement,
       Icon,
       PageWrapper,
       DragFolderTree,
@@ -57,7 +60,7 @@
       const genData = ref();
       const folderTreeRef = ref();
       onMounted(() => {
-        getApiFolderList().then((res) => {
+        getApiFolderTree().then((res) => {
           genData.value = res;
         });
       });
