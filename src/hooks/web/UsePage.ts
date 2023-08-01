@@ -1,10 +1,10 @@
 import type { RouteLocationRaw, Router } from "vue-router";
-
 import { PageEnum } from "/@/enums/PageEnum";
 import { unref } from "vue";
-
 import { useRouter } from "vue-router";
 import { REDIRECT_NAME } from "/@/router/Constant";
+import { getMenu } from "/@/router/menus";
+import { router } from "/@/router";
 
 export type PathAsPageEnum<T> = T extends { path: string } ? T & { path: PageEnum } : T;
 export type RouteLocationRawEx = PathAsPageEnum<RouteLocationRaw>;
@@ -26,6 +26,23 @@ export function useGo(_router?: Router) {
   }
 
   return go;
+}
+
+/**
+ * 是否外部打开 如果是外部打开
+ * @param path
+ */
+export function externalOpen(path: string) {
+  const menu = getMenu(path);
+  //如果是外部打开
+  if (menu?.isExternal) {
+    const routeData = router.resolve({
+      path: path
+    });
+    window.open(routeData.href, "_blank");
+    return true;
+  }
+  return false;
 }
 
 /**

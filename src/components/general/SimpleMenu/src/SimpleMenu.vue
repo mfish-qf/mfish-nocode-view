@@ -1,5 +1,5 @@
 <template>
-  <Menu
+  <MfishMenu
     v-bind="getBindValues"
     :activeName="activeName"
     :openNames="getOpenKeys"
@@ -10,7 +10,7 @@
     <template v-for="item in items" :key="item.path">
       <SimpleSubMenu :item="item" :parent="true" :collapsedShowTitle="collapsedShowTitle" :collapse="collapse" />
     </template>
-  </Menu>
+  </MfishMenu>
 </template>
 <script lang="ts">
   import type { MenuState } from "./Types";
@@ -18,7 +18,7 @@
   import type { RouteLocationNormalizedLoaded } from "vue-router";
   import { defineComponent, computed, ref, unref, reactive, toRefs, watch } from "vue";
   import { useDesign } from "/@/hooks/web/UseDesign";
-  import Menu from "./components/Menu.vue";
+  import MfishMenu from "./components/MfishMenu.vue";
   import SimpleSubMenu from "./SimpleSubMenu.vue";
   import { listenerRouteChange } from "/@/logics/mitt/RouteChange";
   import { propTypes } from "/@/utils/PropTypes";
@@ -31,7 +31,7 @@
   export default defineComponent({
     name: "SimpleMenu",
     components: {
-      Menu,
+      MfishMenu,
       SimpleSubMenu
     },
     inheritAttrs: false,

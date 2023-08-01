@@ -7,7 +7,7 @@
   import { MenuModeEnum, MenuSplitTyeEnum } from "/@/enums/MenuEnum";
   import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
   import { ScrollContainer } from "/@/components/general/Container";
-  import { useGo } from "/@/hooks/web/UsePage";
+  import { externalOpen, useGo } from "/@/hooks/web/UsePage";
   import { useSplitMenu } from "./UseLayoutMenu";
   import { openWindow } from "/@/utils";
   import { propTypes } from "/@/utils/PropTypes";
@@ -16,6 +16,8 @@
   import { useAppInject } from "/@/hooks/web/UseAppInject";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { ThemeEnum } from "/@/enums/AppEnum";
+  import { router } from "/@/router";
+  import { getMenu } from "/@/router/menus";
 
   export default defineComponent({
     name: "LayoutMenu",
@@ -105,16 +107,18 @@
 
       /**
        * click menu
-       * @param menu
+       * @param path
        */
 
       function handleMenuClick(path: string) {
-        go(path);
+        if (!externalOpen(path)) {
+          go(path);
+        }
       }
 
       /**
        * before click menu
-       * @param menu
+       * @param path
        */
       async function beforeMenuClickFn(path: string) {
         if (!isUrl(path)) {

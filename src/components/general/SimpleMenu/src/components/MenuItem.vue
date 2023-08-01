@@ -1,6 +1,6 @@
 <template>
   <li :class="getClass" @click.stop="handleClickItem" :style="getCollapse ? {} : getItemStyle">
-    <Tooltip placement="right" v-if="showTooptip">
+    <Tooltip placement="right" v-if="showTooltip">
       <template #title>
         <slot name="title"></slot>
       </template>
@@ -40,7 +40,7 @@
 
       const active = ref(false);
 
-      const { getItemStyle, getParentList, getParentMenu, getParentRootMenu } = useMenuItem(instance);
+      const { getItemStyle, getParentList, getParentMenu, getParentRootMenu, MFISH_MENU } = useMenuItem(instance);
 
       const { prefixCls } = useDesign("menu");
 
@@ -59,8 +59,8 @@
 
       const getCollapse = computed(() => unref(getParentRootMenu)?.props.collapse);
 
-      const showTooptip = computed(() => {
-        return unref(getParentMenu)?.type.name === "Menu" && unref(getCollapse) && slots.title;
+      const showTooltip = computed(() => {
+        return unref(getParentMenu)?.type.name === MFISH_MENU && unref(getCollapse) && slots.title;
       });
 
       function handleClickItem() {
@@ -68,7 +68,6 @@
         if (disabled) {
           return;
         }
-
         rootMenuEmitter.emit("on-menu-item-select", props.name);
         if (unref(getCollapse)) {
           return;
@@ -76,7 +75,7 @@
         const { uidList } = getParentList();
 
         rootMenuEmitter.emit("on-update-opened", {
-          opend: false,
+          opened: false,
           parent: instance?.parent,
           uidList: uidList
         });
@@ -101,7 +100,7 @@
         { immediate: true }
       );
 
-      return { getClass, prefixCls, getItemStyle, getCollapse, handleClickItem, showTooptip };
+      return { getClass, prefixCls, getItemStyle, getCollapse, handleClickItem, showTooltip };
     }
   });
 </script>

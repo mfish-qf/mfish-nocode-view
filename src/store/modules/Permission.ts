@@ -89,28 +89,15 @@ export const usePermissionStore = defineStore({
         let fMenus: Nullable<MenuListItem[]> = menus;
         let path = "";
         for (let i = 0; i < menuCode.length / 5; i++) {
+          if (fMenus == null) break;
           const code = menuCode.substring(0, (i + 1) * 5);
-          const fMenu = findMenu(fMenus, code);
+          const fMenu = fMenus.find((menu) => menu.menuCode === code);
           if (fMenu != null) {
             path += formatPath(fMenu.routePath);
             fMenus = fMenu.children;
           }
         }
         return path;
-
-        function findMenu(menus: Nullable<MenuListItem[]>, code: string) {
-          if (menus === null) {
-            return null;
-          }
-          for (const menu of menus) {
-            if (menu.menuCode === code) {
-              return menu;
-            }
-          }
-          return null;
-        }
-
-        return menuCode;
       };
       const menuList: Menu[] = [];
       const routes: AppRouteRecordRaw[] = [];
@@ -240,7 +227,7 @@ export const usePermissionStore = defineStore({
             cRoute.children = [];
             buildChildMenuRoute(menu.children, cMenu, cRoute);
           } else if (menu.menuType === MenuType.目录) {
-            //没有子菜单的路由不push到路由中
+            //没有子菜单的目录不push到路由中
             continue;
           }
           pRoute.children?.push(cRoute);
