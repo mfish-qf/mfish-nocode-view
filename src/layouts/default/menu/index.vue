@@ -16,8 +16,6 @@
   import { useAppInject } from "/@/hooks/web/UseAppInject";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { ThemeEnum } from "/@/enums/AppEnum";
-  import { router } from "/@/router";
-  import { getMenu } from "/@/router/menus";
 
   export default defineComponent({
     name: "LayoutMenu",
