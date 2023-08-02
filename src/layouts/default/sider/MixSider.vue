@@ -368,7 +368,7 @@
 
     &.light {
       .@{prefix-cls}-logo {
-        border-bottom: 1px solid rgb(238 238 238);
+        //border-bottom: 1px solid rgb(238 238 238);
       }
 
       &.open {
@@ -532,7 +532,7 @@
 
     &.light &-trigger {
       color: rgb(0 0 0 / 65%);
-      border-top: 1px solid #eee;
+      //border-top: 1px solid #eee;
     }
 
     &-menu-list {
