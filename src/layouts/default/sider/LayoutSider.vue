@@ -156,6 +156,20 @@
       }
     }
 
+    &.ant-layout-sider-light {
+      background-color: @sider-dark-bg-color;
+
+      .ant-layout-sider-trigger {
+        color: darken(@white, 25%);
+        background-color: @trigger-dark-bg-color;
+
+        &:hover {
+          color: @white;
+          background-color: @trigger-dark-hover-bg-color;
+        }
+      }
+    }
+
     &:not(.ant-layout-sider-dark) {
       // box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
 

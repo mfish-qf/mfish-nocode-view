@@ -408,25 +408,50 @@
 
     @border-color: @sider-dark-lighten-bg-color;
 
-    &.dark {
-      &.open {
-        .@{prefix-cls}-logo {
-          // border-bottom: 1px solid @border-color;
-        }
-
-        > .scrollbar {
-          border-right: 1px solid @border-color;
-        }
+    &.open {
+      .@{prefix-cls}-logo {
+        // border-bottom: 1px solid @border-color;
       }
 
-      .@{prefix-cls}-menu-list {
-        background-color: @sider-dark-bg-color;
+      > .scrollbar {
+        border-right: 1px solid @border-color;
+      }
+    }
 
-        &__title {
-          color: @white;
-          border-bottom: none;
-          border-bottom: 1px solid @border-color;
+    .@{prefix-cls}-menu-list {
+      background-color: @sider-dark-bg-color;
+
+      &__title {
+        border-bottom: none;
+        border-bottom: 1px solid @border-color;
+      }
+    }
+    &.dark {
+      &.open {
+        .@{prefix-cls}-menu-list {
+          &__title {
+            color: @white;
+          }
         }
+      }
+    }
+
+    &.open {
+      .@{prefix-cls}-logo {
+        // border-bottom: 1px solid @border-color;
+      }
+
+      > .scrollbar {
+        border-right: 1px solid @border-color;
+      }
+    }
+
+    .@{prefix-cls}-menu-list {
+      background-color: @sider-dark-bg-color;
+
+      &__title {
+        border-bottom: none;
+        border-bottom: 1px solid @border-color;
       }
     }
 
@@ -507,7 +532,6 @@
 
     &.light &-trigger {
       color: rgb(0 0 0 / 65%);
-      background-color: #fff;
       border-top: 1px solid #eee;
     }
 

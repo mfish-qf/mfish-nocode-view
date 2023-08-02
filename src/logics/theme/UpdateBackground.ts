@@ -69,11 +69,8 @@ export function updateSidebarBgColor(color?: string) {
   setCssVar(SIDER_DARK_BG_COLOR, color);
   setCssVar(SIDER_DARK_DARKEN_BG_COLOR, darken(color!, 6));
   setCssVar(SIDER_LIGHTEN_BG_COLOR, lighten(color!, 5));
-
-  // only #ffffff is light
-  // Only when the background color is #fff, the theme of the menu will be changed to light
-  const isLight = ["#fff", "#ffffff"].includes(color!.toLowerCase());
-
+  const isLight = !colorIsDark(color);
+  //如果是亮色且不是深色模式，皮肤设置为亮
   appStore.setProjectConfig({
     menuSetting: {
       theme: isLight && !darkMode ? ThemeEnum.LIGHT : ThemeEnum.DARK
