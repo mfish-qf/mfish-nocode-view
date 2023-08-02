@@ -5,27 +5,33 @@
  @version: V1.1.0
 -->
 <template>
-  <PageWrapper contentClass="flex" contentFullHeight fixedHeight class="mt-3 ml-3 mr-3">
-    <DragFolderTree
-      ref="folderTreeRef"
-      class="xs:w-1/2 s:w-1/4 xl:w-1/5"
-      :tree-data="genData"
-      node-title="name"
-      @save:drag="dragTree"
-      @save:insert="insertTree"
-      @save:update="updateTree"
-      @save:delete="deleteTree"
-      :show-head-title="false"
-      @select="selectFolder"
-    />
-    <div class="bg-white xs:w-1/2 s:w-3/4 xl:w-4/5" :class="prefixCls">
-      <a-breadcrumb separator=">" class="m-3">
-        <a-breadcrumb-item v-for="(item, index) in breadList" :key="index">
-          <Icon :icon="item.icon" />
-          <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
-        </a-breadcrumb-item>
-      </a-breadcrumb>
-      <mf-api-management />
+  <PageWrapper contentFullHeight fixedHeight>
+    <div :class="prefixCls" class="p-3">
+      <DragFolderTree
+        ref="folderTreeRef"
+        class="w-1/3 s:w-1/4 xl:w-1/5"
+        :tree-data="genData"
+        node-title="name"
+        @save:drag="dragTree"
+        @save:insert="insertTree"
+        @save:update="updateTree"
+        @save:delete="deleteTree"
+        :show-head-title="false"
+        @select="selectFolder"
+      >
+        <template #treeTitle>
+          <div class="font-bold m-2 cursor-pointer" @click="setSelect(apiNode.key)">我的API</div>
+        </template>
+      </DragFolderTree>
+      <div class="bg-white w-2/3 s:w-3/4 xl:w-4/5" :class="`${prefixCls}-right`">
+        <ABreadcrumb separator=">" class="breadcrumb">
+          <ABreadcrumbItem v-for="(item, index) in breadList" :key="index">
+            <Icon :icon="item.icon" />
+            <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
+          </ABreadcrumbItem>
+        </ABreadcrumb>
+        <MfApiManagement />
+      </div>
     </div>
   </PageWrapper>
 </template>
@@ -34,7 +40,7 @@
   import { Breadcrumb } from "ant-design-vue";
   import { DragFolderTree } from "/@/components/general/DragTree";
   import { useDesign } from "/@/hooks/web/UseDesign";
-  import { onMounted, ref } from "vue";
+  import { onMounted, reactive, ref } from "vue";
   import {
     deleteApiFolder,
     dragApiFolder,
@@ -63,8 +69,14 @@
         getApiFolderTree().then((res) => {
           genData.value = res;
         });
+        selectFolder(undefined);
       });
       const breadList = ref();
+      const apiNode = reactive({
+        icon: "ant-design:api-outlined",
+        title: "我的API",
+        key: "API"
+      });
 
       function dragTree(_, nodes, callback: (res: boolean) => {}) {
         dragApiFolder(nodes)
@@ -105,9 +117,15 @@
           });
           newNode = newNode.parent;
         }
+        list.unshift(apiNode);
         breadList.value = list;
       }
+
       function setSelect(key: string) {
+        if (key === apiNode.key) {
+          folderTreeRef.value.clearSelect();
+          return;
+        }
         folderTreeRef.value.setSelect(key);
       }
 
@@ -120,6 +138,7 @@
         deleteTree,
         breadList,
         selectFolder,
+        apiNode,
         setSelect,
         folderTreeRef
       };
@@ -129,12 +148,19 @@
 <style lang="less" scoped>
   @prefix-cls: ~"@{namespace}-api-folder";
   [data-theme="dark"] {
-    .@{prefix-cls} {
+    .@{prefix-cls}-right {
       border-left: 1px solid #303030;
     }
   }
 
   .@{prefix-cls} {
-    border-left: 1px solid #d9d9d9;
+    display: flex;
+    height: 100%;
+    &-right {
+      border-left: 1px solid #d9d9d9;
+      .breadcrumb {
+        margin: 12px 0 0 12px;
+      }
+    }
   }
 </style>

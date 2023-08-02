@@ -23,6 +23,7 @@
         </Tooltip>
       </template>
     </TreeHeader>
+    <slot name="treeTitle"></slot>
     <ScrollContainer v-show="gData && gData.length > 0">
       <ADirectoryTree
         class="draggable-tree"
@@ -240,6 +241,10 @@
       selectedKeys.value = [key];
       selectEmit({ ...node });
     }
+  }
+  function clearSelect() {
+    selectedKeys.value = [];
+    emit("select", undefined);
   }
 
   /**
@@ -475,5 +480,5 @@
         break;
     }
   }, 200);
-  defineExpose({ setSelect });
+  defineExpose({ setSelect, clearSelect });
 </script>

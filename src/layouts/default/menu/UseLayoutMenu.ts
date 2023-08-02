@@ -1,6 +1,6 @@
 import type { Menu } from "/@/router/Types";
 import type { Ref } from "vue";
-import { watch, unref, ref, computed } from "vue";
+import { computed, ref, unref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { MenuSplitTyeEnum } from "/@/enums/MenuEnum";
 import { useThrottleFn } from "@vueuse/core";
@@ -94,8 +94,7 @@ export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
 
     // split-top
     if (unref(getSpiltTop)) {
-      const shallowMenus = await getShallowMenus();
-      menusRef.value = shallowMenus;
+      menusRef.value = await getShallowMenus();
       return;
     }
   }

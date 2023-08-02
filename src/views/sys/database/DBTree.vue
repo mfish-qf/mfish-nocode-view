@@ -6,7 +6,7 @@
 <template>
   <div class="mr-0 bg-white">
     <BasicTree
-      title="数据库列表"
+      title=""
       toolbar
       search
       ref="asyncTreeRef"

@@ -188,7 +188,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: "isExternal",
-    label: "是否外链",
+    label: "新窗口打开",
     component: "RadioButtonGroup",
     defaultValue: 0,
     componentProps: {

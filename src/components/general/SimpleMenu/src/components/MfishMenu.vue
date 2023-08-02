@@ -25,7 +25,7 @@
   import mitt from "/@/utils/Mitt";
 
   export default defineComponent({
-    name: "Menu",
+    name: "MfishMenu",
     props: {
       theme: propTypes.oneOf(["light", "dark"]).def("light"),
       activeName: propTypes.oneOfType([propTypes.string, propTypes.number]),
@@ -133,7 +133,6 @@
         updateOpened();
         rootMenuEmitter.on("on-menu-item-select", (name: string) => {
           currentActiveName.value = name;
-
           nextTick(() => {
             props.collapse && removeAll();
           });

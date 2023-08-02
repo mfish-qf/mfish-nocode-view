@@ -4,6 +4,8 @@
 @logo-prefix-cls: ~'@{namespace}-app-logo';
 
 .@{header-prefix-cls} {
+  position: relative;
+  z-index: 1;
   display: flex;
   height: @header-height;
   padding: 0;
@@ -13,6 +15,7 @@
   background-color: @white;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 0 6px 0 rgb(201 205 241);
 
   &--mobile {
     .@{breadcrumb-prefix-cls},
@@ -133,9 +136,10 @@
   }
 
   &--light {
-    background-color: @white !important;
+    //background-color: @white !important;
+    background-color: @header-dark-bg-color !important;
     //border-bottom: 1px solid @header-light-bottom-border-color;
-    border-left: 1px solid @header-light-bottom-border-color;
+    border-left: 1px solid @border-color-base;
 
     .@{header-prefix-cls}-logo {
       color: @text-color-base;

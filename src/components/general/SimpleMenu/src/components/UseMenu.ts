@@ -2,16 +2,18 @@ import { computed, ComponentInternalInstance, unref } from "vue";
 import type { CSSProperties } from "vue";
 
 export function useMenuItem(instance: ComponentInternalInstance | null) {
+  const MFISH_MENU = "MfishMenu";
+  const SUB_MENU = "SubMenu";
   const getParentMenu = computed(() => {
-    return findParentMenu(["Menu", "SubMenu"]);
+    return findParentMenu([MFISH_MENU, SUB_MENU]);
   });
 
   const getParentRootMenu = computed(() => {
-    return findParentMenu(["Menu"]);
+    return findParentMenu([MFISH_MENU]);
   });
 
   const getParentSubMenu = computed(() => {
-    return findParentMenu(["SubMenu"]);
+    return findParentMenu([SUB_MENU]);
   });
 
   const getItemStyle = computed((): CSSProperties => {
@@ -23,8 +25,8 @@ export function useMenuItem(instance: ComponentInternalInstance | null) {
     if (unref(getParentRootMenu)?.props.collapse) {
       padding = indentSize;
     } else {
-      while (parent && parent.type.name !== "Menu") {
-        if (parent.type.name === "SubMenu") {
+      while (parent && parent.type.name !== MFISH_MENU) {
+        if (parent.type.name === SUB_MENU) {
           padding += indentSize;
         }
         parent = parent.parent;
@@ -50,8 +52,8 @@ export function useMenuItem(instance: ComponentInternalInstance | null) {
         list: []
       };
     const ret: any[] = [];
-    while (parent && parent.type.name !== "Menu") {
-      if (parent.type.name === "SubMenu") {
+    while (parent && parent.type.name !== MFISH_MENU) {
+      if (parent.type.name === SUB_MENU) {
         ret.push(parent);
       }
       parent = parent.parent;
@@ -62,7 +64,7 @@ export function useMenuItem(instance: ComponentInternalInstance | null) {
     };
   }
 
-  function getParentInstance(instance: ComponentInternalInstance, name = "SubMenu") {
+  function getParentInstance(instance: ComponentInternalInstance, name = SUB_MENU) {
     let parent = instance.parent;
     while (parent) {
       if (parent.type.name !== name) {
@@ -79,6 +81,7 @@ export function useMenuItem(instance: ComponentInternalInstance | null) {
     getParentRootMenu,
     getParentList,
     getParentSubMenu,
-    getItemStyle
+    getItemStyle,
+    MFISH_MENU
   };
 }

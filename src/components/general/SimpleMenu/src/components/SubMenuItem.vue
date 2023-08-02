@@ -16,7 +16,7 @@
       placement="right"
       :overlayClassName="`${prefixCls}-menu-popover`"
       v-else
-      :visible="getIsOpend"
+      :visible="getIsOpened"
       @visible-change="handleVisibleChange"
       :overlayStyle="getOverlayStyle"
       :align="{ offset: [0, 0] }"
@@ -148,7 +148,7 @@
         };
       });
 
-      const getIsOpend = computed(() => {
+      const getIsOpened = computed(() => {
         const name = props.name;
         if (unref(getCollapse)) {
           return parentGetOpenNames().includes(name);
@@ -267,9 +267,9 @@
             return;
           }
           if (isObject(data) && rootProps.accordion) {
-            const { opend, parent, uidList } = data as Recordable;
+            const { opened, parent, uidList } = data as Recordable;
             if (parent === instance?.parent) {
-              state.opened = opend;
+              state.opened = opened;
             } else if (!uidList.includes(instance?.uid)) {
               state.opened = false;
             }
@@ -315,7 +315,7 @@
         getParentSubMenu,
         getOverlayStyle,
         getTheme,
-        getIsOpend,
+        getIsOpened,
         getEvents,
         getSubClass,
         ...toRefs(state),

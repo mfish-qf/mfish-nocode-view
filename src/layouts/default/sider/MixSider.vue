@@ -83,7 +83,7 @@
   import { useGlobSetting } from "/@/hooks/setting";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { useI18n } from "/@/hooks/web/UseI18n";
-  import { useGo } from "/@/hooks/web/UsePage";
+  import { externalOpen, useGo } from "/@/hooks/web/UsePage";
   import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from "/@/enums/AppEnum";
   import clickOutside from "/@/directives/ClickOutside";
   import { getChildrenMenus, getCurrentParentPath, getShallowMenus } from "/@/router/menus";
@@ -270,7 +270,9 @@
       }
 
       function handleMenuClick(path: string) {
-        go(path);
+        if (!externalOpen(path)) {
+          go(path);
+        }
       }
 
       function handleClickOutside() {
@@ -366,7 +368,7 @@
 
     &.light {
       .@{prefix-cls}-logo {
-        border-bottom: 1px solid rgb(238 238 238);
+        //border-bottom: 1px solid rgb(238 238 238);
       }
 
       &.open {
@@ -406,25 +408,50 @@
 
     @border-color: @sider-dark-lighten-bg-color;
 
-    &.dark {
-      &.open {
-        .@{prefix-cls}-logo {
-          // border-bottom: 1px solid @border-color;
-        }
-
-        > .scrollbar {
-          border-right: 1px solid @border-color;
-        }
+    &.open {
+      .@{prefix-cls}-logo {
+        // border-bottom: 1px solid @border-color;
       }
 
-      .@{prefix-cls}-menu-list {
-        background-color: @sider-dark-bg-color;
+      > .scrollbar {
+        border-right: 1px solid @border-color;
+      }
+    }
 
-        &__title {
-          color: @white;
-          border-bottom: none;
-          border-bottom: 1px solid @border-color;
+    .@{prefix-cls}-menu-list {
+      background-color: @sider-dark-bg-color;
+
+      &__title {
+        border-bottom: none;
+        border-bottom: 1px solid @border-color;
+      }
+    }
+    &.dark {
+      &.open {
+        .@{prefix-cls}-menu-list {
+          &__title {
+            color: @white;
+          }
         }
+      }
+    }
+
+    &.open {
+      .@{prefix-cls}-logo {
+        // border-bottom: 1px solid @border-color;
+      }
+
+      > .scrollbar {
+        border-right: 1px solid @border-color;
+      }
+    }
+
+    .@{prefix-cls}-menu-list {
+      background-color: @sider-dark-bg-color;
+
+      &__title {
+        border-bottom: none;
+        border-bottom: 1px solid @border-color;
       }
     }
 
@@ -505,8 +532,7 @@
 
     &.light &-trigger {
       color: rgb(0 0 0 / 65%);
-      background-color: #fff;
-      border-top: 1px solid #eee;
+      //border-top: 1px solid #eee;
     }
 
     &-menu-list {

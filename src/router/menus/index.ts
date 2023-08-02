@@ -2,6 +2,11 @@ import type { Menu } from "/@/router/Types";
 import { usePermissionStore } from "/@/store/modules/Permission";
 import { getAllParentPath } from "/@/router/helper/MenuHelper";
 
+export function getAllMenus() {
+  const permissionStore = usePermissionStore();
+  return permissionStore.getMenuList;
+}
+
 export function getMenus() {
   const permissionStore = usePermissionStore();
   const menuFilter = (items) => {
@@ -14,6 +19,27 @@ export function getMenus() {
     });
   };
   return menuFilter(permissionStore.getMenuList);
+}
+
+export function getMenu(path: string) {
+  if (!path) return undefined;
+  let fMenu: Menu | undefined;
+  const loop = (menus: Menu[] | undefined) => {
+    if (!menus) {
+      return;
+    }
+    for (const menu of menus) {
+      if (menu.path === path) {
+        fMenu = menu;
+        return;
+      }
+      loop(menu?.children);
+    }
+    return undefined;
+  };
+  const menus = getAllMenus();
+  loop(menus);
+  return fMenu;
 }
 
 export async function getCurrentParentPath(currentPath: string) {
