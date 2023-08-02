@@ -107,7 +107,8 @@ export const usePermissionStore = defineStore({
           hideMenu: !menu.isVisible,
           path: formatPath(menu.routePath),
           menuSort: menu.menuSort,
-          icon: menu.menuIcon
+          icon: menu.menuIcon,
+          isExternal: menu.isExternal === 1
         };
         //如果菜单类型是菜单而且是url链接并且是从外部打开，path直接使用外部路径
         if (menu.menuType === MenuType.菜单 && isUrl(menu.component) && menu.isExternal) {
@@ -124,8 +125,7 @@ export const usePermissionStore = defineStore({
             icon: menu.menuIcon,
             hideMenu: !menu.isVisible,
             menuSort: menu.menuSort,
-            ignoreKeepAlive: !menu.isKeepalive,
-            isExternal: menu.isExternal === 1
+            ignoreKeepAlive: !menu.isKeepalive
           }
         };
         switch (menu.menuType) {
@@ -153,25 +153,24 @@ export const usePermissionStore = defineStore({
         }
         return route;
       };
-      const index = "index";
       const directMenu = (menu: MenuListItem): Menu => {
         const newMenu: Menu = buildMenu(menu);
-        newMenu.path = `${newMenu.path}/${index}`;
         newMenu.meta = { title: newMenu.name, hideChildrenInMenu: true };
         return newMenu;
       };
       const directRoute = (menu: MenuListItem): AppRouteRecordRaw => {
         const route = buildRoute(menu);
-        route.redirect = `${route.path}/${index}`;
-        route.component = LAYOUT;
-        route.children = [
-          {
-            path: index,
-            name: menu.id,
-            meta: { title: menu.menuName, icon: menu.menuIcon },
-            component: importComponent(menu.component)
-          }
-        ];
+        if (!menu.isExternal) {
+          route.component = LAYOUT;
+          route.children = [
+            {
+              path: "",
+              name: menu.id,
+              meta: { title: menu.menuName, icon: menu.menuIcon },
+              component: importComponent(menu.component)
+            }
+          ];
+        }
         return route;
       };
       buildMenuRoute(menus, menuList, routes);
@@ -204,9 +203,9 @@ export const usePermissionStore = defineStore({
 
       /**
        * 递归构建子集目录
-       * @param menus
-       * @param pMenu
-       * @param pRoute
+       * @param menus 菜单集合
+       * @param pMenu 父菜单
+       * @param pRoute 父路由
        */
       function buildChildMenuRoute(menus: MenuListItem[], pMenu: Menu, pRoute: AppRouteRecordRaw) {
         let i = 0;
@@ -215,8 +214,8 @@ export const usePermissionStore = defineStore({
           cMenu.isExternal = menu.isExternal === 1;
           pMenu.children?.push(cMenu);
           const cRoute: AppRouteRecordRaw = buildRoute(menu);
-          //如果组件不是外部地址，菜单不是外部打开。采用内部路由path处理
-          if (!isUrl(menu.component) || !menu.isExternal) {
+          //如果组件不是外部地址，采用内部路由path处理
+          if (!isUrl(menu.component)) {
             if (i++ == 0) {
               pRoute.redirect = pRoute.path + cRoute.path;
             }
@@ -231,7 +230,14 @@ export const usePermissionStore = defineStore({
             //没有子菜单的目录不push到路由中
             continue;
           }
-          pRoute.children?.push(cRoute);
+          //如果外部打开且不是url直接添加到路由集合不使用layout包装
+          if (menu.isExternal && !isUrl(menu.component)) {
+            //使用菜单全路径路由
+            cRoute.path = cMenu.path;
+            routes.push(cRoute);
+          } else {
+            pRoute.children?.push(cRoute);
+          }
         }
       }
 

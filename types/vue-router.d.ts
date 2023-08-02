@@ -15,6 +15,7 @@ declare module "vue-router" {
     currentActiveMenu?: string;
     // Never show in menu
     hideMenu?: boolean;
-    isExternal?: boolean;
+    // Is it fixed on tab
+    affix?: boolean;
   }
 }
