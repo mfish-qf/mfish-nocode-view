@@ -35,6 +35,13 @@
             ]"
           />
         </template>
+        <template v-if="column.key === 'name'">
+          <div style="display: flex; align-items: center; cursor: pointer" @click="folderClick(record)">
+            <Icon icon="ant-design:api-outlined" v-if="record?.fType === 1" />
+            <Icon v-else icon="ant-design:folder-filled" :color="iconColor" />
+            <div style="margin-left: 12px">{{ record.name }}</div>
+          </div>
+        </template>
       </template>
     </BasicTable>
     <MfApiModal @register="registerModal" @success="handleSuccess" />
@@ -51,17 +58,21 @@
   import { Input as AInput } from "ant-design-vue";
   import { ref, watch } from "vue";
   import { getApiFolderAndFile } from "/@/api/nocode/ApiFolder";
+  import Icon from "/@/components/general/Icon/src/Icon.vue";
+  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
 
   export default {
     name: "MfApiManagement",
-    components: { AInputSearch: AInput.Search, BasicTable, MfApiModal, TableAction },
+    components: { Icon, AInputSearch: AInput.Search, BasicTable, MfApiModal, TableAction },
     props: {
       folderId: { type: String, default: "" }
     },
-    setup(props) {
+    emits: ["folderClick"],
+    setup(props, { emit }) {
       const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
       const folderId = ref("");
+      const iconColor = useRootSetting().getThemeColor;
       watch(
         () => props.folderId,
         (value) => {
@@ -144,6 +155,10 @@
         console.log(val, "aaa");
       }
 
+      function folderClick(record) {
+        emit("folderClick", record);
+      }
+
       return {
         registerTable,
         registerModal,
@@ -153,7 +168,9 @@
         handleExport,
         handleSuccess,
         hasPermission,
-        onSearch
+        onSearch,
+        iconColor,
+        folderClick
       };
     }
   };

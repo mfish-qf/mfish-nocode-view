@@ -242,6 +242,11 @@
       if (!node) return;
       selectedKeys.value = [key];
       selectEmit({ ...node });
+      const pNode = findNode(gData.value, (item) => item.id === node.parentId);
+      if (!pNode) return;
+      expandedKeys.value = [...expandedKeys.value, pNode.id];
+      emit("expand", expandedKeys.value);
+      autoExpandParent.value = true;
     }
   }
   function clearSelect() {
@@ -484,14 +489,3 @@
   }, 200);
   defineExpose({ setSelect, clearSelect });
 </script>
-<style lang="less">
-  .ant-tree {
-    .ant-tree-treenode {
-      .ant-tree-treenode-selected {
-        &::before {
-          background: #0a53be !important;
-        }
-      }
-    }
-  }
-</style>

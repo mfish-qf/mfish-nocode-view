@@ -30,7 +30,7 @@
             <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
           </ABreadcrumbItem>
         </ABreadcrumb>
-        <MfApiManagement :folderId="curFolderId" />
+        <MfApiManagement :folderId="curFolderId" @folderClick="folderClick" />
       </div>
     </div>
   </PageWrapper>
@@ -131,6 +131,15 @@
         folderTreeRef.value.setSelect(key);
       }
 
+      function folderClick(record) {
+        //如果是目录进入目录
+        if (record.fType === 0) {
+          setSelect(record.id);
+        }
+        //如果是文件
+        //todo 待完善
+      }
+
       return {
         prefixCls,
         genData,
@@ -143,7 +152,8 @@
         apiNode,
         setSelect,
         folderTreeRef,
-        curFolderId
+        curFolderId,
+        folderClick
       };
     }
   };

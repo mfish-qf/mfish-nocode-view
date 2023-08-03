@@ -1,8 +1,5 @@
 import { BasicColumn } from "/@/components/general/Table";
 import { FormSchema } from "/@/components/general/Table";
-import { h } from "vue";
-import { Icon } from "/@/components/general/Icon";
-import { useAppStore } from "/@/store/modules/App";
 
 /**
  * @description: 自定义API
@@ -14,16 +11,7 @@ export const columns: BasicColumn[] = [
   {
     title: "名称",
     dataIndex: "name",
-    width: 120,
-    customRender: ({ record }) => {
-      const color = useAppStore().getThemeColor;
-      const icon =
-        record?.fType === 1 ? { icon: "ant-design:api-outlined" } : { icon: "ant-design:folder-filled", color };
-      return h("div", { style: "display: flex;align-items: center;" }, [
-        h(Icon, icon),
-        h("div", { style: "margin-left: 12px" }, record.name)
-      ]);
-    }
+    width: 120
   },
   {
     title: "参数类型",
