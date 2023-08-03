@@ -75,7 +75,10 @@ export const imageSrc = async (url, option?: RequestOptions) => {
   //isTransformResponse返回值不执行普通请求的结果处理
   try {
     const img = await defHttp.get({ url, responseType: "blob" }, { isTransformResponse: false, ...option });
-    return URL.createObjectURL(img);
+    if (img.type.startsWith("image")) {
+      return URL.createObjectURL(img);
+    }
+    return "";
   } catch (ex) {
     return "";
   }
@@ -98,7 +101,7 @@ export const imageBase64 = async (url) => {
  */
 export function getFileIcon(fileName: string) {
   const appStore = useAppStore();
-  const color = appStore.getProjectConfig.themeColor || "#ee4f12";
+  const color = appStore.getThemeColor;
   const index = fileName.lastIndexOf(".");
   if (index > 0) {
     let name = fileName.substring(index + 1);

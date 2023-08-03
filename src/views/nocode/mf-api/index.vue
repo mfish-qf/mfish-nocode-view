@@ -42,23 +42,37 @@
 </template>
 <script lang="ts">
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteMfApi, exportMfApi, getMfApiList } from "/@/api/nocode/MfApi";
+  import { deleteMfApi, exportMfApi } from "/@/api/nocode/MfApi";
   import { useModal } from "/@/components/general/Modal";
   import MfApiModal from "./MfApiModal.vue";
   import { columns, searchFormSchema } from "./mfApi.data";
   import { usePermission } from "/@/hooks/web/UsePermission";
   import { MfApi } from "/@/api/nocode/model/MfApiModel";
   import { Input as AInput } from "ant-design-vue";
+  import { ref, watch } from "vue";
+  import { getApiFolderAndFile } from "/@/api/nocode/ApiFolder";
 
   export default {
     name: "MfApiManagement",
     components: { AInputSearch: AInput.Search, BasicTable, MfApiModal, TableAction },
-    setup() {
+    props: {
+      folderId: { type: String, default: "" }
+    },
+    setup(props) {
       const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();
+      const folderId = ref("");
+      watch(
+        () => props.folderId,
+        (value) => {
+          folderId.value = value;
+          queryFolder();
+        }
+      );
       const [registerTable, { reload, getForm }] = useTable({
         title: "",
-        api: getMfApiList,
+        api: getApiFolderAndFile,
+        searchInfo: { parentId: folderId },
         columns,
         formConfig: {
           name: "search_form_item",
@@ -68,7 +82,7 @@
         },
         useSearchForm: false,
         showTableSetting: true,
-        bordered: true,
+        bordered: false,
         showIndexColumn: false,
         actionColumn: {
           width: 80,
@@ -120,9 +134,12 @@
        * 处理完成
        */
       function handleSuccess() {
-        reload();
+        queryFolder();
       }
 
+      function queryFolder() {
+        reload({ searchInfo: { parentId: folderId.value } });
+      }
       function onSearch(val) {
         console.log(val, "aaa");
       }

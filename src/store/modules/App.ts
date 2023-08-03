@@ -18,6 +18,7 @@ interface AppState {
   projectConfig: ProjectConfig;
   // 当窗口缩小时，记住一些状态，并在恢复窗口时恢复这些状态
   beforeMiniInfo: BeforeMiniState;
+  themeColor: string;
 }
 
 let timeId: TimeoutHandle;
@@ -27,7 +28,8 @@ export const useAppStore = defineStore({
     darkMode: undefined,
     pageLoading: false,
     projectConfig: JSON.parse(JSON.stringify(projectSetting)),
-    beforeMiniInfo: {}
+    beforeMiniInfo: {},
+    themeColor: "#ee4f12"
   }),
   getters: {
     getPageLoading(): boolean {
@@ -56,6 +58,9 @@ export const useAppStore = defineStore({
     },
     getMultiTabsSetting(): MultiTabsSetting {
       return this.getProjectConfig.multiTabsSetting;
+    },
+    getThemeColor(): string {
+      return this.getProjectConfig.themeColor || "#ee4f12";
     }
   },
   actions: {

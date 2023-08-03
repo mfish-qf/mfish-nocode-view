@@ -30,7 +30,7 @@
             <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
           </ABreadcrumbItem>
         </ABreadcrumb>
-        <MfApiManagement />
+        <MfApiManagement :folderId="curFolderId" />
       </div>
     </div>
   </PageWrapper>
@@ -65,6 +65,7 @@
       const { prefixCls } = useDesign("api-folder");
       const genData = ref();
       const folderTreeRef = ref();
+      const curFolderId = ref("");
       onMounted(() => {
         getApiFolderTree().then((res) => {
           genData.value = res;
@@ -75,7 +76,7 @@
       const apiNode = reactive({
         icon: "ant-design:api-outlined",
         title: "我的API",
-        key: "API"
+        key: ""
       });
 
       function dragTree(_, nodes, callback: (res: boolean) => {}) {
@@ -119,6 +120,7 @@
         }
         list.unshift(apiNode);
         breadList.value = list;
+        curFolderId.value = node?.key ? node.key : "";
       }
 
       function setSelect(key: string) {
@@ -140,7 +142,8 @@
         selectFolder,
         apiNode,
         setSelect,
-        folderTreeRef
+        folderTreeRef,
+        curFolderId
       };
     }
   };

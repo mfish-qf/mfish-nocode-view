@@ -1,5 +1,5 @@
 import { defHttp } from "/@/utils/http/axios";
-import { ApiFolder, ReqApiFolder } from "/@/api/nocode/model/ApiFolderModel";
+import { ApiFolder, ApiFolderPageModel, ReqApiFolder } from "/@/api/nocode/model/ApiFolderModel";
 
 /**
  * @description: API目录
@@ -22,7 +22,9 @@ enum Api {
 export const getApiFolderTree = (reqApiFolder?: ReqApiFolder) => {
   return defHttp.get<ApiFolder[]>({ url: Api.APIFolderTree, params: reqApiFolder });
 };
-
+export const getApiFolderAndFile = (reqApiFolder?: ReqApiFolder) => {
+  return defHttp.get<ApiFolderPageModel>({ url: Api.ApiFolder, params: reqApiFolder });
+};
 /**
  * 导出API目录
  * @param reqApiFolder

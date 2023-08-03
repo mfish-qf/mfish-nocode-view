@@ -22,12 +22,12 @@
   </div>
 </template>
 <script lang="ts">
-  import { onMounted, ref, unref, nextTick, computed } from "vue";
+  import { onMounted, ref, unref, nextTick } from "vue";
   import { BasicTree, TreeActionType, TreeItem } from "/@/components/general/Tree";
   import { getOrgTree } from "/@/api/sys/Org";
   import { getTenantOrgTree } from "/@/api/sys/SsoTenant";
   import { Icon } from "/@/components/general/Icon";
-  import { useAppStore } from "/@/store/modules/App";
+  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
   export default {
     name: "OrgTree",
     components: { BasicTree, Icon },
@@ -41,10 +41,7 @@
     setup(props, { emit }) {
       const treeData = ref<TreeItem[]>([]);
       const asyncExpandTreeRef = ref<Nullable<TreeActionType>>(null);
-      const appStore = useAppStore();
-      const color = computed(() => {
-        return appStore.getProjectConfig.themeColor;
-      });
+      const color = useRootSetting().getThemeColor;
       async function fetch() {
         if (props.source === 1) {
           treeData.value = (await getTenantOrgTree()) as unknown as TreeItem[];

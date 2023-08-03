@@ -39,8 +39,8 @@
         @right-click="onRightClick"
       >
         <template #icon="{ key }">
-          <Icon v-if="expandedKeys.includes(key)" icon="ant-design:folder-open-outlined" />
-          <Icon v-else icon="ant-design:folder-outlined" />
+          <Icon v-if="expandedKeys.includes(key)" icon="ant-design:folder-open-filled" :color="iconColor(key)" />
+          <Icon v-else icon="ant-design:folder-filled" :color="iconColor(key)" />
         </template>
         <template #title="{ title, data }">
           <ADropdown :trigger="['contextmenu']">
@@ -104,8 +104,10 @@
   import { ScrollContainer } from "/@/components/general/Container";
   import "/@/components/general/Tree/style";
   import { cloneDeep } from "lodash-es";
+  import { useAppStore } from "/@/store/modules/App";
   const ADirectoryTree = Tree.DirectoryTree;
   const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
+  const iconColor = (key: string) => (selectedKeys.value.includes(key) ? "white" : useAppStore().getThemeColor);
 
   const props = defineProps({
     treeData: {
@@ -482,3 +484,14 @@
   }, 200);
   defineExpose({ setSelect, clearSelect });
 </script>
+<style lang="less">
+  .ant-tree {
+    .ant-tree-treenode {
+      .ant-tree-treenode-selected {
+        &::before {
+          background: #0a53be !important;
+        }
+      }
+    }
+  }
+</style>
