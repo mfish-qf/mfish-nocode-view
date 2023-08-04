@@ -30,7 +30,7 @@
             <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
           </ABreadcrumbItem>
         </ABreadcrumb>
-        <MfApiManagement :folderId="curFolderId" @folderClick="folderClick" />
+        <ApiFolderList :folderId="curFolderId" @folder-click="folderClick" @folder-delete="folderDelete" />
       </div>
     </div>
   </PageWrapper>
@@ -49,12 +49,14 @@
     updateApiFolder
   } from "/@/api/nocode/ApiFolder";
   import { Icon } from "/@/components/general/Icon";
-  import MfApiManagement from "/@/views/nocode/mf-api/index.vue";
+  import { FolderVo } from "/@/api/nocode/model/ApiFolderModel";
+  import ApiFolderList from "/@/views/nocode/api-folder/ApiFolderList.vue";
+  import { useMessage } from "/@/hooks/web/UseMessage";
 
   export default {
     name: "ApiFolderManagement",
     components: {
-      MfApiManagement,
+      ApiFolderList,
       Icon,
       PageWrapper,
       DragFolderTree,
@@ -66,6 +68,7 @@
       const genData = ref();
       const folderTreeRef = ref();
       const curFolderId = ref("");
+      const { createMessage } = useMessage();
       onMounted(() => {
         getApiFolderTree().then((res) => {
           genData.value = res;
@@ -98,6 +101,10 @@
       }
 
       function deleteTree(node, callback: (res: boolean) => {}) {
+        if (node.children?.length > 0) {
+          createMessage.error("错误:请先移除子目录");
+          return;
+        }
         deleteApiFolder(node.id)
           .then(() => {
             callback(true);
@@ -140,6 +147,10 @@
         //todo 待完善
       }
 
+      function folderDelete(folderVo: FolderVo) {
+        folderTreeRef.value.deleteFolder(folderVo.id);
+      }
+
       return {
         prefixCls,
         genData,
@@ -153,7 +164,8 @@
         setSelect,
         folderTreeRef,
         curFolderId,
-        folderClick
+        folderClick,
+        folderDelete
       };
     }
   };
