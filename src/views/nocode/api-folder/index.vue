@@ -30,7 +30,7 @@
             <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
           </ABreadcrumbItem>
         </ABreadcrumb>
-        <MfApiManagement />
+        <ApiFolderList :folderId="curFolderId" @folder-click="folderClick" @folder-delete="folderDelete" />
       </div>
     </div>
   </PageWrapper>
@@ -49,12 +49,14 @@
     updateApiFolder
   } from "/@/api/nocode/ApiFolder";
   import { Icon } from "/@/components/general/Icon";
-  import MfApiManagement from "/@/views/nocode/mf-api/index.vue";
+  import { FolderVo } from "/@/api/nocode/model/ApiFolderModel";
+  import ApiFolderList from "/@/views/nocode/api-folder/ApiFolderList.vue";
+  import { useMessage } from "/@/hooks/web/UseMessage";
 
   export default {
     name: "ApiFolderManagement",
     components: {
-      MfApiManagement,
+      ApiFolderList,
       Icon,
       PageWrapper,
       DragFolderTree,
@@ -65,6 +67,8 @@
       const { prefixCls } = useDesign("api-folder");
       const genData = ref();
       const folderTreeRef = ref();
+      const curFolderId = ref("");
+      const { createMessage } = useMessage();
       onMounted(() => {
         getApiFolderTree().then((res) => {
           genData.value = res;
@@ -75,7 +79,7 @@
       const apiNode = reactive({
         icon: "ant-design:api-outlined",
         title: "我的API",
-        key: "API"
+        key: ""
       });
 
       function dragTree(_, nodes, callback: (res: boolean) => {}) {
@@ -97,6 +101,10 @@
       }
 
       function deleteTree(node, callback: (res: boolean) => {}) {
+        if (node.children?.length > 0) {
+          createMessage.error("错误:请先移除子目录");
+          return;
+        }
         deleteApiFolder(node.id)
           .then(() => {
             callback(true);
@@ -119,6 +127,7 @@
         }
         list.unshift(apiNode);
         breadList.value = list;
+        curFolderId.value = node?.key ? node.key : "";
       }
 
       function setSelect(key: string) {
@@ -127,6 +136,19 @@
           return;
         }
         folderTreeRef.value.setSelect(key);
+      }
+
+      function folderClick(record) {
+        //如果是目录进入目录
+        if (record.fType === 0) {
+          setSelect(record.id);
+        }
+        //如果是文件
+        //todo 待完善
+      }
+
+      function folderDelete(folderVo: FolderVo) {
+        folderTreeRef.value.deleteFolder(folderVo.id);
       }
 
       return {
@@ -140,7 +162,10 @@
         selectFolder,
         apiNode,
         setSelect,
-        folderTreeRef
+        folderTreeRef,
+        curFolderId,
+        folderClick,
+        folderDelete
       };
     }
   };

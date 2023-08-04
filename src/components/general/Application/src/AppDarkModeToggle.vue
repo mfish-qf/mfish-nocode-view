@@ -39,7 +39,7 @@
   @prefix-cls: ~"@{namespace}-dark-switch";
 
   .@{prefix-cls} {
-    border: 1px solid rgb(196 188 188);
+    border: 1px solid #4e4c4c;
     position: relative;
     display: flex;
     width: 50px;
@@ -56,7 +56,7 @@
       z-index: 1;
       width: 18px;
       height: 18px;
-      background-color: #fff;
+      //background-color: #fff;
       border-radius: 50%;
       transition: transform 0.5s, background-color 0.5s;
       will-change: transform;
@@ -72,7 +72,7 @@
     &--dark {
       .@{prefix-cls}-inner {
         transform: translateX(calc(100% + 2px));
-        background-color: #151515;
+        //background-color: #151515;
       }
     }
   }

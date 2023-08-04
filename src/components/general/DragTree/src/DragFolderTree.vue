@@ -29,6 +29,7 @@
         class="draggable-tree"
         :draggable="allowDrag && draggable"
         block-node
+        show-icon
         :tree-data="gData"
         @drop="onDrop"
         :expanded-keys="expandedKeys"
@@ -39,8 +40,8 @@
         @right-click="onRightClick"
       >
         <template #icon="{ key }">
-          <Icon v-if="expandedKeys.includes(key)" icon="ant-design:folder-open-outlined" />
-          <Icon v-else icon="ant-design:folder-outlined" />
+          <Icon v-if="expandedKeys.includes(key)" icon="ant-design:folder-open-filled" :color="iconColor(key)" />
+          <Icon v-else icon="ant-design:folder-filled" :color="iconColor(key)" />
         </template>
         <template #title="{ title, data }">
           <ADropdown :trigger="['contextmenu']">
@@ -104,13 +105,14 @@
   import { ScrollContainer } from "/@/components/general/Container";
   import "/@/components/general/Tree/style";
   import { cloneDeep } from "lodash-es";
-  const ADirectoryTree = Tree.DirectoryTree;
+  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
+  import { useAppStore } from "/@/store/modules/App";
   const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
-
   const props = defineProps({
     treeData: {
       type: Array as PropType<TreeDataItem[]>
     },
+    isDirectoryTree: { type: Boolean, default: false },
     //节点key
     nodeKey: { type: String, default: "id" },
     //节点标题
@@ -124,6 +126,13 @@
     allowDelete: { type: Boolean, default: true },
     enterButton: { type: Boolean, default: false }
   });
+  const ADirectoryTree = props.isDirectoryTree ? Tree.DirectoryTree : Tree;
+  const iconColor = (key: string) =>
+    props.isDirectoryTree
+      ? selectedKeys.value.includes(key)
+        ? "white"
+        : useAppStore().getThemeColor
+      : useRootSetting().getThemeColor.value;
   const emit = defineEmits(["select", "expand", "save:insert", "save:update", "save:delete", "save:drag"]);
   const draggable = ref<boolean>(true);
   const gData = ref<any[]>([]);
@@ -138,6 +147,7 @@
     isEdit: boolean;
     isLeaf: boolean;
     parent?: NodeType;
+    children?: NodeType[];
   }
   const newNode = (): NodeType => {
     const key = buildUUID();
@@ -170,7 +180,7 @@
         isLeaf = false;
         initData(node.children);
       }
-      dataList.push({ key: node[props.nodeKey], title: node[props.nodeTitle] });
+      dataList.push({ key: node[props.nodeKey], title: node[props.nodeTitle], isLeaf });
       node["key"] = node[props.nodeKey];
       node["title"] = node[props.nodeTitle];
       node["isLeaf"] = isLeaf;
@@ -182,7 +192,7 @@
   const searchValue = ref<string>("");
   const autoExpandParent = ref<boolean>(true);
   const expandAll = (val: boolean) => {
-    expandedKeys.value = val ? (dataList.map((item) => item.key) as string[]) : [];
+    expandedKeys.value = val ? (dataList.filter((item) => !item.isLeaf).map((item) => item.key) as string[]) : [];
   };
   const onExpand = (keys: string[]) => {
     expandedKeys.value = keys;
@@ -240,6 +250,11 @@
       if (!node) return;
       selectedKeys.value = [key];
       selectEmit({ ...node });
+      const pNode = findNode(gData.value, (item) => item.id === node.parentId);
+      if (!pNode) return;
+      expandedKeys.value = [...expandedKeys.value, pNode.id];
+      emit("expand", expandedKeys.value);
+      autoExpandParent.value = true;
     }
   }
   function clearSelect() {
@@ -282,7 +297,7 @@
      * @param oldPId 父ID
      * @param data 数据集
      */
-    const parentIconChange = (oldPId: string, data: NodeType[]): boolean => {
+    const pIconChange = (oldPId: string, data: NodeType[]): boolean => {
       const pNode = findNode(data, (node) => node.key === oldPId);
       if (pNode) {
         pNode.isLeaf = !(pNode.children && pNode.children.length > 0);
@@ -336,7 +351,7 @@
         if (expandChange && dropObj) {
           expandedKeys.value?.push(dropObj.key);
         }
-        if (parentIconChange(oldPId, data) || expandChange) {
+        if (pIconChange(oldPId, data) || expandChange) {
           emit("expand", expandedKeys.value);
         }
         gData.value = data;
@@ -376,7 +391,7 @@
     if (inputBlur.key) {
       saveFolder(inputBlur.key);
     }
-    let node;
+    let node: any;
     const child = newNode();
     //treeKey等于顶级节点父节点ID，直接添加在最顶层
     if (treeKey === props.topNodeParentKey) {
@@ -389,6 +404,10 @@
       }
       child.parentId = parent.id;
       parent.isLeaf = false;
+      const listNode = dataList.find((item) => item.key === parent.id);
+      if (listNode) {
+        listNode.isLeaf = false;
+      }
       node = parent.children;
     }
     inputValue.value = newFolder;
@@ -425,7 +444,7 @@
         data.title = node.title;
       } else {
         emit("save:insert", newNode);
-        dataList.push({ key: newNode.key, title: newNode.title });
+        dataList.push({ key: newNode.key, title: newNode.title, isLeaf: true });
       }
       selectEmit(newNode);
     } finally {
@@ -450,23 +469,34 @@
   };
 
   const deleteFolder = (treeKey) => {
-    const loop = (treeKey, nodes) => {
+    const loop = (treeKey: string, nodes, pNode) => {
       for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].key === treeKey) {
           emit("save:delete", nodes[i], (res) => {
             if (res) {
               nodes.splice(i, 1);
+              pNodeIconChange(pNode);
             }
           });
           return;
         }
         if (nodes[i].children) {
-          loop(treeKey, nodes[i].children);
+          loop(treeKey, nodes[i].children, nodes[i]);
         }
       }
     };
-    loop(treeKey, gData.value);
+    loop(treeKey, gData.value, undefined);
   };
+  const pNodeIconChange = (pNode) => {
+    if (pNode) {
+      pNode.isLeaf = !(pNode.children && pNode.children.length > 0);
+      if (pNode.isLeaf) {
+        expandedKeys.value = expandedKeys.value.filter((item) => item !== pNode.id);
+        emit("expand", expandedKeys.value);
+      }
+    }
+  };
+
   const onContextMenuClick = useDebounceFn((menuKey: string, treeKey: string) => {
     switch (menuKey) {
       case "1":
@@ -480,5 +510,5 @@
         break;
     }
   }, 200);
-  defineExpose({ setSelect, clearSelect });
+  defineExpose({ setSelect, clearSelect, deleteFolder });
 </script>

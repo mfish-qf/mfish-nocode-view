@@ -61,9 +61,9 @@
   import { Tooltip, Row, Col, Breadcrumb, BreadcrumbItem } from "ant-design-vue";
   import { TableInfo } from "/@/api/sys/model/DbConnectModel";
   import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useAppStore } from "/@/store/modules/App";
   import TableDetail from "/@/views/sys/database/TableDetail.vue";
   import { TreeItem } from "/@/components/general/Tree";
+  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
 
   export default {
     name: "CodeBuild",
@@ -83,8 +83,7 @@
       let tableList = ref<TableInfo[]>([]);
       const dbTreeRef = ref();
       const { prefixCls } = useDesign("code-build");
-      const appStore = useAppStore();
-      const color = computed(() => appStore.getProjectConfig.themeColor);
+      const color = useRootSetting().getThemeColor;
       const startSearch = ref(false);
       const searchTable = ref<TableInfo[]>([]);
       const curNode = ref<TreeItem>();

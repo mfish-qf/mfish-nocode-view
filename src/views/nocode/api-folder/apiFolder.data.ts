@@ -7,25 +7,26 @@ import { FormSchema } from "/@/components/general/Table";
  * @date: 2023-07-21
  * @version: V1.0.0
  */
+export const API_SAVE = "__API_SAVE__";
 export const columns: BasicColumn[] = [
   {
-    title: "目录名称",
+    title: "名称",
     dataIndex: "name",
     width: 120
   },
   {
-    title: "父节点",
-    dataIndex: "parentId",
+    title: "参数类型",
+    dataIndex: "paramFlag",
     width: 120
   },
   {
-    title: "租户ID",
-    dataIndex: "tenantId",
+    title: "创建时间",
+    dataIndex: "createTime",
     width: 120
   },
   {
-    title: "文件夹排序",
-    dataIndex: "folderSort",
+    title: "创建人",
+    dataIndex: "createBy",
     width: 120
   }
 ];

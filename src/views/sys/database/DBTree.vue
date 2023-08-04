@@ -33,16 +33,16 @@
 </template>
 <script lang="ts">
   import { BasicTree, ContextMenuItem, TreeActionType, TreeItem } from "/@/components/general/Tree";
-  import { onMounted, ref, unref, computed, createVNode } from "vue";
+  import { onMounted, ref, unref, createVNode } from "vue";
   import { deleteDbConnect, getDbConnectList, getTableList } from "/@/api/sys/DbConnect";
   import { PageResult } from "/@/api/model/BaseModel";
   import { TableInfo } from "/@/api/sys/model/DbConnectModel";
-  import { useAppStore } from "/@/store/modules/App";
   import Icon from "/@/components/general/Icon/src/Icon.vue";
   import { Button, Tooltip, Modal } from "ant-design-vue";
   import { usePermission } from "/@/hooks/web/UsePermission";
   import DbConnectModal from "/@/views/sys/db-connect/DbConnectModal.vue";
   import { useModal } from "/@/components/general/Modal";
+  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
 
   export default {
     name: "DBTree",
@@ -54,9 +54,7 @@
       const asyncTreeRef = ref<Nullable<TreeActionType>>(null);
       let selectedKeys = ref<TreeItem[]>([]);
       const [registerModal, { openModal }] = useModal();
-      const appStore = useAppStore();
-      const color = computed(() => appStore.getProjectConfig.themeColor);
-
+      const color = useRootSetting().getThemeColor;
       async function fetch() {
         const dbList = (await getDbConnectList()).list;
         dbList.forEach((db) => {

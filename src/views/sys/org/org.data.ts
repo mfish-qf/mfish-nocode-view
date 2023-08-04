@@ -4,7 +4,6 @@ import { h } from "vue";
 import { Tag } from "ant-design-vue";
 import { Icon } from "/@/components/general/Icon";
 import { useAppStore } from "/@/store/modules/App";
-
 export const columns: BasicColumn[] = [
   {
     title: "组织名称",
@@ -16,8 +15,8 @@ export const columns: BasicColumn[] = [
       const tenantId = record.tenantId;
       if (tenantId) {
         return h("div", { style: "display: flex;align-items: center;" }, [
-          h(Icon, { icon: "ion:business", color: appStore.getProjectConfig.themeColor }),
-          h("div", { style: "margin-left: 12px;color:" + appStore.getProjectConfig.themeColor }, record.orgName)
+          h(Icon, { icon: "ion:business", color: appStore.getThemeColor }),
+          h("div", { style: "margin-left: 12px;color:" + appStore.getThemeColor }, record.orgName)
         ]);
       }
       return record.orgName;

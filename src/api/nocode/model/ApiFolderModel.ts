@@ -19,5 +19,9 @@ export interface ReqApiFolder extends ReqPage {
   id?: string;
   name?: string;
 }
-
-export type ApiFolderPageModel = PageResult<ApiFolder>;
+export interface FolderVo extends BaseEntity<string> {
+  name?: string;
+  fType?: number;
+  paramFlag?: number;
+}
+export type ApiFolderPageModel = PageResult<FolderVo>;
