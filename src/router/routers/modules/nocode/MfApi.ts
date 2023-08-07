@@ -10,6 +10,7 @@ const apiConfig: AppRouteRecordRaw = {
   name: "ApiConfig",
   component: () => import("/@/views/nocode/mf-api/index.vue"),
   meta: {
+    menuSort: 999,
     hideMenu: true,
     title: "API配置"
   }
