@@ -4,31 +4,30 @@
  @date: 2023/4/12 10:41
 -->
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" @ok="handleSubmit">
-    <CodeBuild>
+  <BasicModal v-bind="$attrs" title="数据源" @register="registerModal" :showOkBtn="false" cancelText="关闭">
+    <DataBaseManagement>
       <template #[item]="data" v-for="item in Object.keys($slots)">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
-    </CodeBuild>
+    </DataBaseManagement>
   </BasicModal>
 </template>
-
 <script lang="ts">
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import CodeBuild from "/@/views/sys/database/index.vue";
+  import DataBaseManagement from "/@/views/sys/database/index.vue";
+  import { defineComponent, onMounted } from "vue";
 
-  export default {
+  export default defineComponent({
     name: "DataBaseModal",
-    components: { CodeBuild, BasicModal },
+    components: { DataBaseManagement, BasicModal },
     setup() {
-      const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
-        setModalProps({ confirmLoading: false, width: 1200, height: 600 });
+      const [registerModal, { setModalProps }] = useModalInner();
+      onMounted(() => {
+        setModalProps({ width: "1200px", height: 600, defaultFullscreen: true });
       });
       return {
         registerModal
       };
     }
-  };
+  });
 </script>
-
-<style scoped></style>
