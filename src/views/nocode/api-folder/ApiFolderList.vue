@@ -5,63 +5,78 @@
  @version: V1.1.0
 -->
 <template>
-  <BasicTable @register="registerTable">
-    <template #toolbar>
-      <AInputSearch placeholder="输入文件名称" @search="onSearch" style="width: 200px" allowClear />
-      <a-button class="left" type="primary" @click="handleCreate" v-auth="'sys:mfApi:insert'">新建API</a-button>
-    </template>
-    <template #bodyCell="{ column, record }">
-      <template v-if="column.key === 'action'">
-        <TableAction
-          :actions="[
-            {
-              icon: 'ant-design:edit-outlined',
-              onClick: handleEdit.bind(null, record),
-              auth: 'sys:mfApi:update',
-              tooltip: '修改'
-            },
-            {
-              icon: 'ant-design:delete-outlined',
-              color: 'error',
-              popConfirm: {
-                title: '是否确认删除',
-                placement: 'left',
-                confirm: handleDelete.bind(null, record)
+  <div>
+    <BasicTable @register="registerTable">
+      <template #toolbar>
+        <AInputSearch placeholder="输入文件名称" @search="onSearch" style="width: 200px" allowClear />
+        <AButton class="left" type="primary" @click="handleCreate" v-auth="'sys:mfApi:insert'">新建API</AButton>
+      </template>
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.key === 'action'">
+          <TableAction
+            :actions="[
+              {
+                icon: 'ant-design:edit-outlined',
+                onClick: handleEdit.bind(null, record),
+                auth: 'sys:mfApi:update',
+                tooltip: '修改'
               },
-              auth: 'sys:mfApi:delete',
-              tooltip: '删除'
-            }
-          ]"
-        />
+              {
+                icon: 'ant-design:delete-outlined',
+                color: 'error',
+                popConfirm: {
+                  title: '是否确认删除',
+                  placement: 'left',
+                  confirm: handleDelete.bind(null, record)
+                },
+                auth: 'sys:mfApi:delete',
+                tooltip: '删除'
+              }
+            ]"
+          />
+        </template>
+        <template v-if="column.key === 'name'">
+          <div style="display: flex; align-items: center; cursor: pointer" @click="folderClick(record)">
+            <Icon icon="ant-design:api-outlined" v-if="record?.fType === 1" />
+            <Icon v-else icon="ant-design:folder-filled" :color="iconColor" />
+            <div style="margin-left: 12px">{{ record.name }}</div>
+          </div>
+        </template>
       </template>
-      <template v-if="column.key === 'name'">
-        <div style="display: flex; align-items: center; cursor: pointer" @click="folderClick(record)">
-          <Icon icon="ant-design:api-outlined" v-if="record?.fType === 1" />
-          <Icon v-else icon="ant-design:folder-filled" :color="iconColor" />
-          <div style="margin-left: 12px">{{ record.name }}</div>
-        </div>
+    </BasicTable>
+    <DataBaseModal @register="registerModal">
+      <template #button="{ data }">
+        <AButton type="primary" @click="ApiCreate(data)" v-auth="'sys:mfApi:insert'">新建API</AButton>
       </template>
-    </template>
-  </BasicTable>
+    </DataBaseModal>
+  </div>
 </template>
 <script lang="ts">
+  import { onMounted, onUnmounted, ref, watch, defineComponent } from "vue";
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { deleteMfApi, exportMfApi } from "/@/api/nocode/MfApi";
   import { usePermission } from "/@/hooks/web/UsePermission";
   import { MfApi } from "/@/api/nocode/model/MfApiModel";
   import { Input as AInput } from "ant-design-vue";
-  import { onMounted, onUnmounted, ref, watch } from "vue";
   import { getApiFolderAndFile } from "/@/api/nocode/ApiFolder";
   import Icon from "/@/components/general/Icon/src/Icon.vue";
   import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
   import { propTypes } from "/@/utils/PropTypes";
   import { FolderVo } from "/@/api/nocode/model/ApiFolderModel";
   import { API_SAVE, columns } from "/@/views/nocode/api-folder/apiFolder.data";
+  import DataBaseModal from "/@/views/sys/database/DataBaseModal.vue";
+  import { useModal } from "/@/components/general/Modal";
   import { router } from "/@/router";
 
-  export default {
+  export default defineComponent({
     name: "ApiFolderList",
-    components: { Icon, AInputSearch: AInput.Search, BasicTable, TableAction },
+    components: {
+      DataBaseModal,
+      Icon,
+      AInputSearch: AInput.Search,
+      BasicTable,
+      TableAction
+    },
     props: {
       folderId: propTypes.string.def("")
     },
@@ -70,6 +85,7 @@
       const { hasPermission } = usePermission();
       const folderId = ref("");
       const iconColor = useRootSetting().getThemeColor;
+      const [registerModal, { openModal, closeModal }] = useModal();
       watch(
         () => props.folderId,
         (value) => {
@@ -103,11 +119,22 @@
        * 新建
        */
       function handleCreate() {
+        openModal(true);
+      }
+
+      function ApiCreate(data) {
+        if (!data.key) return;
+        const values = data.key.split(",");
+        if (values?.length < 2) return;
+        const connectId = values[0];
+        const tableName = values[1];
         const routeData = router.resolve({
-          path: "/low-code/mf-api/config"
+          path: "/low-code/mf-api/config",
+          query: { connectId, tableName, sourceType: 0 }
         });
         localStorage.setItem(API_SAVE, "0");
         window.open(routeData.href, "_blank");
+        closeModal();
       }
 
       function onStorageHandle(e) {
@@ -171,10 +198,12 @@
         handleExport,
         handleSuccess,
         hasPermission,
+        ApiCreate,
         onSearch,
         iconColor,
-        folderClick
+        folderClick,
+        registerModal
       };
     }
-  };
+  });
 </script>

@@ -66,7 +66,7 @@
   import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
 
   export default {
-    name: "CodeBuild",
+    name: "DataBaseManagement",
     components: {
       TableDetail,
       DBTree,

@@ -40,7 +40,7 @@
   import { Breadcrumb } from "ant-design-vue";
   import { DragFolderTree } from "/@/components/general/DragTree";
   import { useDesign } from "/@/hooks/web/UseDesign";
-  import { onMounted, reactive, ref } from "vue";
+  import { onMounted, reactive, ref, defineComponent } from "vue";
   import {
     deleteApiFolder,
     dragApiFolder,
@@ -53,7 +53,7 @@
   import ApiFolderList from "/@/views/nocode/api-folder/ApiFolderList.vue";
   import { useMessage } from "/@/hooks/web/UseMessage";
 
-  export default {
+  export default defineComponent({
     name: "ApiFolderManagement",
     components: {
       ApiFolderList,
@@ -168,7 +168,7 @@
         folderDelete
       };
     }
-  };
+  });
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~"@{namespace}-api-folder";

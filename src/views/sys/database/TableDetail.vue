@@ -6,7 +6,7 @@
 <template>
   <PageWrapper :title="`数据表：${curNode?.tableName?.toUpperCase()}`" contentBackground contentFullHeight fixedHeight>
     <template #extra>
-      <slot name="button"></slot>
+      <slot name="button" v-bind="{ data: curNode }"></slot>
     </template>
     <template #footer>
       <a-tabs default-active-key="1" @change="changeTab">

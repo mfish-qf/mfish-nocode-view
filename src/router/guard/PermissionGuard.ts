@@ -67,7 +67,7 @@ export function createPermissionGuard(router: Router) {
         replace: true
       };
       if (to.path) {
-        redirectData.query = { redirect: to.path };
+        redirectData.query = { redirect: to.fullPath };
       }
       next(redirectData);
       return;
