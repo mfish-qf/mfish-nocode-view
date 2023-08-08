@@ -22,6 +22,7 @@ enum Api {
   TestConnect = "/sys/dbConnect/test",
   Tables = "/sys/dbConnect/tables",
   Fields = "/sys/dbConnect/fields",
+  Headers = "/sys/dbConnect/headers",
   DataTable = "/sys/dbConnect/data",
   Tree = "/sys/dbConnect/tree"
 }
@@ -66,6 +67,14 @@ export const getFieldList = (params: ReqTable) => {
  */
 export const getDataTable = (params: ReqTable) => {
   return defHttp.get<DataTable>({ url: Api.DataTable, params: params });
+};
+
+/**
+ * 获取数据列头
+ * @param params
+ */
+export const getDataHeaders = (params: ReqTable) => {
+  return defHttp.get<PageResult<FieldInfo>>({ url: Api.Headers, params: params });
 };
 
 /**
