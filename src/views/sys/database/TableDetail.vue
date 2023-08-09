@@ -106,13 +106,10 @@
         }
         getDataTable({ ...condition.value, pageNum, pageSize })
           .then((res) => {
-            let columns: BasicColumn[] = [];
-            Object.keys(res.header).forEach((key) => {
-              columns.push({
-                title: key,
-                dataIndex: key
-              });
-            });
+            const columns: BasicColumn[] = Object.keys(res.headers).map((key) => ({
+              title: key,
+              dataIndex: key
+            }));
             setColumns(columns);
             setDataTable(res.table.list);
             setPagination({
