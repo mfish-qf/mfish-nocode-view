@@ -20,7 +20,7 @@
     >
       <template #headerTools>
         <Tooltip title="新增数据库" v-if="hasPermission('sys:database:insert')">
-          <AButton type="text" size="small" @click="DBCreate">
+          <AButton type="link" size="small" @click="DBCreate">
             <template #icon>
               <Icon icon="ant-design:plus-circle-outlined" />
             </template>

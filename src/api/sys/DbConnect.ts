@@ -7,7 +7,8 @@ import {
   TableInfo,
   FieldInfo,
   DataTable,
-  DBTreeNode
+  DBTreeNode,
+  MetaDataHeader
 } from "/@/api/sys/model/DbConnectModel";
 import { PageResult } from "/@/api/model/BaseModel";
 
@@ -74,7 +75,7 @@ export const getDataTable = (params: ReqTable) => {
  * @param params
  */
 export const getDataHeaders = (params: ReqTable) => {
-  return defHttp.get<PageResult<FieldInfo>>({ url: Api.Headers, params: params });
+  return defHttp.get<MetaDataHeader[]>({ url: Api.Headers, params: params });
 };
 
 /**

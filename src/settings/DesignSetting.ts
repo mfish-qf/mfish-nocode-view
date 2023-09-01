@@ -14,7 +14,7 @@ export const APP_PRESET_COLOR_LIST: string[] = [
   "#ff5c93",
   "#0096c7",
   "#9c27b0",
-  "#fdd001",
+  "#d2aa08",
   "#ff9800",
   "#5172DC",
   "#018ffb",

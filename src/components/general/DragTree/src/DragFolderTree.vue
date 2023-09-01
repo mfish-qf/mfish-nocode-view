@@ -15,11 +15,11 @@
     >
       <template #headerTools v-if="allowAdd">
         <Tooltip title="新增目录">
-          <Button type="text" size="small" @click="addFolder()">
+          <AButton type="link" size="small" @click="addFolder()">
             <template #icon>
               <Icon icon="ant-design:folder-add-outlined" />
             </template>
-          </Button>
+          </AButton>
         </Tooltip>
       </template>
     </TreeHeader>
@@ -94,7 +94,15 @@
 </template>
 <script lang="ts" setup>
   import { PropType, ref, watch, unref, reactive } from "vue";
-  import { Empty, Button, Tree, Tooltip, Input as AInput, Dropdown as ADropdown, Menu as AMenu } from "ant-design-vue";
+  import {
+    Empty,
+    Button as AButton,
+    Tree,
+    Tooltip,
+    Input as AInput,
+    Dropdown as ADropdown,
+    Menu as AMenu
+  } from "ant-design-vue";
   import type { AntTreeNodeDropEvent, TreeProps } from "ant-design-vue/es/tree";
   import { TreeDataItem } from "ant-design-vue/es/tree/Tree";
   import TreeHeader from "/@/components/general/Tree/src/components/TreeHeader.vue";
