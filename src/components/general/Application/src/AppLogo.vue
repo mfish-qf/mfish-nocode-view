@@ -1,8 +1,9 @@
 <template>
-  <div class="anticon" :class="getAppLogoClass" @click="goHome">
+  <div class="anticon" :class="getAppLogoClass" @click="allowGoHome ? goHome : ''">
     <img src="../../../../assets/images/logo.png" />
     <div class="ml-2 truncate md:opacity-100" :class="getTitleClass" v-show="showTitle">
-      {{ title }}
+      <slot v-if="titleSlot" name="title"></slot>
+      <span v-else>{{ title }}</span>
     </div>
   </div>
 </template>
@@ -15,6 +16,7 @@
   import { usePermissionStore } from "/@/store/modules/Permission";
 
   const props = defineProps({
+    allowGoHome: { type: Boolean, default: true },
     /**
      * The theme of the current parent component
      */
@@ -23,6 +25,10 @@
      * Whether to show title
      */
     showTitle: { type: Boolean, default: true },
+    /**
+     * 标题外部挂载
+     */
+    titleSlot: { type: Boolean, default: false },
     /**
      * The title is also displayed when the menu is collapsed
      */

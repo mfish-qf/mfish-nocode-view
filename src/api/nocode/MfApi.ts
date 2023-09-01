@@ -1,5 +1,6 @@
 import { defHttp } from "/@/utils/http/axios";
-import { MfApi, ReqMfApi, MfApiPageModel } from "/@/api/nocode/model/MfApiModel";
+import { MfApi, ReqMfApi, MfApiPageModel, Config } from "/@/api/nocode/model/MfApiModel";
+import { MetaDataHeader } from "/@/api/sys/model/DbConnectModel";
 
 /**
  * @description: 自定义API
@@ -8,7 +9,9 @@ import { MfApi, ReqMfApi, MfApiPageModel } from "/@/api/nocode/model/MfApiModel"
  * @version: V1.0.0
  */
 enum Api {
-  MfApi = "/nocode/mfApi"
+  MfApi = "/nocode/mfApi",
+  SQL = "/nocode/mfApi/sql",
+  Fields = "/nocode/mfApi/fields"
 }
 
 /**
@@ -27,7 +30,7 @@ export const getMfApiList = (reqMfApi?: ReqMfApi) => {
  */
 export function exportMfApi(reqMfApi?: ReqMfApi) {
   return defHttp.download({ url: Api.MfApi + "/export", params: reqMfApi });
-};
+}
 
 /**
  * 新增自定义API
@@ -37,7 +40,7 @@ export function exportMfApi(reqMfApi?: ReqMfApi) {
  */
 export function insertMfApi(mfApi: MfApi) {
   return defHttp.post<MfApi>({ url: Api.MfApi, params: mfApi }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 修改自定义API
@@ -47,7 +50,7 @@ export function insertMfApi(mfApi: MfApi) {
  */
 export function updateMfApi(mfApi: MfApi) {
   return defHttp.put<MfApi>({ url: Api.MfApi, params: mfApi }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 删除自定义API
@@ -57,4 +60,12 @@ export function updateMfApi(mfApi: MfApi) {
  */
 export function deleteMfApi(id: string) {
   return defHttp.delete<MfApi>({ url: Api.MfApi + "/" + id }, { successMessageMode: "message" });
-};
+}
+
+export function getQuerySql(config: Config) {
+  return defHttp.post<string>({ url: Api.SQL, params: config }, { errorMessageMode: "message" });
+}
+
+export function getQueryFields(config: Config) {
+  return defHttp.post<MetaDataHeader[]>({ url: Api.Fields, params: config }, { errorMessageMode: "message" });
+}

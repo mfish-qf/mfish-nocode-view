@@ -54,8 +54,18 @@ export interface FieldInfo {
 }
 
 export interface DataTable {
-  table: PageResult<Record<string, any>>;
-  headers: Record<string, any>;
+  table: PageResult<MetaDataHeader>;
+  headers: MetaDataHeader[];
+}
+export type DataType = "STRING" | "NUMBER" | "DATE" | "BOOLEAN";
+export interface MetaDataHeader {
+  colName?: string;
+  fieldName?: string;
+  comment?: string;
+  expression?: string;
+  dataType?: DataType;
+  tableAlias?: string;
+  targetType?: string;
 }
 
 export interface ReqTable extends ReqPage {

@@ -1,4 +1,5 @@
 import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
+import { MetaDataHeader } from "/@/api/sys/model/DbConnectModel";
 
 /**
  * @description: 自定义API
@@ -38,5 +39,112 @@ export interface ReqMfApi extends ReqPage {
   folderId?: string;
 }
 
+export interface Config {
+  sourceType: number;
+  sourceId: string;
+  sqlQuery: SqlQuery;
+}
+
+export interface FieldCheck extends MetaDataHeader {
+  checked: boolean;
+}
+
+export interface SqlQuery {
+  schema?: string;
+  sourceTable?: string;
+  fields?: MetaDataHeader[];
+  joins?: Join[];
+  filters?: Filter[];
+  aggregates?: Aggregate[];
+  groups?: Group[];
+  orders?: Order[];
+  customColumns?: CustomColumn[];
+  limit?: number;
+  sqlQuery?: SqlQuery;
+}
+export interface Join {
+  fields?: MetaDataHeader[];
+  schema?: string;
+  table?: string;
+  tableAlias?: string;
+  condition?: JoinCondition;
+  type: "left" | "inner" | "right" | "full";
+}
+
+export interface JoinCondition {
+  field: MetaDataHeader;
+  operation: string;
+  joinedField: MetaDataHeader;
+}
+
+export interface Filter {
+  type: "0" | "1"; //0符号 and,or,(,) 1表达式
+  field?: MetaDataHeader;
+  operator?:
+    | "eq"
+    | "ne"
+    | "gt"
+    | "ge"
+    | "lt"
+    | "le"
+    | "between"
+    | "isNull"
+    | "isNotNull"
+    | "like"
+    | "notLike"
+    | "likeLeft"
+    | "likeRight";
+  value?: string;
+  valueType?: "0" | "1"; //0常量 1变量
+  required?: boolean;
+}
+
+export enum FilterCondition {
+  error = "error",
+  eq = "=",
+  ne = "!=",
+  gt = ">",
+  ge = ">=",
+  lt = "<",
+  le = "<=",
+  between = "between",
+  isNull = "isNull",
+  isNotNull = "isNotNull",
+  like = "like",
+  notLike = "notLike",
+  likeLeft = "likeLeft",
+  likeRight = "likeRight"
+}
+
+export interface Aggregate {
+  aggFunc?: string;
+  field?: MetaDataHeader;
+}
+
+export enum AggregateType {
+  count = "计数",
+  sum = "求和",
+  avg = "平均",
+  max = "最大",
+  min = "最小"
+}
+
+export interface Group {
+  field: MetaDataHeader;
+}
+
+export interface Order {
+  field: MetaDataHeader;
+  order: "ASC" | "DESC";
+}
+export interface CustomColumn {
+  name: string;
+  expressions: PExpression[];
+}
+
+export interface PExpression {
+  type: string;
+  value: any;
+}
 //分页结果集
 export type MfApiPageModel = PageResult<MfApi>;
