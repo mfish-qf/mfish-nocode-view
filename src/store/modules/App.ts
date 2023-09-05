@@ -60,7 +60,11 @@ export const useAppStore = defineStore({
       return this.getProjectConfig.multiTabsSetting;
     },
     getThemeColor(): string {
-      return this.getProjectConfig.themeColor || "#ee4f12";
+      //深色模式时，使用默认颜色
+      if (this.getDarkMode === ThemeEnum.DARK) {
+        return this.themeColor;
+      }
+      return this.getProjectConfig.themeColor || this.themeColor;
     }
   },
   actions: {

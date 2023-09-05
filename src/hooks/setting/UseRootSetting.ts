@@ -30,7 +30,7 @@ export function useRootSetting() {
 
   const getShowBreadCrumb = computed(() => appStore.getProjectConfig.showBreadCrumb);
 
-  const getThemeColor = computed(() => appStore.getProjectConfig.themeColor);
+  const getThemeColor = computed(() => appStore.getThemeColor);
 
   const getShowBreadCrumbIcon = computed(() => appStore.getProjectConfig.showBreadCrumbIcon);
 
