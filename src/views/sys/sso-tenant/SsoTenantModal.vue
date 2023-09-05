@@ -2,7 +2,7 @@
  @description: 租户信息表
  @author: mfish
  @date: 2023-05-31
- @version: V1.0.0
+ @version: V1.1.0
 -->
 <template>
   <BasicModal

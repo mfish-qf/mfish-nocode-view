@@ -15,7 +15,7 @@
     >
       <template #headerTools v-if="allowAdd">
         <Tooltip title="新增目录">
-          <AButton type="link" size="small" @click="addFolder()">
+          <AButton type="link" size="small" @click.prevent.stop="addFolder()">
             <template #icon>
               <Icon icon="ant-design:folder-add-outlined" />
             </template>

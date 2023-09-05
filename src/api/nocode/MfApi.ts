@@ -6,7 +6,7 @@ import { MetaDataHeader } from "/@/api/sys/model/DbConnectModel";
  * @description: 自定义API
  * @author: mfish
  * @date: 2023-07-31
- * @version: V1.0.0
+ * @version: V1.1.0
  */
 enum Api {
   MfApi = "/nocode/mfApi",
