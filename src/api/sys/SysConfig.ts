@@ -5,7 +5,7 @@ import { SysConfig } from "/@/api/sys/model/SysConfigModel";
  * @description: 界面配置
  * @author: mfish
  * @date: 2023-03-07
- * @version: V1.0.0
+ * @version: V1.1.0
  */
 enum Api {
   SysConfig = "/sys/sysConfig"

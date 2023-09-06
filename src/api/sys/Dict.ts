@@ -5,7 +5,7 @@ import { Dict, ReqDict, DictPageModel } from "/@/api/sys/model/DictModel";
  * @description: 字典
  * @Author: mfish
  * @Date: 2023-01-03
- * @Version: V1.0.0
+ * @version: V1.1.0
  */
 enum Api {
   Dict = "/sys/dict",

@@ -5,7 +5,7 @@ import { SysLog, ReqSysLog, SysLogPageModel } from "/@/api/sys/model/SysLogModel
  * @description: 系统日志
  * @author: mfish
  * @date: 2023-01-08
- * @version: V1.0.0
+ * @version: V1.1.0
  */
 enum Api {
   SysLog = "/sys/sysLog"
