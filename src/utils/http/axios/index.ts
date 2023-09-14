@@ -49,6 +49,9 @@ const transform: AxiosTransform = {
         msg = t("sys.api.operationSuccess");
       }
       messageTips(options.successMessageMode, msg, false, 0);
+      if (options.completeResult) {
+        return data;
+      }
       return data.data;
     }
     // 在此处根据自己项目的实际情况对不同的code执行不同的操作
@@ -91,7 +94,13 @@ const transform: AxiosTransform = {
    */
   beforeRequestHook: (config, options) => {
     const { apiUrl, joinParamsToUrl, formatDate, joinTime = true } = options;
-    if (apiUrl && isString(apiUrl)) {
+    //如果已传入全路径，则不拼接apiUrl前缀，由传路径地方自行判断是否拼接
+    if (
+      !config.url?.toLowerCase().startsWith("http://") &&
+      !config.url?.toLowerCase().startsWith("https://") &&
+      apiUrl &&
+      isString(apiUrl)
+    ) {
       config.url = `${apiUrl}${config.url}`;
     }
     const params = config.params || {};
