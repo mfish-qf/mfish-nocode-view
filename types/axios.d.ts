@@ -23,6 +23,8 @@ export interface RequestOptions {
   withToken?: boolean;
   // 请求重试机制
   retryRequest?: RetryRequest;
+  // 是否返回完整结果 设置为true时不自动处理返回结果，默认会处理
+  completeResult?: boolean;
 }
 
 export interface RetryRequest {
