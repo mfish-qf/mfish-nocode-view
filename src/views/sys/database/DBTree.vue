@@ -15,7 +15,7 @@
       :load-data="getTables"
       v-model:selectedKeys="selectedKeys"
       @select="handleSelect"
-      @update:searchValue="handleSearch"
+      @update:search-value="handleSearch"
       :beforeRightClick="getRightMenuList"
     >
       <template #headerTools>
@@ -46,7 +46,7 @@
 
   export default {
     name: "DBTree",
-    components: { DbConnectModal, Icon, Tooltip, AButton: Button, BasicTree, Modal },
+    components: { DbConnectModal, Icon, Tooltip, AButton: Button, BasicTree },
     emits: ["select", "search"],
     setup(_, { emit }) {
       const { hasPermission } = usePermission();
