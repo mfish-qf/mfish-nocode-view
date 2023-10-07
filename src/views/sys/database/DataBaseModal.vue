@@ -5,21 +5,24 @@
 -->
 <template>
   <BasicModal v-bind="$attrs" title="数据源" @register="registerModal" :showOkBtn="false" cancelText="关闭">
-    <DataBaseManagement>
-      <template #[item]="data" v-for="item in Object.keys($slots)">
-        <slot :name="item" v-bind="data || {}"></slot>
-      </template>
-    </DataBaseManagement>
+    <PageWrapper contentFullHeight fixedHeight contentClass="flex">
+      <DataBaseManagement>
+        <template #[item]="data" v-for="item in Object.keys($slots)">
+          <slot :name="item" v-bind="data || {}"></slot>
+        </template>
+      </DataBaseManagement>
+    </PageWrapper>
   </BasicModal>
 </template>
 <script lang="ts">
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import DataBaseManagement from "/@/views/sys/database/index.vue";
   import { defineComponent, onMounted } from "vue";
+  import DataBaseManagement from "/@/views/sys/database/DataBaseManagement.vue";
+  import PageWrapper from "/@/components/general/Page/src/PageWrapper.vue";
 
   export default defineComponent({
     name: "DataBaseModal",
-    components: { DataBaseManagement, BasicModal },
+    components: { PageWrapper, DataBaseManagement, BasicModal },
     setup() {
       const [registerModal, { setModalProps }] = useModalInner();
       onMounted(() => {
