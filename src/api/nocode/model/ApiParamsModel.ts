@@ -14,14 +14,17 @@ export interface ApiParams extends BaseEntity<number> {
   //默认值
   defaultValue?: string;
   //是否使用
-  isUse?: string;
+  isUse?: number;
   //参数描述
   remark?: string;
   //是否必须 0否 1是
   required?: number;
 }
 
-export type ReqApiParams = ReqPage;
+export interface ReqApiParams extends ReqPage {
+  apiId?: string;
+  isUse?: number;
+}
 
 //分页结果集
 export type ApiParamsPageModel = PageResult<ApiParams>;

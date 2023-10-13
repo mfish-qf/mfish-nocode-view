@@ -22,6 +22,10 @@ interface CustomApiState {
   level: number;
   //内部字段是否发生变化
   fieldsChange: number;
+  //是否显示数据
+  showData: boolean;
+  //显示数据的层级
+  showDataLevel: string | number;
 }
 
 export const useApiStore = defineStore({
@@ -35,7 +39,9 @@ export const useApiStore = defineStore({
     tableFieldsMap: new Map(),
     variables: [],
     level: 1,
-    fieldsChange: 1
+    fieldsChange: 1,
+    showData: false,
+    showDataLevel: ""
   }),
   getters: {
     getSourceId(): string {
@@ -64,6 +70,12 @@ export const useApiStore = defineStore({
     },
     getFieldsChange(): number {
       return this.fieldsChange;
+    },
+    getShowData(): boolean {
+      return this.showData;
+    },
+    getShowDataLevel(): string | number {
+      return this.showDataLevel;
     }
   },
   actions: {
@@ -73,15 +85,17 @@ export const useApiStore = defineStore({
     setSourceType(sourceType: number) {
       this.sourceType = sourceType;
     },
-    setTableName(tableName: string) {
+    setTableName(tableName: string | undefined) {
+      if (!tableName) return;
       this.tableName = tableName;
     },
-    async setTableFields(connectId: string, tableName: string): Promise<MetaDataHeader[]> {
+    async setTableFields(connectId: string, tableName: string | undefined): Promise<MetaDataHeader[]> {
+      if (!tableName) return [];
       this.tableFields = await getDataHeaders({
         connectId: connectId,
         tableName: tableName,
         pageNum: 1,
-        pageSize: 2000
+        pageSize: 10000
       });
       return this.tableFields;
     },
@@ -96,9 +110,6 @@ export const useApiStore = defineStore({
       }
       return this.tableList;
     },
-    setVariables(variables: ApiParams[]) {
-      this.variables = variables;
-    },
     setLevel(level: number) {
       this.level = level;
     },
@@ -107,11 +118,22 @@ export const useApiStore = defineStore({
         this.fieldsChange++;
       }
     },
+    addTableFieldsMap(tableName: string | undefined, headers: MetaDataHeader[]) {
+      if (tableName) {
+        this.tableFieldsMap.set(tableName, headers);
+      }
+    },
     getTableFieldsByName(tableName: string | undefined): MetaDataHeader[] {
       if (tableName) {
         return this.tableFieldsMap.get(tableName) || [];
       }
       return [];
+    },
+    setShowData(show: boolean) {
+      this.showData = show;
+    },
+    setShowDataLevel(level: string | number) {
+      this.showDataLevel = level;
     }
   }
 });

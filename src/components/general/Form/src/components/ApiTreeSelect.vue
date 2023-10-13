@@ -6,6 +6,10 @@
     <template #suffixIcon v-if="loading">
       <LoadingOutlined spin />
     </template>
+    <template #title="text" v-if="icon !== undefined">
+      <Icon :icon="icon" />
+      {{ text[getAttrs.fieldNames["label"]] }}
+    </template>
   </a-tree-select>
 </template>
 
@@ -16,11 +20,13 @@
   import { get } from "lodash-es";
   import { propTypes } from "/@/utils/PropTypes";
   import { LoadingOutlined } from "@ant-design/icons-vue";
+  import Icon from "/@/components/general/Icon/src/Icon.vue";
 
   export default defineComponent({
     name: "ApiTreeSelect",
-    components: { ATreeSelect: TreeSelect, LoadingOutlined },
+    components: { Icon, ATreeSelect: TreeSelect, LoadingOutlined },
     props: {
+      icon: { type: String },
       api: { type: Function as PropType<(arg?: Recordable) => Promise<Recordable>> },
       params: { type: Object },
       immediate: { type: Boolean, default: true },
@@ -31,7 +37,7 @@
       const treeData = ref<Recordable[]>([]);
       const isFirstLoaded = ref<Boolean>(false);
       const loading = ref(false);
-      const getAttrs = computed(() => {
+      const getAttrs: any = computed(() => {
         return {
           ...(props.api ? { treeData: unref(treeData) } : {}),
           ...attrs

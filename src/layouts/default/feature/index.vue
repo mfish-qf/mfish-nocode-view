@@ -1,6 +1,6 @@
 <script lang="ts">
   import { defineComponent, computed, unref } from "vue";
-  import { BackTop } from "ant-design-vue";
+  import { FloatButton } from "ant-design-vue";
   import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
   import { useHeaderSetting } from "/@/hooks/setting/UseHeaderSetting";
   import { useDesign } from "/@/hooks/web/UseDesign";
@@ -12,7 +12,7 @@
   export default defineComponent({
     name: "LayoutFeatures",
     components: {
-      BackTop,
+      BackTop: FloatButton.BackTop,
       LayoutLockPage: createAsyncComponent(() => import("/@/views/sys/lock/index.vue")),
       SettingDrawer: createAsyncComponent(() => import("/@/layouts/default/setting/index.vue")),
       SessionTimeoutLogin

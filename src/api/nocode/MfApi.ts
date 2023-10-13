@@ -1,6 +1,7 @@
 import { defHttp } from "/@/utils/http/axios";
 import { MfApi, ReqMfApi, MfApiPageModel, Config } from "/@/api/nocode/model/MfApiModel";
-import { MetaDataHeader } from "/@/api/sys/model/DbConnectModel";
+import { DataTable, MetaDataHeader } from "/@/api/sys/model/DbConnectModel";
+import { ReqPage } from "/@/api/model/BaseModel";
 
 /**
  * @description: 自定义API
@@ -11,9 +12,12 @@ import { MetaDataHeader } from "/@/api/sys/model/DbConnectModel";
 enum Api {
   MfApi = "/nocode/mfApi",
   SQL = "/nocode/mfApi/sql",
-  Fields = "/nocode/mfApi/fields"
+  DATA = "/nocode/mfApi/data",
+  Fields = "/nocode/mfApi/fields",
+  API = "/nocode/mfApi/api"
 }
 
+export const getApiUrl = () => Api.API;
 /**
  * 分页列表查询
  *
@@ -62,8 +66,23 @@ export function deleteMfApi(id: string) {
   return defHttp.delete<MfApi>({ url: Api.MfApi + "/" + id }, { successMessageMode: "message" });
 }
 
+/**
+ * 通过ID获取API配置
+ * @param id
+ */
+export function getMfApiById(id: string) {
+  return defHttp.get<MfApi>({ url: Api.MfApi + "/" + id });
+}
+
 export function getQuerySql(config: Config) {
   return defHttp.post<string>({ url: Api.SQL, params: config }, { errorMessageMode: "message" });
+}
+
+export function getQueryData(config: Config, reqPage: ReqPage) {
+  return defHttp.post<DataTable>(
+    { url: Api.DATA + "?pageNum=" + reqPage.pageNum + "&pageSize=" + reqPage.pageSize, params: config },
+    { errorMessageMode: "message" }
+  );
 }
 
 export function getQueryFields(config: Config) {

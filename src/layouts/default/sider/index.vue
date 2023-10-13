@@ -5,8 +5,8 @@
       placement="left"
       :class="`${prefixCls}-drawer`"
       :width="getMenuWidth"
-      :getContainer="null"
-      :visible="!getCollapsed"
+      :getContainer="false"
+      :open="!getCollapsed"
       @close="handleClose"
     >
       <Sider />

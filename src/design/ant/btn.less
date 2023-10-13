@@ -1,9 +1,12 @@
 // button reset
 .ant-btn {
-  &-link:hover,
-  &-link:focus,
-  &-link:active {
-    border-color: transparent !important;
+  &-link{
+    color: @button-primary-color;
+    &:hover,
+    &:focus,
+    &:active{
+      color:  @button-primary-hover-color;
+    }
   }
 
   &-primary {

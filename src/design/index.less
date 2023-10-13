@@ -24,6 +24,7 @@ body {
   height: 100%;
   overflow: visible;
   overflow-x: hidden;
+  position: relative;
 
   &.color-weak {
     filter: invert(80%);
@@ -36,7 +37,13 @@ body {
 }
 a {
   text-decoration: none !important;
+  color: @button-primary-color;
+  &:hover,
+  &:focus {
+    color:  @button-primary-hover-color;
+  }
 }
+
 a:focus,
 a:active,
 button,
