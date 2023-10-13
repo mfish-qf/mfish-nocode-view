@@ -44,7 +44,7 @@
     components: { Drawer, ScrollContainer, DrawerFooter, DrawerHeader },
     inheritAttrs: false,
     props: basicProps,
-    emits: ["visible-change", "ok", "close", "register"],
+    emits: ["open-change", "ok", "close", "register"],
     setup(props, { emit }) {
       const visibleRef = ref(false);
       const attrs = useAttrs();
@@ -130,7 +130,7 @@
         () => visibleRef.value,
         (visible) => {
           nextTick(() => {
-            emit("visible-change", visible);
+            emit("open-change", visible);
             instance && drawerInstance.emitVisible?.(visible, instance.uid);
           });
         }
