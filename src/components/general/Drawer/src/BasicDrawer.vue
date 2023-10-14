@@ -12,9 +12,9 @@
     </template>
 
     <ScrollContainer
-      :style="getScrollContentStyle"
-      v-loading="getLoading"
-      :loading-tip="loadingText || t('common.loadingText')"
+        :style="getScrollContentStyle"
+        v-loading="getLoading"
+        :loading-tip="loadingText || t('common.loadingText')"
     >
       <slot></slot>
     </ScrollContainer>
@@ -26,107 +26,107 @@
   </Drawer>
 </template>
 <script lang="ts">
-  import type { DrawerInstance, DrawerProps } from "./Typing";
-  import type { CSSProperties } from "vue";
-  import { defineComponent, ref, computed, watch, unref, nextTick, toRaw, getCurrentInstance } from "vue";
-  import { Drawer } from "ant-design-vue";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { isFunction, isNumber } from "/@/utils/Is";
-  import { deepMerge } from "/@/utils";
-  import DrawerFooter from "./components/DrawerFooter.vue";
-  import DrawerHeader from "./components/DrawerHeader.vue";
-  import { ScrollContainer } from "/@/components/general/Container";
-  import { basicProps } from "./Props";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useAttrs } from "/@/hooks/core/UseAttrs";
+import type { DrawerInstance, DrawerProps } from "./Typing";
+import type { CSSProperties } from "vue";
+import { defineComponent, ref, computed, watch, unref, nextTick, toRaw, getCurrentInstance } from "vue";
+import { Drawer } from "ant-design-vue";
+import { useI18n } from "/@/hooks/web/UseI18n";
+import { isFunction, isNumber } from "/@/utils/Is";
+import { deepMerge } from "/@/utils";
+import DrawerFooter from "./components/DrawerFooter.vue";
+import DrawerHeader from "./components/DrawerHeader.vue";
+import { ScrollContainer } from "/@/components/general/Container";
+import { basicProps } from "./Props";
+import { useDesign } from "/@/hooks/web/UseDesign";
+import { useAttrs } from "/@/hooks/core/UseAttrs";
 
-  export default defineComponent({
-    components: { Drawer, ScrollContainer, DrawerFooter, DrawerHeader },
-    inheritAttrs: false,
-    props: basicProps,
-    emits: ["open-change", "ok", "close", "register"],
-    setup(props, { emit }) {
-      const visibleRef = ref(false);
-      const attrs = useAttrs();
-      const propsRef = ref<Partial<Nullable<DrawerProps>>>(null);
+export default defineComponent({
+  components: { Drawer, ScrollContainer, DrawerFooter, DrawerHeader },
+  inheritAttrs: false,
+  props: basicProps,
+  emits: ["open-change", "ok", "close", "register"],
+  setup(props, { emit }) {
+    const visibleRef = ref(false);
+    const attrs = useAttrs();
+    const propsRef = ref<Partial<Nullable<DrawerProps>>>(null);
 
-      const { t } = useI18n();
-      const { prefixVar, prefixCls } = useDesign("basic-drawer");
+    const { t } = useI18n();
+    const { prefixVar, prefixCls } = useDesign("basic-drawer");
 
-      const drawerInstance: DrawerInstance = {
-        setDrawerProps: setDrawerProps,
-        emitVisible: undefined
+    const drawerInstance: DrawerInstance = {
+      setDrawerProps: setDrawerProps,
+      emitVisible: undefined
+    };
+
+    const instance = getCurrentInstance();
+
+    instance && emit("register", drawerInstance, instance.uid);
+
+    const getMergeProps = computed((): DrawerProps => {
+      return deepMerge(toRaw(props), unref(propsRef));
+    });
+
+    const getProps = computed((): DrawerProps => {
+      const opt = {
+        placement: "right",
+        ...unref(attrs),
+        ...unref(getMergeProps),
+        visible: unref(visibleRef)
       };
-
-      const instance = getCurrentInstance();
-
-      instance && emit("register", drawerInstance, instance.uid);
-
-      const getMergeProps = computed((): DrawerProps => {
-        return deepMerge(toRaw(props), unref(propsRef));
-      });
-
-      const getProps = computed((): DrawerProps => {
-        const opt = {
-          placement: "right",
-          ...unref(attrs),
-          ...unref(getMergeProps),
-          visible: unref(visibleRef)
-        };
-        opt.title = undefined;
-        const { isDetail, width, wrapClassName, getContainer } = opt;
-        if (isDetail) {
-          if (!width) {
-            opt.width = "100%";
-          }
-          const detailCls = `${prefixCls}__detail`;
-          opt.rootClassName = wrapClassName ? `${wrapClassName} ${detailCls}` : detailCls;
-
-          if (!getContainer) {
-            // TODO type error?
-            opt.getContainer = `.${prefixVar}-layout-content` as any;
-          }
+      opt.title = undefined;
+      const { isDetail, width, wrapClassName, getContainer } = opt;
+      if (isDetail) {
+        if (!width) {
+          opt.width = "100%";
         }
-        return opt as DrawerProps;
-      });
+        const detailCls = `${prefixCls}__detail`;
+        opt.rootClassName = wrapClassName ? `${wrapClassName} ${detailCls}` : detailCls;
 
-      const getBindValues = computed((): DrawerProps => {
-        return {
-          ...attrs,
-          ...unref(getProps)
-        };
-      });
-
-      // Custom implementation of the bottom button,
-      const getFooterHeight = computed(() => {
-        const { footerHeight, showFooter } = unref(getProps);
-        if (showFooter && footerHeight) {
-          return isNumber(footerHeight) ? `${footerHeight}px` : `${footerHeight.replace("px", "")}px`;
+        if (!getContainer) {
+          // TODO type error?
+          opt.getContainer = `.${prefixVar}-layout-content` as any;
         }
-        return `0px`;
-      });
+      }
+      return opt as DrawerProps;
+    });
 
-      const getScrollContentStyle = computed((): CSSProperties => {
-        const footerHeight = unref(getFooterHeight);
-        return {
-          position: "relative",
-          height: `calc(100% - ${footerHeight})`
-        };
-      });
+    const getBindValues = computed((): DrawerProps => {
+      return {
+        ...attrs,
+        ...unref(getProps)
+      };
+    });
 
-      const getLoading = computed(() => {
-        return !!unref(getProps)?.loading;
-      });
+    // Custom implementation of the bottom button,
+    const getFooterHeight = computed(() => {
+      const { footerHeight, showFooter } = unref(getProps);
+      if (showFooter && footerHeight) {
+        return isNumber(footerHeight) ? `${footerHeight}px` : `${footerHeight.replace("px", "")}px`;
+      }
+      return `0px`;
+    });
 
-      watch(
+    const getScrollContentStyle = computed((): CSSProperties => {
+      const footerHeight = unref(getFooterHeight);
+      return {
+        position: "relative",
+        height: `calc(100% - ${footerHeight})`
+      };
+    });
+
+    const getLoading = computed(() => {
+      return !!unref(getProps)?.loading;
+    });
+
+    watch(
         () => props.visible,
         (newVal, oldVal) => {
           if (newVal !== oldVal) visibleRef.value = newVal;
         },
         { deep: true }
-      );
+    );
 
-      watch(
+    watch(
         () => visibleRef.value,
         (visible) => {
           nextTick(() => {
@@ -134,107 +134,107 @@
             instance && drawerInstance.emitVisible?.(visible, instance.uid);
           });
         }
-      );
+    );
 
-      // Cancel event
-      async function onClose(e: Recordable) {
-        const { closeFunc } = unref(getProps);
-        emit("close", e);
-        if (closeFunc && isFunction(closeFunc)) {
-          const res = await closeFunc();
-          visibleRef.value = !res;
-          return;
-        }
-        visibleRef.value = false;
+    // Cancel event
+    async function onClose(e: Recordable) {
+      const { closeFunc } = unref(getProps);
+      emit("close", e);
+      if (closeFunc && isFunction(closeFunc)) {
+        const res = await closeFunc();
+        visibleRef.value = !res;
+        return;
       }
-
-      function setDrawerProps(props: Partial<DrawerProps>): void {
-        // Keep the last setDrawerProps
-        propsRef.value = deepMerge(unref(propsRef) || ({} as any), props);
-
-        if (Reflect.has(props, "visible")) {
-          visibleRef.value = !!props.visible;
-        }
-      }
-
-      function handleOk() {
-        emit("ok");
-      }
-
-      return {
-        onClose,
-        t,
-        prefixCls,
-        getMergeProps: getMergeProps as any,
-        getScrollContentStyle,
-        getProps: getProps as any,
-        getLoading,
-        getBindValues,
-        getFooterHeight,
-        handleOk
-      };
+      visibleRef.value = false;
     }
-  });
+
+    function setDrawerProps(props: Partial<DrawerProps>): void {
+      // Keep the last setDrawerProps
+      propsRef.value = deepMerge(unref(propsRef) || ({} as any), props);
+
+      if (Reflect.has(props, "visible")) {
+        visibleRef.value = !!props.visible;
+      }
+    }
+
+    function handleOk() {
+      emit("ok");
+    }
+
+    return {
+      onClose,
+      t,
+      prefixCls,
+      getMergeProps: getMergeProps as any,
+      getScrollContentStyle,
+      getProps: getProps as any,
+      getLoading,
+      getBindValues,
+      getFooterHeight,
+      handleOk
+    };
+  }
+});
 </script>
 <style lang="less">
-  @header-height: 60px;
-  @detail-header-height: 40px;
-  @prefix-cls: ~"@{namespace}-basic-drawer";
-  @prefix-cls-detail: ~"@{namespace}-basic-drawer__detail";
+@header-height: 60px;
+@detail-header-height: 40px;
+@prefix-cls: ~"@{namespace}-basic-drawer";
+@prefix-cls-detail: ~"@{namespace}-basic-drawer__detail";
 
-  .@{prefix-cls} {
-    .ant-drawer-wrapper-body {
-      overflow: hidden;
-    }
+.@{prefix-cls} {
+  .ant-drawer-wrapper-body {
+    overflow: hidden;
+  }
 
-    .ant-drawer-close {
-      &:hover {
-        color: @error-color;
-      }
-    }
-
-    .ant-drawer-body {
-      height: calc(100% - @header-height);
-      padding: 0;
-      background-color: @component-background;
-
-      .scrollbar__wrap {
-        padding: 16px !important;
-        margin-bottom: 0 !important;
-      }
-
-      > .scrollbar > .scrollbar__bar.is-horizontal {
-        display: none;
-      }
+  .ant-drawer-close {
+    &:hover {
+      color: @error-color;
     }
   }
 
-  .@{prefix-cls-detail} {
-    position: absolute;
-
-    .ant-drawer-header {
-      width: 100%;
-      height: @detail-header-height;
-      padding: 0;
-      border-top: 1px solid @border-color-base;
-      box-sizing: border-box;
-    }
-
-    .ant-drawer-title {
-      height: 100%;
-    }
-
-    .ant-drawer-close {
-      height: @detail-header-height;
-      line-height: @detail-header-height;
-    }
+  .ant-drawer-body {
+    height: calc(100% - @header-height);
+    padding: 0;
+    background-color: @component-background;
 
     .scrollbar__wrap {
-      padding: 0 !important;
+      padding: 16px !important;
+      margin-bottom: 0 !important;
     }
 
-    .ant-drawer-body {
-      height: calc(100% - @detail-header-height);
+    > .scrollbar > .scrollbar__bar.is-horizontal {
+      display: none;
     }
   }
+}
+
+.@{prefix-cls-detail} {
+  position: absolute;
+
+  .ant-drawer-header {
+    width: 100%;
+    height: @detail-header-height;
+    padding: 0;
+    border-top: 1px solid @border-color-base;
+    box-sizing: border-box;
+  }
+
+  .ant-drawer-title {
+    height: 100%;
+  }
+
+  .ant-drawer-close {
+    height: @detail-header-height;
+    line-height: @detail-header-height;
+  }
+
+  .scrollbar__wrap {
+    padding: 0 !important;
+  }
+
+  .ant-drawer-body {
+    height: calc(100% - @detail-header-height);
+  }
+}
 </style>
