@@ -9,13 +9,17 @@ export function useDarkModeTheme() {
   const isDark = computed(() => getDarkMode.value === ThemeEnum.DARK);
   const color = {
     token: {
-      colorPrimary: useRootSetting().getThemeColor
+      colorPrimary: useRootSetting().getThemeColor,
+      colorInfo: useRootSetting().getThemeColor,
+      colorSuccess: "#55D187",
+      colorWarning: "#EFBD47",
+      colorError: "#ED6F6F"
     }
   };
 
   const darkTheme = {
     ...color,
-    algorithm: [darkAlgorithm]
+    algorithm: darkAlgorithm
   };
   const lightTheme = color;
 

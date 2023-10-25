@@ -1,5 +1,5 @@
 <template>
-  <div class="relative !h-full w-full overflow-hidden" ref="el"></div>
+  <div class="relative !h-full w-full overflow-hidden" ref="el" style="border-radius: 6px"></div>
 </template>
 
 <script lang="ts" setup>

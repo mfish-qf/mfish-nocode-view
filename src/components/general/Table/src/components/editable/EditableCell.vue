@@ -487,7 +487,7 @@
         transform: scale(1.2);
 
         svg {
-          color: @primary-color;
+          color: @button-primary-color;
         }
       }
     }

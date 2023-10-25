@@ -11,6 +11,10 @@
       &__extra-redo,
       &__extra-fold {
         border-left: 0px solid @border-color-base;
+        color: #8b949e;
+        &:hover{
+          color: #c9d1d9
+        }
       }
     }
   }
@@ -87,14 +91,14 @@
 
       .ant-tabs-tab:not(.ant-tabs-tab-active) {
         &:hover {
-          color: @primary-color;
+          color: @button-primary-color;
         }
       }
 
       .ant-tabs-tab-active {
         position: relative;
         padding-left: 18px;
-        background: @primary-color;
+        background: @button-primary-color;
         border: 0;
         transition: none;
 
@@ -146,10 +150,10 @@
     &__extra-quick,
     &__extra-redo,
     &__extra-fold {
-      display: inline-block;
+      display: inline-flex;
       width: 36px;
-      height: @multiple-height;
-      line-height: @multiple-height;
+      //height: @multiple-height;
+      //line-height: @multiple-height;
       color: @text-color-secondary;
       text-align: center;
       cursor: pointer;

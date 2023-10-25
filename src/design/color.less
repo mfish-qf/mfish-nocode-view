@@ -1,4 +1,7 @@
 html {
+  --main-color: #ee4f12;
+  --main-color-dark: #ee4f12;
+  --main-color-light: #ee4f12;
   // header
   --header-bg-color: #394664;
   --header-color: #f4f7f9;
@@ -83,12 +86,6 @@ html {
 @tree-hover-font-color: #f5f7fa;
 
 // =================================
-// ==============link============
-// =================================
-@link-hover-color: @primary-color;
-@link-active-color: darken(@primary-color, 10%);
-
-// =================================
 // ==============Text color-=============
 // =================================
 
@@ -109,9 +106,12 @@ html {
 // ==============button=============
 // =================================
 
-@button-primary-color: @primary-color;
-@button-primary-hover-color: lighten(@primary-color, 5%);
-@button-primary-active-color: darken(@primary-color, 5%);
+@main-color: var(--main-color);
+@main-color-light: var(--main-color-light);
+@main-color-dark: var(--main-color-dark);
+@button-primary-color: @main-color;
+@button-primary-hover-color: @main-color-light;
+@button-primary-active-color: @main-color-dark;
 
 @button-ghost-color: @white;
 @button-ghost-hover-color: lighten(@white, 10%);
@@ -135,6 +135,6 @@ html {
 @button-cancel-border-color: @border-color-shallow-dark;
 
 // Mouse over
-@button-cancel-hover-color: @primary-color;
+@button-cancel-hover-color: @main-color;
 @button-cancel-hover-bg-color: @white;
-@button-cancel-hover-border-color: @primary-color;
+@button-cancel-hover-border-color: @main-color;

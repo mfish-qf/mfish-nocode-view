@@ -215,6 +215,7 @@
     align-items: center;
     box-sizing: border-box;
     padding-bottom: 2px;
+    border-radius: 6px;
 
     .frame {
       margin-left: 8px;

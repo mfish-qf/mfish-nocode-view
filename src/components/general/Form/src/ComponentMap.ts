@@ -18,7 +18,7 @@ import {
   Rate,
   Divider,
   AutoComplete
-} from "ant-design-vue/lib";
+} from "ant-design-vue";
 
 import ApiRadioGroup from "./components/ApiRadioGroup.vue";
 import RadioButtonGroup from "./components/RadioButtonGroup.vue";

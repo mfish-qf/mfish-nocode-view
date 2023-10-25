@@ -4,6 +4,7 @@
 @import 'public.less';
 @import 'ant/index.less';
 @import './theme.less';
+@import './dark.less';
 
 input:-webkit-autofill {
   box-shadow: 0 0 0 1000px white inset !important;
@@ -37,10 +38,10 @@ body {
 }
 a {
   text-decoration: none !important;
-  color: @button-primary-color;
+  color: @button-primary-color !important;
   &:hover,
   &:focus {
-    color:  @button-primary-hover-color;
+    color:  @button-primary-hover-color !important;
   }
 }
 

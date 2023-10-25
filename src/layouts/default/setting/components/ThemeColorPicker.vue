@@ -73,7 +73,7 @@
       }
 
       &--active {
-        border: 1px solid lighten(@primary-color, 10%);
+        border: 1px solid @button-primary-hover-color;
 
         svg {
           display: inline-block;

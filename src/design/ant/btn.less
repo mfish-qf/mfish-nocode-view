@@ -1,49 +1,22 @@
 // button reset
 .ant-btn {
-  &-link{
-    color: @button-primary-color;
-    &:hover,
-    &:focus,
-    &:active{
-      color:  @button-primary-hover-color;
-    }
-  }
-
-  &-primary {
-    color: @white;
-    background-color: @button-primary-color;
-
-    &:hover,
-    &:focus {
-      color: @white;
-      background-color: @button-primary-hover-color;
-    }
-  }
 
   &-primary:not(&-background-ghost):not([disabled]) {
     color: @white;
   }
 
-  &-default {
-    color: @button-cancel-color;
-    background-color: @button-cancel-bg-color;
-    border-color: @button-cancel-border-color;
-
-    &:hover,
-    &:focus {
-      color: @button-cancel-hover-color;
-      background-color: @button-cancel-hover-bg-color;
-      border-color: @button-cancel-hover-border-color;
-    }
-
-    //
-    //&[disabled],
-    //&[disabled]:hover {
-    //  color: fade(@button-cancel-color, 40%) !important;
-    //  background: fade(@button-cancel-bg-color, 40%) !important;
-    //  border-color: fade(@button-cancel-border-color, 40%) !important;
-    //}
-  }
+  //&-default {
+  //  color: @button-cancel-color;
+  //  background-color: @button-cancel-bg-color;
+  //  border-color: @button-cancel-border-color;
+  //
+  //  &:hover,
+  //  &:focus {
+  //    color: @button-cancel-hover-color;
+  //    background-color: @button-cancel-hover-bg-color;
+  //    border-color: @button-cancel-hover-border-color;
+  //  }
+  //}
 
   [data-theme='light'] &.ant-btn-link.is-disabled {
     color: rgb(0 0 0 / 25%);

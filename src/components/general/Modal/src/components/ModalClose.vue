@@ -93,7 +93,7 @@
       padding: 10px;
 
       &:hover {
-        color: @primary-color;
+        color: @button-primary-color;
       }
     }
 

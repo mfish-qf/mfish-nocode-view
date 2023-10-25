@@ -75,6 +75,9 @@
   });
 </script>
 <style lang="less" scoped>
+  [data-theme="dark"] .account-setting {
+    background-color: #151515;
+  }
   .account-setting {
     margin: 16px;
     background-color: @component-background;

@@ -394,7 +394,7 @@
         width: 100%;
 
         &:hover {
-          color: @primary-color;
+          color: @button-primary-color;
         }
       }
     }
@@ -406,7 +406,7 @@
 
       &.active,
       &:hover {
-        color: @primary-color;
+        color: @button-primary-color;
       }
 
       &.disabled {

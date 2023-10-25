@@ -59,7 +59,7 @@
     }
 
     &:hover {
-      background-color: @primary-color;
+      background-color: @button-primary-color;
       box-shadow: 0 0 4px 0 rgb(28 36 56 / 15%);
     }
   }

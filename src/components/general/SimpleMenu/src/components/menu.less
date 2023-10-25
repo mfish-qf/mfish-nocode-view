@@ -14,7 +14,7 @@
     display: block;
     width: 2px;
     content: '';
-    background-color: @primary-color;
+    background-color: @button-primary-color;
   }
 }
 
@@ -62,7 +62,7 @@
 
         &-selected {
           color: #fff;
-          background-color: @primary-color !important;
+          background-color: @button-primary-color !important;
         }
       }
     }
@@ -73,13 +73,13 @@
         color: @text-color-base;
 
         &:hover {
-          color: @primary-color;
+          color: @button-primary-color;
         }
 
         &-selected {
           z-index: 2;
-          color: @primary-color;
-          background-color: fade(@primary-color, 10);
+          color: @button-primary-color;
+          background-color: @button-primary-hover-color;
 
           .light-border();
         }
@@ -110,7 +110,7 @@
       background-color: #fff;
 
       .@{menu-prefix-cls}-submenu-active {
-        color: @primary-color !important;
+        color: @button-primary-color !important;
 
         &-border {
           .light-border();
@@ -162,7 +162,7 @@
       cursor: pointer;
 
       &:hover {
-        color: @primary-color;
+        color: @button-primary-color;
       }
 
       .@{menu-prefix-cls}-tooltip {
@@ -221,14 +221,14 @@
     &-light&-vertical &-item {
       &-active:not(.@{menu-prefix-cls}-submenu) {
         z-index: 2;
-        color: @primary-color;
-        background-color: fade(@primary-color, 10);
+        color: @button-primary-color;
+        background-color: @button-primary-hover-color;
 
         .light-border();
       }
 
       &-active.@{menu-prefix-cls}-submenu {
-        color: @primary-color;
+        color: @button-primary-color;
       }
     }
 
@@ -236,7 +236,7 @@
       > li.@{menu-prefix-cls}-item-active,
       .@{menu-prefix-cls}-submenu-active {
         position: relative;
-        background-color: fade(@primary-color, 5);
+        background-color: @button-primary-hover-color;
 
         &::after {
           display: none;
@@ -249,7 +249,7 @@
           width: 3px;
           height: 100%;
           content: '';
-          background-color: @primary-color;
+          background-color: @button-primary-color;
         }
       }
     }
@@ -260,7 +260,7 @@
 
       &-active:not(.@{menu-prefix-cls}-submenu) {
         color: #fff !important;
-        background-color: @primary-color !important;
+        background-color: @button-primary-color !important;
       }
 
       &:hover {
@@ -282,7 +282,7 @@
           width: 3px;
           height: 100%;
           content: '';
-          background-color: @primary-color;
+          background-color: @button-primary-color;
         }
 
         .@{menu-prefix-cls}-submenu-collapse {
