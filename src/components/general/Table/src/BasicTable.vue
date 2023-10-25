@@ -318,7 +318,7 @@
 
     &-row__striped {
       td {
-        background-color: @app-content-background;
+        background-color: @app-content-background !important;
       }
     }
 
@@ -366,7 +366,7 @@
       }
 
       //.ant-table-tbody > tr.ant-table-row-selected td {
-      //background-color: fade(@primary-color, 8%) !important;
+      //background-color: fade(@button-primary-color, 8%) !important;
       //}
     }
 

@@ -2,6 +2,7 @@ import "virtual:uno.css";
 import "virtual:unocss-devtools";
 import "/@/design/index.less";
 import "virtual:svg-icons-register";
+import "ant-design-vue/dist/reset.css";
 import App from "./App.vue";
 import { createApp } from "vue";
 import { router, setupRouter } from "./router";

@@ -9,16 +9,15 @@ import {
   Select,
   Radio,
   Checkbox,
-  AutoComplete,
   Cascader,
   DatePicker,
   InputNumber,
   Switch,
-  TimePicker,
   TreeSelect,
   Slider,
   Rate,
-  Divider
+  Divider,
+  AutoComplete
 } from "ant-design-vue";
 
 import ApiRadioGroup from "./components/ApiRadioGroup.vue";
@@ -64,7 +63,7 @@ componentMap.set("DatePicker", DatePicker);
 componentMap.set("MonthPicker", DatePicker.MonthPicker);
 componentMap.set("RangePicker", DatePicker.RangePicker);
 componentMap.set("WeekPicker", DatePicker.WeekPicker);
-componentMap.set("TimePicker", TimePicker);
+componentMap.set("TimePicker", DatePicker.TimePicker);
 componentMap.set("StrengthMeter", StrengthMeter);
 componentMap.set("IconPicker", IconPicker);
 componentMap.set("InputCountDown", CountdownInput);

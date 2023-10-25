@@ -7,8 +7,6 @@ import { configHtmlPlugin } from "./Html";
 import { configSvgIconsPlugin } from "./SvgSprite";
 import UnoCSS from "unocss/vite";
 import legacy from "@vitejs/plugin-legacy";
-import { configStyleImportPlugin } from "./StyleImport";
-import { configThemePlugin } from "./Theme";
 import { configImageminPlugin } from "./Imagemin";
 import { configMockPlugin } from "./Mock";
 
@@ -33,13 +31,9 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   vitePlugins.push(configSvgIconsPlugin(isBuild));
   // 使用mock调试
   VITE_USE_MOCK && vitePlugins.push(configMockPlugin(isBuild));
-  //组件样式按需引入
-  vitePlugins.push(configStyleImportPlugin(isBuild));
   vitePlugins.push(UnoCSS());
   //请求icon不产生http请求
   vitePlugins.push(purgeIcons());
-  //配置主题
-  vitePlugins.push(configThemePlugin(isBuild));
   if (isBuild) {
     VITE_USE_IMAGEMIN && vitePlugins.push(configImageminPlugin());
   }

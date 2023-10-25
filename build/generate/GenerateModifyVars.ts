@@ -1,11 +1,16 @@
 import { generateAntColors, primaryColor } from "../config/ThemeConfig";
-import { getThemeVariables } from "ant-design-vue/dist/theme";
+// start(ant3使用属性)
+// import { getThemeVariables } from "ant-design-vue/dist/theme";
+// end
+import { theme } from "ant-design-vue/lib";
+import convertLegacyToken from "ant-design-vue/lib/theme/convertLegacyToken";
 import { resolve } from "path";
-
+const { defaultAlgorithm, defaultSeed } = theme;
 /**
  * less global variable
  */
 export function generateModifyVars(dark = false) {
+  console.log(dark, "更新ant4后属性暂时不需要，先保留");
   const palettes = generateAntColors(primaryColor);
   const primary = palettes[5];
   const primaryColorObj: Record<string, string> = {};
@@ -14,12 +19,20 @@ export function generateModifyVars(dark = false) {
     primaryColorObj[`primary-${index + 1}`] = palettes[index];
   }
 
-  const modifyVars = getThemeVariables({ dark });
+  // start(ant3使用属性)
+  // const modifyVars = getThemeVariables({ dark });
+  // end
+  const mapToken = defaultAlgorithm(defaultSeed);
+  const v3Token = convertLegacyToken(mapToken);
   return {
-    ...modifyVars,
     // Used for global import to avoid the need to import each style file separately
     // reference:  Avoid repeated references
-    hack: `${modifyVars.hack} @import (reference) "${resolve("src/design/config.less")}";`,
+    // start(ant3使用属性)
+    // ...modifyVars,
+    // hack: `${modifyVars.hack} @import (reference) "${resolve("src/design/config.less")}";`,
+    // end
+    ...v3Token,
+    hack: `true; @import (reference) "${resolve("src/design/config.less")}";`,
     "primary-color": primary,
     ...primaryColorObj,
     "info-color": primary,

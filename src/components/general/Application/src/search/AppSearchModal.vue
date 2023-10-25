@@ -244,7 +244,7 @@
 
         &--active {
           color: #fff;
-          background-color: @primary-color;
+          background-color: @button-primary-color;
 
           .@{prefix-cls}-list__item-enter {
             opacity: 100%;

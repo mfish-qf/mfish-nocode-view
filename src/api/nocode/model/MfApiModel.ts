@@ -1,5 +1,6 @@
 import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
 import { MetaDataHeader } from "/@/api/sys/model/DbConnectModel";
+import { ApiParams } from "/@/api/nocode/model/ApiParamsModel";
 
 /**
  * @description: 自定义API
@@ -30,6 +31,7 @@ export interface MfApi extends BaseEntity<string> {
   queryType?: number;
   //租户ID
   tenantId?: string;
+  params?: ApiParams[];
 }
 
 export interface ReqMfApi extends ReqPage {
@@ -43,6 +45,7 @@ export interface Config {
   sourceType: number;
   sourceId: string;
   sqlQuery: SqlQuery;
+  params?: object;
 }
 
 export interface FieldCheck extends MetaDataHeader {
@@ -145,6 +148,7 @@ export interface CustomColumn {
 export interface PExpression {
   type: string;
   value: any;
+  name?: string;
 }
 //分页结果集
 export type MfApiPageModel = PageResult<MfApi>;

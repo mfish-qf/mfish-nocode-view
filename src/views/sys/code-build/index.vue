@@ -76,6 +76,7 @@
         showTableSetting: true,
         bordered: true,
         showIndexColumn: false,
+        canResize: false,
         actionColumn: {
           width: 120,
           title: "操作",

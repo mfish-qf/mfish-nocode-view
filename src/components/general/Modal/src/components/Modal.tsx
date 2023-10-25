@@ -8,13 +8,13 @@ import { extendSlots } from "/@/utils/helper/TsxHelper";
 export default defineComponent({
   name: "Modal",
   inheritAttrs: false,
-  props: basicProps,
+  props: basicProps as any,
   emits: ["cancel"],
   setup(props, { slots, emit }) {
-    const { visible, draggable, destroyOnClose } = toRefs(props);
+    const { open, draggable, destroyOnClose } = toRefs(props);
     const attrs = useAttrs();
     useModalDragMove({
-      visible,
+      open,
       destroyOnClose,
       draggable
     });

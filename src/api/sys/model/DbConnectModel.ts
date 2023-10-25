@@ -33,11 +33,12 @@ export interface ReqDbConnect extends ReqPage {
  * 表信息
  */
 export interface TableInfo {
-  idType: string;
-  tableName: string;
-  tableComment: string;
-  tableSchema: string;
-  columns: string;
+  idType?: string;
+  tableName?: string;
+  tableComment?: string;
+  tableSchema?: string;
+  columns?: string;
+  dbType?: number;
 }
 
 /**

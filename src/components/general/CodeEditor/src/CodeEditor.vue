@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full">
+  <div class="h-full" style="border-radius: 6px">
     <CodeMirrorEditor :value="getValue" @change="handleValueChange" :mode="mode" :readonly="readonly" />
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <Drawer :class="prefixCls" @close="onClose" v-bind="getBindValues">
+  <Drawer :rootClassName="prefixCls" @close="onClose" v-bind="getBindValues">
     <template #title v-if="!$slots.title">
       <DrawerHeader :title="getMergeProps.title" :isDetail="isDetail" :showDetailBack="showDetailBack" @close="onClose">
         <template #titleToolbar>
@@ -44,7 +44,7 @@
     components: { Drawer, ScrollContainer, DrawerFooter, DrawerHeader },
     inheritAttrs: false,
     props: basicProps,
-    emits: ["visible-change", "ok", "close", "register"],
+    emits: ["open-change", "ok", "close", "register"],
     setup(props, { emit }) {
       const visibleRef = ref(false);
       const attrs = useAttrs();
@@ -80,7 +80,7 @@
             opt.width = "100%";
           }
           const detailCls = `${prefixCls}__detail`;
-          opt.class = wrapClassName ? `${wrapClassName} ${detailCls}` : detailCls;
+          opt.rootClassName = wrapClassName ? `${wrapClassName} ${detailCls}` : detailCls;
 
           if (!getContainer) {
             // TODO type error?
@@ -130,7 +130,7 @@
         () => visibleRef.value,
         (visible) => {
           nextTick(() => {
-            emit("visible-change", visible);
+            emit("open-change", visible);
             instance && drawerInstance.emitVisible?.(visible, instance.uid);
           });
         }

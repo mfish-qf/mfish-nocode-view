@@ -77,7 +77,7 @@
     }
 
     &.light &__title {
-      color: @primary-color;
+      color: @button-primary-color;
     }
 
     &.dark &__title {

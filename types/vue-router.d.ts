@@ -17,5 +17,7 @@ declare module "vue-router" {
     hideMenu?: boolean;
     // Is it fixed on tab
     affix?: boolean;
+    //iframe方式
+    frameSrc?: string;
   }
 }

@@ -100,7 +100,7 @@
     cursor: pointer;
 
     &:hover {
-      color: @primary-color;
+      color: @button-primary-color;
     }
 
     &__wrap {

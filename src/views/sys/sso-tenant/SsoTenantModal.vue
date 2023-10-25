@@ -30,7 +30,7 @@
             <div style="margin-top: 8px">上传logo</div>
           </div>
         </Upload>
-        <Modal :visible="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
+        <Modal :open="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
           <img alt="example" style="width: 100%" :src="previewImage" />
         </Modal>
       </template>

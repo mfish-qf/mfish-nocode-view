@@ -1,5 +1,6 @@
-import { darkCssIsReady, loadDarkThemeCss } from "@kirklin/vite-plugin-vben-theme/es/client";
 import { addClass, hasClass, removeClass } from "/@/utils/DomUtils";
+import { changeTheme } from "/@/logics/theme/index";
+import { useAppStore } from "/@/store/modules/App";
 
 export async function updateDarkTheme(mode: string | null = "light") {
   const mainHtml = document.getElementById("mainHtml");
@@ -7,10 +8,9 @@ export async function updateDarkTheme(mode: string | null = "light") {
     return;
   }
   const hasDarkClass = hasClass(mainHtml, "dark");
+  const color = useAppStore().getProjectConfig.themeColor;
+  changeTheme(color).then();
   if (mode === "dark") {
-    if (import.meta.env.PROD && !darkCssIsReady) {
-      await loadDarkThemeCss();
-    }
     mainHtml.setAttribute("data-theme", "dark");
     if (!hasDarkClass) {
       addClass(mainHtml, "dark");

@@ -6,7 +6,7 @@
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
-    <Tabs tab-position="left" :tabBarStyle="{ width: '20px' }">
+    <Tabs tab-position="left" :tabBarStyle="{ width: '60px' }">
       <TabPane key="1">
         <template #tab>
           <span style="writing-mode: vertical-rl"> 基础属性 </span>

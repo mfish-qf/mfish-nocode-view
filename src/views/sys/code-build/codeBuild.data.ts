@@ -15,7 +15,7 @@ export const columns: BasicColumn[] = [
     width: 180
   },
   {
-    title: "接口路径前缀",
+    title: "接口前缀",
     dataIndex: "apiPrefix",
     width: 120
   },
@@ -48,7 +48,7 @@ export const searchFormSchema: FormSchema[] = [
   },
   {
     field: "apiPrefix",
-    label: "接口路径前缀",
+    label: "接口前缀",
     component: "Input",
     colProps: { lg: 4, md: 5 }
   },
@@ -88,7 +88,7 @@ export const codeBuildFormSchema: FormSchema[] = [
   },
   {
     field: "apiPrefix",
-    label: "接口路径前缀",
+    label: "接口前缀",
     component: "Input",
     helpMessage: [
       "网关path中的路由匹配前缀",
