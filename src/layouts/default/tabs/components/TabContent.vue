@@ -3,7 +3,7 @@
     :dropMenuList="getDropMenuList"
     :trigger="getTrigger"
     placement="bottom"
-    overlayClassName="multiple-tabs__dropdown"
+    :overlayStyle="{ width: '150px' }"
     @menu-event="handleMenuEvent"
   >
     <div :class="`${prefixCls}__info`" @contextmenu="handleContext" v-if="getIsTabs">
@@ -18,7 +18,7 @@
   import type { PropType } from "vue";
   import type { RouteLocationNormalized } from "vue-router";
   import { defineComponent, computed, unref } from "vue";
-  import { Dropdown } from "/@/components/general/Dropdown/index";
+  import { Dropdown } from "/@/components/general/Dropdown";
   import { Icon } from "/@/components/general/Icon";
   import { TabContentProps } from "../types";
   import { useDesign } from "/@/hooks/web/UseDesign";

@@ -57,6 +57,7 @@
         isTreeTable: true,
         pagination: false,
         striped: false,
+        canResize: false,
         useSearchForm: true,
         showTableSetting: true,
         bordered: true,

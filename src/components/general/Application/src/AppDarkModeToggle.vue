@@ -1,8 +1,7 @@
 <template>
   <div :class="getClass" @click="toggleDarkMode">
     <div :class="`${prefixCls}-inner`">
-      <SvgIcon :class="`${prefixCls}-icon`" v-if="isDark" size="14" name="moon" />
-      <SvgIcon :class="`${prefixCls}-icon`" v-else size="14" name="sun" />
+      <SvgIcon :class="`${prefixCls}-icon`" size="14" :name="isDark ? 'moon' : 'sun'" />
     </div>
   </div>
 </template>
@@ -17,9 +16,7 @@
 
   const { prefixCls } = useDesign("dark-switch");
   const { getDarkMode, setDarkMode } = useRootSetting();
-
   const isDark = computed(() => getDarkMode.value === ThemeEnum.DARK);
-
   const getClass = computed(() => [
     prefixCls,
     {
@@ -27,10 +24,10 @@
     }
   ]);
 
-  function toggleDarkMode() {
+  async function toggleDarkMode() {
     const darkMode = getDarkMode.value === ThemeEnum.DARK ? ThemeEnum.LIGHT : ThemeEnum.DARK;
     setDarkMode(darkMode);
-    updateDarkTheme(darkMode);
+    updateDarkTheme(darkMode).then();
     updateHeaderBgColor();
     updateSidebarBgColor();
   }

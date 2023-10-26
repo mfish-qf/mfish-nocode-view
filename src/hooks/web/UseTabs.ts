@@ -24,7 +24,7 @@ export function useTabs(_router?: Router) {
     if (!show) {
       throw new Error("The multi-tab page is currently not open, please open it in the settings！");
     }
-    return !!show;
+    return show;
   }
 
   const tabStore = useMultipleTabStore();

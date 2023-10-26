@@ -371,7 +371,13 @@
     }
 
     .ant-pagination {
-      margin: 10px 0 0;
+      margin: 10px 0 0 !important;
+      .ant-pagination-prev {
+        display: inline-flex;
+      }
+      .ant-pagination-next {
+        display: inline-flex;
+      }
     }
 
     .ant-table-footer {
