@@ -3,6 +3,7 @@
     :dropMenuList="getDropMenuList"
     :trigger="getTrigger"
     placement="bottom"
+    :arrow="{ pointAtCenter: true }"
     :overlayStyle="{ width: '150px' }"
     @menu-event="handleMenuEvent"
   >
