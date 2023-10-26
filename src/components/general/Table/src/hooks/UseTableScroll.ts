@@ -116,7 +116,7 @@ export function useTableScroll(
   function calcBottomAndPaddingHeight(tableEl: Element, headEl: Element) {
     const { pagination, isCanResizeParent, useSearchForm } = unref(propsRef);
     // Table height from bottom height-custom offset
-    let paddingHeight = 52;
+    let paddingHeight = 30;
     let bottomIncludeBody = 0;
     if (unref(wrapRef) && isCanResizeParent) {
       const tablePadding = 12;
