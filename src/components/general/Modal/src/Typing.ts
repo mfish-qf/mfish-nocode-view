@@ -194,6 +194,11 @@ export interface ModalProps {
    * @type number
    */
   zIndex?: number;
+
+  /**
+   * 是否支持键盘关闭
+   */
+  keyboard?: boolean;
 }
 
 export interface ModalWrapperProps {
