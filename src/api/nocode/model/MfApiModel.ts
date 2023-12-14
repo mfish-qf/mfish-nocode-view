@@ -41,6 +41,12 @@ export interface ReqMfApi extends ReqPage {
   folderId?: string;
 }
 
+export interface ReqSource {
+  sourceType: number;
+  sourceId: string;
+  tableName: string;
+}
+
 export interface Config {
   sourceType: number;
   sourceId: string;
@@ -145,8 +151,14 @@ export interface CustomColumn {
   expressions: PExpression[];
 }
 
+export enum ExpressionType {
+  formula = "formula",
+  operator = "operator",
+  field = "field",
+  param = "param"
+}
 export interface PExpression {
-  type: string;
+  type: ExpressionType;
   value: any;
   name?: string;
 }

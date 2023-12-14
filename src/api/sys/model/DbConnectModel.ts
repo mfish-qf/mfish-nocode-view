@@ -33,6 +33,7 @@ export interface ReqDbConnect extends ReqPage {
  * 表信息
  */
 export interface TableInfo {
+  key?: string;
   idType?: string;
   tableName?: string;
   tableComment?: string;

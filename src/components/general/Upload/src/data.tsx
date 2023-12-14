@@ -7,7 +7,6 @@ import { useI18n } from "/@/hooks/web/UseI18n";
 import { calcSize, getFileIcon } from "/@/utils/FileUtils";
 
 const { t } = useI18n();
-
 // 文件上传列表
 export function createTableColumns(): BasicColumn[] {
   return [
@@ -79,7 +78,7 @@ export function createTableColumns(): BasicColumn[] {
           record.path = e.target.value;
         }
 
-        return <Input placeholder={"为空采用默认路径"} onChange={onChange} />;
+        return <Input placeholder={"为空采用默认路径"} defaultValue={record.path} onChange={onChange} />;
       }
     },
     {

@@ -20,6 +20,7 @@ export interface ReqApiFolder extends ReqPage {
   name?: string;
 }
 export interface FolderVo extends BaseEntity<string> {
+  parentId?: string;
   name?: string;
   remark?: string;
   fType?: number;

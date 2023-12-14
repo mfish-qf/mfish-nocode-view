@@ -10,7 +10,7 @@
         <a-button type="primary" @click="handleCreate" v-auth="'sys:dict:insert'">新增字典项 </a-button>
       </template>
       <template #bodyCell="{ column, record }">
-        <template v-if="column.key === 'action'">
+        <template v-if="column?.key === 'action'">
           <TableAction
             :actions="[
               {

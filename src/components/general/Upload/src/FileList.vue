@@ -2,11 +2,11 @@
   import { defineComponent, watch, nextTick } from "vue";
   import { fileListProps } from "./Props";
   import { useModalContext } from "/@/components/general/Modal/src/hooks/UseModalContext";
-  import { Table } from "ant-design-vue";
+  import { Table as ATable } from "ant-design-vue";
 
   export default defineComponent({
     name: "FileList",
-    components: { Table },
+    components: { ATable },
     props: fileListProps,
     setup(props, {}) {
       const modalFn = useModalContext();
@@ -23,7 +23,7 @@
         const columnList = [...columns, actionColumn];
         const scroll = { x: 800 };
         return (
-          <Table columns={columnList as any} data-source={dataSource} pagination={false} scroll={scroll} bordered />
+          <ATable columns={columnList as any} data-source={dataSource} pagination={false} scroll={scroll} bordered />
         );
       };
     }

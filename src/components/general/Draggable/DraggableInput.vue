@@ -36,7 +36,7 @@
               shape="circle"
               @click="closeBlock(index)"
             >
-              <template #icon><CloseOutlined :style="{ fontSize: '12px', color: blockColor }" /></template>
+              <template #icon><CloseOutlined :style="{ fontSize: '10px', color: blockColor }" /></template>
             </AButton>
           </div>
         </template>
@@ -44,7 +44,7 @@
       <ADropdown>
         <template #overlay>
           <AMenu v-if="!drag && menus.length > 0">
-            <AMenuItem v-for="item in menus" :key="item" @click="childMenuClick($event, item.value)">
+            <AMenuItem v-for="(item, index) in menus" :key="index" @click="childMenuClick($event, item.value)">
               <div :class="`${prefixCls}-menus`" draggable="true" @dragstart="menuDrag($event, item.value)">
                 <PlusOutlined />
                 <div style="margin-left: 7px">
@@ -71,7 +71,7 @@
   import Icon from "/@/components/general/Icon/src/Icon.vue";
   import { Tag as ATag, Menu as AMenu, Dropdown as ADropdown, Button as AButton } from "ant-design-vue";
   import { PlusOutlined, CloseOutlined } from "@ant-design/icons-vue";
-  import { ref, watch } from "vue";
+  import { ref, watchEffect } from "vue";
   import IconFont from "/@/components/general/Icon/src/IconFont.vue";
   import { DragMenu } from "/@/components/general/Draggable/DraggableType";
   import { lighten } from "/@/utils/Color";
@@ -94,13 +94,9 @@
 
   const curTagOver = ref<number>();
   const drag = ref<boolean>(false);
-  watch(
-    () => props.items,
-    (val) => {
-      dragItems.value = val;
-    },
-    { immediate: true }
-  );
+  watchEffect(() => {
+    dragItems.value = props.items;
+  });
   function allowDrop(event) {
     event.preventDefault();
   }
@@ -242,6 +238,9 @@
       margin-top: 2px;
     }
     .close {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 16px;
       height: 16px;
       min-width: 16px;

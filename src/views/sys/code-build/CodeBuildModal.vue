@@ -12,7 +12,7 @@
         <a-button type="primary" @click="handleCreate">新增查询参数</a-button>
       </template>
       <template #bodyCell="{ column, record }">
-        <template v-if="column.key === 'action'">
+        <template v-if="column?.key === 'action'">
           <TableAction
             :actions="[
               {
@@ -39,14 +39,13 @@
   import { codeBuildFormSchema } from "./codeBuild.data";
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
   import { insertCodeBuild } from "/@/api/sys/CodeBuild";
-  import { Divider, Button } from "ant-design-vue";
   import { buildUUID } from "/@/utils/Uuid";
   import { getDictItems } from "/@/api/sys/DictItem";
   import { getFieldList } from "/@/api/sys/DbConnect";
 
   export default {
     name: "CodeBuildModal",
-    components: { BasicModal, BasicForm, Divider, Button, BasicTable, TableAction },
+    components: { BasicModal, BasicForm, BasicTable, TableAction },
     emits: ["success", "register"],
     setup(_, { emit }) {
       const [registerForm, { resetFields, validate }] = useForm({

@@ -102,6 +102,14 @@ export const imageBase64 = async (url) => {
 export function getFileIcon(fileName: string) {
   const appStore = useAppStore();
   const color = appStore.getThemeColor;
+  return h(Icon, { size: 40, icon: getFileIconName(fileName), color: color });
+}
+
+/**
+ * 获取文件icon名称
+ * @param fileName
+ */
+export function getFileIconName(fileName: string) {
   const index = fileName.lastIndexOf(".");
   if (index > 0) {
     let name = fileName.substring(index + 1);
@@ -115,7 +123,11 @@ export function getFileIcon(fileName: string) {
         break;
       case "xls":
       case "xlsx":
+      case "csv":
         name = "excel";
+        break;
+      case "md":
+        name = "markdown";
         break;
       case "pptx":
         name = "ppt";
@@ -128,11 +140,11 @@ export function getFileIcon(fileName: string) {
       case "pdf":
         break;
       default:
-        return h(Icon, { size: 40, icon: `ant-design:file-unknown-outlined`, color: color });
+        return `ant-design:file-unknown-outlined`;
     }
-    return h(Icon, { size: 40, icon: `ant-design:file-${name}-outlined`, color: color });
+    return `ant-design:file-${name}-outlined`;
   }
-  return h(Icon, { size: 40, icon: `ant-design:file-unknown-outlined`, color: color });
+  return `ant-design:file-unknown-outlined`;
 }
 
 /**
