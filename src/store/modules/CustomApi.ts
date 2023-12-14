@@ -1,8 +1,11 @@
 import { defineStore } from "pinia";
 import { MetaDataHeader, TableInfo } from "/@/api/sys/model/DbConnectModel";
-import { getDataHeaders, getTableList } from "/@/api/sys/DbConnect";
+import { getTableList } from "/@/api/sys/DbConnect";
 import { PageResult } from "/@/api/model/BaseModel";
 import { ApiParams } from "/@/api/nocode/model/ApiParamsModel";
+import { FormulaInfo } from "/@/api/nocode/model/FormulaInfoModel";
+import { getFormulaInfoList } from "/@/api/nocode/FormulaInfo";
+import { getSourceHeaders } from "/@/api/nocode/MfApi";
 
 /**
  * @description: 自定义API缓存
@@ -26,6 +29,7 @@ interface CustomApiState {
   showData: boolean;
   //显示数据的层级
   showDataLevel: string | number;
+  formulaMap: Map<string, FormulaInfo>;
 }
 
 export const useApiStore = defineStore({
@@ -41,7 +45,8 @@ export const useApiStore = defineStore({
     level: 1,
     fieldsChange: 1,
     showData: false,
-    showDataLevel: ""
+    showDataLevel: "",
+    formulaMap: new Map()
   }),
   getters: {
     getSourceId(): string {
@@ -76,6 +81,9 @@ export const useApiStore = defineStore({
     },
     getShowDataLevel(): string | number {
       return this.showDataLevel;
+    },
+    getFormulaMap(): Map<string, FormulaInfo> {
+      return this.formulaMap;
     }
   },
   actions: {
@@ -89,13 +97,12 @@ export const useApiStore = defineStore({
       if (!tableName) return;
       this.tableName = tableName;
     },
-    async setTableFields(connectId: string, tableName: string | undefined): Promise<MetaDataHeader[]> {
+    async setTableFields(sourceId: string, tableName: string | undefined): Promise<MetaDataHeader[]> {
       if (!tableName) return [];
-      this.tableFields = await getDataHeaders({
-        connectId: connectId,
+      this.tableFields = await getSourceHeaders({
+        sourceId: sourceId,
         tableName: tableName,
-        pageNum: 1,
-        pageSize: 10000
+        sourceType: this.sourceType
       });
       return this.tableFields;
     },
@@ -114,6 +121,7 @@ export const useApiStore = defineStore({
       this.level = level;
     },
     setFieldsChange(level: number) {
+      //监听内存字段数据发生变化
       if (level < this.getLevel) {
         this.fieldsChange++;
       }
@@ -134,6 +142,17 @@ export const useApiStore = defineStore({
     },
     setShowDataLevel(level: string | number) {
       this.showDataLevel = level;
+    },
+    async setFormulaMap() {
+      if (this.formulaMap && this.formulaMap.size > 0) return;
+      const res = await getFormulaInfoList({ pageNum: 1, pageSize: 10000 });
+      res.list.forEach((info: FormulaInfo) => {
+        const key: string = info.categoryId + "," + info.id;
+        this.formulaMap.set(key, { ...info, key });
+      });
+    },
+    getFormula(key: string) {
+      return this.formulaMap.get(key);
     }
   }
 });

@@ -44,7 +44,7 @@
           <Icon v-else icon="ant-design:folder-filled" :color="iconColor(key)" />
         </template>
         <template #title="{ title, data }">
-          <ADropdown :trigger="['contextmenu']">
+          <ADropdown :trigger="['contextmenu']" placement="bottom" :arrow="{ pointAtCenter: true }">
             <template v-if="data.isEdit">
               <span
                 ><AInput
@@ -64,25 +64,25 @@
               <span v-else>{{ title }}</span>
             </template>
             <template #overlay>
-              <AMenu @click="({ key: menuKey }) => onContextMenuClick(menuKey, data.key)">
-                <AMenu.Item key="1" v-if="allowAdd">
+              <AMenu @click="({ key: menuKey }) => onContextMenuClick(menuKey as string, data.key)">
+                <AMenuItem key="1" v-if="allowAdd">
                   <template #icon>
                     <Icon icon="ant-design:sisternode-outlined" />
                   </template>
                   新增子目录
-                </AMenu.Item>
-                <AMenu.Item key="2" v-if="allowEdit">
+                </AMenuItem>
+                <AMenuItem key="2" v-if="allowEdit">
                   <template #icon>
                     <Icon icon="ant-design:tool-outlined" />
                   </template>
                   重命名
-                </AMenu.Item>
-                <AMenu.Item key="3" v-if="allowDelete">
+                </AMenuItem>
+                <AMenuItem key="3" v-if="allowDelete">
                   <template #icon>
                     <Icon icon="ant-design:delete-outlined" />
                   </template>
                   删除
-                </AMenu.Item>
+                </AMenuItem>
               </AMenu>
             </template>
           </ADropdown>
@@ -93,7 +93,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { PropType, ref, watch, unref, reactive } from "vue";
+  import { PropType, ref, watch, unref, reactive, nextTick } from "vue";
   import {
     Empty,
     Button as AButton,
@@ -116,6 +116,7 @@
   import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
   import { useAppStore } from "/@/store/modules/App";
   const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
+  const AMenuItem = AMenu.Item;
   const props = defineProps({
     treeData: {
       type: Array as PropType<TreeDataItem[]>
@@ -499,8 +500,10 @@
     if (pNode) {
       pNode.isLeaf = !(pNode.children && pNode.children.length > 0);
       if (pNode.isLeaf) {
-        expandedKeys.value = expandedKeys.value.filter((item) => item !== pNode.id);
-        emit("expand", expandedKeys.value);
+        nextTick(() => {
+          expandedKeys.value = expandedKeys.value.filter((item) => item !== pNode.id);
+          emit("expand", expandedKeys.value);
+        });
       }
     }
   };

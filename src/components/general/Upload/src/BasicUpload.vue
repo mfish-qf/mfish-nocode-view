@@ -5,13 +5,22 @@
         {{ t("component.upload.upload") }}
       </a-button>
     </Space>
-    <UploadModal v-bind="bindValue" @register="registerUploadModal" @change="handleChange" @delete="handleDelete" />
+    <UploadModal
+      v-bind="bindValue"
+      @register="registerUploadModal"
+      @change="handleChange"
+      @delete="handleDelete"
+      @success="handleSuccess"
+    >
+      <template #[item]="data" v-for="item in Object.keys($slots)">
+        <slot :name="item" v-bind="data || {}"></slot>
+      </template>
+    </UploadModal>
   </div>
 </template>
 <script lang="ts">
   import { defineComponent, computed } from "vue";
-  import { Icon } from "/@/components/general/Icon";
-  import { Tooltip, Space } from "ant-design-vue";
+  import { Space } from "ant-design-vue";
   import { useModal } from "/@/components/general/Modal";
   import { uploadContainerProps } from "./Props";
   import { omit } from "lodash-es";
@@ -21,9 +30,9 @@
 
   export default defineComponent({
     name: "BasicUpload",
-    components: { UploadModal, Space, Icon, Tooltip },
+    components: { UploadModal, Space },
     props: uploadContainerProps,
-    emits: ["change", "delete"],
+    emits: ["change", "delete", "success"],
 
     setup(props, { emit, attrs }) {
       const { t } = useI18n();
@@ -43,12 +52,16 @@
         emit("delete", record);
       }
 
+      function handleSuccess(files: SysFile[]) {
+        emit("success", files);
+      }
       return {
         registerUploadModal,
         openUploadModal,
-        handleChange,
         bindValue,
+        handleChange,
         handleDelete,
+        handleSuccess,
         t
       };
     }

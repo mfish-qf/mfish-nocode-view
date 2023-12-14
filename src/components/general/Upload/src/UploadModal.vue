@@ -1,7 +1,8 @@
 <template>
   <BasicModal
-    width="900px"
-    :title="t('component.upload.upload')"
+    :width="modalWidth"
+    :height="modalHeight"
+    :title="modalTitle || t('component.upload.upload')"
     :okText="t('component.upload.close')"
     v-bind="$attrs"
     @register="register"
@@ -15,7 +16,7 @@
         {{ getUploadBtnText }}
       </a-button>
     </template>
-
+    <slot name="header"></slot>
     <div class="upload-modal-toolbar">
       <Alert :message="getHelpText" type="info" banner class="upload-modal-toolbar__text" />
       <Upload
@@ -34,14 +35,14 @@
   </BasicModal>
 </template>
 <script lang="ts">
-  import { defineComponent, reactive, ref, toRefs, unref, computed } from "vue";
-  import { Upload, Alert } from "ant-design-vue";
+  import { computed, defineComponent, reactive, ref, toRefs, unref } from "vue";
+  import { Alert, Upload } from "ant-design-vue";
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
   import { useUploadType } from "./UseUpload";
   import { useMessage } from "/@/hooks/web/UseMessage";
   import { FileItem, UploadResultStatus } from "./Typing";
-  import { basicProps } from "./Props";
-  import { createTableColumns, createActionColumn } from "./data";
+  import { basicProps, UploadColumnName } from "./Props";
+  import { createActionColumn, createTableColumns } from "./data";
   import { checkImgType, getBase64WithFile } from "/@/utils/FileUtils";
   import { buildUUID } from "/@/utils/Uuid";
   import { isFunction } from "/@/utils/Is";
@@ -55,7 +56,7 @@
     props: {
       ...basicProps
     },
-    emits: ["change", "register", "delete"],
+    emits: ["change", "register", "delete", "success"],
     setup(props, { emit }) {
       const state = reactive<{ fileList: FileItem[] }>({
         fileList: []
@@ -96,10 +97,15 @@
           createMessage.error(t("component.upload.maxSizeMultiple", [maxSize]));
           return false;
         }
+        // 判断文件类型
+        if (accept.value && accept.value?.length > 0 && !accept.value?.some((item) => name.endsWith(item))) {
+          createMessage.error(t("component.upload.acceptUpload", [getStringAccept.value]));
+          return false;
+        }
         const commonItem = {
           uuid: buildUUID(),
           isPrivate: 1,
-          path: "",
+          path: props.defaultPath ? props.defaultPath : "",
           file,
           size,
           name,
@@ -145,22 +151,15 @@
               path: item.path
             },
             function onUploadProgress(progressEvent: ProgressEvent) {
-              const complete = ((progressEvent.loaded / progressEvent.total) * 100) | 0;
-              item.percent = complete;
+              item.percent = ((progressEvent.loaded / progressEvent.total) * 100) | 0;
             }
           );
           item.status = UploadResultStatus.SUCCESS;
           item.responseData = result;
-          return {
-            success: true,
-            error: null
-          };
+          return item;
         } catch (e) {
           item.status = UploadResultStatus.ERROR;
-          return {
-            success: false,
-            error: e
-          };
+          return item;
         }
       }
 
@@ -181,8 +180,9 @@
           );
           isUploadingRef.value = false;
           // 生产环境:抛出错误
-          const errorList = data.filter((item: any) => !item.success);
+          const errorList = data.filter((item: any) => item.status !== UploadResultStatus.SUCCESS);
           if (errorList.length > 0) throw errorList;
+          emit("success", data);
         } catch (e) {
           isUploadingRef.value = false;
           throw e;
@@ -212,8 +212,18 @@
         }
       }
 
+      const getColumns = () => {
+        const columns = createTableColumns();
+        if (!props.hideColumn) {
+          return columns;
+        }
+        return columns.filter(
+          (item) => item.dataIndex && !props.hideColumn.includes(item.dataIndex as UploadColumnName)
+        );
+      };
+
       return {
-        columns: createTableColumns() as any[],
+        columns: getColumns() as any[],
         actionColumn: createActionColumn(handleRemove) as any,
         register,
         getHelpText,

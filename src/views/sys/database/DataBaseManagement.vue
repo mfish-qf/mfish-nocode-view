@@ -46,7 +46,7 @@
             </a-col>
           </a-row>
         </ScrollContainer>
-        <TableDetail v-else :cur-node="curNode">
+        <TableDetail v-else :cur-node="curNode" :resize-height-offset="resizeHeightOffset">
           <template #[item]="data" v-for="item in Object.keys($slots)">
             <slot :name="item" v-bind="data || {}"></slot>
           </template>
@@ -84,6 +84,9 @@
       [BreadcrumbItem.name]: BreadcrumbItem,
       [Col.name]: Col
     },
+    props: {
+      resizeHeightOffset: { type: Number, default: 0 }
+    },
     setup() {
       let tableList = ref<TableInfo[]>([]);
       const dbTreeRef = ref();
@@ -93,7 +96,7 @@
       const searchTable = ref<TableInfo[]>([]);
       const curNode = ref<any>();
       const parentNode = ref<TreeItem>();
-      const split = ref<string>("300px");
+      const split = ref<number>(0.3);
 
       async function changeSelect(record: any, parent: any) {
         curNode.value = toRaw(record);
@@ -202,6 +205,7 @@
   .@{prefix-cls} {
     //border-left: 1px solid #d9d9d9;
     background-color: #ffffff;
+    height: 100%;
     &-left {
       padding: 6px;
     }

@@ -52,7 +52,7 @@
     display: flex;
     padding-left: 7px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 24px;
     color: @text-color-base;
     cursor: pointer;

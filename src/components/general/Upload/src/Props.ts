@@ -1,6 +1,7 @@
 import type { PropType } from "vue";
 import { FileBasicColumn } from "./Typing";
 
+export type UploadColumnName = "thumbUrl" | "isPrivate" | "name" | "path" | "size" | "type" | "action";
 export const basicProps = {
   helpText: {
     type: String as PropType<string>,
@@ -31,8 +32,7 @@ export const basicProps = {
   },
   api: {
     type: Function as PropType<PromiseFn>,
-    default: null,
-    required: true
+    default: null
   },
   name: {
     type: String as PropType<string>,
@@ -41,6 +41,28 @@ export const basicProps = {
   filename: {
     type: String as PropType<string>,
     default: null
+  },
+  //默认上传路径
+  defaultPath: {
+    type: String as PropType<string>,
+    default: null
+  },
+  //隐藏列
+  hideColumn: {
+    type: Array as PropType<UploadColumnName[]>,
+    default: null
+  },
+  modalTitle: {
+    type: String as PropType<string>,
+    default: null
+  },
+  modalWidth: {
+    type: Number as PropType<number>,
+    default: 900
+  },
+  modalHeight: {
+    type: Number as PropType<number>,
+    default: 300
   }
 };
 

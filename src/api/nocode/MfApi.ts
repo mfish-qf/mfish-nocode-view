@@ -1,5 +1,5 @@
 import { defHttp } from "/@/utils/http/axios";
-import { MfApi, ReqMfApi, MfApiPageModel, Config } from "/@/api/nocode/model/MfApiModel";
+import { MfApi, ReqMfApi, MfApiPageModel, Config, ReqSource } from "/@/api/nocode/model/MfApiModel";
 import { DataTable, MetaDataHeader } from "/@/api/sys/model/DbConnectModel";
 import { ReqPage } from "/@/api/model/BaseModel";
 
@@ -13,8 +13,10 @@ enum Api {
   MfApi = "/nocode/mfApi",
   SQL = "/nocode/mfApi/sql",
   DATA = "/nocode/mfApi/data",
+  Headers = "/nocode/mfApi/headers",
   Fields = "/nocode/mfApi/fields",
-  API = "/nocode/mfApi/api"
+  API = "/nocode/mfApi/api",
+  FormulaTest = "/nocode/mfApi/formulaTest"
 }
 
 export const getApiUrl = () => Api.API;
@@ -85,6 +87,16 @@ export function getQueryData(config: Config, reqPage: ReqPage) {
   );
 }
 
+export function formulaTest(config: Config, reqPage: ReqPage) {
+  return defHttp.post<DataTable>(
+    { url: Api.FormulaTest + "?pageNum=" + reqPage.pageNum + "&pageSize=" + reqPage.pageSize, params: config },
+    { errorMessageMode: "message" }
+  );
+}
 export function getQueryFields(config: Config) {
   return defHttp.post<MetaDataHeader[]>({ url: Api.Fields, params: config }, { errorMessageMode: "message" });
 }
+
+export const getSourceHeaders = (params: ReqSource) => {
+  return defHttp.get<MetaDataHeader[]>({ url: Api.Headers, params: params });
+};

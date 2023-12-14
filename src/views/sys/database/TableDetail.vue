@@ -4,51 +4,52 @@
  @date: 2023/4/4 19:13
 -->
 <template>
-  <PageWrapper :title="`数据表：${curNode?.tableName?.toUpperCase()}`" contentBackground contentFullHeight fixedHeight>
-    <template #extra>
-      <slot name="button" v-bind="{ data: curNode }"></slot>
-    </template>
-    <template #footer>
-      <a-tabs default-active-key="1" @change="changeTab">
-        <a-tab-pane key="1" tab="基本信息" />
-        <a-tab-pane key="2" tab="数据预览" />
-      </a-tabs>
-    </template>
-    <div class="m-4 desc-wrap" v-if="curTab === '1'">
-      <a-descriptions size="small">
-        <a-descriptions-item label="描述">
-          {{ curNode?.tableComment ? curNode?.tableComment : "无" }}
-        </a-descriptions-item>
-      </a-descriptions>
-      <a-descriptions title="字段信息" class="mt-3" />
-      <BasicTable @register="registerFieldTable" />
+  <div :class="`${prefixCls}`">
+    <div class="header">
+      <div class="title">{{ `数据表：${curNode?.tableName?.toUpperCase()}` }}</div>
+      <div><slot name="button" v-bind="{ data: curNode }"></slot></div>
     </div>
-    <div v-else class="m-4">
-      <BasicTable @register="registerDataTable" />
-    </div>
-  </PageWrapper>
+    <a-tabs default-active-key="1" @change="changeTab">
+      <a-tab-pane key="1" tab="基本信息">
+        <div class="mt-3">
+          <a-descriptions size="small">
+            <a-descriptions-item label="描述">
+              {{ curNode?.tableComment ? curNode?.tableComment : "无" }}
+            </a-descriptions-item>
+          </a-descriptions>
+          <a-descriptions title="字段信息" class="mt-3" />
+          <BasicTable @register="registerFieldTable" />
+        </div>
+      </a-tab-pane>
+      <a-tab-pane key="2" tab="数据预览">
+        <div class="mt-2">
+          <BasicTable @register="registerDataTable" />
+        </div>
+      </a-tab-pane>
+    </a-tabs>
+  </div>
 </template>
 <script lang="ts">
   import { ref, watch, onMounted, computed, nextTick, ComputedRef } from "vue";
   import { BasicColumn, BasicTable, TableActionType, useTable } from "/@/components/general/Table";
-  import { PageWrapper } from "/@/components/general/Page";
   import { Descriptions, Tabs } from "ant-design-vue";
   import { ReqTable, TableInfo } from "/@/api/sys/model/DbConnectModel";
   import { getDataTable, getFieldList } from "/@/api/sys/DbConnect";
   import { columns } from "/@/views/sys/database/tableInfo.data";
+  import { useDesign } from "/@/hooks/web/UseDesign";
 
   export default {
     name: "TableDetail",
     components: {
       BasicTable,
-      PageWrapper,
       [Descriptions.name]: Descriptions,
       [Descriptions.Item.name]: Descriptions.Item,
       [Tabs.name]: Tabs,
       [Tabs.TabPane.name]: Tabs.TabPane
     },
     props: {
-      curNode: Object as () => TableInfo
+      curNode: Object as () => TableInfo,
+      resizeHeightOffset: { type: Number, default: 0 }
     },
     setup(props) {
       const curTab = ref("1");
@@ -57,12 +58,14 @@
         setValue();
       };
       const dataTableRef = ref<Nullable<TableActionType>>(null);
+      const { prefixCls } = useDesign("table-detail");
 
       const [registerFieldTable, { setTableData, setLoading: fieldLoading }] = useTable({
         columns,
         bordered: true,
-        showIndexColumn: false,
-        pagination: false
+        showIndexColumn: true,
+        pagination: false,
+        resizeHeightOffset: props.resizeHeightOffset
       });
       const condition: ComputedRef<ReqTable> = computed(() => {
         const curKey = props.curNode?.key;
@@ -78,6 +81,7 @@
         useTable({
           bordered: true,
           showIndexColumn: false,
+          resizeHeightOffset: props.resizeHeightOffset,
           onChange: buildTableData
         });
       watch(
@@ -154,10 +158,25 @@
         changeTab,
         registerFieldTable,
         registerDataTable,
-        dataTableRef
+        dataTableRef,
+        prefixCls
       };
     }
   };
 </script>
-
-<style scoped></style>
+<style scoped lang="less">
+  @prefix-cls: ~"@{namespace}-table-detail";
+  .@{prefix-cls} {
+    margin: 0 10px 0 20px;
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+  }
+</style>

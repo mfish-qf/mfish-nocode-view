@@ -23,7 +23,7 @@
 
     <ModalWrapper
       :useWrapper="getProps.useWrapper"
-      :footerOffset="wrapperFooterOffset"
+      :footerOffset="getProps.wrapperFooterOffset"
       :fullScreen="fullScreenRef"
       ref="modalWrapperRef"
       :loading="getProps.loading"
