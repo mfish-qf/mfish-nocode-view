@@ -1,4 +1,4 @@
-import { computed } from "vue";
+import { computed, reactive } from "vue";
 import { theme } from "ant-design-vue/lib";
 import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
 import { ThemeEnum } from "/@/enums/AppEnum";
@@ -17,11 +17,11 @@ export function useDarkModeTheme() {
     }
   };
 
-  const darkTheme = {
+  const darkTheme = reactive({
     ...color,
     algorithm: darkAlgorithm
-  };
-  const lightTheme = color;
+  });
+  const lightTheme = reactive(color);
 
   return {
     isDark,
