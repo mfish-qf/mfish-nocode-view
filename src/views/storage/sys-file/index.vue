@@ -18,12 +18,12 @@
                 icon: 'ant-design:delete-outlined',
                 color: 'error',
                 popConfirm: {
-                  title: '是否确认删除',
+                  title: '是否确认彻底删除，删除后将无法恢复',
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
                 auth: 'sys:file:delete',
-                tooltip: '删除'
+                tooltip: '彻底删除'
               }
             ]"
           />

@@ -9,7 +9,9 @@ import { SysFile, ReqSysFile, SysFilePageModel } from "/@/api/storage/model/SysF
  */
 enum Api {
   SysFile = "/storage/sysFile",
-  SetStatus = "/storage/sysFile/status"
+  SetStatus = "/storage/sysFile/status",
+  LogicDeleteFile = "/storage/sysFile/logic",
+  RestoreFile = "/storage/sysFile/restore"
 }
 
 /**
@@ -52,6 +54,26 @@ export function insertSysFile(sysFile: SysFile) {
  */
 export function updateSysFile(sysFile: SysFile) {
   return defHttp.put<SysFile>({ url: Api.SysFile, params: sysFile }, { successMessageMode: "message" });
+}
+
+/**
+ * 逻辑删除文件
+ *
+ * @param id 唯一ID
+ * @return
+ */
+export function logicDeleteFile(id: string) {
+  return defHttp.delete<SysFile>({ url: Api.LogicDeleteFile + "/" + id });
+}
+
+/**
+ * 逻辑删除文件恢复
+ *
+ * @param id 唯一ID
+ * @return
+ */
+export function restoreFile(id: string) {
+  return defHttp.put<SysFile>({ url: Api.RestoreFile + "/" + id });
 }
 
 /**
