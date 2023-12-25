@@ -4,7 +4,7 @@ import { h } from "vue";
 import { Switch } from "ant-design-vue";
 import { getToken } from "/@/utils/auth";
 import TableImage from "/@/components/general/Table/src/components/TableImg.vue";
-import { getLocalFileUrl, setFileStatus } from "/@/api/storage/SysFile";
+import { getLocalFileUrl, logicDeleteFile, restoreFile, setFileStatus } from "/@/api/storage/SysFile";
 import { getFileIcon, calcSize, imageUrl } from "/@/utils/FileUtils";
 
 /**
@@ -80,6 +80,34 @@ export const columns: BasicColumn[] = [
           setFileStatus(record.id, newStatus)
             .then(() => {
               record.isPrivate = newStatus;
+            })
+            .finally(() => {
+              record.pendingStatus = false;
+            });
+        }
+      });
+    }
+  },
+  {
+    title: "逻辑删除",
+    dataIndex: "delFlag",
+    width: 100,
+    customRender: ({ record }) => {
+      if (!Reflect.has(record, "pendingStatus")) {
+        record.pendingStatus = false;
+      }
+      return h(Switch, {
+        checked: record.delFlag === 1,
+        checkedChildren: "已删除",
+        unCheckedChildren: "未删除",
+        loading: record.pendingStatus,
+        onChange(checked: boolean) {
+          record.pendingStatus = true;
+          const newStatus = checked ? 1 : 0;
+          const method = newStatus ? logicDeleteFile : restoreFile;
+          method(record.id)
+            .then(() => {
+              record.delFlag = newStatus;
             })
             .finally(() => {
               record.pendingStatus = false;
