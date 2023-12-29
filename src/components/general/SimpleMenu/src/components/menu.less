@@ -78,9 +78,11 @@
 
         &-selected {
           z-index: 2;
-          color: @button-primary-color;
+          color: @white;
           background-color: @button-primary-hover-color;
-
+          &:hover {
+            color: @white;
+          }
           .light-border();
         }
       }
@@ -236,7 +238,7 @@
       > li.@{menu-prefix-cls}-item-active,
       .@{menu-prefix-cls}-submenu-active {
         position: relative;
-        background-color: @button-primary-hover-color;
+        //background-color: @button-primary-hover-color;
 
         &::after {
           display: none;
