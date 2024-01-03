@@ -1,13 +1,17 @@
 <template>
   <ConfigProvider :locale="getAntdLocale" :theme="isDark ? darkTheme : lightTheme">
-    <AppProvider>
-      <RouterView />
-    </AppProvider>
+    <NConfigProvider style="height: 100%" :theme="isDark ? nDarkTheme : nLightTheme">
+      <AppProvider>
+        <RouterView />
+      </AppProvider>
+    </NConfigProvider>
   </ConfigProvider>
 </template>
 <script setup lang="ts">
   import { ConfigProvider } from "ant-design-vue";
   import { RouterView } from "vue-router";
+  import { NConfigProvider } from "naive-ui";
+  import { darkTheme as nDarkTheme, lightTheme as nLightTheme } from "naive-ui";
   import { AppProvider } from "/@/components/general/Application";
   import { useTitle } from "/@/hooks/web/UseTitle";
   import { useLocale } from "/@/i18n/UseLocale";
