@@ -4,8 +4,8 @@
  @date: 2023/3/31 20:17
 -->
 <template>
-  <Split v-model="split" :class="prefixCls">
-    <template #left>
+  <Split :default-size="split" :min="0.1" :max="0.5" :class="prefixCls">
+    <template #1>
       <DBTree
         :class="`${prefixCls}-left h-full`"
         ref="dbTreeRef"
@@ -14,7 +14,7 @@
         @search="changeSearch"
       />
     </template>
-    <template #right>
+    <template #2>
       <div :class="`${prefixCls}-right h-full`">
         <a-breadcrumb separator=">" class="m-3">
           <a-breadcrumb-item v-for="(item, index) in breadList" :key="index">
@@ -58,8 +58,6 @@
 
 <script lang="ts">
   import { ref, unref, onBeforeMount, computed, toRaw } from "vue";
-  import { Split } from "view-ui-plus";
-  import "view-ui-plus/dist/styles/viewuiplus.css";
   import { ScrollContainer } from "/@/components/general/Container";
   import DBTree from "./DBTree.vue";
   import { Icon } from "/@/components/general/Icon";
@@ -69,6 +67,7 @@
   import TableDetail from "/@/views/sys/database/TableDetail.vue";
   import { TreeItem } from "/@/components/general/Tree";
   import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
+  import { Split } from "/@/components/general/Split";
 
   export default {
     name: "DataBaseManagement",
