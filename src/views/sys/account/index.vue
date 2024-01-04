@@ -1,5 +1,5 @@
 <template>
-  <PageWrapper contentClass="flex" contentFullHeight fixedHeight>
+  <PageWrapper contentClass="flex">
     <OrgTree class="w-1/4 xl:w-1/5" @select="handleSelect" :source="$props.source" />
     <BasicTable
       @register="registerTable"
@@ -214,11 +214,12 @@
   @prefix-cls: ~"@{namespace}-account";
   [data-theme="dark"] {
     .@{prefix-cls}{
-      border-left: 1px solid #303030
+      border-left: 1px solid #303030;
     }
   }
   .@{prefix-cls} {
     padding: 0 0 0 5px;
     border-left: 1px solid #d9d9d9;
+    height: calc(100vh - 175px);
   }
 </style>

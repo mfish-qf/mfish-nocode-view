@@ -9,14 +9,12 @@
       </template>
     </CollapseHeader>
 
-    <div class="p-2">
-      <CollapseTransition :enable="canExpan">
-        <Skeleton v-if="loading" :active="loading" />
-        <div :class="`${prefixCls}__body`" v-else v-show="show">
-          <slot></slot>
-        </div>
-      </CollapseTransition>
-    </div>
+    <CollapseTransition :enable="canExpan">
+      <Skeleton v-if="loading" :active="loading" />
+      <div :class="`${prefixCls}__body`" v-else v-show="show">
+        <slot></slot>
+      </div>
+    </CollapseTransition>
     <div :class="`${prefixCls}__footer`" v-if="$slots.footer">
       <slot name="footer"></slot>
     </div>
@@ -93,6 +91,10 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid @border-color-light;
+    }
+
+    &__body {
+      padding-top: 6px;
     }
 
     &__footer {

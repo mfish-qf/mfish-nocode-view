@@ -351,6 +351,9 @@
       .ant-table.ant-table-bordered .ant-table-title {
         border: none !important;
       }
+      .ant-table-header {
+        border-radius: 0;
+      }
     }
 
     .ant-table {
