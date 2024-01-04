@@ -95,7 +95,7 @@
       const searchTable = ref<TableInfo[]>([]);
       const curNode = ref<any>();
       const parentNode = ref<TreeItem>();
-      const split = ref<number>(0.3);
+      const split = ref<number>(0.2);
 
       async function changeSelect(record: any, parent: any) {
         curNode.value = toRaw(record);
