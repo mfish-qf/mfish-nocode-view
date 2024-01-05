@@ -13,7 +13,7 @@
 
 ## 项目介绍
 
-mfish-nocode-view采用 Vue3.0、Vite4.0、 Ant-Design-Vue、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
+mfish-nocode-view采用 Vue3.4、Vite5.0、 Ant-Design-Vue4.0.X、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
 是在Vben-Admin基础上进行优化研发的适合于摸鱼低代码平台的前端解决方案，目前已是稳定版本，可用于生产项目。
 
 ## 后端源码地址
@@ -41,7 +41,7 @@ mfish-nocode-view采用 Vue3.0、Vite4.0、 Ant-Design-Vue、TypeScript 等新�
 
 | 项目名                 | 说明             | 
 |---------------------|----------------|
-| `mfish-nocode-view` | Vue3.0+Vite4前端 | 
+| `mfish-nocode-view` | Vue3.4+Vite5前端 | 
 | `mfish-nocode`      | JAVA后台（微服务架构）  |  
 
 ## 技术文档
@@ -170,7 +170,7 @@ http://localhost:5281
 * [Vue3 文档](https://v3.vuejs.org/)
 * [TypeScript](https://www.typescriptlang.org/)
 * [Vue-router](https://next.router.vuejs.org/)
-* [Ant-Design-Vue](https://2x.antdv.com/docs/vue/introduce-cn/)
+* [Ant-Design-Vue](https://www.antdv.com/components/overview-cn)
 * [Vben文档](https://doc.vvbin.cn/)
 * [Es6](https://es6.ruanyifeng.com/)
 * [Vitejs](https://vitejs.dev/)
