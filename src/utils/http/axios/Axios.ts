@@ -149,6 +149,7 @@ export class VAxios {
     return this.request(
       {
         ...config,
+        timeout: 30 * 60 * 1000, //上传超时时间设置为30分钟
         method: "POST",
         data: formData,
         headers: { "Content-Type": ContentTypeEnum.FORM_DATA, ignoreCancelToken: true }
@@ -162,7 +163,8 @@ export class VAxios {
       {
         ...config,
         method: "get",
-        responseType: "blob"
+        responseType: "blob",
+        timeout: 30 * 60 * 1000 //下载超时时间设置为30分钟
         // headers: { "Content-Type": ContentTypeEnum.OCTET_STREAM}
       },
       options,
