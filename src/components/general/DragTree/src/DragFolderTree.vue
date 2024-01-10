@@ -46,14 +46,15 @@
         <template #title="{ title, data }">
           <ADropdown :trigger="['contextmenu']" placement="bottom" :arrow="{ pointAtCenter: true }">
             <template v-if="data.isEdit">
-              <span
-                ><AInput
+              <span>
+                <AInput
                   ref="folderInputRef"
                   size="small"
                   v-model:value="inputValue"
                   style="width: calc(100% - 24px); margin-top: 1px"
                   @keydown.enter="saveFolder(data.key)"
-              /></span>
+                />
+              </span>
             </template>
             <template v-else>
               <span v-if="searchValue !== '' && title.indexOf(searchValue) > -1">
@@ -209,6 +210,8 @@
     emit("expand", keys);
   };
   const onSelect = (keys: string[], e) => {
+    //不允许不选中节点
+    if (keys?.length === 0) return;
     selectedKeys.value = keys;
     selectEmit(undefined, e);
   };
@@ -245,7 +248,7 @@
     buildFullNode(pNode, data);
   };
 
-  const selectEmit = (node?, e?) => {
+  const selectEmit = async (node?, e?) => {
     if (!node) {
       node = { ...e.node.dataRef };
     }
@@ -444,8 +447,8 @@
     try {
       const node = findNode(gData.value, (node) => node.key === key);
       if (!node) return;
-      node.title = unref(inputValue);
       node.isEdit = false;
+      node.title = unref(inputValue);
       const data = dataList.find((data) => data.key === key);
       const newNode = { ...node };
       if (data) {
@@ -455,7 +458,12 @@
         emit("save:insert", newNode);
         dataList.push({ key: newNode.key, title: newNode.title, isLeaf: true });
       }
-      selectEmit(newNode);
+      //这里将选中置空，触发节点刷新。否则title修改后，界面上还显示原来的值
+      selectedKeys.value = [];
+      nextTick().then(() => {
+        selectedKeys.value = [newNode.key];
+        selectEmit(newNode);
+      });
     } finally {
       draggable.value = true;
       if (inputBlur.key) {

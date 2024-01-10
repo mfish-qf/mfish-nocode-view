@@ -223,7 +223,7 @@ export function useDataSource(
     return findRow(dataSourceRef.value);
   }
 
-  async function fetch(opt?: FetchParams) {
+  async function fetch(opt?: FetchParams | undefined) {
     const { api, searchInfo, defSort, fetchSetting, beforeFetch, afterFetch, useSearchForm, pagination } =
       unref(propsRef);
     if (!api || !isFunction(api)) return;
