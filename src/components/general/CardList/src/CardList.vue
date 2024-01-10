@@ -79,10 +79,12 @@
   import { List, Card, Image, Typography, Tooltip, Slider, Avatar } from "ant-design-vue";
   import { Dropdown } from "/@/components/general/Dropdown";
   import { BasicForm, useForm } from "/@/components/general/Form";
-  import { propTypes } from "/@/utils/propTypes";
+  import { propTypes } from "/@/utils/PropTypes";
   import { Button } from "/@/components/general/Button";
   import { isFunction } from "/@/utils/Is";
   import { useSlider, grid } from "./data";
+  import { PAGE_SIZE, PAGE_SIZE_OPTIONS } from "/@/components/general/Table/src/Const";
+  import { useI18n } from "/@/hooks/web/UseI18n";
 
   const ListItem = List.Item;
   const CardMeta = Card.Meta;
@@ -96,6 +98,7 @@
     //api
     api: propTypes.func
   });
+  const { t } = useI18n();
   //暴露内部方法
   const emit = defineEmits(["getMethod", "delete"]);
   //数据
@@ -148,12 +151,15 @@
   const pageSize = ref(36);
   const total = ref(0);
   const paginationProp = ref({
-    showSizeChanger: false,
-    showQuickJumper: true,
+    defaultPageSize: pageSize.value || PAGE_SIZE,
+    pageSizeOptions: [pageSize.value.toString(), ...PAGE_SIZE_OPTIONS],
     pageSize,
+    size: "small",
     current: pageNum,
+    showSizeChanger: true,
+    showQuickJumper: true,
     total,
-    showTotal: (total) => `总 ${total} 条`,
+    showTotal: (total) => t("component.table.total", { total }),
     onChange: pageChange,
     onShowSizeChange: pageSizeChange
   });

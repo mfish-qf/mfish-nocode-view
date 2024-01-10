@@ -7,10 +7,10 @@ interface PaginationRenderProps {
   originalElement: any;
 }
 
-type PaginationPositon = "topLeft" | "topCenter" | "topRight" | "bottomLeft" | "bottomCenter" | "bottomRight";
+type PaginationPosition = "topLeft" | "topCenter" | "topRight" | "bottomLeft" | "bottomCenter" | "bottomRight";
 
 export declare class PaginationConfig extends Pagination {
-  position?: PaginationPositon[];
+  position?: PaginationPosition[];
 }
 
 export interface PaginationProps {
@@ -105,5 +105,5 @@ export interface PaginationProps {
    * @default ['bottomRight']
    * @type string[]
    */
-  position?: PaginationPositon[];
+  position?: PaginationPosition[];
 }
