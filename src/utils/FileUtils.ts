@@ -8,6 +8,7 @@ import { useAppStore } from "/@/store/modules/App";
 import { RequestOptions } from "/#/axios";
 import { getLocalFileUrl } from "/@/api/storage/SysFile";
 import logo from "/@/assets/images/logo.png";
+import noImage from "/@/assets/images/noImage.png";
 
 /**
  * @description: 文件通用类
@@ -181,11 +182,22 @@ export function calcSize(fileSize, level) {
  * @param setImg 图片设置Ref对象
  */
 export function setHeaderImg(fileKey, setImg: Ref) {
+  setImage(fileKey, logo, setImg);
+}
+
+/**
+ * 获取图片
+ * @param fileKey 文件key
+ * @param defaultImg 默认图片
+ * @param setImg 设置引用
+ */
+export function setImage(fileKey: string | undefined, defaultImg: string, setImg: Ref) {
+  defaultImg = defaultImg ? defaultImg : noImage;
   if (fileKey) {
     imageSrc(getLocalFileUrl(fileKey), { errorMessageMode: "none" }).then((img) => {
-      setImg.value = img ? img : logo;
+      setImg.value = img ? img : defaultImg;
     });
   } else {
-    setImg.value = logo;
+    setImg.value = defaultImg;
   }
 }
