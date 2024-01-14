@@ -26,7 +26,6 @@
     <slot name="treeTitle"></slot>
     <ScrollContainer v-show="gData && gData.length > 0">
       <ADirectoryTree
-        class="draggable-tree"
         :draggable="allowDrag && draggable"
         block-node
         show-icon
@@ -39,7 +38,15 @@
         :auto-expand-parent="autoExpandParent"
         @right-click="onRightClick"
       >
-        <template #icon="{ key }">
+        <template v-if="twoToneIcon" #icon="{ key }">
+          <FolderOpenTwoTone
+            :style="{ marginTop: '5px' }"
+            v-if="expandedKeys.includes(key)"
+            :two-tone-color="iconColor(key)"
+          />
+          <FolderTwoTone :style="{ marginTop: '5px' }" v-else :two-tone-color="iconColor(key)" />
+        </template>
+        <template v-else #icon="{ key }">
           <Icon v-if="expandedKeys.includes(key)" icon="ant-design:folder-open-filled" :color="iconColor(key)" />
           <Icon v-else icon="ant-design:folder-filled" :color="iconColor(key)" />
         </template>
@@ -116,12 +123,14 @@
   import { cloneDeep } from "lodash-es";
   import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
   import { useAppStore } from "/@/store/modules/App";
+  import { FolderTwoTone, FolderOpenTwoTone } from "@ant-design/icons-vue";
   const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
   const AMenuItem = AMenu.Item;
   const props = defineProps({
     treeData: {
       type: Array as PropType<TreeDataItem[]>
     },
+    twoToneIcon: { type: Boolean, default: true },
     isDirectoryTree: { type: Boolean, default: false },
     //节点key
     nodeKey: { type: String, default: "id" },
