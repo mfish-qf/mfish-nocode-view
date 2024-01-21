@@ -3,9 +3,11 @@
     <template #headerContent>
       <div class="flex justify-between items-center">
         <span>
-          摸鱼低代码平台前端<a :href="GITHUB_URL" target="_blank">{{ name + "-view" }}</a
-          >基于Vue3.0、Vite4.0、Ant-Design-Vue、TypeScript，后端<a :href="GITHUB_BACK_URL" target="_blank">{{ name }}</a
-          >基于JAVA、Spring Cloud
+          摸鱼低代码平台前端<a :href="GITHUB_URL" target="_blank">{{ name + "-view" }}</a>
+          基于Vue3.x、Vite5.x、Ant-Design-Vue4.x、TypeScript，后端<a :href="GITHUB_BACK_URL" target="_blank">{{
+            name
+          }}</a>
+          基于JAVA、Spring Cloud
           Alibaba的后台管理解决方案，目标是为中大型项目开发,提供现成的开箱解决方案及丰富的示例，原则上不会限制任何代码用于商用。
         </span>
       </div>
