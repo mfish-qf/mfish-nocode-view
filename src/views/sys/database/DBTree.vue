@@ -177,7 +177,12 @@
         result.list.forEach((db) => {
           db["title"] = db.tableName + (db.tableComment ? "[" + db.tableComment + "]" : "");
           db["key"] = key + "," + db.tableName;
-          db["icon"] = "ant-design:table-outlined";
+          //表和视图图标区分
+          if (db.tableType === 0) {
+            db["icon"] = "ant-design:table-outlined";
+          } else {
+            db["icon"] = "ant-design:fund-view-outlined";
+          }
           db["iconColor"] = color;
           db["isLeaf"] = true;
         });

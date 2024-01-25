@@ -38,6 +38,7 @@ export interface TableInfo {
   tableName?: string;
   tableComment?: string;
   tableSchema?: string;
+  tableType?: number;
   columns?: string;
   dbType?: number;
 }

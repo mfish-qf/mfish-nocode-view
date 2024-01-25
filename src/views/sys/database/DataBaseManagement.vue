@@ -33,7 +33,8 @@
               :class="`${prefixCls}-card`"
             >
               <div :class="`${prefixCls}-card-item`" @click="setSelect(item.key)">
-                <Icon class="icon img" icon="ant-design:table-outlined" :color="color" />
+                <Icon class="icon img" v-if="item.tableType === 0" icon="ant-design:table-outlined" :color="color" />
+                <Icon class="icon img" v-else icon="ant-design:fund-view-outlined" :color="color" />
                 <div :class="`${prefixCls}-card-item-info`">
                   <Tooltip :title="item.tableName">
                     <span>{{ item.tableName }}</span>
