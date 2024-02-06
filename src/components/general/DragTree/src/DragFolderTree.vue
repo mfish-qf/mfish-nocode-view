@@ -26,6 +26,7 @@
     <slot name="treeTitle"></slot>
     <ScrollContainer v-show="gData && gData.length > 0">
       <ADirectoryTree
+        :key="dftKey"
         :draggable="allowDrag && draggable"
         block-node
         show-icon
@@ -126,6 +127,7 @@
   import { FolderTwoTone, FolderOpenTwoTone } from "@ant-design/icons-vue";
   const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
   const AMenuItem = AMenu.Item;
+  const dftKey = ref<number>(1);
   const props = defineProps({
     treeData: {
       type: Array as PropType<TreeDataItem[]>
@@ -277,6 +279,17 @@
       emit("expand", expandedKeys.value);
       autoExpandParent.value = true;
     }
+  }
+
+  /**
+   * 外部设置节点名称
+   * @param key
+   * @param name
+   */
+  function setNodeName(key: string, name: string) {
+    const node = findNode(gData.value, (item) => item.id === key);
+    node.title = name;
+    dftKey.value++;
   }
   function clearSelect() {
     selectedKeys.value = [];
@@ -467,12 +480,9 @@
         emit("save:insert", newNode);
         dataList.push({ key: newNode.key, title: newNode.title, isLeaf: true });
       }
-      //这里将选中置空，触发节点刷新。否则title修改后，界面上还显示原来的值
-      selectedKeys.value = [];
-      nextTick().then(() => {
-        selectedKeys.value = [newNode.key];
-        selectEmit(newNode);
-      });
+      //这里改变Key值，触发节点刷新。否则title修改后，界面上还显示原来的值
+      dftKey.value++;
+      selectEmit(newNode);
     } finally {
       draggable.value = true;
       if (inputBlur.key) {
@@ -538,5 +548,6 @@
         break;
     }
   }, 200);
-  defineExpose({ setSelect, clearSelect, deleteFolder });
+
+  defineExpose({ setSelect, clearSelect, deleteFolder, setNodeName });
 </script>
