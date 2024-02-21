@@ -1,12 +1,12 @@
 <template>
   <div :class="prefixCls" :style="getWrapStyle">
     <Spin :spinning="loading" size="large" :style="getWrapStyle">
-      <iframe :src="frameSrc" :class="`${prefixCls}__main`" ref="frameRef" @load="hideLoading" />
+      <iframe :src="frameSrc" :class="`${prefixCls}__main`" ref="frameRef" @load="hideLoading"></iframe>
     </Spin>
   </div>
 </template>
 <script lang="ts" setup>
-  import type { CSSProperties } from "vue";
+  import { CSSProperties, onMounted, onUnmounted } from "vue";
   import { ref, unref, computed } from "vue";
   import { Spin } from "ant-design-vue";
   import { useWindowSizeFn } from "/@/hooks/event/UseWindowSizeFn";
@@ -14,6 +14,7 @@
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { useLayoutHeight } from "/@/layouts/default/content/UseContentViewHeight";
 
+  const emit = defineEmits(["message"]);
   defineProps({
     frameSrc: propTypes.string.def("")
   });
@@ -21,7 +22,7 @@
   const loading = ref(true);
   const topRef = ref(50);
   const heightRef = ref(window.innerHeight);
-  const frameRef = ref<HTMLFrameElement>();
+  const frameRef = ref();
   const { headerHeightRef } = useLayoutHeight();
 
   const { prefixCls } = useDesign("iframe-page");
@@ -49,6 +50,34 @@
     loading.value = false;
     calcHeight();
   }
+
+  const messageHandler = (e: MessageEvent) => {
+    emit("message", e.data);
+  };
+
+  const postMessage = (message: any, targetOrigin: string, transfer?: Transferable[]) => {
+    const iframe = unref(frameRef);
+    if (!iframe) return;
+    iframe.contentWindow?.postMessage(message, targetOrigin, transfer);
+  };
+
+  const reload = () => {
+    loading.value = true;
+    const iframe = frameRef.value;
+    if (!iframe) return;
+    iframe.contentWindow?.location.reload();
+    loading.value = false;
+  };
+
+  onMounted(() => {
+    window.addEventListener("message", messageHandler);
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener("message", messageHandler);
+  });
+
+  defineExpose({ postMessage, reload });
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~"@{namespace}-iframe-page";
@@ -74,12 +103,13 @@
     }
 
     &__main {
+      display: block;
+      box-sizing: border-box;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background-color: @component-background;
       border: 0;
-      box-sizing: border-box;
+      background-color: @component-background;
     }
   }
 </style>
