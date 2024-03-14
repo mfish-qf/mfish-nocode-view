@@ -81,6 +81,7 @@ export const codeBuildFormSchema: FormSchema[] = [
       initFetchParams: {
         parentId: ""
       },
+      showSearch: true,
       isLeaf: (record) => {
         return record.type === 1;
       }
