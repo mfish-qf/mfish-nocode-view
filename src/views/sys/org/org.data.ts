@@ -133,7 +133,8 @@ export const formSchema: FormSchema[] = [
     component: "Select",
     componentProps: {
       mode: "multiple",
-      showSearch: true
+      showSearch: true,
+      optionFilterProp: "label"
     }
   },
   {
