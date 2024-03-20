@@ -120,8 +120,8 @@
           field: "roleIds",
           componentProps: { options, optionFilterProp: "label" }
         }).then();
-        const roleValues = roleIds.filter((roleId) => roles.some((role) => role.id !== roleId));
-        setFieldsValue({ roleIds: roleValues }).then();
+        // const roleValues = roleIds.filter((roleId) => roles.some((role) => role.id !== roleId));
+        // setFieldsValue({ roleIds: roleValues }).then();
       }
 
       function tenantDisabled(disabled, source) {

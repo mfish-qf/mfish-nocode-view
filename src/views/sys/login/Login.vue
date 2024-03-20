@@ -285,7 +285,7 @@
           .then((userInfo) => {
             notification.success({
               message: t("sys.login.loginSuccessTitle"),
-              description: `${t("sys.login.loginSuccessDesc")}: ${userInfo?.nickname}`,
+              description: `${t("sys.login.loginSuccessDesc")}: ${userInfo?.nickname || userInfo?.account}`,
               duration: 3
             });
           });
