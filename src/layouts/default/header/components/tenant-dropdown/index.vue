@@ -4,7 +4,7 @@
       <img :class="`${prefixCls}__header`" :src="tenantImg" :alt="getTenant.name" />
       <span :class="`${prefixCls}__info hidden md:block`">
         <span :class="`${prefixCls}__name`" class="truncate">
-          <div style="font-weight: bold">租户：</div>
+          <span style="font-weight: bold">租户：</span>
           {{ getTenant.name }}
         </span>
       </span>
