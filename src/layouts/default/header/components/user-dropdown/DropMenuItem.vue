@@ -6,25 +6,19 @@
     </span>
   </MenuItem>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { Menu } from "ant-design-vue";
-  import { computed, defineComponent, getCurrentInstance } from "vue";
+  import { computed, getCurrentInstance } from "vue";
   import { Icon } from "/@/components/general/Icon";
   import { propTypes } from "/@/utils/PropTypes";
+  const MenuItem = Menu.Item;
+  defineOptions({ name: "DropdownMenuItem" });
 
-  export default defineComponent({
-    name: "DropdownMenuItem",
-    components: { MenuItem: Menu.Item, Icon },
-    props: {
-      // eslint-disable-next-line
-      key: propTypes.string,
-      text: propTypes.string,
-      icon: propTypes.string
-    },
-    setup(props) {
-      const instance = getCurrentInstance();
-      const itemKey = computed(() => props.key || instance?.vnode?.props?.key);
-      return { itemKey };
-    }
+  defineProps({
+    text: propTypes.string,
+    icon: propTypes.string
   });
+
+  const instance = getCurrentInstance();
+  const itemKey = computed(() => instance?.vnode?.props?.key);
 </script>
