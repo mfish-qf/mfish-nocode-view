@@ -9,7 +9,8 @@ import { DictCategory, ReqDictCategory, DictCategoryPageModel } from "/@/api/sys
  */
 enum Api {
   DictCategory = "/sys/dictCategory",
-  DictCategoryTree = "/sys/dictCategory/tree"
+  DictCategoryTree = "/sys/dictCategory/tree",
+  DictCategoryList = "/erp/dictCategory/list"
 }
 
 /**
@@ -62,4 +63,22 @@ export function updateDictCategory(dictCategory: DictCategory) {
  */
 export function deleteDictCategory(id: string) {
   return defHttp.delete<DictCategory>({ url: Api.DictCategory + "/" + id }, { successMessageMode: "message" });
+}
+
+/**
+ * 通过编码获取目录树
+ * @param code
+ * @param direction
+ */
+export function queryCategoryTreeByCode(code: string, direction: "up" | "down" | "all") {
+  return defHttp.get<DictCategory[]>({ url: Api.DictCategoryTree + "/" + code, params: { direction } });
+}
+
+/**
+ * 通过编码获取目录列表
+ * @param code
+ * @param direction
+ */
+export function queryCategoryListByCode(code: string, direction: "up" | "down" | "all") {
+  return defHttp.get<DictCategory[]>({ url: Api.DictCategoryList + "/" + code, params: { direction } });
 }
