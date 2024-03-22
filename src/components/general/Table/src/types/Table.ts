@@ -412,7 +412,7 @@ export interface BasicColumn extends ColumnProps<Recordable> {
   filters?: {
     text: string;
     value: string;
-    children?: unknown[] | (((props: Record<string, unknown>) => unknown[]) & (() => unknown[]) & (() => unknown[]));
+    children?: unknown[] | (((props: Record<string, unknown>) => unknown[]) & (() => unknown[]));
   }[];
 
   //
