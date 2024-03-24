@@ -27,9 +27,11 @@
       });
 
       function getDictList() {
-        getDictItems(props.code).then((res) => {
-          dict.value = res;
-        });
+        if (props.code) {
+          getDictItems(props.code).then((res) => {
+            dict.value = res;
+          });
+        }
       }
       return () => {
         for (const status of dict.value) {
