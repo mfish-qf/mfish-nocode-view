@@ -4,9 +4,8 @@
  @date: 2024/3/22
 -->
 <script lang="tsx">
-  import { defineComponent, onBeforeMount, PropType, ref } from "vue";
+  import { defineComponent, PropType } from "vue";
   import { Tag } from "ant-design-vue";
-  import { DictItem } from "/@/api/sys/model/DictItemModel";
   import { useDictStore } from "/@/store/modules/Dict";
 
   export default defineComponent({
@@ -21,23 +20,11 @@
       }
     },
     setup(props) {
-      const dict = ref<DictItem[]>([]);
       const store = useDictStore();
-      onBeforeMount(() => {
-        getDictList();
-      });
-
-      function getDictList() {
-        if (props.code) {
-          store.getDict(props.code).then((res) => {
-            if (res) {
-              dict.value = res;
-            }
-          });
-        }
-      }
-
       return () => {
+        if (!props.code) return;
+        const dict = store.getDict(props.code);
+        if (!dict) return;
         for (const status of dict.value) {
           if (props.value === status.dictValue) {
             return (
