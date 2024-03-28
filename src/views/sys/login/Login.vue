@@ -151,175 +151,157 @@
     </div>
   </section>
 </template>
-<script lang="ts">
-  import "bootstrap/dist/css/bootstrap.min.css";
+<script lang="ts" setup>
   import "bootstrap/dist/js/bootstrap.min.js";
-  import { computed, onMounted, reactive, ref, unref } from "vue";
+  import { computed, onMounted, onUnmounted, reactive, ref, unref } from "vue";
   import { getCaptcha } from "/@/api/sys/User";
   import { oauth2Config } from "/@/settings/LoginSetting";
   import { useMessage } from "/@/hooks/web/UseMessage";
   import { useUserStore } from "/@/store/modules/User";
   import { useI18n } from "/@/hooks/web/UseI18n";
   import { debounce } from "lodash-es";
-  export default {
-    setup() {
-      const username = ref("");
-      const password = ref("");
-      const captchaValue = ref("");
-      const errorMsg = ref("");
-      const showLeft = computed(() => {
-        return document.body.clientWidth > 425;
-      });
-      const passwordShow = ref(false);
-      const passwordType = ref("password");
-      const sendMsgColor = ref("black");
-      const captchaKey = ref("");
-      const captchaUrl = ref("");
-      const rememberMe = ref(false);
-      const isValid = ref(false);
-      const { notification } = useMessage();
-      const userStore = useUserStore();
-      const { t } = useI18n();
-      const error = reactive({
-        username: {
-          show: false,
-          msg: ""
-        },
-        password: {
-          show: false,
-          msg: ""
-        },
-        captcha: {
-          show: false,
-          msg: ""
-        },
-        phone: {
-          show: false,
-          msg: ""
-        },
-        code: {
-          show: false,
-          msg: ""
-        }
-      });
-      function validateUserLogin() {
-        return !(!validateUserName() || !validatePassword() || !validateCaptcha());
-      }
-      function validateUserName() {
-        if (!unref(username)) {
-          showInputError("username", "请输入用户名");
-          return false;
-        }
-        hideInputError("username");
-        return true;
-      }
-      function validatePassword() {
-        if (!password.value) {
-          showInputError("password", "请输入密码");
-          return false;
-        }
-        hideInputError("password");
-        return true;
-      }
-      function validateCaptcha() {
-        if (!captchaValue.value) {
-          showInputError("captcha", "请输入验证码");
-          return false;
-        }
-        hideInputError("captcha");
-        return true;
-      }
-      function showInputError(key, error) {
-        setError(key, true, error);
-      }
-      function setError(key, show, err) {
-        error[key].show = show;
-        error[key].msg = err;
-      }
 
-      function hideInputError(key) {
-        setError(key, false, "");
-      }
-      function pwdShowChange() {
-        passwordShow.value = !passwordShow.value;
-        if (passwordShow.value) {
-          passwordType.value = "text";
-        } else {
-          passwordType.value = "password";
-        }
-      }
+  const username = ref("");
+  const password = ref("");
+  const captchaValue = ref("");
+  const errorMsg = ref("");
+  const showLeft = computed(() => {
+    return document.body.clientWidth > 425;
+  });
+  const passwordShow = ref(false);
+  const passwordType = ref("password");
+  const sendMsgColor = ref("black");
+  const captchaKey = ref("");
+  const captchaUrl = ref("");
+  const rememberMe = ref(false);
+  const isValid = ref(false);
+  const { notification } = useMessage();
+  const userStore = useUserStore();
+  const { t } = useI18n();
+  const error = reactive({
+    username: {
+      show: false,
+      msg: ""
+    },
+    password: {
+      show: false,
+      msg: ""
+    },
+    captcha: {
+      show: false,
+      msg: ""
+    },
+    phone: {
+      show: false,
+      msg: ""
+    },
+    code: {
+      show: false,
+      msg: ""
+    }
+  });
+  onMounted(() => {
+    const link = document.createElement("link");
+    link.setAttribute("rel", "stylesheet");
+    link.setAttribute("href", "/resource/bootstrap/bootstrap.min.css");
+    link.setAttribute("id", "bootstrap-css");
+    document.head.appendChild(link);
+    captcha();
+  });
+  onUnmounted(() => {
+    const link = document.getElementById("bootstrap-css");
+    if (link) {
+      document.head.removeChild(link);
+    }
+  });
+  function validateUserLogin() {
+    return !(!validateUserName() || !validatePassword() || !validateCaptcha());
+  }
+  function validateUserName() {
+    if (!unref(username)) {
+      showInputError("username", "请输入用户名");
+      return false;
+    }
+    hideInputError("username");
+    return true;
+  }
+  function validatePassword() {
+    if (!password.value) {
+      showInputError("password", "请输入密码");
+      return false;
+    }
+    hideInputError("password");
+    return true;
+  }
+  function validateCaptcha() {
+    if (!captchaValue.value) {
+      showInputError("captcha", "请输入验证码");
+      return false;
+    }
+    hideInputError("captcha");
+    return true;
+  }
+  function showInputError(key, error) {
+    setError(key, true, error);
+  }
+  function setError(key, show, err) {
+    error[key].show = show;
+    error[key].msg = err;
+  }
 
-      function msgOver() {
-        sendMsgColor.value = "#0d6efd";
-      }
-      function msgLeave() {
-        sendMsgColor.value = "black";
-      }
+  function hideInputError(key) {
+    setError(key, false, "");
+  }
+  function pwdShowChange() {
+    passwordShow.value = !passwordShow.value;
+    if (passwordShow.value) {
+      passwordType.value = "text";
+    } else {
+      passwordType.value = "password";
+    }
+  }
 
-      function captcha() {
-        getCaptcha().then((res) => {
-          captchaUrl.value = "data:image/jpeg;base64," + res.img;
-          captchaKey.value = res.captchaKey;
-        });
-      }
-      const login = () => {
-        if (validateUserLogin()) {
-          isValid.value = true;
-          //增加一个停顿校验效果
-          handleLogin();
-        }
-      };
+  function msgOver() {
+    sendMsgColor.value = "#0d6efd";
+  }
+  function msgLeave() {
+    sendMsgColor.value = "black";
+  }
 
-      const handleLogin = debounce(() => {
-        userStore
-          .login({
-            password: password.value,
-            username: username.value,
-            rememberMe: rememberMe.value,
-            client_id: oauth2Config.client_id,
-            client_secret: oauth2Config.client_secret,
-            grant_type: "password",
-            redirect_uri: oauth2Config.redirect_uri,
-            mode: "modal"
-          })
-          .then((userInfo) => {
-            notification.success({
-              message: t("sys.login.loginSuccessTitle"),
-              description: `${t("sys.login.loginSuccessDesc")}: ${userInfo?.nickname || userInfo?.account}`,
-              duration: 3
-            });
-          });
-      }, 200);
-
-      onMounted(() => {
-        captcha();
-      });
-
-      return {
-        username,
-        password,
-        captchaValue,
-        error,
-        errorMsg,
-        showLeft,
-        validateUserName,
-        pwdShowChange,
-        passwordShow,
-        passwordType,
-        validatePassword,
-        msgOver,
-        msgLeave,
-        sendMsgColor,
-        validateCaptcha,
-        captchaKey,
-        captchaUrl,
-        captcha,
-        rememberMe,
-        login,
-        isValid
-      };
+  function captcha() {
+    getCaptcha().then((res) => {
+      captchaUrl.value = "data:image/jpeg;base64," + res.img;
+      captchaKey.value = res.captchaKey;
+    });
+  }
+  const login = () => {
+    if (validateUserLogin()) {
+      isValid.value = true;
+      //增加一个停顿校验效果
+      handleLogin();
     }
   };
+
+  const handleLogin = debounce(() => {
+    userStore
+      .login({
+        password: password.value,
+        username: username.value,
+        rememberMe: rememberMe.value,
+        client_id: oauth2Config.client_id,
+        client_secret: oauth2Config.client_secret,
+        grant_type: "password",
+        redirect_uri: oauth2Config.redirect_uri,
+        mode: "modal"
+      })
+      .then((userInfo) => {
+        notification.success({
+          message: t("sys.login.loginSuccessTitle"),
+          description: `${t("sys.login.loginSuccessDesc")}: ${userInfo?.nickname || userInfo?.account}`,
+          duration: 3
+        });
+      });
+  }, 200);
 </script>
 <style scoped lang="less">
   html,
