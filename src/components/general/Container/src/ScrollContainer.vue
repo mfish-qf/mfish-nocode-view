@@ -69,7 +69,7 @@
 
     .scrollbar__wrap {
       margin-bottom: 18px !important;
-      overflow-x: hidden;
+      width: 100%;
     }
 
     .scrollbar__view {

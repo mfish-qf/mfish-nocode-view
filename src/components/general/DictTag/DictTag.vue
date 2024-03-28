@@ -7,7 +7,7 @@
   import { defineComponent, onBeforeMount, PropType, ref } from "vue";
   import { Tag } from "ant-design-vue";
   import { DictItem } from "/@/api/sys/model/DictItemModel";
-  import { getDictItems } from "/@/api/sys/DictItem";
+  import { useDictStore } from "/@/store/modules/Dict";
 
   export default defineComponent({
     name: "DictTag",
@@ -22,15 +22,21 @@
     },
     setup(props) {
       const dict = ref<DictItem[]>([]);
+      const store = useDictStore();
       onBeforeMount(() => {
         getDictList();
       });
 
       function getDictList() {
-        getDictItems(props.code).then((res) => {
-          dict.value = res;
-        });
+        if (props.code) {
+          store.getDict(props.code).then((res) => {
+            if (res) {
+              dict.value = res;
+            }
+          });
+        }
       }
+
       return () => {
         for (const status of dict.value) {
           if (props.value === status.dictValue) {
