@@ -10,7 +10,8 @@ import { DictCategory, ReqDictCategory, DictCategoryPageModel } from "/@/api/sys
 enum Api {
   DictCategory = "/sys/dictCategory",
   DictCategoryTree = "/sys/dictCategory/tree",
-  DictCategoryList = "/erp/dictCategory/list"
+  DictCategoryList = "/erp/dictCategory/list",
+  DictCategoryOne = "/erp/dictCategory/one"
 }
 
 /**
@@ -81,4 +82,8 @@ export function queryCategoryTreeByCode(code: string, direction: "up" | "down" |
  */
 export function queryCategoryListByCode(code: string, direction: "up" | "down" | "all") {
   return defHttp.get<DictCategory[]>({ url: Api.DictCategoryList + "/" + code, params: { direction } });
+}
+
+export function queryCategoryOneByCode(code: string) {
+  return defHttp.get<DictCategory>({ url: Api.DictCategoryOne + "/" + code });
 }

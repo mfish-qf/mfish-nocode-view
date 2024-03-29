@@ -299,7 +299,7 @@
       }
 
       &:not(.ant-form-item-with-help) {
-        margin-bottom: 20px;
+        margin-bottom: 12px;
       }
 
       &.suffix-item {
