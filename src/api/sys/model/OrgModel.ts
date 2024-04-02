@@ -1,3 +1,5 @@
+import { ReqPage } from "/@/api/model/BaseModel";
+
 /**
  * @description: 组织结构信息
  * @author: mfish
@@ -22,4 +24,10 @@ export interface SsoOrg {
   updateTime: string;
   children: SsoOrg[];
   roleIds: string[];
+}
+
+export interface ReqOrgUser extends ReqPage {
+  nickname?: string;
+  phone?: string;
+  account?: string;
 }
