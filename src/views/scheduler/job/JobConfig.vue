@@ -6,7 +6,7 @@
 <template>
   <BasicForm @register="registerForm">
     <template #params="{ model, field }">
-      <CodeEditor style="border: 1px solid #d9d9d9" v-model:value="model[field]" mode="application/json" />
+      <CodeEditor style="border: 1px solid #d9d9d9" v-model:value="model[field]" :mode="MODE.JSON" />
     </template>
   </BasicForm>
 </template>
@@ -14,7 +14,7 @@
   import { watch } from "vue";
   import { BasicForm, useForm } from "../../../components/general/Form";
   import { jobFormSchema } from "./job.data";
-  import { CodeEditor } from "/@/components/general/CodeEditor";
+  import { CodeEditor, MODE } from "/@/components/general/CodeEditor";
   defineOptions({ name: "JobConfig" });
 
   const props = defineProps({

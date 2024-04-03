@@ -35,7 +35,9 @@
   defineProps({
     subscribes: {
       type: Object as PropType<{ startTime: string; endTime: string; status: number; cron: string }[]>,
-      default: []
+      default: () => {
+        return [];
+      }
     }
   });
   const { prefixCls } = useDesign("job-subscribe");
