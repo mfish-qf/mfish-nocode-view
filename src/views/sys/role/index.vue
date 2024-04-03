@@ -46,7 +46,7 @@
     <RoleModal @register="registerModal" @success="handleSuccess" :source="$props.source" />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { deleteRole, getRoleList, setRoleStatus } from "/@/api/sys/Role";
   import { useModal } from "/@/components/general/Modal";
@@ -58,109 +58,89 @@
   import { Switch as ASwitch } from "ant-design-vue";
   import { SsoRole } from "/@/api/sys/model/RoleModel";
   import { useDesign } from "/@/hooks/web/UseDesign";
+  defineOptions({ name: "RoleManagement" });
 
-  export default {
-    name: "RoleManagement",
-    components: { ASwitch, BasicTable, RoleModal, TableAction },
-    props: {
-      source: {
-        type: Number,
-        default: null
-      }
-    },
-    setup(props) {
-      const { hasPermission, hasTenant } = usePermission();
-      const [registerModal, { openModal }] = useModal();
-      const { prefixCls } = useDesign("role");
-      const api = ref();
-
-      if (props.source === 1) {
-        api.value = getTenantRole;
-      } else {
-        api.value = getRoleList;
-      }
-      const [registerTable, { reload }] = useTable({
-        title: "角色列表",
-        api: api,
-        columns,
-        formConfig: {
-          name: "search_form_item",
-          labelWidth: 80,
-          schemas: searchFormSchema,
-          autoSubmitOnEnter: true
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        resizeHeightOffset: props.source === 1 ? 18 : 0,
-        showIndexColumn: false,
-        actionColumn: {
-          width: 80,
-          title: "操作",
-          dataIndex: "action"
-        }
-      });
-
-      function handleCreate() {
-        openModal(true, {
-          isUpdate: false
-        });
-      }
-
-      function handleEdit(record: SsoRole) {
-        openModal(true, {
-          record,
-          isUpdate: true
-        });
-      }
-      const statusLoading = ref(false);
-      const statusDisabled = (record) =>
-        record.id === "1" || (props.source === 1 ? !hasTenant() : !hasPermission("sys:role:update"));
-
-      function handleStatus(record: SsoRole) {
-        statusLoading.value = true;
-        const newStatus = record.status === 0 ? 1 : 0;
-        setRoleStatus(record.id, newStatus)
-          .then(() => {
-            record.status = newStatus;
-          })
-          .finally(() => {
-            statusLoading.value = false;
-          });
-      }
-
-      function handleDelete(record: SsoRole) {
-        if (props.source === 1) {
-          deleteTenantRole(record.id).then(() => {
-            handleSuccess();
-          });
-          return;
-        }
-        deleteRole(record.id).then(() => {
-          handleSuccess();
-        });
-      }
-
-      function handleSuccess() {
-        reload();
-      }
-
-      return {
-        registerTable,
-        registerModal,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-        hasPermission,
-        hasTenant,
-        handleStatus,
-        statusLoading,
-        statusDisabled,
-        prefixCls
-      };
+  const props = defineProps({
+    source: {
+      type: Number,
+      default: null
     }
-  };
+  });
+  const { hasPermission, hasTenant } = usePermission();
+  const [registerModal, { openModal }] = useModal();
+  const { prefixCls } = useDesign("role");
+  const api = ref();
+
+  if (props.source === 1) {
+    api.value = getTenantRole;
+  } else {
+    api.value = getRoleList;
+  }
+  const [registerTable, { reload }] = useTable({
+    title: "角色列表",
+    api: api,
+    columns,
+    formConfig: {
+      name: "search_form_item",
+      labelWidth: 80,
+      schemas: searchFormSchema,
+      autoSubmitOnEnter: true
+    },
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    resizeHeightOffset: props.source === 1 ? 18 : 0,
+    showIndexColumn: false,
+    actionColumn: {
+      width: 80,
+      title: "操作",
+      dataIndex: "action"
+    }
+  });
+
+  function handleCreate() {
+    openModal(true, {
+      isUpdate: false
+    });
+  }
+
+  function handleEdit(record: SsoRole) {
+    openModal(true, {
+      record,
+      isUpdate: true
+    });
+  }
+  const statusLoading = ref(false);
+  const statusDisabled = (record) =>
+    record.id === "1" || (props.source === 1 ? !hasTenant() : !hasPermission("sys:role:update"));
+
+  function handleStatus(record: SsoRole) {
+    statusLoading.value = true;
+    const newStatus = record.status === 0 ? 1 : 0;
+    setRoleStatus(record.id, newStatus)
+      .then(() => {
+        record.status = newStatus;
+      })
+      .finally(() => {
+        statusLoading.value = false;
+      });
+  }
+
+  function handleDelete(record: SsoRole) {
+    if (props.source === 1) {
+      deleteTenantRole(record.id).then(() => {
+        handleSuccess();
+      });
+      return;
+    }
+    deleteRole(record.id).then(() => {
+      handleSuccess();
+    });
+  }
+
+  function handleSuccess() {
+    reload();
+  }
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-role";

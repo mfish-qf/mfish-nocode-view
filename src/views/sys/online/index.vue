@@ -19,68 +19,38 @@
           />
         </template>
         <template v-if="column.key === 'loginMode'">
-          <Tag v-for="item in reqLoginMode" v-show="record.loginMode === item.dictValue" :color="item.color">
-            {{ item.dictLabel }}
-          </Tag>
+          <dict-tag code="sys_login_mode" :value="record.loginMode" />
         </template>
       </template>
     </BasicTable>
   </div>
 </template>
-<script lang="ts">
-  import { ref, onMounted } from "vue";
-  import { Tag } from "ant-design-vue";
+<script lang="ts" setup>
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { columns } from "./online.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
   import { getOnlineList, logoutUser } from "/@/api/sys/User";
-  import { DictItem } from "/@/api/sys/model/DictItemModel";
-  import { getDictItems } from "/@/api/sys/DictItem";
   import { OnlineUser } from "/@/api/sys/model/UserModel";
+  import DictTag from "/@/components/general/DictTag/DictTag.vue";
+  defineOptions({ name: "OnlineManagement" });
 
-  export default {
-    name: "OnlineManagement",
-    components: { BasicTable, TableAction, Tag },
-    setup() {
-      const { hasPermission } = usePermission();
-      const [registerTable, { reload }] = useTable({
-        api: getOnlineList,
-        columns,
-        useSearchForm: false,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        actionColumn: {
-          width: 60,
-          title: "操作",
-          dataIndex: "action",
-          fixed: undefined
-        }
-      });
-      let reqLoginMode = ref<DictItem[]>([]);
-
-      onMounted(() => {
-        getLoginMode();
-      });
-
-      function getLoginMode() {
-        getDictItems("sys_login_mode").then((res) => {
-          reqLoginMode.value = res;
-        });
-      }
-
-      function handleLogout(record: OnlineUser) {
-        logoutUser(record.sid).then(() => {
-          reload();
-        });
-      }
-
-      return {
-        handleLogout,
-        registerTable,
-        hasPermission,
-        reqLoginMode
-      };
+  const [registerTable, { reload }] = useTable({
+    api: getOnlineList,
+    columns,
+    useSearchForm: false,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    actionColumn: {
+      width: 60,
+      title: "操作",
+      dataIndex: "action",
+      fixed: undefined
     }
-  };
+  });
+
+  function handleLogout(record: OnlineUser) {
+    logoutUser(record.sid).then(() => {
+      reload();
+    });
+  }
 </script>

@@ -45,99 +45,84 @@
     <DictCategoryModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { deleteDictCategory, getDictCategoryList } from "/@/api/sys/DictCategory";
   import { useModal } from "/@/components/general/Modal";
   import DictCategoryModal from "./DictCategoryModal.vue";
   import { columns, searchFormSchema } from "./dictCategory.data";
   import { DictCategory } from "/@/api/sys/model/DictCategoryModel";
+  defineOptions({ name: "DictCategoryManagement" });
 
-  export default {
-    name: "DictCategoryManagement",
-    components: { BasicTable, DictCategoryModal, TableAction },
-    setup() {
-      const [registerModal, { openModal }] = useModal();
-      const [registerTable, { reload }] = useTable({
-        title: "分类树",
-        api: getDictCategoryList,
-        rowKey: "id",
-        columns,
-        formConfig: {
-          name: "search_form_item",
-          labelWidth: 80,
-          schemas: searchFormSchema,
-          autoSubmitOnEnter: true
-        },
-        isTreeTable: true,
-        striped: false,
-        canResize: false,
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        actionColumn: {
-          width: 80,
-          title: "操作",
-          dataIndex: "action"
-        }
-      });
-
-      /**
-       * 新建
-       */
-      function handleCreate() {
-        openModal(true, {
-          isUpdate: false
-        });
-      }
-
-      function handleAddChild(dictCategory: DictCategory) {
-        openModal(true, {
-          parentId: dictCategory.id,
-          isUpdate: false
-        });
-      }
-
-      /**
-       * 修改
-       * @param dictCategory 属性分类字典对象
-       */
-      function handleEdit(dictCategory: DictCategory) {
-        openModal(true, {
-          record: dictCategory,
-          isUpdate: true
-        });
-      }
-
-      /**
-       * 删除
-       * @param dictCategory 属性分类字典对象
-       */
-      function handleDelete(dictCategory: DictCategory) {
-        if (dictCategory.id) {
-          deleteDictCategory(dictCategory.id).then(() => {
-            handleSuccess();
-          });
-        }
-      }
-
-      /**
-       * 处理完成
-       */
-      function handleSuccess() {
-        reload();
-      }
-
-      return {
-        registerTable,
-        registerModal,
-        handleCreate,
-        handleEdit,
-        handleAddChild,
-        handleDelete,
-        handleSuccess
-      };
+  const [registerModal, { openModal }] = useModal();
+  const [registerTable, { reload }] = useTable({
+    title: "分类树",
+    api: getDictCategoryList,
+    rowKey: "id",
+    columns,
+    formConfig: {
+      name: "search_form_item",
+      labelWidth: 80,
+      schemas: searchFormSchema,
+      autoSubmitOnEnter: true
+    },
+    isTreeTable: true,
+    striped: false,
+    canResize: false,
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    actionColumn: {
+      width: 80,
+      title: "操作",
+      dataIndex: "action"
     }
-  };
+  });
+
+  /**
+   * 新建
+   */
+  function handleCreate() {
+    openModal(true, {
+      isUpdate: false
+    });
+  }
+
+  function handleAddChild(dictCategory: DictCategory) {
+    openModal(true, {
+      parentId: dictCategory.id,
+      isUpdate: false
+    });
+  }
+
+  /**
+   * 修改
+   * @param dictCategory 属性分类字典对象
+   */
+  function handleEdit(dictCategory: DictCategory) {
+    openModal(true, {
+      record: dictCategory,
+      isUpdate: true
+    });
+  }
+
+  /**
+   * 删除
+   * @param dictCategory 属性分类字典对象
+   */
+  function handleDelete(dictCategory: DictCategory) {
+    if (dictCategory.id) {
+      deleteDictCategory(dictCategory.id).then(() => {
+        handleSuccess();
+      });
+    }
+  }
+
+  /**
+   * 处理完成
+   */
+  function handleSuccess() {
+    reload();
+  }
 </script>

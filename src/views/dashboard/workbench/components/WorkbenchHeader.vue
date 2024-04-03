@@ -2,7 +2,9 @@
   <div class="lg:flex">
     <Avatar :src="avatar" :size="72" class="!mx-auto !block" />
     <div class="md:ml-6 flex flex-col justify-center md:mt-0 mt-2">
-      <h1 class="md:text-lg text-md">早安, {{ userInfo.nickname }}, 开始您一天的工作吧！</h1>
+      <h1 class="md:text-lg text-md"
+        >早安, {{ userInfo?.nickname ? userInfo?.nickname : userInfo?.account }}, 开始您一天的工作吧！</h1
+      >
       <span class="text-secondary"> 今日晴，20℃ - 32℃！ </span>
     </div>
     <div class="flex flex-1 justify-end md:mt-0 mt-4">
@@ -22,23 +24,18 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { computed } from "vue";
   import { Avatar } from "ant-design-vue";
   import { useUserStore } from "/@/store/modules/User";
   import headerImg from "/@/assets/images/header.png";
   import { imageUrl } from "/@/utils/FileUtils";
   import { getLocalFileUrl } from "/@/api/storage/SysFile";
-  export default {
-    components: { Avatar },
-    setup() {
-      const userStore = useUserStore();
-      const userInfo = computed(() => userStore.getUserInfo);
-      const avatar = computed(() => {
-        const imgUrl = userStore.getUserInfo?.headImgUrl;
-        return imgUrl ? imageUrl(getLocalFileUrl(imgUrl)) : headerImg;
-      });
-      return { userInfo, avatar };
-    }
-  };
+  import { SsoUser } from "/@/api/sys/model/UserModel";
+  const userStore = useUserStore();
+  const userInfo: SsoUser = computed(() => userStore.getUserInfo);
+  const avatar = computed(() => {
+    const imgUrl = userStore.getUserInfo?.headImgUrl;
+    return imgUrl ? imageUrl(getLocalFileUrl(imgUrl)) : headerImg;
+  });
 </script>

@@ -29,140 +29,119 @@
     </a-tabs>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { ref, watch, onMounted, computed, nextTick, ComputedRef } from "vue";
-  import { BasicColumn, BasicTable, TableActionType, useTable } from "/@/components/general/Table";
-  import { Descriptions, Tabs } from "ant-design-vue";
+  import { BasicColumn, BasicTable, useTable } from "/@/components/general/Table";
+  import { Descriptions as ADescriptions, Tabs as ATabs } from "ant-design-vue";
   import { ReqTable, TableInfo } from "/@/api/sys/model/DbConnectModel";
   import { getDataTable, getFieldList } from "/@/api/sys/DbConnect";
   import { columns } from "/@/views/sys/database/tableInfo.data";
   import { useDesign } from "/@/hooks/web/UseDesign";
-
-  export default {
-    name: "TableDetail",
-    components: {
-      BasicTable,
-      [Descriptions.name]: Descriptions,
-      [Descriptions.Item.name]: Descriptions.Item,
-      [Tabs.name]: Tabs,
-      [Tabs.TabPane.name]: Tabs.TabPane
-    },
-    props: {
-      curNode: Object as () => TableInfo,
-      resizeHeightOffset: { type: Number, default: 0 }
-    },
-    setup(props) {
-      const curTab = ref("1");
-      const changeTab = (tab) => {
-        curTab.value = tab;
-        setValue();
-      };
-      const dataTableRef = ref<Nullable<TableActionType>>(null);
-      const { prefixCls } = useDesign("table-detail");
-
-      const [registerFieldTable, { setTableData, setLoading: fieldLoading }] = useTable({
-        columns,
-        bordered: true,
-        showIndexColumn: true,
-        pagination: false,
-        resizeHeightOffset: props.resizeHeightOffset
-      });
-      const condition: ComputedRef<ReqTable> = computed(() => {
-        const curKey = props.curNode?.key;
-        if (curKey) {
-          const values = curKey.split(",");
-          const connectId = values[0];
-          const tableName = values[1];
-          return { connectId, tableName };
-        }
-        return { connectId: "" };
-      });
-      const [registerDataTable, { setColumns, setTableData: setDataTable, setPagination, setLoading: tableLoading }] =
-        useTable({
-          bordered: true,
-          showIndexColumn: false,
-          resizeHeightOffset: props.resizeHeightOffset,
-          onChange: buildTableData
-        });
-      watch(
-        () => props.curNode?.key,
-        () => {
-          setValue();
-        }
-      );
-
-      function setValue() {
-        if (curTab.value === "1") {
-          setFields();
-          return;
-        }
-        buildTableData(undefined);
-      }
-
-      async function buildTableData(page) {
-        await nextTick();
-        tableLoading(true);
-        let pageNum = 1;
-        let pageSize = 10;
-        if (page) {
-          pageNum = page.current;
-          pageSize = page.pageSize;
-        }
-        getDataTable({ ...condition.value, pageNum, pageSize })
-          .then((res) => {
-            const columns: BasicColumn[] = Object.keys(res.headers).map((key) => ({
-              title: key,
-              dataIndex: key
-            }));
-            setColumns(columns);
-            setDataTable(res.table.list);
-            setPagination({
-              total: res.table.total,
-              pageSize: res.table.pageSize,
-              current: res.table.pageNum
-            });
-          })
-          .catch(() => {
-            setColumns([]);
-          })
-          .finally(() => {
-            tableLoading(false);
-          });
-      }
-
-      onMounted(() => {
-        setFields();
-      });
-
-      async function setFields() {
-        await nextTick();
-        if (!condition.value.connectId) {
-          setTableData([]);
-          return;
-        }
-        fieldLoading(true);
-        getFieldList({ ...condition.value, pageNum: 1, pageSize: 10000 })
-          .then((res) => {
-            setTableData(res.list);
-          })
-          .catch(() => {
-            setTableData([]);
-          })
-          .finally(() => {
-            fieldLoading(false);
-          });
-      }
-
-      return {
-        curTab,
-        changeTab,
-        registerFieldTable,
-        registerDataTable,
-        dataTableRef,
-        prefixCls
-      };
-    }
+  const ATabPane = ATabs.TabPane;
+  const ADescriptionsItem = ADescriptions.Item;
+  const props = defineProps({
+    curNode: Object as () => TableInfo,
+    resizeHeightOffset: { type: Number, default: 0 }
+  });
+  const curTab = ref("1");
+  const changeTab = (tab) => {
+    curTab.value = tab;
+    setValue();
   };
+  const { prefixCls } = useDesign("table-detail");
+
+  const [registerFieldTable, { setTableData, setLoading: fieldLoading }] = useTable({
+    columns,
+    bordered: true,
+    showIndexColumn: true,
+    pagination: false,
+    resizeHeightOffset: props.resizeHeightOffset
+  });
+  const condition: ComputedRef<ReqTable> = computed(() => {
+    const curKey = props.curNode?.key;
+    if (curKey) {
+      const values = curKey.split(",");
+      const connectId = values[0];
+      const tableName = values[1];
+      return { connectId, tableName };
+    }
+    return { connectId: "" };
+  });
+  const [registerDataTable, { setColumns, setTableData: setDataTable, setPagination, setLoading: tableLoading }] =
+    useTable({
+      bordered: true,
+      showIndexColumn: false,
+      resizeHeightOffset: props.resizeHeightOffset,
+      onChange: buildTableData
+    });
+  watch(
+    () => props.curNode?.key,
+    () => {
+      setValue();
+    }
+  );
+
+  function setValue() {
+    if (curTab.value === "1") {
+      setFields();
+      return;
+    }
+    buildTableData(undefined);
+  }
+
+  async function buildTableData(page) {
+    await nextTick();
+    tableLoading(true);
+    let pageNum = 1;
+    let pageSize = 10;
+    if (page) {
+      pageNum = page.current;
+      pageSize = page.pageSize;
+    }
+    getDataTable({ ...condition.value, pageNum, pageSize })
+      .then((res) => {
+        const columns: BasicColumn[] = Object.keys(res.headers).map((key) => ({
+          title: key,
+          dataIndex: key
+        }));
+        setColumns(columns);
+        setDataTable(res.table.list);
+        setPagination({
+          total: res.table.total,
+          pageSize: res.table.pageSize,
+          current: res.table.pageNum
+        });
+      })
+      .catch(() => {
+        setColumns([]);
+      })
+      .finally(() => {
+        tableLoading(false);
+      });
+  }
+
+  onMounted(() => {
+    setFields();
+  });
+
+  async function setFields() {
+    await nextTick();
+    if (!condition.value.connectId) {
+      setTableData([]);
+      return;
+    }
+    fieldLoading(true);
+    getFieldList({ ...condition.value, pageNum: 1, pageSize: 10000 })
+      .then((res) => {
+        setTableData(res.list);
+      })
+      .catch(() => {
+        setTableData([]);
+      })
+      .finally(() => {
+        fieldLoading(false);
+      });
+  }
 </script>
 <style scoped lang="less">
   @prefix-cls: ~"@{namespace}-table-detail";

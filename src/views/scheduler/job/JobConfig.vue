@@ -6,52 +6,38 @@
 <template>
   <BasicForm @register="registerForm">
     <template #params="{ model, field }">
-      <CodeEditor style="border: 1px solid #d9d9d9" v-model:value="model[field]" mode="application/json" />
+      <CodeEditor style="border: 1px solid #d9d9d9" v-model:value="model[field]" :mode="MODE.JSON" />
     </template>
   </BasicForm>
 </template>
-
-<script>
+<script lang="ts" setup>
   import { watch } from "vue";
   import { BasicForm, useForm } from "../../../components/general/Form";
   import { jobFormSchema } from "./job.data";
-  import { CodeEditor } from "/@/components/general/CodeEditor";
+  import { CodeEditor, MODE } from "/@/components/general/CodeEditor";
+  defineOptions({ name: "JobConfig" });
 
-  export default {
-    name: "JobConfig",
-    props: {
-      jobInfo: { type: Object, default: {} }
-    },
-    components: {
-      BasicForm,
-      CodeEditor
-    },
-    setup(props) {
-      const getValue = async () => {
-        return await validate();
-      };
-      const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-        labelWidth: 120,
-        baseColProps: { span: 12 },
-        schemas: jobFormSchema,
-        showActionButtonGroup: false
-      });
-      watch(
-        () => props.jobInfo,
-        (newVal) => {
-          if (newVal === null) {
-            resetFields().then();
-          } else {
-            setFieldsValue(newVal).then();
-          }
-        }
-      );
-      return {
-        registerForm,
-        getValue
-      };
-    }
+  const props = defineProps({
+    jobInfo: { type: Object, default: {} }
+  });
+  const getValue = async () => {
+    return await validate();
   };
+  const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
+    labelWidth: 120,
+    baseColProps: { span: 12 },
+    schemas: jobFormSchema,
+    showActionButtonGroup: false
+  });
+  watch(
+    () => props.jobInfo,
+    (newVal) => {
+      if (newVal === null) {
+        resetFields().then();
+      } else {
+        setFieldsValue(newVal).then();
+      }
+    }
+  );
+  defineExpose({ getValue });
 </script>
-
-<style scoped></style>

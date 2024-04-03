@@ -35,108 +35,67 @@
           />
         </template>
         <template v-if="column.key === 'dbType'">
-          <Tag v-for="item in dbType" v-show="record.dbType == item.dictValue" :color="item.color">
-            {{ item.dictLabel }}
-          </Tag>
+          <dict-tag code="sys_db_type" :value="record?.dbType" />
         </template>
         <template v-if="column.key === 'poolType'">
-          <Tag v-for="item in poolType" v-show="record.poolType == item.dictValue" :color="item.color">
-            {{ item.dictLabel }}
-          </Tag>
+          <dict-tag code="sys_db_pool" :value="record?.poolType" />
         </template>
       </template>
     </BasicTable>
     <DbConnectModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
-<script lang="ts">
-  import { ref, onMounted } from "vue";
+<script lang="ts" setup>
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { deleteDbConnect, getDbConnectList } from "/@/api/sys/DbConnect";
   import { useModal } from "/@/components/general/Modal";
   import DbConnectModal from "./DbConnectModal.vue";
   import { columns, searchFormSchema } from "./dbConnect.data";
-  import { DictItem } from "/@/api/sys/model/DictItemModel";
-  import { getDictItems } from "/@/api/sys/DictItem";
-  import { Tag } from "ant-design-vue";
+  import DictTag from "/@/components/general/DictTag/DictTag.vue";
+  defineOptions({ name: "DbConnectManagement" });
 
-  export default {
-    name: "DbConnectManagement",
-    components: { BasicTable, DbConnectModal, TableAction, Tag },
-    setup() {
-      const [registerModal, { openModal }] = useModal();
-      const [registerTable, { reload }] = useTable({
-        title: "数据库连接列表",
-        api: getDbConnectList,
-        columns,
-        formConfig: {
-          name: "search_form_item",
-          labelWidth: 80,
-          schemas: searchFormSchema,
-          autoSubmitOnEnter: true
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        actionColumn: {
-          width: 80,
-          title: "操作",
-          dataIndex: "action"
-        }
-      });
-      let dbType = ref<DictItem[]>([]);
-      let poolType = ref<DictItem[]>([]);
-      onMounted(() => {
-        getDBType();
-        getPoolType();
-      });
-
-      function getDBType() {
-        getDictItems("sys_db_type").then((res) => {
-          dbType.value = res;
-        });
-      }
-
-      function getPoolType() {
-        getDictItems("sys_db_pool").then((res) => {
-          poolType.value = res;
-        });
-      }
-
-      function handleCreate() {
-        openModal(true, {
-          isUpdate: false
-        });
-      }
-
-      function handleEdit(record: Recordable) {
-        openModal(true, {
-          record,
-          isUpdate: true
-        });
-      }
-
-      function handleDelete(record: Recordable) {
-        deleteDbConnect(record.id).then(() => {
-          handleSuccess();
-        });
-      }
-
-      function handleSuccess() {
-        reload();
-      }
-
-      return {
-        registerTable,
-        registerModal,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-        dbType,
-        poolType
-      };
+  const [registerModal, { openModal }] = useModal();
+  const [registerTable, { reload }] = useTable({
+    title: "数据库连接列表",
+    api: getDbConnectList,
+    columns,
+    formConfig: {
+      name: "search_form_item",
+      labelWidth: 80,
+      schemas: searchFormSchema,
+      autoSubmitOnEnter: true
+    },
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    actionColumn: {
+      width: 80,
+      title: "操作",
+      dataIndex: "action"
     }
-  };
+  });
+
+  function handleCreate() {
+    openModal(true, {
+      isUpdate: false
+    });
+  }
+
+  function handleEdit(record: Recordable) {
+    openModal(true, {
+      record,
+      isUpdate: true
+    });
+  }
+
+  function handleDelete(record: Recordable) {
+    deleteDbConnect(record.id).then(() => {
+      handleSuccess();
+    });
+  }
+
+  function handleSuccess() {
+    reload();
+  }
 </script>

@@ -29,79 +29,65 @@
     </template>
   </BasicTable>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { watch } from "vue";
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { getJobSubscribeById } from "/@/api/scheduler/JobSubscribe";
   import { columns } from "./jobSubscribe.data";
   import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
   import { buildUUID } from "/@/utils/Uuid";
-
-  export default {
-    name: "JobSubscribeManagement",
-    components: { BasicTable, TableAction },
-    props: {
-      jobId: { type: String, default: "" }
-    },
-    setup(props) {
-      const [registerTable, { reload, insertTableDataRecord, deleteTableDataRecord, setTableData, getDataSource }] =
-        useTable({
-          title: "触发策略列表",
-          rowKey: "id",
-          columns,
-          bordered: true,
-          showIndexColumn: false,
-          maxHeight: 300,
-          pagination: false,
-          actionColumn: {
-            width: 40,
-            title: "",
-            dataIndex: "action"
-          }
-        });
-      const getValue = () => {
-        return getDataSource();
-      };
-
-      watch(
-        () => props.jobId,
-        (newVal, oldVal) => {
-          if (newVal && newVal !== oldVal) {
-            getJobSubscribeById(newVal).then((res) => {
-              setTableData(res);
-            });
-          } else {
-            setTableData([]);
-          }
-        }
-      );
-
-      function handleCreate() {
-        const value = {
-          id: buildUUID(),
-          cron: "",
-          startTime: formatToDateTime(dateUtil()),
-          endTime: formatToDateTime(dateUtil().add(2, "year")),
-          status: 0
-        };
-        insertTableDataRecord(value, 0);
+  defineOptions({ name: "JobSubscribeManagement" });
+  const props = defineProps({
+    jobId: { type: String, default: "" }
+  });
+  const [registerTable, { reload, insertTableDataRecord, deleteTableDataRecord, setTableData, getDataSource }] =
+    useTable({
+      title: "触发策略列表",
+      rowKey: "id",
+      columns,
+      bordered: true,
+      showIndexColumn: false,
+      maxHeight: 300,
+      pagination: false,
+      actionColumn: {
+        width: 40,
+        title: "",
+        dataIndex: "action"
       }
-
-      function handleDelete(record: Recordable) {
-        deleteTableDataRecord(record.id);
-      }
-
-      function handleSuccess() {
-        reload();
-      }
-
-      return {
-        registerTable,
-        handleCreate,
-        handleDelete,
-        handleSuccess,
-        getValue
-      };
-    }
+    });
+  const getValue = () => {
+    return getDataSource();
   };
+
+  watch(
+    () => props.jobId,
+    (newVal, oldVal) => {
+      if (newVal && newVal !== oldVal) {
+        getJobSubscribeById(newVal).then((res) => {
+          setTableData(res);
+        });
+      } else {
+        setTableData([]);
+      }
+    }
+  );
+
+  function handleCreate() {
+    const value = {
+      id: buildUUID(),
+      cron: "",
+      startTime: formatToDateTime(dateUtil()),
+      endTime: formatToDateTime(dateUtil().add(2, "year")),
+      status: 0
+    };
+    insertTableDataRecord(value, 0);
+  }
+
+  function handleDelete(record: Recordable) {
+    deleteTableDataRecord(record.id);
+  }
+
+  function handleSuccess() {
+    reload();
+  }
 </script>

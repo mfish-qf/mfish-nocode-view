@@ -49,139 +49,78 @@
           />
         </template>
         <template v-if="column.key === 'jobType'">
-          <Tag v-for="item in jobTypes" v-show="record.jobType == item.dictValue" :color="item.color">
-            {{ item.dictLabel }}
-          </Tag>
+          <dict-tag code="sys_job_type" :value="record.jobType" />
         </template>
         <template v-if="column.key === 'misfireHandler'">
-          <Tag v-for="item in misfireHandlers" v-show="record.misfireHandler == item.dictValue" :color="item.color">
-            {{ item.dictLabel }}
-          </Tag>
+          <dict-tag code="sys_job_misfire" :value="record.misfireHandler" />
         </template>
         <template v-if="column.key === 'timeZone'">
-          <Tag v-for="item in timeZones" v-show="record.timeZone == item.dictValue" :color="item.color">
-            {{ item.dictLabel }}
-          </Tag>
+          <dict-tag code="sys_time_zone" :value="record.timeZone" />
         </template>
       </template>
     </BasicTable>
     <JobModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
-<script lang="ts">
-  import { ref, onBeforeMount } from "vue";
+<script lang="ts" setup>
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { Tag } from "ant-design-vue";
   import { deleteJob, executeJob, getJobList } from "/@/api/scheduler/Job";
   import { useModal } from "/@/components/general/Modal";
   import JobModal from "./JobModal.vue";
   import { columns, searchFormSchema } from "./job.data";
-  import { getDictItems } from "/@/api/sys/DictItem";
-  import { DictItem } from "/@/api/sys/model/DictItemModel";
   import { Job } from "/@/api/scheduler/model/JobModel";
   import JobSubscribeList from "/@/views/scheduler/job/JobSubscribeList.vue";
-
-  export default {
-    name: "JobManagement",
-    components: {
-      JobSubscribeList,
-      BasicTable,
-      JobModal,
-      TableAction,
-      Tag
+  import DictTag from "/@/components/general/DictTag/DictTag.vue";
+  defineOptions({ name: "JobManagement" });
+  const [registerModal, { openModal }] = useModal();
+  const [registerTable, { reload }] = useTable({
+    title: "定时调度任务列表",
+    api: getJobList,
+    columns,
+    formConfig: {
+      name: "search_form_item",
+      labelWidth: 80,
+      schemas: searchFormSchema,
+      autoSubmitOnEnter: true
     },
-    setup() {
-      const [registerModal, { openModal }] = useModal();
-      const [registerTable, { reload }] = useTable({
-        title: "定时调度任务列表",
-        api: getJobList,
-        columns,
-        formConfig: {
-          name: "search_form_item",
-          labelWidth: 80,
-          schemas: searchFormSchema,
-          autoSubmitOnEnter: true
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        expandRowByClick: true,
-        actionColumn: {
-          width: 100,
-          title: "操作",
-          dataIndex: "action"
-        }
-      });
-
-      let jobTypes = ref<DictItem[]>([]);
-      let misfireHandlers = ref<DictItem[]>([]);
-      let timeZones = ref<DictItem[]>([]);
-      onBeforeMount(() => {
-        getJobTypes();
-        getMisfireHandlers();
-        getTimeZone();
-      });
-
-      function getJobTypes() {
-        getDictItems("sys_job_type").then((res) => {
-          jobTypes.value = res;
-        });
-      }
-
-      function getMisfireHandlers() {
-        getDictItems("sys_job_misfire").then((res) => {
-          misfireHandlers.value = res;
-        });
-      }
-
-      function getTimeZone() {
-        getDictItems("sys_time_zone").then((res) => {
-          timeZones.value = res;
-        });
-      }
-
-      function handleCreate() {
-        openModal(true, {
-          isUpdate: false
-        });
-      }
-
-      function handleExecute(record: Job) {
-        executeJob(record).then();
-      }
-
-      function handleEdit(record: Job) {
-        openModal(true, {
-          record,
-          isUpdate: true
-        });
-      }
-
-      function handleDelete(record: Job) {
-        if (record.id) {
-          deleteJob(record.id).then(() => {
-            handleSuccess();
-          });
-        }
-      }
-
-      function handleSuccess() {
-        reload();
-      }
-
-      return {
-        registerTable,
-        registerModal,
-        handleCreate,
-        handleExecute,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-        jobTypes,
-        misfireHandlers,
-        timeZones
-      };
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    expandRowByClick: true,
+    actionColumn: {
+      width: 100,
+      title: "操作",
+      dataIndex: "action"
     }
-  };
+  });
+
+  function handleCreate() {
+    openModal(true, {
+      isUpdate: false
+    });
+  }
+
+  function handleExecute(record: Job) {
+    executeJob(record).then();
+  }
+
+  function handleEdit(record: Job) {
+    openModal(true, {
+      record,
+      isUpdate: true
+    });
+  }
+
+  function handleDelete(record: Job) {
+    if (record.id) {
+      deleteJob(record.id).then(() => {
+        handleSuccess();
+      });
+    }
+  }
+
+  function handleSuccess() {
+    reload();
+  }
 </script>

@@ -33,7 +33,7 @@
     <SysFileModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { deleteSysFile, getSysFileList } from "/@/api/storage/SysFile";
   import { useModal } from "/@/components/general/Modal";
@@ -42,70 +42,42 @@
   import { uploadApi } from "/@/api/storage/Upload";
   import BasicUpload from "/@/components/general/Upload/src/BasicUpload.vue";
   import { SysFile } from "/@/api/storage/model/SysFileModel";
+  defineOptions({ name: "SysFileManagement" });
 
-  export default {
-    name: "SysFileManagement",
-    components: { BasicUpload, BasicTable, SysFileModal, TableAction },
-    setup() {
-      const [registerModal, { openModal }] = useModal();
-      const [registerTable, { reload, insertTableDataRecord }] = useTable({
-        title: "文件列表",
-        api: getSysFileList,
-        columns,
-        formConfig: {
-          name: "search_form_item",
-          labelWidth: 80,
-          schemas: searchFormSchema,
-          autoSubmitOnEnter: true
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        actionColumn: {
-          width: 80,
-          title: "操作",
-          dataIndex: "action"
-        }
-      });
-
-      function handleCreate() {
-        openModal(true, {
-          isUpdate: false
-        });
-      }
-
-      function handleEdit(record: Recordable) {
-        openModal(true, {
-          record,
-          isUpdate: true
-        });
-      }
-
-      function handleDelete(record: Recordable) {
-        deleteSysFile(record.id).then(() => {
-          handleSuccess();
-        });
-      }
-
-      function handleSuccess() {
-        reload();
-      }
-
-      return {
-        handleChange: (files: SysFile[]) => {
-          files.forEach((file) => {
-            insertTableDataRecord(file, 0);
-          });
-        },
-        registerTable,
-        registerModal,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-        uploadApi
-      };
+  const [registerModal, { openModal }] = useModal();
+  const [registerTable, { reload, insertTableDataRecord }] = useTable({
+    title: "文件列表",
+    api: getSysFileList,
+    columns,
+    formConfig: {
+      name: "search_form_item",
+      labelWidth: 80,
+      schemas: searchFormSchema,
+      autoSubmitOnEnter: true
+    },
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    actionColumn: {
+      width: 80,
+      title: "操作",
+      dataIndex: "action"
     }
+  });
+
+  function handleDelete(record: Recordable) {
+    deleteSysFile(record.id).then(() => {
+      handleSuccess();
+    });
+  }
+
+  function handleSuccess() {
+    reload();
+  }
+  const handleChange = (files: SysFile[]) => {
+    files.forEach((file) => {
+      insertTableDataRecord(file, 0);
+    });
   };
 </script>

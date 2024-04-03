@@ -66,9 +66,9 @@
     <PasswordModal @register="registerPwdModal" />
   </PageWrapper>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { reactive, ref } from "vue";
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
+  import { BasicTable, useTable, TableAction, BasicColumn } from "/@/components/general/Table";
   import { deleteUser, getUserList } from "/@/api/sys/User";
   import { PageWrapper } from "/@/components/general/Page";
   import OrgTree from "./OrgTree.vue";
@@ -82,133 +82,105 @@
   import AccountSelectModal from "/@/views/sys/account/AccountSelectModal.vue";
   import { SsoUser } from "/@/api/sys/model/UserModel";
   import { useMessage } from "/@/hooks/web/UseMessage";
-
-  export default {
-    name: "AccountManagement",
-    components: { AccountSelectModal, PasswordModal, BasicTable, PageWrapper, OrgTree, AccountModal, TableAction },
-    props: {
-      source: {
-        type: Number,
-        default: null
-      }
+  defineOptions({ name: "AccountManagement" });
+  const props = defineProps({
+    source: {
+      type: Number,
+      default: null
+    }
+  });
+  const { hasPermission, hasRole, SUPER_ROLE, hasTenant } = usePermission();
+  const [registerModal, { openModal }] = useModal();
+  const [registerSelectModal, { openModal: openSelectModal }] = useModal();
+  const [registerPwdModal, { openModal: openPwdModal }] = useModal();
+  const { createMessage } = useMessage();
+  const searchInfo = reactive<Recordable>({});
+  const { prefixCls } = useDesign("account");
+  const api = ref();
+  let newColumns: BasicColumn[];
+  if (props.source === 1) {
+    api.value = getTenantUserList;
+    newColumns = columns.filter((col) => col.dataIndex !== "status");
+  } else {
+    api.value = getUserList;
+    newColumns = columns;
+  }
+  const [registerTable, { reload }] = useTable({
+    title: "账号列表",
+    api: api,
+    columns: newColumns,
+    formConfig: {
+      name: "search_form_item",
+      labelWidth: 60,
+      schemas: searchFormSchema,
+      autoSubmitOnEnter: true
     },
-    setup(props) {
-      const { hasPermission, hasRole, SUPER_ROLE, hasTenant } = usePermission();
-      const [registerModal, { openModal }] = useModal();
-      const [registerSelectModal, { openModal: openSelectModal }] = useModal();
-      const [registerPwdModal, { openModal: openPwdModal }] = useModal();
-      const { createMessage } = useMessage();
-      const searchInfo = reactive<Recordable>({});
-      const { prefixCls } = useDesign("account");
-      const api = ref();
-      let newColumns;
-      if (props.source === 1) {
-        api.value = getTenantUserList;
-        newColumns = columns.filter((col) => col.dataIndex !== "status");
-      } else {
-        api.value = getUserList;
-        newColumns = columns;
-      }
-      const [registerTable, { reload }] = useTable({
-        title: "账号列表",
-        api: api,
-        columns: newColumns,
-        formConfig: {
-          name: "search_form_item",
-          labelWidth: 60,
-          schemas: searchFormSchema,
-          autoSubmitOnEnter: true
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        resizeHeightOffset: props.source === 1 ? 18 : 0,
-        actionColumn: {
-          width: 120,
-          title: "操作",
-          dataIndex: "action"
-        }
-      });
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    resizeHeightOffset: props.source === 1 ? 18 : 0,
+    actionColumn: {
+      width: 120,
+      title: "操作",
+      dataIndex: "action"
+    }
+  });
 
-      function handleCreate() {
-        openModal(true, {
-          isUpdate: false
-        });
-      }
+  function handleCreate() {
+    openModal(true, {
+      isUpdate: false
+    });
+  }
 
-      function handleEdit(record: Recordable) {
-        openModal(true, {
-          record,
-          isUpdate: true
-        });
-      }
+  function handleEdit(record: Recordable) {
+    openModal(true, {
+      record,
+      isUpdate: true
+    });
+  }
 
-      function handleDelete(record: Recordable) {
-        deleteUser(record.id).then(() => {
-          handleSuccess();
-        });
-      }
+  function handleDelete(record: Recordable) {
+    deleteUser(record.id).then(() => {
+      handleSuccess();
+    });
+  }
 
-      function handleChangePwd(id: string) {
-        openPwdModal(true, { userId: id });
-      }
+  function handleChangePwd(id: string) {
+    openPwdModal(true, { userId: id });
+  }
 
-      function handleSelectAccount() {
-        openSelectModal(true);
-      }
+  function handleSelectAccount() {
+    openSelectModal(true);
+  }
 
-      function handleSuccess() {
-        reload();
-      }
+  function handleSuccess() {
+    reload();
+  }
 
-      function handleRemoveUser(record: SsoUser) {
-        if (searchInfo.orgId == undefined || searchInfo.orgId == "") {
-          if (record.orgIds) {
-            if (record.orgIds.length > 1) {
-              createMessage.error("错误:请选择组织后再删除");
-              return;
-            }
-            deleteUserOrg({ userId: record.id, orgId: record.orgIds[0] }).then(() => {
-              handleSuccess();
-            });
-            return;
-          }
+  function handleRemoveUser(record: SsoUser) {
+    if (searchInfo.orgId == undefined || searchInfo.orgId == "") {
+      if (record.orgIds) {
+        if (record.orgIds.length > 1) {
           createMessage.error("错误:请选择组织后再删除");
           return;
         }
-        deleteUserOrg({ userId: record.id, orgId: searchInfo.orgId }).then(() => {
+        deleteUserOrg({ userId: record.id, orgId: record.orgIds[0] }).then(() => {
           handleSuccess();
         });
+        return;
       }
-      function handleSelect(orgId = "") {
-        searchInfo.orgId = orgId;
-        reload();
-      }
-
-      return {
-        registerTable,
-        registerModal,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-        handleSelect,
-        searchInfo,
-        hasPermission,
-        hasRole,
-        SUPER_ROLE,
-        registerPwdModal,
-        openPwdModal,
-        handleChangePwd,
-        prefixCls,
-        hasTenant,
-        registerSelectModal,
-        handleSelectAccount,
-        handleRemoveUser
-      };
+      createMessage.error("错误:请选择组织后再删除");
+      return;
     }
-  };
+    deleteUserOrg({ userId: record.id, orgId: searchInfo.orgId }).then(() => {
+      handleSuccess();
+    });
+  }
+  function handleSelect(orgId = "") {
+    searchInfo.orgId = orgId;
+    reload();
+  }
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-account";

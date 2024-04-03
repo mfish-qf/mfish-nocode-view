@@ -21,46 +21,41 @@
     </BasicTree>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref, unref, nextTick } from "vue";
   import { BasicTree, TreeActionType, TreeItem } from "/@/components/general/Tree";
   import { getOrgTree } from "/@/api/sys/Org";
   import { getTenantOrgTree } from "/@/api/sys/SsoTenant";
   import { Icon } from "/@/components/general/Icon";
   import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
-  export default {
-    name: "OrgTree",
-    components: { BasicTree, Icon },
-    props: {
-      source: {
-        type: Number,
-        default: null
-      }
-    },
-    emits: ["select"],
-    setup(props, { emit }) {
-      const treeData = ref<TreeItem[]>([]);
-      const asyncExpandTreeRef = ref<Nullable<TreeActionType>>(null);
-      const color = useRootSetting().getThemeColor;
-      async function fetch() {
-        if (props.source === 1) {
-          treeData.value = (await getTenantOrgTree()) as unknown as TreeItem[];
-        } else {
-          treeData.value = (await getOrgTree()) as unknown as TreeItem[];
-        }
-        nextTick(() => {
-          unref(asyncExpandTreeRef)?.expandAll(true);
-        });
-      }
+  defineOptions({ name: "OrgTree" });
 
-      function handleSelect(keys) {
-        emit("select", keys[0]);
-      }
-
-      onMounted(() => {
-        fetch();
-      });
-      return { treeData, handleSelect, asyncExpandTreeRef, color };
+  const props = defineProps({
+    source: {
+      type: Number,
+      default: null
     }
-  };
+  });
+  const emit = defineEmits(["select"]);
+  const treeData = ref<TreeItem[]>([]);
+  const asyncExpandTreeRef = ref<Nullable<TreeActionType>>(null);
+  const color = useRootSetting().getThemeColor;
+  async function fetch() {
+    if (props.source === 1) {
+      treeData.value = (await getTenantOrgTree()) as unknown as TreeItem[];
+    } else {
+      treeData.value = (await getOrgTree()) as unknown as TreeItem[];
+    }
+    nextTick(() => {
+      unref(asyncExpandTreeRef)?.expandAll(true);
+    });
+  }
+
+  function handleSelect(keys) {
+    emit("select", keys[0]);
+  }
+
+  onMounted(() => {
+    fetch();
+  });
 </script>

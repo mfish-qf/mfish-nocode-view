@@ -30,7 +30,7 @@ export const columns: BasicColumn[] = [
   {
     title: "任务类型",
     dataIndex: "jobType",
-    width: 120
+    width: 100
   },
   {
     title: "类名称",
