@@ -57,131 +57,101 @@
   </Split>
 </template>
 
-<script lang="ts">
-  import { ref, unref, onBeforeMount, computed, toRaw } from "vue";
+<script lang="ts" setup>
+  import { ref, unref, computed, toRaw } from "vue";
   import { ScrollContainer } from "/@/components/general/Container";
   import DBTree from "./DBTree.vue";
   import { Icon } from "/@/components/general/Icon";
-  import { Tooltip, Row, Col, Breadcrumb, BreadcrumbItem } from "ant-design-vue";
+  import { Tooltip, Row as ARow, Col as ACol, Breadcrumb as ABreadcrumb } from "ant-design-vue";
   import { TableInfo } from "/@/api/sys/model/DbConnectModel";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import TableDetail from "/@/views/sys/database/TableDetail.vue";
   import { TreeItem } from "/@/components/general/Tree";
   import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
   import { Split } from "/@/components/general/Split";
+  defineOptions({ name: "DataBaseManagement" });
+  const ABreadcrumbItem = ABreadcrumb.Item;
+  defineProps({
+    resizeHeightOffset: { type: Number, default: 0 }
+  });
+  let tableList = ref<TableInfo[]>([]);
+  const dbTreeRef = ref();
+  const { prefixCls } = useDesign("data-base");
+  const color = useRootSetting().getThemeColor;
+  const startSearch = ref(false);
+  const searchTable = ref<TableInfo[]>([]);
+  const curNode = ref<any>();
+  const parentNode = ref<TreeItem>();
+  const split = ref<number>(0.2);
 
-  export default {
-    name: "DataBaseManagement",
-    components: {
-      Split,
-      TableDetail,
-      DBTree,
-      Icon,
-      ScrollContainer,
-      Tooltip,
-      [Row.name]: Row,
-      [Breadcrumb.name]: Breadcrumb,
-      [BreadcrumbItem.name]: BreadcrumbItem,
-      [Col.name]: Col
-    },
-    props: {
-      resizeHeightOffset: { type: Number, default: 0 }
-    },
-    setup() {
-      let tableList = ref<TableInfo[]>([]);
-      const dbTreeRef = ref();
-      const { prefixCls } = useDesign("data-base");
-      const color = useRootSetting().getThemeColor;
-      const startSearch = ref(false);
-      const searchTable = ref<TableInfo[]>([]);
-      const curNode = ref<any>();
-      const parentNode = ref<TreeItem>();
-      const split = ref<number>(0.2);
-
-      async function changeSelect(record: any, parent: any) {
-        curNode.value = toRaw(record);
-        if (parent) {
-          parentNode.value = toRaw(parent);
-        } else {
-          parentNode.value = undefined;
-        }
-        //如果是数据库节点，构建下面表信息
-        if (record.dbName) {
-          if (record.children) {
-            tableList.value = record.children;
-            return;
-          }
-          tableList.value = [];
-          dbTreeRef.value.buildTableTree(record.id).then((res: any) => {
-            tableList.value = res;
-          });
-          return;
-        }
-      }
-
-      const breadList = computed(() => {
-        const list: any[] = [];
-        if (parentNode.value) {
-          list.push({
-            icon: parentNode.value.icon,
-            title: parentNode.value.dbTitle,
-            key: parentNode.value.key
-          });
-          if (curNode.value) {
-            list.push({
-              icon: curNode.value.icon,
-              title: curNode.value.tableName,
-              key: curNode.value.key
-            });
-          }
-          return list;
-        }
-        if (curNode.value) {
-          list.push({
-            icon: curNode.value.icon,
-            title: curNode.value.dbTitle,
-            key: curNode.value.key
-          });
-        }
-        return list;
-      });
-
-      function setSelect(key) {
-        dbTreeRef.value.setSelect(key);
-      }
-
-      function changeSearch(search, value) {
-        if (!search) {
-          startSearch.value = false;
-          return;
-        }
-        startSearch.value = true;
-        let tables: TableInfo[] = [];
-        toRaw(value).forEach((item) => {
-          if (item.children) {
-            tables.push(...item.children);
-          }
-        });
-        searchTable.value = tables;
-      }
-
-      const getTableList = computed((): TableInfo[] => (startSearch.value ? unref(searchTable) : unref(tableList)));
-
-      onBeforeMount(() => {});
-      return {
-        split,
-        changeSelect,
-        setSelect,
-        changeSearch,
-        getTableList,
-        dbTreeRef,
-        prefixCls,
-        color,
-        curNode,
-        breadList
-      };
+  async function changeSelect(record: any, parent: any) {
+    curNode.value = toRaw(record);
+    if (parent) {
+      parentNode.value = toRaw(parent);
+    } else {
+      parentNode.value = undefined;
     }
-  };
+    //如果是数据库节点，构建下面表信息
+    if (record.dbName) {
+      if (record.children) {
+        tableList.value = record.children;
+        return;
+      }
+      tableList.value = [];
+      dbTreeRef.value.buildTableTree(record.id).then((res: any) => {
+        tableList.value = res;
+      });
+      return;
+    }
+  }
+
+  const breadList = computed(() => {
+    const list: any[] = [];
+    if (parentNode.value) {
+      list.push({
+        icon: parentNode.value.icon,
+        title: parentNode.value.dbTitle,
+        key: parentNode.value.key
+      });
+      if (curNode.value) {
+        list.push({
+          icon: curNode.value.icon,
+          title: curNode.value.tableName,
+          key: curNode.value.key
+        });
+      }
+      return list;
+    }
+    if (curNode.value) {
+      list.push({
+        icon: curNode.value.icon,
+        title: curNode.value.dbTitle,
+        key: curNode.value.key
+      });
+    }
+    return list;
+  });
+
+  function setSelect(key) {
+    dbTreeRef.value.setSelect(key);
+  }
+
+  function changeSearch(search, value) {
+    if (!search) {
+      startSearch.value = false;
+      return;
+    }
+    startSearch.value = true;
+    let tables: TableInfo[] = [];
+    toRaw(value).forEach((item) => {
+      if (item.children) {
+        tables.push(...item.children);
+      }
+    });
+    searchTable.value = tables;
+  }
+
+  const getTableList = computed((): TableInfo[] => (startSearch.value ? unref(searchTable) : unref(tableList)));
 </script>
 <style scoped lang="less">
   @prefix-cls: ~"@{namespace}-data-base";

@@ -12,22 +12,12 @@
     </DataBaseManagement>
   </BasicModal>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { defineComponent, onMounted } from "vue";
+  import { onMounted } from "vue";
   import DataBaseManagement from "/@/views/sys/database/DataBaseManagement.vue";
-
-  export default defineComponent({
-    name: "DataBaseModal",
-    components: { DataBaseManagement, BasicModal },
-    setup() {
-      const [registerModal, { setModalProps }] = useModalInner();
-      onMounted(() => {
-        setModalProps({ width: "1200px", height: 600, defaultFullscreen: true });
-      });
-      return {
-        registerModal
-      };
-    }
+  const [registerModal, { setModalProps }] = useModalInner();
+  onMounted(() => {
+    setModalProps({ width: "1200px", height: 600, defaultFullscreen: true });
   });
 </script>

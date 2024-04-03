@@ -15,7 +15,7 @@
     </div>
     <div :class="`${prefixCls}-column`">
       <div :class="`${prefixCls}-label`">策略状态:</div>
-      <Switch
+      <ASwitch
         :checked="item.status == 0"
         checkedChildren="已启用"
         :loading="showLoading"
@@ -26,44 +26,33 @@
   </div>
 </template>
 
-<script>
+<script lang="ts" setup>
   import { computed, ref } from "vue";
   import { useDesign } from "/@/hooks/web/UseDesign";
-  import { Switch } from "ant-design-vue";
-  import { Divider } from "ant-design-vue";
+  import { Switch as ASwitch } from "ant-design-vue";
   import { setJobSubscribeStatus } from "/@/api/scheduler/JobSubscribe";
-
-  export default {
-    name: "JobSubscribeList",
-    components: { Switch, Divider },
-    props: {
-      subscribes: { type: Object, default: [] }
-    },
-    setup(_) {
-      const { prefixCls } = useDesign("job-subscribe");
-      const getClass = computed(() => [prefixCls]);
-      let showLoading = ref(false);
-
-      async function statusChange(record, checked) {
-        showLoading = true;
-        const newStatus = checked ? 0 : 1;
-        setJobSubscribeStatus(record.id, newStatus)
-          .then(() => {
-            record.status = newStatus;
-          })
-          .finally(() => {
-            showLoading = false;
-          });
-      }
-
-      return {
-        prefixCls,
-        getClass,
-        showLoading,
-        statusChange
-      };
+  defineOptions({ name: "JobSubscribeList" });
+  defineProps({
+    subscribes: {
+      type: Object as PropType<{ startTime: string; endTime: string; status: number; cron: string }[]>,
+      default: []
     }
-  };
+  });
+  const { prefixCls } = useDesign("job-subscribe");
+  const getClass = computed(() => [prefixCls]);
+  let showLoading = ref(false);
+
+  async function statusChange(record, checked) {
+    showLoading.value = true;
+    const newStatus = checked ? 0 : 1;
+    setJobSubscribeStatus(record.id, newStatus)
+      .then(() => {
+        record.status = newStatus;
+      })
+      .finally(() => {
+        showLoading.value = false;
+      });
+  }
 </script>
 
 <style scoped lang="less">

@@ -36,7 +36,7 @@
     <DictItemModal @register="registerModal" @success="handleSuccess" />
   </PageWrapper>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { unref, ref } from "vue";
   import { useRoute } from "vue-router";
   import { PageWrapper } from "/@/components/general/Page";
@@ -47,78 +47,62 @@
   import { columns, searchFormSchema } from "./dictItem.data";
   import { useGo } from "/@/hooks/web/UsePage";
   import { useTabs } from "/@/hooks/web/UseTabs";
+  defineOptions({ name: "DictItemManagement" });
 
-  export default {
-    name: "DictItemManagement",
-    components: { BasicTable, DictItemModal, TableAction, PageWrapper },
-    setup() {
-      const [registerModal, { openModal }] = useModal();
-      const go = useGo();
-      const route = useRoute();
-      const dictCode = ref(route.params?.dictCode);
-      const [registerTable, { reload }] = useTable({
-        title: "字典项列表",
-        api: getDictItemList,
-        searchInfo: { dictCode: dictCode },
-        columns,
-        formConfig: {
-          name: "search_form_item",
-          labelWidth: 80,
-          schemas: searchFormSchema,
-          autoSubmitOnEnter: true
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        actionColumn: {
-          width: 80,
-          title: "操作",
-          dataIndex: "action"
-        }
-      });
-
-      const { setTitle } = useTabs();
-      setTitle(`字典项: ${unref(dictCode)}`);
-
-      function handleCreate() {
-        openModal(true, {
-          record: { dictCode: dictCode },
-          isUpdate: false
-        });
-      }
-
-      function handleEdit(record: Recordable) {
-        openModal(true, {
-          record,
-          isUpdate: true
-        });
-      }
-
-      function handleDelete(record: Recordable) {
-        deleteDictItem(record.id).then(() => {
-          handleSuccess();
-        });
-      }
-
-      function handleSuccess() {
-        reload();
-      }
-
-      function goBack() {
-        go("/system/dict");
-      }
-
-      return {
-        registerTable,
-        registerModal,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-        dictCode,
-        goBack
-      };
+  const [registerModal, { openModal }] = useModal();
+  const go = useGo();
+  const route = useRoute();
+  const dictCode = ref(route.params?.dictCode);
+  const [registerTable, { reload }] = useTable({
+    title: "字典项列表",
+    api: getDictItemList,
+    searchInfo: { dictCode: dictCode },
+    columns,
+    formConfig: {
+      name: "search_form_item",
+      labelWidth: 80,
+      schemas: searchFormSchema,
+      autoSubmitOnEnter: true
+    },
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    actionColumn: {
+      width: 80,
+      title: "操作",
+      dataIndex: "action"
     }
-  };
+  });
+
+  const { setTitle } = useTabs();
+  setTitle(`字典项: ${unref(dictCode)}`);
+
+  function handleCreate() {
+    openModal(true, {
+      record: { dictCode: dictCode },
+      isUpdate: false
+    });
+  }
+
+  function handleEdit(record: Recordable) {
+    openModal(true, {
+      record,
+      isUpdate: true
+    });
+  }
+
+  function handleDelete(record: Recordable) {
+    deleteDictItem(record.id).then(() => {
+      handleSuccess();
+    });
+  }
+
+  function handleSuccess() {
+    reload();
+  }
+
+  function goBack() {
+    go("/system/dict");
+  }
 </script>

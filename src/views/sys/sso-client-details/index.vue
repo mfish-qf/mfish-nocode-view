@@ -57,14 +57,16 @@
                 }
               ]"
             />
-            <div>{{ record.clientSecret }}</div>
+            <div>{{ record?.clientSecret }}</div>
           </div>
         </template>
         <template v-else-if="column.key === 'grantTypes'">
-          <template v-for="type in record.grantTypes.split(',')">
-            <Tag v-for="item in grantTypes" v-show="type == item.dictValue" :color="item.color">
-              {{ item.dictLabel }}
-            </Tag>
+          <template v-for="(type, index) in record.grantTypes.split(',')">
+            <template v-for="item in grantTypes">
+              <a-tag class="ml-1" :key="index + item.dictCode" v-if="type == item.dictValue" :color="item.color">
+                {{ item.dictLabel }}
+              </a-tag>
+            </template>
           </template>
         </template>
       </template>
@@ -72,7 +74,7 @@
     <SsoClientDetailsModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from "vue";
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { deleteSsoClientDetails, getSecret, getSsoClientDetailsList, resetSecret } from "/@/api/sys/SsoClientDetails";
@@ -82,119 +84,101 @@
   import { SsoClientDetails } from "/@/api/sys/model/SsoClientDetailsModel";
   import { getDictItems } from "/@/api/sys/DictItem";
   import { useDesign } from "/@/hooks/web/UseDesign";
-  import { Tag } from "ant-design-vue";
+  import { Tag as ATag } from "ant-design-vue";
   import { DictItem } from "/@/api/sys/model/DictItemModel";
+  defineOptions({ name: "SsoClientDetailsManagement" });
 
-  export default {
-    name: "SsoClientDetailsManagement",
-    components: { BasicTable, SsoClientDetailsModal, TableAction, Tag },
-    setup() {
-      const [registerModal, { openModal }] = useModal();
-      const [registerTable, { reload }] = useTable({
-        title: "客户端信息列表",
-        api: getSsoClientDetailsList,
-        columns,
-        formConfig: {
-          name: "search_form_item",
-          labelWidth: 80,
-          schemas: searchFormSchema,
-          autoSubmitOnEnter: true
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        actionColumn: {
-          width: 120,
-          title: "操作",
-          dataIndex: "action"
-        }
-      });
-      const grantTypes = ref<DictItem[]>([]);
-      const { prefixCls } = useDesign("client-details");
-
-      function showSecret(ssoClientDetails: SsoClientDetails) {
-        if (ssoClientDetails.id) {
-          getSecret(ssoClientDetails.id).then((res) => {
-            ssoClientDetails.clientSecret = res;
-          });
-        }
-      }
-
-      /**
-       * 新建
-       */
-      function handleCreate() {
-        let types: string[] = [];
-        grantTypes.value.forEach((type) => {
-          types.push(type.dictValue);
-        });
-        openModal(true, {
-          record: { grantTypeGroup: types },
-          isUpdate: false
-        });
-      }
-
-      onMounted(() => {
-        getDictItems("sso_grant_type").then((res) => {
-          grantTypes.value = res;
-        });
-      });
-
-      /**
-       * 修改
-       * @param
-       */
-      function handleEdit(ssoClientDetails: SsoClientDetails) {
-        if (ssoClientDetails.grantTypes) {
-          ssoClientDetails.grantTypeGroup = ssoClientDetails.grantTypes.split(",");
-        }
-        openModal(true, {
-          record: ssoClientDetails,
-          isUpdate: true
-        });
-      }
-
-      function handleReset(ssoClientDetails: SsoClientDetails) {
-        if (ssoClientDetails.id)
-          resetSecret(ssoClientDetails.id).then((res) => {
-            ssoClientDetails.clientSecret = res;
-          });
-      }
-
-      /**
-       * 删除
-       * @param
-       */
-      function handleDelete(ssoClientDetails: SsoClientDetails) {
-        if (ssoClientDetails.id) {
-          deleteSsoClientDetails(ssoClientDetails.id).then(() => {
-            handleSuccess();
-          });
-        }
-      }
-
-      /**
-       * 处理完成
-       */
-      function handleSuccess() {
-        reload();
-      }
-
-      return {
-        registerTable,
-        registerModal,
-        handleCreate,
-        handleEdit,
-        handleReset,
-        handleDelete,
-        handleSuccess,
-        prefixCls,
-        showSecret,
-        grantTypes
-      };
+  const [registerModal, { openModal }] = useModal();
+  const [registerTable, { reload }] = useTable({
+    title: "客户端信息列表",
+    api: getSsoClientDetailsList,
+    columns,
+    formConfig: {
+      name: "search_form_item",
+      labelWidth: 80,
+      schemas: searchFormSchema,
+      autoSubmitOnEnter: true
+    },
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    actionColumn: {
+      width: 120,
+      title: "操作",
+      dataIndex: "action"
     }
-  };
+  });
+  const grantTypes = ref<DictItem[]>([]);
+  const { prefixCls } = useDesign("client-details");
+
+  function showSecret(ssoClientDetails: SsoClientDetails) {
+    if (ssoClientDetails.id) {
+      getSecret(ssoClientDetails.id).then((res) => {
+        ssoClientDetails.clientSecret = res;
+      });
+    }
+  }
+
+  /**
+   * 新建
+   */
+  function handleCreate() {
+    let types: any = [];
+    grantTypes.value.forEach((type: DictItem) => {
+      types.push(type.dictValue);
+    });
+    openModal(true, {
+      record: { grantTypeGroup: types },
+      isUpdate: false
+    });
+  }
+
+  onMounted(() => {
+    getDictItems("sso_grant_type").then((res) => {
+      grantTypes.value = res;
+    });
+  });
+
+  /**
+   * 修改
+   * @param
+   */
+  function handleEdit(ssoClientDetails: SsoClientDetails) {
+    if (ssoClientDetails.grantTypes) {
+      ssoClientDetails.grantTypeGroup = ssoClientDetails.grantTypes.split(",");
+    }
+    openModal(true, {
+      record: ssoClientDetails,
+      isUpdate: true
+    });
+  }
+
+  function handleReset(ssoClientDetails: SsoClientDetails) {
+    if (ssoClientDetails.id)
+      resetSecret(ssoClientDetails.id).then((res) => {
+        ssoClientDetails.clientSecret = res;
+      });
+  }
+
+  /**
+   * 删除
+   * @param
+   */
+  function handleDelete(ssoClientDetails: SsoClientDetails) {
+    if (ssoClientDetails.id) {
+      deleteSsoClientDetails(ssoClientDetails.id).then(() => {
+        handleSuccess();
+      });
+    }
+  }
+
+  /**
+   * 处理完成
+   */
+  function handleSuccess() {
+    reload();
+  }
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-client-details";

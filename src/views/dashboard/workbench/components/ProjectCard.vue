@@ -17,16 +17,9 @@
     </CardGrid>
   </Card>
 </template>
-<script lang="ts">
-  import { defineComponent } from "vue";
+<script lang="ts" setup>
   import { Card, CardGrid } from "ant-design-vue";
   import { Icon } from "/@/components/general/Icon";
   import { groupItems } from "./Data";
-
-  export default defineComponent({
-    components: { Card, CardGrid, Icon },
-    setup() {
-      return { items: groupItems };
-    }
-  });
+  const items = groupItems;
 </script>

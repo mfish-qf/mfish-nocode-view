@@ -25,9 +25,9 @@
     </a-row>
   </CollapseContainer>
 </template>
-<script lang="ts">
-  import { Button, Row, Col } from "ant-design-vue";
-  import { defineComponent, onBeforeMount, onMounted, ref } from "vue";
+<script lang="ts" setup>
+  import { Button as AButton, Row as ARow, Col as ACol } from "ant-design-vue";
+  import { onBeforeMount, onMounted, ref } from "vue";
   import { BasicForm, useForm } from "/@/components/general/Form/index";
   import { CollapseContainer } from "/@/components/general/Container";
   import { CropperAvatar } from "/@/components/general/Cropper";
@@ -37,61 +37,41 @@
   import { uploadApi } from "/@/api/storage/Upload";
   import { setHeaderImg } from "/@/utils/FileUtils";
 
-  export default defineComponent({
-    components: {
-      BasicForm,
-      CollapseContainer,
-      AButton: Button,
-      ARow: Row,
-      ACol: Col,
-      CropperAvatar
-    },
-    setup() {
-      const userStore = useUserStore();
-      const [register, { setFieldsValue, validate }] = useForm({
-        labelWidth: 120,
-        schemas: baseSetSchemas,
-        showActionButtonGroup: false
-      });
-      let userInfo = userStore.getUserInfo;
-      onMounted(async () => {
-        const user = await getUserInfo();
-        if (userInfo != null) {
-          userInfo = Object.assign(userInfo, user);
-          setFieldsValue(userInfo).then();
-        }
-      });
-
-      const avatar = ref("");
-      onBeforeMount(() => {
-        const imgUrl = userStore.getUserInfo?.headImgUrl;
-        setHeaderImg(imgUrl, avatar);
-      });
-
-      function updateAvatar({ data }) {
-        if (userInfo != null) {
-          userInfo.headImgUrl = data;
-          userStore.setUserInfo(userInfo);
-          if (data) {
-            updateMe(userInfo).then();
-          }
-        }
-      }
-
-      async function handleSubmit() {
-        const values = await validate();
-        updateMe(values).then();
-      }
-
-      return {
-        avatar,
-        register,
-        uploadApi,
-        updateAvatar,
-        handleSubmit
-      };
+  const userStore = useUserStore();
+  const [register, { setFieldsValue, validate }] = useForm({
+    labelWidth: 120,
+    schemas: baseSetSchemas,
+    showActionButtonGroup: false
+  });
+  let userInfo = userStore.getUserInfo;
+  onMounted(async () => {
+    const user = await getUserInfo();
+    if (userInfo != null) {
+      userInfo = Object.assign(userInfo, user);
+      setFieldsValue(userInfo).then();
     }
   });
+
+  const avatar = ref("");
+  onBeforeMount(() => {
+    const imgUrl = userStore.getUserInfo?.headImgUrl;
+    setHeaderImg(imgUrl, avatar);
+  });
+
+  function updateAvatar({ data }) {
+    if (userInfo != null) {
+      userInfo.headImgUrl = data;
+      userStore.setUserInfo(userInfo);
+      if (data) {
+        updateMe(userInfo).then();
+      }
+    }
+  }
+
+  async function handleSubmit() {
+    const values = await validate();
+    updateMe(values).then();
+  }
 </script>
 
 <style lang="less" scoped>

@@ -36,7 +36,7 @@
     <OrgModal @register="registerModal" @success="handleSuccess" :source="$props.source" />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { ref } from "vue";
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { deleteOrg, getOrgTree } from "/@/api/sys/Org";
@@ -46,101 +46,83 @@
   import { usePermission } from "/@/hooks/web/UsePermission";
   import { deleteTenantOrg, getTenantOrgTree } from "/@/api/sys/SsoTenant";
   import { useDesign } from "/@/hooks/web/UseDesign";
+  defineOptions({ name: "OrgManagement" });
 
-  export default {
-    name: "OrgManagement",
-    components: { BasicTable, OrgModal, TableAction },
-    props: {
-      source: {
-        type: Number,
-        default: null
-      }
-    },
-    setup(props) {
-      const { hasPermission, hasTenant } = usePermission();
-      const [registerModal, { openModal }] = useModal();
-      const { prefixCls } = useDesign("org");
-      const api = ref();
-      if (props.source == 1) {
-        api.value = getTenantOrgTree;
-      } else {
-        api.value = getOrgTree;
-      }
-      const [registerTable, { reload, expandRows }] = useTable({
-        title: "部门列表",
-        rowKey: "id",
-        api: api,
-        columns,
-        formConfig: {
-          name: "search_form_item",
-          labelWidth: 80,
-          schemas: searchFormSchema,
-          autoSubmitOnEnter: true
-        },
-        isTreeTable: true,
-        pagination: false,
-        striped: false,
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        canResize: false,
-        actionColumn: {
-          width: 80,
-          title: "操作",
-          dataIndex: "action"
-        }
-      });
-
-      function handleCreate() {
-        openModal(true, {
-          isUpdate: false
-        });
-      }
-
-      function handleEdit(record: Recordable) {
-        openModal(true, {
-          record,
-          isUpdate: true
-        });
-      }
-
-      function handleDelete(record: Recordable) {
-        if (props.source == 1) {
-          deleteTenantOrg(record.id).then(() => {
-            handleSuccess();
-          });
-          return;
-        }
-        deleteOrg(record.id).then(() => {
-          handleSuccess();
-        });
-      }
-
-      function handleSuccess() {
-        reload();
-      }
-
-      function onFetchSuccess(record) {
-        if (record?.items?.length > 0) {
-          expandRows([record.items[0].id]);
-        }
-      }
-
-      return {
-        registerTable,
-        registerModal,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-        onFetchSuccess,
-        hasPermission,
-        hasTenant,
-        prefixCls
-      };
+  const props = defineProps({
+    source: {
+      type: Number,
+      default: null
     }
-  };
+  });
+  const { hasPermission, hasTenant } = usePermission();
+  const [registerModal, { openModal }] = useModal();
+  const { prefixCls } = useDesign("org");
+  const api = ref();
+  if (props.source == 1) {
+    api.value = getTenantOrgTree;
+  } else {
+    api.value = getOrgTree;
+  }
+  const [registerTable, { reload, expandRows }] = useTable({
+    title: "部门列表",
+    rowKey: "id",
+    api: api,
+    columns,
+    formConfig: {
+      name: "search_form_item",
+      labelWidth: 80,
+      schemas: searchFormSchema,
+      autoSubmitOnEnter: true
+    },
+    isTreeTable: true,
+    pagination: false,
+    striped: false,
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    canResize: false,
+    actionColumn: {
+      width: 80,
+      title: "操作",
+      dataIndex: "action"
+    }
+  });
+
+  function handleCreate() {
+    openModal(true, {
+      isUpdate: false
+    });
+  }
+
+  function handleEdit(record: Recordable) {
+    openModal(true, {
+      record,
+      isUpdate: true
+    });
+  }
+
+  function handleDelete(record: Recordable) {
+    if (props.source == 1) {
+      deleteTenantOrg(record.id).then(() => {
+        handleSuccess();
+      });
+      return;
+    }
+    deleteOrg(record.id).then(() => {
+      handleSuccess();
+    });
+  }
+
+  function handleSuccess() {
+    reload();
+  }
+
+  function onFetchSuccess(record) {
+    if (record?.items?.length > 0) {
+      expandRows([record.items[0].id]);
+    }
+  }
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-org";

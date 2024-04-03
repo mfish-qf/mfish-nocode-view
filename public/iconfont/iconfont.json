@@ -1,0 +1,16 @@
+{
+  "id": "4492753",
+  "name": "mfish-test",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-mfish-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "29701805",
+      "name": "显示",
+      "font_class": "xianshi",
+      "unicode": "e6f9",
+      "unicode_decimal": 59129
+    }
+  ]
+}

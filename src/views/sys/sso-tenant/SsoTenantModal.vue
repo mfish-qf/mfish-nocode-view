@@ -36,17 +36,17 @@
       </template>
       <template #userSearch>
         <a-select
-          v-model:value="userId"
+          v-model:value="accountList.userId"
           show-search
           allowClear
           placeholder="检索帐号"
           :filter-option="false"
-          :not-found-content="fetching ? undefined : null"
-          :options="userList"
+          :not-found-content="accountList.fetching ? undefined : null"
+          :options="accountList.userList"
           @search="fetchUser"
           @change="changeUser"
         >
-          <template v-if="fetching" #notFoundContent>
+          <template v-if="accountList.fetching" #notFoundContent>
             <Spin size="small" />
           </template>
         </a-select>
@@ -54,8 +54,8 @@
     </BasicForm>
   </BasicModal>
 </template>
-<script lang="ts">
-  import { computed, reactive, ref, toRefs, unref } from "vue";
+<script lang="ts" setup>
+  import { computed, reactive, ref, unref } from "vue";
   import { BasicForm, useForm } from "/@/components/general/Form";
   import { Modal, Select as ASelect, Spin, Upload, UploadProps } from "ant-design-vue";
   import { ssoTenantFormSchema } from "./ssoTenant.data";
@@ -70,210 +70,186 @@
   import { getUserById, getUserList } from "/@/api/sys/User";
   import { getAllRoleList } from "/@/api/sys/Role";
 
-  export default {
-    name: "SsoTenantModal",
-    components: { Icon, BasicModal, BasicForm, Upload, Modal, ASelect, Spin },
-    emits: ["success", "register"],
-    setup(_, { emit }) {
-      const isUpdate = ref(true);
-      let source = 0;
-      const [registerForm, { resetFields, setFieldsValue, validate, updateSchema }] = useForm({
-        name: "model_form_item",
-        labelWidth: 100,
-        baseColProps: { span: 12 },
-        schemas: ssoTenantFormSchema,
-        showActionButtonGroup: false,
-        autoSubmitOnEnter: true
+  const emit = defineEmits(["success", "register"]);
+  const isUpdate = ref(true);
+  let source = 0;
+  const [registerForm, { resetFields, setFieldsValue, validate, updateSchema }] = useForm({
+    name: "model_form_item",
+    labelWidth: 100,
+    baseColProps: { span: 12 },
+    schemas: ssoTenantFormSchema,
+    showActionButtonGroup: false,
+    autoSubmitOnEnter: true
+  });
+  const logoList = ref<UploadProps["fileList"]>([]);
+  const showSave = ref<boolean>(true);
+  const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
+    resetFields().then();
+    logoList.value = [];
+    showSave.value = true;
+    if (data.record?.userId) {
+      accountList.userId = data.record.userId;
+      getUserById(data.record.userId).then((res) => {
+        accountList.userList = [{ label: res.account, value: res.id }];
       });
-      const logoList = ref<UploadProps["fileList"]>([]);
-      const showSave = ref<boolean>(true);
-      const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
-        resetFields().then();
-        logoList.value = [];
-        showSave.value = true;
-        if (data.record?.userId) {
-          accountList.userId = data.record.userId;
-          getUserById(data.record.userId).then((res) => {
-            accountList.userList = [{ label: res.account, value: res.id }];
-          });
-        } else {
-          accountList.userId = "";
-          accountList.userList = [];
-        }
-        setModalProps({ confirmLoading: false, width: "800px" });
-        isUpdate.value = !!data?.isUpdate;
-        if (unref(isUpdate)) {
-          const logo = data.record.logo;
-          if (logo) {
-            getSysFileByKey(logo).then((res) => {
-              if (res) {
-                logoList.value = [
-                  {
-                    uid: res.fileKey,
-                    name: res.fileName,
-                    status: "done",
-                    url: imageUrl(getLocalFileUrl(logo))
-                  }
-                ];
+    } else {
+      accountList.userId = "";
+      accountList.userList = [];
+    }
+    setModalProps({ confirmLoading: false, width: "800px" });
+    isUpdate.value = !!data?.isUpdate;
+    if (unref(isUpdate)) {
+      const logo = data.record.logo;
+      if (logo) {
+        getSysFileByKey(logo).then((res) => {
+          if (res) {
+            logoList.value = [
+              {
+                uid: res.fileKey,
+                name: res.fileName,
+                status: "done",
+                url: imageUrl(getLocalFileUrl(logo))
               }
-            });
+            ];
           }
-          //来源1 表示自己修改租户信息，不允许修改用户
-          if (data?.source === 1) {
-            source = 1;
-            updateSchema([
-              {
-                field: "userId",
-                show: false
-              },
-              {
-                field: "roleIds",
-                show: false
-              },
-              {
-                field: "tenantType",
-                dynamicDisabled: true
-              }
-            ]).then();
-          }
-          setFieldsValue({
-            ...data.record
-          }).then();
-          if (data?.disabled === 1) {
-            showSave.value = false;
-          }
-        }
-        //来源1 表示自己修改租户信息，不允许修改角色信息
-        if (data?.source !== 1) {
-          initRoles().then();
-        }
-      });
-
-      async function initRoles() {
-        let roles = await getAllRoleList({ tenantId: "1" });
-        const options = roles.reduce((prev, next: Recordable) => {
-          if (next) {
-            if (next["id"] !== "1") {
-              prev.push({
-                label: next["roleName"],
-                value: next["id"]
-              });
-            }
-          }
-          return prev;
-        }, [] as any);
+        });
+      }
+      //来源1 表示自己修改租户信息，不允许修改用户
+      if (data?.source === 1) {
+        source = 1;
         updateSchema([
           {
+            field: "userId",
+            show: false
+          },
+          {
             field: "roleIds",
-            componentProps: { options, optionFilterProp: "label" }
+            show: false
+          },
+          {
+            field: "tenantType",
+            dynamicDisabled: true
           }
         ]).then();
       }
-      const getTitle = computed(() => (!unref(isUpdate) ? "新增租户信息" : "编辑租户信息"));
-
-      async function handleSubmit() {
-        let values = await validate();
-        setModalProps({ confirmLoading: true });
-        if (unref(isUpdate)) {
-          if (source === 1) {
-            saveSsoTenant(updateMeTenant, values);
-          } else {
-            saveSsoTenant(updateSsoTenant, values);
-          }
-        } else {
-          saveSsoTenant(insertSsoTenant, values);
-        }
+      setFieldsValue({
+        ...data.record
+      }).then();
+      if (data?.disabled === 1) {
+        showSave.value = false;
       }
-
-      function changeUser(id) {
-        if (!id) {
-          id = "";
-        }
-        setFieldsValue({ userId: id }).then();
-      }
-
-      function saveSsoTenant(save, values) {
-        if (logoList.value && logoList.value.length > 0) {
-          if (logoList.value[0].response) {
-            values.logo = (logoList.value[0].response as SysFile).fileKey;
-          }
-        } else {
-          values.logo = "";
-        }
-        save(values)
-          .then(() => {
-            emit("success");
-            closeModal();
-          })
-          .finally(() => {
-            setModalProps({ confirmLoading: false });
-          });
-      }
-
-      function uploadLogo(e) {
-        uploadApi({ file: e.file }, (_) => {})
-          .then((res) => {
-            e.onSuccess(res, e);
-          })
-          .catch((err) => {
-            // 调用实例的失败方法通知组件该文件上传失败
-            e.onError(err);
-          });
-      }
-
-      const previewVisible = ref(false);
-      const previewImage = ref("");
-      const previewTitle = ref("");
-
-      const handlePreview = async (file) => {
-        if (!file.url && !file.preview) {
-          file.preview = (await getBase64WithFile(file.originFileObj))?.result as string;
-        }
-        previewImage.value = file.url || file.preview;
-        previewVisible.value = true;
-        previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf("/") + 1);
-      };
-
-      const handleCancel = () => {
-        previewVisible.value = false;
-        previewTitle.value = "";
-      };
-
-      const accountList = reactive({
-        userList: [] as { label: string; value: string }[],
-        userId: "",
-        fetching: false
-      });
-
-      const fetchUser = debounce((value) => {
-        accountList.userList = [];
-        accountList.fetching = true;
-        getUserList({ account: value, pageNum: 1, pageSize: 20 }).then((res) => {
-          accountList.userList = res.list.map((user) => ({
-            label: user.account,
-            value: user.id
-          }));
-          accountList.fetching = false;
-        });
-      }, 300);
-
-      return {
-        registerModal,
-        registerForm,
-        getTitle,
-        handleSubmit,
-        logoList,
-        uploadLogo,
-        handlePreview,
-        previewVisible,
-        previewImage,
-        previewTitle,
-        handleCancel,
-        fetchUser,
-        showSave,
-        changeUser,
-        ...toRefs(accountList)
-      };
     }
+    //来源1 表示自己修改租户信息，不允许修改角色信息
+    if (data?.source !== 1) {
+      initRoles().then();
+    }
+  });
+
+  async function initRoles() {
+    let roles = await getAllRoleList({ tenantId: "1" });
+    const options = roles.reduce((prev, next: Recordable) => {
+      if (next) {
+        if (next["id"] !== "1") {
+          prev.push({
+            label: next["roleName"],
+            value: next["id"]
+          });
+        }
+      }
+      return prev;
+    }, [] as any);
+    updateSchema([
+      {
+        field: "roleIds",
+        componentProps: { options, optionFilterProp: "label" }
+      }
+    ]).then();
+  }
+  const getTitle = computed(() => (!unref(isUpdate) ? "新增租户信息" : "编辑租户信息"));
+
+  async function handleSubmit() {
+    let values = await validate();
+    setModalProps({ confirmLoading: true });
+    if (unref(isUpdate)) {
+      if (source === 1) {
+        saveSsoTenant(updateMeTenant, values);
+      } else {
+        saveSsoTenant(updateSsoTenant, values);
+      }
+    } else {
+      saveSsoTenant(insertSsoTenant, values);
+    }
+  }
+
+  function changeUser(id) {
+    if (!id) {
+      id = "";
+    }
+    setFieldsValue({ userId: id }).then();
+  }
+
+  function saveSsoTenant(save, values) {
+    if (logoList.value && logoList.value.length > 0) {
+      if (logoList.value[0].response) {
+        values.logo = (logoList.value[0].response as SysFile).fileKey;
+      }
+    } else {
+      values.logo = "";
+    }
+    save(values)
+      .then(() => {
+        emit("success");
+        closeModal();
+      })
+      .finally(() => {
+        setModalProps({ confirmLoading: false });
+      });
+  }
+
+  function uploadLogo(e) {
+    uploadApi({ file: e.file }, (_) => {})
+      .then((res) => {
+        e.onSuccess(res, e);
+      })
+      .catch((err) => {
+        // 调用实例的失败方法通知组件该文件上传失败
+        e.onError(err);
+      });
+  }
+
+  const previewVisible = ref(false);
+  const previewImage = ref("");
+  const previewTitle = ref("");
+
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = (await getBase64WithFile(file.originFileObj))?.result as string;
+    }
+    previewImage.value = file.url || file.preview;
+    previewVisible.value = true;
+    previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf("/") + 1);
   };
+
+  const handleCancel = () => {
+    previewVisible.value = false;
+    previewTitle.value = "";
+  };
+
+  const accountList = reactive({
+    userList: [] as { label: string; value: string }[],
+    userId: "",
+    fetching: false
+  });
+
+  const fetchUser = debounce((value) => {
+    accountList.userList = [];
+    accountList.fetching = true;
+    getUserList({ account: value, pageNum: 1, pageSize: 20 }).then((res) => {
+      accountList.userList = res.list.map((user) => ({
+        label: user.account,
+        value: user.id
+      }));
+      accountList.fetching = false;
+    });
+  }, 300);
 </script>

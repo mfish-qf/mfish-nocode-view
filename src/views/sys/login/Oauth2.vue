@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { onBeforeMount } from "vue";
   import { oauth2Config } from "/@/settings/LoginSetting";
   import { useUserStore } from "/@/store/modules/User";
@@ -24,58 +24,49 @@
   import { useRouter, useRoute } from "vue-router";
   import { useGlobSetting } from "/@/hooks/setting";
 
-  export default {
-    name: "Oauth2",
-    setup() {
-      const userStore = useUserStore();
-      const { notification } = useMessage();
-      const { t } = useI18n();
-      const { title } = useGlobSetting();
-      const route = useRoute();
-      const code = route.query.code as string;
-      const routeRedirect = route.query.redirect as string;
-      const router = useRouter();
-      onBeforeMount(() => {
-        if (code) {
-          handleLogin();
-        } else {
-          router.push("/login");
-        }
-      });
-
-      function handleLogin() {
-        let redirectUri = oauth2Config.redirect_uri;
-        if (routeRedirect) {
-          redirectUri += `?redirect=${routeRedirect}`;
-        }
-        userStore
-          .login({
-            client_id: oauth2Config.client_id,
-            client_secret: oauth2Config.client_secret,
-            grant_type: "authorization_code",
-            redirect_uri: redirectUri,
-            code: code,
-            route_redirect: routeRedirect,
-            mode: "modal"
-          })
-          .then((userInfo) => {
-            if (userInfo) {
-              notification.success({
-                message: t("sys.login.loginSuccessTitle"),
-                description: `${t("sys.login.loginSuccessDesc")}: ${userInfo?.nickname || userInfo?.account}`,
-                duration: 3
-              });
-            }
-          })
-          .catch(() => {
-            //token获取失败，跳转应急登录页面登录
-            router.push("/error-login");
-          });
-      }
-
-      return {
-        title
-      };
+  const userStore = useUserStore();
+  const { notification } = useMessage();
+  const { t } = useI18n();
+  const { title } = useGlobSetting();
+  const route = useRoute();
+  const code = route.query.code as string;
+  const routeRedirect = route.query.redirect as string;
+  const router = useRouter();
+  onBeforeMount(() => {
+    if (code) {
+      handleLogin();
+    } else {
+      router.push("/login");
     }
-  };
+  });
+
+  function handleLogin() {
+    let redirectUri = oauth2Config.redirect_uri;
+    if (routeRedirect) {
+      redirectUri += `?redirect=${routeRedirect}`;
+    }
+    userStore
+      .login({
+        client_id: oauth2Config.client_id,
+        client_secret: oauth2Config.client_secret,
+        grant_type: "authorization_code",
+        redirect_uri: redirectUri,
+        code: code,
+        route_redirect: routeRedirect,
+        mode: "modal"
+      })
+      .then((userInfo) => {
+        if (userInfo) {
+          notification.success({
+            message: t("sys.login.loginSuccessTitle"),
+            description: `${t("sys.login.loginSuccessDesc")}: ${userInfo?.nickname || userInfo?.account}`,
+            duration: 3
+          });
+        }
+      })
+      .catch(() => {
+        //token获取失败，跳转应急登录页面登录
+        router.push("/error-login");
+      });
+  }
 </script>

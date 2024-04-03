@@ -46,80 +46,64 @@
     <CodeQueryModal @register="registerQueryModal" />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
   import { deleteCodeBuild, downloadCode, getCodeBuildList } from "/@/api/sys/CodeBuild";
   import { useModal } from "/@/components/general/Modal";
   import CodeBuildModal from "./CodeBuildModal.vue";
   import { columns, searchFormSchema } from "./codeBuild.data";
-  import { Button } from "ant-design-vue";
+  import { Button as AButton } from "ant-design-vue";
   import CodeQueryModal from "/@/views/sys/code-build/CodeQueryModal.vue";
   import { CodeBuild } from "/@/api/sys/model/CodeBuildModel";
+  defineOptions({ name: "CodeBuildManagement" });
 
-  export default {
-    name: "CodeBuildManagement",
-    components: { CodeQueryModal, BasicTable, CodeBuildModal, TableAction, Button },
-    setup() {
-      const [registerModal, { openModal }] = useModal();
-      const [registerQueryModal, { openModal: openQueryModal }] = useModal();
-      const [registerTable, { reload }] = useTable({
-        title: "代码构建列表",
-        api: getCodeBuildList,
-        columns,
-        formConfig: {
-          name: "search_form_item",
-          labelWidth: 80,
-          schemas: searchFormSchema,
-          autoSubmitOnEnter: true
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        canResize: false,
-        actionColumn: {
-          width: 120,
-          title: "操作",
-          dataIndex: "action"
-        }
-      });
-
-      function handleCreate() {
-        openModal(true, {
-          isUpdate: false
-        });
-      }
-
-      function handleQuery(record: Recordable) {
-        openQueryModal(true, {
-          ...record
-        });
-      }
-
-      function handleDownload(record: CodeBuild) {
-        downloadCode(record).then();
-      }
-
-      function handleDelete(record: Recordable) {
-        deleteCodeBuild(record.id).then(() => {
-          handleSuccess();
-        });
-      }
-
-      function handleSuccess() {
-        reload();
-      }
-
-      return {
-        registerTable,
-        registerModal,
-        registerQueryModal,
-        handleCreate,
-        handleQuery,
-        handleDownload,
-        handleDelete,
-        handleSuccess
-      };
+  const [registerModal, { openModal }] = useModal();
+  const [registerQueryModal, { openModal: openQueryModal }] = useModal();
+  const [registerTable, { reload }] = useTable({
+    title: "代码构建列表",
+    api: getCodeBuildList,
+    columns,
+    formConfig: {
+      name: "search_form_item",
+      labelWidth: 80,
+      schemas: searchFormSchema,
+      autoSubmitOnEnter: true
+    },
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    canResize: false,
+    actionColumn: {
+      width: 120,
+      title: "操作",
+      dataIndex: "action"
     }
-  };
+  });
+
+  function handleCreate() {
+    openModal(true, {
+      isUpdate: false
+    });
+  }
+
+  function handleQuery(record: Recordable) {
+    openQueryModal(true, {
+      ...record
+    });
+  }
+
+  function handleDownload(record: CodeBuild) {
+    downloadCode(record).then();
+  }
+
+  function handleDelete(record: Recordable) {
+    deleteCodeBuild(record.id).then(() => {
+      handleSuccess();
+    });
+  }
+
+  function handleSuccess() {
+    reload();
+  }
 </script>
