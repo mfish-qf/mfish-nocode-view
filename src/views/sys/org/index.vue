@@ -51,7 +51,7 @@
       default: null
     }
   });
-  const { hasPermission, hasTenant } = usePermission();
+  const { hasPermission } = usePermission();
   const [registerModal, { openModal }] = useModal();
   const { prefixCls } = useDesign("org");
   const api = ref();

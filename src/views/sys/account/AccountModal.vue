@@ -87,11 +87,17 @@
         roles = await getAllRoleList({ orgIds: props.orgId });
         orgRoles = await getOrgRoles(props.orgId);
         setRole(roles, [], orgRoles);
-        valueChange("orgIds", [props.orgId]);
+        valueChange("orgIds", [props.orgId]).then();
       }
     }
     let treeData: TreeItem[];
     if (props.source === 1) {
+      updateSchema([
+        {
+          field: "roleIds",
+          dynamicDisabled: true
+        }
+      ]).then();
       treeData = (await getTenantOrgTree()) as unknown as TreeItem[];
     } else {
       treeData = (await getOrgTree()) as unknown as TreeItem[];

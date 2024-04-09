@@ -34,6 +34,7 @@
   const [registerModal, { closeModal }] = useModalInner((data) => {
     resetFields().then();
     setFieldsValue(data).then();
+    //是超户，不需要
     if (hasRole(SUPER_ROLE) && "1" !== data.userId) {
       updateSchema([
         {
