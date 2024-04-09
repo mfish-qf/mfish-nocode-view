@@ -2,10 +2,7 @@
   <div>
     <BasicTable @register="registerTable" @fetch-success="onFetchSuccess" :class="$props.source === 1 ? prefixCls : ''">
       <template #toolbar>
-        <a-button
-          type="primary"
-          @click="handleCreate"
-          v-if="$props.source === 1 ? hasTenant() : hasPermission('sys:org:insert')"
+        <a-button type="primary" @click="handleCreate" v-auth="['sys:org:insert', 'sys:tenantOrg:insert']"
           >新增组织
         </a-button>
       </template>
@@ -16,7 +13,7 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                ifShow: $props.source === 1 ? hasTenant() : hasPermission('sys:org:update')
+                auth: ['sys:org:update', 'sys:tenantOrg:update']
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -26,7 +23,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
-                ifShow: !record?.tenantId && ($props.source === 1 ? hasTenant() : hasPermission('sys:org:delete'))
+                ifShow: !record?.tenantId && hasPermission(['sys:org:delete', 'sys:tenantOrg:delete'])
               }
             ]"
           />
@@ -54,7 +51,7 @@
       default: null
     }
   });
-  const { hasPermission, hasTenant } = usePermission();
+  const { hasPermission } = usePermission();
   const [registerModal, { openModal }] = useModal();
   const { prefixCls } = useDesign("org");
   const api = ref();

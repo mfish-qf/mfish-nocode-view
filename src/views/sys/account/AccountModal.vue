@@ -13,12 +13,17 @@
   import { getAllRoleList } from "/@/api/sys/Role";
   import { RoleInfo } from "/@/api/sys/model/UserModel";
   import { SsoRole } from "/@/api/sys/model/RoleModel";
+  import { getTenantOrgTree } from "/@/api/sys/SsoTenant";
+  import { TreeItem } from "/@/components/general/Tree";
   defineOptions({ name: "AccountModal" });
 
-  defineProps({
+  const props = defineProps({
     source: {
       type: Number,
       default: null
+    },
+    orgId: {
+      type: String
     }
   });
   const emit = defineEmits(["success", "register"]);
@@ -38,6 +43,7 @@
     isUpdate.value = !!data?.isUpdate;
     curRow = data.record ? data.record : {};
     let orgRoles: RoleInfo[] = [];
+    let roles: SsoRole[] = [];
     if (unref(isUpdate)) {
       setFieldsValue({
         ...data.record
@@ -52,10 +58,10 @@
           dynamicDisabled: true
         }
       ]).then();
-      let roles: SsoRole[] = [];
       if (data.record.orgIds) {
-        roles = await getAllRoleList({ orgIds: data.record.orgIds.join(",") });
-        orgRoles = await getOrgRoles(data.record.orgIds);
+        const orgIds = data.record.orgIds.join(",");
+        roles = await getAllRoleList({ orgIds });
+        orgRoles = await getOrgRoles(orgIds);
       }
       const userRoles = await getUserRoles({ userId: data.record.id });
       setRole(roles, userRoles, orgRoles);
@@ -74,8 +80,28 @@
           componentProps: { options: [], optionFilterProp: "label" }
         }
       ]).then();
+      if (props.orgId) {
+        setFieldsValue({
+          orgIds: [props.orgId]
+        }).then();
+        roles = await getAllRoleList({ orgIds: props.orgId });
+        orgRoles = await getOrgRoles(props.orgId);
+        setRole(roles, [], orgRoles);
+        valueChange("orgIds", [props.orgId]).then();
+      }
     }
-    const treeData = await getOrgTree();
+    let treeData: TreeItem[];
+    if (props.source === 1) {
+      updateSchema([
+        {
+          field: "roleIds",
+          dynamicDisabled: true
+        }
+      ]).then();
+      treeData = (await getTenantOrgTree()) as unknown as TreeItem[];
+    } else {
+      treeData = (await getOrgTree()) as unknown as TreeItem[];
+    }
     updateSchema({
       field: "orgIds",
       componentProps: { treeData }
@@ -133,19 +159,21 @@
 
   async function handleSubmit() {
     const values = await validate();
-    values.roleIds = values.roleIds.filter((item) => {
-      if (curRow?.userRoles && curRow?.userRoles.length > 0) {
-        for (const role of curRow.userRoles) {
-          if (role.source !== 1) {
-            continue;
+    values.roleIds = values.roleIds
+      ? values.roleIds.filter((item) => {
+          if (curRow?.userRoles && curRow?.userRoles.length > 0) {
+            for (const role of curRow.userRoles) {
+              if (role.source !== 1) {
+                continue;
+              }
+              if (item === role.id) {
+                return false;
+              }
+            }
           }
-          if (item === role.id) {
-            return false;
-          }
-        }
-      }
-      return true;
-    });
+          return true;
+        })
+      : undefined;
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {
       saveAccount(updateUser, values);
@@ -159,13 +187,15 @@
       return;
     }
     let roles: SsoRole[];
+    let orgRoles: RoleInfo[];
     if (value && value.length > 0) {
       roles = await getAllRoleList({ orgIds: value.join(",") });
+      //获取组织已设置的角色
+      orgRoles = await getOrgRoles(value);
     } else {
       roles = [];
+      orgRoles = [];
     }
-    //获取组织已设置的角色
-    const orgRoles = await getOrgRoles(value);
     let userRoles: RoleInfo[] = [];
     //移除属于组织的角色
     if (curRow?.userRoles && curRow?.userRoles.length > 0) {

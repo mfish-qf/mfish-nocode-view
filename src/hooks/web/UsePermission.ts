@@ -99,15 +99,38 @@ export function usePermission() {
   /**
    * 是否租户管理员
    */
-  function isSuperTenant() {
+  function userIsSuperTenant() {
     return userStore.getTenantId === "1";
   }
 
   /**
    * 是否超级管理员
    */
-  function isSuperAdmin() {
+  function isSuperAdmin(userId: string) {
+    return userId === "1";
+  }
+
+  /**
+   * 判断当前用户是否超户
+   */
+  function userIsSuperAdmin() {
     return userStore.getUserInfo?.id === "1";
+  }
+
+  /**
+   * 是否超户角色
+   * @param roleId 角色id
+   */
+  function isSuperRole(roleId: string) {
+    return roleId === "1";
+  }
+
+  /**
+   * 是否超户组织
+   * @param orgId 组织id
+   */
+  function isSuperOrg(orgId: string) {
+    return orgId === "1";
   }
 
   return {
@@ -118,7 +141,10 @@ export function usePermission() {
     ALL_PERMISSION,
     SUPER_ROLE,
     isTenant,
-    isSuperTenant,
-    isSuperAdmin
+    userIsSuperTenant,
+    userIsSuperAdmin,
+    isSuperAdmin,
+    isSuperRole,
+    isSuperOrg
   };
 }

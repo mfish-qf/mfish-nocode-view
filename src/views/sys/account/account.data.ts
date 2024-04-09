@@ -23,19 +23,9 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "组织",
-    dataIndex: "orgName",
-    width: 120
-  },
-  {
     title: "邮箱",
     dataIndex: "email",
     width: 180
-  },
-  {
-    title: "座机",
-    dataIndex: "telephone",
-    width: 120
   },
   {
     title: "性别",
@@ -48,11 +38,6 @@ export const columns: BasicColumn[] = [
       const text = enable ? "男" : "女";
       return h(Tag, { color: color }, () => text);
     }
-  },
-  {
-    title: "生日",
-    dataIndex: "birthday",
-    width: 120
   },
   {
     title: "状态",
@@ -131,7 +116,8 @@ export const accountFormSchema: FormSchema[] = [
   {
     field: "password",
     label: "密码",
-    component: "InputPassword"
+    component: "InputPassword",
+    required: true
   },
   {
     field: "nickname",
@@ -153,7 +139,8 @@ export const accountFormSchema: FormSchema[] = [
       getPopupContainer: () => document.body
     },
     colProps: { span: 24 },
-    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["id"] === "1",
+    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
+      usePermission().isSuperAdmin(renderCallbackParams.values["id"]),
     required: true
   },
   {
@@ -165,7 +152,8 @@ export const accountFormSchema: FormSchema[] = [
       mode: "multiple"
     },
     colProps: { span: 24 },
-    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["id"] === "1"
+    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
+      usePermission().isSuperAdmin(renderCallbackParams.values["id"])
   },
   {
     field: "phone",
@@ -215,7 +203,8 @@ export const accountFormSchema: FormSchema[] = [
         { label: "停用", value: 1 }
       ]
     },
-    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["id"] === "1",
+    dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
+      usePermission().isSuperAdmin(renderCallbackParams.values["id"]),
     required: true
   },
   {

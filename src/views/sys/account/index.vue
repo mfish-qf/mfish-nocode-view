@@ -8,12 +8,10 @@
       :class="$props.source === 1 ? prefixCls : ''"
     >
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-if="$props.source !== 1 && hasPermission('sys:account:insert')"
-          >新增账号
+        <a-button type="primary" @click="handleCreate" v-auth="['sys:account:insert', 'sys:tenantUser:insert']"
+          >新建账号
         </a-button>
-        <a-button type="primary" @click="handleSelectAccount" v-if="$props.source === 1 && hasTenant()"
-          >添加成员
-        </a-button>
+        <a-button type="primary" @click="handleSelectAccount" v-auth="'sys:tenantUser:insert'">添加成员 </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -54,15 +52,21 @@
                   placement: 'left',
                   confirm: handleRemoveUser.bind(null, record)
                 },
-                ifShow: $props.source === 1 && hasTenant()
+                auth: 'sys:tenantUser:delete',
+                ifShow: $props.source === 1
               }
             ]"
           />
         </template>
       </template>
     </BasicTable>
-    <AccountModal @register="registerModal" @success="handleSuccess" :source="$props.source" />
-    <AccountSelectModal @register="registerSelectModal" @success="handleSuccess" :org-id="searchInfo.orgId" />
+    <AccountModal
+      @register="registerModal"
+      @success="handleSuccess"
+      :source="$props.source"
+      :org-id="searchInfo.orgId"
+    />
+    <AccountSelectModal @register="registerSelectModal" @success="handleSuccess" />
     <PasswordModal @register="registerPwdModal" />
   </PageWrapper>
 </template>
@@ -89,7 +93,7 @@
       default: null
     }
   });
-  const { hasPermission, hasRole, SUPER_ROLE, hasTenant } = usePermission();
+  const { hasRole, SUPER_ROLE } = usePermission();
   const [registerModal, { openModal }] = useModal();
   const [registerSelectModal, { openModal: openSelectModal }] = useModal();
   const [registerPwdModal, { openModal: openPwdModal }] = useModal();
@@ -121,7 +125,7 @@
     showIndexColumn: false,
     resizeHeightOffset: props.source === 1 ? 18 : 0,
     actionColumn: {
-      width: 120,
+      width: props.source === 1 ? 80 : 120,
       title: "操作",
       dataIndex: "action"
     }
@@ -151,7 +155,7 @@
   }
 
   function handleSelectAccount() {
-    openSelectModal(true);
+    openSelectModal(true, { orgId: searchInfo.orgId });
   }
 
   function handleSuccess() {
