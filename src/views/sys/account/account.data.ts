@@ -23,19 +23,9 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "组织",
-    dataIndex: "orgName",
-    width: 120
-  },
-  {
     title: "邮箱",
     dataIndex: "email",
     width: 180
-  },
-  {
-    title: "座机",
-    dataIndex: "telephone",
-    width: 120
   },
   {
     title: "性别",
@@ -48,11 +38,6 @@ export const columns: BasicColumn[] = [
       const text = enable ? "男" : "女";
       return h(Tag, { color: color }, () => text);
     }
-  },
-  {
-    title: "生日",
-    dataIndex: "birthday",
-    width: 120
   },
   {
     title: "状态",

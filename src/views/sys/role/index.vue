@@ -2,10 +2,7 @@
   <div>
     <BasicTable @register="registerTable" :class="$props.source === 1 ? prefixCls : ''">
       <template #toolbar>
-        <a-button
-          type="primary"
-          @click="handleCreate"
-          v-if="$props.source === 1 ? hasTenant() : hasPermission('sys:role:insert')"
+        <a-button type="primary" @click="handleCreate" v-auth="['sys:role:insert', 'sys:tenantRole:insert']"
           >新增角色
         </a-button>
       </template>
@@ -16,7 +13,7 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                ifShow: $props.source === 1 ? hasTenant() : hasPermission('sys:role:update')
+                auth: ['sys:role:update', 'sys:tenantRole:update']
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -26,7 +23,7 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
-                ifShow: record.id !== '1' && ($props.source === 1 ? hasTenant() : hasPermission('sys:role:delete'))
+                ifShow: record.id !== '1' && hasPermission(['sys:role:delete', 'sys:tenantRole:delete'])
               }
             ]"
           />
@@ -66,7 +63,7 @@
       default: null
     }
   });
-  const { hasPermission, hasTenant } = usePermission();
+  const { hasPermission } = usePermission();
   const [registerModal, { openModal }] = useModal();
   const { prefixCls } = useDesign("role");
   const api = ref();
@@ -111,8 +108,7 @@
     });
   }
   const statusLoading = ref(false);
-  const statusDisabled = (record) =>
-    record.id === "1" || (props.source === 1 ? !hasTenant() : !hasPermission("sys:role:update"));
+  const statusDisabled = (record) => record.id === "1" || !hasPermission(["sys:role:update", "sys:tenantRole:update"]);
 
   function handleStatus(record: SsoRole) {
     statusLoading.value = true;

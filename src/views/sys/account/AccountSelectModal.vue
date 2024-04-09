@@ -28,33 +28,45 @@
 </template>
 <script lang="ts" setup>
   import { Spin as ASpin, Select as ASelect } from "ant-design-vue";
-  import { BasicForm, useForm } from "/@/components/general/Form";
+  import { BasicForm, RenderCallbackParams, useForm } from "/@/components/general/Form";
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { bindUserOrg } from "/@/api/sys/SsoTenant";
+  import { bindUserOrg, getTenantOrgTree } from "/@/api/sys/SsoTenant";
   import { reactive } from "vue";
   import { debounce } from "lodash-es";
-  import { useMessage } from "/@/hooks/web/UseMessage";
-  import { getUserList } from "/@/api/sys/User";
-  defineOptions({ name: "AccountSelectModal" });
+  import { searchUserList } from "/@/api/sys/User";
+  import { TreeItem } from "/@/components/general/Tree";
 
   const emit = defineEmits(["success", "register"]);
-  const props = defineProps({
-    orgId: {
-      type: String,
-      default: null
-    }
-  });
-  const [registerForm, { setFieldsValue, validate }] = useForm({
+  const [registerForm, { setFieldsValue, validate, updateSchema, resetFields }] = useForm({
     name: "model_form_item",
     baseColProps: { span: 24 },
     schemas: [
       {
         field: "userId",
-        label: "",
+        label: "成员",
         component: "Input",
-        slot: "userSearch"
+        slot: "userSearch",
+        required: true
+      },
+      {
+        field: "orgId",
+        label: "所属部门",
+        component: "TreeSelect",
+        componentProps: {
+          maxTagCount: 8,
+          fieldNames: {
+            label: "orgName",
+            key: "id",
+            value: "id"
+          },
+          getPopupContainer: () => document.body
+        },
+        colProps: { span: 24 },
+        dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["id"] === "1",
+        required: true
       }
     ],
+    labelWidth: 100,
     showActionButtonGroup: false,
     autoSubmitOnEnter: true
   });
@@ -63,32 +75,42 @@
     userId: undefined,
     fetching: false
   });
-  const { createMessage } = useMessage();
-  const [registerModal, { closeModal }] = useModalInner();
+  const [registerModal, { closeModal }] = useModalInner(async (data) => {
+    resetFields().then();
+    accountList.userId = undefined;
+    const treeData: TreeItem[] = (await getTenantOrgTree()) as unknown as TreeItem[];
+    updateSchema({
+      field: "orgId",
+      componentProps: { treeData }
+    }).then();
+    if (data.orgId) {
+      setFieldsValue({
+        orgId: data.orgId
+      }).then();
+    }
+  });
   const fetchUser = debounce((value) => {
     accountList.userList = [];
     accountList.fetching = true;
-    getUserList({ account: value, pageNum: 1, pageSize: 20 }).then((res) => {
-      accountList.userList = res.list.map((user) => ({
-        label: user.account,
+    searchUserList(value).then((res) => {
+      accountList.userList = res.map((user) => ({
+        label: user.account + (user.nickname ? "-" + user.nickname : ""),
         value: user.id
       }));
       accountList.fetching = false;
     });
   }, 300);
+
   function changeUser(id) {
     if (!id) {
       id = "";
     }
     setFieldsValue({ userId: id }).then();
   }
+
   async function handleSubmit() {
     let values = await validate();
-    if (props.orgId == undefined || props.orgId === "") {
-      createMessage.error("错误:请先选择用户所属组织");
-      return;
-    }
-    bindUserOrg({ orgId: props.orgId, userId: values.userId }).then(() => {
+    bindUserOrg(values).then(() => {
       emit("success");
       closeModal();
     });

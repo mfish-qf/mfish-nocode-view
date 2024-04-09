@@ -20,6 +20,7 @@ enum Api {
   Logout = "/oauth2/user/revoke",
   GetUserInfo = "/oauth2/user/info",
   User = "/oauth2/user",
+  UserSearch = "/oauth2/user/search",
   Me = "/oauth2/user/me",
   IsAccountExist = "/oauth2/user/exist",
   Pwd = "/oauth2/user/pwd",
@@ -104,6 +105,10 @@ export const isAccountExist = (account: string) => {
 
 export const getUserList = (params?: ReqSsoUser) => {
   return defHttp.get<SsoUserPageModel>({ url: Api.User, params });
+};
+
+export const searchUserList = (condition?: string) => {
+  return defHttp.get<SsoUser[]>({ url: Api.UserSearch, params: { condition: condition } });
 };
 
 export function insertUser(params: SsoUser) {
