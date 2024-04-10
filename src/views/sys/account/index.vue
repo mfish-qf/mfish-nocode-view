@@ -8,10 +8,21 @@
       :class="$props.source === 1 ? prefixCls : ''"
     >
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-auth="['sys:account:insert', 'sys:tenantUser:insert']"
+        <a-button
+          type="primary"
+          @click="handleCreate"
+          v-if="
+            (source === 1 && hasPermission('sys:tenantUser:insert')) ||
+            (source !== 1 && hasPermission('sys:account:insert'))
+          "
           >新建账号
         </a-button>
-        <a-button type="primary" @click="handleSelectAccount" v-auth="'sys:tenantUser:insert'">添加成员 </a-button>
+        <a-button
+          type="primary"
+          @click="handleSelectAccount"
+          v-if="source === 1 && hasPermission('sys:tenantUser:insert')"
+          >添加成员
+        </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -22,7 +33,7 @@
                 tooltip: '编辑用户资料',
                 onClick: handleEdit.bind(null, record),
                 auth: 'sys:account:update',
-                ifShow: $props.source !== 1
+                ifShow: source !== 1
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -53,7 +64,7 @@
                   confirm: handleRemoveUser.bind(null, record)
                 },
                 auth: 'sys:tenantUser:delete',
-                ifShow: $props.source === 1
+                ifShow: source === 1
               }
             ]"
           />
@@ -93,7 +104,7 @@
       default: null
     }
   });
-  const { hasRole, SUPER_ROLE } = usePermission();
+  const { hasRole, SUPER_ROLE, hasPermission } = usePermission();
   const [registerModal, { openModal }] = useModal();
   const [registerSelectModal, { openModal: openSelectModal }] = useModal();
   const [registerPwdModal, { openModal: openPwdModal }] = useModal();

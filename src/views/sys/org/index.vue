@@ -2,7 +2,12 @@
   <div>
     <BasicTable @register="registerTable" @fetch-success="onFetchSuccess" :class="$props.source === 1 ? prefixCls : ''">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-auth="['sys:org:insert', 'sys:tenantOrg:insert']"
+        <a-button
+          type="primary"
+          @click="handleCreate"
+          v-if="
+            (source === 1 && hasPermission('sys:tenantOrg:insert')) || (source !== 1 && hasPermission('sys:org:insert'))
+          "
           >新增组织
         </a-button>
       </template>
@@ -13,7 +18,9 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                auth: ['sys:org:update', 'sys:tenantOrg:update']
+                ifShow:
+                  (source === 1 && hasPermission('sys:tenantOrg:update')) ||
+                  (source !== 1 && hasPermission('sys:org:update'))
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -23,7 +30,11 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
-                ifShow: !record?.tenantId && hasPermission(['sys:org:delete', 'sys:tenantOrg:delete'])
+                //最顶层租户组织不允许删除
+                ifShow:
+                  !record?.tenantId &&
+                  ((source === 1 && hasPermission('sys:tenantOrg:delete')) ||
+                    (source !== 1 && hasPermission('sys:org:delete')))
               }
             ]"
           />
