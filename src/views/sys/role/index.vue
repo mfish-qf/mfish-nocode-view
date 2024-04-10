@@ -2,7 +2,13 @@
   <div>
     <BasicTable @register="registerTable" :class="$props.source === 1 ? prefixCls : ''">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-auth="['sys:role:insert', 'sys:tenantRole:insert']"
+        <a-button
+          type="primary"
+          @click="handleCreate"
+          v-if="
+            (source === 1 && hasPermission('sys:tenantRole:insert')) ||
+            (source !== 1 && hasPermission('sys:role:insert'))
+          "
           >新增角色
         </a-button>
       </template>
@@ -13,7 +19,9 @@
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
-                auth: ['sys:role:update', 'sys:tenantRole:update']
+                ifShow:
+                  (source === 1 && hasPermission('sys:tenantRole:update')) ||
+                  (source !== 1 && hasPermission('sys:role:update'))
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -23,7 +31,10 @@
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
-                ifShow: record.id !== '1' && hasPermission(['sys:role:delete', 'sys:tenantRole:delete'])
+                ifShow:
+                  !isSuperRole(record.id) &&
+                  ((source === 1 && hasPermission('sys:tenantRole:delete')) ||
+                    (source !== 1 && hasPermission('sys:role:delete')))
               }
             ]"
           />
@@ -63,7 +74,7 @@
       default: null
     }
   });
-  const { hasPermission } = usePermission();
+  const { hasPermission, isSuperRole } = usePermission();
   const [registerModal, { openModal }] = useModal();
   const { prefixCls } = useDesign("role");
   const api = ref();
@@ -108,7 +119,12 @@
     });
   }
   const statusLoading = ref(false);
-  const statusDisabled = (record) => record.id === "1" || !hasPermission(["sys:role:update", "sys:tenantRole:update"]);
+  const statusDisabled = (record) =>
+    isSuperRole(record.id) ||
+    !(
+      (props.source === 1 && hasPermission("sys:tenantRole:update")) ||
+      (props.source !== 1 && hasPermission("sys:role:update"))
+    );
 
   function handleStatus(record: SsoRole) {
     statusLoading.value = true;
