@@ -13,7 +13,6 @@ import { deepMerge, setObjToUrlParams } from "/@/utils";
 import { useErrorLogStoreWithOut } from "/@/store/modules/ErrorLog";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { formatRequestDate, joinTimestamp, messageTips } from "./Helper";
-import { useUserStoreWithOut } from "/@/store/modules/User";
 import { AxiosRetry } from "/@/utils/http/axios/AxiosRetry";
 
 const globSetting = useGlobSetting();
@@ -42,8 +41,8 @@ const transform: AxiosTransform = {
       // 抛出请求异常
       throw new Error(t("sys.api.apiRequestFailed"));
     }
-    let { code, msg } = data;
-    const hasSuccess = data && code === ResultEnum.SUCCESS;
+    let { msg } = data;
+    const hasSuccess = data && data.code === ResultEnum.SUCCESS;
     if (hasSuccess) {
       if (msg === null || msg === undefined || msg === "") {
         msg = t("sys.api.operationSuccess");
@@ -53,16 +52,6 @@ const transform: AxiosTransform = {
         return data;
       }
       return data.data;
-    }
-    // 在此处根据自己项目的实际情况对不同的code执行不同的操作
-    // 如果不希望中断当前请求，请return数据，否则直接抛出异常即可
-    switch (code) {
-      case ResultEnum.TIMEOUT:
-        msg = t("sys.api.timeoutMessage");
-        const userStore = useUserStoreWithOut();
-        userStore.setToken(undefined);
-        userStore.logout().then();
-        break;
     }
     // errorMessageMode=‘modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
     // errorMessageMode='none' 一般是调用时明确表示不希望自动弹出错误提示

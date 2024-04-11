@@ -29,13 +29,12 @@ export function checkStatus(
       break;
     // 401: 认证失败返回401
     case 401:
-      userStore.setToken(undefined);
       errMessage = t("sys.api.errMsg401");
       if (stp === SessionTimeoutProcessingEnum.PAGE_COVERAGE) {
         userStore.setSessionTimeout(true);
         break;
       }
-      userStore.logout();
+      userStore.logout().then();
       break;
     case 403:
       errMessage = t("sys.api.errMsg403");
