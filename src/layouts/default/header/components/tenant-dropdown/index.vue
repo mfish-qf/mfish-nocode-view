@@ -57,7 +57,7 @@
         let userInfo = toRaw(userStore.getUserInfo);
         while (!userInfo) {
           userInfo = toRaw(userStore.getUserInfo);
-          await sleep(100);
+          await sleep(500);
         }
         tenants.value = userInfo.tenants;
         const tenant: TenantVo = tenants.value?.find((tenant) => tenant.id == userStore.getTenantId) as TenantVo;

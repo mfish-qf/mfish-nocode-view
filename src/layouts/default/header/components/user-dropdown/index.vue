@@ -80,7 +80,7 @@
         let userInfo = toRaw(userStore.getUserInfo);
         while (!userInfo) {
           userInfo = toRaw(userStore.getUserInfo);
-          await sleep(100);
+          await sleep(500);
         }
         getUserInfo.id = userInfo.id;
         getUserInfo.nickname = userInfo.nickname ? userInfo.nickname : userInfo.account;
