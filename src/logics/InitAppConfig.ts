@@ -18,7 +18,7 @@ import { sleep } from "/@/utils/Utils";
 export async function initAppConfigStore() {
   const userStore = useUserStoreWithOut();
   while (!userStore.getUserInfo) {
-    await sleep(500);
+    await sleep(300);
   }
   setAppConfigStore().then();
 }
