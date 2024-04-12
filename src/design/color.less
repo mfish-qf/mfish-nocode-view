@@ -12,11 +12,26 @@ html {
   --sider-dark-bg-color: #273352;
   --sider-dark-darken-bg-color: #273352;
   --sider-dark-lighten-bg-color: #273352;
+
+  --text-color: rgba(0 0 0 / 85%);
+  --border-color: #eee;
+  --component-background-color: #fff;
+  --app-content-background-color: #fafafa;
+  &[data-theme='dark'] {
+    --text-color: #c9d1d9;
+    --border-color: #303030;
+    --component-background-color: #151515;
+    --app-content-background-color: #1e1e1e;
+  }
 }
 
 @white: #fff;
 
 @content-bg: #f4f7f9;
+
+@border-color-base: var(--border-color);
+
+@component-background: var(--component-background-color);
 
 // :export {
 //   name: "less";
@@ -90,7 +105,12 @@ html {
 // =================================
 
 // Main text color
-@text-color-base: @text-color;
+@text-color-base: var(--text-color);
+
+// =================================
+// =======app content color=========
+// =================================
+@app-content-background: var(--app-content-background-color);
 
 // Label color
 @text-color-call-out: #606266;
