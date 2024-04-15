@@ -21,11 +21,10 @@ export function updateHeaderBgColor(color?: string) {
   const appStore = useAppStore();
   const darkMode = appStore.getDarkMode === ThemeEnum.DARK;
   if (!color) {
-    if (darkMode) {
-      color = "#151515";
-    } else {
-      color = appStore.getHeaderSetting.bgColor;
-    }
+    color = appStore.getHeaderSetting.bgColor;
+  }
+  if (darkMode) {
+    color = "#151515";
   }
   // bg color
   setCssVar(HEADER_BG_COLOR_VAR, color);
@@ -60,11 +59,10 @@ export function updateSidebarBgColor(color?: string) {
   const appStore = useAppStore();
   const darkMode = appStore.getDarkMode === ThemeEnum.DARK;
   if (!color) {
-    if (darkMode) {
-      color = "#212121";
-    } else {
-      color = appStore.getMenuSetting.bgColor;
-    }
+    color = appStore.getMenuSetting.bgColor;
+  }
+  if (darkMode) {
+    color = "#212121";
   }
   setCssVar(SIDER_DARK_BG_COLOR, color);
   setCssVar(SIDER_DARK_DARKEN_BG_COLOR, darken(color!, 6));

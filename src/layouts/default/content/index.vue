@@ -3,31 +3,18 @@
     <PageLayout />
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent } from "vue";
+<script lang="ts" setup>
   import PageLayout from "/@/layouts/page/index.vue";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
   import { useTransitionSetting } from "/@/hooks/setting/UseTransitionSetting";
   import { useContentViewHeight } from "./UseContentViewHeight";
+  defineOptions({ name: "LayoutContent" });
+  const { prefixCls } = useDesign("layout-content");
+  const { getOpenPageLoading } = useTransitionSetting();
+  const { getLayoutContentMode, getPageLoading } = useRootSetting();
 
-  export default defineComponent({
-    name: "LayoutContent",
-    components: { PageLayout },
-    setup() {
-      const { prefixCls } = useDesign("layout-content");
-      const { getOpenPageLoading } = useTransitionSetting();
-      const { getLayoutContentMode, getPageLoading } = useRootSetting();
-
-      useContentViewHeight();
-      return {
-        prefixCls,
-        getOpenPageLoading,
-        getLayoutContentMode,
-        getPageLoading
-      };
-    }
-  });
+  useContentViewHeight();
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-layout-content";
