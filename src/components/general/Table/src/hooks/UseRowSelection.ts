@@ -44,7 +44,7 @@ export function useRowSelection(propsRef: ComputedRef<BasicTableProps>, tableDat
           keys: getSelectRowKeys(),
           rows: getSelectRows()
         });
-      });
+      }).then();
     },
     { deep: true }
   );

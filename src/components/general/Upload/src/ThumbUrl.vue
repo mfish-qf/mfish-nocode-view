@@ -1,6 +1,6 @@
 <template>
   <span class="thumb">
-    <Image v-if="fileUrl" :src="fileUrl" :width="60" />
+    <a-image v-if="fileUrl" :src="fileUrl" :width="60" />
   </span>
 </template>
 <script lang="ts">
@@ -9,7 +9,7 @@
   import { Image } from "ant-design-vue";
 
   export default defineComponent({
-    components: { Image },
+    components: { AImage: Image },
     props: {
       fileUrl: propTypes.string.def(""),
       fileName: propTypes.string.def("")

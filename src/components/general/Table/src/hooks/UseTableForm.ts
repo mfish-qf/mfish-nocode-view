@@ -36,7 +36,7 @@ export function useTableForm(
     if (handleSearchInfoFn && isFunction(handleSearchInfoFn)) {
       info = handleSearchInfoFn(info) || info;
     }
-    fetch({ searchInfo: info, page: 1 });
+    fetch({ searchInfo: info, page: 1 }).then();
   }
 
   return {

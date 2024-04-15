@@ -48,7 +48,7 @@
   import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
   import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
   import { useGo } from "/@/hooks/web/UsePage";
-  import { setHeaderImg } from "/@/utils/FileUtils";
+  import { setHeaderImg } from "/@/utils/file/FileUtils";
   import { sleep } from "/@/utils/Utils";
 
   type MenuEvent = "logout" | "doc" | "lock" | "changePwd" | "userInfo";

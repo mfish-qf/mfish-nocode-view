@@ -1,5 +1,5 @@
 <template>
-  <Table
+  <a-table
     v-if="summaryFunc || summaryData"
     :showHeader="false"
     :bordered="false"
@@ -26,7 +26,7 @@
   const SUMMARY_INDEX_KEY = "_index";
   export default defineComponent({
     name: "BasicTableFooter",
-    components: { Table },
+    components: { ATable: Table },
     props: {
       summaryFunc: {
         type: Function as PropType<Fn>

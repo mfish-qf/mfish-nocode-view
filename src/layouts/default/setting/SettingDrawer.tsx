@@ -1,5 +1,5 @@
 import { defineComponent, computed, unref } from "vue";
-import { BasicDrawer } from "/@/components/general/Drawer/index";
+import { BasicDrawer } from "/@/components/general/Drawer";
 import { Divider } from "ant-design-vue";
 import { TypePicker, ThemeColorPicker, SettingFooter, SwitchItem, SelectItem, InputNumberItem } from "./components";
 import { AppDarkModeToggle } from "/@/components/general/Application";

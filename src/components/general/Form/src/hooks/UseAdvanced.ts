@@ -50,7 +50,7 @@ export default function ({ advanceState, emit, getProps, getSchema, formModel, d
     () => {
       const { showAdvancedButton } = unref(getProps);
       if (showAdvancedButton) {
-        debounceUpdateAdvanced();
+        debounceUpdateAdvanced().then();
       }
     },
     { immediate: true }

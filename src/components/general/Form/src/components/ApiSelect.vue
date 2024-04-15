@@ -1,5 +1,5 @@
 <template>
-  <Select
+  <a-select
     @dropdown-visible-change="handleFetch"
     v-bind="attrs"
     @change="handleChange"
@@ -18,7 +18,7 @@
         {{ t("component.form.apiSelectNotFound") }}
       </span>
     </template>
-  </Select>
+  </a-select>
 </template>
 <script lang="ts">
   import { defineComponent, PropType, ref, watchEffect, computed, unref, watch } from "vue";
@@ -36,7 +36,7 @@
   export default defineComponent({
     name: "ApiSelect",
     components: {
-      Select,
+      ASelect: Select,
       LoadingOutlined
     },
     // inheritAttrs: false,

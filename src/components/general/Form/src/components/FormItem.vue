@@ -344,7 +344,7 @@
 
       return () => {
         const { colProps = {}, colSlot, renderColContent, component } = props.schema;
-        if (component === undefined || !componentMap.has(component)) {
+        if (component == undefined || !componentMap.has(component)) {
           return null;
         }
 

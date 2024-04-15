@@ -142,7 +142,7 @@
 
   /**
    * 修改
-   * @param
+   * @param ssoClientDetails
    */
   function handleEdit(ssoClientDetails: SsoClientDetails) {
     if (ssoClientDetails.grantTypes) {
@@ -163,7 +163,7 @@
 
   /**
    * 删除
-   * @param
+   * @param ssoClientDetails
    */
   function handleDelete(ssoClientDetails: SsoClientDetails) {
     if (ssoClientDetails.id) {

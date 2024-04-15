@@ -119,7 +119,7 @@
         if (redirect && isString(redirect)) {
           go(redirect);
         } else {
-          let goPath = "";
+          let goPath: string;
           if (paths.length === 1) {
             goPath = paths[0];
           } else {

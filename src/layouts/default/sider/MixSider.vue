@@ -228,7 +228,7 @@
             }
           }
           if (!unref(openMenu)) {
-            setActive();
+            setActive().then();
           }
         } else {
           openMenu.value = true;

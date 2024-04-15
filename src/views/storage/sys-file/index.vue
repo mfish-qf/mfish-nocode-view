@@ -44,7 +44,7 @@
   import { SysFile } from "/@/api/storage/model/SysFileModel";
   defineOptions({ name: "SysFileManagement" });
 
-  const [registerModal, { openModal }] = useModal();
+  const [registerModal, {}] = useModal();
   const [registerTable, { reload, insertTableDataRecord }] = useTable({
     title: "文件列表",
     api: getSysFileList,

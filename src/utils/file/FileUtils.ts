@@ -5,10 +5,10 @@ import { isString } from "/@/utils/Is";
 import { getToken } from "/@/utils/auth";
 import { defHttp } from "/@/utils/http/axios";
 import { useAppStore } from "/@/store/modules/App";
-import { RequestOptions } from "/#/axios";
 import { getLocalFileUrl } from "/@/api/storage/SysFile";
-import logo from "/@/assets/images/logo.png";
-import noImage from "/@/assets/images/noImage.png";
+import logo from "/src/assets/images/logo.png";
+import noImage from "/src/assets/images/noImage.png";
+import { RequestOptions } from "/#/axios";
 
 /**
  * @description: 文件通用类

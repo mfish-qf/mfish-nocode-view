@@ -4,9 +4,10 @@
  * @date: 2022/11/16 20:54
  */
 import { dateUtil } from "/@/utils/DateUtil";
+import { RuleObject } from "ant-design-vue/lib/form/interface";
 
 export const rules = {
-  email(required: boolean) {
+  email(required: boolean): RuleObject[] {
     return [
       {
         required: required,
@@ -14,7 +15,11 @@ export const rules = {
           if (required && !value) {
             return Promise.reject("请输入邮箱!");
           }
-          if (!new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(value)) {
+          if (
+            !new RegExp(
+              /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            ).test(value)
+          ) {
             return Promise.reject("请输入正确邮箱格式!");
           }
           return Promise.resolve();
@@ -23,7 +28,7 @@ export const rules = {
       }
     ];
   },
-  phone(required: boolean) {
+  phone(required: boolean): RuleObject[] {
     return [
       {
         required: required,
@@ -40,7 +45,7 @@ export const rules = {
       }
     ];
   },
-  startTime(endTime, required: boolean) {
+  startTime(endTime, required: boolean): RuleObject[] {
     return [
       {
         required: required,
@@ -57,7 +62,7 @@ export const rules = {
       }
     ];
   },
-  endTime(startTime, required: boolean) {
+  endTime(startTime, required: boolean): RuleObject[] {
     return [
       {
         required: required,

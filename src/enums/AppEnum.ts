@@ -35,4 +35,3 @@ export enum RouterTransitionEnum {
   FADE_BOTTOM = "fade-bottom",
   FADE_SCALE = "fade-scale"
 }
-

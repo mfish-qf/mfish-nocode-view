@@ -104,7 +104,7 @@ export interface Filter {
     | "likeLeft"
     | "likeRight";
   value?: string;
-  valueType?: "0" | "1"; //0常量 1变量
+  valueType?: "0" | "1" | "2"; //0常量 1变量 2字段
   required?: boolean;
 }
 

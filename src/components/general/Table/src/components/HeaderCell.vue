@@ -11,21 +11,21 @@
     name: "TableHeaderCell",
     components: {
       EditTableHeaderCell,
-      BasicHelp,
+      BasicHelp
     },
     props: {
       column: {
         type: Object as PropType<ColumnType<any>>,
-        default: () => ({}),
-      },
+        default: () => ({})
+      }
     },
     setup(props) {
-      const { prefixCls } = useDesign('basic-table-header-cell');
+      const { prefixCls } = useDesign("basic-table-header-cell");
 
       const getIsEdit = computed(() => !!(props.column as BasicColumn)?.edit);
       const getTitle = computed(() => {
         const column = props.column as BasicColumn;
-        if (typeof column.customHeaderRender === 'function') {
+        if (typeof column.customHeaderRender === "function") {
           return column.customHeaderRender(column);
         }
         return column?.customTitle || props.column?.title;
@@ -34,28 +34,26 @@
 
       return () => {
         return (
-            <div>
-                {getIsEdit.value ? (
-                      <EditTableHeaderCell>{getTitle.value}</EditTableHeaderCell>
-                  ) : (
-                      <span class="default-header-cell">{getTitle.value}</span>
-                  )}
-        {getHelpMessage.value && (
-            <BasicHelp text={getHelpMessage.value} class={`${prefixCls}__help`} />
-        )}
-        </div>
-      );
+          <div>
+            {getIsEdit.value ? (
+              <EditTableHeaderCell>{getTitle.value}</EditTableHeaderCell>
+            ) : (
+              <span class='default-header-cell'>{getTitle.value}</span>
+            )}
+            {getHelpMessage.value && <BasicHelp text={getHelpMessage.value} class={`${prefixCls}__help`} />}
+          </div>
+        );
       };
-    },
+    }
   });
 </script>
 <style lang="less">
-@prefix-cls: ~'@{namespace}-basic-table-header-cell';
+  @prefix-cls: ~"@{namespace}-basic-table-header-cell";
 
-.@{prefix-cls} {
-  &__help {
-    margin-left: 8px;
-    color: rgb(0 0 0 / 65%) !important;
+  .@{prefix-cls} {
+    &__help {
+      margin-left: 8px;
+      color: rgb(0 0 0 / 65%) !important;
+    }
   }
-}
 </style>

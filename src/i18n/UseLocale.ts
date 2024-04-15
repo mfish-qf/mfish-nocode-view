@@ -22,7 +22,7 @@ function setI18nLanguage(locale: LocaleType) {
   } else {
     (i18n.global.locale as any).value = locale;
   }
-  localeStore.setLocaleInfo({locale});
+  localeStore.setLocaleInfo({ locale });
   setHtmlPageLang(locale);
 }
 
@@ -49,7 +49,7 @@ export function useLocale() {
     // 这里改成接口获取
     const langModule = ((await import(`./lang/${locale}.ts`)) as any).default as LangModule;
     if (!langModule) return;
-    const {message} = langModule;
+    const { message } = langModule;
     globalI18n.setLocaleMessage(locale, message);
     loadLocalePool.push(locale);
     setI18nLanguage(locale);

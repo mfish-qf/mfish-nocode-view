@@ -40,7 +40,7 @@ export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
       if (!parentPath) {
         parentPath = await getCurrentParentPath(currentActiveMenu);
       }
-      parentPath && throttleHandleSplitLeftMenu(parentPath);
+      parentPath && throttleHandleSplitLeftMenu(parentPath).then();
     },
     {
       immediate: true

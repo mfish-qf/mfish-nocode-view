@@ -72,7 +72,7 @@
   import { useNow } from "./UseNow";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { LockOutlined } from "@ant-design/icons-vue";
-  import { setHeaderImg } from "/@/utils/FileUtils";
+  import { setHeaderImg } from "/@/utils/file/FileUtils";
 
   const InputPassword = Input.Password;
 

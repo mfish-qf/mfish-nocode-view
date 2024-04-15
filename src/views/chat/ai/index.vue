@@ -2,16 +2,12 @@
   <div>
     <div :class="`${prefixCls}-panel`">
       <ScrollContainer ref="scrollRef">
-        <template v-for="item in chats">
-          <div :class="`${prefixCls}-wrapper`" v-if="item.user === 'chatGpt'">
-            <img class="chat-img" src="/resource/img/logo.png" />
-            <div
-              class="chat-text"
-              v-if="item.chat !== undefined && item.chat !== null && item.chat !== ''"
-              v-html="item.chat"
-            ></div>
+        <template v-for="(item, index) in chats">
+          <div :key="index + '1'" :class="`${prefixCls}-wrapper`" v-if="item.user === 'chatGpt'">
+            <img class="chat-img" src="/resource/img/logo.png" alt="chat-img" />
+            <div class="chat-text" v-if="item.chat != undefined && true && item.chat !== ''" v-html="item.chat"></div>
           </div>
-          <div v-else :class="`${prefixCls}-wrapper`" class="right">
+          <div v-else :key="index + '2'" :class="`${prefixCls}-wrapper`" class="right">
             <div class="chat-text right">{{ item.chat }}</div>
             <SvgIcon name="dynamic-avatar-1" size="32" />
           </div>
@@ -27,13 +23,13 @@
 <script lang="ts" setup>
   import { ref, unref, onMounted } from "vue";
   import { SvgIcon } from "/@/components/general/Icon/index";
-  import { ScrollActionType, ScrollContainer } from "/@/components/general/Container/index";
+  import { ScrollActionType, ScrollContainer } from "/@/components/general/Container";
   import { InputSearch } from "ant-design-vue";
   import { answer } from "/@/api/chat/chat";
   import { ChatsModel } from "/@/api/chat/model/QuestionModel";
   import { buildUUID } from "/@/utils/Uuid";
   import { useDesign } from "/@/hooks/web/UseDesign";
-  defineOptions({ name: "chartGpt" });
+  defineOptions({ name: "ChartGpt" });
   const scrollRef = ref<Nullable<ScrollActionType>>(null);
   const { prefixCls } = useDesign("ai-chat");
   const getScroll = () => {

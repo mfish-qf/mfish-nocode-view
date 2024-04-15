@@ -25,7 +25,7 @@ function handleItem(item: BasicColumn, ellipsis: boolean) {
     }
   }
   if (children && children.length) {
-    handleChildren(children, !!ellipsis);
+    handleChildren(children, ellipsis);
   }
 }
 

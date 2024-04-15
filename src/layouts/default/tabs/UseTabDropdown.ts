@@ -111,27 +111,27 @@ export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: Comp
     switch (event) {
       case MenuEventEnum.REFRESH_PAGE:
         // refresh page
-        refreshPage();
+        refreshPage().then();
         break;
       // Close current
       case MenuEventEnum.CLOSE_CURRENT:
-        close(tabContentProps.tabItem);
+        close(tabContentProps.tabItem).then();
         break;
       // Close left
       case MenuEventEnum.CLOSE_LEFT:
-        closeLeft();
+        closeLeft().then();
         break;
       // Close right
       case MenuEventEnum.CLOSE_RIGHT:
-        closeRight();
+        closeRight().then();
         break;
       // Close other
       case MenuEventEnum.CLOSE_OTHER:
-        closeOther();
+        closeOther().then();
         break;
       // Close all
       case MenuEventEnum.CLOSE_ALL:
-        closeAll();
+        closeAll().then();
         break;
     }
   }

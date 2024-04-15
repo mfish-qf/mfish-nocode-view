@@ -29,7 +29,7 @@
   import { Avatar } from "ant-design-vue";
   import { useUserStore } from "/@/store/modules/User";
   import headerImg from "/@/assets/images/header.png";
-  import { imageUrl } from "/@/utils/FileUtils";
+  import { imageUrl } from "/@/utils/file/FileUtils";
   import { getLocalFileUrl } from "/@/api/storage/SysFile";
   import { SsoUser } from "/@/api/sys/model/UserModel";
   const userStore = useUserStore();

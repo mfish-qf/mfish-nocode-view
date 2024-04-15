@@ -16,7 +16,7 @@ export interface ApiFolder extends BaseEntity<string> {
 }
 
 export interface ReqApiFolder extends ReqPage {
-  id?: string;
+  parentId?: string;
   name?: string;
 }
 export interface FolderVo extends BaseEntity<string> {

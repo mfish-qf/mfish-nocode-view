@@ -161,6 +161,11 @@
   import { useI18n } from "/@/hooks/web/UseI18n";
   import { debounce } from "lodash-es";
 
+  defineProps({
+    sessionTimeout: {
+      type: Boolean
+    }
+  });
   const username = ref("");
   const password = ref("");
   const captchaValue = ref("");

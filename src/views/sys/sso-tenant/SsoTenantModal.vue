@@ -62,7 +62,7 @@
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
   import { insertSsoTenant, updateMeTenant, updateSsoTenant } from "/@/api/sys/SsoTenant";
   import { uploadApi } from "/@/api/storage/Upload";
-  import { getBase64WithFile, imageUrl } from "/@/utils/FileUtils";
+  import { getBase64WithFile, imageUrl } from "/@/utils/file/FileUtils";
   import Icon from "/@/components/general/Icon/src/Icon.vue";
   import { SysFile } from "/@/api/storage/model/SysFileModel";
   import { getLocalFileUrl, getSysFileByKey } from "/@/api/storage/SysFile";

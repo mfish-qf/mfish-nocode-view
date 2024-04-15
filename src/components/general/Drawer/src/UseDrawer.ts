@@ -123,7 +123,7 @@ export const useDrawerInner = (callbackFn?: Fn): UseDrawerInnerReturnType => {
     if (!callbackFn || !isFunction(callbackFn)) return;
     nextTick(() => {
       callbackFn(data);
-    });
+    }).then();
   });
 
   return [

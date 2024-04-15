@@ -25,7 +25,7 @@ export default {
     defaultSize: "middle",
     // 默认排序方法
     defaultSortFn: (sortInfo: SorterResult) => {
-      const {field, order} = sortInfo;
+      const { field, order } = sortInfo;
       if (field && order) {
         return {
           // 排序字段

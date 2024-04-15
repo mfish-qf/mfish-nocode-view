@@ -27,7 +27,7 @@ export const CellComponent: FunctionalComponent = (
     Popover,
     {
       overlayClassName: "edit-cell-rule-popover",
-      visible: !!popoverVisible,
+      visible: popoverVisible,
       ...(getPopupContainer ? { getPopupContainer } : {})
     },
     {

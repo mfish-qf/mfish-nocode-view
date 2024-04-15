@@ -9,7 +9,7 @@ const NOT_ALIVE = 0;
 
 export class Memory<T = any, V = any> {
   private cache: { [key in keyof T]?: Cache<V> } = {};
-  private alive: number;
+  private readonly alive: number;
 
   constructor(alive = NOT_ALIVE) {
     // Unit second

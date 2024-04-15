@@ -6,7 +6,7 @@ import type { Directive, DirectiveBinding } from "vue";
  * @Example v-repeat-click="()=>{}"
  */
 const repeatDirective: Directive = {
-  beforeMount(el: Element, binding: DirectiveBinding<any>) {
+  beforeMount(el: Element, binding: DirectiveBinding) {
     let interval: Nullable<IntervalHandle> = null;
     let startTime = 0;
     const handler = (): void => binding?.value();

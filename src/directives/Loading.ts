@@ -1,13 +1,13 @@
 import { createLoading } from "/@/components/general/Loading";
-import type { Directive, App } from "vue";
+import type { App, Directive } from "vue";
 
 const loadingDirective: Directive = {
   mounted(el, binding) {
     const tip = el.getAttribute("loading-tip");
     const background = el.getAttribute("loading-background");
     const size = el.getAttribute("loading-size");
-    const fullscreen = !!binding.modifiers.fullscreenElement;
-    const instance = createLoading(
+    const fullscreen = binding.modifiers.fullscreenElement;
+    el.instance = createLoading(
       {
         tip,
         background,
@@ -17,7 +17,6 @@ const loadingDirective: Directive = {
       },
       fullscreen ? document.body : el
     );
-    el.instance = instance;
   },
   updated(el, binding) {
     const instance = el.instance;

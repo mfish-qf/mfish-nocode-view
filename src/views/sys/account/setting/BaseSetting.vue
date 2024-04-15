@@ -35,7 +35,7 @@
   import { baseSetSchemas } from "./setting.data";
   import { useUserStore } from "/@/store/modules/User";
   import { uploadApi } from "/@/api/storage/Upload";
-  import { setHeaderImg } from "/@/utils/FileUtils";
+  import { setHeaderImg } from "/@/utils/file/FileUtils";
 
   const userStore = useUserStore();
   const [register, { setFieldsValue, validate }] = useForm({

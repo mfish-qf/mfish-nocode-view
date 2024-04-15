@@ -3,18 +3,24 @@
     <div style="width: 100%" :style="{ textAlign: actionColOpt.style.textAlign }">
       <FormItem>
         <slot name="submitBefore"></slot>
-        <Button type="primary" class="ml-2" v-bind="getSubmitBtnOptions" @click="submitAction" v-if="showSubmitButton">
+        <a-button
+          type="primary"
+          class="ml-2"
+          v-bind="getSubmitBtnOptions"
+          @click="submitAction"
+          v-if="showSubmitButton"
+        >
           {{ getSubmitBtnOptions.text }}
-        </Button>
+        </a-button>
         <slot name="resetBefore"></slot>
-        <Button type="default" class="ml-2" v-bind="getResetBtnOptions" @click="resetAction" v-if="showResetButton">
+        <a-button type="default" class="ml-2" v-bind="getResetBtnOptions" @click="resetAction" v-if="showResetButton">
           {{ getResetBtnOptions.text }}
-        </Button>
+        </a-button>
         <slot name="advanceBefore"></slot>
-        <Button type="link" size="small" @click="toggleAdvanced" v-if="showAdvancedButton && !hideAdvanceBtn">
+        <a-button type="link" size="small" @click="toggleAdvanced" v-if="showAdvancedButton && !hideAdvanceBtn">
           {{ isAdvanced ? t("component.form.putAway") : t("component.form.unfold") }}
           <BasicArrow class="ml-1" :expand="!isAdvanced" up />
-        </Button>
+        </a-button>
         <slot name="advanceAfter"></slot>
       </FormItem>
     </div>
@@ -36,9 +42,9 @@
     name: "BasicFormAction",
     components: {
       FormItem: Form.Item,
-      Button,
+      AButton: Button,
       BasicArrow,
-      [Col.name]: Col
+      ACol: Col
     },
     props: {
       showActionButtonGroup: propTypes.bool.def(true),

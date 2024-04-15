@@ -21,7 +21,7 @@ declare type LabelValueOptions = {
 
 declare type EmitType = (event: string, ...args: any[]) => void;
 
-declare type TargetContext = '_self' | '_blank';
+declare type TargetContext = "_self" | "_blank";
 
 declare interface ComponentElRef<T extends HTMLElement = HTMLDivElement> {
   $el: T;

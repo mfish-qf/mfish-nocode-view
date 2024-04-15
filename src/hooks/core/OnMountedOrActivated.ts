@@ -7,7 +7,7 @@ export function onMountedOrActivated(hook: Fn) {
     hook();
     nextTick(() => {
       mounted = true;
-    });
+    }).then();
   });
 
   onActivated(() => {

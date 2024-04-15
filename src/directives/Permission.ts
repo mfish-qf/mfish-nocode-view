@@ -16,7 +16,7 @@ function isAuth(el: Element, binding: any) {
   }
 }
 
-const mounted = (el: Element, binding: DirectiveBinding<any>) => {
+const mounted = (el: Element, binding: DirectiveBinding) => {
   isAuth(el, binding);
 };
 
