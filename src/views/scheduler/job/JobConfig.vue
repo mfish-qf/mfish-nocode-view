@@ -18,7 +18,12 @@
   defineOptions({ name: "JobConfig" });
 
   const props = defineProps({
-    jobInfo: { type: Object, default: {} }
+    jobInfo: {
+      type: Object,
+      default: () => {
+        return null;
+      }
+    }
   });
   const getValue = async () => {
     return await validate();
@@ -32,7 +37,7 @@
   watch(
     () => props.jobInfo,
     (newVal) => {
-      if (newVal === null) {
+      if (!newVal) {
         resetFields().then();
       } else {
         setFieldsValue(newVal).then();

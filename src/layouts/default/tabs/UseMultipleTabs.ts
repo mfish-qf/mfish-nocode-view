@@ -34,19 +34,20 @@ export function initAffixTabs(): string[] {
     const affixTabs = filterAffixTabs(router.getRoutes() as unknown as RouteLocationNormalized[]);
     affixList.value = affixTabs;
     for (const tab of affixTabs) {
-      tabStore.addTab({
-        meta: tab.meta,
-        name: tab.name,
-        path: tab.path
-      } as unknown as RouteLocationNormalized);
+      tabStore
+        .addTab({
+          meta: tab.meta,
+          name: tab.name,
+          path: tab.path
+        } as unknown as RouteLocationNormalized)
+        .then();
     }
   }
 
-  let isAddAffix = false;
+  const isAddAffix = false;
 
   if (!isAddAffix) {
     addAffixTabs();
-    isAddAffix = true;
   }
   return affixList.value.map((item) => item.meta?.title).filter(Boolean) as string[];
 }
@@ -71,9 +72,9 @@ export function useTabsDrag(affixTextList: string[]) {
           return;
         }
 
-        tabStore.sortTabs(oldIndex, newIndex);
+        tabStore.sortTabs(oldIndex, newIndex).then();
       }
     });
     initSortable();
-  });
+  }).then();
 }

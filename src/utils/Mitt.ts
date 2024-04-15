@@ -38,7 +38,7 @@ export interface Emitter {
 /**
  * Mitt: Tiny (~200b) functional event emitter / pubsub.
  * @name mitt
- * @returns {Mitt}
+ * @returns
  */
 export default function mitt(all?: EventHandlerMap): Emitter {
   all = all || new Map();
@@ -83,7 +83,7 @@ export default function mitt(all?: EventHandlerMap): Emitter {
      * Note: Manually firing "*" handlers is not supported.
      *
      * @param {string|symbol} type The event type to invoke
-     * @param {Any} [evt] Any value (object is recommended and powerful), passed to each handler
+     * @param {any} [evt] Any value (object is recommended and powerful), passed to each handler
      * @memberOf mitt
      */
     emit<T = any>(type: EventType, evt: T) {

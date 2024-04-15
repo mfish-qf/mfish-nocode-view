@@ -37,7 +37,7 @@ export interface FormItem {
 
   /**
    * The layout of label. You can set span offset to something like {span: 3, offset: 12} or sm: {span: 3, offset: 12} same as with <Col>
-   * @type Col
+   * @type ColProps
    */
   labelCol?: ColProps & HTMLAttributes;
 
@@ -56,7 +56,7 @@ export interface FormItem {
 
   /**
    * The layout for input controls, same as labelCol
-   * @type Col
+   * @type ColProps
    */
   wrapperCol?: ColProps;
   /**

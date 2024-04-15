@@ -70,7 +70,7 @@ export function useDataSource(
       searchState.filterInfo = filterInfo;
       params.filterInfo = filterInfo;
     }
-    fetch(params);
+    fetch(params).then();
   }
 
   function setTableKey(items: any[]) {

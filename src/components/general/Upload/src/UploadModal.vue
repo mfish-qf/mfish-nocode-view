@@ -43,7 +43,7 @@
   import { FileItem, UploadResultStatus } from "./Typing";
   import { basicProps, UploadColumnName } from "./Props";
   import { createActionColumn, createTableColumns } from "./data";
-  import { checkImgType, getBase64WithFile } from "/@/utils/FileUtils";
+  import { checkImgType, getBase64WithFile } from "/@/utils/file/FileUtils";
   import { buildUUID } from "/@/utils/Uuid";
   import { isFunction } from "/@/utils/Is";
   import { warn } from "/@/utils/Log";

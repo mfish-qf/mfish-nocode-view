@@ -55,6 +55,7 @@ export function useTrigger(getIsMobile: Ref<boolean>) {
  * Handle menu drag and drop related operations
  * @param siderRef
  * @param dragBarRef
+ * @param mix
  */
 export function useDragLine(siderRef: Ref<any>, dragBarRef: Ref<any>, mix = false) {
   const { getMiniWidthNumber, getCollapsed, setMenuSetting } = useMenuSetting();
@@ -62,8 +63,8 @@ export function useDragLine(siderRef: Ref<any>, dragBarRef: Ref<any>, mix = fals
   onMounted(() => {
     nextTick(() => {
       const exec = useDebounceFn(changeWrapWidth, 80);
-      exec();
-    });
+      exec().then();
+    }).then();
   });
 
   function getEl(elRef: Ref<ElRef | ComponentRef>): any {
@@ -78,7 +79,6 @@ export function useDragLine(siderRef: Ref<any>, dragBarRef: Ref<any>, mix = fals
   function handleMouseMove(ele: HTMLElement, wrap: HTMLElement, clientX: number) {
     document.onmousemove = function (innerE) {
       let iT = (ele as any).left + (innerE.clientX - clientX);
-      innerE = innerE || window.event;
       const maxT = 800;
       const minT = unref(getMiniWidthNumber);
       iT < 0 && (iT = 0);

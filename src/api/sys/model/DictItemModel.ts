@@ -9,7 +9,7 @@ import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
 export interface DictItem extends BaseEntity<string> {
   dictCode: string;
   dictLabel: string;
-  dictValue: string | number | boolean;
+  dictValue: string;
   valueType: number;
   dictSort: number;
   color: string;

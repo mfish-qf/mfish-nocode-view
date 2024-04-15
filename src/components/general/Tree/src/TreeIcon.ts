@@ -1,6 +1,7 @@
 import type { VNode, FunctionalComponent } from "vue";
 
 import { h } from "vue";
+// eslint-disable-next-line vue/prefer-import-from-vue
 import { isString } from "@vue/shared";
 import { Icon } from "/@/components/general/Icon";
 

@@ -43,10 +43,10 @@ export function useFormEvents({
       const defaultValue = cloneDeep(defaultValueRef.value[key]);
       formModel[key] = isInput ? defaultValue || "" : defaultValue;
     });
-    nextTick(() => clearValidate());
+    nextTick(() => clearValidate()).then();
 
     emit("reset", toRaw(formModel));
-    submitOnReset && handleSubmit();
+    submitOnReset && handleSubmit().then();
   }
 
   /**
@@ -261,7 +261,7 @@ export function useFormEvents({
   }
 
   async function validate(nameList?: NamePath[] | undefined) {
-    return await unref(formElRef)?.validate(nameList);
+    return unref(formElRef)?.validate(nameList);
   }
 
   async function clearValidate(name?: string | string[]) {

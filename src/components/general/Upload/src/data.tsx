@@ -4,7 +4,7 @@ import { Progress, Switch, Input } from "ant-design-vue";
 import TableAction from "/@/components/general/Table/src/components/TableAction.vue";
 import ThumbUrl from "./ThumbUrl.vue";
 import { useI18n } from "/@/hooks/web/UseI18n";
-import { calcSize, getFileIcon } from "/@/utils/FileUtils";
+import { calcSize, getFileIcon } from "/@/utils/file/FileUtils";
 
 const { t } = useI18n();
 // 文件上传列表

@@ -49,18 +49,18 @@ export function formatRequestDate(params: Recordable) {
   }
 }
 
-export function messageTips(messageMode: MessageMode, msg: string, isError: boolean, retryCount: number = 0): void {
+export function messageTips(messageMode: MessageMode, msg: string, isError: boolean, retryCount = 0): void {
   const { t } = useI18n();
   if (messageMode === "message") {
     if (!isError) {
-      createMessage.success(msg);
+      createMessage.success(msg).then();
       return;
     }
     //重试请求不重复进行错误提示
     if (retryCount > 0) {
       return;
     }
-    createMessage.error(msg);
+    createMessage.error(msg).then();
     return;
   }
   if (messageMode === "modal") {

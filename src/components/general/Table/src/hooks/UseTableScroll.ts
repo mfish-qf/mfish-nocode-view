@@ -31,7 +31,7 @@ export function useTableScroll(
   watch(
     () => [unref(getCanResize), unref(getDataSourceRef)?.length],
     () => {
-      debounceRedoHeight();
+      debounceRedoHeight().then();
     },
     {
       flush: "post"
@@ -40,8 +40,8 @@ export function useTableScroll(
 
   function redoHeight() {
     nextTick(() => {
-      calcTableHeight();
-    });
+      calcTableHeight().then();
+    }).then();
   }
 
   function setHeight(height: number) {
@@ -117,7 +117,7 @@ export function useTableScroll(
     const { pagination, isCanResizeParent, useSearchForm } = unref(propsRef);
     // Table height from bottom height-custom offset
     let paddingHeight = 30;
-    let bottomIncludeBody = 0;
+    let bottomIncludeBody: number;
     if (unref(wrapRef) && isCanResizeParent) {
       const tablePadding = 12;
       const formMargin = 16;
@@ -192,10 +192,10 @@ export function useTableScroll(
   }
   useWindowSizeFn(calcTableHeight, 280);
   onMountedOrActivated(() => {
-    calcTableHeight();
+    calcTableHeight().then();
     nextTick(() => {
-      debounceRedoHeight();
-    });
+      debounceRedoHeight().then();
+    }).then();
   });
 
   const getScrollX = computed(() => {

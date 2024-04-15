@@ -308,7 +308,7 @@
   [data-theme="dark"] {
     .ant-table-tbody > tr:hover.ant-table-row-selected > td,
     .ant-table-tbody > tr.ant-table-row-selected td {
-      background-color: #262626;
+      background-color: #262626 !important;
     }
   }
 
@@ -318,7 +318,7 @@
 
     &-row__striped {
       td {
-        background-color: @app-content-background !important;
+        background-color: @app-content-background;
       }
     }
 
@@ -337,7 +337,6 @@
     .ant-tag {
       margin-right: 0;
     }
-
     .ant-table-wrapper {
       padding: 6px;
       background-color: @component-background;
@@ -369,7 +368,7 @@
       }
 
       //.ant-table-tbody > tr.ant-table-row-selected td {
-      //background-color: fade(@button-primary-color, 8%) !important;
+      //  background-color: fade(@button-primary-color, 8%) !important;
       //}
     }
 

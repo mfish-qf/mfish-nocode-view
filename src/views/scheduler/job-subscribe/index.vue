@@ -40,21 +40,20 @@
   const props = defineProps({
     jobId: { type: String, default: "" }
   });
-  const [registerTable, { reload, insertTableDataRecord, deleteTableDataRecord, setTableData, getDataSource }] =
-    useTable({
-      title: "触发策略列表",
-      rowKey: "id",
-      columns,
-      bordered: true,
-      showIndexColumn: false,
-      maxHeight: 300,
-      pagination: false,
-      actionColumn: {
-        width: 40,
-        title: "",
-        dataIndex: "action"
-      }
-    });
+  const [registerTable, { insertTableDataRecord, deleteTableDataRecord, setTableData, getDataSource }] = useTable({
+    title: "触发策略列表",
+    rowKey: "id",
+    columns,
+    bordered: true,
+    showIndexColumn: false,
+    maxHeight: 300,
+    pagination: false,
+    actionColumn: {
+      width: 40,
+      title: "",
+      dataIndex: "action"
+    }
+  });
   const getValue = () => {
     return getDataSource();
   };
@@ -87,7 +86,5 @@
     deleteTableDataRecord(record.id);
   }
 
-  function handleSuccess() {
-    reload();
-  }
+  defineExpose({ getValue });
 </script>

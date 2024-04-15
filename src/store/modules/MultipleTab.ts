@@ -1,7 +1,6 @@
 import type { RouteLocationNormalized, RouteLocationRaw, Router } from "vue-router";
 import { toRaw, unref } from "vue";
 import { defineStore } from "pinia";
-import { store } from "/@/store";
 import { useGo, useRedo } from "/@/hooks/web/UsePage";
 import { Persistent } from "/@/utils/cache/Persistent";
 import { PageEnum } from "/@/enums/PageEnum";
@@ -220,7 +219,7 @@ export const useMultipleTabStore = defineStore({
         });
         // 如果当前路由不存在于TabList中，尝试切换到其它路由
         if (isActivated === -1) {
-          let pageIndex;
+          let pageIndex: number;
           if (index > 0) {
             pageIndex = index - 1;
           } else if (index < this.tabList.length - 1) {
@@ -345,8 +344,3 @@ export const useMultipleTabStore = defineStore({
     }
   }
 });
-
-// Need to be used outside the setup
-export function useMultipleTabWithOutStore() {
-  return useMultipleTabStore(store);
-}

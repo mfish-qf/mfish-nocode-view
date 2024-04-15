@@ -102,7 +102,7 @@
 
   /**
    * 修改
-   * @param
+   * @param ssoTenant
    */
   function handleEdit(ssoTenant: SsoTenant) {
     openModal(true, {
@@ -113,7 +113,7 @@
 
   /**
    * 删除
-   * @param
+   * @param ssoTenant
    */
   function handleDelete(ssoTenant: SsoTenant) {
     if (ssoTenant.id) {

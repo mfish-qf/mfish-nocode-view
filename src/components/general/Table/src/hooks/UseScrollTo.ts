@@ -33,13 +33,13 @@ export function useTableScrollTo(tableElRef: Ref<ComponentRef>, getDataSourceRef
 
     // judge pos type
     if (pos === "top") {
-      findTargetRowToScroll(dataSource[0]);
+      findTargetRowToScroll(dataSource[0]).then();
     } else if (pos === "bottom") {
-      findTargetRowToScroll(dataSource[dataSource.length - 1]);
+      findTargetRowToScroll(dataSource[dataSource.length - 1]).then();
     } else {
       const targetRowData = dataSource.find((data) => data.id === pos);
       if (targetRowData) {
-        findTargetRowToScroll(targetRowData);
+        findTargetRowToScroll(targetRowData).then();
       } else {
         warn(`id: ${pos} doesn't exist`);
       }

@@ -109,7 +109,7 @@
         }
         const path = (route || unref(currentRoute)).path;
         menuState.activeName = path;
-        setOpenKeys(path);
+        setOpenKeys(path).then();
       }
 
       async function handleSelect(key: string) {
@@ -126,7 +126,7 @@
         emit("menuClick", key);
 
         isClickGo.value = true;
-        setOpenKeys(key);
+        setOpenKeys(key).then();
         menuState.activeName = key;
       }
 

@@ -11,8 +11,8 @@
       </component>
     </div>
     <template v-if="!native">
-      <bar :move="moveX" :size="sizeWidth" />
-      <bar vertical :move="moveY" :size="sizeHeight" />
+      <bar v-if="!hiddenX" :move="moveX" :size="sizeWidth" />
+      <bar v-if="!hiddenY" vertical :move="moveY" :size="sizeHeight" />
     </template>
   </div>
 </template>
@@ -50,7 +50,9 @@
     tag: {
       type: String,
       default: "div"
-    }
+    },
+    hiddenX: { type: Boolean, default: false },
+    hiddenY: { type: Boolean, default: false }
   });
 
   const sizeWidth = ref("0");

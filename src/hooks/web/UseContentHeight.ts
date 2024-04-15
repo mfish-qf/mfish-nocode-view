@@ -46,8 +46,8 @@ export function useContentHeight(
 
   function redoHeight() {
     nextTick(() => {
-      calcContentHeight();
-    });
+      calcContentHeight().then();
+    }).then();
   }
 
   function calcSubtractSpace(element: Element | null | undefined, direction: "all" | "top" | "bottom" = "all"): number {
@@ -166,12 +166,12 @@ export function useContentHeight(
 
   onMountedOrActivated(() => {
     nextTick(() => {
-      calcContentHeight();
-    });
+      calcContentHeight().then();
+    }).then();
   });
   useWindowSizeFn(
     () => {
-      calcContentHeight();
+      calcContentHeight().then();
     },
     50,
     { immediate: true }
@@ -179,7 +179,7 @@ export function useContentHeight(
   watch(
     () => [layoutFooterHeightRef.value],
     () => {
-      calcContentHeight();
+      calcContentHeight().then();
     },
     {
       flush: "post",

@@ -4,7 +4,7 @@
  @date: 2023/2/26 16:40
 -->
 <template>
-  <div v-for="item in subscribes" :class="getClass">
+  <div v-for="(item, index) in subscribes" :class="getClass" :key="index">
     <div :class="`${prefixCls}-column`">
       <div :class="`${prefixCls}-label`">调度周期:</div>
       <div>{{ item.startTime }} -- {{ item.endTime }}</div>

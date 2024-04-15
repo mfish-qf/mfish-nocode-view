@@ -1,7 +1,7 @@
 <template>
   <div :class="prefixCls">
     <span> {{ title }}</span>
-    <Switch
+    <a-switch
       v-bind="getBindValue"
       @change="handleChange"
       :disabled="disabled"
@@ -21,7 +21,7 @@
 
   export default defineComponent({
     name: "SwitchItem",
-    components: { Switch },
+    components: { ASwitch: Switch },
     props: {
       event: {
         type: Number as PropType<HandlerEnum>

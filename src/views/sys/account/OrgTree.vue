@@ -48,7 +48,7 @@
     }
     nextTick(() => {
       unref(asyncExpandTreeRef)?.expandAll(true);
-    });
+    }).then();
   }
 
   function handleSelect(keys) {

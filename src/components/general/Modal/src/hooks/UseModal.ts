@@ -114,7 +114,7 @@ export const useModalInner = (callbackFn?: Fn): UseModalInnerReturnType => {
     if (!callbackFn || !isFunction(callbackFn)) return;
     nextTick(() => {
       callbackFn(data);
-    });
+    }).then();
   });
 
   return [

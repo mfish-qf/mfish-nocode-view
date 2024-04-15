@@ -36,7 +36,7 @@ export const useLocaleStore = defineStore({
      * @param info multilingual info
      */
     setLocaleInfo(info: Partial<LocaleSetting>) {
-      this.localInfo = {...this.localInfo, ...info};
+      this.localInfo = { ...this.localInfo, ...info };
       ls.set(LOCALE_KEY, this.localInfo);
     },
     /**

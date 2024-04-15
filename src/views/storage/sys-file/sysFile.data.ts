@@ -5,7 +5,7 @@ import { Switch } from "ant-design-vue";
 import { getToken } from "/@/utils/auth";
 import TableImage from "/@/components/general/Table/src/components/TableImg.vue";
 import { getLocalFileUrl, logicDeleteFile, restoreFile, setFileStatus } from "/@/api/storage/SysFile";
-import { getFileIcon, calcSize, imageUrl } from "/@/utils/FileUtils";
+import { getFileIcon, calcSize, imageUrl } from "/@/utils/file/FileUtils";
 
 /**
  * @description: 文件存储

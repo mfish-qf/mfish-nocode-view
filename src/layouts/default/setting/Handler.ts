@@ -42,7 +42,7 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
       if (getThemeColor.value === value) {
         return {};
       }
-      changeTheme(value);
+      changeTheme(value).then();
 
       return { themeColor: value };
 
@@ -50,7 +50,7 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
       if (getDarkMode.value === value) {
         return {};
       }
-      updateDarkTheme(value);
+      updateDarkTheme(value).then();
 
       return {};
 

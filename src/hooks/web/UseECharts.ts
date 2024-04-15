@@ -73,7 +73,7 @@ export function useECharts(elRef: Ref<HTMLDivElement>, theme: "light" | "dark" |
 
         chartInstance?.setOption(unref(getOptions));
       }, 30);
-    });
+    }).then();
   }
 
   function resize() {

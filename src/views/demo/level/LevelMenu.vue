@@ -15,5 +15,3 @@
     name: "LevelMenu"
   };
 </script>
-
-<style scoped></style>

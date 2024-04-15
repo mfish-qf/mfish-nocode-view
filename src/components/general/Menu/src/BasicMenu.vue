@@ -130,13 +130,13 @@
           return;
         }
         const path = (route || unref(currentRoute)).meta?.currentActiveMenu || (route || unref(currentRoute)).path;
-        setOpenKeys(path);
+        setOpenKeys(path).then();
         if (unref(currentActiveMenu)) return;
         if (props.isHorizontal && unref(getSplit)) {
           const parentPath = await getCurrentParentPath(path);
           menuState.selectedKeys = [parentPath];
         } else {
-          menuState.selectedKeys = await getAllParentPath(props.items, path);
+          menuState.selectedKeys = getAllParentPath(props.items, path);
         }
       }
 

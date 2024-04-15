@@ -50,7 +50,7 @@ export function useTableFooter(
         wait: 0,
         options: true
       });
-    });
+    }).then();
   }
 
   return { getFooterProps };

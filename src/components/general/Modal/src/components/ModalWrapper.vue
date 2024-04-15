@@ -54,7 +54,6 @@
   });
 
   const spinStyle = computed((): CSSProperties => {
-    console.log(unref(realHeightRef), "高度");
     return {
       minHeight: `${props.minHeight}px`,
       [props.fullScreen ? "height" : "maxHeight"]: `${unref(realHeightRef)}px`

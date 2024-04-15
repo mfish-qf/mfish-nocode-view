@@ -3,7 +3,7 @@ import { FormSchema } from "/@/components/general/Table";
 import { getDictProps } from "/@/utils/DictUtils";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { imageUrl } from "/@/utils/FileUtils";
+import { imageUrl } from "/@/utils/file/FileUtils";
 import { getLocalFileUrl } from "/@/api/storage/SysFile";
 import TableImage from "/@/components/general/Table/src/components/TableImg.vue";
 

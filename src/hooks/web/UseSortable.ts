@@ -14,7 +14,7 @@ export function useSortable(el: HTMLElement | Ref<HTMLElement>, options?: Option
         delayOnTouchOnly: true,
         ...options
       });
-    });
+    }).then();
   }
 
   return { initSortable };

@@ -29,7 +29,7 @@
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { propTypes } from "/@/utils/PropTypes";
   import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
-  import { setHeaderImg } from "/@/utils/FileUtils";
+  import { setHeaderImg } from "/@/utils/file/FileUtils";
   import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
   import { changeSsoTenant } from "/@/api/sys/SsoTenant";
   import { router } from "/@/router";

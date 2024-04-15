@@ -45,7 +45,7 @@
   import { Avatar, List as AList, Button as AButton, Tag } from "ant-design-vue";
   import { onMounted, ref } from "vue";
   import { CollapseContainer } from "/@/components/general/Container";
-  import { imageUrl } from "/@/utils/FileUtils";
+  import { imageUrl } from "/@/utils/file/FileUtils";
   import { Icon } from "/@/components/general/Icon";
   import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
   import SsoTenantModal from "/@/views/sys/sso-tenant/SsoTenantModal.vue";

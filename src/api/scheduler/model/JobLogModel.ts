@@ -18,6 +18,10 @@ export interface JobLog extends BaseEntity<string> {
   remark: string;
 }
 
-export interface ReqJobLog {}
+export interface ReqJobLog {
+  jobType?: number;
+  jobName?: string;
+  jobGroup?: string;
+}
 
 export type JobLogPageModel = PageResult<JobLog>;
