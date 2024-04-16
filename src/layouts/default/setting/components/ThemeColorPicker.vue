@@ -28,7 +28,7 @@
   const props = defineProps({
     colorList: {
       type: Array as PropType<string[]>,
-      default: []
+      default: () => []
     },
     event: {
       type: Number as PropType<HandlerEnum>

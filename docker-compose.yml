@@ -1,0 +1,7 @@
+services:
+  erp-admin-view:
+    container_name: mfish-nocode-view
+    image: mfish-nocode-view
+    ports:
+      - 11119:5281
+    restart: always
