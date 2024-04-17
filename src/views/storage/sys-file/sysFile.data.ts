@@ -11,7 +11,7 @@ import { getFileIcon, calcSize, imageUrl } from "/@/utils/file/FileUtils";
  * @description: 文件存储
  * @author: mfish
  * @date: 2023-03-02
- * @version: V1.1.0
+ * @version: V1.2.0
  */
 export const columns: BasicColumn[] = [
   {

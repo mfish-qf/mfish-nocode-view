@@ -11,7 +11,7 @@ import { buildJsonPreview } from "/@/utils/HBuildUtils";
  * @description: 系统日志
  * @author: mfish
  * @date: 2023-01-08
- * @version: V1.1.0
+ * @version: V1.2.0
  */
 export const columns: BasicColumn[] = [
   {
