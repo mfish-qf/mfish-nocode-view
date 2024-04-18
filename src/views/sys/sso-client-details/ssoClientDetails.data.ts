@@ -6,7 +6,7 @@ import { getDictProps } from "/@/utils/DictUtils";
  * @description: 客户端信息
  * @author: mfish
  * @date: 2023-05-12
- * @version: V1.1.0
+ * @version: V1.2.0
  */
 export const columns: BasicColumn[] = [
   {

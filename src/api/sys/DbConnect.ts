@@ -16,7 +16,7 @@ import { PageResult } from "/@/api/model/BaseModel";
  * @description: 数据库连接
  * @author: mfish
  * @date: 2023-03-13
- * @version: V1.1.0
+ * @version: V1.2.0
  */
 enum Api {
   DbConnect = "/sys/dbConnect",

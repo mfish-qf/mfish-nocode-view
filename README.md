@@ -1,10 +1,10 @@
 摸鱼低代码开发平台（前端）
 ======================================
-当前最新版本： V1.1.0
+当前最新版本： V1.2.0
 
 [![Author](https://img.shields.io/badge/Author-mfish-orange.svg)](http://www.mfish.com.cn)
 [![Blog](https://img.shields.io/badge/Blog-个人博客-yellow.svg)](http://www.mfish.com.cn)
-[![Version](https://img.shields.io/badge/version-1.1.0-brightgreen.svg)](https://github.com/mfish-qf/mfish-nocode-view/releases/tag/v1.0.0)
+[![Version](https://img.shields.io/badge/version-1.2.0-brightgreen.svg)](https://github.com/mfish-qf/mfish-nocode-view/releases/tag/v1.2.0)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/mfish-qf/mfish-nocode-view/blob/main/LICENSE)
 
 [![GitHub watches](https://img.shields.io/github/watchers/mfish-qf/mfish-nocode-view.svg?style=social&label=Watch)](https://github.com/mfish-qf/mfish-nocode-view)
@@ -94,24 +94,30 @@ http://localhost:5281
 │  ├─聊天
 ├─驾驶舱
 │  ├─工作台
+├─低代码
+│  ├─数据源
+│  ├─代码生成
+│  ├─自助API
+│  └─自助大屏(开发中...)
 ├─系统管理
 │  ├─菜单管理
 │  ├─组织管理
 │  ├─角色管理
 │  ├─帐号管理
 │  ├─字典管理
+│  ├─分类管理
 │  ├─日志管理
 │  ├─文件管理
 │  ├─在线用户
-│  ├─数据库
-│  └─数据源
+│  ├─应用管理
+│  └─数据库
 ├─租户管理
 │  ├─租户配置
-│  ├─租户信息
-│  │  ├─租户组织
-│  │  ├─租户角色
-│  │  ├─租户人员
 │  ├─个人信息
+│  ├─租户信息
+│  ├─租户组织
+│  ├─租户角色
+│  ├─租户人员
 ├─系统监控
 │  ├─监控中心
 ├─任务调度
@@ -124,14 +130,11 @@ http://localhost:5281
 │  ├─AntDesign文档
 │  └─Vben文档
 ├─多级目录
-├─系统工具
-│  ├─代码生成
 ├─图形编辑器
 ├─引导页
 ├─关于
 └─其他模块 
-   └─更多功能开发中。。
-
+   └─更多功能开发中...
 ```
 
 #### 项目截图
