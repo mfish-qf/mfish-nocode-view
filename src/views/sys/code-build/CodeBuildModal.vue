@@ -135,7 +135,7 @@
       }
     }
   ];
-  const [registerTable, { insertTableDataRecord, deleteTableDataRecord, setTableData, getDataSource }] = useTable({
+  const [registerTable, { deleteTableDataRecord, setTableData, getDataSource }] = useTable({
     title: "查询参数列表",
     rowKey: "id",
     columns: reqSearches,
