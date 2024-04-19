@@ -33,7 +33,7 @@
 </template>
 <script lang="ts" setup>
   import { h, ref, onMounted } from "vue";
-  import { Select } from "ant-design-vue";
+  import { Select, Cascader } from "ant-design-vue";
   import { BasicForm, useForm } from "/@/components/general/Form/index";
   import { BasicTable, useTable, TableAction, BasicColumn } from "/@/components/general/Table";
   import { codeBuildFormSchema } from "./codeBuild.data";
@@ -42,6 +42,9 @@
   import { buildUUID } from "/@/utils/Uuid";
   import { getDictItems } from "/@/api/sys/DictItem";
   import { getFieldList } from "/@/api/sys/DbConnect";
+  import { DictItem } from "/@/api/sys/model/DictItemModel";
+  import { getDictList } from "/@/api/sys/Dict";
+
   defineOptions({ name: "CodeBuildModal" });
 
   const emit = defineEmits(["success", "register"]);
@@ -57,15 +60,27 @@
     setTableData([]);
     setModalProps({ confirmLoading: false, width: "800px" });
   });
-  const conditions: any = [];
-  const fields: any = ref([]);
-  onMounted(() => {
+  const conditions: any[] = [];
+  const components = ref<any[]>([]);
+  const fields = ref<any[]>([]);
+  onMounted(async () => {
     getDictItems("sys_code_condition").then((res) => {
       if (res)
         res.forEach((record) => {
           conditions.push({ label: record.dictLabel, value: record.dictValue });
         });
     });
+    const comType: DictItem[] = await getDictItems("vue_com_type");
+    for (const record of comType) {
+      const children: any[] = [];
+      if (record.dictValue === "ApiSelect") {
+        const dict = await getDictList({ pageNum: 1, pageSize: 1000 });
+        dict.list.forEach((record) => {
+          children.push({ label: record.dictName + "[" + record.dictCode + "]", value: record.dictCode });
+        });
+      }
+      components.value.push({ label: record.dictLabel, value: record.dictValue, children });
+    }
   });
   const reqSearches: BasicColumn[] = [
     {
@@ -97,8 +112,24 @@
           placeholder: "选择查询字段",
           style: { width: "200px" },
           showSearch: true,
+          labelInValue: true,
+          onChange(e: any) {
+            record.field = e.value;
+          }
+        });
+      }
+    },
+    {
+      title: "组件",
+      dataIndex: "field",
+      customRender: ({ record }) => {
+        return h(Cascader, {
+          options: components.value,
+          placeholder: "选择组件",
+          style: { width: "200px" },
+          defaultValue: ["Input"],
           onChange(e) {
-            record.field = e;
+            record.component = e;
           }
         });
       }
@@ -160,13 +191,11 @@
     }).then((res) => {
       if (res && res.list) {
         res.list.forEach((field) => {
-          //暂时只支持string类型做查询条件
-          if (field.type === "String") {
-            fields.value.push({
-              label: field.comment ? field.comment : field.fieldName,
-              value: field.fieldName
-            });
-          }
+          fields.value.push({
+            label: field.comment ? field.comment : field.fieldName,
+            value: field.fieldName,
+            items: field
+          });
         });
       }
     });
@@ -176,9 +205,10 @@
     const value = {
       id: buildUUID(),
       field: "",
-      condition: "eq"
+      condition: "eq",
+      component: ["Input"]
     };
-    insertTableDataRecord(value, 0);
+    getDataSource().push(value);
   }
 
   function handleDelete(record: Recordable) {
