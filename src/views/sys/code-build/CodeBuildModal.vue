@@ -113,6 +113,7 @@
           style: { width: "200px" },
           showSearch: true,
           labelInValue: true,
+          optionFilterProp: "label",
           onChange(e: any) {
             record.field = e.value;
           }
@@ -128,6 +129,7 @@
           placeholder: "选择组件",
           style: { width: "200px" },
           defaultValue: ["Input"],
+          showSearch: true,
           onChange(e) {
             record.component = e;
           }
