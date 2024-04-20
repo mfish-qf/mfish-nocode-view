@@ -113,6 +113,7 @@
           style: { width: "200px" },
           showSearch: true,
           labelInValue: true,
+          optionFilterProp: "label",
           onChange(e: any) {
             record.field = e.value;
           }
@@ -128,6 +129,7 @@
           placeholder: "选择组件",
           style: { width: "200px" },
           defaultValue: ["Input"],
+          showSearch: true,
           onChange(e) {
             record.component = e;
           }
@@ -135,7 +137,7 @@
       }
     }
   ];
-  const [registerTable, { insertTableDataRecord, deleteTableDataRecord, setTableData, getDataSource }] = useTable({
+  const [registerTable, { deleteTableDataRecord, setTableData, getDataSource }] = useTable({
     title: "查询参数列表",
     rowKey: "id",
     columns: reqSearches,
