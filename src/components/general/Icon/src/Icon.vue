@@ -13,6 +13,7 @@
   import Iconify from "@purge-icons/generated";
   import { isString } from "/@/utils/Is";
   import { propTypes } from "/@/utils/PropTypes";
+  import { theme } from "ant-design-vue/lib";
 
   const SVG_END_WITH_FLAG = "|svg";
   export default defineComponent({
@@ -37,7 +38,7 @@
       const isSvgIcon = computed(() => props.icon?.endsWith(SVG_END_WITH_FLAG));
       const getSvgIcon = computed(() => props.icon.replace(SVG_END_WITH_FLAG, ""));
       const getIconRef = computed(() => `${props.prefix ? props.prefix + ":" : ""}${props.icon}`);
-
+      const { defaultSeed } = theme;
       const update = async () => {
         if (unref(isSvgIcon)) return;
 
@@ -70,7 +71,14 @@
 
         return {
           fontSize: `${fs}px`,
-          color: color,
+          color:
+            color === "success"
+              ? defaultSeed.colorSuccess
+              : color === "warning"
+              ? defaultSeed.colorWarning
+              : color === "error"
+              ? defaultSeed.colorError
+              : color,
           display: "inline-flex"
         };
       });

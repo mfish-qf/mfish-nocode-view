@@ -32,37 +32,73 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { h, ref, onMounted } from "vue";
-  import { Select, Cascader } from "ant-design-vue";
+  import { ref, onMounted, unref } from "vue";
   import { BasicForm, useForm } from "/@/components/general/Form/index";
-  import { BasicTable, useTable, TableAction, BasicColumn } from "/@/components/general/Table";
-  import { codeBuildFormSchema } from "./codeBuild.data";
+  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
+  import { codeBuildFormSchema, reqSearches } from "./codeBuild.data";
   import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { insertCodeBuild } from "/@/api/sys/CodeBuild";
+  import { insertCodeBuild, updateCodeBuild } from "/@/api/sys/CodeBuild";
   import { buildUUID } from "/@/utils/Uuid";
   import { getDictItems } from "/@/api/sys/DictItem";
-  import { getFieldList } from "/@/api/sys/DbConnect";
+  import { getDBTree, getFieldList } from "/@/api/sys/DbConnect";
   import { DictItem } from "/@/api/sys/model/DictItemModel";
   import { getDictList } from "/@/api/sys/Dict";
 
   defineOptions({ name: "CodeBuildModal" });
 
   const emit = defineEmits(["success", "register"]);
-  const [registerForm, { resetFields, validate }] = useForm({
+  const [registerForm, { resetFields, validate, setFieldsValue, updateSchema }] = useForm({
     labelWidth: 130,
     baseColProps: { span: 12 },
     schemas: codeBuildFormSchema,
     showActionButtonGroup: false,
     autoSubmitOnEnter: true
   });
-  const [registerModal, { setModalProps, closeModal }] = useModalInner(async () => {
-    resetFields().then();
-    setTableData([]);
-    setModalProps({ confirmLoading: false, width: "800px" });
-  });
   const conditions: any[] = [];
   const components = ref<any[]>([]);
   const fields = ref<any[]>([]);
+  const [registerTable, { deleteTableDataRecord, setTableData, getDataSource, reload }] = useTable({
+    title: "查询参数列表",
+    rowKey: "id",
+    columns: reqSearches(conditions, fields, components),
+    bordered: true,
+    showIndexColumn: false,
+    maxHeight: 240,
+    pagination: false,
+    actionColumn: {
+      width: 40,
+      title: "",
+      dataIndex: "action"
+    }
+  });
+  const isUpdate = ref(true);
+  const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
+    resetFields().then();
+    setTableData([]);
+    setModalProps({ confirmLoading: false, width: "800px" });
+    isUpdate.value = !!data?.isUpdate;
+    if (unref(data.isUpdate)) {
+      const dbs = await getDBTree({ parentId: "" });
+      const tables = await getDBTree({ parentId: data.record.connectId });
+      const db = dbs.find((val) => val.code === data.record.connectId);
+      const table = tables.find((val) => val.code === data.record.tableName);
+      await updateSchema({
+        field: "dataBase",
+        componentProps: {
+          displayRenderArray: [db?.label, table?.label]
+        }
+      });
+
+      await getField(data.record.connectId, data.record.tableName);
+      await setFieldsValue({
+        dataBase: [data.record.connectId, data.record.tableName],
+        ...data.record
+      });
+      const params = JSON.parse(data.record.queryParams);
+      setTableData(params);
+      reload();
+    }
+  });
   onMounted(async () => {
     getDictItems("sys_code_condition").then((res) => {
       if (res)
@@ -82,75 +118,6 @@
       components.value.push({ label: record.dictLabel, value: record.dictValue, children });
     }
   });
-  const reqSearches: BasicColumn[] = [
-    {
-      dataIndex: "id",
-      ifShow: false
-    },
-    {
-      title: "查询条件",
-      dataIndex: "condition",
-      width: 120,
-      customRender: ({ record }) => {
-        return h(Select, {
-          options: conditions,
-          placeholder: "选择查询条件",
-          style: { width: "100px" },
-          defaultValue: "eq",
-          onChange(e) {
-            record.condition = e;
-          }
-        });
-      }
-    },
-    {
-      title: "字段",
-      dataIndex: "field",
-      customRender: ({ record }) => {
-        return h(Select, {
-          options: fields.value,
-          placeholder: "选择查询字段",
-          style: { width: "200px" },
-          showSearch: true,
-          labelInValue: true,
-          optionFilterProp: "label",
-          onChange(e: any) {
-            record.field = e.value;
-          }
-        });
-      }
-    },
-    {
-      title: "组件",
-      dataIndex: "field",
-      customRender: ({ record }) => {
-        return h(Cascader, {
-          options: components.value,
-          placeholder: "选择组件",
-          style: { width: "200px" },
-          defaultValue: ["Input"],
-          showSearch: true,
-          onChange(e) {
-            record.component = e;
-          }
-        });
-      }
-    }
-  ];
-  const [registerTable, { deleteTableDataRecord, setTableData, getDataSource }] = useTable({
-    title: "查询参数列表",
-    rowKey: "id",
-    columns: reqSearches,
-    bordered: true,
-    showIndexColumn: false,
-    maxHeight: 200,
-    pagination: false,
-    actionColumn: {
-      width: 40,
-      title: "",
-      dataIndex: "action"
-    }
-  });
 
   async function handleSubmit() {
     let values = await validate();
@@ -166,14 +133,17 @@
       values.queryParams = JSON.stringify(search);
     }
     setModalProps({ confirmLoading: true });
-    insertCodeBuild(values)
-      .then(() => {
-        emit("success");
-        closeModal();
-      })
-      .finally(() => {
-        setModalProps({ confirmLoading: false });
-      });
+    try {
+      if (unref(isUpdate)) {
+        await updateCodeBuild(values);
+      } else {
+        await insertCodeBuild(values);
+      }
+      emit("success");
+      closeModal();
+    } finally {
+      setModalProps({ confirmLoading: false });
+    }
   }
 
   function valueChange(key, value) {
@@ -185,22 +155,25 @@
       return;
     }
     setTableData([]);
-    getFieldList({
-      connectId: value[0],
-      tableName: value[1],
+    getField(value[0], value[1]);
+  }
+
+  async function getField(connectId, tableName) {
+    const res = await getFieldList({
+      connectId: connectId,
+      tableName: tableName,
       pageNum: 1,
       pageSize: 10000
-    }).then((res) => {
-      if (res && res.list) {
-        res.list.forEach((field) => {
-          fields.value.push({
-            label: field.comment ? field.comment : field.fieldName,
-            value: field.fieldName,
-            items: field
-          });
+    }).then();
+    if (res && res.list) {
+      res.list.forEach((field) => {
+        fields.value.push({
+          label: field.comment ? field.comment : field.fieldName,
+          value: field.fieldName,
+          items: field
         });
-      }
-    });
+      });
+    }
   }
 
   function handleCreate() {

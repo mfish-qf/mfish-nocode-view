@@ -9,8 +9,10 @@ import { CodeBuild, ReqCodeBuild, CodeBuildPageModel, CodeVo } from "/@/api/sys/
  */
 enum Api {
   CodeBuild = "/sys/codeBuild",
-  View = "/sys/codeBuild/view",
-  Download = "/sys/codeBuild/download"
+  View = CodeBuild + "/view",
+  Download = CodeBuild + "/download",
+  SaveLocal = CodeBuild + "/saveLocal",
+  CreateMenu = CodeBuild + "/menu"
 }
 
 /**
@@ -34,6 +36,16 @@ export function insertCodeBuild(codeBuild: CodeBuild) {
 }
 
 /**
+ * 修改代码构建
+ *
+ * @param codeBuild
+ * @return
+ */
+export function updateCodeBuild(codeBuild: CodeBuild) {
+  return defHttp.put<CodeBuild>({ url: Api.CodeBuild, params: codeBuild }, { successMessageMode: "message" });
+}
+
+/**
  * 查看代码
  * @param codeBuild
  */
@@ -50,13 +62,11 @@ export function downloadCode(codeBuild: CodeBuild) {
 }
 
 /**
- * 修改代码构建
- *
+ * 保存代码到本地
  * @param codeBuild
- * @return
  */
-export function updateCodeBuild(codeBuild: CodeBuild) {
-  return defHttp.put<CodeBuild>({ url: Api.CodeBuild, params: codeBuild }, { successMessageMode: "message" });
+export function saveCodeLocal(codeBuild: CodeBuild) {
+  return defHttp.get<boolean>({ url: Api.SaveLocal + "/" + codeBuild.id }, { successMessageMode: "message" });
 }
 
 /**
@@ -67,4 +77,22 @@ export function updateCodeBuild(codeBuild: CodeBuild) {
  */
 export function deleteCodeBuild(id: string) {
   return defHttp.delete<CodeBuild>({ url: Api.CodeBuild + "/" + id }, { successMessageMode: "message" });
+}
+
+/**
+ * 批量删除销售订单
+ *
+ * @param ids 唯一ID多个逗号隔开
+ * @return
+ */
+export function deleteBatchCodeBuild(ids: string) {
+  return defHttp.delete<CodeBuild>({ url: Api.CodeBuild + "/batch/" + ids }, { successMessageMode: "message" });
+}
+
+/**
+ * 创建菜单
+ * @param reqMenuCreate 参数
+ */
+export function codeCreateMenu(reqMenuCreate: { id: string; parentId: string }) {
+  return defHttp.post<CodeBuild>({ url: Api.CreateMenu, params: reqMenuCreate }, { successMessageMode: "message" });
 }

@@ -40,7 +40,7 @@
     name: "ApiCascader",
     components: {
       LoadingOutlined,
-      [Cascader.name]: Cascader
+      ACascader: Cascader
     },
     props: {
       value: {
@@ -144,13 +144,11 @@
             [props.asyncFetchParamKey]: Reflect.get(targetOption, "value")
           });
           if (Array.isArray(res)) {
-            const children = generatorOptions(res);
-            targetOption.children = children;
+            targetOption.children = generatorOptions(res);
             return;
           }
           if (props.resultField) {
-            const children = generatorOptions(get(res, props.resultField) || []);
-            targetOption.children = children;
+            targetOption.children = generatorOptions(get(res, props.resultField) || []);
           }
         } catch (e) {
           console.error(e);
