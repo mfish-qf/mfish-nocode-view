@@ -1,6 +1,8 @@
 import { BasicColumn } from "/@/components/general/Table";
 import { FormSchema } from "/@/components/general/Table";
 import { getDBTree } from "/@/api/sys/DbConnect";
+import { h } from "vue";
+import { Cascader, Select } from "ant-design-vue";
 
 /**
  * @description: 代码构建
@@ -117,3 +119,62 @@ export const codeBuildFormSchema: FormSchema[] = [
     colProps: { span: 24 }
   }
 ];
+
+export const reqSearches = (conditions: any, fields: any, components: any) => {
+  return [
+    {
+      dataIndex: "id",
+      ifShow: false
+    },
+    {
+      title: "查询条件",
+      dataIndex: "condition",
+      width: 120,
+      customRender: ({ record }) => {
+        return h(Select, {
+          options: conditions,
+          placeholder: "选择查询条件",
+          style: { width: "100px" },
+          defaultValue: record.condition,
+          onChange(e) {
+            record.condition = e;
+          }
+        });
+      }
+    },
+    {
+      title: "字段",
+      dataIndex: "field",
+      customRender: ({ record }) => {
+        return h(Select, {
+          options: fields.value,
+          placeholder: "选择查询字段",
+          style: { width: "200px" },
+          showSearch: true,
+          labelInValue: true,
+          defaultValue: record.field,
+          optionFilterProp: "label",
+          onChange(e: any) {
+            record.field = e.value;
+          }
+        });
+      }
+    },
+    {
+      title: "组件",
+      dataIndex: "component",
+      customRender: ({ record }) => {
+        return h(Cascader, {
+          options: components.value,
+          placeholder: "选择组件",
+          style: { width: "200px" },
+          defaultValue: record.component || ["Input"],
+          showSearch: true,
+          onChange(e) {
+            record.component = e;
+          }
+        });
+      }
+    }
+  ];
+};

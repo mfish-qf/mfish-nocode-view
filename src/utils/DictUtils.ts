@@ -11,7 +11,8 @@ export const getDictProps = (param) => {
     labelField: "dictLabel",
     // use id as value
     valueField: "dictValue",
-    resultField: "list"
+    resultField: "list",
+    getPopupContainer: () => document.body
   };
 };
 

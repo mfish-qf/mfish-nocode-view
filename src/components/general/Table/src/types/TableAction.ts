@@ -4,7 +4,7 @@ import { TooltipProps } from "ant-design-vue/es/tooltip/Tooltip";
 export interface ActionItem extends ButtonProps {
   onClick?: Fn;
   label?: string;
-  color?: "success" | "error" | "warning";
+  color?: "success" | "error" | "warning" | any;
   icon?: string;
   popConfirm?: PopConfirm;
   disabled?: boolean;

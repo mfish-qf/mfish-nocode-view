@@ -9,15 +9,15 @@
           <a-menu-item v-bind="getAttr(item.event)" @click="handleClickMenu(item)" :disabled="item.disabled">
             <a-popconfirm v-if="popconfirm && item.popConfirm" v-bind="getPopConfirmAttrs(item.popConfirm)">
               <template #icon v-if="item.popConfirm.icon">
-                <Icon :icon="item.popConfirm.icon" />
+                <Icon :icon="item.popConfirm.icon" :color="item.color" />
               </template>
               <div>
-                <Icon :icon="item.icon" v-if="item.icon" />
+                <Icon :icon="item.icon" v-if="item.icon" :color="item.color" />
                 <span class="ml-1">{{ item.text }}</span>
               </div>
             </a-popconfirm>
             <template v-else>
-              <Icon :icon="item.icon" v-if="item.icon" />
+              <Icon :icon="item.icon" v-if="item.icon" :color="item.color" />
               <span class="ml-1">{{ item.text }}</span>
             </template>
           </a-menu-item>
