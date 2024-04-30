@@ -48,7 +48,6 @@
   async function handleSubmit() {
     let values = (await validate()) as MenuListItem;
     setModalProps({ confirmLoading: true });
-    debugger;
     try {
       await codeCreateMenu({ ...values, id: id.value });
       closeModal();

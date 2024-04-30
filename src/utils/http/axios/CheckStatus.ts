@@ -1,12 +1,7 @@
 import type { AxiosError } from "axios";
 import type { MessageMode } from "/#/axios";
 import { useI18n } from "/@/hooks/web/UseI18n";
-import { useUserStoreWithOut } from "/@/store/modules/User";
-import projectSetting from "/@/settings/ProjectSetting";
-import { SessionTimeoutProcessingEnum } from "/@/enums/AppEnum";
 import { messageTips } from "/@/utils/http/axios/Helper";
-
-const stp = projectSetting.sessionTimeoutProcessing;
 
 /**
  * 判断状态码
@@ -22,7 +17,6 @@ export function checkStatus(
   retryCount: number
 ): void {
   const { t } = useI18n();
-  const userStore = useUserStoreWithOut();
   let errMessage = "";
   switch (status) {
     case 400:
@@ -30,11 +24,6 @@ export function checkStatus(
     // 401: 认证失败返回401
     case 401:
       errMessage = t("sys.api.errMsg401");
-      if (stp === SessionTimeoutProcessingEnum.PAGE_COVERAGE) {
-        userStore.setSessionTimeout(true);
-        break;
-      }
-      userStore.logout().then();
       break;
     case 403:
       errMessage = t("sys.api.errMsg403");
