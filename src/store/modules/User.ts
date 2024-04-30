@@ -170,17 +170,17 @@ export const useUserStore = defineStore({
       if (this.getToken) {
         try {
           await doLogout();
-          this.setToken(undefined);
-          this.setRefreshToken(undefined);
-          this.setSessionTimeout(false);
-          this.setUserInfo(null);
-          this.setTenantId(undefined);
-          clearAuthCache(true);
-          this.setIsLogout(true);
-          await router.push(PageEnum.BASE_LOGIN);
         } catch {
-          throw new Error("注销Token失败");
+          console.log("注销Token失败");
         }
+        this.setToken(undefined);
+        this.setRefreshToken(undefined);
+        this.setSessionTimeout(false);
+        this.setUserInfo(null);
+        this.setTenantId(undefined);
+        clearAuthCache(true);
+        this.setIsLogout(true);
+        await router.replace(PageEnum.BASE_LOGIN);
       }
     },
 
