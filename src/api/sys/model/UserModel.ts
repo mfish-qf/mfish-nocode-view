@@ -4,6 +4,7 @@ import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
 export interface CaptchaInfo {
   captchaKey: string;
   img: string;
+  captchaOnOff: boolean;
 }
 /**
  * @description: 用户信息
@@ -26,6 +27,8 @@ export interface LoginParams {
   //刷新token时使用
   refresh_token?: string;
   rememberMe?: boolean;
+  captchaKey?: string;
+  captchaValue?: string;
 }
 
 export interface RoleInfo {
