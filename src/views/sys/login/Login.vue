@@ -13,7 +13,7 @@
           <h6>MFish NoCode</h6>
         </div>
       </div>
-      <div id="errorShow" data-bs-toggle="modal" data-bs-target="#errorModal" style="position: absolute"> </div>
+      <div id="errorShow" data-bs-toggle="modal" data-bs-target="#errorModal" style="position: absolute"></div>
       <div class="modal fade" id="errorModal">
         <div class="modal-dialog">
           <div class="alert alert-danger" role="alert">
@@ -23,7 +23,7 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="card-left" v-if="showLeft"> </div>
+          <div class="card-left" v-if="showLeft"></div>
           <div class="card-wrapper enter-x">
             <div class="card fat">
               <div class="card-body">
@@ -103,7 +103,7 @@
                         </svg>
                       </span>
                     </div>
-                    <div class="input-group mb-1">
+                    <div class="input-group mb-1" v-if="captchaOnOff">
                       <div class="form-floating">
                         <input
                           type="text"
@@ -147,7 +147,7 @@
           </div>
         </div>
       </div>
-      <div class="footer"> Copyright &copy; 2023 &mdash; 摸鱼低代码平台 </div>
+      <div class="footer"> Copyright &copy; 2023 &mdash; 摸鱼低代码平台</div>
     </div>
   </section>
 </template>
@@ -169,6 +169,7 @@
   const username = ref("");
   const password = ref("");
   const captchaValue = ref("");
+  const captchaOnOff = ref<boolean>(true);
   const errorMsg = ref("");
   const showLeft = computed(() => {
     return document.body.clientWidth > 425;
@@ -219,9 +220,11 @@
       document.head.removeChild(link);
     }
   });
+
   function validateUserLogin() {
-    return !(!validateUserName() || !validatePassword() || !validateCaptcha());
+    return !(!validateUserName() || !validatePassword() || (captchaOnOff.value && !validateCaptcha()));
   }
+
   function validateUserName() {
     if (!unref(username)) {
       showInputError("username", "请输入用户名");
@@ -230,6 +233,7 @@
     hideInputError("username");
     return true;
   }
+
   function validatePassword() {
     if (!password.value) {
       showInputError("password", "请输入密码");
@@ -238,6 +242,7 @@
     hideInputError("password");
     return true;
   }
+
   function validateCaptcha() {
     if (!captchaValue.value) {
       showInputError("captcha", "请输入验证码");
@@ -246,9 +251,11 @@
     hideInputError("captcha");
     return true;
   }
+
   function showInputError(key, error) {
     setError(key, true, error);
   }
+
   function setError(key, show, err) {
     error[key].show = show;
     error[key].msg = err;
@@ -257,6 +264,7 @@
   function hideInputError(key) {
     setError(key, false, "");
   }
+
   function pwdShowChange() {
     passwordShow.value = !passwordShow.value;
     if (passwordShow.value) {
@@ -269,6 +277,7 @@
   function msgOver() {
     sendMsgColor.value = "#0d6efd";
   }
+
   function msgLeave() {
     sendMsgColor.value = "black";
   }
@@ -277,8 +286,10 @@
     getCaptcha().then((res) => {
       captchaUrl.value = "data:image/jpeg;base64," + res.img;
       captchaKey.value = res.captchaKey;
+      captchaOnOff.value = res.captchaOnOff;
     });
   }
+
   const login = () => {
     if (validateUserLogin()) {
       isValid.value = true;
@@ -297,6 +308,8 @@
         client_secret: oauth2Config.client_secret,
         grant_type: "password",
         redirect_uri: oauth2Config.redirect_uri,
+        captchaValue: captchaValue.value,
+        captchaKey: captchaKey.value,
         mode: "modal"
       })
       .then((userInfo) => {
