@@ -42,7 +42,7 @@
   import { Form, Row } from "ant-design-vue";
   import FormItem from "./components/FormItem.vue";
   import FormAction from "./components/FormAction.vue";
-  import { dateItemType } from "./Helper";
+  import { dateItemType, isIncludeSimpleComponents } from "./Helper";
   import { dateUtil } from "/@/utils/DateUtil";
   import { deepMerge } from "/@/utils";
   import { useFormValues } from "./hooks/UseFormValues";
@@ -55,6 +55,7 @@
   import { basicProps } from "./Props";
   import { useDesign } from "/@/hooks/web/UseDesign";
   import { cloneDeep } from "lodash-es";
+  import { TableActionType } from "/@/components/general/Table";
 
   export default {
     name: "BasicForm",
@@ -100,26 +101,37 @@
       const getBindValue = computed(() => ({ ...attrs, ...props, ...unref(getProps) } as Recordable));
 
       const getSchema = computed((): FormSchema[] => {
-        const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any);
+        const schemas: FormSchema[] = cloneDeep(unref(schemaRef) || (unref(getProps).schemas as any));
         for (const schema of schemas) {
-          const { defaultValue, component, isHandleDateDefaultValue = true } = schema;
-          // 句柄日期类型
-          if (isHandleDateDefaultValue && defaultValue && component != undefined && dateItemType.includes(component)) {
+          const { defaultValue, component, componentProps = {}, isHandleDateDefaultValue = true } = schema;
+          // handle date type
+          if (isHandleDateDefaultValue && defaultValue && component && dateItemType.includes(component)) {
+            const opt = {
+              schema,
+              tableAction: props.tableAction ?? ({} as TableActionType),
+              formModel,
+              formActionType: {} as FormActionType
+            };
+            const valueFormat = componentProps
+              ? typeof componentProps === "function"
+                ? componentProps(opt)["valueFormat"]
+                : componentProps["valueFormat"]
+              : null;
             if (!Array.isArray(defaultValue)) {
-              schema.defaultValue = dateUtil(defaultValue);
+              schema.defaultValue = valueFormat ? dateUtil(defaultValue).format(valueFormat) : dateUtil(defaultValue);
             } else {
               const def: any[] = [];
               defaultValue.forEach((item) => {
-                def.push(dateUtil(item));
+                def.push(valueFormat ? dateUtil(item).format(valueFormat) : dateUtil(item));
               });
               schema.defaultValue = def;
             }
           }
         }
         if (unref(getProps).showAdvancedButton) {
-          return cloneDeep(schemas.filter((schema) => schema.component !== "Divider") as FormSchema[]);
+          return schemas.filter((schema) => !isIncludeSimpleComponents(schema.component)) as FormSchema[];
         } else {
-          return cloneDeep(schemas as FormSchema[]);
+          return schemas as FormSchema[];
         }
       });
 

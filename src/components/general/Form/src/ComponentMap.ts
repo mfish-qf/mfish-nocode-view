@@ -5,21 +5,22 @@ import type { ComponentType } from "./types";
  * Component list, register here to setting it in the form
  */
 import {
-  Input,
-  Select,
-  Radio,
-  Checkbox,
+  AutoComplete,
   Cascader,
+  Checkbox,
   DatePicker,
-  InputNumber,
-  Switch,
-  TreeSelect,
-  Slider,
-  Rate,
   Divider,
-  AutoComplete
+  Input,
+  InputNumber,
+  Radio,
+  Rate,
+  Select,
+  Slider,
+  Switch,
+  TimePicker,
+  TreeSelect,
+  Transfer
 } from "ant-design-vue";
-
 import ApiRadioGroup from "./components/ApiRadioGroup.vue";
 import RadioButtonGroup from "./components/RadioButtonGroup.vue";
 import ApiSelect from "./components/ApiSelect.vue";
@@ -31,8 +32,10 @@ import { BasicUpload } from "/@/components/general/Upload";
 import { StrengthMeter } from "/@/components/general/StrengthMeter";
 import { IconPicker } from "/@/components/general/Icon";
 import { CountdownInput } from "/@/components/general/CountDown";
+import { BasicTitle } from "/@/components/general/Basic";
+import { CropperAvatar } from "/@/components/general/Cropper";
 
-const componentMap = new Map<ComponentType, Component>();
+const componentMap = new Map<ComponentType | string, Component>();
 
 componentMap.set("Input", Input);
 componentMap.set("InputGroup", Input.Group);
@@ -41,7 +44,6 @@ componentMap.set("InputSearch", Input.Search);
 componentMap.set("InputTextArea", Input.TextArea);
 componentMap.set("InputNumber", InputNumber);
 componentMap.set("AutoComplete", AutoComplete);
-
 componentMap.set("Select", Select);
 componentMap.set("ApiSelect", ApiSelect);
 componentMap.set("ApiTree", ApiTree);
@@ -57,25 +59,30 @@ componentMap.set("ApiCascader", ApiCascader);
 componentMap.set("Cascader", Cascader);
 componentMap.set("Slider", Slider);
 componentMap.set("Rate", Rate);
+componentMap.set("Transfer", Transfer);
 componentMap.set("ApiTransfer", ApiTransfer);
 
 componentMap.set("DatePicker", DatePicker);
 componentMap.set("MonthPicker", DatePicker.MonthPicker);
 componentMap.set("RangePicker", DatePicker.RangePicker);
 componentMap.set("WeekPicker", DatePicker.WeekPicker);
-componentMap.set("TimePicker", DatePicker.TimePicker);
+componentMap.set("TimePicker", TimePicker);
+componentMap.set("TimeRangePicker", TimePicker.TimeRangePicker);
 componentMap.set("StrengthMeter", StrengthMeter);
 componentMap.set("IconPicker", IconPicker);
 componentMap.set("InputCountDown", CountdownInput);
 
 componentMap.set("Upload", BasicUpload);
 componentMap.set("Divider", Divider);
+componentMap.set("CropperAvatar", CropperAvatar);
 
-export function add(compName: ComponentType, component: Component) {
+componentMap.set("BasicTitle", BasicTitle);
+
+export function add<T extends string, R extends Component>(compName: ComponentType | T, component: R) {
   componentMap.set(compName, component);
 }
 
-export function del(compName: ComponentType) {
+export function del<T extends string>(compName: ComponentType | T) {
   componentMap.delete(compName);
 }
 
