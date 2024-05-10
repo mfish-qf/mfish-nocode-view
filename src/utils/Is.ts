@@ -97,3 +97,8 @@ export function isUrl(path: string): boolean {
     /^https?:\/\/(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+\.?)+(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+)(:\d+)?(\/.*)?(\?.*)?(#.*)?/;
   return reg.test(path);
 }
+
+export function isPascalCase(str: string): boolean {
+  const regex = /^[A-Z][A-Za-z]*$/;
+  return regex.test(str);
+}

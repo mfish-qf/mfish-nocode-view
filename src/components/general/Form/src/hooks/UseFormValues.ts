@@ -1,9 +1,9 @@
-import { isArray, isFunction, isObject, isString, isNullOrUnDef } from "/@/utils/Is";
+import { isArray, isFunction, isObject, isString, isEmpty } from "/@/utils/Is";
 import { dateUtil } from "/@/utils/DateUtil";
 import { unref } from "vue";
 import type { Ref, ComputedRef } from "vue";
 import type { FormProps, FormSchema } from "../types/Form";
-import { cloneDeep, set } from "lodash-es";
+import { cloneDeep, get, isNil, set, unset } from "lodash-es";
 
 interface UseFormValuesContext {
   defaultValueRef: Ref<any>;
@@ -13,7 +13,7 @@ interface UseFormValuesContext {
 }
 
 /**
- * @desription deconstruct array-link key. This method will mutate the target.
+ * @description deconstruct array-link key. This method will mutate the target.
  */
 function tryDeconstructArray(key: string, value: any, target: Recordable) {
   const pattern = /^\[(.+)\]$/;
@@ -31,7 +31,7 @@ function tryDeconstructArray(key: string, value: any, target: Recordable) {
 }
 
 /**
- * @desription deconstruct object-link key. This method will mutate the target.
+ * @description deconstruct object-link key. This method will mutate the target.
  */
 function tryDeconstructObject(key: string, value: any, target: Recordable) {
   const pattern = /^\{(.+)\}$/;
@@ -96,31 +96,61 @@ export function useFormValues({ defaultValueRef, getSchema, formModel, getProps 
         continue;
       }
       // If the value to be converted is empty, remove the field
-      if (!values[field]) {
-        Reflect.deleteProperty(values, field);
+      if (!get(values, field)) {
+        unset(values, field);
         continue;
       }
 
-      const [startTime, endTime]: string[] = values[field];
+      const [startTime, endTime]: string[] = get(values, field);
+
       const [startTimeFormat, endTimeFormat] = Array.isArray(format) ? format : [format, format];
-      values[startTimeKey] = dateUtil(startTime).format(startTimeFormat);
-      values[endTimeKey] = dateUtil(endTime).format(endTimeFormat);
-      Reflect.deleteProperty(values, field);
+
+      if (!isNil(startTime) && !isEmpty(startTime)) {
+        set(values, startTimeKey, formatTime(startTime, startTimeFormat));
+      }
+      if (!isNil(endTime) && !isEmpty(endTime)) {
+        set(values, endTimeKey, formatTime(endTime, endTimeFormat));
+      }
+      unset(values, field);
     }
 
     return values;
+  }
+
+  function formatTime(time: string, format: string) {
+    if (format === "timestamp") {
+      return dateUtil(time).unix();
+    } else if (format === "timestampStartDay") {
+      return dateUtil(time).startOf("day").unix();
+    }
+    return dateUtil(time).format(format);
   }
 
   function initDefault() {
     const schemas = unref(getSchema);
     const obj: Recordable = {};
     schemas.forEach((item) => {
-      const { defaultValue } = item;
-      if (!isNullOrUnDef(defaultValue)) {
+      const { defaultValue, defaultValueObj, componentProps = {} } = item;
+      const fieldKeys = Object.keys(defaultValueObj || {});
+      if (fieldKeys.length) {
+        fieldKeys.forEach((field) => {
+          obj[field] = defaultValueObj![field];
+          if (formModel[field] === undefined) {
+            formModel[field] = defaultValueObj![field];
+          }
+        });
+      }
+      if (!isNil(defaultValue)) {
         obj[item.field] = defaultValue;
 
         if (formModel[item.field] === undefined) {
           formModel[item.field] = defaultValue;
+        }
+      }
+      if (!isNil(componentProps?.defaultValue)) {
+        obj[item.field] = componentProps?.defaultValue;
+        if (formModel[item.field] === undefined) {
+          formModel[item.field] = componentProps?.defaultValue;
         }
       }
     });
