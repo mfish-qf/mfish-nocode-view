@@ -54,7 +54,6 @@
   import { SysLog } from "/@/api/sys/model/SysLogModel";
   import { buildDictTag } from "/@/utils/DictUtils";
   import DictTag from "/@/components/general/DictTag/DictTag.vue";
-  import { useDictStore } from "/@/store/modules/Dict";
   defineOptions({ name: "SysLogManagement" });
 
   const [registerModal, { openModal }] = useModal();
@@ -80,10 +79,9 @@
   });
 
   function handleQuery(record: SysLog) {
-    const store = useDictStore();
-    const reqSourceTag = buildDictTag(record.reqSource, store.getDict("sys_req_source"));
-    const operTypeTag = buildDictTag(record.operType, store.getDict("sys_log_type"));
-    const reqTypeTag = buildDictTag(record.reqType, store.getDict("sys_req_type"));
+    const reqSourceTag = buildDictTag("sys_req_source", record.reqSource);
+    const operTypeTag = buildDictTag("sys_log_type", record.operType);
+    const reqTypeTag = buildDictTag("sys_req_type", record.reqType);
     openModal(true, { ...record, reqSourceTag, operTypeTag, reqTypeTag });
   }
 

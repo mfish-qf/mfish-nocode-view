@@ -1,7 +1,6 @@
 import { getDictItems } from "/@/api/sys/DictItem";
-import { DictItem } from "/@/api/sys/model/DictItemModel";
-import { h, Ref, unref } from "vue";
-import { Tag } from "ant-design-vue";
+import { h } from "vue";
+import DictTag from "/@/components/general/DictTag/DictTag.vue";
 
 export const getDictProps = (param) => {
   return {
@@ -16,12 +15,6 @@ export const getDictProps = (param) => {
   };
 };
 
-export const buildDictTag = (value: String | number, dict: DictItem[] | Ref<DictItem[]> | undefined) => {
-  if (!dict) return;
-  for (const source of unref(dict)) {
-    if (source.dictValue === value) {
-      return h(Tag, { color: source.color }, { default: () => source.dictLabel });
-    }
-  }
-  return h("div");
+export const buildDictTag = (code: string, value: string | number | boolean | undefined) => {
+  return h(DictTag, { code, value });
 };
