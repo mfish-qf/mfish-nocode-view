@@ -51,7 +51,6 @@
   import { buildDictTag } from "/@/utils/DictUtils";
   import { Job } from "/@/api/scheduler/model/JobModel";
   import DictTag from "/@/components/general/DictTag/DictTag.vue";
-  import { useDictStore } from "/@/store/modules/Dict";
   defineOptions({ name: "JobLogManagement" });
   const [registerModal, { openModal }] = useModal();
   const [registerTable, { reload }] = useTable({
@@ -82,9 +81,8 @@
   }
 
   function handleQuery(record: Job) {
-    const store = useDictStore();
-    const jobTypesTag = buildDictTag(record.jobType, store.getDict("sys_job_type"));
-    const jobStatusTag = buildDictTag(record.status, store.getDict("sys_job_status"));
+    const jobTypesTag = buildDictTag("sys_job_type", record.jobType);
+    const jobStatusTag = buildDictTag("sys_job_status", record.status);
     openModal(true, { ...record, jobTypesTag, jobStatusTag });
   }
 
