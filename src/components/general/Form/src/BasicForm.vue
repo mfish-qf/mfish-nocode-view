@@ -35,7 +35,7 @@
   </AForm>
 </template>
 <script lang="ts">
-  import type { FormActionType, FormProps, FormSchema } from "./types/Form";
+  import type { FormActionType, FormProps, FormSchemaInner as FormSchema } from "./types/Form";
   import type { AdvanceState } from "./types/Hooks";
   import type { Ref } from "vue";
   import { reactive, ref, computed, unref, onMounted, watch, nextTick } from "vue";
@@ -98,7 +98,7 @@
         };
       });
 
-      const getBindValue = computed(() => ({ ...attrs, ...props, ...unref(getProps) } as Recordable));
+      const getBindValue = computed(() => ({ ...attrs, ...props, ...unref(getProps) }) as Recordable);
 
       const getSchema = computed((): FormSchema[] => {
         const schemas: FormSchema[] = cloneDeep(unref(schemaRef) || (unref(getProps).schemas as any));
