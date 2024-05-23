@@ -35,7 +35,7 @@
         default: () => ({})
       },
       setFormModel: {
-        type: Function as PropType<(key: string, value: any, schema?: FormSchema) => void>,
+        type: Function as PropType<(key: string, value: any) => void>,
         default: null
       },
       tableAction: {
