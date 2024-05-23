@@ -135,7 +135,9 @@ export const ssoTenantFormSchema: FormSchema[] = [
     component: "Select",
     componentProps: {
       mode: "multiple",
-      showSearch: true
+      showSearch: true,
+      optionFilterProp: "label",
+      getPopupContainer: () => document.body
     }
   },
   {

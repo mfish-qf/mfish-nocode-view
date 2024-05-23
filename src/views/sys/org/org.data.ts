@@ -134,7 +134,8 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       mode: "multiple",
       showSearch: true,
-      optionFilterProp: "label"
+      optionFilterProp: "label",
+      getPopupContainer: () => document.body
     }
   },
   {
