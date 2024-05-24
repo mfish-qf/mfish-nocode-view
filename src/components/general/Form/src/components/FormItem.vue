@@ -1,7 +1,7 @@
 <script lang="tsx">
   import type { PropType, Ref } from "vue";
   import { computed, defineComponent, toRefs, unref } from "vue";
-  import type { FormActionType, FormProps, FormSchema } from "../types/Form";
+  import type { FormActionType, FormProps, FormSchemaInner as FormSchema } from "../types/Form";
   import type { RuleObject } from "ant-design-vue/lib/form/interface";
   import type { TableActionType } from "/@/components/general/Table";
   import { Col, Divider, Form } from "ant-design-vue";
@@ -315,8 +315,8 @@
             return slot
               ? getSlot(slots, slot, unref(getValues))
               : render
-              ? render(unref(getValues))
-              : renderComponent();
+                ? render(unref(getValues))
+                : renderComponent();
           };
 
           const showSuffix = !!suffix;

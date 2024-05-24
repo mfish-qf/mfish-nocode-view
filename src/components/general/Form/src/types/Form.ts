@@ -197,13 +197,13 @@ interface BaseFormSchema<T extends ComponentType = any> {
   show?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
 
   // Render the content in the form-item tag
-  render?: (renderCallbackParams: RenderCallbackParams, opts: RenderOpts) => VNode | VNode[] | string;
+  render?: (renderCallbackParams: RenderCallbackParams, opts?: RenderOpts) => VNode | VNode[] | string;
 
   // Rendering col content requires outer wrapper form-item
-  renderColContent?: (renderCallbackParams: RenderCallbackParams, opts: RenderOpts) => VNode | VNode[] | string;
+  renderColContent?: (renderCallbackParams: RenderCallbackParams, opts?: RenderOpts) => VNode | VNode[] | string;
 
   renderComponentContent?:
-    | ((renderCallbackParams: RenderCallbackParams, opts: RenderOpts) => any)
+    | ((renderCallbackParams: RenderCallbackParams, opts?: RenderOpts) => any)
     | VNode
     | VNode[]
     | string;
