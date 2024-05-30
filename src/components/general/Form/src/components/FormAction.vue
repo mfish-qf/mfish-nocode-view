@@ -66,9 +66,7 @@
   const { resetAction, submitAction } = useFormContext();
 
   const actionColOpt = computed(() => {
-    const { showAdvancedButton, actionSpan: span, actionColOptions } = props;
-    const linkSpan = showAdvancedButton && !props.hideAdvanceBtn ? 4 : 0;
-    const actionSpan = 24 - span - linkSpan;
+    const { showAdvancedButton, actionSpan, actionColOptions } = props;
     const advancedSpanObj = showAdvancedButton ? { span: actionSpan < 6 ? 24 : actionSpan } : {};
     const actionColOpt: Partial<ColEx> = {
       style: { textAlign: "left" },
