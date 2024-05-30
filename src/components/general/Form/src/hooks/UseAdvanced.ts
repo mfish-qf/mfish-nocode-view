@@ -56,9 +56,8 @@ export default function ({ advanceState, emit, getProps, getSchema, formModel, d
     { immediate: true }
   );
 
-  function getAdvanced(itemCol: Partial<ColEx>, itemColSum = 0, isLastAction = false) {
+  function getAdvanced(itemCol: Partial<ColEx>, itemColSum = 0, lastRowCol = 0, isLastAction = false) {
     const width = unref(realWidthRef);
-
     const mdWidth =
       parseInt(itemCol.md as string) ||
       parseInt(itemCol.xs as string) ||
@@ -69,14 +68,24 @@ export default function ({ advanceState, emit, getProps, getSchema, formModel, d
     const lgWidth = parseInt(itemCol.lg as string) || mdWidth;
     const xlWidth = parseInt(itemCol.xl as string) || lgWidth;
     const xxlWidth = parseInt(itemCol.xxl as string) || xlWidth;
+    const sumRowCol = (width) => {
+      itemColSum += width;
+      let temp = lastRowCol;
+      temp += width;
+      if (temp > BASIC_COL_LEN) {
+        lastRowCol = 0;
+      }
+      lastRowCol += width;
+    };
+
     if (width <= screenEnum.LG) {
-      itemColSum += mdWidth;
+      sumRowCol(mdWidth);
     } else if (width < screenEnum.XL) {
-      itemColSum += lgWidth;
+      sumRowCol(lgWidth);
     } else if (width < screenEnum.XXL) {
-      itemColSum += xlWidth;
+      sumRowCol(xlWidth);
     } else {
-      itemColSum += xxlWidth;
+      sumRowCol(xxlWidth);
     }
 
     if (isLastAction) {
@@ -96,13 +105,13 @@ export default function ({ advanceState, emit, getProps, getSchema, formModel, d
         advanceState.isLoad = true;
         advanceState.isAdvanced = !advanceState.isAdvanced;
       }
-      return { isAdvanced: advanceState.isAdvanced, itemColSum };
+      return { isAdvanced: advanceState.isAdvanced, itemColSum, lastRowCol };
     }
     if (itemColSum > BASIC_COL_LEN * (unref(getProps).alwaysShowLines || 1)) {
-      return { isAdvanced: advanceState.isAdvanced, itemColSum };
+      return { isAdvanced: advanceState.isAdvanced, itemColSum, lastRowCol };
     } else {
       // The first line is always displayed
-      return { isAdvanced: true, itemColSum };
+      return { isAdvanced: true, itemColSum, lastRowCol };
     }
   }
 
@@ -110,7 +119,8 @@ export default function ({ advanceState, emit, getProps, getSchema, formModel, d
 
   function updateAdvanced() {
     let itemColSum = 0;
-    let realItemColSum = 0;
+    //最后一行的列宽度
+    let lastRowCol = 0;
     const { baseColProps = {} } = unref(getProps);
 
     for (const schema of unref(getSchema)) {
@@ -132,24 +142,23 @@ export default function ({ advanceState, emit, getProps, getSchema, formModel, d
           }
         });
       }
-
       if (isShow && (colProps || baseColProps)) {
-        const { itemColSum: sum, isAdvanced } = getAdvanced({ ...baseColProps, ...colProps }, itemColSum);
+        const {
+          itemColSum: sum,
+          lastRowCol: rowCol,
+          isAdvanced
+        } = getAdvanced({ ...baseColProps, ...colProps }, itemColSum, lastRowCol);
 
         itemColSum = sum || 0;
-        if (isAdvanced) {
-          realItemColSum = itemColSum;
-        }
+        lastRowCol = rowCol;
         fieldsIsAdvancedMap[schema.field] = isAdvanced;
       }
     }
 
     // 确保页面发送更新
     vm?.proxy?.$forceUpdate();
-
-    advanceState.actionSpan = (realItemColSum % BASIC_COL_LEN) + unref(getEmptySpan);
-
-    getAdvanced(unref(getProps).actionColOptions || { span: BASIC_COL_LEN }, itemColSum, true);
+    advanceState.actionSpan = BASIC_COL_LEN - lastRowCol + unref(getEmptySpan);
+    getAdvanced(unref(getProps).actionColOptions || { span: BASIC_COL_LEN }, itemColSum, lastRowCol, true);
 
     emit("advanced-change", advanceState.isAdvanced);
   }

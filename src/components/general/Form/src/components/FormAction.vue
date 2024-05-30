@@ -1,7 +1,7 @@
 <template>
   <a-col v-bind="actionColOpt" v-if="showActionButtonGroup">
     <div style="width: 100%" :style="{ textAlign: actionColOpt.style.textAlign }">
-      <FormItem>
+      <Form.Item>
         <slot name="submitBefore"></slot>
         <a-button
           type="primary"
@@ -22,98 +22,80 @@
           <BasicArrow class="ml-1" :expand="!isAdvanced" up />
         </a-button>
         <slot name="advanceAfter"></slot>
-      </FormItem>
+      </Form.Item>
     </div>
   </a-col>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import type { ColEx } from "../types";
-  import { defineComponent, computed, PropType } from "vue";
-  import { Form, Col } from "ant-design-vue";
-  import { Button, ButtonProps } from "/@/components/general/Button";
+  import { computed, PropType } from "vue";
+  import { Form, Col as ACol, Button as AButton } from "ant-design-vue";
+  import { ButtonProps } from "/@/components/general/Button";
   import { BasicArrow } from "/@/components/general/Basic";
   import { useFormContext } from "../hooks/UseFormContext";
   import { useI18n } from "/@/hooks/web/UseI18n";
   import { propTypes } from "/@/utils/PropTypes";
 
-  type ButtonOptions = Partial<ButtonProps> & { text: string };
+  defineOptions({ name: "BasicFormAction" });
 
-  export default defineComponent({
-    name: "BasicFormAction",
-    components: {
-      FormItem: Form.Item,
-      AButton: Button,
-      BasicArrow,
-      ACol: Col
+  const props = defineProps({
+    showActionButtonGroup: propTypes.bool.def(true),
+    showResetButton: propTypes.bool.def(true),
+    showSubmitButton: propTypes.bool.def(true),
+    showAdvancedButton: propTypes.bool.def(true),
+    resetButtonOptions: {
+      type: Object as PropType<ButtonProps>,
+      default: () => ({})
     },
-    props: {
-      showActionButtonGroup: propTypes.bool.def(true),
-      showResetButton: propTypes.bool.def(true),
-      showSubmitButton: propTypes.bool.def(true),
-      showAdvancedButton: propTypes.bool.def(true),
-      resetButtonOptions: {
-        type: Object as PropType<ButtonOptions>,
-        default: () => ({})
-      },
-      submitButtonOptions: {
-        type: Object as PropType<ButtonOptions>,
-        default: () => ({})
-      },
-      actionColOptions: {
-        type: Object as PropType<Partial<ColEx>>,
-        default: () => ({})
-      },
-      actionSpan: propTypes.number.def(6),
-      isAdvanced: propTypes.bool,
-      hideAdvanceBtn: propTypes.bool
+    submitButtonOptions: {
+      type: Object as PropType<ButtonProps>,
+      default: () => ({})
     },
-    emits: ["toggle-advanced"],
-    setup(props, { emit }) {
-      const { t } = useI18n();
-
-      const actionColOpt = computed(() => {
-        const { showAdvancedButton, actionSpan: span, actionColOptions } = props;
-        const actionSpan = 24 - span;
-        const advancedSpanObj = showAdvancedButton ? { span: actionSpan < 6 ? 24 : actionSpan } : {};
-        const actionColOpt: Partial<ColEx> = {
-          style: { textAlign: "left" },
-          span: showAdvancedButton ? 6 : 4,
-          ...advancedSpanObj,
-          ...actionColOptions
-        };
-        return actionColOpt;
-      });
-
-      const getResetBtnOptions = computed((): ButtonOptions => {
-        return Object.assign(
-          {
-            text: t("common.resetText")
-          },
-          props.resetButtonOptions
-        );
-      });
-
-      const getSubmitBtnOptions = computed(() => {
-        return Object.assign(
-          {
-            text: t("common.queryText")
-          },
-          props.submitButtonOptions
-        );
-      });
-
-      function toggleAdvanced() {
-        emit("toggle-advanced");
-      }
-
-      return {
-        t,
-        actionColOpt,
-        getResetBtnOptions,
-        getSubmitBtnOptions,
-        toggleAdvanced,
-        ...useFormContext()
-      };
-    }
+    actionColOptions: {
+      type: Object as PropType<Partial<ColEx>>,
+      default: () => ({})
+    },
+    actionSpan: propTypes.number.def(6),
+    isAdvanced: propTypes.bool,
+    hideAdvanceBtn: propTypes.bool
   });
+
+  const emit = defineEmits(["toggle-advanced"]);
+
+  const { t } = useI18n();
+  const { resetAction, submitAction } = useFormContext();
+
+  const actionColOpt = computed(() => {
+    const { showAdvancedButton, actionSpan, actionColOptions } = props;
+    const advancedSpanObj = showAdvancedButton ? { span: actionSpan < 6 ? 24 : actionSpan } : {};
+    const actionColOpt: Partial<ColEx> = {
+      style: { textAlign: "left" },
+      span: showAdvancedButton ? 6 : 4,
+      ...advancedSpanObj,
+      ...actionColOptions
+    };
+    return actionColOpt;
+  });
+
+  const getResetBtnOptions = computed((): ButtonProps => {
+    return Object.assign(
+      {
+        text: t("common.resetText")
+      },
+      props.resetButtonOptions
+    );
+  });
+
+  const getSubmitBtnOptions = computed((): ButtonProps => {
+    return Object.assign(
+      {
+        text: t("common.queryText")
+      },
+      props.submitButtonOptions
+    );
+  });
+
+  function toggleAdvanced() {
+    emit("toggle-advanced");
+  }
 </script>
