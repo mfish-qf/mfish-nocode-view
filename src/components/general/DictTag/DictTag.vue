@@ -1,6 +1,6 @@
 <!--
  @description: 字典标签
- @author: qiufeng
+ @author: mfish
  @date: 2024/3/22
 -->
 <script lang="tsx">

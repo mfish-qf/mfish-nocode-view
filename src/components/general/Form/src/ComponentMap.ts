@@ -34,6 +34,7 @@ import { IconPicker } from "/@/components/general/Icon";
 import { CountdownInput } from "/@/components/general/CountDown";
 import { BasicTitle } from "/@/components/general/Basic";
 import { CropperAvatar } from "/@/components/general/Cropper";
+import EmptyCol from "./components/EmptyCol.vue";
 
 const componentMap = new Map<ComponentType | string, Component>();
 
@@ -77,6 +78,7 @@ componentMap.set("Divider", Divider);
 componentMap.set("CropperAvatar", CropperAvatar);
 
 componentMap.set("BasicTitle", BasicTitle);
+componentMap.set("EmptyCol", EmptyCol);
 
 export function add<T extends string, R extends Component>(compName: ComponentType | T, component: R) {
   componentMap.set(compName, component);
