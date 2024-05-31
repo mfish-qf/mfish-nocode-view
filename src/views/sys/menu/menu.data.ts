@@ -25,6 +25,10 @@ export const columns: BasicColumn[] = [
     width: 180
   },
   {
+    title: "路由地址",
+    dataIndex: "routePath"
+  },
+  {
     title: "组件",
     dataIndex: "component"
   },
