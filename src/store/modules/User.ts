@@ -21,7 +21,6 @@ interface UserState {
   refreshToken?: string;
   roleInfoList: RoleInfo[];
   roleList: Set<string>;
-  sessionTimeout?: boolean;
   isLogout?: boolean;
 }
 
@@ -40,8 +39,6 @@ export const useUserStore = defineStore({
     roleInfoList: [],
     // 角色code列表
     roleList: new Set<string>(),
-    // token时长
-    sessionTimeout: false,
     //判断是否登出操作
     isLogout: false
   }),
@@ -63,9 +60,6 @@ export const useUserStore = defineStore({
     },
     getRoleList(): Set<string> {
       return this.roleList;
-    },
-    getSessionTimeout(): boolean {
-      return !!this.sessionTimeout;
     },
     getIsLogout(): boolean {
       return !!this.isLogout;
@@ -93,9 +87,6 @@ export const useUserStore = defineStore({
     setUserInfo(info: SsoUser | null) {
       this.userInfo = info;
     },
-    setSessionTimeout(flag: boolean) {
-      this.sessionTimeout = flag;
-    },
     setIsLogout(flag: boolean) {
       this.isLogout = flag;
     },
@@ -104,7 +95,6 @@ export const useUserStore = defineStore({
       this.token = "";
       this.tenantId = undefined;
       this.roleList = new Set<string>();
-      this.sessionTimeout = false;
       this.isLogout = false;
     },
     /**
@@ -129,8 +119,10 @@ export const useUserStore = defineStore({
         return Promise.reject(error);
       }
     },
-    async getAccountInfo(): Promise<SsoUser | null> {
-      if (!this.getToken) return null;
+    async getAccountInfo(): Promise<SsoUser> {
+      if (!this.getToken) {
+        throw new Error("token为空");
+      }
       // 获取用户信息
       const userInfo = await this.getUserInfoAction();
       const permissionStore = usePermissionStore();
@@ -138,14 +130,12 @@ export const useUserStore = defineStore({
       if (!permissionStore.isDynamicAddedRoute) {
         await permissionStore.addRouter(router);
       }
-      const sessionTimeout = this.sessionTimeout;
-      if (sessionTimeout) {
-        this.setSessionTimeout(false);
-      }
       return userInfo;
     },
-    async getUserInfoAction(): Promise<SsoUser | null> {
-      if (!this.getToken) return null;
+    async getUserInfoAction(): Promise<SsoUser> {
+      if (!this.getToken) {
+        throw new Error("token为空");
+      }
       const userInfo = await getUserInfo();
       const { userRoles = [], tenants } = userInfo;
       if (isArray(userRoles)) {
@@ -175,7 +165,6 @@ export const useUserStore = defineStore({
         }
         this.setToken(undefined);
         this.setRefreshToken(undefined);
-        this.setSessionTimeout(false);
         this.setUserInfo(null);
         this.setTenantId(undefined);
         clearAuthCache(true);

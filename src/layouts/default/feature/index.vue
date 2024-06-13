@@ -4,26 +4,20 @@
   import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
   import { useHeaderSetting } from "/@/hooks/setting/UseHeaderSetting";
   import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useUserStoreWithOut } from "/@/store/modules/User";
   import { SettingButtonPositionEnum } from "/@/enums/AppEnum";
   import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
-  import SessionTimeoutLogin from "/@/views/sys/login/SessionTimeoutLogin.vue";
 
   export default defineComponent({
     name: "LayoutFeatures",
     components: {
       BackTop: FloatButton.BackTop,
       LayoutLockPage: createAsyncComponent(() => import("/@/views/sys/lock/index.vue")),
-      SettingDrawer: createAsyncComponent(() => import("/@/layouts/default/setting/index.vue")),
-      SessionTimeoutLogin
+      SettingDrawer: createAsyncComponent(() => import("/@/layouts/default/setting/index.vue"))
     },
     setup() {
       const { getUseOpenBackTop, getShowSettingButton, getSettingButtonPosition, getFullContent } = useRootSetting();
-      const userStore = useUserStoreWithOut();
       const { prefixCls } = useDesign("setting-drawer-feature");
       const { getShowHeader } = useHeaderSetting();
-
-      const getIsSessionTimeout = computed(() => userStore.getSessionTimeout);
 
       const getIsFixedSettingDrawer = computed(() => {
         if (!unref(getShowSettingButton)) {
@@ -41,8 +35,7 @@
         getTarget: () => document.body,
         getUseOpenBackTop,
         getIsFixedSettingDrawer,
-        prefixCls,
-        getIsSessionTimeout
+        prefixCls
       };
     }
   });
@@ -52,7 +45,6 @@
   <LayoutLockPage />
   <BackTop v-if="getUseOpenBackTop" :target="getTarget" />
   <SettingDrawer v-if="getIsFixedSettingDrawer" :class="prefixCls" />
-  <SessionTimeoutLogin v-if="getIsSessionTimeout" />
 </template>
 
 <style lang="less">

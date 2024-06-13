@@ -12,28 +12,6 @@ export const columns: BasicColumn[] = [
     align: "left"
   },
   {
-    title: "图标",
-    dataIndex: "menuIcon",
-    width: 50,
-    customRender: ({ record }) => {
-      return h(Icon, { icon: record.menuIcon });
-    }
-  },
-  {
-    title: "权限标识",
-    dataIndex: "permissions",
-    width: 180
-  },
-  {
-    title: "组件",
-    dataIndex: "component"
-  },
-  {
-    title: "排序",
-    dataIndex: "menuSort",
-    width: 50
-  },
-  {
     title: "菜单状态",
     dataIndex: "isVisible",
     width: 80,
@@ -46,9 +24,30 @@ export const columns: BasicColumn[] = [
     }
   },
   {
-    title: "创建时间",
-    dataIndex: "createTime",
+    title: "图标",
+    dataIndex: "menuIcon",
+    width: 50,
+    customRender: ({ record }) => {
+      return h(Icon, { icon: record.menuIcon });
+    }
+  },
+  {
+    title: "路由地址",
+    dataIndex: "routePath"
+  },
+  {
+    title: "组件",
+    dataIndex: "component"
+  },
+  {
+    title: "权限标识",
+    dataIndex: "permissions",
     width: 180
+  },
+  {
+    title: "排序",
+    dataIndex: "menuSort",
+    width: 50
   }
 ];
 const isMenu = (type: number) => type === 1;

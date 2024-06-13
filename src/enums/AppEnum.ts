@@ -20,11 +20,6 @@ export enum SettingButtonPositionEnum {
   FIXED = "fixed"
 }
 
-export enum SessionTimeoutProcessingEnum {
-  ROUTE_JUMP,
-  PAGE_COVERAGE
-}
-
 // Route switching animation
 // 路由切换动画
 export enum RouterTransitionEnum {

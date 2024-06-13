@@ -1,10 +1,4 @@
-import {
-  ContentEnum,
-  ThemeEnum,
-  RouterTransitionEnum,
-  SettingButtonPositionEnum,
-  SessionTimeoutProcessingEnum
-} from "/@/enums/AppEnum";
+import { ContentEnum, ThemeEnum, RouterTransitionEnum, SettingButtonPositionEnum } from "/@/enums/AppEnum";
 import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from "/@/enums/MenuEnum";
 import { CacheTypeEnum } from "/@/enums/CacheEnum";
 
@@ -68,8 +62,6 @@ export interface ProjectConfig {
   showDarkModeToggle: boolean;
   // Configure where the button is displayed
   settingButtonPosition: SettingButtonPositionEnum;
-  // Session timeout processing
-  sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
   // Website gray mode, open for possible mourning dates
   grayMode: boolean;
   // Whether to turn on the color weak mode

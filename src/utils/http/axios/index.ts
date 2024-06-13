@@ -14,9 +14,6 @@ import { useErrorLogStoreWithOut } from "/@/store/modules/ErrorLog";
 import { useI18n } from "/@/hooks/web/UseI18n";
 import { formatRequestDate, joinTimestamp, messageTips } from "./Helper";
 import { AxiosRetry } from "/@/utils/http/axios/AxiosRetry";
-import { SessionTimeoutProcessingEnum } from "/@/enums/AppEnum";
-import { useUserStoreWithOut } from "/@/store/modules/User";
-import projectSetting from "/@/settings/ProjectSetting";
 
 const globSetting = useGlobSetting();
 
@@ -179,24 +176,9 @@ const transform: AxiosTransform = {
     const retryRequest = new AxiosRetry();
     const { isOpenRetry } = config.requestOptions?.retryRequest;
     config.method?.toUpperCase() === RequestEnum.GET && isOpenRetry && retryRequest.retry(axiosInstance, error);
-    unauthorizedHandle(status);
     return Promise.reject(error);
   }
 };
-
-function unauthorizedHandle(status: number) {
-  if (status === 401) {
-    const userStore = useUserStoreWithOut();
-    const stp = projectSetting.sessionTimeoutProcessing;
-    if (stp === SessionTimeoutProcessingEnum.PAGE_COVERAGE) {
-      userStore.setSessionTimeout(true);
-      return;
-    }
-    setTimeout(() => {
-      userStore.logout().then();
-    }, 500);
-  }
-}
 
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
   return new VAxios(
