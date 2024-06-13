@@ -1,13 +1,7 @@
 import type { ProjectConfig } from "/#/config";
 import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from "/@/enums/MenuEnum";
 import { CacheTypeEnum } from "/@/enums/CacheEnum";
-import {
-  ContentEnum,
-  ThemeEnum,
-  RouterTransitionEnum,
-  SettingButtonPositionEnum,
-  SessionTimeoutProcessingEnum
-} from "/@/enums/AppEnum";
+import { ContentEnum, ThemeEnum, RouterTransitionEnum, SettingButtonPositionEnum } from "/@/enums/AppEnum";
 import { SIDE_BAR_BG_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, APP_PRESET_COLOR_LIST } from "./DesignSetting";
 
 // ! You need to clear the browser cache after the change
@@ -23,9 +17,6 @@ const setting: ProjectConfig = {
 
   // Permission-related cache is stored in sessionStorage or localStorage
   permissionCacheType: CacheTypeEnum.LOCAL,
-
-  // Session timeout processing
-  sessionTimeoutProcessing: SessionTimeoutProcessingEnum.ROUTE_JUMP,
 
   // color
   themeColor: APP_PRESET_COLOR_LIST[0],

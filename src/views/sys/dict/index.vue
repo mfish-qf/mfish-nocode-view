@@ -8,7 +8,7 @@
     <BasicTable @register="registerTable">
       <template #toolbar>
         <a-button type="primary" @click="handleCreate" v-auth="'sys:dict:insert'">新增 </a-button>
-        <a-button type="error" @click="handleExport" v-auth="'sys:dict:export'">导出 </a-button>
+        <a-button color="error" @click="handleExport" v-auth="'sys:dict:export'">导出 </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">

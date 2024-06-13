@@ -17,15 +17,14 @@ export function createPermissionGuard(router: Router) {
     if (whitePathList.includes(to.path as PageEnum)) {
       //如果访问登陆页面且token存在，判断token是否有效直接进入redirect地址或首页地址
       if (to.path === PageEnum.BASE_LOGIN && token) {
-        const isSessionTimeout = userStore.getSessionTimeout;
         //增加try catch方式请求异常造成无法返回首页
         try {
           await userStore.getAccountInfo();
-          if (!isSessionTimeout) {
-            next((to.query?.redirect as string) || "/");
-            return;
-          }
-        } catch {}
+          next((to.query?.redirect as string) || "/");
+          return;
+        } catch {
+          userStore.setToken(undefined);
+        }
       }
       //如果登录类型为code方式走统一认证登录
       if (to.path === PageEnum.BASE_LOGIN && curLoginType === "authorization_code") {
