@@ -69,9 +69,17 @@
     return unref(options).reduce((prev, next: Recordable) => {
       if (next) {
         const value = next[valueField];
+        const labels = labelField.split(",");
+        let labelJoin = "";
+        for (const label of labels) {
+          labelJoin += "-" + next[label];
+        }
+        if (labelJoin.length > 0) {
+          labelJoin = labelJoin.substring(1);
+        }
         prev.push({
           ...omit(next, [labelField, valueField]),
-          label: next[labelField],
+          label: labelJoin,
           value: numberToString ? `${value}` : value,
           disabled: next.labelDisabled ? next.labelDisabled : false
         });
