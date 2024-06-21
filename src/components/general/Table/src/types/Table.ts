@@ -362,7 +362,7 @@ export interface BasicTableProps<T = any> {
   /**
    * Data can be changed again before rendering.
    * The default configuration of general user empty data.
-   * You can configured globally through [ConfigProvider](https://antdv.com/components/config-provider-cn/)
+   * You can configure globally through [ConfigProvider](https://antdv.com/components/config-provider-cn/)
    *
    * @version 1.5.4
    */
@@ -390,7 +390,7 @@ export interface BasicTableProps<T = any> {
    * @param expanded
    * @param record
    */
-  onExpand?: (expande: boolean, record: T) => void;
+  onExpand?: (expanded: boolean, record: T) => void;
 
   /**
    * Callback executed when the expanded rows change

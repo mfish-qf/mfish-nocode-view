@@ -165,7 +165,7 @@ export const usePermissionStore = defineStore({
           route.children = [
             {
               path: "",
-              name: menu.id,
+              name: menu.id + "child",
               meta: { title: menu.menuName, icon: menu.menuIcon },
               component: importComponent(menu.component)
             }
