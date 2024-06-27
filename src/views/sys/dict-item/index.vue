@@ -37,7 +37,7 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { unref, ref } from "vue";
+  import { unref, ref, onBeforeMount } from "vue";
   import { useRoute } from "vue-router";
   import { PageWrapper } from "/@/components/general/Page";
   import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
@@ -74,9 +74,14 @@
       dataIndex: "action"
     }
   });
-
   const { setTitle } = useTabs();
-  setTitle(`字典项: ${unref(dictCode)}`);
+  onBeforeMount(() => {
+    if (!dictCode.value) {
+      const index = route.fullPath.lastIndexOf("/");
+      dictCode.value = route.fullPath.substring(index + 1);
+    }
+    setTitle(`字典项: ${unref(dictCode)}`);
+  });
 
   function handleCreate() {
     openModal(true, {
