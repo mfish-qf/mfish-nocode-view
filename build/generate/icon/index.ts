@@ -37,7 +37,7 @@ async function generateIcon() {
         type: "input",
         name: "output",
         message: "Select the icon set that needs to be generated?",
-        default: "src/components/Icon/data"
+        default: "src/components/general/Icon/data"
       }
     ])
     .then(async (answers) => {
