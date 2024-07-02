@@ -58,6 +58,16 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       target: "es2015",
       cssTarget: "chrome80",
       outDir: OUTPUT_DIR,
+      rollupOptions: {
+        output: {
+          // 入口文件名
+          entryFileNames: "assets/entry/[name]-[hash].js",
+          manualChunks: {
+            vue: ["vue", "pinia", "vue-router"],
+            antd: ["ant-design-vue", "@ant-design/icons-vue"]
+          }
+        }
+      },
       /**
        * 当 minify=“minify:'terser'” 解开注释 需要安装Terser
        * npm add -D terser

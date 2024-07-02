@@ -75,10 +75,10 @@
             color === "success"
               ? defaultSeed.colorSuccess
               : color === "warning"
-              ? defaultSeed.colorWarning
-              : color === "error"
-              ? defaultSeed.colorError
-              : color,
+                ? defaultSeed.colorWarning
+                : color === "error"
+                  ? defaultSeed.colorError
+                  : color,
           display: "inline-flex"
         };
       });
