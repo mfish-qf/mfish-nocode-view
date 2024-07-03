@@ -9,6 +9,7 @@ import UnoCSS from "unocss/vite";
 import legacy from "@vitejs/plugin-legacy";
 import { configImageminPlugin } from "./Imagemin";
 import { configMockPlugin } from "./Mock";
+import { configVisualizerConfig } from "./Visualizer";
 
 /**
  * @description: 插件引用
@@ -16,7 +17,7 @@ import { configMockPlugin } from "./Mock";
  * @date: 2022/9/23 22:21
  */
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
-  const { VITE_LEGACY, VITE_USE_IMAGEMIN, VITE_USE_MOCK } = viteEnv;
+  const { VITE_LEGACY, VITE_USE_IMAGEMIN, VITE_USE_MOCK, VITE_USE_VISUALIZER } = viteEnv;
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     vue(),
     vueJsx(),
@@ -34,7 +35,10 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   vitePlugins.push(UnoCSS());
   //请求icon不产生http请求
   vitePlugins.push(purgeIcons());
+
   if (isBuild) {
+    //用于分析打包后文件大小占比
+    VITE_USE_VISUALIZER && vitePlugins.push(configVisualizerConfig());
     VITE_USE_IMAGEMIN && vitePlugins.push(configImageminPlugin());
   }
   return vitePlugins;

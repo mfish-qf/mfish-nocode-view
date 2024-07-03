@@ -20,12 +20,6 @@ importers:
       '@iconify/iconify':
         specifier: ^3.1.1
         version: 3.1.1
-      '@types/qrcode':
-        specifier: ^1.5.5
-        version: 1.5.5
-      '@vue/runtime-core':
-        specifier: ^3.4.31
-        version: 3.4.31
       '@vue/shared':
         specifier: ^3.4.31
         version: 3.4.31
@@ -95,9 +89,6 @@ importers:
       uuid:
         specifier: ^9.0.1
         version: 9.0.1
-      vite:
-        specifier: ^5.3.3
-        version: 5.3.3(@types/node@20.14.9)(less@4.2.0)(terser@5.31.1)
       vue:
         specifier: ^3.4.31
         version: 3.4.31(typescript@5.5.3)
@@ -156,6 +147,9 @@ importers:
       '@types/node':
         specifier: ^20.14.9
         version: 20.14.9
+      '@types/qrcode':
+        specifier: ^1.5.5
+        version: 1.5.5
       '@types/sm-crypto':
         specifier: ^0.3.4
         version: 0.3.4
@@ -273,6 +267,9 @@ importers:
       unocss:
         specifier: ^0.58.9
         version: 0.58.9(postcss@8.4.39)(rollup@4.18.0)(vite@5.3.3(@types/node@20.14.9)(less@4.2.0)(terser@5.31.1))
+      vite:
+        specifier: ^5.3.3
+        version: 5.3.3(@types/node@20.14.9)(less@4.2.0)(terser@5.31.1)
       vite-plugin-html:
         specifier: ^3.2.2
         version: 3.2.2(vite@5.3.3(@types/node@20.14.9)(less@4.2.0)(terser@5.31.1))
