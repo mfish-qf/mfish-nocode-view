@@ -13,7 +13,7 @@
   import Iconify from "@purge-icons/generated";
   import { isString } from "/@/utils/Is";
   import { propTypes } from "/@/utils/PropTypes";
-  import { theme } from "ant-design-vue/lib";
+  import { theme } from "ant-design-vue";
 
   const SVG_END_WITH_FLAG = "|svg";
   export default defineComponent({

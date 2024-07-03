@@ -2,7 +2,7 @@ import { generateAntColors, primaryColor } from "../config/ThemeConfig";
 // start(ant3使用属性)
 // import { getThemeVariables } from "ant-design-vue/dist/theme";
 // end
-import { theme } from "ant-design-vue/lib";
+import { theme } from "ant-design-vue";
 import convertLegacyToken from "ant-design-vue/lib/theme/convertLegacyToken";
 import { resolve } from "path";
 const { defaultAlgorithm, defaultSeed } = theme;
