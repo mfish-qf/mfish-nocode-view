@@ -61,10 +61,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       rollupOptions: {
         output: {
           // 入口文件名
-          entryFileNames: "assets/entry/[name]-[hash].js",
+          entryFileNames: "assets/[name]-[hash].js",
           manualChunks: {
             vue: ["vue", "pinia", "vue-router"],
-            antd: ["ant-design-vue", "@ant-design/icons-vue"]
+            antd: ["ant-design-vue", "@ant-design/icons-vue", "@ant-design/colors"],
+            naive: ["naive-ui"],
+            echarts: ["echarts"]
           }
         }
       },
