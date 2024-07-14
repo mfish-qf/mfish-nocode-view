@@ -127,7 +127,8 @@ export const ssoTenantFormSchema: FormSchema[] = [
     field: "userId",
     label: "管理员",
     component: "Input",
-    slot: "userSearch"
+    slot: "userSearch",
+    required: true
   },
   {
     label: "角色",
