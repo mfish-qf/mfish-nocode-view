@@ -40,6 +40,18 @@ export const columns: BasicColumn[] = [
     }
   },
   {
+    title: "所属组织",
+    dataIndex: "orgNames",
+    width: 180,
+    customRender: ({ value }) => {
+      const tags: any[] = [];
+      for (const tag of value) {
+        tags.push(h(Tag, { class: "ml-1 mt-1" }, () => tag));
+      }
+      return h("div", tags);
+    }
+  },
+  {
     title: "状态",
     dataIndex: "status",
     width: 80,
