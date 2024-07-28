@@ -1,6 +1,6 @@
 <template>
   <div class="anticon" :class="getAppLogoClass" @click="allowGoHome ? goHome : ''">
-    <img src="../../../../assets/images/logo.png" />
+    <img src="../../../../assets/images/logo.png" alt="logo" />
     <div class="ml-2 truncate md:opacity-100" :class="getTitleClass" v-show="showTitle">
       <slot v-if="titleSlot" name="title"></slot>
       <span v-else>{{ title }}</span>
