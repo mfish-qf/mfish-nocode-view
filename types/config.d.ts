@@ -40,7 +40,7 @@ export interface GlobConfig {
 }
 
 //国际化类型
-export type LocaleType = "zh_CN" | "en" | "ru" | "ja" | "ko";
+export type LocaleType = "zh-CN" | "en" | "ru" | "ja" | "ko";
 
 //国际化设置
 export interface LocaleSetting {

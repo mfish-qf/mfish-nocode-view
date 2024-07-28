@@ -134,7 +134,7 @@
     showTableSetting: true,
     bordered: true,
     showIndexColumn: false,
-    resizeHeightOffset: props.source === 1 ? 18 : 0,
+    resizeHeightOffset: props.source === 1 ? 26 : 0,
     actionColumn: {
       width: props.source === 1 ? 80 : 120,
       title: "操作",
@@ -200,7 +200,7 @@
 <style lang="less">
   @prefix-cls: ~"@{namespace}-account";
   [data-theme="dark"] {
-    .@{prefix-cls}{
+    .@{prefix-cls} {
       border-left: 1px solid #303030;
     }
   }
