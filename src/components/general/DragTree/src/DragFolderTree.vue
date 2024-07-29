@@ -504,11 +504,12 @@
     });
   };
 
-  const deleteFolder = (treeKey) => {
+  const deleteFolder = (treeKey: string, callback: (res: boolean) => void) => {
     const loop = (treeKey: string, nodes, pNode) => {
       for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].key === treeKey) {
           emit("save:delete", nodes[i], (res) => {
+            callback(res);
             if (res) {
               nodes.splice(i, 1);
               pNodeIconChange(pNode);
@@ -544,7 +545,9 @@
         editFolder(treeKey);
         break;
       case "3":
-        deleteFolder(treeKey);
+        deleteFolder(treeKey, (res) => {
+          console.log(res);
+        });
         break;
     }
   }, 200);
