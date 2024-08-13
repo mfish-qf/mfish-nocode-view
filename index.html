@@ -11,10 +11,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="renderer" content="webkit" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><%= title %></title>
+  <title><%= VITE_GLOB_APP_TITLE %></title>
   <style>
       html[data-theme='dark'] .app-loading {
-          background-color: #2C344A;
+          background: #0d0d10;
       }
 
       html[data-theme='dark'] .app-loading .app-loading-title {
@@ -22,10 +22,16 @@
       }
 
       .app-loading {
+          position: fixed;
+          top: 0;
+          left: 0;
           display: flex;
-          justify-content: center;
-          align-items: center;
           flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
           background-color: #f4f7f9;
       }
 
@@ -134,13 +140,6 @@
               opacity: 100%;
           }
       }
-      .icon {
-          width: 1em;
-          height: 1em;
-          vertical-align: -0.15em;
-          fill: currentColor;
-          overflow: hidden;
-      }
   </style>
 </head>
 <body>
@@ -160,7 +159,7 @@
       <div>
         <span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
       </div>
-      <div class="app-loading-title"><%= title %></div>
+      <div class="app-loading-title"><%= VITE_GLOB_APP_TITLE %></div>
     </div>
   </div>
 </div>

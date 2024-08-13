@@ -3,7 +3,7 @@
  * @author: mfish
  * @date: 2022/10/11 17:08
  */
-//请求结果
+// 请求结果
 export enum ResultEnum {
   SUCCESS = 200,
   ERROR = -1,
@@ -11,7 +11,7 @@ export enum ResultEnum {
   TYPE = "success"
 }
 
-//请求方法
+// 请求方法
 export enum RequestEnum {
   GET = "GET",
   POST = "POST",
@@ -19,7 +19,7 @@ export enum RequestEnum {
   DELETE = "DELETE"
 }
 
-//ContentType类型
+// ContentType类型
 export enum ContentTypeEnum {
   // json
   JSON = "application/json;charset=UTF-8",
@@ -27,6 +27,6 @@ export enum ContentTypeEnum {
   FORM_URLENCODED = "application/x-www-form-urlencoded;charset=UTF-8",
   // form-data  upload
   FORM_DATA = "multipart/form-data;charset=UTF-8",
-  //OCTET_STREAM download
+  // OCTET_STREAM download
   OCTET_STREAM = "application/octet-stream;charset=UTF-8"
 }

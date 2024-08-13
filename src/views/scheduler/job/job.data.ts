@@ -1,10 +1,10 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
-import { getDictProps } from "/@/utils/DictUtils";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
+import { getDictProps } from "@/utils/DictUtils";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
 import { Switch } from "ant-design-vue";
-import { setJobStatus } from "/@/api/scheduler/Job";
+import { setJobStatus } from "@/api/scheduler/Job";
 
 /**
  * @description: 定时调度任务
@@ -46,10 +46,10 @@ export const columns: BasicColumn[] = [
     dataIndex: "allowConcurrent",
     width: 100,
     customRender: ({ record }) => {
-      const enable = ~~record.allowConcurrent === 1;
+      const enable = Math.trunc(record.allowConcurrent) === 1;
       const color = enable ? "green" : "red";
       const text = enable ? "允许" : "不允许";
-      return h(Tag, { color: color }, () => text);
+      return h(Tag, { color }, () => text);
     }
   },
   {

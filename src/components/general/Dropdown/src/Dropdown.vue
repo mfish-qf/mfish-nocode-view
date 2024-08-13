@@ -1,13 +1,13 @@
 <template>
-  <a-dropdown :trigger="trigger" v-bind="$attrs">
+  <ADropdown :trigger="trigger" v-bind="$attrs">
     <span>
       <slot></slot>
     </span>
     <template #overlay>
-      <a-menu :selectedKeys="selectedKeys">
+      <AMenu :selected-keys="selectedKeys">
         <template v-for="item in dropMenuList" :key="`${item.event}`">
-          <a-menu-item v-bind="getAttr(item.event)" @click="handleClickMenu(item)" :disabled="item.disabled">
-            <a-popconfirm v-if="popconfirm && item.popConfirm" v-bind="getPopConfirmAttrs(item.popConfirm)">
+          <AMenuItem v-bind="getAttr(item.event)" @click="handleClickMenu(item)" :disabled="item.disabled">
+            <APopconfirm v-if="popconfirm && item.popConfirm" v-bind="getPopConfirmAttrs(item.popConfirm)">
               <template #icon v-if="item.popConfirm.icon">
                 <Icon :icon="item.popConfirm.icon" :color="item.color" />
               </template>
@@ -15,32 +15,27 @@
                 <Icon :icon="item.icon" v-if="item.icon" :color="item.color" />
                 <span class="ml-1">{{ item.text }}</span>
               </div>
-            </a-popconfirm>
+            </APopconfirm>
             <template v-else>
               <Icon :icon="item.icon" v-if="item.icon" :color="item.color" />
               <span class="ml-1">{{ item.text }}</span>
             </template>
-          </a-menu-item>
-          <a-menu-divider v-if="item.divider" :key="`d-${item.event}`" />
+          </AMenuItem>
+          <AMenuDivider v-if="item.divider" :key="`d-${item.event}`" />
         </template>
-      </a-menu>
+      </AMenu>
     </template>
-  </a-dropdown>
+  </ADropdown>
 </template>
 
 <script lang="ts" setup>
   import { computed, PropType } from "vue";
   import type { DropMenu } from "./typing";
   import { Dropdown, Menu, Popconfirm } from "ant-design-vue";
-  import { Icon } from "/@/components/general/Icon";
+  import { Icon } from "@/components/general/Icon";
   import { omit } from "lodash-es";
-  import { isFunction } from "/@/utils/Is";
-
-  const ADropdown = Dropdown;
-  const AMenu = Menu;
-  const AMenuItem = Menu.Item;
-  const AMenuDivider = Menu.Divider;
-  const APopconfirm = Popconfirm;
+  import { isFunction } from "@/utils/Is";
+  import { Recordable } from "@mfish/types";
 
   const props = defineProps({
     popconfirm: Boolean,
@@ -64,8 +59,12 @@
       default: () => []
     }
   });
-
   const emit = defineEmits(["menuEvent"]);
+  const ADropdown = Dropdown;
+  const AMenu = Menu;
+  const AMenuItem = Menu.Item;
+  const AMenuDivider = Menu.Divider;
+  const APopconfirm = Popconfirm;
 
   function handleClickMenu(item: DropMenu) {
     const { event } = item;
@@ -77,8 +76,8 @@
   const getPopConfirmAttrs = computed(() => {
     return (attrs) => {
       const originAttrs = omit(attrs, ["confirm", "cancel", "icon"]);
-      if (!attrs.onConfirm && attrs.confirm && isFunction(attrs.confirm)) originAttrs["onConfirm"] = attrs.confirm;
-      if (!attrs.onCancel && attrs.cancel && isFunction(attrs.cancel)) originAttrs["onCancel"] = attrs.cancel;
+      if (!attrs.onConfirm && attrs.confirm && isFunction(attrs.confirm)) originAttrs.onConfirm = attrs.confirm;
+      if (!attrs.onCancel && attrs.cancel && isFunction(attrs.cancel)) originAttrs.onCancel = attrs.cancel;
       return originAttrs;
     };
   });

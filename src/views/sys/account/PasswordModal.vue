@@ -15,11 +15,11 @@
 </template>
 
 <script lang="ts" setup>
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { BasicForm, useForm } from "/@/components/general/Form";
-  import { formSchema } from "/@/views/sys/account/pwd.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
-  import { changePwd } from "/@/api/sys/User";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicForm, useForm } from "@/components/general/Form";
+  import { formSchema } from "@/views/sys/account/pwd.data";
+  import { usePermission } from "@/hooks/web/UsePermission";
+  import { changePwd } from "@/api/sys/User";
   defineOptions({ name: "PasswordModal" });
 
   const [registerForm, { validate, resetFields, updateSchema, setFieldsValue }] = useForm({
@@ -34,8 +34,8 @@
   const [registerModal, { closeModal }] = useModalInner((data) => {
     resetFields().then();
     setFieldsValue(data).then();
-    //是超户，不需要
-    if (hasRole(SUPER_ROLE) && "1" !== data.userId) {
+    // 是超户，不需要
+    if (hasRole(SUPER_ROLE) && data.userId !== "1") {
       updateSchema([
         {
           field: "oldPwd",

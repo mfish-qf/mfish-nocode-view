@@ -4,9 +4,9 @@
     @register="register"
     :title="t('component.cropper.modalTitle')"
     width="800px"
-    :canFullscreen="false"
+    :can-fullscreen="false"
     @ok="handleOk"
-    :okText="t('component.cropper.okText')"
+    :ok-text="t('component.cropper.okText')"
   >
     <div :class="prefixCls">
       <div :class="`${prefixCls}-left`">
@@ -22,16 +22,16 @@
         </div>
 
         <div :class="`${prefixCls}-toolbar`">
-          <Upload :fileList="[]" accept="image/*" :beforeUpload="handleBeforeUpload">
+          <Upload :file-list="[]" accept="image/*" :before-upload="handleBeforeUpload">
             <Tooltip :title="t('component.cropper.selectImage')" placement="bottom">
-              <a-button size="small" preIcon="ant-design:upload-outlined" type="primary" />
+              <a-button size="small" pre-icon="ant-design:upload-outlined" type="primary" />
             </Tooltip>
           </Upload>
           <Space>
             <Tooltip :title="t('component.cropper.btn_reset')" placement="bottom">
               <a-button
                 type="primary"
-                preIcon="ant-design:reload-outlined"
+                pre-icon="ant-design:reload-outlined"
                 size="small"
                 :disabled="!src"
                 @click="handlerToolbar('reset')"
@@ -40,7 +40,7 @@
             <Tooltip :title="t('component.cropper.btn_rotate_left')" placement="bottom">
               <a-button
                 type="primary"
-                preIcon="ant-design:rotate-left-outlined"
+                pre-icon="ant-design:rotate-left-outlined"
                 size="small"
                 :disabled="!src"
                 @click="handlerToolbar('rotate', -45)"
@@ -49,7 +49,7 @@
             <Tooltip :title="t('component.cropper.btn_rotate_right')" placement="bottom">
               <a-button
                 type="primary"
-                preIcon="ant-design:rotate-right-outlined"
+                pre-icon="ant-design:rotate-right-outlined"
                 size="small"
                 :disabled="!src"
                 @click="handlerToolbar('rotate', 45)"
@@ -58,7 +58,7 @@
             <Tooltip :title="t('component.cropper.btn_scale_x')" placement="bottom">
               <a-button
                 type="primary"
-                preIcon="vaadin:arrows-long-h"
+                pre-icon="vaadin:arrows-long-h"
                 size="small"
                 :disabled="!src"
                 @click="handlerToolbar('scaleX')"
@@ -67,7 +67,7 @@
             <Tooltip :title="t('component.cropper.btn_scale_y')" placement="bottom">
               <a-button
                 type="primary"
-                preIcon="vaadin:arrows-long-v"
+                pre-icon="vaadin:arrows-long-v"
                 size="small"
                 :disabled="!src"
                 @click="handlerToolbar('scaleY')"
@@ -76,7 +76,7 @@
             <Tooltip :title="t('component.cropper.btn_zoom_in')" placement="bottom">
               <a-button
                 type="primary"
-                preIcon="ant-design:zoom-in-outlined"
+                pre-icon="ant-design:zoom-in-outlined"
                 size="small"
                 :disabled="!src"
                 @click="handlerToolbar('zoom', 0.1)"
@@ -85,7 +85,7 @@
             <Tooltip :title="t('component.cropper.btn_zoom_out')" placement="bottom">
               <a-button
                 type="primary"
-                preIcon="ant-design:zoom-out-outlined"
+                pre-icon="ant-design:zoom-out-outlined"
                 size="small"
                 :disabled="!src"
                 @click="handlerToolbar('zoom', -0.1)"
@@ -115,12 +115,12 @@
   import { defineComponent, ref } from "vue";
   import CropperImage from "./Cropper.vue";
   import { Space, Upload, Avatar, Tooltip } from "ant-design-vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { dataURLtoBlob } from "/@/utils/file/Base64Conver";
-  import { isFunction } from "/@/utils/Is";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { UploadFileParams } from "/#/axios";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { dataURLtoBlob } from "@/utils/file/Base64Conver";
+  import { isFunction } from "@/utils/Is";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { UploadFileParams } from "#/axios";
 
   const props = {
     circled: { type: Boolean, default: true },
@@ -153,10 +153,10 @@
         reader.readAsDataURL(file);
         src.value = "";
         previewSource.value = "";
-        reader.onload = function (e) {
+        reader.addEventListener("load", (e) => {
           src.value = (e.target?.result as string) ?? "";
           fileName = file.name;
-        };
+        });
         return false;
       }
 
@@ -233,7 +233,9 @@
       background: #eee;
       background-image: linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0, transparent 75%, rgb(0 0 0 / 25%) 0),
         linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0, transparent 75%, rgb(0 0 0 / 25%) 0);
-      background-position: 0 0, 12px 12px;
+      background-position:
+        0 0,
+        12px 12px;
       background-size: 24px 24px;
     }
 

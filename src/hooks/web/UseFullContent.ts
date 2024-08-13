@@ -1,5 +1,5 @@
 import { computed, unref } from "vue";
-import { useAppStore } from "/@/store/modules/App";
+import { useAppStore } from "@/store/modules/App";
 import { useRouter } from "vue-router";
 
 /**

@@ -6,7 +6,7 @@
 <script lang="ts" setup>
   import { computed } from "vue";
   import CodeMirrorEditor from "./codemirror/CodeMirrorEdit.vue";
-  import { isString } from "/@/utils/Is";
+  import { isString } from "@/utils/Is";
   import { MODE } from "./Typing";
 
   const props = defineProps({
@@ -34,7 +34,7 @@
     if (isString(value)) {
       try {
         result = JSON.parse(value);
-      } catch (e) {
+      } catch {
         emit("format-error", value);
         return value as string;
       }

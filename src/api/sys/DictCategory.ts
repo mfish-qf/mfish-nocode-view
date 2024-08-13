@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { DictCategory, ReqDictCategory, DictCategoryPageModel } from "/@/api/sys/model/DictCategoryModel";
+import { defHttp } from "@/utils/http/axios";
+import { DictCategory, ReqDictCategory, DictCategoryPageModel } from "@/api/sys/model/DictCategoryModel";
 
 /**
  * @description: 属性分类字典
@@ -33,7 +33,7 @@ export const getDictCategoryTree = (reqDictCategory?: ReqDictCategory) => {
  * @param reqDictCategory
  */
 export function exportDictCategory(reqDictCategory?: ReqDictCategory) {
-  return defHttp.download({ url: Api.DictCategory + "/export", params: reqDictCategory });
+  return defHttp.download({ url: `${Api.DictCategory}/export`, params: reqDictCategory });
 }
 
 /**
@@ -63,7 +63,7 @@ export function updateDictCategory(dictCategory: DictCategory) {
  * @return
  */
 export function deleteDictCategory(id: string) {
-  return defHttp.delete<DictCategory>({ url: Api.DictCategory + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<DictCategory>({ url: `${Api.DictCategory}/${id}` }, { successMessageMode: "message" });
 }
 
 /**
@@ -72,7 +72,7 @@ export function deleteDictCategory(id: string) {
  * @param direction
  */
 export function queryCategoryTreeByCode(code: string, direction: "up" | "down" | "all") {
-  return defHttp.get<DictCategory[]>({ url: Api.DictCategoryTree + "/" + code, params: { direction } });
+  return defHttp.get<DictCategory[]>({ url: `${Api.DictCategoryTree}/${code}`, params: { direction } });
 }
 
 /**
@@ -81,9 +81,9 @@ export function queryCategoryTreeByCode(code: string, direction: "up" | "down" |
  * @param direction
  */
 export function queryCategoryListByCode(code: string, direction: "up" | "down" | "all") {
-  return defHttp.get<DictCategory[]>({ url: Api.DictCategoryList + "/" + code, params: { direction } });
+  return defHttp.get<DictCategory[]>({ url: `${Api.DictCategoryList}/${code}`, params: { direction } });
 }
 
 export function queryCategoryOneByCode(code: string) {
-  return defHttp.get<DictCategory>({ url: Api.DictCategoryOne + "/" + code });
+  return defHttp.get<DictCategory>({ url: `${Api.DictCategoryOne}/${code}` });
 }

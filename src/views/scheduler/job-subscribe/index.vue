@@ -31,11 +31,12 @@
 </template>
 <script lang="ts" setup>
   import { watch } from "vue";
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { getJobSubscribeById } from "/@/api/scheduler/JobSubscribe";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { getJobSubscribeById } from "@/api/scheduler/JobSubscribe";
   import { columns } from "./jobSubscribe.data";
-  import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
-  import { buildUUID } from "/@/utils/Uuid";
+  import { dateUtil, formatToDateTime } from "@/utils/DateUtil";
+  import { buildUUID } from "@/utils/Uuid";
+  import { Recordable } from "@mfish/types";
   defineOptions({ name: "JobSubscribeManagement" });
   const props = defineProps({
     jobId: { type: String, default: "" }

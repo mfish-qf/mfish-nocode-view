@@ -1,7 +1,7 @@
 import type { Router } from "vue-router";
 import { configureDynamicParamsMenu } from "../helper/MenuHelper";
 import { Menu } from "../Types";
-import { usePermissionStoreWithOut } from "/@/store/modules/Permission";
+import { usePermissionStoreWithOut } from "@/store/modules/Permission";
 
 export function createParamMenuGuard(router: Router) {
   const permissionStore = usePermissionStoreWithOut();
@@ -11,7 +11,7 @@ export function createParamMenuGuard(router: Router) {
       next();
       return;
     }
-    //是否已经动态添加路由
+    // 是否已经动态添加路由
     if (!permissionStore.getIsDynamicAddedRoute) {
       next();
       return;

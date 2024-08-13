@@ -3,8 +3,8 @@ import type { AdvanceState } from "../types/Hooks";
 import { ComputedRef, getCurrentInstance, Ref, shallowReactive } from "vue";
 import type { FormProps, FormSchema } from "../types/Form";
 import { computed, unref, watch } from "vue";
-import { isBoolean, isFunction, isNumber, isObject } from "/@/utils/Is";
-import { useBreakpoint } from "/@/hooks/event/UseBreakpoint";
+import { isBoolean, isFunction, isNumber, isObject } from "@/utils/Is";
+import { useBreakpoint } from "@/hooks/event/UseBreakpoint";
 import { useDebounceFn } from "@vueuse/core";
 
 const BASIC_COL_LEN = 24;
@@ -59,15 +59,15 @@ export default function ({ advanceState, emit, getProps, getSchema, formModel, d
   function getAdvanced(itemCol: Partial<ColEx>, itemColSum = 0, lastRowCol = 0, isLastAction = false) {
     const width = unref(realWidthRef);
     const mdWidth =
-      parseInt(itemCol.md as string) ||
-      parseInt(itemCol.xs as string) ||
-      parseInt(itemCol.sm as string) ||
+      Number.parseInt(itemCol.md as string) ||
+      Number.parseInt(itemCol.xs as string) ||
+      Number.parseInt(itemCol.sm as string) ||
       (itemCol.span as number) ||
       BASIC_COL_LEN;
 
-    const lgWidth = parseInt(itemCol.lg as string) || mdWidth;
-    const xlWidth = parseInt(itemCol.xl as string) || lgWidth;
-    const xxlWidth = parseInt(itemCol.xxl as string) || xlWidth;
+    const lgWidth = Number.parseInt(itemCol.lg as string) || mdWidth;
+    const xlWidth = Number.parseInt(itemCol.xl as string) || lgWidth;
+    const xxlWidth = Number.parseInt(itemCol.xxl as string) || xlWidth;
     const sumRowCol = (width) => {
       itemColSum += width;
       let temp = lastRowCol;
@@ -119,7 +119,7 @@ export default function ({ advanceState, emit, getProps, getSchema, formModel, d
 
   function updateAdvanced() {
     let itemColSum = 0;
-    //最后一行的列宽度
+    // 最后一行的列宽度
     let lastRowCol = 0;
     const { baseColProps = {} } = unref(getProps);
 
@@ -133,7 +133,7 @@ export default function ({ advanceState, emit, getProps, getSchema, formModel, d
 
       if (isFunction(show)) {
         isShow = show({
-          schema: schema,
+          schema,
           model: formModel,
           field: schema.field,
           values: {

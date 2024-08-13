@@ -1,13 +1,13 @@
-import { getStorageShortName } from "/@/utils/Env";
+import { getStorageShortName } from "@/utils/Env";
 import { createStorage as create, CreateStorageParams } from "./StorageCache";
-import { enableStorageEncryption } from "/@/settings/EncryptionSetting";
-import { DEFAULT_CACHE_TIME } from "/@/settings/EncryptionSetting";
+import { enableStorageEncryption } from "@/settings/EncryptionSetting";
+import { DEFAULT_CACHE_TIME } from "@/settings/EncryptionSetting";
 
 export type Options = Partial<CreateStorageParams>;
 
 const createOptions = (storage: Storage, options: Options = {}): Options => {
   return {
-    //调试模式下不加密
+    // 调试模式下不加密
     hasEncrypt: enableStorageEncryption,
     storage,
     prefixKey: getStorageShortName(),

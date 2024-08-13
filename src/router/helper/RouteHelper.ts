@@ -1,4 +1,4 @@
-import type { AppRouteRecordRaw } from "/@/router/Types";
+import type { AppRouteRecordRaw } from "@/router/Types";
 import type { Router, RouteRecordNormalized } from "vue-router";
 import { cloneDeep, omit } from "lodash-es";
 import { createRouter, createWebHashHistory } from "vue-router";
@@ -11,7 +11,7 @@ const viewsModules = import.meta.glob("../../views/**/*.{vue,tsx}");
  */
 export function importComponent(component: string) {
   const view = viewsModules[`../../views${component}`];
-  return !view ? null : view;
+  return view || null;
 }
 
 /**
@@ -21,8 +21,7 @@ export function importComponent(component: string) {
 export function flatMultiLevelRoutes(routeModules: AppRouteRecordRaw[]) {
   const modules: AppRouteRecordRaw[] = cloneDeep(routeModules);
 
-  for (let index = 0; index < modules.length; index++) {
-    const routeModule = modules[index];
+  for (const routeModule of modules) {
     // 判断级别是否 多级 路由
     if (!isMultipleRoute(routeModule)) {
       // 声明终止当前循环， 即跳过此次循环，进行下一轮
@@ -56,8 +55,7 @@ function promoteRouteLevel(routeModule: AppRouteRecordRaw) {
 // Add all sub-routes to the secondary route
 // 将所有子路由添加到二级路由
 function addToChildren(routes: RouteRecordNormalized[], children: AppRouteRecordRaw[], routeModule: AppRouteRecordRaw) {
-  for (let index = 0; index < children.length; index++) {
-    const child = children[index];
+  for (const child of children) {
     const route = routes.find((item) => item.name === child.name);
     if (!route) {
       continue;
@@ -81,8 +79,7 @@ function isMultipleRoute(routeModule: AppRouteRecordRaw) {
   }
   const children = routeModule.children;
   let flag = false;
-  for (let index = 0; index < children.length; index++) {
-    const child = children[index];
+  for (const child of children) {
     if (child.children?.length) {
       flag = true;
       break;

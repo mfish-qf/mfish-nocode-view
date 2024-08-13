@@ -1,5 +1,5 @@
 import { Ref, unref, computed } from "vue";
-import { useI18n } from "/@/hooks/web/UseI18n";
+import { useI18n } from "@/hooks/web/UseI18n";
 
 const { t } = useI18n();
 
@@ -25,11 +25,7 @@ export function useUploadType({
   const getStringAccept = computed(() => {
     return unref(getAccept)
       .map((item) => {
-        if (item.indexOf("/") > 0 || item.startsWith(".")) {
-          return item;
-        } else {
-          return `.${item}`;
-        }
+        return item.indexOf("/") > 0 || item.startsWith(".") ? item : `.${item}`;
       })
       .join(",");
   });

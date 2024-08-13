@@ -1,4 +1,4 @@
-import { PageResult } from "/@/api/model/BaseModel";
+import { PageResult } from "@/api/model/BaseModel";
 
 /**
  * @description: 任务订阅表

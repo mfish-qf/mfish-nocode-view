@@ -2,8 +2,8 @@ import { Modal } from "ant-design-vue";
 import { defineComponent, toRefs, unref } from "vue";
 import { basicProps } from "../Props";
 import { useModalDragMove } from "../hooks/UseModalDrag";
-import { useAttrs } from "/@/hooks/core/UseAttrs";
-import { extendSlots } from "/@/utils/helper/TsxHelper";
+import { useAttrs } from "@/hooks/core/UseAttrs";
+import { extendSlots } from "@/utils/helper/TsxHelper";
 
 export default defineComponent({
   name: "Modal",

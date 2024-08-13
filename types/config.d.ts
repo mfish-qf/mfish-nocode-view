@@ -1,6 +1,6 @@
-import { ContentEnum, ThemeEnum, RouterTransitionEnum, SettingButtonPositionEnum } from "/@/enums/AppEnum";
-import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from "/@/enums/MenuEnum";
-import { CacheTypeEnum } from "/@/enums/CacheEnum";
+import { ContentEnum, ThemeEnum, RouterTransitionEnum, SettingButtonPositionEnum } from "@/enums/AppEnum";
+import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from "@/enums/MenuEnum";
+import { CacheTypeEnum } from "@/enums/CacheEnum";
 
 /**
  * @description: 配置定义

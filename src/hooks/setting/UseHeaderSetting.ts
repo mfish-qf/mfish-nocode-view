@@ -1,10 +1,10 @@
-import type { HeaderSetting } from "/#/config";
+import type { HeaderSetting } from "#/config";
 import { computed, unref } from "vue";
-import { useAppStore } from "/@/store/modules/App";
-import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
-import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
-import { useFullContent } from "/@/hooks/web/UseFullContent";
-import { MenuModeEnum } from "/@/enums/MenuEnum";
+import { useAppStore } from "@/store/modules/App";
+import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
+import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+import { useFullContent } from "@/hooks/web/UseFullContent";
+import { MenuModeEnum } from "@/enums/MenuEnum";
 
 export function useHeaderSetting() {
   const { getFullContent } = useFullContent();

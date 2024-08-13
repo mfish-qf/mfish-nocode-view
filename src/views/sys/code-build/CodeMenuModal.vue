@@ -9,11 +9,11 @@
   </BasicModal>
 </template>
 <script setup lang="ts">
-  import { BasicForm, useForm } from "/@/components/general/Form";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { MenuListItem, MenuType } from "/@/api/sys/model/MenuModel";
-  import { getMenuList } from "/@/api/sys/Menu";
-  import { codeCreateMenu } from "/@/api/sys/CodeBuild";
+  import { BasicForm, useForm } from "@/components/general/Form";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { MenuListItem, MenuType } from "@/api/sys/model/MenuModel";
+  import { getMenuList } from "@/api/sys/Menu";
+  import { codeCreateMenu } from "@/api/sys/CodeBuild";
   import { ref } from "vue";
   const [registerForm, { resetFields, validate }] = useForm({
     labelWidth: 100,
@@ -46,7 +46,7 @@
   });
 
   async function handleSubmit() {
-    let values = (await validate()) as MenuListItem;
+    const values = (await validate()) as MenuListItem;
     setModalProps({ confirmLoading: true });
     try {
       await codeCreateMenu({ ...values, id: id.value });

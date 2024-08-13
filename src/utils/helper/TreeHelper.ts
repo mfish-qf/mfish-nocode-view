@@ -73,7 +73,7 @@ export function findPath<T = any>(tree: any, func: Fn, config: Partial<TreeHelpe
   const list = [...tree];
   const visitedSet = new Set();
   const { children } = config;
-  while (list.length) {
+  while (list.length > 0) {
     const node = list[0];
     if (visitedSet.has(node)) {
       path.pop();
@@ -95,9 +95,9 @@ export function findPathAll(tree: any, func: Fn, config: Partial<TreeHelperConfi
   const path: any[] = [];
   const list = [...tree];
   const result: any[] = [];
-  const visitedSet = new Set(),
-    { children } = config;
-  while (list.length) {
+  const visitedSet = new Set();
+  const { children } = config;
+  while (list.length > 0) {
     const node = list[0];
     if (visitedSet.has(node)) {
       path.pop();
@@ -141,7 +141,7 @@ export function forEach<T = any>(tree: T[], func: (n: T) => any, config: Partial
   const list: any[] = [...tree];
   const { children } = config;
   for (let i = 0; i < list.length; i++) {
-    //func 返回true就终止遍历，避免大量节点场景下无意义循环，引起浏览器卡顿
+    // func 返回true就终止遍历，避免大量节点场景下无意义循环，引起浏览器卡顿
     if (func(list[i])) {
       return;
     }
@@ -164,21 +164,19 @@ export function treeMap<T = any>(treeData: T[], opt: { children?: string; conver
 export function treeMapEach(data: any, { children = "children", conversion }: { children?: string; conversion: Fn }) {
   const haveChildren = Array.isArray(data[children]) && data[children].length > 0;
   const conversionData = conversion(data) || {};
-  if (haveChildren) {
-    return {
-      ...conversionData,
-      [children]: data[children].map((i: number) =>
-        treeMapEach(i, {
-          children,
-          conversion
-        })
-      )
-    };
-  } else {
-    return {
-      ...conversionData
-    };
-  }
+  return haveChildren
+    ? {
+        ...conversionData,
+        [children]: data[children].map((i: number) =>
+          treeMapEach(i, {
+            children,
+            conversion
+          })
+        )
+      }
+    : {
+        ...conversionData
+      };
 }
 
 /**

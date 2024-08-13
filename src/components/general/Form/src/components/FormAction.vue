@@ -1,40 +1,34 @@
 <template>
-  <a-col v-bind="actionColOpt" v-if="showActionButtonGroup">
+  <ACol v-bind="actionColOpt" v-if="showActionButtonGroup">
     <div style="width: 100%" :style="{ textAlign: actionColOpt.style.textAlign }">
       <Form.Item>
         <slot name="submitBefore"></slot>
-        <a-button
-          type="primary"
-          class="ml-2"
-          v-bind="getSubmitBtnOptions"
-          @click="submitAction"
-          v-if="showSubmitButton"
-        >
+        <AButton type="primary" class="ml-2" v-bind="getSubmitBtnOptions" @click="submitAction" v-if="showSubmitButton">
           {{ getSubmitBtnOptions.text }}
-        </a-button>
+        </AButton>
         <slot name="resetBefore"></slot>
-        <a-button type="default" class="ml-2" v-bind="getResetBtnOptions" @click="resetAction" v-if="showResetButton">
+        <AButton type="default" class="ml-2" v-bind="getResetBtnOptions" @click="resetAction" v-if="showResetButton">
           {{ getResetBtnOptions.text }}
-        </a-button>
+        </AButton>
         <slot name="advanceBefore"></slot>
-        <a-button type="link" size="small" @click="toggleAdvanced" v-if="showAdvancedButton && !hideAdvanceBtn">
+        <AButton type="link" size="small" @click="toggleAdvanced" v-if="showAdvancedButton && !hideAdvanceBtn">
           {{ isAdvanced ? t("component.form.putAway") : t("component.form.unfold") }}
           <BasicArrow class="ml-1" :expand="!isAdvanced" up />
-        </a-button>
+        </AButton>
         <slot name="advanceAfter"></slot>
       </Form.Item>
     </div>
-  </a-col>
+  </ACol>
 </template>
 <script lang="ts" setup>
   import type { ColEx } from "../types";
   import { computed, PropType } from "vue";
   import { Form, Col as ACol, Button as AButton } from "ant-design-vue";
-  import { ButtonProps } from "/@/components/general/Button";
-  import { BasicArrow } from "/@/components/general/Basic";
+  import { ButtonProps } from "@/components/general/Button";
+  import { BasicArrow } from "@/components/general/Basic";
   import { useFormContext } from "../hooks/UseFormContext";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { propTypes } from "/@/utils/PropTypes";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { propTypes } from "@/utils/PropTypes";
 
   defineOptions({ name: "BasicFormAction" });
 

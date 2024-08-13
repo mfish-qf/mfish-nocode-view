@@ -34,7 +34,7 @@ export function downloadByBase64(buf: string, filename: string, mime?: string, b
  * @param {*} bom
  */
 export function downloadByData(data: BlobPart, filename: string, mime?: string, bom?: BlobPart) {
-  const blobData = typeof bom !== "undefined" ? [bom, data] : [data];
+  const blobData = bom === undefined ? [data] : [bom, data];
   const blob = new Blob(blobData, { type: mime || "application/octet-stream" });
 
   const blobURL = window.URL.createObjectURL(blob);
@@ -42,12 +42,12 @@ export function downloadByData(data: BlobPart, filename: string, mime?: string, 
   tempLink.style.display = "none";
   tempLink.href = blobURL;
   tempLink.setAttribute("download", filename);
-  if (typeof tempLink.download === "undefined") {
+  if (tempLink.download === undefined) {
     tempLink.setAttribute("target", "_blank");
   }
-  document.body.appendChild(tempLink);
+  document.body.append(tempLink);
   tempLink.click();
-  document.body.removeChild(tempLink);
+  tempLink.remove();
   window.URL.revokeObjectURL(blobURL);
 }
 
@@ -64,10 +64,10 @@ export function downloadByUrl({
   target?: TargetContext;
   fileName?: string;
 }): boolean {
-  const isChrome = window.navigator.userAgent.toLowerCase().indexOf("chrome") > -1;
-  const isSafari = window.navigator.userAgent.toLowerCase().indexOf("safari") > -1;
+  const isChrome = window.navigator.userAgent.toLowerCase().includes("chrome");
+  const isSafari = window.navigator.userAgent.toLowerCase().includes("safari");
 
-  if (/(iP)/g.test(window.navigator.userAgent)) {
+  if (/(iP)/.test(window.navigator.userAgent)) {
     console.error("Your browser does not support download!");
     return false;
   }
@@ -87,7 +87,7 @@ export function downloadByUrl({
       return true;
     }
   }
-  if (url.indexOf("?") === -1) {
+  if (!url.includes("?")) {
     url += "?download";
   }
 

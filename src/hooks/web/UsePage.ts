@@ -1,10 +1,10 @@
 import type { RouteLocationRaw, Router } from "vue-router";
-import { PageEnum } from "/@/enums/PageEnum";
+import { PageEnum } from "@/enums/PageEnum";
 import { unref } from "vue";
 import { useRouter } from "vue-router";
-import { REDIRECT_NAME } from "/@/router/Constant";
-import { getMenu } from "/@/router/menus";
-import { router } from "/@/router";
+import { REDIRECT_NAME } from "@/router/Constant";
+import { getMenu } from "@/router/menus";
+import { router } from "@/router";
 
 export type PathAsPageEnum<T> = T extends { path: string } ? T & { path: PageEnum } : T;
 export type RouteLocationRawEx = PathAsPageEnum<RouteLocationRaw>;
@@ -34,10 +34,10 @@ export function useGo(_router?: Router) {
  */
 export function externalOpen(path: string) {
   const menu = getMenu(path);
-  //如果是外部打开
+  // 如果是外部打开
   if (menu?.isExternal) {
     const routeData = router.resolve({
-      path: path
+      path
     });
     window.open(routeData.href, "_blank");
     return true;
@@ -59,11 +59,11 @@ export const useRedo = (_router?: Router) => {
         return;
       }
       if (name && Object.keys(params).length > 0) {
-        params["_redirect_type"] = "name";
-        params["path"] = String(name);
+        params._redirect_type = "name";
+        params.path = String(name);
       } else {
-        params["_redirect_type"] = "path";
-        params["path"] = fullPath;
+        params._redirect_type = "path";
+        params.path = fullPath;
       }
       replace({ name: REDIRECT_NAME, params, query }).then(() => resolve(true));
     });

@@ -1,41 +1,41 @@
 <template>
-  <CollapseContainer title="个人信息" :canExpan="false">
-    <a-row :gutter="24">
-      <a-col :span="14">
+  <CollapseContainer title="个人信息" :can-expan="false">
+    <ARow :gutter="24">
+      <ACol :span="14">
         <BasicForm @register="register" />
-      </a-col>
-      <a-col :span="10">
+      </ACol>
+      <ACol :span="10">
         <div class="change-avatar">
           <div class="mb-2">头像</div>
           <CropperAvatar
-            :uploadApi="uploadApi"
+            :upload-api="uploadApi"
             :value="avatar"
-            btnText="更换头像"
-            :btnProps="{ preIcon: 'ant-design:cloud-upload-outlined' }"
+            btn-text="更换头像"
+            :btn-props="{ preIcon: 'ant-design:cloud-upload-outlined' }"
             @change="updateAvatar"
             width="150"
           />
         </div>
-      </a-col>
-    </a-row>
-    <a-row :gutter="24">
-      <a-col :offset="5">
+      </ACol>
+    </ARow>
+    <ARow :gutter="24">
+      <ACol :offset="5">
         <AButton type="primary" @click="handleSubmit">更新基本信息</AButton>
-      </a-col>
-    </a-row>
+      </ACol>
+    </ARow>
   </CollapseContainer>
 </template>
 <script lang="ts" setup>
   import { Button as AButton, Row as ARow, Col as ACol } from "ant-design-vue";
   import { onBeforeMount, onMounted, ref } from "vue";
-  import { BasicForm, useForm } from "/@/components/general/Form/index";
-  import { CollapseContainer } from "/@/components/general/Container";
-  import { CropperAvatar } from "/@/components/general/Cropper";
-  import { getUserInfo, updateMe } from "/@/api/sys/User";
+  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { CollapseContainer } from "@/components/general/Container";
+  import { CropperAvatar } from "@/components/general/Cropper";
+  import { getUserInfo, updateMe } from "@/api/sys/User";
   import { baseSetSchemas } from "./setting.data";
-  import { useUserStore } from "/@/store/modules/User";
-  import { uploadApi } from "/@/api/storage/Upload";
-  import { setHeaderImg } from "/@/utils/file/FileUtils";
+  import { useUserStore } from "@/store/modules/User";
+  import { uploadApi } from "@/api/storage/Upload";
+  import { setHeaderImg } from "@/utils/file/FileUtils";
 
   const userStore = useUserStore();
   const [register, { setFieldsValue, validate }] = useForm({
@@ -46,7 +46,7 @@
   let userInfo = userStore.getUserInfo;
   onMounted(async () => {
     const user = await getUserInfo();
-    if (userInfo != null) {
+    if (userInfo !== null) {
       userInfo = Object.assign(userInfo, user);
       setFieldsValue(userInfo).then();
     }
@@ -59,7 +59,7 @@
   });
 
   function updateAvatar({ data }) {
-    if (userInfo != null) {
+    if (userInfo !== null) {
       userInfo.headImgUrl = data;
       userStore.setUserInfo(userInfo);
       if (data) {

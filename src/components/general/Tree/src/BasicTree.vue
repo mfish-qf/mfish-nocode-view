@@ -6,16 +6,16 @@
   import TreeHeader from "./components/TreeHeader.vue";
   import { Tree, Spin, Empty } from "ant-design-vue";
   import { TreeIcon } from "./TreeIcon";
-  import { ScrollContainer } from "/@/components/general/Container";
+  import { ScrollContainer } from "@/components/general/Container";
   import { omit, get, difference, cloneDeep } from "lodash-es";
-  import { isArray, isBoolean, isEmpty, isFunction } from "/@/utils/Is";
-  import { extendSlots, getSlot } from "/@/utils/helper/TsxHelper";
-  import { filter, treeToList, eachTree } from "/@/utils/helper/TreeHelper";
+  import { isArray, isBoolean, isEmpty, isFunction } from "@/utils/Is";
+  import { extendSlots, getSlot } from "@/utils/helper/TsxHelper";
+  import { filter, treeToList, eachTree } from "@/utils/helper/TreeHelper";
   import { useTree } from "./hooks/UseTree";
-  import { useContextMenu } from "/@/hooks/web/UseContextMenu";
-  import { CreateContextOptions } from "/@/components/general/ContextMenu";
+  import { useContextMenu } from "@/hooks/web/UseContextMenu";
+  import { CreateContextOptions } from "@/components/general/ContextMenu";
   import { treeEmits, treeProps } from "./types/Tree";
-  import { createBEM } from "/@/utils/Bem";
+  import { createBEM } from "@/utils/Bem";
 
   export default defineComponent({
     name: "BasicTree",
@@ -53,7 +53,7 @@
       });
 
       const getBindValues = computed(() => {
-        let propsData = {
+        const propsData = {
           blockNode: true,
           ...attrs,
           ...props,
@@ -113,20 +113,18 @@
       } = useTree(treeDataRef, getFieldNames);
 
       function getIcon(params: Recordable, icon?: string) {
-        if (!icon) {
-          if (props.renderIcon && isFunction(props.renderIcon)) {
-            return props.renderIcon(params);
-          }
+        if (!icon && props.renderIcon && isFunction(props.renderIcon)) {
+          return props.renderIcon(params);
         }
         return icon;
       }
 
       async function handleRightClick({ event, node }: Recordable) {
         const { rightMenuList: menuList = [], beforeRightClick } = props;
-        let contextMenuOptions: CreateContextOptions = { event, items: [] };
+        const contextMenuOptions: CreateContextOptions = { event, items: [] };
 
         if (beforeRightClick && isFunction(beforeRightClick)) {
-          let result = await beforeRightClick(node, event);
+          const result = await beforeRightClick(node, event);
           if (Array.isArray(result)) {
             contextMenuOptions.items = result;
           } else {
@@ -214,7 +212,7 @@
           (node) => {
             const result = filterFn
               ? filterFn(searchValue, node, unref(getFieldNames))
-              : node[titleField]?.includes(searchValue) ?? false;
+              : (node[titleField]?.includes(searchValue) ?? false);
             if (result) {
               matchedKeys.push(node[keyField]);
             }
@@ -227,31 +225,31 @@
           const expandKeys = treeToList(searchState.searchData).map((val) => {
             return val[keyField];
           });
-          if (expandKeys && expandKeys.length) {
+          if (expandKeys && expandKeys.length > 0) {
             setExpandedKeys(expandKeys);
           }
         }
 
-        if (checkOnSearch && checkable && matchedKeys.length) {
+        if (checkOnSearch && checkable && matchedKeys.length > 0) {
           setCheckedKeys(matchedKeys);
         }
 
-        if (selectedOnSearch && matchedKeys.length) {
+        if (selectedOnSearch && matchedKeys.length > 0) {
           setSelectedKeys(matchedKeys);
         }
       }
 
       function handleClickNode(key: string, children: TreeItem[]) {
         if (!props.clickRowToExpand || !children || children.length === 0) return;
-        if (!state.expandedKeys.includes(key)) {
-          setExpandedKeys([...state.expandedKeys, key]);
-        } else {
+        if (state.expandedKeys.includes(key)) {
           const keys = [...state.expandedKeys];
-          const index = keys.findIndex((item) => item === key);
+          const index = keys.indexOf(key);
           if (index !== -1) {
             keys.splice(index, 1);
           }
           setExpandedKeys(keys);
+        } else {
+          setExpandedKeys([...state.expandedKeys, key]);
         }
       }
 
@@ -260,7 +258,7 @@
       });
 
       onMounted(() => {
-        const level = parseInt(props.defaultExpandLevel);
+        const level = Number.parseInt(props.defaultExpandLevel);
         if (level > 0) {
           state.expandedKeys = filterByLevel(level);
         } else if (props.defaultExpandAll) {
@@ -356,11 +354,7 @@
 
           const icon = getIcon(item, item.icon);
           let colorIcon;
-          if (item.iconColor) {
-            colorIcon = { icon: icon, color: item.iconColor };
-          } else {
-            colorIcon = { icon: icon };
-          }
+          colorIcon = item.iconColor ? { icon, color: item.iconColor } : { icon };
           const title = get(item, titleField);
           const searchIdx = searchText ? title.indexOf(searchText) : -1;
           const isHighlight = searchState.startSearch && !isEmpty(searchText) && highlight && searchIdx !== -1;
@@ -368,9 +362,9 @@
 
           const titleDom = isHighlight ? (
             <span class={unref(getBindValues)?.blockNode ? `${bem("content")}` : ""}>
-              <span>{title.substring(0, searchIdx)}</span>
+              <span>{title.slice(0, Math.max(0, searchIdx))}</span>
               <span style={highlightStyle}>{searchText}</span>
-              <span>{title.substring(searchIdx + (searchText as string).length)}</span>
+              <span>{title.slice(Math.max(0, searchIdx + (searchText as string).length))}</span>
             </span>
           ) : (
             title

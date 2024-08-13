@@ -7,8 +7,8 @@
   import { ref, watchEffect, computed, unref } from "vue";
   import { Button } from "ant-design-vue";
   import { useCountdown } from "./UseCountdown";
-  import { isFunction } from "/@/utils/Is";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { isFunction } from "@/utils/Is";
+  import { useI18n } from "@/hooks/web/UseI18n";
 
   const props = {
     value: { type: [Object, Number, String, Array] },
@@ -25,9 +25,9 @@
   const { t } = useI18n();
 
   const getButtonText = computed(() => {
-    return !unref(isStart)
-      ? t("component.countdown.normalText")
-      : t("component.countdown.sendText", [unref(currentCount)]);
+    return unref(isStart)
+      ? t("component.countdown.sendText", [unref(currentCount)])
+      : t("component.countdown.normalText");
   });
 
   watchEffect(() => {

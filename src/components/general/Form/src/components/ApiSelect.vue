@@ -1,5 +1,5 @@
 <template>
-  <a-select
+  <ASelect
     @dropdown-visible-change="handleFetch"
     v-bind="attrs"
     @change="handleChange"
@@ -18,18 +18,18 @@
         {{ t("component.form.apiSelectNotFound") }}
       </span>
     </template>
-  </a-select>
+  </ASelect>
 </template>
 <script lang="ts" setup>
   import { PropType, ref, watchEffect, computed, unref, watch } from "vue";
   import { Select as ASelect } from "ant-design-vue";
-  import { isFunction } from "/@/utils/Is";
-  import { useRuleFormItem } from "/@/hooks/component/UseFormItem";
-  import { useAttrs } from "/@/hooks/core/UseAttrs";
+  import { isFunction } from "@/utils/Is";
+  import { useRuleFormItem } from "@/hooks/component/UseFormItem";
+  import { useAttrs } from "@/hooks/core/UseAttrs";
   import { get, omit } from "lodash-es";
   import { LoadingOutlined } from "@ant-design/icons-vue";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { propTypes } from "/@/utils/PropTypes";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { propTypes } from "@/utils/PropTypes";
   import { SelectValue } from "ant-design-vue/es/select";
 
   type OptionsItem = { label: string; value: string; disabled?: boolean };
@@ -72,10 +72,10 @@
         const labels = labelField.split(",");
         let labelJoin = "";
         for (const label of labels) {
-          labelJoin += "-" + next[label];
+          labelJoin += `-${next[label]}`;
         }
         if (labelJoin.length > 0) {
-          labelJoin = labelJoin.substring(1);
+          labelJoin = labelJoin.slice(1);
         }
         prev.push({
           ...omit(next, [labelField, valueField]),
@@ -121,7 +121,7 @@
       }
       if (props.disabledCondition) {
         options.value.forEach((val) => {
-          val["labelDisabled"] = props.disabledCondition(val);
+          val.labelDisabled = props.disabledCondition(val);
         });
       }
       emitChange();

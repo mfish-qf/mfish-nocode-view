@@ -11,10 +11,10 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "/@/components/general/Form";
+  import { BasicForm, useForm } from "@/components/general/Form";
   import { ssoClientDetailsFormSchema } from "./ssoClientDetails.data";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { insertSsoClientDetails, updateSsoClientDetails } from "/@/api/sys/SsoClientDetails";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { insertSsoClientDetails, updateSsoClientDetails } from "@/api/sys/SsoClientDetails";
 
   const emit = defineEmits(["success", "register"]);
   const isUpdate = ref(true);
@@ -34,10 +34,10 @@
       ...data.record
     }).then();
   });
-  const getTitle = computed(() => (!unref(isUpdate) ? "新增客户端信息" : "编辑客户端信息"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑客户端信息" : "新增客户端信息"));
 
   async function handleSubmit() {
-    let values = await validate();
+    const values = await validate();
     if (values.grantTypeGroup && values.grantTypeGroup.length > 0) {
       values.grantTypes = values.grantTypeGroup.join(",");
     }

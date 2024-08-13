@@ -14,10 +14,10 @@ export enum ExceptionEnum {
   ERROR = 500,
 
   // net work error
-  NET_WORK_ERROR = 10000,
+  NET_WORK_ERROR = 10_000,
 
   // No data on the page. In fact, it is not an exception page
-  PAGE_NOT_DATA = 10100
+  PAGE_NOT_DATA = 10_100
 }
 
 export enum ErrorTypeEnum {

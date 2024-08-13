@@ -1,7 +1,7 @@
-import { defHttp } from "/@/utils/http/axios";
-import { UploadFileParams } from "/#/axios";
+import { defHttp } from "@/utils/http/axios";
+import { UploadFileParams } from "#/axios";
 import { AxiosProgressEvent } from "axios";
-import { SysFile } from "/@/api/storage/model/SysFileModel";
+import { SysFile } from "@/api/storage/model/SysFileModel";
 
 /**
  * @description: Upload interface

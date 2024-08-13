@@ -1,15 +1,15 @@
 import { defineComponent, computed, unref } from "vue";
-import { BasicDrawer } from "/@/components/general/Drawer";
+import { BasicDrawer } from "@/components/general/Drawer";
 import { Divider } from "ant-design-vue";
 import { TypePicker, ThemeColorPicker, SettingFooter, SwitchItem, SelectItem, InputNumberItem } from "./components";
-import { AppDarkModeToggle } from "/@/components/general/Application";
-import { MenuTypeEnum, TriggerEnum } from "/@/enums/MenuEnum";
-import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
-import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
-import { useHeaderSetting } from "/@/hooks/setting/UseHeaderSetting";
-import { useMultipleTabSetting } from "/@/hooks/setting/UseMultipleTabSetting";
-import { useTransitionSetting } from "/@/hooks/setting/UseTransitionSetting";
-import { useI18n } from "/@/hooks/web/UseI18n";
+import { AppDarkModeToggle } from "@/components/general/Application";
+import { MenuTypeEnum, TriggerEnum } from "@/enums/MenuEnum";
+import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
+import { useHeaderSetting } from "@/hooks/setting/UseHeaderSetting";
+import { useMultipleTabSetting } from "@/hooks/setting/UseMultipleTabSetting";
+import { useTransitionSetting } from "@/hooks/setting/UseTransitionSetting";
+import { useI18n } from "@/hooks/web/UseI18n";
 import { baseHandler } from "./Handler";
 import {
   HandlerEnum,
@@ -20,7 +20,7 @@ import {
   menuTypeList,
   mixSidebarTriggerOptions
 } from "./Enum";
-import { HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST, APP_PRESET_COLOR_LIST } from "/@/settings/DesignSetting";
+import { HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST, APP_PRESET_COLOR_LIST } from "@/settings/DesignSetting";
 
 const { t } = useI18n();
 
@@ -121,7 +121,7 @@ export default defineComponent({
     }
 
     /**
-     * @description: */
+      @description: */
     function renderFeatures() {
       let triggerDef = unref(getTrigger);
 
@@ -235,7 +235,7 @@ export default defineComponent({
             event={HandlerEnum.LOCK_TIME}
             defaultValue={unref(getLockTime)}
             formatter={(value: string) => {
-              return parseInt(value) === 0
+              return Number.parseInt(value) === 0
                 ? `0(${t("layout.setting.notAutoScreenLock")})`
                 : `${value}${t("layout.setting.minute")}`;
             }}
@@ -248,7 +248,7 @@ export default defineComponent({
             event={HandlerEnum.MENU_WIDTH}
             disabled={!unref(getShowMenuRef)}
             defaultValue={unref(getMenuWidth)}
-            formatter={(value: string) => `${parseInt(value)}px`}
+            formatter={(value: string) => `${Number.parseInt(value)}px`}
           />
         </>
       );

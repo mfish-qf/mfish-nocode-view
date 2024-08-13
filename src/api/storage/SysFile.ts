@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { SysFile, ReqSysFile, SysFilePageModel } from "/@/api/storage/model/SysFileModel";
+import { defHttp } from "@/utils/http/axios";
+import { SysFile, ReqSysFile, SysFilePageModel } from "@/api/storage/model/SysFileModel";
 
 /**
  * @description: 文件存储
@@ -19,7 +19,7 @@ enum Api {
  * @param fileKey
  */
 export const getLocalFileUrl = (fileKey?: string) => {
-  return "/storage/file/" + fileKey;
+  return `/storage/file/${fileKey}`;
 };
 
 /**
@@ -33,7 +33,7 @@ export const getSysFileList = (reqSysFile?: ReqSysFile) => {
 };
 
 export const getSysFileByKey = (fileKey: string) => {
-  return defHttp.get<SysFile>({ url: Api.SysFile + "/" + fileKey });
+  return defHttp.get<SysFile>({ url: `${Api.SysFile}/${fileKey}` });
 };
 
 /**
@@ -63,7 +63,7 @@ export function updateSysFile(sysFile: SysFile) {
  * @return
  */
 export function logicDeleteFile(id: string) {
-  return defHttp.delete<SysFile>({ url: Api.LogicDeleteFile + "/" + id });
+  return defHttp.delete<SysFile>({ url: `${Api.LogicDeleteFile}/${id}` });
 }
 
 /**
@@ -73,7 +73,7 @@ export function logicDeleteFile(id: string) {
  * @return
  */
 export function restoreFile(id: string) {
-  return defHttp.put<SysFile>({ url: Api.RestoreFile + "/" + id });
+  return defHttp.put<SysFile>({ url: `${Api.RestoreFile}/${id}` });
 }
 
 /**
@@ -83,7 +83,7 @@ export function restoreFile(id: string) {
  * @return
  */
 export function deleteSysFile(id: string) {
-  return defHttp.delete<SysFile>({ url: Api.SysFile + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<SysFile>({ url: `${Api.SysFile}/${id}` }, { successMessageMode: "message" });
 }
 
 /**
@@ -92,5 +92,5 @@ export function deleteSysFile(id: string) {
  * @param status 状态 0 公开， 1 私密
  */
 export const setFileStatus = (fileId: string, status: number) => {
-  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { id: fileId, isPrivate: status } });
+  return defHttp.put<boolean>({ url: Api.SetStatus, params: { id: fileId, isPrivate: status } });
 };

@@ -6,10 +6,10 @@
 import { unref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useTitle as usePageTitle } from "@vueuse/core";
-import { REDIRECT_NAME } from "/@/router/Constant";
-import { useGlobSetting } from "/@/hooks/setting";
-import { useI18n } from "/@/hooks/web/UseI18n";
-import { useLocaleStore } from "/@/store/modules/I18n";
+import { REDIRECT_NAME } from "@/router/Constant";
+import { useGlobSetting } from "@/hooks/setting";
+import { useI18n } from "@/hooks/web/UseI18n";
+import { useLocaleStore } from "@/store/modules/I18n";
 
 export function useTitle() {
   const { title } = useGlobSetting();

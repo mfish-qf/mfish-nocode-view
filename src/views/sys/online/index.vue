@@ -19,18 +19,18 @@
           />
         </template>
         <template v-if="column.key === 'loginMode'">
-          <dict-tag code="sys_login_mode" :value="record.loginMode" />
+          <DictTag code="sys_login_mode" :value="record.loginMode" />
         </template>
       </template>
     </BasicTable>
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
   import { columns } from "./online.data";
-  import { getOnlineList, logoutUser } from "/@/api/sys/User";
-  import { OnlineUser } from "/@/api/sys/model/UserModel";
-  import DictTag from "/@/components/general/DictTag/DictTag.vue";
+  import { getOnlineList, logoutUser } from "@/api/sys/User";
+  import { OnlineUser } from "@/api/sys/model/UserModel";
+  import DictTag from "@/components/general/DictTag/DictTag.vue";
   defineOptions({ name: "OnlineManagement" });
 
   const [registerTable, { reload }] = useTable({

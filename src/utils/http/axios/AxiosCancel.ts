@@ -1,6 +1,6 @@
 import type { AxiosRequestConfig, Canceler } from "axios";
 import axios from "axios";
-import { isFunction } from "/@/utils/Is";
+import { isFunction } from "@/utils/Is";
 
 // 用于存储每个请求的标识和取消功能
 let pendingMap = new Map<string, Canceler>();
@@ -10,7 +10,7 @@ export const getPendingUrl = (config: AxiosRequestConfig) => [config.method, con
 export class AxiosCanceler {
   /**
    * 增加请求
-   * @param {Object} config
+   * @param {object} config
    */
   addPending(config: AxiosRequestConfig) {
     this.removePending(config);
@@ -37,7 +37,7 @@ export class AxiosCanceler {
 
   /**
    * 删除请求
-   * @param {Object} config
+   * @param {object} config
    */
   removePending(config: AxiosRequestConfig) {
     const url = getPendingUrl(config);

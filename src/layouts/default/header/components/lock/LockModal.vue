@@ -26,13 +26,13 @@
 </template>
 <script lang="ts">
   import { defineComponent, computed, ref, onBeforeMount } from "vue";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { BasicForm, useForm } from "/@/components/general/Form/index";
-  import { useUserStore } from "/@/store/modules/User";
-  import { useLockStore } from "/@/store/modules/Lock";
-  import { setHeaderImg } from "/@/utils/file/FileUtils";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { useUserStore } from "@/store/modules/User";
+  import { useLockStore } from "@/store/modules/Lock";
+  import { setHeaderImg } from "@/utils/file/FileUtils";
 
   export default defineComponent({
     name: "LockModal",

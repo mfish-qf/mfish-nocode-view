@@ -4,13 +4,13 @@
  @date: 2023/7/4
 -->
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" title="添加成员" @ok="handleSubmit" cancelText="关闭">
+  <BasicModal v-bind="$attrs" @register="registerModal" title="添加成员" @ok="handleSubmit" cancel-text="关闭">
     <BasicForm @register="registerForm" @submit="handleSubmit">
       <template #userSearch>
-        <a-select
+        <ASelect
           v-model:value="accountList.userId"
           show-search
-          allowClear
+          allow-clear
           placeholder="检索成员"
           :filter-option="false"
           :not-found-content="accountList.fetching ? undefined : null"
@@ -19,22 +19,22 @@
           @change="changeUser"
         >
           <template v-if="accountList.fetching" #notFoundContent>
-            <a-spin size="small" />
+            <ASpin size="small" />
           </template>
-        </a-select>
+        </ASelect>
       </template>
     </BasicForm>
   </BasicModal>
 </template>
 <script lang="ts" setup>
   import { Spin as ASpin, Select as ASelect } from "ant-design-vue";
-  import { BasicForm, RenderCallbackParams, useForm } from "/@/components/general/Form";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { bindUserOrg, getTenantOrgTree } from "/@/api/sys/SsoTenant";
+  import { BasicForm, RenderCallbackParams, useForm } from "@/components/general/Form";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { bindUserOrg, getTenantOrgTree } from "@/api/sys/SsoTenant";
   import { reactive } from "vue";
   import { debounce } from "lodash-es";
-  import { searchUserList } from "/@/api/sys/User";
-  import { TreeItem } from "/@/components/general/Tree";
+  import { searchUserList } from "@/api/sys/User";
+  import { TreeItem } from "@/components/general/Tree";
 
   const emit = defineEmits(["success", "register"]);
   const [registerForm, { setFieldsValue, validate, updateSchema, resetFields }] = useForm({
@@ -62,7 +62,7 @@
           getPopupContainer: () => document.body
         },
         colProps: { span: 24 },
-        dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values["id"] === "1",
+        dynamicDisabled: (renderCallbackParams: RenderCallbackParams) => renderCallbackParams.values.id === "1",
         required: true
       }
     ],
@@ -94,7 +94,7 @@
     accountList.fetching = true;
     searchUserList(value).then((res) => {
       accountList.userList = res.map((user) => ({
-        label: user.account + (user.nickname ? "-" + user.nickname : ""),
+        label: user.account + (user.nickname ? `-${user.nickname}` : ""),
         value: user.id
       }));
       accountList.fetching = false;
@@ -109,7 +109,7 @@
   }
 
   async function handleSubmit() {
-    let values = await validate();
+    const values = await validate();
     bindUserOrg(values).then(() => {
       emit("success");
       closeModal();

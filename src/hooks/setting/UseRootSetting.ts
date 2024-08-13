@@ -1,7 +1,7 @@
-import type { ProjectConfig } from "/#/config";
+import type { ProjectConfig } from "#/config";
 import { computed } from "vue";
-import { useAppStore } from "/@/store/modules/App";
-import { ContentEnum, ThemeEnum } from "/@/enums/AppEnum";
+import { useAppStore } from "@/store/modules/App";
+import { ContentEnum, ThemeEnum } from "@/enums/AppEnum";
 
 type RootSetting = Omit<ProjectConfig, "locale" | "headerSetting" | "menuSetting" | "multiTabsSetting">;
 

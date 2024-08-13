@@ -11,10 +11,10 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "/@/components/general/Form/index";
+  import { BasicForm, useForm } from "@/components/general/Form/index";
   import { dictCategoryFormSchema } from "./dictCategory.data";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { getDictCategoryTree, insertDictCategory, updateDictCategory } from "/@/api/sys/DictCategory";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { getDictCategoryTree, insertDictCategory, updateDictCategory } from "@/api/sys/DictCategory";
 
   const emit = defineEmits(["success", "register"]);
   const isUpdate = ref(true);
@@ -54,10 +54,10 @@
     ]);
   }
 
-  const getTitle = computed(() => (!unref(isUpdate) ? "新增分类" : "编辑分类"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑分类" : "新增分类"));
 
   async function handleSubmit() {
-    let values = await validate();
+    const values = await validate();
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {
       saveDictCategory(updateDictCategory, values);

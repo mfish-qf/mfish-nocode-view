@@ -6,11 +6,11 @@ import type {
   UseDrawerInnerReturnType
 } from "./Typing";
 import { ref, getCurrentInstance, unref, reactive, watchEffect, nextTick, toRaw, computed } from "vue";
-import { isProdMode } from "/@/utils/Env";
-import { isFunction } from "/@/utils/Is";
+import { isProdMode } from "@/utils/Env";
+import { isFunction } from "@/utils/Is";
 import { tryOnUnmounted } from "@vueuse/core";
 import { isEqual } from "lodash-es";
-import { error } from "/@/utils/Log";
+import { error } from "@/utils/Log";
 
 const dataTransferRef = reactive<any>({});
 
@@ -61,12 +61,12 @@ export function useDrawer(): UseDrawerReturnType {
     },
 
     getVisible: computed((): boolean => {
-      return visibleData[~~unref(uid)];
+      return visibleData[Math.trunc(unref(uid))];
     }),
 
     openDrawer: <T = any>(visible = true, data?: T, openOnSet = true): void => {
       getInstance()?.setDrawerProps({
-        visible: visible
+        visible
       });
       if (!data) return;
 
@@ -137,7 +137,7 @@ export const useDrawerInner = (callbackFn?: Fn): UseDrawerInnerReturnType => {
         getInstance()?.setDrawerProps({ confirmLoading: loading });
       },
       getVisible: computed((): boolean => {
-        return visibleData[~~unref(uidRef)];
+        return visibleData[Math.trunc(unref(uidRef))];
       }),
 
       closeDrawer: () => {

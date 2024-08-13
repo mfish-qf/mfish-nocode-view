@@ -4,11 +4,11 @@
  * @date: 2022/10/9 17:49
  */
 import { App, Plugin, unref } from "vue";
-import { isObject } from "/@/utils/Is";
+import { isObject } from "@/utils/Is";
 import type { RouteLocationNormalized, RouteRecordNormalized } from "vue-router";
 
 export const noop = () => {};
-//组件安装
+// 组件安装
 export const withInstall = <T>(component: T, alias?: string) => {
   const comp = component as any;
   comp.install = (app: App) => {
@@ -42,7 +42,7 @@ export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
 export function setObjToUrlParams(baseUrl: string, obj: any): string {
   let parameters = "";
   for (const key in obj) {
-    parameters += key + "=" + encodeURIComponent(obj[key]) + "&";
+    parameters += `${key}=${encodeURIComponent(obj[key])}&`;
   }
   parameters = parameters.replace(/&$/, "");
   return /\?$/.test(baseUrl) ? baseUrl + parameters : baseUrl.replace(/\/?$/, "?") + parameters;
@@ -85,8 +85,8 @@ export function getPopupContainer(node?: HTMLElement): HTMLElement {
   return (node?.parentNode as HTMLElement) ?? document.body;
 }
 
-//获取动态属性
-export function getDynamicProps<T extends Object, U>(props: T): Partial<U> {
+// 获取动态属性
+export function getDynamicProps<T extends object, U>(props: T): Partial<U> {
   const ret: Recordable = {};
   Object.keys(props).map((key) => {
     ret[key] = unref((props as Recordable)[key]);

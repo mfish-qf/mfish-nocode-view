@@ -13,8 +13,8 @@
   import type { PropType } from "vue";
   import { defineComponent, reactive, onMounted, ref, toRef, toRefs } from "vue";
   import { Skeleton } from "ant-design-vue";
-  import { useTimeoutFn } from "/@/hooks/core/UseTimeout";
-  import { useIntersectionObserver } from "/@/hooks/event/UseIntersectionObserver";
+  import { useTimeoutFn } from "@/hooks/core/UseTimeout";
+  import { useIntersectionObserver } from "@/hooks/event/UseIntersectionObserver";
 
   interface State {
     isInit: boolean;
@@ -32,7 +32,7 @@
      * If the component is scrolling in the page container, the viewport is the container
      */
     viewport: {
-      type: (typeof window !== "undefined" ? window.HTMLElement : Object) as PropType<HTMLElement>,
+      type: (typeof window === "undefined" ? Object : window.HTMLElement) as PropType<HTMLElement>,
       default: () => null
     },
     /**
@@ -102,12 +102,14 @@
         // According to the scrolling direction to construct the viewport margin, used to load in advance
         let rootMargin = "0px";
         switch (direction) {
-          case "vertical":
+          case "vertical": {
             rootMargin = `${threshold} 0px`;
             break;
-          case "horizontal":
+          }
+          case "horizontal": {
             rootMargin = `0px ${threshold}`;
             break;
+          }
         }
 
         try {
@@ -125,7 +127,7 @@
             },
             root: toRef(props, "viewport")
           });
-        } catch (e) {
+        } catch {
           init();
         }
       }

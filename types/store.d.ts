@@ -1,5 +1,5 @@
-import { ErrorTypeEnum } from "/@/enums/ExceptionEnum";
-import { MenuModeEnum, MenuTypeEnum } from "/@/enums/MenuEnum";
+import { ErrorTypeEnum } from "@/enums/ExceptionEnum";
+import { MenuModeEnum, MenuTypeEnum } from "@/enums/MenuEnum";
 
 /**
  * @description: 缓存定义

@@ -1,4 +1,4 @@
-import { prefixCls } from "/@/settings/DesignSetting";
+import { prefixCls } from "@/settings/DesignSetting";
 
 type Mod = string | { [key: string]: any };
 type Mods = Mod | Mod[];

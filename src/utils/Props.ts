@@ -4,10 +4,11 @@ import { warn } from "vue";
 import { isObject } from "@vue/shared";
 import { fromPairs } from "lodash-es";
 import type { ExtractPropTypes, PropType } from "vue";
-import type { Mutable } from "./Types";
 
 const wrapperKey = Symbol();
-export type PropWrapper<T> = { [wrapperKey]: T };
+export interface PropWrapper<T> {
+  [wrapperKey]: T;
+}
 
 export const propKey = Symbol();
 
@@ -20,13 +21,13 @@ type ResolvePropTypeWithReadonly<T> =
 
 type IfUnknown<T, V> = [unknown] extends [T] ? V : T;
 
-export type BuildPropOption<T, D extends BuildPropType<T, V, C>, R, V, C> = {
+export interface BuildPropOption<T, D extends BuildPropType<T, V, C>, R, V, C> {
   type?: T;
   values?: readonly V[];
   required?: R;
   default?: R extends true ? never : D extends Record<string, unknown> | Array<any> ? () => D : (() => D) | D;
   validator?: ((val: any) => val is C) | ((val: any) => boolean);
-};
+}
 
 type _BuildPropType<T, V, C> =
   | (T extends PropWrapper<unknown>
@@ -150,21 +151,11 @@ export const buildProps = <
       ? O[K]
       : [O[K]] extends NativePropType
         ? O[K]
-        : O[K] extends BuildPropOption<
-              infer T,
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              infer _D,
-              infer R,
-              infer V,
-              infer C
-            >
+        : O[K] extends BuildPropOption<infer T, infer _D, infer R, infer V, infer C>
           ? BuildPropReturn<T, O[K]["default"], R, V, C>
           : never;
   };
 
 export const definePropType = <T>(val: any) => ({ [wrapperKey]: val }) as PropWrapper<T>;
-
-// export const keyOf = <T>(arr: T) => Object.keys(arr) as Array<keyof T>;
-export const mutable = <T extends readonly any[] | Record<string, unknown>>(val: T) => val as Mutable<typeof val>;
 
 export const componentSize = ["large", "medium", "small", "mini"] as const;

@@ -1,6 +1,7 @@
 import type { ComputedRef, Ref } from "vue";
 import { nextTick, unref } from "vue";
-import { warn } from "/@/utils/Log";
+import { warn } from "@/utils/Log";
+import { Recordable } from "@mfish/types";
 
 export function useTableScrollTo(tableElRef: Ref<ComponentRef>, getDataSourceRef: ComputedRef<Recordable[]>) {
   let bodyEl: HTMLElement | null;
@@ -8,7 +9,7 @@ export function useTableScrollTo(tableElRef: Ref<ComponentRef>, getDataSourceRef
   async function findTargetRowToScroll(targetRowData: Recordable) {
     const { id } = targetRowData;
     const targetRowEl: HTMLElement | null | undefined = bodyEl?.querySelector(`[data-row-key="${id}"]`);
-    //Add a delay to get new dataSource
+    // Add a delay to get new dataSource
     await nextTick();
     bodyEl?.scrollTo({
       top: targetRowEl?.offsetTop ?? 0,

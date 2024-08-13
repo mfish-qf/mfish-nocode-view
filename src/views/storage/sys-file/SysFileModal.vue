@@ -11,10 +11,10 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "/@/components/general/Form/index";
+  import { BasicForm, useForm } from "@/components/general/Form/index";
   import { sysFileFormSchema } from "./sysFile.data";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { insertSysFile, updateSysFile } from "/@/api/storage/SysFile";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { insertSysFile, updateSysFile } from "@/api/storage/SysFile";
   defineOptions({ name: "SysFileModal" });
 
   const emit = defineEmits(["success", "register"]);
@@ -36,10 +36,10 @@
       }).then();
     }
   });
-  const getTitle = computed(() => (!unref(isUpdate) ? "新增文件存储" : "编辑文件存储"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑文件存储" : "新增文件存储"));
 
   async function handleSubmit() {
-    let values = await validate();
+    const values = await validate();
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {
       saveSysFile(updateSysFile, values);

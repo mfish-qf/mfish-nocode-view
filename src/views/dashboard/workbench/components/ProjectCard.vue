@@ -19,7 +19,7 @@
 </template>
 <script lang="ts" setup>
   import { Card, CardGrid } from "ant-design-vue";
-  import { Icon } from "/@/components/general/Icon";
+  import { Icon } from "@/components/general/Icon";
   import { groupItems } from "./Data";
   const items = groupItems;
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="h-full" :class="prefixCls">
-    <FlowChartToolbar :prefixCls="prefixCls" v-if="toolbar" @view-data="handlePreview" />
+    <FlowChartToolbar :prefix-cls="prefixCls" v-if="toolbar" @view-data="handlePreview" />
     <div ref="lfElRef" class="h-full"></div>
     <BasicModal @register="register" title="流程数据" width="50%">
       <JsonPreview :data="graphData" />
@@ -14,12 +14,12 @@
   import FlowChartToolbar from "./FlowChartToolbar.vue";
   import LogicFlow from "@logicflow/core";
   import { Snapshot, BpmnElement, Menu, DndPanel, SelectionSelect } from "@logicflow/extension";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useAppStore } from "/@/store/modules/App";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useAppStore } from "@/store/modules/App";
   import { createFlowChartContext } from "./UseFlowContext";
   import { toLogicFlowData } from "./AdpterForTurbo";
-  import { useModal, BasicModal } from "/@/components/general/Modal";
-  import { JsonPreview } from "/@/components/general/CodeEditor";
+  import { useModal, BasicModal } from "@/components/general/Modal";
+  import { JsonPreview } from "@/components/general/CodeEditor";
   import { configDefaultDndPanel } from "./Config";
   import "@logicflow/core/dist/style/index.css";
   import "@logicflow/extension/lib/style/index.css";

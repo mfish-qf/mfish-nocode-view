@@ -1,14 +1,14 @@
 import { h, Ref } from "vue";
-import { Icon } from "/@/components/general/Icon";
-import { useGlobSetting } from "/@/hooks/setting";
-import { isString } from "/@/utils/Is";
-import { getToken } from "/@/utils/auth";
-import { defHttp } from "/@/utils/http/axios";
-import { useAppStore } from "/@/store/modules/App";
-import { getLocalFileUrl } from "/@/api/storage/SysFile";
+import { Icon } from "@/components/general/Icon";
+import { useGlobSetting } from "@/hooks/setting";
+import { isString } from "@/utils/Is";
+import { getToken } from "@/utils/auth";
+import { defHttp } from "@/utils/http/axios";
+import { useAppStore } from "@/store/modules/App";
+import { getLocalFileUrl } from "@/api/storage/SysFile";
 import logo from "/src/assets/images/logo.png";
 import noImage from "/src/assets/images/noImage.png";
-import { RequestOptions } from "/#/axios";
+import { RequestOptions } from "#/axios";
 
 /**
  * @description: 文件通用类
@@ -18,7 +18,7 @@ import { RequestOptions } from "/#/axios";
 export function checkFileType(file: File, accepts: string[]) {
   const newTypes = accepts.join("|");
   // const reg = /\.(jpg|jpeg|png|gif|txt|doc|docx|xls|xlsx|xml)$/i;
-  const reg = new RegExp("\\.(" + newTypes + ")$", "i");
+  const reg = new RegExp(`${String.raw`\.(` + newTypes})$`, "i");
 
   return reg.test(file.name);
 }
@@ -38,7 +38,7 @@ export function getBase64WithFile(file: File) {
   }>((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve({ result: reader.result as string, file });
+    reader.addEventListener("load", () => resolve({ result: reader.result as string, file }));
     reader.onerror = (error) => reject(error);
   });
 }
@@ -57,11 +57,7 @@ export const imageUrl = (url) => {
   }
   const token = getToken();
   if (token) {
-    if (url.indexOf("?") >= 0) {
-      url += "&";
-    } else {
-      url += "?";
-    }
+    url += url.includes("?") ? "&" : "?";
     url += `access_token=${token}`;
   }
   return url;
@@ -73,14 +69,14 @@ export const imageUrl = (url) => {
  * @param option 请求参数
  */
 export const imageSrc = async (url, option?: RequestOptions) => {
-  //isTransformResponse返回值不执行普通请求的结果处理
+  // isTransformResponse返回值不执行普通请求的结果处理
   try {
     const img = await defHttp.get({ url, responseType: "blob" }, { isTransformResponse: false, ...option });
     if (img.type.startsWith("image")) {
       return URL.createObjectURL(img);
     }
     return "";
-  } catch (ex) {
+  } catch {
     return "";
   }
 };
@@ -91,9 +87,7 @@ export const imageSrc = async (url, option?: RequestOptions) => {
  */
 export const imageBase64 = async (url) => {
   const img = await defHttp.get({ url, responseType: "arraybuffer" }, { isTransformResponse: false });
-  return (
-    "data:image/png;base64," + btoa(new Uint8Array(img).reduce((data, byte) => data + String.fromCharCode(byte), ""))
-  );
+  return `data:image/png;base64,${btoa(new Uint8Array(img).reduce((data, byte) => data + String.fromCharCode(byte), ""))}`;
 };
 
 /**
@@ -103,7 +97,7 @@ export const imageBase64 = async (url) => {
 export function getFileIcon(fileName: string) {
   const appStore = useAppStore();
   const color = appStore.getThemeColor;
-  return h(Icon, { size: 40, icon: getFileIconName(fileName), color: color });
+  return h(Icon, { size: 40, icon: getFileIconName(fileName), color });
 }
 
 /**
@@ -113,35 +107,43 @@ export function getFileIcon(fileName: string) {
 export function getFileIconName(fileName: string) {
   const index = fileName.lastIndexOf(".");
   if (index > 0) {
-    let name = fileName.substring(index + 1);
+    let name = fileName.slice(Math.max(0, index + 1));
     switch (name) {
-      case "txt":
+      case "txt": {
         name = "text";
         break;
+      }
       case "doc":
-      case "docx":
+      case "docx": {
         name = "word";
         break;
+      }
       case "xls":
       case "xlsx":
-      case "csv":
+      case "csv": {
         name = "excel";
         break;
-      case "md":
+      }
+      case "md": {
         name = "markdown";
         break;
-      case "pptx":
+      }
+      case "pptx": {
         name = "ppt";
         break;
-      case "rar":
+      }
+      case "rar": {
         name = "zip";
         break;
+      }
       case "zip":
       case "ppt":
-      case "pdf":
+      case "pdf": {
         break;
-      default:
+      }
+      default: {
         return `ant-design:file-unknown-outlined`;
+      }
     }
     return `ant-design:file-${name}-outlined`;
   }
@@ -160,20 +162,24 @@ export function calcSize(fileSize, level) {
   }
   let unit = "";
   switch (level) {
-    case 1:
+    case 1: {
       unit = "KB";
       break;
-    case 2:
+    }
+    case 2: {
       unit = "MB";
       break;
-    case 3:
+    }
+    case 3: {
       unit = "GB";
       break;
-    case 4:
+    }
+    case 4: {
       unit = "TB";
       break;
+    }
   }
-  return size.toFixed(2) + " " + unit;
+  return `${size.toFixed(2)} ${unit}`;
 }
 
 /**
@@ -192,10 +198,10 @@ export function setHeaderImg(fileKey, setImg: Ref) {
  * @param setImg 设置引用
  */
 export function setImage(fileKey: string | undefined, defaultImg: string, setImg: Ref) {
-  defaultImg = defaultImg ? defaultImg : noImage;
+  defaultImg = defaultImg || noImage;
   if (fileKey) {
     imageSrc(getLocalFileUrl(fileKey), { errorMessageMode: "none" }).then((img) => {
-      setImg.value = img ? img : defaultImg;
+      setImg.value = img || defaultImg;
     });
   } else {
     setImg.value = defaultImg;

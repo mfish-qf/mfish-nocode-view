@@ -13,13 +13,12 @@
     </template>
 
     <Popover
-      placement="right"
-      :overlayClassName="`${prefixCls}-menu-popover`"
+      placement="rightTop"
+      :overlay-class-name="`${prefixCls}-menu-popover`"
       v-else
       :open="getIsOpened"
       @open-change="handleVisibleChange"
-      :overlayStyle="getOverlayStyle"
-      :overlayInnerStyle="{ padding: 0 }"
+      :overlay-style="getOverlayStyle"
       :align="{ offset: [0, 0] }"
     >
       <div :class="getSubClass" v-bind="getEvents(false)">
@@ -66,15 +65,16 @@
     onBeforeMount,
     inject
   } from "vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { propTypes } from "/@/utils/PropTypes";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { propTypes } from "@/utils/PropTypes";
   import { useMenuItem } from "./UseMenu";
   import { useSimpleRootMenuContext } from "./UseSimpleMenuContext";
-  import { CollapseTransition } from "/@/components/general/Transition";
-  import { Icon } from "/@/components/general/Icon";
+  import { CollapseTransition } from "@/components/general/Transition";
+  import { Icon } from "@/components/general/Icon";
   import { Popover } from "ant-design-vue";
-  import { isBoolean, isObject } from "/@/utils/Is";
-  import mitt from "/@/utils/Mitt";
+  import { isBoolean, isObject } from "@/utils/Is";
+  import { mitt } from "@/utils/Mitt";
+  import { Recordable, TimeoutHandle } from "@mfish/types";
 
   const DELAY = 200;
   export default defineComponent({
@@ -189,7 +189,7 @@
           rootMenuEmitter.emit("on-update-opened", {
             opend: false,
             parent: instance?.parent,
-            uidList: uidList
+            uidList
           });
         } else {
           rootMenuEmitter.emit("open-name-change", {
@@ -206,7 +206,7 @@
 
         subMenuEmitter.emit("submenu:mouse-enter-child");
 
-        const index = parentGetOpenNames().findIndex((item) => item === props.name);
+        const index = parentGetOpenNames().indexOf(props.name);
 
         sliceIndex(index);
 
@@ -242,10 +242,8 @@
             }
           }, DELAY);
         }
-        if (deepDispatch) {
-          if (getParentSubMenu.value) {
-            parentHandleMouseleave?.(true);
-          }
+        if (deepDispatch && getParentSubMenu.value) {
+          parentHandleMouseleave?.(true);
         }
       }
 

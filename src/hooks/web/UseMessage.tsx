@@ -5,7 +5,7 @@ import { InfoCircleFilled, CheckCircleFilled, CloseCircleFilled } from "@ant-des
 
 import { NotificationArgsProps, ConfigProps } from "ant-design-vue/lib/notification";
 import { useI18n } from "./UseI18n";
-import { isString } from "/@/utils/Is";
+import { isString } from "@/utils/Is";
 
 export interface NotifyApi {
   info(config: NotificationArgsProps): void;
@@ -20,7 +20,7 @@ export interface NotifyApi {
 
   open(args: NotificationArgsProps): void;
 
-  close(key: String): void;
+  close(key: string): void;
 
   config(options: ConfigProps): void;
 
@@ -45,23 +45,24 @@ interface ConfirmOptions {
 }
 
 function getIcon(iconType: string) {
-  if (iconType === "warning") {
-    return <InfoCircleFilled class='modal-icon-warning' />;
-  } else if (iconType === "success") {
-    return <CheckCircleFilled class='modal-icon-success' />;
-  } else if (iconType === "info") {
-    return <InfoCircleFilled class='modal-icon-info' />;
-  } else {
-    return <CloseCircleFilled class='modal-icon-error' />;
+  switch (iconType) {
+    case "warning": {
+      return <InfoCircleFilled class='modal-icon-warning' />;
+    }
+    case "success": {
+      return <CheckCircleFilled class='modal-icon-success' />;
+    }
+    case "info": {
+      return <InfoCircleFilled class='modal-icon-info' />;
+    }
+    default: {
+      return <CloseCircleFilled class='modal-icon-error' />;
+    }
   }
 }
 
 function renderContent({ content }: Pick<ModalOptionsEx, "content">) {
-  if (isString(content)) {
-    return <div innerHTML={`<div>${content as string}</div>`}></div>;
-  } else {
-    return content;
-  }
+  return isString(content) ? <div innerHTML={`<div>${content as string}</div>`}></div> : content;
 }
 
 /**
@@ -124,7 +125,7 @@ export function useMessage() {
   return {
     createMessage: Message,
     notification: notification as NotifyApi,
-    createConfirm: createConfirm,
+    createConfirm,
     createSuccessModal,
     createErrorModal,
     createInfoModal,

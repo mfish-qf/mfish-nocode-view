@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { CodeBuild, ReqCodeBuild, CodeBuildPageModel, CodeVo } from "/@/api/sys/model/CodeBuildModel";
+import { defHttp } from "@/utils/http/axios";
+import { CodeBuild, ReqCodeBuild, CodeBuildPageModel, CodeVo } from "@/api/sys/model/CodeBuildModel";
 
 /**
  * @description: 代码构建
@@ -9,10 +9,10 @@ import { CodeBuild, ReqCodeBuild, CodeBuildPageModel, CodeVo } from "/@/api/sys/
  */
 enum Api {
   CodeBuild = "/sys/codeBuild",
-  View = CodeBuild + "/view",
-  Download = CodeBuild + "/download",
-  SaveLocal = CodeBuild + "/saveLocal",
-  CreateMenu = CodeBuild + "/menu"
+  View = `${CodeBuild}/view`,
+  Download = `${CodeBuild}/download`,
+  SaveLocal = `${CodeBuild}/saveLocal`,
+  CreateMenu = `${CodeBuild}/menu`
 }
 
 /**
@@ -50,7 +50,7 @@ export function updateCodeBuild(codeBuild: CodeBuild) {
  * @param codeBuild
  */
 export function viewCode(codeBuild: CodeBuild) {
-  return defHttp.get<CodeVo[]>({ url: Api.View + "/" + codeBuild.id });
+  return defHttp.get<CodeVo[]>({ url: `${Api.View}/${codeBuild.id}` });
 }
 
 /**
@@ -58,7 +58,7 @@ export function viewCode(codeBuild: CodeBuild) {
  * @param codeBuild
  */
 export function downloadCode(codeBuild: CodeBuild) {
-  return defHttp.download<CodeVo[]>({ url: Api.Download + "/" + codeBuild.id });
+  return defHttp.download<CodeVo[]>({ url: `${Api.Download}/${codeBuild.id}` });
 }
 
 /**
@@ -66,7 +66,7 @@ export function downloadCode(codeBuild: CodeBuild) {
  * @param codeBuild
  */
 export function saveCodeLocal(codeBuild: CodeBuild) {
-  return defHttp.get<boolean>({ url: Api.SaveLocal + "/" + codeBuild.id }, { successMessageMode: "message" });
+  return defHttp.get<boolean>({ url: `${Api.SaveLocal}/${codeBuild.id}` }, { successMessageMode: "message" });
 }
 
 /**
@@ -76,7 +76,7 @@ export function saveCodeLocal(codeBuild: CodeBuild) {
  * @return
  */
 export function deleteCodeBuild(id: string) {
-  return defHttp.delete<CodeBuild>({ url: Api.CodeBuild + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<CodeBuild>({ url: `${Api.CodeBuild}/${id}` }, { successMessageMode: "message" });
 }
 
 /**
@@ -86,7 +86,7 @@ export function deleteCodeBuild(id: string) {
  * @return
  */
 export function deleteBatchCodeBuild(ids: string) {
-  return defHttp.delete<CodeBuild>({ url: Api.CodeBuild + "/batch/" + ids }, { successMessageMode: "message" });
+  return defHttp.delete<CodeBuild>({ url: `${Api.CodeBuild}/batch/${ids}` }, { successMessageMode: "message" });
 }
 
 /**

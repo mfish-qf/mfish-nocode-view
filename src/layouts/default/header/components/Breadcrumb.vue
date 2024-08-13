@@ -16,20 +16,20 @@
 <script lang="ts">
   import type { RouteLocationMatched } from "vue-router";
   import { useRouter } from "vue-router";
-  import type { Menu } from "/@/router/Types";
+  import type { Menu } from "@/router/Types";
   import { defineComponent, ref, watchEffect } from "vue";
   import { Breadcrumb } from "ant-design-vue";
-  import { Icon } from "/@/components/general/Icon";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
-  import { useGo } from "/@/hooks/web/UsePage";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { propTypes } from "/@/utils/PropTypes";
-  import { isString } from "/@/utils/Is";
-  import { filter } from "/@/utils/helper/TreeHelper";
-  import { getMenus } from "/@/router/menus";
-  import { REDIRECT_NAME } from "/@/router/Constant";
-  import { getAllParentPath } from "/@/router/helper/MenuHelper";
+  import { Icon } from "@/components/general/Icon";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+  import { useGo } from "@/hooks/web/UsePage";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { propTypes } from "@/utils/PropTypes";
+  import { isString } from "@/utils/Is";
+  import { filter } from "@/utils/helper/TreeHelper";
+  import { getMenus } from "@/router/menus";
+  import { REDIRECT_NAME } from "@/router/Constant";
+  import { getAllParentPath } from "@/router/helper/MenuHelper";
 
   export default defineComponent({
     name: "LayoutBreadcrumb",

@@ -16,10 +16,10 @@
     <div :class="`${prefixCls}-column`">
       <div :class="`${prefixCls}-label`">策略状态:</div>
       <ASwitch
-        :checked="item.status == 0"
-        checkedChildren="已启用"
+        :checked="item.status === 0"
+        checked-children="已启用"
         :loading="showLoading"
-        unCheckedChildren="已停用"
+        un-checked-children="已停用"
         @change="statusChange(item, $event)"
       />
     </div>
@@ -28,9 +28,9 @@
 
 <script lang="ts" setup>
   import { computed, ref } from "vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { Switch as ASwitch } from "ant-design-vue";
-  import { setJobSubscribeStatus } from "/@/api/scheduler/JobSubscribe";
+  import { setJobSubscribeStatus } from "@/api/scheduler/JobSubscribe";
   defineOptions({ name: "JobSubscribeList" });
   defineProps({
     subscribes: {
@@ -42,7 +42,7 @@
   });
   const { prefixCls } = useDesign("job-subscribe");
   const getClass = computed(() => [prefixCls]);
-  let showLoading = ref(false);
+  const showLoading = ref(false);
 
   async function statusChange(record, checked) {
     showLoading.value = true;

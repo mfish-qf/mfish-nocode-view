@@ -133,9 +133,9 @@
                         v-model="rememberMe"
                       />
                       <label class="form-check-label" for="rememberMe"> 记住我 </label>
-                      <a style="float: right" href="https://jq.qq.com/?_wv=1027&k=0A2bxoZX" target="_blank"
-                        >免费获取帐号密码</a
-                      >
+                      <a style="float: right" href="https://jq.qq.com/?_wv=1027&k=0A2bxoZX" target="_blank">
+                        免费获取帐号密码
+                      </a>
                     </div>
                     <div class="d-grid gap-2 mb-3">
                       <button type="button" class="btn btn-primary btn-block" @click="login">登录</button>
@@ -154,11 +154,11 @@
 <script lang="ts" setup>
   import "bootstrap/dist/js/bootstrap.min.js";
   import { computed, onMounted, onUnmounted, reactive, ref, unref } from "vue";
-  import { getCaptcha } from "/@/api/sys/User";
-  import { oauth2Config } from "/@/settings/LoginSetting";
-  import { useMessage } from "/@/hooks/web/UseMessage";
-  import { useUserStore } from "/@/store/modules/User";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { getCaptcha } from "@/api/sys/User";
+  import { oauth2Config } from "@/settings/LoginSetting";
+  import { useMessage } from "@/hooks/web/UseMessage";
+  import { useUserStore } from "@/store/modules/User";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { debounce } from "lodash-es";
 
   const username = ref("");
@@ -206,13 +206,13 @@
     link.setAttribute("rel", "stylesheet");
     link.setAttribute("href", "/resource/bootstrap/bootstrap.min.css");
     link.setAttribute("id", "bootstrap-css");
-    document.head.appendChild(link);
+    document.head.append(link);
     captcha();
   });
   onUnmounted(() => {
-    const link = document.getElementById("bootstrap-css");
+    const link = document.querySelector("#bootstrap-css");
     if (link) {
-      document.head.removeChild(link);
+      link.remove();
     }
   });
 
@@ -262,11 +262,7 @@
 
   function pwdShowChange() {
     passwordShow.value = !passwordShow.value;
-    if (passwordShow.value) {
-      passwordType.value = "text";
-    } else {
-      passwordType.value = "password";
-    }
+    passwordType.value = passwordShow.value ? "text" : "password";
   }
 
   function msgOver() {
@@ -279,7 +275,7 @@
 
   function captcha() {
     getCaptcha().then((res) => {
-      captchaUrl.value = "data:image/jpeg;base64," + res.img;
+      captchaUrl.value = `data:image/jpeg;base64,${res.img}`;
       captchaKey.value = res.captchaKey;
       captchaOnOff.value = res.captchaOnOff;
     });
@@ -288,7 +284,7 @@
   const login = () => {
     if (validateUserLogin()) {
       isValid.value = true;
-      //增加一个停顿校验效果
+      // 增加一个停顿校验效果
       handleLogin();
     }
   };

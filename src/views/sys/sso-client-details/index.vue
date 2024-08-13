@@ -63,9 +63,9 @@
         <template v-else-if="column.key === 'grantTypes'">
           <template v-for="(type, index) in record.grantTypes.split(',')">
             <template v-for="item in grantTypes">
-              <a-tag class="ml-1" :key="index + item.dictCode" v-if="type == item.dictValue" :color="item.color">
+              <ATag class="ml-1" :key="index + item.dictCode" v-if="type === item.dictValue" :color="item.color">
                 {{ item.dictLabel }}
-              </a-tag>
+              </ATag>
             </template>
           </template>
         </template>
@@ -76,16 +76,16 @@
 </template>
 <script lang="ts" setup>
   import { onMounted, ref } from "vue";
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteSsoClientDetails, getSecret, getSsoClientDetailsList, resetSecret } from "/@/api/sys/SsoClientDetails";
-  import { useModal } from "/@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { deleteSsoClientDetails, getSecret, getSsoClientDetailsList, resetSecret } from "@/api/sys/SsoClientDetails";
+  import { useModal } from "@/components/general/Modal";
   import SsoClientDetailsModal from "./SsoClientDetailsModal.vue";
   import { columns, searchFormSchema } from "./ssoClientDetails.data";
-  import { SsoClientDetails } from "/@/api/sys/model/SsoClientDetailsModel";
-  import { getDictItems } from "/@/api/sys/DictItem";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { getDictItems } from "@/api/sys/DictItem";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { Tag as ATag } from "ant-design-vue";
-  import { DictItem } from "/@/api/sys/model/DictItemModel";
+  import { DictItem } from "@/api/sys/model/DictItemModel";
+  import { Recordable } from "@mfish/types";
   defineOptions({ name: "SsoClientDetailsManagement" });
 
   const [registerModal, { openModal }] = useModal();
@@ -112,7 +112,7 @@
   const grantTypes = ref<DictItem[]>([]);
   const { prefixCls } = useDesign("client-details");
 
-  function showSecret(ssoClientDetails: SsoClientDetails) {
+  function showSecret(ssoClientDetails: Recordable) {
     if (ssoClientDetails.id) {
       getSecret(ssoClientDetails.id).then((res) => {
         ssoClientDetails.clientSecret = res;
@@ -124,7 +124,7 @@
    * 新建
    */
   function handleCreate() {
-    let types: any = [];
+    const types: any = [];
     grantTypes.value.forEach((type: DictItem) => {
       types.push(type.dictValue);
     });
@@ -144,7 +144,7 @@
    * 修改
    * @param ssoClientDetails
    */
-  function handleEdit(ssoClientDetails: SsoClientDetails) {
+  function handleEdit(ssoClientDetails: Recordable) {
     if (ssoClientDetails.grantTypes) {
       ssoClientDetails.grantTypeGroup = ssoClientDetails.grantTypes.split(",");
     }
@@ -154,7 +154,7 @@
     });
   }
 
-  function handleReset(ssoClientDetails: SsoClientDetails) {
+  function handleReset(ssoClientDetails: Recordable) {
     if (ssoClientDetails.id)
       resetSecret(ssoClientDetails.id).then((res) => {
         ssoClientDetails.clientSecret = res;
@@ -165,7 +165,7 @@
    * 删除
    * @param ssoClientDetails
    */
-  function handleDelete(ssoClientDetails: SsoClientDetails) {
+  function handleDelete(ssoClientDetails: Recordable) {
     if (ssoClientDetails.id) {
       deleteSsoClientDetails(ssoClientDetails.id).then(() => {
         handleSuccess();

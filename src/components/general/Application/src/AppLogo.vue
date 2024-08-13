@@ -9,11 +9,11 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from "vue";
-  import { useGlobSetting } from "/@/hooks/setting";
-  import { useGo } from "/@/hooks/web/UsePage";
-  import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { usePermissionStore } from "/@/store/modules/Permission";
+  import { useGlobSetting } from "@/hooks/setting";
+  import { useGo } from "@/hooks/web/UsePage";
+  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { usePermissionStore } from "@/store/modules/Permission";
 
   const props = defineProps({
     allowGoHome: { type: Boolean, default: true },

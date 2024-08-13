@@ -1,11 +1,11 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
 import { h } from "vue";
 import { Switch } from "ant-design-vue";
-import { getToken } from "/@/utils/auth";
-import TableImage from "/@/components/general/Table/src/components/TableImg.vue";
-import { getLocalFileUrl, logicDeleteFile, restoreFile, setFileStatus } from "/@/api/storage/SysFile";
-import { getFileIcon, calcSize, imageUrl } from "/@/utils/file/FileUtils";
+import { getToken } from "@/utils/auth";
+import TableImage from "@/components/general/Table/src/components/TableImg.vue";
+import { getLocalFileUrl, logicDeleteFile, restoreFile, setFileStatus } from "@/api/storage/SysFile";
+import { getFileIcon, calcSize, imageUrl } from "@/utils/file/FileUtils";
 
 /**
  * @description: 文件存储
@@ -20,7 +20,7 @@ export const columns: BasicColumn[] = [
     customRender: ({ record }) => {
       const imgList = [imageUrl(getLocalFileUrl(record.fileKey))];
       if (record.fileType.toLowerCase().startsWith("image")) {
-        return h(TableImage, { size: 40, simpleShow: true, imgList: imgList });
+        return h(TableImage, { size: 40, simpleShow: true, imgList });
       }
       return getFileIcon(record.fileName);
     },
@@ -30,8 +30,8 @@ export const columns: BasicColumn[] = [
     title: "文件名",
     dataIndex: "fileName",
     customRender: ({ record }) => {
-      //超链接访问文件，直接访问后台存储文件地址
-      return h("a", { href: record.fileUrl + "?access_token=" + getToken(), target: "_blank" }, record.fileName);
+      // 超链接访问文件，直接访问后台存储文件地址
+      return h("a", { href: `${record.fileUrl}?access_token=${getToken()}`, target: "_blank" }, record.fileName);
     },
     width: 260
   },
@@ -74,7 +74,7 @@ export const columns: BasicColumn[] = [
         checkedChildren: "已公开",
         unCheckedChildren: "已私密",
         loading: record.pendingStatus,
-        onChange(checked: boolean) {
+        onChange(checked: boolean | string | number) {
           record.pendingStatus = true;
           const newStatus = checked ? 0 : 1;
           setFileStatus(record.id, newStatus)
@@ -101,7 +101,7 @@ export const columns: BasicColumn[] = [
         checkedChildren: "已删除",
         unCheckedChildren: "未删除",
         loading: record.pendingStatus,
-        onChange(checked: boolean) {
+        onChange(checked: boolean | string | number) {
           record.pendingStatus = true;
           const newStatus = checked ? 1 : 0;
           const method = newStatus ? logicDeleteFile : restoreFile;

@@ -1,5 +1,5 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
 
@@ -26,10 +26,10 @@ export const columns: BasicColumn[] = [
     width: 60,
     customRender: ({ record }) => {
       const status = record.status;
-      const enable = ~~status === 0;
+      const enable = Math.trunc(status) === 0;
       const color = enable ? "green" : "red";
       const text = enable ? "启用" : "停用";
-      return h(Tag, { color: color }, () => text);
+      return h(Tag, { color }, () => text);
     }
   },
   {

@@ -28,12 +28,12 @@ import ApiTree from "./components/ApiTree.vue";
 import ApiTreeSelect from "./components/ApiTreeSelect.vue";
 import ApiCascader from "./components/ApiCascader.vue";
 import ApiTransfer from "./components/ApiTransfer.vue";
-import { BasicUpload } from "/@/components/general/Upload";
-import { StrengthMeter } from "/@/components/general/StrengthMeter";
-import { IconPicker } from "/@/components/general/Icon";
-import { CountdownInput } from "/@/components/general/CountDown";
-import { BasicTitle } from "/@/components/general/Basic";
-import { CropperAvatar } from "/@/components/general/Cropper";
+import { BasicUpload } from "@/components/general/Upload";
+import { StrengthMeter } from "@/components/general/StrengthMeter";
+import { IconPicker } from "@/components/general/Icon";
+import { CountdownInput } from "@/components/general/CountDown";
+import { BasicTitle } from "@/components/general/Basic";
+import { CropperAvatar } from "@/components/general/Cropper";
 import EmptyCol from "./components/EmptyCol.vue";
 
 const componentMap = new Map<ComponentType | string, Component>();

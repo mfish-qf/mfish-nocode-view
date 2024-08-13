@@ -1,7 +1,7 @@
-import type { GlobConfig } from "/#/config";
+import type { GlobConfig } from "#/config";
 
-import { warn } from "/@/utils/Log";
-import { getAppEnvConfig } from "/@/utils/Env";
+import { warn } from "@/utils/Log";
+import { getAppEnvConfig } from "@/utils/Env";
 
 export const useGlobSetting = (): Readonly<GlobConfig> => {
   const {
@@ -12,7 +12,7 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     VITE_GLOB_OAUTH2_URL,
     VITE_GLOB_OAUTH2_REDIRECT_URI
   } = getAppEnvConfig();
-  if (!/[a-zA-Z\_]*/.test(VITE_GLOB_APP_SHORT_NAME)) {
+  if (!/[_a-z]*/i.test(VITE_GLOB_APP_SHORT_NAME)) {
     warn(
       `VITE_GLOB_APP_SHORT_NAME Variables can only be characters/underscores, please modify in the environment variables and re-running.`
     );

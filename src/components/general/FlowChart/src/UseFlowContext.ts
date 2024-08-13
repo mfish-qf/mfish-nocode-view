@@ -3,9 +3,9 @@ import { provide, inject } from "vue";
 
 const key = Symbol("flow-chart");
 
-type Instance = {
+interface Instance {
   logicFlow: LogicFlow;
-};
+}
 
 export function createFlowChartContext(instance: Instance) {
   provide(key, instance);

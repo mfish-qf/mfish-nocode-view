@@ -1,18 +1,18 @@
 <template>
   <div ref="wrapperRef" class="account-setting">
-    <a-tabs
-      destroyInactiveTabPane
+    <ATabs
+      destroy-inactive-tab-pane
       tab-position="left"
-      :tabBarStyle="tabBarStyle"
-      :activeKey="tabType"
+      :tab-bar-style="tabBarStyle"
+      :active-key="tabType"
       @change="tabChange"
     >
       <template v-for="item in setting">
-        <a-tab-pane :tab="item.name" class="base-title" :key="item.key" v-if="hasPermission(item.auth)">
+        <ATabPane :tab="item.name" class="base-title" :key="item.key" v-if="hasPermission(item.auth)">
           <component :is="components[item.component]" />
-        </a-tab-pane>
+        </ATabPane>
       </template>
-    </a-tabs>
+    </ATabs>
   </div>
 </template>
 
@@ -27,7 +27,7 @@
   import TenantRoleSetting from "./TenantRoleSetting.vue";
   import TenantUserSetting from "./TenantUserSetting.vue";
   import { useRoute } from "vue-router";
-  import { usePermission } from "/@/hooks/web/UsePermission";
+  import { usePermission } from "@/hooks/web/UsePermission";
   const ATabPane = ATabs.TabPane;
   const components = {
     BaseSetting,
@@ -41,16 +41,12 @@
   const tabType = ref<number>(1);
   const { isTenant, hasPermission } = usePermission();
   let setting: { key: number; name: string; component: string; auth?: string }[];
-  //如果不是租户，不显示租户配置信息
-  if (!isTenant()) {
-    setting = [...settingList.filter((set) => set.key <= 3)];
-  } else {
-    setting = [...settingList];
-  }
+  // 如果不是租户，不显示租户配置信息
+  setting = isTenant() ? [...settingList] : settingList.filter((set) => set.key <= 3);
   onBeforeMount(() => {
     const index = route.path.lastIndexOf("/");
     if (index) {
-      const type = parseInt(route.path.substring(index + 1));
+      const type = Number.parseInt(route.path.slice(Math.max(0, index + 1)));
       if (!Number.isNaN(type)) {
         tabType.value = type;
       }

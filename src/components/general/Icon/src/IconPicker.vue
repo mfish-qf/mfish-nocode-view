@@ -1,5 +1,5 @@
 <template>
-  <a-input
+  <AInput
     disabled
     :style="{ width }"
     :placeholder="t('component.icon.placeholder')"
@@ -7,15 +7,15 @@
     v-model:value="currentSelect"
   >
     <template #addonAfter>
-      <a-popover placement="bottomLeft" trigger="click" v-model="visible" :overlayClassName="`${prefixCls}-popover`">
+      <APopover placement="bottomLeft" trigger="click" v-model="visible" :overlay-class-name="`${prefixCls}-popover`">
         <template #title>
           <div class="flex justify-between">
-            <a-input :placeholder="t('component.icon.search')" @change="debounceHandleSearchChange" allowClear />
+            <AInput :placeholder="t('component.icon.search')" @change="debounceHandleSearchChange" allow-clear />
           </div>
         </template>
 
         <template #content>
-          <div v-if="getPaginationList.length">
+          <div v-if="getPaginationList.length > 0">
             <ScrollContainer class="border border-solid border-t-0">
               <ul class="flex flex-wrap px-2">
                 <li
@@ -33,10 +33,10 @@
               </ul>
             </ScrollContainer>
             <div class="flex py-2 items-center justify-center" v-if="getTotal >= pageSize">
-              <a-pagination
-                showLessItems
+              <APagination
+                show-less-items
                 size="small"
-                :pageSize="pageSize"
+                :page-size="pageSize"
                 :total="getTotal"
                 @change="handlePageChange"
               />
@@ -44,7 +44,7 @@
           </div>
           <template v-else>
             <div class="p-5">
-              <a-empty />
+              <AEmpty />
             </div>
           </template>
         </template>
@@ -53,26 +53,34 @@
           <SvgIcon :name="currentSelect" />
         </span>
         <Icon :icon="currentSelect || 'ion:apps-outline'" class="cursor-pointer px-2 py-1" v-else />
-      </a-popover>
+      </APopover>
     </template>
-  </a-input>
+  </AInput>
 </template>
 <script lang="ts" setup>
   import { ref, watchEffect, watch, unref } from "vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { ScrollContainer } from "/@/components/general/Container";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { ScrollContainer } from "@/components/general/Container";
   import { Input, Popover, Pagination, Empty } from "ant-design-vue";
   import Icon from "./Icon.vue";
   import SvgIcon from "./SvgIcon.vue";
   import iconsData from "../data/icons.data";
-  import { propTypes } from "/@/utils/PropTypes";
-  import { usePagination } from "/@/hooks/web/UsePagination";
+  import { propTypes } from "@/utils/PropTypes";
+  import { usePagination } from "@/hooks/web/UsePagination";
   import { useDebounceFn } from "@vueuse/core";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { useCopyToClipboard } from "/@/hooks/web/UseCopyToClipboard";
-  import { useMessage } from "/@/hooks/web/UseMessage";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useCopyToClipboard } from "@/hooks/web/UseCopyToClipboard";
+  import { useMessage } from "@/hooks/web/UseMessage";
   import svgIcons from "virtual:svg-icons-names";
 
+  const props = defineProps({
+    value: propTypes.string,
+    width: propTypes.string.def("100%"),
+    pageSize: propTypes.number.def(140),
+    copy: propTypes.bool.def(false),
+    mode: propTypes.oneOf<("svg" | "iconify")[]>(["svg", "iconify"]).def("iconify")
+  });
+  const emit = defineEmits(["change", "update:value"]);
   // 没有使用别名引入，是因为WebStorm当前版本还不能正确识别，会报unused警告
   const AInput = Input;
   const APopover = Popover;
@@ -94,16 +102,6 @@
   function getSvgIcons() {
     return svgIcons.map((icon) => icon.replace("icon-", ""));
   }
-
-  const props = defineProps({
-    value: propTypes.string,
-    width: propTypes.string.def("100%"),
-    pageSize: propTypes.number.def(140),
-    copy: propTypes.bool.def(false),
-    mode: propTypes.oneOf<("svg" | "iconify")[]>(["svg", "iconify"]).def("iconify")
-  });
-
-  const emit = defineEmits(["change", "update:value"]);
 
   const isSvgMode = props.mode === "svg";
   const icons = isSvgMode ? getSvgIcons() : getIcons();

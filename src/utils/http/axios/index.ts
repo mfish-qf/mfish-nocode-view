@@ -1,19 +1,19 @@
 import type { AxiosResponse, AxiosInstance } from "axios";
 import axios from "axios";
 import { clone } from "lodash-es";
-import type { RequestOptions, Result } from "/#/axios";
+import type { RequestOptions, Result } from "#/axios";
 import type { AxiosTransform, CreateAxiosOptions } from "./AxiosTransform";
 import { VAxios } from "./Axios";
 import { checkError, checkStatus } from "./CheckStatus";
-import { useGlobSetting } from "/@/hooks/setting";
-import { ContentTypeEnum, RequestEnum, ResultEnum } from "/@/enums/HttpEnum";
-import { isString } from "/@/utils/Is";
-import { getToken } from "/@/utils/auth";
-import { deepMerge, setObjToUrlParams } from "/@/utils";
-import { useErrorLogStoreWithOut } from "/@/store/modules/ErrorLog";
-import { useI18n } from "/@/hooks/web/UseI18n";
+import { useGlobSetting } from "@/hooks/setting";
+import { ContentTypeEnum, RequestEnum, ResultEnum } from "@/enums/HttpEnum";
+import { isString } from "@/utils/Is";
+import { getToken } from "@/utils/auth";
+import { deepMerge, setObjToUrlParams } from "@/utils";
+import { useErrorLogStoreWithOut } from "@/store/modules/ErrorLog";
+import { useI18n } from "@/hooks/web/UseI18n";
 import { formatRequestDate, joinTimestamp, messageTips } from "./Helper";
-import { AxiosRetry } from "/@/utils/http/axios/AxiosRetry";
+import { AxiosRetry } from "@/utils/http/axios/AxiosRetry";
 
 const globSetting = useGlobSetting();
 
@@ -58,7 +58,7 @@ const transform: AxiosTransform = {
     messageTips(options.errorMessageMode, msg, true, 0);
     throw new Error(msg || t("sys.api.apiRequestFailed"));
   },
-  //下载文件返回处理
+  // 下载文件返回处理
   downloadResponseHook: (res: any, options: RequestOptions) => {
     const { data } = res;
     const url = window.URL.createObjectURL(data);
@@ -83,7 +83,7 @@ const transform: AxiosTransform = {
    */
   beforeRequestHook: (config, options) => {
     const { apiUrl, joinParamsToUrl, formatDate, joinTime = true } = options;
-    //如果已传入全路径，则不拼接apiUrl前缀，由传路径地方自行判断是否拼接
+    // 如果已传入全路径，则不拼接apiUrl前缀，由传路径地方自行判断是否拼接
     if (
       !config.url?.toLowerCase().startsWith("http://") &&
       !config.url?.toLowerCase().startsWith("https://") &&
@@ -99,7 +99,7 @@ const transform: AxiosTransform = {
     if (config.method?.toUpperCase() === RequestEnum.GET) {
       if (isString(params)) {
         // 兼容restful风格
-        config.url = config.url + params + `${joinTimestamp(joinTime, true)}`;
+        config.url = `${config.url + params}${joinTimestamp(joinTime, true)}`;
         config.params = undefined;
       } else {
         // 给 get 请求加上时间戳参数，避免从缓存中拿数据。
@@ -168,7 +168,7 @@ const transform: AxiosTransform = {
     if (checkError(error, errorMessageMode, retryCount)) {
       return Promise.reject(error);
     }
-    //后台返回信息包括错误信息
+    // 后台返回信息包括错误信息
     const msg: string = response?.data?.msg ?? "";
     const status = error?.response?.status;
     checkStatus(status, msg, errorMessageMode, retryCount);

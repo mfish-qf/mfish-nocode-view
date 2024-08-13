@@ -1,6 +1,6 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
-import { getDBTree } from "/@/api/sys/DbConnect";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
+import { getDBTree } from "@/api/sys/DbConnect";
 import { h } from "vue";
 import { Cascader, Select } from "ant-design-vue";
 

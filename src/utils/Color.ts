@@ -6,7 +6,7 @@
  * @return  Boolean
  */
 export function isHexColor(color: string) {
-  const reg = /^#([0-9a-fA-F]{3}|[0-9a-fA-f]{6})$/;
+  const reg = /^#([\dA-Fa-f]{3}|[\dA-f]{6})$/;
   return reg.test(color);
 }
 
@@ -22,7 +22,7 @@ export function isHexColor(color: string) {
 export function rgbToHex(r: number, g: number, b: number) {
   // tslint:disable-next-line:no-bitwise
   const hex = ((r << 16) | (g << 8) | b).toString(16);
-  return "#" + new Array(Math.abs(hex.length - 7)).join("0") + hex;
+  return `#${Array.from({ length: Math.abs(hex.length - 7) }).join("0")}${hex}`;
 }
 
 /**
@@ -42,9 +42,9 @@ export function hexToRGB(hex: string) {
     }
     const sColorChange: number[] = [];
     for (let i = 1; i < 7; i += 2) {
-      sColorChange.push(parseInt("0x" + sHex.slice(i, i + 2)));
+      sColorChange.push(Number.parseInt(`0x${sHex.slice(i, i + 2)}`));
     }
-    return "RGB(" + sColorChange.join(",") + ")";
+    return `RGB(${sColorChange.join(",")})`;
   }
   return sHex;
 }
@@ -52,9 +52,9 @@ export function hexToRGB(hex: string) {
 export function colorIsDark(color: string) {
   if (!isHexColor(color)) return;
   const [r, g, b] = hexToRGB(color)
-    .replace(/(?:\(|\)|rgb|RGB)*/g, "")
+    .replaceAll(/(?:\(|\)|rgb|RGB)*/g, "")
     .split(",")
-    .map((item) => Number(item));
+    .map(Number);
   return r * 0.299 + g * 0.578 + b * 0.114 < 192;
 }
 
@@ -65,12 +65,12 @@ export function colorIsDark(color: string) {
  * @returns {string} The HEX representation of the processed color
  */
 export function darken(color: string, amount: number) {
-  color = color.indexOf("#") >= 0 ? color.substring(1, color.length) : color;
+  color = color.includes("#") ? color.substring(1, color.length) : color;
   amount = Math.trunc((255 * amount) / 100);
-  return `#${subtractLight(color.substring(0, 2), amount)}${subtractLight(
-    color.substring(2, 4),
+  return `#${subtractLight(color.slice(0, 2), amount)}${subtractLight(
+    color.slice(2, 4),
     amount
-  )}${subtractLight(color.substring(4, 6), amount)}`;
+  )}${subtractLight(color.slice(4, 6), amount)}`;
 }
 
 /**
@@ -80,10 +80,10 @@ export function darken(color: string, amount: number) {
  * @returns {string} The processed color represented as HEX
  */
 export function lighten(color: string, amount: number) {
-  color = color.indexOf("#") >= 0 ? color.substring(1, color.length) : color;
+  color = color.includes("#") ? color.substring(1, color.length) : color;
   amount = Math.trunc((255 * amount) / 100);
-  return `#${addLight(color.substring(0, 2), amount)}${addLight(color.substring(2, 4), amount)}${addLight(
-    color.substring(4, 6),
+  return `#${addLight(color.slice(0, 2), amount)}${addLight(color.slice(2, 4), amount)}${addLight(
+    color.slice(4, 6),
     amount
   )}`;
 }
@@ -96,7 +96,7 @@ export function lighten(color: string, amount: number) {
  * @returns {string} The processed part of the color
  */
 function addLight(color: string, amount: number) {
-  const cc = parseInt(color, 16) + amount;
+  const cc = Number.parseInt(color, 16) + amount;
   const c = cc > 255 ? 255 : cc;
   return c.toString(16).length > 1 ? c.toString(16) : `0${c.toString(16)}`;
 }
@@ -110,7 +110,7 @@ function addLight(color: string, amount: number) {
 function luminanace(r: number, g: number, b: number) {
   const a = [r, g, b].map((v) => {
     v /= 255;
-    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    return v <= 0.039_28 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
   });
   return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
 }
@@ -121,7 +121,10 @@ function luminanace(r: number, g: number, b: number) {
  * @param {string} rgb2 rgb color 2
  */
 function contrast(rgb1: string[], rgb2: number[]) {
-  return (luminanace(~~rgb1[0], ~~rgb1[1], ~~rgb1[2]) + 0.05) / (luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05);
+  return (
+    (luminanace(Math.trunc(rgb1[0]), Math.trunc(rgb1[1]), Math.trunc(rgb1[2])) + 0.05) /
+    (luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05)
+  );
 }
 
 /**
@@ -129,7 +132,7 @@ function contrast(rgb1: string[], rgb2: number[]) {
  * @param hexColor - Last selected color by the user
  */
 export function calculateBestTextColor(hexColor: string) {
-  const rgbColor = hexToRGB(hexColor.substring(1));
+  const rgbColor = hexToRGB(hexColor.slice(1));
   const contrastWithBlack = contrast(rgbColor.split(","), [0, 0, 0]);
 
   return contrastWithBlack >= 12 ? "#000000" : "#FFFFFF";
@@ -142,7 +145,7 @@ export function calculateBestTextColor(hexColor: string) {
  * @returns {string} The processed part of the color
  */
 function subtractLight(color: string, amount: number) {
-  const cc = parseInt(color, 16) - amount;
+  const cc = Number.parseInt(color, 16) - amount;
   const c = cc < 0 ? 0 : cc;
   return c.toString(16).length > 1 ? c.toString(16) : `0${c.toString(16)}`;
 }

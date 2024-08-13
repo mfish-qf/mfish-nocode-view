@@ -1,7 +1,12 @@
 <template>
-  <Drawer :rootClassName="prefixCls" @close="onClose" v-bind="getBindValues">
+  <Drawer :root-class-name="prefixCls" @close="onClose" v-bind="getBindValues">
     <template #title v-if="!$slots.title">
-      <DrawerHeader :title="getMergeProps.title" :isDetail="isDetail" :showDetailBack="showDetailBack" @close="onClose">
+      <DrawerHeader
+        :title="getMergeProps.title"
+        :is-detail="isDetail"
+        :show-detail-back="showDetailBack"
+        @close="onClose"
+      >
         <template #titleToolbar>
           <slot name="titleToolbar"></slot>
         </template>
@@ -30,15 +35,16 @@
   import type { CSSProperties } from "vue";
   import { defineComponent, ref, computed, watch, unref, nextTick, toRaw, getCurrentInstance } from "vue";
   import { Drawer } from "ant-design-vue";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { isFunction, isNumber } from "/@/utils/Is";
-  import { deepMerge } from "/@/utils";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { isFunction, isNumber } from "@/utils/Is";
+  import { deepMerge } from "@/utils";
   import DrawerFooter from "./components/DrawerFooter.vue";
   import DrawerHeader from "./components/DrawerHeader.vue";
-  import { ScrollContainer } from "/@/components/general/Container";
+  import { ScrollContainer } from "@/components/general/Container";
   import { basicProps } from "./Props";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useAttrs } from "/@/hooks/core/UseAttrs";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useAttrs } from "@/hooks/core/UseAttrs";
+  import { Recordable } from "@mfish/types";
 
   export default defineComponent({
     components: { Drawer, ScrollContainer, DrawerFooter, DrawerHeader },
@@ -54,7 +60,7 @@
       const { prefixVar, prefixCls } = useDesign("basic-drawer");
 
       const drawerInstance: DrawerInstance = {
-        setDrawerProps: setDrawerProps,
+        setDrawerProps,
         emitVisible: undefined
       };
 

@@ -1,4 +1,5 @@
 import type { BarMap } from "./types";
+import type { Recordable } from "@mfish/types";
 
 export const BAR_MAP: BarMap = {
   vertical: {
@@ -38,9 +39,9 @@ export function renderThumbStyle({ move, size, bar }) {
 
 export function toObject<T>(arr: Array<T>): Recordable<T> {
   const res = {};
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i]) {
-      Object.assign(res, arr[i]);
+  for (const element of arr) {
+    if (element) {
+      Object.assign(res, element);
     }
   }
   return res;

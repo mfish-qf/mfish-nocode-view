@@ -1,24 +1,24 @@
 <template>
-  <a-footer :class="prefixCls" v-if="getShowLayoutFooter" ref="footerRef">
+  <AFooter :class="prefixCls" v-if="getShowLayoutFooter" ref="footerRef">
     <div :class="`${prefixCls}__links`">
       <a @click="openWindow(SITE_URL)">{{ t("layout.footer.onlinePreview") }}</a>
       <GithubFilled @click="openWindow(GITHUB_URL)" :class="`${prefixCls}__github`" />
       <a @click="openWindow(DOC_URL)">{{ t("layout.footer.onlineDocument") }}</a>
     </div>
     <div>Copyright &copy;2022 MFish NoCode</div>
-  </a-footer>
+  </AFooter>
 </template>
 
 <script lang="ts">
   import { computed, defineComponent, unref, ref } from "vue";
   import { Layout } from "ant-design-vue";
   import { GithubFilled } from "@ant-design/icons-vue";
-  import { DOC_URL, GITHUB_URL, SITE_URL } from "/@/settings/SiteSetting";
-  import { openWindow } from "/@/utils";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
+  import { DOC_URL, GITHUB_URL, SITE_URL } from "@/settings/SiteSetting";
+  import { openWindow } from "@/utils";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
   import { useRouter } from "vue-router";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { useLayoutHeight } from "../content/UseContentViewHeight";
 
   export default defineComponent({

@@ -2,7 +2,7 @@ import type { ComputedRef } from "vue";
 import type { BasicTableProps } from "../types/Table";
 import { unref } from "vue";
 import { ROW_KEY } from "../Const";
-import { isString, isFunction } from "/@/utils/Is";
+import { isString, isFunction } from "@/utils/Is";
 
 interface Options {
   setSelectedRowKeys: (keys: string[]) => void;
@@ -59,7 +59,7 @@ export function useCustomRow(
               setSelectedRowKeys([...keys, key]);
               return;
             }
-            const keyIndex = keys.findIndex((item) => item === key);
+            const keyIndex = keys.indexOf(key);
             keys.splice(keyIndex, 1);
             setSelectedRowKeys(keys);
             return;
@@ -68,7 +68,7 @@ export function useCustomRow(
           const isRadio = rowSelection.type === "radio";
           if (isRadio) {
             if (!keys.includes(key)) {
-              if (keys.length) {
+              if (keys.length > 0) {
                 clearSelectedRowKeys();
               }
               setSelectedRowKeys([key]);
@@ -79,19 +79,19 @@ export function useCustomRow(
         }
 
         handleClick();
-        emit("row-click", record, index, e);
+        emit("rowClick", record, index, e);
       },
       onDblclick: (event: Event) => {
-        emit("row-dbClick", record, index, event);
+        emit("rowDbClick", record, index, event);
       },
       onContextmenu: (event: Event) => {
-        emit("row-contextmenu", record, index, event);
+        emit("rowContextmenu", record, index, event);
       },
       onMouseenter: (event: Event) => {
-        emit("row-mouseenter", record, index, event);
+        emit("rowMouseenter", record, index, event);
       },
       onMouseleave: (event: Event) => {
-        emit("row-mouseleave", record, index, event);
+        emit("rowMouseleave", record, index, event);
       }
     };
   };

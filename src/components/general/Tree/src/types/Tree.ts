@@ -1,5 +1,5 @@
 import type { TreeDataItem } from "ant-design-vue/es/tree/Tree";
-import { buildProps } from "/@/utils/Props";
+import { buildProps } from "@/utils/Props";
 
 export enum ToolbarEnum {
   SELECT_ALL,
@@ -115,7 +115,7 @@ export const treeProps = buildProps({
   },
   // 高亮搜索值，仅高亮具体匹配值（通过title）值为true时使用默认色值，值为#xxx时使用此值替代且高亮开启
   highlight: {
-    type: [Boolean, String] as PropType<Boolean | String>,
+    type: [Boolean, String] as PropType<boolean | string>,
     default: false
   },
   // 搜索完成时自动展开结果

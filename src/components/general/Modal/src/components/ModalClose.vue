@@ -16,9 +16,9 @@
 <script lang="ts">
   import { defineComponent, computed } from "vue";
   import { FullscreenExitOutlined, FullscreenOutlined, CloseOutlined } from "@ant-design/icons-vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { Tooltip } from "ant-design-vue";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useI18n } from "@/hooks/web/UseI18n";
 
   export default defineComponent({
     name: "ModalClose",

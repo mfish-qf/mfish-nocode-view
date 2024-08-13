@@ -1,11 +1,12 @@
 import type { NamePath, RuleObject } from "ant-design-vue/lib/form/interface";
 import type { VNode } from "vue";
-import type { ButtonProps as AntdButtonProps } from "/@/components/general/Button";
+import type { ButtonProps as AntdButtonProps } from "@/components/general/Button";
 import type { FormItem } from "./FormItem";
 import type { ColEx, ComponentType, ComponentProps } from "./index";
-import type { TableActionType } from "/@/components/general/Table/src/types/Table";
+import type { TableActionType } from "@/components/general/Table/src/types/Table";
 import type { CSSProperties } from "vue";
 import type { RowProps } from "ant-design-vue/lib/grid/Row";
+import { Recordable } from "@mfish/types";
 
 export type FieldMapToTime = [string, [string, string], (string | [string, string])?][];
 
@@ -127,10 +128,10 @@ export interface FormProps {
   transformDateFunc?: (date: any) => string;
   colon?: boolean;
 }
-export type RenderOpts = {
+export interface RenderOpts {
   disabled: boolean;
   [key: string]: any;
-};
+}
 
 interface BaseFormSchema<T extends ComponentType = any> {
   // Field name
@@ -224,12 +225,12 @@ export interface ComponentFormSchema<T extends ComponentType = any> extends Base
 
 export interface SlotFormSchema extends BaseFormSchema {
   // Custom slot, in form-item
-  slot: string;
+  slot?: string;
 }
 
 type ComponentFormSchemaType<T extends ComponentType = ComponentType> = T extends any ? ComponentFormSchema<T> : never;
 
-export type FormSchema = ComponentFormSchemaType | SlotFormSchema;
+export type FormSchema = ComponentFormSchemaType & SlotFormSchema;
 
 export type FormSchemaInner = Partial<ComponentFormSchema> & Partial<SlotFormSchema> & BaseFormSchema;
 

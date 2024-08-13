@@ -1,9 +1,9 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { Icon } from "/@/components/general/Icon";
-import { useAppStore } from "/@/store/modules/App";
+import { Icon } from "@/components/general/Icon";
+import { useAppStore } from "@/store/modules/App";
 export const columns: BasicColumn[] = [
   {
     title: "组织名称",
@@ -16,7 +16,7 @@ export const columns: BasicColumn[] = [
       if (tenantId) {
         return h("div", { style: "display: flex;align-items: center;" }, [
           h(Icon, { icon: "ion:business", color: appStore.getThemeColor }),
-          h("div", { style: "margin-left: 12px;color:" + appStore.getThemeColor }, record.orgName)
+          h("div", { style: `margin-left: 12px;color:${appStore.getThemeColor}` }, record.orgName)
         ]);
       }
       return record.orgName;
@@ -48,10 +48,10 @@ export const columns: BasicColumn[] = [
     width: 80,
     customRender: ({ record }) => {
       const status = record.status;
-      const enable = ~~status === 0;
+      const enable = Math.trunc(status) === 0;
       const color = enable ? "green" : "red";
       const text = enable ? "启用" : "停用";
-      return h(Tag, { color: color }, () => text);
+      return h(Tag, { color }, () => text);
     }
   }
 ];

@@ -1,8 +1,8 @@
-import type { AppRouteRecordRaw } from "/@/router/Types";
+import type { AppRouteRecordRaw } from "@/router/Types";
 import { computed, toRaw, unref } from "vue";
-import { useMultipleTabStore } from "/@/store/modules/MultipleTab";
+import { useMultipleTabStore } from "@/store/modules/MultipleTab";
 import { uniqBy } from "lodash-es";
-import { useMultipleTabSetting } from "/@/hooks/setting/UseMultipleTabSetting";
+import { useMultipleTabSetting } from "@/hooks/setting/UseMultipleTabSetting";
 import { useRouter } from "vue-router";
 
 export function useFrameKeepAlive() {
@@ -31,7 +31,7 @@ export function useFrameKeepAlive() {
       if (frameSrc) {
         res.push(route);
       }
-      if (children && children.length) {
+      if (children && children.length > 0) {
         res.push(...getAllFramePages(children));
       }
     }

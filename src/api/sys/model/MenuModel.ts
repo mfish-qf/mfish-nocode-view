@@ -34,7 +34,7 @@ export interface MenuListItem {
   routePath: string;
   component: string;
   isKeepalive: number;
-  //外部打开
+  // 外部打开
   isExternal: number;
   remark: string;
   createBy: string;
@@ -47,13 +47,13 @@ export interface MenuListItem {
   children: MenuListItem[];
 }
 
-export type MenuParams = {
+export interface MenuParams {
   menuName?: string;
   menuType?: MenuType;
   status?: string;
   permission?: string;
   noButton?: boolean;
-};
+}
 
 /**
  * 菜单路由树

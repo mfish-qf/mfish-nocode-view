@@ -1,10 +1,10 @@
 <template>
   <Dropdown
-    :dropMenuList="getDropMenuList"
+    :drop-menu-list="getDropMenuList"
     :trigger="getTrigger"
     placement="bottom"
     :arrow="{ pointAtCenter: true }"
-    :overlayStyle="{ width: '150px' }"
+    :overlay-style="{ width: '150px' }"
     @menu-event="handleMenuEvent"
   >
     <div :class="`${prefixCls}__info`" @contextmenu="handleContext" v-if="getIsTabs">
@@ -19,11 +19,11 @@
   import type { PropType } from "vue";
   import type { RouteLocationNormalized } from "vue-router";
   import { defineComponent, computed, unref } from "vue";
-  import { Dropdown } from "/@/components/general/Dropdown";
-  import { Icon } from "/@/components/general/Icon";
+  import { Dropdown } from "@/components/general/Dropdown";
+  import { Icon } from "@/components/general/Icon";
   import { TabContentProps } from "../types";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { useTabDropdown } from "../UseTabDropdown";
 
   export default defineComponent({

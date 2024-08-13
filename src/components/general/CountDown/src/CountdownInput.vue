@@ -1,7 +1,7 @@
 <template>
   <a-input v-bind="$attrs" :class="prefixCls" :size="size" :value="state">
     <template #addonAfter>
-      <CountButton :size="size" :count="count" :value="state" :beforeStartFunc="sendCodeApi" />
+      <CountButton :size="size" :count="count" :value="state" :before-start-func="sendCodeApi" />
     </template>
     <template #[item]="data" v-for="item in Object.keys($slots).filter((k) => k !== 'addonAfter')">
       <slot :name="item" v-bind="data || {}"></slot>
@@ -11,8 +11,8 @@
 <script lang="ts">
   import { defineComponent, PropType } from "vue";
   import CountButton from "./CountButton.vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useRuleFormItem } from "/@/hooks/component/UseFormItem";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useRuleFormItem } from "@/hooks/component/UseFormItem";
 
   const props = {
     value: { type: String },

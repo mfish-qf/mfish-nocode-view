@@ -10,58 +10,59 @@
       toolbar
       search
       ref="asyncTreeRef"
-      treeWrapperClassName="h-[calc(100%-35px)] overflow-auto"
-      :treeData="treeData"
+      tree-wrapper-class-name="h-[calc(100%-35px)] overflow-auto"
+      :tree-data="treeData"
       :load-data="getTables"
       v-model:selectedKeys="selectedKeys"
       @select="handleSelect"
       @update:search-value="handleSearch"
-      :beforeRightClick="getRightMenuList"
+      :before-right-click="getRightMenuList"
     >
       <template #headerTools>
-        <a-tooltip title="新增数据库" v-if="hasPermission('sys:database:insert')">
-          <a-button type="link" size="small" @click="DBCreate">
+        <ATooltip title="新增数据库" v-if="hasPermission('sys:database:insert')">
+          <AButton type="link" size="small" @click="DBCreate">
             <template #icon>
               <Icon icon="ant-design:plus-circle-outlined" />
             </template>
-          </a-button>
-        </a-tooltip>
+          </AButton>
+        </ATooltip>
       </template>
     </BasicTree>
     <DbConnectModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTree, ContextMenuItem, TreeActionType, TreeItem } from "/@/components/general/Tree";
+  import { BasicTree, ContextMenuItem, TreeActionType, TreeItem } from "@/components/general/Tree";
   import { onMounted, ref, unref, createVNode } from "vue";
-  import { deleteDbConnect, getDbConnectList, getTableList } from "/@/api/sys/DbConnect";
-  import { PageResult } from "/@/api/model/BaseModel";
-  import { TableInfo } from "/@/api/sys/model/DbConnectModel";
-  import Icon from "/@/components/general/Icon/src/Icon.vue";
+  import { deleteDbConnect, getDbConnectList, getTableList } from "@/api/sys/DbConnect";
+  import { PageResult } from "@/api/model/BaseModel";
+  import { TableInfo } from "@/api/sys/model/DbConnectModel";
+  import Icon from "@/components/general/Icon/src/Icon.vue";
   import { Button as AButton, Tooltip as ATooltip, Modal } from "ant-design-vue";
-  import { usePermission } from "/@/hooks/web/UsePermission";
-  import DbConnectModal from "/@/views/sys/db-connect/DbConnectModal.vue";
-  import { useModal } from "/@/components/general/Modal";
-  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
+  import { usePermission } from "@/hooks/web/UsePermission";
+  import DbConnectModal from "@/views/sys/db-connect/DbConnectModal.vue";
+  import { useModal } from "@/components/general/Modal";
+  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+  import { Nullable, Recordable } from "@mfish/types";
 
   const emit = defineEmits(["select", "search"]);
   const { hasPermission } = usePermission();
   const treeData = ref<TreeItem[]>([]);
   const asyncTreeRef = ref<Nullable<TreeActionType>>(null);
-  let selectedKeys = ref<TreeItem[]>([]);
+  const selectedKeys = ref<TreeItem[]>([]);
   const [registerModal, { openModal }] = useModal();
   const color = useRootSetting().getThemeColor;
   async function fetch() {
     const dbList = (await getDbConnectList()).list;
-    dbList.forEach((db) => {
-      db["title"] = db.dbTitle;
-      db["key"] = db.id;
-      db["icon"] = "simple-icons:" + (db.dbType === 1 ? "postgresql" : db.dbType === 2 ? "oracle" : "mysql");
-      db["iconColor"] = color;
+    dbList.forEach((db: any) => {
+      db.title = db.dbTitle;
+      db.key = db.id;
+      db.icon = `simple-icons:${db.dbType === 1 ? "postgresql" : db.dbType === 2 ? "oracle" : "mysql"}`;
+      db.iconColor = color;
     });
     treeData.value = dbList as unknown as TreeItem[];
     if (dbList?.length > 0) {
-      let id = treeData.value[0].id;
+      const id = treeData.value[0].id;
       selectedKeys.value = [id];
       emit("select", treeData.value[0]);
     }
@@ -164,23 +165,19 @@
     const result: PageResult<TableInfo> = await getTableList({
       connectId: key,
       pageNum: 1,
-      pageSize: 10000
+      pageSize: 10_000
     });
     if (!result) {
       return [];
     }
     const asyncTreeAction: TreeActionType | null = unref(asyncTreeRef);
-    result.list.forEach((db) => {
-      db["title"] = db.tableName + (db.tableComment ? "[" + db.tableComment + "]" : "");
-      db["key"] = key + "," + db.tableName;
-      //表和视图图标区分
-      if (db.tableType === 0) {
-        db["icon"] = "ant-design:table-outlined";
-      } else {
-        db["icon"] = "ant-design:fund-view-outlined";
-      }
-      db["iconColor"] = color;
-      db["isLeaf"] = true;
+    result.list.forEach((db: any) => {
+      db.title = db.tableName + (db.tableComment ? `[${db.tableComment}]` : "");
+      db.key = `${key},${db.tableName}`;
+      // 表和视图图标区分
+      db.icon = db.tableType === 0 ? "ant-design:table-outlined" : "ant-design:fund-view-outlined";
+      db.iconColor = color;
+      db.isLeaf = true;
     });
     asyncTreeAction?.updateNodeByKey(key, { children: result.list });
     return result.list;

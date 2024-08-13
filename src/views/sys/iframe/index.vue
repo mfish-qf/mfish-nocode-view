@@ -9,16 +9,15 @@
   import { CSSProperties, onMounted, onUnmounted } from "vue";
   import { ref, unref, computed } from "vue";
   import { Spin } from "ant-design-vue";
-  import { useWindowSizeFn } from "/@/hooks/event/UseWindowSizeFn";
-  import { propTypes } from "/@/utils/PropTypes";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useLayoutHeight } from "/@/layouts/default/content/UseContentViewHeight";
+  import { useWindowSizeFn } from "@/hooks/event/UseWindowSizeFn";
+  import { propTypes } from "@/utils/PropTypes";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useLayoutHeight } from "@/layouts/default/content/UseContentViewHeight";
 
-  const emit = defineEmits(["message"]);
   defineProps({
     frameSrc: propTypes.string.def("")
   });
-
+  const emit = defineEmits(["message"]);
   const loading = ref(true);
   const topRef = ref(50);
   const heightRef = ref(window.innerHeight);

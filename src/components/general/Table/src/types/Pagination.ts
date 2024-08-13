@@ -1,5 +1,5 @@
 import Pagination from "ant-design-vue/lib/pagination";
-import { VNodeChild } from "vue";
+import { VNodeChild, VNode } from "vue";
 
 interface PaginationRenderProps {
   page: number;
@@ -98,7 +98,7 @@ export interface PaginationProps {
    * to customize item innerHTML
    * @type Function
    */
-  itemRender?: (props: PaginationRenderProps) => VNodeChild | JSX.Element;
+  itemRender?: (props: PaginationRenderProps) => VNodeChild | VNode;
 
   /**
    * specify the position of Pagination

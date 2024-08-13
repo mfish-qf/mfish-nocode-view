@@ -8,12 +8,12 @@
     v-bind="$attrs"
     @register="registerModal"
     title="代码查看"
-    :showOkBtn="false"
-    cancelText="关闭"
+    :show-ok-btn="false"
+    cancel-text="关闭"
     @height-change="heightChange"
   >
-    <a-tabs>
-      <a-tab-pane v-for="(item, index) in codeList" :key="index">
+    <ATabs>
+      <ATabPane v-for="(item, index) in codeList" :key="index">
         <template #tab>
           <span>
             {{ item.name }}
@@ -25,21 +25,20 @@
           :mode="MODE.JSON"
           :readonly="true"
         />
-      </a-tab-pane>
-    </a-tabs>
+      </ATabPane>
+    </ATabs>
   </BasicModal>
 </template>
 
 <script lang="ts" setup>
   import { toRaw, ref } from "vue";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
   import { Tabs as ATabs } from "ant-design-vue";
-  import { viewCode } from "/@/api/sys/CodeBuild";
-  import { CodeVo } from "/@/api/sys/model/CodeBuildModel";
-  import { CodeEditor, MODE } from "/@/components/general/CodeEditor";
-  const ATabPane = ATabs.TabPane;
+  import { viewCode } from "@/api/sys/CodeBuild";
+  import { CodeVo } from "@/api/sys/model/CodeBuildModel";
+  import { CodeEditor, MODE } from "@/components/general/CodeEditor";
   defineOptions({ name: "CodeQueryModal" });
-
+  const ATabPane = ATabs.TabPane;
   const codeList = ref<CodeVo[]>([]);
   const editHeight = ref(500);
   const [registerModal, { setModalProps, changeLoading }] = useModalInner(async (data) => {

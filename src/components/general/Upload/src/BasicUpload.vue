@@ -1,7 +1,7 @@
 <template>
   <div>
     <Space>
-      <a-button type="primary" @click="openUploadModal" preIcon="carbon:cloud-upload">
+      <a-button type="primary" @click="openUploadModal" pre-icon="carbon:cloud-upload">
         {{ t("component.upload.upload") }}
       </a-button>
     </Space>
@@ -21,12 +21,12 @@
 <script lang="ts">
   import { defineComponent, computed } from "vue";
   import { Space } from "ant-design-vue";
-  import { useModal } from "/@/components/general/Modal";
+  import { useModal } from "@/components/general/Modal";
   import { uploadContainerProps } from "./Props";
   import { omit } from "lodash-es";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import UploadModal from "./UploadModal.vue";
-  import { SysFile } from "/@/api/storage/model/SysFileModel";
+  import { SysFile } from "@/api/storage/model/SysFileModel";
 
   export default defineComponent({
     name: "BasicUpload",

@@ -9,10 +9,10 @@ import type {
   TableRowSelection,
   SizeType
 } from "./types/Table";
-import type { FormProps } from "/@/components/general/Form";
-
+import type { FormProps } from "@/components/general/Form";
 import { DEFAULT_FILTER_FN, DEFAULT_SORT_FN, FETCH_SETTING, DEFAULT_SIZE } from "./Const";
-import { propTypes } from "/@/utils/PropTypes";
+import { propTypes } from "@/utils/PropTypes";
+import type { Recordable } from "@mfish/types";
 
 export const basicProps = {
   clickToRowSelect: { type: Boolean, default: true },

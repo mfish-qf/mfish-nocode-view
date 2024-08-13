@@ -3,13 +3,13 @@
     :width="modalWidth"
     :height="modalHeight"
     :title="modalTitle || t('component.upload.upload')"
-    :okText="t('component.upload.close')"
+    :ok-text="t('component.upload.close')"
     v-bind="$attrs"
     @register="register"
     @ok="handleOk"
-    :afterClose="handleCloseFunc"
+    :after-close="handleCloseFunc"
     class="upload-modal"
-    :showCancelBtn="false"
+    :show-cancel-btn="false"
   >
     <template #centerFooter>
       <a-button @click="handleStartUpload" color="success" :disabled="!getIsSelectFile" :loading="isUploadingRef">
@@ -31,25 +31,25 @@
         </a-button>
       </Upload>
     </div>
-    <FileList :dataSource="fileListRef" :columns="columns" :actionColumn="actionColumn" />
+    <FileList :data-source="fileListRef" :columns="columns" :action-column="actionColumn" />
   </BasicModal>
 </template>
 <script lang="ts">
   import { computed, defineComponent, reactive, ref, toRefs, unref } from "vue";
   import { Alert, Upload } from "ant-design-vue";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
   import { useUploadType } from "./UseUpload";
-  import { useMessage } from "/@/hooks/web/UseMessage";
+  import { useMessage } from "@/hooks/web/UseMessage";
   import { FileItem, UploadResultStatus } from "./Typing";
   import { basicProps, UploadColumnName } from "./Props";
   import { createActionColumn, createTableColumns } from "./data";
-  import { checkImgType, getBase64WithFile } from "/@/utils/file/FileUtils";
-  import { buildUUID } from "/@/utils/Uuid";
-  import { isFunction } from "/@/utils/Is";
-  import { warn } from "/@/utils/Log";
+  import { checkImgType, getBase64WithFile } from "@/utils/file/FileUtils";
+  import { buildUUID } from "@/utils/Uuid";
+  import { isFunction } from "@/utils/Is";
+  import { warn } from "@/utils/Log";
   import FileList from "./FileList.vue";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { SysFile } from "/@/api/storage/model/SysFileModel";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { SysFile } from "@/api/storage/model/SysFileModel";
 
   export default defineComponent({
     components: { BasicModal, Upload, Alert, FileList },
@@ -84,8 +84,8 @@
         return isUploadingRef.value
           ? t("component.upload.uploading")
           : someError
-          ? t("component.upload.reUploadFailed")
-          : t("component.upload.startUpload");
+            ? t("component.upload.reUploadFailed")
+            : t("component.upload.startUpload");
       });
 
       // 上传前校验
@@ -145,19 +145,19 @@
           item.status = UploadResultStatus.UPLOADING;
           const result = await props.api(
             {
-              ...(props.uploadParams || {}),
+              ...props.uploadParams,
               file: item.file,
               isPrivate: item.isPrivate,
               path: item.path
             },
-            function onUploadProgress(progressEvent: ProgressEvent) {
+            (progressEvent: ProgressEvent) => {
               item.percent = ((progressEvent.loaded / progressEvent.total) * 100) | 0;
             }
           );
           item.status = UploadResultStatus.SUCCESS;
           item.responseData = result;
           return item;
-        } catch (e) {
+        } catch {
           item.status = UploadResultStatus.ERROR;
           return item;
         }
@@ -183,9 +183,9 @@
           const errorList = data.filter((item: any) => item.status !== UploadResultStatus.SUCCESS);
           if (errorList.length > 0) throw errorList;
           emit("success", data);
-        } catch (e) {
+        } catch (error) {
           isUploadingRef.value = false;
-          throw e;
+          throw error;
         }
       }
 

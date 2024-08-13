@@ -1,5 +1,5 @@
 <template>
-  <a-tree-select v-bind="getAttrs" @change="handleChange">
+  <ATreeSelect v-bind="getAttrs" @change="handleChange">
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
@@ -8,19 +8,19 @@
     </template>
     <template #title="text" v-if="icon !== undefined">
       <Icon :icon="icon" />
-      {{ text[getAttrs.fieldNames["label"]] }}
+      {{ text[getAttrs.fieldNames.label] }}
     </template>
-  </a-tree-select>
+  </ATreeSelect>
 </template>
 
 <script lang="ts">
   import { computed, defineComponent, watch, ref, onMounted, unref } from "vue";
   import { TreeSelect } from "ant-design-vue";
-  import { isArray, isFunction } from "/@/utils/Is";
+  import { isArray, isFunction } from "@/utils/Is";
   import { get } from "lodash-es";
-  import { propTypes } from "/@/utils/PropTypes";
+  import { propTypes } from "@/utils/PropTypes";
   import { LoadingOutlined } from "@ant-design/icons-vue";
-  import Icon from "/@/components/general/Icon/src/Icon.vue";
+  import Icon from "@/components/general/Icon/src/Icon.vue";
 
   export default defineComponent({
     name: "ApiTreeSelect",
@@ -75,8 +75,8 @@
         let result;
         try {
           result = await api(props.params);
-        } catch (e) {
-          console.error(e);
+        } catch (error) {
+          console.error(error);
         }
         loading.value = false;
         if (!result) return;

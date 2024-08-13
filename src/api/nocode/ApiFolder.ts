@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { ApiFolder, ApiFolderPageModel, ReqApiFolder } from "/@/api/nocode/model/ApiFolderModel";
+import { defHttp } from "@/utils/http/axios";
+import { ApiFolder, ApiFolderPageModel, ReqApiFolder } from "@/api/nocode/model/ApiFolderModel";
 
 /**
  * @description: API目录
@@ -30,7 +30,7 @@ export const getApiFolderAndFile = (reqApiFolder?: ReqApiFolder) => {
  * @param reqApiFolder
  */
 export function exportApiFolder(reqApiFolder?: ReqApiFolder) {
-  return defHttp.download({ url: Api.ApiFolder + "/export", params: reqApiFolder });
+  return defHttp.download({ url: `${Api.ApiFolder}/export`, params: reqApiFolder });
 }
 
 /**
@@ -68,5 +68,5 @@ export function dragApiFolder(apiFolders: ApiFolder[]) {
  * @return
  */
 export function deleteApiFolder(id: string) {
-  return defHttp.delete<ApiFolder>({ url: Api.ApiFolder + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<ApiFolder>({ url: `${Api.ApiFolder}/${id}` }, { successMessageMode: "message" });
 }

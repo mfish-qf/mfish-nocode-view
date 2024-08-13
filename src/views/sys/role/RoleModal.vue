@@ -1,13 +1,13 @@
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" showFooter :title="getTitle" @ok="handleSubmit">
+  <BasicModal v-bind="$attrs" @register="registerModal" show-footer :title="getTitle" @ok="handleSubmit">
     <BasicForm @register="registerForm" @submit="handleSubmit">
       <template #menus="{ model, field }">
         <BasicTree
           v-model:value="model[field]"
-          :treeData="treeData"
+          :tree-data="treeData"
           search
-          :fieldNames="{ title: 'menuName', key: 'id' }"
-          :clickRowToExpand="true"
+          :field-names="{ title: 'menuName', key: 'id' }"
+          :click-row-to-expand="true"
           checkable
           toolbar
           title="菜单分配"
@@ -18,13 +18,13 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "/@/components/general/Form/index";
+  import { BasicForm, useForm } from "@/components/general/Form/index";
   import { formSchema } from "./role.data";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { BasicTree, TreeItem } from "/@/components/general/Tree";
-  import { getMenuTree } from "/@/api/sys/Menu";
-  import { getRoleMenus, insertRole, updateRole } from "/@/api/sys/Role";
-  import { getTenantMenuTree, getTenantRoleMenus, insertTenantRole, updateTenantRole } from "/@/api/sys/SsoTenant";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicTree, TreeItem } from "@/components/general/Tree";
+  import { getMenuTree } from "@/api/sys/Menu";
+  import { getRoleMenus, insertRole, updateRole } from "@/api/sys/Role";
+  import { getTenantMenuTree, getTenantRoleMenus, insertTenantRole, updateTenantRole } from "@/api/sys/SsoTenant";
 
   const props = defineProps({
     source: {
@@ -47,19 +47,13 @@
     setModalProps({ confirmLoading: false, width: "800px" });
     // 需要在setFieldsValue之前先填充treeData，否则Tree组件可能会报key not exist警告
     if (unref(treeData).length === 0) {
-      if (props.source === 1) {
-        treeData.value = (await getTenantMenuTree()) as any as TreeItem[];
-      } else {
-        treeData.value = (await getMenuTree()) as any as TreeItem[];
-      }
+      treeData.value =
+        props.source === 1
+          ? ((await getTenantMenuTree()) as any as TreeItem[])
+          : ((await getMenuTree()) as any as TreeItem[]);
     }
     isUpdate.value = !!data?.isUpdate;
-    let getMenus;
-    if (props.source === 1) {
-      getMenus = getTenantRoleMenus;
-    } else {
-      getMenus = getRoleMenus;
-    }
+    const getMenus = props.source === 1 ? getTenantRoleMenus : getRoleMenus;
     if (unref(isUpdate)) {
       getMenus(data.record.id).then((res) => {
         data.record.menus = res;
@@ -92,10 +86,10 @@
       ]).then();
     }
   });
-  const getTitle = computed(() => (!unref(isUpdate) ? "新增角色" : "编辑角色"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑角色" : "新增角色"));
 
   async function handleSubmit() {
-    let values = await validate();
+    const values = await validate();
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {
       if (props.source === 1) {

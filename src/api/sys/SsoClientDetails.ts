@@ -1,9 +1,9 @@
-import { defHttp } from "/@/utils/http/axios";
+import { defHttp } from "@/utils/http/axios";
 import {
   SsoClientDetails,
   ReqSsoClientDetails,
   SsoClientDetailsPageModel
-} from "/@/api/sys/model/SsoClientDetailsModel";
+} from "@/api/sys/model/SsoClientDetailsModel";
 
 /**
  * @description: 客户端信息
@@ -68,7 +68,7 @@ export function updateSsoClientDetails(ssoClientDetails: SsoClientDetails) {
 export function resetSecret(id: string) {
   return defHttp.put<string>(
     {
-      url: Api.Secret + "/" + id
+      url: `${Api.Secret}/${id}`
     },
     { successMessageMode: "message" }
   );
@@ -80,7 +80,7 @@ export function resetSecret(id: string) {
  */
 export function getSecret(id: string) {
   return defHttp.get<string>({
-    url: Api.Secret + "/" + id
+    url: `${Api.Secret}/${id}`
   });
 }
 
@@ -91,5 +91,5 @@ export function getSecret(id: string) {
  * @return
  */
 export function deleteSsoClientDetails(id: string) {
-  return defHttp.delete<SsoClientDetails>({ url: Api.SsoClientDetails + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<SsoClientDetails>({ url: `${Api.SsoClientDetails}/${id}` }, { successMessageMode: "message" });
 }

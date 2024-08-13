@@ -1,7 +1,7 @@
 import type { RuleObject } from "ant-design-vue/lib/form/interface";
 import type { ComponentType } from "./types";
-import { useI18n } from "/@/hooks/web/UseI18n";
-import { isNumber } from "/@/utils/Is";
+import { useI18n } from "@/hooks/web/UseI18n";
+import { isNumber } from "@/utils/Is";
 
 const { t } = useI18n();
 

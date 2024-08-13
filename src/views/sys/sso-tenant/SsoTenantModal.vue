@@ -10,8 +10,8 @@
     @register="registerModal"
     :title="getTitle"
     @ok="handleSubmit"
-    :showOkBtn="showSave"
-    cancelText="关闭"
+    :show-ok-btn="showSave"
+    cancel-text="关闭"
   >
     <BasicForm @register="registerForm" @submit="handleSubmit">
       <template #logoImg>
@@ -22,7 +22,7 @@
           :max-count="1"
           accept="image/*"
           list-type="picture-card"
-          :customRequest="uploadLogo"
+          :custom-request="uploadLogo"
           @preview="handlePreview"
         >
           <div>
@@ -35,10 +35,10 @@
         </Modal>
       </template>
       <template #userSearch>
-        <a-select
+        <ASelect
           v-model:value="accountList.userId"
           show-search
-          allowClear
+          allow-clear
           placeholder="检索帐号"
           :filter-option="false"
           :not-found-content="accountList.fetching ? undefined : null"
@@ -49,26 +49,27 @@
           <template v-if="accountList.fetching" #notFoundContent>
             <Spin size="small" />
           </template>
-        </a-select>
+        </ASelect>
       </template>
     </BasicForm>
   </BasicModal>
 </template>
 <script lang="ts" setup>
   import { computed, reactive, ref, unref } from "vue";
-  import { BasicForm, useForm } from "/@/components/general/Form";
+  import { BasicForm, useForm } from "@/components/general/Form";
   import { Modal, Select as ASelect, Spin, Upload, UploadProps } from "ant-design-vue";
   import { ssoTenantFormSchema } from "./ssoTenant.data";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { insertSsoTenant, updateMeTenant, updateSsoTenant } from "/@/api/sys/SsoTenant";
-  import { uploadApi } from "/@/api/storage/Upload";
-  import { getBase64WithFile, imageUrl } from "/@/utils/file/FileUtils";
-  import Icon from "/@/components/general/Icon/src/Icon.vue";
-  import { SysFile } from "/@/api/storage/model/SysFileModel";
-  import { getLocalFileUrl, getSysFileByKey } from "/@/api/storage/SysFile";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { insertSsoTenant, updateMeTenant, updateSsoTenant } from "@/api/sys/SsoTenant";
+  import { uploadApi } from "@/api/storage/Upload";
+  import { getBase64WithFile, imageUrl } from "@/utils/file/FileUtils";
+  import Icon from "@/components/general/Icon/src/Icon.vue";
+  import { SysFile } from "@/api/storage/model/SysFileModel";
+  import { getLocalFileUrl, getSysFileByKey } from "@/api/storage/SysFile";
   import { debounce } from "lodash-es";
-  import { getUserById, getUserList } from "/@/api/sys/User";
-  import { getAllRoleList } from "/@/api/sys/Role";
+  import { getUserById, getUserList } from "@/api/sys/User";
+  import { getAllRoleList } from "@/api/sys/Role";
+  import { Recordable } from "@mfish/types";
 
   const emit = defineEmits(["success", "register"]);
   const isUpdate = ref(true);
@@ -114,7 +115,7 @@
           }
         });
       }
-      //来源1 表示自己修改租户信息，不允许修改用户
+      // 来源1 表示自己修改租户信息，不允许修改用户
       if (data?.source === 1) {
         source = 1;
         updateSchema([
@@ -139,22 +140,20 @@
         showSave.value = false;
       }
     }
-    //来源1 表示自己修改租户信息，不允许修改角色信息
+    // 来源1 表示自己修改租户信息，不允许修改角色信息
     if (data?.source !== 1) {
       initRoles().then();
     }
   });
 
   async function initRoles() {
-    let roles = await getAllRoleList({ tenantId: "1" });
+    const roles = await getAllRoleList({ tenantId: "1" });
     const options = roles.reduce((prev, next: Recordable) => {
-      if (next) {
-        if (next["id"] !== "1") {
-          prev.push({
-            label: next["roleName"],
-            value: next["id"]
-          });
-        }
+      if (next && next.id !== "1") {
+        prev.push({
+          label: next.roleName,
+          value: next.id
+        });
       }
       return prev;
     }, [] as any);
@@ -165,10 +164,10 @@
       }
     ]).then();
   }
-  const getTitle = computed(() => (!unref(isUpdate) ? "新增租户信息" : "编辑租户信息"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑租户信息" : "新增租户信息"));
 
   async function handleSubmit() {
-    let values = await validate();
+    const values = await validate();
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {
       if (source === 1) {
@@ -211,9 +210,9 @@
       .then((res) => {
         e.onSuccess(res, e);
       })
-      .catch((err) => {
+      .catch((error) => {
         // 调用实例的失败方法通知组件该文件上传失败
-        e.onError(err);
+        e.onError(error);
       });
   }
 
@@ -227,7 +226,7 @@
     }
     previewImage.value = file.url || file.preview;
     previewVisible.value = true;
-    previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf("/") + 1);
+    previewTitle.value = file.name || file.url.slice(Math.max(0, file.url.lastIndexOf("/") + 1));
   };
 
   const handleCancel = () => {

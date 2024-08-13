@@ -12,7 +12,7 @@
   import { PropType } from "vue";
   import { defineComponent } from "vue";
   import { Spin } from "ant-design-vue";
-  import { SizeEnum } from "/@/enums/SizeEnum";
+  import { SizeEnum } from "@/enums/SizeEnum";
 
   export default defineComponent({
     name: "Loading",

@@ -26,7 +26,7 @@ export function urlToBase64(url: string, mineType?: string): Promise<string> {
 
     const img = new Image();
     img.crossOrigin = "";
-    img.onload = function () {
+    img.addEventListener("load", () => {
       if (!canvas || !ctx) {
         return reject();
       }
@@ -36,7 +36,7 @@ export function urlToBase64(url: string, mineType?: string): Promise<string> {
       const dataURL = canvas.toDataURL(mineType || "image/png");
       canvas = null;
       resolve(dataURL);
-    };
+    });
     img.src = url;
   });
 }

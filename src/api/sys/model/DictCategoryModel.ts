@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
 
 /**
  * @description: 属性分类字典
@@ -7,26 +7,26 @@ import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
  * @version: V1.2.0
  */
 export interface DictCategory extends BaseEntity<string> {
-  //父分类id
+  // 父分类id
   parentId?: string;
-  //分类编码
+  // 分类编码
   categoryCode: string;
-  //分类名称
+  // 分类名称
   categoryName: string;
-  //分类树编码（系统自动编码）
+  // 分类树编码（系统自动编码）
   treeCode?: string;
-  //分类树层级（自动生成）
+  // 分类树层级（自动生成）
   treeLevel: number;
-  //排序
+  // 排序
   sort?: number;
 }
 
 export interface ReqDictCategory extends ReqPage {
-  //分类名称
+  // 分类名称
   categoryName?: string;
-  //分类编码
+  // 分类编码
   categoryCode?: string;
 }
 
-//分页结果集
+// 分页结果集
 export type DictCategoryPageModel = PageResult<DictCategory>;

@@ -1,11 +1,11 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
-import { getDictProps } from "/@/utils/DictUtils";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
+import { getDictProps } from "@/utils/DictUtils";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { imageUrl } from "/@/utils/file/FileUtils";
-import { getLocalFileUrl } from "/@/api/storage/SysFile";
-import TableImage from "/@/components/general/Table/src/components/TableImg.vue";
+import { imageUrl } from "@/utils/file/FileUtils";
+import { getLocalFileUrl } from "@/api/storage/SysFile";
+import TableImage from "@/components/general/Table/src/components/TableImg.vue";
 
 /**
  * @description: 租户信息表
@@ -20,7 +20,7 @@ export const columns: BasicColumn[] = [
     customRender: ({ record }) => {
       if (record.logo) {
         const imgList = [imageUrl(getLocalFileUrl(record.logo))];
-        return h(TableImage, { size: 40, simpleShow: true, imgList: imgList });
+        return h(TableImage, { size: 40, simpleShow: true, imgList });
       }
     },
     width: 120
@@ -59,7 +59,7 @@ export const columns: BasicColumn[] = [
     title: "域名",
     dataIndex: "domain",
     customRender: ({ record }) => {
-      //超链接访问文件，直接访问后台存储文件地址
+      // 超链接访问文件，直接访问后台存储文件地址
       return h("a", { href: record.domain, target: "_blank" }, record.domain);
     },
     width: 120
@@ -75,10 +75,10 @@ export const columns: BasicColumn[] = [
     width: 80,
     customRender: ({ record }) => {
       const status = record.status;
-      const enable = ~~status === 0;
+      const enable = Math.trunc(status) === 0;
       const color = enable ? "green" : "red";
       const text = enable ? "正常" : "注销";
-      return h(Tag, { color: color }, () => text);
+      return h(Tag, { color }, () => text);
     }
   }
 ];

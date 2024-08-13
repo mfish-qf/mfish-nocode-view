@@ -1,0 +1,45 @@
+.@{prefix-cls} {
+  height: 28px;
+  border-radius: 14px;
+  transition: background 0.5s ease;
+  overflow: hidden;
+  font-size: 14px;
+  cursor: pointer;
+  align-items: center;
+  margin: 2px;
+
+  img {
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+  }
+
+  &__header {
+    border-radius: 50%;
+  }
+
+  &__name {
+    display: flex;
+    font-size: 14px;
+  }
+
+  &:hover {
+    background-color: @header-bg-hover-color;
+  }
+
+  &--light {
+    .@{prefix-cls}__name {
+      color: @text-color-base;
+    }
+
+    .@{prefix-cls}__desc {
+      color: @header-light-desc-color;
+    }
+  }
+
+  &-dropdown-overlay {
+    .ant-dropdown-menu-item {
+      min-width: 160px;
+    }
+  }
+}

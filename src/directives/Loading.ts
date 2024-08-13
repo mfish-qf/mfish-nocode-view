@@ -1,4 +1,4 @@
-import { createLoading } from "/@/components/general/Loading";
+import { createLoading } from "@/components/general/Loading";
 import type { App, Directive } from "vue";
 
 const loadingDirective: Directive = {

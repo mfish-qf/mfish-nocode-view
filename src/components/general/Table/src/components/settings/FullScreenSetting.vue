@@ -12,7 +12,7 @@
   import { Tooltip } from "ant-design-vue";
   import { FullscreenOutlined, FullscreenExitOutlined } from "@ant-design/icons-vue";
   import { useFullscreen } from "@vueuse/core";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { useTableContext } from "../../hooks/UseTableContext";
 
   export default defineComponent({

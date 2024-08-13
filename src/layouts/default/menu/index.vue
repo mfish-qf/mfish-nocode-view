@@ -1,21 +1,22 @@
 <script lang="tsx">
   import type { PropType, CSSProperties } from "vue";
   import { computed, defineComponent, unref, toRef } from "vue";
-  import { BasicMenu } from "/@/components/general/Menu";
-  import { SimpleMenu } from "/@/components/general/SimpleMenu";
-  import { AppLogo } from "/@/components/general/Application";
-  import { MenuModeEnum, MenuSplitTyeEnum } from "/@/enums/MenuEnum";
-  import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
-  import { ScrollContainer } from "/@/components/general/Container";
-  import { externalOpen, useGo } from "/@/hooks/web/UsePage";
+  import { BasicMenu } from "@/components/general/Menu";
+  import { SimpleMenu } from "@/components/general/SimpleMenu";
+  import { AppLogo } from "@/components/general/Application";
+  import { MenuModeEnum, MenuSplitTyeEnum } from "@/enums/MenuEnum";
+  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
+  import { ScrollContainer } from "@/components/general/Container";
+  import { externalOpen, useGo } from "@/hooks/web/UsePage";
   import { useSplitMenu } from "./UseLayoutMenu";
-  import { openWindow } from "/@/utils";
-  import { propTypes } from "/@/utils/PropTypes";
-  import { isUrl } from "/@/utils/Is";
-  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
-  import { useAppInject } from "/@/hooks/web/UseAppInject";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { ThemeEnum } from "/@/enums/AppEnum";
+  import { openWindow } from "@/utils";
+  import { propTypes } from "@/utils/PropTypes";
+  import { isUrl } from "@/utils/Is";
+  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+  import { useAppInject } from "@/hooks/web/UseAppInject";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { ThemeEnum } from "@/enums/AppEnum";
+  import { Nullable } from "@mfish/types";
 
   export default defineComponent({
     name: "LayoutMenu",
@@ -136,11 +137,9 @@
 
       function renderMenu() {
         const { menus, ...menuProps } = unref(getCommonProps);
-        if (!menus || !menus.length) return null;
-        //菜单为头部菜单时，强制设置菜单样式为light，重写light的字体颜色，查看updateBackground.ts
-        return !props.isHorizontal ? (
-          <SimpleMenu {...menuProps} isSplitMenu={unref(getSplit)} items={menus} />
-        ) : (
+        if (!menus || menus.length === 0) return null;
+        // 菜单为头部菜单时，强制设置菜单样式为light，重写light的字体颜色，查看updateBackground.ts
+        return props.isHorizontal ? (
           <BasicMenu
             {...(menuProps as any)}
             theme={ThemeEnum.LIGHT}
@@ -150,6 +149,8 @@
             mode={unref(getComputedMenuMode as any)}
             items={menus}
           />
+        ) : (
+          <SimpleMenu {...menuProps} isSplitMenu={unref(getSplit)} items={menus} />
         );
       }
 

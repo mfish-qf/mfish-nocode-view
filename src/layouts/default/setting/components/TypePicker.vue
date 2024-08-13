@@ -21,7 +21,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from "vue";
   import { Tooltip } from "ant-design-vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { menuTypeList } from "../Enum";
 
   export default defineComponent({

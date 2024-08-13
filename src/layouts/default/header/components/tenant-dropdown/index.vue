@@ -1,5 +1,5 @@
 <template>
-  <Dropdown v-if="getTenant.id" placement="bottomLeft" :overlayClassName="`${prefixCls}-dropdown-overlay`">
+  <Dropdown v-if="getTenant.id" placement="bottomLeft" :overlay-class-name="`${prefixCls}-dropdown-overlay`">
     <span :class="[prefixCls, `${prefixCls}--${theme}`]" class="flex">
       <img :class="`${prefixCls}__header`" :src="tenantImg" :alt="getTenant.name" />
       <span :class="`${prefixCls}__info hidden md:block`">
@@ -25,15 +25,15 @@
   import { Dropdown, Menu as AMenu } from "ant-design-vue";
   import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
   import { onBeforeMount, reactive, ref, toRaw } from "vue";
-  import { useUserStore } from "/@/store/modules/User";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { propTypes } from "/@/utils/PropTypes";
-  import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
-  import { setHeaderImg } from "/@/utils/file/FileUtils";
-  import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
-  import { changeSsoTenant } from "/@/api/sys/SsoTenant";
-  import { router } from "/@/router";
-  import { sleep } from "/@/utils/Utils";
+  import { useUserStore } from "@/store/modules/User";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { propTypes } from "@/utils/PropTypes";
+  import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
+  import { setHeaderImg } from "@/utils/file/FileUtils";
+  import { TenantVo } from "@/api/sys/model/SsoTenantModel";
+  import { changeSsoTenant } from "@/api/sys/SsoTenant";
+  import { router } from "@/router";
+  import { sleep } from "@/utils/Utils";
   export default {
     name: "TenantDropdown",
     components: {
@@ -91,55 +91,5 @@
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-header-tenant-dropdown";
-
-  .@{prefix-cls} {
-    height: @header-height;
-    padding: 0 0 0 10px;
-    padding-right: 10px;
-    overflow: hidden;
-    font-size: 12px;
-    cursor: pointer;
-    align-items: center;
-
-    img {
-      width: 24px;
-      height: 24px;
-      margin-right: 12px;
-    }
-
-    &__header {
-      border-radius: 50%;
-    }
-
-    &__name {
-      display: flex;
-      font-size: 14px;
-    }
-
-    &--dark {
-      &:hover {
-        background-color: @header-dark-bg-hover-color;
-      }
-    }
-
-    &--light {
-      &:hover {
-        background-color: @header-light-bg-hover-color;
-      }
-
-      .@{prefix-cls}__name {
-        color: @text-color-base;
-      }
-
-      .@{prefix-cls}__desc {
-        color: @header-light-desc-color;
-      }
-    }
-
-    &-dropdown-overlay {
-      .ant-dropdown-menu-item {
-        min-width: 160px;
-      }
-    }
-  }
+  @import "../dropdown.less";
 </style>

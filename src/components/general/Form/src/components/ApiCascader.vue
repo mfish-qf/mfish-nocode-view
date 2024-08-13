@@ -1,11 +1,11 @@
 <template>
-  <a-cascader
+  <ACascader
     v-model:value="state"
     :options="options"
     :load-data="loadData"
     change-on-select
     @change="handleChange"
-    :displayRender="handleRenderDisplay"
+    :display-render="handleRenderDisplay"
   >
     <template #suffixIcon v-if="loading">
       <LoadingOutlined spin />
@@ -16,17 +16,17 @@
         {{ t("component.form.apiSelectNotFound") }}
       </span>
     </template>
-  </a-cascader>
+  </ACascader>
 </template>
 <script lang="ts" setup>
   import { PropType, ref, unref, watch, watchEffect } from "vue";
   import { Cascader as ACascader } from "ant-design-vue";
-  import { propTypes } from "/@/utils/PropTypes";
-  import { isFunction } from "/@/utils/Is";
+  import { propTypes } from "@/utils/PropTypes";
+  import { isFunction } from "@/utils/Is";
   import { get, omit } from "lodash-es";
-  import { useRuleFormItem } from "/@/hooks/component/UseFormItem";
+  import { useRuleFormItem } from "@/hooks/component/UseFormItem";
   import { LoadingOutlined } from "@ant-design/icons-vue";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { ValueType } from "ant-design-vue/es/vc-cascader/Cascader";
 
   interface Option {
@@ -144,8 +144,8 @@
       if (props.resultField) {
         targetOption.children = generatorOptions(get(res, props.resultField) || []);
       }
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     } finally {
       targetOption.loading = false;
     }

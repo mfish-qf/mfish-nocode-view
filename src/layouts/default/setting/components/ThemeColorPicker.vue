@@ -19,11 +19,9 @@
 <script lang="ts" setup>
   import { PropType } from "vue";
   import { CheckOutlined } from "@ant-design/icons-vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { baseHandler } from "../Handler";
   import { HandlerEnum } from "../Enum";
-
-  const { prefixCls } = useDesign("setting-theme-picker");
 
   const props = defineProps({
     colorList: {
@@ -37,6 +35,9 @@
       type: String
     }
   });
+
+  const { prefixCls } = useDesign("setting-theme-picker");
+
   function handleClick(color: string) {
     props.event && baseHandler(props.event, color);
   }

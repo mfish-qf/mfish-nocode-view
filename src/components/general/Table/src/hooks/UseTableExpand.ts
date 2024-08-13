@@ -23,7 +23,7 @@ export function useTableExpand(propsRef: ComputedRef<BasicTableProps>, tableData
       expandedRowKeys: unref(expandedRowKeys),
       onExpandedRowsChange: (keys: string[]) => {
         expandedRowKeys.value = keys;
-        emit("expanded-rows-change", keys);
+        emit("expandedRowsChange", keys);
       }
     };
   });
@@ -34,7 +34,7 @@ export function useTableExpand(propsRef: ComputedRef<BasicTableProps>, tableData
   }
 
   function expandRows(keys: string[]) {
-    //使用行KEY展开指定的行
+    // 使用行KEY展开指定的行
     const { isTreeTable } = unref(propsRef);
     if (!isTreeTable) return;
     expandedRowKeys.value = [...expandedRowKeys.value, ...keys];

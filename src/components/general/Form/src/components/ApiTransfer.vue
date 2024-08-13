@@ -3,10 +3,10 @@
     :data-source="getdataSource"
     :filter-option="filterOption"
     :render="(item) => item.title"
-    :showSelectAll="showSelectAll"
-    :selectedKeys="selectedKeys"
-    :targetKeys="getTargetKeys"
-    :showSearch="showSearch"
+    :show-select-all="showSelectAll"
+    :selected-keys="selectedKeys"
+    :target-keys="getTargetKeys"
+    :show-search="showSearch"
     @change="handleChange"
   />
 </template>
@@ -14,10 +14,10 @@
 <script lang="ts">
   import { computed, defineComponent, watch, ref, unref, watchEffect } from "vue";
   import { Transfer } from "ant-design-vue";
-  import { isFunction } from "/@/utils/Is";
+  import { isFunction } from "@/utils/Is";
   import { get, omit } from "lodash-es";
-  import { propTypes } from "/@/utils/PropTypes";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { propTypes } from "@/utils/PropTypes";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { TransferDirection, TransferItem } from "ant-design-vue/lib/transfer";
 
   export default defineComponent({
@@ -54,7 +54,7 @@
 
       const getAttrs = computed(() => {
         return {
-          ...(!props.api ? { dataSource: unref(_dataSource) } : {}),
+          ...(props.api ? {} : { dataSource: unref(_dataSource) }),
           ...attrs
         };
       });

@@ -1,9 +1,9 @@
-import { addClass, hasClass, removeClass } from "/@/utils/DomUtils";
-import { changeTheme } from "/@/logics/theme/index";
-import { useAppStore } from "/@/store/modules/App";
+import { addClass, hasClass, removeClass } from "@/utils/DomUtils";
+import { changeTheme } from "@/logics/theme/UpdateTheme";
+import { useAppStore } from "@/store/modules/App";
 
 export async function updateDarkTheme(mode: string | null = "light") {
-  const mainHtml = document.getElementById("mainHtml");
+  const mainHtml = document.querySelector("#mainHtml");
   if (!mainHtml) {
     return;
   }

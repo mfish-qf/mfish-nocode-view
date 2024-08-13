@@ -1,5 +1,5 @@
 import { ComponentType } from "../../types/ComponentType";
-import { useI18n } from "/@/hooks/web/UseI18n";
+import { useI18n } from "@/hooks/web/UseI18n";
 
 const { t } = useI18n();
 

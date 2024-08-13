@@ -1,10 +1,10 @@
-import type { Menu as MenuType } from "/@/router/Types";
+import type { Menu as MenuType } from "@/router/Types";
 import type { MenuState } from "./Types";
 import { computed, Ref, toRaw } from "vue";
 import { unref } from "vue";
 import { uniq } from "lodash-es";
-import { getAllParentPath } from "/@/router/helper/MenuHelper";
-import { useTimeoutFn } from "/@/hooks/core/UseTimeout";
+import { getAllParentPath } from "@/router/helper/MenuHelper";
+import { useTimeoutFn } from "@/hooks/core/UseTimeout";
 import { useDebounceFn } from "@vueuse/core";
 
 export function useOpenKeys(
@@ -28,11 +28,7 @@ export function useOpenKeys(
         }
         const keys = getAllParentPath(menuList, path);
 
-        if (!unref(accordion)) {
-          menuState.openNames = uniq([...menuState.openNames, ...keys]);
-        } else {
-          menuState.openNames = keys;
-        }
+        menuState.openNames = unref(accordion) ? keys : uniq([...menuState.openNames, ...keys]);
         menuState.activeSubMenuNames = menuState.openNames;
       },
       30,

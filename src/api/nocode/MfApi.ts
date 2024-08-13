@@ -1,7 +1,7 @@
-import { defHttp } from "/@/utils/http/axios";
-import { MfApi, ReqMfApi, MfApiPageModel, Config, ReqSource } from "/@/api/nocode/model/MfApiModel";
-import { DataTable, MetaDataHeader } from "/@/api/sys/model/DbConnectModel";
-import { ReqPage } from "/@/api/model/BaseModel";
+import { defHttp } from "@/utils/http/axios";
+import { MfApi, ReqMfApi, MfApiPageModel, Config, ReqSource } from "@/api/nocode/model/MfApiModel";
+import { DataTable, MetaDataHeader } from "@/api/sys/model/DbConnectModel";
+import { ReqPage } from "@/api/model/BaseModel";
 
 /**
  * @description: 自定义API
@@ -35,7 +35,7 @@ export const getMfApiList = (reqMfApi?: ReqMfApi) => {
  * @param reqMfApi
  */
 export function exportMfApi(reqMfApi?: ReqMfApi) {
-  return defHttp.download({ url: Api.MfApi + "/export", params: reqMfApi });
+  return defHttp.download({ url: `${Api.MfApi}/export`, params: reqMfApi });
 }
 
 /**
@@ -65,7 +65,7 @@ export function updateMfApi(mfApi: MfApi) {
  * @return
  */
 export function deleteMfApi(id: string) {
-  return defHttp.delete<MfApi>({ url: Api.MfApi + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<MfApi>({ url: `${Api.MfApi}/${id}` }, { successMessageMode: "message" });
 }
 
 /**
@@ -73,7 +73,7 @@ export function deleteMfApi(id: string) {
  * @param id
  */
 export function getMfApiById(id: string) {
-  return defHttp.get<MfApi>({ url: Api.MfApi + "/" + id });
+  return defHttp.get<MfApi>({ url: `${Api.MfApi}/${id}` });
 }
 
 export function getQuerySql(config: Config) {
@@ -82,14 +82,14 @@ export function getQuerySql(config: Config) {
 
 export function getQueryData(config: Config, reqPage: ReqPage) {
   return defHttp.post<DataTable>(
-    { url: Api.DATA + "?pageNum=" + reqPage.pageNum + "&pageSize=" + reqPage.pageSize, params: config },
+    { url: `${Api.DATA}?pageNum=${reqPage.pageNum}&pageSize=${reqPage.pageSize}`, params: config },
     { errorMessageMode: "message" }
   );
 }
 
 export function formulaTest(config: Config, reqPage: ReqPage) {
   return defHttp.post<DataTable>(
-    { url: Api.FormulaTest + "?pageNum=" + reqPage.pageNum + "&pageSize=" + reqPage.pageSize, params: config },
+    { url: `${Api.FormulaTest}?pageNum=${reqPage.pageNum}&pageSize=${reqPage.pageSize}`, params: config },
     { errorMessageMode: "message" }
   );
 }
@@ -98,5 +98,5 @@ export function getQueryFields(config: Config) {
 }
 
 export const getSourceHeaders = (params: ReqSource) => {
-  return defHttp.get<MetaDataHeader[]>({ url: Api.Headers, params: params });
+  return defHttp.get<MetaDataHeader[]>({ url: Api.Headers, params });
 };

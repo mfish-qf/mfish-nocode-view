@@ -1,6 +1,6 @@
-import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
-import { MetaDataHeader } from "/@/api/sys/model/DbConnectModel";
-import { ApiParams } from "/@/api/nocode/model/ApiParamsModel";
+import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
+import { MetaDataHeader } from "@/api/sys/model/DbConnectModel";
+import { ApiParams } from "@/api/nocode/model/ApiParamsModel";
 
 /**
  * @description: 自定义API
@@ -9,35 +9,35 @@ import { ApiParams } from "/@/api/nocode/model/ApiParamsModel";
  * @version: V1.2.0
  */
 export interface MfApi extends BaseEntity<string> {
-  //API名称
+  // API名称
   name?: string;
-  //目录id
+  // 目录id
   folderId?: string;
-  //数据来源id
+  // 数据来源id
   sourceId?: string;
-  //数据来源类型 0 数据库 1文件 2API接口
+  // 数据来源类型 0 数据库 1文件 2API接口
   sourceType?: number;
-  //描述
+  // 描述
   remark?: string;
-  //数据源SQL（原生查询方式存储）
+  // 数据源SQL（原生查询方式存储）
   sourceSql?: string;
-  //参数标签 0无参 1有参数
+  // 参数标签 0无参 1有参数
   paramFlag?: number;
-  //API配置信息
+  // API配置信息
   config?: string;
-  //删除标签 0未删除 1已删除
+  // 删除标签 0未删除 1已删除
   delFlag?: number;
-  //查询类型 0 自定义查询 1原生SQL查询
+  // 查询类型 0 自定义查询 1原生SQL查询
   queryType?: number;
-  //租户ID
+  // 租户ID
   tenantId?: string;
   params?: ApiParams[];
 }
 
 export interface ReqMfApi extends ReqPage {
-  //API名称
+  // API名称
   name?: string;
-  //目录id
+  // 目录id
   folderId?: string;
 }
 
@@ -87,7 +87,7 @@ export interface JoinCondition {
 }
 
 export interface Filter {
-  type: "0" | "1"; //0符号 and,or,(,) 1表达式
+  type: "0" | "1"; // 0符号 and,or,(,) 1表达式
   field?: MetaDataHeader;
   operator?:
     | "eq"
@@ -104,7 +104,7 @@ export interface Filter {
     | "likeLeft"
     | "likeRight";
   value?: string;
-  valueType?: "0" | "1" | "2"; //0常量 1变量 2字段
+  valueType?: "0" | "1" | "2"; // 0常量 1变量 2字段
   required?: boolean;
 }
 
@@ -162,5 +162,5 @@ export interface PExpression {
   value: any;
   name?: string;
 }
-//分页结果集
+// 分页结果集
 export type MfApiPageModel = PageResult<MfApi>;

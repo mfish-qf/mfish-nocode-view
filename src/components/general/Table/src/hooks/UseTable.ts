@@ -1,12 +1,13 @@
 import type { BasicTableProps, TableActionType, FetchParams, BasicColumn } from "../types/Table";
 import type { PaginationProps } from "../types/Pagination";
-import type { DynamicProps } from "/#/utils";
-import type { FormActionType } from "/@/components/general/Form";
+import type { DynamicProps } from "#/utils";
+import type { FormActionType } from "@/components/general/Form";
 import type { WatchStopHandle } from "vue";
-import { getDynamicProps } from "/@/utils";
+import { getDynamicProps } from "@/utils";
 import { ref, onUnmounted, unref, watch, toRaw } from "vue";
-import { isProdMode } from "/@/utils/Env";
-import { error } from "/@/utils/Log";
+import { isProdMode } from "@/utils/Env";
+import { error } from "@/utils/Log";
+import { Nullable, Recordable } from "@mfish/types";
 
 type Props = Partial<DynamicProps<BasicTableProps>>;
 
@@ -79,7 +80,7 @@ export function useTable(
       const columns = getTableInstance().getColumns({ ignoreIndex }) || [];
       return toRaw(columns);
     },
-    setColumns: (columns: BasicColumn[]) => {
+    setColumns: (columns: BasicColumn[] | string[]) => {
       getTableInstance().setColumns(columns);
     },
     setTableData: (values: any[]) => {
@@ -142,7 +143,7 @@ export function useTable(
     expandAll: () => {
       getTableInstance().expandAll();
     },
-    expandRows: (keys: string[]) => {
+    expandRows: (keys: string[] | number[]) => {
       getTableInstance().expandRows(keys);
     },
     collapseAll: () => {

@@ -1,6 +1,6 @@
 // token key
 export const TOKEN_KEY = "TOKEN__";
-//refreshToken key
+// refreshToken key
 export const REFRESH_TOKEN_KEY = "REFRESH__TOKEN__";
 
 export const TENANT_ID_KEY = "TENANT__ID__";

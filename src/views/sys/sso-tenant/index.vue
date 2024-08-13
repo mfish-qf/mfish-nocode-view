@@ -37,16 +37,16 @@
           />
         </template>
         <template v-if="column.key === 'corpSize'">
-          <dict-tag code="tenant_corp_size" :value="record.corpSize" />
+          <DictTag code="tenant_corp_size" :value="record.corpSize" />
         </template>
         <template v-if="column.key === 'corpYears'">
-          <dict-tag code="tenant_corp_years" :value="record.corpYears" />
+          <DictTag code="tenant_corp_years" :value="record.corpYears" />
         </template>
         <template v-if="column.key === 'trade'">
-          <dict-tag code="tenant_corp_trade" :value="record.trade" />
+          <DictTag code="tenant_corp_trade" :value="record.trade" />
         </template>
         <template v-if="column.key === 'tenantType'">
-          <dict-tag code="tenant_corp_type" :value="record.tenantType" />
+          <DictTag code="tenant_corp_type" :value="record.tenantType" />
         </template>
       </template>
     </BasicTable>
@@ -54,13 +54,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteSsoTenant, exportSsoTenant, getSsoTenantList } from "/@/api/sys/SsoTenant";
-  import { useModal } from "/@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { deleteSsoTenant, exportSsoTenant, getSsoTenantList } from "@/api/sys/SsoTenant";
+  import { useModal } from "@/components/general/Modal";
   import SsoTenantModal from "./SsoTenantModal.vue";
   import { columns, searchFormSchema } from "./ssoTenant.data";
-  import { SsoTenant } from "/@/api/sys/model/SsoTenantModel";
-  import DictTag from "/@/components/general/DictTag/DictTag.vue";
+  import { SsoTenant } from "@/api/sys/model/SsoTenantModel";
+  import DictTag from "@/components/general/DictTag/DictTag.vue";
   defineOptions({ name: "SsoTenantManagement" });
   const [registerModal, { openModal }] = useModal();
   const [registerTable, { reload, getForm }] = useTable({

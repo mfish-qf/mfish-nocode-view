@@ -1,4 +1,5 @@
-import { VNodeChild } from "vue";
+import { VNode, VNodeChild } from "vue";
+import type { Recordable } from "@mfish/types";
 
 export interface ColumnFilterItem {
   text?: string;
@@ -25,7 +26,7 @@ export interface FilterDropdownProps {
   visible?: boolean;
 }
 
-export declare type CustomRenderFunction<T> = (record: RecordProps<T>) => VNodeChild | JSX.Element;
+export declare type CustomRenderFunction<T> = (record: RecordProps<T>) => VNodeChild | VNode;
 
 export interface ColumnProps<T> {
   /**
@@ -71,7 +72,7 @@ export interface ColumnProps<T> {
    * Customized filter overlay
    * @type any (slot)
    */
-  filterDropdown?: VNodeChild | JSX.Element | ((props: FilterDropdownProps) => VNodeChild | JSX.Element);
+  filterDropdown?: VNodeChild | VNode | ((props: FilterDropdownProps) => VNodeChild | VNode);
 
   /**
    * Whether filterDropdown is visible
@@ -97,7 +98,7 @@ export interface ColumnProps<T> {
    * @default false
    * @type any
    */
-  filterIcon?: boolean | VNodeChild | JSX.Element;
+  filterIcon?: boolean | VNodeChild | VNode;
 
   /**
    * Whether multiple filters can be selected
@@ -129,7 +130,7 @@ export interface ColumnProps<T> {
    * Renderer of the table cell. The return value should be a VNode, or an object for colSpan/rowSpan config
    * @type Function | ScopedSlot
    */
-  customRender?: CustomRenderFunction<T> | VNodeChild | JSX.Element;
+  customRender?: CustomRenderFunction<T> | VNodeChild | VNode;
 
   /**
    * Sort function for local sort, see Array.sort's compareFunction. If you need sort buttons only, set to true
@@ -154,7 +155,7 @@ export interface ColumnProps<T> {
    * Title of this column
    * @type any (string | slot)
    */
-  title?: VNodeChild | JSX.Element;
+  title?: VNodeChild | VNode;
 
   /**
    * Width of this column

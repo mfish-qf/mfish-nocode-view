@@ -6,7 +6,7 @@
 <script lang="tsx">
   import { defineComponent, PropType } from "vue";
   import { Tag } from "ant-design-vue";
-  import { useDictStore } from "/@/store/modules/Dict";
+  import { useDictStore } from "@/store/modules/Dict";
 
   export default defineComponent({
     name: "DictTag",

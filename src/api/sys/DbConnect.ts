@@ -1,4 +1,4 @@
-import { defHttp } from "/@/utils/http/axios";
+import { defHttp } from "@/utils/http/axios";
 import {
   DbConnect,
   ReqDbConnect,
@@ -9,8 +9,8 @@ import {
   DataTable,
   DBTreeNode,
   MetaDataHeader
-} from "/@/api/sys/model/DbConnectModel";
-import { PageResult } from "/@/api/model/BaseModel";
+} from "@/api/sys/model/DbConnectModel";
+import { PageResult } from "@/api/model/BaseModel";
 
 /**
  * @description: 数据库连接
@@ -43,7 +43,7 @@ export const getDbConnectList = (reqDbConnect?: ReqDbConnect) => {
  * @param params id不传获取数据库 传id获取数据库下的表
  */
 export const getDBTree = (params?: any) => {
-  return defHttp.get<DBTreeNode[]>({ url: Api.Tree, params: params });
+  return defHttp.get<DBTreeNode[]>({ url: Api.Tree, params });
 };
 
 /**
@@ -51,7 +51,7 @@ export const getDBTree = (params?: any) => {
  * @param params
  */
 export const getTableList = (params: ReqTable) => {
-  return defHttp.get<PageResult<TableInfo>>({ url: Api.Tables, params: params });
+  return defHttp.get<PageResult<TableInfo>>({ url: Api.Tables, params });
 };
 
 /**
@@ -59,7 +59,7 @@ export const getTableList = (params: ReqTable) => {
  * @param params
  */
 export const getFieldList = (params: ReqTable) => {
-  return defHttp.get<PageResult<FieldInfo>>({ url: Api.Fields, params: params });
+  return defHttp.get<PageResult<FieldInfo>>({ url: Api.Fields, params });
 };
 
 /**
@@ -67,7 +67,7 @@ export const getFieldList = (params: ReqTable) => {
  * @param params
  */
 export const getDataTable = (params: ReqTable) => {
-  return defHttp.get<DataTable>({ url: Api.DataTable, params: params });
+  return defHttp.get<DataTable>({ url: Api.DataTable, params });
 };
 
 /**
@@ -75,7 +75,7 @@ export const getDataTable = (params: ReqTable) => {
  * @param params
  */
 export const getDataHeaders = (params: ReqTable) => {
-  return defHttp.get<MetaDataHeader[]>({ url: Api.Headers, params: params });
+  return defHttp.get<MetaDataHeader[]>({ url: Api.Headers, params });
 };
 
 /**
@@ -105,7 +105,7 @@ export function updateDbConnect(dbConnect: DbConnect) {
  * @return
  */
 export function deleteDbConnect(id: string) {
-  return defHttp.delete<DbConnect>({ url: Api.DbConnect + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<DbConnect>({ url: `${Api.DbConnect}/${id}` }, { successMessageMode: "message" });
 }
 
 /**

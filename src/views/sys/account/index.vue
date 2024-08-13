@@ -1,10 +1,10 @@
 <template>
-  <PageWrapper contentClass="flex">
-    <OrgTree class="w-1/4 xl:w-1/5" @select="handleSelect" :source="$props.source" />
+  <PageWrapper content-class="flex">
+    <OrgTree class="w-1/4 xl:w-1/5 -enter-x" @select="handleSelect" :source="$props.source" />
     <BasicTable
       @register="registerTable"
-      class="w-3/4 xl:w-4/5"
-      :searchInfo="searchInfo"
+      class="w-3/4 xl:w-4/5 -enter-x"
+      :search-info="searchInfo"
       :class="$props.source === 1 ? prefixCls : ''"
     >
       <template #toolbar>
@@ -15,13 +15,15 @@
             (source === 1 && hasPermission('sys:tenantUser:insert')) ||
             (source !== 1 && hasPermission('sys:account:insert'))
           "
-          >新建账号
+        >
+          新建账号
         </a-button>
         <a-button
           type="primary"
           @click="handleSelectAccount"
           v-if="source === 1 && hasPermission('sys:tenantUser:insert')"
-          >添加成员
+        >
+          添加成员
         </a-button>
       </template>
       <template #bodyCell="{ column, record }">
@@ -83,20 +85,20 @@
 </template>
 <script lang="ts" setup>
   import { reactive, ref } from "vue";
-  import { BasicTable, useTable, TableAction, BasicColumn } from "/@/components/general/Table";
-  import { deleteUser, getUserList } from "/@/api/sys/User";
-  import { PageWrapper } from "/@/components/general/Page";
+  import { BasicTable, useTable, TableAction, BasicColumn } from "@/components/general/Table";
+  import { deleteUser, getUserList } from "@/api/sys/User";
+  import { PageWrapper } from "@/components/general/Page";
   import OrgTree from "./OrgTree.vue";
-  import { useModal } from "/@/components/general/Modal";
+  import { useModal } from "@/components/general/Modal";
   import AccountModal from "./AccountModal.vue";
   import { columns, searchFormSchema } from "./account.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
-  import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
-  import { deleteUserOrg, getTenantUserList } from "/@/api/sys/SsoTenant";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import AccountSelectModal from "/@/views/sys/account/AccountSelectModal.vue";
-  import { SsoUser } from "/@/api/sys/model/UserModel";
-  import { useMessage } from "/@/hooks/web/UseMessage";
+  import { usePermission } from "@/hooks/web/UsePermission";
+  import PasswordModal from "@/views/sys/account/PasswordModal.vue";
+  import { deleteUserOrg, getTenantUserList } from "@/api/sys/SsoTenant";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import AccountSelectModal from "@/views/sys/account/AccountSelectModal.vue";
+  import { useMessage } from "@/hooks/web/UseMessage";
+  import { Recordable } from "@mfish/types";
   defineOptions({ name: "AccountManagement" });
   const props = defineProps({
     source: {
@@ -122,7 +124,7 @@
   }
   const [registerTable, { reload }] = useTable({
     title: "账号列表",
-    api: api,
+    api,
     columns: newColumns,
     formConfig: {
       name: "search_form_item",
@@ -173,8 +175,8 @@
     reload();
   }
 
-  function handleRemoveUser(record: SsoUser) {
-    if (searchInfo.orgId == undefined || searchInfo.orgId == "") {
+  function handleRemoveUser(record: Recordable) {
+    if (searchInfo.orgId === undefined || searchInfo.orgId === "") {
       if (record.orgIds) {
         if (record.orgIds.length > 1) {
           createMessage.error("错误:请选择组织后再删除");

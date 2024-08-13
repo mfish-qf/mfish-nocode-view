@@ -1,5 +1,5 @@
-import { PageResult, ReqPage } from "/@/api/model/BaseModel";
-import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
+import { PageResult, ReqPage } from "@/api/model/BaseModel";
+import { TenantVo } from "@/api/sys/model/SsoTenantModel";
 
 export interface CaptchaInfo {
   captchaKey: string;
@@ -11,20 +11,20 @@ export interface CaptchaInfo {
  * @author: mfish
  * @date: 2022/10/11 15:28
  */
-//登录接口参数
+// 登录接口参数
 export interface LoginParams {
-  //password方式登录时使用
+  // password方式登录时使用
   username?: string;
-  //password方式登录时使用
+  // password方式登录时使用
   password?: string;
   client_id: string;
   client_secret: string;
   grant_type: string;
   redirect_uri: string;
-  //auth_code方式登录时使用
+  // auth_code方式登录时使用
   code?: string;
   state?: string;
-  //刷新token时使用
+  // 刷新token时使用
   refresh_token?: string;
   rememberMe?: boolean;
   captchaKey?: string;

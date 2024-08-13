@@ -1,9 +1,10 @@
 import type { Router } from "vue-router";
-import { usePermissionStoreWithOut } from "/@/store/modules/Permission";
-import { PageEnum } from "/@/enums/PageEnum";
-import { useUserStoreWithOut } from "/@/store/modules/User";
-import { PAGE_NOT_FOUND_ROUTE, RootRoute } from "/@/router/routers/Basic";
-import { curLoginType, oauth2Config } from "/@/settings/LoginSetting";
+import { usePermissionStoreWithOut } from "@/store/modules/Permission";
+import { PageEnum } from "@/enums/PageEnum";
+import { useUserStoreWithOut } from "@/store/modules/User";
+import { PAGE_NOT_FOUND_ROUTE, RootRoute } from "@/router/routers/Basic";
+import { curLoginType, oauth2Config } from "@/settings/LoginSetting";
+import type { Recordable } from "@mfish/types";
 
 const ROOT_PATH = RootRoute().path;
 const whitePathList: PageEnum[] = [PageEnum.BASE_LOGIN, PageEnum.OAUTH_LOGIN, PageEnum.ERROR_LOGIN];
@@ -15,9 +16,9 @@ export function createPermissionGuard(router: Router) {
     const token = userStore.getToken;
     // 白名单路径允许直接访问
     if (whitePathList.includes(to.path as PageEnum)) {
-      //如果访问登陆页面且token存在，判断token是否有效直接进入redirect地址或首页地址
+      // 如果访问登陆页面且token存在，判断token是否有效直接进入redirect地址或首页地址
       if (to.path === PageEnum.BASE_LOGIN && token) {
-        //增加try catch方式请求异常造成无法返回首页
+        // 增加try catch方式请求异常造成无法返回首页
         try {
           await userStore.getAccountInfo();
           next((to.query?.redirect as string) || "/");
@@ -26,21 +27,20 @@ export function createPermissionGuard(router: Router) {
           userStore.setToken(undefined);
         }
       }
-      //如果登录类型为code方式走统一认证登录
+      // 如果登录类型为code方式走统一认证登录
       if (to.path === PageEnum.BASE_LOGIN && curLoginType === "authorization_code") {
-        let url = oauth2Config.url + "?";
+        let url = `${oauth2Config.url}?`;
         const redirect_uri = to.redirectedFrom?.path;
         Object.keys(oauth2Config).forEach((key) => {
           if (key === "url" || key === "client_secret") return;
-          //如果存在当前域的重定向地址，补充回调地址。否则使用默认回调地址
-          if (key === "redirect_uri" && redirect_uri) {
-            url += `${key}=${oauth2Config[key]}?redirect=${redirect_uri}&`;
-          } else {
-            url += `${key}=${oauth2Config[key]}&`;
-          }
+          // 如果存在当前域的重定向地址，补充回调地址。否则使用默认回调地址
+          url +=
+            key === "redirect_uri" && redirect_uri
+              ? `${key}=${oauth2Config[key]}?redirect=${redirect_uri}&`
+              : `${key}=${oauth2Config[key]}&`;
         });
         if (url.endsWith("&")) {
-          url = url.substring(0, url.length - 1);
+          url = url.slice(0, Math.max(0, url.length - 1));
         }
         if (userStore.getIsLogout) {
           url += "&force_login=1";
@@ -60,7 +60,7 @@ export function createPermissionGuard(router: Router) {
         next();
         return;
       }
-      //重定向到登录页面
+      // 重定向到登录页面
       const redirectData: { path: string; replace: boolean; query?: Recordable<string> } = {
         path: PageEnum.BASE_LOGIN,
         replace: true

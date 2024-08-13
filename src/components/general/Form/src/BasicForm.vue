@@ -10,14 +10,14 @@
       <slot name="formHeader"></slot>
       <template v-for="schema in getSchema" :key="schema.field">
         <FormItem
-          :isAdvanced="fieldsIsAdvancedMap[schema.field]"
-          :tableAction="tableAction"
-          :formActionType="formActionType"
+          :is-advanced="fieldsIsAdvancedMap[schema.field]"
+          :table-action="tableAction"
+          :form-action-type="formActionType"
           :schema="schema"
-          :formProps="getProps"
-          :allDefaultValues="defaultValueRef"
-          :formModel="formModel"
-          :setFormModel="setFormModel"
+          :form-props="getProps"
+          :all-default-values="defaultValueRef"
+          :form-model="formModel"
+          :set-form-model="setFormModel"
         >
           <template #[item]="data" v-for="item in Object.keys($slots)">
             <slot :name="item" v-bind="data || {}"></slot>
@@ -43,19 +43,19 @@
   import FormItem from "./components/FormItem.vue";
   import FormAction from "./components/FormAction.vue";
   import { dateItemType, isIncludeSimpleComponents } from "./Helper";
-  import { dateUtil } from "/@/utils/DateUtil";
-  import { deepMerge } from "/@/utils";
+  import { dateUtil } from "@/utils/DateUtil";
+  import { deepMerge } from "@/utils";
   import { useFormValues } from "./hooks/UseFormValues";
   import useAdvanced from "./hooks/UseAdvanced";
   import { useFormEvents } from "./hooks/UseFormEvents";
   import { createFormContext } from "./hooks/UseFormContext";
   import { useAutoFocus } from "./hooks/UseAutoFocus";
-  import { useModalContext } from "/@/components/general/Modal";
+  import { useModalContext } from "@/components/general/Modal";
   import { useDebounceFn } from "@vueuse/core";
   import { basicProps } from "./Props";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { cloneDeep } from "lodash-es";
-  import { TableActionType } from "/@/components/general/Table";
+  import { TableActionType } from "@/components/general/Table";
 
   defineOptions({ name: "BasicForm" });
 
@@ -122,25 +122,23 @@
         };
         const valueFormat = componentProps
           ? typeof componentProps === "function"
-            ? componentProps(opt)["valueFormat"]
-            : componentProps["valueFormat"]
+            ? componentProps(opt).valueFormat
+            : componentProps.valueFormat
           : null;
-        if (!Array.isArray(defaultValue)) {
-          schema.defaultValue = valueFormat ? dateUtil(defaultValue).format(valueFormat) : dateUtil(defaultValue);
-        } else {
+        if (Array.isArray(defaultValue)) {
           const def: any[] = [];
           defaultValue.forEach((item) => {
             def.push(valueFormat ? dateUtil(item).format(valueFormat) : dateUtil(item));
           });
           schema.defaultValue = def;
+        } else {
+          schema.defaultValue = valueFormat ? dateUtil(defaultValue).format(valueFormat) : dateUtil(defaultValue);
         }
       }
     }
-    if (unref(getProps).showAdvancedButton) {
-      return schemas.filter((schema) => !isIncludeSimpleComponents(schema.component)) as FormSchema[];
-    } else {
-      return schemas as FormSchema[];
-    }
+    return unref(getProps).showAdvancedButton
+      ? (schemas.filter((schema) => !isIncludeSimpleComponents(schema.component)) as FormSchema[])
+      : (schemas as FormSchema[]);
   });
 
   const { handleToggleAdvanced, fieldsIsAdvancedMap } = useAdvanced({
@@ -277,7 +275,7 @@
     validateFields,
     validate,
     submit: handleSubmit,
-    scrollToField: scrollToField,
+    scrollToField,
     resetDefaultField
   };
 

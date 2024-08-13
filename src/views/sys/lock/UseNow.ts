@@ -1,6 +1,7 @@
-import { dateUtil } from "/@/utils/DateUtil";
+import { dateUtil } from "@/utils/DateUtil";
 import { reactive, toRefs } from "vue";
 import { tryOnMounted, tryOnUnmounted } from "@vueuse/core";
+import { IntervalHandle } from "@mfish/types";
 
 export function useNow(immediate = true) {
   let timer: IntervalHandle;
@@ -23,7 +24,7 @@ export function useNow(immediate = true) {
     const s = now.get("s");
     state.year = now.get("y");
     state.month = now.get("M") + 1;
-    state.week = "星期" + ["日", "一", "二", "三", "四", "五", "六"][now.day()];
+    state.week = `星期${["日", "一", "二", "三", "四", "五", "六"][now.day()]}`;
     state.day = now.get("date");
     state.hour = h;
     state.minute = m;

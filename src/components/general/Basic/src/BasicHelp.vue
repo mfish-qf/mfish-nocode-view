@@ -3,10 +3,10 @@
   import { defineComponent, computed, unref } from "vue";
   import { Tooltip } from "ant-design-vue";
   import { InfoCircleOutlined } from "@ant-design/icons-vue";
-  import { getPopupContainer } from "/@/utils";
-  import { isString, isArray } from "/@/utils/Is";
-  import { getSlot } from "/@/utils/helper/TsxHelper";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { getPopupContainer } from "@/utils";
+  import { isString, isArray } from "@/utils/Is";
+  import { getSlot } from "@/utils/helper/TsxHelper";
+  import { useDesign } from "@/hooks/web/UseDesign";
 
   const props = {
     /**

@@ -2,10 +2,10 @@
   <Dropdown
     placement="bottom"
     :trigger="['click']"
-    :dropMenuList="localeList"
-    :selectedKeys="selectedKeys"
+    :drop-menu-list="localeList"
+    :selected-keys="selectedKeys"
     @menu-event="handleMenuEvent"
-    overlayClassName="app-locale-picker-overlay"
+    overlay-class-name="app-locale-picker-overlay"
   >
     <span class="cursor-pointer flex items-center">
       <Icon icon="ion:language" />
@@ -14,13 +14,13 @@
   </Dropdown>
 </template>
 <script lang="ts" setup>
-  import type { LocaleType } from "/#/config";
-  import type { DropMenu } from "/@/components/general/Dropdown";
-  import { Dropdown } from "/@/components/general/Dropdown";
+  import type { LocaleType } from "#/config";
+  import type { DropMenu } from "@/components/general/Dropdown";
+  import { Dropdown } from "@/components/general/Dropdown";
   import { ref, watchEffect, unref, computed } from "vue";
-  import { Icon } from "/@/components/general/Icon";
-  import { useLocale } from "/@/i18n/UseLocale";
-  import { localeList } from "/@/settings/I18nSetting";
+  import { Icon } from "@/components/general/Icon";
+  import { useLocale } from "@/i18n/UseLocale";
+  import { localeList } from "@/settings/I18nSetting";
 
   const props = defineProps({
     /**

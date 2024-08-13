@@ -1,6 +1,6 @@
-import type { Menu } from "/@/router/Types";
-import { usePermissionStore } from "/@/store/modules/Permission";
-import { getAllParentPath } from "/@/router/helper/MenuHelper";
+import type { Menu } from "@/router/Types";
+import { usePermissionStore } from "@/store/modules/Permission";
+import { getAllParentPath } from "@/router/helper/MenuHelper";
 
 export function getAllMenus() {
   const permissionStore = usePermissionStore();
@@ -22,7 +22,7 @@ export function getMenus() {
 }
 
 export function getMenu(path: string) {
-  if (!path) return undefined;
+  if (!path) return;
   let fMenu: Menu | undefined;
   const loop = (menus: Menu[] | undefined) => {
     if (!menus) {
@@ -35,7 +35,6 @@ export function getMenu(path: string) {
       }
       loop(menu?.children);
     }
-    return undefined;
   };
   const menus = getAllMenus();
   loop(menus);

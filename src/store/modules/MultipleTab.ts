@@ -1,14 +1,14 @@
 import type { RouteLocationNormalized, RouteLocationRaw, Router } from "vue-router";
 import { toRaw, unref } from "vue";
 import { defineStore } from "pinia";
-import { useGo, useRedo } from "/@/hooks/web/UsePage";
-import { Persistent } from "/@/utils/cache/Persistent";
-import { PageEnum } from "/@/enums/PageEnum";
-import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "/@/router/routers/Basic";
-import { getRawRoute } from "/@/utils";
-import { MULTIPLE_TABS_KEY } from "/@/enums/CacheEnum";
-import projectSetting from "/@/settings/ProjectSetting";
-import { usePermissionStore } from "/@/store/modules/Permission";
+import { useGo, useRedo } from "@/hooks/web/UsePage";
+import { Persistent } from "@/utils/cache/Persistent";
+import { PageEnum } from "@/enums/PageEnum";
+import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "@/router/routers/Basic";
+import { getRawRoute } from "@/utils";
+import { MULTIPLE_TABS_KEY } from "@/enums/CacheEnum";
+import projectSetting from "@/settings/ProjectSetting";
+import { usePermissionStore } from "@/store/modules/Permission";
 
 export interface MultipleTabState {
   cacheTabList: Set<string>;
@@ -47,7 +47,7 @@ export const useMultipleTabStore = defineStore({
       return this.tabList;
     },
     getCachedTabList(): string[] {
-      return Array.from(this.cacheTabList);
+      return [...this.cacheTabList];
     },
     getLastDragEndIndex(): number {
       return this.lastDragEndIndex;
@@ -150,7 +150,7 @@ export const useMultipleTabStore = defineStore({
           // const realName: string = path.match(/(\S*)\//)![1];
           const realPath = meta?.realPath ?? "";
           // 获取到已经打开的动态路由数, 判断是否大于某一个值
-          if (this.tabList.filter((e) => e.meta?.realPath ?? "" === realPath).length >= dynamicLevel) {
+          if (this.tabList.filter((e) => e.meta?.realPath ?? realPath === "").length >= dynamicLevel) {
             // 关闭第一个
             const index = this.tabList.findIndex((item) => item.meta.realPath === realPath);
             index !== -1 && this.tabList.splice(index, 1);
@@ -268,7 +268,7 @@ export const useMultipleTabStore = defineStore({
       const index = this.tabList.findIndex((item) => item.fullPath === route.fullPath);
 
       if (index >= 0 && index < this.tabList.length - 1) {
-        const rightTabs = this.tabList.slice(index + 1, this.tabList.length);
+        const rightTabs = this.tabList.slice(index + 1);
 
         const pathList: string[] = [];
         for (const item of rightTabs) {
@@ -333,7 +333,7 @@ export const useMultipleTabStore = defineStore({
     },
     /**
      * replace tab's path
-     * **/
+     */
     async updateTabPath(fullPath: string, route: RouteLocationNormalized) {
       const findTab = this.getTabList.find((item) => item === route);
       if (findTab) {

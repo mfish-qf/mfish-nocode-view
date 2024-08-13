@@ -1,4 +1,4 @@
-import { FormSchema } from "/@/components/general/Form";
+import { FormSchema } from "@/components/general/Form";
 
 export interface ListItem {
   key: string;

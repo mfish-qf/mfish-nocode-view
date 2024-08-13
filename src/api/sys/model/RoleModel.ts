@@ -1,4 +1,4 @@
-import { PageResult, ReqPage } from "/@/api/model/BaseModel";
+import { PageResult, ReqPage } from "@/api/model/BaseModel";
 
 /**
  * @description: 角色信息

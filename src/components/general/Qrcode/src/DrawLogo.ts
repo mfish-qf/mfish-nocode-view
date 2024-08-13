@@ -1,4 +1,4 @@
-import { isString } from "/@/utils/Is";
+import { isString } from "@/utils/Is";
 import { RenderQrCodeParams, LogoType } from "./Typing";
 
 export const drawLogo = ({ canvas, logo }: RenderQrCodeParams) => {
@@ -63,10 +63,10 @@ export const drawLogo = ({ canvas, logo }: RenderQrCodeParams) => {
 
   // 将 logo绘制到 canvas上
   return new Promise((resolve) => {
-    image.onload = () => {
+    image.addEventListener("load", () => {
       logoRadius ? drawLogoWithCanvas(image) : drawLogoWithImage(image);
       resolve((canvas as HTMLCanvasElement).toDataURL());
-    };
+    });
   });
 };
 

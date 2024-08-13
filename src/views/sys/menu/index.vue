@@ -17,7 +17,7 @@
                 icon: 'ant-design:delete-outlined',
                 color: 'error',
                 popConfirm: {
-                  title: '是否确认删除',
+                  title: '是否确认删除【' + record.menuName + '】',
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
@@ -32,11 +32,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteMenu, getMenuList } from "/@/api/sys/Menu";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { deleteMenu, getMenuList } from "@/api/sys/Menu";
   import MenuModal from "./MenuModal.vue";
   import { columns, searchFormSchema } from "./menu.data";
-  import { useModal } from "/@/components/general/Modal";
+  import { useModal } from "@/components/general/Modal";
+  import { Recordable } from "@mfish/types";
   defineOptions({ name: "MenuManagement" });
 
   const [registerModal, { openModal }] = useModal();

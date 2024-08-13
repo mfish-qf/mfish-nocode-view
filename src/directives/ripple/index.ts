@@ -48,7 +48,7 @@ const RippleDirective: Directive & RippleProto = {
 };
 
 function rippler({ event, el, zIndex, background }: { event: EventType; el: HTMLElement } & RippleProto) {
-  const targetBorder = parseInt(getComputedStyle(el).borderWidth.replace("px", ""));
+  const targetBorder = Number.parseInt(getComputedStyle(el).borderWidth.replace("px", ""));
   const clientX = event.clientX || event.touches[0].clientX;
   const clientY = event.clientY || event.touches[0].clientY;
 
@@ -61,7 +61,7 @@ function rippler({ event, el, zIndex, background }: { event: EventType; el: HTML
   const maxX = Math.max(dx, width - dx);
   const maxY = Math.max(dy, height - dy);
   const style = window.getComputedStyle(el);
-  const radius = Math.sqrt(maxX * maxX + maxY * maxY);
+  const radius = Math.hypot(maxX, maxY);
   const border = targetBorder > 0 ? targetBorder : 0;
 
   const ripple = document.createElement("div");
@@ -101,8 +101,8 @@ function rippler({ event, el, zIndex, background }: { event: EventType; el: HTML
     el.style.position = "relative";
   }
 
-  rippleContainer.appendChild(ripple);
-  el.appendChild(rippleContainer);
+  rippleContainer.append(ripple);
+  el.append(rippleContainer);
 
   Object.assign(ripple.style, {
     marginTop: `${dy}px`,
@@ -150,7 +150,7 @@ function rippler({ event, el, zIndex, background }: { event: EventType; el: HTML
       }
 
       if (clearPosition) {
-        el.style.position = storedTargetPosition !== "static" ? storedTargetPosition : "";
+        el.style.position = storedTargetPosition === "static" ? "" : storedTargetPosition;
       }
     }, options.transition + 260);
   }

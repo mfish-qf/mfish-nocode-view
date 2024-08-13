@@ -2,9 +2,9 @@
  * Used to monitor routing changes to change the status of menus and tabs. There is no need to monitor the route, because the route status change is affected by the page rendering time, which will be slow
  */
 
-import mitt from "/@/utils/Mitt";
+import { mitt } from "@/utils/Mitt";
 import type { RouteLocationNormalized } from "vue-router";
-import { getRawRoute } from "/@/utils";
+import { getRawRoute } from "@/utils";
 
 const emitter = mitt();
 

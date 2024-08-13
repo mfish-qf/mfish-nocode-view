@@ -1,4 +1,4 @@
-import { SysFile } from "/@/api/storage/model/SysFileModel";
+import { SysFile } from "@/api/storage/model/SysFileModel";
 
 export enum UploadResultStatus {
   SUCCESS = "success",

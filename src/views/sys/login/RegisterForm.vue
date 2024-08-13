@@ -32,7 +32,7 @@
       <FormItem name="confirmPassword" class="enter-x">
         <InputPassword
           size="large"
-          visibilityToggle
+          visibility-toggle
           v-model:value="formData.confirmPassword"
           :placeholder="t('sys.login.confirmPassword')"
         />
@@ -58,9 +58,9 @@
   import { reactive, ref, unref, computed } from "vue";
   import LoginFormTitle from "./LoginFormTitle.vue";
   import { Form, Input, Button, Checkbox } from "ant-design-vue";
-  import { StrengthMeter } from "/@/components/general/StrengthMeter";
-  import { CountdownInput } from "/@/components/general/CountDown";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { StrengthMeter } from "@/components/general/StrengthMeter";
+  import { CountdownInput } from "@/components/general/CountDown";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from "./UseLogin";
 
   const FormItem = Form.Item;
@@ -88,6 +88,5 @@
   async function handleRegister() {
     const data = await validForm();
     if (!data) return;
-    console.log(data);
   }
 </script>

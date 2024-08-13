@@ -33,16 +33,17 @@
 </template>
 <script lang="ts" setup>
   import { ref, onMounted, unref } from "vue";
-  import { BasicForm, useForm } from "/@/components/general/Form/index";
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
+  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
   import { codeBuildFormSchema, reqSearches } from "./codeBuild.data";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { insertCodeBuild, updateCodeBuild } from "/@/api/sys/CodeBuild";
-  import { buildUUID } from "/@/utils/Uuid";
-  import { getDictItems } from "/@/api/sys/DictItem";
-  import { getDBTree, getFieldList } from "/@/api/sys/DbConnect";
-  import { DictItem } from "/@/api/sys/model/DictItemModel";
-  import { getDictList } from "/@/api/sys/Dict";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { insertCodeBuild, updateCodeBuild } from "@/api/sys/CodeBuild";
+  import { buildUUID } from "@/utils/Uuid";
+  import { getDictItems } from "@/api/sys/DictItem";
+  import { getDBTree, getFieldList } from "@/api/sys/DbConnect";
+  import { DictItem } from "@/api/sys/model/DictItemModel";
+  import { getDictList } from "@/api/sys/Dict";
+  import { Recordable } from "@mfish/types";
 
   defineOptions({ name: "CodeBuildModal" });
 
@@ -112,7 +113,7 @@
       if (record.dictValue === "ApiSelect") {
         const dict = await getDictList({ pageNum: 1, pageSize: 1000 });
         dict.list.forEach((record) => {
-          children.push({ label: record.dictName + "[" + record.dictCode + "]", value: record.dictCode });
+          children.push({ label: `${record.dictName}[${record.dictCode}]`, value: record.dictCode });
         });
       }
       components.value.push({ label: record.dictLabel, value: record.dictValue, children });
@@ -120,7 +121,7 @@
   });
 
   async function handleSubmit() {
-    let values = await validate();
+    const values = await validate();
     if (values.dataBase && values.dataBase.length === 2) {
       values.connectId = values.dataBase[0];
       values.tableName = values.dataBase[1];
@@ -134,11 +135,7 @@
     }
     setModalProps({ confirmLoading: true });
     try {
-      if (unref(isUpdate)) {
-        await updateCodeBuild(values);
-      } else {
-        await insertCodeBuild(values);
-      }
+      await (unref(isUpdate) ? updateCodeBuild(values) : insertCodeBuild(values));
       emit("success");
       closeModal();
     } finally {
@@ -160,10 +157,10 @@
 
   async function getField(connectId, tableName) {
     const res = await getFieldList({
-      connectId: connectId,
-      tableName: tableName,
+      connectId,
+      tableName,
       pageNum: 1,
-      pageSize: 10000
+      pageSize: 10_000
     }).then();
     if (res && res.list) {
       res.list.forEach((field) => {

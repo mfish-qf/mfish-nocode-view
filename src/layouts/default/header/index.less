@@ -79,20 +79,12 @@
       .anticon {
         font-size: 16px;
       }
-
-      &.light {
-        &:hover {
-          background-color: @header-light-bg-hover-color;
-        }
-
-        svg {
-          fill: #000;
-        }
+      &:hover {
+        background-color: @header-bg-hover-color;
       }
-
-      &.dark {
-        &:hover {
-          background-color: @header-dark-bg-hover-color;
+      &.light {
+        svg {
+          fill: @black;
         }
       }
     }
@@ -103,21 +95,27 @@
     min-width: 0;
     flex: 1;
     align-items: center;
+
+    & li{
+      transition: background 0.5s ease !important;
+      &:hover {
+        background-color: @header-bg-hover-color !important;
+      }
+    }
   }
 
   &-action {
     display: flex;
     min-width: 180px;
-    // padding-right: 12px;
     align-items: center;
 
     &__item {
       display: flex !important;
+      justify-content: center;
+      align-items: center;
       height: @header-height;
-      padding: 0 2px;
       font-size: 1.2em;
       cursor: pointer;
-      align-items: center;
 
       .ant-badge {
         height: @header-height;
@@ -129,60 +127,57 @@
         right: 2px;
       }
     }
-
-    span[role='img'] {
-      padding: 0 8px;
-    }
   }
 
   &--light {
-    //background-color: @white !important;
     background-color: @header-dark-bg-color !important;
-    //border-bottom: 1px solid @header-light-bottom-border-color;
     border-left: 1px solid @border-color-base;
 
     .@{header-prefix-cls}-logo {
       color: @text-color-base;
 
       &:hover {
-        background-color: @header-light-bg-hover-color;
+        background-color: @header-bg-hover-color;
       }
     }
 
     .@{header-prefix-cls}-action {
       &__item {
         color: @text-color-base;
-
+        transition: background 0.5s ease;
+        height: 28px;
+        width: 28px;
+        border-radius: 14px;
+        margin: 2px;
         .app-iconify {
           padding: 0 10px;
           font-size: 16px !important;
         }
 
         &:hover {
-          background-color: @header-light-bg-hover-color;
+          background-color: @header-bg-hover-color;
         }
-      }
-
-      &-icon,
-      span[role='img'] {
-        color: @text-color-base;
       }
     }
   }
 
   &--dark {
     background-color: @header-dark-bg-color !important;
-    //border-bottom: 1px solid @border-color-base;
     border-left: 1px solid @border-color-base;
     box-shadow: 0 0 6px 0 #303030;
     .@{header-prefix-cls}-logo {
       &:hover {
-        background-color: @header-dark-bg-hover-color;
+        background-color: @header-bg-hover-color;
       }
     }
 
     .@{header-prefix-cls}-action {
       &__item {
+        transition: background 0.5s ease;
+        height: 28px;
+        width: 28px;
+        border-radius: 14px;
+        margin: 2px;
         .app-iconify {
           padding: 0 10px;
           font-size: 16px !important;
@@ -195,7 +190,7 @@
         }
 
         &:hover {
-          background-color: @header-dark-bg-hover-color;
+          background-color: @header-bg-hover-color;
         }
       }
     }

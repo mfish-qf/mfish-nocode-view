@@ -1,7 +1,7 @@
 <template>
   <div :class="bem()" class="flex px-2 py-1.5 items-center">
     <slot name="headerTitle" v-if="slots.headerTitle"></slot>
-    <BasicTitle :helpMessage="helpMessage" v-if="!slots.headerTitle && title">
+    <BasicTitle :help-message="helpMessage" v-if="!slots.headerTitle && title">
       {{ title }}
     </BasicTitle>
     <div class="flex items-center flex-1 cursor-pointer justify-self-stretch" v-if="search || toolbar">
@@ -9,7 +9,7 @@
         <InputSearch
           :placeholder="t('common.searchText')"
           size="small"
-          allowClear
+          allow-clear
           v-model:value="searchValue"
           @search="enterSearch"
           :enter-button="props.enterButton"
@@ -37,17 +37,12 @@
 <script lang="ts" setup>
   import { computed, ref, watch, useSlots } from "vue";
   import { Dropdown, Menu, MenuItem, MenuDivider, Input } from "ant-design-vue";
-  import { Icon } from "/@/components/general/Icon";
-  import { BasicTitle } from "/@/components/general/Basic";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { Icon } from "@/components/general/Icon";
+  import { BasicTitle } from "@/components/general/Basic";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { useDebounceFn } from "@vueuse/core";
-  import { createBEM } from "/@/utils/Bem";
+  import { createBEM } from "@/utils/Bem";
   import { ToolbarEnum } from "../types/Tree";
-  const InputSearch = Input.Search;
-  const searchValue = ref("");
-
-  const [bem] = createBEM("tree-header");
-
   const props = defineProps({
     helpMessage: {
       type: [String, Array] as PropType<string | string[]>,
@@ -87,6 +82,11 @@
     }
   } as const);
   const emit = defineEmits(["strictly-change", "search", "enterSearch"]);
+  const InputSearch = Input.Search;
+  const searchValue = ref("");
+
+  const [bem] = createBEM("tree-header");
+
   const slots = useSlots();
   const { t } = useI18n();
 
@@ -96,7 +96,7 @@
       "mr-1",
       "w-full",
       {
-        ["ml-3"]: titleExists
+        "ml-3": titleExists
       }
     ];
   });
@@ -130,24 +130,30 @@
   function handleMenuClick(e: { key: ToolbarEnum }) {
     const { key } = e;
     switch (key) {
-      case ToolbarEnum.SELECT_ALL:
+      case ToolbarEnum.SELECT_ALL: {
         props.checkAll?.(true);
         break;
-      case ToolbarEnum.UN_SELECT_ALL:
+      }
+      case ToolbarEnum.UN_SELECT_ALL: {
         props.checkAll?.(false);
         break;
-      case ToolbarEnum.EXPAND_ALL:
+      }
+      case ToolbarEnum.EXPAND_ALL: {
         props.expandAll?.(true);
         break;
-      case ToolbarEnum.UN_EXPAND_ALL:
+      }
+      case ToolbarEnum.UN_EXPAND_ALL: {
         props.expandAll?.(false);
         break;
-      case ToolbarEnum.CHECK_STRICTLY:
+      }
+      case ToolbarEnum.CHECK_STRICTLY: {
         emit("strictly-change", false);
         break;
-      case ToolbarEnum.CHECK_UN_STRICTLY:
+      }
+      case ToolbarEnum.CHECK_UN_STRICTLY: {
         emit("strictly-change", true);
         break;
+      }
     }
   }
 

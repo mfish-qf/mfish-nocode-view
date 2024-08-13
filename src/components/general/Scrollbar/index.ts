@@ -2,7 +2,6 @@
  * copy from element-ui
  */
 
-import Scrollbar from "./src/Scrollbar.vue";
-
-export { Scrollbar };
 export type { ScrollbarType } from "./src/types";
+
+export { default as Scrollbar } from "./src/Scrollbar.vue";

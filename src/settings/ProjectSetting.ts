@@ -1,7 +1,7 @@
-import type { ProjectConfig } from "/#/config";
-import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from "/@/enums/MenuEnum";
-import { CacheTypeEnum } from "/@/enums/CacheEnum";
-import { ContentEnum, ThemeEnum, RouterTransitionEnum, SettingButtonPositionEnum } from "/@/enums/AppEnum";
+import type { ProjectConfig } from "#/config";
+import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from "@/enums/MenuEnum";
+import { CacheTypeEnum } from "@/enums/CacheEnum";
+import { ContentEnum, ThemeEnum, RouterTransitionEnum, SettingButtonPositionEnum } from "@/enums/AppEnum";
 import { SIDE_BAR_BG_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, APP_PRESET_COLOR_LIST } from "./DesignSetting";
 
 // ! You need to clear the browser cache after the change

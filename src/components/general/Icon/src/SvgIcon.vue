@@ -6,7 +6,7 @@
 <script lang="ts">
   import type { CSSProperties } from "vue";
   import { defineComponent, computed } from "vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
 
   export default defineComponent({
     name: "SvgIcon",

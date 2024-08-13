@@ -2,6 +2,7 @@ import type { UnwrapRef, Ref, WritableComputedRef, DeepReadonly } from "vue";
 import { reactive, readonly, computed, getCurrentInstance, watchEffect, unref, toRaw } from "vue";
 
 import { isEqual } from "lodash-es";
+import { Recordable } from "@mfish/types";
 
 export function useRuleFormItem<T extends Recordable, K extends keyof T, V = UnwrapRef<T[K]>>(
   props: T,

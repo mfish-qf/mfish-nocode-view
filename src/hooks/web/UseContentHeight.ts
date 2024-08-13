@@ -1,9 +1,9 @@
 import { ComputedRef, isRef, nextTick, Ref, ref, unref, watch } from "vue";
-import { onMountedOrActivated } from "/@/hooks/core/OnMountedOrActivated";
-import { useWindowSizeFn } from "/@/hooks/event/UseWindowSizeFn";
-import { useLayoutHeight } from "/@/layouts/default/content/UseContentViewHeight";
-import { getViewportOffset } from "/@/utils/DomUtils";
-import { isNumber, isString } from "/@/utils/Is";
+import { onMountedOrActivated } from "@/hooks/core/OnMountedOrActivated";
+import { useWindowSizeFn } from "@/hooks/event/UseWindowSizeFn";
+import { useLayoutHeight } from "@/layouts/default/content/UseContentViewHeight";
+import { getViewportOffset } from "@/utils/DomUtils";
+import { isNumber, isString } from "@/utils/Is";
 
 export interface CompensationHeight {
   // 使用 layout Footer 高度作为判断补偿高度的条件
@@ -27,7 +27,7 @@ type Upward = number | string | null | undefined;
  * @returns 响应式高度
  */
 export function useContentHeight(
-  flag: ComputedRef<Boolean>,
+  flag: ComputedRef<boolean>,
   anchorRef: Ref,
   subtractHeightRefs: Ref[],
   subtractSpaceRefs: Ref[],
@@ -52,7 +52,7 @@ export function useContentHeight(
 
   function calcSubtractSpace(element: Element | null | undefined, direction: "all" | "top" | "bottom" = "all"): number {
     function numberPx(px: string) {
-      return Number(px.replace(/[^\d]/g, ""));
+      return Number(px.replaceAll(/\D/g, ""));
     }
 
     let subtractHeight = 0;
@@ -119,17 +119,15 @@ export function useContentHeight(
         const parent = element.parentElement;
         if (parent) {
           if (isString(upwardLvlOrClass)) {
-            if (!parent.classList.contains(upwardLvlOrClass)) {
+            if (parent.classList.contains(upwardLvlOrClass)) {
               upwardSpaceHeight += calcSubtractSpace(parent, "bottom");
-              upward(parent, upwardLvlOrClass);
             } else {
               upwardSpaceHeight += calcSubtractSpace(parent, "bottom");
+              upward(parent, upwardLvlOrClass);
             }
-          } else if (isNumber(upwardLvlOrClass)) {
-            if (upwardLvlOrClass > 0) {
-              upwardSpaceHeight += calcSubtractSpace(parent, "bottom");
-              upward(parent, --upwardLvlOrClass);
-            }
+          } else if (isNumber(upwardLvlOrClass) && upwardLvlOrClass > 0) {
+            upwardSpaceHeight += calcSubtractSpace(parent, "bottom");
+            upward(parent, --upwardLvlOrClass);
           }
         }
       }

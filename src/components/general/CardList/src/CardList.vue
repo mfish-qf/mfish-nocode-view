@@ -42,7 +42,7 @@
                 <EditOutlined key="edit" />
                 <Dropdown
                   :trigger="['hover']"
-                  :dropMenuList="[
+                  :drop-menu-list="[
                     {
                       text: '删除',
                       event: '1',
@@ -77,40 +77,40 @@
   import { computed, onMounted, ref } from "vue";
   import { EditOutlined, EllipsisOutlined, RedoOutlined, TableOutlined } from "@ant-design/icons-vue";
   import { List, Card, Image, Typography, Tooltip, Slider, Avatar } from "ant-design-vue";
-  import { Dropdown } from "/@/components/general/Dropdown";
-  import { BasicForm, useForm } from "/@/components/general/Form";
-  import { propTypes } from "/@/utils/PropTypes";
-  import { Button } from "/@/components/general/Button";
-  import { isFunction } from "/@/utils/Is";
+  import { Dropdown } from "@/components/general/Dropdown";
+  import { BasicForm, useForm } from "@/components/general/Form";
+  import { propTypes } from "@/utils/PropTypes";
+  import { Button } from "@/components/general/Button";
+  import { isFunction } from "@/utils/Is";
   import { useSlider, grid } from "./data";
-  import { PAGE_SIZE, PAGE_SIZE_OPTIONS } from "/@/components/general/Table/src/Const";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { PAGE_SIZE, PAGE_SIZE_OPTIONS } from "@/components/general/Table/src/Const";
+  import { useI18n } from "@/hooks/web/UseI18n";
 
+  // 组件接收参数
+  const props = defineProps({
+    // 请求API的参数
+    params: propTypes.object.def({}),
+    // api
+    api: propTypes.func
+  });
+  // 暴露内部方法
+  const emit = defineEmits(["getMethod", "delete"]);
   const ListItem = List.Item;
   const CardMeta = Card.Meta;
   const TypographyText = Typography.Text;
   // 获取slider属性
   const sliderProp = computed(() => useSlider(4));
-  // 组件接收参数
-  const props = defineProps({
-    // 请求API的参数
-    params: propTypes.object.def({}),
-    //api
-    api: propTypes.func
-  });
   const { t } = useI18n();
-  //暴露内部方法
-  const emit = defineEmits(["getMethod", "delete"]);
-  //数据
+  // 数据
   const data = ref([]);
   // 切换每行个数
   // cover图片自适应高度
-  //修改pageSize并重新请求数据
+  // 修改pageSize并重新请求数据
 
   const height = computed(() => {
     return `h-${120 - grid.value * 6}`;
   });
-  //表单
+  // 表单
   const [registerForm, { validate }] = useForm({
     schemas: [{ field: "type", component: "Input", label: "类型" }],
     labelWidth: 80,
@@ -120,7 +120,7 @@
     submitFunc: handleSubmit
   });
 
-  //表单提交
+  // 表单提交
   async function handleSubmit() {
     const data = await validate();
     await fetch(data);
@@ -146,7 +146,7 @@
     }
   }
 
-  //分页相关
+  // 分页相关
   const pageNum = ref(1);
   const pageSize = ref(36);
   const total = ref(0);

@@ -19,7 +19,7 @@
     <FormItem name="password" class="enter-x">
       <InputPassword
         size="large"
-        visibilityToggle
+        visibility-toggle
         v-model:value="formData.password"
         :placeholder="t('sys.login.password')"
       />
@@ -72,11 +72,11 @@
   import { reactive, ref, unref, computed } from "vue";
   import { Checkbox, Form, Input, Row, Col, Button } from "ant-design-vue";
   import LoginFormTitle from "./LoginFormTitle.vue";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { useMessage } from "/@/hooks/web/UseMessage";
-  import { useUserStore } from "/@/store/modules/User";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useMessage } from "@/hooks/web/UseMessage";
+  import { useUserStore } from "@/store/modules/User";
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from "./UseLogin";
-  import { oauth2Config } from "/@/settings/LoginSetting";
+  import { oauth2Config } from "@/settings/LoginSetting";
 
   const ACol = Col;
   const ARow = Row;

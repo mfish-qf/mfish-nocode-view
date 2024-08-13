@@ -18,18 +18,14 @@ export function getBoundingClientRect(element: Element): DOMRect | number {
 }
 
 function trim(string: string) {
-  return (string || "").replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, "");
+  return (string || "").replaceAll(/^\s+|\s+$/g, "");
 }
 
 /* istanbul ignore next */
 export function hasClass(el: Element, cls: string) {
   if (!el || !cls) return false;
-  if (cls.indexOf(" ") !== -1) throw new Error("className should not contain space.");
-  if (el.classList) {
-    return el.classList.contains(cls);
-  } else {
-    return (" " + el.className + " ").indexOf(" " + cls + " ") > -1;
-  }
+  if (cls.includes(" ")) throw new Error("className should not contain space.");
+  return el.classList ? el.classList.contains(cls) : ` ${el.className} `.includes(` ${cls} `);
 }
 
 /* istanbul ignore next */
@@ -45,7 +41,7 @@ export function addClass(el: Element, cls: string) {
     if (el.classList) {
       el.classList.add(clsName);
     } else if (!hasClass(el, clsName)) {
-      curClass += " " + clsName;
+      curClass += ` ${clsName}`;
     }
   }
   if (!el.classList) {
@@ -57,7 +53,7 @@ export function addClass(el: Element, cls: string) {
 export function removeClass(el: Element, cls: string) {
   if (!el || !cls) return;
   const classes = cls.split(" ");
-  let curClass = " " + el.className + " ";
+  let curClass = ` ${el.className} `;
 
   for (let i = 0, j = classes.length; i < j; i++) {
     const clsName = classes[i];
@@ -66,7 +62,7 @@ export function removeClass(el: Element, cls: string) {
     if (el.classList) {
       el.classList.remove(clsName);
     } else if (hasClass(el, clsName)) {
-      curClass = curClass.replace(" " + clsName + " ", " ");
+      curClass = curClass.replace(` ${clsName} `, " ");
     }
   }
   if (!el.classList) {
@@ -83,7 +79,7 @@ export function removeClass(el: Element, cls: string) {
  * rightIncludeBody: the distance between the leftmost element and the right side of the document
  * bottomIncludeBody: the distance from the bottom of the element to the bottom of the document
  *
- * @description: */
+  @description: */
 export function getViewportOffset(element: Element): ViewportOffsetResult {
   const doc = document.documentElement;
 
@@ -110,8 +106,8 @@ export function getViewportOffset(element: Element): ViewportOffsetResult {
   const clientWidth = window.document.documentElement.clientWidth;
   const clientHeight = window.document.documentElement.clientHeight;
   return {
-    left: left,
-    top: top,
+    left,
+    top,
     right: clientWidth - rectWidth - left,
     bottom: clientHeight - rectHeight - top,
     rightIncludeBody: clientWidth - left,

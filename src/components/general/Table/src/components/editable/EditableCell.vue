@@ -5,14 +5,14 @@
   import type { EditRecordRow } from "./index";
   import { CheckOutlined, CloseOutlined, FormOutlined } from "@ant-design/icons-vue";
   import { CellComponent } from "./CellComponent";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { useTableContext } from "../../hooks/UseTableContext";
-  import clickOutside from "/@/directives/ClickOutside";
-  import { propTypes } from "/@/utils/PropTypes";
-  import { isArray, isBoolean, isFunction, isNumber, isString } from "/@/utils/Is";
+  import clickOutside from "@/directives/ClickOutside";
+  import { propTypes } from "@/utils/PropTypes";
+  import { isArray, isBoolean, isFunction, isNumber, isString } from "@/utils/Is";
   import { createPlaceholderMessage } from "./Helper";
   import { pick, set } from "lodash-es";
-  import { treeToList } from "/@/utils/helper/TreeHelper";
+  import { treeToList } from "@/utils/helper/TreeHelper";
   import { Spin } from "ant-design-vue";
 
   export default defineComponent({
@@ -187,7 +187,7 @@
         const onChange = unref(getComponentProps)?.onChange;
         if (onChange && isFunction(onChange)) onChange(...arguments);
 
-        table.emit?.("edit-change", {
+        table.emit?.("editChange", {
           column: props.column,
           value: unref(currentValueRef),
           record: toRaw(props.record)
@@ -209,7 +209,7 @@
           }
           if (isFunction(editRule)) {
             const res = await editRule(currentValue, record as Recordable);
-            if (!!res) {
+            if (res) {
               ruleMessage.value = res;
               ruleVisible.value = true;
               return false;
@@ -253,7 +253,7 @@
                 key: dataKey as string,
                 value
               });
-            } catch (e) {
+            } catch {
               result = false;
             } finally {
               spinning.value = false;
@@ -265,8 +265,8 @@
         }
 
         set(record, dataKey, value);
-        //const record = await table.updateTableData(index, dataKey, value);
-        needEmit && table.emit?.("edit-end", { record, index, key: dataKey, value });
+        // const record = await table.updateTableData(index, dataKey, value);
+        needEmit && table.emit?.("editEnd", { record, index, key: dataKey, value });
         isEdit.value = false;
       }
 
@@ -286,7 +286,7 @@
         currentValueRef.value = defaultValueRef.value;
         const { column, index, record } = props;
         const { key, dataIndex } = column;
-        table.emit?.("edit-cancel", {
+        table.emit?.("editCancel", {
           record,
           index,
           key: dataIndex || key,
@@ -350,7 +350,7 @@
             if (!props.record?.onValid?.()) return;
             const submitFns = props.record?.submitCbs || [];
             submitFns.forEach((fn) => fn(false, false));
-            table.emit?.("edit-row-end");
+            table.emit?.("editRowEnd");
             return true;
           }
         };
@@ -389,7 +389,7 @@
             class={{ [`${this.prefixCls}__normal`]: true, "ellipsis-cell": this.column.ellipsis }}
             onClick={this.handleEdit}
           >
-            <div class='cell-content' title={this.column.ellipsis ? this.getValues ?? "" : ""}>
+            <div class='cell-content' title={this.column.ellipsis ? (this.getValues ?? "") : ""}>
               {this.column.editRender
                 ? this.column.editRender({
                     text: this.value,
@@ -398,8 +398,8 @@
                     index: this.index
                   })
                 : this.getValues
-                ? this.getValues
-                : "\u00A0"}
+                  ? this.getValues
+                  : "\u00A0"}
             </div>
             {!this.column.editRow && <FormOutlined class={`${this.prefixCls}__normal-icon`} />}
           </div>

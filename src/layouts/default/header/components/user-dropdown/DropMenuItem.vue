@@ -9,16 +9,14 @@
 <script lang="ts" setup>
   import { Menu } from "ant-design-vue";
   import { computed, getCurrentInstance } from "vue";
-  import { Icon } from "/@/components/general/Icon";
-  import { propTypes } from "/@/utils/PropTypes";
-  const MenuItem = Menu.Item;
+  import { Icon } from "@/components/general/Icon";
+  import { propTypes } from "@/utils/PropTypes";
   defineOptions({ name: "DropdownMenuItem" });
-
   defineProps({
     text: propTypes.string,
     icon: propTypes.string
   });
-
+  const MenuItem = Menu.Item;
   const instance = getCurrentInstance();
   const itemKey = computed(() => instance?.vnode?.props?.key);
 </script>

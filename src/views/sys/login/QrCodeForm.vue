@@ -14,11 +14,11 @@
   import { computed, unref } from "vue";
   import LoginFormTitle from "./LoginFormTitle.vue";
   import { Button, Divider } from "ant-design-vue";
-  import { QrCode } from "/@/components/general/Qrcode";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { QrCode } from "@/components/general/Qrcode";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { useLoginState, LoginStateEnum } from "./UseLogin";
 
-  const qrCodeUrl = "https://vvbin.cn/next/login";
+  const qrCodeUrl = "https://www.mfish.com.cn";
 
   const { t } = useI18n();
   const { handleBackLogin, getLoginState } = useLoginState();

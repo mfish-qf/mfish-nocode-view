@@ -3,9 +3,9 @@
  * @author: mfish
  * @date: 2022/10/11 17:57
  */
-import type { TransitionSetting } from "/#/config";
+import type { TransitionSetting } from "#/config";
 import { computed } from "vue";
-import { useAppStore } from "/@/store/modules/App";
+import { useAppStore } from "@/store/modules/App";
 
 export function useTransitionSetting() {
   const appStore = useAppStore();

@@ -15,7 +15,7 @@
     </template>
     <Dropdown
       :trigger="['hover']"
-      :dropMenuList="getDropdownList"
+      :drop-menu-list="getDropdownList"
       popconfirm
       v-if="dropDownActions && getDropdownList.length > 0"
     >
@@ -30,15 +30,15 @@
   import { defineComponent, PropType, computed, toRaw, unref } from "vue";
   import { MoreOutlined } from "@ant-design/icons-vue";
   import { Divider, Tooltip, TooltipProps } from "ant-design-vue";
-  import { Icon } from "/@/components/general/Icon";
-  import { ActionItem, TableActionType } from "/@/components/general/Table";
-  import { PopConfirmButton } from "/@/components/general/Button";
-  import { Dropdown } from "/@/components/general/Dropdown";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { Icon } from "@/components/general/Icon";
+  import { ActionItem, TableActionType } from "@/components/general/Table";
+  import { PopConfirmButton } from "@/components/general/Button";
+  import { Dropdown } from "@/components/general/Dropdown";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { useTableContext } from "../hooks/UseTableContext";
-  import { usePermission } from "/@/hooks/web/UsePermission";
-  import { isBoolean, isFunction, isString } from "/@/utils/Is";
-  import { propTypes } from "/@/utils/PropTypes";
+  import { usePermission } from "@/hooks/web/UsePermission";
+  import { isBoolean, isFunction, isString } from "@/utils/Is";
+  import { propTypes } from "@/utils/PropTypes";
   import { ACTION_COLUMN_FLAG } from "../Const";
 
   export default defineComponent({
@@ -92,7 +92,7 @@
               type: "link",
               size: "small",
               ...action,
-              ...(popConfirm || {}),
+              ...popConfirm,
               onConfirm: popConfirm?.confirm,
               onCancel: popConfirm?.cancel,
               enable: !!popConfirm

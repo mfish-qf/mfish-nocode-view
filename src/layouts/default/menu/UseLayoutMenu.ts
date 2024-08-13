@@ -1,13 +1,13 @@
-import type { Menu } from "/@/router/Types";
+import type { Menu } from "@/router/Types";
 import type { Ref } from "vue";
 import { computed, ref, unref, watch } from "vue";
 import { useRouter } from "vue-router";
-import { MenuSplitTyeEnum } from "/@/enums/MenuEnum";
+import { MenuSplitTyeEnum } from "@/enums/MenuEnum";
 import { useThrottleFn } from "@vueuse/core";
-import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
-import { getChildrenMenus, getCurrentParentPath, getMenus, getShallowMenus } from "/@/router/menus";
-import { usePermissionStore } from "/@/store/modules/Permission";
-import { useAppInject } from "/@/hooks/web/UseAppInject";
+import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
+import { getChildrenMenus, getCurrentParentPath, getMenus, getShallowMenus } from "@/router/menus";
+import { usePermissionStore } from "@/store/modules/Permission";
+import { useAppInject } from "@/hooks/web/UseAppInject";
 
 export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
   // Menu array
@@ -74,7 +74,7 @@ export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
     // spilt mode left
     const children = await getChildrenMenus(parentPath);
 
-    if (!children || !children.length) {
+    if (!children || children.length === 0) {
       setMenuSetting({ hidden: true });
       menusRef.value = [];
       return;
@@ -95,7 +95,6 @@ export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
     // split-top
     if (unref(getSpiltTop)) {
       menusRef.value = await getShallowMenus();
-      return;
     }
   }
 

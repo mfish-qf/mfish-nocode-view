@@ -1,12 +1,12 @@
 import type { TabContentProps } from "./types";
-import type { DropMenu } from "/@/components/general/Dropdown";
+import type { DropMenu } from "@/components/general/Dropdown";
 import type { ComputedRef } from "vue";
 import { computed, unref, reactive } from "vue";
 import { MenuEventEnum } from "./types";
-import { useMultipleTabStore } from "/@/store/modules/MultipleTab";
+import { useMultipleTabStore } from "@/store/modules/MultipleTab";
 import { RouteLocationNormalized, useRouter } from "vue-router";
-import { useTabs } from "/@/hooks/web/UseTabs";
-import { useI18n } from "/@/hooks/web/UseI18n";
+import { useTabs } from "@/hooks/web/UseTabs";
+import { useI18n } from "@/hooks/web/UseI18n";
 
 export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: ComputedRef<boolean>) {
   const state = reactive({
@@ -86,7 +86,7 @@ export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: Comp
         icon: "clarity:minus-line",
         event: MenuEventEnum.CLOSE_ALL,
         text: t("layout.multipleTab.closeAll"),
-        disabled: disabled
+        disabled
       }
     ];
 
@@ -109,30 +109,36 @@ export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: Comp
   function handleMenuEvent(menu: DropMenu): void {
     const { event } = menu;
     switch (event) {
-      case MenuEventEnum.REFRESH_PAGE:
+      case MenuEventEnum.REFRESH_PAGE: {
         // refresh page
         refreshPage().then();
         break;
+      }
       // Close current
-      case MenuEventEnum.CLOSE_CURRENT:
+      case MenuEventEnum.CLOSE_CURRENT: {
         close(tabContentProps.tabItem).then();
         break;
+      }
       // Close left
-      case MenuEventEnum.CLOSE_LEFT:
+      case MenuEventEnum.CLOSE_LEFT: {
         closeLeft().then();
         break;
+      }
       // Close right
-      case MenuEventEnum.CLOSE_RIGHT:
+      case MenuEventEnum.CLOSE_RIGHT: {
         closeRight().then();
         break;
+      }
       // Close other
-      case MenuEventEnum.CLOSE_OTHER:
+      case MenuEventEnum.CLOSE_OTHER: {
         closeOther().then();
         break;
+      }
       // Close all
-      case MenuEventEnum.CLOSE_ALL:
+      case MenuEventEnum.CLOSE_ALL: {
         closeAll().then();
         break;
+      }
     }
   }
 

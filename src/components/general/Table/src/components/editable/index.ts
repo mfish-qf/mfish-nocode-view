@@ -1,7 +1,8 @@
-import type { BasicColumn } from "/@/components/general/Table/src/types/Table";
+import type { BasicColumn } from "@/components/general/Table/src/types/Table";
 import { h, Ref } from "vue";
 import EditableCell from "./EditableCell.vue";
-import { isArray } from "/@/utils/Is";
+import { isArray } from "@/utils/Is";
+import type { Recordable } from "@mfish/types";
 
 interface Params {
   text: string;

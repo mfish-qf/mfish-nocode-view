@@ -5,16 +5,16 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { BasicForm, useForm } from "/@/components/general/Form/index";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicForm, useForm } from "@/components/general/Form/index";
   import { accountFormSchema } from "./account.data";
-  import { getOrgRoles, getOrgTree } from "/@/api/sys/Org";
-  import { getUserRoles, insertUser, updateUser } from "/@/api/sys/User";
-  import { getAllRoleList } from "/@/api/sys/Role";
-  import { RoleInfo } from "/@/api/sys/model/UserModel";
-  import { SsoRole } from "/@/api/sys/model/RoleModel";
-  import { getTenantOrgTree } from "/@/api/sys/SsoTenant";
-  import { TreeItem } from "/@/components/general/Tree";
+  import { getOrgRoles, getOrgTree } from "@/api/sys/Org";
+  import { getUserRoles, insertUser, updateUser } from "@/api/sys/User";
+  import { getAllRoleList } from "@/api/sys/Role";
+  import { RoleInfo } from "@/api/sys/model/UserModel";
+  import { SsoRole } from "@/api/sys/model/RoleModel";
+  import { getTenantOrgTree } from "@/api/sys/SsoTenant";
+  import { TreeItem } from "@/components/general/Tree";
   defineOptions({ name: "AccountModal" });
 
   const props = defineProps({
@@ -107,7 +107,7 @@
       componentProps: { treeData }
     }).then();
   });
-  const getTitle = computed(() => (!unref(isUpdate) ? "新增账号" : "编辑账号"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑账号" : "新增账号"));
 
   function setRole(roles, userRoles, orgRoles) {
     if (!roles) {
@@ -117,11 +117,11 @@
     const options = roles.reduce((prev, next: Recordable) => {
       if (next) {
         let disable = false;
-        if (next["id"] === "1") {
+        if (next.id === "1") {
           disable = true;
         } else {
           for (const role of userRoles) {
-            if (next["id"] !== role.id) {
+            if (next.id !== role.id) {
               continue;
             }
             if (role.source === 1) {
@@ -131,15 +131,15 @@
           }
         }
         prev.push({
-          key: next["id"],
-          label: next["roleName"],
-          value: next["id"],
+          key: next.id,
+          label: next.roleName,
+          value: next.id,
           disabled: disable
         });
       }
       return prev;
     }, [] as any);
-    //合并组织拥有的角色，如果已经包含该角色则过滤掉
+    // 合并组织拥有的角色，如果已经包含该角色则过滤掉
     const opts = options.concat(
       orgRoles
         .map((orgRole) => ({
@@ -190,18 +190,18 @@
     let orgRoles: RoleInfo[];
     if (value && value.length > 0) {
       roles = await getAllRoleList({ orgIds: value.join(",") });
-      //获取组织已设置的角色
+      // 获取组织已设置的角色
       orgRoles = await getOrgRoles(value);
     } else {
       roles = [];
       orgRoles = [];
     }
     let userRoles: RoleInfo[] = [];
-    //移除属于组织的角色
+    // 移除属于组织的角色
     if (curRow?.userRoles && curRow?.userRoles.length > 0) {
       userRoles = curRow.userRoles.filter((item) => item.source !== 1);
     }
-    //合并新的组织角色
+    // 合并新的组织角色
     userRoles = userRoles.concat(orgRoles);
     const opts = setRole(roles, userRoles, orgRoles);
     const roleIds = userRoles
@@ -209,10 +209,8 @@
         return item.id;
       })
       .reduce((prev, next: string) => {
-        if (next) {
-          if (!prev.includes(next)) {
-            prev.push(next);
-          }
+        if (next && !prev.includes(next)) {
+          prev.push(next);
         }
         return prev;
       }, [] as string[]);

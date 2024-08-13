@@ -1,10 +1,10 @@
-import type { BasicColumn, ActionItem } from "/@/components/general/Table";
+import type { BasicColumn, ActionItem } from "@/components/general/Table";
 import { FileItem, UploadResultStatus } from "./Typing";
 import { Progress, Switch, Input } from "ant-design-vue";
-import TableAction from "/@/components/general/Table/src/components/TableAction.vue";
+import TableAction from "@/components/general/Table/src/components/TableAction.vue";
 import ThumbUrl from "./ThumbUrl.vue";
-import { useI18n } from "/@/hooks/web/UseI18n";
-import { calcSize, getFileIcon } from "/@/utils/file/FileUtils";
+import { useI18n } from "@/hooks/web/UseI18n";
+import { calcSize, getFileIcon } from "@/utils/file/FileUtils";
 
 const { t } = useI18n();
 // 文件上传列表
@@ -29,7 +29,7 @@ export function createTableColumns(): BasicColumn[] {
       width: 80,
       align: "center",
       customRender: ({ record }) => {
-        function onChange(checked: boolean) {
+        function onChange(checked: boolean | string | number) {
           record.isPrivate = checked ? 0 : 1;
         }
 
@@ -51,12 +51,20 @@ export function createTableColumns(): BasicColumn[] {
       customRender: ({ text, record }) => {
         const { percent, status: uploadStatus } = (record as FileItem) || {};
         let status: "normal" | "exception" | "active" | "success" = "normal";
-        if (uploadStatus === UploadResultStatus.ERROR) {
-          status = "exception";
-        } else if (uploadStatus === UploadResultStatus.UPLOADING) {
-          status = "active";
-        } else if (uploadStatus === UploadResultStatus.SUCCESS) {
-          status = "success";
+        switch (uploadStatus) {
+          case UploadResultStatus.ERROR: {
+            status = "exception";
+            break;
+          }
+          case UploadResultStatus.UPLOADING: {
+            status = "active";
+            break;
+          }
+          case UploadResultStatus.SUCCESS: {
+            status = "success";
+            break;
+          }
+          // No default
         }
         return (
           <span>

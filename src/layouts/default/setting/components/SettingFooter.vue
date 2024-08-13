@@ -18,14 +18,14 @@
 <script lang="ts">
   import { defineComponent, unref } from "vue";
   import { CopyOutlined, RedoOutlined, SaveOutlined } from "@ant-design/icons-vue";
-  import { useAppStore } from "/@/store/modules/App";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { useMessage } from "/@/hooks/web/UseMessage";
-  import { useCopyToClipboard } from "/@/hooks/web/UseCopyToClipboard";
-  import defaultSetting from "/@/settings/ProjectSetting";
-  import { saveSysConfig } from "/@/api/sys/SysConfig";
-  import { changeAppConfig } from "/@/logics/InitAppConfig";
+  import { useAppStore } from "@/store/modules/App";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useMessage } from "@/hooks/web/UseMessage";
+  import { useCopyToClipboard } from "@/hooks/web/UseCopyToClipboard";
+  import defaultSetting from "@/settings/ProjectSetting";
+  import { saveSysConfig } from "@/api/sys/SysConfig";
+  import { changeAppConfig } from "@/logics/InitAppConfig";
 
   export default defineComponent({
     name: "SettingFooter",

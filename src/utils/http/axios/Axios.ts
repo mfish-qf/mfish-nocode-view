@@ -1,12 +1,12 @@
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from "axios";
-import type { RequestOptions, Result } from "/#/axios";
+import type { RequestOptions, Result } from "#/axios";
 import type { CreateAxiosOptions } from "./AxiosTransform";
 import axios from "axios";
 import qs from "qs";
 import { AxiosCanceler } from "./AxiosCancel";
-import { isFunction } from "/@/utils/Is";
+import { isFunction } from "@/utils/Is";
 import { cloneDeep } from "lodash-es";
-import { ContentTypeEnum, RequestEnum } from "/@/enums/HttpEnum";
+import { ContentTypeEnum, RequestEnum } from "@/enums/HttpEnum";
 
 export * from "./AxiosTransform";
 
@@ -78,7 +78,7 @@ export class VAxios {
         config = requestInterceptors(config, this.options);
       }
       return config;
-    }, undefined);
+    });
     // 请求拦截器错误捕获
     requestInterceptorsCatch &&
       isFunction(requestInterceptorsCatch) &&
@@ -91,7 +91,7 @@ export class VAxios {
         res = responseInterceptors(res);
       }
       return res;
-    }, undefined);
+    });
 
     // 响应结果拦截器错误捕获
     responseInterceptorsCatch &&
@@ -144,12 +144,12 @@ export class VAxios {
         formData.append(key, value);
       }
     });
-    //参数已添加到formData中，删除params
+    // 参数已添加到formData中，删除params
     delete config.params;
     return this.request(
       {
         ...config,
-        timeout: 30 * 60 * 1000, //上传超时时间设置为30分钟
+        timeout: 30 * 60 * 1000, // 上传超时时间设置为30分钟
         method: "POST",
         data: formData,
         headers: { "Content-Type": ContentTypeEnum.FORM_DATA, ignoreCancelToken: true }
@@ -164,7 +164,7 @@ export class VAxios {
         ...config,
         method: "get",
         responseType: "blob",
-        timeout: 30 * 60 * 1000 //下载超时时间设置为30分钟
+        timeout: 30 * 60 * 1000 // 下载超时时间设置为30分钟
         // headers: { "Content-Type": ContentTypeEnum.OCTET_STREAM}
       },
       options,
@@ -197,22 +197,22 @@ export class VAxios {
             try {
               const ret = transformResponseHook(res, opt);
               resolve(ret);
-            } catch (err) {
-              reject(err || new Error("请求错误!"));
+            } catch (error) {
+              reject(error || new Error("请求错误!"));
             }
             return;
           }
           resolve(res as unknown as Promise<T>);
         })
-        .catch((e: Error | AxiosError) => {
+        .catch((error: Error | AxiosError) => {
           if (requestCatchHook && isFunction(requestCatchHook)) {
-            reject(requestCatchHook(e, opt));
+            reject(requestCatchHook(error, opt));
             return;
           }
-          if (axios.isAxiosError(e)) {
+          if (axios.isAxiosError(error)) {
             // rewrite error message from axios in here
           }
-          reject(e);
+          reject(error);
         });
     });
   }

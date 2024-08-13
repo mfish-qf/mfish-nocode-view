@@ -1,5 +1,5 @@
 import { Slots } from "vue";
-import { isFunction } from "/@/utils/Is";
+import { isFunction } from "@/utils/Is";
 
 /**
  * @description: 获取插槽

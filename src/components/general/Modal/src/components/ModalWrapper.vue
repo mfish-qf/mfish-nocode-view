@@ -8,8 +8,8 @@
 <script lang="ts" setup>
   import type { CSSProperties } from "vue";
   import { computed, ref, watchEffect, unref, watch, onMounted, nextTick } from "vue";
-  import { useWindowSizeFn } from "/@/hooks/event/UseWindowSizeFn";
-  import { ScrollContainer } from "/@/components/general/Container";
+  import { useWindowSizeFn } from "@/hooks/event/UseWindowSizeFn";
+  import { ScrollContainer } from "@/components/general/Container";
   import { createModalContext } from "../hooks/UseModalContext";
   import { useMutationObserver } from "@vueuse/core";
 
@@ -68,10 +68,10 @@
     () => props.fullScreen,
     (v) => {
       setModalHeight();
-      if (!v) {
-        realHeightRef.value = minRealHeightRef.value;
-      } else {
+      if (v) {
         minRealHeightRef.value = realHeightRef.value;
+      } else {
+        realHeightRef.value = minRealHeightRef.value;
       }
     }
   );

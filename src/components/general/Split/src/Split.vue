@@ -19,13 +19,14 @@
 </template>
 <script setup lang="ts">
   import { NSplit } from "naive-ui";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { PropType } from "vue";
 
-  const { prefixCls } = useDesign("split");
   defineProps({
     resizeTriggerSize: { type: Number, default: 6 },
     direction: { type: String as PropType<"horizontal" | "vertical">, default: "horizontal" }
   });
+  const { prefixCls } = useDesign("split");
 </script>
 <style scoped lang="less">
   @prefix-cls: ~"@{namespace}-split";

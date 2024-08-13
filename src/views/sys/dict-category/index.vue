@@ -46,12 +46,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteDictCategory, getDictCategoryList } from "/@/api/sys/DictCategory";
-  import { useModal } from "/@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { deleteDictCategory, getDictCategoryList } from "@/api/sys/DictCategory";
+  import { useModal } from "@/components/general/Modal";
   import DictCategoryModal from "./DictCategoryModal.vue";
   import { columns, searchFormSchema } from "./dictCategory.data";
-  import { DictCategory } from "/@/api/sys/model/DictCategoryModel";
+  import { DictCategory } from "@/api/sys/model/DictCategoryModel";
   defineOptions({ name: "DictCategoryManagement" });
 
   const [registerModal, { openModal }] = useModal();

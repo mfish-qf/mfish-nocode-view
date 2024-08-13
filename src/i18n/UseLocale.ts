@@ -3,11 +3,12 @@
  * @author: mfish
  * @date: 2022/10/9 17:12
  */
-import { LocaleType } from "/#/config";
+import { LocaleType } from "#/config";
 import { i18n } from "./SetupI18n";
-import { useLocaleStoreWithOut } from "/@/store/modules/I18n";
+import { useLocaleStoreWithOut } from "@/store/modules/I18n";
 import { unref, computed } from "vue";
 import { loadLocalePool, setHtmlPageLang } from "./Helper";
+import { Recordable } from "@mfish/types";
 
 interface LangModule {
   message: Recordable;

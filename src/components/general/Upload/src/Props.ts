@@ -42,12 +42,12 @@ export const basicProps = {
     type: String as PropType<string>,
     default: null
   },
-  //默认上传路径
+  // 默认上传路径
   defaultPath: {
     type: String as PropType<string>,
     default: null
   },
-  //隐藏列
+  // 隐藏列
   hideColumn: {
     type: Array as PropType<UploadColumnName[]>,
     default: null

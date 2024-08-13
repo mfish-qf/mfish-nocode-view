@@ -1,6 +1,6 @@
 import type { PropType } from "vue";
 import { defineComponent, Transition, TransitionGroup } from "vue";
-import { getSlot } from "/@/utils/helper/TsxHelper";
+import { getSlot } from "@/utils/helper/TsxHelper";
 
 type Mode = "in-out" | "out-in" | "default" | undefined;
 
@@ -27,7 +27,7 @@ export function createSimpleTransition(name: string, origin = "top center 0", mo
       };
 
       return () => {
-        const Tag = !props.group ? Transition : TransitionGroup;
+        const Tag = props.group ? TransitionGroup : Transition;
         return (
           <Tag name={name} mode={props.mode} {...attrs} onBeforeEnter={onBeforeEnter}>
             {() => getSlot(slots)}

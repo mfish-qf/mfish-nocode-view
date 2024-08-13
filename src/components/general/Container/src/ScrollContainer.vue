@@ -6,8 +6,8 @@
 
 <script lang="ts" setup>
   import { ref, unref, nextTick } from "vue";
-  import { Scrollbar, ScrollbarType } from "/@/components/general/Scrollbar";
-  import { useScrollTo } from "/@/hooks/event/UseScrollTo";
+  import { Scrollbar, ScrollbarType } from "@/components/general/Scrollbar";
+  import { useScrollTo } from "@/hooks/event/UseScrollTo";
 
   defineOptions({ name: "ScrollContainer" });
 

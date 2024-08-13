@@ -8,7 +8,8 @@
           v-if="
             (source === 1 && hasPermission('sys:tenantOrg:insert')) || (source !== 1 && hasPermission('sys:org:insert'))
           "
-          >新增组织
+        >
+          新增组织
         </a-button>
       </template>
       <template #bodyCell="{ column, record }">
@@ -46,14 +47,15 @@
 </template>
 <script lang="ts" setup>
   import { ref } from "vue";
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteOrg, getOrgTree } from "/@/api/sys/Org";
-  import { useModal } from "/@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { deleteOrg, getOrgTree } from "@/api/sys/Org";
+  import { useModal } from "@/components/general/Modal";
   import OrgModal from "./OrgModal.vue";
   import { columns, searchFormSchema } from "./org.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
-  import { deleteTenantOrg, getTenantOrgTree } from "/@/api/sys/SsoTenant";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { usePermission } from "@/hooks/web/UsePermission";
+  import { deleteTenantOrg, getTenantOrgTree } from "@/api/sys/SsoTenant";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { Recordable } from "@mfish/types";
   defineOptions({ name: "OrgManagement" });
 
   const props = defineProps({
@@ -66,15 +68,11 @@
   const [registerModal, { openModal }] = useModal();
   const { prefixCls } = useDesign("org");
   const api = ref();
-  if (props.source == 1) {
-    api.value = getTenantOrgTree;
-  } else {
-    api.value = getOrgTree;
-  }
+  api.value = props.source === 1 ? getTenantOrgTree : getOrgTree;
   const [registerTable, { reload, expandRows }] = useTable({
     title: "部门列表",
     rowKey: "id",
-    api: api,
+    api,
     columns,
     formConfig: {
       name: "search_form_item",
@@ -111,7 +109,7 @@
   }
 
   function handleDelete(record: Recordable) {
-    if (props.source == 1) {
+    if (props.source === 1) {
       deleteTenantOrg(record.id).then(() => {
         handleSuccess();
       });
