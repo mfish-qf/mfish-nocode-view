@@ -348,7 +348,6 @@
 
         &__title {
           font-size: 16px;
-          font-weight: bold;
           .pushpin {
             color: rgb(0 0 0 / 25%);
 
@@ -377,14 +376,6 @@
     &.open {
       > .scrollbar {
         border-right: 1px solid @sider-bg-color;
-      }
-    }
-
-    .@{prefix-cls}-menu-list {
-      background-color: @sider-bg-color;
-
-      &__title {
-        border-bottom: 1px solid @sider-bg-color;
       }
     }
 
@@ -421,6 +412,7 @@
         }
 
         &--active {
+          font-weight: 700;
           &::before {
             position: absolute;
             top: 0;

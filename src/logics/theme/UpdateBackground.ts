@@ -7,8 +7,9 @@ const HEADER_BG_COLOR_VAR = "--header-bg-color";
 const HEADER_COLOR = "--header-color";
 const HEADER_BG_HOVER_COLOR_VAR = "--header-bg-hover-color";
 
-const SIDER_DARK_BG_COLOR = "--sider-bg-color";
-
+const SIDER_BG_COLOR = "--sider-bg-color";
+const SIDER_DARKEN_BG_COLOR = "--sider-darken-bg-color";
+const SIDER_LIGHTEN_BG_COLOR = "--sider-lighten-bg-color";
 /**
  * Change the background color of the top header
  * @param color
@@ -58,7 +59,9 @@ export function updateSidebarBgColor(color?: string) {
   if (darkMode) {
     color = "#212121";
   }
-  setCssVar(SIDER_DARK_BG_COLOR, color);
+  setCssVar(SIDER_BG_COLOR, color);
+  setCssVar(SIDER_DARKEN_BG_COLOR, darken(color, 6));
+  setCssVar(SIDER_LIGHTEN_BG_COLOR, lighten(color, 5));
   const isLight = !colorIsDark(color);
   // 如果是亮色且不是深色模式，皮肤设置为亮
   appStore.setProjectConfig({

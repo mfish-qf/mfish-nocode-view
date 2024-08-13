@@ -122,7 +122,7 @@ function luminanace(r: number, g: number, b: number) {
  */
 function contrast(rgb1: string[], rgb2: number[]) {
   return (
-    (luminanace(Math.trunc(rgb1[0]), Math.trunc(rgb1[1]), Math.trunc(rgb1[2])) + 0.05) /
+    (luminanace(Math.trunc(Number(rgb1[0])), Math.trunc(Number(rgb1[1])), Math.trunc(Number(rgb1[2]))) + 0.05) /
     (luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05)
   );
 }
