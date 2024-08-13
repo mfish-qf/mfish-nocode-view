@@ -1,9 +1,9 @@
-import { defHttp } from "/@/utils/http/axios";
-import { SsoTenant, ReqSsoTenant, SsoTenantPageModel } from "/@/api/sys/model/SsoTenantModel";
-import { SsoOrg } from "/@/api/sys/model/OrgModel";
-import { ReqSsoRole, SsoRole } from "/@/api/sys/model/RoleModel";
-import { MenuListItem, MenuParams } from "/@/api/sys/model/MenuModel";
-import { ReqSsoUser, SsoUserPageModel, UserOrg } from "/@/api/sys/model/UserModel";
+import { defHttp } from "@/utils/http/axios";
+import { SsoTenant, ReqSsoTenant, SsoTenantPageModel } from "@/api/sys/model/SsoTenantModel";
+import { SsoOrg } from "@/api/sys/model/OrgModel";
+import { ReqSsoRole, SsoRole } from "@/api/sys/model/RoleModel";
+import { MenuListItem, MenuParams } from "@/api/sys/model/MenuModel";
+import { ReqSsoUser, SsoUserPageModel, UserOrg } from "@/api/sys/model/UserModel";
 
 /**
  * @description: 租户信息表
@@ -39,7 +39,7 @@ export const getSsoTenantList = (reqSsoTenant?: ReqSsoTenant) => {
  * @param reqSsoTenant
  */
 export function exportSsoTenant(reqSsoTenant?: ReqSsoTenant) {
-  return defHttp.download({ url: Api.SsoTenant + "/export", params: reqSsoTenant });
+  return defHttp.download({ url: `${Api.SsoTenant}/export`, params: reqSsoTenant });
 }
 
 /**
@@ -66,8 +66,8 @@ export function updateSsoTenant(ssoTenant: SsoTenant) {
  * 切换租户
  * @param tenantId
  */
-export function changeSsoTenant(tenantId: String) {
-  return defHttp.put<string>({ url: Api.ChangeTenant + "/" + tenantId }, { successMessageMode: "message" });
+export function changeSsoTenant(tenantId: string) {
+  return defHttp.put<string>({ url: `${Api.ChangeTenant}/${tenantId}` }, { successMessageMode: "message" });
 }
 
 /**
@@ -85,7 +85,7 @@ export function updateMeTenant(ssoTenant: SsoTenant) {
  * @return
  */
 export function deleteSsoTenant(id: string) {
-  return defHttp.delete<SsoTenant>({ url: Api.SsoTenant + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<SsoTenant>({ url: `${Api.SsoTenant}/${id}` }, { successMessageMode: "message" });
 }
 
 /**
@@ -117,7 +117,7 @@ export const getTenantAllRole = (params?: ReqSsoRole) => {
 };
 
 export const getTenantRoleMenus = (roleId?: string) => {
-  return defHttp.get<String[]>({ url: `${Api.TenantRoleMenu}/${roleId}` });
+  return defHttp.get<string[]>({ url: `${Api.TenantRoleMenu}/${roleId}` });
 };
 
 /**
@@ -143,9 +143,9 @@ export const getTenantUserList = (params?: ReqSsoUser) => {
 };
 
 export function bindUserOrg(params: UserOrg) {
-  return defHttp.post<Boolean>({ url: Api.TenantUserOrg, params }, { successMessageMode: "message" });
+  return defHttp.post<boolean>({ url: Api.TenantUserOrg, params }, { successMessageMode: "message" });
 }
 
 export function deleteUserOrg(params: UserOrg) {
-  return defHttp.delete<Boolean>({ url: Api.TenantUserOrg, params }, { successMessageMode: "message" });
+  return defHttp.delete<boolean>({ url: Api.TenantUserOrg, params }, { successMessageMode: "message" });
 }

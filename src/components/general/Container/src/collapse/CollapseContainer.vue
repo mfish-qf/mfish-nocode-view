@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <CollapseHeader v-bind="props" :prefixCls="prefixCls" :show="show" @expand="handleExpand">
+    <CollapseHeader v-bind="props" :prefix-cls="prefixCls" :show="show" @expand="handleExpand">
       <template #title>
         <slot name="title"></slot>
       </template>
@@ -26,12 +26,12 @@
   import { isNil } from "lodash-es";
   // component
   import { Skeleton } from "ant-design-vue";
-  import { CollapseTransition } from "/@/components/general/Transition";
+  import { CollapseTransition } from "@/components/general/Transition";
   import CollapseHeader from "./CollapseHeader.vue";
-  import { triggerWindowResize as windowResize } from "/@/utils/event";
+  import { triggerWindowResize as windowResize } from "@/utils/event";
   // hook
-  import { useTimeoutFn } from "/@/hooks/core/UseTimeout";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useTimeoutFn } from "@/hooks/core/UseTimeout";
+  import { useDesign } from "@/hooks/web/UseDesign";
 
   const props = defineProps({
     title: { type: String, default: "" },

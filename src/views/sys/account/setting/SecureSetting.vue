@@ -1,38 +1,38 @@
 <template>
-  <CollapseContainer title="安全设置" :canExpan="false">
-    <a-list>
+  <CollapseContainer title="安全设置" :can-expan="false">
+    <AList>
       <template v-for="item in secureSettingList" :key="item.key">
-        <a-list-item>
-          <a-list-item-meta>
+        <AListItem>
+          <AListItemMeta>
             <template #title>
               {{ item.title }}
             </template>
             <template #description>
               <div>{{ item.description }}</div>
             </template>
-          </a-list-item-meta>
+          </AListItemMeta>
           <template #actions>
-            <a-button type="link" size="small" v-if="item.extra" @click="handleClick(item)">
+            <AButton type="link" size="small" v-if="item.extra" @click="handleClick(item)">
               <template #icon>
                 <Icon icon="ant-design:edit-outlined" />
               </template>
               {{ item.extra }}
-            </a-button>
+            </AButton>
           </template>
-        </a-list-item>
+        </AListItem>
       </template>
-    </a-list>
+    </AList>
   </CollapseContainer>
   <PasswordModal @register="registerPwd" />
 </template>
 <script lang="ts" setup>
   import { List as AList, Button as AButton } from "ant-design-vue";
-  import { CollapseContainer } from "/@/components/general/Container";
+  import { CollapseContainer } from "@/components/general/Container";
   import { ListItem } from "./setting.data";
-  import { useUserStore } from "/@/store/modules/User";
-  import { Icon } from "/@/components/general/Icon";
-  import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
-  import { useModal } from "/@/components/general/Modal";
+  import { useUserStore } from "@/store/modules/User";
+  import { Icon } from "@/components/general/Icon";
+  import PasswordModal from "@/views/sys/account/PasswordModal.vue";
+  import { useModal } from "@/components/general/Modal";
   const AListItem = AList.Item;
   const AListItemMeta = AListItem.Meta;
   const userStore = useUserStore();
@@ -50,7 +50,7 @@
     {
       key: "2",
       title: "密保手机",
-      description: "已绑定手机：" + phone,
+      description: `已绑定手机：${phone}`,
       extra: "修改"
     },
     {
@@ -62,7 +62,7 @@
     {
       key: "4",
       title: "备用邮箱",
-      description: "已绑定邮箱：" + email,
+      description: `已绑定邮箱：${email}`,
       extra: "修改"
     },
     {
@@ -74,11 +74,13 @@
   ];
   function handleClick(e) {
     switch (e.key) {
-      case "1":
+      case "1": {
         changePwd();
         break;
-      default:
+      }
+      default: {
         break;
+      }
     }
   }
   function changePwd() {

@@ -1,5 +1,4 @@
-import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
-import FullScreen from "./FullScreen.vue";
+import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
 
 export const TenantDropDown = createAsyncComponent(() => import("./tenant-dropdown/index.vue"), {
   loading: true
@@ -15,4 +14,4 @@ export const Notify = createAsyncComponent(() => import("./notify/index.vue"));
 
 export const ErrorAction = createAsyncComponent(() => import("./ErrorAction.vue"));
 
-export { FullScreen };
+export { default as FullScreen } from "./FullScreen.vue";

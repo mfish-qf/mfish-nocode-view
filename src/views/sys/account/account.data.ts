@@ -1,10 +1,10 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
 import { h } from "vue";
 import { Tag, Switch } from "ant-design-vue";
-import { RenderCallbackParams } from "/@/components/general/Form";
-import { setUserStatus } from "/@/api/sys/User";
-import { usePermission } from "/@/hooks/web/UsePermission";
+import { RenderCallbackParams } from "@/components/general/Form";
+import { setUserStatus } from "@/api/sys/User";
+import { usePermission } from "@/hooks/web/UsePermission";
 
 export const columns: BasicColumn[] = [
   {
@@ -33,10 +33,10 @@ export const columns: BasicColumn[] = [
     width: 60,
     customRender: ({ record }) => {
       const sex = record.sex;
-      const enable = ~~sex === 1;
+      const enable = Math.trunc(sex) === 1;
       const color = enable ? "green" : "red";
       const text = enable ? "男" : "女";
-      return h(Tag, { color: color }, () => text);
+      return h(Tag, { color }, () => text);
     }
   },
   {
@@ -65,7 +65,7 @@ export const columns: BasicColumn[] = [
         unCheckedChildren: "已停用",
         disabled: record.id === "1" || !usePermission().hasPermission("sys:account:update"),
         loading: record.pendingStatus,
-        onChange(checked: boolean) {
+        onChange(checked: boolean | string | number) {
           record.pendingStatus = true;
           const newStatus = checked ? 0 : 1;
           setUserStatus(record.id, newStatus)
@@ -152,7 +152,7 @@ export const accountFormSchema: FormSchema[] = [
     },
     colProps: { span: 24 },
     dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
-      usePermission().isSuperAdmin(renderCallbackParams.values["id"]),
+      usePermission().isSuperAdmin(renderCallbackParams.values.id),
     required: true
   },
   {
@@ -165,7 +165,7 @@ export const accountFormSchema: FormSchema[] = [
     },
     colProps: { span: 24 },
     dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
-      usePermission().isSuperAdmin(renderCallbackParams.values["id"])
+      usePermission().isSuperAdmin(renderCallbackParams.values.id)
   },
   {
     field: "phone",
@@ -216,7 +216,7 @@ export const accountFormSchema: FormSchema[] = [
       ]
     },
     dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
-      usePermission().isSuperAdmin(renderCallbackParams.values["id"]),
+      usePermission().isSuperAdmin(renderCallbackParams.values.id),
     required: true
   },
   {

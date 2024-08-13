@@ -2,22 +2,22 @@
   import type { PropType } from "vue";
   import { Result, Button } from "ant-design-vue";
   import { defineComponent, ref, computed, unref } from "vue";
-  import { ExceptionEnum } from "/@/enums/ExceptionEnum";
-  import notDataSvg from "/@/assets/svg/no-data.svg";
-  import netWorkSvg from "/@/assets/svg/net-error.svg";
+  import { ExceptionEnum } from "@/enums/ExceptionEnum";
+  import notDataSvg from "@/assets/svg/no-data.svg";
+  import netWorkSvg from "@/assets/svg/net-error.svg";
   import { useRoute } from "vue-router";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { useGo, useRedo } from "/@/hooks/web/UsePage";
-  import { usePermissionStore } from "/@/store/modules/Permission";
-  import { PageEnum } from "/@/enums/PageEnum";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useGo, useRedo } from "@/hooks/web/UsePage";
+  import { usePermissionStore } from "@/store/modules/Permission";
+  import { PageEnum } from "@/enums/PageEnum";
 
   interface MapValue {
     title: string;
     subTitle: string;
     btnText?: string;
     icon?: string;
-    handler?: Fn;
+    handler?: () => void;
     status?: string;
   }
 

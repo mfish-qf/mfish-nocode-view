@@ -3,7 +3,7 @@ import type { VNode, FunctionalComponent } from "vue";
 import { h } from "vue";
 // eslint-disable-next-line vue/prefer-import-from-vue
 import { isString } from "@vue/shared";
-import { Icon } from "/@/components/general/Icon";
+import { Icon } from "@/components/general/Icon";
 
 export const TreeIcon: FunctionalComponent = ({ props }: { props: { icon: VNode | string; color: string } }) => {
   if (!props) return null;

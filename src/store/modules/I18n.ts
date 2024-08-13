@@ -3,12 +3,12 @@
  * @author: mfish
  * @date: 2022/10/9 17:16
  */
-import type { LocaleSetting, LocaleType } from "/#/config";
+import type { LocaleSetting, LocaleType } from "#/config";
 import { defineStore } from "pinia";
-import { store } from "/@/store";
-import { LOCALE_KEY } from "/@/enums/CacheEnum";
-import { createLocalStorage } from "/@/utils/cache";
-import { localeSetting } from "/@/settings/I18nSetting";
+import { store } from "@/store";
+import { LOCALE_KEY } from "@/enums/CacheEnum";
+import { createLocalStorage } from "@/utils/cache";
+import { localeSetting } from "@/settings/I18nSetting";
 
 const ls = createLocalStorage();
 const lsLocaleSetting = (ls.get(LOCALE_KEY) || localeSetting) as LocaleSetting;

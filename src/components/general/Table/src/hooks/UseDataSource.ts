@@ -1,11 +1,12 @@
 import type { BasicTableProps, FetchParams, SorterResult } from "../types/Table";
 import type { PaginationProps } from "../types/Pagination";
 import { ref, unref, ComputedRef, computed, onMounted, watch, reactive, Ref, watchEffect } from "vue";
-import { useTimeoutFn } from "/@/hooks/core/UseTimeout";
-import { buildUUID } from "/@/utils/Uuid";
-import { isFunction, isBoolean } from "/@/utils/Is";
+import { useTimeoutFn } from "@/hooks/core/UseTimeout";
+import { buildUUID } from "@/utils/Uuid";
+import { isFunction, isBoolean } from "@/utils/Is";
 import { get, cloneDeep, merge } from "lodash-es";
 import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from "../Const";
+import { Recordable } from "@mfish/types";
 
 interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>;
@@ -79,7 +80,7 @@ export function useDataSource(
       if (!item[ROW_KEY]) {
         item[ROW_KEY] = buildUUID();
       }
-      if (item.children && item.children.length) {
+      if (item.children && item.children.length > 0) {
         setTableKey(item.children);
       }
     });
@@ -103,19 +104,17 @@ export function useDataSource(
       const firstItem = dataSource[0];
       const lastItem = dataSource[dataSource.length - 1];
 
-      if (firstItem && lastItem) {
-        if (!firstItem[ROW_KEY] || !lastItem[ROW_KEY]) {
-          const data = cloneDeep(unref(dataSourceRef));
-          data.forEach((item) => {
-            if (!item[ROW_KEY]) {
-              item[ROW_KEY] = buildUUID();
-            }
-            if (item.children && item.children.length) {
-              setTableKey(item.children);
-            }
-          });
-          dataSourceRef.value = data;
-        }
+      if (firstItem && lastItem && (!firstItem[ROW_KEY] || !lastItem[ROW_KEY])) {
+        const data = cloneDeep(unref(dataSourceRef));
+        data.forEach((item) => {
+          if (!item[ROW_KEY]) {
+            item[ROW_KEY] = buildUUID();
+          }
+          if (item.children && item.children.length > 0) {
+            setTableKey(item.children);
+          }
+        });
+        dataSourceRef.value = data;
       }
     }
     return unref(dataSourceRef);
@@ -141,10 +140,10 @@ export function useDataSource(
   }
 
   function deleteTableDataRecord(rowKey: string | number | string[] | number[]) {
-    if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
+    if (!dataSourceRef.value || dataSourceRef.value.length === 0) return;
     const rowKeyName = unref(getRowKey);
     if (!rowKeyName) return;
-    const rowKeys = !Array.isArray(rowKey) ? [rowKey] : rowKey;
+    const rowKeys = Array.isArray(rowKey) ? rowKey : [rowKey];
 
     function deleteRow(data, key) {
       const row: { index: number; data: [] } = findRow(data, key);
@@ -168,7 +167,7 @@ export function useDataSource(
           }
           if (row.children?.length > 0) {
             const result = findRow(row.children, key);
-            if (result != null) {
+            if (result !== null) {
               return result;
             }
           }
@@ -194,7 +193,7 @@ export function useDataSource(
   }
 
   function findTableDataRecord(rowKey: string | number) {
-    if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
+    if (!dataSourceRef.value || dataSourceRef.value.length === 0) return;
 
     const rowKeyName = unref(getRowKey);
     if (!rowKeyName) return;
@@ -280,13 +279,13 @@ export function useDataSource(
           current: opt.page || 1
         });
       }
-      emit("fetch-success", {
+      emit("fetchSuccess", {
         items: unref(resultItems),
         total: resultTotal
       });
       return resultItems;
     } catch (error) {
-      emit("fetch-error", error);
+      emit("fetchError", error);
       dataSourceRef.value = [];
       setPagination({
         total: 0

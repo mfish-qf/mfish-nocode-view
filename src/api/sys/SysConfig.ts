@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { SysConfig } from "/@/api/sys/model/SysConfigModel";
+import { defHttp } from "@/utils/http/axios";
+import { SysConfig } from "@/api/sys/model/SysConfigModel";
 
 /**
  * @description: 界面配置
@@ -37,5 +37,5 @@ export function saveSysConfig(sysConfig: SysConfig) {
  * @return
  */
 export function deleteSysConfig(id: string) {
-  return defHttp.delete<SysConfig>({ url: Api.SysConfig + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<SysConfig>({ url: `${Api.SysConfig}/${id}` }, { successMessageMode: "message" });
 }

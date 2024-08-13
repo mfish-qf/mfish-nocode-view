@@ -6,7 +6,7 @@
 <script lang="ts">
   import { defineComponent, ref, computed, watchEffect, unref, onMounted, watch } from "vue";
   import { useTransition, TransitionPresets } from "@vueuse/core";
-  import { isNumber } from "/@/utils/Is";
+  import { isNumber } from "@/utils/Is";
 
   const props = {
     startVal: { type: Number, default: 0 },
@@ -98,7 +98,7 @@
         const rgx = /(\d+)(\d{3})/;
         if (separator && !isNumber(separator)) {
           while (rgx.test(x1)) {
-            x1 = x1.replace(rgx, "$1" + separator + "$2");
+            x1 = x1.replace(rgx, `$1${separator}$2`);
           }
         }
         return prefix + x1 + x2 + suffix;

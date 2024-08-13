@@ -1,4 +1,4 @@
-import { ReqPage } from "/@/api/model/BaseModel";
+import { ReqPage } from "@/api/model/BaseModel";
 
 /**
  * @description: 组织结构信息

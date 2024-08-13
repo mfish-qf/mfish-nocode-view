@@ -29,7 +29,7 @@
                 tooltip: '编辑信息'
               }
             ]"
-            :dropDownActions="[
+            :drop-down-actions="[
               {
                 icon: 'ant-design:download-outlined',
                 color: '#1677ff',
@@ -77,24 +77,25 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
   import {
     deleteBatchCodeBuild,
     deleteCodeBuild,
     downloadCode,
     getCodeBuildList,
     saveCodeLocal
-  } from "/@/api/sys/CodeBuild";
-  import { useModal } from "/@/components/general/Modal";
+  } from "@/api/sys/CodeBuild";
+  import { useModal } from "@/components/general/Modal";
   import CodeBuildModal from "./CodeBuildModal.vue";
   import { columns, searchFormSchema } from "./codeBuild.data";
   import { TableProps } from "ant-design-vue";
-  import CodeQueryModal from "/@/views/sys/code-build/CodeQueryModal.vue";
-  import { CodeBuild } from "/@/api/sys/model/CodeBuildModel";
-  import { isProdMode } from "/@/utils/Env";
-  import { useMessage } from "/@/hooks/web/UseMessage";
-  import CodeMenuModal from "/@/views/sys/code-build/CodeMenuModal.vue";
+  import CodeQueryModal from "@/views/sys/code-build/CodeQueryModal.vue";
+  import { CodeBuild } from "@/api/sys/model/CodeBuildModel";
+  import { isProdMode } from "@/utils/Env";
+  import { useMessage } from "@/hooks/web/UseMessage";
+  import CodeMenuModal from "@/views/sys/code-build/CodeMenuModal.vue";
   import { ref } from "vue";
+  import { Recordable } from "@mfish/types";
 
   defineOptions({ name: "CodeBuildManagement" });
   const selectedRowKeys = ref<number[]>([]);
@@ -121,7 +122,7 @@
     showTableSetting: true,
     bordered: true,
     showIndexColumn: false,
-    rowSelection: rowSelection,
+    rowSelection,
     actionColumn: {
       width: 120,
       title: "操作",

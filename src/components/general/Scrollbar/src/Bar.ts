@@ -1,5 +1,5 @@
 import { defineComponent, h, computed, ref, getCurrentInstance, onUnmounted, inject, Ref } from "vue";
-import { on, off } from "/@/utils/DomUtils";
+import { on, off } from "@/utils/DomUtils";
 import { renderThumbStyle, BAR_MAP } from "./Util";
 
 export default defineComponent({
@@ -44,7 +44,7 @@ export default defineComponent({
       cursorDown.value = true;
       on(document, "mousemove", mouseMoveDocumentHandler);
       on(document, "mouseup", mouseUpDocumentHandler);
-      document.onselectstart = () => false;
+      document.addEventListener("selectstart", () => false);
     };
 
     const mouseMoveDocumentHandler = (e: any) => {
@@ -74,7 +74,7 @@ export default defineComponent({
       h(
         "div",
         {
-          class: ["scrollbar__bar", "is-" + bar.value.key],
+          class: ["scrollbar__bar", `is-${bar.value.key}`],
           onMousedown: clickTrackHandler
         },
         h("div", {

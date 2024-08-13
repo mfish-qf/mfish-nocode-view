@@ -4,7 +4,7 @@
  * @date: 2022/10/9 17:37
  */
 import type { DropMenu } from "../components/general/Dropdown";
-import type { LocaleSetting, LocaleType } from "/#/config";
+import type { LocaleSetting, LocaleType } from "#/config";
 
 export const LOCALE: { [key: string]: LocaleType } = {
   ZH_CN: "zh-CN",

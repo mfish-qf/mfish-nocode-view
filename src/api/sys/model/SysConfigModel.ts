@@ -1,4 +1,4 @@
-import { BaseEntity } from "/@/api/model/BaseModel";
+import { BaseEntity } from "@/api/model/BaseModel";
 
 /**
  * @description: 界面配置

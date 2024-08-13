@@ -10,8 +10,8 @@
       :search="true"
       :toolbar="true"
       @search="handleSearch"
-      :expandAll="expandAll"
-      :enterButton="props.enterButton"
+      :expand-all="expandAll"
+      :enter-button="props.enterButton"
     >
       <template #headerTools v-if="allowAdd">
         <Tooltip title="新增目录">
@@ -114,31 +114,28 @@
   } from "ant-design-vue";
   import type { AntTreeNodeDropEvent, TreeProps } from "ant-design-vue/es/tree";
   import { TreeDataItem } from "ant-design-vue/es/tree/Tree";
-  import TreeHeader from "/@/components/general/Tree/src/components/TreeHeader.vue";
-  import Icon from "/@/components/general/Icon/src/Icon.vue";
-  import { buildUUID } from "/@/utils/Uuid";
-  import { findNode, findNodeAll } from "/@/utils/helper/TreeHelper";
+  import TreeHeader from "@/components/general/Tree/src/components/TreeHeader.vue";
+  import Icon from "@/components/general/Icon/src/Icon.vue";
+  import { buildUUID } from "@/utils/Uuid";
+  import { findNode, findNodeAll } from "@/utils/helper/TreeHelper";
   import { useDebounceFn, useEventListener, useFocus } from "@vueuse/core";
-  import { ScrollContainer } from "/@/components/general/Container";
-  import "/@/components/general/Tree/style";
+  import { ScrollContainer } from "@/components/general/Container";
+  import "@/components/general/Tree/style";
   import { cloneDeep } from "lodash-es";
-  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
-  import { useAppStore } from "/@/store/modules/App";
+  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+  import { useAppStore } from "@/store/modules/App";
   import { FolderTwoTone, FolderOpenTwoTone } from "@ant-design/icons-vue";
-  const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
-  const AMenuItem = AMenu.Item;
-  const dftKey = ref<number>(1);
   const props = defineProps({
     treeData: {
       type: Array as PropType<TreeDataItem[]>
     },
     twoToneIcon: { type: Boolean, default: true },
     isDirectoryTree: { type: Boolean, default: false },
-    //节点key
+    // 节点key
     nodeKey: { type: String, default: "id" },
-    //节点标题
+    // 节点标题
     nodeTitle: { type: String, default: "id" },
-    //顶部节点父节点key
+    // 顶部节点父节点key
     topNodeParentKey: { type: String, default: "" },
     showHeadTitle: { type: Boolean, default: true },
     allowDrag: { type: Boolean, default: true },
@@ -147,6 +144,10 @@
     allowDelete: { type: Boolean, default: true },
     enterButton: { type: Boolean, default: false }
   });
+  const emit = defineEmits(["select", "expand", "save:insert", "save:update", "save:delete", "save:drag"]);
+  const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
+  const AMenuItem = AMenu.Item;
+  const dftKey = ref<number>(1);
   const ADirectoryTree = props.isDirectoryTree ? Tree.DirectoryTree : Tree;
   const iconColor = (key: string) =>
     props.isDirectoryTree
@@ -154,7 +155,6 @@
         ? "white"
         : useAppStore().getThemeColor
       : useRootSetting().getThemeColor.value;
-  const emit = defineEmits(["select", "expand", "save:insert", "save:update", "save:delete", "save:drag"]);
   const draggable = ref<boolean>(true);
   const gData = ref<any[]>([]);
   const dataList: TreeProps["treeData"] = [];
@@ -202,9 +202,9 @@
         initData(node.children);
       }
       dataList.push({ key: node[props.nodeKey], title: node[props.nodeTitle], isLeaf });
-      node["key"] = node[props.nodeKey];
-      node["title"] = node[props.nodeTitle];
-      node["isLeaf"] = isLeaf;
+      node.key = node[props.nodeKey];
+      node.title = node[props.nodeTitle];
+      node.isLeaf = isLeaf;
     }
   };
 
@@ -221,24 +221,22 @@
     emit("expand", keys);
   };
   const onSelect = (keys: string[], e) => {
-    //不允许不选中节点
+    // 不允许不选中节点
     if (keys?.length === 0) return;
     selectedKeys.value = keys;
     selectEmit(undefined, e);
   };
   watch(searchValue, (value) => {
-    if (value) {
-      expandedKeys.value = dataList
-        .map((item) => {
-          if (item.title.indexOf(value) > -1) {
-            return getParentKey(item.key, gData.value);
-          }
-          return null;
-        })
-        .filter((item, i, self) => item && self.indexOf(item) === i) as string[];
-    } else {
-      expandedKeys.value = [];
-    }
+    expandedKeys.value = value
+      ? (dataList
+          .map((item) => {
+            if (item.title.includes(value)) {
+              return getParentKey(item.key, gData.value);
+            }
+            return null;
+          })
+          .filter((item, i, self) => item && self.indexOf(item) === i) as string[])
+      : [];
     emit("expand", expandedKeys.value);
     autoExpandParent.value = true;
   });
@@ -293,7 +291,7 @@
   }
   function clearSelect() {
     selectedKeys.value = [];
-    emit("select", undefined);
+    emit("select");
   }
 
   /**
@@ -349,7 +347,7 @@
     if (!dragObj) return;
     let oldPId: string;
     let expandChange = false;
-    //调整顺序或拖出父节点
+    // 调整顺序或拖出父节点
     if (info.dropToGap) {
       let ar: TreeProps["treeData"] = [];
       let i = 0;
@@ -367,7 +365,7 @@
         ar.splice(i + 1, 0, dragObj);
       }
     } else {
-      //拖为子节点
+      // 拖为子节点
       oldPId = dragObj.parentId;
       loop(data, dropKey, (item) => {
         dropObj = item;
@@ -380,7 +378,7 @@
       expandChange = !!dropObj;
     }
     emit("save:drag", dragObj, getChangeData(dragObj.parentId, data), (res: boolean) => {
-      //拖动成功更新节点位置
+      // 拖动成功更新节点位置
       if (res) {
         if (expandChange && dropObj) {
           expandedKeys.value?.push(dropObj.key);
@@ -401,8 +399,7 @@
       return undefined;
     }
     let parentKey: string | number | undefined;
-    for (let i = 0; i < tree.length; i++) {
-      const node = tree[i];
+    for (const node of tree) {
       if (node.children) {
         if (node.children.some((item) => item.key === key)) {
           parentKey = node.key;
@@ -421,13 +418,13 @@
   const { focused } = useFocus(folderInputRef, { initialValue: true });
   const inputBlur = reactive({ key: "", inputBlur: () => {} });
   const addChildFolder = (treeKey) => {
-    //判断是否存在未保存记录
+    // 判断是否存在未保存记录
     if (inputBlur.key) {
       saveFolder(inputBlur.key);
     }
     let node: any;
     const child = newNode();
-    //treeKey等于顶级节点父节点ID，直接添加在最顶层
+    // treeKey等于顶级节点父节点ID，直接添加在最顶层
     if (treeKey === props.topNodeParentKey) {
       node = gData.value;
     } else {
@@ -456,7 +453,7 @@
     setSelect(child.key);
     focused.value = true;
     draggable.value = false;
-    //此处延迟注册事件防止第一次加入新增时候触发blur事件,时间太短不生效(暂时不知道原因)
+    // 此处延迟注册事件防止第一次加入新增时候触发blur事件,时间太短不生效(暂时不知道原因)
     setTimeout(() => {
       inputBlur.key = child.key;
       inputBlur.inputBlur = useEventListener(folderInputRef, "blur", () => {
@@ -480,7 +477,7 @@
         emit("save:insert", newNode);
         dataList.push({ key: newNode.key, title: newNode.title, isLeaf: true });
       }
-      //这里改变Key值，触发节点刷新。否则title修改后，界面上还显示原来的值
+      // 这里改变Key值，触发节点刷新。否则title修改后，界面上还显示原来的值
       dftKey.value++;
       selectEmit(newNode);
     } finally {
@@ -522,7 +519,7 @@
         }
       }
     };
-    loop(treeKey, gData.value, undefined);
+    loop(treeKey, gData.value);
   };
   const pNodeIconChange = (pNode) => {
     if (pNode) {
@@ -538,17 +535,20 @@
 
   const onContextMenuClick = useDebounceFn((menuKey: string, treeKey: string) => {
     switch (menuKey) {
-      case "1":
+      case "1": {
         addChildFolder(treeKey);
         break;
-      case "2":
+      }
+      case "2": {
         editFolder(treeKey);
         break;
-      case "3":
+      }
+      case "3": {
         deleteFolder(treeKey, (res) => {
           console.log(res);
         });
         break;
+      }
     }
   }, 200);
 

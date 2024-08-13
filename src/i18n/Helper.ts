@@ -1,5 +1,6 @@
-import type { LocaleType } from "/#/config";
+import type { LocaleType } from "#/config";
 import { set } from "lodash-es";
+import { Recordable } from "@mfish/types";
 
 export const loadLocalePool: LocaleType[] = [];
 
@@ -17,7 +18,7 @@ export function genMessage(langMap: Record<string, any>, prefix = "lang") {
     const langFileModule = langMap[path].default;
     let fileName = path.replace(`./${prefix}/`, "").replace(/^\.\//, "");
     const lastIndex = fileName.lastIndexOf(".");
-    fileName = fileName.substring(0, lastIndex);
+    fileName = fileName.slice(0, Math.max(0, lastIndex));
     const keyList: string[] = fileName.split("/");
     const moduleName = keyList.shift()?.toLowerCase();
     const objKey = keyList.join(".").toLowerCase();

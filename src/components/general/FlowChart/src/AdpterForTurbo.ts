@@ -21,9 +21,9 @@ function convertFlowElementToEdge(element) {
     pointsList,
     properties: {}
   };
-  const excludeProperties = ["startPoint", "endPoint", "pointsList", "text", "logicFlowType"];
+  const excludeProperties = new Set(["startPoint", "endPoint", "pointsList", "text", "logicFlowType"]);
   Object.keys(element.properties).forEach((property) => {
-    if (excludeProperties.indexOf(property) === -1) {
+    if (!excludeProperties.has(property)) {
       edge.properties[property] = element.properties[property];
     }
   });
@@ -41,9 +41,9 @@ function convertFlowElementToNode(element) {
     text,
     properties: {}
   };
-  const excludeProperties = ["x", "y", "text", "logicFlowType"];
+  const excludeProperties = new Set(["x", "y", "text", "logicFlowType"]);
   Object.keys(element.properties).forEach((property) => {
-    if (excludeProperties.indexOf(property) === -1) {
+    if (!excludeProperties.has(property)) {
       node.properties[property] = element.properties[property];
     }
   });

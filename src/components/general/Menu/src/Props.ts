@@ -1,9 +1,9 @@
-import type { Menu } from "/@/router/Types";
+import type { Menu } from "@/router/Types";
 import type { PropType } from "vue";
 
-import { MenuModeEnum, MenuTypeEnum } from "/@/enums/MenuEnum";
-import { ThemeEnum } from "/@/enums/AppEnum";
-import { propTypes } from "/@/utils/PropTypes";
+import { MenuModeEnum, MenuTypeEnum } from "@/enums/MenuEnum";
+import { ThemeEnum } from "@/enums/AppEnum";
+import { propTypes } from "@/utils/PropTypes";
 import type { MenuTheme } from "ant-design-vue";
 import type { MenuMode } from "ant-design-vue/lib/menu/src/interface";
 

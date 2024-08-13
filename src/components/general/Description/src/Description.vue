@@ -1,16 +1,17 @@
 <script lang="tsx">
   import type { DescriptionProps, DescInstance, DescItem } from "./Typing";
   import type { DescriptionsProps } from "ant-design-vue/es/descriptions";
-  import type { CSSProperties } from "vue";
-  import type { CollapseContainerOptions } from "/@/components/general/Container";
+  import type { CSSProperties, PropType } from "vue";
+  import type { CollapseContainerOptions } from "@/components/general/Container";
   import { defineComponent, computed, ref, unref, toRefs } from "vue";
   import { get } from "lodash-es";
   import { Descriptions } from "ant-design-vue";
-  import { CollapseContainer } from "/@/components/general/Container";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { isFunction } from "/@/utils/Is";
-  import { getSlot } from "/@/utils/helper/TsxHelper";
-  import { useAttrs } from "/@/hooks/core/UseAttrs";
+  import { CollapseContainer } from "@/components/general/Container";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { isFunction } from "@/utils/Is";
+  import { getSlot } from "@/utils/helper/TsxHelper";
+  import { useAttrs } from "@/hooks/core/UseAttrs";
+  import { Recordable } from "@mfish/types";
 
   const props = {
     useCollapse: { type: Boolean, default: true },
@@ -124,7 +125,7 @@
               if (getField && !toRefs(_data).hasOwnProperty(field)) {
                 return isFunction(render) ? render("", _data) : "";
               }
-              return isFunction(render) ? render(getField, _data) : getField ?? "";
+              return isFunction(render) ? render(getField, _data) : (getField ?? "");
             };
 
             const width = contentMinWidth;

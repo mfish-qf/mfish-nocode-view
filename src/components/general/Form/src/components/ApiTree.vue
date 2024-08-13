@@ -1,20 +1,20 @@
 <template>
-  <a-tree v-bind="getAttrs" @change="handleChange">
+  <ATree v-bind="getAttrs" @change="handleChange">
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
     <template #suffixIcon v-if="loading">
       <LoadingOutlined spin />
     </template>
-  </a-tree>
+  </ATree>
 </template>
 
 <script lang="ts">
   import { computed, defineComponent, watch, ref, onMounted, unref } from "vue";
   import { Tree } from "ant-design-vue";
-  import { isArray, isFunction } from "/@/utils/Is";
+  import { isArray, isFunction } from "@/utils/Is";
   import { get } from "lodash-es";
-  import { propTypes } from "/@/utils/PropTypes";
+  import { propTypes } from "@/utils/PropTypes";
   import { LoadingOutlined } from "@ant-design/icons-vue";
 
   export default defineComponent({
@@ -70,8 +70,8 @@
         let result;
         try {
           result = await api(props.params);
-        } catch (e) {
-          console.error(e);
+        } catch (error) {
+          console.error(error);
         }
         if (afterFetch && isFunction(afterFetch)) {
           result = afterFetch(result);

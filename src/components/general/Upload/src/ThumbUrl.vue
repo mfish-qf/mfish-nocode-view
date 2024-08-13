@@ -1,11 +1,11 @@
 <template>
   <span class="thumb">
-    <a-image v-if="fileUrl" :src="fileUrl" :width="60" />
+    <AImage v-if="fileUrl" :src="fileUrl" :width="60" />
   </span>
 </template>
 <script lang="ts">
   import { defineComponent } from "vue";
-  import { propTypes } from "/@/utils/PropTypes";
+  import { propTypes } from "@/utils/PropTypes";
   import { Image } from "ant-design-vue";
 
   export default defineComponent({

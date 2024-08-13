@@ -2,15 +2,15 @@
   <Modal v-bind="getBindValue" @cancel="handleCancel">
     <template #closeIcon v-if="!$slots.closeIcon">
       <ModalClose
-        :canFullscreen="getProps.canFullscreen"
-        :fullScreen="fullScreenRef"
+        :can-fullscreen="getProps.canFullscreen"
+        :full-screen="fullScreenRef"
         @cancel="handleCancel"
         @fullscreen="handleFullScreen"
       />
     </template>
 
     <template #title v-if="!$slots.title">
-      <ModalHeader :helpMessage="getProps.helpMessage" :title="getMergeProps.title" @dblclick="handleTitleDbClick" />
+      <ModalHeader :help-message="getProps.helpMessage" :title="getMergeProps.title" @dblclick="handleTitleDbClick" />
     </template>
 
     <template #footer v-if="!$slots.footer">
@@ -22,16 +22,16 @@
     </template>
 
     <ModalWrapper
-      :useWrapper="getProps.useWrapper"
-      :footerOffset="getProps.wrapperFooterOffset"
-      :fullScreen="fullScreenRef"
+      :use-wrapper="getProps.useWrapper"
+      :footer-offset="getProps.wrapperFooterOffset"
+      :full-screen="fullScreenRef"
       ref="modalWrapperRef"
       :loading="getProps.loading"
       :loading-tip="getProps.loadingTip"
-      :minHeight="getProps.minHeight"
+      :min-height="getProps.minHeight"
       :height="getWrapperHeight"
       :open="openRef"
-      :modalFooterHeight="footer !== undefined && !footer ? 0 : undefined"
+      :modal-footer-height="footer !== undefined && !footer ? 0 : undefined"
       v-bind="omit(getProps.wrapperProps, 'open', 'height', 'modalFooterHeight')"
       @ext-height="handleExtHeight"
       @height-change="handleHeightChange"
@@ -52,12 +52,13 @@
   import ModalClose from "./components/ModalClose.vue";
   import ModalFooter from "./components/ModalFooter.vue";
   import ModalHeader from "./components/ModalHeader.vue";
-  import { isFunction } from "/@/utils/Is";
-  import { deepMerge } from "/@/utils";
+  import { isFunction } from "@/utils/Is";
+  import { deepMerge } from "@/utils";
   import { basicProps } from "./Props";
   import { useFullScreen } from "./hooks/UseModalFullScreen";
   import { omit } from "lodash-es";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { Recordable } from "@mfish/types";
 
   defineOptions({ name: "BasicModal", inheritAttrs: false });
 
@@ -125,7 +126,7 @@
       ...unref(getMergeProps),
       open: unref(openRef)
     };
-    attr["wrapClassName"] = `${attr?.["wrapClassName"] || ""} ${unref(getWrapClassName)}` + "vben-basic-modal-wrap";
+    attr.wrapClassName = `${attr?.wrapClassName || ""} ${unref(getWrapClassName)}` + "mfish-basic-modal-wrap";
     if (unref(fullScreenRef)) {
       return omit(attr, ["height", "title"]);
     }
@@ -133,7 +134,7 @@
   });
 
   const getWrapperHeight = computed(() => {
-    if (unref(fullScreenRef)) return undefined;
+    if (unref(fullScreenRef)) return;
     return unref(getProps).height;
   });
 
@@ -165,7 +166,7 @@
   async function handleCancel(e: Event) {
     e?.stopPropagation();
     // 过滤自定义关闭按钮的空白区域
-    if ((e.target as HTMLElement)?.classList?.contains(prefixCls + "-close--custom")) return;
+    if ((e.target as HTMLElement)?.classList?.contains(`${prefixCls}-close--custom`)) return;
     if (props.closeFunc && isFunction(props.closeFunc)) {
       const isClose: boolean = await props.closeFunc();
       openRef.value = !isClose;

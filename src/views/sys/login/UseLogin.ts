@@ -1,6 +1,7 @@
 import type { RuleObject } from "ant-design-vue/lib/form/interface";
 import { ref, computed, unref, Ref } from "vue";
-import { useI18n } from "/@/hooks/web/UseI18n";
+import { useI18n } from "@/hooks/web/UseI18n";
+import { Recordable } from "@mfish/types";
 
 export enum LoginStateEnum {
   LOGIN,
@@ -26,7 +27,7 @@ export function useLoginState() {
   return { setLoginState, getLoginState, handleBackLogin };
 }
 
-export function useFormValid<T extends Object = any>(formRef: Ref<any>) {
+export function useFormValid<T extends object = any>(formRef: Ref<any>) {
   async function validForm() {
     const form = unref(formRef);
     if (!form) return;
@@ -46,22 +47,21 @@ export function useFormRules(formData?: Recordable) {
   const getMobileFormRule = computed(() => createRule(t("sys.login.mobilePlaceholder")));
 
   const validatePolicy = async (_: RuleObject, value: boolean) => {
-    return !value ? Promise.reject(t("sys.login.policyPlaceholder")) : Promise.resolve();
+    return value ? Promise.resolve() : Promise.reject(t("sys.login.policyPlaceholder"));
   };
 
   const validateConfirmPassword = (password: string) => {
     return async (_: RuleObject, value: string) => {
       if (!value) {
-        return Promise.reject(t("sys.login.passwordPlaceholder"));
+        throw t("sys.login.passwordPlaceholder");
       }
       if (value !== password) {
-        return Promise.reject(t("sys.login.diffPwd"));
+        throw t("sys.login.diffPwd");
       }
-      return Promise.resolve();
     };
   };
 
-  const getFormRules = computed((): { [k: string]: Object | RuleObject[] } => {
+  const getFormRules = computed((): { [k: string]: object | RuleObject[] } => {
     const accountFormRule = unref(getAccountFormRule);
     const passwordFormRule = unref(getPasswordFormRule);
     const smsFormRule = unref(getSmsFormRule);
@@ -73,7 +73,7 @@ export function useFormRules(formData?: Recordable) {
     };
     switch (unref(currentState)) {
       // register form rules
-      case LoginStateEnum.REGISTER:
+      case LoginStateEnum.REGISTER: {
         return {
           account: accountFormRule,
           password: passwordFormRule,
@@ -81,24 +81,28 @@ export function useFormRules(formData?: Recordable) {
           policy: [{ validator: validatePolicy, trigger: "change" }],
           ...mobileRule
         };
+      }
 
       // reset password form rules
-      case LoginStateEnum.RESET_PASSWORD:
+      case LoginStateEnum.RESET_PASSWORD: {
         return {
           account: accountFormRule,
           ...mobileRule
         };
+      }
 
       // mobile form rules
-      case LoginStateEnum.MOBILE:
+      case LoginStateEnum.MOBILE: {
         return mobileRule;
+      }
 
       // login form rules
-      default:
+      default: {
         return {
           account: accountFormRule,
           password: passwordFormRule
         };
+      }
     }
   });
   return { getFormRules };
@@ -108,7 +112,7 @@ function createRule(message: string) {
   return [
     {
       required: true,
-      message: message,
+      message,
       trigger: "change"
     }
   ];

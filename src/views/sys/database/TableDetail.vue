@@ -9,40 +9,40 @@
       <div class="title">{{ `数据表：${curNode?.tableName?.toUpperCase()}` }}</div>
       <div><slot name="button" v-bind="{ data: curNode }"></slot></div>
     </div>
-    <a-tabs default-active-key="1" @change="changeTab">
-      <a-tab-pane key="1" tab="基本信息">
+    <ATabs default-active-key="1" @change="changeTab">
+      <ATabPane key="1" tab="基本信息">
         <div class="mt-3">
-          <a-descriptions size="small">
-            <a-descriptions-item label="描述">
+          <ADescriptions size="small">
+            <ADescriptionsItem label="描述">
               {{ curNode?.tableComment ? curNode?.tableComment : "无" }}
-            </a-descriptions-item>
-          </a-descriptions>
-          <a-descriptions title="字段信息" class="mt-3" />
+            </ADescriptionsItem>
+          </ADescriptions>
+          <ADescriptions title="字段信息" class="mt-3" />
           <BasicTable @register="registerFieldTable" />
         </div>
-      </a-tab-pane>
-      <a-tab-pane key="2" tab="数据预览">
+      </ATabPane>
+      <ATabPane key="2" tab="数据预览">
         <div class="mt-2">
           <BasicTable @register="registerDataTable" />
         </div>
-      </a-tab-pane>
-    </a-tabs>
+      </ATabPane>
+    </ATabs>
   </div>
 </template>
 <script lang="ts" setup>
   import { ref, watch, onMounted, computed, nextTick, ComputedRef } from "vue";
-  import { BasicColumn, BasicTable, useTable } from "/@/components/general/Table";
+  import { BasicColumn, BasicTable, useTable } from "@/components/general/Table";
   import { Descriptions as ADescriptions, Tabs as ATabs } from "ant-design-vue";
-  import { ReqTable, TableInfo } from "/@/api/sys/model/DbConnectModel";
-  import { getDataTable, getFieldList } from "/@/api/sys/DbConnect";
-  import { columns } from "/@/views/sys/database/tableInfo.data";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  const ATabPane = ATabs.TabPane;
-  const ADescriptionsItem = ADescriptions.Item;
+  import { ReqTable, TableInfo } from "@/api/sys/model/DbConnectModel";
+  import { getDataTable, getFieldList } from "@/api/sys/DbConnect";
+  import { columns } from "@/views/sys/database/tableInfo.data";
+  import { useDesign } from "@/hooks/web/UseDesign";
   const props = defineProps({
     curNode: Object as () => TableInfo,
     resizeHeightOffset: { type: Number, default: 0 }
   });
+  const ATabPane = ATabs.TabPane;
+  const ADescriptionsItem = ADescriptions.Item;
   const curTab = ref("1");
   const changeTab = (tab) => {
     curTab.value = tab;
@@ -86,10 +86,10 @@
       setFields();
       return;
     }
-    buildTableData(undefined);
+    buildTableData();
   }
 
-  async function buildTableData(page) {
+  async function buildTableData(page?: any) {
     await nextTick();
     tableLoading(true);
     let pageNum = 1;
@@ -131,7 +131,7 @@
       return;
     }
     fieldLoading(true);
-    getFieldList({ ...condition.value, pageNum: 1, pageSize: 10000 })
+    getFieldList({ ...condition.value, pageNum: 1, pageSize: 10_000 })
       .then((res) => {
         setTableData(res.list);
       })

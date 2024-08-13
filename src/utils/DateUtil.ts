@@ -3,7 +3,7 @@
  */
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
-import { useLocaleStoreWithOut } from "/@/store/modules/I18n";
+import { useLocaleStoreWithOut } from "@/store/modules/I18n";
 
 const localeStore = useLocaleStoreWithOut();
 dayjs.locale(localeStore.getLocale);

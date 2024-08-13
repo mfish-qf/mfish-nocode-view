@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
 
 /**
  * @description: API目录

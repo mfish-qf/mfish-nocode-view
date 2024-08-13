@@ -1,8 +1,8 @@
 import { computed, onUnmounted, unref, watchEffect } from "vue";
 import { useThrottleFn } from "@vueuse/core";
-import { useAppStore } from "/@/store/modules/App";
-import { useLockStore } from "/@/store/modules/Lock";
-import { useUserStore } from "/@/store/modules/User";
+import { useAppStore } from "@/store/modules/App";
+import { useLockStore } from "@/store/modules/Lock";
+import { useUserStore } from "@/store/modules/User";
 import { useRootSetting } from "../setting/UseRootSetting";
 
 export function useLockPage() {
@@ -30,9 +30,12 @@ export function useLockPage() {
     }
     clear();
 
-    timeId = setTimeout(() => {
-      lockPage();
-    }, lockTime * 60 * 1000);
+    timeId = setTimeout(
+      () => {
+        lockPage();
+      },
+      lockTime * 60 * 1000
+    );
   }
 
   function lockPage(): void {

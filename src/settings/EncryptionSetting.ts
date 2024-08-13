@@ -1,4 +1,4 @@
-import { isDevMode } from "/@/utils/Env";
+import { isDevMode } from "@/utils/Env";
 
 // 默认缓存时间
 export const DEFAULT_CACHE_TIME = 60 * 60 * 24 * 7;

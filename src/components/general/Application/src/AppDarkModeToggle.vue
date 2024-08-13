@@ -7,12 +7,12 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from "vue";
-  import { SvgIcon } from "/@/components/general/Icon";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
-  import { updateHeaderBgColor, updateSidebarBgColor } from "/@/logics/theme/UpdateBackground";
-  import { updateDarkTheme } from "/@/logics/theme/Dark";
-  import { ThemeEnum } from "/@/enums/AppEnum";
+  import { SvgIcon } from "@/components/general/Icon";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+  import { updateHeaderBgColor, updateSidebarBgColor } from "@/logics/theme/UpdateBackground";
+  import { updateDarkTheme } from "@/logics/theme/Dark";
+  import { ThemeEnum } from "@/enums/AppEnum";
 
   const { prefixCls } = useDesign("dark-switch");
   const { getDarkMode, setDarkMode } = useRootSetting();
@@ -24,8 +24,38 @@
     }
   ]);
 
-  async function toggleDarkMode() {
+  async function toggleDarkMode(event: MouseEvent) {
     const darkMode = getDarkMode.value === ThemeEnum.DARK ? ThemeEnum.LIGHT : ThemeEnum.DARK;
+    const isAppearanceTransition =
+      // @ts-expect-error
+      document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!isAppearanceTransition || !event) {
+      setTheme(darkMode);
+      return;
+    }
+    const x = event.clientX;
+    const y = event.clientY;
+    const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    // @ts-expect-error: Transition API
+    const transition = document.startViewTransition(() => {
+      setTheme(darkMode);
+    });
+    transition.ready.then(() => {
+      const clipPath = [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`];
+      document.documentElement.animate(
+        {
+          clipPath
+        },
+        {
+          duration: 500,
+          easing: "ease-in",
+          pseudoElement: "::view-transition-new(root)"
+        }
+      );
+    });
+  }
+
+  function setTheme(darkMode: ThemeEnum) {
     setDarkMode(darkMode);
     updateDarkTheme(darkMode).then();
     updateHeaderBgColor();
@@ -34,28 +64,35 @@
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~"@{namespace}-dark-switch";
-
+  [data-theme="dark"] {
+    .@{prefix-cls} {
+      border: 1px #303030 solid;
+    }
+  }
   .@{prefix-cls} {
-    border: 1px solid #4e4c4c;
+    border: 1px solid #d9d9d9;
     position: relative;
     display: flex;
-    width: 50px;
-    height: 26px;
-    padding: 0 6px;
-    margin-left: auto;
+    width: 46px;
+    height: 24px;
+    margin: 2px;
     cursor: pointer;
     border-radius: 30px;
     justify-content: space-between;
     align-items: center;
-
+    transition: background 0.5s ease;
+    &:hover {
+      background-color: @header-bg-hover-color;
+    }
     &-inner {
       position: absolute;
       z-index: 1;
       width: 18px;
       height: 18px;
-      //background-color: #fff;
       border-radius: 50%;
-      transition: transform 0.5s, background-color 0.5s;
+      transition:
+        transform 0.5s,
+        background-color 0.5s;
       will-change: transform;
       display: flex;
       justify-content: center;
@@ -68,8 +105,7 @@
 
     &--dark {
       .@{prefix-cls}-inner {
-        transform: translateX(calc(100% + 2px));
-        //background-color: #151515;
+        transform: translateX(calc(100% + 6px));
       }
     }
   }

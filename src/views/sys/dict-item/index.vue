@@ -39,14 +39,15 @@
 <script lang="ts" setup>
   import { unref, ref, onBeforeMount } from "vue";
   import { useRoute } from "vue-router";
-  import { PageWrapper } from "/@/components/general/Page";
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteDictItem, getDictItemList } from "/@/api/sys/DictItem";
-  import { useModal } from "/@/components/general/Modal";
+  import { PageWrapper } from "@/components/general/Page";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { deleteDictItem, getDictItemList } from "@/api/sys/DictItem";
+  import { useModal } from "@/components/general/Modal";
   import DictItemModal from "./DictItemModal.vue";
   import { columns, searchFormSchema } from "./dictItem.data";
-  import { useGo } from "/@/hooks/web/UsePage";
-  import { useTabs } from "/@/hooks/web/UseTabs";
+  import { useGo } from "@/hooks/web/UsePage";
+  import { useTabs } from "@/hooks/web/UseTabs";
+  import { Recordable } from "@mfish/types";
   defineOptions({ name: "DictItemManagement" });
 
   const [registerModal, { openModal }] = useModal();
@@ -56,7 +57,7 @@
   const [registerTable, { reload }] = useTable({
     title: "字典项列表",
     api: getDictItemList,
-    searchInfo: { dictCode: dictCode },
+    searchInfo: { dictCode },
     columns,
     formConfig: {
       name: "search_form_item",
@@ -78,14 +79,14 @@
   onBeforeMount(() => {
     if (!dictCode.value) {
       const index = route.fullPath.lastIndexOf("/");
-      dictCode.value = route.fullPath.substring(index + 1);
+      dictCode.value = route.fullPath.slice(Math.max(0, index + 1));
     }
     setTitle(`字典项: ${unref(dictCode)}`);
   });
 
   function handleCreate() {
     openModal(true, {
-      record: { dictCode: dictCode },
+      record: { dictCode },
       isUpdate: false
     });
   }

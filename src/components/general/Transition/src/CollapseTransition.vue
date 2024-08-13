@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
   import { defineComponent } from "vue";
-  import { addClass, removeClass } from "/@/utils/DomUtils";
+  import { addClass, removeClass } from "@/utils/DomUtils";
 
   export default defineComponent({
     name: "CollapseTransition",
@@ -26,12 +26,12 @@
 
           enter(el) {
             el.dataset.oldOverflow = el.style.overflow;
-            if (el.scrollHeight !== 0) {
-              el.style.height = el.scrollHeight + "px";
+            if (el.scrollHeight === 0) {
+              el.style.height = "";
               el.style.paddingTop = el.dataset.oldPaddingTop;
               el.style.paddingBottom = el.dataset.oldPaddingBottom;
             } else {
-              el.style.height = "";
+              el.style.height = `${el.scrollHeight}px`;
               el.style.paddingTop = el.dataset.oldPaddingTop;
               el.style.paddingBottom = el.dataset.oldPaddingBottom;
             }
@@ -51,7 +51,7 @@
             el.dataset.oldPaddingBottom = el.style.paddingBottom;
             el.dataset.oldOverflow = el.style.overflow;
 
-            el.style.height = el.scrollHeight + "px";
+            el.style.height = `${el.scrollHeight}px`;
             el.style.overflow = "hidden";
           },
 

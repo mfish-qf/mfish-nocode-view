@@ -7,8 +7,8 @@
       placement="bottomLeft"
       trigger="click"
       @open-change="handleVisibleChange"
-      :overlayClassName="`${prefixCls}__cloumn-list`"
-      :getPopupContainer="getPopupContainer"
+      :overlay-class-name="`${prefixCls}__cloumn-list`"
+      :get-popup-container="getPopupContainer"
     >
       <template #title>
         <div :class="`${prefixCls}__popover-title`">
@@ -40,7 +40,7 @@
                   {{ item.label }}
                 </Checkbox>
 
-                <Tooltip placement="bottomLeft" :mouseLeaveDelay="0.4" :getPopupContainer="getPopupContainer">
+                <Tooltip placement="bottomLeft" :mouse-leave-delay="0.4" :get-popup-container="getPopupContainer">
                   <template #title>
                     {{ t("component.table.settingFixedLeft") }}
                   </template>
@@ -57,7 +57,7 @@
                   />
                 </Tooltip>
                 <Divider type="vertical" />
-                <Tooltip placement="bottomLeft" :mouseLeaveDelay="0.4" :getPopupContainer="getPopupContainer">
+                <Tooltip placement="bottomLeft" :mouse-leave-delay="0.4" :get-popup-container="getPopupContainer">
                   <template #title>
                     {{ t("component.table.settingFixedRight") }}
                   </template>
@@ -88,13 +88,13 @@
   import { Tooltip, Popover, Checkbox, Divider } from "ant-design-vue";
   import type { CheckboxChangeEvent } from "ant-design-vue/lib/checkbox/interface";
   import { SettingOutlined, DragOutlined } from "@ant-design/icons-vue";
-  import { Icon } from "/@/components/general/Icon";
-  import { ScrollContainer } from "/@/components/general/Container";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { Icon } from "@/components/general/Icon";
+  import { ScrollContainer } from "@/components/general/Container";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { useTableContext } from "../../hooks/UseTableContext";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { isFunction, isNullAndUnDef } from "/@/utils/Is";
-  import { getPopupContainer as getParentContainer } from "/@/utils";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { isFunction, isNullAndUnDef } from "@/utils/Is";
+  import { getPopupContainer as getParentContainer } from "@/utils";
   import { cloneDeep, omit } from "lodash-es";
   import Sortablejs from "sortablejs";
   import type Sortable from "sortablejs";
@@ -125,7 +125,7 @@
       Divider,
       Icon
     },
-    emits: ["columns-change"],
+    emits: ["columnsChange"],
 
     setup(_, { emit, attrs }) {
       const { t } = useI18n();
@@ -159,7 +159,7 @@
       watchEffect(() => {
         setTimeout(() => {
           const columns = table.getColumns();
-          if (columns.length && !state.isInit) {
+          if (columns.length > 0 && !state.isInit) {
             init();
           }
         }, 0);
@@ -195,7 +195,7 @@
           })
           .filter(Boolean) as string[];
 
-        if (!plainOptions.value.length) {
+        if (plainOptions.value.length === 0) {
           plainOptions.value = columns;
           plainSortOptions.value = columns;
           cachePlainOptions.value = columns;
@@ -226,7 +226,7 @@
 
       const indeterminate = computed(() => {
         const len = plainOptions.value.length;
-        let checkedLen = state.checkedList.length;
+        const checkedLen = state.checkedList.length;
         return checkedLen > 0 && checkedLen < len;
       });
 
@@ -332,14 +332,13 @@
       function setColumns(columns: BasicColumn[] | string[]) {
         table.setColumns(columns);
         const data: ColumnChangeParam[] = unref(plainSortOptions).map((col) => {
-          const visible =
-            columns.findIndex(
-              (c: BasicColumn | string) => c === col.value || (typeof c !== "string" && c.dataIndex === col.value)
-            ) !== -1;
+          const visible = columns.some(
+            (c: BasicColumn | string) => c === col.value || (typeof c !== "string" && c.dataIndex === col.value)
+          );
           return { dataIndex: col.value, fixed: col.fixed, visible };
         });
 
-        emit("columns-change", data);
+        emit("columnsChange", data);
       }
 
       function getPopupContainer() {

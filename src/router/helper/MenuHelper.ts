@@ -1,7 +1,7 @@
-import type { Menu, AppRouteRecordRaw } from "/@/router/Types";
-import { findPath, treeMap } from "/@/utils/helper/TreeHelper";
+import type { Menu, AppRouteRecordRaw } from "@/router/Types";
+import { findPath, treeMap } from "@/utils/helper/TreeHelper";
 import { cloneDeep } from "lodash-es";
-import { isUrl } from "/@/utils/Is";
+import { isUrl } from "@/utils/Is";
 import { RouteParams } from "vue-router";
 import { toRaw } from "vue";
 
@@ -10,7 +10,7 @@ export function getAllParentPath<T = Recordable>(treeData: T[], path: string) {
   return (menuList || []).map((item) => item.path);
 }
 
-//非URL增加 /
+// 非URL增加 /
 export function formatPath(path: string) {
   if (!!path && (path.startsWith("/") || isUrl(path))) {
     return path;
@@ -20,8 +20,7 @@ export function formatPath(path: string) {
 
 // 路径处理
 function joinParentPath(menus: Menu[], parentPath = "") {
-  for (let index = 0; index < menus.length; index++) {
-    const menu = menus[index];
+  for (const menu of menus) {
     // https://next.router.vuejs.org/guide/essentials/nested-routes.html
     // Note that nested paths that start with / will be treated as a root path.
     // 请注意，以 / 开头的嵌套路径将被视为根路径。
@@ -63,7 +62,7 @@ export function transformRouteToMenu(routeModList: AppRouteRecordRaw[], routerMa
       const { meta: { title, hideMenu = false } = {} } = node;
 
       return {
-        ...(node.meta || {}),
+        ...node.meta,
         meta: node.meta,
         name: title,
         hideMenu,
@@ -84,11 +83,11 @@ const menuParamRegex = /:([\s\S]+?)((?=\/)|$)/g;
 
 export function configureDynamicParamsMenu(menu: Menu, params: RouteParams) {
   const { path, paramPath } = toRaw(menu);
-  let realPath = paramPath ? paramPath : path;
+  let realPath = paramPath || path;
   const matchArr = realPath.match(menuParamRegex);
 
   matchArr?.forEach((it) => {
-    const realIt = it.substring(1);
+    const realIt = it.slice(1);
     if (params[realIt]) {
       realPath = realPath.replace(`:${realIt}`, params[realIt] as string);
     }

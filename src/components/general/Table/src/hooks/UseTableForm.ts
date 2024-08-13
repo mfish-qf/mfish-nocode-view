@@ -1,8 +1,9 @@
 import type { ComputedRef, Slots } from "vue";
 import type { BasicTableProps, FetchParams } from "../types/Table";
 import { unref, computed } from "vue";
-import type { FormProps } from "/@/components/general/Form";
-import { isFunction } from "/@/utils/Is";
+import type { FormProps } from "@/components/general/Form";
+import { isFunction } from "@/utils/Is";
+import { Recordable } from "@mfish/types";
 
 export function useTableForm(
   propsRef: ComputedRef<BasicTableProps>,
@@ -28,7 +29,7 @@ export function useTableForm(
 
   function replaceFormSlotKey(key: string) {
     if (!key) return "";
-    return key?.replace?.(/form\-/, "") ?? "";
+    return key?.replace?.(/form-/, "") ?? "";
   }
 
   function handleSearchInfoChange(info: Recordable) {

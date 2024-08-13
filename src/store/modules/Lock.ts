@@ -1,9 +1,9 @@
-import type { LockInfo } from "/#/store";
+import type { LockInfo } from "#/store";
 import { defineStore } from "pinia";
-import { LOCK_INFO_KEY } from "/@/enums/CacheEnum";
-import { Persistent } from "/@/utils/cache/Persistent";
+import { LOCK_INFO_KEY } from "@/enums/CacheEnum";
+import { Persistent } from "@/utils/cache/Persistent";
 import { useUserStore } from "./User";
-import { oauth2Config } from "/@/settings/LoginSetting";
+import { oauth2Config } from "@/settings/LoginSetting";
 
 interface LockState {
   lockInfo: Nullable<LockInfo>;
@@ -51,7 +51,7 @@ export const useLockStore = defineStore({
             this.resetLockInfo();
           }
           return res;
-        } catch (error) {
+        } catch {
           return false;
         }
       };

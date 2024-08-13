@@ -1,6 +1,6 @@
-import { getDictItems } from "/@/api/sys/DictItem";
+import { getDictItems } from "@/api/sys/DictItem";
 import { h } from "vue";
-import DictTag from "/@/components/general/DictTag/DictTag.vue";
+import DictTag from "@/components/general/DictTag/DictTag.vue";
 
 export const getDictProps = (param) => {
   return {

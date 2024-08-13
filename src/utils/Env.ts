@@ -3,14 +3,25 @@
  * @author: mfish
  * @date: 2022/10/9 11:43
  */
-import { warn } from "/@/utils/Log";
-import { getConfigFileName } from "../../build/BuildUtils";
-import { GlobEnvConfig } from "/#/config";
+import { warn } from "@/utils/Log";
+import { GlobEnvConfig } from "#/config";
 import pkg from "../../package.json";
 
+const getVariableName = (title: string) => {
+  function strToHex(str: string) {
+    const result: string[] = [];
+    for (let i = 0; i < str.length; ++i) {
+      const hex = str.charCodeAt(i).toString(16);
+      result.push(`000${hex}`.slice(-4));
+    }
+    return result.join("").toUpperCase();
+  }
+  return `__PRODUCTION__${strToHex(title) || "__APP"}__CONF__`.toUpperCase().replaceAll(/\s/g, "");
+};
+
 export function getAppEnvConfig() {
-  const ENV_NAME = getConfigFileName(import.meta.env);
-  //获取全局配置(打包时将独立提取配置)
+  const ENV_NAME = getVariableName(import.meta.env.VITE_GLOB_APP_TITLE);
+  // 获取全局配置(打包时将独立提取配置)
   const ENV = (import.meta.env.DEV
     ? (import.meta.env as unknown as GlobEnvConfig)
     : window[ENV_NAME as any]) as unknown as GlobEnvConfig;
@@ -24,7 +35,7 @@ export function getAppEnvConfig() {
     VITE_GLOB_OAUTH2_REDIRECT_URI
   } = ENV;
 
-  if (!/^[a-zA-Z_]*$/.test(VITE_GLOB_APP_SHORT_NAME)) {
+  if (!/^[_a-z]*$/i.test(VITE_GLOB_APP_SHORT_NAME)) {
     warn(
       `VITE_GLOB_APP_SHORT_NAME Variables can only be characters/underscores, please modify in the environment variables and re-running.`
     );
@@ -49,17 +60,17 @@ export function getStorageShortName() {
   return `${getCommonStoragePrefix()}__${pkg.version}__`.toUpperCase();
 }
 
-//获取当前环境
+// 获取当前环境
 export function getEnv(): string {
   return import.meta.env.MODE;
 }
 
-//是否开发模式
+// 是否开发模式
 export function isDevMode(): boolean {
   return import.meta.env.DEV;
 }
 
-//是否生成模式
+// 是否生成模式
 export function isProdMode(): boolean {
   return import.meta.env.PROD;
 }

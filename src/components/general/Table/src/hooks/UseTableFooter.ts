@@ -2,7 +2,8 @@ import type { ComputedRef, Ref } from "vue";
 import type { BasicTableProps } from "../types/Table";
 import { unref, computed, h, nextTick, watchEffect } from "vue";
 import TableFooter from "../components/TableFooter.vue";
-import { useEventListener } from "/@/hooks/event/UseEventListener";
+import { useEventListener } from "@/hooks/event/UseEventListener";
+import { Recordable } from "@mfish/types";
 
 type scrollRefType = ComputedRef<{
   x: string | number | true;

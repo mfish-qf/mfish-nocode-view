@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
 
 /**
  * @description: API请求参数
@@ -7,17 +7,17 @@ import { BaseEntity, PageResult, ReqPage } from "/@/api/model/BaseModel";
  * @version: V1.2.0
  */
 export interface ApiParams extends BaseEntity<number> {
-  //接口ID
+  // 接口ID
   apiId?: string;
-  //参数名称
+  // 参数名称
   name?: string;
-  //默认值
+  // 默认值
   defaultValue?: string;
-  //是否使用
+  // 是否使用
   isUse?: number;
-  //参数描述
+  // 参数描述
   remark?: string;
-  //是否必须 0否 1是
+  // 是否必须 0否 1是
   required?: number;
 }
 
@@ -26,5 +26,5 @@ export interface ReqApiParams extends ReqPage {
   isUse?: number;
 }
 
-//分页结果集
+// 分页结果集
 export type ApiParamsPageModel = PageResult<ApiParams>;

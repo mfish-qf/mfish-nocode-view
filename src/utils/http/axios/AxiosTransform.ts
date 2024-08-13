@@ -1,5 +1,5 @@
 import type { InternalAxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios";
-import type { RequestOptions, Result } from "/#/axios";
+import type { RequestOptions, Result } from "#/axios";
 
 export interface CreateAxiosOptions extends InternalAxiosRequestConfig {
   authenticationScheme?: string;

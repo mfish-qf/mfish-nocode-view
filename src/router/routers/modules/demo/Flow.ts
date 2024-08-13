@@ -1,6 +1,6 @@
-import type { AppRouteRecordRaw } from "/@/router/Types";
-import { LAYOUT } from "/@/router/Constant";
-import { t } from "/@/hooks/web/UseI18n";
+import type { AppRouteRecordRaw } from "@/router/Types";
+import { LAYOUT } from "@/router/Constant";
+import { t } from "@/hooks/web/UseI18n";
 
 const flows: AppRouteRecordRaw = {
   path: "/flow",
@@ -16,7 +16,7 @@ const flows: AppRouteRecordRaw = {
     {
       path: "flowChart",
       name: "flowChartDemo",
-      component: () => import("/@/views/demo/flow-chart/index.vue"),
+      component: () => import("@/views/demo/flow-chart/index.vue"),
       meta: {
         title: t("routes.demo.flow.flowChart")
       }

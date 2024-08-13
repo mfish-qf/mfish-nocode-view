@@ -49,13 +49,13 @@
           />
         </template>
         <template v-if="column.key === 'jobType'">
-          <dict-tag code="sys_job_type" :value="record.jobType" />
+          <DictTag code="sys_job_type" :value="record.jobType" />
         </template>
         <template v-if="column.key === 'misfireHandler'">
-          <dict-tag code="sys_job_misfire" :value="record.misfireHandler" />
+          <DictTag code="sys_job_misfire" :value="record.misfireHandler" />
         </template>
         <template v-if="column.key === 'timeZone'">
-          <dict-tag code="sys_time_zone" :value="record.timeZone" />
+          <DictTag code="sys_time_zone" :value="record.timeZone" />
         </template>
       </template>
     </BasicTable>
@@ -63,14 +63,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteJob, executeJob, getJobList } from "/@/api/scheduler/Job";
-  import { useModal } from "/@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { deleteJob, executeJob, getJobList } from "@/api/scheduler/Job";
+  import { useModal } from "@/components/general/Modal";
   import JobModal from "./JobModal.vue";
   import { columns, searchFormSchema } from "./job.data";
-  import { Job } from "/@/api/scheduler/model/JobModel";
-  import JobSubscribeList from "/@/views/scheduler/job/JobSubscribeList.vue";
-  import DictTag from "/@/components/general/DictTag/DictTag.vue";
+  import { Job } from "@/api/scheduler/model/JobModel";
+  import JobSubscribeList from "@/views/scheduler/job/JobSubscribeList.vue";
+  import DictTag from "@/components/general/DictTag/DictTag.vue";
   defineOptions({ name: "JobManagement" });
   const [registerModal, { openModal }] = useModal();
   const [registerTable, { reload }] = useTable({

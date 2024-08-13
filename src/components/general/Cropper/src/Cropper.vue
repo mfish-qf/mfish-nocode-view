@@ -8,7 +8,7 @@
   import { defineComponent, onMounted, ref, unref, computed, onUnmounted } from "vue";
   import Cropper from "cropperjs";
   import "cropperjs/dist/cropper.css";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { useDebounceFn } from "@vueuse/shared";
 
   type Options = Cropper.Options;
@@ -81,7 +81,7 @@
       });
 
       const getWrapperStyle = computed((): CSSProperties => {
-        return { height: `${props.height}`.replace(/px/, "") + "px" };
+        return { height: `${`${props.height}`.replace(/px/, "")}px` };
       });
 
       onMounted(init);
@@ -125,13 +125,13 @@
         if (!cropper.value) {
           return;
         }
-        let imgInfo = cropper.value.getData();
+        const imgInfo = cropper.value.getData();
         const canvas = props.circled ? getRoundedCanvas() : cropper.value.getCroppedCanvas();
         canvas.toBlob((blob) => {
           if (!blob) {
             return;
           }
-          let fileReader: FileReader = new FileReader();
+          const fileReader: FileReader = new FileReader();
           fileReader.readAsDataURL(blob);
           fileReader.onloadend = (e) => {
             emit("cropper", {

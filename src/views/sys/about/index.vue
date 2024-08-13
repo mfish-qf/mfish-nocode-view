@@ -3,7 +3,7 @@
     <template #headerContent>
       <div class="flex justify-between items-center">
         <span>
-          摸鱼低代码平台前端<a :href="GITHUB_URL" target="_blank">{{ name + "-view" }}</a>
+          摸鱼低代码平台前端<a :href="GITHUB_URL" target="_blank">{{ `${name}-view` }}</a>
           基于Vue3.x、Vite5.x、Ant-Design-Vue4.x、TypeScript，后端<a :href="GITHUB_BACK_URL" target="_blank">{{
             name
           }}</a>
@@ -20,10 +20,11 @@
 <script lang="ts" setup>
   import { h } from "vue";
   import { Tag } from "ant-design-vue";
-  import { PageWrapper } from "/@/components/general/Page";
-  import { Description, DescItem, useDescription } from "/@/components/general/Description";
-  import { GITHUB_URL, GITHUB_BACK_URL, SITE_URL, DOC_URL } from "/@/settings/SiteSetting";
+  import { PageWrapper } from "@/components/general/Page";
+  import { Description, DescItem, useDescription } from "@/components/general/Description";
+  import { GITHUB_URL, GITHUB_BACK_URL, SITE_URL, DOC_URL } from "@/settings/SiteSetting";
 
+  // eslint-disable-next-line no-undef
   const { pkg, lastBuildTime } = __APP_INFO__;
 
   const { dependencies, devDependencies, name, version } = pkg;
@@ -58,7 +59,7 @@
     {
       label: "前端-Github",
       field: "github",
-      render: commonLinkRender(name + "-view")
+      render: commonLinkRender(`${name}-view`)
     },
     {
       label: "后端-Github",
@@ -68,7 +69,7 @@
     {
       label: "前端-Gitee",
       field: "gitee",
-      render: commonLinkRender(name + "-view")
+      render: commonLinkRender(`${name}-view`)
     },
     {
       label: "后端-Gitee",
@@ -99,7 +100,7 @@
   const [register] = useDescription({
     title: "前端生产环境依赖",
     data: dependencies,
-    schema: schema,
+    schema,
     column: 3
   });
 

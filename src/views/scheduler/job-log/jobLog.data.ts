@@ -1,8 +1,8 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
-import { getDictProps } from "/@/utils/DictUtils";
-import { DescItem } from "/@/components/general/Description";
-import { buildJsonPreview } from "/@/utils/HBuildUtils";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
+import { getDictProps } from "@/utils/DictUtils";
+import { DescItem } from "@/components/general/Description";
+import { buildJsonPreview } from "@/utils/HBuildUtils";
 
 /**
  * @description: 任务日志

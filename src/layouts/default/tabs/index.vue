@@ -4,23 +4,23 @@
       type="editable-card"
       size="small"
       :animated="false"
-      :hideAdd="true"
-      :tabBarGutter="3"
-      :activeKey="activeKeyRef"
+      :hide-add="true"
+      :tab-bar-gutter="3"
+      :active-key="activeKeyRef"
       @change="handleChange"
       @edit="handleEdit"
     >
       <template v-for="item in getTabsState" :key="item.query ? item.fullPath : item.path">
         <TabPane :closable="!(item && item.meta && item.meta.affix)">
           <template #tab>
-            <TabContent :tabItem="item" />
+            <TabContent :tab-item="item" />
           </template>
         </TabPane>
       </template>
 
       <template #rightExtra v-if="getShowRedo || getShowQuick">
         <TabRedo v-if="getShowRedo" />
-        <TabContent isExtra :tabItem="$route" v-if="getShowQuick" />
+        <TabContent is-extra :tab-item="$route" v-if="getShowQuick" />
         <FoldButton v-if="getShowFold" />
       </template>
     </Tabs>
@@ -33,14 +33,14 @@
   import TabContent from "./components/TabContent.vue";
   import FoldButton from "./components/FoldButton.vue";
   import TabRedo from "./components/TabRedo.vue";
-  import { useGo } from "/@/hooks/web/UsePage";
-  import { useMultipleTabStore } from "/@/store/modules/MultipleTab";
-  import { useUserStore } from "/@/store/modules/User";
+  import { useGo } from "@/hooks/web/UsePage";
+  import { useMultipleTabStore } from "@/store/modules/MultipleTab";
+  import { useUserStore } from "@/store/modules/User";
   import { initAffixTabs, useTabsDrag } from "./UseMultipleTabs";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useMultipleTabSetting } from "/@/hooks/setting/UseMultipleTabSetting";
-  import { REDIRECT_NAME } from "/@/router/Constant";
-  import { listenerRouteChange } from "/@/logics/mitt/RouteChange";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useMultipleTabSetting } from "@/hooks/setting/UseMultipleTabSetting";
+  import { REDIRECT_NAME } from "@/router/Constant";
+  import { listenerRouteChange } from "@/logics/mitt/RouteChange";
   import { useRouter } from "vue-router";
 
   export default defineComponent({
@@ -88,7 +88,7 @@
 
         const { path, fullPath, meta = {} } = route;
         const { currentActiveMenu, hideTab } = meta as RouteMeta;
-        const isHide = !hideTab ? null : currentActiveMenu;
+        const isHide = hideTab ? currentActiveMenu : null;
         const p = isHide || fullPath || path;
         if (activeKeyRef.value !== p) {
           activeKeyRef.value = p as string;

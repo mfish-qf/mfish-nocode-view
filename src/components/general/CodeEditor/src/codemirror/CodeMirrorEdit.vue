@@ -5,8 +5,8 @@
 <script lang="ts" setup>
   import { ref, onMounted, onUnmounted, watchEffect, watch, unref, nextTick } from "vue";
   import { useDebounceFn } from "@vueuse/core";
-  import { useAppStore } from "/@/store/modules/App";
-  import { useWindowSizeFn } from "/@/hooks/event/UseWindowSizeFn";
+  import { useAppStore } from "@/store/modules/App";
+  import { useWindowSizeFn } from "@/hooks/event/UseWindowSizeFn";
   import CodeMirror from "codemirror";
   import { MODE } from "../Typing";
   // css
@@ -45,7 +45,7 @@
       await nextTick();
       const oldValue = editor?.getValue();
       if (value !== oldValue) {
-        editor?.setValue(value ? value : "");
+        editor?.setValue(value || "");
       }
     },
     { flush: "post" }

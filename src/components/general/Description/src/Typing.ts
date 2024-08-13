@@ -1,18 +1,19 @@
 import type { VNode, CSSProperties } from "vue";
-import type { CollapseContainerOptions } from "/@/components/general/Container";
+import type { CollapseContainerOptions } from "@/components/general/Container";
 import type { DescriptionsProps } from "ant-design-vue/es";
+import { Recordable } from "@mfish/types";
 
 export interface DescItem {
   labelMinWidth?: number;
   contentMinWidth?: number;
   labelStyle?: CSSProperties;
   field: string;
-  label: string | VNode | JSX.Element;
+  label: string | VNode;
   // Merge column
   span?: number;
   show?: (...arg: any) => boolean;
   // render
-  render?: (val: any, data: Recordable) => VNode | undefined | JSX.Element | Element | string | number;
+  render?: (val: any, data: Recordable) => VNode | undefined | Element | string | number;
 }
 
 export interface DescriptionProps extends DescriptionsProps {
@@ -42,5 +43,5 @@ export interface DescInstance {
 export type Register = (descInstance: DescInstance) => void;
 
 /**
- * @description: */
+  @description: */
 export type UseDescReturnType = [Register, DescInstance];

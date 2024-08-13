@@ -1,17 +1,18 @@
 import type { Router, RouteLocationNormalized } from "vue-router";
-import { useAppStoreWithOut } from "/@/store/modules/App";
-import { useUserStoreWithOut } from "/@/store/modules/User";
-import { useTransitionSetting } from "/@/hooks/setting/UseTransitionSetting";
-import { AxiosCanceler } from "/@/utils/http/axios/AxiosCancel";
+import { useAppStoreWithOut } from "@/store/modules/App";
+import { useUserStoreWithOut } from "@/store/modules/User";
+import { useTransitionSetting } from "@/hooks/setting/UseTransitionSetting";
+import { AxiosCanceler } from "@/utils/http/axios/AxiosCancel";
 import { Modal, notification } from "ant-design-vue";
-import { warn } from "/@/utils/Log";
+import { warn } from "@/utils/Log";
 import { unref } from "vue";
-import { setRouteChange } from "/@/logics/mitt/RouteChange";
+import { setRouteChange } from "@/logics/mitt/RouteChange";
 import { createPermissionGuard } from "./PermissionGuard";
 import { createStateGuard } from "./StateGuard";
 import nProgress from "nprogress";
-import projectSetting from "/@/settings/ProjectSetting";
+import projectSetting from "@/settings/ProjectSetting";
 import { createParamMenuGuard } from "./ParamMenuGuard";
+import { Nullable } from "@mfish/types";
 
 // 不要更改创建顺序
 export function setupRouterGuard(router: Router) {
@@ -95,7 +96,7 @@ function createHttpGuard(router: Router) {
 // 切换路由时返回顶部
 function createScrollGuard(router: Router) {
   const isHash = (href: string) => {
-    return /^#/.test(href);
+    return href.startsWith("#");
   };
   const body = document.body;
   router.afterEach(async (to) => {
@@ -113,13 +114,13 @@ export function createMessageGuard(router: Router) {
   const { closeMessageOnSwitch } = projectSetting;
   router.beforeEach(async () => {
     try {
-      //判断切换界面时是否删除未关闭的消息并通知
+      // 判断切换界面时是否删除未关闭的消息并通知
       if (closeMessageOnSwitch) {
         Modal.destroyAll();
         notification.destroy();
       }
     } catch (error) {
-      warn("message guard error:" + error);
+      warn(`message guard error:${error}`);
     }
     return true;
   });

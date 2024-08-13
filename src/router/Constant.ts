@@ -9,13 +9,13 @@ export const PARENT_LAYOUT_NAME = "ParentLayout";
 
 export const PAGE_NOT_FOUND_NAME = "PageNotFound";
 
-export const EXCEPTION_COMPONENT = () => import("/@/views/sys/exception/Exception.vue");
+export const EXCEPTION_COMPONENT = () => import("@/views/sys/exception/Exception.vue");
 
 /**
  * @description: 默认布局
  */
-export const LAYOUT = () => import("/@/layouts/default/index.vue");
-export const IFRAME = () => import("/@/views/sys/iframe/FrameBlank.vue");
+export const LAYOUT = () => import("@/layouts/default/index.vue");
+export const IFRAME = () => import("@/views/sys/iframe/FrameBlank.vue");
 
 /**
  * @description: 父布局

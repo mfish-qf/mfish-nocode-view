@@ -4,10 +4,10 @@
       <span>{{ t("component.table.settingDens") }}</span>
     </template>
 
-    <Dropdown placement="bottom" :trigger="['click']" :getPopupContainer="getPopupContainer">
+    <Dropdown placement="bottom" :trigger="['click']" :get-popup-container="getPopupContainer">
       <ColumnHeightOutlined />
       <template #overlay>
-        <a-menu @click="handleTitleClick" selectable v-model:selectedKeys="selectedKeysRef">
+        <AMenu @click="handleTitleClick" selectable v-model:selectedKeys="selectedKeysRef">
           <MenuItem key="default">
             <span>{{ t("component.table.settingDensDefault") }}</span>
           </MenuItem>
@@ -17,7 +17,7 @@
           <MenuItem key="small">
             <span>{{ t("component.table.settingDensSmall") }}</span>
           </MenuItem>
-        </a-menu>
+        </AMenu>
       </template>
     </Dropdown>
   </Tooltip>
@@ -27,9 +27,9 @@
   import { defineComponent, ref } from "vue";
   import { Tooltip, Dropdown, Menu } from "ant-design-vue";
   import { ColumnHeightOutlined } from "@ant-design/icons-vue";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { useTableContext } from "../../hooks/UseTableContext";
-  import { getPopupContainer } from "/@/utils";
+  import { getPopupContainer } from "@/utils";
 
   export default defineComponent({
     name: "SizeSetting",

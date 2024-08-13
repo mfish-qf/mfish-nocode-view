@@ -5,11 +5,11 @@
 </template>
 <script lang="ts" setup>
   import { computed, ref, unref } from "vue";
-  import { BasicForm, useForm } from "/@/components/general/Form/index";
+  import { BasicForm, useForm } from "@/components/general/Form/index";
   import { formSchema } from "./menu.data";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { getMenuList, insertMenu, updateMenu } from "/@/api/sys/Menu";
-  import { MenuListItem, MenuType } from "/@/api/sys/model/MenuModel";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { getMenuList, insertMenu, updateMenu } from "@/api/sys/Menu";
+  import { MenuListItem, MenuType } from "@/api/sys/model/MenuModel";
 
   const emit = defineEmits(["success", "register"]);
   const isUpdate = ref(true);
@@ -24,24 +24,22 @@
     await resetFields();
     setModalProps({ confirmLoading: false, width: "800px" });
     isUpdate.value = !!data?.isUpdate;
-    valueChange("menuType", !data.record ? MenuType.目录 : data.record.menuType);
+    valueChange("menuType", data.record ? data.record.menuType : MenuType.目录);
     if (unref(isUpdate)) {
       setFieldsValue({
         ...data.record
       }).then();
     }
   });
-  const getTitle = computed(() => (!unref(isUpdate) ? "新增菜单" : "编辑菜单"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑菜单" : "新增菜单"));
 
   async function setTreeData(type: MenuType) {
-    //菜单类型为目录时，查询目录级别菜单
-    //其他类型查询上级目录菜单
-    let treeData;
-    if (type === MenuType.目录) {
-      treeData = await getMenuList({ menuType: MenuType.目录 });
-    } else {
-      treeData = await getMenuList({ menuType: type - 1 });
-    }
+    // 菜单类型为目录时，查询目录级别菜单
+    // 其他类型查询上级目录菜单
+
+    const treeData = await (type === MenuType.目录
+      ? getMenuList({ menuType: MenuType.目录 })
+      : getMenuList({ menuType: type - 1 }));
     let menuData;
     if (type === MenuType.菜单) {
       menuData = await getMenuList({ menuType: MenuType.菜单 });
@@ -71,7 +69,7 @@
   }
 
   async function handleSubmit() {
-    let values = (await validate()) as MenuListItem;
+    const values = (await validate()) as MenuListItem;
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {
       saveMenu(updateMenu, values);

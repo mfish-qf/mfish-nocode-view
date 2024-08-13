@@ -1,8 +1,5 @@
 import { onUnmounted, getCurrentInstance } from "vue";
-import { createContextMenu, destroyContextMenu } from "/@/components/general/ContextMenu";
-import type { ContextMenuItem } from "/@/components/general/ContextMenu";
-
-export type { ContextMenuItem };
+import { createContextMenu, destroyContextMenu } from "@/components/general/ContextMenu";
 
 export function useContextMenu(authRemove = true) {
   if (getCurrentInstance() && authRemove) {
@@ -12,3 +9,5 @@ export function useContextMenu(authRemove = true) {
   }
   return [createContextMenu, destroyContextMenu];
 }
+
+export { type ContextMenuItem } from "@/components/general/ContextMenu";

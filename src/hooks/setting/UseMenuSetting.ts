@@ -1,10 +1,10 @@
-import type { MenuSetting } from "/#/config";
+import type { MenuSetting } from "#/config";
 
 import { computed, unref, ref } from "vue";
-import { useAppStore } from "/@/store/modules/App";
-import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from "/@/enums/AppEnum";
-import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from "/@/enums/MenuEnum";
-import { useFullContent } from "/@/hooks/web/UseFullContent";
+import { useAppStore } from "@/store/modules/App";
+import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from "@/enums/AppEnum";
+import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from "@/enums/MenuEnum";
+import { useFullContent } from "@/hooks/web/UseFullContent";
 
 const mixSideHasChildren = ref(false);
 
@@ -17,6 +17,8 @@ export function useMenuSetting() {
       unref(getSplit) || (unref(getShowMenu) && unref(getMenuMode) !== MenuModeEnum.HORIZONTAL && !unref(fullContent))
     );
   });
+
+  const getManualCollapsed = computed(() => appStore.getManualCollapsed);
 
   const getCollapsed = computed(() => appStore.getMenuSetting.collapsed);
 
@@ -112,21 +114,23 @@ export function useMenuSetting() {
   }
 
   function toggleCollapsed() {
-    setMenuSetting({
-      collapsed: !unref(getCollapsed)
+    //切换时设置为手动切换，用于控制手机端时不自动展开
+    appStore.setManualCollapsed().then(() => {
+      setMenuSetting({
+        collapsed: !unref(getCollapsed)
+      });
     });
   }
 
   return {
     setMenuSetting,
-
     toggleCollapsed,
-
     getMenuFixed,
     getRealWidth,
     getMenuType,
     getMenuMode,
     getShowMenu,
+    getManualCollapsed,
     getCollapsed,
     getMiniWidthNumber,
     getCalcContentWidth,

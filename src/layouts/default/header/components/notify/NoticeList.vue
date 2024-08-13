@@ -2,10 +2,10 @@
   <a-list :class="prefixCls" bordered :pagination="getPagination">
     <template v-for="item in getData" :key="item.id">
       <a-list-item class="list-item">
-        <a-list-item-meta>
+        <AListItemMeta>
           <template #title>
             <div class="title">
-              <a-typography-paragraph
+              <ATypographyParagraph
                 @click="handleTitleClick(item)"
                 style="width: 100%; margin-bottom: 0 !important"
                 :style="{ cursor: isTitleClickable ? 'pointer' : '' }"
@@ -31,7 +31,7 @@
           <template #description>
             <div>
               <div class="description" v-if="item.description">
-                <a-typography-paragraph
+                <ATypographyParagraph
                   style="width: 100%; margin-bottom: 0 !important"
                   :ellipsis="
                     $props.descRows && $props.descRows > 0
@@ -46,7 +46,7 @@
               </div>
             </div>
           </template>
-        </a-list-item-meta>
+        </AListItemMeta>
       </a-list-item>
     </template>
   </a-list>
@@ -54,9 +54,9 @@
 <script lang="ts">
   import { computed, defineComponent, PropType, ref, watch, unref } from "vue";
   import { ListItem } from "./Data";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { List, Avatar, Tag, Typography } from "ant-design-vue";
-  import { isNumber } from "/@/utils/Is";
+  import { isNumber } from "@/utils/Is";
 
   export default defineComponent({
     components: {
@@ -99,7 +99,7 @@
       const getData = computed(() => {
         const { pageSize, list } = props;
         if (pageSize === false) return [];
-        let size = isNumber(pageSize) ? pageSize : 5;
+        const size = isNumber(pageSize) ? pageSize : 5;
         return list.slice(size * (unref(current) - 1), size * unref(current));
       });
       watch(
@@ -115,7 +115,7 @@
           return {
             total: list.length,
             pageSize,
-            //size: 'small',
+            // size: 'small',
             current: unref(current),
             onChange(page) {
               current.value = page;

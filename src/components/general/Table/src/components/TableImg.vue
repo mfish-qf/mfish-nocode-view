@@ -1,5 +1,5 @@
 <template>
-  <div :class="prefixCls" class="flex items-center mx-auto" v-if="imgList && imgList.length" :style="getWrapStyle">
+  <div :class="prefixCls" class="flex items-center mx-auto" v-if="imgList && imgList.length > 0" :style="getWrapStyle">
     <Badge :count="!showBadge || imgList.length == 1 ? 0 : imgList.length" v-if="simpleShow">
       <div class="img-div">
         <PreviewGroup>
@@ -31,9 +31,9 @@
 <script lang="ts">
   import type { CSSProperties } from "vue";
   import { defineComponent, computed } from "vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { Image, Badge } from "ant-design-vue";
-  import { propTypes } from "/@/utils/PropTypes";
+  import { propTypes } from "@/utils/PropTypes";
 
   export default defineComponent({
     name: "TableImage",

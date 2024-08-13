@@ -5,9 +5,9 @@
  */
 export interface DraggableType {
   name?: string;
-  //是否自己挂载组件
+  // 是否自己挂载组件
   slot?: boolean;
-  //隐藏关闭按钮
+  // 隐藏关闭按钮
   hideClose?: boolean;
 }
 

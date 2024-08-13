@@ -1,12 +1,12 @@
 <template>
-  <BasicTitle :helpMessage="helpMessage">
+  <BasicTitle :help-message="helpMessage">
     {{ title }}
   </BasicTitle>
 </template>
 <script lang="ts">
   import type { PropType } from "vue";
   import { defineComponent } from "vue";
-  import { BasicTitle } from "/@/components/general/Basic";
+  import { BasicTitle } from "@/components/general/Basic";
 
   export default defineComponent({
     name: "BasicModalHeader",

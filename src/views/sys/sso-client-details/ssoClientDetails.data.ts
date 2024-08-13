@@ -1,6 +1,6 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
-import { getDictProps } from "/@/utils/DictUtils";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
+import { getDictProps } from "@/utils/DictUtils";
 
 /**
  * @description: 客户端信息

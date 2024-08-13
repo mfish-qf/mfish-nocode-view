@@ -17,12 +17,12 @@
 
 <script lang="ts" setup>
   import { onBeforeMount } from "vue";
-  import { oauth2Config } from "/@/settings/LoginSetting";
-  import { useUserStore } from "/@/store/modules/User";
-  import { useMessage } from "/@/hooks/web/UseMessage";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { oauth2Config } from "@/settings/LoginSetting";
+  import { useUserStore } from "@/store/modules/User";
+  import { useMessage } from "@/hooks/web/UseMessage";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { useRouter, useRoute } from "vue-router";
-  import { useGlobSetting } from "/@/hooks/setting";
+  import { useGlobSetting } from "@/hooks/setting";
 
   const userStore = useUserStore();
   const { notification } = useMessage();
@@ -51,7 +51,7 @@
         client_secret: oauth2Config.client_secret,
         grant_type: "authorization_code",
         redirect_uri: redirectUri,
-        code: code,
+        code,
         route_redirect: routeRedirect,
         mode: "modal"
       })
@@ -65,7 +65,7 @@
         }
       })
       .catch(() => {
-        //token获取失败，跳转应急登录页面登录
+        // token获取失败，跳转应急登录页面登录
         router.push("/error-login");
       });
   }

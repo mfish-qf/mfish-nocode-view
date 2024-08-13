@@ -5,42 +5,34 @@
       placement="left"
       :class="`${prefixCls}-drawer`"
       :width="getMenuWidth"
-      :getContainer="false"
-      :open="!getCollapsed"
+      :get-container="false"
+      :open="!getCollapsed && getManualCollapsed"
       @close="handleClose"
     >
-      <Sider />
+      <LayoutSider />
     </Drawer>
     <MixSider v-else-if="getIsMixSidebar" />
-    <Sider v-else />
+    <LayoutSider v-else />
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent } from "vue";
-  import Sider from "./LayoutSider.vue";
+<script lang="ts" setup>
+  import LayoutSider from "./LayoutSider.vue";
   import MixSider from "./MixSider.vue";
   import { Drawer } from "ant-design-vue";
-  import { useAppInject } from "/@/hooks/web/UseAppInject";
-  import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useAppInject } from "@/hooks/web/UseAppInject";
+  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  defineOptions({ name: "SiderWrapper" });
 
-  export default defineComponent({
-    name: "SiderWrapper",
-    components: { Sider, Drawer, MixSider },
-    setup() {
-      const { prefixCls } = useDesign("layout-sider");
-      const { getIsMobile } = useAppInject();
-      const { setMenuSetting, getCollapsed, getMenuWidth, getIsMixSidebar } = useMenuSetting();
+  const { prefixCls } = useDesign("layout-sider");
+  const { getIsMobile } = useAppInject();
+  const { setMenuSetting, getCollapsed, getMenuWidth, getIsMixSidebar, getManualCollapsed } = useMenuSetting();
 
-      function handleClose() {
-        setMenuSetting({
-          collapsed: true
-        });
-      }
-
-      return { prefixCls, getIsMobile, getCollapsed, handleClose, getMenuWidth, getIsMixSidebar };
-    }
-  });
+  function handleClose() {
+    setMenuSetting({
+      collapsed: true
+    });
+  }
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-layout-sider";

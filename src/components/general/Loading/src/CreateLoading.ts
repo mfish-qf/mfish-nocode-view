@@ -30,7 +30,7 @@ export function createLoading(props?: Partial<LoadingProps>, target?: HTMLElemen
 
   function close() {
     if (vm?.el && vm.el.parentNode) {
-      vm.el.parentNode.removeChild(vm.el);
+      vm.el.remove();
     }
   }
 
@@ -38,7 +38,7 @@ export function createLoading(props?: Partial<LoadingProps>, target?: HTMLElemen
     if (!vm || !vm.el) {
       return;
     }
-    target.appendChild(vm.el as HTMLElement);
+    target.append(vm.el as HTMLElement);
   }
 
   if (target) {

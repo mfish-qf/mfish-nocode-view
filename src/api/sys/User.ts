@@ -1,4 +1,4 @@
-import { defHttp } from "/@/utils/http/axios";
+import { defHttp } from "@/utils/http/axios";
 import {
   LoginParams,
   AccessToken,
@@ -9,10 +9,10 @@ import {
   ReqSsoUser,
   CaptchaInfo
 } from "./model/UserModel";
-import { MessageMode } from "/#/axios";
-import { ContentTypeEnum } from "/@/enums/HttpEnum";
-import { ReqPage } from "/@/api/model/BaseModel";
-import { TenantVo } from "/@/api/sys/model/SsoTenantModel";
+import { MessageMode } from "#/axios";
+import { ContentTypeEnum } from "@/enums/HttpEnum";
+import { ReqPage } from "@/api/model/BaseModel";
+import { TenantVo } from "@/api/sys/model/SsoTenantModel";
 
 enum Api {
   Captcha = "/captcha",
@@ -62,7 +62,7 @@ export function getUserInfo() {
  * @param id
  */
 export function getUserById(id: string) {
-  return defHttp.get<SsoUser>({ url: Api.User + "/" + id });
+  return defHttp.get<SsoUser>({ url: `${Api.User}/${id}` });
 }
 
 /**
@@ -108,7 +108,7 @@ export const getUserList = (params?: ReqSsoUser) => {
 };
 
 export const searchUserList = (condition?: string) => {
-  return defHttp.get<SsoUser[]>({ url: Api.UserSearch, params: { condition: condition } });
+  return defHttp.get<SsoUser[]>({ url: Api.UserSearch, params: { condition } });
 };
 
 export function insertUser(params: SsoUser) {
@@ -132,7 +132,7 @@ export function changePwd(params: { userId: string; oldPwd?: string; newPwd: str
 }
 
 export const setUserStatus = (userId: string, status: number) => {
-  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { id: userId, status: status } });
+  return defHttp.put<boolean>({ url: Api.SetStatus, params: { id: userId, status } });
 };
 
 export const getOnlineList = (params?: ReqPage) => {

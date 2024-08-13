@@ -1,13 +1,13 @@
 <template>
-  <BasicTitle :class="prefixCls" v-if="getTitle" :helpMessage="helpMessage">
+  <BasicTitle :class="prefixCls" v-if="getTitle" :help-message="helpMessage">
     {{ getTitle }}
   </BasicTitle>
 </template>
 <script lang="ts">
   import { computed, defineComponent, PropType } from "vue";
-  import { BasicTitle } from "/@/components/general/Basic";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { isFunction } from "/@/utils/Is";
+  import { BasicTitle } from "@/components/general/Basic";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { isFunction } from "@/utils/Is";
 
   export default defineComponent({
     name: "BasicTableTitle",

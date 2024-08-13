@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { Dict, ReqDict, DictPageModel } from "/@/api/sys/model/DictModel";
+import { defHttp } from "@/utils/http/axios";
+import { Dict, ReqDict, DictPageModel } from "@/api/sys/model/DictModel";
 
 /**
  * @description: 字典
@@ -57,5 +57,5 @@ export function updateDict(dict: Dict) {
  * @return
  */
 export function deleteDict(id: string) {
-  return defHttp.delete<Dict>({ url: Api.Dict + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<Dict>({ url: `${Api.Dict}/${id}` }, { successMessageMode: "message" });
 }

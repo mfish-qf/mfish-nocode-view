@@ -1,5 +1,5 @@
-import { isArray, isFunction, isObject, isString, isEmpty } from "/@/utils/Is";
-import { dateUtil } from "/@/utils/DateUtil";
+import { isArray, isFunction, isObject, isString, isEmpty } from "@/utils/Is";
+import { dateUtil } from "@/utils/DateUtil";
 import { unref } from "vue";
 import type { Ref, ComputedRef } from "vue";
 import type { FormProps, FormSchema } from "../types/Form";
@@ -132,7 +132,7 @@ export function useFormValues({ defaultValueRef, getSchema, formModel, getProps 
     schemas.forEach((item) => {
       const { defaultValue, defaultValueObj, componentProps = {} } = item;
       const fieldKeys = Object.keys(defaultValueObj || {});
-      if (fieldKeys.length) {
+      if (fieldKeys.length > 0) {
         fieldKeys.forEach((field) => {
           obj[field] = defaultValueObj![field];
           if (formModel[field] === undefined) {

@@ -16,22 +16,22 @@
 <script lang="ts">
   import { defineComponent, computed, unref } from "vue";
   import { Layout } from "ant-design-vue";
-  import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
+  import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
   import LayoutHeader from "./header/index.vue";
   import LayoutContent from "./content/index.vue";
   import LayoutSideBar from "./sider/index.vue";
   import LayoutMultipleHeader from "./header/MultipleHeader.vue";
-  import { useHeaderSetting } from "/@/hooks/setting/UseHeaderSetting";
-  import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useLockPage } from "/@/hooks/web/UseLockPage";
-  import { useAppInject } from "/@/hooks/web/UseAppInject";
+  import { useHeaderSetting } from "@/hooks/setting/UseHeaderSetting";
+  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useLockPage } from "@/hooks/web/UseLockPage";
+  import { useAppInject } from "@/hooks/web/UseAppInject";
 
   export default defineComponent({
     name: "DefaultLayout",
     components: {
-      LayoutFeatures: createAsyncComponent(() => import("/@/layouts/default/feature/index.vue")),
-      LayoutFooter: createAsyncComponent(() => import("/@/layouts/default/footer/index.vue")),
+      LayoutFeatures: createAsyncComponent(() => import("@/layouts/default/feature/index.vue")),
+      LayoutFooter: createAsyncComponent(() => import("@/layouts/default/footer/index.vue")),
       LayoutHeader,
       LayoutContent,
       LayoutSideBar,
@@ -43,10 +43,10 @@
       const { getIsMobile } = useAppInject();
       const { getShowFullHeaderRef } = useHeaderSetting();
       const { getShowSidebar, getIsMixSidebar, getShowMenu } = useMenuSetting();
-      //创建一个锁定屏幕的监听
+      // 创建一个锁定屏幕的监听
       const lockEvents = useLockPage();
       const layoutClass = computed(() => {
-        let cls: string[] = ["ant-layout"];
+        const cls: string[] = ["ant-layout"];
         if (unref(getIsMixSidebar) || unref(getShowMenu)) {
           cls.push("ant-layout-has-sider");
         }

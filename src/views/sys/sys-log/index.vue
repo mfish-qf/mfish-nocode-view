@@ -32,13 +32,13 @@
           />
         </template>
         <template v-if="column.key === 'reqSource'">
-          <dict-tag code="sys_req_source" :value="record.reqSource" />
+          <DictTag code="sys_req_source" :value="record.reqSource" />
         </template>
         <template v-if="column.key === 'operType'">
-          <dict-tag code="sys_log_type" :value="record.operType" />
+          <DictTag code="sys_log_type" :value="record.operType" />
         </template>
         <template v-if="column.key === 'reqType'">
-          <dict-tag code="sys_req_type" :value="record.reqType" />
+          <DictTag code="sys_req_type" :value="record.reqType" />
         </template>
       </template>
     </BasicTable>
@@ -46,14 +46,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteSysLog, getSysLogList } from "/@/api/sys/SysLog";
-  import { useModal } from "/@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { deleteSysLog, getSysLogList } from "@/api/sys/SysLog";
+  import { useModal } from "@/components/general/Modal";
   import SysLogModal from "./SysLogModal.vue";
   import { columns, searchFormSchema } from "./sysLog.data";
-  import { SysLog } from "/@/api/sys/model/SysLogModel";
-  import { buildDictTag } from "/@/utils/DictUtils";
-  import DictTag from "/@/components/general/DictTag/DictTag.vue";
+  import { SysLog } from "@/api/sys/model/SysLogModel";
+  import { buildDictTag } from "@/utils/DictUtils";
+  import DictTag from "@/components/general/DictTag/DictTag.vue";
   defineOptions({ name: "SysLogManagement" });
 
   const [registerModal, { openModal }] = useModal();

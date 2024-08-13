@@ -15,19 +15,24 @@
       {{ btnText ? btnText : t("component.cropper.selectImage") }}
     </a-button>
 
-    <CopperModal @register="register" @upload-success="handleUploadSuccess" :uploadApi="uploadApi" :src="sourceValue" />
+    <CopperModal
+      @register="register"
+      @upload-success="handleUploadSuccess"
+      :upload-api="uploadApi"
+      :src="sourceValue"
+    />
   </div>
 </template>
 <script lang="ts">
   import { defineComponent, computed, CSSProperties, unref, ref, watchEffect, watch, PropType } from "vue";
   import CopperModal from "./CopperModal.vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useModal } from "/@/components/general/Modal";
-  import { useMessage } from "/@/hooks/web/UseMessage";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import type { ButtonProps } from "/@/components/general/Button";
-  import { Icon } from "/@/components/general/Icon";
-  import { UploadFileParams } from "/#/axios";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useModal } from "@/components/general/Modal";
+  import { useMessage } from "@/hooks/web/UseMessage";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import type { ButtonProps } from "@/components/general/Button";
+  import { Icon } from "@/components/general/Icon";
+  import { UploadFileParams } from "#/axios";
 
   const props = {
     width: { type: [String, Number], default: "200px" },
@@ -52,9 +57,9 @@
 
       const getClass = computed(() => [prefixCls]);
 
-      const getWidth = computed(() => `${props.width}`.replace(/px/, "") + "px");
+      const getWidth = computed(() => `${`${props.width}`.replace(/px/, "")}px`);
 
-      const getIconWidth = computed(() => parseInt(`${props.width}`.replace(/px/, "")) / 2 + "px");
+      const getIconWidth = computed(() => `${Number.parseInt(`${props.width}`.replace(/px/, "")) / 2}px`);
 
       const getStyle = computed((): CSSProperties => ({ width: unref(getWidth) }));
 

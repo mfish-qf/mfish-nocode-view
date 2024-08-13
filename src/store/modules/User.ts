@@ -1,18 +1,18 @@
-import type { MessageMode } from "/#/axios";
+import type { MessageMode } from "#/axios";
 import { defineStore } from "pinia";
-import { store } from "/@/store";
-import { PageEnum } from "/@/enums/PageEnum";
-import { REFRESH_TOKEN_KEY, TENANT_ID_KEY, TOKEN_KEY } from "/@/enums/CacheEnum";
-import { clearAuthCache, getAuthCache, setAuthCache } from "/@/utils/auth";
-import { LoginParams, RoleInfo, SsoUser } from "/@/api/sys/model/UserModel";
-import { doLogout, getUserInfo, loginApi } from "/@/api/sys/User";
-import { useI18n } from "/@/hooks/web/UseI18n";
-import { useMessage } from "/@/hooks/web/UseMessage";
-import { router } from "/@/router";
-import { usePermissionStore } from "/@/store/modules/Permission";
-import { isArray } from "/@/utils/Is";
+import { store } from "@/store";
+import { PageEnum } from "@/enums/PageEnum";
+import { REFRESH_TOKEN_KEY, TENANT_ID_KEY, TOKEN_KEY } from "@/enums/CacheEnum";
+import { clearAuthCache, getAuthCache, setAuthCache } from "@/utils/auth";
+import { LoginParams, RoleInfo, SsoUser } from "@/api/sys/model/UserModel";
+import { doLogout, getUserInfo, loginApi } from "@/api/sys/User";
+import { useI18n } from "@/hooks/web/UseI18n";
+import { useMessage } from "@/hooks/web/UseMessage";
+import { router } from "@/router";
+import { usePermissionStore } from "@/store/modules/Permission";
+import { isArray } from "@/utils/Is";
 import { h } from "vue";
-import { Nullable } from "/@/utils/Types";
+import { Nullable } from "@/utils/Types";
 
 interface UserState {
   userInfo: Nullable<SsoUser>;
@@ -29,17 +29,17 @@ export const useUserStore = defineStore({
   state: (): UserState => ({
     // 用户信息
     userInfo: null,
-    //当前租户ID
+    // 当前租户ID
     tenantId: undefined,
     // token信息
     token: undefined,
-    //过期后刷新token
+    // 过期后刷新token
     refreshToken: undefined,
-    //角色信息列表
+    // 角色信息列表
     roleInfoList: [],
     // 角色code列表
     roleList: new Set<string>(),
-    //判断是否登出操作
+    // 判断是否登出操作
     isLogout: false
   }),
   getters: {
@@ -71,11 +71,11 @@ export const useUserStore = defineStore({
       setAuthCache(TOKEN_KEY, info);
     },
     setTenantId(id: string | undefined) {
-      this.tenantId = id ? id : "";
+      this.tenantId = id || "";
       setAuthCache(TENANT_ID_KEY + this.getToken, id);
     },
     setRefreshToken(refreshToken: string | undefined) {
-      this.refreshToken = refreshToken ? refreshToken : "";
+      this.refreshToken = refreshToken || "";
       setAuthCache(REFRESH_TOKEN_KEY, refreshToken);
     },
     setRoleInfoList(roleList: RoleInfo[]) {
@@ -109,11 +109,7 @@ export const useUserStore = defineStore({
         this.setToken(access_token);
         this.setRefreshToken(refresh_token);
         const userInfo = await this.getAccountInfo();
-        if (route_redirect) {
-          await router.replace(route_redirect);
-        } else {
-          await router.replace(usePermissionStore().getHomePath);
-        }
+        await (route_redirect ? router.replace(route_redirect) : router.replace(usePermissionStore().getHomePath));
         return userInfo;
       } catch (error) {
         return Promise.reject(error);

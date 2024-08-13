@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { SysLog, ReqSysLog, SysLogPageModel } from "/@/api/sys/model/SysLogModel";
+import { defHttp } from "@/utils/http/axios";
+import { SysLog, ReqSysLog, SysLogPageModel } from "@/api/sys/model/SysLogModel";
 
 /**
  * @description: 系统日志
@@ -48,5 +48,5 @@ export function updateSysLog(sysLog: SysLog) {
  * @return
  */
 export function deleteSysLog(id: number) {
-  return defHttp.delete<SysLog>({ url: Api.SysLog + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<SysLog>({ url: `${Api.SysLog}/${id}` }, { successMessageMode: "message" });
 }

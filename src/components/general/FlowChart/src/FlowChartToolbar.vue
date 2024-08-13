@@ -15,7 +15,7 @@
   import type { ToolbarConfig } from "./Types";
   import { defineComponent, ref, onUnmounted, unref, nextTick, watchEffect } from "vue";
   import { Divider, Tooltip } from "ant-design-vue";
-  import { Icon } from "/@/components/general/Icon";
+  import { Icon } from "@/components/general/Icon";
   import { useFlowChartContext } from "./UseFlowContext";
   import { ToolbarTypeEnum } from "./Enum";
 
@@ -89,27 +89,34 @@
           return;
         }
         switch (item.type) {
-          case ToolbarTypeEnum.ZOOM_IN:
+          case ToolbarTypeEnum.ZOOM_IN: {
             lf.zoom();
             break;
-          case ToolbarTypeEnum.ZOOM_OUT:
+          }
+          case ToolbarTypeEnum.ZOOM_OUT: {
             lf.zoom(true);
             break;
-          case ToolbarTypeEnum.RESET_ZOOM:
+          }
+          case ToolbarTypeEnum.RESET_ZOOM: {
             lf.resetZoom();
             break;
-          case ToolbarTypeEnum.UNDO:
+          }
+          case ToolbarTypeEnum.UNDO: {
             lf.undo();
             break;
-          case ToolbarTypeEnum.REDO:
+          }
+          case ToolbarTypeEnum.REDO: {
             lf.redo();
             break;
-          case ToolbarTypeEnum.SNAPSHOT:
+          }
+          case ToolbarTypeEnum.SNAPSHOT: {
             lf.getSnapshot();
             break;
-          case ToolbarTypeEnum.VIEW_DATA:
+          }
+          case ToolbarTypeEnum.VIEW_DATA: {
             emit("view-data");
             break;
+          }
         }
       };
 

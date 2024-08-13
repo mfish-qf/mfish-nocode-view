@@ -1,5 +1,5 @@
 import { h } from "vue";
-import { JsonPreview } from "/@/components/general/CodeEditor";
+import { JsonPreview } from "@/components/general/CodeEditor";
 
 /**
  * @description: vue通过h动态创建组件
@@ -13,7 +13,7 @@ export function buildJsonPreview(data) {
   try {
     const json = JSON.parse(data);
     return h(JsonPreview, { data: json, deep: 2 });
-  } catch (e) {
+  } catch {
     return h("div", data);
   }
 }

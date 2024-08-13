@@ -5,7 +5,7 @@
     </div>
     <div class="flex items-center">
       <slot name="tableTitle" v-if="$slots.tableTitle"></slot>
-      <TableTitle :helpMessage="titleHelpMessage" :title="title" v-if="!$slots.tableTitle && title" />
+      <TableTitle :help-message="titleHelpMessage" :title="title" v-if="!$slots.tableTitle && title" />
       <div :class="`${prefixCls}__toolbar`">
         <slot name="toolbar"></slot>
         <Divider type="vertical" v-if="$slots.toolbar && showTableSetting" />
@@ -21,7 +21,8 @@
   import { Divider } from "ant-design-vue";
   import TableSettingComponent from "./settings/index.vue";
   import TableTitle from "./TableTitle.vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { Recordable } from "@mfish/types";
 
   export default defineComponent({
     name: "BasicTableHeader",
@@ -45,12 +46,12 @@
         default: ""
       }
     },
-    emits: ["columns-change"],
+    emits: ["columnsChange"],
     setup(_, { emit }) {
       const { prefixCls } = useDesign("basic-table-header");
 
       function handleColumnChange(data: ColumnChangeParam[]) {
-        emit("columns-change", data);
+        emit("columnsChange", data);
       }
 
       return { prefixCls, handleColumnChange };

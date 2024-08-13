@@ -1,6 +1,6 @@
-import { defHttp } from "/@/utils/http/axios";
-import { ReqOrgUser, SsoOrg } from "/@/api/sys/model/OrgModel";
-import { RoleInfo, SsoUserPageModel } from "/@/api/sys/model/UserModel";
+import { defHttp } from "@/utils/http/axios";
+import { ReqOrgUser, SsoOrg } from "@/api/sys/model/OrgModel";
+import { RoleInfo, SsoUserPageModel } from "@/api/sys/model/UserModel";
 
 /**
  * @description: 组织请求类
@@ -45,7 +45,7 @@ export function getOrgRoles(orgId: string) {
  * @param direction 查询方向
  */
 export function getOrgByCode(code: string, direction: "up" | "down" | "all") {
-  return defHttp.get<SsoOrg[]>({ url: Api.OrgByCode + "/" + code, params: { direction } });
+  return defHttp.get<SsoOrg[]>({ url: `${Api.OrgByCode}/${code}`, params: { direction } });
 }
 
 /**
@@ -54,5 +54,5 @@ export function getOrgByCode(code: string, direction: "up" | "down" | "all") {
  * @param params 参数
  */
 export function getUserByOrgCode(code: string, params: ReqOrgUser) {
-  return defHttp.get<SsoUserPageModel[]>({ url: Api.UserByOrgCode + "/" + code, params });
+  return defHttp.get<SsoUserPageModel[]>({ url: `${Api.UserByOrgCode}/${code}`, params });
 }

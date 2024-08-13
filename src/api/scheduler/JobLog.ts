@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { JobLog, ReqJobLog, JobLogPageModel } from "/@/api/scheduler/model/JobLogModel";
+import { defHttp } from "@/utils/http/axios";
+import { JobLog, ReqJobLog, JobLogPageModel } from "@/api/scheduler/model/JobLogModel";
 
 /**
  * @description: 任务日志
@@ -48,5 +48,5 @@ export function updateJobLog(jobLog: JobLog) {
  * @return
  */
 export function deleteJobLog(id: string) {
-  return defHttp.delete<JobLog>({ url: Api.JobLog + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<JobLog>({ url: `${Api.JobLog}/${id}` }, { successMessageMode: "message" });
 }

@@ -4,8 +4,8 @@
 <script lang="ts">
   import { defineComponent, computed, unref } from "vue";
 
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
 
   export default defineComponent({
     name: "DargBar",

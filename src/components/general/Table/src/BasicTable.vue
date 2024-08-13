@@ -2,10 +2,10 @@
   <div ref="wrapRef" :class="getWrapperClass">
     <BasicForm
       ref="formRef"
-      submitOnReset
+      submit-on-reset
       v-bind="getFormProps"
       v-if="getBindValues.useSearchForm"
-      :tableAction="tableAction"
+      :table-action="tableAction"
       @register="registerForm"
       @submit="handleSearchInfoChange"
       @advanced-change="redoHeight"
@@ -18,9 +18,10 @@
     <ATable
       ref="tableElRef"
       v-bind="getBindValues"
-      :rowClassName="getRowClassName"
+      :row-class-name="getRowClassName"
       v-show="getEmptyDataIsShowTable"
       @change="handleTableChange"
+      @resize-column="handleResizeColumn"
     >
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
@@ -35,12 +36,12 @@
     </ATable>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import type { BasicTableProps, TableActionType, SizeType, ColumnChangeParam } from "./types/Table";
-  import { defineComponent, ref, computed, unref, toRaw, inject, watchEffect } from "vue";
+  import { ref, computed, unref, toRaw, inject, watchEffect, useSlots, useAttrs } from "vue";
   import { Table as ATable } from "ant-design-vue";
-  import { BasicForm, useForm } from "/@/components/general/Form";
-  import { PageWrapperFixedHeightKey } from "/@/components/general/Page";
+  import { BasicForm, useForm } from "@/components/general/Form";
+  import { PageWrapperFixedHeightKey } from "@/components/general/Page";
   import HeaderCell from "./components/HeaderCell.vue";
   import { InnerHandlers } from "./types/Table";
   import { usePagination } from "./hooks/UsePagination";
@@ -57,248 +58,232 @@
   import { createTableContext } from "./hooks/UseTableContext";
   import { useTableFooter } from "./hooks/UseTableFooter";
   import { useTableForm } from "./hooks/UseTableForm";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { omit } from "lodash-es";
   import { basicProps } from "./Props";
-  import { isFunction } from "/@/utils/Is";
-  import { warn } from "/@/utils/Log";
+  import { isFunction } from "@/utils/Is";
+  import { warn } from "@/utils/Log";
+  import { Recordable } from "@mfish/types";
 
-  export default defineComponent({
-    name: "BasicTable",
-    components: {
-      ATable,
-      BasicForm,
-      HeaderCell
-    },
-    props: basicProps,
-    emits: [
-      "fetch-success",
-      "fetch-error",
-      "selection-change",
-      "register",
-      "row-click",
-      "row-dbClick",
-      "row-contextmenu",
-      "row-mouseenter",
-      "row-mouseleave",
-      "edit-end",
-      "edit-cancel",
-      "edit-row-end",
-      "edit-change",
-      "expanded-rows-change",
-      "change",
-      "columns-change"
-    ],
-    setup(props, { attrs, emit, slots, expose }) {
-      const tableElRef = ref(null);
-      const tableData = ref<Recordable[]>([]);
-      const wrapRef = ref(null);
-      const formRef = ref(null);
-      const innerPropsRef = ref<Partial<BasicTableProps>>();
-      const { prefixCls } = useDesign("basic-table");
-      const [registerForm, formActions] = useForm();
-      const getProps = computed(() => {
-        return { ...props, ...unref(innerPropsRef) } as BasicTableProps;
-      });
-      const isFixedHeightPage = inject(PageWrapperFixedHeightKey, false);
-      watchEffect(() => {
-        unref(isFixedHeightPage) &&
-          props.canResize &&
-          warn("BasicTable的'canResize'可能无法在具有'fixedHeight'的PageWrapper中工作（尤其是在热更新中）");
-      });
-      const { getLoading, setLoading } = useLoading(getProps);
-      const { getPaginationInfo, getPagination, setPagination, setShowPagination, getShowPagination } =
-        usePagination(getProps);
-      const {
-        getRowSelection,
-        getRowSelectionRef,
-        getSelectRows,
-        clearSelectedRowKeys,
-        getSelectRowKeys,
-        deleteSelectRowByKey,
-        setSelectedRowKeys
-      } = useRowSelection(getProps, tableData, emit);
-      const {
-        handleTableChange: onTableChange,
-        getDataSourceRef,
-        getDataSource,
-        getRawDataSource,
-        setTableData,
-        updateTableDataRecord,
-        deleteTableDataRecord,
-        insertTableDataRecord,
-        findTableDataRecord,
-        fetch,
-        getRowKey,
-        reload,
-        getAutoCreateKey,
-        updateTableData
-      } = useDataSource(
-        getProps,
-        {
-          tableData,
-          getPaginationInfo,
-          setLoading,
-          setPagination,
-          getFieldsValue: formActions.getFieldsValue,
-          clearSelectedRowKeys
-        },
-        emit
-      );
+  defineOptions({ name: "BasicTable" });
 
-      function handleTableChange(...args) {
-        onTableChange.call(undefined, ...args);
-        emit("change", ...args);
-        // 解决通过useTable注册onChange时不起作用的问题
-        const { onChange } = unref(getProps);
-        onChange && isFunction(onChange) && onChange.call(undefined, ...args);
-      }
+  const props = defineProps(basicProps);
 
-      const { getViewColumns, getColumns, setCacheColumnsByField, setColumns, getColumnsRef, getCacheColumns } =
-        useColumns(getProps, getPaginationInfo);
-      const { getScrollRef, redoHeight } = useTableScroll(
-        getProps,
-        tableElRef,
-        getColumnsRef,
-        getRowSelectionRef,
-        getDataSourceRef,
-        wrapRef,
-        formRef
-      );
-      const { scrollTo } = useTableScrollTo(tableElRef, getDataSourceRef);
-      const { customRow } = useCustomRow(getProps, {
-        setSelectedRowKeys,
-        getSelectRowKeys,
-        clearSelectedRowKeys,
-        getAutoCreateKey,
-        emit
-      });
-      const { getRowClassName } = useTableStyle(getProps, prefixCls);
-      const { getExpandOption, expandAll, expandRows, collapseAll } = useTableExpand(getProps, tableData, emit);
-      const handlers: InnerHandlers = {
-        onColumnsChange: (data: ColumnChangeParam[]) => {
-          emit("columns-change", data);
-          // support useTable
-          unref(getProps).onColumnsChange?.(data);
-        }
-      };
-      const { getHeaderProps } = useTableHeader(getProps, slots, handlers);
-      const { getFooterProps } = useTableFooter(getProps, getScrollRef, tableElRef, getDataSourceRef);
-
-      const { getFormProps, replaceFormSlotKey, getFormSlotKeys, handleSearchInfoChange } = useTableForm(
-        getProps,
-        slots,
-        fetch,
-        getLoading
-      );
-
-      const getBindValues = computed(() => {
-        const dataSource = unref(getDataSourceRef);
-        let propsData: Recordable = {
-          ...attrs,
-          customRow,
-          ...unref(getProps),
-          ...unref(getHeaderProps),
-          scroll: unref(getScrollRef),
-          loading: unref(getLoading),
-          tableLayout: "fixed",
-          rowSelection: unref(getRowSelectionRef),
-          rowKey: unref(getRowKey),
-          columns: toRaw(unref(getViewColumns)),
-          pagination: toRaw(unref(getPaginationInfo)),
-          dataSource,
-          footer: unref(getFooterProps),
-          ...unref(getExpandOption)
-        };
-
-        propsData = omit(propsData, ["class", "onChange"]);
-        return propsData;
-      });
-
-      const getWrapperClass = computed(() => {
-        const values = unref(getBindValues);
-        return [
-          prefixCls,
-          attrs.class,
-          {
-            [`${prefixCls}-form-container`]: values.useSearchForm,
-            [`${prefixCls}--inset`]: values.inset
-          }
-        ];
-      });
-
-      const getEmptyDataIsShowTable = computed(() => {
-        const { emptyDataIsShowTable, useSearchForm } = unref(getProps);
-        if (emptyDataIsShowTable || !useSearchForm) {
-          return true;
-        }
-        return !!unref(getDataSourceRef).length;
-      });
-
-      function setProps(props: Partial<BasicTableProps>) {
-        innerPropsRef.value = { ...unref(innerPropsRef), ...props };
-      }
-
-      const tableAction: TableActionType = {
-        reload,
-        getSelectRows,
-        clearSelectedRowKeys,
-        getSelectRowKeys,
-        deleteSelectRowByKey,
-        setPagination,
-        setTableData,
-        updateTableDataRecord,
-        deleteTableDataRecord,
-        insertTableDataRecord,
-        findTableDataRecord,
-        redoHeight,
-        setSelectedRowKeys,
-        setColumns,
-        setLoading,
-        getDataSource,
-        getRawDataSource,
-        setProps,
-        getRowSelection,
-        getPaginationRef: getPagination,
-        getColumns,
-        getCacheColumns,
-        emit,
-        updateTableData,
-        setShowPagination,
-        getShowPagination,
-        setCacheColumnsByField,
-        expandAll,
-        expandRows,
-        collapseAll,
-        scrollTo,
-        getSize: () => {
-          return unref(getBindValues).size as SizeType;
-        }
-      };
-      createTableContext({ ...tableAction, wrapRef, getBindValues });
-      expose(tableAction);
-      emit("register", tableAction, formActions);
-      return {
-        formRef,
-        tableElRef,
-        getBindValues,
-        getLoading,
-        registerForm,
-        handleSearchInfoChange,
-        getEmptyDataIsShowTable,
-        handleTableChange,
-        getRowClassName,
-        wrapRef,
-        tableAction,
-        redoHeight,
-        getFormProps: getFormProps as any,
-        replaceFormSlotKey,
-        getFormSlotKeys,
-        getWrapperClass,
-        columns: getViewColumns
-      };
-    }
+  const emit = defineEmits([
+    "fetchSuccess",
+    "fetchError",
+    "selectionChange",
+    "register",
+    "rowClick",
+    "rowDbClick",
+    "rowContextmenu",
+    "rowMouseenter",
+    "rowMouseleave",
+    "editEnd",
+    "editCancel",
+    "editRowEnd",
+    "editChange",
+    "expandedRowsChange",
+    "change",
+    "columnsChange"
+  ]);
+  const attrs = useAttrs();
+  const slots = useSlots();
+  const tableElRef = ref(null);
+  const tableData = ref<Recordable[]>([]);
+  const wrapRef = ref(null);
+  const formRef = ref(null);
+  const innerPropsRef = ref<Partial<BasicTableProps>>();
+  const { prefixCls } = useDesign("basic-table");
+  const [registerForm, formActions] = useForm();
+  const getProps = computed(() => {
+    return { ...props, ...unref(innerPropsRef) } as BasicTableProps;
   });
+  const isFixedHeightPage = inject(PageWrapperFixedHeightKey, false);
+  watchEffect(() => {
+    unref(isFixedHeightPage) &&
+      props.canResize &&
+      warn("BasicTable的'canResize'可能无法在具有'fixedHeight'的PageWrapper中工作（尤其是在热更新中）");
+  });
+  const { getLoading, setLoading } = useLoading(getProps);
+  const { getPaginationInfo, getPagination, setPagination, setShowPagination, getShowPagination } =
+    usePagination(getProps);
+  const {
+    getRowSelection,
+    getRowSelectionRef,
+    getSelectRows,
+    clearSelectedRowKeys,
+    getSelectRowKeys,
+    deleteSelectRowByKey,
+    setSelectedRowKeys
+  } = useRowSelection(getProps, tableData, emit);
+  const {
+    handleTableChange: onTableChange,
+    getDataSourceRef,
+    getDataSource,
+    getRawDataSource,
+    setTableData,
+    updateTableDataRecord,
+    deleteTableDataRecord,
+    insertTableDataRecord,
+    findTableDataRecord,
+    fetch,
+    getRowKey,
+    reload,
+    getAutoCreateKey,
+    updateTableData
+  } = useDataSource(
+    getProps,
+    {
+      tableData,
+      getPaginationInfo,
+      setLoading,
+      setPagination,
+      getFieldsValue: formActions.getFieldsValue,
+      clearSelectedRowKeys
+    },
+    emit
+  );
+
+  function handleTableChange(...args) {
+    onTableChange.call(undefined, ...args);
+    emit("change", ...args);
+    // 解决通过useTable注册onChange时不起作用的问题
+    const { onChange } = unref(getProps);
+    onChange && isFunction(onChange) && onChange.call(undefined, ...args);
+  }
+
+  const { getViewColumns, getColumns, setCacheColumnsByField, setColumns, getColumnsRef, getCacheColumns } = useColumns(
+    getProps,
+    getPaginationInfo
+  );
+  const { getScrollRef, redoHeight } = useTableScroll(
+    getProps,
+    tableElRef,
+    getColumnsRef,
+    getRowSelectionRef,
+    getDataSourceRef,
+    wrapRef,
+    formRef
+  );
+  const { scrollTo } = useTableScrollTo(tableElRef, getDataSourceRef);
+  const { customRow } = useCustomRow(getProps, {
+    setSelectedRowKeys,
+    getSelectRowKeys,
+    clearSelectedRowKeys,
+    getAutoCreateKey,
+    emit
+  });
+  const { getRowClassName } = useTableStyle(getProps, prefixCls);
+  const { getExpandOption, expandAll, expandRows, collapseAll } = useTableExpand(getProps, tableData, emit);
+  const handlers: InnerHandlers = {
+    onColumnsChange: (data: ColumnChangeParam[]) => {
+      emit("columnsChange", data);
+      // support useTable
+      unref(getProps).onColumnsChange?.(data);
+    }
+  };
+  const { getHeaderProps } = useTableHeader(getProps, slots, handlers);
+  const { getFooterProps } = useTableFooter(getProps, getScrollRef, tableElRef, getDataSourceRef);
+
+  const { getFormProps, replaceFormSlotKey, getFormSlotKeys, handleSearchInfoChange } = useTableForm(
+    getProps,
+    slots,
+    fetch,
+    getLoading
+  );
+
+  const getBindValues = computed(() => {
+    const dataSource = unref(getDataSourceRef);
+    let propsData: Recordable = {
+      ...attrs,
+      customRow,
+      ...unref(getProps),
+      ...unref(getHeaderProps),
+      scroll: unref(getScrollRef),
+      loading: unref(getLoading),
+      tableLayout: "fixed",
+      rowSelection: unref(getRowSelectionRef),
+      rowKey: unref(getRowKey),
+      columns: toRaw(unref(getViewColumns)),
+      pagination: toRaw(unref(getPaginationInfo)),
+      dataSource,
+      footer: unref(getFooterProps),
+      ...unref(getExpandOption)
+    };
+
+    propsData = omit(propsData, ["class", "onChange"]);
+    return propsData;
+  });
+
+  const getWrapperClass = computed(() => {
+    const values = unref(getBindValues);
+    return [
+      prefixCls,
+      "-enter-x",
+      attrs.class,
+      {
+        [`${prefixCls}-form-container`]: values.useSearchForm,
+        [`${prefixCls}--inset`]: values.inset
+      }
+    ];
+  });
+
+  const getEmptyDataIsShowTable = computed(() => {
+    const { emptyDataIsShowTable, useSearchForm } = unref(getProps);
+    if (emptyDataIsShowTable || !useSearchForm) {
+      return true;
+    }
+    return unref(getDataSourceRef).length > 0;
+  });
+
+  function setProps(props: Partial<BasicTableProps>) {
+    innerPropsRef.value = { ...unref(innerPropsRef), ...props };
+  }
+
+  function handleResizeColumn(w, col) {
+    col.width = w;
+  }
+
+  const tableAction: TableActionType = {
+    reload,
+    getSelectRows,
+    clearSelectedRowKeys,
+    getSelectRowKeys,
+    deleteSelectRowByKey,
+    setPagination,
+    setTableData,
+    updateTableDataRecord,
+    deleteTableDataRecord,
+    insertTableDataRecord,
+    findTableDataRecord,
+    redoHeight,
+    setSelectedRowKeys,
+    setColumns,
+    setLoading,
+    getDataSource,
+    getRawDataSource,
+    setProps,
+    getRowSelection,
+    getPaginationRef: getPagination,
+    getColumns,
+    getCacheColumns,
+    emit,
+    updateTableData,
+    setShowPagination,
+    getShowPagination,
+    setCacheColumnsByField,
+    expandAll,
+    expandRows,
+    collapseAll,
+    scrollTo,
+    getSize: () => {
+      return unref(getBindValues).size as SizeType;
+    }
+  };
+  createTableContext({ ...tableAction, wrapRef, getBindValues });
+  emit("register", tableAction, formActions);
+  defineExpose({ tableElRef, ...tableAction });
 </script>
 <style lang="less">
   @border-color: #cecece4d;

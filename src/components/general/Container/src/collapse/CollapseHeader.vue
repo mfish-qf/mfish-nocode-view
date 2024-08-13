@@ -1,6 +1,6 @@
 <template>
   <div :class="[`${prefixCls}__header px-2 py-4`, $attrs.class]">
-    <BasicTitle :helpMessage="helpMessage" bold>
+    <BasicTitle :help-message="helpMessage" bold>
       <template v-if="title">
         {{ title }}
       </template>
@@ -16,7 +16,7 @@
 </template>
 <script lang="ts">
   import { defineComponent } from "vue";
-  import { BasicArrow, BasicTitle } from "/@/components/general/Basic";
+  import { BasicArrow, BasicTitle } from "@/components/general/Basic";
 
   const props = {
     prefixCls: { type: String },

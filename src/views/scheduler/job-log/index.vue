@@ -32,10 +32,10 @@
           />
         </template>
         <template v-if="column.key === 'jobType'">
-          <dict-tag code="sys_job_type" :value="record.jobType" />
+          <DictTag code="sys_job_type" :value="record.jobType" />
         </template>
         <template v-if="column.key === 'status'">
-          <dict-tag code="sys_job_status" :value="record.status" />
+          <DictTag code="sys_job_status" :value="record.status" />
         </template>
       </template>
     </BasicTable>
@@ -43,14 +43,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteJobLog, getJobLogList } from "/@/api/scheduler/JobLog";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { deleteJobLog, getJobLogList } from "@/api/scheduler/JobLog";
   import { columns, searchFormSchema } from "./jobLog.data";
-  import { useModal } from "/@/components/general/Modal";
-  import JobLogModal from "/@/views/scheduler/job-log/JobLogModal.vue";
-  import { buildDictTag } from "/@/utils/DictUtils";
-  import { Job } from "/@/api/scheduler/model/JobModel";
-  import DictTag from "/@/components/general/DictTag/DictTag.vue";
+  import { useModal } from "@/components/general/Modal";
+  import JobLogModal from "@/views/scheduler/job-log/JobLogModal.vue";
+  import { buildDictTag } from "@/utils/DictUtils";
+  import { Job } from "@/api/scheduler/model/JobModel";
+  import DictTag from "@/components/general/DictTag/DictTag.vue";
+  import { Recordable } from "@mfish/types";
   defineOptions({ name: "JobLogManagement" });
   const [registerModal, { openModal }] = useModal();
   const [registerTable, { reload }] = useTable({

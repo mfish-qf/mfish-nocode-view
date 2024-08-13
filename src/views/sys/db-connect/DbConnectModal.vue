@@ -6,16 +6,16 @@
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
-    <a-tabs tab-position="left" :tabBarStyle="{ width: '60px' }">
-      <a-tab-pane key="1">
+    <ATabs tab-position="left" :tab-bar-style="{ width: '60px' }">
+      <ATabPane key="1">
         <template #tab>
           <span style="writing-mode: vertical-rl"> 基础属性 </span>
         </template>
         <div style="height: 500px; overflow-y: auto; padding-right: 20px">
           <BasicForm @register="registerForm" @submit="handleSubmit" @field-value-change="valueChange" />
         </div>
-      </a-tab-pane>
-      <a-tab-pane key="2" forceRender>
+      </ATabPane>
+      <ATabPane key="2" force-render>
         <template #tab>
           <span style="writing-mode: vertical-rl"> 连接池配置 </span>
         </template>
@@ -24,8 +24,8 @@
           <BasicForm @register="registerDruidForm" v-show="poolType === PoolEnum.Druid" />
           <div v-show="poolType === PoolEnum.NoPool">未使用连接池</div>
         </div>
-      </a-tab-pane>
-    </a-tabs>
+      </ATabPane>
+    </ATabs>
     <template #centerFooter>
       <a-button @click="testConnect" type="primary" danger>测试连接</a-button>
     </template>
@@ -33,18 +33,18 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref, Ref, onBeforeMount } from "vue";
-  import { BasicForm, FormSchema, useForm } from "/@/components/general/Form/index";
+  import { BasicForm, FormSchema, useForm } from "@/components/general/Form/index";
   import { dbConnectFormSchema } from "./dbConnect.data";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { insertDbConnect, testDbConnect, updateDbConnect } from "/@/api/sys/DbConnect";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { insertDbConnect, testDbConnect, updateDbConnect } from "@/api/sys/DbConnect";
   import { Tabs as ATabs } from "ant-design-vue";
-  import { getDictItems } from "/@/api/sys/DictItem";
-  import { ComponentType } from "/@/components/general/Form/src/types";
-  import { buildSm2Key, sm2Encrypt } from "/@/utils/Cipher";
-  const ATabPane = ATabs.TabPane;
+  import { getDictItems } from "@/api/sys/DictItem";
+  import { ComponentType } from "@/components/general/Form/src/types";
+  import { buildSm2Key, sm2Encrypt } from "@/utils/Cipher";
   const emit = defineEmits(["success", "register"]);
+  const ATabPane = ATabs.TabPane;
   const isUpdate = ref(true);
-  let poolType = ref("");
+  const poolType = ref("");
   const hikari = ref({});
   const druid = ref({});
   const hikariSchema = ref([]) as Ref<FormSchema[]>;
@@ -100,7 +100,7 @@
     valueChange("poolType", data.record.poolType);
     setPoolConfig(data.record?.poolType);
   });
-  const getTitle = computed(() => (!unref(isUpdate) ? "新增数据库连接" : "编辑数据库连接"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑数据库连接" : "新增数据库连接"));
 
   function valueChange(key, value) {
     if (key !== "poolType") {
@@ -112,20 +112,22 @@
 
   function setPoolConfig(poolType) {
     switch (poolType) {
-      case PoolEnum.Hikari:
+      case PoolEnum.Hikari: {
         if (curPoolConfig && curPoolConfig[PoolEnum.Hikari]) {
           setHikariFieldsValue(curPoolConfig[PoolEnum.Hikari]).then();
         } else {
           setHikariFieldsValue(unref(hikari)).then();
         }
         break;
-      case PoolEnum.Druid:
+      }
+      case PoolEnum.Druid: {
         if (curPoolConfig && curPoolConfig[PoolEnum.Druid]) {
           setDruidFieldsValue(curPoolConfig[PoolEnum.Druid]).then();
         } else {
           setDruidFieldsValue(unref(druid)).then();
         }
         break;
+      }
     }
   }
 
@@ -134,18 +136,21 @@
       for (const option of res) {
         const component = ((): ComponentType => {
           switch (option.valueType) {
-            case 1:
+            case 1: {
               return "InputNumber";
-            case 2:
+            }
+            case 2: {
               return "Checkbox";
-            default:
+            }
+            default: {
               return "Input";
+            }
           }
         })();
         schema.value.push({
           field: option.dictLabel,
           label: option.dictLabel,
-          component: component,
+          component,
           helpMessage: option.remark,
           disabledLabelWidth: true,
           required: true
@@ -156,26 +161,29 @@
   }
 
   async function testConnect() {
-    let values = await validate();
+    const values = await validate();
     buildSm2Key();
     values.password = sm2Encrypt(values.password, publicKey);
     testDbConnect(values).then();
   }
 
   async function handleSubmit() {
-    let values = await validate();
+    const values = await validate();
     switch (values.poolType) {
-      case PoolEnum.Hikari:
+      case PoolEnum.Hikari: {
         const hConfig = await hikariConfig();
         values.options = JSON.stringify({ [PoolEnum.Hikari]: hConfig });
         break;
-      case PoolEnum.Druid:
+      }
+      case PoolEnum.Druid: {
         const dConfig = await druidConfig();
         values.options = JSON.stringify({ [PoolEnum.Druid]: dConfig });
         break;
-      default:
+      }
+      default: {
         values.options = "";
         break;
+      }
     }
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {

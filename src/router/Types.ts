@@ -1,5 +1,6 @@
 import type { RouteRecordRaw, RouteMeta } from "vue-router";
 import { defineComponent } from "vue";
+import { Recordable } from "@mfish/types";
 
 export type Component<T = any> =
   | ReturnType<typeof defineComponent>
@@ -37,6 +38,6 @@ export interface Menu {
   tag?: MenuTag;
   hideMenu?: boolean;
   isExternal?: boolean;
-  //隐藏子菜单，当只有一级菜单时为true
+  // 隐藏子菜单，当只有一级菜单时为true
   hideChildrenInMenu?: boolean;
 }

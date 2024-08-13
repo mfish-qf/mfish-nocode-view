@@ -2,7 +2,7 @@
   import type { ContextMenuItem, ItemContentProps, Axis } from "./Typing";
   import type { FunctionalComponent, CSSProperties, PropType } from "vue";
   import { defineComponent, nextTick, onMounted, computed, ref, unref, onUnmounted } from "vue";
-  import { Icon } from "/@/components/general/Icon";
+  import { Icon } from "@/components/general/Icon";
   import { Menu, Divider } from "ant-design-vue";
 
   const prefixCls = "context-menu";
@@ -176,7 +176,10 @@
     background-color: @component-background;
     border: 1px solid rgb(0 0 0 / 8%);
     border-radius: 0.25rem;
-    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 10%), 0 1px 5px 0 rgb(0 0 0 / 6%);
+    box-shadow:
+      0 2px 2px 0 rgb(0 0 0 / 14%),
+      0 3px 1px -2px rgb(0 0 0 / 10%),
+      0 1px 5px 0 rgb(0 0 0 / 6%);
     background-clip: padding-box;
     user-select: none;
 

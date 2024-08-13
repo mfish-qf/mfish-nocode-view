@@ -4,8 +4,8 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { PageWrapper } from "/@/components/general/Page";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { PageWrapper } from "@/components/general/Page";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import intro from "intro.js";
   import "intro.js/minified/introjs.min.css";
 

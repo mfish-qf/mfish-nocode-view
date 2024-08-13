@@ -1,12 +1,12 @@
-import type { ErrorLogInfo } from "/#/store";
+import type { ErrorLogInfo } from "#/store";
 
 import { defineStore } from "pinia";
-import { store } from "/@/store";
+import { store } from "@/store";
 
-import { formatToDateTime } from "/@/utils/DateUtil";
-import projectSetting from "/@/settings/ProjectSetting";
+import { formatToDateTime } from "@/utils/DateUtil";
+import projectSetting from "@/settings/ProjectSetting";
 
-import { ErrorTypeEnum } from "/@/enums/ExceptionEnum";
+import { ErrorTypeEnum } from "@/enums/ExceptionEnum";
 import dayjs from "dayjs";
 
 export interface ErrorLogState {

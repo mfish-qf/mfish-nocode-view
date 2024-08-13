@@ -1,6 +1,6 @@
 import type { ButtonProps } from "ant-design-vue/lib/button/buttonTypes";
-import type { CSSProperties, VNodeChild, ComputedRef } from "vue";
-import type { ScrollContainerOptions } from "/@/components/general/Container";
+import type { CSSProperties, VNodeChild, ComputedRef, VNode } from "vue";
+import type { ScrollContainerOptions } from "@/components/general/Container";
 
 export interface DrawerInstance {
   setDrawerProps: (props: Partial<DrawerProps> | boolean) => void;
@@ -128,7 +128,7 @@ export interface DrawerProps extends DrawerFooterProps {
    * The title for Drawer.
    * @type any (string | slot)
    */
-  title?: VNodeChild | JSX.Element;
+  title?: VNodeChild | VNode;
   /**
    * The class name of the container of the Drawer dialog.
    * @type string

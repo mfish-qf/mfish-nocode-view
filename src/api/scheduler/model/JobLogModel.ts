@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult } from "/@/api/model/BaseModel";
+import { BaseEntity, PageResult } from "@/api/model/BaseModel";
 
 /**
  * @description: 任务日志

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { getDictItems } from "/@/api/sys/DictItem";
-import { DictItem } from "/@/api/sys/model/DictItemModel";
+import { getDictItems } from "@/api/sys/DictItem";
+import { DictItem } from "@/api/sys/model/DictItemModel";
 import { ref, Ref } from "vue";
 
 /**
@@ -9,12 +9,12 @@ import { ref, Ref } from "vue";
  * @date: 2024/3/26
  */
 interface DictState {
-  dictMap: Map<String, Ref<DictItem[]>>;
+  dictMap: Map<string, Ref<DictItem[]>>;
 }
 export const useDictStore = defineStore({
   id: "dict",
   state: (): DictState => ({
-    dictMap: new Map<String, Ref<DictItem[]>>()
+    dictMap: new Map<string, Ref<DictItem[]>>()
   }),
   actions: {
     getDict(key: string): Ref<DictItem[]> | undefined {

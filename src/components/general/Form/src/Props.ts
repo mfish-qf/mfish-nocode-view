@@ -1,10 +1,10 @@
 import type { FieldMapToTime, FormSchema } from "./types/Form";
 import type { CSSProperties, PropType } from "vue";
 import type { ColEx } from "./types";
-import type { TableActionType } from "/@/components/general/Table";
+import type { TableActionType } from "@/components/general/Table";
 import type { ButtonProps } from "ant-design-vue/es/button/buttonTypes";
 import type { RowProps } from "ant-design-vue/lib/grid/Row";
-import { propTypes } from "/@/utils/PropTypes";
+import { propTypes } from "@/utils/PropTypes";
 
 export const basicProps = {
   model: {

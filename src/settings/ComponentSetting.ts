@@ -1,7 +1,7 @@
 // Used to configure the general configuration of some components without modifying the components
 // 用于配置某些组件的常规配置，而无需修改组件
-import type { SorterResult } from "../components/general/Table";
-
+import type { SorterResult } from "@/components/general/Table";
+import type { Recordable } from "@mfish/types";
 export default {
   // 表格配置
   table: {

@@ -4,7 +4,7 @@
   </span>
 </template>
 <script lang="ts" setup>
-  import { Icon } from "/@/components/general/Icon";
+  import { Icon } from "@/components/general/Icon";
 
   defineProps({
     icon: String

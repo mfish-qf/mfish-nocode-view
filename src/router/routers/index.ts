@@ -1,11 +1,5 @@
-import {
-  ErrorLoginRoute,
-  LoginRoute,
-  Oauth2Route,
-  PAGE_NOT_FOUND_ROUTE,
-  REDIRECT_ROUTE
-} from "/@/router/routers/Basic";
-import { AppRouteRecordRaw } from "/@/router/Types";
+import { ErrorLoginRoute, LoginRoute, Oauth2Route, PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "@/router/routers/Basic";
+import { AppRouteRecordRaw } from "@/router/Types";
 
 const modules = import.meta.glob("./modules/**/*.ts");
 

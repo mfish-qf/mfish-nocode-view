@@ -1,7 +1,7 @@
 <script lang="tsx">
   import { defineComponent, watch, nextTick } from "vue";
   import { fileListProps } from "./Props";
-  import { useModalContext } from "/@/components/general/Modal/src/hooks/UseModalContext";
+  import { useModalContext } from "@/components/general/Modal/src/hooks/UseModalContext";
   import { Table as ATable } from "ant-design-vue";
 
   export default defineComponent({

@@ -5,8 +5,8 @@
 </template>
 <script lang="ts" setup>
   import { computed } from "vue";
-  import { Icon } from "/@/components/general/Icon";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { Icon } from "@/components/general/Icon";
+  import { useDesign } from "@/hooks/web/UseDesign";
 
   const props = defineProps({
     /**

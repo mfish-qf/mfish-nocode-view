@@ -1,12 +1,13 @@
 import type { BasicTableProps, TableRowSelection, BasicColumn } from "../types/Table";
 import { Ref, ComputedRef, ref } from "vue";
 import { computed, unref, nextTick, watch } from "vue";
-import { getViewportOffset } from "/@/utils/DomUtils";
-import { isBoolean } from "/@/utils/Is";
-import { useWindowSizeFn } from "/@/hooks/event/UseWindowSizeFn";
-import { useModalContext } from "/@/components/general/Modal";
-import { onMountedOrActivated } from "/@/hooks/core/OnMountedOrActivated";
+import { getViewportOffset } from "@/utils/DomUtils";
+import { isBoolean } from "@/utils/Is";
+import { useWindowSizeFn } from "@/hooks/event/UseWindowSizeFn";
+import { useModalContext } from "@/components/general/Modal";
+import { onMountedOrActivated } from "@/hooks/core/OnMountedOrActivated";
 import { useDebounceFn } from "@vueuse/core";
+import { Nullable, Recordable } from "@mfish/types";
 
 export function useTableScroll(
   propsRef: ComputedRef<BasicTableProps>,
@@ -76,7 +77,9 @@ export function useTableScroll(
     const { pagination } = unref(propsRef);
     // Pager height
     let paginationHeight = 2;
-    if (!isBoolean(pagination)) {
+    if (isBoolean(pagination)) {
+      paginationHeight = -8;
+    } else {
       paginationEl = tableEl.querySelector(".ant-pagination") as HTMLElement;
       if (paginationEl) {
         const offsetHeight = paginationEl.offsetHeight;
@@ -85,8 +88,6 @@ export function useTableScroll(
         // TODO First fix 24
         paginationHeight += 24;
       }
-    } else {
-      paginationHeight = -8;
     }
     return paginationHeight;
   }
@@ -95,11 +96,11 @@ export function useTableScroll(
     const { pagination } = unref(propsRef);
     let footerHeight = 0;
     if (!isBoolean(pagination)) {
-      if (!footerEl) {
-        footerEl = tableEl.querySelector(".ant-table-footer") as HTMLElement;
-      } else {
+      if (footerEl) {
         const offsetHeight = footerEl.offsetHeight;
         footerHeight += offsetHeight || 0;
+      } else {
+        footerEl = tableEl.querySelector(".ant-table-footer") as HTMLElement;
       }
     }
     return footerHeight;
@@ -137,7 +138,7 @@ export function useTableScroll(
 
       const headerCellHeight = (tableEl.querySelector(".ant-table-title") as HTMLElement)?.offsetHeight ?? 0;
 
-      console.log(wrapHeight - formHeight - headerCellHeight - tablePadding - paginationMargin);
+      // console.log(wrapHeight - formHeight - headerCellHeight - tablePadding - paginationMargin);
       bottomIncludeBody = wrapHeight - formHeight - headerCellHeight - tablePadding - paginationMargin;
     } else {
       // Table height from bottom

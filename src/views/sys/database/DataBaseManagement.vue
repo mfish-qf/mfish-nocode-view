@@ -7,24 +7,24 @@
   <Split :default-size="split" :min="0.1" :max="0.5" :class="prefixCls">
     <template #1>
       <DBTree
-        :class="`${prefixCls}-left h-full`"
+        :class="`${prefixCls}-left h-full -enter-x`"
         ref="dbTreeRef"
-        :showIcon="true"
+        :show-icon="true"
         @select="changeSelect"
         @search="changeSearch"
       />
     </template>
     <template #2>
-      <div :class="`${prefixCls}-right h-full`">
-        <a-breadcrumb separator=">" class="m-3">
-          <a-breadcrumb-item v-for="(item, index) in breadList" :key="index">
+      <div :class="`${prefixCls}-right h-full -enter-x`">
+        <ABreadcrumb separator=">" class="m-3">
+          <ABreadcrumbItem v-for="(item, index) in breadList" :key="index">
             <Icon :icon="item.icon" />
             <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
-          </a-breadcrumb-item>
-        </a-breadcrumb>
+          </ABreadcrumbItem>
+        </ABreadcrumb>
         <ScrollContainer v-if="curNode?.dbName">
-          <a-row class="ml-6">
-            <a-col
+          <ARow class="ml-6">
+            <ACol
               :xs="{ span: 24 }"
               :md="{ span: 8 }"
               :lg="{ span: 5 }"
@@ -44,8 +44,8 @@
                   </Tooltip>
                 </div>
               </div>
-            </a-col>
-          </a-row>
+            </ACol>
+          </ARow>
         </ScrollContainer>
         <TableDetail v-else :cur-node="curNode" :resize-height-offset="resizeHeightOffset">
           <template #[item]="data" v-for="item in Object.keys($slots)">
@@ -59,22 +59,22 @@
 
 <script lang="ts" setup>
   import { ref, unref, computed, toRaw } from "vue";
-  import { ScrollContainer } from "/@/components/general/Container";
+  import { ScrollContainer } from "@/components/general/Container";
   import DBTree from "./DBTree.vue";
-  import { Icon } from "/@/components/general/Icon";
+  import { Icon } from "@/components/general/Icon";
   import { Tooltip, Row as ARow, Col as ACol, Breadcrumb as ABreadcrumb } from "ant-design-vue";
-  import { TableInfo } from "/@/api/sys/model/DbConnectModel";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import TableDetail from "/@/views/sys/database/TableDetail.vue";
-  import { TreeItem } from "/@/components/general/Tree";
-  import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
-  import { Split } from "/@/components/general/Split";
+  import { TableInfo } from "@/api/sys/model/DbConnectModel";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import TableDetail from "@/views/sys/database/TableDetail.vue";
+  import { TreeItem } from "@/components/general/Tree";
+  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+  import { Split } from "@/components/general/Split";
   defineOptions({ name: "DataBaseManagement" });
-  const ABreadcrumbItem = ABreadcrumb.Item;
   defineProps({
     resizeHeightOffset: { type: Number, default: 0 }
   });
-  let tableList = ref<TableInfo[]>([]);
+  const ABreadcrumbItem = ABreadcrumb.Item;
+  const tableList = ref<TableInfo[]>([]);
   const dbTreeRef = ref();
   const { prefixCls } = useDesign("data-base");
   const color = useRootSetting().getThemeColor;
@@ -86,12 +86,8 @@
 
   async function changeSelect(record: any, parent: any) {
     curNode.value = toRaw(record);
-    if (parent) {
-      parentNode.value = toRaw(parent);
-    } else {
-      parentNode.value = undefined;
-    }
-    //如果是数据库节点，构建下面表信息
+    parentNode.value = parent ? toRaw(parent) : undefined;
+    // 如果是数据库节点，构建下面表信息
     if (record.dbName) {
       if (record.children) {
         tableList.value = record.children;
@@ -101,7 +97,6 @@
       dbTreeRef.value.buildTableTree(record.id).then((res: any) => {
         tableList.value = res;
       });
-      return;
     }
   }
 
@@ -142,7 +137,7 @@
       return;
     }
     startSearch.value = true;
-    let tables: TableInfo[] = [];
+    const tables: TableInfo[] = [];
     toRaw(value).forEach((item) => {
       if (item.children) {
         tables.push(...item.children);
@@ -161,11 +156,11 @@
     }
   }
   [data-theme="dark"] {
-    .@{prefix-cls}{
+    .@{prefix-cls} {
       //border-left: 1px solid #303030
       background-color: #121212;
     }
-    .ivu-split-trigger-vertical{
+    .ivu-split-trigger-vertical {
       background: black !important;
     }
     .ivu-split-trigger {
@@ -195,9 +190,10 @@
       box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.05);
       display: flex;
       align-items: center;
+      transition: box-shadow 0.3s ease-in;
 
       &:hover {
-        border: 1px solid #e5e7eb;
+        box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
         cursor: pointer;
       }
 
@@ -213,7 +209,7 @@
         width: 0;
         display: flex;
         flex-direction: column;
-        > span{
+        > span {
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;

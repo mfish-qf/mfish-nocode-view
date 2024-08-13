@@ -37,6 +37,14 @@ body {
     filter: progid:dximagetransform.microsoft.basicimage(grayscale=1);
   }
 }
+
+html::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  display: block;
+}
+
 a {
   text-decoration: none !important;
   color: @button-primary-color !important;

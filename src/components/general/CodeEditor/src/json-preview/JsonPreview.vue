@@ -1,5 +1,5 @@
 <template>
-  <vue-json-pretty v-bind="$props" />
+  <VueJsonPretty v-bind="$props" />
 </template>
 
 <script lang="ts" setup>

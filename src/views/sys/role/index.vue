@@ -9,7 +9,8 @@
             (source === 1 && hasPermission('sys:tenantRole:insert')) ||
             (source !== 1 && hasPermission('sys:role:insert'))
           "
-          >新增角色
+        >
+          新增角色
         </a-button>
       </template>
       <template #bodyCell="{ column, record }">
@@ -42,7 +43,7 @@
         <template v-if="column.key === 'status'">
           <ASwitch
             checked-children="已启用"
-            unCheckedChildren="已停用"
+            un-checked-children="已停用"
             :checked="record.status === 0"
             :loading="statusLoading"
             @change="handleStatus(record)"
@@ -55,17 +56,17 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteRole, getRoleList, setRoleStatus } from "/@/api/sys/Role";
-  import { useModal } from "/@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { deleteRole, getRoleList, setRoleStatus } from "@/api/sys/Role";
+  import { useModal } from "@/components/general/Modal";
   import RoleModal from "./RoleModal.vue";
   import { columns, searchFormSchema } from "./role.data";
-  import { usePermission } from "/@/hooks/web/UsePermission";
+  import { usePermission } from "@/hooks/web/UsePermission";
   import { ref } from "vue";
-  import { deleteTenantRole, getTenantRole } from "/@/api/sys/SsoTenant";
+  import { deleteTenantRole, getTenantRole } from "@/api/sys/SsoTenant";
   import { Switch as ASwitch } from "ant-design-vue";
-  import { SsoRole } from "/@/api/sys/model/RoleModel";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { SsoRole } from "@/api/sys/model/RoleModel";
+  import { useDesign } from "@/hooks/web/UseDesign";
   defineOptions({ name: "RoleManagement" });
 
   const props = defineProps({
@@ -79,14 +80,10 @@
   const { prefixCls } = useDesign("role");
   const api = ref();
 
-  if (props.source === 1) {
-    api.value = getTenantRole;
-  } else {
-    api.value = getRoleList;
-  }
+  api.value = props.source === 1 ? getTenantRole : getRoleList;
   const [registerTable, { reload }] = useTable({
     title: "角色列表",
-    api: api,
+    api,
     columns,
     formConfig: {
       name: "search_form_item",

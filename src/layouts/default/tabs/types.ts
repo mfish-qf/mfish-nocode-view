@@ -1,12 +1,9 @@
-import type { DropMenu } from "/@/components/general/Dropdown";
 import type { RouteLocationNormalized } from "vue-router";
 
 export enum TabContentEnum {
   TAB_TYPE,
   EXTRA_TYPE
 }
-
-export type { DropMenu };
 
 export interface TabContentProps {
   tabItem: RouteLocationNormalized;
@@ -23,3 +20,5 @@ export enum MenuEventEnum {
   CLOSE_ALL,
   SCALE
 }
+
+export { type DropMenu } from "@/components/general/Dropdown";

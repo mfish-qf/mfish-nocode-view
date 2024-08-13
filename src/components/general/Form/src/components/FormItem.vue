@@ -3,16 +3,16 @@
   import { computed, defineComponent, toRefs, unref } from "vue";
   import type { FormActionType, FormProps, FormSchemaInner as FormSchema } from "../types/Form";
   import type { RuleObject } from "ant-design-vue/lib/form/interface";
-  import type { TableActionType } from "/@/components/general/Table";
+  import type { TableActionType } from "@/components/general/Table";
   import { Col, Divider, Form } from "ant-design-vue";
   import { componentMap } from "../ComponentMap";
-  import { BasicHelp } from "/@/components/general/Basic";
-  import { isBoolean, isFunction, isNull } from "/@/utils/Is";
-  import { getSlot } from "/@/utils/helper/TsxHelper";
+  import { BasicHelp } from "@/components/general/Basic";
+  import { isBoolean, isFunction, isNull } from "@/utils/Is";
+  import { getSlot } from "@/utils/helper/TsxHelper";
   import { createPlaceholderMessage, setComponentRuleType } from "../Helper";
   import { cloneDeep, upperFirst } from "lodash-es";
   import { useItemLabelWidth } from "../hooks/UseLabelWidth";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useI18n } from "@/hooks/web/UseI18n";
 
   export default defineComponent({
     name: "BasicFormItem",
@@ -69,7 +69,7 @@
             ...allDefaultValues,
             ...formModel
           } as Recordable,
-          schema: schema
+          schema
         };
       });
 
@@ -139,7 +139,7 @@
         const joinLabel = Reflect.has(props.schema, "rulesMessageJoinLabel")
           ? rulesMessageJoinLabel
           : globalRulesMessageJoinLabel;
-        const defaultMsg = createPlaceholderMessage(component) + `${joinLabel ? label : ""}`;
+        const defaultMsg = `${createPlaceholderMessage(component)}${joinLabel ? label : ""}`;
 
         function validator(rule: any, value: any) {
           const msg = rule.message || defaultMsg;

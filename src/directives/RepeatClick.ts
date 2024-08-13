@@ -1,5 +1,6 @@
-import { on, once } from "/@/utils/DomUtils";
+import { on, once } from "@/utils/DomUtils";
 import type { Directive, DirectiveBinding } from "vue";
+import { IntervalHandle, Nullable } from "@mfish/types";
 
 /**
  * Prevent repeated clicks

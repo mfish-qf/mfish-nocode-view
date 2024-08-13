@@ -1,10 +1,11 @@
 import type { FormProps, FormActionType, UseFormReturnType, FormSchema } from "../types/Form";
 import type { NamePath } from "ant-design-vue/lib/form/interface";
-import type { DynamicProps } from "/#/utils";
+import type { DynamicProps } from "#/utils";
 import { ref, onUnmounted, unref, nextTick, watch } from "vue";
-import { isProdMode } from "/@/utils/Env";
-import { error } from "/@/utils/Log";
-import { getDynamicProps } from "/@/utils";
+import { isProdMode } from "@/utils/Env";
+import { error } from "@/utils/Log";
+import { getDynamicProps } from "@/utils";
+import type { Recordable } from "@mfish/types";
 
 export declare type ValidateFields = (nameList?: NamePath[]) => Promise<Recordable>;
 

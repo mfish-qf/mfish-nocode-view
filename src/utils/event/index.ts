@@ -6,7 +6,7 @@ const isServer = typeof window === "undefined";
 function resizeHandler(entries: any[]) {
   for (const entry of entries) {
     const listeners = entry.target.__resizeListeners__ || [];
-    if (listeners.length) {
+    if (listeners.length > 0) {
       listeners.forEach((fn: () => any) => {
         fn();
       });
@@ -29,7 +29,7 @@ export function addResizeListener(element: any, fn: () => any) {
 export function removeResizeListener(element: any, fn: () => any) {
   if (!element || !element.__resizeListeners__) return;
   element.__resizeListeners__.splice(element.__resizeListeners__.indexOf(fn), 1);
-  if (!element.__resizeListeners__.length) {
+  if (element.__resizeListeners__.length === 0) {
     element.__ro__.disconnect();
   }
 }

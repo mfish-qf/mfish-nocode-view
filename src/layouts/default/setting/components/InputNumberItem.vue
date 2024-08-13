@@ -7,7 +7,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from "vue";
   import { InputNumber } from "ant-design-vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { baseHandler } from "../Handler";
   import { HandlerEnum } from "../Enum";
 

@@ -1,8 +1,8 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { Icon } from "/@/components/general/Icon";
+import { Icon } from "@/components/general/Icon";
 
 export const columns: BasicColumn[] = [
   {
@@ -17,10 +17,10 @@ export const columns: BasicColumn[] = [
     width: 80,
     customRender: ({ record }) => {
       const status = record.isVisible;
-      const enable = ~~status === 1;
+      const enable = Math.trunc(status) === 1;
       const color = enable ? "green" : "red";
       const text = enable ? "显示" : "隐藏";
-      return h(Tag, { color: color }, () => text);
+      return h(Tag, { color }, () => text);
     }
   },
   {

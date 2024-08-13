@@ -3,12 +3,13 @@ import type { PaginationProps } from "../types/Pagination";
 import type { ComputedRef } from "vue";
 import { computed, Ref, ref, reactive, toRaw, unref, watch } from "vue";
 import { renderEditCell } from "../components/editable";
-import { usePermission } from "/@/hooks/web/UsePermission";
-import { useI18n } from "/@/hooks/web/UseI18n";
-import { isArray, isBoolean, isFunction, isMap, isString } from "/@/utils/Is";
+import { usePermission } from "@/hooks/web/UsePermission";
+import { useI18n } from "@/hooks/web/UseI18n";
+import { isArray, isBoolean, isFunction, isMap, isString } from "@/utils/Is";
 import { cloneDeep, isEqual } from "lodash-es";
-import { formatToDate } from "/@/utils/DateUtil";
+import { formatToDate } from "@/utils/DateUtil";
 import { ACTION_COLUMN_FLAG, DEFAULT_ALIGN, INDEX_COLUMN_FLAG, PAGE_SIZE } from "../Const";
+import { Recordable } from "@mfish/types";
 
 function handleItem(item: BasicColumn, ellipsis: boolean) {
   const { key, dataIndex, children } = item;
@@ -24,7 +25,7 @@ function handleItem(item: BasicColumn, ellipsis: boolean) {
       });
     }
   }
-  if (children && children.length) {
+  if (children && children.length > 0) {
     handleChildren(children, ellipsis);
   }
 }
@@ -187,7 +188,6 @@ export function useColumns(
     cacheColumns.forEach((item) => {
       if (item.dataIndex === dataIndex) {
         Object.assign(item, value);
-        return;
       }
     });
   }
@@ -309,7 +309,7 @@ export function formatCell(text: string, format: CellFormat, record: Recordable,
     if (isMap(format)) {
       return format.get(text);
     }
-  } catch (error) {
+  } catch {
     return text;
   }
 }

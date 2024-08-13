@@ -1,7 +1,7 @@
-import { isObject, isString } from "/@/utils/Is";
-import { MessageMode } from "/#/axios";
-import { useI18n } from "/@/hooks/web/UseI18n";
-import { useMessage } from "/@/hooks/web/UseMessage";
+import { isObject, isString } from "@/utils/Is";
+import { MessageMode } from "#/axios";
+import { useI18n } from "@/hooks/web/UseI18n";
+import { useMessage } from "@/hooks/web/UseMessage";
 
 const { createMessage, createErrorModal, createSuccessModal } = useMessage();
 
@@ -13,7 +13,7 @@ export function joinTimestamp(join: boolean, restful = false): string | object {
   if (!join) {
     return restful ? "" : {};
   }
-  const now = new Date().getTime();
+  const now = Date.now();
   if (restful) {
     return `?_t=${now}`;
   }
@@ -56,7 +56,7 @@ export function messageTips(messageMode: MessageMode, msg: string, isError: bool
       createMessage.success(msg).then();
       return;
     }
-    //重试请求不重复进行错误提示
+    // 重试请求不重复进行错误提示
     if (retryCount > 0) {
       return;
     }
@@ -71,6 +71,5 @@ export function messageTips(messageMode: MessageMode, msg: string, isError: bool
       return;
     }
     createErrorModal({ title: t("sys.api.errorTip"), content: msg });
-    return;
   }
 }

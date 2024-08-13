@@ -1,14 +1,15 @@
-import type { ProjectConfig, HeaderSetting, MenuSetting, TransitionSetting, MultiTabsSetting } from "/#/config";
-import type { BeforeMiniState } from "/#/store";
+import type { ProjectConfig, HeaderSetting, MenuSetting, TransitionSetting, MultiTabsSetting } from "#/config";
+import type { BeforeMiniState } from "#/store";
 import { defineStore } from "pinia";
-import { store } from "/@/store";
-import { ThemeEnum } from "/@/enums/AppEnum";
-import { APP_DARK_MODE_KEY_ } from "/@/enums/CacheEnum";
-import { Persistent } from "/@/utils/cache/Persistent";
-import { darkMode } from "/@/settings/DesignSetting";
-import { resetRouter } from "/@/router";
-import { deepMerge } from "/@/utils";
-import projectSetting from "/@/settings/ProjectSetting";
+import { store } from "@/store";
+import { ThemeEnum } from "@/enums/AppEnum";
+import { APP_DARK_MODE_KEY_ } from "@/enums/CacheEnum";
+import { Persistent } from "@/utils/cache/Persistent";
+import { darkMode } from "@/settings/DesignSetting";
+import { resetRouter } from "@/router";
+import { deepMerge } from "@/utils";
+import projectSetting from "@/settings/ProjectSetting";
+import { DeepPartial, TimeoutHandle } from "@mfish/types";
 
 interface AppState {
   darkMode?: ThemeEnum;
@@ -18,6 +19,8 @@ interface AppState {
   projectConfig: ProjectConfig;
   // 当窗口缩小时，记住一些状态，并在恢复窗口时恢复这些状态
   beforeMiniInfo: BeforeMiniState;
+  //判断是否手动点击折叠，解决手机端初始加载时自动展开的问题
+  manualCollapsed: boolean;
 }
 
 let timeId: TimeoutHandle;
@@ -27,7 +30,8 @@ export const useAppStore = defineStore({
     darkMode: undefined,
     pageLoading: false,
     projectConfig: JSON.parse(JSON.stringify(projectSetting)),
-    beforeMiniInfo: {}
+    beforeMiniInfo: {},
+    manualCollapsed: false
   }),
   getters: {
     getPageLoading(): boolean {
@@ -59,6 +63,9 @@ export const useAppStore = defineStore({
     },
     getThemeColor(): string {
       return this.getProjectConfig.themeColor;
+    },
+    getManualCollapsed(): boolean {
+      return this.manualCollapsed;
     }
   },
   actions: {
@@ -78,7 +85,7 @@ export const useAppStore = defineStore({
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
       const pConfig = JSON.parse(JSON.stringify(this.projectConfig));
       this.projectConfig = deepMerge(pConfig || {}, config);
-      //界面配置已存储到服务端，下面这段存储本地缓存可以根据自己需求放开
+      // 界面配置已存储到服务端，下面这段存储本地缓存可以根据自己需求放开
       // Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
     },
 
@@ -97,11 +104,14 @@ export const useAppStore = defineStore({
         this.setPageLoading(loading);
         clearTimeout(timeId);
       }
+    },
+    async setManualCollapsed() {
+      this.manualCollapsed = true;
     }
   }
 });
 
-//需要在setup外使用
+// 需要在setup外使用
 export function useAppStoreWithOut() {
   return useAppStore(store);
 }

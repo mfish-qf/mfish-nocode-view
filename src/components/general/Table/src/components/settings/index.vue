@@ -1,13 +1,13 @@
 <template>
   <div class="table-settings">
-    <RedoSetting v-if="getSetting.redo" :getPopupContainer="getTableContainer" />
-    <SizeSetting v-if="getSetting.size" :getPopupContainer="getTableContainer" />
+    <RedoSetting v-if="getSetting.redo" :get-popup-container="getTableContainer" />
+    <SizeSetting v-if="getSetting.size > 0" :get-popup-container="getTableContainer" />
     <ColumnSetting
       v-if="getSetting.setting"
       @columns-change="handleColumnChange"
-      :getPopupContainer="getTableContainer"
+      :get-popup-container="getTableContainer"
     />
-    <FullScreenSetting v-if="getSetting.fullScreen" :getPopupContainer="getTableContainer" />
+    <FullScreenSetting v-if="getSetting.fullScreen" :get-popup-container="getTableContainer" />
   </div>
 </template>
 <script lang="ts">
@@ -18,7 +18,7 @@
   import SizeSetting from "./SizeSetting.vue";
   import RedoSetting from "./RedoSetting.vue";
   import FullScreenSetting from "./FullScreenSetting.vue";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { useTableContext } from "../../hooks/UseTableContext";
 
   export default defineComponent({
@@ -35,7 +35,7 @@
         default: () => ({})
       }
     },
-    emits: ["columns-change"],
+    emits: ["columnsChange"],
     setup(props, { emit }) {
       const { t } = useI18n();
       const table = useTableContext();
@@ -51,7 +51,7 @@
       });
 
       function handleColumnChange(data: ColumnChangeParam[]) {
-        emit("columns-change", data);
+        emit("columnsChange", data);
       }
 
       function getTableContainer() {

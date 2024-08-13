@@ -6,9 +6,9 @@
           v-model:value="curOrg"
           show-search
           allow-clear
-          treeNodeFilterProp="orgName"
+          tree-node-filter-prop="orgName"
           :tree-data="treeData"
-          :fieldNames="fieldNames"
+          :field-names="fieldNames"
           :disabled="parentIdDisabled"
           @change="orgChange"
         />
@@ -18,16 +18,17 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref, toRaw } from "vue";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { BasicForm, useForm } from "/@/components/general/Form/index";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicForm, useForm } from "@/components/general/Form/index";
   import { formSchema } from "./org.data";
-  import { getOrgTree, insertOrg, updateOrg } from "/@/api/sys/Org";
-  import { getAllRoleList } from "/@/api/sys/Role";
-  import { getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "/@/api/sys/SsoTenant";
-  import { useMessage } from "/@/hooks/web/UseMessage";
-  import { isNullOrUnDef } from "/@/utils/Is";
-  import { SsoOrg } from "/@/api/sys/model/OrgModel";
+  import { getOrgTree, insertOrg, updateOrg } from "@/api/sys/Org";
+  import { getAllRoleList } from "@/api/sys/Role";
+  import { getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "@/api/sys/SsoTenant";
+  import { useMessage } from "@/hooks/web/UseMessage";
+  import { isNullOrUnDef } from "@/utils/Is";
+  import { SsoOrg } from "@/api/sys/model/OrgModel";
   import { TreeSelect } from "ant-design-vue";
+  import { Recordable } from "@mfish/types";
 
   const props = defineProps({
     source: {
@@ -63,17 +64,13 @@
     tenantDisabled(false, props.source);
     setModalProps({ confirmLoading: false, width: "800px" });
     isUpdate.value = !!data?.isUpdate;
-    if (props.source == 1) {
-      treeData.value = await getTenantOrgTree();
-    } else {
-      treeData.value = await getOrgTree();
-    }
+    treeData.value = await (props.source === 1 ? getTenantOrgTree() : getOrgTree());
     if (unref(isUpdate)) {
       curOrg.value = data.record.parentId;
       setFieldsValue({
         ...data.record
       }).then();
-      //如果是租户父组织，不允许在此界面修改名称、编码等属性
+      // 如果是租户父组织，不允许在此界面修改名称、编码等属性
       if (data.record.tenantId) {
         tenantDisabled(true, props.source);
       }
@@ -83,10 +80,10 @@
       }
       let roles;
       if (isNullOrUnDef(data.record.tenantId) || data.record.tenantId === "") {
-        //租户子组织获取系统默认角色
+        // 租户子组织获取系统默认角色
         roles = await getAllRoleList({ orgIds: data.record.id });
       } else {
-        //租户父组织获取系统默认角色
+        // 租户父组织获取系统默认角色
         roles = await getAllRoleList({ tenantId: "1" });
       }
       setRoles(roles, roleIds);
@@ -100,13 +97,13 @@
     const options = roles.reduce((prev, next: Recordable) => {
       if (next) {
         let disable = false;
-        if (next["id"] === "1") {
+        if (next.id === "1") {
           disable = true;
         }
         prev.push({
-          key: next["id"],
-          label: next["roleName"],
-          value: next["id"],
+          key: next.id,
+          label: next.roleName,
+          value: next.id,
           disabled: disable
         });
       }
@@ -141,16 +138,11 @@
   async function orgChange(orgId, _, extra) {
     setFieldsValue({ parentId: orgId }).then();
     const id = extra.triggerNode?.props?.id;
-    let roles;
-    if (id) {
-      roles = await getAllRoleList({ orgIds: id });
-    } else {
-      roles = await getAllRoleList({ tenantId: "1" });
-    }
+    const roles = await (id ? getAllRoleList({ orgIds: id }) : getAllRoleList({ tenantId: "1" }));
     setRoles(roles, []);
   }
 
-  const getTitle = computed(() => (!unref(isUpdate) ? "新增组织" : "编辑组织"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑组织" : "新增组织"));
 
   async function handleSubmit() {
     const values = await validate();

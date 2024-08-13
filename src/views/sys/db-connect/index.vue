@@ -35,10 +35,10 @@
           />
         </template>
         <template v-if="column.key === 'dbType'">
-          <dict-tag code="sys_db_type" :value="record?.dbType" />
+          <DictTag code="sys_db_type" :value="record?.dbType" />
         </template>
         <template v-if="column.key === 'poolType'">
-          <dict-tag code="sys_db_pool" :value="record?.poolType" />
+          <DictTag code="sys_db_pool" :value="record?.poolType" />
         </template>
       </template>
     </BasicTable>
@@ -46,12 +46,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "/@/components/general/Table";
-  import { deleteDbConnect, getDbConnectList } from "/@/api/sys/DbConnect";
-  import { useModal } from "/@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { deleteDbConnect, getDbConnectList } from "@/api/sys/DbConnect";
+  import { useModal } from "@/components/general/Modal";
   import DbConnectModal from "./DbConnectModal.vue";
   import { columns, searchFormSchema } from "./dbConnect.data";
-  import DictTag from "/@/components/general/DictTag/DictTag.vue";
+  import DictTag from "@/components/general/DictTag/DictTag.vue";
+  import { Recordable } from "@mfish/types";
   defineOptions({ name: "DbConnectManagement" });
 
   const [registerModal, { openModal }] = useModal();

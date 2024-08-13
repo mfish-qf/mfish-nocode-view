@@ -66,13 +66,13 @@
 <script lang="ts" setup>
   import { ref, computed, onBeforeMount } from "vue";
   import { Input } from "ant-design-vue";
-  import { useUserStore } from "/@/store/modules/User";
-  import { useLockStore } from "/@/store/modules/Lock";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useUserStore } from "@/store/modules/User";
+  import { useLockStore } from "@/store/modules/Lock";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { useNow } from "./UseNow";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { useDesign } from "@/hooks/web/UseDesign";
   import { LockOutlined } from "@ant-design/icons-vue";
-  import { setHeaderImg } from "/@/utils/file/FileUtils";
+  import { setHeaderImg } from "@/utils/file/FileUtils";
 
   const InputPassword = Input.Password;
 
@@ -105,7 +105,7 @@
     if (!password.value) {
       return;
     }
-    let pwd = password.value;
+    const pwd = password.value;
     try {
       loading.value = true;
       const res = await lockStore.unLock(pwd);

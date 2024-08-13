@@ -1,14 +1,14 @@
 import type { EChartsOption } from "echarts";
 import type { Ref } from "vue";
-import { useTimeoutFn } from "/@/hooks/core/UseTimeout";
+import { useTimeoutFn } from "@/hooks/core/UseTimeout";
 import { tryOnUnmounted } from "@vueuse/core";
 import { unref, nextTick, watch, computed, ref } from "vue";
 import { useDebounceFn } from "@vueuse/core";
-import { useEventListener } from "/@/hooks/event/UseEventListener";
-import { useBreakpoint } from "/@/hooks/event/UseBreakpoint";
-import echarts from "/@/utils/lib/Echarts";
-import { useRootSetting } from "/@/hooks/setting/UseRootSetting";
-import { useMenuSetting } from "/@/hooks/setting/UseMenuSetting";
+import { useEventListener } from "@/hooks/event/UseEventListener";
+import { useBreakpoint } from "@/hooks/event/UseBreakpoint";
+import echarts from "@/utils/lib/Echarts";
+import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
 
 export function useECharts(elRef: Ref<HTMLDivElement>, theme: "light" | "dark" | "default" = "default") {
   const { getDarkMode: getSysDarkMode } = useRootSetting();

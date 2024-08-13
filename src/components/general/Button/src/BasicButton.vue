@@ -20,9 +20,9 @@
 </script>
 <script lang="ts" setup>
   import { computed, unref } from "vue";
-  import { Icon } from "/@/components/general/Icon";
+  import { Icon } from "@/components/general/Icon";
   import { buttonProps } from "./props";
-  import { useAttrs } from "/@/hooks/core/UseAttrs";
+  import { useAttrs } from "@/hooks/core/UseAttrs";
 
   const props = defineProps(buttonProps);
   // get component class

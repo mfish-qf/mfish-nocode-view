@@ -1,11 +1,11 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { dateUtil } from "/@/utils/DateUtil";
-import { getDictProps } from "/@/utils/DictUtils";
-import { DescItem } from "/@/components/general/Description";
-import { buildJsonPreview } from "/@/utils/HBuildUtils";
+import { dateUtil } from "@/utils/DateUtil";
+import { getDictProps } from "@/utils/DictUtils";
+import { DescItem } from "@/components/general/Description";
+import { buildJsonPreview } from "@/utils/HBuildUtils";
 
 /**
  * @description: 系统日志
@@ -49,10 +49,10 @@ export const columns: BasicColumn[] = [
     dataIndex: "operStatus",
     width: 120,
     customRender: ({ record }) => {
-      const enable = ~~record.operStatus === 0;
+      const enable = Math.trunc(record.operStatus) === 0;
       const color = enable ? "green" : "red";
       const text = enable ? "正常" : "异常";
-      return h(Tag, { color: color }, () => text);
+      return h(Tag, { color }, () => text);
     }
   },
   {
@@ -144,12 +144,12 @@ export const searchFormSchema: FormSchema[] = [
         defaultValue: [dateUtil("00:00:00", "HH:mm:ss"), dateUtil("23:59:59", "HH:mm:ss")]
       },
       ranges: {
-        ["今天"]: [dateUtil().startOf("day"), dateUtil()],
-        ["昨天"]: [dateUtil().startOf("day").subtract(1, "days"), dateUtil().endOf("day").subtract(1, "days")],
-        ["最近一周"]: [dateUtil().subtract(1, "weeks"), dateUtil()],
-        ["最近两周"]: [dateUtil().subtract(2, "weeks"), dateUtil()],
-        ["最近1个月"]: [dateUtil().subtract(1, "months"), dateUtil()],
-        ["最近3个月"]: [dateUtil().subtract(3, "months"), dateUtil()]
+        今天: [dateUtil().startOf("day"), dateUtil()],
+        昨天: [dateUtil().startOf("day").subtract(1, "days"), dateUtil().endOf("day").subtract(1, "days")],
+        最近一周: [dateUtil().subtract(1, "weeks"), dateUtil()],
+        最近两周: [dateUtil().subtract(2, "weeks"), dateUtil()],
+        最近1个月: [dateUtil().subtract(1, "months"), dateUtil()],
+        最近3个月: [dateUtil().subtract(3, "months"), dateUtil()]
       }
     },
     colProps: { lg: 7, md: 8 }
@@ -197,10 +197,10 @@ export const sysLogSchema: DescItem[] = [
     label: "操作状态",
     labelMinWidth: 60,
     render: (record) => {
-      const enable = ~~record === 0;
+      const enable = Math.trunc(record) === 0;
       const color = enable ? "green" : "red";
       const text = enable ? "正常" : "异常";
-      return h(Tag, { color: color }, () => text);
+      return h(Tag, { color }, () => text);
     }
   },
   {

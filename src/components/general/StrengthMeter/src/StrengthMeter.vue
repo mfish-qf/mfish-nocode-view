@@ -3,7 +3,7 @@
     <InputPassword
       v-if="showInput"
       v-bind="$attrs"
-      allowClear
+      allow-clear
       :value="innerValueRef"
       @change="handleChange"
       :disabled="disabled"
@@ -22,8 +22,8 @@
   import { defineComponent, computed, ref, watch, unref, watchEffect } from "vue";
   import { Input } from "ant-design-vue";
   import { zxcvbn } from "@zxcvbn-ts/core";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { propTypes } from "/@/utils/PropTypes";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { propTypes } from "@/utils/PropTypes";
 
   export default defineComponent({
     name: "StrengthMeter",
@@ -110,7 +110,9 @@
         height: inherit;
         background-color: transparent;
         border-radius: inherit;
-        transition: width 0.5s ease-in-out, background 0.25s;
+        transition:
+          width 0.5s ease-in-out,
+          background 0.25s;
 
         &[data-score="0"] {
           width: 20%;

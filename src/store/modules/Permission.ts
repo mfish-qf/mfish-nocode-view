@@ -1,16 +1,16 @@
-import type { AppRouteRecordRaw, Menu } from "/@/router/Types";
+import type { AppRouteRecordRaw, Menu } from "@/router/Types";
 import type { Router, RouteRecordRaw } from "vue-router";
 import { defineStore } from "pinia";
-import { store } from "/@/store";
-import { getRoleMenuTree } from "/@/api/sys/Menu";
-import { PageEnum } from "/@/enums/PageEnum";
-import { routeModuleList } from "/@/router/routers";
-import { MenuListItem, MenuType } from "/@/api/sys/model/MenuModel";
-import { IFRAME, LAYOUT } from "/@/router/Constant";
-import { formatPath, transformRouteToMenu } from "/@/router/helper/MenuHelper";
-import { flatMultiLevelRoutes, importComponent } from "/@/router/helper/RouteHelper";
-import { isUrl } from "/@/utils/Is";
-import { RootRoute } from "/@/router/routers/Basic";
+import { store } from "@/store";
+import { getRoleMenuTree } from "@/api/sys/Menu";
+import { PageEnum } from "@/enums/PageEnum";
+import { routeModuleList } from "@/router/routers";
+import { MenuListItem, MenuType } from "@/api/sys/model/MenuModel";
+import { IFRAME, LAYOUT } from "@/router/Constant";
+import { formatPath, transformRouteToMenu } from "@/router/helper/MenuHelper";
+import { flatMultiLevelRoutes, importComponent } from "@/router/helper/RouteHelper";
+import { isUrl } from "@/utils/Is";
+import { RootRoute } from "@/router/routers/Basic";
 
 interface PermissionState {
   // 权限代码列表
@@ -36,7 +36,7 @@ export const usePermissionStore = defineStore({
     lastBuildMenuTime: 0,
     // 菜单列表
     menuList: [],
-    //首页
+    // 首页
     homePath: PageEnum.BASE_HOME
   }),
   getters: {
@@ -65,7 +65,7 @@ export const usePermissionStore = defineStore({
       list?.length > 0 && this.setLastBuildMenuTime();
     },
     setLastBuildMenuTime() {
-      this.lastBuildMenuTime = new Date().getTime();
+      this.lastBuildMenuTime = Date.now();
     },
     setDynamicAddedRoute(added: boolean) {
       this.isDynamicAddedRoute = added;
@@ -90,7 +90,7 @@ export const usePermissionStore = defineStore({
         let path = "";
         for (let i = 0; i < menuCode.length / 5; i++) {
           if (fMenus == null) break;
-          const code = menuCode.substring(0, (i + 1) * 5);
+          const code = menuCode.slice(0, Math.max(0, (i + 1) * 5));
           const fMenu = fMenus.find((menu) => menu.menuCode === code);
           if (fMenu != null) {
             path += formatPath(fMenu.routePath);
@@ -110,7 +110,7 @@ export const usePermissionStore = defineStore({
           icon: menu.menuIcon,
           isExternal: menu.isExternal === 1
         };
-        //如果菜单类型是菜单而且是url链接并且是从外部打开，path直接使用外部路径
+        // 如果菜单类型是菜单而且是url链接并且是从外部打开，path直接使用外部路径
         if (menu.menuType === MenuType.菜单 && isUrl(menu.component) && menu.isExternal) {
           newMenu.path = menu.component;
         }
@@ -129,14 +129,15 @@ export const usePermissionStore = defineStore({
           }
         };
         switch (menu.menuType) {
-          case MenuType.目录:
+          case MenuType.目录: {
             route.component = LAYOUT;
             break;
-          case MenuType.菜单:
-            //如果组件是URL地址，设置frame地址
+          }
+          case MenuType.菜单: {
+            // 如果组件是URL地址，设置frame地址
             if (isUrl(menu.component)) {
               route.meta.frameSrc = menu.component;
-              //如果URL外部打开设置path为url,如果是内部打开设置基于iframe打开
+              // 如果URL外部打开设置path为url,如果是内部打开设置基于iframe打开
               if (menu.isExternal) {
                 route.path = menu.component;
               } else {
@@ -145,11 +146,12 @@ export const usePermissionStore = defineStore({
             } else {
               route.component = importComponent(menu.component);
             }
-            //如果菜单为隐藏菜单且设置了选中时激活菜单
+            // 如果菜单为隐藏菜单且设置了选中时激活菜单
             if (!menu.isVisible && menu.activeMenu) {
               route.meta.currentActiveMenu = getActiveMenu(menus, menu.activeMenu);
             }
             break;
+          }
         }
         return route;
       };
@@ -165,7 +167,7 @@ export const usePermissionStore = defineStore({
           route.children = [
             {
               path: "",
-              name: menu.id + "child",
+              name: `${menu.id}child`,
               meta: { title: menu.menuName, icon: menu.menuIcon },
               component: importComponent(menu.component)
             }
@@ -194,7 +196,7 @@ export const usePermissionStore = defineStore({
             continue;
           }
           if (menu.menuType == MenuType.菜单) {
-            //没有子节点而且是菜单，需要构造一个Layout壳
+            // 没有子节点而且是菜单，需要构造一个Layout壳
             menuList.push(directMenu(menu));
             routes.push(directRoute(menu));
           }
@@ -214,12 +216,12 @@ export const usePermissionStore = defineStore({
           cMenu.isExternal = menu.isExternal === 1;
           pMenu.children?.push(cMenu);
           const cRoute: AppRouteRecordRaw = buildRoute(menu);
-          //如果组件不是外部地址，采用内部路由path处理
+          // 如果组件不是外部地址，采用内部路由path处理
           if (!isUrl(menu.component)) {
             if (i++ == 0) {
               pRoute.redirect = pRoute.path + cRoute.path;
             }
-            cRoute.path = cRoute.path.substring(1);
+            cRoute.path = cRoute.path.slice(1);
             cMenu.path = pMenu.path + cMenu.path;
           }
           if (menu.children != null && menu.children.length > 0) {
@@ -227,12 +229,12 @@ export const usePermissionStore = defineStore({
             cRoute.children = [];
             buildChildMenuRoute(menu.children, cMenu, cRoute);
           } else if (menu.menuType === MenuType.目录) {
-            //没有子菜单的目录不push到路由中
+            // 没有子菜单的目录不push到路由中
             continue;
           }
-          //如果外部打开且不是url直接添加到路由集合不使用layout包装
+          // 如果外部打开且不是url直接添加到路由集合不使用layout包装
           if (menu.isExternal && !isUrl(menu.component)) {
-            //使用菜单全路径路由
+            // 使用菜单全路径路由
             cRoute.path = cMenu.path;
             routes.push(cRoute);
           } else {
@@ -241,7 +243,7 @@ export const usePermissionStore = defineStore({
         }
       }
 
-      //如果存在前端路由信息，补充到到后台
+      // 如果存在前端路由信息，补充到到后台
       routes.push(...routeModuleList);
       if (routeModuleList != null && routeModuleList.length > 0) {
         // 将路由转换成菜单
@@ -253,7 +255,7 @@ export const usePermissionStore = defineStore({
         });
       }
       if (menuList.length > 0) {
-        //设置第一个菜单为首页
+        // 设置第一个菜单为首页
         this.setHomePath(menuList[0].path);
       }
       // 设置菜单列表
@@ -267,9 +269,9 @@ export const usePermissionStore = defineStore({
 
     async addRouter(router: Router) {
       const routes = await this.buildRoutesAction();
-      //添加基础路由
+      // 添加基础路由
       router.addRoute(RootRoute(this.getHomePath) as unknown as RouteRecordRaw);
-      //添加其他路由
+      // 添加其他路由
       routes.forEach((route) => {
         router.addRoute(route as unknown as RouteRecordRaw);
       });

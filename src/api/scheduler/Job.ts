@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { Job, ReqJob, JobPageModel } from "/@/api/scheduler/model/JobModel";
+import { defHttp } from "@/utils/http/axios";
+import { Job, ReqJob, JobPageModel } from "@/api/scheduler/model/JobModel";
 
 /**
  * @description: 定时调度任务
@@ -50,7 +50,7 @@ export function updateJob(job: Job) {
  * @return
  */
 export function deleteJob(id: string) {
-  return defHttp.delete<Job>({ url: Api.Job + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<Job>({ url: `${Api.Job}/${id}` }, { successMessageMode: "message" });
 }
 
 /**
@@ -59,7 +59,7 @@ export function deleteJob(id: string) {
  * @param status
  */
 export const setJobStatus = (jobId: string, status: number) => {
-  return defHttp.put<Boolean>({ url: Api.SetStatus, params: { id: jobId, status: status } });
+  return defHttp.put<boolean>({ url: Api.SetStatus, params: { id: jobId, status } });
 };
 
 /**
@@ -67,5 +67,5 @@ export const setJobStatus = (jobId: string, status: number) => {
  * @param job
  */
 export function executeJob(job: Job) {
-  return defHttp.put<Boolean>({ url: Api.ExecuteJob, params: job }, { successMessageMode: "message" });
+  return defHttp.put<boolean>({ url: Api.ExecuteJob, params: job }, { successMessageMode: "message" });
 }

@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { CompletionResult, QuestionModel } from "/@/api/chat/model/QuestionModel";
+import { defHttp } from "@/utils/http/axios";
+import { CompletionResult, QuestionModel } from "@/api/chat/model/QuestionModel";
 
 /**
  * @description: 聊天机器人

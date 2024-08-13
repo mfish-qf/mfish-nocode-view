@@ -3,11 +3,11 @@
     <div :class="`${prefixCls}-panel`">
       <ScrollContainer ref="scrollRef">
         <template v-for="(item, index) in chats">
-          <div :key="index + '1'" :class="`${prefixCls}-wrapper`" v-if="item.user === 'chatGpt'">
+          <div :key="`${index}1`" :class="`${prefixCls}-wrapper`" v-if="item.user === 'chatGpt'">
             <img class="chat-img" src="/resource/img/logo.png" alt="chat-img" />
             <div class="chat-text" v-if="item.chat != undefined && true && item.chat !== ''" v-html="item.chat"></div>
           </div>
-          <div v-else :key="index + '2'" :class="`${prefixCls}-wrapper`" class="right">
+          <div v-else :key="`${index}2`" :class="`${prefixCls}-wrapper`" class="right">
             <div class="chat-text right">{{ item.chat }}</div>
             <SvgIcon name="dynamic-avatar-1" size="32" />
           </div>
@@ -22,13 +22,14 @@
 
 <script lang="ts" setup>
   import { ref, unref, onMounted } from "vue";
-  import { SvgIcon } from "/@/components/general/Icon/index";
-  import { ScrollActionType, ScrollContainer } from "/@/components/general/Container";
+  import { SvgIcon } from "@/components/general/Icon/index";
+  import { ScrollActionType, ScrollContainer } from "@/components/general/Container";
   import { InputSearch } from "ant-design-vue";
-  import { answer } from "/@/api/chat/chat";
-  import { ChatsModel } from "/@/api/chat/model/QuestionModel";
-  import { buildUUID } from "/@/utils/Uuid";
-  import { useDesign } from "/@/hooks/web/UseDesign";
+  import { answer } from "@/api/chat/chat";
+  import { ChatsModel } from "@/api/chat/model/QuestionModel";
+  import { buildUUID } from "@/utils/Uuid";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { Nullable } from "@mfish/types";
   defineOptions({ name: "ChartGpt" });
   const scrollRef = ref<Nullable<ScrollActionType>>(null);
   const { prefixCls } = useDesign("ai-chat");
@@ -41,15 +42,15 @@
   };
   const botName = "chatGpt";
   const msg = ref<string>("");
-  let chats = ref<ChatsModel[]>([]);
+  const chats = ref<ChatsModel[]>([]);
   const QUERYING = "查询中...";
   const onSend = (value: string) => {
     chats.value.push({ id: "user", user: "user", chat: value });
     const id = buildUUID();
-    chats.value.push({ id: id, user: botName, chat: QUERYING });
+    chats.value.push({ id, user: botName, chat: QUERYING });
     msg.value = "";
     scrollBottom();
-    answer({ data: value, id: id }).then((res) => {
+    answer({ data: value, id }).then((res) => {
       const result = JSON.parse(res.result);
       let question = "我现在忙不过来，请慢点提问！";
       if (result.choices !== undefined && result.choices !== null && result.choices.length > 0) {

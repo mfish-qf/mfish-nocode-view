@@ -1,5 +1,5 @@
 <template>
-  <Dropdown placement="bottomLeft" :overlayClassName="`${prefixCls}-dropdown-overlay`">
+  <Dropdown placement="bottomLeft" :overlay-class-name="`${prefixCls}-dropdown-overlay`">
     <span :class="[prefixCls, `${prefixCls}--${theme}`]" class="flex">
       <img :class="`${prefixCls}__header`" :src="userImg" />
       <span :class="`${prefixCls}__info hidden md:block`">
@@ -37,19 +37,19 @@
   import { Dropdown, Menu } from "ant-design-vue";
   import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
   import { onBeforeMount, reactive, ref, toRaw, unref } from "vue";
-  import { DOC_URL } from "/@/settings/SiteSetting";
-  import { useUserStore } from "/@/store/modules/User";
-  import { useHeaderSetting } from "/@/hooks/setting/UseHeaderSetting";
-  import { useI18n } from "/@/hooks/web/UseI18n";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useModal } from "/@/components/general/Modal";
-  import { propTypes } from "/@/utils/PropTypes";
-  import { openWindow } from "/@/utils";
-  import { createAsyncComponent } from "/@/utils/factory/CreateAsyncComponent";
-  import PasswordModal from "/@/views/sys/account/PasswordModal.vue";
-  import { useGo } from "/@/hooks/web/UsePage";
-  import { setHeaderImg } from "/@/utils/file/FileUtils";
-  import { sleep } from "/@/utils/Utils";
+  import { DOC_URL } from "@/settings/SiteSetting";
+  import { useUserStore } from "@/store/modules/User";
+  import { useHeaderSetting } from "@/hooks/setting/UseHeaderSetting";
+  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useModal } from "@/components/general/Modal";
+  import { propTypes } from "@/utils/PropTypes";
+  import { openWindow } from "@/utils";
+  import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
+  import PasswordModal from "@/views/sys/account/PasswordModal.vue";
+  import { useGo } from "@/hooks/web/UsePage";
+  import { setHeaderImg } from "@/utils/file/FileUtils";
+  import { sleep } from "@/utils/Utils";
 
   type MenuEvent = "logout" | "doc" | "lock" | "changePwd" | "userInfo";
 
@@ -110,21 +110,26 @@
 
       function handleMenuClick(e: MenuInfo) {
         switch (e.key as MenuEvent) {
-          case "logout":
+          case "logout": {
             handleLoginOut();
             break;
-          case "doc":
+          }
+          case "doc": {
             openDoc();
             break;
-          case "lock":
+          }
+          case "lock": {
             handleLock();
             break;
-          case "changePwd":
+          }
+          case "changePwd": {
             changePwd();
             break;
-          case "userInfo":
+          }
+          case "userInfo": {
             go("/tenant/info/1");
             break;
+          }
         }
       }
 
@@ -144,54 +149,5 @@
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-header-user-dropdown";
-
-  .@{prefix-cls} {
-    height: @header-height;
-    padding: 0 0 0 10px;
-    padding-right: 10px;
-    overflow: hidden;
-    font-size: 12px;
-    cursor: pointer;
-    align-items: center;
-
-    img {
-      width: 24px;
-      height: 24px;
-      margin-right: 12px;
-    }
-
-    &__header {
-      border-radius: 50%;
-    }
-
-    &__name {
-      font-size: 14px;
-    }
-
-    &--dark {
-      &:hover {
-        background-color: @header-dark-bg-hover-color;
-      }
-    }
-
-    &--light {
-      &:hover {
-        background-color: @header-light-bg-hover-color;
-      }
-
-      .@{prefix-cls}__name {
-        color: @text-color-base;
-      }
-
-      .@{prefix-cls}__desc {
-        color: @header-light-desc-color;
-      }
-    }
-
-    &-dropdown-overlay {
-      .ant-dropdown-menu-item {
-        min-width: 160px;
-      }
-    }
-  }
+  @import "../dropdown.less";
 </style>

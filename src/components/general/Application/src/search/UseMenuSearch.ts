@@ -1,12 +1,13 @@
-import type { Menu } from "/@/router/Types";
+import type { Menu } from "@/router/Types";
 import { ref, onBeforeMount, unref, Ref, nextTick } from "vue";
-import { getMenus } from "/@/router/menus";
+import { getMenus } from "@/router/menus";
 import { cloneDeep } from "lodash-es";
-import { filter, forEach } from "/@/utils/helper/TreeHelper";
-import { useGo } from "/@/hooks/web/UsePage";
-import { useScrollTo } from "/@/hooks/event/UseScrollTo";
+import { filter, forEach } from "@/utils/helper/TreeHelper";
+import { useGo } from "@/hooks/web/UsePage";
+import { useScrollTo } from "@/hooks/event/UseScrollTo";
 import { onKeyStroke, useDebounceFn } from "@vueuse/core";
-import { useI18n } from "/@/hooks/web/UseI18n";
+import { useI18n } from "@/hooks/web/UseI18n";
+import { ChangeEvent, ElRef } from "@mfish/types";
 
 export interface SearchResult {
   name: string;
@@ -72,7 +73,7 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
           icon
         });
       }
-      if (!meta?.hideChildrenInMenu && Array.isArray(children) && children.length) {
+      if (!meta?.hideChildrenInMenu && Array.isArray(children) && children.length > 0) {
         ret.push(...handlerSearchResult(children, reg, item));
       }
     });
@@ -87,7 +88,7 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
 
   // Arrow key up
   function handleUp() {
-    if (!searchResult.value.length) return;
+    if (searchResult.value.length === 0) return;
     activeIndex.value--;
     if (activeIndex.value < 0) {
       activeIndex.value = searchResult.value.length - 1;
@@ -97,7 +98,7 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
 
   // Arrow key down
   function handleDown() {
-    if (!searchResult.value.length) return;
+    if (searchResult.value.length === 0) return;
     activeIndex.value++;
     if (activeIndex.value > searchResult.value.length - 1) {
       activeIndex.value = 0;
@@ -134,7 +135,7 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
 
   // enter keyboard event
   async function handleEnter() {
-    if (!searchResult.value.length) {
+    if (searchResult.value.length === 0) {
       return;
     }
     const result = unref(searchResult);

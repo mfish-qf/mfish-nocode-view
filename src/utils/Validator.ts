@@ -3,26 +3,25 @@
  * @author: mfish
  * @date: 2022/11/16 20:54
  */
-import { dateUtil } from "/@/utils/DateUtil";
+import { dateUtil } from "@/utils/DateUtil";
 import { RuleObject } from "ant-design-vue/lib/form/interface";
 
 export const rules = {
   email(required: boolean): RuleObject[] {
     return [
       {
-        required: required,
+        required,
         validator: async (_rule, value) => {
           if (required && !value) {
-            return Promise.reject("请输入邮箱!");
+            throw "请输入邮箱!";
           }
           if (
             !new RegExp(
-              /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+              /^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}])|(([\da-z\-]+\.)+[a-z]{2,}))$/i
             ).test(value)
           ) {
-            return Promise.reject("请输入正确邮箱格式!");
+            throw "请输入正确邮箱格式!";
           }
-          return Promise.resolve();
         },
         trigger: "change"
       }
@@ -31,15 +30,14 @@ export const rules = {
   phone(required: boolean): RuleObject[] {
     return [
       {
-        required: required,
+        required,
         validator: async (_, value) => {
           if (required && !value) {
-            return Promise.reject("请输入手机号码1!");
+            throw "请输入手机号码1!";
           }
-          if (!new RegExp(/^1[3-9][0-9]\d{8}$/).test(value)) {
-            return Promise.reject("手机号码格式有误");
+          if (!new RegExp(/^1[3-9]\d{9}$/).test(value)) {
+            throw "手机号码格式有误";
           }
-          return Promise.resolve();
         },
         trigger: "change"
       }
@@ -48,7 +46,7 @@ export const rules = {
   startTime(endTime, required: boolean): RuleObject[] {
     return [
       {
-        required: required,
+        required,
         validator: (_, value) => {
           if (required && !value) {
             return Promise.reject("请选择开始时间");
@@ -65,7 +63,7 @@ export const rules = {
   endTime(startTime, required: boolean): RuleObject[] {
     return [
       {
-        required: required,
+        required,
         validator: (_, value) => {
           if (required && !value) {
             return Promise.reject("请选择结束时间");

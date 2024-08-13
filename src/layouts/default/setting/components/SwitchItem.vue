@@ -1,12 +1,12 @@
 <template>
   <div :class="prefixCls">
     <span> {{ title }}</span>
-    <a-switch
+    <ASwitch
       v-bind="getBindValue"
       @change="handleChange"
       :disabled="disabled"
-      :checkedChildren="t('layout.setting.on')"
-      :unCheckedChildren="t('layout.setting.off')"
+      :checked-children="t('layout.setting.on')"
+      :un-checked-children="t('layout.setting.off')"
     />
   </div>
 </template>
@@ -14,8 +14,8 @@
   import { defineComponent, PropType, computed } from "vue";
 
   import { Switch } from "ant-design-vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { useI18n } from "/@/hooks/web/UseI18n";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useI18n } from "@/hooks/web/UseI18n";
   import { baseHandler } from "../Handler";
   import { HandlerEnum } from "../Enum";
 

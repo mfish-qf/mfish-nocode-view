@@ -7,5 +7,5 @@ export * from "./src/types/Table";
 export * from "./src/types/Pagination";
 export * from "./src/types/TableAction";
 export { useTable } from "./src/hooks/UseTable";
-export type { FormSchemaInner as FormSchema, FormProps } from "/@/components/general/Form/src/types/Form";
+export type { FormSchemaInner as FormSchema, FormProps } from "@/components/general/Form/src/types/Form";
 export type { EditRecordRow } from "./src/components/editable";

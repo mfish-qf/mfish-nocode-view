@@ -1,13 +1,13 @@
 <template>
-  <a-table
+  <ATable
     v-if="summaryFunc || summaryData"
-    :showHeader="false"
+    :show-header="false"
     :bordered="false"
     :pagination="false"
-    :dataSource="getDataSource"
-    :rowKey="(r) => r[rowKey]"
+    :data-source="getDataSource"
+    :row-key="(r) => r[rowKey]"
     :columns="getColumns"
-    tableLayout="fixed"
+    table-layout="fixed"
     :scroll="scroll"
   />
 </template>
@@ -16,11 +16,12 @@
   import { defineComponent, unref, computed, toRaw } from "vue";
   import { Table } from "ant-design-vue";
   import { cloneDeep } from "lodash-es";
-  import { isFunction } from "/@/utils/Is";
+  import { isFunction } from "@/utils/Is";
   import type { BasicColumn } from "../types/Table";
   import { INDEX_COLUMN_FLAG } from "../Const";
-  import { propTypes } from "/@/utils/PropTypes";
+  import { propTypes } from "@/utils/PropTypes";
   import { useTableContext } from "../hooks/UseTableContext";
+  import { Recordable } from "@mfish/types";
 
   const SUMMARY_ROW_KEY = "_row";
   const SUMMARY_INDEX_KEY = "_index";

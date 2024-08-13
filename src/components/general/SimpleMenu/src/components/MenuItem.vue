@@ -19,8 +19,8 @@
 <script lang="ts">
   import { PropType } from "vue";
   import { defineComponent, ref, computed, unref, getCurrentInstance, watch } from "vue";
-  import { useDesign } from "/@/hooks/web/UseDesign";
-  import { propTypes } from "/@/utils/PropTypes";
+  import { useDesign } from "@/hooks/web/UseDesign";
+  import { propTypes } from "@/utils/PropTypes";
   import { useMenuItem } from "./UseMenu";
   import { Tooltip } from "ant-design-vue";
   import { useSimpleRootMenuContext } from "./UseSimpleMenuContext";
@@ -77,7 +77,7 @@
         rootMenuEmitter.emit("on-update-opened", {
           opened: false,
           parent: instance?.parent,
-          uidList: uidList
+          uidList
         });
       }
 

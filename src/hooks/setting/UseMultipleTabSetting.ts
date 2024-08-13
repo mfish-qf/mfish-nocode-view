@@ -1,6 +1,6 @@
-import type { MultiTabsSetting } from "/#/config";
+import type { MultiTabsSetting } from "#/config";
 import { computed } from "vue";
-import { useAppStore } from "/@/store/modules/App";
+import { useAppStore } from "@/store/modules/App";
 
 export function useMultipleTabSetting() {
   const appStore = useAppStore();

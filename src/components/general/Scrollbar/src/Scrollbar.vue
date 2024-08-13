@@ -2,26 +2,27 @@
   <div class="scrollbar">
     <div
       ref="wrap"
-      :class="[wrapClass, 'scrollbar__wrap', native ? '' : 'scrollbar__wrap--hidden-default']"
+      class="scrollbar__wrap"
+      :class="[wrapClass, native ? '' : 'scrollbar__wrap--hidden-default']"
       :style="wrapStyle"
       @scroll="handleScroll"
     >
-      <component :is="tag" ref="resize" :class="['scrollbar__view', viewClass]" :style="viewStyle">
+      <component :is="tag" ref="resize" class="scrollbar__view" :class="[viewClass]" :style="viewStyle">
         <slot></slot>
       </component>
     </div>
     <template v-if="!native">
-      <bar v-if="!hiddenX" :move="moveX" :size="sizeWidth" />
-      <bar v-if="!hiddenY" vertical :move="moveY" :size="sizeHeight" />
+      <Bar v-if="!hiddenX" :move="moveX" :size="sizeWidth" />
+      <Bar v-if="!hiddenY" vertical :move="moveY" :size="sizeHeight" />
     </template>
   </div>
 </template>
 <script lang="ts" setup>
   import { ref, onMounted, onBeforeUnmount, nextTick, provide, unref, type PropType } from "vue";
-  import type { StyleValue } from "/@/utils/Types";
-  import { addResizeListener, removeResizeListener } from "/@/utils/event";
-  import componentSetting from "/@/settings/ComponentSetting";
+  import { addResizeListener, removeResizeListener } from "@/utils/event";
+  import componentSetting from "@/settings/ComponentSetting";
   import Bar from "./Bar";
+  import { StyleValue } from "@mfish/types";
 
   defineOptions({ name: "Scrollbar" });
 
@@ -77,8 +78,8 @@
     const heightPercentage = (unref(wrap).clientHeight * 100) / unref(wrap).scrollHeight;
     const widthPercentage = (unref(wrap).clientWidth * 100) / unref(wrap).scrollWidth;
 
-    sizeHeight.value = heightPercentage < 100 ? heightPercentage + "%" : "";
-    sizeWidth.value = widthPercentage < 100 ? widthPercentage + "%" : "";
+    sizeHeight.value = heightPercentage < 100 ? `${heightPercentage}%` : "";
+    sizeWidth.value = widthPercentage < 100 ? `${widthPercentage}%` : "";
   };
 
   defineExpose({

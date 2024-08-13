@@ -1,5 +1,5 @@
-import { BasicColumn } from "/@/components/general/Table";
-import { FormSchema } from "/@/components/general/Table";
+import { BasicColumn } from "@/components/general/Table";
+import { FormSchema } from "@/components/general/Table";
 export const columns: BasicColumn[] = [
   {
     title: "角色名称",

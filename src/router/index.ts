@@ -25,7 +25,7 @@ export const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 })
 });
 
-//重置路由
+// 重置路由
 export function resetRouter() {
   router.getRoutes().forEach((route) => {
     const { name } = route;

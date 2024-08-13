@@ -1,21 +1,24 @@
 /**
  * Application configuration
  */
-import type { ProjectConfig } from "/#/config";
-import projectSetting from "/@/settings/ProjectSetting";
-import { updateHeaderBgColor, updateSidebarBgColor } from "/@/logics/theme/UpdateBackground";
-import { updateColorWeak } from "/@/logics/theme/UpdateColorWeak";
-import { updateGrayMode } from "/@/logics/theme/UpdateGrayMode";
-import { updateDarkTheme } from "/@/logics/theme/Dark";
-import { changeTheme } from "/@/logics/theme";
-import { useAppStore } from "/@/store/modules/App";
-import { getCommonStoragePrefix, getStorageShortName } from "/@/utils/Env";
-import { ThemeEnum } from "/@/enums/AppEnum";
-import { getSysConfig } from "/@/api/sys/SysConfig";
-import { useUserStoreWithOut } from "/@/store/modules/User";
-import { sleep } from "/@/utils/Utils";
+import type { ProjectConfig } from "#/config";
+import projectSetting from "@/settings/ProjectSetting";
+import { updateHeaderBgColor, updateSidebarBgColor } from "@/logics/theme/UpdateBackground";
+import { updateColorWeak } from "@/logics/theme/UpdateColorWeak";
+import { updateGrayMode } from "@/logics/theme/UpdateGrayMode";
+import { updateDarkTheme } from "@/logics/theme/Dark";
+import { changeTheme } from "@/logics/theme/UpdateTheme";
+import { useAppStore } from "@/store/modules/App";
+import { getCommonStoragePrefix, getStorageShortName } from "@/utils/Env";
+import { ThemeEnum } from "@/enums/AppEnum";
+import { getSysConfig } from "@/api/sys/SysConfig";
+import { useUserStoreWithOut } from "@/store/modules/User";
+import { sleep } from "@/utils/Utils";
 
 export async function initAppConfigStore() {
+  // 设置本地样式
+  changeAppConfig(projectSetting);
+  // 获取服务端样式配置
   const userStore = useUserStoreWithOut();
   while (!userStore.getUserInfo) {
     await sleep(300);
@@ -27,11 +30,7 @@ export async function initAppConfigStore() {
 async function setAppConfigStore() {
   let projCfg: ProjectConfig;
   const sysConfig = await getSysConfig();
-  if (sysConfig && sysConfig.config != null) {
-    projCfg = JSON.parse(sysConfig.config) as ProjectConfig;
-  } else {
-    projCfg = projectSetting;
-  }
+  projCfg = sysConfig && sysConfig.config !== null ? (JSON.parse(sysConfig.config) as ProjectConfig) : projectSetting;
   changeAppConfig(projCfg);
 }
 

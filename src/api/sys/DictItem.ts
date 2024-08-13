@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { DictItem, ReqDictItem, DictItemPageModel } from "/@/api/sys/model/DictItemModel";
+import { defHttp } from "@/utils/http/axios";
+import { DictItem, ReqDictItem, DictItemPageModel } from "@/api/sys/model/DictItemModel";
 
 /**
  * @description: 字典项
@@ -26,7 +26,7 @@ export const getDictItemList = (reqDictItem?: ReqDictItem) => {
  * @param dictCode
  */
 export const getDictItems = (dictCode: string) => {
-  return defHttp.get<DictItem[]>({ url: Api.DictItem + "/" + dictCode });
+  return defHttp.get<DictItem[]>({ url: `${Api.DictItem}/${dictCode}` });
 };
 
 /**
@@ -56,5 +56,5 @@ export function updateDictItem(dictItem: DictItem) {
  * @return
  */
 export function deleteDictItem(id: string) {
-  return defHttp.delete<DictItem>({ url: Api.DictItem + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<DictItem>({ url: `${Api.DictItem}/${id}` }, { successMessageMode: "message" });
 }

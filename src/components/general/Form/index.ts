@@ -1,5 +1,3 @@
-import BasicForm from "./src/BasicForm.vue";
-
 export * from "./src/types/Form";
 export * from "./src/types/FormItem";
 export { useComponentRegister } from "./src/hooks/UseComponentRegister";
@@ -12,4 +10,4 @@ export { default as ApiRadioGroup } from "./src/components/ApiRadioGroup.vue";
 export { default as ApiCascader } from "./src/components/ApiCascader.vue";
 export { default as ApiTransfer } from "./src/components/ApiTransfer.vue";
 
-export { BasicForm };
+export { default as BasicForm } from "./src/BasicForm.vue";

@@ -1,7 +1,7 @@
-import { BasicColumn } from "/@/components/general/Table";
+import { BasicColumn } from "@/components/general/Table";
 import { h } from "vue";
 import { Input, RangePicker, Switch } from "ant-design-vue";
-import { dateUtil, formatToDateTime } from "/@/utils/DateUtil";
+import { dateUtil, formatToDateTime } from "@/utils/DateUtil";
 
 /**
  * @description: 任务订阅表
@@ -23,15 +23,15 @@ export const columns: BasicColumn[] = [
         },
         defaultValue: [dateUtil(record.startTime), dateUtil(record.endTime)],
         ranges: {
-          ["一周"]: [dateUtil(), dateUtil().add(1, "weeks")],
-          ["一月"]: [dateUtil(), dateUtil().add(1, "months")],
-          ["三个月"]: [dateUtil(), dateUtil().add(3, "months")],
-          ["一年"]: [dateUtil(), dateUtil().add(1, "years")],
-          ["两年"]: [dateUtil(), dateUtil().add(2, "years")],
-          ["三年"]: [dateUtil(), dateUtil().add(3, "years")]
+          一周: [dateUtil(), dateUtil().add(1, "weeks")],
+          一月: [dateUtil(), dateUtil().add(1, "months")],
+          三个月: [dateUtil(), dateUtil().add(3, "months")],
+          一年: [dateUtil(), dateUtil().add(1, "years")],
+          两年: [dateUtil(), dateUtil().add(2, "years")],
+          三年: [dateUtil(), dateUtil().add(3, "years")]
         },
         onChange(value: any) {
-          if (value && value.length == 2) {
+          if (value && value.length === 2) {
             record.startTime = formatToDateTime(value[0]);
             record.endTime = formatToDateTime(value[1]);
           } else {
@@ -67,7 +67,7 @@ export const columns: BasicColumn[] = [
         checkedChildren: "已启用",
         unCheckedChildren: "已停用",
         loading: record.pendingStatus,
-        onChange(checked: boolean) {
+        onChange(checked: boolean | string | number) {
           record.pendingStatus = true;
           record.status = checked ? 0 : 1;
           record.pendingStatus = false;

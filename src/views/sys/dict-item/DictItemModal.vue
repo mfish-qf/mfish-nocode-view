@@ -10,10 +10,10 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "/@/components/general/Form/index";
+  import { BasicForm, useForm } from "@/components/general/Form/index";
   import { dictItemFormSchema } from "./dictItem.data";
-  import { BasicModal, useModalInner } from "/@/components/general/Modal";
-  import { insertDictItem, updateDictItem } from "/@/api/sys/DictItem";
+  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { insertDictItem, updateDictItem } from "@/api/sys/DictItem";
 
   const emit = defineEmits(["success", "register"]);
   const isUpdate = ref(true);
@@ -32,10 +32,10 @@
       ...data.record
     }).then();
   });
-  const getTitle = computed(() => (!unref(isUpdate) ? "新增字典项" : "编辑字典项"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑字典项" : "新增字典项"));
 
   async function handleSubmit() {
-    let values = await validate();
+    const values = await validate();
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {
       saveDictItem(updateDictItem, values);

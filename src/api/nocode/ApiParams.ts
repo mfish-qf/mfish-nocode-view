@@ -1,5 +1,5 @@
-import { defHttp } from "/@/utils/http/axios";
-import { ApiParams, ReqApiParams, ApiParamsPageModel } from "/@/api/nocode/model/ApiParamsModel";
+import { defHttp } from "@/utils/http/axios";
+import { ApiParams, ReqApiParams, ApiParamsPageModel } from "@/api/nocode/model/ApiParamsModel";
 
 /**
  * @description: API请求参数
@@ -26,7 +26,7 @@ export const getApiParamsList = (reqApiParams?: ReqApiParams) => {
  * @param reqApiParams
  */
 export function exportApiParams(reqApiParams?: ReqApiParams) {
-  return defHttp.download({ url: Api.ApiParams + "/export", params: reqApiParams });
+  return defHttp.download({ url: `${Api.ApiParams}/export`, params: reqApiParams });
 }
 
 /**
@@ -56,5 +56,5 @@ export function updateApiParams(apiParams: ApiParams) {
  * @return
  */
 export function deleteApiParams(id: string) {
-  return defHttp.delete<ApiParams>({ url: Api.ApiParams + "/" + id }, { successMessageMode: "message" });
+  return defHttp.delete<ApiParams>({ url: `${Api.ApiParams}/${id}` }, { successMessageMode: "message" });
 }

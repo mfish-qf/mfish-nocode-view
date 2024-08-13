@@ -5,7 +5,7 @@ export function is(val: unknown, type: string) {
 }
 
 export function isDef<T = unknown>(val?: T): val is T {
-  return typeof val !== "undefined";
+  return val !== undefined;
 }
 
 export function isUnDef<T = unknown>(val?: T): val is T {
@@ -93,8 +93,7 @@ export const isServer = typeof window === "undefined";
 export const isClient = !isServer;
 
 export function isUrl(path: string): boolean {
-  const reg =
-    /^https?:\/\/(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+\.?)+(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+)(:\d+)?(\/.*)?(\?.*)?(#.*)?/;
+  const reg = /^https?:\/\/(([\dA-Za-z]+-?)+[\dA-Za-z]\.?)+(([\dA-Za-z]+-?)+[\dA-Za-z])(:\d+)?(\/.*)?(\?.*)?(#.*)?/;
   return reg.test(path);
 }
 

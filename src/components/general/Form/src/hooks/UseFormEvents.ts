@@ -2,12 +2,12 @@ import type { ComputedRef, Ref } from "vue";
 import type { FormProps, FormSchemaInner as FormSchema, FormActionType } from "../types/Form";
 import type { NamePath } from "ant-design-vue/lib/form/interface";
 import { unref, toRaw, nextTick } from "vue";
-import { isArray, isFunction, isObject, isString } from "/@/utils/Is";
-import { deepMerge } from "/@/utils";
+import { isArray, isFunction, isObject, isString } from "@/utils/Is";
+import { deepMerge } from "@/utils";
 import { dateItemType, defaultValueComponents, isIncludeSimpleComponents } from "../Helper";
-import { dateUtil } from "/@/utils/DateUtil";
+import { dateUtil } from "@/utils/DateUtil";
 import { cloneDeep, has, uniqBy, get, set, isNil } from "lodash-es";
-import { error } from "/@/utils/Log";
+import { error } from "@/utils/Log";
 
 interface UseFormActionContext {
   emit: EmitType;
@@ -26,14 +26,14 @@ function tryConstructArray(field: string, values: Recordable = {}): any[] | unde
     const match = field.match(pattern);
     if (match && match[1]) {
       const keys = match[1].split(",");
-      if (!keys.length) {
+      if (keys.length === 0) {
         return undefined;
       }
       const result = [];
       keys.forEach((k, index) => {
         set(result, index, values[k.trim()]);
       });
-      return result.filter(Boolean).length ? result : undefined;
+      return result.some(Boolean) ? result : undefined;
     }
   }
 }
@@ -58,7 +58,7 @@ export function useFormEvents({
       const schema = unref(getSchema).find((item) => item.field === key);
       const defaultValueObj = schema?.defaultValueObj;
       const fieldKeys = Object.keys(defaultValueObj || {});
-      if (fieldKeys.length) {
+      if (fieldKeys.length > 0) {
         fieldKeys.forEach((field) => {
           formModel[field] = defaultValueObj![field];
         });
@@ -73,8 +73,7 @@ export function useFormEvents({
   // 获取表单fields
   const getAllFields = () =>
     unref(getSchema)
-      .map((item) => [...(item.fields || []), item.field])
-      .flat(1)
+      .flatMap((item) => [...(item.fields || []), item.field])
       .filter(Boolean);
   /**
    * @description: Set form value
@@ -108,7 +107,7 @@ export function useFormEvents({
       // Adapt date component
       if (itemIsDateComponent(schema?.component)) {
         constructValue = tryConstructArray(key, values);
-        if (!!constructValue) {
+        if (constructValue) {
           const fieldValue = constructValue || value;
           if (Array.isArray(fieldValue)) {
             const arr: any[] = [];
@@ -375,7 +374,7 @@ export function useFormEvents({
     validateFields,
     validate,
     submit: handleSubmit,
-    scrollToField: scrollToField
+    scrollToField
   };
 
   return {

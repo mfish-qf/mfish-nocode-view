@@ -1,5 +1,5 @@
 import { ref, watch } from "vue";
-import { isDef } from "/@/utils/Is";
+import { isDef } from "@/utils/Is";
 
 interface Options {
   target?: HTMLElement;
@@ -52,8 +52,8 @@ export function copyTextToClipboard(input: string, { target = document.body }: O
   let isSuccess = false;
   try {
     isSuccess = document.execCommand("copy");
-  } catch (e: any) {
-    throw new Error(e);
+  } catch (error: any) {
+    throw new Error(error);
   }
 
   element.remove();
