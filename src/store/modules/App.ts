@@ -19,8 +19,6 @@ interface AppState {
   projectConfig: ProjectConfig;
   // 当窗口缩小时，记住一些状态，并在恢复窗口时恢复这些状态
   beforeMiniInfo: BeforeMiniState;
-  //判断是否手动点击折叠，解决手机端初始加载时自动展开的问题
-  manualCollapsed: boolean;
 }
 
 let timeId: TimeoutHandle;
@@ -30,8 +28,7 @@ export const useAppStore = defineStore({
     darkMode: undefined,
     pageLoading: false,
     projectConfig: JSON.parse(JSON.stringify(projectSetting)),
-    beforeMiniInfo: {},
-    manualCollapsed: false
+    beforeMiniInfo: {}
   }),
   getters: {
     getPageLoading(): boolean {
@@ -63,9 +60,6 @@ export const useAppStore = defineStore({
     },
     getThemeColor(): string {
       return this.getProjectConfig.themeColor;
-    },
-    getManualCollapsed(): boolean {
-      return this.manualCollapsed;
     }
   },
   actions: {
@@ -104,9 +98,6 @@ export const useAppStore = defineStore({
         this.setPageLoading(loading);
         clearTimeout(timeId);
       }
-    },
-    async setManualCollapsed() {
-      this.manualCollapsed = true;
     }
   }
 });

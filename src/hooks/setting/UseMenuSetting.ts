@@ -18,8 +18,6 @@ export function useMenuSetting() {
     );
   });
 
-  const getManualCollapsed = computed(() => appStore.getManualCollapsed);
-
   const getCollapsed = computed(() => appStore.getMenuSetting.collapsed);
 
   const getMenuType = computed(() => appStore.getMenuSetting.type);
@@ -114,11 +112,8 @@ export function useMenuSetting() {
   }
 
   function toggleCollapsed() {
-    //切换时设置为手动切换，用于控制手机端时不自动展开
-    appStore.setManualCollapsed().then(() => {
-      setMenuSetting({
-        collapsed: !unref(getCollapsed)
-      });
+    setMenuSetting({
+      collapsed: !unref(getCollapsed)
     });
   }
 
@@ -130,7 +125,6 @@ export function useMenuSetting() {
     getMenuType,
     getMenuMode,
     getShowMenu,
-    getManualCollapsed,
     getCollapsed,
     getMiniWidthNumber,
     getCalcContentWidth,
