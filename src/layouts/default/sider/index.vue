@@ -6,7 +6,7 @@
       :class="`${prefixCls}-drawer`"
       :width="getMenuWidth"
       :get-container="false"
-      :open="!getCollapsed && getManualCollapsed"
+      :open="!getCollapsed"
       @close="handleClose"
     >
       <LayoutSider />
@@ -22,17 +22,24 @@
   import { useAppInject } from "@/hooks/web/UseAppInject";
   import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
   import { useDesign } from "@/hooks/web/UseDesign";
+  import { nextTick, onBeforeMount, unref } from "vue";
   defineOptions({ name: "SiderWrapper" });
 
   const { prefixCls } = useDesign("layout-sider");
   const { getIsMobile } = useAppInject();
-  const { setMenuSetting, getCollapsed, getMenuWidth, getIsMixSidebar, getManualCollapsed } = useMenuSetting();
+  const { setMenuSetting, getCollapsed, getMenuWidth, getIsMixSidebar } = useMenuSetting();
 
   function handleClose() {
     setMenuSetting({
       collapsed: true
     });
   }
+  onBeforeMount(async () => {
+    await nextTick();
+    if (unref(getIsMobile)) {
+      handleClose();
+    }
+  });
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-layout-sider";

@@ -60,8 +60,8 @@ export function updateSidebarBgColor(color?: string) {
     color = "#212121";
   }
   setCssVar(SIDER_BG_COLOR, color);
-  setCssVar(SIDER_DARKEN_BG_COLOR, darken(color, 6));
-  setCssVar(SIDER_LIGHTEN_BG_COLOR, lighten(color, 5));
+  setCssVar(SIDER_DARKEN_BG_COLOR, darken(color, 3));
+  setCssVar(SIDER_LIGHTEN_BG_COLOR, lighten(color, 2));
   const isLight = !colorIsDark(color);
   // 如果是亮色且不是深色模式，皮肤设置为亮
   appStore.setProjectConfig({
