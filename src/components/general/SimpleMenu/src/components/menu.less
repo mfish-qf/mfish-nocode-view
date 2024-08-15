@@ -65,7 +65,8 @@
         }
         span {
           &:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
+            transform-origin: right;
           }
         }
 
@@ -89,7 +90,8 @@
         }
         span {
           &:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
+            transform-origin: right;
           }
         }
 
@@ -145,11 +147,6 @@
       list-style: none;
       cursor: pointer;
       outline: none;
-
-      &:hover,
-      &:active {
-        color: inherit;
-      }
     }
 
     &-item > i {
@@ -171,10 +168,11 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: transform 0.25s ease-in-out;
 
       &:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
+        transform-origin: right;
         color: @button-primary-color !important;
       }
 
@@ -188,7 +186,8 @@
         padding: 12px 0;
 
         &:hover {
-          transform: scale(1.1);
+          transform: scale(1.05);
+          transform-origin: right;
           color: @button-primary-color !important;
         }
         &:active {
@@ -297,7 +296,6 @@
       .@{menu-prefix-cls}-submenu-active {
         position: relative;
         color: #fff !important;
-
         &::before {
           position: absolute;
           top: 0;
