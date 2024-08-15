@@ -190,10 +190,11 @@
       box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.05);
       display: flex;
       align-items: center;
-      transition: box-shadow 0.3s ease-in;
+      transition: all 0.3s ease-in;
 
       &:hover {
         box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
+        transform: scale(1.01);
         cursor: pointer;
       }
 
