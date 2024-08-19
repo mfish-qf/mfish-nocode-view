@@ -62,6 +62,8 @@ export interface ProjectConfig {
   showDarkModeToggle: boolean;
   // Configure where the button is displayed
   settingButtonPosition: SettingButtonPositionEnum;
+  // 浅色深色模式
+  darkMode: ThemeEnum;
   // Website gray mode, open for possible mourning dates
   grayMode: boolean;
   // Whether to turn on the color weak mode

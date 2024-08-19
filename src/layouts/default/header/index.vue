@@ -26,6 +26,9 @@
 
     <!-- action  -->
     <div :class="`${prefixCls}-action`">
+      <TenantDropDown :theme="getHeaderTheme" />
+      <UserDropDown :theme="getHeaderTheme" />
+      <Divider type="vertical" />
       <AppSearch :class="`${prefixCls}-action__item `" v-if="getShowSearch" />
       <ErrorAction v-if="getUseErrorHandle" :class="`${prefixCls}-action__item error-action`" />
       <Notify v-if="getShowNotice" :class="`${prefixCls}-action__item notify-item`" />
@@ -36,9 +39,7 @@
         :show-text="false"
         :class="`${prefixCls}-action__item`"
       />
-      <TenantDropDown :theme="getHeaderTheme" />
-      <UserDropDown :theme="getHeaderTheme" />
-      <AppDarkModeToggle class="mx-auto" />
+      <AppDarkModeToggle />
       <SettingDrawer v-if="getShowSetting" :class="`m-2 ${prefixCls}-action__item`" />
     </div>
   </AHeader>
@@ -47,7 +48,7 @@
   import { unref, computed } from "vue";
   import { propTypes } from "@/utils/PropTypes";
   import { AppLogo } from "@/components/general/Application";
-  import { Layout } from "ant-design-vue";
+  import { Divider, Layout } from "ant-design-vue";
   import LayoutMenu from "../menu/index.vue";
   import LayoutTrigger from "../trigger/index.vue";
   import { AppSearch } from "@/components/general/Application";

@@ -32,9 +32,9 @@ export function updateHeaderBgColor(color?: string) {
   // 为头部菜单时强制设置字体颜色，判断当前背景为深色时候设置浅色字体
   if (isDark) {
     hoverColor = lighten(color, 10);
-    setCssVar(HEADER_COLOR, "white");
+    setCssVar(HEADER_COLOR, "#F9FBFD");
   } else {
-    setCssVar(HEADER_COLOR, "black");
+    setCssVar(HEADER_COLOR, "#18203A");
   }
   // 设置头部组件鼠标移入颜色
   setCssVar(HEADER_BG_HOVER_COLOR_VAR, hoverColor);

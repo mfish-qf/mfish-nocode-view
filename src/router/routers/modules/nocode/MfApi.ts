@@ -3,7 +3,7 @@
  * @author: mfish
  * @date: 2023/8/4
  */
-import type { AppRouteRecordRaw } from "/@/router/Types";
+import type { AppRouteRecordRaw } from "@/router/Types";
 
 const apiConfig: AppRouteRecordRaw = {
   path: "/low-code/mf-api/config",

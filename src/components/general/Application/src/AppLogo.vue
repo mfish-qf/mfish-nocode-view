@@ -68,23 +68,12 @@
     cursor: pointer;
     transition: all 0.2s ease;
 
-    &.light {
-      border-bottom: 0px solid @border-color-base;
-    }
-
     &.collapsed-show-title {
       padding-left: 20px;
     }
 
-    &.light &__title {
-      color: @button-primary-color;
-    }
-
-    &.dark &__title {
-      color: @white;
-    }
-
     &__title {
+      color: @button-primary-color;
       font-size: 16px;
       font-weight: 700;
       transition: all 0.5s;

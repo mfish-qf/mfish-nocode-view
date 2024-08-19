@@ -24,10 +24,15 @@ export const getSysConfig = () => {
  * 新增界面配置
  *
  * @param sysConfig
+ * @param showMsg 是否显示提示信息
  * @return
  */
-export function saveSysConfig(sysConfig: SysConfig) {
-  return defHttp.post<SysConfig>({ url: Api.SysConfig, params: sysConfig }, { successMessageMode: "message" });
+export function saveSysConfig(sysConfig: SysConfig, showMsg: boolean = true) {
+  let options = {};
+  if (showMsg) {
+    options = { successMessageMode: "message" };
+  }
+  return defHttp.post<SysConfig>({ url: Api.SysConfig, params: sysConfig }, options);
 }
 
 /**

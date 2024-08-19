@@ -28,22 +28,14 @@ export async function initAppConfigStore() {
 
 // 初始化项目配置
 async function setAppConfigStore() {
-  let projCfg: ProjectConfig;
   const sysConfig = await getSysConfig();
-  projCfg = sysConfig && sysConfig.config !== null ? (JSON.parse(sysConfig.config) as ProjectConfig) : projectSetting;
+  const projCfg: ProjectConfig =
+    sysConfig && sysConfig.config ? (JSON.parse(sysConfig.config) as ProjectConfig) : projectSetting;
   changeAppConfig(projCfg);
 }
 
 export function changeAppConfig(projCfg: ProjectConfig) {
-  const appStore = useAppStore();
-  const darkMode = appStore.getDarkMode;
-  const {
-    colorWeak,
-    grayMode,
-    themeColor,
-    headerSetting: { bgColor: headerBgColor } = {},
-    menuSetting: { bgColor } = {}
-  } = projCfg;
+  const { darkMode, colorWeak, grayMode, themeColor } = projCfg;
   try {
     if (themeColor) {
       changeTheme(themeColor).then();
@@ -53,20 +45,18 @@ export function changeAppConfig(projCfg: ProjectConfig) {
   } catch (error) {
     console.log(error);
   }
-  appStore.setProjectConfig(projCfg);
-  // init dark mode
-  updateDarkTheme(darkMode).then();
-  if (darkMode === ThemeEnum.DARK) {
-    updateHeaderBgColor();
-    updateSidebarBgColor();
-  } else {
-    headerBgColor && updateHeaderBgColor(headerBgColor);
-    bgColor && updateSidebarBgColor(bgColor);
-  }
-
+  useAppStore().setProjectConfig(projCfg);
+  setDarkTheme(darkMode);
   setTimeout(() => {
     clearObsoleteStorage();
   }, 16);
+}
+
+// 设置深色浅色模式
+export function setDarkTheme(darkMode: ThemeEnum) {
+  updateDarkTheme(darkMode).then();
+  updateHeaderBgColor();
+  updateSidebarBgColor();
 }
 
 /**

@@ -157,8 +157,14 @@
   }
   [data-theme="dark"] {
     .@{prefix-cls} {
-      //border-left: 1px solid #303030
       background-color: #121212;
+    }
+    .@{prefix-cls}-card {
+      &-item {
+        &:hover {
+          box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.1);
+        }
+      }
     }
     .ivu-split-trigger-vertical {
       background: black !important;
@@ -168,7 +174,6 @@
     }
   }
   .@{prefix-cls} {
-    //border-left: 1px solid #d9d9d9;
     background-color: #ffffff;
     height: 100%;
     &-left {

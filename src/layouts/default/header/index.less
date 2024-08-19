@@ -4,17 +4,12 @@
 @logo-prefix-cls: ~'@{namespace}-app-logo';
 
 .@{header-prefix-cls} {
-  position: relative;
-  z-index: 1;
   display: flex;
-  height: @header-height;
-  padding: 0;
-  margin-left: -1px;
-  line-height: @header-height;
-  color: @white !important;
-  background-color: @white;
   align-items: center;
   justify-content: space-between;
+  color: @white !important;
+  background-color: @header-dark-bg-color !important;
+  z-index: 1;
   box-shadow: 0 0 6px 0 rgb(201 205 241);
 
   &--mobile {
@@ -39,7 +34,14 @@
     }
 
     .@{header-prefix-cls}-action {
-      padding-right: 4px;
+      padding-right: 2px;
+      &__item{
+        margin: 1px;
+        padding: 4px;
+      }
+      .ant-divider {
+       margin: 2px;
+      }
     }
   }
 
@@ -53,14 +55,16 @@
 
   &-logo {
     height: @header-height;
-    min-width: 192px;
     padding: 0 10px;
     font-size: 14px;
-
+    border-radius: 8px;
     img {
       width: @logo-width;
       height: @logo-width;
       margin-right: 2px;
+    }
+    &:hover {
+      background-color: @header-bg-hover-color;
     }
   }
 
@@ -97,102 +101,44 @@
     align-items: center;
 
     & li{
+      border-radius: 8px !important;
       transition: background 0.5s ease !important;
+
       &:hover {
         background-color: @header-bg-hover-color !important;
+
       }
     }
   }
 
   &-action {
     display: flex;
-    min-width: 180px;
+    min-width: 120px;
     align-items: center;
 
     &__item {
       display: flex !important;
       justify-content: center;
       align-items: center;
-      height: @header-height;
-      font-size: 1.2em;
+      transition: background 0.5s ease;
+      height: 28px;
+      border-radius: 14px;
+      margin: 2px;
+      padding: 6px;
+      font-size: 14px;
+      color: @header-color;
       cursor: pointer;
-
-      .ant-badge {
-        height: @header-height;
-        line-height: @header-height;
-      }
-
-      .ant-badge-dot {
-        top: 10px;
-        right: 2px;
-      }
-    }
-  }
-
-  &--light {
-    background-color: @header-dark-bg-color !important;
-    border-left: 1px solid @border-color-base;
-
-    .@{header-prefix-cls}-logo {
-      color: @text-color-base;
-
       &:hover {
         background-color: @header-bg-hover-color;
       }
     }
-
-    .@{header-prefix-cls}-action {
-      &__item {
-        color: @text-color-base;
-        transition: background 0.5s ease;
-        height: 28px;
-        width: 28px;
-        border-radius: 14px;
-        margin: 2px;
-        .app-iconify {
-          padding: 0 10px;
-          font-size: 16px !important;
-        }
-
-        &:hover {
-          background-color: @header-bg-hover-color;
-        }
-      }
+    .ant-divider {
+      height: 16px;
+      background-color: @header-color;
     }
   }
-
   &--dark {
     background-color: @header-dark-bg-color !important;
-    border-left: 1px solid @border-color-base;
     box-shadow: 0 0 6px 0 #303030;
-    .@{header-prefix-cls}-logo {
-      &:hover {
-        background-color: @header-bg-hover-color;
-      }
-    }
-
-    .@{header-prefix-cls}-action {
-      &__item {
-        transition: background 0.5s ease;
-        height: 28px;
-        width: 28px;
-        border-radius: 14px;
-        margin: 2px;
-        .app-iconify {
-          padding: 0 10px;
-          font-size: 16px !important;
-        }
-
-        .ant-badge {
-          span {
-            color: @white;
-          }
-        }
-
-        &:hover {
-          background-color: @header-bg-hover-color;
-        }
-      }
-    }
   }
 }

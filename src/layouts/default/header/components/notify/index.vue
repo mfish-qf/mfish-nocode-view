@@ -76,7 +76,7 @@
 
     .ant-badge {
       font-size: 18px;
-
+      color: @header-color;
       .ant-badge-multiple-words {
         padding: 0 4px;
       }

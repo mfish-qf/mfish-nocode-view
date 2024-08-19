@@ -11,6 +11,7 @@ import { isFunction } from "@/utils/Is";
 import { tryOnUnmounted } from "@vueuse/core";
 import { isEqual } from "lodash-es";
 import { error } from "@/utils/Log";
+import { Nullable } from "@mfish/types";
 
 const dataTransferRef = reactive<any>({});
 
