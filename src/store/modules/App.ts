@@ -3,7 +3,6 @@ import type { BeforeMiniState } from "#/store";
 import { defineStore } from "pinia";
 import { store } from "@/store";
 import { ThemeEnum } from "@/enums/AppEnum";
-import { APP_DARK_MODE_KEY_ } from "@/enums/CacheEnum";
 import { Persistent } from "@/utils/cache/Persistent";
 import { darkMode } from "@/settings/DesignSetting";
 import { resetRouter } from "@/router";
@@ -12,7 +11,6 @@ import projectSetting from "@/settings/ProjectSetting";
 import { DeepPartial, TimeoutHandle } from "@mfish/types";
 
 interface AppState {
-  darkMode?: ThemeEnum;
   // 页面加载状态
   pageLoading: boolean;
   // 项目配置
@@ -25,7 +23,6 @@ let timeId: TimeoutHandle;
 export const useAppStore = defineStore({
   id: "app",
   state: (): AppState => ({
-    darkMode: undefined,
     pageLoading: false,
     projectConfig: JSON.parse(JSON.stringify(projectSetting)),
     beforeMiniInfo: {}
@@ -34,8 +31,8 @@ export const useAppStore = defineStore({
     getPageLoading(): boolean {
       return this.pageLoading;
     },
-    getDarkMode(): "light" | "dark" | string {
-      return this.darkMode || localStorage.getItem(APP_DARK_MODE_KEY_) || darkMode;
+    getDarkMode(): ThemeEnum {
+      return this.projectConfig.darkMode || darkMode;
     },
 
     getBeforeMiniInfo(): BeforeMiniState {
@@ -68,8 +65,7 @@ export const useAppStore = defineStore({
     },
 
     setDarkMode(mode: ThemeEnum): void {
-      this.darkMode = mode;
-      localStorage.setItem(APP_DARK_MODE_KEY_, mode);
+      this.projectConfig.darkMode = mode;
     },
 
     setBeforeMiniInfo(state: BeforeMiniState): void {

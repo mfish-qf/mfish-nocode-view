@@ -10,7 +10,7 @@ const setting: ProjectConfig = {
   showSettingButton: true,
 
   // Whether to show the theme switch button
-  showDarkModeToggle: false,
+  showDarkModeToggle: true,
 
   // `Settings` button position
   settingButtonPosition: SettingButtonPositionEnum.AUTO,
@@ -20,6 +20,9 @@ const setting: ProjectConfig = {
 
   // color
   themeColor: APP_PRESET_COLOR_LIST[0],
+
+  // 浅色深色模式
+  darkMode: ThemeEnum.LIGHT,
 
   // Website gray mode, open for possible mourning dates
   grayMode: false,

@@ -10,12 +10,14 @@
   import { SvgIcon } from "@/components/general/Icon";
   import { useDesign } from "@/hooks/web/UseDesign";
   import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-  import { updateHeaderBgColor, updateSidebarBgColor } from "@/logics/theme/UpdateBackground";
-  import { updateDarkTheme } from "@/logics/theme/Dark";
   import { ThemeEnum } from "@/enums/AppEnum";
+  import { setDarkTheme } from "@/logics/InitAppConfig";
+  import { saveSysConfig } from "@/api/sys/SysConfig";
+  import { useAppStore } from "@/store/modules/App";
 
   const { prefixCls } = useDesign("dark-switch");
   const { getDarkMode, setDarkMode } = useRootSetting();
+  const appStore = useAppStore();
   const isDark = computed(() => getDarkMode.value === ThemeEnum.DARK);
   const getClass = computed(() => [
     prefixCls,
@@ -57,9 +59,8 @@
 
   function setTheme(darkMode: ThemeEnum) {
     setDarkMode(darkMode);
-    updateDarkTheme(darkMode).then();
-    updateHeaderBgColor();
-    updateSidebarBgColor();
+    setDarkTheme(darkMode);
+    saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)) }, false).then();
   }
 </script>
 <style lang="less" scoped>

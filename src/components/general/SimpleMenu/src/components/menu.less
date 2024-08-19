@@ -56,53 +56,33 @@
       }
     }
 
+    .@{menu-prefix-cls}-item,
+    .@{menu-prefix-cls}-submenu-title {
+      color: @text-color-base;
+      &:hover {
+        color: @button-primary-color;
+        background-color: @sider-darken-bg-color;
+      }
+      span {
+        &:hover {
+          transform: scale(1.05);
+          transform-origin: right;
+        }
+      }
+
+      &-selected {
+        border-radius: 8px;
+        background-color: @button-primary-hover-color !important;
+        color: @menu-dark-subsidiary-color;
+        &:hover {
+          color: @white;
+        }
+      }
+    }
     &-dark {
       .@{menu-prefix-cls}-item,
       .@{menu-prefix-cls}-submenu-title {
         color: @menu-dark-subsidiary-color;
-        &:hover {
-          color: @button-primary-color;
-        }
-        span {
-          &:hover {
-            transform: scale(1.05);
-            transform-origin: right;
-          }
-        }
-
-        &-selected {
-          border-radius: 8px;
-          background-color: @button-primary-hover-color !important;
-
-          &:hover {
-            color: @white;
-          }
-        }
-      }
-    }
-
-    &-light {
-      .@{menu-prefix-cls}-item,
-      .@{menu-prefix-cls}-submenu-title {
-        color: @text-color-base;
-        &:hover {
-          color: @button-primary-color;
-        }
-        span {
-          &:hover {
-            transform: scale(1.05);
-            transform-origin: right;
-          }
-        }
-
-        &-selected {
-          border-radius: 8px;
-          background-color: @button-primary-hover-color !important;
-          color: @white;
-          &:hover {
-            color: @white;
-          }
-        }
       }
     }
   }
@@ -173,6 +153,7 @@
       &:hover {
         transform: scale(1.05);
         transform-origin: right;
+        background-color: @sider-darken-bg-color !important;
         color: @button-primary-color !important;
       }
 
@@ -188,6 +169,7 @@
         &:hover {
           transform: scale(1.05);
           transform-origin: right;
+          background-color: @sider-darken-bg-color !important;;
           color: @button-primary-color !important;
         }
         &:active {
@@ -244,7 +226,7 @@
         border-radius: 8px;
         color: #fff !important;
         transform: scale(1);
-        background-color: @button-primary-hover-color;
+        background-color: @button-primary-hover-color !important;
       }
 
       &-active.@{menu-prefix-cls}-submenu {
@@ -256,7 +238,6 @@
       > li.@{menu-prefix-cls}-item-active,
       .@{menu-prefix-cls}-submenu-active {
         position: relative;
-        //background-color: @button-primary-hover-color;
 
         &::after {
           display: none;

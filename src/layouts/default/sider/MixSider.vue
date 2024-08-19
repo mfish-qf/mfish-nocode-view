@@ -409,6 +409,7 @@
         &:hover {
           transform: scale(1.05);
           transform-origin: left;
+          background-color: @sider-darken-bg-color;
           color: @button-primary-color !important;
         }
 
@@ -420,7 +421,7 @@
             left: 0;
             width: 4px;
             height: 100%;
-            background-color: @button-primary-color;
+            background-color: @button-primary-color !important;
             content: "";
           }
         }

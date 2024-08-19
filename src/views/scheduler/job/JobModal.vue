@@ -35,10 +35,10 @@
   const jobConfig = ref();
   const triggerConfig = ref();
   const getJobValue = () => {
-    return jobConfig.value.getValue();
+    return jobConfig.value?.getValue();
   };
   const getTriggerValue = () => {
-    return triggerConfig.value.getValue();
+    return triggerConfig.value?.getValue();
   };
   const jobInfo = ref<any>(null);
   const jobId = ref("");

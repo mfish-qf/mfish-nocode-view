@@ -44,13 +44,13 @@
   import { basicProps } from "./Props";
   import { useDesign } from "@/hooks/web/UseDesign";
   import { useAttrs } from "@/hooks/core/UseAttrs";
-  import { Recordable } from "@mfish/types";
+  import { Nullable, Recordable } from "@mfish/types";
 
   export default defineComponent({
     components: { Drawer, ScrollContainer, DrawerFooter, DrawerHeader },
     inheritAttrs: false,
     props: basicProps,
-    emits: ["open-change", "ok", "close", "register"],
+    emits: ["openChange", "ok", "close", "register"],
     setup(props, { emit }) {
       const visibleRef = ref(false);
       const attrs = useAttrs();
@@ -136,7 +136,7 @@
         () => visibleRef.value,
         (visible) => {
           nextTick(() => {
-            emit("open-change", visible);
+            emit("openChange", visible);
             instance && drawerInstance.emitVisible?.(visible, instance.uid);
           });
         }

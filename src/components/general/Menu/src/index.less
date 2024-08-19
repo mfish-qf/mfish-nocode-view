@@ -6,6 +6,7 @@
 
 .@{basic-menu-prefix-cls} {
   width: 100%;
+
   .ant-menu-item {
     transition: unset;
   }
@@ -15,10 +16,20 @@
       display: flex;
       align-items: center;
 
-      &.ant-menu-light {
+      &.ant-menu {
         background-color: transparent;
         color: @header-color;
         border-bottom: none;
+
+        .ant-menu-submenu-active {
+          color: @main-color;
+        }
+
+        .ant-menu-title-content {
+          &:hover {
+            color: @main-color;
+          }
+        }
       }
     }
   }
