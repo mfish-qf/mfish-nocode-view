@@ -11,6 +11,7 @@ import { formatPath, transformRouteToMenu } from "@/router/helper/MenuHelper";
 import { flatMultiLevelRoutes, importComponent } from "@/router/helper/RouteHelper";
 import { isUrl } from "@/utils/Is";
 import { RootRoute } from "@/router/routers/Basic";
+import { Nullable } from "@mfish/types";
 
 interface PermissionState {
   // 权限代码列表
@@ -89,10 +90,10 @@ export const usePermissionStore = defineStore({
         let fMenus: Nullable<MenuListItem[]> = menus;
         let path = "";
         for (let i = 0; i < menuCode.length / 5; i++) {
-          if (fMenus == null) break;
+          if (fMenus === null) break;
           const code = menuCode.slice(0, Math.max(0, (i + 1) * 5));
           const fMenu = fMenus.find((menu) => menu.menuCode === code);
-          if (fMenu != null) {
+          if (fMenu !== undefined && fMenu !== null) {
             path += formatPath(fMenu.routePath);
             fMenus = fMenu.children;
           }
@@ -185,7 +186,7 @@ export const usePermissionStore = defineStore({
        */
       function buildMenuRoute(menus: MenuListItem[], menuList: Menu[], routes: AppRouteRecordRaw[]) {
         for (const menu of menus) {
-          if (menu.children != null && menu.children.length > 0) {
+          if (menu.children !== null && menu.children.length > 0) {
             const cMenu: Menu = buildMenu(menu);
             menuList.push(cMenu);
             const cRoute: AppRouteRecordRaw = buildRoute(menu);
@@ -195,7 +196,7 @@ export const usePermissionStore = defineStore({
             buildChildMenuRoute(menu.children, cMenu, cRoute);
             continue;
           }
-          if (menu.menuType == MenuType.菜单) {
+          if (menu.menuType === MenuType.菜单) {
             // 没有子节点而且是菜单，需要构造一个Layout壳
             menuList.push(directMenu(menu));
             routes.push(directRoute(menu));
@@ -218,13 +219,13 @@ export const usePermissionStore = defineStore({
           const cRoute: AppRouteRecordRaw = buildRoute(menu);
           // 如果组件不是外部地址，采用内部路由path处理
           if (!isUrl(menu.component)) {
-            if (i++ == 0) {
+            if (i++ === 0) {
               pRoute.redirect = pRoute.path + cRoute.path;
             }
             cRoute.path = cRoute.path.slice(1);
             cMenu.path = pMenu.path + cMenu.path;
           }
-          if (menu.children != null && menu.children.length > 0) {
+          if (menu.children !== null && menu.children.length > 0) {
             cMenu.children = [];
             cRoute.children = [];
             buildChildMenuRoute(menu.children, cMenu, cRoute);
@@ -245,7 +246,7 @@ export const usePermissionStore = defineStore({
 
       // 如果存在前端路由信息，补充到到后台
       routes.push(...routeModuleList);
-      if (routeModuleList != null && routeModuleList.length > 0) {
+      if (routeModuleList !== null && routeModuleList.length > 0) {
         // 将路由转换成菜单
         const frontMenu = transformRouteToMenu(routeModuleList, true);
         menuList.push(...frontMenu);

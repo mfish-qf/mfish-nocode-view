@@ -12,8 +12,8 @@
         <AStep title="触发策略配置" @click="stepChange(1)" />
       </ASteps>
     </div>
-    <JobConfig ref="jobConfig" v-show="currentStep === 0" :job-info="jobInfo" />
-    <JobSubscribeManagement ref="triggerConfig" v-show="currentStep === 1" :job-id="jobId" />
+    <JobConfig ref="jobConfigRef" v-show="currentStep === 0" :job-info="jobInfo" />
+    <JobSubscribeManagement ref="triggerConfigRef" v-show="currentStep === 1" :job-id="jobId" />
     <template #centerFooter>
       <a-button v-show="currentStep === 0" @click="stepChange(1)" type="primary" danger>下一步 </a-button>
       <a-button v-show="currentStep === 1" @click="stepChange(0)" type="primary" danger>上一步 </a-button>
@@ -32,13 +32,13 @@
   const AStep = ASteps.Step;
   const isUpdate = ref(true);
   const currentStep = ref(0);
-  const jobConfig = ref();
-  const triggerConfig = ref();
+  const jobConfigRef = ref();
+  const triggerConfigRef = ref();
   const getJobValue = () => {
-    return jobConfig.value?.getValue();
+    return jobConfigRef.value?.getValue();
   };
   const getTriggerValue = () => {
-    return triggerConfig.value?.getValue();
+    return triggerConfigRef.value?.getValue();
   };
   const jobInfo = ref<any>(null);
   const jobId = ref("");

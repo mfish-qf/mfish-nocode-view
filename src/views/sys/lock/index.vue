@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade-bottom" mode="out-in">
+  <transition name="zoom-fade" mode="out-in">
     <LockPage v-if="getIsLock" />
   </transition>
 </template>

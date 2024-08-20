@@ -56,12 +56,15 @@
       height: 20px;
       cursor: pointer;
       border: 1px solid #ddd;
-      border-radius: 2px;
-
+      border-radius: 6px;
+      transition: all 0.2s ease-in;
       svg {
         display: none;
       }
-
+      &:hover {
+        transform: scale(1.05);
+        border: 1px solid @button-primary-hover-color;
+      }
       &--active {
         border: 1px solid @button-primary-hover-color;
 

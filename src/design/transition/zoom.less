@@ -1,7 +1,7 @@
 // zoom-out
 .zoom-out-enter-active,
 .zoom-out-leave-active {
-  transition: opacity 0.1 ease-in-out, transform 0.15s ease-out;
+  transition: transform 0.3s ease-out,opacity 0.2s ease-in-out;
 }
 
 .zoom-out-enter-from,
@@ -24,4 +24,44 @@
 .zoom-fade-leave-to {
   opacity: 0;
   transform: scale(1.06);
+}
+
+@keyframes zoom-out {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes zoom-fade {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+}
+
+.zoom-out-slow {
+  animation: zoom-out 3s infinite;
+}
+
+.zoom-fade-slow {
+  animation: zoom-fade 3s infinite;
 }

@@ -63,8 +63,8 @@ export function useDragLine(siderRef: Ref<any>, dragBarRef: Ref<any>, mix = fals
   onMounted(() => {
     nextTick(() => {
       const exec = useDebounceFn(changeWrapWidth, 80);
-      exec().then();
-    }).then();
+      exec();
+    });
   });
 
   function getEl(elRef: Ref<ElRef | ComponentRef>): any {
@@ -77,7 +77,7 @@ export function useDragLine(siderRef: Ref<any>, dragBarRef: Ref<any>, mix = fals
   }
 
   function handleMouseMove(ele: HTMLElement, wrap: HTMLElement, clientX: number) {
-    document.addEventListener("mousemove", (innerE) => {
+    document.onmousemove = function (innerE) {
       let iT = (ele as any).left + (innerE.clientX - clientX);
       const maxT = 800;
       const minT = unref(getMiniWidthNumber);
@@ -86,31 +86,31 @@ export function useDragLine(siderRef: Ref<any>, dragBarRef: Ref<any>, mix = fals
       iT < minT && (iT = minT);
       ele.style.left = wrap.style.width = `${iT}px`;
       return false;
-    });
+    };
   }
 
   // Drag and drop in the menu area-release the mouse
   function removeMouseup(ele: any) {
     const wrap = getEl(siderRef);
-    document.addEventListener("mouseup", () => {
+    document.onmouseup = function () {
       document.onmousemove = null;
       document.onmouseup = null;
       wrap.style.transition = "width 0.2s";
-      const width = Number.parseInt(wrap.style.width);
+      const width = parseInt(wrap.style.width);
 
-      if (mix) {
-        setMenuSetting({ menuWidth: width });
-      } else {
+      if (!mix) {
         const miniWidth = unref(getMiniWidthNumber);
-        if (unref(getCollapsed)) {
-          width > miniWidth && setMenuSetting({ collapsed: false, menuWidth: width });
-        } else {
+        if (!unref(getCollapsed)) {
           width > miniWidth + 20 ? setMenuSetting({ menuWidth: width }) : setMenuSetting({ collapsed: true });
+        } else {
+          width > miniWidth && setMenuSetting({ collapsed: false, menuWidth: width });
         }
+      } else {
+        setMenuSetting({ menuWidth: width });
       }
 
       ele.releaseCapture?.();
-    });
+    };
   }
 
   function changeWrapWidth() {
@@ -119,7 +119,7 @@ export function useDragLine(siderRef: Ref<any>, dragBarRef: Ref<any>, mix = fals
     const wrap = getEl(siderRef);
     if (!wrap) return;
 
-    ele.addEventListener("mousedown", (e: any) => {
+    ele.onmousedown = (e: any) => {
       wrap.style.transition = "unset";
       const clientX = e?.clientX;
       ele.left = ele.offsetLeft;
@@ -127,7 +127,7 @@ export function useDragLine(siderRef: Ref<any>, dragBarRef: Ref<any>, mix = fals
       removeMouseup(ele);
       ele.setCapture?.();
       return false;
-    });
+    };
   }
 
   return {};

@@ -21,7 +21,7 @@
         <span> {{ minute }}</span>
       </div>
     </div>
-    <transition name="fade-slide">
+    <transition name="fade-slide-left">
       <div :class="`${prefixCls}-entry`" v-show="!showDate">
         <div :class="`${prefixCls}-entry-content`">
           <div :class="`${prefixCls}-entry__header enter-x`">

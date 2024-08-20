@@ -4,6 +4,7 @@ import { useAppStore } from "@/store/modules/App";
 import { useLockStore } from "@/store/modules/Lock";
 import { useUserStore } from "@/store/modules/User";
 import { useRootSetting } from "../setting/UseRootSetting";
+import { TimeoutHandle } from "@mfish/types";
 
 export function useLockPage() {
   const { getLockTime } = useRootSetting();

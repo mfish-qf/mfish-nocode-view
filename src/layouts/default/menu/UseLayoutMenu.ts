@@ -32,7 +32,10 @@ export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
   watch(
     [() => unref(currentRoute).path, () => unref(splitType)],
     async ([path]: [string, MenuSplitTyeEnum]) => {
-      if (unref(splitNotLeft) || unref(getIsMobile)) return;
+      if (unref(splitNotLeft) || unref(getIsMobile)) {
+        getMenuList().then();
+        return;
+      }
 
       const { meta } = unref(currentRoute);
       const currentActiveMenu = meta.currentActiveMenu as string;
@@ -74,7 +77,7 @@ export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
     // spilt mode left
     const children = await getChildrenMenus(parentPath);
 
-    if (!children || children.length === 0) {
+    if (!children || !children.length) {
       setMenuSetting({ hidden: true });
       menusRef.value = [];
       return;

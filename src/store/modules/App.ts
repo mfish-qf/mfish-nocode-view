@@ -2,7 +2,7 @@ import type { ProjectConfig, HeaderSetting, MenuSetting, TransitionSetting, Mult
 import type { BeforeMiniState } from "#/store";
 import { defineStore } from "pinia";
 import { store } from "@/store";
-import { ThemeEnum } from "@/enums/AppEnum";
+import { RouterTransitionEnum, ThemeEnum } from "@/enums/AppEnum";
 import { Persistent } from "@/utils/cache/Persistent";
 import { darkMode } from "@/settings/DesignSetting";
 import { resetRouter } from "@/router";
@@ -50,7 +50,7 @@ export const useAppStore = defineStore({
       return this.getProjectConfig.menuSetting;
     },
     getTransitionSetting(): TransitionSetting {
-      return this.getProjectConfig.transitionSetting;
+      return this.getProjectConfig.transitionSetting || RouterTransitionEnum.FADE_SIDE_LEFT;
     },
     getMultiTabsSetting(): MultiTabsSetting {
       return this.getProjectConfig.multiTabsSetting;

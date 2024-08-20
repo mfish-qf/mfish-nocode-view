@@ -1,4 +1,4 @@
-import { ContentEnum, RouterTransitionEnum } from "@/enums/AppEnum";
+import { ContentEnum } from "@/enums/AppEnum";
 import { MenuModeEnum, MenuTypeEnum, TopMenuAlignEnum, TriggerEnum, MixSidebarTriggerEnum } from "@/enums/MenuEnum";
 import { useI18n } from "@/hooks/web/UseI18n";
 
@@ -84,10 +84,6 @@ export const getMenuTriggerOptions = (hideTop: boolean) => {
       value: TriggerEnum.NONE,
       label: t("layout.setting.menuTriggerNone")
     },
-    {
-      value: TriggerEnum.FOOTER,
-      label: t("layout.setting.menuTriggerBottom")
-    },
     ...(hideTop
       ? []
       : [
@@ -98,20 +94,6 @@ export const getMenuTriggerOptions = (hideTop: boolean) => {
         ])
   ];
 };
-
-export const routerTransitionOptions = [
-  RouterTransitionEnum.ZOOM_FADE,
-  RouterTransitionEnum.FADE,
-  RouterTransitionEnum.ZOOM_OUT,
-  RouterTransitionEnum.FADE_SIDE,
-  RouterTransitionEnum.FADE_BOTTOM,
-  RouterTransitionEnum.FADE_SCALE
-].map((item) => {
-  return {
-    label: item,
-    value: item
-  };
-});
 
 export const menuTypeList = [
   {
