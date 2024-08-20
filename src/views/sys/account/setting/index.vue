@@ -1,5 +1,5 @@
 <template>
-  <div ref="wrapperRef" class="account-setting">
+  <div class="account-setting">
     <ATabs
       destroy-inactive-tab-pane
       tab-position="left"
@@ -40,9 +40,10 @@
   const route = useRoute();
   const tabType = ref<number>(1);
   const { isTenant, hasPermission } = usePermission();
-  let setting: { key: number; name: string; component: string; auth?: string }[];
   // 如果不是租户，不显示租户配置信息
-  setting = isTenant() ? [...settingList] : settingList.filter((set) => set.key <= 3);
+  const setting: { key: number; name: string; component: string; auth?: string }[] = isTenant()
+    ? [...settingList]
+    : settingList.filter((set) => set.key <= 3);
   onBeforeMount(() => {
     const index = route.path.lastIndexOf("/");
     if (index) {
@@ -71,10 +72,6 @@
 
     .base-title {
       padding: 0 16px 0 16px !important;
-    }
-
-    .ant-tabs-tab-active {
-      background-color: @item-active-bg;
     }
   }
 </style>
