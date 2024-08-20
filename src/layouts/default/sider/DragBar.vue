@@ -1,47 +1,36 @@
 <template>
   <div :class="getClass" :style="getDragBarStyle"></div>
 </template>
-<script lang="ts">
-  import { defineComponent, computed, unref } from "vue";
+<script lang="ts" setup>
+  import { computed, unref } from "vue";
 
   import { useDesign } from "@/hooks/web/UseDesign";
   import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
 
-  export default defineComponent({
-    name: "DargBar",
-    props: {
-      mobile: Boolean
-    },
-    setup(props) {
-      const { getMiniWidthNumber, getCollapsed, getCanDrag } = useMenuSetting();
+  const props = defineProps({
+    mobile: Boolean
+  });
+  const { getMiniWidthNumber, getCollapsed, getCanDrag } = useMenuSetting();
 
-      const { prefixCls } = useDesign("darg-bar");
-      const getDragBarStyle = computed(() => {
-        if (unref(getCollapsed)) {
-          return { left: `${unref(getMiniWidthNumber)}px` };
-        }
-        return {};
-      });
-
-      const getClass = computed(() => {
-        return [
-          prefixCls,
-          {
-            [`${prefixCls}--hide`]: !unref(getCanDrag) || props.mobile
-          }
-        ];
-      });
-
-      return {
-        prefixCls,
-        getDragBarStyle,
-        getClass
-      };
+  const { prefixCls } = useDesign("drag-bar");
+  const getDragBarStyle = computed(() => {
+    if (unref(getCollapsed)) {
+      return { left: `${unref(getMiniWidthNumber)}px` };
     }
+    return {};
+  });
+
+  const getClass = computed(() => {
+    return [
+      prefixCls,
+      {
+        [`${prefixCls}--hide`]: !unref(getCanDrag) || props.mobile
+      }
+    ];
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~"@{namespace}-darg-bar";
+  @prefix-cls: ~"@{namespace}-drag-bar";
 
   .@{prefix-cls} {
     position: absolute;

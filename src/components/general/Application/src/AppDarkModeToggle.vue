@@ -67,11 +67,11 @@
   @prefix-cls: ~"@{namespace}-dark-switch";
   [data-theme="dark"] {
     .@{prefix-cls} {
-      border: 1px #303030 solid;
+      border: 1px solid @border-color-dark;
     }
   }
   .@{prefix-cls} {
-    border: 1px solid #d9d9d9;
+    border: 1px solid @border-color-base;
     position: relative;
     display: flex;
     width: 46px;

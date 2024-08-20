@@ -37,7 +37,7 @@
       padding-right: 2px;
       &__item{
         margin: 1px;
-        padding: 4px;
+        padding: 6px;
       }
       .ant-divider {
        margin: 2px;
@@ -134,11 +134,15 @@
     }
     .ant-divider {
       height: 16px;
-      background-color: @header-color;
+      background-color: @border-color-base;
     }
   }
   &--dark {
-    background-color: @header-dark-bg-color !important;
     box-shadow: 0 0 6px 0 #303030;
+    &-action {
+      .ant-divider {
+        background-color: @border-color-dark;
+      }
+    }
   }
 }

@@ -4,37 +4,26 @@
     <InputNumber v-bind="$attrs" size="small" :class="`${prefixCls}-input-number`" @change="handleChange" />
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent, PropType } from "vue";
+<script lang="ts" setup>
+  import { PropType } from "vue";
   import { InputNumber } from "ant-design-vue";
   import { useDesign } from "@/hooks/web/UseDesign";
   import { baseHandler } from "../Handler";
   import { HandlerEnum } from "../Enum";
 
-  export default defineComponent({
-    name: "InputNumberItem",
-    components: { InputNumber },
-    props: {
-      event: {
-        type: Number as PropType<HandlerEnum>
-      },
-      title: {
-        type: String
-      }
+  const props = defineProps({
+    event: {
+      type: Number as PropType<HandlerEnum>
     },
-    setup(props) {
-      const { prefixCls } = useDesign("setting-input-number-item");
-
-      function handleChange(e) {
-        props.event && baseHandler(props.event, e);
-      }
-
-      return {
-        prefixCls,
-        handleChange
-      };
+    title: {
+      type: String
     }
   });
+  const { prefixCls } = useDesign("setting-input-number-item");
+
+  function handleChange(e) {
+    props.event && baseHandler(props.event, e);
+  }
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~"@{namespace}-setting-input-number-item";
@@ -45,7 +34,7 @@
     margin: 16px 0;
 
     &-input-number {
-      width: 80px;
+      width: 126px;
     }
   }
 </style>

@@ -15,7 +15,6 @@
   import { BasicForm, useForm } from "../../../components/general/Form";
   import { jobFormSchema } from "./job.data";
   import { CodeEditor, MODE } from "@/components/general/CodeEditor";
-  defineOptions({ name: "JobConfig" });
 
   const props = defineProps({
     jobInfo: {

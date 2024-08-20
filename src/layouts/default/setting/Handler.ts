@@ -8,6 +8,8 @@ import { changeTheme } from "@/logics/theme/UpdateTheme";
 import { updateDarkTheme } from "@/logics/theme/Dark";
 import { useRootSetting } from "@/hooks/setting/UseRootSetting";
 import { DeepPartial } from "@mfish/types";
+import { saveSysConfig } from "@/api/sys/SysConfig";
+import { unref } from "vue";
 
 export function baseHandler(event: HandlerEnum, value: any) {
   const appStore = useAppStore();
@@ -17,6 +19,7 @@ export function baseHandler(event: HandlerEnum, value: any) {
     updateHeaderBgColor();
     updateSidebarBgColor();
   }
+  saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)) }, false).then();
 }
 
 export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConfig> {

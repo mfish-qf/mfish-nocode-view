@@ -1,11 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <a-button type="primary" @click="handleSave">
-      <SaveOutlined class="mr-2" />
-      {{ t("layout.setting.saveBtn") }}
-    </a-button>
-
-    <a-button type="warning" @click="handleCopy">
+    <a-button type="primary" @click="handleCopy">
       <CopyOutlined class="mr-2" />
       {{ t("layout.setting.copyBtn") }}
     </a-button>
@@ -17,24 +12,20 @@
 </template>
 <script lang="ts" setup>
   import { unref } from "vue";
-  import { CopyOutlined, RedoOutlined, SaveOutlined } from "@ant-design/icons-vue";
+  import { CopyOutlined, RedoOutlined } from "@ant-design/icons-vue";
   import { useAppStore } from "@/store/modules/App";
   import { useDesign } from "@/hooks/web/UseDesign";
   import { useI18n } from "@/hooks/web/UseI18n";
   import { useMessage } from "@/hooks/web/UseMessage";
   import { useCopyToClipboard } from "@/hooks/web/UseCopyToClipboard";
   import defaultSetting from "@/settings/ProjectSetting";
-  import { saveSysConfig } from "@/api/sys/SysConfig";
   import { changeAppConfig } from "@/logics/InitAppConfig";
+  import { saveSysConfig } from "@/api/sys/SysConfig";
 
   const { prefixCls } = useDesign("setting-save");
   const { t } = useI18n();
   const { createSuccessModal, createMessage } = useMessage();
   const appStore = useAppStore();
-
-  function handleSave() {
-    saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)) }).then();
-  }
 
   function handleCopy() {
     const { isSuccessRef } = useCopyToClipboard(JSON.stringify(unref(appStore.getProjectConfig), null, 2));
@@ -48,7 +39,9 @@
   function handleResetSetting() {
     try {
       changeAppConfig(defaultSetting);
-      createMessage.success(t("layout.setting.resetSuccess"));
+      saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)) }, false).then(() => {
+        createMessage.success(t("layout.setting.resetSuccess"));
+      });
     } catch (error: any) {
       createMessage.error(error);
     }
@@ -59,7 +52,7 @@
 
   .@{prefix-cls} {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     button {
       display: flex;
       align-items: center;

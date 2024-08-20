@@ -29,11 +29,10 @@
     components: { Tooltip },
     props: {
       menuTypeList: {
-        type: Array as PropType<typeof menuTypeList>,
-        defualt: () => []
+        type: Array as PropType<typeof menuTypeList>
       },
       handler: {
-        type: Function as PropType<Fn>,
+        type: Function,
         default: () => ({})
       },
       def: {
@@ -55,16 +54,15 @@
 
   .@{prefix-cls} {
     display: flex;
-
+    justify-content: space-between;
     &__item {
       position: relative;
       width: 56px;
       height: 48px;
-      margin-right: 16px;
       overflow: hidden;
       cursor: pointer;
       background-color: #f0f2f5;
-      border-radius: 4px;
+      border-radius: 8px;
       box-shadow: 0 1px 2.5px 0 rgb(0 0 0 / 18%);
 
       &::before,
@@ -155,11 +153,12 @@
           background-color: #fff;
         }
       }
-
+      transition: all 0.2s ease-in;
       &:hover,
       &--active {
         padding: 12px;
-        border: 2px solid @button-primary-color;
+        transform: scale(1.05);
+        border: 1px solid @button-primary-color;
 
         &::before,
         &::after {

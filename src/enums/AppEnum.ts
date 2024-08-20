@@ -23,10 +23,12 @@ export enum SettingButtonPositionEnum {
 // Route switching animation
 // 路由切换动画
 export enum RouterTransitionEnum {
-  ZOOM_FADE = "zoom-fade",
-  ZOOM_OUT = "zoom-out",
-  FADE_SIDE = "fade-slide",
   FADE = "fade",
-  FADE_BOTTOM = "fade-bottom",
-  FADE_SCALE = "fade-scale"
+  FADE_SIDE_LEFT = "fade-slide-left",
+  FADE_SIDE_RIGHT = "fade-slide-right",
+  FADE_UP = "fade-up",
+  FADE_DOWN = "fade-down",
+  FADE_SCALE = "fade-scale",
+  ZOOM_FADE = "zoom-fade",
+  ZOOM_OUT = "zoom-out"
 }

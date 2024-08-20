@@ -220,7 +220,6 @@
     const values = unref(getBindValues);
     return [
       prefixCls,
-      "-enter-x",
       attrs.class,
       {
         [`${prefixCls}-form-container`]: values.useSearchForm,

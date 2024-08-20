@@ -11,7 +11,7 @@
     :collapsed-width="getCollapsedWidth"
     :theme="getMenuTheme"
     v-bind="getTriggerAttr"
-    :trigger="getShowTrigger ? h(LayoutTrigger) : null"
+    :trigger="null"
     @breakpoint="onBreakpointChange"
   >
     <LayoutMenu :theme="getMenuTheme" :menu-mode="getMode" :split-type="getSplitType" />
@@ -19,10 +19,9 @@
   </Layout.Sider>
 </template>
 <script lang="ts" setup>
-  import { computed, ref, unref, CSSProperties, h } from "vue";
+  import { computed, ref, unref, CSSProperties } from "vue";
   import { Layout } from "ant-design-vue";
   import LayoutMenu from "../menu/index.vue";
-  import LayoutTrigger from "@/layouts/default/trigger/index.vue";
   import { MenuModeEnum, MenuSplitTyeEnum, TriggerEnum } from "@/enums/MenuEnum";
   import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
   import { useTrigger, useDragLine, useSiderEvent } from "./UseLayoutSider";
@@ -51,7 +50,7 @@
 
   const { getIsMobile } = useAppInject();
 
-  const { getTriggerAttr, getShowTrigger } = useTrigger(getIsMobile);
+  const { getTriggerAttr } = useTrigger(getIsMobile);
 
   useDragLine(sideRef, dragBarRef);
 

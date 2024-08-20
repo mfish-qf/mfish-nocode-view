@@ -10,7 +10,7 @@ const setting: ProjectConfig = {
   showSettingButton: true,
 
   // Whether to show the theme switch button
-  showDarkModeToggle: true,
+  showDarkModeToggle: false,
 
   // `Settings` button position
   settingButtonPosition: SettingButtonPositionEnum.AUTO,
@@ -129,7 +129,7 @@ const setting: ProjectConfig = {
     enable: true,
 
     // Route basic switching animation
-    basicTransition: RouterTransitionEnum.FADE_SIDE,
+    basicTransition: RouterTransitionEnum.FADE_SIDE_LEFT,
 
     // Whether to open page switching loading
     // Only open when enable=true

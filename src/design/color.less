@@ -4,7 +4,7 @@ html {
   --main-color-light: #ee4f12;
   // header
   --header-bg-color: #f4f7f9;
-  --header-color: #f4f7f9;
+  --header-color: #18203A;
   --header-bg-hover-color: #f4f7f9;
 
   // sider
@@ -13,13 +13,14 @@ html {
   --sider-lighten-bg-color: #212121;
 
   --text-color: rgba(0 0 0 / 85%);
-  --border-color: #eee;
+  --border-color: #d9d9d9;
+  --border-color-dark: #424242;
   --component-background-color: #fff;
   --app-content-background-color: #fafafa;
 
   &[data-theme='dark'] {
     --text-color: #c9d1d9;
-    --border-color: #303030;
+    --border-color: #424242;
     --component-background-color: #151515;
     --app-content-background-color: #1e1e1e;
   }
@@ -31,17 +32,11 @@ html {
 @content-bg: #f4f7f9;
 
 @border-color-base: var(--border-color);
+@border-color-dark: var(--border-color-dark);
 
 @component-background: var(--component-background-color);
 
 @iconify-bg-color: #5551;
-
-// =================================
-// ==============border-color=======
-// =================================
-
-// Dark-dark
-@border-color-dark: #b6b7b9;
 
 // Dark-light
 @border-color-shallow-dark: #cececd;
