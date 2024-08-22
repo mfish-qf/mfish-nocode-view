@@ -333,7 +333,7 @@ export interface BasicTableProps<T = any> {
    * Row selection config
    * @type object
    */
-  rowSelection?: TableRowSelection;
+  rowSelection: TableRowSelection;
 
   /**
    * Set horizontal or vertical scrolling, can also be used to specify the width and height of the scroll area.
@@ -446,9 +446,9 @@ export interface TableActionType {
   deleteSelectRowByKey: (key: string) => void;
   setPagination: (info: Partial<PaginationProps>) => void;
   setTableData: <T extends Recordable = Recordable>(values: T[]) => void;
-  updateTableDataRecord: (rowKey: string | number, record: Recordable) => Recordable;
+  updateTableDataRecord: (rowKey: string | number, record: Recordable) => Recordable | undefined;
   deleteTableDataRecord: (rowKey: string | number | string[] | number[]) => void;
-  insertTableDataRecord: (record: Recordable, index?: number) => Recordable;
+  insertTableDataRecord: (record: Recordable, index?: number) => Recordable | undefined;
   findTableDataRecord: (rowKey: string | number) => Recordable;
   getColumns: (opt?: GetColumnsParams) => BasicColumn[];
   setColumns: (columns: BasicColumn[] | string[]) => void;
@@ -462,7 +462,7 @@ export interface TableActionType {
   getSize: () => SizeType;
   getRowSelection: () => TableRowSelection<Recordable>;
   getCacheColumns: () => BasicColumn[];
-  emit?: EmitType;
+  emit: EmitType | any;
   updateTableData: (index: number, key: string, value: any) => Recordable;
   setShowPagination: (show: boolean) => Promise<void>;
   getShowPagination: () => boolean;

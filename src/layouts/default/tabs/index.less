@@ -2,15 +2,11 @@
 
 [data-theme='dark'] {
   .@{prefix-cls} {
-    .ant-tabs-tab {
-      //border-bottom: 1px solid @border-color-base;
-    }
-
     &-content {
       &__extra-quick,
       &__extra-redo,
       &__extra-fold {
-        border-left: 0px solid @border-color-base;
+        border-left: 0 solid @border-color-base;
         color: #8b949e;
         &:hover{
           color: #c9d1d9
@@ -23,17 +19,14 @@
 [data-theme='light'] {
   .@{prefix-cls} {
     .ant-tabs-tab:not(.ant-tabs-tab-active) {
-      border: 1px solid #d9d9d9 !important;
+      border: 1px solid @border-color-base !important;
     }
   }
 }
 
 .@{prefix-cls} {
   z-index: 10;
-  //height: @multiple-height + 2;
-  //line-height: @multiple-height + 2;
   background-color: @component-background;
-  //border-bottom: 1px solid @border-color-base;
 
   .ant-tabs-small {
     height: @multiple-height;
@@ -59,9 +52,10 @@
         line-height: calc(@multiple-height - 2px);
         color: @text-color-base;
         background-color: @component-background;
-        transition: none;
+        transition: all 0.2s ease;
 
         &:hover {
+          box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
           .ant-tabs-tab-remove {
             opacity: 1;
           }
@@ -73,7 +67,6 @@
           font-size: 12px;
           color: inherit;
           opacity: 0;
-          transition: none;
           margin-left: 2px;
           margin-right: -4px;
 
@@ -98,7 +91,7 @@
       .ant-tabs-tab-active {
         position: relative;
         padding-left: 18px;
-        background: @button-primary-color;
+        background: @main-color-light;
         border: 0;
         transition: none;
 
@@ -152,12 +145,8 @@
     &__extra-fold {
       display: inline-flex;
       width: 36px;
-      //height: @multiple-height;
-      //line-height: @multiple-height;
-      color: @text-color-secondary;
       text-align: center;
       cursor: pointer;
-      //border-left: 1px solid @border-color-base;
 
       &:hover {
         color: @text-color-base;

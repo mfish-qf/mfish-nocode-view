@@ -5,7 +5,7 @@
  */
 import type { CSSProperties } from "vue";
 
-export type Recordable<T = any> = Record<string, T>;
+export type Recordable<T = any> = Record<string, T> | any;
 export type Nullable<T> = T | null;
 export type StyleValue = string | CSSProperties | Array<StyleValue>;
 export type TimeoutHandle = ReturnType<typeof setTimeout>;

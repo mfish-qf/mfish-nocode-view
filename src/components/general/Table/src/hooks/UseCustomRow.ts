@@ -3,12 +3,13 @@ import type { BasicTableProps } from "../types/Table";
 import { unref } from "vue";
 import { ROW_KEY } from "../Const";
 import { isString, isFunction } from "@/utils/Is";
+import { Recordable } from "@mfish/types";
 
 interface Options {
   setSelectedRowKeys: (keys: string[]) => void;
   getSelectRowKeys: () => string[];
   clearSelectedRowKeys: () => void;
-  emit: EmitType;
+  emit: EmitType | any;
   getAutoCreateKey: ComputedRef<boolean | undefined>;
 }
 

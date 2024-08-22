@@ -26,14 +26,14 @@
   },
   "dependencies": {
     "@ant-design/colors": "^7.1.0",
-    "vite": "^5.4.1"
+    "vite": "^5.4.2"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@vitejs/plugin-vue": "^5.1.2",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "ant-design-vue": "^4.2.3",
-    "dayjs": "^1.11.12",
+    "dayjs": "^1.11.13",
     "dotenv": "^16.4.5",
     "fs-extra": "^11.2.0",
     "less": "^4.2.0",

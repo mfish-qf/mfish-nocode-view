@@ -1,22 +1,12 @@
 // button reset
 .ant-btn {
 
+  &:not(:disabled):focus-visible{
+    outline: none;
+  }
   &-primary:not(&-background-ghost):not([disabled]) {
     color: @white;
   }
-
-  //&-default {
-  //  color: @button-cancel-color;
-  //  background-color: @button-cancel-bg-color;
-  //  border-color: @button-cancel-border-color;
-  //
-  //  &:hover,
-  //  &:focus {
-  //    color: @button-cancel-hover-color;
-  //    background-color: @button-cancel-hover-bg-color;
-  //    border-color: @button-cancel-hover-border-color;
-  //  }
-  //}
 
   [data-theme='light'] &.ant-btn-link.is-disabled {
     color: rgb(0 0 0 / 25%);
@@ -35,8 +25,6 @@
     border-color: transparent !important;
     box-shadow: none;
   }
-
-  // color: @white;
 
   &-success.ant-btn-link:not([disabled='disabled']) {
     color: @button-success-color;
@@ -112,13 +100,6 @@
       background-color: @button-warn-active-color;
       border-color: @button-warn-active-color;
     }
-
-    //&[disabled],
-    //&[disabled]:hover {
-    //  color: @white;
-    //  background-color: fade(@button-warn-color, 40%);
-    //  border-color: fade(@button-warn-color, 40%);
-    //}
   }
 
   &-error.ant-btn-link:not([disabled='disabled']) {
@@ -139,7 +120,6 @@
     color: @white;
     background-color: @button-error-color;
     border-color: @button-error-color;
-    //border-width: 0;
 
     &:hover,
     &:focus {
@@ -152,13 +132,6 @@
       background-color: @button-error-active-color;
       border-color: @button-error-active-color;
     }
-
-    //&[disabled],
-    //&[disabled]:hover {
-    //  color: @white;
-    //  background-color: fade(@button-error-color, 40%);
-    //  border-color: fade(@button-error-color, 40%);
-    //}
   }
 
   &-background-ghost {

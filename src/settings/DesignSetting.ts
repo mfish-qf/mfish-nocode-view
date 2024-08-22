@@ -1,4 +1,4 @@
-import { ThemeEnum } from "../enums/AppEnum";
+import { ThemeEnum } from "@/enums/AppEnum";
 
 export const prefixCls = "mfish";
 
@@ -56,8 +56,8 @@ export const HEADER_PRESET_BG_COLOR_LIST: string[] = [
 
 // sider preset color
 export const SIDE_BAR_BG_COLOR_LIST: string[] = [
-  "#001529",
   "#212121",
+  "#001529",
   "#273352",
   "#191b24",
   "#191a23",

@@ -11,8 +11,8 @@ declare module "vue-router" {
     realPath?: string;
     // Whether to ignore permissions
     ignoreAuth?: boolean;
-    // Whether not to cache
-    ignoreKeepAlive?: boolean;
+    // Whether cache
+    keepAlive?: boolean;
     // icon on tab
     icon?: string;
     // Currently active menu

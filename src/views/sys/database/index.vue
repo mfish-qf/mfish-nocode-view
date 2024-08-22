@@ -12,4 +12,5 @@
 <script lang="ts" setup>
   import DataBaseManagement from "@/views/sys/database/DataBaseManagement.vue";
   import PageWrapper from "@/components/general/Page/src/PageWrapper.vue";
+  defineOptions({ name: "DataBaseManagement" });
 </script>

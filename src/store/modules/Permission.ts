@@ -126,7 +126,7 @@ export const usePermissionStore = defineStore({
             icon: menu.menuIcon,
             hideMenu: !menu.isVisible,
             menuSort: menu.menuSort,
-            ignoreKeepAlive: !menu.isKeepalive
+            keepAlive: !!menu.isKeepalive
           }
         };
         switch (menu.menuType) {

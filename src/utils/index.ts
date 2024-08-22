@@ -6,6 +6,7 @@
 import { App, Plugin, unref } from "vue";
 import { isObject } from "@/utils/Is";
 import type { RouteLocationNormalized, RouteRecordNormalized } from "vue-router";
+import { Recordable } from "@mfish/types";
 
 export const noop = () => {};
 // 组件安装
@@ -88,9 +89,7 @@ export function getPopupContainer(node?: HTMLElement): HTMLElement {
 // 获取动态属性
 export function getDynamicProps<T extends object, U>(props: T): Partial<U> {
   const ret: Recordable = {};
-  Object.keys(props).map((key) => {
-    ret[key] = unref((props as Recordable)[key]);
-  });
+  Object.keys(props).map((key) => (ret[key] = unref((props as Recordable)[key])));
 
   return ret as Partial<U>;
 }
