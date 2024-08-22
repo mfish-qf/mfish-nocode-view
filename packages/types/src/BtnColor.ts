@@ -3,6 +3,6 @@
  * @author: mfish
  * @date: 2024/8/21
  */
-export const colorSuccess = "#67C23A";
+export const colorSuccess = "#238636";
 export const colorWarning = "#E6A23C";
-export const colorError = "#F56C6C";
+export const colorError = "#DA3633";
