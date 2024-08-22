@@ -2,6 +2,7 @@ import { computed, reactive } from "vue";
 import { theme } from "ant-design-vue";
 import { useRootSetting } from "@/hooks/setting/UseRootSetting";
 import { ThemeEnum } from "@/enums/AppEnum";
+import { colorError, colorSuccess, colorWarning } from "@mfish/types";
 
 export function useDarkModeTheme() {
   const { getDarkMode } = useRootSetting();
@@ -11,9 +12,9 @@ export function useDarkModeTheme() {
     token: {
       colorPrimary: useRootSetting().getThemeColor,
       colorInfo: useRootSetting().getThemeColor,
-      colorSuccess: "#55D187",
-      colorWarning: "#EFBD47",
-      colorError: "#ED6F6F"
+      colorSuccess,
+      colorWarning,
+      colorError
     }
   };
 

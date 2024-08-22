@@ -1,5 +1,8 @@
 <template>
   <Button v-bind="getBindValue" :class="getButtonClass" @click="onClick">
+    <template #icon>
+      <slot name="icon"></slot>
+    </template>
     <template #default="data">
       <Icon :icon="preIcon" v-if="preIcon" :size="iconSize" />
       <slot v-bind="data || {}"></slot>
@@ -8,22 +11,17 @@
   </Button>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from "vue";
-  import { Button } from "ant-design-vue";
-
-  export default defineComponent({
-    name: "AButton",
-    extends: Button,
-    inheritAttrs: false
-  });
-</script>
 <script lang="ts" setup>
-  import { computed, unref } from "vue";
+  import { ComponentOptionsMixin, computed, unref } from "vue";
   import { Icon } from "@/components/general/Icon";
   import { buttonProps } from "./props";
+  import { Button } from "ant-design-vue";
   import { useAttrs } from "@/hooks/core/UseAttrs";
-
+  defineOptions({
+    name: "AButton",
+    extends: Button as ComponentOptionsMixin,
+    inheritAttrs: false
+  });
   const props = defineProps(buttonProps);
   // get component class
   const attrs = useAttrs({ excludeDefaultKeys: false });

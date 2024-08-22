@@ -54,8 +54,9 @@
     &__item {
       width: 20px;
       height: 20px;
+      margin-bottom: 1px;
       cursor: pointer;
-      border: 1px solid #ddd;
+      border: 1px solid @border-color-base;
       border-radius: 6px;
       transition: all 0.2s ease-in;
       svg {
@@ -72,7 +73,7 @@
           display: inline-block;
           margin: 3px 3px 3px 3px;
           font-size: 12px;
-          fill: @white !important;
+          fill: darken(@white, 25%) !important;
         }
       }
     }

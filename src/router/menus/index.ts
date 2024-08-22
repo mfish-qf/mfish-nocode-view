@@ -50,8 +50,7 @@ export async function getCurrentParentPath(currentPath: string) {
 // 获取一级菜单删除子选项
 export async function getShallowMenus(): Promise<Menu[]> {
   const menus = getMenus();
-  const shallowMenuList = menus.map((item) => ({ ...item, children: undefined }));
-  return shallowMenuList;
+  return menus.map((item) => ({ ...item, children: undefined }));
 }
 
 // 获取子菜单

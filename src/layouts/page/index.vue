@@ -3,9 +3,9 @@
     <template #default="{ Component, route }">
       <transition :name="getTransitionName(getEnableTransition, getBasicTransition)" mode="out-in" appear>
         <keep-alive v-if="openCache" :include="getCaches">
-          <component :is="Component" :key="route.fullPath" />
+          <component :is="setName(route, Component)" :key="route.name" />
         </keep-alive>
-        <component v-else :is="Component" :key="route.fullPath" />
+        <component v-else :is="Component" :key="route.name" />
       </transition>
     </template>
   </RouterView>
@@ -25,10 +25,17 @@
 
   const { getShowMultipleTab } = useMultipleTabSetting();
   const tabStore = useMultipleTabStore();
-
   const { getOpenKeepAlive, getCanEmbedIFramePage } = useRootSetting();
 
   const { getBasicTransition, getEnableTransition } = useTransitionSetting();
+
+  function setName(route, Component) {
+    const name = Component.type.name;
+    if (name) {
+      tabStore.addCacheTab(route, name);
+    }
+    return Component;
+  }
 
   const openCache = computed(() => unref(getOpenKeepAlive) && unref(getShowMultipleTab));
 

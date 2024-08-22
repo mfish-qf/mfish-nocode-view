@@ -1,5 +1,5 @@
 import type { RouteLocationNormalized, RouteLocationRaw, Router } from "vue-router";
-import { toRaw, unref } from "vue";
+import { ref, toRaw, unref } from "vue";
 import { defineStore } from "pinia";
 import { useGo, useRedo } from "@/hooks/web/UsePage";
 import { Persistent } from "@/utils/cache/Persistent";
@@ -11,7 +11,7 @@ import projectSetting from "@/settings/ProjectSetting";
 import { usePermissionStore } from "@/store/modules/Permission";
 
 export interface MultipleTabState {
-  cacheTabList: Set<string>;
+  cacheTabMap: Map<string, string>;
   tabList: RouteLocationNormalized[];
   lastDragEndIndex: number;
 }
@@ -36,7 +36,7 @@ export const useMultipleTabStore = defineStore({
   id: "app-multiple-tab",
   state: (): MultipleTabState => ({
     // Tabs that need to be cached
-    cacheTabList: new Set(),
+    cacheTabMap: ref(new Map()),
     // multiple tab list
     tabList: cacheTab ? Persistent.getLocal(MULTIPLE_TABS_KEY) || [] : [],
     // Index of the last moved tab
@@ -47,49 +47,34 @@ export const useMultipleTabStore = defineStore({
       return this.tabList;
     },
     getCachedTabList(): string[] {
-      return [...this.cacheTabList];
+      const list = [];
+      for (const tab of this.tabList) {
+        if (!this.cacheTabMap.has(tab.name)) {
+          continue;
+        }
+        list.push(this.cacheTabMap.get(tab.name));
+      }
+      return list;
     },
     getLastDragEndIndex(): number {
       return this.lastDragEndIndex;
     }
   },
   actions: {
-    /**
-     * Update the cache according to the currently opened tabs
-     */
-    async updateCacheTab() {
-      const cacheMap: Set<string> = new Set();
-
-      for (const tab of this.tabList) {
-        const item = getRawRoute(tab);
-        // Ignore the cache
-        const needCache = !item.meta?.ignoreKeepAlive;
-        if (!needCache) {
-          continue;
-        }
-        const name = item.name as string;
-        cacheMap.add(name);
+    addCacheTab(route, componentName: string) {
+      if (route.meta?.keepAlive && componentName) {
+        this.cacheTabMap.set(route.name, componentName);
       }
-      this.cacheTabList = cacheMap;
     },
-
+    clearCacheTabs(): void {
+      this.cacheTabMap.clear();
+    },
     /**
      * Refresh tabs
      */
     async refreshPage(router: Router) {
-      const { currentRoute } = router;
-      const route = unref(currentRoute);
-      const name = route.name;
-
-      const findTab = this.getCachedTabList.find((item) => item === name);
-      if (findTab) {
-        this.cacheTabList.delete(findTab);
-      }
       const redo = useRedo(router);
       await redo();
-    },
-    clearCacheTabs(): void {
-      this.cacheTabList = new Set();
     },
     resetState(): void {
       this.tabList = [];
@@ -158,7 +143,6 @@ export const useMultipleTabStore = defineStore({
         }
         this.tabList.push(route);
       }
-      this.updateCacheTab().then();
       cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList);
     },
 
@@ -171,14 +155,11 @@ export const useMultipleTabStore = defineStore({
         const index = this.tabList.findIndex((item) => item.fullPath === fullPath);
         index !== -1 && this.tabList.splice(index, 1);
       };
-
       const { currentRoute, replace } = router;
-
       const { path } = unref(currentRoute);
       if (path !== tab.path) {
         // Closed is not the activation tab
         close(tab);
-        this.updateCacheTab().then();
         return;
       }
 
@@ -186,7 +167,6 @@ export const useMultipleTabStore = defineStore({
       let toTarget: RouteLocationRaw = {};
 
       const index = this.tabList.findIndex((item) => item.path === path);
-
       // If the current is the leftmost tab
       if (index === 0) {
         // There is only one tab, then jump to the homepage, otherwise jump to the right tab
@@ -259,7 +239,6 @@ export const useMultipleTabStore = defineStore({
         }
         this.bulkCloseTabs(pathList).then();
       }
-      this.updateCacheTab().then();
       handleGotoPage(router);
     },
 
@@ -279,7 +258,6 @@ export const useMultipleTabStore = defineStore({
         }
         this.bulkCloseTabs(pathList).then();
       }
-      this.updateCacheTab().then();
       handleGotoPage(router);
     },
 
@@ -310,7 +288,6 @@ export const useMultipleTabStore = defineStore({
         }
       }
       this.bulkCloseTabs(pathList).then();
-      this.updateCacheTab().then();
       handleGotoPage(router);
     },
 
@@ -328,7 +305,6 @@ export const useMultipleTabStore = defineStore({
       const findTab = this.getTabList.find((item) => item === route);
       if (findTab) {
         findTab.meta.title = title;
-        await this.updateCacheTab();
       }
     },
     /**
@@ -339,7 +315,6 @@ export const useMultipleTabStore = defineStore({
       if (findTab) {
         findTab.fullPath = fullPath;
         findTab.path = fullPath;
-        await this.updateCacheTab();
       }
     }
   }

@@ -6,8 +6,12 @@ import { omit } from "lodash-es";
 import { findNodeAll } from "@/utils/helper/TreeHelper";
 import { Recordable } from "@mfish/types";
 
-export function useRowSelection(propsRef: ComputedRef<BasicTableProps>, tableData: Ref<Recordable[]>, emit: EmitType) {
-  const selectedRowKeysRef = ref<string[]>([]);
+export function useRowSelection(
+  propsRef: ComputedRef<BasicTableProps>,
+  tableData: Ref<Recordable[]>,
+  emit: EmitType | any
+) {
+  const selectedRowKeysRef = ref<any[]>([]);
   const selectedRowRef = ref<Recordable[]>([]);
 
   const getRowSelectionRef = computed((): TableRowSelection | null => {
@@ -50,26 +54,26 @@ export function useRowSelection(propsRef: ComputedRef<BasicTableProps>, tableDat
     { deep: true }
   );
 
-  const getAutoCreateKey = computed(() => {
+  const getAutoCreateKey: any = computed(() => {
     return unref(propsRef).autoCreateKey && !unref(propsRef).rowKey;
   });
 
-  const getRowKey = computed(() => {
+  const getRowKey: any = computed(() => {
     const { rowKey } = unref(propsRef);
     return unref(getAutoCreateKey) ? ROW_KEY : rowKey;
   });
 
-  function setSelectedRowKeys(rowKeys: string[]) {
+  function setSelectedRowKeys(rowKeys: any[]) {
     selectedRowKeysRef.value = rowKeys;
     const allSelectedRows = findNodeAll(
       toRaw(unref(tableData)).concat(toRaw(unref(selectedRowRef))),
-      (item) => rowKeys.includes(item[unref(getRowKey) as string]),
+      (item) => rowKeys.includes(item[unref(getRowKey)]),
       {
         children: propsRef.value.childrenColumnName ?? "children"
       }
     );
     const trueSelectedRows: any[] = [];
-    rowKeys.forEach((key: string) => {
+    rowKeys.forEach((key: string | number) => {
       const found = allSelectedRows.find((item) => item[unref(getRowKey) as string] === key);
       found && trueSelectedRows.push(found);
     });
@@ -85,7 +89,7 @@ export function useRowSelection(propsRef: ComputedRef<BasicTableProps>, tableDat
     selectedRowKeysRef.value = [];
   }
 
-  function deleteSelectRowByKey(key: string) {
+  function deleteSelectRowByKey(key: string | number) {
     const selectedRowKeys = unref(selectedRowKeysRef);
     const index = selectedRowKeys.indexOf(key);
     if (index !== -1) {

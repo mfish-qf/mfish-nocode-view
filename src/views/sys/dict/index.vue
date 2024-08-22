@@ -17,6 +17,7 @@
               {
                 icon: 'ant-design:menu-outlined',
                 tooltip: '字典项',
+                color: 'success',
                 onClick: handleItem.bind(null, record)
               },
               {

@@ -2,9 +2,14 @@ import type { ComputedRef, Ref } from "vue";
 import type { BasicTableProps } from "../types/Table";
 import { computed, unref, ref, toRaw } from "vue";
 import { ROW_KEY } from "../Const";
+import { Recordable } from "@mfish/types";
 
-export function useTableExpand(propsRef: ComputedRef<BasicTableProps>, tableData: Ref<Recordable[]>, emit: EmitType) {
-  const expandedRowKeys = ref<string[]>([]);
+export function useTableExpand(
+  propsRef: ComputedRef<BasicTableProps>,
+  tableData: Ref<Recordable[]>,
+  emit: EmitType | any
+) {
+  const expandedRowKeys = ref<any[]>([]);
 
   const getAutoCreateKey = computed(() => {
     return unref(propsRef).autoCreateKey && !unref(propsRef).rowKey;
@@ -33,7 +38,7 @@ export function useTableExpand(propsRef: ComputedRef<BasicTableProps>, tableData
     expandedRowKeys.value = keys;
   }
 
-  function expandRows(keys: string[]) {
+  function expandRows(keys: any[]) {
     // 使用行KEY展开指定的行
     const { isTreeTable } = unref(propsRef);
     if (!isTreeTable) return;
