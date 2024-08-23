@@ -8,7 +8,7 @@ import type { AppRouteRecordRaw } from "@/router/Types";
 const screenConfig: AppRouteRecordRaw = {
   path: "/low-code/mf-screen/config",
   name: "ScreenConfig",
-  // component: () => import("@/views/nocode/mf-screen/index.vue"),
+  component: () => import("@/views/nocode/mf-screen/index.vue"),
   meta: {
     menuSort: 999,
     hideMenu: true,

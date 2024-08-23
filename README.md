@@ -15,6 +15,7 @@
 
 摸鱼低代码前端采用 Vue3.4、Vite5.0、 Ant-Design-Vue4.0.X、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
 是在Vben-Admin基础上进行优化研发的适合于摸鱼低代码平台的前端解决方案，目前已是稳定版本，可用于生产项目。
+
 * 后端基于SpringBoot3, Spring Cloud Alibaba，实现微服务、单体服务代码一体化架构
 * 注册中心、配置中心采用nacos(作为单体服务时无需使用注册中心)
 * 支持oauth2统一认证接入，支持多种登录方式（账号密码登录、手机短信登录、微信扫码登录）
@@ -147,32 +148,38 @@ http://localhost:5281
 
 <table>
     <tr>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-7b8b53019b36fb12f5a0388491f7cedb06a.png" /></td>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-cb060c85cfc867df4ea6c1be4ac65d64d74.png" /></td>
+      <td><img src="https://mfish-pic.pages.dev/login.png" alt='login'/></td>
+      <td><img src="https://mfish-pic.pages.dev/menu.png" alt='menu'/></td>
     </tr>
     <tr>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-93645a610cf9dd0266580e0870ff497b946.png" /></td>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-4f34924c18c4f5df0fb7823feef7431227d.png" /></td>
+      <td><img src="https://mfish-pic.pages.dev/api.png"  alt="api"/></td>
+      <td><img src="https://mfish-pic.pages.dev/flow.png" alt="flow" /></td>
     </tr>
     <tr>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-57d93c91b93340387c44d5d30e984e914d7.png" /></td>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-0ff2d7b640896b9a9156af832baebcb313f.png" /></td>
+      <td><img src="https://mfish-pic.pages.dev/datasource.png" alt='datasource'/></td>
+      <td><img src="https://mfish-pic.pages.dev/codebuild.png" alt='codebuild'/></td>
     </tr>
     <tr>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-81d9f856cdd794843d172c47874b69ff503.png" /></td>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-c26c5a79214ed2e242512d0f5f4accca63b.png" /></td>
+      <td><img src="https://mfish-pic.pages.dev/org.png" alt='org'/></td>
+      <td><img src="https://mfish-pic.pages.dev/role.png" alt='role'/></td>
     </tr>
     <tr>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-36d63fb4e8dd0a0844ff64a8f4c28682296.png" /></td>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-434781fa769d2da21e396bfccbbe13c8f15.png" /></td>
+      <td><img src="https://mfish-pic.pages.dev/dict.png" alt='dict'/></td>
+      <td><img src="https://mfish-pic.pages.dev/category.png" alt='category'/></td>
     </tr>
     <tr>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-7b2eeb5e679f75d889a841de61f9845c026.png" /></td>
-      <td><img src="https://oscimg.oschina.net/oscnet/up-c413a81f353a0175bbbd09cc32a7fb8d5bf.png" /></td>
+      <td><img src="https://mfish-pic.pages.dev/account.png" alt='account'/></td>
+      <td><img src="https://mfish-pic.pages.dev/tenant.png" alt='tenant'/></td>
+    </tr>
+    <tr>
+      <td><img src="https://mfish-pic.pages.dev/schedule.png" alt='schedule'/></td>
+      <td><img src="https://mfish-pic.pages.dev/monitor.png" alt='monitor'/></td>
+    </tr>
+    <tr>
+      <td><img src="https://mfish-pic.pages.dev/file.png" alt='file'/></td>
+      <td><img src="https://mfish-pic.pages.dev/log.png" alt='log'/></td>
     </tr>
 </table>
-
-![](https://oscimg.oschina.net/oscnet/up-736398ce5030ce21b6dda45ba9f24af4a72.png)
 
 ## 入门必备
 

@@ -49,8 +49,8 @@
           clipPath
         },
         {
-          duration: 500,
-          easing: "ease-in",
+          duration: 1000,
+          easing: "ease-in-out",
           pseudoElement: "::view-transition-new(root)"
         }
       );
