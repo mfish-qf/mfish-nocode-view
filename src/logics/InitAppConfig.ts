@@ -14,12 +14,14 @@ import { ThemeEnum } from "@/enums/AppEnum";
 import { getSysConfig } from "@/api/sys/SysConfig";
 import { useUserStoreWithOut } from "@/store/modules/User";
 import { sleep } from "@/utils/Utils";
+import { useTableSettingStore } from "@/store/modules/TableSetting";
 
 export async function initAppConfigStore() {
   // 设置本地样式
   changeAppConfig(projectSetting);
   // 获取服务端样式配置
   const userStore = useUserStoreWithOut();
+
   while (!userStore.getUserInfo) {
     await sleep(300);
   }
@@ -28,10 +30,19 @@ export async function initAppConfigStore() {
 
 // 初始化项目配置
 async function setAppConfigStore() {
-  const sysConfig = await getSysConfig();
-  const projCfg: ProjectConfig =
-    sysConfig && sysConfig.config ? (JSON.parse(sysConfig.config) as ProjectConfig) : projectSetting;
-  changeAppConfig(projCfg);
+  const sysConfigs = await getSysConfig();
+  if (!sysConfigs || sysConfigs.length === 0) {
+    return;
+  }
+  for (const sysConfig of sysConfigs) {
+    if (sysConfig.type === 1) {
+      useTableSettingStore().setTableSetting(JSON.parse(sysConfig.config));
+    } else if (sysConfig.type === 0) {
+      const projCfg: ProjectConfig =
+        sysConfig && sysConfig.config ? (JSON.parse(sysConfig.config) as ProjectConfig) : projectSetting;
+      changeAppConfig(projCfg);
+    }
+  }
 }
 
 export function changeAppConfig(projCfg: ProjectConfig) {

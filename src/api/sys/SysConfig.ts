@@ -17,7 +17,7 @@ enum Api {
  * @return
  */
 export const getSysConfig = () => {
-  return defHttp.get<SysConfig>({ url: Api.SysConfig });
+  return defHttp.get<SysConfig[]>({ url: Api.SysConfig });
 };
 
 /**
@@ -38,9 +38,9 @@ export function saveSysConfig(sysConfig: SysConfig, showMsg: boolean = true) {
 /**
  * 删除界面配置
  *
- * @param id 唯一ID
+ * @param type 配置类型
  * @return
  */
-export function deleteSysConfig(id: string) {
-  return defHttp.delete<SysConfig>({ url: `${Api.SysConfig}/${id}` }, { successMessageMode: "message" });
+export function deleteSysConfig(type: number) {
+  return defHttp.delete<boolean>({ url: `${Api.SysConfig}/${type}` }, { successMessageMode: "message" });
 }

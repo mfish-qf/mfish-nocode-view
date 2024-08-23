@@ -6,6 +6,7 @@ import type { Recordable } from "@mfish/types";
 
 import { ComponentType } from "./ComponentType";
 import { VueNode } from "@/utils/PropTypes";
+import { FixedType } from "ant-design-vue/es/vc-table/interface";
 
 export declare type SortOrder = "ascend" | "descend";
 
@@ -471,4 +472,13 @@ export interface TableActionType {
 
 export interface InnerHandlers {
   onColumnsChange: (data: ColumnChangeParam[]) => void;
+}
+
+export interface ColumnOptionsType {
+  value: string;
+  label: string;
+  column: {
+    defaultHidden?: boolean;
+  };
+  fixed?: FixedType;
 }
