@@ -60,7 +60,7 @@
   function setTheme(darkMode: ThemeEnum) {
     setDarkMode(darkMode);
     setDarkTheme(darkMode);
-    saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)) }, false).then();
+    saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)), type: 0 }, false).then();
   }
 </script>
 <style lang="less" scoped>

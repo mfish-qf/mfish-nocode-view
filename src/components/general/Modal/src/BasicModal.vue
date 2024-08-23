@@ -64,7 +64,7 @@
 
   const props = defineProps(basicProps);
 
-  const emit = defineEmits(["open-change", "height-change", "cancel", "ok", "register", "update:open"]);
+  const emit = defineEmits(["openChange", "heightChange", "fullScreen", "cancel", "ok", "register", "update:open"]);
 
   const attrs = useAttrs();
   const openRef = ref(false);
@@ -99,7 +99,11 @@
     };
   });
 
-  const { handleFullScreen, getWrapClassName, fullScreenRef } = useFullScreen({
+  const {
+    handleFullScreen: handleFullScreenInner,
+    getWrapClassName,
+    fullScreenRef
+  } = useFullScreen({
     modalWrapperRef,
     extHeightRef,
     wrapClassName: toRef(getMergeProps.value, "wrapClassName")
@@ -126,7 +130,11 @@
       ...unref(getMergeProps),
       open: unref(openRef)
     };
-    attr.wrapClassName = `${attr?.wrapClassName || ""} ${unref(getWrapClassName)}` + "mfish-basic-modal-wrap";
+    if (attr?.wrapClassName === unref(getWrapClassName)) {
+      attr.wrapClassName = `${attr?.wrapClassName || ""} ${prefixCls}`;
+    } else {
+      attr.wrapClassName = `${unref(getWrapClassName) || ""}${prefixCls}`;
+    }
     if (unref(fullScreenRef)) {
       return omit(attr, ["height", "title"]);
     }
@@ -134,7 +142,7 @@
   });
 
   const getWrapperHeight = computed(() => {
-    if (unref(fullScreenRef)) return;
+    if (unref(fullScreenRef)) return undefined;
     return unref(getProps).height;
   });
 
@@ -146,7 +154,7 @@
   watch(
     () => unref(openRef),
     (v) => {
-      emit("open-change", v);
+      emit("openChange", v);
       emit("update:open", v);
       if (instance && modalMethods.emitOpen) {
         modalMethods.emitOpen(v, instance.uid);
@@ -196,7 +204,7 @@
   }
 
   function handleHeightChange(height: string) {
-    emit("height-change", height);
+    emit("heightChange", height);
   }
 
   function handleExtHeight(height: number) {
@@ -207,5 +215,11 @@
     if (!props.canFullscreen) return;
     e.stopPropagation();
     handleFullScreen(e);
+  }
+
+  // 事件传递
+  function handleFullScreen(e) {
+    handleFullScreenInner(e);
+    emit("fullScreen");
   }
 </script>
