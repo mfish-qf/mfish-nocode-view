@@ -19,7 +19,7 @@ export function baseHandler(event: HandlerEnum, value: any) {
     updateHeaderBgColor();
     updateSidebarBgColor();
   }
-  saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)) }, false).then();
+  saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)), type: 0 }, false).then();
 }
 
 export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConfig> {

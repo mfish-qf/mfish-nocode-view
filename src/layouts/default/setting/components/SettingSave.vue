@@ -39,7 +39,7 @@
   function handleResetSetting() {
     try {
       changeAppConfig(defaultSetting);
-      saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)) }, false).then(() => {
+      saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)), type: 0 }, false).then(() => {
         createMessage.success(t("layout.setting.resetSuccess"));
       });
     } catch (error: any) {
