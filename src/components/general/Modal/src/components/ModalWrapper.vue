@@ -28,7 +28,7 @@
     loadingTip: { type: String }
   });
 
-  const emit = defineEmits(["height-change", "ext-height"]);
+  const emit = defineEmits(["heightChange", "extHeight"]);
 
   const wrapperRef = ref(null);
   const spinRef = ref(null);
@@ -78,7 +78,7 @@
 
   onMounted(() => {
     const { modalHeaderHeight, modalFooterHeight } = props;
-    emit("ext-height", modalHeaderHeight + modalFooterHeight);
+    emit("extHeight", modalHeaderHeight + modalFooterHeight);
   });
 
   async function scrollTop() {
@@ -129,7 +129,7 @@
       } else {
         realHeightRef.value = props.height ? props.height : realHeight > maxHeight ? maxHeight : realHeight;
       }
-      emit("height-change", unref(realHeightRef));
+      emit("heightChange", unref(realHeightRef));
     } catch (error) {
       console.log(error);
     }

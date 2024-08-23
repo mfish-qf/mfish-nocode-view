@@ -13,7 +13,7 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
   };
   const drag = (wrap: any) => {
     if (!wrap) return;
-    wrap.dataset.drag = unref(context.draggable);
+    wrap.setAttribute("data-drag", unref(context.draggable));
     const dialogHeaderEl = wrap.querySelector(".ant-modal-header");
     const dragDom = wrap.querySelector(".ant-modal");
 
@@ -21,7 +21,7 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
 
     dialogHeaderEl.style.cursor = "move";
 
-    dialogHeaderEl.addEventListener("mousedown", (e: any) => {
+    dialogHeaderEl.onmousedown = (e: any) => {
       if (!e) return;
       // 鼠标按下，计算当前元素距离可视区的距离
       const disX = e.clientX;
@@ -45,14 +45,14 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
 
       // 注意在ie中 第一次获取到的值为组件自带50% 移动之后赋值为px
       if (domLeft.includes("%")) {
-        styL = +document.body.clientWidth * (+domLeft.replaceAll("%", "") / 100);
-        styT = +document.body.clientHeight * (+domTop.replaceAll("%", "") / 100);
+        styL = +document.body.clientWidth * (+domLeft.replace(/%/g, "") / 100);
+        styT = +document.body.clientHeight * (+domTop.replace(/%/g, "") / 100);
       } else {
-        styL = +domLeft.replaceAll("px", "");
-        styT = +domTop.replaceAll("px", "");
+        styL = +domLeft.replace(/px/g, "");
+        styT = +domTop.replace(/px/g, "");
       }
 
-      document.addEventListener("mousemove", (e) => {
+      document.onmousemove = function (e) {
         // 通过事件委托，计算移动的距离
         let left = e.clientX - disX;
         let top = e.clientY - disY;
@@ -72,26 +72,26 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
 
         // 移动当前元素
         dragDom.style.cssText += `;left:${left + styL}px;top:${top + styT}px;`;
-      });
+      };
 
-      document.addEventListener("mouseup", () => {
+      document.onmouseup = () => {
         document.onmousemove = null;
         document.onmouseup = null;
-      });
-    });
+      };
+    };
   };
 
   const handleDrag = () => {
     const dragWraps = document.querySelectorAll(".ant-modal-wrap");
-    for (const wrap of dragWraps) {
+    for (const wrap of Array.from(dragWraps)) {
       if (!wrap) continue;
       const display = getStyle(wrap, "display");
-      const draggable = wrap.dataset.drag;
-      if (
-        display !== "none" && // 拖拽位置
-        (draggable === null || unref(context.destroyOnClose))
-      ) {
-        drag(wrap);
+      const draggable = wrap.getAttribute("data-drag");
+      if (display !== "none") {
+        // 拖拽位置
+        if (draggable === null || unref(context.destroyOnClose)) {
+          drag(wrap);
+        }
       }
     }
   };
