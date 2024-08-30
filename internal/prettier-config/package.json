@@ -1,6 +1,6 @@
 {
   "name": "@mfish/prettier-config",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "private": true,
   "author": {
     "name": "mfish",
@@ -23,6 +23,6 @@
     "prettier": "^3.3.3"
   },
   "devDependencies": {
-    "prettier-plugin-packagejson": "^2.5.1"
+    "prettier-plugin-packagejson": "^2.5.2"
   }
 }

@@ -16,7 +16,7 @@ export async function unicorn(): Promise<Linter.Config[]> {
         "unicorn/consistent-function-scoping": "off",
         "unicorn/filename-case": "off",
         "unicorn/import-style": "off",
-        // "unicorn/no-array-for-each": "off",
+        "unicorn/no-array-for-each": "off",
         "unicorn/no-null": "off",
         "unicorn/prefer-at": "off",
         "unicorn/prefer-dom-node-text-content": "off",

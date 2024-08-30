@@ -6,7 +6,7 @@ import { ApiParams } from "@/api/nocode/model/ApiParamsModel";
  * @description: 自定义API
  * @author: mfish
  * @date: 2023-07-31
- * @version: V1.2.0
+ * @version: V1.3.1
  */
 export interface MfApi extends BaseEntity<string> {
   // API名称

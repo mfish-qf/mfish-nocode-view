@@ -1,10 +1,14 @@
 import { BasicColumn } from "@/components/general/Table";
 import { FormSchema } from "@/components/general/Table";
-import { h } from "vue";
+import { h, ref } from "vue";
 import { Tag, Switch } from "ant-design-vue";
 import { RenderCallbackParams } from "@/components/general/Form";
 import { setUserStatus } from "@/api/sys/User";
 import { usePermission } from "@/hooks/web/UsePermission";
+import { DescItem } from "@/components/general/Description";
+import { YNTag_Name, YNTag_Status } from "@/components/general/DictTag/CommonTag";
+import { getRoleByIds } from "@/api/sys/Role";
+import { getOrgByIds } from "@/api/sys/Org";
 
 export const columns: BasicColumn[] = [
   {
@@ -226,3 +230,91 @@ export const accountFormSchema: FormSchema[] = [
     colProps: { span: 24 }
   }
 ];
+
+export class AccountDesc {
+  orgNames = ref([]);
+  roleNames = ref([]);
+  viewSchema: DescItem[] = [
+    {
+      label: "id",
+      field: "id",
+      show: () => false
+    },
+    {
+      field: "account",
+      label: "用户名"
+    },
+    {
+      field: "nickname",
+      label: "昵称"
+    },
+    {
+      field: "orgIds",
+      label: "所属部门",
+      span: 2,
+      render: (val) => {
+        if (!val) return;
+        getOrgByIds(val).then((res) => {
+          if (res && res.length > 0) {
+            this.orgNames.value = res.map((val) => val.orgName);
+          } else {
+            this.orgNames.value = [];
+          }
+        });
+        return h(
+          "div",
+          this.orgNames.value.map((orgName) => h(Tag, () => orgName))
+        );
+      }
+    },
+    {
+      field: "roleIds",
+      label: "角色",
+      span: 2,
+      render: (val: string[] | undefined) => {
+        if (!val || val.length === 0) return;
+        getRoleByIds(val).then((res) => {
+          if (res && res.length > 0) {
+            this.roleNames.value = res.map((val) => val.roleName);
+          } else {
+            this.roleNames.value = [];
+          }
+        });
+        return h(
+          "div",
+          this.roleNames.value.map((roleName) => h(Tag, () => roleName))
+        );
+      }
+    },
+    {
+      field: "phone",
+      label: "手机号"
+    },
+    {
+      field: "email",
+      label: "邮箱"
+    },
+    {
+      field: "telephone",
+      label: "座机"
+    },
+    {
+      field: "birthday",
+      label: "生日"
+    },
+    {
+      field: "sex",
+      label: "性别",
+      render: (record) => YNTag_Name(record === 1, "男", "女")
+    },
+    {
+      field: "status",
+      label: "状态",
+      render: (record) => YNTag_Status(record)
+    },
+    {
+      field: "remark",
+      label: "备注"
+    }
+  ];
+}

@@ -1,6 +1,6 @@
 import type { PaginationProps } from "../types/Pagination";
 import type { BasicTableProps } from "../types/Table";
-import { computed, unref, ref, ComputedRef, watch } from "vue";
+import { computed, unref, ref, ComputedRef, watch, h } from "vue";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons-vue";
 import { isBoolean } from "@/utils/Is";
 import { PAGE_SIZE, PAGE_SIZE_OPTIONS } from "../Const";
@@ -14,9 +14,9 @@ interface ItemRender {
 
 function itemRender({ page, type, originalElement }: ItemRender) {
   if (type === "prev") {
-    return page === 0 ? null : <LeftOutlined />;
+    return page === 0 ? null : h(LeftOutlined);
   } else if (type === "next") {
-    return page === 1 ? null : <RightOutlined />;
+    return page === 1 ? null : h(RightOutlined);
   }
   return originalElement;
 }
@@ -33,7 +33,7 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
       if (!isBoolean(pagination) && pagination) {
         configRef.value = {
           ...unref(configRef),
-          ...pagination
+          ...(pagination ?? {})
         };
       }
     }
@@ -48,7 +48,6 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
 
     return {
       current: 1,
-      pageSize: PAGE_SIZE,
       size: "small",
       defaultPageSize: PAGE_SIZE,
       showTotal: (total) => t("component.table.total", { total }),

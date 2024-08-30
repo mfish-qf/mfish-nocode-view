@@ -31,6 +31,13 @@
           <TableAction
             :actions="[
               {
+                icon: 'ant-design:info-circle-outlined',
+                onClick: handleQuery.bind(null, record),
+                auth: ['sys:account:query', 'sys:tenantUser:query'],
+                color: 'success',
+                tooltip: '查看'
+              },
+              {
                 icon: 'ant-design:edit-outlined',
                 tooltip: '编辑用户资料',
                 onClick: handleEdit.bind(null, record),
@@ -81,6 +88,7 @@
     />
     <AccountSelectModal @register="registerSelectModal" @success="handleSuccess" />
     <PasswordModal @register="registerPwdModal" />
+    <AccountViewModal @register="registerViewModal" />
   </PageWrapper>
 </template>
 <script lang="ts" setup>
@@ -99,6 +107,7 @@
   import AccountSelectModal from "@/views/sys/account/AccountSelectModal.vue";
   import { useMessage } from "@/hooks/web/UseMessage";
   import { Recordable } from "@mfish/types";
+  import AccountViewModal from "@/views/sys/account/AccountViewModal.vue";
   defineOptions({ name: "AccountManagement" });
   const props = defineProps({
     source: {
@@ -110,6 +119,7 @@
   const [registerModal, { openModal }] = useModal();
   const [registerSelectModal, { openModal: openSelectModal }] = useModal();
   const [registerPwdModal, { openModal: openPwdModal }] = useModal();
+  const [registerViewModal, { openModal: openViewModal }] = useModal();
   const { createMessage } = useMessage();
   const searchInfo = reactive<Recordable>({});
   const { prefixCls } = useDesign("account");
@@ -138,7 +148,7 @@
     showIndexColumn: false,
     resizeHeightOffset: props.source === 1 ? 26 : 0,
     actionColumn: {
-      width: props.source === 1 ? 80 : 120,
+      width: props.source === 1 ? 120 : 150,
       title: "操作",
       dataIndex: "action"
     }
@@ -148,6 +158,14 @@
     openModal(true, {
       isUpdate: false
     });
+  }
+
+  /**
+   * 查看
+   * @param account 用户表对象
+   */
+  function handleQuery(account: Recordable) {
+    openViewModal(true, { record: account });
   }
 
   function handleEdit(record: Recordable) {

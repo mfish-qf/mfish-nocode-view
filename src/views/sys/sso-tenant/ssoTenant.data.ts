@@ -11,7 +11,7 @@ import TableImage from "@/components/general/Table/src/components/TableImg.vue";
  * @description: 租户信息表
  * @author: mfish
  * @date: 2023-05-31
- * @version: V1.2.0
+ * @version: V1.3.1
  */
 export const columns: BasicColumn[] = [
   {

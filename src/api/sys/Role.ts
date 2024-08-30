@@ -19,6 +19,9 @@ export const getRoleList = (params?: ReqSsoRole) => {
 export const getAllRoleList = (params?: ReqSsoRole) => {
   return defHttp.get<SsoRole[]>({ url: Api.AllRole, params });
 };
+export function getRoleByIds(ids: string) {
+  return defHttp.get<SsoRole[]>({ url: `${Api.Role}/${ids}` });
+}
 export const getRoleMenus = (roleId?: string) => {
   return defHttp.get<string[]>({ url: `${Api.Menus}/${roleId}` });
 };
@@ -31,6 +34,6 @@ export const updateRole = (params: SsoRole) => {
 export const setRoleStatus = (roleId: string, status: number) => {
   return defHttp.put<boolean>({ url: Api.SetStatus, params: { id: roleId, status } });
 };
-export const deleteRole = (params: string) => {
-  return defHttp.delete({ url: `${Api.Role}/${params}` }, { successMessageMode: "message" });
+export const deleteRole = (id: string) => {
+  return defHttp.delete<boolean>({ url: `${Api.Role}/${id}` }, { successMessageMode: "message" });
 };

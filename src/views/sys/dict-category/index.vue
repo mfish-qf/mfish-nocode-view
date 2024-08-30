@@ -2,7 +2,7 @@
  @description: 属性分类字典
  @author: mfish
  @date: 2024-03-12
- @version: V1.2.0
+ @version: V1.3.1
 -->
 <template>
   <div>

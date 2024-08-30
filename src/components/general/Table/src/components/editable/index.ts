@@ -1,5 +1,5 @@
 import type { BasicColumn } from "@/components/general/Table/src/types/Table";
-import { h, Ref } from "vue";
+import { h, Ref, toRaw } from "vue";
 import EditableCell from "./EditableCell.vue";
 import { isArray } from "@/utils/Is";
 import type { Recordable } from "@mfish/types";
@@ -12,7 +12,7 @@ interface Params {
 
 export function renderEditCell(column: BasicColumn) {
   return ({ text: value, record, index }: Params) => {
-    record.onValid = async () => {
+    toRaw(record).onValid = async () => {
       if (isArray(record?.validCbs)) {
         const validFns = (record?.validCbs || []).map((fn) => fn());
         const res = await Promise.all(validFns);
@@ -21,7 +21,7 @@ export function renderEditCell(column: BasicColumn) {
       return false;
     };
 
-    record.onEdit = async (edit: boolean, submit = false) => {
+    toRaw(record).onEdit = async (edit: boolean, submit = false) => {
       if (!submit) {
         record.editable = edit;
       }

@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @description: 大屏目录
  * @author: mfish
  * @date: 2024-01-08
- * @version: V1.2.0
+ * @version: V1.3.1
  */
 export interface ScreenFolder extends BaseEntity<string> {
   // 父节点

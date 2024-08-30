@@ -67,7 +67,7 @@
     display: block;
     min-width: 1em;
     min-height: 1em;
-    background-color: @iconify-bg-color;
+    background-color: #5551;
     border-radius: 100%;
   }
 </style>

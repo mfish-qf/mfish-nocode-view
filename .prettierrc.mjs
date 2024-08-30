@@ -1,1 +1,1 @@
-export { default } from '@mfish/prettier-config';
+export { default } from "@mfish/prettier-config";

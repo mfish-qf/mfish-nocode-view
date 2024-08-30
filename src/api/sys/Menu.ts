@@ -18,6 +18,14 @@ export const getMenuList = (params?: MenuParams) => {
 export const getMenuTree = (params?: MenuParams) => {
   return defHttp.get<MenuListItem[]>({ url: Api.MenuTree, params });
 };
+
+/**
+ * 通过id获取菜单
+ * @param id id
+ */
+export function getMenuById(id: string) {
+  return defHttp.get<MenuListItem>({ url: `${Api.Menu}/${id}` });
+}
 /**
  * 获取角色菜单
  */

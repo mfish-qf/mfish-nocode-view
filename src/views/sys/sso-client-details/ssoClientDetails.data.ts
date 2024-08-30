@@ -1,12 +1,15 @@
 import { BasicColumn } from "@/components/general/Table";
 import { FormSchema } from "@/components/general/Table";
-import { getDictProps } from "@/utils/DictUtils";
+import { buildDictTag, getDictProps } from "@/utils/DictUtils";
+import { DescItem } from "@/components/general/Description";
+import { Tag } from "ant-design-vue";
+import { h } from "vue";
 
 /**
  * @description: 客户端信息
  * @author: mfish
  * @date: 2023-05-12
- * @version: V1.2.0
+ * @version: V1.3.1
  */
 export const columns: BasicColumn[] = [
   {
@@ -75,3 +78,53 @@ export const ssoClientDetailsFormSchema: FormSchema[] = [
     required: true
   }
 ];
+
+export class SsoClientDetailsDesc {
+  viewSchema: DescItem[] = [
+    {
+      label: "id",
+      field: "id",
+      show: () => false
+    },
+    {
+      field: "clientName",
+      label: "客户端名称"
+    },
+    {
+      field: "clientId",
+      label: "客户端ID"
+    },
+    {
+      field: "clientSecret",
+      label: "客户端密钥"
+    },
+    {
+      field: "scope",
+      label: "权限范围"
+    },
+    {
+      field: "grantTypes",
+      label: "认证方式",
+      render: (val) => {
+        if (!val) return;
+        const types: string[] = val.split(",");
+        return types.map((type) => h("div", { class: "mt-1 mb-1" }, buildDictTag("sso_grant_type", type)));
+      }
+    },
+    {
+      field: "redirectUrl",
+      label: "回调地址",
+      render: (val) => {
+        if (!val) return;
+        const types: string[] = val.split(",");
+        return types.map((type) =>
+          h(
+            "div",
+            { class: "mt-1 mb-1" },
+            h(Tag, () => type)
+          )
+        );
+      }
+    }
+  ];
+}

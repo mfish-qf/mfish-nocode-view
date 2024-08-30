@@ -1,6 +1,6 @@
 {
   "name": "@mfish/eslint-config",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "private": true,
   "author": {
     "name": "mfish",
@@ -25,15 +25,15 @@
     }
   },
   "dependencies": {
-    "eslint-config-turbo": "^2.0.14",
+    "eslint-config-turbo": "^2.1.0",
     "eslint-plugin-command": "^0.2.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.9.0",
-    "@types/eslint": "^9.6.0",
-    "@typescript-eslint/eslint-plugin": "^8.2.0",
-    "@typescript-eslint/parser": "^8.2.0",
-    "eslint": "^9.9.0",
+    "@eslint/js": "^9.9.1",
+    "@types/eslint": "^9.6.1",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-jsdoc": "^50.2.2",
@@ -41,6 +41,7 @@
     "eslint-plugin-no-only-tests": "^3.3.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-regexp": "^2.6.0",
+    "eslint-plugin-unicorn": "^55.0.0",
     "eslint-plugin-unused-imports": "^4.1.3",
     "eslint-plugin-vue": "^9.27.0",
     "globals": "^15.9.0",

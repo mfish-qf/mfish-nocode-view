@@ -1,8 +1,11 @@
 import { BasicColumn } from "@/components/general/Table";
 import { FormSchema } from "@/components/general/Table";
-import { h } from "vue";
+import { h, ref } from "vue";
 import { Tag } from "ant-design-vue";
 import { Icon } from "@/components/general/Icon";
+import { DescItem } from "@/components/general/Description";
+import { getMenuById } from "@/api/sys/Menu";
+import { YNTag, YNTag_Name } from "@/components/general/DictTag/CommonTag";
 
 export const columns: BasicColumn[] = [
   {
@@ -212,3 +215,110 @@ export const formSchema: FormSchema[] = [
     ifShow: ({ values }) => isMenu(values.menuType)
   }
 ];
+
+export class MenuDesc {
+  parentName = ref<string>();
+  viewSchema: DescItem[] = [
+    {
+      label: "id",
+      field: "id",
+      show: () => false
+    },
+    {
+      field: "menuType",
+      label: "菜单类型",
+      render: (val) =>
+        h(Tag, { color: "green" }, () => (val === 0 ? "目录" : val === 1 ? "菜单" : val === 2 ? "按钮" : "未知"))
+    },
+    {
+      field: "menuName",
+      label: "菜单名称"
+    },
+    {
+      field: "parentId",
+      label: "上级菜单",
+      render: (val) => {
+        if (!val) return;
+        getMenuById(val)
+          .then((res) => {
+            this.parentName.value = res.menuName;
+          })
+          .catch(() => {
+            this.parentName.value = "";
+          });
+        return h("div", this.parentName.value);
+      }
+    },
+    {
+      field: "menuSort",
+      label: "排序"
+    },
+    {
+      field: "menuIcon",
+      label: "图标",
+      show: (values) => {
+        if (!values) return;
+        return !isButton(values.menuType);
+      }
+    },
+    {
+      field: "routePath",
+      label: "路由地址",
+      show: (values) => {
+        if (!values) return;
+        return !isButton(values.menuType);
+      }
+    },
+    {
+      field: "component",
+      label: "组件路径",
+      show: (values) => {
+        if (!values) return;
+        return isMenu(values.menuType);
+      }
+    },
+    {
+      field: "permissions",
+      label: "权限标识",
+      show: (values) => {
+        if (!values) return;
+        return isButton(values.menuType);
+      }
+    },
+    {
+      field: "isVisible",
+      label: "菜单状态",
+      show: (values) => {
+        if (!values) return;
+        return !isButton(values.menuType);
+      },
+      render: (val) => YNTag_Name(val, "显示", "隐藏")
+    },
+    {
+      field: "activeMenu",
+      label: "激活菜单",
+      show: (values) => {
+        if (!values) return;
+        return isMenu(values.menuType) && values.isVisible === 0;
+      }
+    },
+    {
+      field: "isExternal",
+      label: "新窗口打开",
+      show: (values) => {
+        if (!values) return;
+        return isMenu(values.menuType);
+      },
+      render: (val) => YNTag(val)
+    },
+    {
+      field: "isKeepalive",
+      label: "是否缓存",
+      show: (values) => {
+        if (!values) return;
+        return isMenu(values.menuType);
+      },
+      render: (val) => YNTag(val)
+    }
+  ];
+}

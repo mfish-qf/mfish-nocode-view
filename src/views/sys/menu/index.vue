@@ -9,6 +9,13 @@
           <TableAction
             :actions="[
               {
+                icon: 'ant-design:info-circle-outlined',
+                onClick: handleQuery.bind(null, record),
+                auth: 'sys:menu:query',
+                color: 'success',
+                tooltip: '查看'
+              },
+              {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
                 auth: 'sys:menu:update'
@@ -17,7 +24,7 @@
                 icon: 'ant-design:delete-outlined',
                 color: 'error',
                 popConfirm: {
-                  title: '是否确认删除【' + record.menuName + '】',
+                  title: `是否确认删除【${record.menuName}】`,
                   placement: 'left',
                   confirm: handleDelete.bind(null, record)
                 },
@@ -29,6 +36,7 @@
       </template>
     </BasicTable>
     <MenuModal @register="registerModal" @success="handleSuccess" />
+    <MenuViewModal @register="registerViewModal" />
   </div>
 </template>
 <script lang="ts" setup>
@@ -38,9 +46,11 @@
   import { columns, searchFormSchema } from "./menu.data";
   import { useModal } from "@/components/general/Modal";
   import { Recordable } from "@mfish/types";
+  import MenuViewModal from "@/views/sys/menu/MenuViewModal.vue";
   defineOptions({ name: "MenuManagement" });
 
   const [registerModal, { openModal }] = useModal();
+  const [registerViewModal, { openModal: openViewModal }] = useModal();
   const [registerTable, { reload, setTableData, deleteTableDataRecord }] = useTable({
     title: "菜单列表",
     api: getMenuList,
@@ -61,7 +71,7 @@
     bordered: true,
     showIndexColumn: false,
     actionColumn: {
-      width: 80,
+      width: 120,
       title: "操作",
       dataIndex: "action"
     }
@@ -71,6 +81,10 @@
     openModal(true, {
       isUpdate: false
     });
+  }
+
+  function handleQuery(record: Recordable) {
+    openViewModal(true, { record });
   }
 
   function handleEdit(record: Recordable) {

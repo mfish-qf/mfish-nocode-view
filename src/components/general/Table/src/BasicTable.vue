@@ -15,31 +15,33 @@
       </template>
     </BasicForm>
 
-    <ATable
+    <Table
       ref="tableElRef"
       v-bind="getBindValues"
       :row-class-name="getRowClassName"
       v-show="getEmptyDataIsShowTable"
       @change="handleTableChange"
-      @resize-column="handleResizeColumn"
+      @resize-column="setColumnWidth"
+      @expand="handleTableExpand"
     >
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
       <template #headerCell="{ column }">
-        <HeaderCell :column="column" />
+        <slot name="headerCell" v-bind="{ column }">
+          <HeaderCell :column="column" />
+        </slot>
       </template>
-      <!-- 增加对antdv3.x兼容 -->
       <template #bodyCell="data">
-        <slot name="bodyCell" v-bind="(data as any) || {}"></slot>
+        <slot name="bodyCell" v-bind="data || {}"></slot>
       </template>
-    </ATable>
+    </Table>
   </div>
 </template>
 <script lang="ts" setup>
-  import type { BasicTableProps, TableActionType, SizeType, ColumnChangeParam } from "./types/Table";
-  import { ref, computed, unref, toRaw, inject, watchEffect, useSlots, useAttrs } from "vue";
-  import { Table as ATable } from "ant-design-vue";
+  import type { BasicTableProps, TableActionType, SizeType, ColumnChangeParam, InnerMethods } from "./types/Table";
+  import { ref, computed, unref, toRaw, inject, useSlots, useAttrs, watch } from "vue";
+  import { Table } from "ant-design-vue";
   import { BasicForm, useForm } from "@/components/general/Form";
   import { PageWrapperFixedHeightKey } from "@/components/general/Page";
   import HeaderCell from "./components/HeaderCell.vue";
@@ -59,11 +61,10 @@
   import { useTableFooter } from "./hooks/UseTableFooter";
   import { useTableForm } from "./hooks/UseTableForm";
   import { useDesign } from "@/hooks/web/UseDesign";
-  import { omit } from "lodash-es";
+  import { debounce, omit } from "lodash-es";
   import { basicProps } from "./Props";
   import { isFunction } from "@/utils/Is";
-  import { warn } from "@/utils/Log";
-  import { Recordable } from "@mfish/types";
+  import { useElementSize } from "@vueuse/core";
 
   defineOptions({ name: "BasicTable" });
 
@@ -90,21 +91,18 @@
   const attrs = useAttrs();
   const slots = useSlots();
   const tableElRef = ref(null);
-  const tableData = ref<Recordable[]>([]);
+  const tableData = ref([]);
   const wrapRef = ref(null);
   const formRef = ref(null);
   const innerPropsRef = ref<Partial<BasicTableProps>>();
+  const { height } = useElementSize(wrapRef);
   const { prefixCls } = useDesign("basic-table");
   const [registerForm, formActions] = useForm();
+
   const getProps = computed(() => {
     return { ...props, ...unref(innerPropsRef) } as BasicTableProps;
   });
   const isFixedHeightPage = inject(PageWrapperFixedHeightKey, false);
-  watchEffect(() => {
-    unref(isFixedHeightPage) &&
-      props.canResize &&
-      warn("BasicTable的'canResize'可能无法在具有'fixedHeight'的PageWrapper中工作（尤其是在热更新中）");
-  });
   const { getLoading, setLoading } = useLoading(getProps);
   const { getPaginationInfo, getPagination, setPagination, setShowPagination, getShowPagination } =
     usePagination(getProps);
@@ -112,16 +110,19 @@
     getRowSelection,
     getRowSelectionRef,
     getSelectRows,
+    setSelectedRows,
     clearSelectedRowKeys,
     getSelectRowKeys,
     deleteSelectRowByKey,
     setSelectedRowKeys
   } = useRowSelection(getProps, tableData, emit);
+
   const {
     handleTableChange: onTableChange,
     getDataSourceRef,
     getDataSource,
     getRawDataSource,
+    getSearchInfo,
     setTableData,
     updateTableDataRecord,
     deleteTableDataRecord,
@@ -145,20 +146,25 @@
     emit
   );
 
-  function handleTableChange(...args: any[]) {
-    // eslint-disable-next-line no-useless-call
-    onTableChange.call(undefined, ...args);
-    emit("change", ...args);
+  function handleTableChange(pagination: any, filters: any, sorter: any, extra: any) {
+    onTableChange(pagination, filters, sorter);
+    emit("change", pagination, filters, sorter);
     // 解决通过useTable注册onChange时不起作用的问题
     const { onChange } = unref(getProps);
-    // eslint-disable-next-line no-useless-call
-    onChange && isFunction(onChange) && onChange.call(undefined, ...args);
+    onChange && isFunction(onChange) && onChange(pagination, filters, sorter, extra);
   }
 
-  const { getViewColumns, getColumns, setCacheColumnsByField, setColumns, getColumnsRef, getCacheColumns } = useColumns(
-    getProps,
-    getPaginationInfo
-  );
+  const {
+    getViewColumns,
+    getColumns,
+    setCacheColumnsByField,
+    setCacheColumns,
+    setColumnWidth,
+    setColumns,
+    getColumnsRef,
+    getCacheColumns
+  } = useColumns(getProps, getPaginationInfo);
+
   const { getScrollRef, redoHeight } = useTableScroll(
     getProps,
     tableElRef,
@@ -168,7 +174,10 @@
     wrapRef,
     formRef
   );
+  const debounceRedoHeight = debounce(redoHeight, 50);
+
   const { scrollTo } = useTableScrollTo(tableElRef, getDataSourceRef);
+
   const { customRow } = useCustomRow(getProps, {
     setSelectedRowKeys,
     getSelectRowKeys,
@@ -176,8 +185,15 @@
     getAutoCreateKey,
     emit
   });
+
   const { getRowClassName } = useTableStyle(getProps, prefixCls);
-  const { getExpandOption, expandAll, expandRows, collapseAll } = useTableExpand(getProps, tableData, emit);
+
+  const { getExpandOption, expandAll, expandRows, collapseRows, collapseAll, handleTableExpand } = useTableExpand(
+    getProps,
+    tableData,
+    emit
+  );
+
   const handlers: InnerHandlers = {
     onColumnsChange: (data: ColumnChangeParam[]) => {
       emit("columnsChange", data);
@@ -185,7 +201,14 @@
       unref(getProps).onColumnsChange?.(data);
     }
   };
-  const { getHeaderProps } = useTableHeader(getProps, slots, handlers);
+
+  const methods: InnerMethods = {
+    clearSelectedRowKeys,
+    getSelectRowKeys
+  };
+
+  const { getHeaderProps } = useTableHeader(getProps, slots, handlers, methods);
+
   const { getFooterProps } = useTableFooter(getProps, getScrollRef, tableElRef, getDataSourceRef);
 
   const { getFormProps, replaceFormSlotKey, getFormSlotKeys, handleSearchInfoChange } = useTableForm(
@@ -197,7 +220,7 @@
 
   const getBindValues = computed(() => {
     const dataSource = unref(getDataSourceRef);
-    let propsData: Recordable = {
+    let propsData: any = {
       ...attrs,
       customRow,
       ...unref(getProps),
@@ -213,6 +236,9 @@
       footer: unref(getFooterProps),
       ...unref(getExpandOption)
     };
+    // if (slots.expandedRowRender) {
+    //   propsData = omit(propsData, 'scroll');
+    // }
 
     propsData = omit(propsData, ["class", "onChange"]);
     return propsData;
@@ -238,17 +264,18 @@
     return unref(getDataSourceRef).length > 0;
   });
 
+  watch(height, () => {
+    unref(isFixedHeightPage) && props.canResize && debounceRedoHeight();
+  });
+
   function setProps(props: Partial<BasicTableProps>) {
     innerPropsRef.value = { ...unref(innerPropsRef), ...props };
-  }
-
-  function handleResizeColumn(w, col) {
-    col.width = w;
   }
 
   const tableAction: TableActionType = {
     reload,
     getSelectRows,
+    setSelectedRows,
     clearSelectedRowKeys,
     getSelectRowKeys,
     deleteSelectRowByKey,
@@ -264,6 +291,7 @@
     setLoading,
     getDataSource,
     getRawDataSource,
+    getSearchInfo,
     setProps,
     getRowSelection,
     getPaginationRef: getPagination,
@@ -275,58 +303,57 @@
     getShowPagination,
     setCacheColumnsByField,
     expandAll,
-    expandRows,
     collapseAll,
+    expandRows,
+    collapseRows,
     scrollTo,
     getSize: () => {
       return unref(getBindValues).size as SizeType;
-    }
+    },
+    setCacheColumns
   };
   createTableContext({ ...tableAction, wrapRef, getBindValues });
+
   emit("register", tableAction, formActions);
+
   defineExpose({ tableElRef, ...tableAction });
 </script>
 <style lang="less">
-  @border-color: #cecece4d;
-
   @prefix-cls: ~"@{namespace}-basic-table";
-
-  [data-theme="dark"] {
-    .ant-table-tbody > tr:hover.ant-table-row-selected > td,
-    .ant-table-tbody > tr.ant-table-row-selected td {
-      background-color: #262626 !important;
-    }
-  }
-
   .@{prefix-cls} {
     max-width: 100%;
     height: 100%;
 
-    &-row__striped {
+    &-row__striped:not(.ant-table-row-selected) {
       td {
-        background-color: @app-content-background;
+        background-color: @app-content-background !important;
       }
     }
-
     &-form-container {
       padding: 16px;
 
       .ant-form {
         width: 100%;
-        padding: 12px 10px 6px;
         margin-bottom: 16px;
-        background-color: @component-background;
+        padding: 12px 10px 6px;
         border-radius: 2px;
+        background-color: @component-background;
       }
     }
 
-    .ant-tag {
-      margin-right: 0;
+    .ant-table-cell {
+      .ant-tag {
+        margin-right: 0;
+      }
     }
+
     .ant-table-wrapper {
+      .ant-table-container {
+        border-radius: 8px !important;
+      }
       padding: 6px;
-      background-color: @component-background;
       border-radius: 2px;
+      background-color: @component-background;
 
       .ant-table-title {
         min-height: 40px;
@@ -336,9 +363,6 @@
       .ant-table.ant-table-bordered .ant-table-title {
         border: none !important;
       }
-      .ant-table-header {
-        border-radius: 0;
-      }
     }
 
     .ant-table {
@@ -347,25 +371,15 @@
 
       &-title {
         display: flex;
+        align-items: center;
+        justify-content: space-between;
         padding: 8px 6px;
         border-bottom: none;
-        justify-content: space-between;
-        align-items: center;
       }
-
-      //.ant-table-tbody > tr.ant-table-row-selected td {
-      //  background-color: fade(@button-primary-color, 8%) !important;
-      //}
     }
 
-    .ant-pagination {
-      margin: 10px 0 0 !important;
-      .ant-pagination-prev {
-        display: inline-flex;
-      }
-      .ant-pagination-next {
-        display: inline-flex;
-      }
+    .ant-table-wrapper .ant-pagination {
+      margin: 10px 0 0;
     }
 
     .ant-table-footer {
@@ -381,7 +395,6 @@
 
       .ant-table-body {
         overflow-x: hidden !important;
-        //  overflow-y: scroll !important;
       }
 
       td {

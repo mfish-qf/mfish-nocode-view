@@ -45,25 +45,24 @@
   </AHeader>
 </template>
 <script lang="ts" setup>
-  import { unref, computed } from "vue";
+  import { computed, unref } from "vue";
   import { propTypes } from "@/utils/PropTypes";
-  import { AppLogo } from "@/components/general/Application";
+  import { AppLocalePicker, AppLogo, AppSearch } from "@/components/general/Application";
   import { Divider, Layout } from "ant-design-vue";
   import LayoutMenu from "../menu/index.vue";
   import LayoutTrigger from "../trigger/index.vue";
-  import { AppSearch } from "@/components/general/Application";
   import { useHeaderSetting } from "@/hooks/setting/UseHeaderSetting";
   import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
   import { useRootSetting } from "@/hooks/setting/UseRootSetting";
   import { MenuModeEnum, MenuSplitTyeEnum } from "@/enums/MenuEnum";
   import { SettingButtonPositionEnum } from "@/enums/AppEnum";
-  import { AppLocalePicker } from "@/components/general/Application";
-  import { UserDropDown, TenantDropDown, LayoutBreadcrumb, FullScreen, Notify, ErrorAction } from "./components";
+  import { ErrorAction, FullScreen, LayoutBreadcrumb, Notify, TenantDropDown, UserDropDown } from "./components";
   import { useAppInject } from "@/hooks/web/UseAppInject";
   import { useDesign } from "@/hooks/web/UseDesign";
   import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
   import { useLocale } from "@/i18n/UseLocale";
   import AppDarkModeToggle from "@/components/general/Application/src/AppDarkModeToggle.vue";
+
   defineOptions({ name: "LayoutHeader" });
   const props = defineProps({
     fixed: propTypes.bool

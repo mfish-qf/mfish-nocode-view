@@ -1,5 +1,7 @@
 import { BasicColumn } from "@/components/general/Table";
 import { FormSchema } from "@/components/general/Table";
+import { DescItem } from "@/components/general/Description";
+import { YNTag_Status } from "@/components/general/DictTag/CommonTag";
 export const columns: BasicColumn[] = [
   {
     title: "角色名称",
@@ -109,3 +111,34 @@ export const formSchema: FormSchema[] = [
     colProps: { span: 24 }
   }
 ];
+
+export class RoleDesc {
+  viewSchema: DescItem[] = [
+    {
+      label: "id",
+      field: "id",
+      show: () => false
+    },
+    {
+      field: "roleName",
+      label: "角色名称"
+    },
+    {
+      field: "roleCode",
+      label: "角色编码"
+    },
+    {
+      field: "roleSort",
+      label: "显示顺序"
+    },
+    {
+      field: "status",
+      label: "状态",
+      render: (val) => YNTag_Status(val)
+    },
+    {
+      field: "remark",
+      label: "备注"
+    }
+  ];
+}

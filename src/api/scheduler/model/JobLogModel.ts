@@ -4,7 +4,7 @@ import { BaseEntity, PageResult } from "@/api/model/BaseModel";
  * @description: 任务日志
  * @author: mfish
  * @date: 2023-02-14
- * @version: V1.2.0
+ * @version: V1.3.1
  */
 export interface JobLog extends BaseEntity<string> {
   jobId: string;

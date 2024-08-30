@@ -12,6 +12,7 @@ import {
   regexp,
   turbo,
   typescript,
+  unicorn,
   // unicorn,
   vue
 } from "./configs";
@@ -31,7 +32,7 @@ async function defineConfig(config: FlatConfig[] = []) {
     disableds(),
     comments(),
     jsdoc(),
-    // unicorn(),
+    unicorn(),
     regexp(),
     command(),
     turbo(),

@@ -7,6 +7,8 @@ import { isFunction, isBoolean } from "@/utils/Is";
 import { get, cloneDeep, merge } from "lodash-es";
 import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from "../Const";
 import { Recordable } from "@mfish/types";
+import type { Key } from "ant-design-vue/lib/table/interface";
+import { parseRowKeyValue } from "@/components/general/Table/src/Helper";
 
 interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>;
@@ -21,11 +23,10 @@ interface SearchState {
   sortInfo: Recordable;
   filterInfo: Record<string, string[]>;
 }
-
 export function useDataSource(
   propsRef: ComputedRef<BasicTableProps>,
   { getPaginationInfo, setPagination, setLoading, getFieldsValue, clearSelectedRowKeys, tableData }: ActionType,
-  emit: EmitType | any
+  emit: EmitType
 ) {
   const searchState = reactive<SearchState>({
     sortInfo: {},
@@ -33,10 +34,12 @@ export function useDataSource(
   });
   const dataSourceRef = ref<Recordable[]>([]);
   const rawDataSourceRef = ref<Recordable>({});
+  const searchInfoRef = ref<Recordable>({});
 
   watchEffect(() => {
     tableData.value = unref(dataSourceRef);
   });
+
   watch(
     () => unref(propsRef).dataSource,
     () => {
@@ -95,32 +98,43 @@ export function useDataSource(
     return unref(getAutoCreateKey) ? ROW_KEY : rowKey;
   });
 
-  const getDataSourceRef = computed(() => {
-    const dataSource = unref(dataSourceRef);
-    if (!dataSource || dataSource.length === 0) {
-      return unref(dataSourceRef);
-    }
-    if (unref(getAutoCreateKey)) {
-      const firstItem = dataSource[0];
-      const lastItem = dataSource[dataSource.length - 1];
+  const getDataSourceRef: Ref<Recordable[]> = ref([]);
 
-      if (firstItem && lastItem && (!firstItem[ROW_KEY] || !lastItem[ROW_KEY])) {
-        const data = cloneDeep(unref(dataSourceRef));
-        data.forEach((item) => {
-          if (!item[ROW_KEY]) {
-            item[ROW_KEY] = buildUUID();
-          }
-          if (item.children && item.children.length > 0) {
-            setTableKey(item.children);
-          }
-        });
-        dataSourceRef.value = data;
+  watch(
+    () => dataSourceRef.value,
+    () => {
+      const dataSource = unref(dataSourceRef);
+      if (!dataSource || dataSource.length === 0) {
+        getDataSourceRef.value = unref(dataSourceRef);
       }
-    }
-    return unref(dataSourceRef);
-  });
+      if (unref(getAutoCreateKey)) {
+        const firstItem = dataSource[0];
+        const lastItem = dataSource[dataSource.length - 1];
 
-  async function updateTableData(index: number, key: string, value: any) {
+        if (firstItem && lastItem) {
+          if (!firstItem[ROW_KEY] || !lastItem[ROW_KEY]) {
+            const data = cloneDeep(unref(dataSourceRef));
+            data.forEach((item) => {
+              if (!item[ROW_KEY]) {
+                item[ROW_KEY] = buildUUID();
+              }
+              if (item.children && item.children.length > 0) {
+                setTableKey(item.children);
+              }
+            });
+            dataSourceRef.value = data;
+          }
+        }
+      }
+      getDataSourceRef.value = unref(dataSourceRef);
+    },
+    {
+      deep: true,
+      immediate: true
+    }
+  );
+
+  async function updateTableData(index: number, key: Key, value: any) {
     const record = dataSourceRef.value[index];
     if (record) {
       dataSourceRef.value[index][key] = value;
@@ -128,8 +142,8 @@ export function useDataSource(
     return dataSourceRef.value[index];
   }
 
-  function updateTableDataRecord(rowKey: string | number, record: Recordable): Recordable | undefined {
-    const row = findTableDataRecord(rowKey);
+  function updateTableDataRecord(keyValue: Key, record: Recordable): Recordable | undefined {
+    const row = findTableDataRecord(keyValue);
 
     if (row) {
       for (const field in row) {
@@ -139,34 +153,28 @@ export function useDataSource(
     }
   }
 
-  function deleteTableDataRecord(rowKey: string | number | string[] | number[]) {
+  function deleteTableDataRecord(keyValues: Key | Key[]) {
     if (!dataSourceRef.value || dataSourceRef.value.length === 0) return;
-    const rowKeyName = unref(getRowKey);
-    if (!rowKeyName) return;
-    const rowKeys = Array.isArray(rowKey) ? rowKey : [rowKey];
+    const delKeyValues = Array.isArray(keyValues) ? keyValues : [keyValues];
 
-    function deleteRow(data, key) {
-      const row: { index: number; data: [] } = findRow(data, key);
+    function deleteRow(data, keyValue) {
+      const row: { index: number; data: [] } = findRow(data, keyValue);
       if (row === null || row.index === -1) {
         return;
       }
       row.data.splice(row.index, 1);
 
-      function findRow(data, key) {
+      function findRow(data, keyValue) {
         if (data === null || data === undefined) {
           return null;
         }
         for (let i = 0; i < data.length; i++) {
           const row = data[i];
-          let targetKeyName: string = rowKeyName as string;
-          if (isFunction(rowKeyName)) {
-            targetKeyName = rowKeyName(row);
-          }
-          if (row[targetKeyName] === key) {
+          if (parseRowKeyValue(unref(getRowKey), row) === keyValue) {
             return { index: i, data };
           }
           if (row.children?.length > 0) {
-            const result = findRow(row.children, key);
+            const result = findRow(row.children, keyValue);
             if (result !== null) {
               return result;
             }
@@ -176,43 +184,33 @@ export function useDataSource(
       }
     }
 
-    for (const key of rowKeys) {
-      deleteRow(dataSourceRef.value, key);
-      deleteRow(unref(propsRef).dataSource, key);
+    for (const keyValue of delKeyValues) {
+      deleteRow(dataSourceRef.value, keyValue);
+      deleteRow(unref(propsRef).dataSource, keyValue);
     }
     setPagination({
       total: unref(propsRef).dataSource?.length
     });
   }
 
-  function insertTableDataRecord(record: Recordable, index?: number | undefined): Recordable | undefined {
+  function insertTableDataRecord(record: Recordable | Recordable[], index?: number): Recordable[] | undefined {
     // if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
     index = index ?? dataSourceRef.value?.length;
-    unref(dataSourceRef).splice(index, 0, record);
+    const _record = isObject(record) ? [record as Recordable] : (record as Recordable[]);
+    unref(dataSourceRef).splice(index, 0, ..._record);
     return unref(dataSourceRef);
   }
 
-  function findTableDataRecord(rowKey: string | number) {
+  function findTableDataRecord(keyValue: Key) {
     if (!dataSourceRef.value || dataSourceRef.value.length === 0) return;
-
-    const rowKeyName = unref(getRowKey);
-    if (!rowKeyName) return;
-
     const { childrenColumnName = "children" } = unref(propsRef);
 
     const findRow = (array: any[]) => {
       let ret;
       array.some(function iter(r) {
-        if (typeof rowKeyName === "function") {
-          if ((rowKeyName(r) as string) === rowKey) {
-            ret = r;
-            return true;
-          }
-        } else {
-          if (Reflect.has(r, rowKeyName) && r[rowKeyName] === rowKey) {
-            ret = r;
-            return true;
-          }
+        if (parseRowKeyValue(unref(getRowKey), r) === keyValue) {
+          ret = r;
+          return true;
         }
         return r[childrenColumnName] && r[childrenColumnName].some(iter);
       });
@@ -222,7 +220,7 @@ export function useDataSource(
     return findRow(dataSourceRef.value);
   }
 
-  async function fetch(opt?: FetchParams | undefined) {
+  async function fetch(opt?: FetchParams) {
     const { api, searchInfo, defSort, fetchSetting, beforeFetch, afterFetch, useSearchForm, pagination } =
       unref(propsRef);
     if (!api || !isFunction(api)) return;
@@ -230,14 +228,18 @@ export function useDataSource(
       setLoading(true);
       const { pageField, sizeField, listField, totalField } = Object.assign({}, FETCH_SETTING, fetchSetting);
       let pageParams: Recordable = {};
+
       const { current = 1, pageSize = PAGE_SIZE } = unref(getPaginationInfo) as PaginationProps;
+
       if ((isBoolean(pagination) && !pagination) || isBoolean(getPaginationInfo)) {
         pageParams = {};
       } else {
         pageParams[pageField] = (opt && opt.page) || current;
         pageParams[sizeField] = pageSize;
       }
+
       const { sortInfo = {}, filterInfo } = searchState;
+
       let params: Recordable = merge(
         pageParams,
         useSearchForm ? getFieldsValue() : {},
@@ -252,13 +254,17 @@ export function useDataSource(
       if (beforeFetch && isFunction(beforeFetch)) {
         params = (await beforeFetch(params)) || params;
       }
+      searchInfoRef.value = params;
       const res = await api(params);
       rawDataSourceRef.value = res;
+
       const isArrayResult = Array.isArray(res);
+
       let resultItems: Recordable[] = isArrayResult ? res : get(res, listField);
       const resultTotal: number = isArrayResult ? res.length : get(res, totalField);
+
       // 假如数据变少，导致总页数变少并小于当前选中页码，通过getPaginationRef获取到的页码是不正确的，需获取正确的页码再次执行
-      if (resultTotal) {
+      if (Number(resultTotal)) {
         const currentTotalPage = Math.ceil(resultTotal / pageSize);
         if (current > currentTotalPage) {
           setPagination({
@@ -267,6 +273,7 @@ export function useDataSource(
           return await fetch(opt);
         }
       }
+
       if (afterFetch && isFunction(afterFetch)) {
         resultItems = (await afterFetch(resultItems)) || resultItems;
       }
@@ -295,8 +302,8 @@ export function useDataSource(
     }
   }
 
-  function setTableData<T extends Recordable = Recordable>(values: T[]) {
-    dataSourceRef.value = values;
+  function setTableData<T = Recordable>(values: T[]) {
+    dataSourceRef.value = values as Recordable[];
   }
 
   function getDataSource<T = Recordable>() {
@@ -311,6 +318,10 @@ export function useDataSource(
     return await fetch(opt);
   }
 
+  function getSearchInfo<T = Recordable>() {
+    return searchInfoRef.value as T;
+  }
+
   onMounted(() => {
     useTimeoutFn(() => {
       unref(propsRef).immediate && fetch();
@@ -318,9 +329,11 @@ export function useDataSource(
   });
 
   return {
-    getDataSourceRef,
+    getDataSourceRef: computed(() => getDataSourceRef.value),
     getDataSource,
     getRawDataSource,
+    searchInfoRef,
+    getSearchInfo,
     getRowKey,
     setTableData,
     getAutoCreateKey,

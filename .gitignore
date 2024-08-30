@@ -28,3 +28,4 @@ coverage
 *.sw?
 /mfish-nocode-view/
 .turbo
+/.vite/

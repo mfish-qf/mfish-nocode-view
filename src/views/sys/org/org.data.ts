@@ -1,9 +1,14 @@
 import { BasicColumn } from "@/components/general/Table";
 import { FormSchema } from "@/components/general/Table";
-import { h } from "vue";
+import { h, ref } from "vue";
 import { Tag } from "ant-design-vue";
 import { Icon } from "@/components/general/Icon";
 import { useAppStore } from "@/store/modules/App";
+import { DescItem } from "@/components/general/Description";
+import { YNTag_Status } from "@/components/general/DictTag/CommonTag";
+import { getOrgByIds } from "@/api/sys/Org";
+import { getRoleByIds } from "@/api/sys/Role";
+
 export const columns: BasicColumn[] = [
   {
     title: "组织名称",
@@ -115,7 +120,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: "parentId",
-    label: "上级部门",
+    label: "上级组织",
     component: "TreeSelect",
     componentProps: {
       fieldNames: {
@@ -178,3 +183,82 @@ export const formSchema: FormSchema[] = [
     colProps: { span: 24 }
   }
 ];
+
+export class OrgDesc {
+  orgName = ref("");
+  roleNames = ref([]);
+  viewSchema: DescItem[] = [
+    {
+      label: "id",
+      field: "id",
+      show: () => false
+    },
+    {
+      field: "orgName",
+      label: "组织名称"
+    },
+    {
+      field: "orgFixCode",
+      label: "组织编码"
+    },
+    {
+      field: "parentId",
+      label: "上级组织",
+      render: (val) => {
+        if (!val) return;
+        getOrgByIds(val).then((res) => {
+          if (res && res.length > 0) {
+            this.orgName.value = res[0].orgName;
+          } else {
+            this.orgName.value = "";
+          }
+        });
+        return h(Tag, () => this.orgName.value);
+      }
+    },
+    {
+      label: "角色",
+      field: "roleIds",
+      render: (val: string[] | undefined) => {
+        if (!val || val.length === 0) return;
+        getRoleByIds(val).then((res) => {
+          if (res && res.length > 0) {
+            this.roleNames.value = res.map((val) => val.roleName);
+          } else {
+            this.roleNames.value = [];
+          }
+        });
+        return h(
+          "div",
+          this.roleNames.value.map((roleName) => h(Tag, () => roleName))
+        );
+      }
+    },
+    {
+      field: "orgSort",
+      label: "排序"
+    },
+    {
+      field: "leader",
+      label: "负责人"
+    },
+    {
+      field: "phone",
+      label: "联系电话"
+    },
+    {
+      field: "email",
+      label: "邮箱"
+    },
+    {
+      field: "status",
+      label: "状态",
+      render: (val) => YNTag_Status(val),
+      span: 2
+    },
+    {
+      field: "remark",
+      label: "备注"
+    }
+  ];
+}

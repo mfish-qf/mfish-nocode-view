@@ -2,7 +2,7 @@
  @description: 定时调度任务
  @author: mfish
  @date: 2023-02-20
- @version: V1.2.0
+ @version: V1.3.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit" @cancel="clearJob">

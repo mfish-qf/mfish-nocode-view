@@ -38,7 +38,6 @@ export function updateHeaderBgColor(color?: string) {
   }
   // 设置头部组件鼠标移入颜色
   setCssVar(HEADER_BG_HOVER_COLOR_VAR, hoverColor);
-  // }
   appStore.setProjectConfig({
     headerSetting: {
       theme: isDark || darkMode ? ThemeEnum.DARK : ThemeEnum.LIGHT

@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @description: 我的大屏信息
  * @author: mfish
  * @date: 2024-08-07
- * @version: V1.3.0
+ * @version: V1.3.1
  */
 export interface MfScreen extends BaseEntity<string> {
   // 目录id

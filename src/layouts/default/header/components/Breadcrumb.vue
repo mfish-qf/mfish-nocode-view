@@ -1,7 +1,6 @@
 <template>
   <div :class="[prefixCls, `${prefixCls}--${theme}`]">
     <ABreadcrumb :routes="routes">
-      <template #separator><span :style="{ color }">></span></template>
       <template #itemRender="{ route, routes: routesMatched }">
         <Icon :icon="getIcon(route)" v-if="getShowBreadCrumbIcon && getIcon(route)" :color="color" />
         <span v-if="!hasRedirect(routesMatched, route)" class="ml-2"> {{ getName(route) }} </span>
@@ -14,24 +13,24 @@
 </template>
 <script lang="ts" setup>
   import { useRouter } from "vue-router";
-  import { ref, watchEffect } from "vue";
+  import { computed, ref, watchEffect } from "vue";
   import { Breadcrumb as ABreadcrumb } from "ant-design-vue";
   import { Icon } from "@/components/general/Icon";
   import { useDesign } from "@/hooks/web/UseDesign";
   import { useRootSetting } from "@/hooks/setting/UseRootSetting";
   import { useGo } from "@/hooks/web/UsePage";
-  import { propTypes } from "@/utils/PropTypes";
   import { isString } from "@/utils/Is";
   import { filter } from "@/utils/helper/TreeHelper";
   import { getMenus } from "@/router/menus";
   import { REDIRECT_NAME } from "@/router/Constant";
   import { getAllParentPath } from "@/router/helper/MenuHelper";
   import type { Route } from "ant-design-vue/es/breadcrumb/Breadcrumb";
+  import { useAppStore } from "@/store/modules/App";
 
   defineOptions({ name: "LayoutBreadcrumb" });
-
-  defineProps({
-    theme: propTypes.oneOf(["dark", "light"])
+  const appStore = useAppStore();
+  const theme = computed(() => {
+    return appStore.getHeaderSetting.theme;
   });
 
   const routes = ref<Route[]>([]);
@@ -147,6 +146,14 @@
 
     .ant-breadcrumb-link {
       color: @header-color;
+    }
+    .anticon-down {
+      color: v-bind(color);
+    }
+    &--dark {
+      .ant-breadcrumb-separator {
+        color: @header-light-desc-color;
+      }
     }
   }
 </style>

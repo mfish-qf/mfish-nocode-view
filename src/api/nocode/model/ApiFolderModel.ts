@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @description: API目录
  * @author: mfish
  * @date: 2023-07-21
- * @version: V1.2.0
+ * @version: V1.3.1
  */
 export interface ApiFolder extends BaseEntity<string> {
   parentId?: string;
