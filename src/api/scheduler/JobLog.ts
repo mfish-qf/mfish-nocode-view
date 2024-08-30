@@ -5,7 +5,7 @@ import { JobLog, ReqJobLog, JobLogPageModel } from "@/api/scheduler/model/JobLog
  * @description: 任务日志
  * @author: mfish
  * @date: 2023-02-14
- * @version: V1.2.0
+ * @version: V1.3.1
  */
 enum Api {
   JobLog = "/scheduler/jobLog"

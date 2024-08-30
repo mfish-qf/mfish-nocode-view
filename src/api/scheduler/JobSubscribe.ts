@@ -5,7 +5,7 @@ import { JobSubscribe, ReqJobSubscribe, JobSubscribePageModel } from "@/api/sche
  * @description: 任务订阅表
  * @author: mfish
  * @date: 2023-02-20
- * @version: V1.2.0
+ * @version: V1.3.1
  */
 enum Api {
   JobSubscribe = "/scheduler/jobSubscribe",

@@ -8,6 +8,7 @@ import { ref, onUnmounted, unref, watch, toRaw } from "vue";
 import { isProdMode } from "@/utils/Env";
 import { error } from "@/utils/Log";
 import { Nullable, Recordable } from "@mfish/types";
+import { Key } from "ant-design-vue/lib/table/interface";
 
 type Props = Partial<DynamicProps<BasicTableProps>>;
 
@@ -15,12 +16,16 @@ type UseTableMethod = TableActionType & {
   getForm: () => FormActionType;
 };
 
-export function useTable(
-  tableProps?: Props
-): [(instance: TableActionType, formInstance: UseTableMethod) => void, UseTableMethod] {
+export function useTable(tableProps?: Props): [
+  (instance: TableActionType, formInstance: UseTableMethod) => void,
+  TableActionType & {
+    getForm: () => FormActionType;
+  }
+] {
   const tableRef = ref<Nullable<TableActionType>>(null);
   const loadedRef = ref<Nullable<boolean>>(false);
   const formRef = ref<Nullable<UseTableMethod>>(null);
+
   let stopWatch: WatchStopHandle;
 
   function register(instance: TableActionType, formInstance: UseTableMethod) {
@@ -29,12 +34,16 @@ export function useTable(
         tableRef.value = null;
         loadedRef.value = null;
       });
+
     if (unref(loadedRef) && isProdMode() && instance === unref(tableRef)) return;
+
     tableRef.value = instance;
     formRef.value = formInstance;
     tableProps && instance.setProps(getDynamicProps(tableProps));
     loadedRef.value = true;
+
     stopWatch?.();
+
     stopWatch = watch(
       () => tableProps,
       () => {
@@ -67,6 +76,9 @@ export function useTable(
     redoHeight: () => {
       getTableInstance().redoHeight();
     },
+    setSelectedRows: (rows: Recordable[]) => {
+      return toRaw(getTableInstance().setSelectedRows(rows));
+    },
     setLoading: (loading: boolean) => {
       getTableInstance().setLoading(loading);
     },
@@ -75,6 +87,9 @@ export function useTable(
     },
     getRawDataSource: () => {
       return getTableInstance().getRawDataSource();
+    },
+    getSearchInfo: () => {
+      return getTableInstance().getSearchInfo();
     },
     getColumns: ({ ignoreIndex = false }: { ignoreIndex?: boolean } = {}) => {
       const columns = getTableInstance().getColumns({ ignoreIndex }) || [];
@@ -89,8 +104,8 @@ export function useTable(
     setPagination: (info: Partial<PaginationProps>) => {
       return getTableInstance().setPagination(info);
     },
-    deleteSelectRowByKey: (key: string) => {
-      getTableInstance().deleteSelectRowByKey(key);
+    deleteSelectRowByKey: (keyValue: Key) => {
+      getTableInstance().deleteSelectRowByKey(keyValue);
     },
     getSelectRowKeys: () => {
       return toRaw(getTableInstance().getSelectRowKeys());
@@ -101,8 +116,8 @@ export function useTable(
     clearSelectedRowKeys: () => {
       getTableInstance().clearSelectedRowKeys();
     },
-    setSelectedRowKeys: (keys: string[] | number[]) => {
-      getTableInstance().setSelectedRowKeys(keys);
+    setSelectedRowKeys: (keyValues: Key[]) => {
+      getTableInstance().setSelectedRowKeys(keyValues);
     },
     getPaginationRef: () => {
       return getTableInstance().getPaginationRef();
@@ -113,17 +128,17 @@ export function useTable(
     updateTableData: (index: number, key: string, value: any) => {
       return getTableInstance().updateTableData(index, key, value);
     },
-    deleteTableDataRecord: (rowKey: string | number | string[] | number[]) => {
-      return getTableInstance().deleteTableDataRecord(rowKey);
+    deleteTableDataRecord: (keyValues: Key | Key[]) => {
+      return getTableInstance().deleteTableDataRecord(keyValues);
     },
     insertTableDataRecord: (record: Recordable | Recordable[], index?: number) => {
       return getTableInstance().insertTableDataRecord(record, index);
     },
-    updateTableDataRecord: (rowKey: string | number, record: Recordable) => {
-      return getTableInstance().updateTableDataRecord(rowKey, record);
+    updateTableDataRecord: (keyValue: Key, record: Recordable) => {
+      return getTableInstance().updateTableDataRecord(keyValue, record);
     },
-    findTableDataRecord: (rowKey: string | number) => {
-      return getTableInstance().findTableDataRecord(rowKey);
+    findTableDataRecord: (keyValue: Key) => {
+      return getTableInstance().findTableDataRecord(keyValue);
     },
     getRowSelection: () => {
       return toRaw(getTableInstance().getRowSelection());
@@ -135,7 +150,7 @@ export function useTable(
       return unref(formRef) as unknown as FormActionType;
     },
     setShowPagination: async (show: boolean) => {
-      getTableInstance().setShowPagination(show).then();
+      getTableInstance().setShowPagination(show);
     },
     getShowPagination: () => {
       return toRaw(getTableInstance().getShowPagination());
@@ -143,11 +158,14 @@ export function useTable(
     expandAll: () => {
       getTableInstance().expandAll();
     },
-    expandRows: (keys: string[] | number[]) => {
-      getTableInstance().expandRows(keys);
-    },
     collapseAll: () => {
       getTableInstance().collapseAll();
+    },
+    expandRows: (keyValues: Key[]) => {
+      getTableInstance().expandRows(keyValues);
+    },
+    collapseRows: (keyValues: Key[]) => {
+      getTableInstance().collapseRows(keyValues);
     },
     scrollTo: (pos: string) => {
       getTableInstance().scrollTo(pos);

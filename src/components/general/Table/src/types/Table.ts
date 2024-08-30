@@ -474,6 +474,11 @@ export interface InnerHandlers {
   onColumnsChange: (data: ColumnChangeParam[]) => void;
 }
 
+export interface InnerMethods {
+  clearSelectedRowKeys: TableActionType["clearSelectedRowKeys"];
+  getSelectRowKeys: TableActionType["getSelectRowKeys"];
+}
+
 export interface ColumnOptionsType {
   value: string;
   label: string;

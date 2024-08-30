@@ -192,6 +192,7 @@
     &-item {
       height: 70px;
       background: #ffffff;
+      border-radius: 8px;
       box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.05);
       display: flex;
       align-items: center;

@@ -2,18 +2,25 @@
  @description: 客户端信息
  @author: mfish
  @date: 2023-05-12
- @version: V1.2.0
+ @version: V1.3.1
 -->
 <template>
   <div :class="prefixCls">
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-auth="'sys:client:insert'">新增 </a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:client:insert'">新增</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
             :actions="[
+              {
+                icon: 'ant-design:info-circle-outlined',
+                onClick: handleQuery.bind(null, record),
+                auth: 'sys:client:query',
+                color: 'success',
+                tooltip: '查看'
+              },
               {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
@@ -72,6 +79,7 @@
       </template>
     </BasicTable>
     <SsoClientDetailsModal @register="registerModal" @success="handleSuccess" />
+    <SsoClientDetailsViewModal @register="registerViewModal" />
   </div>
 </template>
 <script lang="ts" setup>
@@ -86,9 +94,12 @@
   import { Tag as ATag } from "ant-design-vue";
   import { DictItem } from "@/api/sys/model/DictItemModel";
   import { Recordable } from "@mfish/types";
+  import SsoClientDetailsViewModal from "@/views/sys/sso-client-details/SsoClientDetailsViewModal.vue";
+
   defineOptions({ name: "SsoClientDetailsManagement" });
 
   const [registerModal, { openModal }] = useModal();
+  const [registerViewModal, { openModal: openViewModal }] = useModal();
   const [registerTable, { reload }] = useTable({
     title: "客户端信息列表",
     api: getSsoClientDetailsList,
@@ -104,7 +115,7 @@
     bordered: true,
     showIndexColumn: false,
     actionColumn: {
-      width: 120,
+      width: 150,
       title: "操作",
       dataIndex: "action"
     }
@@ -133,12 +144,19 @@
       isUpdate: false
     });
   }
-
   onMounted(() => {
     getDictItems("sso_grant_type").then((res) => {
       grantTypes.value = res;
     });
   });
+
+  /**
+   * 查看
+   * @param ssoClientDetails 客户端信息对象
+   */
+  function handleQuery(ssoClientDetails: Recordable) {
+    openViewModal(true, { record: ssoClientDetails });
+  }
 
   /**
    * 修改

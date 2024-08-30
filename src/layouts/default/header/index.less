@@ -35,12 +35,14 @@
 
     .@{header-prefix-cls}-action {
       padding-right: 2px;
-      &__item{
+
+      &__item {
         margin: 1px;
         padding: 6px;
       }
+
       .ant-divider {
-       margin: 2px;
+        margin: 2px;
       }
     }
   }
@@ -58,11 +60,13 @@
     padding: 0 10px;
     font-size: 14px;
     border-radius: 8px;
+
     img {
       width: @logo-width;
       height: @logo-width;
       margin-right: 2px;
     }
+
     &:hover {
       background-color: @header-bg-hover-color;
     }
@@ -83,9 +87,11 @@
       .anticon {
         font-size: 16px;
       }
+
       &:hover {
         background-color: @header-bg-hover-color;
       }
+
       &.light {
         svg {
           fill: @black;
@@ -100,7 +106,7 @@
     flex: 1;
     align-items: center;
 
-    & li{
+    & li {
       border-radius: 8px !important;
       transition: background 0.5s ease !important;
 
@@ -128,21 +134,22 @@
       font-size: 14px;
       color: @header-color;
       cursor: pointer;
+
       &:hover {
         background-color: @header-bg-hover-color;
       }
     }
+
     .ant-divider {
       height: 16px;
       background-color: @border-color-base;
     }
   }
+
   &--dark {
     box-shadow: 0 0 6px 0 #303030;
-    &-action {
-      .ant-divider {
-        background-color: @border-color-dark;
-      }
+    .ant-divider {
+      background-color: @header-light-desc-color;
     }
   }
 }

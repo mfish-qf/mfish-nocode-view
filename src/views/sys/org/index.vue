@@ -17,6 +17,13 @@
           <TableAction
             :actions="[
               {
+                icon: 'ant-design:info-circle-outlined',
+                onClick: handleQuery.bind(null, record),
+                auth: ['sys:org:query', 'sys:tenantOrg:update'],
+                color: 'success',
+                tooltip: '查看'
+              },
+              {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
                 ifShow:
@@ -43,6 +50,7 @@
       </template>
     </BasicTable>
     <OrgModal @register="registerModal" @success="handleSuccess" :source="$props.source" />
+    <OrgViewModal @register="registerViewModal" />
   </div>
 </template>
 <script lang="ts" setup>
@@ -51,6 +59,7 @@
   import { deleteOrg, getOrgTree } from "@/api/sys/Org";
   import { useModal } from "@/components/general/Modal";
   import OrgModal from "./OrgModal.vue";
+  import OrgViewModal from "./OrgViewModal.vue";
   import { columns, searchFormSchema } from "./org.data";
   import { usePermission } from "@/hooks/web/UsePermission";
   import { deleteTenantOrg, getTenantOrgTree } from "@/api/sys/SsoTenant";
@@ -66,6 +75,7 @@
   });
   const { hasPermission } = usePermission();
   const [registerModal, { openModal }] = useModal();
+  const [registerViewModal, { openModal: openViewModal }] = useModal();
   const { prefixCls } = useDesign("org");
   const api = ref();
   api.value = props.source === 1 ? getTenantOrgTree : getOrgTree;
@@ -99,6 +109,10 @@
     openModal(true, {
       isUpdate: false
     });
+  }
+
+  function handleQuery(org: Recordable) {
+    openViewModal(true, { record: org });
   }
 
   function handleEdit(record: Recordable) {

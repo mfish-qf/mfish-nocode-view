@@ -5,15 +5,9 @@ import TableFooter from "../components/TableFooter.vue";
 import { useEventListener } from "@/hooks/event/UseEventListener";
 import { Recordable } from "@mfish/types";
 
-type scrollRefType = ComputedRef<{
-  x: string | number | true;
-  y: string | number | null;
-  scrollToFirstRowOnChange: boolean;
-}>;
-
 export function useTableFooter(
   propsRef: ComputedRef<BasicTableProps>,
-  scrollRef: scrollRefType,
+  scrollRef: ComputedRef<BasicTableProps["scroll"]>,
   tableElRef: Ref<ComponentRef>,
   getDataSourceRef: ComputedRef<Recordable>
 ) {
@@ -39,20 +33,21 @@ export function useTableFooter(
     nextTick(() => {
       const tableEl = unref(tableElRef);
       if (!tableEl) return;
-      const bodyDom = tableEl.$el.querySelector(".ant-table-content");
+      const bodyDom = tableEl.$el.querySelector(" .ant-table-content,  .ant-table-body");
       useEventListener({
         el: bodyDom,
         name: "scroll",
         listener: () => {
-          const footerBodyDom = tableEl.$el.querySelector(".ant-table-footer .ant-table-content") as HTMLDivElement;
+          const footerBodyDom = tableEl.$el.querySelector(
+            '.ant-table-footer .ant-table-container  [class^="ant-table-"]'
+          ) as HTMLDivElement;
           if (!footerBodyDom || !bodyDom) return;
           footerBodyDom.scrollLeft = bodyDom.scrollLeft;
         },
         wait: 0,
         options: true
       });
-    }).then();
+    });
   }
-
   return { getFooterProps };
 }

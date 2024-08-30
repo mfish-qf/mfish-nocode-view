@@ -2,7 +2,7 @@
  @description: 代码构建
  @author: mfish
  @date: 2023-04-11
- @version: V1.2.0
+ @version: V1.3.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="代码构建" @ok="handleSubmit">
@@ -95,9 +95,11 @@
         dataBase: [data.record.connectId, data.record.tableName],
         ...data.record
       });
-      const params = JSON.parse(data.record.queryParams);
-      setTableData(params);
-      reload();
+      if (data.record.queryParams) {
+        const params = JSON.parse(data.record.queryParams);
+        setTableData(params);
+      }
+      reload().then();
     }
   });
   onMounted(async () => {

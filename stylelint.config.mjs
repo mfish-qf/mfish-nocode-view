@@ -1,4 +1,4 @@
 export default {
-  extends: ['@mfish/stylelint-config'],
-  root: true,
+  extends: ["@mfish/stylelint-config"],
+  root: true
 };

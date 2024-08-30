@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @description: API请求参数
  * @author: mfish
  * @date: 2023-08-25
- * @version: V1.2.0
+ * @version: V1.3.1
  */
 export interface ApiParams extends BaseEntity<number> {
   // 接口ID

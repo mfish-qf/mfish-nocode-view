@@ -1,6 +1,6 @@
 {
   "name": "@mfish/ts-config",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "private": true,
   "author": {
     "name": "mfish",
@@ -18,7 +18,7 @@
     "web.json"
   ],
   "dependencies": {
-    "@types/node": "^22.5.0",
+    "@types/node": "^22.5.1",
     "vite": "^5.4.2"
   }
 }

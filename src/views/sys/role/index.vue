@@ -18,6 +18,13 @@
           <TableAction
             :actions="[
               {
+                icon: 'ant-design:info-circle-outlined',
+                onClick: handleQuery.bind(null, record),
+                auth: ['sys:role:query', 'sys:tenantRole:query'],
+                color: 'success',
+                tooltip: '查看'
+              },
+              {
                 icon: 'ant-design:edit-outlined',
                 onClick: handleEdit.bind(null, record),
                 ifShow:
@@ -53,6 +60,7 @@
       </template>
     </BasicTable>
     <RoleModal @register="registerModal" @success="handleSuccess" :source="$props.source" />
+    <RoleViewModal @register="registerViewModal" :source="$props.source" />
   </div>
 </template>
 <script lang="ts" setup>
@@ -60,6 +68,7 @@
   import { deleteRole, getRoleList, setRoleStatus } from "@/api/sys/Role";
   import { useModal } from "@/components/general/Modal";
   import RoleModal from "./RoleModal.vue";
+  import RoleViewModal from "./RoleViewModal.vue";
   import { columns, searchFormSchema } from "./role.data";
   import { usePermission } from "@/hooks/web/UsePermission";
   import { ref } from "vue";
@@ -77,6 +86,7 @@
   });
   const { hasPermission, isSuperRole } = usePermission();
   const [registerModal, { openModal }] = useModal();
+  const [registerViewModal, { openModal: openViewModal }] = useModal();
   const { prefixCls } = useDesign("role");
   const api = ref();
 
@@ -97,7 +107,7 @@
     resizeHeightOffset: props.source === 1 ? 18 : 0,
     showIndexColumn: false,
     actionColumn: {
-      width: 80,
+      width: 120,
       title: "操作",
       dataIndex: "action"
     }
@@ -107,6 +117,14 @@
     openModal(true, {
       isUpdate: false
     });
+  }
+
+  /**
+   * 查看
+   * @param role 角色表对象
+   */
+  function handleQuery(role: SsoRole) {
+    openViewModal(true, { record: role });
   }
 
   function handleEdit(record: SsoRole) {

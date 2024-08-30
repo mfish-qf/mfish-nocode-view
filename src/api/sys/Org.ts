@@ -19,6 +19,10 @@ export const getOrgTree = (params?: SsoOrg) => {
   return defHttp.get<SsoOrg[]>({ url: Api.OrgTree, params });
 };
 
+export function getOrgByIds(ids: string) {
+  return defHttp.get<SsoOrg[]>({ url: `${Api.Org}/${ids}` });
+}
+
 export function insertOrg(params: SsoOrg) {
   return defHttp.post<SsoOrg>({ url: Api.Org, params }, { successMessageMode: "message" });
 }
