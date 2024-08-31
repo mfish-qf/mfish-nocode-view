@@ -1,12 +1,13 @@
 <template>
   <div class="table-settings">
     <RedoSetting v-if="getSetting.redo" :get-popup-container="getTableContainer" />
-    <SizeSetting v-if="getSetting.size" :get-popup-container="getTableContainer" />
+    <SizeSetting v-if="getSetting.size > 0" :get-popup-container="getTableContainer" />
     <ColumnSetting
       v-if="getSetting.setting"
       @columns-change="handleColumnChange"
       :get-popup-container="getTableContainer"
       :cache="getSetting.settingCache"
+      :title="title"
     />
     <FullScreenSetting v-if="getSetting.fullScreen" :get-popup-container="getTableContainer" />
   </div>
@@ -25,6 +26,10 @@
   defineOptions({ name: "TableSetting" });
 
   const props = defineProps({
+    title: {
+      type: String,
+      default: ""
+    },
     setting: {
       type: Object as PropType<TableSetting>,
       default: () => ({})

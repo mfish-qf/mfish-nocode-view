@@ -6,7 +6,7 @@ import { omit } from "lodash-es";
 import { findNodeAll } from "@/utils/helper/TreeHelper";
 import { Recordable } from "@mfish/types";
 import { Key } from "ant-design-vue/lib/table/interface";
-import { parseRowKeyValue } from "@/components/general/Table/src/Helper";
+import { parseRowKey, parseRowKeyValue } from "@/components/general/Table/src/Helper";
 export function useRowSelection(propsRef: ComputedRef<BasicTableProps>, tableData: Ref<Recordable[]>, emit: EmitType) {
   const selectedRowKeysRef = ref<Key[]>([]);
   const selectedRowRef = ref<Recordable[]>([]);
@@ -27,13 +27,13 @@ export function useRowSelection(propsRef: ComputedRef<BasicTableProps>, tableDat
         } else {
           // 点击 checkbox/radiobox 触发
           // 取出【当前页】所有 keyValues
-          const currentPageKeys = tableData.value.map((o) => parseRowKeyValue(unref(getRowKey), o));
+          const currentPageKeys = new Set(tableData.value.map((o) => parseRowKeyValue(unref(getRowKey), o)));
           // 从【所有分页】已选的 keyValues，且属于【当前页】的部分
-          for (const selectedKey of selectedRowKeysRef.value.filter((k) => currentPageKeys.includes(k))) {
+          for (const selectedKey of selectedRowKeysRef.value.filter((k) => currentPageKeys.has(k))) {
             // 判断是否已经不存在于【当前页】
-            if (selectedRowKeys.findIndex((k) => k === selectedKey) < 0) {
+            if (!selectedRowKeys.includes(selectedKey)) {
               // 不存在 = 取消勾选
-              const removeIndex = selectedRowKeysRef.value.findIndex((k) => k === selectedKey);
+              const removeIndex = selectedRowKeysRef.value.indexOf(selectedKey);
               if (removeIndex > -1) {
                 // 取消勾选
                 selectedRowKeysRef.value.splice(removeIndex, 1);
@@ -43,7 +43,7 @@ export function useRowSelection(propsRef: ComputedRef<BasicTableProps>, tableDat
           }
           // 存在于【当前页】，但不存在于【所有分页】，则认为是新增的
           for (const selectedKey of selectedRowKeys) {
-            const existIndex = selectedRowKeysRef.value.findIndex((k) => k === selectedKey);
+            const existIndex = selectedRowKeysRef.value.indexOf(selectedKey);
             if (existIndex < 0) {
               // 新增勾选
               selectedRowKeysRef.value.push(selectedKey);
@@ -99,7 +99,7 @@ export function useRowSelection(propsRef: ComputedRef<BasicTableProps>, tableDat
 
   function setSelectedRowKeys(keyValues?: Key[]) {
     selectedRowKeysRef.value = keyValues || [];
-    const rows = toRaw(unref(tableData)).concat(toRaw(unref(selectedRowRef)));
+    const rows = [...toRaw(unref(tableData)), ...toRaw(unref(selectedRowRef))];
     const allSelectedRows = findNodeAll(rows, (item) => keyValues?.includes(parseRowKeyValue(unref(getRowKey), item)), {
       children: propsRef.value.childrenColumnName ?? "children"
     });
@@ -131,7 +131,7 @@ export function useRowSelection(propsRef: ComputedRef<BasicTableProps>, tableDat
 
   function deleteSelectRowByKey(key: Key) {
     const selectedRowKeys = unref(selectedRowKeysRef);
-    const index = selectedRowKeys.findIndex((item) => item === key);
+    const index = selectedRowKeys.indexOf(key);
     if (index !== -1) {
       unref(selectedRowKeysRef).splice(index, 1);
     }

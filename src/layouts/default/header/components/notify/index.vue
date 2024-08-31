@@ -86,7 +86,7 @@
       }
       &:hover {
         svg {
-          animation: bell-ring 1s both;
+          animation: bell-ring 1.2s both;
         }
       }
     }
@@ -97,23 +97,27 @@
       }
 
       15% {
-        transform: rotateZ(10deg);
+        transform: rotateZ(15deg);
       }
 
       30% {
-        transform: rotateZ(-10deg);
+        transform: rotateZ(-15deg);
       }
 
       45% {
-        transform: rotateZ(5deg);
+        transform: rotateZ(10deg);
       }
 
       60% {
-        transform: rotateZ(-5deg);
+        transform: rotateZ(-10deg);
       }
 
       75% {
-        transform: rotateZ(2deg);
+        transform: rotateZ(5deg);
+      }
+
+      90% {
+        transform: rotateZ(-5deg);
       }
     }
   }

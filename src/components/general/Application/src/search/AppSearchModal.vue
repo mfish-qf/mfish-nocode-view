@@ -162,7 +162,7 @@
 
         &__item {
           &-enter {
-            opacity: 0% !important;
+            opacity: 0 !important;
           }
         }
       }
@@ -207,7 +207,7 @@
       display: flex;
       width: 100%;
       height: 100px;
-      font-size: 0.9;
+      font-size: 0.9em;
       color: rgb(150 159 175);
       align-items: center;
       justify-content: center;
@@ -215,10 +215,8 @@
 
     &-list {
       max-height: 472px;
-      padding: 0 14px;
-      padding-bottom: 20px;
-      margin: 0 auto;
-      margin-top: 14px;
+      padding: 0 14px 20px;
+      margin: 14px auto 0;
       overflow: auto;
 
       &__item {
@@ -262,7 +260,7 @@
 
         &-enter {
           width: 30px;
-          opacity: 0%;
+          opacity: 0;
         }
       }
     }

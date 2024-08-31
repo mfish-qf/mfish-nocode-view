@@ -12,7 +12,12 @@
       <div :class="`${prefixCls}__toolbar`">
         <slot name="toolbar"></slot>
         <Divider type="vertical" v-if="$slots.toolbar && showTableSetting" />
-        <TableSettingComponent :setting="tableSetting" v-if="showTableSetting" @columns-change="handleColumnChange" />
+        <TableSettingComponent
+          :title="title"
+          :setting="tableSetting"
+          v-if="showTableSetting"
+          @columns-change="handleColumnChange"
+        />
       </div>
     </div>
   </div>

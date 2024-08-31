@@ -33,7 +33,7 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
       if (!isBoolean(pagination) && pagination) {
         configRef.value = {
           ...unref(configRef),
-          ...(pagination ?? {})
+          ...pagination
         };
       }
     }

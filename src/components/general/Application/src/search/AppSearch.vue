@@ -4,13 +4,14 @@
   import { SearchOutlined } from "@ant-design/icons-vue";
   import AppSearchModal from "./AppSearchModal.vue";
   import { useI18n } from "@/hooks/web/UseI18n";
+  import { useDesign } from "@/hooks/web/UseDesign";
 
   export default defineComponent({
     name: "AppSearch",
     setup() {
       const showModal = ref(false);
       const { t } = useI18n();
-
+      const { prefixCls } = useDesign("app-search");
       function changeModal(show: boolean) {
         showModal.value = show;
       }
@@ -21,7 +22,7 @@
             <Tooltip>
               {{
                 title: () => t("common.searchText"),
-                default: () => <SearchOutlined />
+                default: () => <SearchOutlined class={prefixCls} />
               }}
             </Tooltip>
             <AppSearchModal onClose={changeModal.bind(null, false)} visible={unref(showModal)} />
@@ -31,3 +32,13 @@
     }
   });
 </script>
+<style scoped lang="less">
+  @prefix-cls: ~"@{namespace}-app-search";
+
+  .@{prefix-cls} {
+    transition: all 0.2s ease-in;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+</style>
