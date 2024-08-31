@@ -3,7 +3,7 @@ import type { PaginationProps } from "../types/Pagination";
 import { ref, unref, ComputedRef, computed, onMounted, watch, reactive, Ref, watchEffect } from "vue";
 import { useTimeoutFn } from "@/hooks/core/UseTimeout";
 import { buildUUID } from "@/utils/Uuid";
-import { isFunction, isBoolean } from "@/utils/Is";
+import { isFunction, isBoolean, isObject } from "@/utils/Is";
 import { get, cloneDeep, merge } from "lodash-es";
 import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from "../Const";
 import { Recordable } from "@mfish/types";
@@ -111,19 +111,17 @@ export function useDataSource(
         const firstItem = dataSource[0];
         const lastItem = dataSource[dataSource.length - 1];
 
-        if (firstItem && lastItem) {
-          if (!firstItem[ROW_KEY] || !lastItem[ROW_KEY]) {
-            const data = cloneDeep(unref(dataSourceRef));
-            data.forEach((item) => {
-              if (!item[ROW_KEY]) {
-                item[ROW_KEY] = buildUUID();
-              }
-              if (item.children && item.children.length > 0) {
-                setTableKey(item.children);
-              }
-            });
-            dataSourceRef.value = data;
-          }
+        if (firstItem && lastItem && (!firstItem[ROW_KEY] || !lastItem[ROW_KEY])) {
+          const data = cloneDeep(unref(dataSourceRef));
+          data.forEach((item) => {
+            if (!item[ROW_KEY]) {
+              item[ROW_KEY] = buildUUID();
+            }
+            if (item.children && item.children.length > 0) {
+              setTableKey(item.children);
+            }
+          });
+          dataSourceRef.value = data;
         }
       }
       getDataSourceRef.value = unref(dataSourceRef);

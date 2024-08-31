@@ -102,14 +102,17 @@ export function useTableScroll(
     const { pagination } = unref(propsRef);
 
     let paginationHeight = 0;
-    if (!isBoolean(pagination)) {
+    if (isBoolean(pagination)) {
+      // 不显示分页，pagination 为 false 的时候
+      paginationHeight = 0;
+    } else {
       // 从 Dom 获取
       if (!paginationEl) {
         paginationEl = tableEl.querySelector(".ant-pagination") as HTMLElement;
       }
       if (paginationEl) {
         // 分页 margin-top
-        const paginationElMarginTop = parseInt(getComputedStyle(paginationEl)?.marginTop) || 10 + 24;
+        const paginationElMarginTop = Number.parseInt(getComputedStyle(paginationEl)?.marginTop) || 10 + 24;
         // 分页高度
         const offsetHeight = paginationEl.offsetHeight;
         paginationHeight = offsetHeight + paginationElMarginTop;
@@ -117,9 +120,6 @@ export function useTableScroll(
         // 找不到分页组件，缺省给予默认分页 margin-top + 高度
         paginationHeight = 10 + 24;
       }
-    } else {
-      // 不显示分页，pagination 为 false 的时候
-      paginationHeight = 0;
     }
     return paginationHeight;
   }
@@ -128,11 +128,11 @@ export function useTableScroll(
     const { pagination } = unref(propsRef);
     let footerHeight = 0;
     if (!isBoolean(pagination)) {
-      if (!footerEl) {
-        footerEl = tableEl.querySelector(".ant-table-footer") as HTMLElement;
-      } else {
+      if (footerEl) {
         const offsetHeight = footerEl.offsetHeight;
         footerHeight += offsetHeight || 0;
+      } else {
+        footerEl = tableEl.querySelector(".ant-table-footer") as HTMLElement;
       }
     }
     return footerHeight;
@@ -214,7 +214,7 @@ export function useTableScroll(
       const modalFooterMarginTop = modalFooterEl
         ? modalIsFullscreen
           ? 0
-          : parseInt(getComputedStyle(modalFooterEl).marginTop)
+          : Number.parseInt(getComputedStyle(modalFooterEl).marginTop)
         : 0;
 
       // 来自于 .ant-modal .ant-modal-body > .scrollbar

@@ -43,7 +43,7 @@ export function useCustomRow(
               setSelectedRowKeys(keyValues);
               return;
             }
-            const keyIndex = keyValues.findIndex((item) => item === keyValue);
+            const keyIndex = keyValues.indexOf(keyValue);
             keyValues.splice(keyIndex, 1);
             setSelectedRowKeys(keyValues);
             return;
@@ -52,7 +52,7 @@ export function useCustomRow(
           const isRadio = rowSelection.type === "radio";
           if (isRadio) {
             if (!keyValues.includes(keyValue)) {
-              if (keyValues.length) {
+              if (keyValues.length > 0) {
                 clearSelectedRowKeys();
               }
               setSelectedRowKeys([keyValue]);

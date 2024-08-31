@@ -1,42 +1,41 @@
 <template>
   <Tooltip :title="getTitle" placement="bottom" :mouse-enter-delay="0.5">
     <span @click="toggle">
-      <FullscreenOutlined v-if="!isFullscreen" />
-      <FullscreenExitOutlined v-else />
+      <FullscreenOutlined :class="prefixCls" v-if="!isFullscreen" />
+      <FullscreenExitOutlined :class="prefixCls" v-else />
     </span>
   </Tooltip>
 </template>
-<script lang="ts">
-  import { defineComponent, computed, unref } from "vue";
+<script lang="ts" setup>
+  import { computed, unref } from "vue";
   import { Tooltip } from "ant-design-vue";
   import { useI18n } from "@/hooks/web/UseI18n";
   import { useFullscreen } from "@vueuse/core";
   import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons-vue";
+  import { useDesign } from "@/hooks/web/UseDesign";
 
-  export default defineComponent({
-    name: "FullScreen",
-    components: { FullscreenExitOutlined, FullscreenOutlined, Tooltip },
-
-    setup() {
-      const { t } = useI18n();
-      const { toggle, isFullscreen } = useFullscreen();
-      // 重新检查全屏状态
-      // @ts-ignore
-      isFullscreen.value = !!(
-        document.fullscreenElement ||
-        document.webkitFullscreenElement ||
-        document.mozFullScreenElement ||
-        document.msFullscreenElement
-      );
-      const getTitle = computed(() => {
-        return unref(isFullscreen) ? t("layout.header.tooltipExitFull") : t("layout.header.tooltipEntryFull");
-      });
-
-      return {
-        getTitle,
-        isFullscreen,
-        toggle
-      };
-    }
+  const { t } = useI18n();
+  const { toggle, isFullscreen } = useFullscreen();
+  // 重新检查全屏状态
+  // @ts-ignore
+  isFullscreen.value = !!(
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement
+  );
+  const getTitle = computed(() => {
+    return unref(isFullscreen) ? t("layout.header.tooltipExitFull") : t("layout.header.tooltipEntryFull");
   });
+  const { prefixCls } = useDesign("full-screen");
 </script>
+<style scoped lang="less">
+  @prefix-cls: ~"@{namespace}-full-screen";
+
+  .@{prefix-cls} {
+    transition: all 0.2s ease-in;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+</style>

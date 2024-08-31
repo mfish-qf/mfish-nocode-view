@@ -69,7 +69,7 @@ export function useTableExpand(propsRef: ComputedRef<BasicTableProps>, tableData
 
   // 获取展开路径 keyValues
   function getKeyPaths(records: Recordable[], childrenColumnName: string, keyValue: Key, paths: Array<Key>): boolean {
-    if (records.findIndex((record) => parseRowKeyValue(unref(getRowKey), record) === keyValue) > -1) {
+    if (records.some((record) => parseRowKeyValue(unref(getRowKey), record) === keyValue)) {
       paths.push(keyValue);
       return true;
     } else {
