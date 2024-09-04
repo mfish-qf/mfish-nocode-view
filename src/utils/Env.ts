@@ -11,7 +11,7 @@ const getVariableName = (title: string) => {
   function strToHex(str: string) {
     const result: string[] = [];
     for (let i = 0; i < str.length; ++i) {
-      const hex = str.charCodeAt(i).toString(16);
+      const hex = str.codePointAt(i).toString(16);
       result.push(`000${hex}`.slice(-4));
     }
     return result.join("").toUpperCase();
@@ -35,7 +35,7 @@ export function getAppEnvConfig() {
     VITE_GLOB_OAUTH2_REDIRECT_URI
   } = ENV;
 
-  if (!/^[_a-z]*$/i.test(VITE_GLOB_APP_SHORT_NAME)) {
+  if (!/^[\s_a-z]*$/i.test(VITE_GLOB_APP_SHORT_NAME)) {
     warn(
       `VITE_GLOB_APP_SHORT_NAME Variables can only be characters/underscores, please modify in the environment variables and re-running.`
     );

@@ -66,14 +66,4 @@
       z-index: 300;
     }
   }
-
-  html[data-theme="dark"] {
-    .full-loading:not(.light) {
-      background-color: @modal-mask-bg;
-    }
-  }
-
-  .full-loading.dark {
-    background-color: @modal-mask-bg;
-  }
 </style>

@@ -54,7 +54,7 @@ export async function vue(): Promise<Linter.Config[]> {
         ],
         "vue/component-name-in-template-casing": ["error", "PascalCase"],
         "vue/component-options-name-casing": ["error", "PascalCase"],
-        "vue/custom-event-name-casing": ["error", "camelCase"],
+        "vue/custom-event-name-casing": "off",
         "vue/define-macros-order": [
           "error",
           {

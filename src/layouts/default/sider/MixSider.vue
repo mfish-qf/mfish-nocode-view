@@ -50,7 +50,7 @@
           }
         ]"
       >
-        <span class="text"> {{ title }}</span>
+        <span class="text"> {{ shortName }}</span>
         <Icon
           :size="16"
           :icon="getMixSideFixed ? 'ri:pushpin-2-fill' : 'ri:pushpin-2-line'"
@@ -114,7 +114,7 @@
     getCollapsed
   } = useMenuSetting();
 
-  const { title } = useGlobSetting();
+  const { shortName } = useGlobSetting();
   const permissionStore = usePermissionStore();
 
   useDragLine(sideRef, dragBarRef, true);

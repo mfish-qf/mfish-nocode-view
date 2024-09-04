@@ -69,11 +69,6 @@ export function useTableScroll(
   let paginationEl: HTMLElement | null;
   let footerEl: HTMLElement | null;
   let bodyEl: HTMLElement | null;
-
-  /**
-   * table wrapper padding 的高度
-   * @description 来自于 .vben-basic-table .ant-table-wrapper
-   */
   const tableWrapperPadding = 6;
 
   function handleScrollBar(bodyEl: HTMLElement, tableEl: Element) {
@@ -161,7 +156,6 @@ export function useTableScroll(
 
       let formHeight = unref(formRef)?.$el.offsetHeight ?? 0;
       if (formHeight) {
-        // 来自于 .vben-basic-table-form-container .ant-form 以及 .vben-basic-table-form-container
         formHeight += 16 + 16 * 2;
       }
 
@@ -243,9 +237,7 @@ export function useTableScroll(
       // 继承父元素高度
       return tableWrapperPadding;
     }
-    return (
-      tableWrapperPadding + 16 // 来自于 .vben-basic-table-form-container 或是 .p-4
-    );
+    return tableWrapperPadding + 16;
   }
 
   async function calcTableHeight() {

@@ -109,7 +109,7 @@ export const codeBuildFormSchema: FormSchema[] = [
     field: "packageName",
     label: "项目包名",
     component: "Input",
-    helpMessage: ["java包名称 格式:cn.com.mfish.***", "不传使用默认包名 cn.com.mfish.web"]
+    helpMessage: ["java包名称 格式:cn.com.mfish.***", "不传使用默认包名 cn.com.mfish.sys"]
   },
   {
     field: "tableComment",

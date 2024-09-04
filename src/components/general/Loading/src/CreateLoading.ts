@@ -2,6 +2,7 @@ import { VNode, defineComponent } from "vue";
 import type { LoadingProps } from "./Typing";
 import { createVNode, render, reactive, h } from "vue";
 import Loading from "./Loading.vue";
+import { Nullable } from "@mfish/types";
 
 export function createLoading(props?: Partial<LoadingProps>, target?: HTMLElement, wait = false) {
   let vm: Nullable<VNode> = null;
@@ -20,7 +21,6 @@ export function createLoading(props?: Partial<LoadingProps>, target?: HTMLElemen
   vm = createVNode(LoadingWrap);
 
   if (wait) {
-    // TODO fix https://github.com/anncwb/vue-vben-admin/issues/438
     setTimeout(() => {
       render(vm, document.createElement("div"));
     }, 0);
