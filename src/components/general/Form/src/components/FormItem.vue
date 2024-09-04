@@ -13,6 +13,7 @@
   import { cloneDeep, upperFirst } from "lodash-es";
   import { useItemLabelWidth } from "../hooks/UseLabelWidth";
   import { useI18n } from "@/hooks/web/UseI18n";
+  import { Nullable, Recordable } from "@mfish/types";
 
   export default defineComponent({
     name: "BasicFormItem",
@@ -92,7 +93,7 @@
         const { disabled: globDisabled } = props.formProps;
         const { dynamicDisabled } = props.schema;
         const { disabled: itemDisabled = false } = unref(getComponentsProps);
-        let disabled = !!globDisabled || itemDisabled;
+        let disabled = globDisabled || itemDisabled;
         if (isBoolean(dynamicDisabled)) {
           disabled = dynamicDisabled;
         }
@@ -344,7 +345,7 @@
 
       return () => {
         const { colProps = {}, colSlot, renderColContent, component } = props.schema;
-        if (component == undefined || !componentMap.has(component)) {
+        if (component === undefined || !componentMap.has(component)) {
           return null;
         }
 

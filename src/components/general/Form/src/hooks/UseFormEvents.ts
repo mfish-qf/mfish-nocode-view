@@ -132,9 +132,6 @@ export function useFormEvents({
           _props?.onChange(fieldValue);
         }
         validKeys.push(key);
-      } else {
-        // key not exist
-        // refer:https://github.com/vbenjs/vue-vben-admin/issues/3795
       }
     });
     validateFields(validKeys).catch((_) => {});

@@ -125,6 +125,7 @@
   import { useRootSetting } from "@/hooks/setting/UseRootSetting";
   import { useAppStore } from "@/store/modules/App";
   import { FolderTwoTone, FolderOpenTwoTone } from "@ant-design/icons-vue";
+  import { Nullable } from "@mfish/types";
   const props = defineProps({
     treeData: {
       type: Array as PropType<TreeDataItem[]>

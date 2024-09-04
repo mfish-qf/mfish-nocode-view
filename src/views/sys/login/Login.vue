@@ -9,8 +9,8 @@
       <div class="logo -enter-x">
         <img class="brand" src="/resource/img/logo.png" alt="logo" />
         <div class="title">
-          <h1>摸鱼低代码平台</h1>
-          <h6>MFish NoCode</h6>
+          <h1>{{ title }}</h1>
+          <h6>{{ shortName }}</h6>
         </div>
       </div>
       <div id="errorShow" data-bs-toggle="modal" data-bs-target="#errorModal" style="position: absolute"></div>
@@ -147,7 +147,7 @@
           </div>
         </div>
       </div>
-      <div class="footer"> Copyright &copy; 2023 &mdash; 摸鱼低代码平台</div>
+      <div class="footer"> Copyright &copy; 2023 &mdash; {{ shortName }} {{ title }}</div>
     </div>
   </section>
 </template>
@@ -160,12 +160,14 @@
   import { useUserStore } from "@/store/modules/User";
   import { useI18n } from "@/hooks/web/UseI18n";
   import { debounce } from "lodash-es";
+  import { useGlobSetting } from "@/hooks/setting";
 
   const username = ref("");
   const password = ref("");
   const captchaValue = ref("");
   const captchaOnOff = ref<boolean>(true);
   const errorMsg = ref("");
+  const { title, shortName } = useGlobSetting();
   const showLeft = computed(() => {
     return document.body.clientWidth > 425;
   });

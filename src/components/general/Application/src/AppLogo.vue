@@ -3,7 +3,7 @@
     <img src="../../../../assets/images/logo.png" alt="logo" />
     <div class="ml-2 truncate md:opacity-100" :class="getTitleClass" v-show="showTitle">
       <slot v-if="titleSlot" name="title"></slot>
-      <span v-else>{{ title }}</span>
+      <span v-else>{{ shortName }}</span>
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@
   const { prefixCls } = useDesign("app-logo");
   const { getCollapsedShowTitle } = useMenuSetting();
   const permissionStore = usePermissionStore();
-  const { title } = useGlobSetting();
+  const { shortName } = useGlobSetting();
   const go = useGo();
 
   const getAppLogoClass = computed(() => [

@@ -25,7 +25,8 @@ export async function unicorn(): Promise<Linter.Config[]> {
         "unicorn/prevent-abbreviations": "off",
         "unicorn/no-array-reduce": "off",
         "unicorn/no-nested-ternary": "off",
-        "unicorn/prefer-ternary": "off"
+        "unicorn/prefer-ternary": "off",
+        "unicorn/prefer-structured-clone": "off"
       }
     },
     {

@@ -12,6 +12,7 @@ export type TimeoutHandle = ReturnType<typeof setTimeout>;
 export type IntervalHandle = ReturnType<typeof setInterval>;
 export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 export type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
+export type ComponentRef<T extends HTMLElement = HTMLDivElement> = ComponentElRef<T> | null;
 
 export interface Fn<T = any, R = T> {
   (...arg: T[]): R;

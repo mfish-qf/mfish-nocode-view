@@ -10,7 +10,7 @@
       <div>
         <span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
       </div>
-      <div class="app-loading-title">{{ title }}</div>
+      <div class="app-loading-title">{{ shortName }}</div>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@
   const userStore = useUserStore();
   const { notification } = useMessage();
   const { t } = useI18n();
-  const { title } = useGlobSetting();
+  const { shortName } = useGlobSetting();
   const route = useRoute();
   const code = route.query.code as string;
   const routeRedirect = route.query.redirect as string;
