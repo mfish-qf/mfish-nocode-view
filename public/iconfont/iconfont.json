@@ -1,16 +1,114 @@
 {
-  "id": "4492753",
-  "name": "mfish-test",
+  "id": "4205115",
+  "name": "mfish-nocode-new",
   "font_family": "iconfont",
   "css_prefix_text": "icon-mfish-",
   "description": "",
   "glyphs": [
     {
-      "icon_id": "29701805",
-      "name": "显示",
-      "font_class": "xianshi",
-      "unicode": "e6f9",
-      "unicode_decimal": 59129
+      "icon_id": "37371577",
+      "name": "divide",
+      "font_class": "divide",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "37371576",
+      "name": "subtract",
+      "font_class": "subtract",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "37371575",
+      "name": "multiply",
+      "font_class": "multiply",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "37371574",
+      "name": "add",
+      "font_class": "add",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "37129251",
+      "name": "sum",
+      "font_class": "sum",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "37019119",
+      "name": "right-bracket",
+      "font_class": "right-bracket",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "37019118",
+      "name": "left-bracket",
+      "font_class": "left-bracket",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "36882344",
+      "name": "aggregate",
+      "font_class": "aggregate",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "36882306",
+      "name": "full-join",
+      "font_class": "full-join",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "36868628",
+      "name": "equals",
+      "font_class": "equals",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "36859207",
+      "name": "table",
+      "font_class": "table",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "36855965",
+      "name": "right-join",
+      "font_class": "right-join",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "36855963",
+      "name": "join",
+      "font_class": "join",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "36855964",
+      "name": "left-join",
+      "font_class": "left-join",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "36855962",
+      "name": "inner-join",
+      "font_class": "inner-join",
+      "unicode": "e603",
+      "unicode_decimal": 58883
     }
   ]
 }

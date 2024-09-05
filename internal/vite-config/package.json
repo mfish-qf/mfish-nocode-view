@@ -39,7 +39,7 @@
     "less": "^4.2.0",
     "picocolors": "^1.1.0",
     "pkg-types": "^1.2.0",
-    "postcss": "^8.4.44",
+    "postcss": "^8.4.45",
     "rollup-plugin-visualizer": "^5.12.0",
     "unbuild": "^2.0.0",
     "unocss": "^0.61.9",

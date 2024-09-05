@@ -93,7 +93,7 @@ export function scriptErrorHandler(
   console.log(colno);
   const errorInfo: Partial<ErrorLogInfo> = {};
   errorInfo.message = event as string;
-  errorInfo.stack = error?.stack ? error.stack : "";
+  errorInfo.stack = error?.stack || "";
   const name = source ? source.slice(Math.max(0, source.lastIndexOf("/") + 1)) : "script";
   const errorLogStore = useErrorLogStoreWithOut();
   errorLogStore.addErrorLogInfo({

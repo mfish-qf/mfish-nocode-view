@@ -218,7 +218,7 @@ export const usePermissionStore = defineStore({
           pMenu.children?.push(cMenu);
           const cRoute: AppRouteRecordRaw = buildRoute(menu);
           // 如果组件不是外部地址，采用内部路由path处理
-          if (!isUrl(menu.component)) {
+          if (!menu.isExternal) {
             if (i++ === 0) {
               pRoute.redirect = pRoute.path + cRoute.path;
             }

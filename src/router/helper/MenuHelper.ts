@@ -43,19 +43,12 @@ export function transformRouteToMenu(routeModList: AppRouteRecordRaw[], routerMa
   // 借助 lodash 深拷贝
   const cloneRouteModList = cloneDeep(routeModList);
   const routeList: AppRouteRecordRaw[] = [];
-
   // 对路由项进行修改
   cloneRouteModList.forEach((item) => {
     if (routerMapping && item.meta.hideChildrenInMenu && typeof item.redirect === "string") {
       item.path = item.redirect;
     }
-
-    if (item.meta?.single) {
-      const realItem = item?.children?.[0];
-      realItem && routeList.push(realItem);
-    } else {
-      routeList.push(item);
-    }
+    routeList.push(item);
   });
   // 提取树指定结构
   const list = treeMap(routeList, {
@@ -70,6 +63,12 @@ export function transformRouteToMenu(routeModList: AppRouteRecordRaw[], routerMa
         path: node.path,
         ...(node.redirect ? { redirect: node.redirect } : {})
       };
+    }
+  });
+  //如果设置菜单隐藏子菜单，删除当前菜单children属性
+  list.forEach((item) => {
+    if (item.hideChildrenInMenu) {
+      delete item.children;
     }
   });
   // 路径处理

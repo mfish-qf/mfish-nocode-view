@@ -1,3 +1,5 @@
+import { formatToDate } from "@/utils/DateUtil";
+
 interface GroupItem {
   title: string;
   icon: string;
@@ -5,12 +7,14 @@ interface GroupItem {
   desc: string;
   date: string;
   group: string;
+  url?: string;
 }
 
 interface NavItem {
   title: string;
   icon: string;
   color: string;
+  url?: string;
 }
 
 interface DynamicInfoItem {
@@ -22,61 +26,67 @@ interface DynamicInfoItem {
 
 export const navItems: NavItem[] = [
   {
-    title: "首页",
-    icon: "ion:home-outline",
-    color: "#1fdaca"
-  },
-  {
-    title: "仪表盘",
-    icon: "ion:grid-outline",
-    color: "#bf0c2c"
-  },
-  {
-    title: "组件",
-    icon: "ion:layers-outline",
-    color: "#e18525"
+    title: "低代码",
+    icon: "ant-design:code-outlined",
+    color: "#1fdaca",
+    url: "/low-code"
   },
   {
     title: "系统管理",
     icon: "ion:settings-outline",
-    color: "#3fb27f"
+    color: "#3fb27f",
+    url: "/system"
   },
   {
-    title: "权限管理",
-    icon: "ion:key-outline",
-    color: "#4daf1bc9"
+    title: "租户管理",
+    icon: "ion:home-outline",
+    color: "#bf0c2c",
+    url: "/tenant"
   },
   {
-    title: "图表",
-    icon: "ion:bar-chart-outline",
-    color: "#00d8ff"
+    title: "项目文档",
+    icon: "ion:book-outline",
+    color: "#e18525",
+    url: "/doc"
+  },
+  {
+    title: "使用样例",
+    icon: "ant-design:read-outlined",
+    color: "#4daf1bc9",
+    url: "/demo"
+  },
+  {
+    title: "任务调度",
+    icon: "ion:calendar-outline",
+    color: "#00d8ff",
+    url: "/scheduler"
   }
 ];
 
 export const dynamicInfoItems: DynamicInfoItem[] = [
   {
     avatar: "dynamic-avatar-1|svg",
-    name: "威廉",
+    name: "mfish",
     date: "刚刚",
-    desc: `在 <a>开源组</a> 创建了项目 <a>Vue</a>`
+    desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>github</a> 发布了1.3.1最新版本后端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>mfish-nocode</a>`
   },
   {
     avatar: "dynamic-avatar-2|svg",
-    name: "艾文",
+    name: "mfish",
     date: "1个小时前",
-    desc: `关注了 <a>威廉</a> `
+    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>gitee</a> 发布了V1.3.1最新版本后端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>mfish-nocode</a>`
   },
   {
     avatar: "dynamic-avatar-3|svg",
     name: "克里斯",
     date: "1天前",
-    desc: `发布了 <a>个人动态</a> `
+    desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>github</a> 发布了1.3.1最新版本前端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>mfish-nocode-view</a>`
   },
   {
     avatar: "dynamic-avatar-4|svg",
     name: "Mfish",
     date: "2天前",
-    desc: `发表文章 <a>如何编写一个Vite插件</a> `
+    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>gitee</a> 发布了V1.3.1最新版本前端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>mfish-nocode-view</a>`
   },
   {
     avatar: "dynamic-avatar-5|svg",
@@ -106,44 +116,77 @@ export const dynamicInfoItems: DynamicInfoItem[] = [
 
 export const groupItems: GroupItem[] = [
   {
-    title: "Github",
-    icon: "carbon:logo-github",
+    title: "Github后端",
+    icon: "ant-design:github-outlined",
     color: "",
     desc: "不要等待机会，而要创造机会。",
     group: "开源组",
-    date: "2021-04-01"
+    date: formatToDate(),
+    url: "https://github.com/mfish-qf/mfish-nocode"
   },
   {
-    title: "Vue",
-    icon: "ion:logo-vue",
-    color: "#3fb27f",
-    desc: "现在的你决定将来的你。",
-    group: "算法组",
-    date: "2021-04-01"
+    title: "Github前端",
+    icon: "ant-design:github-outlined",
+    color: "",
+    desc: "摸鱼也会成长，摸鱼也能成功。",
+    group: "开源组",
+    date: formatToDate(),
+    url: "https://github.com/mfish-qf/mfish-nocode-view"
   },
   {
-    title: "Html5",
-    icon: "ion:logo-html5",
+    title: "Gitee后端",
+    icon: "simple-icons:gitee",
+    color: "#bf0c2c",
+    desc: "上班摸鱼不如来学习下摸鱼低代码",
+    group: "开源组",
+    date: formatToDate(),
+    url: "https://gitee.com/qiufeng9862/mfish-nocode"
+  },
+  {
+    title: "Gitee前端",
+    icon: "simple-icons:gitee",
+    color: "#bf0c2c",
+    desc: "热情和欲望可以突破一切难关。",
+    group: "开源组",
+    date: formatToDate(),
+    url: "https://gitee.com/qiufeng9862/mfish-nocode-view"
+  },
+  {
+    title: "来摸鱼啊",
+    icon: "ion:fish-outline",
     color: "#e18525",
     desc: "没有什么才能比努力更重要。",
     group: "上班摸鱼",
-    date: "2021-04-01"
+    date: formatToDate(),
+    url: "https://www.mfish.com.cn"
   },
   {
-    title: "Angular",
-    icon: "ion:logo-angular",
-    color: "#bf0c2c",
-    desc: "热情和欲望可以突破一切难关。",
-    group: "UI",
-    date: "2021-04-01"
+    title: "Vue",
+    icon: "carbon:logo-vue",
+    color: "#3fb27f",
+    desc: "易学易用，性能出色，适用场景丰富的Web框架。",
+    group: "前端框架",
+    date: formatToDate(),
+    url: "https://cn.vuejs.org/"
+  },
+
+  {
+    title: "AntDesign",
+    icon: "ant-design:ant-design-outlined",
+    color: "#5183f4",
+    desc: "Ant Design致力于提供给程序员愉悦的开发体验。",
+    group: "小蚂蚁们",
+    date: formatToDate(),
+    url: "https://www.antdv.com/docs/vue/introduce-cn/"
   },
   {
-    title: "React",
-    icon: "bx:bxl-react",
+    title: "Vben",
+    icon: "ion:social-vimeo-outline",
     color: "#00d8ff",
-    desc: "健康的身体是实目标的基石。",
-    group: "技术牛",
-    date: "2021-04-01"
+    desc: "Vben一个开源的VUE前端脚手架。",
+    group: "前端框架",
+    date: formatToDate(),
+    url: "https://github.com/vbenjs/vue-vben-admin"
   },
   {
     title: "Js",
@@ -151,6 +194,7 @@ export const groupItems: GroupItem[] = [
     color: "#4daf1bc9",
     desc: "路是走出来的，而不是空想出来的。",
     group: "架构组",
-    date: "2021-04-01"
+    date: formatToDate(),
+    url: "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide"
   }
 ];

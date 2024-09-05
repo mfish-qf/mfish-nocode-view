@@ -4,7 +4,12 @@
       <a-button type="link" size="small">更多</a-button>
     </template>
 
-    <CardGrid v-for="item in items" :key="item.title" class="!md:w-1/3 !w-full">
+    <Card.Grid
+      v-for="item in items"
+      :key="item.title"
+      class="!md:w-1/3 !w-full cursor-pointer"
+      @click="clickCard(item)"
+    >
       <span class="flex">
         <Icon :icon="item.icon" :color="item.color" size="30" />
         <span class="text-lg ml-4">{{ item.title }}</span>
@@ -14,12 +19,16 @@
         <span>{{ item.group }}</span>
         <span>{{ item.date }}</span>
       </div>
-    </CardGrid>
+    </Card.Grid>
   </Card>
 </template>
 <script lang="ts" setup>
-  import { Card, CardGrid } from "ant-design-vue";
+  import { Card } from "ant-design-vue";
   import { Icon } from "@/components/general/Icon";
   import { groupItems } from "./Data";
   const items = groupItems;
+  function clickCard(item) {
+    window.open(item.url, "_blank");
+  }
 </script>
+<style lang="less"></style>

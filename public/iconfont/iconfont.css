@@ -1,10 +1,10 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 4492753 */
+  font-family: "iconfont"; /* Project id 4205115 */
   /* Color fonts */
   src: 
-       url('iconfont.woff2?t=1712050866117') format('woff2'),
-       url('iconfont.woff?t=1712050866117') format('woff'),
-       url('iconfont.ttf?t=1712050866117') format('truetype');
+       url('iconfont.woff2?t=1694680942086') format('woff2'),
+       url('iconfont.woff?t=1694680942086') format('woff'),
+       url('iconfont.ttf?t=1694680942086') format('truetype');
 }
 
 .iconfont {
@@ -15,7 +15,63 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-mfish-xianshi:before {
-  content: "\e6f9";
+.icon-mfish-divide:before {
+  content: "\e60b";
+}
+
+.icon-mfish-subtract:before {
+  content: "\e60c";
+}
+
+.icon-mfish-multiply:before {
+  content: "\e60d";
+}
+
+.icon-mfish-add:before {
+  content: "\e60e";
+}
+
+.icon-mfish-sum:before {
+  content: "\e60a";
+}
+
+.icon-mfish-right-bracket:before {
+  content: "\e608";
+}
+
+.icon-mfish-left-bracket:before {
+  content: "\e609";
+}
+
+.icon-mfish-aggregate:before {
+  content: "\e606";
+}
+
+.icon-mfish-full-join:before {
+  content: "\e607";
+}
+
+.icon-mfish-equals:before {
+  content: "\e605";
+}
+
+.icon-mfish-table:before {
+  content: "\e604";
+}
+
+.icon-mfish-right-join:before {
+  content: "\e600";
+}
+
+.icon-mfish-join:before {
+  content: "\e601";
+}
+
+.icon-mfish-left-join:before {
+  content: "\e602";
+}
+
+.icon-mfish-inner-join:before {
+  content: "\e603";
 }
 
