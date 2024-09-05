@@ -8,7 +8,7 @@ const flows: AppRouteRecordRaw = {
   component: LAYOUT,
   redirect: "/flow/flowChart",
   meta: {
-    menuSort: 18,
+    menuSort: 998,
     icon: "tabler:chart-dots",
     title: t("routes.demo.flow.name")
   },

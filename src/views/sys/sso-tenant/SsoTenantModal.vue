@@ -130,6 +130,10 @@
           {
             field: "tenantType",
             dynamicDisabled: true
+          },
+          {
+            field: "status",
+            dynamicDisabled: true
           }
         ]).then();
       }
@@ -222,7 +226,8 @@
 
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
-      file.preview = (await getBase64WithFile(file.originFileObj))?.result as string;
+      const obj = await getBase64WithFile(file.originFileObj);
+      file.preview = obj?.result as string;
     }
     previewImage.value = file.url || file.preview;
     previewVisible.value = true;

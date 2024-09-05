@@ -61,7 +61,7 @@ function addToChildren(routes: RouteRecordNormalized[], children: AppRouteRecord
       continue;
     }
     routeModule.children = routeModule.children || [];
-    if (!routeModule.children.find((item) => item.name === route.name)) {
+    if (!routeModule.children.some((item) => item.name === route.name)) {
       routeModule.children?.push(route as unknown as AppRouteRecordRaw);
     }
     if (child.children?.length) {

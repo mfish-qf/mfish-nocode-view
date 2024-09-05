@@ -5,7 +5,7 @@
         <template v-for="(item, index) in chats">
           <div :key="`${index}1`" :class="`${prefixCls}-wrapper`" v-if="item.user === 'chatGpt'">
             <img class="chat-img" src="/resource/img/logo.png" alt="chat-img" />
-            <div class="chat-text" v-if="item.chat != undefined && true && item.chat !== ''" v-html="item.chat"></div>
+            <div class="chat-text" v-if="item.chat !== undefined && true && item.chat !== ''" v-html="item.chat"></div>
           </div>
           <div v-else :key="`${index}2`" :class="`${prefixCls}-wrapper`" class="right">
             <div class="chat-text right">{{ item.chat }}</div>
@@ -22,11 +22,11 @@
 
 <script lang="ts" setup>
   import { ref, unref, onMounted } from "vue";
-  import { SvgIcon } from "@/components/general/Icon/index";
+  import { SvgIcon } from "@/components/general/Icon";
   import { ScrollActionType, ScrollContainer } from "@/components/general/Container";
   import { InputSearch } from "ant-design-vue";
-  import { answer } from "@/api/chat/chat";
-  import { ChatsModel } from "@/api/chat/model/QuestionModel";
+  import { answer } from "@/api/demo/chat";
+  import { ChatsModel } from "@/api/demo/model/QuestionModel";
   import { buildUUID } from "@/utils/Uuid";
   import { useDesign } from "@/hooks/web/UseDesign";
   import { Nullable } from "@mfish/types";
@@ -95,15 +95,16 @@
     }
 
     .@{prefix-cls}-panel {
-      box-shadow: 0 0 15px 2px #2b2d34;
+      box-shadow: 0 0 15px 8px rgba(255, 255, 255, 0.1);
     }
   }
 
   .@{prefix-cls}-panel {
+    border-radius: 8px;
     overflow-y: auto;
     height: calc(100vh - 200px);
     margin: 15px;
-    box-shadow: 0 0 15px 2px #c9d7f8;
+    box-shadow: 0 0 15px 8px rgba(0, 0, 0, 0.05);
   }
 
   .@{prefix-cls}-wrapper {

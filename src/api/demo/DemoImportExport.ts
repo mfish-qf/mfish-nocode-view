@@ -4,7 +4,6 @@ import {
   ReqDemoImportExport,
   DemoImportExportPageModel
 } from "@/api/demo/model/DemoImportExportModel";
-import { SysFile } from "@/api/storage/model/SysFileModel";
 
 /**
  * @description: 导入导出Demo

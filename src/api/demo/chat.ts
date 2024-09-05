@@ -1,5 +1,5 @@
 import { defHttp } from "@/utils/http/axios";
-import { CompletionResult, QuestionModel } from "@/api/chat/model/QuestionModel";
+import { CompletionResult, QuestionModel } from "@/api/demo/model/QuestionModel";
 
 /**
  * @description: 聊天机器人
@@ -7,7 +7,7 @@ import { CompletionResult, QuestionModel } from "@/api/chat/model/QuestionModel"
  * @date: 2023/2/8 20:18
  */
 enum Api {
-  Question = "/ai/openai/answer"
+  Question = "/demo/openai/answer"
 }
 
 export function answer(question: QuestionModel) {

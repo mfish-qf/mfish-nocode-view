@@ -8,7 +8,7 @@ import type { AppRouteRecordRaw } from "@/router/Types";
 const apiConfig: AppRouteRecordRaw = {
   path: "/low-code/mf-api/config",
   name: "ApiConfig",
-  // component: () => import("@/views/nocode/mf-api/index.vue"),
+  component: () => import("@/views/nocode/mf-api/index.vue"),
   meta: {
     menuSort: 999,
     hideMenu: true,

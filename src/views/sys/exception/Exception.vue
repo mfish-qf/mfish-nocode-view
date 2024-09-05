@@ -11,6 +11,7 @@
   import { useGo, useRedo } from "@/hooks/web/UsePage";
   import { usePermissionStore } from "@/store/modules/Permission";
   import { PageEnum } from "@/enums/PageEnum";
+  import { useTabs } from "@/hooks/web/UseTabs";
 
   interface MapValue {
     title: string;
@@ -52,6 +53,7 @@
       const redo = useRedo();
       const { t } = useI18n();
       const { prefixCls } = useDesign("app-exception-page");
+      const { closeCurrent } = useTabs();
       const getStatus = computed(() => {
         const { status: routeStatus } = query;
         const { status } = props;
@@ -68,7 +70,10 @@
         status: `${ExceptionEnum.PAGE_NOT_ACCESS}`,
         subTitle: t("sys.exception.subTitle403"),
         btnText: props.full ? backLoginI18n : backHomeI18n,
-        handler: () => (props.full ? go(PageEnum.BASE_LOGIN) : go(permissionStore.homePath))
+        handler: () => {
+          closeCurrent();
+          return props.full ? go(PageEnum.BASE_LOGIN) : go(permissionStore.homePath);
+        }
       });
 
       unref(statusMapRef).set(ExceptionEnum.PAGE_NOT_FOUND, {
@@ -76,7 +81,10 @@
         status: `${ExceptionEnum.PAGE_NOT_FOUND}`,
         subTitle: t("sys.exception.subTitle404"),
         btnText: props.full ? backLoginI18n : backHomeI18n,
-        handler: () => (props.full ? go(PageEnum.BASE_LOGIN) : go(permissionStore.homePath))
+        handler: () => {
+          closeCurrent();
+          return props.full ? go(PageEnum.BASE_LOGIN) : go(permissionStore.homePath);
+        }
       });
 
       unref(statusMapRef).set(ExceptionEnum.ERROR, {

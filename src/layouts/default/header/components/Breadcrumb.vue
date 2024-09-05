@@ -26,6 +26,7 @@
   import { getAllParentPath } from "@/router/helper/MenuHelper";
   import type { Route } from "ant-design-vue/es/breadcrumb/Breadcrumb";
   import { useAppStore } from "@/store/modules/App";
+  import { useI18n } from "@/hooks/web/UseI18n";
 
   defineOptions({ name: "LayoutBreadcrumb" });
   const appStore = useAppStore();
@@ -39,6 +40,7 @@
   const { getShowBreadCrumbIcon } = useRootSetting();
   const go = useGo();
   const color = useRootSetting().getThemeColor;
+  const { t } = useI18n();
 
   watchEffect(async () => {
     if (currentRoute.value.name === REDIRECT_NAME) return;
@@ -133,7 +135,7 @@
   }
 
   function getName(route: any) {
-    return route.name || route.meta?.name;
+    return t(route.meta?.title || route.name);
   }
 </script>
 <style lang="less">
