@@ -3,12 +3,12 @@
     <template v-for="(action, index) in getActions" :key="`${index}-${action.label}`">
       <Tooltip v-if="action.tooltip" v-bind="getTooltip(action.tooltip)">
         <PopConfirmButton v-bind="omit(action, 'icon')">
-          <Icon :icon="action.icon" :class="{ 'mr-1': !!action.label }" v-if="action.icon" />
+          <Icon :icon="action.icon" :class="{ 'mr-1': !!action.label }" :color="action?.color" v-if="action.icon" />
           <template v-if="action.label">{{ action.label }}</template>
         </PopConfirmButton>
       </Tooltip>
       <PopConfirmButton v-else v-bind="omit(action, 'icon')">
-        <Icon :icon="action.icon" :class="{ 'mr-1': !!action.label }" v-if="action.icon" />
+        <Icon :icon="action.icon" :class="{ 'mr-1': !!action.label }" :color="action?.color" v-if="action.icon" />
         <template v-if="action.label">{{ action.label }}</template>
       </PopConfirmButton>
       <Divider type="vertical" class="action-divider" v-if="divider && index < getActions.length - 1" />
@@ -92,7 +92,7 @@
           type: "link",
           size: "small",
           ...action,
-          ...(popConfirm || {}),
+          ...popConfirm,
           onConfirm: popConfirm?.confirm,
           onCancel: popConfirm?.cancel,
           enable: !!popConfirm

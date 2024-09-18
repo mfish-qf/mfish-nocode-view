@@ -85,12 +85,12 @@
 
         let value = val;
         if (isCheckValue) {
-          if (typeof checkedValue !== "undefined") {
+          if (checkedValue !== undefined) {
             value = val === checkedValue ? checkedValue : unCheckedValue;
-          } else if (typeof unCheckedValue !== "undefined") {
-            value = val === unCheckedValue ? unCheckedValue : checkedValue;
-          } else {
+          } else if (unCheckedValue === "undefined") {
             value = isNumber(val) || isBoolean(val) ? val : !!val;
+          } else {
+            value = val === unCheckedValue ? unCheckedValue : checkedValue;
           }
         }
 
@@ -275,9 +275,9 @@
                 key: dataKey as string,
                 value
               });
-            } catch (e) {
+            } catch (error) {
               result = false;
-              warn(e);
+              warn(error);
             } finally {
               spinning.value = false;
             }
@@ -289,7 +289,7 @@
         set(record, dataKey, value);
         defaultValueRef.value = value;
         //const record = await table.updateTableData(index, dataKey, value);
-        needEmit && table.emit?.("edit-end", { record, index, key: dataKey, value });
+        needEmit && table.emit?.("editEnd", { record, index, key: dataKey, value });
         isEdit.value = false;
       }
 

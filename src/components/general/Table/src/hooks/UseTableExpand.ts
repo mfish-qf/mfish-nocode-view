@@ -1,10 +1,11 @@
 import type { ComputedRef, Ref } from "vue";
+import { computed, ref, nextTick, toRaw, unref } from "vue";
 import type { BasicTableProps } from "../types/Table";
-import { computed, unref, ref, toRaw } from "vue";
 import { ROW_KEY } from "../Const";
 import { Recordable } from "@mfish/types";
 import { parseRowKeyValue } from "../Helper";
 import type { Key } from "ant-design-vue/lib/table/interface";
+import { isFunction } from "@/utils/Is";
 
 export function useTableExpand(propsRef: ComputedRef<BasicTableProps>, tableData: Ref<Recordable[]>, emit: EmitType) {
   const expandedRowKeys = ref<Key[]>([]);
@@ -26,14 +27,13 @@ export function useTableExpand(propsRef: ComputedRef<BasicTableProps>, tableData
       expandedRowKeys: unref(expandedRowKeys),
       onExpandedRowsChange: (keyValues: string[]) => {
         expandedRowKeys.value = keyValues;
-        emit("expanded-rows-change", keyValues);
+        emit("expandedRowsChange", keyValues);
       }
     };
   });
 
   function expandAll() {
-    const keyValues = getAllKeys();
-    expandedRowKeys.value = keyValues;
+    expandedRowKeys.value = getAllKeys();
   }
 
   function collapseAll() {
@@ -95,13 +95,21 @@ export function useTableExpand(propsRef: ComputedRef<BasicTableProps>, tableData
   // 监听展开事件，用于支持手风琴展开效果
   function handleTableExpand(expanded: boolean, record: Recordable) {
     // 手风琴开关
-    // isTreeTable 或 expandRowByClick 时支持
-    // 展开操作
-    if (propsRef.value.accordion && (propsRef.value.isTreeTable || propsRef.value.expandRowByClick) && expanded) {
-      nextTick(() => {
+    if (propsRef.value.accordion && expanded) {
+      nextTick().then(() => {
         expandRowAccordion(parseRowKeyValue(unref(getRowKey), record));
       });
     }
+    nextTick().then(() => {
+      emit("expand", expanded, record);
+      // register自定义展开事件触发
+      const { onExpand } = unref(propsRef);
+      onExpand && isFunction(onExpand) && onExpand(expanded, record);
+    });
+  }
+
+  function getExpandedRowKeys() {
+    return unref(expandedRowKeys);
   }
 
   return {
@@ -110,7 +118,7 @@ export function useTableExpand(propsRef: ComputedRef<BasicTableProps>, tableData
     collapseAll,
     expandRows,
     collapseRows,
-    expandRowAccordion,
-    handleTableExpand
+    handleTableExpand,
+    getExpandedRowKeys
   };
 }

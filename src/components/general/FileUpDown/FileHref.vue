@@ -5,40 +5,47 @@
 -->
 <template>
   <div :class="prefixCls">
-    <a target="_blank" v-for="(item, index) in files" :key="index" @click="clickFile(item)">
-      {{ files[index]?.fileName }}
+    <a target="_blank" v-for="(item, index) in files.keys()" :key="index" @click="clickFile(item)">
+      {{ files.get(item)?.fileName }}
     </a>
     <FilePreview ref="filePreviewRef" />
   </div>
 </template>
 <script setup lang="ts">
-  import { onMounted, ref, Ref } from "vue";
+  import { ref, unref, watch } from "vue";
   import { getSysFileByKey } from "@/api/storage/SysFile";
   import { useDesign } from "@/hooks/web/UseDesign";
   import FilePreview from "@/components/general/FileUpDown/FilePreview.vue";
 
   export interface FileHrefModel {
     fileKey: string;
-    fileName: Ref<string>;
+    fileName: string;
     fileType?: string;
   }
   const props = defineProps({
-    files: { type: Array<FileHrefModel>, default: [] }
+    keys: { type: Array<String>, default: [] }
   });
-  const { files } = props;
+  const files = ref<Map<string, FileHrefModel>>(new Map());
   const { prefixCls } = useDesign("file-href");
   const filePreviewRef = ref();
-  onMounted(() => {
-    props.files.forEach((file) => {
-      getSysFileByKey(file.fileKey).then((res) => {
-        file.fileName.value = res.fileName;
-        file.fileType = res.fileType;
-      });
-    });
-  });
+  watch(
+    () => props.keys,
+    (newKeys) => {
+      files.value.clear();
+      if (newKeys) {
+        newKeys?.forEach(async (key) => {
+          const res = await getSysFileByKey(key);
+          files.value.set(key, { fileKey: res.fileKey, fileName: res.fileName, fileType: res.fileType });
+        });
+      }
+    },
+    {
+      immediate: true
+    }
+  );
 
-  function clickFile(file) {
-    filePreviewRef.value?.show({ ...file, type: file.fileType });
+  function clickFile(key) {
+    filePreviewRef.value?.show(unref(files).get(key));
   }
 </script>
 <style lang="less" scoped>

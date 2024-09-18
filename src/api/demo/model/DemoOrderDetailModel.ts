@@ -7,8 +7,6 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @version: V1.3.1
  */
 export interface DemoOrderDetail extends BaseEntity<string> {
-  //明细主键
-  detailId: string;
   //订单号
   orderId: string;
   //商品名称
@@ -34,8 +32,6 @@ export interface DemoOrderDetail extends BaseEntity<string> {
 }
 
 export interface ReqDemoOrderDetail extends ReqPage {
-  //明细主键
-  detailId?: string;
   //订单号
   orderId?: string;
 }

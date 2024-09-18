@@ -21,6 +21,9 @@ export function useDescription(props?: Partial<DescriptionProps>): UseDescReturn
   const methods: DescInstance = {
     setDescProps: (descProps: Partial<DescriptionProps>): void => {
       unref(desc)?.setDescProps(descProps);
+    },
+    getData(): object {
+      return unref(desc)?.getData() || {};
     }
   };
 

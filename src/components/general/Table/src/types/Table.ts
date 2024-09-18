@@ -170,6 +170,8 @@ export interface BasicTableProps<T = any> {
   // 点击行选中
   clickToRowSelect?: boolean;
   isTreeTable?: boolean;
+  //树形表格，手风琴展开模式
+  accordion?: boolean;
   // 自定义排序方法
   sortFn?: (sortInfo: SorterResult) => any;
   // 排序方法
@@ -468,6 +470,7 @@ export interface TableActionType {
   setShowPagination: (show: boolean) => Promise<void>;
   getShowPagination: () => boolean;
   setCacheColumnsByField?: (dataIndex: string | undefined, value: BasicColumn) => void;
+  getExpandedRowKeys: () => string[];
 }
 
 export interface InnerHandlers {

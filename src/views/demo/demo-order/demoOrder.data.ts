@@ -4,9 +4,9 @@ import { DescItem } from "@/components/general/Description";
 import { buildDictTag, getDictProps } from "@/utils/DictUtils";
 
 /**
- * @description: 导入导出Demo
+ * @description: 销售订单
  * @author: mfish
- * @date: 2024-09-02
+ * @date: 2024-09-13
  * @version: V1.3.1
  */
 export const columns: BasicColumn[] = [
@@ -21,6 +21,14 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
+    title: "收货地址",
+    dataIndex: "userAddress",
+    width: 120
+  },
+  {
+    customRender: ({ record }) => {
+      return buildDictTag("mall_order_status", record.orderStatus);
+    },
     title: "订单状态",
     dataIndex: "orderStatus",
     width: 120
@@ -36,6 +44,24 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
+    title: "快递费用",
+    dataIndex: "expressAmount",
+    width: 120
+  },
+  {
+    title: "订单描述",
+    dataIndex: "orderDesc",
+    width: 120
+  },
+  {
+    title: "支付流水",
+    dataIndex: "tradeNo",
+    width: 120
+  },
+  {
+    customRender: ({ record }) => {
+      return buildDictTag("mall_pay_type", record.payType);
+    },
     title: "支付类型",
     dataIndex: "payType",
     width: 120
@@ -46,8 +72,16 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
+    customRender: ({ record }) => {
+      return buildDictTag("mall_delivery_type", record.deliveryType);
+    },
     title: "配送方式",
     dataIndex: "deliveryType",
+    width: 120
+  },
+  {
+    title: "收货时间",
+    dataIndex: "confirmTime",
     width: 120
   }
 ];
@@ -80,7 +114,7 @@ export const searchFormSchema: FormSchema[] = [
     colProps: { xl: 6, md: 8 }
   }
 ];
-export const demoImportExportFormSchema: FormSchema[] = [
+export const demoOrderFormSchema: FormSchema[] = [
   {
     field: "id",
     label: "唯一ID",
@@ -169,7 +203,7 @@ export const demoImportExportFormSchema: FormSchema[] = [
   }
 ];
 
-export class DemoImportExportDesc {
+export class DemoOrderDesc {
   viewSchema: DescItem[] = [
     {
       label: "id",

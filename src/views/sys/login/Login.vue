@@ -134,7 +134,7 @@
                       />
                       <label class="form-check-label" for="rememberMe"> 记住我 </label>
                       <a style="float: right" href="https://jq.qq.com/?_wv=1027&k=0A2bxoZX" target="_blank">
-                        免费获取帐号密码
+                        加入我们
                       </a>
                     </div>
                     <div class="d-grid gap-2 mb-3">
@@ -366,9 +366,11 @@
   }
 
   .login .logo .title {
+    border-radius: 6px;
+    padding: 8px 8px 0 8px;
     color: #fbfbfb;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-left: 20px;
+    margin-left: 10px;
   }
 
   .login .logo .title > h1 {
@@ -416,7 +418,7 @@
 
   .login .form-control {
     border-width: 1px;
-    border-radius: 0;
+    border-radius: 6px !important;
     background-image: none;
   }
 
@@ -436,19 +438,15 @@
     right: 0;
     width: 149px;
     z-index: 10;
+    border-radius: 6px;
   }
 
   .login .captcha:hover {
     cursor: pointer;
   }
 
-  .login .form-check-input {
-    border-radius: 0;
-  }
-
   .login .btn.btn-block {
     padding: 10px;
-    border-radius: 0;
   }
 
   .login .btn.send-msg {
@@ -464,9 +462,7 @@
   }
 
   .login .btn.btn-tab {
-    border-radius: 0;
     font-size: 14px;
-    /*color: rgba(0, 0, 0, 0.85);*/
     border-color: #d9d9d9;
   }
 
@@ -521,7 +517,6 @@
 
   .login .qrcode-img .qrcode-error .refresh {
     font-size: 12px;
-    border-radius: 0;
   }
 
   .login .qrcode-desc {

@@ -14,7 +14,6 @@
   import { BasicForm, useForm } from "@/components/general/Form/index";
   import { demoOrderDetailFormSchema } from "./demoOrderDetail.data";
   import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { insertDemoOrderDetail, updateDemoOrderDetail } from "@/api/demo/DemoOrderDetail";
 
   defineOptions({ name: "DemoOrderDetailModal" });
   const emit = defineEmits(["success", "register"]);
@@ -31,32 +30,20 @@
     resetFields().then();
     setModalProps({ confirmLoading: false, width: "800px" });
     isUpdate.value = !!data?.isUpdate;
-    if (unref(isUpdate)) {
-      setFieldsValue({
-        ...data.record
-      }).then();
-    }
+    setFieldsValue({
+      ...data.record
+    }).then();
   });
-  const getTitle = computed(() => (!unref(isUpdate) ? "新增销售订单明细" : "编辑销售订单明细"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑销售订单明细" : "新增销售订单明细"));
 
   async function handleSubmit() {
-    let values = await validate();
-    setModalProps({ confirmLoading: true });
-    if (unref(isUpdate)) {
-      saveDemoOrderDetail(updateDemoOrderDetail, values);
-    } else {
-      saveDemoOrderDetail(insertDemoOrderDetail, values);
+    const values = await validate();
+    try {
+      setModalProps({ confirmLoading: true });
+      emit("success", { record: values, isUpdate: isUpdate.value });
+      closeModal();
+    } finally {
+      setModalProps({ confirmLoading: false });
     }
-  }
-
-  function saveDemoOrderDetail(save, values) {
-    save(values)
-      .then(() => {
-        emit("success");
-        closeModal();
-      })
-      .finally(() => {
-        setModalProps({ confirmLoading: false });
-      });
   }
 </script>

@@ -122,7 +122,7 @@
                 return null;
               }
               const getField = get(_data, field);
-              if (getField && !toRefs(_data).hasOwnProperty(field)) {
+              if (getField && !Object.prototype.hasOwnProperty.call(toRefs(_data), field)) {
                 return isFunction(render) ? render("", _data) : "";
               }
               return isFunction(render) ? render(getField, _data) : (getField ?? "");
@@ -174,8 +174,13 @@
         );
       };
 
+      function getData() {
+        return unref(getProps)?.data;
+      }
+
       const methods: DescInstance = {
-        setDescProps
+        setDescProps,
+        getData
       };
 
       emit("register", methods);
