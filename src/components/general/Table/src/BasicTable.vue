@@ -86,7 +86,8 @@
     "editChange",
     "expandedRowsChange",
     "change",
-    "columnsChange"
+    "columnsChange",
+    "expand"
   ]);
   const attrs = useAttrs();
   const slots = useSlots();
@@ -188,11 +189,8 @@
 
   const { getRowClassName } = useTableStyle(getProps, prefixCls);
 
-  const { getExpandOption, expandAll, expandRows, collapseRows, collapseAll, handleTableExpand } = useTableExpand(
-    getProps,
-    tableData,
-    emit
-  );
+  const { getExpandOption, expandAll, expandRows, collapseRows, collapseAll, handleTableExpand, getExpandedRowKeys } =
+    useTableExpand(getProps, tableData, emit);
 
   const handlers: InnerHandlers = {
     onColumnsChange: (data: ColumnChangeParam[]) => {
@@ -236,11 +234,8 @@
       footer: unref(getFooterProps),
       ...unref(getExpandOption)
     };
-    // if (slots.expandedRowRender) {
-    //   propsData = omit(propsData, 'scroll');
-    // }
-
-    propsData = omit(propsData, ["class", "onChange"]);
+    //排除Table组件中已设置的属性
+    propsData = omit(propsData, ["class", "onChange", "onExpand"]);
     return propsData;
   });
 
@@ -310,7 +305,8 @@
     getSize: () => {
       return unref(getBindValues).size as SizeType;
     },
-    setCacheColumns
+    setCacheColumns,
+    getExpandedRowKeys
   };
   createTableContext({ ...tableAction, wrapRef, getBindValues });
 
@@ -329,6 +325,7 @@
         background-color: @app-content-background !important;
       }
     }
+
     &-form-container {
       padding: 16px;
 
@@ -347,10 +344,15 @@
       }
     }
 
+    .ant-table-wrapper:only-child .ant-table {
+      margin: 0 !important;
+    }
+
     .ant-table-wrapper {
       .ant-table-container {
         border-radius: 8px !important;
       }
+
       padding: 6px;
       border-radius: 2px;
       background-color: @component-background;
@@ -375,6 +377,9 @@
         justify-content: space-between;
         padding: 8px 6px;
         border-bottom: none;
+      }
+      .ant-table-content {
+        border-radius: 8px;
       }
     }
 

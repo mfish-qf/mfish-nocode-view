@@ -1,57 +1,66 @@
 <!--
- @description: 导入导出Demo
+ @description: 销售订单
  @author: mfish
- @date: 2024-09-02
+ @date: 2024-09-13
  @version: V1.3.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
     <BasicForm @register="registerForm" @submit="handleSubmit" />
+    <ADivider>订单明细</ADivider>
+    <DemoOrderDetailManagement ref="detailsRef" :order-id="orderId" />
   </BasicModal>
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
   import { BasicForm, useForm } from "@/components/general/Form/index";
-  import { demoImportExportFormSchema } from "./demoImportExport.data";
+  import { demoOrderFormSchema } from "./demoOrder.data";
   import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { insertDemoImportExport, updateDemoImportExport } from "@/api/demo/DemoImportExport";
+  import { insertDemoOrder, updateDemoOrder } from "@/api/demo/DemoOrder";
+  import DemoOrderDetailManagement from "@/views/demo/demo-order-detail/index.vue";
+  import { Divider as ADivider } from "ant-design-vue";
 
-  defineOptions({ name: "DemoImportExportModal" });
+  defineOptions({ name: "DemoOrderModal" });
   const emit = defineEmits(["success", "register"]);
   const isUpdate = ref(true);
   const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
     name: "model_form_item",
     labelWidth: 100,
     baseColProps: { span: 12 },
-    schemas: demoImportExportFormSchema,
+    schemas: demoOrderFormSchema,
     showActionButtonGroup: false,
     autoSubmitOnEnter: true
   });
+  const orderId = ref("");
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
     resetFields().then();
     setModalProps({ confirmLoading: false, width: "800px" });
     isUpdate.value = !!data?.isUpdate;
+    orderId.value = data?.record?.id;
     if (unref(isUpdate)) {
       setFieldsValue({
         ...data.record
       }).then();
     }
   });
-  const getTitle = computed(() => (unref(isUpdate) ? "编辑导入导出Demo" : "新增导入导出Demo"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑销售订单" : "新增销售订单"));
+  const detailsRef = ref();
 
   async function handleSubmit() {
     const values = await validate();
     setModalProps({ confirmLoading: true });
+    const details = detailsRef.value?.getDataSource();
     if (unref(isUpdate)) {
-      saveDemoImportExport(updateDemoImportExport, values);
+      saveDemoOrder(updateDemoOrder, { ...values, details });
     } else {
-      saveDemoImportExport(insertDemoImportExport, values);
+      saveDemoOrder(insertDemoOrder, { ...values, details });
     }
   }
 
-  function saveDemoImportExport(save, values) {
+  function saveDemoOrder(save, values) {
     save(values)
-      .then(() => {
+      .then((res) => {
+        orderId.value = res.id;
         emit("success");
         closeModal();
       })

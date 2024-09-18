@@ -38,10 +38,11 @@ export interface DescriptionProps extends DescriptionsProps {
 
 export interface DescInstance {
   setDescProps(descProps: Partial<DescriptionProps>): void;
+  getData(): object;
 }
 
 export type Register = (descInstance: DescInstance) => void;
 
 /**
-  @description: */
+ * @description: */
 export type UseDescReturnType = [Register, DescInstance];

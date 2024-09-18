@@ -33,7 +33,7 @@ export const getSysFileList = (reqSysFile?: ReqSysFile) => {
 };
 
 export const getSysFileByKey = (fileKey: string) => {
-  return defHttp.get<SysFile>({ url: `${Api.SysFile}/${fileKey}` });
+  return defHttp.get<SysFile>({ url: `${Api.SysFile}/${fileKey}` }, { errorMessageMode: "none" });
 };
 
 /**

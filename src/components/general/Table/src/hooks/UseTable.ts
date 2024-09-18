@@ -169,6 +169,9 @@ export function useTable(tableProps?: Props): [
     },
     scrollTo: (pos: string) => {
       getTableInstance().scrollTo(pos);
+    },
+    getExpandedRowKeys: () => {
+      return getTableInstance().getExpandedRowKeys();
     }
   };
 

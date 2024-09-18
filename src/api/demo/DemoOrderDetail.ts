@@ -37,7 +37,7 @@ export function getDemoOrderDetailById(id: string) {
  */
 export function exportDemoOrderDetail(reqDemoOrderDetail?: ReqDemoOrderDetail) {
   return defHttp.download({ url: Api.DemoOrderDetail + "/export", params: reqDemoOrderDetail });
-};
+}
 
 /**
  * 新增销售订单明细
@@ -46,8 +46,11 @@ export function exportDemoOrderDetail(reqDemoOrderDetail?: ReqDemoOrderDetail) {
  * @return 返回结果
  */
 export function insertDemoOrderDetail(demoOrderDetail: DemoOrderDetail) {
-  return defHttp.post<DemoOrderDetail>({ url: Api.DemoOrderDetail, params: demoOrderDetail }, { successMessageMode: "message" });
-};
+  return defHttp.post<DemoOrderDetail>(
+    { url: Api.DemoOrderDetail, params: demoOrderDetail },
+    { successMessageMode: "message" }
+  );
+}
 
 /**
  * 修改销售订单明细
@@ -56,8 +59,11 @@ export function insertDemoOrderDetail(demoOrderDetail: DemoOrderDetail) {
  * @return 返回结果
  */
 export function updateDemoOrderDetail(demoOrderDetail: DemoOrderDetail) {
-  return defHttp.put<DemoOrderDetail>({ url: Api.DemoOrderDetail, params: demoOrderDetail }, { successMessageMode: "message" });
-};
+  return defHttp.put<DemoOrderDetail>(
+    { url: Api.DemoOrderDetail, params: demoOrderDetail },
+    { successMessageMode: "message" }
+  );
+}
 
 /**
  * 删除销售订单明细
@@ -67,7 +73,7 @@ export function updateDemoOrderDetail(demoOrderDetail: DemoOrderDetail) {
  */
 export function deleteDemoOrderDetail(id: string) {
   return defHttp.delete<boolean>({ url: `${Api.DemoOrderDetail}/${id}` }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 批量删除销售订单明细
@@ -77,4 +83,4 @@ export function deleteDemoOrderDetail(id: string) {
  */
 export function deleteBatchDemoOrderDetail(ids: string) {
   return defHttp.delete<boolean>({ url: Api.DemoOrderDetail + "/batch/" + ids }, { successMessageMode: "message" });
-};
+}

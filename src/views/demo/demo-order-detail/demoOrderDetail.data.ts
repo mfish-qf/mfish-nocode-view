@@ -10,11 +10,6 @@ import { DescItem } from "@/components/general/Description";
  */
 export const columns: BasicColumn[] = [
   {
-    title: "明细主键",
-    dataIndex: "detailId",
-    width: 120
-  },
-  {
     title: "订单号",
     dataIndex: "orderId",
     width: 120
@@ -25,7 +20,7 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "商品货品图片或者商品图片",
+    title: "商品图片",
     dataIndex: "picUrl",
     width: 120
   },
@@ -68,21 +63,15 @@ export const columns: BasicColumn[] = [
     title: "优惠券扣减金额",
     dataIndex: "couponDiscount",
     width: 120
-  },
+  }
 ];
 export const searchFormSchema: FormSchema[] = [
-  {
-    field: "detailId",
-    label: "明细主键",
-    component: "Input",
-    colProps: { xl: 6, md: 8 }
-  },
   {
     field: "orderId",
     label: "订单号",
     component: "Input",
     colProps: { xl: 6, md: 8 }
-  },
+  }
 ];
 export const demoOrderDetailFormSchema: FormSchema[] = [
   {
@@ -92,41 +81,35 @@ export const demoOrderDetailFormSchema: FormSchema[] = [
     show: false
   },
   {
-    field: "detailId",
-    label: "明细主键",
-    component: "Input",
-    required: true
-  },
-  {
     field: "orderId",
     label: "订单号",
     component: "Input",
-    required: true
+    show: false
   },
   {
     field: "goodsName",
     label: "商品名称",
-    component: "Input",
+    component: "Input"
   },
   {
     field: "picUrl",
-    label: "商品货品图片或者商品图片",
-    component: "Input",
+    label: "商品图片",
+    component: "Input"
   },
   {
     field: "goodsPrice",
     label: "商品单价",
-    component: "InputNumber",
+    component: "InputNumber"
   },
   {
     field: "goodsPricePro",
     label: "商品原价",
-    component: "InputNumber",
+    component: "InputNumber"
   },
   {
     field: "goodsCount",
     label: "购买数量",
-    component: "InputNumber",
+    component: "InputNumber"
   },
   {
     field: "sendTime",
@@ -137,7 +120,7 @@ export const demoOrderDetailFormSchema: FormSchema[] = [
       format: "YYYY-MM-DD HH:mm:ss",
       showTime: { format: "HH:mm:ss" },
       getPopupContainer: () => document.body
-    },
+    }
   },
   {
     field: "receiveTime",
@@ -148,23 +131,23 @@ export const demoOrderDetailFormSchema: FormSchema[] = [
       format: "YYYY-MM-DD HH:mm:ss",
       showTime: { format: "HH:mm:ss" },
       getPopupContainer: () => document.body
-    },
+    }
   },
   {
     field: "payAmount",
     label: "实际支付金额",
-    component: "InputNumber",
+    component: "InputNumber"
   },
   {
     field: "discount",
     label: "商品优惠总金额",
-    component: "InputNumber",
+    component: "InputNumber"
   },
   {
     field: "couponDiscount",
     label: "优惠券扣减金额",
-    component: "InputNumber",
-  },
+    component: "InputNumber"
+  }
 ];
 
 export class DemoOrderDetailDesc {
@@ -173,10 +156,6 @@ export class DemoOrderDetailDesc {
       label: "id",
       field: "id",
       show: () => false
-    },
-    {
-      field: "detailId",
-      label: "明细主键"
     },
     {
       field: "orderId",
@@ -188,7 +167,7 @@ export class DemoOrderDetailDesc {
     },
     {
       field: "picUrl",
-      label: "商品货品图片或者商品图片"
+      label: "商品图片"
     },
     {
       field: "goodsPrice",
@@ -221,6 +200,6 @@ export class DemoOrderDetailDesc {
     {
       field: "couponDiscount",
       label: "优惠券扣减金额"
-    },
-  ]
+    }
+  ];
 }

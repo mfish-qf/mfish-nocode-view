@@ -1,7 +1,8 @@
+import { PropType } from "vue";
+
 export const buttonProps = {
   color: {
-    type: String,
-    validator: (v) => ["primary", "error", "warning", "success", ""].includes(v)
+    type: String
   },
   loading: { type: Boolean },
   disabled: { type: Boolean },
