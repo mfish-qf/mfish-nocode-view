@@ -4,13 +4,14 @@
 @logo-prefix-cls: ~'@{namespace}-app-logo';
 
 .@{header-prefix-cls} {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: @white !important;
   background-color: @header-bg-color !important;
   z-index: 1;
-  box-shadow: 0 0 6px 0 rgb(201 205 241);
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
 
   &--mobile {
     .@{breadcrumb-prefix-cls},
@@ -147,7 +148,7 @@
   }
 
   &--dark {
-    box-shadow: 0 0 6px 0 #303030;
+    box-shadow: 0 0 6px 0 @trigger-dark-bg-color;
     .ant-divider {
       background-color: @header-light-desc-color;
     }
