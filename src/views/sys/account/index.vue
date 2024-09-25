@@ -1,9 +1,9 @@
 <template>
   <PageWrapper content-class="flex">
-    <OrgTree class="w-1/4 xl:w-1/5 -enter-x" @select="handleSelect" :source="$props.source" />
+    <OrgTree class="w-1/4 xl:w-1/5" @select="handleSelect" :source="$props.source" />
     <BasicTable
       @register="registerTable"
-      class="w-3/4 xl:w-4/5 -enter-x"
+      class="w-3/4 xl:w-4/5"
       :search-info="searchInfo"
       :class="$props.source === 1 ? prefixCls : ''"
     >

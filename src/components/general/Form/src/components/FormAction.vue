@@ -49,7 +49,7 @@
       type: Object as PropType<Partial<ColEx>>,
       default: () => ({})
     },
-    actionSpan: propTypes.number.def(6),
+    actionSpan: propTypes.number.def(4),
     isAdvanced: propTypes.bool,
     hideAdvanceBtn: propTypes.bool
   });
@@ -61,7 +61,7 @@
 
   const actionColOpt = computed(() => {
     const { showAdvancedButton, actionSpan, actionColOptions } = props;
-    const advancedSpanObj = showAdvancedButton ? { span: actionSpan < 6 ? 24 : actionSpan } : {};
+    const advancedSpanObj = showAdvancedButton ? { span: actionSpan < 4 ? 24 : actionSpan } : {};
     const actionColOpt: Partial<ColEx> = {
       style: { textAlign: "left" },
       span: showAdvancedButton ? 6 : 4,

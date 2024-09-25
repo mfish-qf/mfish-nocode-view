@@ -88,19 +88,19 @@ export const searchFormSchema: FormSchema[] = [
     label: "租户类型",
     component: "ApiSelect",
     componentProps: getDictProps("tenant_corp_type"),
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "domain",
     label: "域名",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "name",
     label: "租户名称",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 export const ssoTenantFormSchema: FormSchema[] = [

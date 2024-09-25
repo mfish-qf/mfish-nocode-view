@@ -11,7 +11,8 @@ export interface DescItem {
   label: string | VNode;
   // Merge column
   span?: number;
-  show?: (...arg: any) => boolean;
+  show?: boolean | ((...arg: any) => boolean);
+  init?: ((val: any, data: Recordable) => void) | undefined;
   // render
   render?: (val: any, data: Recordable) => VNode | undefined | Element | string | number;
 }
@@ -44,5 +45,6 @@ export interface DescInstance {
 export type Register = (descInstance: DescInstance) => void;
 
 /**
- * @description: */
+ * @description:
+ */
 export type UseDescReturnType = [Register, DescInstance];

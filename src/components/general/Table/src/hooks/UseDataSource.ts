@@ -26,7 +26,7 @@ interface SearchState {
 export function useDataSource(
   propsRef: ComputedRef<BasicTableProps>,
   { getPaginationInfo, setPagination, setLoading, getFieldsValue, clearSelectedRowKeys, tableData }: ActionType,
-  emit: EmitType
+  emit: EmitType | any
 ) {
   const searchState = reactive<SearchState>({
     sortInfo: {},
@@ -191,7 +191,7 @@ export function useDataSource(
     });
   }
 
-  function insertTableDataRecord(record: Recordable | Recordable[], index?: number): Recordable[] | undefined {
+  function insertTableDataRecord(record: Recordable | Recordable[], index?: number): Recordable[] {
     // if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
     index = index ?? dataSourceRef.value?.length;
     const _record = isObject(record) ? [record as Recordable] : (record as Recordable[]);

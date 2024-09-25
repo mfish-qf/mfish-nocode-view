@@ -30,13 +30,13 @@ export const searchFormSchema: FormSchema[] = [
     field: "categoryName",
     label: "分类名称",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "categoryCode",
     label: "分类编码",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 export const dictCategoryFormSchema: FormSchema[] = [

@@ -105,7 +105,7 @@
         const commonItem = {
           uuid: buildUUID(),
           isPrivate: 1,
-          path: props.defaultPath ? props.defaultPath : "",
+          path: props.defaultPath ?? "",
           file,
           size,
           name,

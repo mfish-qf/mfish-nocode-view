@@ -38,7 +38,7 @@
     baseColProps: { span: 24 },
     autoSubmitOnEnter: true
   });
-  const id = ref<string>();
+  const id = ref<string>("");
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
     await resetFields();
     setModalProps({ confirmLoading: false, width: "600px" });

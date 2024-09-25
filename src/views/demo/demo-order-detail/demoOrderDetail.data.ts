@@ -70,7 +70,7 @@ export const searchFormSchema: FormSchema[] = [
     field: "orderId",
     label: "订单号",
     component: "Input",
-    colProps: { xl: 6, md: 8 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 export const demoOrderDetailFormSchema: FormSchema[] = [

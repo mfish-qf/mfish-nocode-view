@@ -7,7 +7,11 @@ import { findNodeAll } from "@/utils/helper/TreeHelper";
 import { Recordable } from "@mfish/types";
 import { Key } from "ant-design-vue/lib/table/interface";
 import { parseRowKey, parseRowKeyValue } from "@/components/general/Table/src/Helper";
-export function useRowSelection(propsRef: ComputedRef<BasicTableProps>, tableData: Ref<Recordable[]>, emit: EmitType) {
+export function useRowSelection(
+  propsRef: ComputedRef<BasicTableProps>,
+  tableData: Ref<Recordable[]>,
+  emit: EmitType | any
+) {
   const selectedRowKeysRef = ref<Key[]>([]);
   const selectedRowRef = ref<Recordable[]>([]);
 

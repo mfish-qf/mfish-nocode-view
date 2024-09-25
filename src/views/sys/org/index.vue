@@ -80,7 +80,7 @@
   const api = ref();
   api.value = props.source === 1 ? getTenantOrgTree : getOrgTree;
   const [registerTable, { reload, expandRows }] = useTable({
-    title: "部门列表",
+    title: "组织列表",
     rowKey: "id",
     api,
     columns,

@@ -77,28 +77,28 @@ export const searchFormSchema: FormSchema[] = [
     field: "userName",
     label: "姓名",
     component: "Input",
-    colProps: { xl: 6, md: 8 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "orderStatus",
     label: "订单状态",
     component: "ApiSelect",
     componentProps: getDictProps("mall_order_status"),
-    colProps: { xl: 6, md: 8 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "payType",
     label: "支付类型",
     component: "ApiSelect",
     componentProps: getDictProps("mall_pay_type"),
-    colProps: { xl: 6, md: 8 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "deliveryType",
     label: "配送方式",
     component: "ApiSelect",
     componentProps: getDictProps("mall_delivery_type"),
-    colProps: { xl: 6, md: 8 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 export const demoUpFormSchema: FormSchema[] = [

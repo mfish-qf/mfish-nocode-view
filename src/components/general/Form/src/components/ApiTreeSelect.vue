@@ -14,13 +14,14 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, watch, ref, onMounted, unref } from "vue";
+  import { computed, defineComponent, watch, ref, onMounted, unref, PropType } from "vue";
   import { TreeSelect } from "ant-design-vue";
   import { isArray, isFunction } from "@/utils/Is";
   import { get } from "lodash-es";
   import { propTypes } from "@/utils/PropTypes";
   import { LoadingOutlined } from "@ant-design/icons-vue";
   import Icon from "@/components/general/Icon/src/Icon.vue";
+  import { Recordable } from "@mfish/types";
 
   export default defineComponent({
     name: "ApiTreeSelect",

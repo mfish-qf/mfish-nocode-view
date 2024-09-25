@@ -1,6 +1,6 @@
 import { BasicColumn } from "@/components/general/Table";
 import { FormSchema } from "@/components/general/Table";
-import { h, ref } from "vue";
+import { h, ref, unref } from "vue";
 import { Tag, Switch } from "ant-design-vue";
 import { RenderCallbackParams } from "@/components/general/Form";
 import { setUserStatus } from "@/api/sys/User";
@@ -89,19 +89,19 @@ export const searchFormSchema: FormSchema[] = [
     field: "account",
     label: "用户名",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "nickname",
     label: "昵称",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "phone",
     label: "手机号",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "status",
@@ -113,7 +113,7 @@ export const searchFormSchema: FormSchema[] = [
         { label: "停用", value: 1 }
       ]
     },
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 export const accountFormSchema: FormSchema[] = [
@@ -252,18 +252,29 @@ export class AccountDesc {
       field: "orgIds",
       label: "所属部门",
       span: 2,
-      render: (val) => {
-        if (!val) return;
-        getOrgByIds(val).then((res) => {
+      init: (val) => {
+        if (!val || val.orgIds?.length === 0) {
+          this.orgNames.value = [];
+          return;
+        }
+        getOrgByIds(val.orgIds).then((res) => {
           if (res && res.length > 0) {
             this.orgNames.value = res.map((val) => val.orgName);
           } else {
             this.orgNames.value = [];
           }
         });
+      },
+      show: false
+    },
+    {
+      field: "orgNames",
+      label: "所属部门",
+      span: 2,
+      render: () => {
         return h(
           "div",
-          this.orgNames.value.map((orgName) => h(Tag, () => orgName))
+          unref(this.orgNames).map((orgName) => h(Tag, () => orgName))
         );
       }
     },
@@ -271,18 +282,29 @@ export class AccountDesc {
       field: "roleIds",
       label: "角色",
       span: 2,
-      render: (val: string[] | undefined) => {
-        if (!val || val.length === 0) return;
-        getRoleByIds(val).then((res) => {
+      init: (val) => {
+        if (!val || val.roleIds?.length === 0) {
+          this.roleNames.value = [];
+          return;
+        }
+        getRoleByIds(val.roleIds).then((res) => {
           if (res && res.length > 0) {
             this.roleNames.value = res.map((val) => val.roleName);
           } else {
             this.roleNames.value = [];
           }
         });
+      },
+      show: false
+    },
+    {
+      field: "roleNames",
+      label: "角色",
+      span: 2,
+      render: () => {
         return h(
           "div",
-          this.roleNames.value.map((roleName) => h(Tag, () => roleName))
+          unref(this.roleNames).map((roleName) => h(Tag, () => roleName))
         );
       }
     },

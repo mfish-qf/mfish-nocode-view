@@ -42,13 +42,13 @@ export const searchFormSchema: FormSchema[] = [
     field: "dictName",
     label: "字典名称",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "dictCode",
     label: "字典编码",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "status",
@@ -60,7 +60,7 @@ export const searchFormSchema: FormSchema[] = [
         { label: "停用", value: 1 }
       ]
     },
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 export const dictFormSchema: FormSchema[] = [

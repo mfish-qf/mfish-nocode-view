@@ -1,5 +1,5 @@
-import type { RouteLocationNormalized, RouteLocationRaw, Router } from "vue-router";
-import { ref, toRaw, unref } from "vue";
+import { RouteLocationNormalized, RouteLocationRaw, Router } from "vue-router";
+import { toRaw, unref } from "vue";
 import { defineStore } from "pinia";
 import { useGo, useRedo } from "@/hooks/web/UsePage";
 import { Persistent } from "@/utils/cache/Persistent";
@@ -11,9 +11,10 @@ import projectSetting from "@/settings/ProjectSetting";
 import { usePermissionStore } from "@/store/modules/Permission";
 
 export interface MultipleTabState {
-  cacheTabMap: Map<string, string>;
+  cacheTabMap: Map<any, string>;
   tabList: RouteLocationNormalized[];
   lastDragEndIndex: number;
+  newOpenTab: any;
 }
 
 function handleGotoPage(router: Router) {
@@ -35,29 +36,37 @@ const cacheTab = projectSetting.multiTabsSetting.cache;
 export const useMultipleTabStore = defineStore({
   id: "app-multiple-tab",
   state: (): MultipleTabState => ({
-    // Tabs that need to be cached
-    cacheTabMap: ref(new Map()),
-    // multiple tab list
+    // 缓存路由与组件名称对应关系
+    cacheTabMap: new Map(),
+    // Tab列表
     tabList: cacheTab ? Persistent.getLocal(MULTIPLE_TABS_KEY) || [] : [],
     // Index of the last moved tab
-    lastDragEndIndex: 0
+    lastDragEndIndex: 0,
+    //是否新打开
+    newOpenTab: ""
   }),
   getters: {
     getTabList(): RouteLocationNormalized[] {
       return this.tabList;
     },
     getCachedTabList(): string[] {
-      const list = [];
+      const list: string[] = [];
       for (const tab of this.tabList) {
         if (!this.cacheTabMap.has(tab.name)) {
           continue;
         }
-        list.push(this.cacheTabMap.get(tab.name));
+        const mapTab = this.cacheTabMap.get(tab.name);
+        if (mapTab) {
+          list.push(mapTab);
+        }
       }
       return list;
     },
     getLastDragEndIndex(): number {
       return this.lastDragEndIndex;
+    },
+    getNewOpenTab(): string {
+      return this.newOpenTab;
     }
   },
   actions: {
@@ -142,6 +151,7 @@ export const useMultipleTabStore = defineStore({
           }
         }
         this.tabList.push(route);
+        this.newOpenTab = route.name ?? "";
       }
       cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList);
     },
@@ -315,6 +325,11 @@ export const useMultipleTabStore = defineStore({
       if (findTab) {
         findTab.fullPath = fullPath;
         findTab.path = fullPath;
+      }
+    },
+    openEnd(routeName: any) {
+      if (this.getNewOpenTab === routeName) {
+        this.newOpenTab = "";
       }
     }
   }

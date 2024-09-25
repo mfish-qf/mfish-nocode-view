@@ -6,19 +6,27 @@ import { computed, unref, watch } from "vue";
 import { isBoolean, isFunction, isNumber, isObject } from "@/utils/Is";
 import { useBreakpoint } from "@/hooks/event/UseBreakpoint";
 import { useDebounceFn } from "@vueuse/core";
+import { Recordable } from "@mfish/types";
 
 const BASIC_COL_LEN = 24;
 
 interface UseAdvancedContext {
   advanceState: AdvanceState;
-  emit: EmitType;
+  emit: EmitType | any;
   getProps: ComputedRef<FormProps>;
   getSchema: ComputedRef<FormSchema[]>;
   formModel: Recordable;
   defaultValueRef: Ref<Recordable>;
 }
 
-export default function ({ advanceState, emit, getProps, getSchema, formModel, defaultValueRef }: UseAdvancedContext) {
+export default function useAdvanced({
+  advanceState,
+  emit,
+  getProps,
+  getSchema,
+  formModel,
+  defaultValueRef
+}: UseAdvancedContext) {
   const vm = getCurrentInstance();
 
   const { realWidthRef, screenEnum, screenRef } = useBreakpoint();

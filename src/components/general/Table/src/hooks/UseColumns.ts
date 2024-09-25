@@ -300,7 +300,7 @@ function sortFixedColumn(columns: BasicColumn[]) {
   const viewColumns = [...fixedLeftColumns, ...defColumns, ...fixedRightColumns].filter(filterFunc);
   // 筛选>=2级表头（深度优先）
   const list = [...viewColumns];
-  while (list.length) {
+  while (list.length > 0) {
     const current = list[0];
     if (Array.isArray(current.children)) {
       current.children = current.children.filter(filterFunc);

@@ -7,7 +7,7 @@
   <Split :default-size="split" :min="0.1" :max="0.5" :class="prefixCls">
     <template #1>
       <DBTree
-        :class="`${prefixCls}-left h-full -enter-x`"
+        :class="`${prefixCls}-left h-full`"
         ref="dbTreeRef"
         :show-icon="true"
         @select="changeSelect"
@@ -15,7 +15,7 @@
       />
     </template>
     <template #2>
-      <div :class="`${prefixCls}-right h-full -enter-x`">
+      <div :class="`${prefixCls}-right h-full`">
         <ABreadcrumb separator=">" class="m-3">
           <ABreadcrumbItem v-for="(item, index) in breadList" :key="index">
             <Icon :icon="item.icon" />

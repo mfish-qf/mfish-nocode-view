@@ -167,7 +167,7 @@
     if (res && res.list) {
       res.list.forEach((field) => {
         fields.value.push({
-          label: field.comment ? field.comment : field.fieldName,
+          label: field.comment ?? field.fieldName,
           value: field.fieldName,
           items: field
         });

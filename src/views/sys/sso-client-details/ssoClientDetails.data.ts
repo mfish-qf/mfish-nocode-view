@@ -41,13 +41,13 @@ export const searchFormSchema: FormSchema[] = [
     field: "clientName",
     label: "客户端名称",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "clientId",
     label: "客户端ID",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 export const ssoClientDetailsFormSchema: FormSchema[] = [
