@@ -32,7 +32,7 @@ export const columns: BasicColumn[] = [
     customRender: ({ record }) => {
       const color = record.color;
       if (color) {
-        return h(Tag, { color }, () => record.color);
+        return h(Tag, { color: color === "primary" ? "processing" : color }, () => color);
       }
       return color;
     }
@@ -91,13 +91,13 @@ export const searchFormSchema: FormSchema[] = [
     field: "dictLabel",
     label: "字典标签",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "dictValue",
     label: "字典键值",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 export const dictItemFormSchema: FormSchema[] = [

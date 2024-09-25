@@ -3,10 +3,10 @@ import type { FormProps } from "@/components/general/Form";
 import type { TableRowSelection as ITableRowSelection } from "ant-design-vue/lib/table/interface";
 import type { ColumnProps } from "ant-design-vue/lib/table";
 import type { Recordable } from "@mfish/types";
-
+import { Key } from "ant-design-vue/lib/table/interface";
 import { ComponentType } from "./ComponentType";
 import { VueNode } from "@/utils/PropTypes";
-import { FixedType } from "ant-design-vue/es/vc-table/interface";
+import { FixedType } from "ant-design-vue/lib/vc-table/interface";
 
 export declare type SortOrder = "ascend" | "descend";
 
@@ -14,13 +14,15 @@ export interface TableCurrentDataSource<T = Recordable> {
   currentDataSource: T[];
 }
 
-// @ts-expect-error - no types
-export interface TableRowSelection<T = any> extends ITableRowSelection<T> {
+export interface TableRowSelection<T = any> extends ITableRowSelection {
   /**
    * Callback executed when selected rows change
-   * @type Function
+   * @param selectedRowKeys 已选的 keyValues
+   * @param selectedRows 已选的 records
+   * @param isClickCustomRow 是否是点击行触发（反之，就是点击checkbox/radiobox）
+   * @returns void
    */
-  onChange?: (selectedRowKeys: string[] | number[], selectedRows: T[]) => any;
+  onChange?: (selectedRowKeys: Key[], selectedRows: T[], isClickCustomRow?: boolean) => void;
 
   /**
    * Callback executed when select/deselect one row
@@ -38,7 +40,7 @@ export interface TableRowSelection<T = any> extends ITableRowSelection<T> {
    * Callback executed when row selection is inverted
    * @type Function
    */
-  onSelectInvert?: (selectedRows: string[] | number[]) => any;
+  onSelectInvert?: (selectedRows: Key[]) => any;
 }
 
 export interface TableCustomRecord<T> {
@@ -438,39 +440,43 @@ export interface BasicTableProps<T = any> {
 }
 
 export interface TableActionType {
-  reload: (opt?: FetchParams) => Promise<Recordable[] | undefined>;
+  reload: (opt?: FetchParams) => Promise<Recordable<any>[] | undefined>;
+  setSelectedRows: (rows: Recordable[]) => void;
   getSelectRows: <T = Recordable>() => T[];
   clearSelectedRowKeys: () => void;
   expandAll: () => void;
-  expandRows: (keys: string[] | number[]) => void;
   collapseAll: () => void;
+  expandRows: (keyValues: Key[]) => void;
+  collapseRows: (keyValues: Key[]) => void;
   scrollTo: (pos: string) => void; // pos: id | "top" | "bottom"
-  getSelectRowKeys: () => string[];
-  deleteSelectRowByKey: (key: string) => void;
+  getSelectRowKeys: () => Key[];
+  deleteSelectRowByKey: (keyValue: Key) => void;
   setPagination: (info: Partial<PaginationProps>) => void;
-  setTableData: <T extends Recordable = Recordable>(values: T[]) => void;
-  updateTableDataRecord: (rowKey: string | number, record: Recordable) => Recordable | undefined;
-  deleteTableDataRecord: (rowKey: string | number | string[] | number[]) => void;
-  insertTableDataRecord: (record: Recordable, index?: number) => Recordable | undefined;
-  findTableDataRecord: (rowKey: string | number) => Recordable;
+  setTableData: <T = Recordable>(values: T[]) => void;
+  updateTableDataRecord: (keyValue: Key, record: Recordable) => Recordable;
+  deleteTableDataRecord: (keyValues: Key | Key[]) => void;
+  insertTableDataRecord: (record: Recordable | Recordable[], index?: number) => Recordable[];
+  findTableDataRecord: (keyValue: Key) => Recordable;
   getColumns: (opt?: GetColumnsParams) => BasicColumn[];
   setColumns: (columns: BasicColumn[] | string[]) => void;
   getDataSource: <T = Recordable>() => T[];
   getRawDataSource: <T = Recordable>() => T;
+  getSearchInfo: <T = Recordable>() => T;
   setLoading: (loading: boolean) => void;
   setProps: (props: Partial<BasicTableProps>) => void;
   redoHeight: () => void;
-  setSelectedRowKeys: (rowKeys: string[] | number[]) => void;
+  setSelectedRowKeys: (keyValues: Key[]) => void;
   getPaginationRef: () => PaginationProps | boolean;
   getSize: () => SizeType;
   getRowSelection: () => TableRowSelection<Recordable>;
   getCacheColumns: () => BasicColumn[];
-  emit: EmitType | any;
+  emit?: EmitType | any;
   updateTableData: (index: number, key: string, value: any) => Recordable;
   setShowPagination: (show: boolean) => Promise<void>;
   getShowPagination: () => boolean;
   setCacheColumnsByField?: (dataIndex: string | undefined, value: BasicColumn) => void;
-  getExpandedRowKeys: () => string[];
+  setCacheColumns?: (columns: BasicColumn[]) => void;
+  getExpandedRowKeys: () => Key[];
 }
 
 export interface InnerHandlers {

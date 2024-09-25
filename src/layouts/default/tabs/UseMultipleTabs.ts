@@ -6,6 +6,7 @@ import { useMultipleTabStore } from "@/store/modules/MultipleTab";
 import { isNullAndUnDef } from "@/utils/Is";
 import projectSetting from "@/settings/ProjectSetting";
 import { useRouter } from "vue-router";
+import { ChangeEvent } from "@mfish/types";
 
 export function initAffixTabs(): string[] {
   const affixList = ref<RouteLocationNormalized[]>([]);

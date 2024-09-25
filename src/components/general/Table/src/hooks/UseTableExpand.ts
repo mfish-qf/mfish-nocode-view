@@ -7,7 +7,11 @@ import { parseRowKeyValue } from "../Helper";
 import type { Key } from "ant-design-vue/lib/table/interface";
 import { isFunction } from "@/utils/Is";
 
-export function useTableExpand(propsRef: ComputedRef<BasicTableProps>, tableData: Ref<Recordable[]>, emit: EmitType) {
+export function useTableExpand(
+  propsRef: ComputedRef<BasicTableProps>,
+  tableData: Ref<Recordable[]>,
+  emit: EmitType | any
+) {
   const expandedRowKeys = ref<Key[]>([]);
 
   const getAutoCreateKey = computed(() => {

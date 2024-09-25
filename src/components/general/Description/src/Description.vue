@@ -1,7 +1,7 @@
 <script lang="tsx">
   import type { DescriptionProps, DescInstance, DescItem } from "./Typing";
   import type { DescriptionsProps } from "ant-design-vue/es/descriptions";
-  import type { CSSProperties, PropType } from "vue";
+  import { CSSProperties, PropType, toRaw } from "vue";
   import type { CollapseContainerOptions } from "@/components/general/Container";
   import { defineComponent, computed, ref, unref, toRefs } from "vue";
   import { get } from "lodash-es";
@@ -110,12 +110,13 @@
         const { schema, data } = unref(getProps);
         return unref(schema)
           .map((item) => {
-            const { render, field, span, show, contentMinWidth } = item;
-
-            if (show && isFunction(show) && !show(data)) {
+            const { render, field, span, show, contentMinWidth, init } = item;
+            if (init && isFunction(init)) {
+              init(toRaw(data));
+            }
+            if (show === false || (show && isFunction(show) && !show(data))) {
               return null;
             }
-
             const getContent = () => {
               const _data = unref(getProps)?.data;
               if (!_data) {

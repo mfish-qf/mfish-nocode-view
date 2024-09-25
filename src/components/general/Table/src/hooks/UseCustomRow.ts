@@ -9,7 +9,7 @@ interface Options {
   setSelectedRowKeys: (keyValues: Key[]) => void;
   getSelectRowKeys: () => Key[];
   clearSelectedRowKeys: () => void;
-  emit: EmitType;
+  emit: EmitType | any;
   getAutoCreateKey: ComputedRef<boolean | undefined>;
 }
 

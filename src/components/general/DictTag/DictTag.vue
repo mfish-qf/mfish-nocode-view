@@ -28,7 +28,10 @@
         for (const status of dict.value) {
           if (props.value === status.dictValue) {
             return (
-              <Tag color={status.color} key={status.dictCode + status.dictValue}>
+              <Tag
+                color={status.color === "primary" ? "processing" : status.color}
+                key={status.dictCode + status.dictValue}
+              >
                 {status.dictLabel}
               </Tag>
             );

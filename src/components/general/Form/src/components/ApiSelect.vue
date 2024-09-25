@@ -31,6 +31,7 @@
   import { useI18n } from "@/hooks/web/UseI18n";
   import { propTypes } from "@/utils/PropTypes";
   import { SelectValue } from "ant-design-vue/es/select";
+  import { Recordable } from "@mfish/types";
 
   type OptionsItem = { label: string; value: string; disabled?: boolean };
   defineOptions({ name: "ApiSelect", inheritAttrs: false });

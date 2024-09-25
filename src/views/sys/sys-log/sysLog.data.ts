@@ -79,46 +79,46 @@ export const searchFormSchema: FormSchema[] = [
     field: "title",
     label: "中文标题",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 4, md: 6 }
   },
   {
     field: "method",
     label: "方法",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 4, md: 6 }
   },
   {
     field: "reqType",
     label: "请求类型",
     component: "ApiSelect",
     componentProps: getDictProps("sys_req_type"),
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 4, md: 6 }
   },
   {
     field: "reqUri",
     label: "请求路径",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 4, md: 6 }
   },
   {
     field: "reqSource",
     label: "请求来源",
     component: "ApiSelect",
     componentProps: getDictProps("sys_req_source"),
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 4, md: 6 }
   },
   {
     field: "operType",
     label: "操作类型",
     component: "ApiSelect",
     componentProps: getDictProps("sys_log_type"),
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 4, md: 6 }
   },
   {
     field: "operIp",
     label: "操作IP",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 4, md: 6 }
   },
   {
     field: "operStatus",
@@ -130,7 +130,7 @@ export const searchFormSchema: FormSchema[] = [
         { label: "异常", value: 1 }
       ]
     },
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 4, md: 6 }
   },
   {
     field: "[startTime, endTime]",
@@ -152,7 +152,7 @@ export const searchFormSchema: FormSchema[] = [
         最近3个月: [dateUtil().subtract(3, "months"), dateUtil()]
       }
     },
-    colProps: { lg: 7, md: 8 }
+    colProps: { xl: 6, md: 10 }
   }
 ];
 export const sysLogSchema: DescItem[] = [

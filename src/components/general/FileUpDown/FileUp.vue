@@ -28,13 +28,14 @@
 </template>
 <script setup lang="ts">
   import { Upload as AUpload, UploadProps } from "ant-design-vue";
-  import { ref, toRaw, toRefs, unref, watch } from "vue";
+  import { PropType, ref, toRaw, toRefs, unref, watch } from "vue";
   import { uploadApi } from "@/api/storage/Upload";
   import { getLocalFileUrl, getSysFileByKey } from "@/api/storage/SysFile";
   import FilePreview from "@/components/general/FileUpDown/FilePreview.vue";
   import { imageUrl } from "@/utils/file/FileUtils";
   import { SysFile } from "@/api/storage/model/SysFileModel";
   import { Icon } from "@/components/general/Icon";
+  import { UploadRequestOption } from "ant-design-vue/lib/vc-upload/interface";
 
   const props = defineProps({
     fileKeys: { type: String, default: "" },
@@ -44,7 +45,7 @@
     maxCount: { type: Number, default: undefined },
     showUploadList: { type: Boolean, default: true },
     filePath: { type: String, default: null },
-    customRequest: { type: Function, default: null },
+    customRequest: { type: Function as PropType<(options: UploadRequestOption) => void>, default: null },
     icon: { type: String, default: "ant-design:upload-outlined" },
     iconColor: { type: String, default: "" },
     uploadLoading: { type: Boolean, default: false },
@@ -64,7 +65,7 @@
       keysArray.forEach((key) => {
         getSysFileByKey(key).then((res) => {
           if (res) {
-            fileList.value.push(buildFile(res));
+            fileList.value?.push(buildFile(res));
           }
         });
       });
@@ -86,7 +87,7 @@
       .finally(() => (uploadLoading.value = false));
   }
 
-  function buildFile(sysFile: SysFile): UploadProps {
+  function buildFile(sysFile: SysFile): any {
     return {
       uid: sysFile.fileKey,
       name: sysFile.fileName,
@@ -107,4 +108,5 @@
   function getFiles() {
     return unref(fileList)?.map((file) => toRaw(file.response));
   }
+  defineExpose({ getFiles });
 </script>

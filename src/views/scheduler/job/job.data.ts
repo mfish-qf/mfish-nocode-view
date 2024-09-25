@@ -104,20 +104,20 @@ export const searchFormSchema: FormSchema[] = [
     field: "jobName",
     label: "任务名称",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "jobGroup",
     label: "任务组",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "jobType",
     label: "任务类型",
     component: "ApiSelect",
     componentProps: getDictProps("sys_job_type"),
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     label: "任务状态",
@@ -129,7 +129,7 @@ export const searchFormSchema: FormSchema[] = [
         { label: "停用", value: 1 }
       ]
     },
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 export const jobFormSchema: FormSchema[] = [

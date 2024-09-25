@@ -66,19 +66,19 @@ export const searchFormSchema: FormSchema[] = [
     field: "orgName",
     label: "组织名称",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "leader",
     label: "负责人",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "phone",
     label: "手机号",
     component: "Input",
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "status",
@@ -90,7 +90,7 @@ export const searchFormSchema: FormSchema[] = [
         { label: "停用", value: "1" }
       ]
     },
-    colProps: { lg: 4, md: 6 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 
@@ -219,15 +219,25 @@ export class OrgDesc {
     {
       label: "角色",
       field: "roleIds",
-      render: (val: string[] | undefined) => {
-        if (!val || val.length === 0) return;
-        getRoleByIds(val).then((res) => {
+      init: (val: string[] | undefined) => {
+        if (!val || val.roleIds?.length === 0) {
+          this.roleNames.value = [];
+          return;
+        }
+        getRoleByIds(val.roleIds).then((res) => {
           if (res && res.length > 0) {
             this.roleNames.value = res.map((val) => val.roleName);
           } else {
             this.roleNames.value = [];
           }
         });
+      },
+      show: false
+    },
+    {
+      label: "角色",
+      field: "roleNames",
+      render: () => {
         return h(
           "div",
           this.roleNames.value.map((roleName) => h(Tag, () => roleName))

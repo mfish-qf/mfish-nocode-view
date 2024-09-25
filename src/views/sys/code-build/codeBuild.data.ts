@@ -46,19 +46,19 @@ export const searchFormSchema: FormSchema[] = [
     field: "tableName",
     label: "表名",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "apiPrefix",
     label: "接口前缀",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "entityName",
     label: "实体类名",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 export const codeBuildFormSchema: FormSchema[] = [

@@ -50,26 +50,26 @@ export const searchFormSchema: FormSchema[] = [
     field: "dbTitle",
     label: "连接名",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "dbType",
     label: "库类型",
     component: "ApiSelect",
     componentProps: getDictProps("sys_db_type"),
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "host",
     label: "主机",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   },
   {
     field: "dbName",
     label: "数据库",
     component: "Input",
-    colProps: { lg: 4, md: 5 }
+    colProps: { xl: 5, md: 6 }
   }
 ];
 export const dbConnectFormSchema: FormSchema[] = [

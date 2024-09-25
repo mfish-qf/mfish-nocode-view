@@ -5,17 +5,18 @@
 -->
 <template>
   <div :class="prefixCls">
-    <a target="_blank" v-for="(item, index) in files.keys()" :key="index" @click="clickFile(item)">
-      {{ files.get(item)?.fileName }}
+    <a target="_blank" v-for="(item, index) in files" :key="index" @click="clickFile(item)">
+      {{ item?.fileName }}
     </a>
     <FilePreview ref="filePreviewRef" />
   </div>
 </template>
 <script setup lang="ts">
-  import { ref, unref, watch } from "vue";
+  import { ref, watch } from "vue";
   import { getSysFileByKey } from "@/api/storage/SysFile";
   import { useDesign } from "@/hooks/web/UseDesign";
   import FilePreview from "@/components/general/FileUpDown/FilePreview.vue";
+  import { SysFile } from "@/api/storage/model/SysFileModel";
 
   export interface FileHrefModel {
     fileKey: string;
@@ -23,20 +24,27 @@
     fileType?: string;
   }
   const props = defineProps({
-    keys: { type: Array<String>, default: [] }
+    keys: { type: Array<string>, default: [] }
   });
-  const files = ref<Map<string, FileHrefModel>>(new Map());
+  const files = ref<FileHrefModel[]>([]);
   const { prefixCls } = useDesign("file-href");
   const filePreviewRef = ref();
   watch(
     () => props.keys,
     (newKeys) => {
-      files.value.clear();
       if (newKeys) {
-        newKeys?.forEach(async (key) => {
-          const res = await getSysFileByKey(key);
-          files.value.set(key, { fileKey: res.fileKey, fileName: res.fileName, fileType: res.fileType });
+        const newFiles: Promise<SysFile>[] = [];
+        newKeys.forEach((key) => {
+          newFiles.push(getSysFileByKey(key));
         });
+        Promise.all(newFiles).then((res) => {
+          files.value = [];
+          res.forEach((item) => {
+            files.value.push({ fileKey: item.fileKey, fileName: item.fileName, fileType: item.fileType });
+          });
+        });
+      } else {
+        files.value = [];
       }
     },
     {
@@ -44,8 +52,8 @@
     }
   );
 
-  function clickFile(key) {
-    filePreviewRef.value?.show(unref(files).get(key));
+  function clickFile(file) {
+    filePreviewRef.value?.show(file);
   }
 </script>
 <style lang="less" scoped>

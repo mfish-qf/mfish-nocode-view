@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref } from "vue";
+  import { computed, PropType, ref } from "vue";
   import { useDesign } from "@/hooks/web/UseDesign";
   import { Switch as ASwitch } from "ant-design-vue";
   import { setJobSubscribeStatus } from "@/api/scheduler/JobSubscribe";
