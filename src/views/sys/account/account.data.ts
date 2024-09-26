@@ -142,7 +142,7 @@ export const accountFormSchema: FormSchema[] = [
   },
   {
     field: "orgIds",
-    label: "所属部门",
+    label: "所属组织",
     component: "TreeSelect",
     componentProps: {
       maxTagCount: 8,
@@ -156,8 +156,7 @@ export const accountFormSchema: FormSchema[] = [
     },
     colProps: { span: 24 },
     dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
-      usePermission().isSuperAdmin(renderCallbackParams.values.id),
-    required: true
+      usePermission().isSuperAdmin(renderCallbackParams.values.id)
   },
   {
     label: "角色",
@@ -232,8 +231,8 @@ export const accountFormSchema: FormSchema[] = [
 ];
 
 export class AccountDesc {
-  orgNames = ref([]);
-  roleNames = ref([]);
+  orgNames = ref<string[]>([]);
+  roleNames = ref<string[]>([]);
   viewSchema: DescItem[] = [
     {
       label: "id",
@@ -250,7 +249,7 @@ export class AccountDesc {
     },
     {
       field: "orgIds",
-      label: "所属部门",
+      label: "所属组织",
       span: 2,
       init: (val) => {
         if (!val || val.orgIds?.length === 0) {
@@ -269,7 +268,7 @@ export class AccountDesc {
     },
     {
       field: "orgNames",
-      label: "所属部门",
+      label: "所属组织",
       span: 2,
       render: () => {
         return h(
