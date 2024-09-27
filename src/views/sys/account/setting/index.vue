@@ -1,6 +1,7 @@
 <template>
-  <div class="account-setting">
+  <PageWrapper content-full-height fixed-height class="account-setting">
     <ATabs
+      style="height: 100%"
       destroy-inactive-tab-pane
       tab-position="left"
       :tab-bar-style="tabBarStyle"
@@ -13,7 +14,7 @@
         </ATabPane>
       </template>
     </ATabs>
-  </div>
+  </PageWrapper>
 </template>
 
 <script lang="ts" setup>
@@ -28,6 +29,7 @@
   import TenantUserSetting from "./TenantUserSetting.vue";
   import { useRoute } from "vue-router";
   import { usePermission } from "@/hooks/web/UsePermission";
+  import { PageWrapper } from "@/components/general/Page";
   const ATabPane = ATabs.TabPane;
   const components = {
     BaseSetting,
@@ -58,8 +60,7 @@
   }
 
   const tabBarStyle = {
-    width: "110px",
-    height: "calc(100vh - 112px)"
+    width: "110px"
   };
 </script>
 <style lang="less" scoped>
@@ -67,6 +68,7 @@
     background-color: #151515;
   }
   .account-setting {
+    padding: 16px;
     margin: 16px;
     background-color: @component-background;
 

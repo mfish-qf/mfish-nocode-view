@@ -29,6 +29,7 @@
   import { SsoOrg } from "@/api/sys/model/OrgModel";
   import { TreeSelect } from "ant-design-vue";
   import { Recordable } from "@mfish/types";
+  import { SsoRole } from "@/api/sys/model/RoleModel";
 
   const props = defineProps({
     source: {
@@ -78,7 +79,7 @@
       if (!roleIds) {
         roleIds = [];
       }
-      let roles;
+      let roles: SsoRole[];
       if (isNullOrUnDef(data.record.tenantId) || data.record.tenantId === "") {
         // 租户子组织获取系统默认角色
         roles = await getAllRoleList({ orgIds: data.record.id });
@@ -131,6 +132,10 @@
       {
         field: "roleIds",
         dynamicDisabled: source === 1 && disabled
+      },
+      {
+        field: "status",
+        dynamicDisabled: source === 1 && disabled
       }
     ]).then();
   }
@@ -155,6 +160,9 @@
     }
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {
+      if (!values.roleIds) {
+        values.roleIds = [];
+      }
       if (props.source === 1) {
         saveOrg(updateTenantOrg, values);
       } else {

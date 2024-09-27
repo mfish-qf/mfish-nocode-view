@@ -84,7 +84,7 @@ export const getUserTenants = () => {
  * 当前用户登出
  */
 export function doLogout() {
-  return defHttp.get({ url: Api.Logout });
+  return defHttp.delete({ url: Api.Logout });
 }
 
 /**
@@ -92,7 +92,7 @@ export function doLogout() {
  * @param sid
  */
 export function logoutUser(sid: string) {
-  return defHttp.get({ url: `${Api.Logout}/${sid}` });
+  return defHttp.delete({ url: `${Api.Logout}/${sid}` });
 }
 
 /**
