@@ -104,7 +104,7 @@
     useSearchForm: true,
     showTableSetting: true,
     bordered: true,
-    resizeHeightOffset: props.source === 1 ? 18 : 0,
+    resizeHeightOffset: props.source === 1 ? 25 : 0,
     showIndexColumn: false,
     actionColumn: {
       width: 120,

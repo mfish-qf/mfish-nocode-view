@@ -7,7 +7,7 @@
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="角色信息">
     <Description @register="registerDesc" />
-    <a-divider>菜单明细</a-divider>
+    <ADivider>菜单明细</ADivider>
     <BasicTree
       v-model:value="menus"
       :tree-data="treeData"
@@ -33,20 +33,22 @@
   import { getRoleMenus } from "@/api/sys/Role";
 
   defineOptions({ name: "RoleViewModal" });
-  const roleData = ref();
-  const roleDesc = new RoleDesc();
-  const treeData = ref<TreeItem[]>([]);
   const props = defineProps({
     source: {
       type: Number,
       default: null
     }
   });
-  const menus = ref([]);
+  const roleData = ref();
+  const roleDesc = new RoleDesc();
+  const treeData = ref<TreeItem[]>([]);
+
+  const menus = ref<string[]>([]);
   const [registerModal, { setModalProps }] = useModalInner(async (data) => {
     setModalProps({
       confirmLoading: false,
       width: "800px",
+      showOkBtn: false,
       cancelText: "关闭"
     });
     roleData.value = data.record;
