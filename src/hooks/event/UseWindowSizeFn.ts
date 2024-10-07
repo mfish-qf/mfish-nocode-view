@@ -1,20 +1,23 @@
 import { tryOnMounted, tryOnUnmounted, useDebounceFn } from "@vueuse/core";
+import type { Fn } from "@mfish/types";
 
 interface WindowSizeOptions {
+  wait?: number;
   once?: boolean;
   immediate?: boolean;
   listenerOptions?: AddEventListenerOptions | boolean;
 }
 
-export function useWindowSizeFn<T>(fn: Fn<T>, wait = 150, options?: WindowSizeOptions) {
+export function useWindowSizeFn(fn: Fn, options: WindowSizeOptions = {}) {
+  const { wait = 150, immediate } = options;
   let handler = () => {
     fn();
   };
-  const handleSize = useDebounceFn(handler, wait);
-  handler = handleSize;
+
+  handler = useDebounceFn(handler, wait);
 
   const start = () => {
-    if (options && options.immediate) {
+    if (immediate) {
       handler();
     }
     window.addEventListener("resize", handler);
@@ -31,5 +34,5 @@ export function useWindowSizeFn<T>(fn: Fn<T>, wait = 150, options?: WindowSizeOp
   tryOnUnmounted(() => {
     stop();
   });
-  return [start, stop];
+  return { start, stop };
 }

@@ -35,6 +35,9 @@
       <template #bodyCell="data">
         <slot name="bodyCell" v-bind="data || {}"></slot>
       </template>
+      <template #footer="data">
+        <slot name="footer" v-bind="data || {}"></slot>
+      </template>
     </Table>
   </div>
 </template>
@@ -350,7 +353,8 @@
 
     .ant-table-wrapper {
       .ant-table-container {
-        border-radius: 8px !important;
+        border-top-left-radius: 8px !important;
+        border-top-right-radius: 8px !important;
       }
 
       padding: 6px;
@@ -379,7 +383,8 @@
         border-bottom: none;
       }
       .ant-table-content {
-        border-radius: 8px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
       }
     }
 
@@ -388,8 +393,8 @@
     }
 
     .ant-table-footer {
-      padding: 0;
-
+      background-color: @component-background;
+      padding: 4px !important;
       .ant-table-wrapper {
         padding: 0;
       }

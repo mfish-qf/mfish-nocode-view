@@ -9,7 +9,7 @@ interface TableSetting {
   showRowSelection: Recordable<Nullable<boolean>>;
 }
 interface TableSettingState {
-  setting: Nullable<Partial<TableSetting>>;
+  setting: Nullable<TableSetting>;
 }
 
 export const useTableSettingStore = defineStore({
@@ -21,7 +21,7 @@ export const useTableSettingStore = defineStore({
     getTableSetting(): Nullable<Partial<TableSetting>> {
       return this.setting;
     },
-    getTableSize() {
+    getTableSize(): SizeType {
       return this.setting?.size || "middle";
     },
     getShowIndexColumn() {

@@ -71,23 +71,6 @@ export function useTableScroll(
   let bodyEl: HTMLElement | null;
   const tableWrapperPadding = 6;
 
-  function handleScrollBar(bodyEl: HTMLElement, tableEl: Element) {
-    const hasScrollBarY = bodyEl.scrollHeight > bodyEl.clientHeight;
-    const hasScrollBarX = bodyEl.scrollWidth > bodyEl.clientWidth;
-
-    if (hasScrollBarY) {
-      tableEl.classList.contains("hide-scrollbar-y") && tableEl.classList.remove("hide-scrollbar-y");
-    } else {
-      !tableEl.classList.contains("hide-scrollbar-y") && tableEl.classList.add("hide-scrollbar-y");
-    }
-
-    if (hasScrollBarX) {
-      tableEl.classList.contains("hide-scrollbar-x") && tableEl.classList.remove("hide-scrollbar-x");
-    } else {
-      !tableEl.classList.contains("hide-scrollbar-x") && tableEl.classList.add("hide-scrollbar-x");
-    }
-  }
-
   /**
    * 计算分页器高度
    * @param tableEl table element
@@ -241,7 +224,7 @@ export function useTableScroll(
   }
 
   async function calcTableHeight() {
-    const { resizeHeightOffset, maxHeight } = unref(propsRef);
+    const { resizeHeightOffset, maxHeight = 9999 } = unref(propsRef);
     const tableData = unref(getDataSourceRef);
 
     const table = unref(tableElRef);
@@ -255,9 +238,7 @@ export function useTableScroll(
       if (!bodyEl) return;
     }
 
-    handleScrollBar(bodyEl, tableEl);
-
-    bodyEl!.style.height = "unset";
+    bodyEl.style.height = "unset";
 
     if (!unref(getCanResize) || !unref(tableData) || tableData.length === 0) return;
 
@@ -294,10 +275,10 @@ export function useTableScroll(
         1
     );
 
-    height = (height > maxHeight! ? (maxHeight as number) : height) ?? height;
+    height = (height > maxHeight ? (maxHeight as number) : height) ?? height;
     setHeight(height);
 
-    bodyEl!.style.height = `${height}px`;
+    bodyEl.style.height = `${height}px`;
   }
   useWindowSizeFn(calcTableHeight, { wait: 280 });
   onMountedOrActivated(() => {

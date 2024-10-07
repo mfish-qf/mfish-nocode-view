@@ -1,3 +1,5 @@
+import { Nullable } from "@mfish/types";
+
 export type ScrollType = "default" | "main";
 
 export interface CollapseContainerOptions {

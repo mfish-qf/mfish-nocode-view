@@ -4,6 +4,7 @@ import { useWindowSizeFn } from "@/hooks/event/UseWindowSizeFn";
 import { useLayoutHeight } from "@/layouts/default/content/UseContentViewHeight";
 import { getViewportOffset } from "@/utils/DomUtils";
 import { isNumber, isString } from "@/utils/Is";
+import { Nullable } from "@mfish/types";
 
 export interface CompensationHeight {
   // 使用 layout Footer 高度作为判断补偿高度的条件
@@ -22,8 +23,8 @@ type Upward = number | string | null | undefined;
  * @param anchorRef 锚点组件 Ref<ElRef | ComponentRef>
  * @param subtractHeightRefs 待减去高度的组件列表 Ref<ElRef | ComponentRef>
  * @param subtractSpaceRefs 待减去空闲空间(margins/paddings)的组件列表 Ref<ElRef | ComponentRef>
- * @param offsetHeightRef 计算偏移的响应式高度，计算高度时将直接减去此值
  * @param upwardSpace 向上递归减去空闲空间的 层级 或 直到指定class为止 数值为2代表向上递归两次|数值为ant-layout表示向上递归直到碰见.ant-layout为止
+ * @param offsetHeightRef 计算偏移的响应式高度，计算高度时将直接减去此值
  * @returns 响应式高度
  */
 export function useContentHeight(
@@ -80,7 +81,7 @@ export function useContentHeight(
   }
 
   function getEl(element: any): Nullable<HTMLDivElement> {
-    if (element == null) {
+    if (element === null) {
       return null;
     }
     return (element instanceof HTMLDivElement ? element : element.$el) as HTMLDivElement;
@@ -99,16 +100,16 @@ export function useContentHeight(
     }
     const { bottomIncludeBody } = getViewportOffset(anchorEl);
 
-    // substract elements height
-    let substractHeight = 0;
+    // subtract elements height
+    let subtractHeight = 0;
     subtractHeightRefs.forEach((item) => {
-      substractHeight += getEl(unref(item))?.offsetHeight ?? 0;
+      subtractHeight += getEl(unref(item))?.offsetHeight ?? 0;
     });
 
     // subtract margins / paddings
-    let substractSpaceHeight = calcSubtractSpace(anchorEl) ?? 0;
+    let subtractSpaceHeight = calcSubtractSpace(anchorEl) ?? 0;
     subtractSpaceRefs.forEach((item) => {
-      substractSpaceHeight += calcSubtractSpace(getEl(unref(item)));
+      subtractSpaceHeight += calcSubtractSpace(getEl(unref(item)));
     });
 
     // upwardSpace
@@ -143,8 +144,8 @@ export function useContentHeight(
       bottomIncludeBody -
       unref(layoutFooterHeightRef) -
       unref(offsetHeightRef) -
-      substractHeight -
-      substractSpaceHeight -
+      subtractHeight -
+      subtractSpaceHeight -
       upwardSpaceHeight;
 
     // compensation height
@@ -153,12 +154,7 @@ export function useContentHeight(
         height += getEl(unref(item))?.offsetHeight ?? 0;
       });
     };
-    if (compensationHeight.useLayoutFooter && unref(layoutFooterHeightRef) > 0) {
-      calcCompensationHeight();
-    } else {
-      calcCompensationHeight();
-    }
-
+    calcCompensationHeight();
     contentHeight.value = height;
   }
 
@@ -171,8 +167,7 @@ export function useContentHeight(
     () => {
       calcContentHeight().then();
     },
-    50,
-    { immediate: true }
+    { wait: 200, immediate: true }
   );
   watch(
     () => [layoutFooterHeightRef.value],
