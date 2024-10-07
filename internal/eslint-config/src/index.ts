@@ -13,7 +13,6 @@ import {
   turbo,
   typescript,
   unicorn,
-  // unicorn,
   vue
 } from "./configs";
 

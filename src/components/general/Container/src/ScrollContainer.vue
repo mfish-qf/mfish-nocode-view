@@ -8,6 +8,7 @@
   import { ref, unref, nextTick } from "vue";
   import { Scrollbar, ScrollbarType } from "@/components/general/Scrollbar";
   import { useScrollTo } from "@/hooks/event/UseScrollTo";
+  import { Nullable } from "@mfish/types";
 
   defineOptions({ name: "ScrollContainer" });
 

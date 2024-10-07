@@ -26,132 +26,123 @@
     </PageFooter>
   </div>
 </template>
-<script lang="ts">
-  import { CSSProperties, PropType, provide } from "vue";
-  import { defineComponent, computed, watch, ref, unref } from "vue";
+<script lang="ts" setup>
+  import { CSSProperties, PropType, provide, useAttrs, useSlots } from "vue";
+  import { computed, watch, ref, unref } from "vue";
   import PageFooter from "./PageFooter.vue";
   import { useDesign } from "@/hooks/web/UseDesign";
   import { propTypes } from "@/utils/PropTypes";
-  import { omit } from "lodash-es";
+  import { debounce, omit } from "lodash-es";
   import { PageHeader } from "ant-design-vue";
   import { useContentHeight } from "@/hooks/web/UseContentHeight";
   import { PageWrapperFixedHeightKey } from "../index";
-
-  export default defineComponent({
+  import { useElementSize } from "@vueuse/core";
+  defineOptions({
     name: "PageWrapper",
-    components: { PageFooter, PageHeader },
-    inheritAttrs: false,
-    props: {
-      title: propTypes.string,
-      dense: propTypes.bool.def(true),
-      ghost: propTypes.bool,
-      content: propTypes.string,
-      contentStyle: {
-        type: Object as PropType<CSSProperties>
-      },
-      contentBackground: propTypes.bool,
-      contentFullHeight: propTypes.bool,
-      contentClass: propTypes.string,
-      fixedHeight: propTypes.bool,
-      upwardSpace: propTypes.oneOfType([propTypes.number, propTypes.string]).def(0)
+    inheritAttrs: false
+  });
+  const props = defineProps({
+    title: propTypes.string,
+    dense: propTypes.bool.def(true),
+    ghost: propTypes.bool,
+    content: propTypes.string,
+    contentStyle: {
+      type: Object as PropType<CSSProperties>
     },
-    setup(props, { slots, attrs }) {
-      const wrapperRef = ref(null);
-      const headerRef = ref(null);
-      const contentRef = ref(null);
-      const footerRef = ref(null);
-      const { prefixCls } = useDesign("page-wrapper");
+    contentBackground: propTypes.bool,
+    contentFullHeight: propTypes.bool.def(false),
+    contentClass: propTypes.string,
+    fixedHeight: propTypes.bool,
+    upwardSpace: propTypes.oneOfType([propTypes.number, propTypes.string]).def(0)
+  });
+  const attrs = useAttrs();
+  const slots = useSlots();
+  const wrapperRef = ref(null);
+  const headerRef = ref(null);
+  const contentRef = ref(null);
+  const footerRef = ref(null);
+  const { prefixCls } = useDesign("page-wrapper");
+  const { height } = useElementSize(wrapperRef);
+  provide(
+    PageWrapperFixedHeightKey,
+    computed(() => props.fixedHeight)
+  );
 
-      provide(
-        PageWrapperFixedHeightKey,
-        computed(() => props.fixedHeight)
-      );
+  const getIsContentFullHeight = computed(() => {
+    return props.contentFullHeight;
+  });
 
-      const getIsContentFullHeight = computed(() => {
-        return props.contentFullHeight;
-      });
+  const getUpwardSpace = computed(() => props.upwardSpace);
+  const { redoHeight, setCompensation, contentHeight } = useContentHeight(
+    getIsContentFullHeight,
+    wrapperRef,
+    [headerRef, footerRef],
+    [contentRef],
+    getUpwardSpace
+  );
+  setCompensation({ useLayoutFooter: true, elements: [footerRef] });
 
-      const getUpwardSpace = computed(() => props.upwardSpace);
-      const { redoHeight, setCompensation, contentHeight } = useContentHeight(
-        getIsContentFullHeight,
-        wrapperRef,
-        [headerRef, footerRef],
-        [contentRef],
-        getUpwardSpace
-      );
-      setCompensation({ useLayoutFooter: true, elements: [footerRef] });
+  const getClass = computed(() => {
+    return [
+      prefixCls,
+      {
+        [`${prefixCls}--dense`]: props.dense
+      },
+      attrs.class ?? {}
+    ];
+  });
 
-      const getClass = computed(() => {
-        return [
-          prefixCls,
-          {
-            [`${prefixCls}--dense`]: props.dense
-          },
-          attrs.class ?? {}
-        ];
-      });
+  const getShowHeader = computed(
+    () => props.content || slots?.headerContent || props.title || getHeaderSlots.value.length > 0
+  );
 
-      const getShowHeader = computed(
-        () => props.content || slots?.headerContent || props.title || getHeaderSlots.value.length
-      );
+  const getShowFooter = computed(() => slots?.leftFooter || slots?.rightFooter);
 
-      const getShowFooter = computed(() => slots?.leftFooter || slots?.rightFooter);
+  const getHeaderSlots = computed(() => {
+    return Object.keys(omit(slots, "default", "leftFooter", "rightFooter", "headerContent"));
+  });
 
-      const getHeaderSlots = computed(() => {
-        return Object.keys(omit(slots, "default", "leftFooter", "rightFooter", "headerContent"));
-      });
-
-      const getContentStyle = computed((): CSSProperties => {
-        const { contentFullHeight, contentStyle, fixedHeight } = props;
-        if (!contentFullHeight) {
-          return { ...contentStyle };
-        }
-
-        const height = `${unref(contentHeight)}px`;
-        return {
-          ...contentStyle,
-          minHeight: height,
-          ...(fixedHeight ? { height } : {})
-        };
-      });
-
-      const getContentClass = computed(() => {
-        const { contentBackground, contentClass } = props;
-        return [
-          `${prefixCls}-content`,
-          contentClass,
-          {
-            [`${prefixCls}-content-bg`]: contentBackground
-          }
-        ];
-      });
-
-      watch(
-        () => [getShowFooter.value],
-        () => {
-          redoHeight();
-        },
-        {
-          flush: "post",
-          immediate: true
-        }
-      );
-
-      return {
-        getContentStyle,
-        wrapperRef,
-        headerRef,
-        contentRef,
-        footerRef,
-        getClass,
-        getHeaderSlots,
-        prefixCls,
-        getShowHeader,
-        getShowFooter,
-        omit,
-        getContentClass
-      };
+  const getContentStyle = computed((): CSSProperties => {
+    const { contentFullHeight, contentStyle, fixedHeight } = props;
+    if (!contentFullHeight) {
+      return { ...contentStyle };
     }
+
+    const height = unref(contentHeight) === null ? "" : `${unref(contentHeight)}px`;
+    return {
+      ...contentStyle,
+      minHeight: height,
+
+      ...(fixedHeight ? { height } : {})
+    };
+  });
+
+  const getContentClass = computed(() => {
+    const { contentBackground, contentClass } = props;
+    return [
+      `${prefixCls}-content`,
+      contentClass,
+      {
+        [`${prefixCls}-content-bg`]: contentBackground
+      }
+    ];
+  });
+
+  watch(
+    () => [getShowFooter.value],
+    () => {
+      redoHeight();
+    },
+    {
+      flush: "post",
+      immediate: true
+    }
+  );
+
+  const debounceRedoHeight = debounce(redoHeight, 50);
+  watch(height, () => {
+    const { contentFullHeight, fixedHeight } = props;
+    contentFullHeight && fixedHeight && debounceRedoHeight();
   });
 </script>
 <style lang="less">

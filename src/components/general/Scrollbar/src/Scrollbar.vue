@@ -135,7 +135,6 @@
       transition: 0.3s background-color;
       border-radius: inherit;
       background-color: rgb(144 147 153 / 30%);
-      cursor: pointer;
 
       &:hover {
         background-color: rgb(144 147 153 / 50%);

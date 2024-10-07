@@ -25,7 +25,7 @@
   const { headerHeightRef } = useLayoutHeight();
 
   const { prefixCls } = useDesign("iframe-page");
-  useWindowSizeFn(calcHeight, 150, { immediate: true });
+  useWindowSizeFn(calcHeight, { wait: 150, immediate: true });
 
   const getWrapStyle = computed((): CSSProperties => {
     return {
@@ -54,7 +54,7 @@
     emit("message", e.data);
   };
 
-  const postMessage = (message: any, targetOrigin: string, transfer?: Transferable[]) => {
+  const postMessage = (message: any, targetOrigin: string, transfer?: any[]) => {
     const iframe = unref(frameRef);
     if (!iframe) return;
     iframe.contentWindow?.postMessage(message, targetOrigin, transfer);

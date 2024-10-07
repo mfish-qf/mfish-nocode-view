@@ -53,7 +53,7 @@ async function createAppConfigPlugin({ root, isBuild }: { root: string; isBuild:
 
         console.log(colors.cyan(`✨configuration file is build successfully!`));
       } catch (error) {
-        console.log(colors.red("configuration file configuration file failed to package:\n" + error));
+        console.log(colors.red(`configuration file configuration file failed to package:\n${error}`));
       }
     }
   };
@@ -61,18 +61,18 @@ async function createAppConfigPlugin({ root, isBuild }: { root: string; isBuild:
 
 /**
  * Get the configuration file variable name
- * @param env
+ * @param title
  */
 const getVariableName = (title: string) => {
   function strToHex(str: string) {
     const result: string[] = [];
     for (let i = 0; i < str.length; ++i) {
-      const hex = str.charCodeAt(i).toString(16);
-      result.push(("000" + hex).slice(-4));
+      const hex = str.codePointAt(i)?.toString(16);
+      result.push(`000${hex}`.slice(-4));
     }
     return result.join("").toUpperCase();
   }
-  return `__PRODUCTION__${strToHex(title) || "__APP"}__CONF__`.toUpperCase().replace(/\s/g, "");
+  return `__PRODUCTION__${strToHex(title) || "__APP"}__CONF__`.toUpperCase().replaceAll(/\s/g, "");
 };
 
 async function getConfigSource(appTitle: string) {
@@ -87,7 +87,7 @@ async function getConfigSource(appTitle: string) {
       configurable: false,
       writable: false,
     });
-  `.replace(/\s/g, "");
+  `.replaceAll(/\s/g, "");
   return source;
 }
 
