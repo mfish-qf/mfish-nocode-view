@@ -28,7 +28,8 @@ enum Api {
   SetStatus = "/oauth2/user/status",
   Online = "/oauth2/user/online",
   UserRoles = "/oauth2/user/roles",
-  Tenants = "/oauth2/user/tenants"
+  Tenants = "/oauth2/user/tenants",
+  UnLock = "/oauth2/unLock"
 }
 
 export function getCaptcha() {
@@ -48,6 +49,14 @@ export function loginApi(params: LoginParams, mode: MessageMode = "modal") {
       errorMessageMode: mode
     }
   );
+}
+
+export function unLock(params: LoginParams) {
+  return defHttp.post<AccessToken>({
+    url: Api.UnLock,
+    params,
+    headers: { "Content-Type": ContentTypeEnum.FORM_URLENCODED }
+  });
 }
 
 /**

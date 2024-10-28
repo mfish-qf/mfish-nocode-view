@@ -2,9 +2,9 @@
   font-family: "iconfont"; /* Project id 4205115 */
   /* Color fonts */
   src: 
-       url('iconfont.woff2?t=1694680942086') format('woff2'),
-       url('iconfont.woff?t=1694680942086') format('woff'),
-       url('iconfont.ttf?t=1694680942086') format('truetype');
+       url('iconfont.woff2?t=1730120320539') format('woff2'),
+       url('iconfont.woff?t=1730120320539') format('woff'),
+       url('iconfont.ttf?t=1730120320539') format('truetype');
 }
 
 .iconfont {
@@ -13,6 +13,102 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mfish-paste:before {
+  content: "\e626";
+}
+
+.icon-mfish-copy:before {
+  content: "\e621";
+}
+
+.icon-mfish-bottom-level:before {
+  content: "\e622";
+}
+
+.icon-mfish-down-level:before {
+  content: "\e623";
+}
+
+.icon-mfish-align:before {
+  content: "\e624";
+}
+
+.icon-mfish-bottom-align:before {
+  content: "\e625";
+}
+
+.icon-mfish-un-combine:before {
+  content: "\e615";
+}
+
+.icon-mfish-horizontal-distribution:before {
+  content: "\e616";
+}
+
+.icon-mfish-vertical-center:before {
+  content: "\e617";
+}
+
+.icon-mfish-up-level:before {
+  content: "\e618";
+}
+
+.icon-mfish-left-align:before {
+  content: "\e619";
+}
+
+.icon-mfish-combine:before {
+  content: "\e61a";
+}
+
+.icon-mfish-right-align:before {
+  content: "\e61b";
+}
+
+.icon-mfish-vertical-distribution:before {
+  content: "\e61c";
+}
+
+.icon-mfish-top-align:before {
+  content: "\e61d";
+}
+
+.icon-mfish-rename:before {
+  content: "\e61e";
+}
+
+.icon-mfish-top-level:before {
+  content: "\e61f";
+}
+
+.icon-mfish-horizontal-center:before {
+  content: "\e620";
+}
+
+.icon-mfish-all:before {
+  content: "\e614";
+}
+
+.icon-mfish-expand-all:before {
+  content: "\e612";
+}
+
+.icon-mfish-collapse-all:before {
+  content: "\e613";
+}
+
+.icon-mfish-config:before {
+  content: "\e611";
+}
+
+.icon-mfish-chart:before {
+  content: "\e610";
+}
+
+.icon-mfish-layer:before {
+  content: "\e60f";
 }
 
 .icon-mfish-divide:before {

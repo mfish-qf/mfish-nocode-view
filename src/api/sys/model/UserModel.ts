@@ -18,9 +18,9 @@ export interface LoginParams {
   // password方式登录时使用
   password?: string;
   client_id: string;
-  client_secret: string;
-  grant_type: string;
-  redirect_uri: string;
+  client_secret?: string;
+  grant_type?: string;
+  redirect_uri?: string;
   // auth_code方式登录时使用
   code?: string;
   state?: string;

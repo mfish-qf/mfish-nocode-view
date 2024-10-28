@@ -14,6 +14,7 @@ import { useErrorLogStoreWithOut } from "@/store/modules/ErrorLog";
 import { useI18n } from "@/hooks/web/UseI18n";
 import { formatRequestDate, joinTimestamp, messageTips } from "./Helper";
 import { AxiosRetry } from "@/utils/http/axios/AxiosRetry";
+import { Recordable } from "@mfish/types";
 
 const globSetting = useGlobSetting();
 
@@ -160,7 +161,7 @@ const transform: AxiosTransform = {
     const errorLogStore = useErrorLogStoreWithOut();
     errorLogStore.addAjaxErrorInfo(error);
     const { response, config } = error || {};
-    const errorMessageMode = config?.requestOptions?.errorMessageMode || "none";
+    const errorMessageMode = config.requestOptions.errorMessageMode || "none";
     if (axios.isCancel(error)) {
       return Promise.reject(error);
     }
@@ -174,7 +175,7 @@ const transform: AxiosTransform = {
     checkStatus(status, msg, errorMessageMode, retryCount);
     // 添加自动重试机制 保险起见 只针对GET请求
     const retryRequest = new AxiosRetry();
-    const { isOpenRetry } = config.requestOptions?.retryRequest;
+    const { isOpenRetry } = config.requestOptions.retryRequest;
     config.method?.toUpperCase() === RequestEnum.GET && isOpenRetry && retryRequest.retry(axiosInstance, error);
     return Promise.reject(error);
   }

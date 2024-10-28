@@ -1,16 +1,14 @@
-// copy from element-plus
 import { warn } from "vue";
-// eslint-disable-next-line vue/prefer-import-from-vue
 import { isObject } from "@vue/shared";
 import { fromPairs } from "lodash-es";
 import type { ExtractPropTypes, PropType } from "vue";
 
-const wrapperKey = Symbol();
+const wrapperKey = Symbol("wrapper-key");
 export interface PropWrapper<T> {
   [wrapperKey]: T;
 }
 
-export const propKey = Symbol();
+export const propKey = Symbol("prop-key");
 
 type ResolveProp<T> = ExtractPropTypes<{
   key: { type: T; required: true };
@@ -39,10 +37,8 @@ type _BuildPropType<T, V, C> =
   | C;
 export type BuildPropType<T, V, C> = _BuildPropType<IfUnknown<T, never>, IfUnknown<V, never>, IfUnknown<C, never>>;
 
-type _BuildPropDefault<T, D> = [T] extends [
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  Record<string, unknown> | Array<any> | Function
-]
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+type _BuildPropDefault<T, D> = [T] extends [Record<string, unknown> | Array<any> | Function]
   ? D
   : D extends () => T
     ? ReturnType<D>
@@ -117,11 +113,7 @@ export function buildProp<
       : undefined;
 
   return {
-    type:
-      typeof type === "object" && Object.getOwnPropertySymbols(type).includes(wrapperKey)
-        ? // @ts-ignore
-          type[wrapperKey]
-        : type,
+    type: typeof type === "object" && Object.getOwnPropertySymbols(type).includes(wrapperKey) ? type[wrapperKey] : type,
     required: !!required,
     default: defaultValue,
     validator: _validator,

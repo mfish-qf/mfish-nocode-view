@@ -27,7 +27,7 @@
     height: 44px;
     padding: 0 16px;
     font-size: 12px;
-    color: #666;
+    color: @screen-item-normal-color;
     background-color: @component-background;
     border-top: 1px solid @border-color-base;
     border-radius: 0 0 16px 16px;

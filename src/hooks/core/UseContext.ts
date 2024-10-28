@@ -10,7 +10,11 @@ type ShallowUnwrap<T> = {
   [P in keyof T]: UnwrapRef<T[P]>;
 };
 
-export function createContext<T>(context: any, key: InjectionKey<T> = Symbol(), options: CreateContextOptions = {}) {
+export function createContext<T>(
+  context: any,
+  key: InjectionKey<T> = Symbol("context"),
+  options: CreateContextOptions = {}
+) {
   const { readonly = true, createProvider = false, native = false } = options;
   const state = reactive(context);
   const provideData = readonly ? defineReadonly(state) : state;
@@ -22,6 +26,6 @@ export function createContext<T>(context: any, key: InjectionKey<T> = Symbol(), 
 
 export function useContext<T>(key: InjectionKey<T>, native?: boolean): T;
 
-export function useContext<T>(key: InjectionKey<T> = Symbol(), defaultValue?: any): ShallowUnwrap<T> {
+export function useContext<T>(key: InjectionKey<T> = Symbol("context"), defaultValue?: any): ShallowUnwrap<T> {
   return inject(key, defaultValue || {});
 }

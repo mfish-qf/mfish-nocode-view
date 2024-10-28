@@ -1,4 +1,4 @@
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent, h } from "vue";
 import { Spin } from "ant-design-vue";
 import { noop } from "@/utils";
 
@@ -14,7 +14,13 @@ export function createAsyncComponent(loader: Fn, options: Options = {}) {
   const { size = "small", delay = 100, timeout = 30_000, loading = false, retry = true } = options;
   return defineAsyncComponent({
     loader,
-    loadingComponent: loading ? <Spin spinning={true} size={size} /> : undefined,
+    loadingComponent: loading
+      ? h(
+          "div",
+          { style: "display: flex;align-items: center;justify-content: center;height:100%" },
+          <Spin spinning={true} size={size} />
+        )
+      : undefined,
     // The error component will be displayed if a timeout is
     // provided and exceeded. Default: Infinity.
     // TODO

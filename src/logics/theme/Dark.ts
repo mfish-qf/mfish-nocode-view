@@ -3,7 +3,7 @@ import { changeTheme } from "@/logics/theme/UpdateTheme";
 import { useAppStore } from "@/store/modules/App";
 import { APP_DARK_MODE_KEY } from "@/enums/CacheEnum";
 
-export async function updateDarkTheme(mode: string | null = "light") {
+export async function updateDarkTheme(mode: string = "light") {
   const mainHtml = document.querySelector("#mainHtml");
   if (!mainHtml) {
     return;

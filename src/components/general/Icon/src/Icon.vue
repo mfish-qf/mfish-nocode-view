@@ -1,23 +1,25 @@
 <template>
   <SvgIcon :size="size" :name="getSvgIcon" v-if="isSvgIcon" class="anticon" :class="[$attrs.class]" :spin="spin" />
+  <IconFont v-else-if="isIconFont" :icon="getIconfont" :size="size" :color="color" />
   <span v-else class="app-iconify anticon" :class="[$attrs.class, spin && 'app-iconify-spin']" :style="getWrapStyle">
     <Icon :icon="getIconRef" />
   </span>
 </template>
 <script lang="ts" setup>
-  import { PropType, computed, CSSProperties } from "vue";
+  import { PropType, computed, ComputedRef } from "vue";
   import SvgIcon from "./SvgIcon.vue";
   import { Icon } from "@iconify/vue";
   import { isString } from "@/utils/Is";
   import { propTypes } from "@/utils/PropTypes";
   import { theme } from "ant-design-vue";
+  import { IconFont } from "@/components/general/Icon";
 
   defineOptions({ name: "Icon" });
   const props = defineProps({
     // icon name
     icon: propTypes.string,
     // icon color
-    color: propTypes.string,
+    color: [String, Object] as PropType<string | ComputedRef<string>>,
     // icon size
     size: {
       type: [String, Number] as PropType<string | number>,
@@ -26,13 +28,16 @@
     spin: propTypes.bool.def(false),
     prefix: propTypes.string.def("")
   });
-  const SVG_END_WITH_FLAG = "|svg";
-  const isSvgIcon = computed(() => props.icon?.endsWith(SVG_END_WITH_FLAG));
+  const SVG_END_WITH_FLAG = "svg:";
+  const ICONFONT_END_WITH_FLAG = "iconfont:";
+  const isSvgIcon = computed(() => props.icon?.startsWith(SVG_END_WITH_FLAG));
+  const isIconFont = computed(() => props.icon?.startsWith(ICONFONT_END_WITH_FLAG));
   const getSvgIcon = computed(() => props.icon.replace(SVG_END_WITH_FLAG, ""));
+  const getIconfont = computed(() => props.icon.replace(ICONFONT_END_WITH_FLAG, ""));
   const getIconRef = computed(() => `${props.prefix ? `${props.prefix}:` : ""}${props.icon}`);
   const { defaultSeed } = theme;
 
-  const getWrapStyle = computed((): CSSProperties => {
+  const getWrapStyle = computed(() => {
     const { size, color } = props;
     let fs = size;
     if (isString(size)) {

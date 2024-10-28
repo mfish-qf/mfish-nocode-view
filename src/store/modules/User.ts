@@ -12,7 +12,7 @@ import { router } from "@/router";
 import { usePermissionStore } from "@/store/modules/Permission";
 import { isArray } from "@/utils/Is";
 import { h } from "vue";
-import { Nullable } from "@/utils/Types";
+import { Nullable } from "@mfish/types";
 
 interface UserState {
   userInfo: Nullable<SsoUser>;
@@ -112,7 +112,7 @@ export const useUserStore = defineStore({
         await (route_redirect ? router.replace(route_redirect) : router.replace(usePermissionStore().getHomePath));
         return userInfo;
       } catch (error) {
-        return Promise.reject(error);
+        throw new Error(error);
       }
     },
     async getAccountInfo(): Promise<SsoUser> {

@@ -61,7 +61,7 @@
       height: 48px;
       overflow: hidden;
       cursor: pointer;
-      background-color: #f0f2f5;
+      background-color: @screen-header-color-light;
       border-radius: 8px;
       box-shadow: 0 1px 2.5px 0 rgb(0 0 0 / 18%);
 
