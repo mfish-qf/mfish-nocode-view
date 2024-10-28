@@ -6,6 +6,174 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "42245623",
+      "name": "paste",
+      "font_class": "paste",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "42244387",
+      "name": "copy",
+      "font_class": "copy",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "42244385",
+      "name": "bottom-level",
+      "font_class": "bottom-level",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "42244388",
+      "name": "down-level",
+      "font_class": "down-level",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "42244383",
+      "name": "align",
+      "font_class": "align",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "42244384",
+      "name": "bottom-align",
+      "font_class": "bottom-align",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "42244399",
+      "name": "un-combine",
+      "font_class": "un-combine",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "42244397",
+      "name": "horizontal-distribution",
+      "font_class": "horizontal-distribution",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "42244398",
+      "name": "vertical-center",
+      "font_class": "vertical-center",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "42244396",
+      "name": "up-level",
+      "font_class": "up-level",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "42244395",
+      "name": "left-align",
+      "font_class": "left-align",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "42244386",
+      "name": "combine",
+      "font_class": "combine",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "42244392",
+      "name": "right-align",
+      "font_class": "right-align",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "42244389",
+      "name": "vertical-distribution",
+      "font_class": "vertical-distribution",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "42244394",
+      "name": "top-align",
+      "font_class": "top-align",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "42244391",
+      "name": "rename",
+      "font_class": "rename",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "42244390",
+      "name": "top-level",
+      "font_class": "top-level",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "42244393",
+      "name": "horizontal-center",
+      "font_class": "horizontal-center",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "42078584",
+      "name": "all",
+      "font_class": "all",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "42074876",
+      "name": "expand-all",
+      "font_class": "expand-all",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "42074875",
+      "name": "collapse-all",
+      "font_class": "collapse-all",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "42042833",
+      "name": "config",
+      "font_class": "config",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "42042764",
+      "name": "chart",
+      "font_class": "chart",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "42042113",
+      "name": "layer",
+      "font_class": "layer",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
       "icon_id": "37371577",
       "name": "divide",
       "font_class": "divide",

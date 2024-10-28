@@ -22,7 +22,7 @@ export type EventHandlerMap<Events extends Record<EventType, unknown>> = Map<
 export interface Emitter<Events extends Record<EventType, unknown>> {
   all: EventHandlerMap<Events>;
 
-  on<Key extends keyof Events>(type: Key, handler: Handler<Events[Key]>): void;
+  on<Key extends keyof Events>(type: Key | any, handler: Handler<Events[Key]> | any): void;
   on(type: "*", handler: WildcardHandler<Events>): void;
 
   off<Key extends keyof Events>(type: Key, handler?: Handler<Events[Key]>): void;
@@ -36,7 +36,7 @@ export interface Emitter<Events extends Record<EventType, unknown>> {
 /**
  * Mitt: Tiny (~200b) functional event emitter / pubsub.
  * @name mitt
- * @returns {Mitt}
+ * @returns Mitt
  */
 export function mitt<Events extends Record<EventType, unknown>>(all?: EventHandlerMap<Events>): Emitter<Events> {
   type GenericEventHandler = Handler<Events[keyof Events]> | WildcardHandler<Events>;
@@ -88,25 +88,26 @@ export function mitt<Events extends Record<EventType, unknown>>(all?: EventHandl
      * Note: Manually firing '*' handlers is not supported.
      *
      * @param {string|symbol} type The event type to invoke
-     * @param {Any} [evt] Any value (object is recommended and powerful), passed to each handler
+     * @param {type} [evt] Any value (object is recommended and powerful), passed to each handler
      * @memberOf mitt
      */
     emit<Key extends keyof Events>(type: Key, evt?: Events[Key]) {
       let handlers = all?.get(type);
       if (handlers) {
-        [...(handlers as EventHandlerList<Events[keyof Events]>)].forEach((handler) => {
-          handler(evt as Events[Key]);
+        [...(handlers as EventHandlerList<Events[keyof Events]>)].map((handler) => {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return handler(evt!);
         });
       }
 
       handlers = all?.get("*");
       if (handlers) {
-        [...(handlers as WildCardEventHandlerList<Events>)].forEach((handler) => {
-          handler(type, evt as Events[Key]);
+        [...(handlers as WildCardEventHandlerList<Events>)].map((handler) => {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          return handler(type, evt!);
         });
       }
     },
-
     /**
      * Clear all
      */

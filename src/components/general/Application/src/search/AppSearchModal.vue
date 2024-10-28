@@ -200,7 +200,7 @@
     &-cancel {
       display: none;
       font-size: 1em;
-      color: #666;
+      color: @screen-item-normal-color;
     }
 
     &-not-data {

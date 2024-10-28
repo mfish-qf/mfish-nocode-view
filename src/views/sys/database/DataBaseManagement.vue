@@ -28,6 +28,7 @@
               :xs="{ span: 24 }"
               :md="{ span: 8 }"
               :lg="{ span: 5 }"
+              :xl="{ span: 4 }"
               v-for="(item, index) in getTableList"
               :key="index"
               :class="`${prefixCls}-card`"

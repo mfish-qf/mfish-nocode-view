@@ -83,7 +83,7 @@
           await sleep(500);
         }
         getUserInfo.id = userInfo.id;
-        getUserInfo.nickname = userInfo.nickname ? userInfo.nickname : userInfo.account;
+        getUserInfo.nickname = userInfo.nickname ?? userInfo.account;
         setHeaderImg(userInfo.headImgUrl, userImg);
       });
       const [register, { openModal }] = useModal();

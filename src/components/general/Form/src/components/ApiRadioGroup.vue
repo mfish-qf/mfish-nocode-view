@@ -22,6 +22,7 @@
   import { propTypes } from "@/utils/PropTypes";
   import { get, omit } from "lodash-es";
   import { useI18n } from "@/hooks/web/UseI18n";
+  import { Recordable } from "@mfish/types";
 
   type OptionsItem = { label: string; value: string | number | boolean; disabled?: boolean };
 

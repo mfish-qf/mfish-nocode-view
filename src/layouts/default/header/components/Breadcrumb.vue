@@ -154,7 +154,7 @@
     }
     &--dark {
       .ant-breadcrumb-separator {
-        color: @header-light-desc-color;
+        color: @trigger-dark-bg-color;
       }
     }
   }
