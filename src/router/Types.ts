@@ -16,6 +16,7 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, "children"> {
   children?: AppRouteRecordRaw[];
   props?: Recordable;
   fullPath?: string;
+  hideChildrenInMenu?: boolean;
 }
 
 export interface MenuTag {

@@ -12,6 +12,7 @@ export interface DictItem extends BaseEntity<string> {
   dictValue: string;
   valueType: number;
   dictSort: number;
+  icon: string;
   color: string;
   status: number;
   remark: string;

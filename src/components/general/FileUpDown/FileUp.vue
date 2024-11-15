@@ -99,10 +99,10 @@
     };
   }
 
-  function handlePreview(file) {
+  function handlePreview(file: any) {
     filePreviewRef.value?.show({ fileKey: file.response.fileKey, fileType: file.type });
   }
-  function handleRemove(file) {
+  function handleRemove(file: any) {
     emit("remove", toRaw(unref(file)), getFiles());
   }
   function getFiles() {

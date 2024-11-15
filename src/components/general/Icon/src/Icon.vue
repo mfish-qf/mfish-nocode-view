@@ -1,12 +1,12 @@
 <template>
   <SvgIcon :size="size" :name="getSvgIcon" v-if="isSvgIcon" class="anticon" :class="[$attrs.class]" :spin="spin" />
-  <IconFont v-else-if="isIconFont" :icon="getIconfont" :size="size" :color="color" />
+  <IconFont v-else-if="isIconFont" :icon="getIconfont" :size="getWrapStyle.fontSize" :color="getWrapStyle.color" />
   <span v-else class="app-iconify anticon" :class="[$attrs.class, spin && 'app-iconify-spin']" :style="getWrapStyle">
     <Icon :icon="getIconRef" />
   </span>
 </template>
 <script lang="ts" setup>
-  import { PropType, computed, ComputedRef } from "vue";
+  import { PropType, computed } from "vue";
   import SvgIcon from "./SvgIcon.vue";
   import { Icon } from "@iconify/vue";
   import { isString } from "@/utils/Is";
@@ -19,7 +19,7 @@
     // icon name
     icon: propTypes.string,
     // icon color
-    color: [String, Object] as PropType<string | ComputedRef<string>>,
+    color: { type: String },
     // icon size
     size: {
       type: [String, Number] as PropType<string | number>,
@@ -43,16 +43,22 @@
     if (isString(size)) {
       fs = Number.parseInt(size, 10);
     }
+    const newColor = { color: "inherit" };
+    if (color) {
+      newColor.color =
+        color === "primary"
+          ? defaultSeed.colorPrimary
+          : color === "success"
+            ? defaultSeed.colorSuccess
+            : color === "warning"
+              ? defaultSeed.colorWarning
+              : color === "error"
+                ? defaultSeed.colorError
+                : color;
+    }
     return {
       fontSize: `${fs}px`,
-      color:
-        color === "success"
-          ? defaultSeed.colorSuccess
-          : color === "warning"
-            ? defaultSeed.colorWarning
-            : color === "error"
-              ? defaultSeed.colorError
-              : color,
+      ...newColor,
       display: "inline-flex"
     };
   });

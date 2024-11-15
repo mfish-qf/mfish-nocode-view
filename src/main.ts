@@ -3,6 +3,8 @@ import "virtual:unocss-devtools";
 import "@/design/index.less";
 import "virtual:svg-icons-register";
 import "ant-design-vue/dist/reset.css";
+// 引入动画
+import "animate.css/animate.min.css";
 import App from "./App.vue";
 import { createApp } from "vue";
 import { router, setupRouter } from "./router";

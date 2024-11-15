@@ -2,6 +2,7 @@ import { BasicColumn } from "@/components/general/Table";
 import { FormSchema } from "@/components/general/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
+import { Icon } from "@/components/general/Icon";
 
 /**
  * @description: 字典项
@@ -35,6 +36,14 @@ export const columns: BasicColumn[] = [
         return h(Tag, { color: color === "primary" ? "processing" : color }, () => color);
       }
       return color;
+    }
+  },
+  {
+    title: "图标",
+    dataIndex: "icon",
+    width: 50,
+    customRender: ({ record }) => {
+      return h(Icon, { icon: record.icon, color: record.color });
     }
   },
   {
@@ -159,6 +168,11 @@ export const dictItemFormSchema: FormSchema[] = [
     field: "color",
     label: "字典颜色",
     component: "Input"
+  },
+  {
+    field: "icon",
+    label: "图标",
+    component: "IconPicker"
   },
   {
     field: "remark",

@@ -24,9 +24,9 @@
         <template #item="{ index, element }">
           <div @mouseover="tagMouseOver(index)" @mouseleave="tagMouseLeave" style="position: relative">
             <div @drop="handleDropItem($event, index)">
-              <slot v-bind="{ index, element } || {}" name="tag" v-if="element.slot"></slot>
+              <slot v-bind="{ index, element }" name="tag" v-if="element.slot"></slot>
               <ATag v-else class="pointer" :color="blockColor" @click="editBlock(index, element)">
-                <template #icon> <slot v-bind="{ index, element } || {}" name="tagIcon"></slot> </template>
+                <template #icon> <slot v-bind="{ index, element }" name="tagIcon"></slot> </template>
                 {{ element.name }}
               </ATag>
             </div>

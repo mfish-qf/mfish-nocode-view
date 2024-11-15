@@ -7,7 +7,7 @@ import { curLoginType, oauth2Config } from "@/settings/LoginSetting";
 import type { Recordable } from "@mfish/types";
 
 const ROOT_PATH = RootRoute().path;
-const whitePathList: PageEnum[] = [PageEnum.BASE_LOGIN, PageEnum.OAUTH_LOGIN, PageEnum.ERROR_LOGIN];
+const whitePathList: Set<PageEnum> = new Set([PageEnum.BASE_LOGIN, PageEnum.OAUTH_LOGIN, PageEnum.ERROR_LOGIN]);
 
 export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
@@ -15,7 +15,7 @@ export function createPermissionGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
     const token = userStore.getToken;
     // 白名单路径允许直接访问
-    if (whitePathList.includes(to.path as PageEnum)) {
+    if (whitePathList.has(to.path as PageEnum)) {
       // 如果访问登陆页面且token存在，判断token是否有效直接进入redirect地址或首页地址
       if (to.path === PageEnum.BASE_LOGIN && token) {
         // 增加try catch方式请求异常造成无法返回首页

@@ -2,6 +2,7 @@ import { cacheCipher } from "@/settings/EncryptionSetting";
 import type { EncryptionParams } from "@/utils/Cipher";
 import { AesEncryption } from "@/utils/Cipher";
 import { isNullOrUnDef } from "@/utils/Is";
+import { Nullable } from "@mfish/types";
 
 export interface CreateStorageParams extends EncryptionParams {
   prefixKey: string;

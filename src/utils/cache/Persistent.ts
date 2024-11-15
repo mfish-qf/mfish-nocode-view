@@ -17,6 +17,7 @@ import {
 import { DEFAULT_CACHE_TIME } from "@/settings/EncryptionSetting";
 import { toRaw } from "vue";
 import { pick, omit } from "lodash-es";
+import { Nullable } from "@mfish/types";
 
 interface BasicStore {
   [TOKEN_KEY]: string | number | null | undefined;

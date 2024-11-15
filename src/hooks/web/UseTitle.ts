@@ -12,7 +12,7 @@ import { useI18n } from "@/hooks/web/UseI18n";
 import { useLocaleStore } from "@/store/modules/I18n";
 
 export function useTitle() {
-  const { title } = useGlobSetting();
+  const { shortName } = useGlobSetting();
   const { currentRoute } = useRouter();
   const pageTitle = usePageTitle();
   const { t } = useI18n();
@@ -25,7 +25,7 @@ export function useTitle() {
         return;
       }
       const tTitle = t(route?.meta?.title as string);
-      pageTitle.value = tTitle ? `${tTitle}-${title}` : title;
+      pageTitle.value = tTitle ? `${tTitle}-${shortName}` : shortName;
     },
     { immediate: true }
   );

@@ -12,5 +12,5 @@ RUN npm run build
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/mfish-nocode-view /usr/share/nginx/html/mfish-nocode-view
 COPY --from=build-stage /app/config/mfish-nocode-view.conf /etc/nginx/conf.d/mfish-nocode-view.conf
-EXPOSE 5281
+EXPOSE 5186
 CMD ["nginx", "-g", "daemon off;"]
