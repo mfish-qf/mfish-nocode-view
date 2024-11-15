@@ -46,7 +46,8 @@
 .modal-icon-info {
   color: @button-primary-color !important;
 }
-.ant-layout-header{
+
+.ant-layout-header {
   height: @header-height !important;
   padding-inline: 0 !important;
   line-height: @header-height !important;
@@ -68,9 +69,21 @@
   > div {
     > div {
       max-width: 100%;
-      > div{
+
+      > div {
         width: 100%;
       }
     }
   }
+}
+
+.ant-segmented-item-selected {
+  .ant-segmented-item-label {
+    color: @main-color;
+    font-weight: bold;
+  }
+}
+
+.ant-segmented-item {
+  margin: 0 2px 0 2px;
 }

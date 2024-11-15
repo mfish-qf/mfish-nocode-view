@@ -15,6 +15,15 @@ export const columns: BasicColumn[] = [
     align: "left"
   },
   {
+    dataIndex: "menuType",
+    title: "菜单类型",
+    width: 80,
+    customRender: ({ value }) =>
+      h(Tag, value === 0 ? { color: "green" } : value === 1 ? { color: "blue" } : {}, () =>
+        value === 0 ? "目录" : value === 1 ? "菜单" : value === 2 ? "按钮" : "未知"
+      )
+  },
+  {
     title: "菜单状态",
     dataIndex: "isVisible",
     width: 80,
@@ -227,8 +236,10 @@ export class MenuDesc {
     {
       field: "menuType",
       label: "菜单类型",
-      render: (val) =>
-        h(Tag, { color: "green" }, () => (val === 0 ? "目录" : val === 1 ? "菜单" : val === 2 ? "按钮" : "未知"))
+      render: (value) =>
+        h(Tag, value === 0 ? { color: "green" } : value === 1 ? { color: "blue" } : {}, () =>
+          value === 0 ? "目录" : value === 1 ? "菜单" : value === 2 ? "按钮" : "未知"
+        )
     },
     {
       field: "menuName",
@@ -257,7 +268,7 @@ export class MenuDesc {
       field: "menuIcon",
       label: "图标",
       show: (values) => {
-        if (!values) return;
+        if (!values) return false;
         return !isButton(values.menuType);
       }
     },
@@ -265,7 +276,7 @@ export class MenuDesc {
       field: "routePath",
       label: "路由地址",
       show: (values) => {
-        if (!values) return;
+        if (!values) return false;
         return !isButton(values.menuType);
       }
     },
@@ -273,7 +284,7 @@ export class MenuDesc {
       field: "component",
       label: "组件路径",
       show: (values) => {
-        if (!values) return;
+        if (!values) return false;
         return isMenu(values.menuType);
       }
     },
@@ -281,7 +292,7 @@ export class MenuDesc {
       field: "permissions",
       label: "权限标识",
       show: (values) => {
-        if (!values) return;
+        if (!values) return false;
         return isButton(values.menuType);
       }
     },
@@ -289,7 +300,7 @@ export class MenuDesc {
       field: "isVisible",
       label: "菜单状态",
       show: (values) => {
-        if (!values) return;
+        if (!values) return false;
         return !isButton(values.menuType);
       },
       render: (val) => YNTag_Name(val, "显示", "隐藏")
@@ -298,7 +309,7 @@ export class MenuDesc {
       field: "activeMenu",
       label: "激活菜单",
       show: (values) => {
-        if (!values) return;
+        if (!values) return false;
         return isMenu(values.menuType) && values.isVisible === 0;
       }
     },
@@ -306,7 +317,7 @@ export class MenuDesc {
       field: "isExternal",
       label: "新窗口打开",
       show: (values) => {
-        if (!values) return;
+        if (!values) return false;
         return isMenu(values.menuType);
       },
       render: (val) => YNTag(val)
@@ -315,7 +326,7 @@ export class MenuDesc {
       field: "isKeepalive",
       label: "是否缓存",
       show: (values) => {
-        if (!values) return;
+        if (!values) return false;
         return isMenu(values.menuType);
       },
       render: (val) => YNTag(val)

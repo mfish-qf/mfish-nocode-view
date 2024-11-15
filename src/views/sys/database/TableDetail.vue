@@ -6,7 +6,9 @@
 <template>
   <div :class="`${prefixCls}`">
     <div class="header">
-      <div class="title">{{ `数据表：${curNode?.tableName?.toUpperCase()}` }}</div>
+      <div class="title">
+        {{ `数据表：${curNode?.tableName?.toUpperCase() ? curNode.tableName.toUpperCase() : "无"}` }}
+      </div>
       <div><slot name="button" v-bind="{ data: curNode }"></slot></div>
     </div>
     <ATabs default-active-key="1" @change="changeTab">
@@ -90,6 +92,7 @@
   }
 
   async function buildTableData(page?: any) {
+    if (!condition.value.connectId) return;
     await nextTick();
     tableLoading(true);
     let pageNum = 1;

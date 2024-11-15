@@ -3,5 +3,5 @@ services:
     container_name: mfish-nocode-view
     image: mfish-nocode-view
     ports:
-      - 11119:5281
+      - 11119:5186
     restart: always
