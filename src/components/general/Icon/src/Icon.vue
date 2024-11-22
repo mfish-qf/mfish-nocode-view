@@ -13,6 +13,7 @@
   import { propTypes } from "@/utils/PropTypes";
   import { theme } from "ant-design-vue";
   import { IconFont } from "@/components/general/Icon";
+  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
 
   defineOptions({ name: "Icon" });
   const props = defineProps({
@@ -43,22 +44,18 @@
     if (isString(size)) {
       fs = Number.parseInt(size, 10);
     }
-    const newColor = { color: "inherit" };
-    if (color) {
-      newColor.color =
+    return {
+      fontSize: `${fs}px`,
+      color:
         color === "primary"
-          ? defaultSeed.colorPrimary
+          ? useRootSetting().getThemeColor.value
           : color === "success"
             ? defaultSeed.colorSuccess
             : color === "warning"
               ? defaultSeed.colorWarning
               : color === "error"
                 ? defaultSeed.colorError
-                : color;
-    }
-    return {
-      fontSize: `${fs}px`,
-      ...newColor,
+                : color,
       display: "inline-flex"
     };
   });

@@ -1,5 +1,7 @@
 import { BasicColumn } from "@/components/general/Table";
 import { FormSchema } from "@/components/general/Table";
+import { Icon } from "@/components/general/Icon";
+import { h } from "vue";
 
 /**
  * @description: 属性分类字典
@@ -17,6 +19,19 @@ export const columns: BasicColumn[] = [
   {
     title: "分类编码",
     dataIndex: "categoryCode",
+    width: 120
+  },
+  {
+    title: "图标",
+    dataIndex: "icon",
+    width: 50,
+    customRender: ({ record }) => {
+      return h(Icon, { icon: record.icon });
+    }
+  },
+  {
+    title: "备注",
+    dataIndex: "remark",
     width: 120
   },
   {
@@ -55,7 +70,8 @@ export const dictCategoryFormSchema: FormSchema[] = [
   {
     field: "categoryCode",
     label: "分类编码",
-    component: "Input"
+    component: "Input",
+    helpMessage: ["用于快速检索到当前分类", "一般用于父级分类（全局唯一）"]
   },
   {
     field: "parentId",
@@ -71,8 +87,18 @@ export const dictCategoryFormSchema: FormSchema[] = [
     }
   },
   {
+    field: "icon",
+    label: "图标",
+    component: "IconPicker"
+  },
+  {
     field: "sort",
     label: "排序",
     component: "InputNumber"
+  },
+  {
+    field: "remark",
+    label: "备注",
+    component: "InputTextArea"
   }
 ];

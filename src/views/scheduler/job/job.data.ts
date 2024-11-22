@@ -80,7 +80,7 @@ export const columns: BasicColumn[] = [
         checkedChildren: "已启用",
         unCheckedChildren: "已停用",
         loading: record.pendingStatus,
-        onChange(checked: boolean) {
+        onChange: (checked: any) => {
           record.pendingStatus = true;
           const newStatus = checked ? 0 : 1;
           setJobStatus(record.id, newStatus)

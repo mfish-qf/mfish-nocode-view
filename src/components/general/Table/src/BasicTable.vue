@@ -33,10 +33,10 @@
         </slot>
       </template>
       <template #bodyCell="data">
-        <slot name="bodyCell" v-bind="data || {}"></slot>
+        <slot name="bodyCell" v-bind="(data as any) || {}"></slot>
       </template>
       <template #footer="data">
-        <slot name="footer" v-bind="data || {}"></slot>
+        <slot name="footer" v-bind="(data as any) || {}"></slot>
       </template>
     </Table>
   </div>

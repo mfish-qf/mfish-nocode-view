@@ -17,6 +17,10 @@ export interface DictCategory extends BaseEntity<string> {
   treeCode?: string;
   // 分类树层级（自动生成）
   treeLevel: number;
+  //图标
+  icon?: string;
+  //备注
+  remark?: string;
   // 排序
   sort?: number;
 }
