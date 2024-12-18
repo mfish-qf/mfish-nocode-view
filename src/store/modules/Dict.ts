@@ -11,8 +11,7 @@ import { ref, Ref } from "vue";
 interface DictState {
   dictMap: Map<string, Ref<DictItem[]>>;
 }
-export const useDictStore = defineStore({
-  id: "dict",
+export const useDictStore = defineStore("dict", {
   state: (): DictState => ({
     dictMap: new Map<string, Ref<DictItem[]>>()
   }),

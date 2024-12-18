@@ -8,10 +8,10 @@ import { buildUUID } from "@/utils/Uuid";
  */
 export const useOutsideOpen = (constant: string, complete?: () => void) => {
   onMounted(() => {
-    window.addEventListener("storage", onStorageHandle);
+    globalThis.addEventListener("storage", onStorageHandle);
   });
   onUnmounted(() => {
-    window.removeEventListener("storage", onStorageHandle);
+    globalThis.removeEventListener("storage", onStorageHandle);
   });
 
   function onStorageHandle(e) {

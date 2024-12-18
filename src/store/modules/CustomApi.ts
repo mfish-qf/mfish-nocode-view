@@ -32,8 +32,7 @@ interface CustomApiState {
   formulaMap: Map<string, FormulaInfo>;
 }
 
-export const useApiStore = defineStore({
-  id: "custom-api",
+export const useApiStore = defineStore("custom-api", {
   state: (): CustomApiState => ({
     sourceId: "",
     sourceType: 0,

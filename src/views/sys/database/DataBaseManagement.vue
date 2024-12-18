@@ -151,31 +151,22 @@
 </script>
 <style scoped lang="less">
   @prefix-cls: ~"@{namespace}-data-base";
-  [data-theme="dark"] {
-    .@{prefix-cls}-card-item {
-      background: #212121;
-    }
-  }
+
   [data-theme="dark"] {
     .@{prefix-cls} {
       background-color: #121212;
     }
     .@{prefix-cls}-card {
       &-item {
+        background: @sider-bg-color;
         &:hover {
           box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.1);
         }
       }
     }
-    .ivu-split-trigger-vertical {
-      background: black !important;
-    }
-    .ivu-split-trigger {
-      border: 1px solid black !important;
-    }
   }
   .@{prefix-cls} {
-    background-color: #ffffff;
+    background-color: @white;
     height: 100%;
     &-left {
       padding: 6px;
@@ -192,7 +183,7 @@
 
     &-item {
       height: 70px;
-      background: #ffffff;
+      background: @white;
       border-radius: 8px;
       box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.05);
       display: flex;
