@@ -8,9 +8,9 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  */
 export interface ApiParams extends BaseEntity<number> {
   // 接口ID
-  apiId?: string;
+  apiId: string;
   // 参数名称
-  name?: string;
+  name: string;
   // 默认值
   defaultValue?: string;
   // 是否使用

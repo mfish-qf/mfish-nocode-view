@@ -8,14 +8,14 @@ import projectSetting from "@/settings/ProjectSetting";
 
 import { ErrorTypeEnum } from "@/enums/ExceptionEnum";
 import dayjs from "dayjs";
+import { Nullable } from "@mfish/types";
 
 export interface ErrorLogState {
   errorLogInfoList: Nullable<ErrorLogInfo[]>;
   errorLogListCount: number;
 }
 
-export const useErrorLogStore = defineStore({
-  id: "app-error-log",
+export const useErrorLogStore = defineStore("app-error-log", {
   state: (): ErrorLogState => ({
     errorLogInfoList: null,
     errorLogListCount: 0

@@ -16,7 +16,9 @@ enum Api {
   Headers = "/nocode/mfApi/headers",
   Fields = "/nocode/mfApi/fields",
   API = "/nocode/mfApi/api",
-  FormulaTest = "/nocode/mfApi/formulaTest"
+  FormulaTest = "/nocode/mfApi/formulaTest",
+  FieldRename = "/nocode/mfApi/field/rename",
+  DataTable = "/nocode/mfApi/table"
 }
 
 export const getApiUrl = () => Api.API;
@@ -100,3 +102,27 @@ export function getQueryFields(config: Config) {
 export const getSourceHeaders = (params: ReqSource) => {
   return defHttp.get<MetaDataHeader[]>({ url: Api.Headers, params });
 };
+
+export function getDataFieldsById(id: string) {
+  return defHttp.get<MetaDataHeader[]>({ url: `${Api.Fields}/${id}` }, { errorMessageMode: "message" });
+}
+
+export function getDataTableById(id: string, reqPage: ReqPage, params: any) {
+  return defHttp.get<DataTable>(
+    { url: `${Api.DataTable}/${id}?pageNum=${reqPage.pageNum}&pageSize=${reqPage.pageSize}`, params },
+    { errorMessageMode: "message" }
+  );
+}
+
+/**
+ * 重命名字段
+ * @param id api id
+ * @param colName 原列名
+ * @param newName 新列明
+ */
+export function renameField(id: string, colName: string, newName: string) {
+  return defHttp.put<boolean>(
+    { url: Api.FieldRename, params: { id, colName, newName } },
+    { successMessageMode: "message" }
+  );
+}

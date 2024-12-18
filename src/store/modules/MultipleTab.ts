@@ -33,8 +33,7 @@ const getToTarget = (tabItem: RouteLocationNormalized) => {
 
 const cacheTab = projectSetting.multiTabsSetting.cache;
 
-export const useMultipleTabStore = defineStore({
-  id: "app-multiple-tab",
+export const useMultipleTabStore = defineStore("app-multiple-tab", {
   state: (): MultipleTabState => ({
     // 缓存路由与组件名称对应关系
     cacheTabMap: new Map(),

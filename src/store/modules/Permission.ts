@@ -26,8 +26,7 @@ interface PermissionState {
   homePath: string;
 }
 
-export const usePermissionStore = defineStore({
-  id: "app-permission",
+export const usePermissionStore = defineStore("app-permission", {
   state: (): PermissionState => ({
     // 权限代码列表
     permissions: new Set(),

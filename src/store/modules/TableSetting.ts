@@ -12,8 +12,7 @@ interface TableSettingState {
   setting: Nullable<TableSetting>;
 }
 
-export const useTableSettingStore = defineStore({
-  id: "table-setting",
+export const useTableSettingStore = defineStore("table-setting", {
   state: (): TableSettingState => ({
     setting: null
   }),

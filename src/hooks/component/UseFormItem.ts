@@ -1,5 +1,5 @@
 import type { UnwrapRef, Ref, WritableComputedRef, DeepReadonly } from "vue";
-import { reactive, readonly, computed, getCurrentInstance, watchEffect, unref, toRaw } from "vue";
+import { reactive, readonly, computed, getCurrentInstance, watchEffect, unref, toRaw, nextTick } from "vue";
 
 import { isEqual } from "lodash-es";
 import { Recordable } from "@mfish/types";
@@ -36,7 +36,7 @@ export function useRuleFormItem<T extends Recordable>(
     set(value) {
       if (isEqual(value, defaultState.value)) return;
       innerState.value = value as T[keyof T];
-      setTimeout(() => {
+      nextTick(() => {
         emit?.(changeEvent, value, ...(toRaw(unref(emitData)) || []));
       });
     }
