@@ -1,7 +1,7 @@
 import { defHttp } from "@/utils/http/axios";
 import { MfApi, ReqMfApi, MfApiPageModel, Config, ReqSource } from "@/api/nocode/model/MfApiModel";
 import { DataTable, MetaDataHeader } from "@/api/sys/model/DbConnectModel";
-import { ReqPage } from "@/api/model/BaseModel";
+import { PageResult, ReqPage } from "@/api/model/BaseModel";
 
 /**
  * @description: 自定义API
@@ -107,9 +107,28 @@ export function getDataFieldsById(id: string) {
   return defHttp.get<MetaDataHeader[]>({ url: `${Api.Fields}/${id}` }, { errorMessageMode: "message" });
 }
 
+/**
+ * 查询API结果数据 包含表头
+ * @param id
+ * @param reqPage
+ * @param params
+ */
 export function getDataTableById(id: string, reqPage: ReqPage, params: any) {
   return defHttp.get<DataTable>(
     { url: `${Api.DataTable}/${id}?pageNum=${reqPage.pageNum}&pageSize=${reqPage.pageSize}`, params },
+    { errorMessageMode: "message" }
+  );
+}
+
+/**
+ * 查询API结果数据 不包含表头
+ * @param id
+ * @param reqPage
+ * @param params
+ */
+export function getApiDataById(id: string, reqPage: ReqPage, params: any) {
+  return defHttp.get<PageResult<MetaDataHeader>>(
+    { url: `${getApiUrl()}/${id}`, params: { ...reqPage, ...params } },
     { errorMessageMode: "message" }
   );
 }

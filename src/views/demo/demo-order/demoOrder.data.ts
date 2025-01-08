@@ -103,7 +103,7 @@ export const searchFormSchema: FormSchema[] = [
     field: "payType",
     label: "支付类型",
     component: "ApiSelect",
-    componentProps: getDictProps("mall_pay_type"),
+    componentProps: { ...getDictProps("mall_pay_type"), mode: "multiple" },
     colProps: { xl: 5, md: 6 }
   },
   {

@@ -114,9 +114,6 @@ export function mitt<Events extends Record<EventType, unknown>>(all?: EventHandl
      */
     clear() {
       this.all.clear();
-    },
-    delete<Key extends keyof Events>(type: Key) {
-      this.all.delete(type);
     }
   };
 }

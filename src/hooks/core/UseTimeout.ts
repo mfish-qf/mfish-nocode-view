@@ -1,6 +1,7 @@
 import { ref, watch } from "vue";
 import { tryOnUnmounted } from "@vueuse/core";
 import { isFunction } from "@/utils/Is";
+import { TimeoutHandle } from "@mfish/types";
 
 export function useTimeoutFn(handle: Fn, wait: number, native = false) {
   if (!isFunction(handle)) {
@@ -29,7 +30,7 @@ export function useTimeoutRef(wait: number) {
 
   function stop(): void {
     readyRef.value = false;
-    timer && window.clearTimeout(timer);
+    timer && globalThis.clearTimeout(timer);
   }
 
   function start(): void {

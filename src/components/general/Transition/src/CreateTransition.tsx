@@ -1,6 +1,7 @@
 import type { PropType } from "vue";
 import { defineComponent, Transition, TransitionGroup } from "vue";
 import { getSlot } from "@/utils/helper/TsxHelper";
+import { Recordable } from "@mfish/types";
 
 type Mode = "in-out" | "out-in" | "default" | undefined;
 

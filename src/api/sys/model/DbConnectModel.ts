@@ -58,12 +58,13 @@ export interface FieldInfo {
 
 export interface DataTable {
   table: PageResult<MetaDataHeader>;
-  headers: MetaDataHeader[];
+  headers: Record<string, MetaDataHeader>;
 }
 export type DataType = "STRING" | "NUMBER" | "DATE" | "BOOLEAN";
 export interface MetaDataHeader {
   colName?: string;
   fieldName?: string;
+  rename?: string;
   comment?: string;
   expression?: string;
   dataType?: DataType;
