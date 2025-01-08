@@ -17,8 +17,12 @@ export interface MfScreen extends BaseEntity<string> {
   thumbnail?: string;
   // 描述
   remark?: string;
+  // 大屏画布配置
+  canvasConfig?: string;
   // 大屏基础配置信息及组件位置信息(json方式存储)
-  config?: string;
+  contains?: string;
+  // 大屏图层配置
+  layers?: Record<string, string>;
 }
 
 export interface ReqMfScreen extends ReqPage {

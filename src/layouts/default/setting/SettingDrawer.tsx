@@ -78,19 +78,17 @@ export default defineComponent({
 
     function renderSidebar() {
       return (
-        <>
-          <TypePicker
-            menuTypeList={menuTypeList}
-            handler={(item: (typeof menuTypeList)[0]) => {
-              baseHandler(HandlerEnum.CHANGE_LAYOUT, {
-                mode: item.mode,
-                type: item.type,
-                split: unref(getIsHorizontal) ? false : undefined
-              });
-            }}
-            def={unref(getMenuType)}
-          />
-        </>
+        <TypePicker
+          menuTypeList={menuTypeList}
+          handler={(item: (typeof menuTypeList)[0]) => {
+            baseHandler(HandlerEnum.CHANGE_LAYOUT, {
+              mode: item.mode,
+              type: item.type,
+              split: unref(getIsHorizontal) ? false : undefined
+            });
+          }}
+          def={unref(getMenuType)}
+        />
       );
     }
 
@@ -136,7 +134,7 @@ export default defineComponent({
       }
 
       return (
-        <>
+        <div>
           <SwitchItem
             title={t("layout.setting.splitMenu")}
             event={HandlerEnum.MENU_SPLIT}
@@ -256,13 +254,13 @@ export default defineComponent({
             defaultValue={unref(getMenuWidth)}
             formatter={(value: string) => `${Number.parseInt(value)}px`}
           />
-        </>
+        </div>
       );
     }
 
     function renderContent() {
       return (
-        <>
+        <div>
           <SwitchItem
             title={t("layout.setting.breadcrumb")}
             event={HandlerEnum.SHOW_BREADCRUMB}
@@ -323,16 +321,12 @@ export default defineComponent({
           <SwitchItem title={t("layout.setting.grayMode")} event={HandlerEnum.GRAY_MODE} def={unref(getGrayMode)} />
 
           <SwitchItem title={t("layout.setting.colorWeak")} event={HandlerEnum.COLOR_WEAK} def={unref(getColorWeak)} />
-        </>
+        </div>
       );
     }
 
     function renderTransition() {
-      return (
-        <>
-          <Animation />
-        </>
-      );
+      return <Animation />;
     }
 
     return () => (

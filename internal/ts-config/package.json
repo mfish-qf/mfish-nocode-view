@@ -18,7 +18,7 @@
     "web.json"
   ],
   "dependencies": {
-    "@types/node": "^22.10.2",
+    "@types/node": "^22.10.5",
     "vite": "^5.4.11"
   }
 }

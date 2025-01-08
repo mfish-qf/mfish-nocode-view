@@ -5,7 +5,7 @@ import axios from "axios";
 import qs from "qs";
 import { AxiosCanceler } from "./AxiosCancel";
 import { isFunction } from "@/utils/Is";
-import { cloneDeep } from "lodash-es";
+import { cloneDeep, isArray } from "lodash-es";
 import { ContentTypeEnum, RequestEnum } from "@/enums/HttpEnum";
 
 export * from "./AxiosTransform";
@@ -120,6 +120,15 @@ export class VAxios {
   }
 
   get<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+    //get请求参数为数组时以逗号隔开（需要后端支持）
+    if (config.params) {
+      Object.keys(config.params).forEach((key) => {
+        const value = config.params[key];
+        if (isArray(value)) {
+          config.params[key] = value.join(",");
+        }
+      });
+    }
     return this.request({ ...config, method: "GET" }, options);
   }
 
@@ -136,7 +145,7 @@ export class VAxios {
   }
 
   upload<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    const formData = new window.FormData();
+    const formData = new globalThis.FormData();
     const params = config.params;
     Object.keys(params).forEach((key) => {
       const value = params[key];

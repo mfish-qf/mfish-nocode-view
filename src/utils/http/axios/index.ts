@@ -188,7 +188,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
       {
         // See https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes
         authenticationScheme: "Bearer",
-        timeout: 15 * 1000,
+        timeout: 30 * 1000,
         // 数据处理方式
         transform: clone(transform),
         headers: { "Content-Type": ContentTypeEnum.JSON },

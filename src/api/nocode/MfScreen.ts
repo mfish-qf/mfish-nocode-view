@@ -22,11 +22,13 @@ export const getMfScreenList = (reqMfScreen?: ReqMfScreen) => {
 };
 
 /**
- * 导出我的大屏信息
- * @param reqMfScreen
+ * 通过id查询
+ *
+ * @param id 唯一ID
+ * @return 返回分页列表
  */
-export function exportMfScreen(reqMfScreen?: ReqMfScreen) {
-  return defHttp.download({ url: `${Api.MfScreen}/export`, params: reqMfScreen });
+export function getMfScreenById(id: string) {
+  return defHttp.get<MfScreen>({ url: `${Api.MfScreen}/${id}` });
 }
 
 /**
@@ -57,14 +59,4 @@ export function updateMfScreen(mfScreen: MfScreen) {
  */
 export function deleteMfScreen(id: string) {
   return defHttp.delete<MfScreen>({ url: `${Api.MfScreen}/${id}` }, { successMessageMode: "message" });
-}
-
-/**
- * 批量删除我的大屏信息
- *
- * @param ids 唯一ID多个逗号隔开
- * @return
- */
-export function deleteBatchMfScreen(ids: string) {
-  return defHttp.delete<MfScreen>({ url: `${Api.MfScreen}/batch/${ids}` }, { successMessageMode: "message" });
 }
