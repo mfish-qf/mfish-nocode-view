@@ -8,7 +8,7 @@
   </div>
 </template>
 <script lang="ts">
-  import type { Ref } from "vue";
+  import type { PropType, Ref } from "vue";
   import type { Definition } from "@logicflow/core";
   import { defineComponent, ref, onMounted, unref, nextTick, computed, watch } from "vue";
   import FlowChartToolbar from "./FlowChartToolbar.vue";

@@ -49,8 +49,8 @@
         </template>
       </template>
     </BasicTable>
-    <OrgModal @register="registerModal" @success="handleSuccess" :source="$props.source" />
-    <OrgViewModal @register="registerViewModal" />
+    <OrgModal @register="registerModal" @success="handleSuccess" :source="source" />
+    <OrgViewModal @register="registerViewModal" :source="source" />
   </div>
 </template>
 <script lang="ts" setup>
@@ -70,7 +70,7 @@
   const props = defineProps({
     source: {
       type: Number,
-      default: null
+      default: 0
     }
   });
   const { hasPermission } = usePermission();

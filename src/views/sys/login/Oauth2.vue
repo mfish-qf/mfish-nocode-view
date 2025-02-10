@@ -24,6 +24,11 @@
   import { useRouter, useRoute } from "vue-router";
   import { useGlobSetting } from "@/hooks/setting";
 
+  const props = defineProps({
+    loginHandler: {
+      type: Function
+    }
+  });
   const userStore = useUserStore();
   const { notification } = useMessage();
   const { t } = useI18n();
@@ -34,7 +39,11 @@
   const router = useRouter();
   onBeforeMount(() => {
     if (code) {
-      handleLogin();
+      if (props.loginHandler) {
+        props.loginHandler();
+      } else {
+        handleLogin();
+      }
     } else {
       router.push("/login");
     }

@@ -2,7 +2,7 @@
  @description: 角色表查看
  @author: mfish
  @date: 2024-08-29
- @version: V1.3.1
+ @version: V1.3.2
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="角色信息">

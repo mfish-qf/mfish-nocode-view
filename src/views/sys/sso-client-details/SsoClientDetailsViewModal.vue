@@ -2,7 +2,7 @@
  @description: 客户端信息查看
  @author: mfish
  @date: 2024-08-30
- @version: V1.3.1
+ @version: V1.3.2
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="客户端信息">

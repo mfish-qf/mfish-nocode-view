@@ -8,7 +8,7 @@ import { Icon } from "@/components/general/Icon";
  * @description: 字典项
  * @Author: mfish
  * @Date: 2023-01-03
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 export const columns: BasicColumn[] = [
   {

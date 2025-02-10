@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @description: 文件数据源
  * @author: mfish
  * @date: 2023-12-13
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 export interface MfFile extends BaseEntity<string> {
   // 目录id

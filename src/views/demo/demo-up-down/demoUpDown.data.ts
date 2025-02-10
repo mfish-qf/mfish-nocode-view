@@ -11,7 +11,7 @@ import { updateDemoImportExport } from "@/api/demo/DemoImportExport";
  * @description: 上传下载样例
  * @author: mfish
  * @date: 2024-09-08
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 export const columns: BasicColumn[] = [
   {

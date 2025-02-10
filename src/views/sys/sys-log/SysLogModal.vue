@@ -2,7 +2,7 @@
  @description: 系统日志
  @author: mfish
  @date: 2023-01-08
- @version: V1.3.1
+ @version: V1.3.2
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="查看系统日志" :show-ok-btn="false" cancel-text="关闭">

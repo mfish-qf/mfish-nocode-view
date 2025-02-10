@@ -27,7 +27,7 @@
           <div :class="`${prefixCls}-entry__header enter-x`">
             <img :src="avatar" :class="`${prefixCls}-entry__header-img`" />
             <p :class="`${prefixCls}-entry__header-name`">
-              {{ userinfo.nickname }}
+              {{ userinfo?.nickname || userinfo?.account }}
             </p>
           </div>
           <InputPassword :placeholder="t('sys.lock.placeholder')" class="enter-x" v-model:value="password" />
@@ -95,7 +95,7 @@
   const { t } = useI18n();
 
   const userinfo = computed(() => {
-    return userStore.getUserInfo || {};
+    return userStore.getUserInfo;
   });
 
   /**

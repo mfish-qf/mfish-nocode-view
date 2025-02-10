@@ -5,7 +5,7 @@ import { SysFile, ReqSysFile, SysFilePageModel } from "@/api/storage/model/SysFi
  * @description: 文件存储
  * @author: mfish
  * @date: 2023-03-02
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 enum Api {
   SysFile = "/storage/sysFile",

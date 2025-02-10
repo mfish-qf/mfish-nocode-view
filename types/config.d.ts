@@ -21,6 +21,14 @@ export interface GlobEnvConfig {
   VITE_GLOB_OAUTH2_URL?: string;
   // oauth2回调地址
   VITE_GLOB_OAUTH2_REDIRECT_URI?: string;
+  // gitee客户端id
+  VITE_GLOB_GITEE_CLIENT_ID?: string;
+  // gitee回调地址
+  VITE_GLOB_GITEE_REDIRECT_URI?: string;
+  // github客户端id
+  VITE_GLOB_GITHUB_CLIENT_ID?: string;
+  // github回调地址
+  VITE_GLOB_GITHUB_REDIRECT_URI?: string;
 }
 
 //环境配置转换为只读属性提供使用
@@ -37,6 +45,14 @@ export interface GlobConfig {
   oauth2Url?: string;
   // oauth2回调地址
   oauth2RedirectUri?: string;
+  // gitee客户端id
+  giteeClientId?: string;
+  // gitee回调地址
+  giteeRedirectUri?: string;
+  // github客户端id
+  githubClientId?: string;
+  // github回调地址
+  githubRedirectUri?: string;
 }
 
 //国际化类型

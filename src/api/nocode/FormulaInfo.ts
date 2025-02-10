@@ -5,7 +5,7 @@ import { FormulaInfo, ReqFormulaInfo, FormulaInfoPageModel, FormulaTree } from "
  * @description: 公式信息
  * @author: mfish
  * @date: 2023-10-27
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 enum Api {
   FormulaInfo = "/nocode/formulaInfo",

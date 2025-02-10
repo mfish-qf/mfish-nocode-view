@@ -28,7 +28,7 @@ export function checkImgType(file: File) {
 }
 
 export function isImgTypeByName(name: string) {
-  return /\.(jpg|jpeg|png|gif)$/i.test(name);
+  return /\.(?:jpg|jpeg|png|gif)$/i.test(name);
 }
 
 export function getBase64WithFile(file: File) {
@@ -87,7 +87,7 @@ export const imageSrc = async (url, option?: RequestOptions) => {
  */
 export const imageBase64 = async (url) => {
   const img = await defHttp.get({ url, responseType: "arraybuffer" }, { isTransformResponse: false });
-  return `data:image/png;base64,${btoa(new Uint8Array(img).reduce((data, byte) => data + String.fromCharCode(byte), ""))}`;
+  return `data:image/png;base64,${btoa(new Uint8Array(img).reduce((data, byte) => data + String.fromCodePoint(byte), ""))}`;
 };
 
 /**

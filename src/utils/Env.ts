@@ -9,9 +9,10 @@ import pkg from "../../package.json";
 
 const getVariableName = (title: string) => {
   function strToHex(str: string) {
+    if (!str) return;
     const result: string[] = [];
     for (let i = 0; i < str.length; ++i) {
-      const hex = str.codePointAt(i).toString(16);
+      const hex = str.codePointAt(i)?.toString(16);
       result.push(`000${hex}`.slice(-4));
     }
     return result.join("").toUpperCase();
@@ -32,7 +33,11 @@ export function getAppEnvConfig() {
     VITE_GLOB_APP_SHORT_NAME,
     VITE_GLOB_LOGIN_TYPE,
     VITE_GLOB_OAUTH2_URL,
-    VITE_GLOB_OAUTH2_REDIRECT_URI
+    VITE_GLOB_OAUTH2_REDIRECT_URI,
+    VITE_GLOB_GITEE_CLIENT_ID,
+    VITE_GLOB_GITEE_REDIRECT_URI,
+    VITE_GLOB_GITHUB_CLIENT_ID,
+    VITE_GLOB_GITHUB_REDIRECT_URI
   } = ENV;
 
   if (!/^[\s_a-z]*$/i.test(VITE_GLOB_APP_SHORT_NAME)) {
@@ -47,7 +52,11 @@ export function getAppEnvConfig() {
     VITE_GLOB_APP_SHORT_NAME,
     VITE_GLOB_LOGIN_TYPE,
     VITE_GLOB_OAUTH2_URL,
-    VITE_GLOB_OAUTH2_REDIRECT_URI
+    VITE_GLOB_OAUTH2_REDIRECT_URI,
+    VITE_GLOB_GITEE_CLIENT_ID,
+    VITE_GLOB_GITEE_REDIRECT_URI,
+    VITE_GLOB_GITHUB_CLIENT_ID,
+    VITE_GLOB_GITHUB_REDIRECT_URI
   };
 }
 

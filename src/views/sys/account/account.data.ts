@@ -9,6 +9,7 @@ import { DescItem } from "@/components/general/Description";
 import { YNTag_Name, YNTag_Status } from "@/components/general/DictTag/CommonTag";
 import { getRoleByIds } from "@/api/sys/Role";
 import { getOrgByIds } from "@/api/sys/Org";
+import { getTenantOrgByIds, getTenantRoleByIds } from "@/api/sys/SsoTenant";
 
 export const columns: BasicColumn[] = [
   {
@@ -231,6 +232,12 @@ export const accountFormSchema: FormSchema[] = [
 ];
 
 export class AccountDesc {
+  source: number;
+
+  constructor(s: number) {
+    this.source = s;
+  }
+
   orgNames = ref<string[]>([]);
   roleNames = ref<string[]>([]);
   viewSchema: DescItem[] = [
@@ -256,13 +263,18 @@ export class AccountDesc {
           this.orgNames.value = [];
           return;
         }
-        getOrgByIds(val.orgIds).then((res) => {
+        const setOrgName = (res) => {
           if (res && res.length > 0) {
             this.orgNames.value = res.map((val) => val.orgName);
           } else {
             this.orgNames.value = [];
           }
-        });
+        };
+        if (this.source === 1) {
+          getTenantOrgByIds(val.orgIds).then((res) => setOrgName(res));
+        } else {
+          getOrgByIds(val.orgIds).then((res) => setOrgName(res));
+        }
       },
       show: false
     },
@@ -282,17 +294,22 @@ export class AccountDesc {
       label: "角色",
       span: 2,
       init: (val) => {
-        if (!val || val.roleIds?.length === 0) {
+        if (!val || !val.roleIds || val.roleIds.length === 0) {
           this.roleNames.value = [];
           return;
         }
-        getRoleByIds(val.roleIds).then((res) => {
+        const setRoleNames = (res) => {
           if (res && res.length > 0) {
             this.roleNames.value = res.map((val) => val.roleName);
           } else {
             this.roleNames.value = [];
           }
-        });
+        };
+        if (this.source === 1) {
+          getTenantRoleByIds(val.roleIds).then((res) => setRoleNames(res));
+        } else {
+          getRoleByIds(val.roleIds).then((res) => setRoleNames(res));
+        }
       },
       show: false
     },
