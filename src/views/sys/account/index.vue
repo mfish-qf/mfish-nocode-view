@@ -88,7 +88,7 @@
     />
     <AccountSelectModal @register="registerSelectModal" @success="handleSuccess" />
     <PasswordModal @register="registerPwdModal" />
-    <AccountViewModal @register="registerViewModal" />
+    <AccountViewModal @register="registerViewModal" :source="source" />
   </PageWrapper>
 </template>
 <script lang="ts" setup>
@@ -112,7 +112,7 @@
   const props = defineProps({
     source: {
       type: Number,
-      default: null
+      default: 0
     }
   });
   const { hasRole, SUPER_ROLE, hasPermission } = usePermission();

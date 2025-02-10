@@ -7,7 +7,13 @@ import { curLoginType, oauth2Config } from "@/settings/LoginSetting";
 import type { Recordable } from "@mfish/types";
 
 const ROOT_PATH = RootRoute().path;
-const whitePathList: Set<PageEnum> = new Set([PageEnum.BASE_LOGIN, PageEnum.OAUTH_LOGIN, PageEnum.ERROR_LOGIN]);
+const whitePathList: Set<PageEnum> = new Set([
+  PageEnum.BASE_LOGIN,
+  PageEnum.OAUTH_LOGIN,
+  PageEnum.ERROR_LOGIN,
+  PageEnum.GITEE_LOGIN,
+  PageEnum.GITHUB_LOGIN
+]);
 
 export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
@@ -46,7 +52,7 @@ export function createPermissionGuard(router: Router) {
           url += "&force_login=1";
           userStore.setIsLogout(false);
         }
-        window.location.href = url;
+        globalThis.location.href = url;
         return;
       }
       next();

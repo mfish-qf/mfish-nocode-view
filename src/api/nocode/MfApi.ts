@@ -7,7 +7,7 @@ import { PageResult, ReqPage } from "@/api/model/BaseModel";
  * @description: 自定义API
  * @author: mfish
  * @date: 2023-07-31
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 enum Api {
   MfApi = "/nocode/mfApi",

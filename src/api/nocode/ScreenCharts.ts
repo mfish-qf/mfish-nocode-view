@@ -5,7 +5,7 @@ import { ScreenCharts, ReqScreenCharts, ScreenChartsPageModel } from "@/api/noco
  * @description: 组件基础信息
  * @author: mfish
  * @date: 2024-11-19
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 enum Api {
   ScreenCharts = "/nocode/screenCharts"

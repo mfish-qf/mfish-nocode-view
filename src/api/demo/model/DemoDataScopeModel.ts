@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @description: demo_data_scope
  * @author: mfish
  * @date: 2024-09-04
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 export interface DemoDataScope extends BaseEntity<number> {
   //角色id

@@ -5,7 +5,7 @@ import { ScreenLayers, ReqScreenLayers } from "@/api/nocode/model/ScreenLayersMo
  * @description: 我的大屏图层信息
  * @author: mfish
  * @date: 2024-12-24
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 enum Api {
   ScreenLayers = "/nocode/screenLayers"

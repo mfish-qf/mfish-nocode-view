@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @description: 公式信息
  * @author: mfish
  * @date: 2023-10-27
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 export interface FormulaInfo extends BaseEntity<string> {
   // 目录id

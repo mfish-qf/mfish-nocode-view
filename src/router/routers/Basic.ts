@@ -90,3 +90,22 @@ export const REDIRECT_ROUTE: AppRouteRecordRaw = {
     }
   ]
 };
+
+// gitee登录
+export const GiteeRoute: AppRouteRecordRaw = {
+  path: "/giteeOauth2",
+  name: "giteeOauth2",
+  component: () => import("@/views/sys/login/Gitee.vue"),
+  meta: {
+    title: "giteeOauth2"
+  }
+};
+// github登录
+export const GithubRoute: AppRouteRecordRaw = {
+  path: "/githubOauth2",
+  name: "githubOauth2",
+  component: () => import("@/views/sys/login/Github.vue"),
+  meta: {
+    title: "githubOauth2"
+  }
+};

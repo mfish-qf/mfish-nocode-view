@@ -4,7 +4,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { computed } from "vue";
+  import { computed, PropType } from "vue";
   import CodeMirrorEditor from "./codemirror/CodeMirrorEdit.vue";
   import { isString } from "@/utils/Is";
   import { MODE } from "./Typing";

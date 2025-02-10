@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @description: 组件基础信息
  * @author: mfish
  * @date: 2024-11-19
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 export interface ScreenCharts extends BaseEntity<string> {
   //组件名称
@@ -28,6 +28,8 @@ export interface ReqScreenCharts extends ReqPage {
   name?: string;
   //组件类型
   type?: string;
+  //组件类型集合
+  types?: string;
   //所属分类
   category?: string;
 }

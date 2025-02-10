@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @description: 系统日志
  * @author: mfish
  * @date: 2023-01-08
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 export interface SysLog extends BaseEntity<number> {
   title: string;

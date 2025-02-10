@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @description: 销售订单
  * @author: mfish
  * @date: 2024-09-13
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 export interface DemoOrder extends BaseEntity<string> {
   //姓名

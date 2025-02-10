@@ -2,7 +2,7 @@
  @description: 客户端信息
  @author: mfish
  @date: 2023-05-12
- @version: V1.3.1
+ @version: V1.3.2
 -->
 <template>
   <div :class="prefixCls">

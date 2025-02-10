@@ -5,7 +5,7 @@ import { MfScreen, ReqMfScreen, MfScreenPageModel } from "@/api/nocode/model/MfS
  * @description: 我的大屏信息
  * @author: mfish
  * @date: 2024-08-07
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 enum Api {
   MfScreen = "/nocode/mfScreen"

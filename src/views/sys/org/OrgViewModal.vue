@@ -2,7 +2,7 @@
  @description: 组织结构表查看
  @author: mfish
  @date: 2024-08-29
- @version: V1.3.1
+ @version: V1.3.2
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="组织结构信息">
@@ -16,8 +16,14 @@
   import { OrgDesc } from "./org.data";
 
   defineOptions({ name: "OrgViewModal" });
+  const props = defineProps({
+    source: {
+      type: Number,
+      default: 0
+    }
+  });
   const orgData = ref();
-  const orgDesc = new OrgDesc();
+  const orgDesc = new OrgDesc(props.source);
   const [registerModal, { setModalProps }] = useModalInner(async (data) => {
     setModalProps({
       confirmLoading: false,

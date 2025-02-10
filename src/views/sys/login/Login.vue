@@ -137,10 +137,25 @@
                         加入我们
                       </a>
                     </div>
-                    <div class="d-grid gap-2 mb-3">
+                    <div class="d-grid gap-2 mb-1">
                       <button type="button" class="btn btn-primary btn-block" @click="login">登录</button>
                     </div>
                   </form>
+                </div>
+                <div class="login-divider">
+                  <hr class="divider" style="flex: 1" />
+                  <span style="padding: 0 10px 0 10px">其他方式登录</span>
+                  <hr class="divider" style="flex: 1" />
+                </div>
+                <div class="other-login">
+                  <Icon
+                    style="cursor: pointer"
+                    icon="simple-icons:gitee"
+                    color="#bf0c2c"
+                    :size="32"
+                    @click="giteeLogin"
+                  />
+                  <Icon style="cursor: pointer" icon="simple-icons:github" :size="32" @click="githubLogin" />
                 </div>
               </div>
             </div>
@@ -155,12 +170,13 @@
   import "bootstrap/dist/js/bootstrap.min.js";
   import { computed, onMounted, onUnmounted, reactive, ref, unref } from "vue";
   import { getCaptcha } from "@/api/sys/User";
-  import { oauth2Config } from "@/settings/LoginSetting";
+  import { oauth2Config, giteeConfig, githubConfig } from "@/settings/LoginSetting";
   import { useMessage } from "@/hooks/web/UseMessage";
   import { useUserStore } from "@/store/modules/User";
   import { useI18n } from "@/hooks/web/UseI18n";
   import { debounce } from "lodash-es";
   import { useGlobSetting } from "@/hooks/setting";
+  import { Icon } from "@/components/general/Icon";
 
   const username = ref("");
   const password = ref("");
@@ -313,6 +329,13 @@
         });
       });
   }, 200);
+
+  function giteeLogin() {
+    globalThis.location.href = `https://gitee.com/oauth/authorize?client_id=${giteeConfig.client_id}&redirect_uri=${giteeConfig.redirect_uri}&response_type=code`;
+  }
+  function githubLogin() {
+    globalThis.location.href = `https://github.com/login/oauth/authorize?client_id=${githubConfig.client_id}&redirect_uri=${githubConfig.redirect_uri}&response_type=code`;
+  }
 </script>
 <style scoped lang="less">
   html,
@@ -530,7 +553,17 @@
     color: #888;
     text-align: center;
   }
+  .login-divider {
+    display: flex;
+    align-items: center;
+    color: #6c6c6c;
+  }
 
+  .other-login {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
   @media screen and (max-width: 540px) {
     .login .logo {
       margin: 20px 0 0 20px;

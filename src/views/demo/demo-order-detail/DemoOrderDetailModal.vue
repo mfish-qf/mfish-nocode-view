@@ -2,7 +2,7 @@
  @description: 销售订单明细
  @author: mfish
  @date: 2024-09-02
- @version: V1.3.1
+ @version: V1.3.2
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">

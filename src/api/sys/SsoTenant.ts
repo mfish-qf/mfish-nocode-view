@@ -9,7 +9,7 @@ import { ReqSsoUser, SsoUserPageModel, UserOrg } from "@/api/sys/model/UserModel
  * @description: 租户信息表
  * @author: mfish
  * @date: 2023-05-31
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 enum Api {
   SsoTenant = "/oauth2/ssoTenant",
@@ -96,6 +96,10 @@ export const getTenantOrgTree = (params?: SsoOrg) => {
   return defHttp.get<SsoOrg[]>({ url: Api.TenantOrg, params });
 };
 
+export function getTenantOrgByIds(ids: string) {
+  return defHttp.get<SsoOrg[]>({ url: `${Api.TenantOrg}/${ids}` });
+}
+
 export function insertTenantOrg(params: SsoOrg) {
   return defHttp.post<SsoOrg>({ url: Api.TenantOrg, params }, { successMessageMode: "message" });
 }
@@ -115,6 +119,10 @@ export const getTenantRole = (params?: ReqSsoRole) => {
 export const getTenantAllRole = (params?: ReqSsoRole) => {
   return defHttp.get<SsoRole[]>({ url: Api.TenantALLRole, params });
 };
+
+export function getTenantRoleByIds(ids: string) {
+  return defHttp.get<SsoRole[]>({ url: `${Api.TenantRole}/${ids}` });
+}
 
 export const getTenantRoleMenus = (roleId?: string) => {
   return defHttp.get<string[]>({ url: `${Api.TenantRoleMenu}/${roleId}` });

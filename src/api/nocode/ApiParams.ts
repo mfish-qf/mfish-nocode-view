@@ -5,7 +5,7 @@ import { ApiParams, ReqApiParams, ApiParamsPageModel } from "@/api/nocode/model/
  * @description: API请求参数
  * @author: mfish
  * @date: 2023-08-25
- * @version: V1.3.1
+ * @version: V1.3.2
  */
 enum Api {
   ApiParams = "/nocode/apiParams"
