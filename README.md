@@ -13,7 +13,7 @@
 
 ## 项目介绍
 
-摸鱼低代码前端采用 Vue3.4、Vite5.0、 Ant-Design-Vue4.0.X、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
+摸鱼低代码前端采用 Vue3.x、Vite6.x、 Ant-Design-Vue4.0.X、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
 是在Vben-Admin基础上进行优化研发的适合于摸鱼低代码平台的前端解决方案，目前已是稳定版本，可用于生产项目。
 
 * 后端基于SpringBoot3, Spring Cloud Alibaba，实现微服务、单体服务代码一体化架构
