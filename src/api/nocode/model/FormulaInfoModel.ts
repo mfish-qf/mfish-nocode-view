@@ -7,27 +7,27 @@ import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
  * @version: V1.3.2
  */
 export interface FormulaInfo extends BaseEntity<string> {
-  // 目录id
+  //目录id
   categoryId?: string;
-  // 公式名称
+  //公式名称
   enName?: string;
-  // 公式中文名称
+  //公式中文名称
   cnName?: string;
-  // 公式总体描述
+  //公式总体描述
   description?: string;
-  // 参数描述
+  //参数描述
   paramDesc?: string;
-  // 返回结果描述
+  //返回结果描述
   returnDesc?: string;
-  // 公式对应类
+  //公式对应类
   targetObject?: string;
-  // 公式参数
+  //公式参数
   targetParam?: string;
-  // 返回值类型
+  //返回值类型
   returnType?: string;
-  // 是否显示 1显示 0不显示
+  //是否显示 1显示 0不显示
   display?: number;
-  // 排序
+  //排序
   sort?: number;
   key?: string;
 }
@@ -50,9 +50,15 @@ export interface FormulaTree extends BaseEntity<string> {
 }
 
 export interface ReqFormulaInfo extends ReqPage {
-  // 公式名称
+  //公式名称
   enName?: string;
+  //目录id
+  categoryId?: string;
+  //公式中文名称
+  cnName?: string;
+  //公式对应类
+  targetObject?: string;
 }
 
-// 分页结果集
+//分页结果集
 export type FormulaInfoPageModel = PageResult<FormulaInfo>;

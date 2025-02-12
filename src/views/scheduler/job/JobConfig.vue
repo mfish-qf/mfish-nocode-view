@@ -6,7 +6,7 @@
 <template>
   <BasicForm @register="registerForm">
     <template #params="{ model, field }">
-      <CodeEditor style="border: 1px solid #d9d9d9" v-model:value="model[field]" :mode="MODE.JSON" />
+      <CodeEditor v-model:value="model[field]" :mode="MODE.JSON" />
     </template>
   </BasicForm>
 </template>

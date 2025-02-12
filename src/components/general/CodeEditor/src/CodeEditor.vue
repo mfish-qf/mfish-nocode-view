@@ -1,6 +1,12 @@
 <template>
   <div class="h-full" style="border-radius: 6px">
-    <CodeMirrorEditor :value="getValue" @change="handleValueChange" :mode="mode" :readonly="readonly" />
+    <CodeMirrorEditor
+      :style="showBorder ? borderStyle : ''"
+      :value="getValue"
+      @change="handleValueChange"
+      :mode="mode"
+      :readonly="readonly"
+    />
   </div>
 </template>
 <script lang="ts" setup>
@@ -8,6 +14,7 @@
   import CodeMirrorEditor from "./codemirror/CodeMirrorEdit.vue";
   import { isString } from "@/utils/Is";
   import { MODE } from "./Typing";
+  import { theme } from "ant-design-vue";
 
   const props = defineProps({
     value: { type: [Object, String] as PropType<Record<string, any> | string> },
@@ -20,10 +27,18 @@
       }
     },
     readonly: { type: Boolean },
-    autoFormat: { type: Boolean, default: true }
+    autoFormat: { type: Boolean, default: true },
+    showBorder: { type: Boolean, default: true }
   });
 
   const emit = defineEmits(["change", "update:value", "format-error"]);
+  const { token } = theme.useToken();
+  const borderStyle = computed(() => {
+    return {
+      border: `1px solid ${token.value.colorBorder}`,
+      borderRadius: "6px"
+    };
+  });
 
   const getValue = computed(() => {
     const { value, mode, autoFormat } = props;
