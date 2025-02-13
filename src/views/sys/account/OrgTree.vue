@@ -1,5 +1,5 @@
 <template>
-  <div class="mr-0 overflow-hidden bg-white" :class="$props.source === 1 ? '' : 'mt-3 ml-3 mb-3'">
+  <div class="mr-0 overflow-hidden bg-white" :class="$props.source === 1 ? '' : 'mt-4 ml-4 mb-4'">
     <BasicTree
       title="组织列表"
       toolbar

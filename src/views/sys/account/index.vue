@@ -1,5 +1,5 @@
 <template>
-  <PageWrapper content-class="flex">
+  <PageWrapper content-class="flex" content-full-height fixed-height>
     <OrgTree class="w-1/4 xl:w-1/5" @select="handleSelect" :source="$props.source" />
     <BasicTable
       @register="registerTable"
