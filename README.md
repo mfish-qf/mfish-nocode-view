@@ -112,7 +112,7 @@ http://localhost:5186
 │  ├─数据源
 │  ├─代码生成
 │  ├─自助API
-│  └─自助大屏(开发中...)
+│  └─自助大屏
 ├─系统管理
 │  ├─菜单管理
 │  ├─组织管理
@@ -157,6 +157,10 @@ http://localhost:5186
     <tr>
       <td><img src="https://mfish-pic.pages.dev/login.png" alt='login'/></td>
       <td><img src="https://mfish-pic.pages.dev/menu.png" alt='menu'/></td>
+    </tr>
+    <tr>
+      <td><img src="https://mfish-pic.pages.dev/screen.png" /></td>
+      <td><img src="https://mfish-pic.pages.dev/screenConfig.png" /></td>
     </tr>
     <tr>
       <td><img src="https://mfish-pic.pages.dev/api.png"  alt="api"/></td>

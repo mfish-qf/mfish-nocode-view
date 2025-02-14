@@ -62,7 +62,7 @@ const transform: AxiosTransform = {
   // 下载文件返回处理
   downloadResponseHook: (res: any, options: RequestOptions) => {
     const { data } = res;
-    const url = window.URL.createObjectURL(data);
+    const url = globalThis.URL.createObjectURL(data);
     const link = document.createElement("a");
     link.href = url;
     let fileName = res.headers["content-disposition"]?.split("=")[1];
