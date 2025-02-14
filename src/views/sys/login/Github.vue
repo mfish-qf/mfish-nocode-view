@@ -24,7 +24,7 @@
       router.push("/login");
     };
     defHttp
-      .get<number>({ url: `/oauth2/github/token/${code}` })
+      .get<number>({ url: `/oauth2/github/token/${code}` }, { errorMessageMode: "none" })
       .then((res) => {
         //res 1 未star项目 2 登录成功
         if (res === 1) {
