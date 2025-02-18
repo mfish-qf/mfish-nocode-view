@@ -11,6 +11,7 @@
           :field-names="fieldNames"
           :disabled="parentIdDisabled"
           @change="orgChange"
+          @search="handleSearch"
         />
       </template>
     </BasicForm>
@@ -21,7 +22,7 @@
   import { BasicModal, useModalInner } from "@/components/general/Modal";
   import { BasicForm, useForm } from "@/components/general/Form/index";
   import { formSchema } from "./org.data";
-  import { getOrgTree, insertOrg, updateOrg } from "@/api/sys/Org";
+  import { getOrg, insertOrg, updateOrg } from "@/api/sys/Org";
   import { getAllRoleList } from "@/api/sys/Role";
   import { getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "@/api/sys/SsoTenant";
   import { useMessage } from "@/hooks/web/UseMessage";
@@ -65,7 +66,16 @@
     tenantDisabled(false, props.source);
     setModalProps({ confirmLoading: false, width: "800px" });
     isUpdate.value = !!data?.isUpdate;
-    treeData.value = await (props.source === 1 ? getTenantOrgTree() : getOrgTree());
+    if (props.source === 1) {
+      treeData.value = await getTenantOrgTree();
+    } else {
+      const orgData = await getOrg({
+        orgName: data.record?.orgName ?? undefined,
+        pageNum: 1,
+        pageSize: 100
+      });
+      treeData.value = orgData.list;
+    }
     if (unref(isUpdate)) {
       curOrg.value = data.record.parentId;
       setFieldsValue({
@@ -140,6 +150,15 @@
     ]).then();
   }
 
+  async function handleSearch(value) {
+    if (props.source === 1) return;
+    const orgData = await getOrg({
+      orgName: value,
+      pageNum: 1,
+      pageSize: 100
+    });
+    treeData.value = orgData.list;
+  }
   async function orgChange(orgId, _, extra) {
     setFieldsValue({ parentId: orgId }).then();
     const id = extra.triggerNode?.props?.id;

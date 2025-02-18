@@ -35,7 +35,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { computed, ref, watch, useSlots } from "vue";
+  import { computed, ref, watch, useSlots, PropType } from "vue";
   import { Dropdown, Menu, MenuItem, MenuDivider, Input } from "ant-design-vue";
   import { Icon } from "@/components/general/Icon";
   import { BasicTitle } from "@/components/general/Basic";

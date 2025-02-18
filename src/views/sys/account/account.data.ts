@@ -147,6 +147,7 @@ export const accountFormSchema: FormSchema[] = [
     component: "TreeSelect",
     componentProps: {
       maxTagCount: 8,
+      treeNodeFilterProp: "orgName",
       fieldNames: {
         label: "orgName",
         key: "id",
@@ -155,6 +156,7 @@ export const accountFormSchema: FormSchema[] = [
       multiple: true,
       getPopupContainer: () => document.body
     },
+    slot: "orgIds",
     colProps: { span: 24 },
     dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>
       usePermission().isSuperAdmin(renderCallbackParams.values.id)
@@ -165,7 +167,8 @@ export const accountFormSchema: FormSchema[] = [
     component: "Select",
     componentProps: {
       maxTagCount: 8,
-      mode: "multiple"
+      mode: "multiple",
+      getPopupContainer: () => document.body
     },
     colProps: { span: 24 },
     dynamicDisabled: (renderCallbackParams: RenderCallbackParams) =>

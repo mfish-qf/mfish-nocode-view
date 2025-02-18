@@ -25,6 +25,7 @@
   import { getMenuTree } from "@/api/sys/Menu";
   import { getRoleMenus, insertRole, updateRole } from "@/api/sys/Role";
   import { getTenantMenuTree, getTenantRoleMenus, insertTenantRole, updateTenantRole } from "@/api/sys/SsoTenant";
+  import { usePermission } from "@/hooks/web/UsePermission";
 
   const props = defineProps({
     source: {
@@ -42,6 +43,7 @@
     showActionButtonGroup: false,
     autoSubmitOnEnter: true
   });
+  const { isSuperRole, isPersonRole } = usePermission();
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
     resetFields().then();
     setModalProps({ confirmLoading: false, width: "800px" });
@@ -61,8 +63,8 @@
           ...data.record
         }).then();
       });
-      // 超户不允许修改roleName,roleCode
-      if (data.record.id === "1") {
+      // 超户和个人角色不允许修改roleName,roleCode
+      if (isSuperRole(data.record.id) || isPersonRole(data.record.id)) {
         disableInput(true);
         return;
       }

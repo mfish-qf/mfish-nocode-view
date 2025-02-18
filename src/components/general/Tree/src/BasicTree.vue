@@ -1,28 +1,28 @@
 <script lang="tsx">
-  import type { CSSProperties } from "vue";
-  import type { FieldNames, TreeState, TreeItem, KeyType, CheckKeys, TreeActionType } from "./types/Tree";
-
-  import { defineComponent, reactive, computed, unref, ref, watchEffect, toRaw, watch, onMounted } from "vue";
+  import { CSSProperties } from "vue";
+  import { FieldNames, TreeState, TreeItem, KeyType, CheckKeys, TreeActionType, treeProps } from "./types/Tree";
+  import { reactive, computed, unref, ref, watchEffect, toRaw, watch, onMounted } from "vue";
   import TreeHeader from "./components/TreeHeader.vue";
-  import { Tree, Spin, Empty } from "ant-design-vue";
+  import { Tree, Spin, Empty, Pagination } from "ant-design-vue";
   import { TreeIcon } from "./TreeIcon";
   import { ScrollContainer } from "@/components/general/Container";
   import { omit, get, difference, cloneDeep } from "lodash-es";
-  import { isArray, isBoolean, isEmpty, isFunction } from "@/utils/Is";
+  import { isArray, isBoolean, isEmpty, isFunction, isNumber } from "@/utils/Is";
   import { extendSlots, getSlot } from "@/utils/helper/TsxHelper";
   import { filter, treeToList, eachTree } from "@/utils/helper/TreeHelper";
   import { useTree } from "./hooks/UseTree";
   import { useContextMenu } from "@/hooks/web/UseContextMenu";
   import { CreateContextOptions } from "@/components/general/ContextMenu";
-  import { treeEmits, treeProps } from "./types/Tree";
+  import { treeEmits } from "./types/Tree";
   import { createBEM } from "@/utils/Bem";
+  import { Recordable } from "@mfish/types";
 
-  export default defineComponent({
+  export default {
     name: "BasicTree",
     inheritAttrs: false,
     props: treeProps,
     emits: treeEmits,
-    setup(props, { attrs, slots, emit, expose }) {
+    setup(props: any, { attrs, slots, emit, expose }) {
       const [bem] = createBEM("tree");
 
       const state = reactive<TreeState>({
@@ -190,6 +190,7 @@
         () => props.treeData,
         (val) => {
           if (val) {
+            treeDataRef.value = val as TreeItem[];
             handleSearch(searchState.searchText);
           }
         }
@@ -239,6 +240,12 @@
         }
       }
 
+      function headerSearch(searchValue: string) {
+        emit("beforeSearch", searchValue, () => {
+          handleSearch(searchValue);
+        });
+      }
+
       function handleClickNode(key: string, children: TreeItem[]) {
         if (!props.clickRowToExpand || !children || children.length === 0) return;
         if (state.expandedKeys.includes(key)) {
@@ -253,12 +260,10 @@
         }
       }
 
-      watchEffect(() => {
-        treeDataRef.value = props.treeData as TreeItem[];
-      });
-
       onMounted(() => {
-        const level = Number.parseInt(props.defaultExpandLevel);
+        const level = isNumber(props.defaultExpandLevel)
+          ? props.defaultExpandLevel
+          : Number.parseInt(props.defaultExpandLevel);
         if (level > 0) {
           state.expandedKeys = filterByLevel(level);
         } else if (props.defaultExpandAll) {
@@ -353,8 +358,7 @@
           const { title: titleField, key: keyField, children: childrenField } = unref(getFieldNames);
 
           const icon = getIcon(item, item.icon);
-          let colorIcon;
-          colorIcon = item.iconColor ? { icon, color: item.iconColor } : { icon };
+          const colorIcon: any = item.iconColor ? { icon, color: item.iconColor } : { icon };
           const title = get(item, titleField);
           const searchIdx = searchText ? title.indexOf(searchText) : -1;
           const isHighlight = searchState.startSearch && !isEmpty(searchText) && highlight && searchIdx !== -1;
@@ -392,10 +396,29 @@
 
       expose(instance);
 
+      function pageChange(page: number) {
+        // 分页
+        emit("pageChange", page, searchState.searchText);
+      }
+
       return () => {
-        const { title, helpMessage, toolbar, search, checkable } = props;
+        const { title, helpMessage, toolbar, search, checkable, pagination } = props;
+        const pageInfo = {
+          //是否翻页
+          total: 0,
+          // 每页显示条数
+          pageSize: 50,
+          current: 1,
+          simple: true,
+          size: "small",
+          ...pagination
+        };
         const showTitle = title || toolbar || search || slots.headerTitle;
-        const scrollStyle: CSSProperties = { marginTop: "4px", height: "calc(100% - 38px)" };
+        const scrollStyle: CSSProperties = {
+          marginTop: "4px",
+          height: `calc(100% - ${pagination.total > 0 ? 72 : 38}px)`
+        };
+        const pageStyle: CSSProperties = { display: "flex", justifyContent: "center" };
         return (
           <div class={[bem(), "h-full", attrs.class]}>
             {showTitle && (
@@ -408,7 +431,7 @@
                 toolbar={toolbar}
                 helpMessage={helpMessage}
                 onStrictlyChange={onStrictlyChange}
-                onSearch={handleSearch}
+                onSearch={headerSearch}
                 searchText={searchState.searchText}
               >
                 {extendSlots(slots)}
@@ -424,9 +447,10 @@
               </Spin>
             </ScrollContainer>
             <Empty v-show={unref(getNotFound)} image={Empty.PRESENTED_IMAGE_SIMPLE} class='!mt-4' />
+            <Pagination v-show={pageInfo.total > 0} style={pageStyle} {...pageInfo} onChange={pageChange} />
           </div>
         );
       };
     }
-  });
+  };
 </script>

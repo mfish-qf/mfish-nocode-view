@@ -8,8 +8,11 @@
       tree-wrapper-class-name="h-[calc(100%-35px)] overflow-auto"
       :click-row-to-expand="false"
       :tree-data="treeData"
+      :pagination="pagination"
       :field-names="{ key: 'id', title: 'orgName' }"
       @select="handleSelect"
+      @before-search="handleBeforeSearch"
+      @page-change="handlePageChange"
     >
       <template #title="item">
         <div v-if="item.tenantId !== null && item.tenantId !== ''" style="display: flex; align-items: center">
@@ -22,9 +25,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { onMounted, ref, unref, nextTick } from "vue";
+  import { onMounted, ref, unref, nextTick, reactive } from "vue";
   import { BasicTree, TreeActionType, TreeItem } from "@/components/general/Tree";
-  import { getOrgTree } from "@/api/sys/Org";
+  import { getOrg } from "@/api/sys/Org";
   import { getTenantOrgTree } from "@/api/sys/SsoTenant";
   import { Icon } from "@/components/general/Icon";
   import { useRootSetting } from "@/hooks/setting/UseRootSetting";
@@ -41,14 +44,38 @@
   const treeData = ref<TreeItem[]>([]);
   const asyncExpandTreeRef = ref<Nullable<TreeActionType>>(null);
   const color = useRootSetting().getThemeColor;
-  async function fetch() {
-    treeData.value =
-      props.source === 1
-        ? ((await getTenantOrgTree()) as unknown as TreeItem[])
-        : ((await getOrgTree()) as unknown as TreeItem[]);
+  const pagination = reactive({
+    total: 0,
+    current: 1,
+    pageSize: 50
+  });
+  async function fetch(orgName?: string) {
+    if (props.source === 1) {
+      treeData.value = (await getTenantOrgTree()) as unknown as TreeItem[];
+    } else {
+      const org = await getOrg({
+        orgName: orgName ?? undefined,
+        pageNum: pagination.current,
+        pageSize: pagination.pageSize
+      });
+      treeData.value = org.list as unknown as TreeItem[];
+      pagination.total = org.total;
+      pagination.current = org.pageNum;
+    }
+
     nextTick(() => {
       unref(asyncExpandTreeRef)?.expandAll(true);
     }).then();
+  }
+  function handleBeforeSearch(searchValue, callback) {
+    pagination.current = 1;
+    fetch(searchValue).then(() => {
+      callback();
+    });
+  }
+  function handlePageChange(page: number, searchValue) {
+    pagination.current = page;
+    fetch(searchValue);
   }
 
   function handleSelect(keys) {

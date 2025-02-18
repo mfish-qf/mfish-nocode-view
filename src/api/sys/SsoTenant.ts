@@ -1,6 +1,6 @@
 import { defHttp } from "@/utils/http/axios";
 import { SsoTenant, ReqSsoTenant, SsoTenantPageModel } from "@/api/sys/model/SsoTenantModel";
-import { SsoOrg } from "@/api/sys/model/OrgModel";
+import { ReqSsoOrg, SsoOrg } from "@/api/sys/model/OrgModel";
 import { ReqSsoRole, SsoRole } from "@/api/sys/model/RoleModel";
 import { MenuListItem, MenuParams } from "@/api/sys/model/MenuModel";
 import { ReqSsoUser, SsoUserPageModel, UserOrg } from "@/api/sys/model/UserModel";
@@ -92,7 +92,7 @@ export function deleteSsoTenant(id: string) {
  * 获取租户组织树
  * @param params
  */
-export const getTenantOrgTree = (params?: SsoOrg) => {
+export const getTenantOrgTree = (params?: ReqSsoOrg) => {
   return defHttp.get<SsoOrg[]>({ url: Api.TenantOrg, params });
 };
 

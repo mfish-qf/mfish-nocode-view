@@ -1,5 +1,7 @@
 import type { TreeDataItem } from "ant-design-vue/es/tree/Tree";
+import { Recordable } from "@mfish/types";
 import { buildProps } from "@/utils/Props";
+import { PropType } from "vue";
 
 export enum ToolbarEnum {
   SELECT_ALL,
@@ -16,7 +18,9 @@ export const treeEmits = [
   "update:value",
   "change",
   "check",
-  "update:searchValue"
+  "update:searchValue",
+  "pageChange",
+  "beforeSearch"
 ];
 
 export interface TreeState {
@@ -40,7 +44,6 @@ export const treeProps = buildProps({
   value: {
     type: [Object, Array, String] as PropType<KeyType[] | CheckKeys>
   },
-
   renderIcon: {
     type: Function as PropType<(params: Recordable) => string>
   },
@@ -49,7 +52,6 @@ export const treeProps = buildProps({
     type: [String, Array] as PropType<string | string[]>,
     default: ""
   },
-
   title: {
     type: String,
     default: ""
@@ -128,7 +130,19 @@ export const treeProps = buildProps({
     type: Boolean,
     default: false
   },
-  treeWrapperClassName: String
+  treeWrapperClassName: String,
+  pagination: {
+    type: Object,
+    default: () => ({
+      //是否翻页
+      total: 0,
+      // 每页显示条数
+      pageSize: 50,
+      current: 1,
+      simple: true,
+      size: "small"
+    })
+  }
 });
 
 export interface ContextMenuItem {
@@ -176,7 +190,7 @@ export interface TreeActionType {
   insertNodeByKey: (opt: InsertNodeParams) => void;
   insertNodesByKey: (opt: InsertNodeParams) => void;
   deleteNodeByKey: (key: string) => void;
-  updateNodeByKey: (key: string, node: Omit<TreeDataItem, "key">) => void;
+  updateNodeByKey: (key: string, node: TreeDataItem, list?: TreeDataItem[]) => void;
   setSearchValue: (value: string) => void;
   getSearchValue: () => string;
   getSelectedNode: (key: KeyType, treeList?: TreeItem[], selectNode?: TreeItem | null) => TreeItem | null;

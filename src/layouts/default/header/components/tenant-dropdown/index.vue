@@ -60,7 +60,7 @@
           await sleep(500);
         }
         tenants.value = userInfo.tenants;
-        const tenant: TenantVo = tenants.value?.find((tenant) => tenant.id == userStore.getTenantId) as TenantVo;
+        const tenant: TenantVo = tenants.value?.find((tenant) => tenant.id === userStore.getTenantId) as TenantVo;
         if (tenant) {
           getTenant.id = tenant.id;
           getTenant.name = tenant.name;

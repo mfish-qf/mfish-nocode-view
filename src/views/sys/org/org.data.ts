@@ -124,11 +124,6 @@ export const formSchema: FormSchema[] = [
     label: "上级组织",
     component: "TreeSelect",
     componentProps: {
-      fieldNames: {
-        label: "orgName",
-        key: "id",
-        value: "id"
-      },
       getPopupContainer: () => document.body
     },
     slot: "parentId"

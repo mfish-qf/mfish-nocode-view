@@ -78,6 +78,8 @@ export const dictCategoryFormSchema: FormSchema[] = [
     label: "上级分类",
     component: "TreeSelect",
     componentProps: {
+      showSearch: true,
+      treeNodeFilterProp: "categoryName",
       fieldNames: {
         label: "categoryName",
         key: "id",
