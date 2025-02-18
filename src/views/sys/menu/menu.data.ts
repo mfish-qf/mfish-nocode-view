@@ -131,6 +131,8 @@ export const formSchema: FormSchema[] = [
     label: "上级菜单",
     component: "TreeSelect",
     componentProps: {
+      showSearch: true,
+      treeNodeFilterProp: "menuName",
       fieldNames: {
         label: "menuName",
         key: "id",
@@ -188,6 +190,8 @@ export const formSchema: FormSchema[] = [
     label: "激活菜单",
     component: "TreeSelect",
     componentProps: {
+      showSearch: true,
+      treeNodeFilterProp: "menuName",
       fieldNames: {
         label: "menuName",
         key: "menuCode",

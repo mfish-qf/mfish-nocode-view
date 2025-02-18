@@ -39,6 +39,7 @@ export function getBase64WithFile(file: File) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.addEventListener("load", () => resolve({ result: reader.result as string, file }));
+    // eslint-disable-next-line unicorn/prefer-add-event-listener
     reader.onerror = (error) => reject(error);
   });
 }
@@ -200,9 +201,13 @@ export function setHeaderImg(fileKey, setImg: Ref) {
 export function setImage(fileKey: string | undefined, defaultImg: string, setImg: Ref) {
   defaultImg = defaultImg || noImage;
   if (fileKey) {
-    imageSrc(getLocalFileUrl(fileKey), { errorMessageMode: "none" }).then((img) => {
-      setImg.value = img || defaultImg;
-    });
+    if (fileKey.startsWith("http://") || fileKey.startsWith("https://")) {
+      setImg.value = fileKey;
+    } else {
+      imageSrc(getLocalFileUrl(fileKey), { errorMessageMode: "none" }).then((img) => {
+        setImg.value = img || defaultImg;
+      });
+    }
   } else {
     setImg.value = defaultImg;
   }

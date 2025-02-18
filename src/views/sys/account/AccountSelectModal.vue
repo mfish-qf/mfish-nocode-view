@@ -53,6 +53,8 @@
         label: "所属部门",
         component: "TreeSelect",
         componentProps: {
+          showSearch: true,
+          treeNodeFilterProp: "orgName",
           maxTagCount: 8,
           fieldNames: {
             label: "orgName",

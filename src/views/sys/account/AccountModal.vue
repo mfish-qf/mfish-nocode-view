@@ -1,6 +1,22 @@
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
-    <BasicForm @register="registerForm" @submit="handleSubmit" @field-value-change="valueChange" />
+    <BasicForm @register="registerForm" @submit="handleSubmit" @field-value-change="valueChange">
+      <template #orgIds>
+        <TreeSelect
+          v-model:value="curOrgs"
+          show-search
+          allow-clear
+          tree-node-filter-prop="orgName"
+          :max-tag-count="8"
+          :tree-data="treeData"
+          :multiple="true"
+          :field-names="fieldNames"
+          :disabled="disabled"
+          @change="handleChange"
+          @search="handleSearch"
+        />
+      </template>
+    </BasicForm>
   </BasicModal>
 </template>
 <script lang="ts" setup>
@@ -8,13 +24,17 @@
   import { BasicModal, useModalInner } from "@/components/general/Modal";
   import { BasicForm, useForm } from "@/components/general/Form/index";
   import { accountFormSchema } from "./account.data";
-  import { getOrgRoles, getOrgTree } from "@/api/sys/Org";
+  import { getOrg, getOrgRoles } from "@/api/sys/Org";
   import { getUserRoles, insertUser, updateUser } from "@/api/sys/User";
   import { getAllRoleList } from "@/api/sys/Role";
   import { RoleInfo } from "@/api/sys/model/UserModel";
   import { SsoRole } from "@/api/sys/model/RoleModel";
   import { getTenantOrgTree } from "@/api/sys/SsoTenant";
-  import { TreeItem } from "@/components/general/Tree";
+  import { Recordable } from "@mfish/types";
+  import { TreeSelect } from "ant-design-vue";
+  import { SsoOrg } from "@/api/sys/model/OrgModel";
+  import { usePermission } from "@/hooks/web/UsePermission";
+
   defineOptions({ name: "AccountModal" });
 
   const props = defineProps({
@@ -27,8 +47,18 @@
     }
   });
   const emit = defineEmits(["success", "register"]);
+  const curOrgs = ref<string[]>([]);
+  const treeData = ref<SsoOrg[]>([]);
   const isUpdate = ref(true);
   let curRow: any;
+  const curLabels = ref<string[]>([]);
+  const { isSuperAdmin } = usePermission();
+  const disabled = ref<boolean>(true);
+  const fieldNames = {
+    label: "orgName",
+    key: "id",
+    value: "id"
+  };
   const [registerForm, { setFieldsValue, updateSchema, resetFields, validate }] = useForm({
     name: "model_form_item",
     labelWidth: 100,
@@ -40,8 +70,11 @@
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
     resetFields().then();
     setModalProps({ confirmLoading: false, width: "800px" });
+    curOrgs.value = [];
     isUpdate.value = !!data?.isUpdate;
-    curRow = data.record ? data.record : {};
+    curRow = data.record || {};
+    curLabels.value = data.record?.orgNames || [];
+    disabled.value = isSuperAdmin(curRow.id);
     let orgRoles: RoleInfo[] = [];
     let roles: SsoRole[] = [];
     if (unref(isUpdate)) {
@@ -59,10 +92,16 @@
         }
       ]).then();
       if (data.record.orgIds) {
+        curOrgs.value = data.record.orgIds;
         const orgIds = data.record.orgIds.join(",");
         roles = await getAllRoleList({ orgIds });
-        orgRoles = await getOrgRoles(orgIds);
+        if (orgIds && orgIds.length > 0) {
+          orgRoles = await getOrgRoles(orgIds);
+        } else {
+          orgRoles = [];
+        }
       }
+
       const userRoles = await getUserRoles({ userId: data.record.id });
       setRole(roles, userRoles, orgRoles);
     } else {
@@ -90,7 +129,6 @@
         valueChange("orgIds", [props.orgId]).then();
       }
     }
-    let treeData: TreeItem[];
     if (props.source === 1) {
       updateSchema([
         {
@@ -98,20 +136,36 @@
           dynamicDisabled: true
         }
       ]).then();
-      treeData = (await getTenantOrgTree()) as unknown as TreeItem[];
+      treeData.value = await getTenantOrgTree();
     } else {
-      treeData = (await getOrgTree()) as unknown as TreeItem[];
+      const orgName = data.record?.orgNames?.join(",");
+      const orgData = await getOrg({
+        orgName,
+        pageNum: 1,
+        pageSize: 100
+      });
+      treeData.value = orgData.list;
     }
-    updateSchema({
-      field: "orgIds",
-      componentProps: { treeData }
-    }).then();
   });
+
+  function handleChange(_, label) {
+    curLabels.value = label;
+  }
+  async function handleSearch(value) {
+    if (props.source === 1) return;
+    const orgNames = curLabels.value?.join(",");
+    const orgData = await getOrg({
+      orgName: value ? `${value},${orgNames}` : orgNames,
+      pageNum: 1,
+      pageSize: 100
+    });
+    treeData.value = orgData.list;
+  }
   const getTitle = computed(() => (unref(isUpdate) ? "编辑账号" : "新增账号"));
 
   function setRole(roles, userRoles, orgRoles) {
     if (!roles) {
-      return;
+      return [];
     }
     curRow.userRoles = userRoles;
     const options = roles.reduce((prev, next: Recordable) => {
@@ -140,8 +194,9 @@
       return prev;
     }, [] as any);
     // 合并组织拥有的角色，如果已经包含该角色则过滤掉
-    const opts = options.concat(
-      orgRoles
+    const opts = [
+      ...options,
+      ...orgRoles
         .map((orgRole) => ({
           key: orgRole.id,
           label: orgRole.roleName,
@@ -149,7 +204,7 @@
           disabled: orgRole.source === 1
         }))
         .filter((item) => !options.some((opt) => opt.key === item.key))
-    );
+    ];
     updateSchema({
       field: "roleIds",
       componentProps: { options: opts, optionFilterProp: "label" }
@@ -202,7 +257,7 @@
       userRoles = curRow.userRoles.filter((item) => item.source !== 1);
     }
     // 合并新的组织角色
-    userRoles = userRoles.concat(orgRoles);
+    userRoles = [...userRoles, ...orgRoles];
     const opts = setRole(roles, userRoles, orgRoles);
     const roleIds = userRoles
       .map((item) => {

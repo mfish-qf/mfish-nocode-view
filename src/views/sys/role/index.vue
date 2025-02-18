@@ -41,6 +41,7 @@
                 },
                 ifShow:
                   !isSuperRole(record.id) &&
+                  !isPersonRole(record.id) &&
                   ((source === 1 && hasPermission('sys:tenantRole:delete')) ||
                     (source !== 1 && hasPermission('sys:role:delete')))
               }
@@ -84,7 +85,7 @@
       default: null
     }
   });
-  const { hasPermission, isSuperRole } = usePermission();
+  const { hasPermission, isSuperRole, isPersonRole } = usePermission();
   const [registerModal, { openModal }] = useModal();
   const [registerViewModal, { openModal: openViewModal }] = useModal();
   const { prefixCls } = useDesign("role");
@@ -136,6 +137,7 @@
   const statusLoading = ref(false);
   const statusDisabled = (record) =>
     isSuperRole(record.id) ||
+    isPersonRole(record.id) ||
     !(
       (props.source === 1 && hasPermission("sys:tenantRole:update")) ||
       (props.source !== 1 && hasPermission("sys:role:update"))

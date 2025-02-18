@@ -1,5 +1,5 @@
 import { defHttp } from "@/utils/http/axios";
-import { ReqOrgUser, SsoOrg } from "@/api/sys/model/OrgModel";
+import { ReqOrgUser, ReqSsoOrg, SsoOrg, SsoOrgPageModel } from "@/api/sys/model/OrgModel";
 import { RoleInfo, SsoUserPageModel } from "@/api/sys/model/UserModel";
 
 /**
@@ -15,8 +15,15 @@ enum Api {
   UserByOrgCode = "/oauth2/org/user"
 }
 
-export const getOrgTree = (params?: SsoOrg) => {
+export const getOrg = (params?: ReqSsoOrg) => {
+  return defHttp.get<SsoOrgPageModel>({ url: Api.Org, params });
+};
+
+export const getOrgTree = (params?: ReqSsoOrg) => {
   return defHttp.get<SsoOrg[]>({ url: Api.OrgTree, params });
+};
+export const getOrgTreeById = (ids: string, direction: string) => {
+  return defHttp.get<SsoOrg[]>({ url: `${Api.OrgTree}/${ids}`, params: { direction } });
 };
 
 export function getOrgByIds(ids: string) {

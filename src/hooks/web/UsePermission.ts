@@ -126,6 +126,14 @@ export function usePermission() {
   }
 
   /**
+   * 是否个人角色
+   * @param roleId
+   */
+  function isPersonRole(roleId: string) {
+    return roleId === "0";
+  }
+
+  /**
    * 是否超户组织
    * @param orgId 组织id
    */
@@ -145,6 +153,7 @@ export function usePermission() {
     userIsSuperAdmin,
     isSuperAdmin,
     isSuperRole,
-    isSuperOrg
+    isSuperOrg,
+    isPersonRole
   };
 }

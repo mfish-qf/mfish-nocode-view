@@ -56,7 +56,7 @@
 <script lang="ts" setup>
   import { ref } from "vue";
   import { BasicTable, useTable, TableAction } from "@/components/general/Table";
-  import { deleteOrg, getOrgTree } from "@/api/sys/Org";
+  import { deleteOrg, getOrg } from "@/api/sys/Org";
   import { useModal } from "@/components/general/Modal";
   import OrgModal from "./OrgModal.vue";
   import OrgViewModal from "./OrgViewModal.vue";
@@ -78,7 +78,7 @@
   const [registerViewModal, { openModal: openViewModal }] = useModal();
   const { prefixCls } = useDesign("org");
   const api = ref();
-  api.value = props.source === 1 ? getTenantOrgTree : getOrgTree;
+  api.value = props.source === 1 ? getTenantOrgTree : getOrg;
   const [registerTable, { reload, expandRows }] = useTable({
     title: "组织列表",
     rowKey: "id",
@@ -91,7 +91,6 @@
       autoSubmitOnEnter: true
     },
     isTreeTable: true,
-    pagination: false,
     striped: false,
     useSearchForm: true,
     showTableSetting: true,

@@ -1,4 +1,4 @@
-import { ReqPage } from "@/api/model/BaseModel";
+import { PageResult, ReqPage } from "@/api/model/BaseModel";
 
 /**
  * @description: 组织结构信息
@@ -25,9 +25,18 @@ export interface SsoOrg {
   children: SsoOrg[];
   roleIds: string[];
 }
+export interface ReqSsoOrg extends ReqPage {
+  tenantId?: string;
+  orgName?: string;
+  leader?: string;
+  phone?: string;
+  status?: number;
+}
 
 export interface ReqOrgUser extends ReqPage {
   nickname?: string;
   phone?: string;
   account?: string;
 }
+
+export type SsoOrgPageModel = PageResult<SsoOrg>;
