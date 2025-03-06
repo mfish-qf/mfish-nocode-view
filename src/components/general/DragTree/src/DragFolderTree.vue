@@ -185,7 +185,7 @@
   const inputValue = ref<string>("");
   watch(
     () => props.treeData,
-    (value: []) => {
+    (value) => {
       if (value) {
         initData(value);
         gData.value = value;
@@ -216,12 +216,12 @@
   const expandAll = (val: boolean) => {
     expandedKeys.value = val ? (dataList.filter((item) => !item.isLeaf).map((item) => item.key) as string[]) : [];
   };
-  const onExpand = (keys: string[]) => {
+  const onExpand = (keys: any[]) => {
     expandedKeys.value = keys;
     autoExpandParent.value = false;
     emit("expand", keys);
   };
-  const onSelect = (keys: string[], e) => {
+  const onSelect = (keys: any[], e) => {
     // 不允许不选中节点
     if (keys?.length === 0) return;
     selectedKeys.value = keys;
@@ -503,7 +503,7 @@
   };
 
   const deleteFolder = (treeKey: string, callback: (res: boolean) => void) => {
-    const loop = (treeKey: string, nodes, pNode) => {
+    const loop = (treeKey: string, nodes, pNode?) => {
       for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].key === treeKey) {
           emit("save:delete", nodes[i], (res) => {

@@ -74,6 +74,7 @@ export interface MetaDataHeader {
 
 export interface ReqTable extends ReqPage {
   connectId: string;
+  tableSchema?: string;
   tableName?: string;
 }
 

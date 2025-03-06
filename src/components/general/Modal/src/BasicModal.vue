@@ -142,7 +142,7 @@
   });
 
   const getWrapperHeight = computed(() => {
-    if (unref(fullScreenRef)) return undefined;
+    if (unref(fullScreenRef)) return;
     return unref(getProps).height;
   });
 
