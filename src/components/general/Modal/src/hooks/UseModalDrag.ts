@@ -21,7 +21,7 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
 
     dialogHeaderEl.style.cursor = "move";
 
-    dialogHeaderEl.onmousedown = (e: any) => {
+    dialogHeaderEl.addEventListener("mousedown", (e: any) => {
       if (!e) return;
       // 鼠标按下，计算当前元素距离可视区的距离
       const disX = e.clientX;
@@ -30,13 +30,13 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
       const screenHeight = document.documentElement.clientHeight; // 可见区域高度(应为body高度，可某些环境下无法获取)
 
       const dragDomWidth = dragDom.offsetWidth; // 对话框宽度
-      const dragDomheight = dragDom.offsetHeight; // 对话框高度
+      const dragDomHeight = dragDom.offsetHeight; // 对话框高度
 
       const minDragDomLeft = dragDom.offsetLeft;
 
       const maxDragDomLeft = screenWidth - dragDom.offsetLeft - dragDomWidth;
       const minDragDomTop = dragDom.offsetTop;
-      const maxDragDomTop = screenHeight - dragDom.offsetTop - dragDomheight;
+      const maxDragDomTop = screenHeight - dragDom.offsetTop - dragDomHeight;
       // 获取到的值带px 正则匹配替换
       const domLeft = getStyle(dragDom, "left");
       const domTop = getStyle(dragDom, "top");
@@ -45,14 +45,14 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
 
       // 注意在ie中 第一次获取到的值为组件自带50% 移动之后赋值为px
       if (domLeft.includes("%")) {
-        styL = +document.body.clientWidth * (+domLeft.replace(/%/g, "") / 100);
-        styT = +document.body.clientHeight * (+domTop.replace(/%/g, "") / 100);
+        styL = +document.body.clientWidth * (+domLeft.replaceAll("%", "") / 100);
+        styT = +document.body.clientHeight * (+domTop.replaceAll("%", "") / 100);
       } else {
-        styL = +domLeft.replace(/px/g, "");
-        styT = +domTop.replace(/px/g, "");
+        styL = +domLeft.replaceAll("px", "");
+        styT = +domTop.replaceAll("px", "");
       }
 
-      document.onmousemove = function (e) {
+      const mouseMove = (e: MouseEvent) => {
         // 通过事件委托，计算移动的距离
         let left = e.clientX - disX;
         let top = e.clientY - disY;
@@ -71,14 +71,16 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
         }
 
         // 移动当前元素
-        dragDom.style.cssText += `;left:${left + styL}px;top:${top + styT}px;`;
+        dragDom.style.cssText += `;left:${left + styL}px;top:${Math.max(top + styT, 0)}px;`;
       };
 
-      document.onmouseup = () => {
-        document.onmousemove = null;
-        document.onmouseup = null;
+      const mouseUp = () => {
+        document.removeEventListener("mousemove", mouseMove);
+        document.removeEventListener("mouseup", mouseUp);
       };
-    };
+      document.addEventListener("mousemove", mouseMove);
+      document.addEventListener("mouseup", mouseUp);
+    });
   };
 
   const handleDrag = () => {
@@ -87,11 +89,11 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
       if (!wrap) continue;
       const display = getStyle(wrap, "display");
       const draggable = wrap.getAttribute("data-drag");
-      if (display !== "none") {
-        // 拖拽位置
-        if (draggable === null || unref(context.destroyOnClose)) {
-          drag(wrap);
-        }
+      if (
+        display !== "none" && // 拖拽位置
+        (draggable === null || unref(context.destroyOnClose))
+      ) {
+        drag(wrap);
       }
     }
   };

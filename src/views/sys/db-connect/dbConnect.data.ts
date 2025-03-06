@@ -1,6 +1,7 @@
 import { BasicColumn } from "@/components/general/Table";
 import { FormSchema } from "@/components/general/Table";
 import { getDictProps } from "@/utils/DictUtils";
+import { YNTag } from "@/components/general/DictTag/CommonTag";
 
 /**
  * @description: 数据库连接
@@ -38,6 +39,12 @@ export const columns: BasicColumn[] = [
     title: "数据库名",
     dataIndex: "dbName",
     width: 120
+  },
+  {
+    title: "是否公开",
+    dataIndex: "isPublic",
+    width: 80,
+    customRender: ({ value }) => YNTag(value)
   },
   {
     title: "备注",
@@ -130,6 +137,19 @@ export const dbConnectFormSchema: FormSchema[] = [
     label: "密码",
     component: "InputPassword",
     required: true
+  },
+  {
+    field: "isPublic",
+    label: "是否公开",
+    component: "RadioButtonGroup",
+    defaultValue: 0,
+    helpMessage: ["（请谨慎）如果设置为公开", "所有用户都可以查看该库数据"],
+    componentProps: {
+      options: [
+        { label: "否", value: 0 },
+        { label: "是", value: 1 }
+      ]
+    }
   },
   {
     field: "remark",

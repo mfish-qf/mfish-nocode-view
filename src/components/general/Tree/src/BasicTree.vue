@@ -244,6 +244,7 @@
         emit("beforeSearch", searchValue, () => {
           handleSearch(searchValue);
         });
+        handleSearch(searchValue);
       }
 
       function handleClickNode(key: string, children: TreeItem[]) {

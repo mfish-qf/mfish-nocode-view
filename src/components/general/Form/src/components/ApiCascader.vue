@@ -28,6 +28,8 @@
   import { LoadingOutlined } from "@ant-design/icons-vue";
   import { useI18n } from "@/hooks/web/UseI18n";
   import { ValueType } from "ant-design-vue/es/vc-cascader/Cascader";
+  import { Recordable } from "@mfish/types";
+  import { DefaultOptionType } from "ant-design-vue/lib/vc-cascader";
 
   interface Option {
     value: string;
@@ -79,8 +81,7 @@
   watch(
     apiData,
     (data) => {
-      const opts = generatorOptions(data);
-      options.value = opts;
+      options.value = generatorOptions(data);
     },
     { deep: true }
   );
@@ -127,7 +128,7 @@
     }
   }
 
-  async function loadData(selectedOptions: Option[]) {
+  async function loadData(selectedOptions: DefaultOptionType[]) {
     const targetOption = selectedOptions[selectedOptions.length - 1];
     targetOption.loading = true;
 
@@ -168,8 +169,14 @@
     emit("defaultChange", keys, args);
   }
 
-  function handleRenderDisplay({ labels, selectedOptions }) {
-    if (unref(emitData).length === selectedOptions.length) {
+  function handleRenderDisplay({
+    labels,
+    selectedOptions
+  }: {
+    labels: string[];
+    selectedOptions?: DefaultOptionType[];
+  }) {
+    if (unref(emitData).length === selectedOptions?.length) {
       return labels.join(" / ");
     }
     if (props.displayRenderArray) {

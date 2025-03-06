@@ -158,8 +158,15 @@
   }
 
   async function getField(connectId, tableName) {
+    const tableNames = tableName.split(".");
+    let tableSchema;
+    if (tableNames.length > 1) {
+      tableSchema = tableNames[0];
+      tableName = tableNames[1];
+    }
     const res = await getFieldList({
       connectId,
+      tableSchema,
       tableName,
       pageNum: 1,
       pageSize: 10_000

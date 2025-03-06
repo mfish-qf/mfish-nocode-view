@@ -8,7 +8,8 @@ import { MfScreen, ReqMfScreen, MfScreenPageModel } from "@/api/nocode/model/MfS
  * @version: V1.3.2
  */
 enum Api {
-  MfScreen = "/nocode/mfScreen"
+  MfScreen = "/nocode/mfScreen",
+  MfScreenShare = "/nocode/mfScreen/share"
 }
 
 /**
@@ -25,10 +26,11 @@ export const getMfScreenList = (reqMfScreen?: ReqMfScreen) => {
  * 通过id查询
  *
  * @param id 唯一ID
+ * @param shareToken 分享token
  * @return 返回分页列表
  */
-export function getMfScreenById(id: string) {
-  return defHttp.get<MfScreen>({ url: `${Api.MfScreen}/${id}` });
+export function getMfScreenById(id: string, shareToken?: string) {
+  return defHttp.get<MfScreen>({ url: `${Api.MfScreen}/${id}`, params: { shareToken } });
 }
 
 /**
@@ -59,4 +61,13 @@ export function updateMfScreen(mfScreen: MfScreen) {
  */
 export function deleteMfScreen(id: string) {
   return defHttp.delete<MfScreen>({ url: `${Api.MfScreen}/${id}` }, { successMessageMode: "message" });
+}
+
+/**
+ * 通过id分享大屏
+ * @param id
+ * @param duration 分享时长 单位小时
+ */
+export function shareMfScreenById(id: string, duration?: number) {
+  return defHttp.get<MfScreen>({ url: `${Api.MfScreenShare}/${id}`, params: { duration } });
 }

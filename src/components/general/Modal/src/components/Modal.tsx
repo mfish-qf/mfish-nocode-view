@@ -11,7 +11,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: basicProps as any,
   emits: ["cancel"],
-  setup(props, { slots, emit }) {
+  setup(props: any, { slots, emit }) {
     const { open, draggable, destroyOnClose } = toRefs(props);
     const attrs = useAttrs();
     useModalDragMove({

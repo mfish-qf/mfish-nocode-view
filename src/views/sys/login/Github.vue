@@ -31,8 +31,11 @@
           const modal = createErrorModal({
             title: "登录失败",
             content:
-              "请先star项目再重试，项目地址:<a href='https://github.com/mfish-qf/mfish-nocode' target='_blank'>Gitee地址</a>",
-            onOk: () => onOk(modal)
+              "请先star项目再重试，项目地址:<a href='https://github.com/mfish-qf/mfish-nocode' target='_blank'>Github地址</a>",
+            onOk: () => {
+              onOk(modal);
+              window.open("https://github.com/mfish-qf/mfish-nocode", "_blank");
+            }
           });
         } else {
           router.push("/login");

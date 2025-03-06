@@ -37,11 +37,14 @@
                 <Icon class="icon img" v-if="item.tableType === 0" icon="ant-design:table-outlined" :color="color" />
                 <Icon class="icon img" v-else icon="ant-design:fund-view-outlined" :color="color" />
                 <div :class="`${prefixCls}-card-item-info`">
+                  <Tooltip :title="item.tableSchema">
+                    <span class="text-xs" style="color: #999">表空间：{{ item.tableSchema }}</span>
+                  </Tooltip>
                   <Tooltip :title="item.tableName">
-                    <span>{{ item.tableName }}</span>
+                    <span style="font-weight: 700">{{ item.tableName }}</span>
                   </Tooltip>
                   <Tooltip :title="item.tableComment">
-                    <span>{{ item.tableComment }}</span>
+                    <span class="text-xs" style="color: #999">{{ item.tableComment }}</span>
                   </Tooltip>
                 </div>
               </div>
@@ -95,7 +98,7 @@
         return;
       }
       tableList.value = [];
-      dbTreeRef.value.buildTableTree(record.id).then((res: any) => {
+      dbTreeRef.value.buildTableTree(record.id, record.dbType, record.dbName).then((res: any) => {
         tableList.value = res;
       });
     }
@@ -112,7 +115,7 @@
       if (curNode.value) {
         list.push({
           icon: curNode.value.icon,
-          title: curNode.value.tableName,
+          title: `${curNode.value.tableSchema}.${curNode.value.tableName}`,
           key: curNode.value.key
         });
       }
@@ -208,6 +211,7 @@
         width: 0;
         display: flex;
         flex-direction: column;
+        gap: 4px;
         > span {
           overflow: hidden;
           text-overflow: ellipsis;

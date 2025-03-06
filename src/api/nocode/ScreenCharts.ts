@@ -36,8 +36,8 @@ export function getScreenChartsById(id: string) {
  * @param reqScreenCharts 请求参数
  */
 export function exportScreenCharts(reqScreenCharts?: ReqScreenCharts) {
-  return defHttp.download({ url: Api.ScreenCharts + "/export", params: reqScreenCharts });
-};
+  return defHttp.download({ url: `${Api.ScreenCharts}/export`, params: reqScreenCharts });
+}
 
 /**
  * 新增组件基础信息
@@ -47,7 +47,7 @@ export function exportScreenCharts(reqScreenCharts?: ReqScreenCharts) {
  */
 export function insertScreenCharts(screenCharts: ScreenCharts) {
   return defHttp.post<ScreenCharts>({ url: Api.ScreenCharts, params: screenCharts }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 修改组件基础信息
@@ -57,7 +57,7 @@ export function insertScreenCharts(screenCharts: ScreenCharts) {
  */
 export function updateScreenCharts(screenCharts: ScreenCharts) {
   return defHttp.put<ScreenCharts>({ url: Api.ScreenCharts, params: screenCharts }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 删除组件基础信息
@@ -67,7 +67,7 @@ export function updateScreenCharts(screenCharts: ScreenCharts) {
  */
 export function deleteScreenCharts(id: string) {
   return defHttp.delete<boolean>({ url: `${Api.ScreenCharts}/${id}` }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 批量删除组件基础信息
@@ -76,5 +76,5 @@ export function deleteScreenCharts(id: string) {
  * @return 返回结果
  */
 export function deleteBatchScreenCharts(ids: string) {
-  return defHttp.delete<boolean>({ url: Api.ScreenCharts + "/batch/" + ids }, { successMessageMode: "message" });
-};
+  return defHttp.delete<boolean>({ url: `${Api.ScreenCharts}/batch/${ids}` }, { successMessageMode: "message" });
+}

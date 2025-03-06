@@ -73,7 +73,7 @@ function vueErrorHandler(err: Error, vm: any, info: string) {
     message: err.message,
     stack: processStackMsg(err),
     detail: info,
-    url: window.location.href
+    url: globalThis.location.href
   });
 }
 
@@ -101,7 +101,7 @@ export function scriptErrorHandler(
     name,
     file: source as string,
     detail: `lineno${lineno}`,
-    url: window.location.href,
+    url: globalThis.location.href,
     ...(errorInfo as Pick<ErrorLogInfo, "message" | "stack">)
   });
   return true;
@@ -111,7 +111,7 @@ export function scriptErrorHandler(
  * Configure Promise error handling function
  */
 function registerPromiseErrorHandler() {
-  window.addEventListener(
+  globalThis.addEventListener(
     "unhandledrejection",
     (event) => {
       const errorLogStore = useErrorLogStoreWithOut();
@@ -120,7 +120,7 @@ function registerPromiseErrorHandler() {
         name: "Promise Error!",
         file: "none",
         detail: "promise error!",
-        url: window.location.href,
+        url: globalThis.location.href,
         stack: "promise error!",
         message: event.reason
       });
@@ -134,7 +134,7 @@ function registerPromiseErrorHandler() {
  */
 function registerResourceErrorHandler() {
   // Monitoring resource loading error(img,script,css,and jsonp)
-  window.addEventListener(
+  globalThis.addEventListener(
     "error",
     (e: Event) => {
       const target = e.target as any;
@@ -148,7 +148,7 @@ function registerResourceErrorHandler() {
           html: target.outerHTML,
           type: e.type
         }),
-        url: window.location.href,
+        url: globalThis.location.href,
         stack: "resource is not found",
         message: `${(e.target || ({} as any)).localName} is load error`
       });
@@ -170,7 +170,8 @@ export function setupErrorHandle(app: App) {
   app.config.errorHandler = vueErrorHandler;
 
   // script error
-  window.onerror = scriptErrorHandler;
+  // eslint-disable-next-line unicorn/prefer-add-event-listener
+  globalThis.onerror = scriptErrorHandler;
 
   //  promise exception
   registerPromiseErrorHandler();

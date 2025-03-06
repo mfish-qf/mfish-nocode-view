@@ -13,7 +13,7 @@
       tree-wrapper-class-name="h-[calc(100%-35px)] overflow-auto"
       :tree-data="treeData"
       :load-data="getTables"
-      v-model:selectedKeys="selectedKeys"
+      v-model:selected-keys="selectedKeys"
       @select="handleSelect"
       @update:search-value="handleSearch"
       :before-right-click="getRightMenuList"
@@ -22,7 +22,7 @@
         <ATooltip title="新增数据库" v-if="hasPermission('sys:database:insert')">
           <AButton type="link" size="small" @click="DBCreate">
             <template #icon>
-              <Icon icon="ant-design:plus-circle-outlined" />
+              <Icon icon="ant-design:database-outlined" />
             </template>
           </AButton>
         </ATooltip>
@@ -49,15 +49,18 @@
   const { hasPermission } = usePermission();
   const treeData = ref<TreeItem[]>([]);
   const asyncTreeRef = ref<Nullable<TreeActionType>>(null);
-  const selectedKeys = ref<TreeItem[]>([]);
+  const selectedKeys = ref<any[]>([]);
   const [registerModal, { openModal }] = useModal();
   const color = useRootSetting().getThemeColor;
+
   async function fetch() {
-    const dbList = (await getDbConnectList()).list;
+    const conns = await getDbConnectList();
+    if (!conns) return;
+    const dbList = conns.list;
     dbList.forEach((db: any) => {
       db.title = db.dbTitle;
       db.key = db.id;
-      db.icon = `simple-icons:${db.dbType === 1 ? "postgresql" : db.dbType === 2 ? "oracle" : "mysql"}`;
+      db.icon = `simple-icons:${db.dbType === 0 ? "mysql" : db.dbType === 1 ? "postgresql" : db.dbType === 2 ? "oracle" : "dotnet"}`;
       db.iconColor = color;
     });
     treeData.value = dbList as unknown as TreeItem[];
@@ -114,7 +117,7 @@
     if (key) {
       selectedKeys.value = [key];
       const keys = key.split(",");
-      if (keys && keys.length === 2) {
+      if (keys && keys.length === 3) {
         asyncTreeRef.value?.setExpandedKeys([keys[0]]);
         emit("select", asyncTreeRef.value?.getSelectedNode(key), asyncTreeRef.value?.getSelectedNode(keys[0]));
         return;
@@ -131,7 +134,7 @@
     if (treeNode.children) {
       return;
     }
-    await buildTableTree(treeNode.eventKey);
+    await buildTableTree(treeNode.eventKey, treeNode.dbType, treeNode.dbName);
   }
 
   function DBCreate() {
@@ -161,9 +164,11 @@
    * 构建数据库下面的表列表
    * @param key
    */
-  async function buildTableTree(key: string) {
+  async function buildTableTree(key: string, dbType: number, dbName: string) {
+    const tableSchema = dbType === 0 ? dbName : "";
     const result: PageResult<TableInfo> = await getTableList({
       connectId: key,
+      tableSchema,
       pageNum: 1,
       pageSize: 10_000
     });
@@ -173,7 +178,7 @@
     const asyncTreeAction: TreeActionType | null = unref(asyncTreeRef);
     result.list.forEach((db: any) => {
       db.title = db.tableName + (db.tableComment ? `[${db.tableComment}]` : "");
-      db.key = `${key},${db.tableName}`;
+      db.key = `${key},${db.tableSchema},${db.tableName}`;
       // 表和视图图标区分
       db.icon = db.tableType === 0 ? "ant-design:table-outlined" : "ant-design:fund-view-outlined";
       db.iconColor = color;

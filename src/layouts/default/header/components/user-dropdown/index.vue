@@ -1,7 +1,7 @@
 <template>
   <Dropdown placement="bottomLeft" :overlay-class-name="`${prefixCls}-dropdown-overlay`">
     <span :class="[prefixCls, `${prefixCls}--${theme}`]" class="flex">
-      <img :class="`${prefixCls}__header`" :src="userImg" />
+      <img :class="`${prefixCls}__header`" :src="userImg" alt="用户图像" />
       <span :class="`${prefixCls}__info hidden md:block`">
         <span :class="`${prefixCls}__name`" class="truncate">
           {{ getUserInfo.nickname }}
@@ -83,7 +83,7 @@
           await sleep(500);
         }
         getUserInfo.id = userInfo.id;
-        getUserInfo.nickname = userInfo.nickname ?? userInfo.account;
+        getUserInfo.nickname = userInfo.nickname || userInfo.account;
         setHeaderImg(userInfo.headImgUrl, userImg);
       });
       const [register, { openModal }] = useModal();

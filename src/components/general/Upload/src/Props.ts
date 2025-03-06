@@ -79,6 +79,10 @@ export const uploadContainerProps = {
   emptyHidePreview: {
     type: Boolean as PropType<boolean>,
     default: false
+  },
+  buttonType: {
+    type: String as PropType<string>,
+    default: "primary"
   }
 };
 

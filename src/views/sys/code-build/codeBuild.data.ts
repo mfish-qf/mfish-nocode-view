@@ -75,6 +75,7 @@ export const codeBuildFormSchema: FormSchema[] = [
     required: true,
     helpMessage: ["选择生成代码相关数据库和表"],
     componentProps: {
+      placeholder: "选择数据库和表，需要先点击库加载后才能使用过滤",
       api: getDBTree,
       apiParamKey: "parentId",
       asyncFetchParamKey: "parentId",
@@ -87,12 +88,16 @@ export const codeBuildFormSchema: FormSchema[] = [
       isLeaf: (record) => {
         return record.type === 1;
       }
-    }
+    },
+    colProps: { span: 24 }
   },
   {
     field: "apiPrefix",
     label: "接口前缀",
     component: "Input",
+    componentProps: {
+      placeholder: "例如：请求系统接口前缀为sys"
+    },
     helpMessage: [
       "网关path中的路由匹配前缀",
       "例如:网关中认证服务访问路径为Path=/oauth2/**接口前缀为oauth2",
@@ -103,17 +108,27 @@ export const codeBuildFormSchema: FormSchema[] = [
     field: "entityName",
     label: "实体类名",
     component: "Input",
+    componentProps: {
+      placeholder: "实体类名，例如字典类：Dict"
+    },
     helpMessage: ["javaBean对象实体名称", "不传会使用表名驼峰化"]
   },
   {
     field: "packageName",
     label: "项目包名",
     component: "Input",
-    helpMessage: ["java包名称 格式:cn.com.mfish.***", "不传使用默认包名 cn.com.mfish.sys"]
+    componentProps: {
+      placeholder: "后端包名，例如系统包：cn.com.mfish.sys"
+    },
+    helpMessage: ["java包名称 格式:cn.com.mfish.***", "不传使用默认包名 cn.com.mfish.sys"],
+    colProps: { span: 24 }
   },
   {
     field: "tableComment",
     label: "表描述",
+    componentProps: {
+      placeholder: "请输入描述信息"
+    },
     component: "InputTextArea",
     helpMessage: ["表相关描述信息", "不传会获取数据库表中的中文描述，如果也为空则使用表名"],
     colProps: { span: 24 }

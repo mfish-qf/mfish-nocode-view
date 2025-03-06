@@ -18,8 +18,8 @@
   const props = defineProps({
     loading: { type: Boolean },
     useWrapper: { type: Boolean, default: true },
-    modalHeaderHeight: { type: Number, default: 57 },
-    modalFooterHeight: { type: Number, default: 74 },
+    modalHeaderHeight: { type: Number, default: 52 },
+    modalFooterHeight: { type: Number, default: 64 },
     minHeight: { type: Number, default: 200 },
     height: { type: Number },
     footerOffset: { type: Number, default: 0 },
@@ -104,20 +104,9 @@
     try {
       const modalDom = bodyDom.parentElement && bodyDom.parentElement.parentElement;
       if (!modalDom) return;
+      const maxHeight =
+        window.innerHeight - (props.footerOffset! || 0) - props.modalFooterHeight - props.modalHeaderHeight;
 
-      const modalRect = getComputedStyle(modalDom as Element).top;
-      const modalTop = Number.parseInt(modalRect);
-      let maxHeight =
-        window.innerHeight -
-        modalTop * 2 +
-        (props.footerOffset! || 0) -
-        props.modalFooterHeight -
-        props.modalHeaderHeight;
-
-      // 距离顶部过进会出现滚动条
-      if (modalTop < 40) {
-        maxHeight -= 26;
-      }
       await nextTick();
       const spinEl: any = unref(spinRef);
 
@@ -125,9 +114,9 @@
       await nextTick();
       realHeight = spinEl.scrollHeight;
       if (props.fullScreen) {
-        realHeightRef.value = window.innerHeight - props.modalFooterHeight - props.modalHeaderHeight - 28;
+        realHeightRef.value = window.innerHeight - props.modalFooterHeight - props.modalHeaderHeight;
       } else {
-        realHeightRef.value = props.height ? props.height : realHeight > maxHeight ? maxHeight : realHeight;
+        realHeightRef.value = props.height || realHeight > maxHeight ? maxHeight : realHeight;
       }
       emit("heightChange", unref(realHeightRef));
     } catch (error) {

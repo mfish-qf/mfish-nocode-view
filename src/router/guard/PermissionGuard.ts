@@ -36,7 +36,7 @@ export function createPermissionGuard(router: Router) {
       // 如果登录类型为code方式走统一认证登录
       if (to.path === PageEnum.BASE_LOGIN && curLoginType === "authorization_code") {
         let url = `${oauth2Config.url}?`;
-        const redirect_uri = to.redirectedFrom?.path;
+        const redirect_uri = to.redirectedFrom?.fullPath;
         Object.keys(oauth2Config).forEach((key) => {
           if (key === "url" || key === "client_secret") return;
           // 如果存在当前域的重定向地址，补充回调地址。否则使用默认回调地址

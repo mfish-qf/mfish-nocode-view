@@ -6,8 +6,13 @@
 <template>
   <div :class="`${prefixCls}`">
     <div class="header">
-      <div class="title">
-        {{ `数据表：${curNode?.tableName?.toUpperCase() ? curNode.tableName.toUpperCase() : "无"}` }}
+      <div class="flex gap-12">
+        <div class="title">
+          {{ `表空间：${curNode?.tableSchema?.toUpperCase() ? curNode.tableSchema.toUpperCase() : "无"}` }}
+        </div>
+        <div class="title">
+          {{ `数据表：${curNode?.tableName?.toUpperCase() ? curNode.tableName.toUpperCase() : "无"}` }}
+        </div>
       </div>
       <div><slot name="button" v-bind="{ data: curNode }"></slot></div>
     </div>
@@ -64,8 +69,9 @@
     if (curKey) {
       const values = curKey.split(",");
       const connectId = values[0];
-      const tableName = values[1];
-      return { connectId, tableName };
+      const tableSchema = values[1];
+      const tableName = values[2];
+      return { connectId, tableSchema, tableName };
     }
     return { connectId: "" };
   });

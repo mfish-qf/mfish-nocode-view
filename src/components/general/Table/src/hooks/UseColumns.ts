@@ -76,7 +76,7 @@ function handleIndexColumn(
         return `${index + 1}`;
       }
       const { current = 1, pageSize = PAGE_SIZE } = getPagination;
-      return ((current < 1 ? 1 : current) - 1) * pageSize + index + 1;
+      return (Math.max(current, 1) - 1) * pageSize + index + 1;
     },
     ...(isFixedLeft
       ? {
@@ -171,7 +171,7 @@ export function useColumns(
       .map((column) => {
         // Support table multiple header editable
         if (column.children?.length) {
-          column.children = column.children.map(mapFn);
+          column.children = column.children.map((element) => mapFn(element));
         }
 
         return mapFn(column);
@@ -297,13 +297,15 @@ function sortFixedColumn(columns: BasicColumn[]) {
   // 筛选逻辑
   const filterFunc = (item) => !item.defaultHidden;
   // 筛选首层显示列（1级表头）
-  const viewColumns = [...fixedLeftColumns, ...defColumns, ...fixedRightColumns].filter(filterFunc);
+  const viewColumns = [...fixedLeftColumns, ...defColumns, ...fixedRightColumns].filter((element) =>
+    filterFunc(element)
+  );
   // 筛选>=2级表头（深度优先）
   const list = [...viewColumns];
   while (list.length > 0) {
     const current = list[0];
     if (Array.isArray(current.children)) {
-      current.children = current.children.filter(filterFunc);
+      current.children = current.children.filter((element) => filterFunc(element));
       list.shift();
       list.unshift(...current.children);
     } else {
