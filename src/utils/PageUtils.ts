@@ -7,10 +7,14 @@ import { useI18n } from "@/hooks/web/UseI18n";
  * @author: mfish
  * @date: 2024/7/29
  */
-
-export const usePagination = (pageRefresh: () => void) => {
+interface PageOptions {
+  pageSize?: number;
+  showSizeChanger?: boolean;
+  showQuickJumper?: boolean;
+}
+export const usePagination = (pageRefresh: () => void, options?: PageOptions) => {
   const pageNum = ref<number>(1);
-  const pageSize = ref<number>(10);
+  const pageSize = ref<number>(options?.pageSize ?? PAGE_SIZE);
   const total = ref<number>(0);
   const { t } = useI18n();
 
@@ -20,8 +24,8 @@ export const usePagination = (pageRefresh: () => void) => {
     pageSize,
     size: "small",
     current: pageNum,
-    showSizeChanger: true,
-    showQuickJumper: true,
+    showSizeChanger: options?.showSizeChanger ?? true,
+    showQuickJumper: options?.showQuickJumper ?? true,
     total,
     showTotal: (total) => t("component.table.total", { total }),
     onChange: pageChange,

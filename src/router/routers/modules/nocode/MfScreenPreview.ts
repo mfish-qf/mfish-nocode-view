@@ -6,7 +6,7 @@
 import type { AppRouteRecordRaw } from "@/router/Types";
 
 const screenPreview: AppRouteRecordRaw = {
-  path: "/low-code/mf-screen/preview/:id",
+  path: "/low-code/mf-screen/preview/:id?",
   name: "ScreenPreview",
   // component: () => import("@/views/nocode/mf-screen/PreviewIndex.vue"),
   meta: {

@@ -36,13 +36,14 @@
 </template>
 <script lang="ts" setup>
   import { computed, ref, watch, useSlots, PropType } from "vue";
-  import { Dropdown, Menu, MenuItem, MenuDivider, Input } from "ant-design-vue";
+  import { Dropdown, Menu, MenuItem, MenuDivider } from "ant-design-vue";
   import { Icon } from "@/components/general/Icon";
   import { BasicTitle } from "@/components/general/Basic";
   import { useI18n } from "@/hooks/web/UseI18n";
   import { useDebounceFn } from "@vueuse/core";
   import { createBEM } from "@/utils/Bem";
   import { ToolbarEnum } from "../types/Tree";
+  import InputSearch from "@/components/general/InputSearch/index.vue";
   const props = defineProps({
     helpMessage: {
       type: [String, Array] as PropType<string | string[]>,
@@ -78,11 +79,10 @@
     },
     enterButton: {
       type: Boolean,
-      default: false
+      default: true
     }
   } as const);
   const emit = defineEmits(["strictly-change", "search", "enterSearch"]);
-  const InputSearch = Input.Search;
   const searchValue = ref("");
 
   const [bem] = createBEM("tree-header");

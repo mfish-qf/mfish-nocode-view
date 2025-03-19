@@ -6,7 +6,19 @@
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="代码构建" @ok="handleSubmit">
-    <BasicForm @register="registerForm" @submit="handleSubmit" @field-value-change="valueChange" />
+    <BasicForm @register="registerForm" @submit="handleSubmit" @field-value-change="valueChange">
+      <template #addDatabase>
+        <a-button
+          type="link"
+          pre-icon="ant-design:database-outlined"
+          v-if="hasPermission('sys:database:insert')"
+          icon-size="16"
+          @click="handleAddDb"
+        >
+          添加数据库
+        </a-button>
+      </template>
+    </BasicForm>
     <BasicTable @register="registerTable">
       <template #toolbar>
         <a-button type="primary" @click="handleCreate">新增查询参数</a-button>
@@ -30,13 +42,14 @@
       </template>
     </BasicTable>
   </BasicModal>
+  <DbConnectModal @register="registerDBModal" @success="addDBSuccess" />
 </template>
 <script lang="ts" setup>
   import { ref, onMounted, unref } from "vue";
   import { BasicForm, useForm } from "@/components/general/Form/index";
   import { BasicTable, useTable, TableAction } from "@/components/general/Table";
   import { codeBuildFormSchema, reqSearches } from "./codeBuild.data";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicModal, useModal, useModalInner } from "@/components/general/Modal";
   import { insertCodeBuild, updateCodeBuild } from "@/api/sys/CodeBuild";
   import { buildUUID } from "@/utils/Uuid";
   import { getDictItems } from "@/api/sys/DictItem";
@@ -44,6 +57,8 @@
   import { DictItem } from "@/api/sys/model/DictItemModel";
   import { getDictList } from "@/api/sys/Dict";
   import { Recordable } from "@mfish/types";
+  import DbConnectModal from "@/views/sys/db-connect/DbConnectModal.vue";
+  import { usePermission } from "@/hooks/web/UsePermission";
 
   defineOptions({ name: "CodeBuildModal" });
 
@@ -55,9 +70,11 @@
     showActionButtonGroup: false,
     autoSubmitOnEnter: true
   });
+  const [registerDBModal, { openModal }] = useModal();
   const conditions: any[] = [];
   const components = ref<any[]>([]);
   const fields = ref<any[]>([]);
+  const { hasPermission } = usePermission();
   const [registerTable, { deleteTableDataRecord, setTableData, getDataSource, reload }] = useTable({
     title: "查询参数列表",
     rowKey: "id",
@@ -194,5 +211,22 @@
 
   function handleDelete(record: Recordable) {
     deleteTableDataRecord(record.id);
+  }
+
+  function handleAddDb() {
+    openModal(true, {
+      isUpdate: false
+    });
+  }
+  function addDBSuccess() {
+    //改变参数强制更新
+    updateSchema({
+      field: "dataBase",
+      componentProps: {
+        initFetchParams: {
+          parentId: " "
+        }
+      }
+    });
   }
 </script>

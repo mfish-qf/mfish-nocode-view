@@ -7,6 +7,7 @@
   <AUpload
     v-model:file-list="fileList"
     name="file"
+    :disabled="disabled"
     :max-count="maxCount"
     :show-upload-list="showUploadList"
     :accept="accepts"
@@ -38,6 +39,7 @@
   import { UploadRequestOption } from "ant-design-vue/lib/vc-upload/interface";
 
   const props = defineProps({
+    disabled: { type: Boolean, default: false },
     fileKeys: { type: String, default: "" },
     buttonText: { type: String, default: "上传文件" },
     buttonColor: { type: String, default: "" },
