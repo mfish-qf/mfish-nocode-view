@@ -5,7 +5,7 @@ import { ref, onUnmounted, unref, nextTick, watch } from "vue";
 import { isProdMode } from "@/utils/Env";
 import { error } from "@/utils/Log";
 import { getDynamicProps } from "@/utils";
-import type { Recordable } from "@mfish/types";
+import type { Nullable, Recordable } from "@mfish/types";
 
 export declare type ValidateFields = (nameList?: NamePath[]) => Promise<Recordable>;
 

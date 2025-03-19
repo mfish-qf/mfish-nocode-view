@@ -71,3 +71,13 @@ export function deleteMfScreen(id: string) {
 export function shareMfScreenById(id: string, duration?: number) {
   return defHttp.get<MfScreen>({ url: `${Api.MfScreenShare}/${id}`, params: { duration } });
 }
+
+/**
+ * 通过二维码分享大屏
+ * @param id
+ * @param path 分享路径
+ * @param duration 分享时长 单位小时
+ */
+export function shareMfScreenByQRCode(id: string, path?: string, duration?: number) {
+  return defHttp.get<string>({ url: `${Api.MfScreenShare}/code/${id}`, params: { path, duration } });
+}

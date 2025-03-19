@@ -89,7 +89,13 @@ export const codeBuildFormSchema: FormSchema[] = [
         return record.type === 1;
       }
     },
-    colProps: { span: 24 }
+    colProps: { span: 23 }
+  },
+  {
+    field: "",
+    component: "Button",
+    slot: "addDatabase",
+    colProps: { span: 1 }
   },
   {
     field: "apiPrefix",

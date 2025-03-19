@@ -13,7 +13,7 @@
   import { propTypes } from "@/utils/PropTypes";
   import { useDesign } from "@/hooks/web/UseDesign";
   import { useLayoutHeight } from "@/layouts/default/content/UseContentViewHeight";
-
+  defineOptions({ name: "FramePage" });
   defineProps({
     frameSrc: propTypes.string.def("")
   });

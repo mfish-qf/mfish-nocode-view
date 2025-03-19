@@ -143,7 +143,7 @@
     allowAdd: { type: Boolean, default: true },
     allowEdit: { type: Boolean, default: true },
     allowDelete: { type: Boolean, default: true },
-    enterButton: { type: Boolean, default: false }
+    enterButton: { type: Boolean, default: true }
   });
   const emit = defineEmits(["select", "expand", "save:insert", "save:update", "save:delete", "save:drag"]);
   const simpleImage = Empty.PRESENTED_IMAGE_SIMPLE;
