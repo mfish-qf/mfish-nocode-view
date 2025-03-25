@@ -46,7 +46,8 @@ export function loginApi(params: LoginParams, mode: MessageMode = "modal") {
       headers: { "Content-Type": ContentTypeEnum.FORM_URLENCODED }
     },
     {
-      errorMessageMode: mode
+      errorMessageMode: mode,
+      refreshToken: false
     }
   );
 }
@@ -62,8 +63,8 @@ export function unLock(params: LoginParams) {
 /**
  * @description: getUserInfo
  */
-export function getUserInfo() {
-  return defHttp.get<SsoUser>({ url: Api.GetUserInfo });
+export function getUserInfo(refreshToken: boolean = true) {
+  return defHttp.get<SsoUser>({ url: Api.GetUserInfo }, { errorMessageMode: "none", refreshToken });
 }
 
 /**

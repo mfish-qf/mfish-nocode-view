@@ -30,15 +30,6 @@ export const getScreenResourceList = (reqScreenResource?: ReqScreenResource) => 
 export function getScreenResourceBySourceId(sourceId: string) {
   return defHttp.get<ScreenResource>({ url: `${Api.ScreenResource}/${sourceId}` });
 }
-
-/**
- * 导出大屏资源信息
- * @param reqScreenResource 请求参数
- */
-export function exportScreenResource(reqScreenResource?: ReqScreenResource) {
-  return defHttp.download({ url: Api.ScreenResource + "/export", params: reqScreenResource });
-}
-
 /**
  * 新增大屏资源信息
  *
@@ -68,19 +59,9 @@ export function updateScreenResource(screenResource: ScreenResource) {
 /**
  * 删除大屏资源信息
  *
- * @param id 唯一ID
+ * @param sourceId 唯一ID
  * @return 返回结果
  */
-export function deleteScreenResource(id: string) {
-  return defHttp.delete<boolean>({ url: `${Api.ScreenResource}/${id}` }, { successMessageMode: "message" });
-}
-
-/**
- * 批量删除大屏资源信息
- *
- * @param ids 唯一ID多个逗号隔开
- * @return 返回结果
- */
-export function deleteBatchScreenResource(ids: string) {
-  return defHttp.delete<boolean>({ url: Api.ScreenResource + "/batch/" + ids }, { successMessageMode: "message" });
+export function deleteScreenResource(sourceId: string) {
+  return defHttp.delete<boolean>({ url: `${Api.ScreenResource}/${sourceId}` }, { successMessageMode: "message" });
 }

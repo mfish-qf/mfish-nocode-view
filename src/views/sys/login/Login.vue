@@ -309,7 +309,7 @@
 
   const handleLogin = debounce(() => {
     userStore
-      .login({
+      .loginRedirect({
         password: password.value,
         username: username.value,
         rememberMe: rememberMe.value,

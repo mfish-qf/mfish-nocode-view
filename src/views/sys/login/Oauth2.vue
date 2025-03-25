@@ -55,15 +55,17 @@
       redirectUri += `?redirect=${routeRedirect}`;
     }
     userStore
-      .login({
-        client_id: oauth2Config.client_id,
-        client_secret: oauth2Config.client_secret,
-        grant_type: "authorization_code",
-        redirect_uri: redirectUri,
-        code,
-        route_redirect: routeRedirect,
-        mode: "modal"
-      })
+      .loginRedirect(
+        {
+          client_id: oauth2Config.client_id,
+          client_secret: oauth2Config.client_secret,
+          grant_type: "authorization_code",
+          redirect_uri: redirectUri,
+          code,
+          mode: "modal"
+        },
+        routeRedirect
+      )
       .then((userInfo) => {
         if (userInfo) {
           notification.success({

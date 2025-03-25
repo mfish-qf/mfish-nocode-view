@@ -6,7 +6,11 @@
         :full-screen="fullScreenRef"
         @cancel="handleCancel"
         @fullscreen="handleFullScreen"
-      />
+      >
+        <template #customIcon="data">
+          <slot name="customIcon" v-bind="data || {}"></slot>
+        </template>
+      </ModalClose>
     </template>
 
     <template #title v-if="!$slots.title">

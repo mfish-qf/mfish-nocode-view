@@ -1,13 +1,12 @@
-import { computed, reactive } from "vue";
+import { reactive, Ref, watch } from "vue";
 import { theme } from "ant-design-vue";
 import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-import { ThemeEnum } from "@/enums/AppEnum";
 import { colorError, colorSuccess, colorWarning } from "@mfish/types";
+import { ThemeEnum } from "@/enums/AppEnum";
 
-export function useDarkModeTheme() {
-  const { getDarkMode } = useRootSetting();
-  const { darkAlgorithm } = theme;
-  const isDark = computed(() => getDarkMode.value === ThemeEnum.DARK);
+export function useDarkModeTheme(darkMode: Ref<ThemeEnum>) {
+  const { darkAlgorithm, defaultAlgorithm } = theme;
+
   const color = {
     token: {
       colorPrimary: useRootSetting().getThemeColor,
@@ -17,16 +16,23 @@ export function useDarkModeTheme() {
       colorError
     }
   };
-
-  const darkTheme = reactive({
+  /**
+   * 全局ANT主题
+   */
+  const antTheme = reactive({
     ...color,
-    algorithm: darkAlgorithm
+    algorithm: defaultAlgorithm
   });
-  const lightTheme = reactive(color);
+
+  watch(
+    darkMode,
+    () => {
+      antTheme.algorithm = darkMode.value === ThemeEnum.DARK ? darkAlgorithm : defaultAlgorithm;
+    },
+    { immediate: true }
+  );
 
   return {
-    isDark,
-    darkTheme,
-    lightTheme
+    antTheme
   };
 }

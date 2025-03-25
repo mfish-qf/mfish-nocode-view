@@ -1,5 +1,6 @@
 <template>
   <div :class="getClass">
+    <slot name="customIcon"></slot>
     <template v-if="canFullscreen">
       <Tooltip :title="t('component.modal.restore')" placement="bottom" v-if="fullScreen">
         <FullscreenExitOutlined @click="handleFullScreen" />
@@ -70,13 +71,13 @@
     align-items: center;
 
     > span {
-      margin-left: 48px;
+      margin-left: 6px;
       font-size: 16px;
     }
 
     &--can-full {
       > span {
-        margin-left: 12px;
+        margin-left: 6px;
       }
     }
 

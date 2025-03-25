@@ -172,7 +172,8 @@ const transform: AxiosTransform = {
     // 后台返回信息包括错误信息
     const msg: string = response?.data?.msg ?? "";
     const status = error?.response?.status;
-    checkStatus(status, msg, errorMessageMode, retryCount);
+    const refreshToken: boolean = error.response?.config?.requestOptions?.refreshToken;
+    checkStatus(status, msg, errorMessageMode, retryCount, refreshToken);
     // 添加自动重试机制 保险起见 只针对GET请求
     const retryRequest = new AxiosRetry();
     const { isOpenRetry } = config.requestOptions.retryRequest;
@@ -216,6 +217,8 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           ignoreCancelToken: true,
           // 是否携带token
           withToken: true,
+          // 请求失败，是否刷新token
+          refreshToken: true,
           retryRequest: {
             isOpenRetry: false,
             count: 1,
