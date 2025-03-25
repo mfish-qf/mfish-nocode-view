@@ -13,6 +13,7 @@ import { usePermissionStore } from "@/store/modules/Permission";
 import { isArray } from "@/utils/Is";
 import { h } from "vue";
 import { Nullable } from "@mfish/types";
+import { oauth2Config } from "@/settings/LoginSetting";
 
 interface UserState {
   userInfo: Nullable<SsoUser>;
@@ -97,22 +98,43 @@ export const useUserStore = defineStore("app-user", {
       this.isLogout = false;
     },
     /**
-     * 登录
-     * @param params  route_redirect //路由重定向地址，统一认证后跳转
+     * 登录获取用户信息
+     * @param params
      */
-    async login(params: LoginParams & { mode?: MessageMode; route_redirect?: string }): Promise<SsoUser | null> {
+    async login(params: LoginParams & { mode?: MessageMode }) {
       try {
-        const { mode, route_redirect, ...loginParams } = params;
+        const { mode, ...loginParams } = params;
         const result = await loginApi(loginParams, mode);
         const { access_token, refresh_token } = result;
         this.setToken(access_token);
         this.setRefreshToken(refresh_token);
-        const userInfo = await this.getAccountInfo();
-        await (route_redirect ? router.replace(route_redirect) : router.replace(usePermissionStore().getHomePath));
-        return userInfo;
+        return await this.getAccountInfo();
       } catch (error) {
         throw new Error(error);
       }
+    },
+    /**
+     * 登录并跳转路由
+     * @param params  route_redirect //路由重定向地址，统一认证后跳转
+     * @param route_redirect
+     */
+    async loginRedirect(
+      params: LoginParams & { mode?: MessageMode },
+      route_redirect?: string
+    ): Promise<SsoUser | null> {
+      const userInfo = await this.login(params);
+      await (route_redirect ? router.replace(route_redirect) : router.replace(usePermissionStore().getHomePath));
+      return userInfo;
+    },
+    async refreshTokenAction() {
+      return await this.login({
+        client_id: oauth2Config.client_id,
+        client_secret: oauth2Config.client_secret,
+        refresh_token: this.getRefreshToken,
+        grant_type: "refresh_token",
+        redirect_uri: oauth2Config.redirect_uri,
+        mode: "none"
+      }).then();
     },
     async getAccountInfo(): Promise<SsoUser> {
       if (!this.getToken) {
@@ -131,7 +153,7 @@ export const useUserStore = defineStore("app-user", {
       if (!this.getToken) {
         throw new Error("token为空");
       }
-      const userInfo = await getUserInfo();
+      const userInfo = await getUserInfo(false);
       const { userRoles = [], tenants } = userInfo;
       if (isArray(userRoles)) {
         this.setRoleInfoList(userRoles);

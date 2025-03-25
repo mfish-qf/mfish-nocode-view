@@ -2,21 +2,25 @@ import type { AxiosError } from "axios";
 import type { MessageMode } from "#/axios";
 import { useI18n } from "@/hooks/web/UseI18n";
 import { messageTips } from "@/utils/http/axios/Helper";
-
+import { useUserStoreWithOut } from "@/store/modules/User";
+import { router } from "@/router";
 /**
  * 判断状态码
- * @param status
- * @param msg
- * @param errorMessageMode
- * @param retryCount
+ * @param status 状态码
+ * @param msg 错误信息
+ * @param errorMessageMode 错误信息弹窗模式
+ * @param retryCount 接口请求失败重试次数
+ * @param refreshToken 接口请求失败是否直接刷新token
  */
 export function checkStatus(
   status: number,
   msg: string,
   errorMessageMode: MessageMode = "none",
-  retryCount: number
+  retryCount: number,
+  refreshToken: boolean
 ): void {
   const { t } = useI18n();
+  const userStore = useUserStoreWithOut();
   let errMessage = "";
   switch (status) {
     case 400: {
@@ -24,6 +28,12 @@ export function checkStatus(
     }
     // 401: 认证失败返回401
     case 401: {
+      // 接口请求认证失败，自动刷新token
+      if (refreshToken) {
+        userStore.setToken(undefined);
+        userStore.setUserInfo(null);
+        router.go(0);
+      }
       errMessage = t("sys.api.errMsg401");
       break;
     }

@@ -4,17 +4,20 @@
  @date: 2023/3/31 20:17
 -->
 <template>
-  <Split :default-size="split" :min="0.1" :max="0.5" :class="prefixCls">
-    <template #1>
-      <DBTree
-        :class="`${prefixCls}-left h-full`"
-        ref="dbTreeRef"
-        :show-icon="true"
-        @select="changeSelect"
-        @search="changeSearch"
-      />
-    </template>
-    <template #2>
+  <NLayout has-sider sider-placement="left" :class="prefixCls">
+    <NLayoutSider :collapsed-width="0" collapse-mode="transform" :width="300" show-trigger="bar" @contextmenu.stop>
+      <div style="display: flex; height: 100%">
+        <DBTree
+          :class="`${prefixCls}-left h-full`"
+          ref="dbTreeRef"
+          :show-icon="true"
+          @select="changeSelect"
+          @search="changeSearch"
+        />
+        <ADivider type="vertical" class="divider" />
+      </div>
+    </NLayoutSider>
+    <NLayoutContent>
       <div :class="`${prefixCls}-right h-full`">
         <ABreadcrumb separator=">" class="m-3">
           <ABreadcrumbItem v-for="(item, index) in breadList" :key="index">
@@ -57,22 +60,21 @@
           </template>
         </TableDetail>
       </div>
-    </template>
-  </Split>
+    </NLayoutContent>
+  </NLayout>
 </template>
-
 <script lang="ts" setup>
   import { ref, unref, computed, toRaw } from "vue";
   import { ScrollContainer } from "@/components/general/Container";
   import DBTree from "./DBTree.vue";
   import { Icon } from "@/components/general/Icon";
-  import { Tooltip, Row as ARow, Col as ACol, Breadcrumb as ABreadcrumb } from "ant-design-vue";
+  import { Tooltip, Row as ARow, Col as ACol, Breadcrumb as ABreadcrumb, Divider as ADivider } from "ant-design-vue";
   import { TableInfo } from "@/api/sys/model/DbConnectModel";
   import { useDesign } from "@/hooks/web/UseDesign";
   import TableDetail from "@/views/sys/database/TableDetail.vue";
   import { TreeItem } from "@/components/general/Tree";
   import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-  import { Split } from "@/components/general/Split";
+  import { NLayout, NLayoutContent, NLayoutSider } from "naive-ui";
   defineOptions({ name: "DataBaseManagement" });
   defineProps({
     resizeHeightOffset: { type: Number, default: 0 }
@@ -86,7 +88,6 @@
   const searchTable = ref<TableInfo[]>([]);
   const curNode = ref<any>();
   const parentNode = ref<TreeItem>();
-  const split = ref<number>(0.2);
 
   async function changeSelect(record: any, parent: any) {
     curNode.value = toRaw(record);
@@ -172,12 +173,20 @@
     background-color: @white;
     height: 100%;
     &-left {
+      flex: 1;
       padding: 6px;
     }
 
     &-right {
       display: flex;
       flex-direction: column;
+    }
+
+    .divider {
+      height: calc(100% - 20px);
+      top: 10px;
+      padding: 0;
+      margin: 0;
     }
   }
 

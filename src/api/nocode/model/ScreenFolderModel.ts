@@ -30,6 +30,7 @@ export interface FolderVo extends BaseEntity<string> {
   thumbnail?: string;
   remark?: string;
   fType?: number;
+  released?: boolean;
 }
 
 // 分页结果集

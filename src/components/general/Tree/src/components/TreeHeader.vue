@@ -127,7 +127,7 @@
       : defaultToolbarList;
   });
 
-  function handleMenuClick(e: { key: ToolbarEnum }) {
+  function handleMenuClick(e: any) {
     const { key } = e;
     switch (key) {
       case ToolbarEnum.SELECT_ALL: {

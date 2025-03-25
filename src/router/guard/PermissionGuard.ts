@@ -20,17 +20,39 @@ export function createPermissionGuard(router: Router) {
   const permissionStore = usePermissionStoreWithOut();
   router.beforeEach(async (to, from, next) => {
     const token = userStore.getToken;
+    const refreshToken = userStore.getRefreshToken;
+    if (!token && refreshToken) {
+      // 如果token过期，刷新token
+      try {
+        await userStore.refreshTokenAction();
+        next(to.path);
+        return;
+      } catch {
+        userStore.setRefreshToken(undefined);
+      }
+    }
     // 白名单路径允许直接访问
     if (whitePathList.has(to.path as PageEnum)) {
       // 如果访问登陆页面且token存在，判断token是否有效直接进入redirect地址或首页地址
       if (to.path === PageEnum.BASE_LOGIN && token) {
         // 增加try catch方式请求异常造成无法返回首页
         try {
+          //获取用户信息成功，进入首页，失败如果返回401会自动刷新
           await userStore.getAccountInfo();
           next((to.query?.redirect as string) || "/");
           return;
         } catch {
           userStore.setToken(undefined);
+        }
+        if (refreshToken) {
+          // 如果token过期，刷新token
+          try {
+            await userStore.refreshTokenAction();
+            next(to.query?.redirect as string);
+            return;
+          } catch {
+            userStore.setRefreshToken(undefined);
+          }
         }
       }
       // 如果登录类型为code方式走统一认证登录
@@ -53,6 +75,7 @@ export function createPermissionGuard(router: Router) {
           userStore.setIsLogout(false);
         }
         globalThis.location.href = url;
+        next(false);
         return;
       }
       next();

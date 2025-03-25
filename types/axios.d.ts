@@ -25,6 +25,8 @@ export interface RequestOptions {
   retryRequest?: RetryRequest;
   // 是否返回完整结果 设置为true时不自动处理返回结果，默认会处理
   completeResult?: boolean;
+  // 是否开启刷新token 默认开启
+  refreshToken?: boolean;
 }
 
 export interface RetryRequest {

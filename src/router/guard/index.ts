@@ -70,7 +70,7 @@ function createPageLoadingGuard(router: Router) {
       // 增加一个延迟防止闪烁过快
       setTimeout(() => {
         appStore.setPageLoading(false);
-      }, 220);
+      }, 100);
     }
     return true;
   });
