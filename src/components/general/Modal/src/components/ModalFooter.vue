@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="display: flex; align-items: center" :style="{ justifyContent: buttonPosition }">
     <slot name="insertFooter"></slot>
     <a-button v-bind="cancelButtonProps" @click="handleCancel" v-if="showCancelBtn">
       {{ cancelText }}
@@ -11,24 +11,17 @@
     <slot name="appendFooter"></slot>
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent } from "vue";
+<script lang="ts" setup>
   import { basicProps } from "../Props";
 
-  export default defineComponent({
-    name: "BasicModalFooter",
-    props: basicProps,
-    emits: ["ok", "cancel"],
-    setup(_, { emit }) {
-      function handleOk(e: Event) {
-        emit("ok", e);
-      }
+  defineOptions({ name: "BasicModalFooter" });
+  defineProps(basicProps);
+  const emit = defineEmits(["ok", "cancel"]);
+  function handleOk(e: Event) {
+    emit("ok", e);
+  }
 
-      function handleCancel(e: Event) {
-        emit("cancel", e);
-      }
-
-      return { handleOk, handleCancel };
-    }
-  });
+  function handleCancel(e: Event) {
+    emit("cancel", e);
+  }
 </script>

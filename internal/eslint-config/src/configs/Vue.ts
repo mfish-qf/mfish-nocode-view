@@ -4,7 +4,6 @@ import { interopDefault } from "../Util";
 
 export async function vue(): Promise<Linter.Config[]> {
   const [pluginVue, parserVue, parserTs] = await Promise.all([
-    // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-vue")),
     interopDefault(import("vue-eslint-parser")),
     interopDefault(import("@typescript-eslint/parser"))
@@ -14,10 +13,6 @@ export async function vue(): Promise<Linter.Config[]> {
     {
       files: ["**/*.vue"],
       languageOptions: {
-        globals: {
-          // TODO: 等待插件正式支持后删除
-          defineModel: true
-        },
         parser: parserVue,
         parserOptions: {
           ecmaFeatures: {
@@ -34,10 +29,6 @@ export async function vue(): Promise<Linter.Config[]> {
       processor: pluginVue.processors[".vue"],
       rules: {
         ...pluginVue.configs.base.rules,
-        ...pluginVue.configs["vue3-essential"].rules,
-        ...pluginVue.configs["vue3-strongly-recommended"].rules,
-        ...pluginVue.configs["vue3-recommended"].rules,
-
         "vue/attribute-hyphenation": [
           "error",
           "always",
@@ -109,7 +100,6 @@ export async function vue(): Promise<Linter.Config[]> {
         "vue/require-default-prop": "off",
         "vue/require-explicit-emits": "error",
         "vue/require-prop-types": "off",
-        "vue/script-setup-uses-vars": "error",
         "vue/singleline-html-element-content-newline": "off",
         "vue/space-infix-ops": "error",
         "vue/space-unary-ops": ["error", { nonwords: false, words: true }],

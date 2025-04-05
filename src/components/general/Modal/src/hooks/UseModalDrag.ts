@@ -16,10 +16,11 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
     wrap.setAttribute("data-drag", unref(context.draggable));
     const dialogHeaderEl = wrap.querySelector(".ant-modal-header");
     const dragDom = wrap.querySelector(".ant-modal");
-
+    const dialogClose = wrap.querySelector(".ant-modal-close-x");
     if (!dialogHeaderEl || !dragDom || !unref(context.draggable)) return;
 
     dialogHeaderEl.style.cursor = "move";
+    dialogHeaderEl.style.width = `calc(100% - ${dialogClose.clientWidth}px)`;
 
     dialogHeaderEl.addEventListener("mousedown", (e: any) => {
       if (!e) return;

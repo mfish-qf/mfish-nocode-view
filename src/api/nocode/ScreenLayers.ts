@@ -18,8 +18,8 @@ enum Api {
  * @return 返回分页列表
  */
 export function getScreenLayers(reqScreenLayers?: ReqScreenLayers, shareToken?: string) {
-  return defHttp.get<ScreenLayers>({
+  return defHttp.get<ScreenLayers[]>({
     url: Api.ScreenLayers,
-    params: { ...reqScreenLayers, shareToken }
+    params: { ...reqScreenLayers, _shareToken: shareToken }
   });
 }

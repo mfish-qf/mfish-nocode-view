@@ -52,6 +52,9 @@ const globSetting = useGlobSetting();
  * @param url
  */
 export const imageUrl = (url) => {
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
   const { apiUrl } = globSetting;
   if (apiUrl && isString(apiUrl)) {
     url = `${apiUrl}${url}`;

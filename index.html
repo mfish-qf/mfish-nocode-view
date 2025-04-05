@@ -124,8 +124,8 @@
 <body>
 <script>
   (() => {
-    let main = document.getElementById("mainHtml");
-    let theme = window.localStorage.getItem("__APP__DARK__MODE__");
+    const main = document.getElementById("mainHtml");
+    const theme = window.localStorage.getItem("__APP__DARK__MODE__");
     if (main && theme) {
       main.setAttribute("data-theme", theme);
     }

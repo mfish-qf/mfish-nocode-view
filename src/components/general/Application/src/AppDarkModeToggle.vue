@@ -30,7 +30,7 @@
     const darkMode = getDarkMode.value === ThemeEnum.DARK ? ThemeEnum.LIGHT : ThemeEnum.DARK;
     const isAppearanceTransition =
       // @ts-expect-error
-      document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.startViewTransition && !globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!isAppearanceTransition || !event) {
       setTheme(darkMode);
       return;

@@ -6,6 +6,7 @@ import { isEqual } from "lodash-es";
 import { tryOnUnmounted } from "@vueuse/core";
 import { error } from "@/utils/Log";
 import { computed } from "vue";
+import { Nullable } from "@mfish/types";
 
 const dataTransfer = reactive<any>({});
 
@@ -19,11 +20,11 @@ export function useModal(): UseModalReturnType {
   const loaded = ref<Nullable<boolean>>(false);
   const uid = ref<number>(0);
 
-  function register(modalMethod: ModalMethods, uuid: number) {
+  function register(modalMethod: ModalMethods, uuid?: number) {
     if (!getCurrentInstance()) {
       throw new Error("useModal() can only be used inside setup() or functional components!");
     }
-    uid.value = uuid;
+    uid.value = uuid || 0;
     isProdMode() &&
       onUnmounted(() => {
         modal.value = null;
@@ -53,7 +54,7 @@ export function useModal(): UseModalReturnType {
     },
 
     getOpen: computed((): boolean => {
-      return openData[~~unref(uid)];
+      return openData[Math.trunc(unref(uid))];
     }),
 
     redoModalHeight: () => {
@@ -77,7 +78,6 @@ export function useModal(): UseModalReturnType {
         dataTransfer[id] = toRaw(data);
       }
     },
-
     closeModal: () => {
       getInstance()?.setModalProps({ open: false });
     }
@@ -98,12 +98,12 @@ export const useModalInner = (callbackFn?: Fn): UseModalInnerReturnType => {
     return instance;
   };
 
-  const register = (modalInstance: ModalMethods, uuid: number) => {
+  const register = (modalInstance: ModalMethods, uuid?: number) => {
     isProdMode() &&
       tryOnUnmounted(() => {
         modalInstanceRef.value = null;
       });
-    uidRef.value = uuid;
+    uidRef.value = uuid || 0;
     modalInstanceRef.value = modalInstance;
     currentInstance?.emit("register", modalInstance, uuid);
   };
@@ -124,7 +124,7 @@ export const useModalInner = (callbackFn?: Fn): UseModalInnerReturnType => {
         getInstance()?.setModalProps({ loading });
       },
       getOpen: computed((): boolean => {
-        return openData[~~unref(uidRef)];
+        return openData[Math.trunc(unref(uidRef))];
       }),
 
       changeOkLoading: (loading = true) => {

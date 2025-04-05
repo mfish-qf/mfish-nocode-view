@@ -184,7 +184,7 @@
   function closeBlock(index: number) {
     const delItem = { ...dragItems.value[index] };
     dragItems.value.splice(index, 1);
-    emit("closeBlock", index, delItem, dragItems);
+    emit("closeBlock", index, delItem);
     emit("dragChange", dragItems.value);
   }
 </script>

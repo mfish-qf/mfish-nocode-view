@@ -1,5 +1,12 @@
 import { defHttp } from "@/utils/http/axios";
-import { ScreenResourceApi, ReqScreenResourceApi, ScreenResourceApiPageModel } from "@/api/nocode/model/ScreenResourceApiModel";
+import {
+  ScreenResourceApi,
+  ReqScreenResourceApi,
+  ScreenResourceApiPageModel
+} from "@/api/nocode/model/ScreenResourceApiModel";
+import { DataTable, MetaDataHeader } from "@/api/sys/model/DbConnectModel";
+import { ReqPage } from "@/api/model/BaseModel";
+import { MfApi } from "@/api/nocode/model/MfApiModel";
 
 /**
  * @description: 大屏资源API
@@ -32,22 +39,17 @@ export function getScreenResourceApiById(id: string) {
 }
 
 /**
- * 导出大屏资源API
- * @param reqScreenResourceApi 请求参数
- */
-export function exportScreenResourceApi(reqScreenResourceApi?: ReqScreenResourceApi) {
-  return defHttp.download({ url: Api.ScreenResourceApi + "/export", params: reqScreenResourceApi });
-};
-
-/**
  * 新增大屏资源API
  *
  * @param screenResourceApi 请求参数
  * @return 返回结果
  */
 export function insertScreenResourceApi(screenResourceApi: ScreenResourceApi) {
-  return defHttp.post<ScreenResourceApi>({ url: Api.ScreenResourceApi, params: screenResourceApi }, { successMessageMode: "message" });
-};
+  return defHttp.post<ScreenResourceApi>(
+    { url: Api.ScreenResourceApi, params: screenResourceApi },
+    { successMessageMode: "message" }
+  );
+}
 
 /**
  * 修改大屏资源API
@@ -56,8 +58,11 @@ export function insertScreenResourceApi(screenResourceApi: ScreenResourceApi) {
  * @return 返回结果
  */
 export function updateScreenResourceApi(screenResourceApi: ScreenResourceApi) {
-  return defHttp.put<ScreenResourceApi>({ url: Api.ScreenResourceApi, params: screenResourceApi }, { successMessageMode: "message" });
-};
+  return defHttp.put<ScreenResourceApi>(
+    { url: Api.ScreenResourceApi, params: screenResourceApi },
+    { successMessageMode: "message" }
+  );
+}
 
 /**
  * 删除大屏资源API
@@ -67,14 +72,39 @@ export function updateScreenResourceApi(screenResourceApi: ScreenResourceApi) {
  */
 export function deleteScreenResourceApi(id: string) {
   return defHttp.delete<boolean>({ url: `${Api.ScreenResourceApi}/${id}` }, { successMessageMode: "message" });
-};
+}
 
 /**
- * 批量删除大屏资源API
- *
- * @param ids 唯一ID多个逗号隔开
- * @return 返回结果
+ * 查询API结果数据 包含表头
+ * @param id 大屏id,api_id
+ * @param reqPage
+ * @param params
  */
-export function deleteBatchScreenResourceApi(ids: string) {
-  return defHttp.delete<boolean>({ url: Api.ScreenResourceApi + "/batch/" + ids }, { successMessageMode: "message" });
-};
+export function getDataTableByResourceId(id: string, reqPage: ReqPage, params: any) {
+  return defHttp.get<DataTable>(
+    {
+      url: `${Api.ScreenResourceApi}/table/${id}?pageNum=${reqPage.pageNum}&pageSize=${reqPage.pageSize}`,
+      params: { ...params }
+    },
+    { errorMessageMode: "message" }
+  );
+}
+
+/**
+ * 查询API字段
+ * @param id 大屏id,api_id
+ */
+export function getFieldsByResourceId(id: string) {
+  return defHttp.get<MetaDataHeader[]>(
+    { url: `${Api.ScreenResourceApi}/fields/${id}` },
+    { errorMessageMode: "message" }
+  );
+}
+
+/**
+ * 获取API信息
+ * @param id 大屏id,api_id
+ */
+export function getMfApiByResourceId(id: string) {
+  return defHttp.get<ScreenResourceApi>({ url: `${Api.ScreenResourceApi}/api/${id}` });
+}
