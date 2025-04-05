@@ -28,7 +28,7 @@
   import { computed, ComputedRef } from "vue";
   import { Avatar } from "ant-design-vue";
   import { useUserStore } from "@/store/modules/User";
-  import headerImg from "@/assets/images/header.png";
+  import logo from "@/assets/images/logo.png";
   import { imageUrl } from "@/utils/file/FileUtils";
   import { getLocalFileUrl } from "@/api/storage/SysFile";
   import { SsoUser } from "@/api/sys/model/UserModel";
@@ -39,11 +39,8 @@
   const avatar = computed(() => {
     const imgUrl = userStore.getUserInfo?.headImgUrl;
     if (imgUrl) {
-      if (imgUrl.startsWith("http://") || imgUrl.startsWith("https://")) {
-        return imgUrl;
-      }
       return imageUrl(getLocalFileUrl(imgUrl));
     }
-    return headerImg;
+    return logo;
   });
 </script>

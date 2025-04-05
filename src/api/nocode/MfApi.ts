@@ -2,7 +2,6 @@ import { defHttp } from "@/utils/http/axios";
 import { MfApi, ReqMfApi, MfApiPageModel, Config, ReqSource } from "@/api/nocode/model/MfApiModel";
 import { DataTable, MetaDataHeader } from "@/api/sys/model/DbConnectModel";
 import { PageResult, ReqPage } from "@/api/model/BaseModel";
-import { useScreenEditStore } from "@/store/screen/ScreenEdit";
 
 /**
  * @description: 自定义API
@@ -115,11 +114,10 @@ export function getDataFieldsById(id: string) {
  * @param params
  */
 export function getDataTableById(id: string, reqPage: ReqPage, params: any) {
-  const screenEditStore = useScreenEditStore();
   return defHttp.get<DataTable>(
     {
       url: `${Api.DataTable}/${id}?pageNum=${reqPage.pageNum}&pageSize=${reqPage.pageSize}`,
-      params: { ...params, shareToken: screenEditStore.getShareToken }
+      params
     },
     { errorMessageMode: "message" }
   );

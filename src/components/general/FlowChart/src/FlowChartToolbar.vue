@@ -4,7 +4,7 @@
       <Tooltip placement="bottom" v-bind="item.disabled ? { visible: false } : {}">
         <template #title>{{ item.tooltip }}</template>
         <span :class="`${prefixCls}-toolbar__icon`" v-if="item.icon" @click="onControl(item)">
-          <Icon :icon="item.icon" :class="item.disabled ? 'cursor-not-allowed disabeld' : 'cursor-pointer'" />
+          <Icon :icon="item.icon" :class="item.disabled ? 'cursor-not-allowed disabled' : 'cursor-pointer'" />
         </span>
       </Tooltip>
       <Divider v-if="item.separate" type="vertical" />
@@ -138,8 +138,13 @@
   @prefix-cls: ~"@{namespace}-flow-chart-toolbar";
 
   [data-theme="dark"] {
-    .lf-dnd {
-      background: #080808;
+    .lf-graph {
+      background: @app-content-background;
+    }
+    .@{prefix-cls} {
+      .disabled {
+        color: rgba(255, 255, 255, 0.3);
+      }
     }
   }
 
@@ -148,8 +153,8 @@
     background-color: @app-content-background;
     border-bottom: 1px solid @border-color-base;
 
-    .disabeld {
-      color: @disabled-color;
+    .disabled {
+      color: rgba(0, 0, 0, 0.3);
     }
 
     &__icon {

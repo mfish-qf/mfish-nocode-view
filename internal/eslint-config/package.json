@@ -25,27 +25,27 @@
     }
   },
   "dependencies": {
-    "eslint-config-turbo": "^2.4.4",
+    "eslint-config-turbo": "^2.5.0",
     "eslint-plugin-command": "^0.2.7"
   },
   "devDependencies": {
-    "@eslint/js": "^9.22.0",
+    "@eslint/js": "^9.24.0",
     "@types/eslint": "^9.6.1",
-    "@typescript-eslint/eslint-plugin": "^8.27.0",
-    "@typescript-eslint/parser": "^8.27.0",
-    "eslint": "^9.22.0",
-    "eslint-config-prettier": "^9.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
+    "@typescript-eslint/parser": "^8.29.0",
+    "eslint": "^9.24.0",
+    "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-jsdoc": "^50.6.8",
-    "eslint-plugin-jsonc": "^2.19.1",
+    "eslint-plugin-jsdoc": "^50.6.9",
+    "eslint-plugin-jsonc": "^2.20.0",
     "eslint-plugin-no-only-tests": "^3.3.0",
-    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-regexp": "^2.7.0",
     "eslint-plugin-unicorn": "^56.0.1",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "eslint-plugin-vue": "^9.33.0",
+    "eslint-plugin-vue": "^10.0.0",
     "globals": "^15.15.0",
     "jsonc-eslint-parser": "^2.4.0",
-    "vue-eslint-parser": "^9.4.3"
+    "vue-eslint-parser": "^10.1.2"
   }
 }

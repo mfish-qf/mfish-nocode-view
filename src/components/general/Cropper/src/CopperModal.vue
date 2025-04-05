@@ -112,7 +112,7 @@
 </template>
 <script lang="ts">
   import type { CropperResult, Cropper } from "./typing";
-  import { defineComponent, ref } from "vue";
+  import { defineComponent, PropType, ref } from "vue";
   import CropperImage from "./Cropper.vue";
   import { Space, Upload, Avatar, Tooltip } from "ant-design-vue";
   import { useDesign } from "@/hooks/web/UseDesign";
@@ -231,7 +231,8 @@
     &-cropper {
       height: 300px;
       background: #eee;
-      background-image: linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0, transparent 75%, rgb(0 0 0 / 25%) 0),
+      background-image:
+        linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0, transparent 75%, rgb(0 0 0 / 25%) 0),
         linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0, transparent 75%, rgb(0 0 0 / 25%) 0);
       background-position:
         0 0,

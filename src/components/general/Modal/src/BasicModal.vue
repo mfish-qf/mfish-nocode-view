@@ -14,7 +14,10 @@
     </template>
 
     <template #title v-if="!$slots.title">
-      <ModalHeader :help-message="getProps.helpMessage" :title="getMergeProps.title" @dblclick="handleTitleDbClick" />
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <ModalHeader :help-message="getProps.helpMessage" :title="getMergeProps.title" @dblclick="handleTitleDbClick" />
+        <slot name="customHeaderButton"></slot>
+      </div>
     </template>
 
     <template #footer v-if="!$slots.footer">

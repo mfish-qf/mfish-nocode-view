@@ -89,12 +89,13 @@
       }
     }
 
-    & span:nth-child(1) {
-      display: inline-block;
-      padding: 10px;
+    & span:nth-child(n-1) {
+      display: flex;
+      align-items: center;
+      padding: 4px;
 
       &:hover {
-        color: @button-primary-color;
+        color: @main-color;
       }
     }
 

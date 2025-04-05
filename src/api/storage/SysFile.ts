@@ -19,6 +19,9 @@ enum Api {
  * @param fileKey
  */
 export const getLocalFileUrl = (fileKey?: string) => {
+  if (fileKey?.startsWith("http://") || fileKey?.startsWith("https://")) {
+    return fileKey;
+  }
   return `/storage/file/${fileKey}`;
 };
 

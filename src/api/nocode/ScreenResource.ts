@@ -1,5 +1,6 @@
 import { defHttp } from "@/utils/http/axios";
 import { ScreenResource, ReqScreenResource, ScreenResourcePageModel } from "@/api/nocode/model/ScreenResourceModel";
+import { ScreenLayers } from "@/api/nocode/model/ScreenLayersModel";
 
 /**
  * @description: 大屏资源信息
@@ -64,4 +65,12 @@ export function updateScreenResource(screenResource: ScreenResource) {
  */
 export function deleteScreenResource(sourceId: string) {
   return defHttp.delete<boolean>({ url: `${Api.ScreenResource}/${sourceId}` }, { successMessageMode: "message" });
+}
+
+/**
+ * 通过资源id查询图层信息
+ * @param sourceId
+ */
+export function getLayersBySourceId(sourceId: string) {
+  return defHttp.get<ScreenLayers[]>({ url: `${Api.ScreenResource}/layers/${sourceId}` });
 }

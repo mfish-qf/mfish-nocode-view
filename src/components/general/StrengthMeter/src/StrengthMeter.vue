@@ -47,7 +47,7 @@
         return score;
       });
 
-      function handleChange(e: ChangeEvent) {
+      function handleChange(e: any) {
         innerValueRef.value = e.target.value;
       }
 
@@ -73,13 +73,23 @@
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~"@{namespace}-strength-meter";
-
+  [data-theme="dark"] {
+    .@{prefix-cls} {
+      &-bar {
+        background-color: rgba(255, 255, 255, 0.1);
+        &::before,
+        &::after {
+          border-color: @black;
+        }
+      }
+    }
+  }
   .@{prefix-cls} {
     &-bar {
       position: relative;
       height: 6px;
       margin: 10px auto 6px;
-      background-color: @disabled-color;
+      background-color: rgba(0, 0, 0, 0.2);
       border-radius: 6px;
 
       &::before,

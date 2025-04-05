@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
 import { generate } from "@ant-design/colors";
 import { theme } from "ant-design-vue";
-import convertLegacyToken from "ant-design-vue/lib/theme/convertLegacyToken";
+import convertLegacyToken from "ant-design-vue/es/theme/convertLegacyToken";
 import { colorError, colorSuccess, colorWarning } from "@mfish/types";
 
 const { defaultAlgorithm, defaultSeed } = theme;

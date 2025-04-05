@@ -30,7 +30,7 @@ export const getMfScreenList = (reqMfScreen?: ReqMfScreen) => {
  * @return 返回分页列表
  */
 export function getMfScreenById(id: string, shareToken?: string) {
-  return defHttp.get<MfScreen>({ url: `${Api.MfScreen}/${id}`, params: { shareToken } });
+  return defHttp.get<MfScreen>({ url: `${Api.MfScreen}/${id}`, params: { _shareToken: shareToken } });
 }
 
 /**

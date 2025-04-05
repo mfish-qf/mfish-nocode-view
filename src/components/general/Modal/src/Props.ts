@@ -80,5 +80,7 @@ export const basicProps = Object.assign({}, modalProps, {
 
   wrapClassName: { type: String },
 
-  zIndex: { type: Number }
+  zIndex: { type: Number },
+
+  buttonPosition: { type: String as PropType<"left" | "center" | "right">, default: "right" }
 });

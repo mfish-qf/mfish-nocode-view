@@ -4,12 +4,13 @@
   </div>
 </template>
 <script lang="ts">
-  import type { CSSProperties } from "vue";
+  import type { CSSProperties, PropType } from "vue";
   import { defineComponent, onMounted, ref, unref, computed, onUnmounted } from "vue";
   import Cropper from "cropperjs";
   import "cropperjs/dist/cropper.css";
   import { useDesign } from "@/hooks/web/UseDesign";
   import { useDebounceFn } from "@vueuse/shared";
+  import { Nullable } from "@mfish/types";
 
   type Options = Cropper.Options;
 
