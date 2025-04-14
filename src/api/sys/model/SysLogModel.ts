@@ -1,10 +1,10 @@
-import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "@mfish/core/src/api/model/BaseModel";
 
 /**
  * @description: 系统日志
  * @author: mfish
  * @date: 2023-01-08
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export interface SysLog extends BaseEntity<number> {
   title: string;

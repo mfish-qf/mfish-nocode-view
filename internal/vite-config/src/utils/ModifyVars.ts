@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import { generate } from "@ant-design/colors";
 import { theme } from "ant-design-vue";
 import convertLegacyToken from "ant-design-vue/es/theme/convertLegacyToken";
-import { colorError, colorSuccess, colorWarning } from "@mfish/types";
+import { colorError, colorSuccess, colorWarning } from "@mfish/types/BtnColor";
 
 const { defaultAlgorithm, defaultSeed } = theme;
 const primaryColor = "#ee4f12";
@@ -29,7 +29,7 @@ export function generateModifyVars() {
   return {
     ...v3Token,
     // reference:  Avoid repeated references
-    hack: `true; @import (reference) "${resolve("src/design/config.less")}";`,
+    hack: `true; @import (reference) "${resolve("packages/styles/src/config.less")}";`,
     "primary-color": primary,
     ...primaryColorObj,
     "info-color": primary,

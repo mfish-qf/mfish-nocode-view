@@ -31,12 +31,12 @@
 </template>
 <script setup lang="ts">
   import SwitchItem from "./SwitchItem.vue";
-  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
   import { HandlerEnum } from "@/layouts/default/setting/Enum";
-  import { useTransitionSetting } from "@/hooks/setting/UseTransitionSetting";
+  import { useTransitionSetting } from "@mfish/core/src/hooks/setting/UseTransitionSetting";
   import { baseHandler } from "@/layouts/default/setting/Handler";
-  import { RouterTransitionEnum } from "@/enums/AppEnum";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { RouterTransitionEnum } from "@mfish/core/enums";
+  import { useDesign } from "@mfish/core";
 
   defineOptions({
     name: "PreferenceAnimation"

@@ -26,11 +26,11 @@
 </template>
 <script lang="ts" setup>
   import { onMounted, ref, unref, nextTick, reactive } from "vue";
-  import { BasicTree, TreeActionType, TreeItem } from "@/components/general/Tree";
-  import { getOrg } from "@/api/sys/Org";
-  import { getTenantOrgTree } from "@/api/sys/SsoTenant";
-  import { Icon } from "@/components/general/Icon";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+  import { BasicTree, TreeActionType, TreeItem } from "@mfish/core/src/components/Tree";
+  import { getOrg } from "@mfish/core/src/api/sys/Org";
+  import { getTenantOrgTree } from "@mfish/core/src/api/sys/SsoTenant";
+  import { Icon } from "@mfish/core/src/components/Icon";
+  import { useRootSetting } from "@mfish/core";
   import { Nullable } from "@mfish/types";
   defineOptions({ name: "OrgTree" });
 

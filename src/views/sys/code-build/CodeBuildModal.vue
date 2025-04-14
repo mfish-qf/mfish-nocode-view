@@ -2,7 +2,7 @@
  @description: 代码构建
  @author: mfish
  @date: 2023-04-11
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="代码构建" @ok="handleSubmit">
@@ -46,19 +46,19 @@
 </template>
 <script lang="ts" setup>
   import { ref, onMounted, unref } from "vue";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
   import { codeBuildFormSchema, reqSearches } from "./codeBuild.data";
-  import { BasicModal, useModal, useModalInner } from "@/components/general/Modal";
+  import { BasicModal, useModal, useModalInner } from "@mfish/core/src/components/Modal";
   import { insertCodeBuild, updateCodeBuild } from "@/api/sys/CodeBuild";
-  import { buildUUID } from "@/utils/Uuid";
-  import { getDictItems } from "@/api/sys/DictItem";
-  import { getDBTree, getFieldList } from "@/api/sys/DbConnect";
-  import { DictItem } from "@/api/sys/model/DictItemModel";
+  import { buildUUID } from "@mfish/core/src/utils/Uuid";
+  import { getDictItems } from "@mfish/core/src/api/sys/DictItem";
+  import { getDBTree, getFieldList } from "@mfish/core/src/api/sys/DbConnect";
+  import { DictItem } from "@mfish/core/src/api/sys/model/DictItemModel";
   import { getDictList } from "@/api/sys/Dict";
   import { Recordable } from "@mfish/types";
   import DbConnectModal from "@/views/sys/db-connect/DbConnectModal.vue";
-  import { usePermission } from "@/hooks/web/UsePermission";
+  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
 
   defineOptions({ name: "CodeBuildModal" });
 

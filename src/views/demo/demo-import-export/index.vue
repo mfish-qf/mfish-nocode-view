@@ -2,7 +2,7 @@
  @description: 导入导出Demo
  @author: mfish
  @date: 2024-09-02
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <PageWrapper
@@ -76,7 +76,7 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
   import {
     deleteBatchDemoImportExport,
     deleteDemoImportExport,
@@ -85,17 +85,17 @@
     getDemoImportExportList,
     importDemo
   } from "@/api/demo/DemoImportExport";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import DemoImportExportModal from "./DemoImportExportModal.vue";
   import DemoImportExportViewModal from "./DemoImportExportViewModal.vue";
   import { columns, searchFormSchema } from "./demoImportExport.data";
   import { DemoImportExport } from "@/api/demo/model/DemoImportExportModel";
   import { onMounted, ref } from "vue";
   import { Upload as AUpload, Tour as ATour } from "ant-design-vue";
-  import { useMessage } from "@/hooks/web/UseMessage";
+  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
   import { ImportOutlined, ExportOutlined } from "@ant-design/icons-vue";
-  import DictTag from "@/components/general/DictTag/DictTag.vue";
-  import AButton from "@/components/general/Button/src/BasicButton.vue";
+  import { DictTag } from "@mfish/core/src/components/DictTag";
+  import { Button as AButton } from "@mfish/core/src/components/Button";
   import type { TourProps } from "ant-design-vue";
   import { PageWrapper } from "@/components/general/Page";
 

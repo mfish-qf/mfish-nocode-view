@@ -19,8 +19,8 @@
 <script lang="ts">
   import { PropType } from "vue";
   import { defineComponent, ref, computed, unref, getCurrentInstance, watch } from "vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { propTypes } from "@/utils/PropTypes";
+  import { useDesign } from "@mfish/core";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
   import { useMenuItem } from "./UseMenu";
   import { Tooltip } from "ant-design-vue";
   import { useSimpleRootMenuContext } from "./UseSimpleMenuContext";

@@ -1,7 +1,7 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
-import { buildDictTag, getDictProps } from "@/utils/DictUtils";
-import { DescItem } from "@/components/general/Description";
+import { BasicColumn } from "@mfish/core/src/components/Table";
+import { FormSchema } from "@mfish/core/src/components/Table";
+import { buildDictTag, getDictProps } from "@mfish/core/src/components/DictTag";
+import { DescItem } from "@mfish/core/src/components/Description";
 import { Tag } from "ant-design-vue";
 import { h } from "vue";
 
@@ -9,7 +9,7 @@ import { h } from "vue";
  * @description: 客户端信息
  * @author: mfish
  * @date: 2023-05-12
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

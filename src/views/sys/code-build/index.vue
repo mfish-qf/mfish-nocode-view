@@ -2,7 +2,7 @@
  @description: 代码构建
  @author: mfish
  @date: 2023-04-11
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <div>
@@ -77,7 +77,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
   import {
     deleteBatchCodeBuild,
     deleteCodeBuild,
@@ -85,14 +85,14 @@
     getCodeBuildList,
     saveCodeLocal
   } from "@/api/sys/CodeBuild";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import CodeBuildModal from "./CodeBuildModal.vue";
   import { columns, searchFormSchema } from "./codeBuild.data";
   import { TableProps } from "ant-design-vue";
   import CodeQueryModal from "@/views/sys/code-build/CodeQueryModal.vue";
   import { CodeBuild } from "@/api/sys/model/CodeBuildModel";
-  import { isProdMode } from "@/utils/Env";
-  import { useMessage } from "@/hooks/web/UseMessage";
+  import { isProdMode } from "@mfish/core/src/utils/Env";
+  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
   import CodeMenuModal from "@/views/sys/code-build/CodeMenuModal.vue";
   import { ref } from "vue";
   import { Recordable } from "@mfish/types";

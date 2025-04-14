@@ -32,11 +32,11 @@
 
 <script lang="ts" setup>
   import { toRaw, ref } from "vue";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
   import { Tabs as ATabs } from "ant-design-vue";
   import { viewCode } from "@/api/sys/CodeBuild";
   import { CodeVo } from "@/api/sys/model/CodeBuildModel";
-  import { CodeEditor, MODE } from "@/components/general/CodeEditor";
+  import { CodeEditor, MODE } from "@mfish/core/src/components/CodeEditor";
   defineOptions({ name: "CodeQueryModal" });
   const ATabPane = ATabs.TabPane;
   const codeList = ref<CodeVo[]>([]);

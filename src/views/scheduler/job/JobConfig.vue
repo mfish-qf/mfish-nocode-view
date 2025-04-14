@@ -12,9 +12,9 @@
 </template>
 <script lang="ts" setup>
   import { watch } from "vue";
-  import { BasicForm, useForm } from "../../../components/general/Form";
+  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
   import { jobFormSchema } from "./job.data";
-  import { CodeEditor, MODE } from "@/components/general/CodeEditor";
+  import { CodeEditor, MODE } from "@mfish/core/src/components/CodeEditor";
 
   const props = defineProps({
     jobInfo: {

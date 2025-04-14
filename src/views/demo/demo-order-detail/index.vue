@@ -2,7 +2,7 @@
  @description: 销售订单明细
  @author: mfish
  @date: 2024-09-02
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <div>
@@ -51,15 +51,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
   import { getDemoOrderDetailList } from "@/api/demo/DemoOrderDetail";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import DemoOrderDetailModal from "./DemoOrderDetailModal.vue";
   import DemoOrderDetailViewModal from "./DemoOrderDetailViewModal.vue";
   import { columns, searchFormSchema } from "./demoOrderDetail.data";
   import { DemoOrderDetail } from "@/api/demo/model/DemoOrderDetailModel";
   import { ref, watch } from "vue";
-  import { useMessage } from "@/hooks/web/UseMessage";
+  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
 
   defineOptions({ name: "DemoOrderDetailManagement" });
   const props = defineProps({

@@ -1,6 +1,6 @@
 {
   "name": "@mfish/stylelint-config",
-  "version": "1.3.2",
+  "version": "2.0.0",
   "private": true,
   "author": {
     "name": "mfish",
@@ -30,7 +30,7 @@
     "postcss-html": "^1.8.0",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.5.3",
-    "stylelint": "^16.17.0",
+    "stylelint": "^16.18.0",
     "stylelint-config-recommended": "^14.0.1",
     "stylelint-config-recommended-scss": "^14.1.0",
     "stylelint-config-recommended-vue": "^1.6.0",

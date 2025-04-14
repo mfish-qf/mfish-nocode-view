@@ -1,4 +1,4 @@
-import { isString } from "@/utils/Is";
+import { isString } from "@mfish/core/src/utils/Is";
 import { RenderQrCodeParams, LogoType } from "./Typing";
 
 export const drawLogo = ({ canvas, logo }: RenderQrCodeParams) => {

@@ -65,15 +65,15 @@
 </template>
 <script lang="ts" setup>
   import { ref, unref, computed, toRaw } from "vue";
-  import { ScrollContainer } from "@/components/general/Container";
+  import { ScrollContainer } from "@mfish/core/src/components/Container";
   import DBTree from "./DBTree.vue";
-  import { Icon } from "@/components/general/Icon";
+  import { Icon } from "@mfish/core/src/components/Icon";
   import { Tooltip, Row as ARow, Col as ACol, Breadcrumb as ABreadcrumb, Divider as ADivider } from "ant-design-vue";
-  import { TableInfo } from "@/api/sys/model/DbConnectModel";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { TableInfo } from "@mfish/core/src/api/sys/model/DbConnectModel";
+  import { useDesign } from "@mfish/core";
   import TableDetail from "@/views/sys/database/TableDetail.vue";
-  import { TreeItem } from "@/components/general/Tree";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+  import { TreeItem } from "@mfish/core/src/components/Tree";
+  import { useRootSetting } from "@mfish/core";
   import { NLayout, NLayoutContent, NLayoutSider } from "naive-ui";
   defineOptions({ name: "DataBaseManagement" });
   defineProps({

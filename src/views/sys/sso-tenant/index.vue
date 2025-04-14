@@ -2,7 +2,7 @@
  @description: 租户信息表
  @author: mfish
  @date: 2023-05-31
- @version: V1.0.1
+ @version: V2.0.0
 -->
 <template>
   <div>
@@ -54,13 +54,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
-  import { deleteSsoTenant, exportSsoTenant, getSsoTenantList } from "@/api/sys/SsoTenant";
-  import { useModal } from "@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { deleteSsoTenant, exportSsoTenant, getSsoTenantList } from "@mfish/core/src/api/sys/SsoTenant";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import SsoTenantModal from "./SsoTenantModal.vue";
   import { columns, searchFormSchema } from "./ssoTenant.data";
-  import { SsoTenant } from "@/api/sys/model/SsoTenantModel";
-  import DictTag from "@/components/general/DictTag/DictTag.vue";
+  import { SsoTenant } from "@mfish/core/src/api/sys/model/SsoTenantModel";
+  import { DictTag } from "@mfish/core/src/components/DictTag";
   defineOptions({ name: "SsoTenantManagement" });
   const [registerModal, { openModal }] = useModal();
   const [registerTable, { reload, getForm }] = useTable({

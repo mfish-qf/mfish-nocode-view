@@ -19,18 +19,18 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref, toRaw } from "vue";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
   import { formSchema } from "./org.data";
-  import { getOrg, insertOrg, updateOrg } from "@/api/sys/Org";
-  import { getAllRoleList } from "@/api/sys/Role";
-  import { getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "@/api/sys/SsoTenant";
-  import { useMessage } from "@/hooks/web/UseMessage";
-  import { isNullOrUnDef } from "@/utils/Is";
-  import { SsoOrg } from "@/api/sys/model/OrgModel";
+  import { getOrg, insertOrg, updateOrg } from "@mfish/core/src/api/sys/Org";
+  import { getAllRoleList } from "@mfish/core/src/api/sys/Role";
+  import { getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "@mfish/core/src/api/sys/SsoTenant";
+  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
+  import { isNullOrUnDef } from "@mfish/core/src/utils/Is";
+  import { SsoOrg } from "@mfish/core/src/api/sys/model/OrgModel";
   import { TreeSelect } from "ant-design-vue";
   import { Recordable } from "@mfish/types";
-  import { SsoRole } from "@/api/sys/model/RoleModel";
+  import { SsoRole } from "@mfish/core/src/api/sys/model/RoleModel";
 
   const props = defineProps({
     source: {

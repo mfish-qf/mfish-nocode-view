@@ -1,10 +1,10 @@
-import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "@mfish/core/src/api/model/BaseModel";
 
 /**
  * @description: 销售订单明细
  * @author: mfish
  * @date: 2024-09-02
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export interface DemoOrderDetail extends BaseEntity<string> {
   //订单号

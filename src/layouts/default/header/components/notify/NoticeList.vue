@@ -54,9 +54,9 @@
 <script lang="ts">
   import { computed, defineComponent, PropType, ref, watch, unref } from "vue";
   import { ListItem } from "./Data";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useDesign } from "@mfish/core";
   import { List, Avatar, Tag, Typography } from "ant-design-vue";
-  import { isNumber } from "@/utils/Is";
+  import { isNumber } from "@mfish/core/src/utils/Is";
 
   export default defineComponent({
     components: {

@@ -2,7 +2,7 @@
  @description: 属性分类字典
  @author: mfish
  @date: 2024-03-12
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
@@ -11,10 +11,10 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
   import { dictCategoryFormSchema } from "./dictCategory.data";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { getDictCategoryTree, insertDictCategory, updateDictCategory } from "@/api/sys/DictCategory";
+  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { getDictCategoryTree, insertDictCategory, updateDictCategory } from "@mfish/core/src/api/sys/DictCategory";
 
   const emit = defineEmits(["success", "register"]);
   const isUpdate = ref(true);

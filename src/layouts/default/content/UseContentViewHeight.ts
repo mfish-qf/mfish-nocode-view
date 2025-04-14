@@ -1,6 +1,6 @@
 import { ref, computed, unref } from "vue";
-import { createPageContext } from "@/hooks/component/UsePageContext";
-import { useWindowSizeFn } from "@/hooks/event/UseWindowSizeFn";
+import { createPageContext } from "@mfish/core/src/hooks/component/UsePageContext";
+import { useWindowSizeFn } from "@mfish/core/src/hooks/event/UseWindowSizeFn";
 
 const headerHeightRef = ref(0);
 const footerHeightRef = ref(0);

@@ -19,7 +19,7 @@
 <script lang="ts" setup>
   import { PropType } from "vue";
   import { CheckOutlined } from "@ant-design/icons-vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useDesign } from "@mfish/core";
   import { baseHandler } from "../Handler";
   import { HandlerEnum } from "../Enum";
 

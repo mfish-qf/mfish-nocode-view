@@ -9,8 +9,8 @@
 
 <script lang="ts" setup>
   import { useRouter, useRoute } from "vue-router";
-  import { defHttp } from "@/utils/http/axios";
-  import { useMessage } from "@/hooks/web/UseMessage";
+  import { defHttp } from "@mfish/core/src/utils/http/axios";
+  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
   import Oauth2 from "@/views/sys/login/Oauth2.vue";
 
   const { createErrorModal } = useMessage();

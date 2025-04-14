@@ -4,18 +4,18 @@
   import { BasicMenu } from "@/components/general/Menu";
   import { SimpleMenu } from "@/components/general/SimpleMenu";
   import { AppLogo } from "@/components/general/Application";
-  import { MenuModeEnum, MenuSplitTyeEnum } from "@/enums/MenuEnum";
-  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-  import { ScrollContainer } from "@/components/general/Container";
-  import { externalOpen, useGo } from "@/hooks/web/UsePage";
+  import { MenuModeEnum, MenuSplitTyeEnum } from "@mfish/core/enums";
+  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
+  import { ScrollContainer } from "@mfish/core/src/components/Container";
+  import { externalOpen, useGo } from "@mfish/core/src/hooks/web/UsePage";
   import { useSplitMenu } from "./UseLayoutMenu";
-  import { openWindow } from "@/utils";
-  import { propTypes } from "@/utils/PropTypes";
-  import { isUrl } from "@/utils/Is";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-  import { useAppInject } from "@/hooks/web/UseAppInject";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { ThemeEnum } from "@/enums/AppEnum";
+  import { openWindow } from "@mfish/core/src/utils";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import { isUrl } from "@mfish/core/src/utils/Is";
+  import { useRootSetting } from "@mfish/core";
+  import { useAppInject } from "@/hooks/UseAppInject";
+  import { useDesign } from "@mfish/core";
+  import { ThemeEnum } from "@mfish/core/enums";
   import { Nullable } from "@mfish/types";
 
   export default defineComponent({

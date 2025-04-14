@@ -40,13 +40,13 @@
   import { unref, ref, onBeforeMount } from "vue";
   import { useRoute } from "vue-router";
   import { PageWrapper } from "@/components/general/Page";
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
-  import { deleteDictItem, getDictItemList } from "@/api/sys/DictItem";
-  import { useModal } from "@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { deleteDictItem, getDictItemList } from "@mfish/core/src/api/sys/DictItem";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import DictItemModal from "./DictItemModal.vue";
   import { columns, searchFormSchema } from "./dictItem.data";
-  import { useGo } from "@/hooks/web/UsePage";
-  import { useTabs } from "@/hooks/web/UseTabs";
+  import { useGo } from "@mfish/core/src/hooks/web/UsePage";
+  import { useTabs } from "@mfish/core/src/hooks/web/UseTabs";
   import { Recordable } from "@mfish/types";
   defineOptions({ name: "DictItemManagement" });
 

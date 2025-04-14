@@ -1,6 +1,6 @@
 {
   "name": "@mfish/types",
-  "version": "1.3.2",
+  "version": "2.0.0",
   "private": true,
   "author": {
     "name": "mfish",
@@ -14,11 +14,30 @@
       "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
-    "./global": {
-      "types": "./global.d.ts"
+    "./BtnColor": {
+      "types": "./src/BtnColor.ts",
+      "default": "./src/BtnColor.ts"
+    },
+    "./src/type/global": {
+      "types": "./src/type/global.d.ts",
+      "default": "./src/type/global.d.ts"
+    },
+    "./src/type/config": {
+      "types": "./src/type/config.d.ts",
+      "default": "./src/type/config.d.ts"
+    },
+    "./src/type/axios": {
+      "types": "./src/type/axios.d.ts",
+      "default": "./src/type/axios.d.ts"
+    },
+    "./src/type/store":{
+      "types": "./src/type/store.d.ts",
+      "default": "./src/type/store.d.ts"
+    },
+    "./src/type/utils":{
+      "types": "./src/type/utils.d.ts",
+      "default": "./src/type/utils.d.ts"
     }
-  },
-  "dependencies": {
-    "vue": "^3.5.13"
+
   }
 }

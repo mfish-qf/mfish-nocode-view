@@ -16,11 +16,11 @@
   import { RouterView } from "vue-router";
   import { darkTheme as nDarkTheme, lightTheme as nLightTheme, NConfigProvider } from "naive-ui";
   import { AppProvider } from "@/components/general/Application";
-  import { useTitle } from "@/hooks/web/UseTitle";
-  import { useLocale } from "@/i18n/UseLocale";
-  import { useDarkModeTheme } from "@/hooks/setting/UseDarkModeTheme";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-  import { ThemeEnum } from "@/enums/AppEnum";
+  import { useTitle } from "@mfish/core/src/hooks/web/UseTitle";
+  import { useLocale } from "@mfish/core/src/i18n/UseLocale";
+  import { useDarkModeTheme } from "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+  import { useRootSetting } from "@mfish/core";
+  import { ThemeEnum } from "@mfish/core/enums";
 
   const { getAntdLocale } = useLocale();
   const { getDarkMode } = useRootSetting();

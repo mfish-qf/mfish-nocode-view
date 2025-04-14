@@ -36,15 +36,15 @@
 </template>
 <script lang="ts" setup>
   import type { PropType } from "vue";
-  import type { Menu } from "@/router/Types";
+  import type { Menu } from "@mfish/core/src/router/Types";
   import { computed } from "vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { Icon } from "@/components/general/Icon";
+  import { useDesign } from "@mfish/core";
+  import { Icon } from "@mfish/core/src/components/Icon";
   import MenuItem from "./components/MenuItem.vue";
   import SubMenu from "./components/SubMenuItem.vue";
-  import { propTypes } from "@/utils/PropTypes";
-  import { useI18n } from "@/hooks/web/UseI18n";
-  import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
+  import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
 
   defineOptions({ name: "SimpleSubMenu" });
 

@@ -1,5 +1,5 @@
 import type { InjectionKey, ComputedRef } from "vue";
-import { createContext, useContext } from "@/hooks/core/UseContext";
+import { createContext, useContext } from "@mfish/core";
 
 export interface ContentContextProps {
   contentHeight: ComputedRef<number>;

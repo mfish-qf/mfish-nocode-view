@@ -28,7 +28,7 @@
   import TenantRoleSetting from "./TenantRoleSetting.vue";
   import TenantUserSetting from "./TenantUserSetting.vue";
   import { useRoute } from "vue-router";
-  import { usePermission } from "@/hooks/web/UsePermission";
+  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
   import { PageWrapper } from "@/components/general/Page";
   const ATabPane = ATabs.TabPane;
   const components = {

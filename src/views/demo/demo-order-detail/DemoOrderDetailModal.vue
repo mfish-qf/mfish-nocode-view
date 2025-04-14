@@ -2,7 +2,7 @@
  @description: 销售订单明细
  @author: mfish
  @date: 2024-09-02
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
@@ -11,9 +11,9 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
   import { demoOrderDetailFormSchema } from "./demoOrderDetail.data";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
 
   defineOptions({ name: "DemoOrderDetailModal" });
   const emit = defineEmits(["success", "register"]);

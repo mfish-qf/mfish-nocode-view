@@ -1,6 +1,6 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
-import { getDBTree } from "@/api/sys/DbConnect";
+import { BasicColumn } from "@mfish/core/src/components/Table";
+import { FormSchema } from "@mfish/core/src/components/Table";
+import { getDBTree } from "@mfish/core/src/api/sys/DbConnect";
 import { h } from "vue";
 import { Cascader, Select } from "ant-design-vue";
 
@@ -8,7 +8,7 @@ import { Cascader, Select } from "ant-design-vue";
  * @description: 代码构建
  * @author: mfish
  * @date: 2023-04-11
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

@@ -1,14 +1,14 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
+import { BasicColumn } from "@mfish/core/src/components/Table";
+import { FormSchema } from "@mfish/core/src/components/Table";
 import { h, ref } from "vue";
 import { Tag } from "ant-design-vue";
-import { Icon } from "@/components/general/Icon";
-import { useAppStore } from "@/store/modules/App";
-import { DescItem } from "@/components/general/Description";
-import { YNTag_Status } from "@/components/general/DictTag/CommonTag";
-import { getOrgByIds } from "@/api/sys/Org";
-import { getRoleByIds } from "@/api/sys/Role";
-import { getTenantOrgByIds, getTenantRoleByIds } from "@/api/sys/SsoTenant";
+import { Icon } from "@mfish/core/src/components/Icon";
+import { useAppStore } from "@mfish/stores/modules";
+import { DescItem } from "@mfish/core/src/components/Description";
+import { YNTag_Status } from "@mfish/core/src/components/DictTag";
+import { getOrgByIds } from "@mfish/core/src/api/sys/Org";
+import { getRoleByIds } from "@mfish/core/src/api/sys/Role";
+import { getTenantOrgByIds, getTenantRoleByIds } from "@mfish/core/src/api/sys/SsoTenant";
 
 export const columns: BasicColumn[] = [
   {

@@ -10,9 +10,9 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
   import { dictFormSchema } from "./dict.data";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
   import { insertDict, updateDict } from "@/api/sys/Dict";
 
   const emit = defineEmits(["success", "register"]);

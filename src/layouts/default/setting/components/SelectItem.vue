@@ -14,7 +14,7 @@
 <script lang="ts" setup>
   import { PropType, computed } from "vue";
   import { Select as ASelect } from "ant-design-vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useDesign } from "@mfish/core";
   import { baseHandler } from "../Handler";
   import { HandlerEnum } from "../Enum";
 

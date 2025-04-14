@@ -1,11 +1,11 @@
-import { defHttp } from "@/utils/http/axios";
+import { defHttp } from "@mfish/core/src/utils/http/axios";
 import { Dict, ReqDict, DictPageModel } from "@/api/sys/model/DictModel";
 
 /**
  * @description: 字典
  * @Author: mfish
  * @Date: 2023-01-03
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 enum Api {
   Dict = "/sys/dict",

@@ -30,11 +30,11 @@
   import { CSSProperties, PropType, provide, useAttrs, useSlots } from "vue";
   import { computed, watch, ref, unref } from "vue";
   import PageFooter from "./PageFooter.vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { propTypes } from "@/utils/PropTypes";
+  import { useDesign } from "@mfish/core";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
   import { debounce, omit } from "lodash-es";
   import { PageHeader } from "ant-design-vue";
-  import { useContentHeight } from "@/hooks/web/UseContentHeight";
+  import { useContentHeight } from "@/hooks/UseContentHeight";
   import { PageWrapperFixedHeightKey } from "../index";
   import { useElementSize } from "@vueuse/core";
   defineOptions({

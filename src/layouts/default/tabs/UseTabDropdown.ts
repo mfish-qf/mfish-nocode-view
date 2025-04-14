@@ -1,12 +1,13 @@
 import type { TabContentProps } from "./types";
-import type { DropMenu } from "@/components/general/Dropdown";
+import type { DropMenu } from "@mfish/core/src/components/Dropdown";
 import type { ComputedRef } from "vue";
 import { computed, unref, reactive } from "vue";
 import { MenuEventEnum } from "./types";
-import { useMultipleTabStore } from "@/store/modules/MultipleTab";
+import { useMultipleTabStore } from "@mfish/stores/modules";
 import { RouteLocationNormalized, useRouter } from "vue-router";
-import { useTabs } from "@/hooks/web/UseTabs";
-import { useI18n } from "@/hooks/web/UseI18n";
+import { useTabs } from "@mfish/core/src/hooks/web/UseTabs";
+import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
+import { Nullable } from "@mfish/types";
 
 export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: ComputedRef<boolean>) {
   const state = reactive({

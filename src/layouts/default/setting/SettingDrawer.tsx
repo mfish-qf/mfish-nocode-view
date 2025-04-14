@@ -1,5 +1,5 @@
 import { defineComponent, computed, unref } from "vue";
-import { BasicDrawer } from "@/components/general/Drawer";
+import { BasicDrawer } from "@mfish/core/src/components/Drawer";
 import { Divider } from "ant-design-vue";
 import {
   TypePicker,
@@ -11,12 +11,12 @@ import {
   Animation
 } from "./components";
 import { AppDarkModeToggle } from "@/components/general/Application";
-import { MenuTypeEnum, TriggerEnum } from "@/enums/MenuEnum";
-import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-import { useHeaderSetting } from "@/hooks/setting/UseHeaderSetting";
-import { useMultipleTabSetting } from "@/hooks/setting/UseMultipleTabSetting";
-import { useI18n } from "@/hooks/web/UseI18n";
+import { MenuTypeEnum, TriggerEnum } from "@mfish/core/enums";
+import { useRootSetting } from "@mfish/core";
+import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
+import { useHeaderSetting } from "@mfish/core/src/hooks/setting/UseHeaderSetting";
+import { useMultipleTabSetting } from "@mfish/core/src/hooks/setting/UseMultipleTabSetting";
+import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
 import { baseHandler } from "./Handler";
 import {
   HandlerEnum,
@@ -26,7 +26,11 @@ import {
   menuTypeList,
   mixSidebarTriggerOptions
 } from "./Enum";
-import { HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST, APP_PRESET_COLOR_LIST } from "@/settings/DesignSetting";
+import {
+  HEADER_PRESET_BG_COLOR_LIST,
+  SIDE_BAR_BG_COLOR_LIST,
+  APP_PRESET_COLOR_LIST
+} from "@mfish/core/src/settings/DesignSetting";
 
 const { t } = useI18n();
 

@@ -25,15 +25,15 @@
   import { Dropdown, Menu as AMenu } from "ant-design-vue";
   import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
   import { onBeforeMount, reactive, ref, toRaw } from "vue";
-  import { useUserStore } from "@/store/modules/User";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { propTypes } from "@/utils/PropTypes";
-  import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
-  import { setHeaderImg } from "@/utils/file/FileUtils";
-  import { TenantVo } from "@/api/sys/model/SsoTenantModel";
-  import { changeSsoTenant } from "@/api/sys/SsoTenant";
-  import { router } from "@/router";
-  import { sleep } from "@/utils/Utils";
+  import { useUserStore } from "@mfish/stores/modules";
+  import { useDesign } from "@mfish/core";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
+  import { setHeaderImg } from "@mfish/core/src/utils/file/FileUtils";
+  import { TenantVo } from "@mfish/core/src/api/sys/model/SsoTenantModel";
+  import { changeSsoTenant } from "@mfish/core/src/api/sys/SsoTenant";
+  import { router } from "@mfish/core/src/router";
+  import { sleep } from "@mfish/core/src/utils/Utils";
   export default {
     name: "TenantDropdown",
     components: {

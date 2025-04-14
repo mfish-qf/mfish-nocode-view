@@ -28,8 +28,8 @@
   import { BellOutlined } from "@ant-design/icons-vue";
   import { tabListData, ListItem } from "./Data";
   import NoticeList from "./NoticeList.vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useMessage } from "@/hooks/web/UseMessage";
+  import { useDesign } from "@mfish/core";
+  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
 
   export default defineComponent({
     components: { Popover, BellOutlined, Tabs, TabPane: Tabs.TabPane, Badge, NoticeList },

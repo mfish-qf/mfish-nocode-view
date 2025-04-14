@@ -9,12 +9,12 @@
   import { defineComponent, unref, computed, CSSProperties } from "vue";
   import LayoutHeader from "./index.vue";
   import MultipleTabs from "../tabs/index.vue";
-  import { useHeaderSetting } from "@/hooks/setting/UseHeaderSetting";
-  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-  import { useFullContent } from "@/hooks/web/UseFullContent";
-  import { useMultipleTabSetting } from "@/hooks/setting/UseMultipleTabSetting";
-  import { useAppInject } from "@/hooks/web/UseAppInject";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useHeaderSetting } from "@mfish/core/src/hooks/setting/UseHeaderSetting";
+  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
+  import { useFullContent } from "@mfish/core/src/hooks/setting/UseFullContent";
+  import { useMultipleTabSetting } from "@mfish/core/src/hooks/setting/UseMultipleTabSetting";
+  import { useAppInject } from "@/hooks/UseAppInject";
+  import { useDesign } from "@mfish/core";
   import { useLayoutHeight } from "../content/UseContentViewHeight";
 
   const HEADER_HEIGHT = 42;

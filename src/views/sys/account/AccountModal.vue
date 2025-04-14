@@ -21,19 +21,19 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
   import { accountFormSchema } from "./account.data";
-  import { getOrg, getOrgRoles } from "@/api/sys/Org";
-  import { getUserRoles, insertUser, updateUser } from "@/api/sys/User";
-  import { getAllRoleList } from "@/api/sys/Role";
-  import { RoleInfo } from "@/api/sys/model/UserModel";
-  import { SsoRole } from "@/api/sys/model/RoleModel";
-  import { getTenantOrgTree } from "@/api/sys/SsoTenant";
+  import { getOrg, getOrgRoles } from "@mfish/core/src/api/sys/Org";
+  import { getUserRoles, insertUser, updateUser } from "@mfish/core/src/api/sys/User";
+  import { getAllRoleList } from "@mfish/core/src/api/sys/Role";
+  import { RoleInfo } from "@mfish/core/src/api/sys/model/UserModel";
+  import { SsoRole } from "@mfish/core/src/api/sys/model/RoleModel";
+  import { getTenantOrgTree } from "@mfish/core/src/api/sys/SsoTenant";
   import { Recordable } from "@mfish/types";
   import { TreeSelect } from "ant-design-vue";
-  import { SsoOrg } from "@/api/sys/model/OrgModel";
-  import { usePermission } from "@/hooks/web/UsePermission";
+  import { SsoOrg } from "@mfish/core/src/api/sys/model/OrgModel";
+  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
 
   defineOptions({ name: "AccountModal" });
 

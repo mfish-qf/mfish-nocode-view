@@ -1,14 +1,14 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
-import { getDictProps } from "@/utils/DictUtils";
-import { DescItem } from "@/components/general/Description";
+import { BasicColumn } from "@mfish/core/src/components/Table";
+import { FormSchema } from "@mfish/core/src/components/Table";
+import { getDictProps } from "@mfish/core/src/components/DictTag";
+import { DescItem } from "@mfish/core/src/components/Description";
 import { buildJsonPreview } from "@/utils/HBuildUtils";
 
 /**
  * @description: 任务日志
  * @author: mfish
  * @date: 2023-02-14
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

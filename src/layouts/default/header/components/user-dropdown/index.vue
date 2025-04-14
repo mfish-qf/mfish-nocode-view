@@ -37,19 +37,19 @@
   import { Dropdown, Menu } from "ant-design-vue";
   import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
   import { onBeforeMount, reactive, ref, toRaw, unref } from "vue";
-  import { DOC_URL } from "@/settings/SiteSetting";
-  import { useUserStore } from "@/store/modules/User";
-  import { useHeaderSetting } from "@/hooks/setting/UseHeaderSetting";
-  import { useI18n } from "@/hooks/web/UseI18n";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useModal } from "@/components/general/Modal";
-  import { propTypes } from "@/utils/PropTypes";
-  import { openWindow } from "@/utils";
-  import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
+  import { DOC_URL } from "@mfish/core/src/settings/SiteSetting";
+  import { useUserStore } from "@mfish/stores/modules";
+  import { useHeaderSetting } from "@mfish/core/src/hooks/setting/UseHeaderSetting";
+  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
+  import { useDesign } from "@mfish/core";
+  import { useModal } from "@mfish/core/src/components/Modal";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import { openWindow } from "@mfish/core/src/utils";
+  import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
   import PasswordModal from "@/views/sys/account/PasswordModal.vue";
-  import { useGo } from "@/hooks/web/UsePage";
-  import { setHeaderImg } from "@/utils/file/FileUtils";
-  import { sleep } from "@/utils/Utils";
+  import { useGo } from "@mfish/core/src/hooks/web/UsePage";
+  import { setHeaderImg } from "@mfish/core/src/utils/file/FileUtils";
+  import { sleep } from "@mfish/core/src/utils/Utils";
 
   type MenuEvent = "logout" | "doc" | "lock" | "changePwd" | "userInfo";
 

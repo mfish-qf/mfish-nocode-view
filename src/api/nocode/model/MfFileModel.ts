@@ -1,10 +1,10 @@
-import { BaseEntity, PageResult, ReqPage } from "@/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "@mfish/core/src/api/model/BaseModel";
 
 /**
  * @description: 文件数据源
  * @author: mfish
  * @date: 2023-12-13
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export interface MfFile extends BaseEntity<string> {
   // 目录id

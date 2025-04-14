@@ -2,7 +2,7 @@
  @description: 数据库连接
  @author: mfish
  @date: 2023-03-13
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <div>
@@ -46,12 +46,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
-  import { deleteDbConnect, getDbConnectList } from "@/api/sys/DbConnect";
-  import { useModal } from "@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { deleteDbConnect, getDbConnectList } from "@mfish/core/src/api/sys/DbConnect";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import DbConnectModal from "./DbConnectModal.vue";
   import { columns, searchFormSchema } from "./dbConnect.data";
-  import DictTag from "@/components/general/DictTag/DictTag.vue";
+  import { DictTag } from "@mfish/core/src/components/DictTag";
   import { Recordable } from "@mfish/types";
   defineOptions({ name: "DbConnectManagement" });
 

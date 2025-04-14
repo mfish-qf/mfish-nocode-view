@@ -19,11 +19,11 @@
   import type { PropType } from "vue";
   import type { RouteLocationNormalized } from "vue-router";
   import { defineComponent, computed, unref } from "vue";
-  import { Dropdown } from "@/components/general/Dropdown";
-  import { Icon } from "@/components/general/Icon";
+  import { Dropdown } from "@mfish/core/src/components/Dropdown";
+  import { Icon } from "@mfish/core/src/components/Icon";
   import { TabContentProps } from "../types";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useDesign } from "@mfish/core";
+  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
   import { useTabDropdown } from "../UseTabDropdown";
 
   export default defineComponent({

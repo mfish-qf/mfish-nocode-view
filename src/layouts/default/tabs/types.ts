@@ -21,4 +21,4 @@ export enum MenuEventEnum {
   SCALE
 }
 
-export { type DropMenu } from "@/components/general/Dropdown";
+export { type DropMenu } from "@mfish/core/src/components/Dropdown";

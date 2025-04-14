@@ -2,7 +2,7 @@
  @description: 客户端信息
  @author: mfish
  @date: 2023-05-12
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <div :class="prefixCls">
@@ -84,15 +84,15 @@
 </template>
 <script lang="ts" setup>
   import { onMounted, ref } from "vue";
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
   import { deleteSsoClientDetails, getSecret, getSsoClientDetailsList, resetSecret } from "@/api/sys/SsoClientDetails";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import SsoClientDetailsModal from "./SsoClientDetailsModal.vue";
   import { columns, searchFormSchema } from "./ssoClientDetails.data";
-  import { getDictItems } from "@/api/sys/DictItem";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { getDictItems } from "@mfish/core/src/api/sys/DictItem";
+  import { useDesign } from "@mfish/core";
   import { Tag as ATag } from "ant-design-vue";
-  import { DictItem } from "@/api/sys/model/DictItemModel";
+  import { DictItem } from "@mfish/core/src/api/sys/model/DictItemModel";
   import { Recordable } from "@mfish/types";
   import SsoClientDetailsViewModal from "@/views/sys/sso-client-details/SsoClientDetailsViewModal.vue";
 

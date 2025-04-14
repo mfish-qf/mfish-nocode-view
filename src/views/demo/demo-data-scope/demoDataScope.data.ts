@@ -1,11 +1,11 @@
-import { BasicColumn } from "@/components/general/Table";
-import { DescItem } from "@/components/general/Description";
+import { BasicColumn } from "@mfish/core/src/components/Table";
+import { DescItem } from "@mfish/core/src/components/Description";
 
 /**
  * @description: demo_data_scope
  * @author: mfish
  * @date: 2024-09-04
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

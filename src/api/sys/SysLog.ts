@@ -1,11 +1,11 @@
-import { defHttp } from "@/utils/http/axios";
+import { defHttp } from "@mfish/core/src/utils/http/axios";
 import { SysLog, ReqSysLog, SysLogPageModel } from "@/api/sys/model/SysLogModel";
 
 /**
  * @description: 系统日志
  * @author: mfish
  * @date: 2023-01-08
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 enum Api {
   SysLog = "/sys/sysLog"

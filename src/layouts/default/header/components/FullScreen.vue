@@ -9,10 +9,10 @@
 <script lang="ts" setup>
   import { computed, unref } from "vue";
   import { Tooltip } from "ant-design-vue";
-  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
   import { useFullscreen } from "@vueuse/core";
   import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons-vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useDesign } from "@mfish/core";
 
   const { t } = useI18n();
   const { toggle, isFullscreen } = useFullscreen();

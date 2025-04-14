@@ -15,7 +15,7 @@
   import type { ToolbarConfig } from "./Types";
   import { defineComponent, ref, onUnmounted, unref, nextTick, watchEffect } from "vue";
   import { Divider, Tooltip } from "ant-design-vue";
-  import { Icon } from "@/components/general/Icon";
+  import { Icon } from "@mfish/core/src/components/Icon";
   import { useFlowChartContext } from "./UseFlowContext";
   import { ToolbarTypeEnum } from "./Enum";
 

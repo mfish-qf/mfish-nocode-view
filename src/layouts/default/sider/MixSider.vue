@@ -66,25 +66,25 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import type { Menu } from "@/router/Types";
+  import type { Menu } from "@mfish/core/src/router/Types";
   import type { CSSProperties } from "vue";
   import { computed, onMounted, ref, unref, watch } from "vue";
   import type { RouteLocationNormalized } from "vue-router";
-  import { ScrollContainer } from "@/components/general/Container";
+  import { ScrollContainer } from "@mfish/core/src/components/Container";
   import { SimpleMenu, SimpleMenuTag } from "@/components/general/SimpleMenu";
-  import { Icon } from "@/components/general/Icon";
+  import { Icon } from "@mfish/core/src/components/Icon";
   import { AppLogo } from "@/components/general/Application";
-  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-  import { usePermissionStore } from "@/store/modules/Permission";
+  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
+  import { usePermissionStore } from "@mfish/stores/modules";
   import { useDragLine } from "./UseLayoutSider";
-  import { useGlobSetting } from "@/hooks/setting";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useI18n } from "@/hooks/web/UseI18n";
-  import { externalOpen, useGo } from "@/hooks/web/UsePage";
-  import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from "@/enums/AppEnum";
-  import vClickOutside from "@/directives/ClickOutside";
-  import { getChildrenMenus, getCurrentParentPath, getShallowMenus } from "@/router/menus";
-  import { listenerRouteChange } from "@/logics/mitt/RouteChange";
+  import { useGlobSetting } from "@mfish/core/src/hooks/setting";
+  import { useDesign } from "@mfish/core";
+  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
+  import { externalOpen, useGo } from "@mfish/core/src/hooks/web/UsePage";
+  import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from "@mfish/core/enums";
+  import { ClickOutside as vClickOutside } from "@mfish/core/src/directives";
+  import { getChildrenMenus, getCurrentParentPath, getShallowMenus } from "@mfish/core/src/router/menus";
+  import { listenerRouteChange } from "@mfish/core/src/logics/mitt/RouteChange";
   import LayoutTrigger from "../trigger/index.vue";
   import { Nullable, ElRef } from "@mfish/types";
 

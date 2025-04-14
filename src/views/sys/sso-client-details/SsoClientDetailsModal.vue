@@ -2,7 +2,7 @@
  @description: 客户端信息
  @author: mfish
  @date: 2023-05-12
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
@@ -11,9 +11,9 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@/components/general/Form";
+  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
   import { ssoClientDetailsFormSchema } from "./ssoClientDetails.data";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
   import { insertSsoClientDetails, updateSsoClientDetails } from "@/api/sys/SsoClientDetails";
 
   const emit = defineEmits(["success", "register"]);

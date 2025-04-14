@@ -14,18 +14,18 @@
 </template>
 <script lang="ts" setup>
   import type { MenuState } from "./Types";
-  import type { Menu as MenuType } from "@/router/Types";
+  import type { Menu as MenuType } from "@mfish/core/src/router/Types";
   import type { RouteLocationNormalizedLoaded } from "vue-router";
   import { computed, ref, unref, reactive, toRefs, watch, PropType, useAttrs } from "vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useDesign } from "@mfish/core";
   import MfishMenu from "./components/MfishMenu.vue";
   import SimpleSubMenu from "./SimpleSubMenu.vue";
-  import { listenerRouteChange } from "@/logics/mitt/RouteChange";
-  import { propTypes } from "@/utils/PropTypes";
-  import { REDIRECT_NAME } from "@/router/Constant";
+  import { listenerRouteChange } from "@mfish/core/src/logics/mitt/RouteChange";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import { REDIRECT_NAME } from "@mfish/core/src/router/Constant";
   import { useRouter } from "vue-router";
-  import { isFunction, isUrl } from "@/utils/Is";
-  import { openWindow } from "@/utils";
+  import { isFunction, isUrl } from "@mfish/core/src/utils/Is";
+  import { openWindow } from "@mfish/core/src/utils";
   import { useOpenKeys } from "./UseOpenKeys";
 
   defineOptions({ name: "SimpleMenu", inheritAttrs: false });

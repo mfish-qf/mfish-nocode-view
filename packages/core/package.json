@@ -1,0 +1,551 @@
+{
+  "name": "@mfish/core",
+  "version": "2.0.0",
+  "private": true,
+  "author": {
+    "name": "mfish",
+    "email": "qiufeng9862@qq.com",
+    "url": "https://github.com/mfish-qf"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./enums": {
+      "types": "./src/enums/index.ts",
+      "default": "./src/enums/index.ts"
+    },
+    "./src/router": {
+      "types": "./src/router/index.ts",
+      "default": "./src/router/index.ts"
+    },
+    "./src/router/Types": {
+      "types": "./src/router/Types.ts",
+      "default": "./src/router/Types.ts"
+    },
+    "./src/router/Constant": {
+      "types": "./src/router/Constant.ts",
+      "default": "./src/router/Constant.ts"
+    },
+    "./src/router/guard":{
+      "types": "./src/router/guard/index.ts",
+      "default": "./src/router/guard/index.ts"
+    },
+    "./src/router/menus": {
+      "types": "./src/router/menus/index.ts",
+      "default": "./src/router/menus/index.ts"
+    },
+    "./src/router/helper/MenuHelper": {
+      "types": "./src/router/helper/MenuHelper.ts",
+      "default": "./src/router/helper/MenuHelper.ts"
+    },
+    "./src/router/helper/RouteHelper": {
+      "types": "./src/router/helper/RouteHelper.ts",
+      "default": "./src/router/helper/RouteHelper.ts"
+    },
+    "./src/router/routers/Basic": {
+      "types": "./src/router/routers/Basic.ts",
+      "default": "./src/router/routers/Basic.ts"
+    },
+    "./src/settings/DesignSetting": {
+      "types": "./src/settings/DesignSetting.ts",
+      "default": "./src/settings/DesignSetting.ts"
+    },
+    "./src/settings/ProjectSetting": {
+      "types": "./src/settings/ProjectSetting.ts",
+      "default": "./src/settings/ProjectSetting.ts"
+    },
+    "./src/settings/EncryptionSetting": {
+      "types": "./src/settings/EncryptionSetting.ts",
+      "default": "./src/settings/EncryptionSetting.ts"
+    },
+    "./src/settings/I18nSetting": {
+      "types": "./src/settings/I18nSetting.ts",
+      "default": "./src/settings/I18nSetting.ts"
+    },
+    "./src/settings/ComponentSetting": {
+      "types": "./src/settings/ComponentSetting.ts",
+      "default": "./src/settings/ComponentSetting.ts"
+    },
+    "./src/settings/LoginSetting": {
+      "types": "./src/settings/LoginSetting.ts",
+      "default": "./src/settings/LoginSetting.ts"
+    },
+    "./src/settings/SiteSetting": {
+      "types": "./src/settings/SiteSetting.ts",
+      "default": "./src/settings/SiteSetting.ts"
+    },
+    "./src/utils": {
+      "types": "./src/utils/index.ts",
+      "default": "./src/utils/index.ts"
+    },
+    "./src/utils/Log": {
+      "types": "./src/utils/Log.ts",
+      "default": "./src/utils/Log.ts"
+    },
+    "./src/utils/Env": {
+      "types": "./src/utils/Env.ts",
+      "default": "./src/utils/Env.ts"
+    },
+    "./src/utils/Bem": {
+      "types": "./src/utils/Bem.ts",
+      "default": "./src/utils/Bem.ts"
+    },
+    "./src/utils/Is": {
+      "types": "./src/utils/Is.ts",
+      "default": "./src/utils/Is.ts"
+    },
+    "./src/utils/Mitt": {
+      "types": "./src/utils/Mitt.ts",
+      "default": "./src/utils/Mitt.ts"
+    },
+    "./src/utils/Props": {
+      "types": "./src/utils/Props.ts",
+      "default": "./src/utils/Props.ts"
+    },
+    "./src/utils/PropTypes": {
+      "types": "./src/utils/PropTypes.ts",
+      "default": "./src/utils/PropTypes.ts"
+    },
+    "./src/utils/DomUtils": {
+      "types": "./src/utils/DomUtils.ts",
+      "default": "./src/utils/DomUtils.ts"
+    },
+    "./src/utils/Utils": {
+      "types": "./src/utils/Utils.ts",
+      "default": "./src/utils/Utils.ts"
+    },
+    "./src/utils/Cipher": {
+      "types": "./src/utils/Cipher.ts",
+      "default": "./src/utils/Cipher.ts"
+    },
+    "./src/utils/Uuid": {
+      "types": "./src/utils/Uuid.ts",
+      "default": "./src/utils/Uuid.ts"
+    },
+    "./src/utils/DateUtil": {
+      "types": "./src/utils/DateUtil.ts",
+      "default": "./src/utils/DateUtil.ts"
+    },
+    "./src/utils/Validator": {
+      "types": "./src/utils/Validator.ts",
+      "default": "./src/utils/Validator.ts"
+    },
+    "./src/utils/Color": {
+      "types": "./src/utils/Color.ts",
+      "default": "./src/utils/Color.ts"
+    },
+    "./src/utils/auth": {
+      "types": "./src/utils/auth/index.ts",
+      "default": "./src/utils/auth/index.ts"
+    },
+    "./src/utils/cache": {
+      "types": "./src/utils/cache/index.ts",
+      "default": "./src/utils/cache/index.ts"
+    },
+    "./src/utils/cache/Persistent": {
+      "types": "./src/utils/cache/Persistent.ts",
+      "default": "./src/utils/cache/Persistent.ts"
+    },
+    "./src/utils/event": {
+      "types": "./src/utils/event/index.ts",
+      "default": "./src/utils/event/index.ts"
+    },
+    "./src/utils/factory/CreateAsyncComponent": {
+      "types": "./src/utils/factory/CreateAsyncComponent.tsx",
+      "default": "./src/utils/factory/CreateAsyncComponent.tsx"
+    },
+    "./src/utils/helper/TsxHelper": {
+      "types": "./src/utils/helper/TsxHelper.tsx",
+      "default": "./src/utils/helper/TsxHelper.tsx"
+    },
+    "./src/utils/helper/TreeHelper": {
+      "types": "./src/utils/helper/TreeHelper.ts",
+      "default": "./src/utils/helper/TreeHelper.ts"
+    },
+    "./src/utils/file/FileUtils": {
+      "types": "./src/utils/file/FileUtils.ts",
+      "default": "./src/utils/file/FileUtils.ts"
+    },
+    "./src/utils/file/Download": {
+      "types": "./src/utils/file/Download.ts",
+      "default": "./src/utils/file/Download.ts"
+    },
+    "./src/utils/file/Base64Convert": {
+      "types": "./src/utils/file/Base64Convert.ts",
+      "default": "./src/utils/file/Base64Convert.ts"
+    },
+    "./src/utils/OutsideOpenUtils": {
+      "types": "./src/utils/OutsideOpenUtils.ts",
+      "default": "./src/utils/OutsideOpenUtils.ts"
+    },
+    "./src/utils/PageUtils": {
+      "types": "./src/utils/PageUtils.ts",
+      "default": "./src/utils/PageUtils.ts"
+    },
+    "./src/i18n/SetupI18n": {
+      "types": "./src/i18n/SetupI18n.ts",
+      "default": "./src/i18n/SetupI18n.ts"
+    },
+    "./src/i18n/UseLocale": {
+      "types": "./src/i18n/UseLocale.ts",
+      "default": "./src/i18n/UseLocale.ts"
+    },
+    "./src/hooks/setting": {
+      "types": "./src/hooks/setting/index.ts",
+      "default": "./src/hooks/setting/index.ts"
+    },
+    "./src/hooks/setting/UseTransitionSetting": {
+      "types": "./src/hooks/setting/UseTransitionSetting.ts",
+      "default": "./src/hooks/setting/UseTransitionSetting.ts"
+    },
+    "./src/hooks/setting/UseDarkModeTheme": {
+      "types": "./src/hooks/setting/UseDarkModeTheme.ts",
+      "default": "./src/hooks/setting/UseDarkModeTheme.ts"
+    },
+    "./src/hooks/setting/UseFullContent": {
+      "types": "./src/hooks/setting/UseFullContent.ts",
+      "default": "./src/hooks/setting/UseFullContent.ts"
+    },
+    "./src/hooks/setting/UseMenuSetting": {
+      "types": "./src/hooks/setting/UseMenuSetting.ts",
+      "default": "./src/hooks/setting/UseMenuSetting.ts"
+    },
+    "./src/hooks/setting/UseHeaderSetting": {
+      "types": "./src/hooks/setting/UseHeaderSetting.ts",
+      "default": "./src/hooks/setting/UseHeaderSetting.ts"
+    },
+    "./src/hooks/setting/UseMultipleTabSetting": {
+      "types": "./src/hooks/setting/UseMultipleTabSetting.ts",
+      "default": "./src/hooks/setting/UseMultipleTabSetting.ts"
+    },
+    "./src/hooks/web/UseI18n": {
+      "types": "./src/hooks/web/UseI18n.ts",
+      "default": "./src/hooks/web/UseI18n.ts"
+    },
+    "./src/hooks/web/UseCopyToClipboard": {
+      "types": "./src/hooks/web/UseCopyToClipboard.ts",
+      "default": "./src/hooks/web/UseCopyToClipboard.ts"
+    },
+    "./src/hooks/web/UseMessage": {
+      "types": "./src/hooks/web/UseMessage.tsx",
+      "default": "./src/hooks/web/UseMessage.tsx"
+    },
+    "./src/hooks/web/UsePage": {
+      "types": "./src/hooks/web/UsePage.ts",
+      "default": "./src/hooks/web/UsePage.ts"
+    },
+    "./src/hooks/web/UseTitle": {
+      "types": "./src/hooks/web/UseTitle.ts",
+      "default": "./src/hooks/web/UseTitle.ts"
+    },
+    "./src/hooks/web/UseTabs": {
+      "types": "./src/hooks/web/UseTabs.ts",
+      "default": "./src/hooks/web/UseTabs.ts"
+    },
+    "./src/hooks/web/UsePermission": {
+      "types": "./src/hooks/web/UsePermission.ts",
+      "default": "./src/hooks/web/UsePermission.ts"
+    },
+    "./src/hooks/web/UseLockPage": {
+      "types": "./src/hooks/web/UseLockPage.ts",
+      "default": "./src/hooks/web/UseLockPage.ts"
+    },
+    "./src/hooks/core/UseTimeout": {
+      "types": "./src/hooks/core/UseTimeout.ts",
+      "default": "./src/hooks/core/UseTimeout.ts"
+    },
+    "./src/hooks/core/OnMountedOrActivated": {
+      "types": "./src/hooks/core/OnMountedOrActivated.ts",
+      "default": "./src/hooks/core/OnMountedOrActivated.ts"
+    },
+    "./src/hooks/core/UseAttrs": {
+      "types": "./src/hooks/core/UseAttrs.ts",
+      "default": "./src/hooks/core/UseAttrs.ts"
+    },
+    "./src/hooks/core/UseRefs": {
+      "types": "./src/hooks/core/UseRefs.ts",
+      "default": "./src/hooks/core/UseRefs.ts"
+    },
+    "./src/hooks/event/UseScrollTo": {
+      "types": "./src/hooks/event/UseScrollTo.ts",
+      "default": "./src/hooks/event/UseScrollTo.ts"
+    },
+    "./src/hooks/event/UseWindowSizeFn": {
+      "types": "./src/hooks/event/UseWindowSizeFn.ts",
+      "default": "./src/hooks/event/UseWindowSizeFn.ts"
+    },
+    "./src/hooks/event/UseEventListener": {
+      "types": "./src/hooks/event/UseEventListener.ts",
+      "default": "./src/hooks/event/UseEventListener.ts"
+    },
+    "./src/hooks/event/UseBreakpoint": {
+      "types": "./src/hooks/event/UseBreakpoint.ts",
+      "default": "./src/hooks/event/UseBreakpoint.ts"
+    },
+    "./src/hooks/component/UsePageContext": {
+      "types": "./src/hooks/component/UsePageContext.ts",
+      "default": "./src/hooks/component/UsePageContext.ts"
+    },
+    "./src/hooks/component/UseFormItem": {
+      "types": "./src/hooks/component/UseFormItem.ts",
+      "default": "./src/hooks/component/UseFormItem.ts"
+    },
+    "./src/utils/http/axios": {
+      "types": "./src/utils/http/axios/index.ts",
+      "default": "./src/utils/http/axios/index.ts"
+    },
+    "./src/utils/http/axios/AxiosCancel": {
+      "types": "./src/utils/http/axios/AxiosCancel.ts",
+      "default": "./src/utils/http/axios/AxiosCancel.ts"
+    },
+    "./src/components/RegisterGlobComponent": {
+      "types": "./src/components/RegisterGlobComponent.ts",
+      "default": "./src/components/RegisterGlobComponent.ts"
+    },
+    "./src/components/Basic": {
+      "types": "./src/components/Basic/index.ts",
+      "default": "./src/components/Basic/index.ts"
+    },
+    "./src/components/Container": {
+      "types": "./src/components/Container/index.ts",
+      "default": "./src/components/Container/index.ts"
+    },
+    "./src/components/Icon": {
+      "types": "./src/components/Icon/index.ts",
+      "default": "./src/components/Icon/index.ts"
+    },
+    "./src/components/Scrollbar": {
+      "types": "./src/components/Scrollbar/index.ts",
+      "default": "./src/components/Scrollbar/index.ts"
+    },
+    "./src/components/Transition": {
+      "types": "./src/components/Transition/index.ts",
+      "default": "./src/components/Transition/index.ts"
+    },
+    "./src/components/Modal": {
+      "types": "./src/components/Modal/index.ts",
+      "default": "./src/components/Modal/index.ts"
+    },
+    "./src/components/Button": {
+      "types": "./src/components/Button/index.ts",
+      "default": "./src/components/Button/index.ts"
+    },
+    "./src/components/Draggable": {
+      "types": "./src/components/Draggable/index.ts",
+      "default": "./src/components/Draggable/index.ts"
+    },
+    "./src/components/Dropdown": {
+      "types": "./src/components/Dropdown/index.ts",
+      "default": "./src/components/Dropdown/index.ts"
+    },
+    "./src/components/DictTag": {
+      "types": "./src/components/DictTag/index.ts",
+      "default": "./src/components/DictTag/index.ts"
+    },
+    "./src/components/Tree": {
+      "types": "./src/components/Tree/index.ts",
+      "default": "./src/components/Tree/index.ts"
+    },
+    "./src/components/Loading": {
+      "types": "./src/components/Loading/index.ts",
+      "default": "./src/components/Loading/index.ts"
+    },
+    "./src/components/InputSearch": {
+      "types": "./src/components/InputSearch/index.vue",
+      "default": "./src/components/InputSearch/index.vue"
+    },
+    "./src/components/DragTree": {
+      "types": "./src/components/DragTree/index.ts",
+      "default": "./src/components/DragTree/index.ts"
+    },
+    "./src/components/CodeEditor": {
+      "types": "./src/components/CodeEditor/index.ts",
+      "default": "./src/components/CodeEditor/index.ts"
+    },
+    "./src/components/Form": {
+      "types": "./src/components/Form/index.ts",
+      "default": "./src/components/Form/index.ts"
+    },
+    "./src/components/Table": {
+      "types": "./src/components/Table/index.ts",
+      "default": "./src/components/Table/index.ts"
+    },
+    "./src/components/Cropper": {
+      "types": "./src/components/Cropper/index.ts",
+      "default": "./src/components/Cropper/index.ts"
+    },
+    "./src/components/StrengthMeter": {
+      "types": "./src/components/StrengthMeter/index.ts",
+      "default": "./src/components/StrengthMeter/index.ts"
+    },
+    "./src/components/CountDown": {
+      "types": "./src/components/CountDown/index.ts",
+      "default": "./src/components/CountDown/index.ts"
+    },
+    "./src/components/Upload": {
+      "types": "./src/components/Upload/index.ts",
+      "default": "./src/components/Upload/index.ts"
+    },
+    "./src/components/Split": {
+      "types": "./src/components/Split/index.ts",
+      "default": "./src/components/Split/index.ts"
+    },
+    "./src/components/Description": {
+      "types": "./src/components/Description/index.ts",
+      "default": "./src/components/Description/index.ts"
+    },
+    "./src/components/FileUpDown": {
+      "types": "./src/components/FileUpDown/index.ts",
+      "default": "./src/components/FileUpDown/index.ts"
+    },
+    "./src/components/CountTo": {
+      "types": "./src/components/CountTo/index.ts",
+      "default": "./src/components/CountTo/index.ts"
+    },
+    "./src/components/CardList": {
+      "types": "./src/components/CardList/index.ts",
+      "default": "./src/components/CardList/index.ts"
+    },
+    "./src/components/Drawer": {
+      "types": "./src/components/Drawer/index.ts",
+      "default": "./src/components/Drawer/index.ts"
+    },
+    "./src/logics/mitt/RouteChange": {
+      "types": "./src/logics/mitt/RouteChange.ts",
+      "default": "./src/logics/mitt/RouteChange.ts"
+    },
+    "./src/logics/error-handle": {
+      "types": "./src/logics/error-handle/index.ts",
+      "default": "./src/logics/error-handle/index.ts"
+    },
+    "./src/logics/InitAppConfig": {
+      "types": "./src/logics/InitAppConfig.ts",
+      "default": "./src/logics/InitAppConfig.ts"
+    },
+    "./src/logics/theme/Dark": {
+      "types": "./src/logics/theme/Dark.ts",
+      "default": "./src/logics/theme/Dark.ts"
+    },
+    "./src/logics/theme/UpdateBackground": {
+      "types": "./src/logics/theme/UpdateBackground.ts",
+      "default": "./src/logics/theme/UpdateBackground.ts"
+    },
+    "./src/logics/theme/UpdateColorWeak": {
+      "types": "./src/logics/theme/UpdateColorWeak.ts",
+      "default": "./src/logics/theme/UpdateColorWeak.ts"
+    },
+    "./src/logics/theme/UpdateGrayMode": {
+      "types": "./src/logics/theme/UpdateGrayMode.ts",
+      "default": "./src/logics/theme/UpdateGrayMode.ts"
+    },
+    "./src/logics/theme/UpdateTheme": {
+      "types": "./src/logics/theme/UpdateTheme.ts",
+      "default": "./src/logics/theme/UpdateTheme.ts"
+    },
+    "./src/api/model/BaseModel": {
+      "types": "./src/api/model/BaseModel.ts",
+      "default": "./src/api/model/BaseModel.ts"
+    },
+    "./src/api/sys/model/DbConnectModel": {
+      "types": "./src/api/sys/model/DbConnectModel.ts",
+      "default": "./src/api/sys/model/DbConnectModel.ts"
+    },
+    "./src/api/sys/model/DictItemModel": {
+      "types": "./src/api/sys/model/DictItemModel.ts",
+      "default": "./src/api/sys/model/DictItemModel.ts"
+    },
+    "./src/api/sys/model/UserModel": {
+      "types": "./src/api/sys/model/UserModel.ts",
+      "default": "./src/api/sys/model/UserModel.ts"
+    },
+    "./src/api/sys/model/RoleModel": {
+      "types": "./src/api/sys/model/RoleModel.ts",
+      "default": "./src/api/sys/model/RoleModel.ts"
+    },
+    "./src/api/sys/model/MenuModel": {
+      "types": "./src/api/sys/model/MenuModel.ts",
+      "default": "./src/api/sys/model/MenuModel.ts"
+    },
+    "./src/api/sys/model/OrgModel": {
+      "types": "./src/api/sys/model/OrgModel.ts",
+      "default": "./src/api/sys/model/OrgModel.ts"
+    },
+    "./src/api/sys/model/DictCategoryModel": {
+      "types": "./src/api/sys/model/DictCategoryModel.ts",
+      "default": "./src/api/sys/model/DictCategoryModel.ts"
+    },
+    "./src/api/sys/model/SsoTenantModel": {
+      "types": "./src/api/sys/model/SsoTenantModel.ts",
+      "default": "./src/api/sys/model/SsoTenantModel.ts"
+    },
+    "./src/api/sys/DictCategory": {
+      "types": "./src/api/sys/DictCategory.ts",
+      "default": "./src/api/sys/DictCategory.ts"
+    },
+    "./src/api/sys/DictItem": {
+      "types": "./src/api/sys/DictItem.ts",
+      "default": "./src/api/sys/DictItem.ts"
+    },
+    "./src/api/sys/User": {
+      "types": "./src/api/sys/User.ts",
+      "default": "./src/api/sys/User.ts"
+    },
+    "./src/api/sys/Role": {
+      "types": "./src/api/sys/Role.ts",
+      "default": "./src/api/sys/Role.ts"
+    },
+    "./src/api/sys/Menu": {
+      "types": "./src/api/sys/Menu.ts",
+      "default": "./src/api/sys/Menu.ts"
+    },
+    "./src/api/sys/Org": {
+      "types": "./src/api/sys/Org.ts",
+      "default": "./src/api/sys/Org.ts"
+    },
+    "./src/api/sys/SsoTenant": {
+      "types": "./src/api/sys/SsoTenant.ts",
+      "default": "./src/api/sys/SsoTenant.ts"
+    },
+    "./src/api/sys/DbConnect": {
+      "types": "./src/api/sys/DbConnect.ts",
+      "default": "./src/api/sys/DbConnect.ts"
+    },
+    "./src/api/storage/model/SysFileModel": {
+      "types": "./src/api/storage/model/SysFileModel.ts",
+      "default": "./src/api/storage/model/SysFileModel.ts"
+    },
+    "./src/api/storage/SysFile": {
+      "types": "./src/api/storage/SysFile.ts",
+      "default": "./src/api/storage/SysFile.ts"
+    },
+    "./src/api/storage/Upload": {
+      "types": "./src/api/storage/Upload.ts",
+      "default": "./src/api/storage/Upload.ts"
+    },
+    "./src/assets/images/*.png": {
+      "types": "./src/assets/images/*.png",
+      "default": "./src/assets/images/*.png"
+    },
+    "./src/assets/svg/*.svg": {
+      "types": "./src/assets/svg/*.svg",
+      "default": "./src/assets/svg/*.svg"
+    },
+    "./src/directives": {
+      "types": "./src/directives/index.ts",
+      "default": "./src/directives/index.ts"
+    }
+  },
+  "dependencies": {
+    "qs": "^6.14.0",
+    "nprogress": "^0.2.0",
+    "codemirror": "5.65.16",
+    "cropperjs": "^1.6.2"
+  },
+  "devDependencies": {
+    "vite-plugin-svg-icons": "^2.0.1"
+  }
+}

@@ -2,7 +2,7 @@
  @description: 租户信息表
  @author: mfish
  @date: 2023-05-31
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal
@@ -56,19 +56,19 @@
 </template>
 <script lang="ts" setup>
   import { computed, reactive, ref, unref } from "vue";
-  import { BasicForm, useForm } from "@/components/general/Form";
+  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
   import { Modal, Select as ASelect, Spin, Upload, UploadProps } from "ant-design-vue";
   import { ssoTenantFormSchema } from "./ssoTenant.data";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { insertSsoTenant, updateMeTenant, updateSsoTenant } from "@/api/sys/SsoTenant";
-  import { uploadApi } from "@/api/storage/Upload";
-  import { getBase64WithFile, imageUrl } from "@/utils/file/FileUtils";
-  import Icon from "@/components/general/Icon/src/Icon.vue";
-  import { SysFile } from "@/api/storage/model/SysFileModel";
-  import { getLocalFileUrl, getSysFileByKey } from "@/api/storage/SysFile";
+  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { insertSsoTenant, updateMeTenant, updateSsoTenant } from "@mfish/core/src/api/sys/SsoTenant";
+  import { uploadApi } from "@mfish/core/src/api/storage/Upload";
+  import { getBase64WithFile, imageUrl, getLocalFileUrl } from "@mfish/core/src/utils/file/FileUtils";
+  import { Icon } from "@mfish/core/src/components/Icon";
+  import { SysFile } from "@mfish/core/src/api/storage/model/SysFileModel";
+  import { getSysFileByKey } from "@mfish/core/src/api/storage/SysFile";
   import { debounce } from "lodash-es";
-  import { getUserById, getUserList } from "@/api/sys/User";
-  import { getAllRoleList } from "@/api/sys/Role";
+  import { getUserById, getUserList } from "@mfish/core/src/api/sys/User";
+  import { getAllRoleList } from "@mfish/core/src/api/sys/Role";
   import { Recordable } from "@mfish/types";
 
   const emit = defineEmits(["success", "register"]);

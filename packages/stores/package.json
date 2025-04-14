@@ -1,0 +1,29 @@
+{
+  "name": "@mfish/stores",
+  "version": "2.0.0",
+  "private": true,
+  "author": {
+    "name": "mfish",
+    "email": "qiufeng9862@qq.com",
+    "url": "https://github.com/mfish-qf"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./modules": {
+      "types": "./src/modules/index.ts",
+      "default": "./src/modules/index.ts"
+    },
+    "./screen": {
+      "types": "./src/screen/index.ts",
+      "default": "./src/screen/index.ts"
+    }
+  },
+  "dependencies": {
+    "pinia": "^3.0.2"
+  }
+}

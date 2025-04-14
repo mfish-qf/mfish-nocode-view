@@ -1,6 +1,6 @@
 import { h } from "vue";
-import { JsonPreview } from "@/components/general/CodeEditor";
-import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+import { JsonPreview } from "@mfish/core/src/components/CodeEditor";
+import { useRootSetting } from "@mfish/core";
 
 /**
  * @description: vue通过h动态创建组件

@@ -5,11 +5,11 @@
 </template>
 <script lang="ts">
   import { defineComponent, unref, computed } from "vue";
-  import { Icon } from "@/components/general/Icon";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useHeaderSetting } from "@/hooks/setting/UseHeaderSetting";
-  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-  import { triggerWindowResize } from "@/utils/event";
+  import { Icon } from "@mfish/core/src/components/Icon";
+  import { useDesign } from "@mfish/core";
+  import { useHeaderSetting } from "@mfish/core/src/hooks/setting/UseHeaderSetting";
+  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
+  import { triggerWindowResize } from "@mfish/core/src/utils/event";
 
   export default defineComponent({
     name: "FoldButton",

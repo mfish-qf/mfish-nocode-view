@@ -65,18 +65,18 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
-  import { deleteRole, getRoleList, setRoleStatus } from "@/api/sys/Role";
-  import { useModal } from "@/components/general/Modal";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { deleteRole, getRoleList, setRoleStatus } from "@mfish/core/src/api/sys/Role";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import RoleModal from "./RoleModal.vue";
   import RoleViewModal from "./RoleViewModal.vue";
   import { columns, searchFormSchema } from "./role.data";
-  import { usePermission } from "@/hooks/web/UsePermission";
+  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
   import { ref } from "vue";
-  import { deleteTenantRole, getTenantRole } from "@/api/sys/SsoTenant";
+  import { deleteTenantRole, getTenantRole } from "@mfish/core/src/api/sys/SsoTenant";
   import { Switch as ASwitch } from "ant-design-vue";
-  import { SsoRole } from "@/api/sys/model/RoleModel";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { SsoRole } from "@mfish/core/src/api/sys/model/RoleModel";
+  import { useDesign } from "@mfish/core";
   defineOptions({ name: "RoleManagement" });
 
   const props = defineProps({

@@ -9,9 +9,9 @@
   import { CSSProperties, onMounted, onUnmounted } from "vue";
   import { ref, unref, computed } from "vue";
   import { Spin } from "ant-design-vue";
-  import { useWindowSizeFn } from "@/hooks/event/UseWindowSizeFn";
-  import { propTypes } from "@/utils/PropTypes";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useWindowSizeFn } from "@mfish/core/src/hooks/event/UseWindowSizeFn";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import { useDesign } from "@mfish/core";
   import { useLayoutHeight } from "@/layouts/default/content/UseContentViewHeight";
   defineOptions({ name: "FramePage" });
   defineProps({

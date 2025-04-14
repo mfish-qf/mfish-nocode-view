@@ -1,5 +1,5 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
+import { BasicColumn } from "@mfish/core/src/components/Table";
+import { FormSchema } from "@mfish/core/src/components/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
 
@@ -7,7 +7,7 @@ import { Tag } from "ant-design-vue";
  * @description: 字典
  * @Author: mfish
  * @Date: 2023-01-03
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

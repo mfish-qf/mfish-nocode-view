@@ -32,17 +32,17 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTree, ContextMenuItem, TreeActionType, TreeItem } from "@/components/general/Tree";
+  import { BasicTree, ContextMenuItem, TreeActionType, TreeItem } from "@mfish/core/src/components/Tree";
   import { onMounted, ref, unref, createVNode } from "vue";
-  import { deleteDbConnect, getDbConnectList, getTableList } from "@/api/sys/DbConnect";
-  import { PageResult } from "@/api/model/BaseModel";
-  import { TableInfo } from "@/api/sys/model/DbConnectModel";
-  import Icon from "@/components/general/Icon/src/Icon.vue";
+  import { deleteDbConnect, getDbConnectList, getTableList } from "@mfish/core/src/api/sys/DbConnect";
+  import { PageResult } from "@mfish/core/src/api/model/BaseModel";
+  import { TableInfo } from "@mfish/core/src/api/sys/model/DbConnectModel";
+  import { Icon } from "@mfish/core/src/components/Icon";
   import { Button as AButton, Tooltip as ATooltip, Modal } from "ant-design-vue";
-  import { usePermission } from "@/hooks/web/UsePermission";
+  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
   import DbConnectModal from "@/views/sys/db-connect/DbConnectModal.vue";
-  import { useModal } from "@/components/general/Modal";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useRootSetting } from "@mfish/core";
   import { Nullable, Recordable } from "@mfish/types";
 
   const emit = defineEmits(["select", "search"]);

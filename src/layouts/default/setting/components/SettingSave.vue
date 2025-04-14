@@ -13,13 +13,13 @@
 <script lang="ts" setup>
   import { unref } from "vue";
   import { CopyOutlined, RedoOutlined } from "@ant-design/icons-vue";
-  import { useAppStore } from "@/store/modules/App";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useI18n } from "@/hooks/web/UseI18n";
-  import { useMessage } from "@/hooks/web/UseMessage";
-  import { useCopyToClipboard } from "@/hooks/web/UseCopyToClipboard";
-  import defaultSetting from "@/settings/ProjectSetting";
-  import { changeAppConfig } from "@/logics/InitAppConfig";
+  import { useAppStore } from "@mfish/stores/modules";
+  import { useDesign } from "@mfish/core";
+  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
+  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
+  import { useCopyToClipboard } from "@mfish/core/src/hooks/web/UseCopyToClipboard";
+  import defaultSetting from "@mfish/core/src/settings/ProjectSetting";
+  import { changeAppConfig } from "../../../../../packages/core/src/logics/InitAppConfig";
   import { saveSysConfig } from "@/api/sys/SysConfig";
 
   const { prefixCls } = useDesign("setting-save");

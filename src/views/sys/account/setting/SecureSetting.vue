@@ -27,12 +27,12 @@
 </template>
 <script lang="ts" setup>
   import { List as AList, Button as AButton } from "ant-design-vue";
-  import { CollapseContainer } from "@/components/general/Container";
+  import { CollapseContainer } from "@mfish/core/src/components/Container";
   import { ListItem } from "./setting.data";
-  import { useUserStore } from "@/store/modules/User";
-  import { Icon } from "@/components/general/Icon";
+  import { useUserStore } from "@mfish/stores/modules";
+  import { Icon } from "@mfish/core/src/components/Icon";
   import PasswordModal from "@/views/sys/account/PasswordModal.vue";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/src/components/Modal";
   const AListItem = AList.Item;
   const AListItemMeta = AListItem.Meta;
   const userStore = useUserStore();

@@ -2,7 +2,7 @@
  @description: 定时调度任务
  @author: mfish
  @date: 2023-02-20
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit" @cancel="clearJob">
@@ -22,7 +22,7 @@
 </template>
 <script lang="ts" setup>
   import { ref, computed, unref } from "vue";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
   import { insertJob, updateJob } from "@/api/scheduler/Job";
   import { Steps as ASteps } from "ant-design-vue";
   import JobConfig from "@/views/scheduler/job/JobConfig.vue";

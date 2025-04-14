@@ -93,19 +93,19 @@
 </template>
 <script lang="ts" setup>
   import { reactive, ref } from "vue";
-  import { BasicTable, useTable, TableAction, BasicColumn } from "@/components/general/Table";
-  import { deleteUser, getUserList } from "@/api/sys/User";
+  import { BasicTable, useTable, TableAction, BasicColumn } from "@mfish/core/src/components/Table";
+  import { deleteUser, getUserList } from "@mfish/core/src/api/sys/User";
   import { PageWrapper } from "@/components/general/Page";
   import OrgTree from "./OrgTree.vue";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import AccountModal from "./AccountModal.vue";
   import { columns, searchFormSchema } from "./account.data";
-  import { usePermission } from "@/hooks/web/UsePermission";
+  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
   import PasswordModal from "@/views/sys/account/PasswordModal.vue";
-  import { deleteUserOrg, getTenantUserList } from "@/api/sys/SsoTenant";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { deleteUserOrg, getTenantUserList } from "@mfish/core/src/api/sys/SsoTenant";
+  import { useDesign } from "@mfish/core";
   import AccountSelectModal from "@/views/sys/account/AccountSelectModal.vue";
-  import { useMessage } from "@/hooks/web/UseMessage";
+  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
   import { Recordable } from "@mfish/types";
   import AccountViewModal from "@/views/sys/account/AccountViewModal.vue";
   defineOptions({ name: "AccountManagement" });

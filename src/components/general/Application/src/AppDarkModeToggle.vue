@@ -7,13 +7,13 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from "vue";
-  import { SvgIcon } from "@/components/general/Icon";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-  import { ThemeEnum } from "@/enums/AppEnum";
-  import { setDarkTheme } from "@/logics/InitAppConfig";
+  import { SvgIcon } from "@mfish/core/src/components/Icon";
+  import { useDesign } from "@mfish/core";
+  import { useRootSetting } from "@mfish/core";
+  import { ThemeEnum } from "@mfish/core/enums";
+  import { setDarkTheme } from "../../../../../packages/core/src/logics/InitAppConfig";
   import { saveSysConfig } from "@/api/sys/SysConfig";
-  import { useAppStore } from "@/store/modules/App";
+  import { useAppStore } from "@mfish/stores/modules";
 
   const { prefixCls } = useDesign("dark-switch");
   const { getDarkMode, setDarkMode } = useRootSetting();

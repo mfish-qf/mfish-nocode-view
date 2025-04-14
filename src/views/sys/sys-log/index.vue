@@ -2,7 +2,7 @@
  @description: 系统日志
  @author: mfish
  @date: 2023-01-08
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <div>
@@ -46,14 +46,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
   import { deleteSysLog, getSysLogList } from "@/api/sys/SysLog";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import SysLogModal from "./SysLogModal.vue";
   import { columns, searchFormSchema } from "./sysLog.data";
   import { SysLog } from "@/api/sys/model/SysLogModel";
-  import { buildDictTag } from "@/utils/DictUtils";
-  import DictTag from "@/components/general/DictTag/DictTag.vue";
+  import { buildDictTag } from "@mfish/core/src/components/DictTag";
+  import { DictTag } from "@mfish/core/src/components/DictTag";
   defineOptions({ name: "SysLogManagement" });
 
   const [registerModal, { openModal }] = useModal();

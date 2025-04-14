@@ -17,12 +17,12 @@
 
 <script lang="ts" setup>
   import { onBeforeMount } from "vue";
-  import { oauth2Config } from "@/settings/LoginSetting";
-  import { useUserStore } from "@/store/modules/User";
-  import { useMessage } from "@/hooks/web/UseMessage";
-  import { useI18n } from "@/hooks/web/UseI18n";
+  import { oauth2Config } from "@mfish/core/src/settings/LoginSetting";
+  import { useUserStore } from "@mfish/stores/modules";
+  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
+  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
   import { useRouter, useRoute } from "vue-router";
-  import { useGlobSetting } from "@/hooks/setting";
+  import { useGlobSetting } from "@mfish/core/src/hooks/setting";
 
   const props = defineProps({
     loginHandler: {

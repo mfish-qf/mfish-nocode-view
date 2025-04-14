@@ -40,11 +40,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
-  import { deleteMenu, getMenuList } from "@/api/sys/Menu";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { deleteMenu, getMenuList } from "@mfish/core/src/api/sys/Menu";
   import MenuModal from "./MenuModal.vue";
   import { columns, searchFormSchema } from "./menu.data";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import { Recordable } from "@mfish/types";
   import MenuViewModal from "@/views/sys/menu/MenuViewModal.vue";
   defineOptions({ name: "MenuManagement" });

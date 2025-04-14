@@ -11,8 +11,8 @@
 <script lang="ts" setup>
   import { Card, CardGrid } from "ant-design-vue";
   import { navItems } from "./Data";
-  import { Icon } from "@/components/general/Icon";
-  import { useGo } from "@/hooks/web/UsePage";
+  import { Icon } from "@mfish/core/src/components/Icon";
+  import { useGo } from "@mfish/core/src/hooks/web/UsePage";
   const go = useGo();
   function clickCard(item) {
     go(item.url);

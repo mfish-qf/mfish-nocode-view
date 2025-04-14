@@ -38,12 +38,12 @@
 </template>
 <script lang="ts" setup>
   import { ref, watch, onMounted, computed, nextTick, ComputedRef } from "vue";
-  import { BasicColumn, BasicTable, useTable } from "@/components/general/Table";
+  import { BasicColumn, BasicTable, useTable } from "@mfish/core/src/components/Table";
   import { Descriptions as ADescriptions, Tabs as ATabs } from "ant-design-vue";
-  import { ReqTable, TableInfo } from "@/api/sys/model/DbConnectModel";
-  import { getDataTable, getFieldList } from "@/api/sys/DbConnect";
+  import { ReqTable, TableInfo } from "@mfish/core/src/api/sys/model/DbConnectModel";
+  import { getDataTable, getFieldList } from "@mfish/core/src/api/sys/DbConnect";
   import { columns } from "@/views/sys/database/tableInfo.data";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useDesign } from "@mfish/core";
   const props = defineProps({
     curNode: Object as () => TableInfo,
     resizeHeightOffset: { type: Number, default: 0 }

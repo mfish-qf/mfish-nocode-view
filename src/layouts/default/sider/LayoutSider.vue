@@ -22,11 +22,11 @@
   import { computed, ref, unref, CSSProperties } from "vue";
   import { Layout } from "ant-design-vue";
   import LayoutMenu from "../menu/index.vue";
-  import { MenuModeEnum, MenuSplitTyeEnum, TriggerEnum } from "@/enums/MenuEnum";
-  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
+  import { MenuModeEnum, MenuSplitTyeEnum, TriggerEnum } from "@mfish/core/enums";
+  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
   import { useTrigger, useDragLine, useSiderEvent } from "./UseLayoutSider";
-  import { useAppInject } from "@/hooks/web/UseAppInject";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useAppInject } from "@/hooks/UseAppInject";
+  import { useDesign } from "@mfish/core";
   import DragBar from "./DragBar.vue";
 
   defineOptions({ name: "LayoutSideBar" });

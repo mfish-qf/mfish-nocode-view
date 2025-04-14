@@ -1,4 +1,4 @@
-import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
+import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
 
 export const TenantDropDown = createAsyncComponent(() => import("./tenant-dropdown/index.vue"), {
   loading: true

@@ -46,21 +46,21 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from "vue";
-  import { propTypes } from "@/utils/PropTypes";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
   import { AppLocalePicker, AppLogo, AppSearch } from "@/components/general/Application";
   import { Divider, Layout } from "ant-design-vue";
   import LayoutMenu from "../menu/index.vue";
   import LayoutTrigger from "../trigger/index.vue";
-  import { useHeaderSetting } from "@/hooks/setting/UseHeaderSetting";
-  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-  import { MenuModeEnum, MenuSplitTyeEnum } from "@/enums/MenuEnum";
-  import { SettingButtonPositionEnum } from "@/enums/AppEnum";
+  import { useHeaderSetting } from "@mfish/core/src/hooks/setting/UseHeaderSetting";
+  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
+  import { useRootSetting } from "@mfish/core";
+  import { MenuModeEnum, MenuSplitTyeEnum } from "@mfish/core/enums";
+  import { SettingButtonPositionEnum } from "@mfish/core/enums";
   import { ErrorAction, FullScreen, LayoutBreadcrumb, Notify, TenantDropDown, UserDropDown } from "./components";
-  import { useAppInject } from "@/hooks/web/UseAppInject";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
-  import { useLocale } from "@/i18n/UseLocale";
+  import { useAppInject } from "@/hooks/UseAppInject";
+  import { useDesign } from "@mfish/core";
+  import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
+  import { useLocale } from "@mfish/core/src/i18n/UseLocale";
   import AppDarkModeToggle from "@/components/general/Application/src/AppDarkModeToggle.vue";
 
   defineOptions({ name: "LayoutHeader" });

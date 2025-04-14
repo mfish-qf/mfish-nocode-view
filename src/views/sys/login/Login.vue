@@ -169,14 +169,14 @@
 <script lang="ts" setup>
   import "bootstrap/dist/js/bootstrap.min.js";
   import { computed, onMounted, onUnmounted, reactive, ref, unref } from "vue";
-  import { getCaptcha } from "@/api/sys/User";
-  import { oauth2Config, giteeConfig, githubConfig } from "@/settings/LoginSetting";
-  import { useMessage } from "@/hooks/web/UseMessage";
-  import { useUserStore } from "@/store/modules/User";
-  import { useI18n } from "@/hooks/web/UseI18n";
+  import { getCaptcha } from "@mfish/core/src/api/sys/User";
+  import { oauth2Config, giteeConfig, githubConfig } from "@mfish/core/src/settings/LoginSetting";
+  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
+  import { useUserStore } from "@mfish/stores/modules";
+  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
   import { debounce } from "lodash-es";
-  import { useGlobSetting } from "@/hooks/setting";
-  import { Icon } from "@/components/general/Icon";
+  import { useGlobSetting } from "@mfish/core/src/hooks/setting";
+  import { Icon } from "@mfish/core/src/components/Icon";
 
   const username = ref("");
   const password = ref("");

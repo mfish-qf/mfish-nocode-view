@@ -2,7 +2,7 @@
  @description: demo_data_scope
  @author: mfish
  @date: 2024-09-04
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <PageWrapper title="数据权限控制样例" content="通过@DataScope注解进行数据权限限制，使用方法参考后端接口代码">
@@ -41,7 +41,7 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
   import {
     getAdminOrg,
     getCurrentOrg,
@@ -51,7 +51,7 @@
     getFixRole,
     getMixScope
   } from "@/api/demo/DemoDataScope";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import DemoDataScopeViewModal from "./DemoDataScopeViewModal.vue";
   import { columns } from "./demoDataScope.data";
   import { DemoDataScope } from "@/api/demo/model/DemoDataScopeModel";

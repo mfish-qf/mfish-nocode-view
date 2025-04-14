@@ -1,12 +1,11 @@
 import { toRaw, ref, nextTick } from "vue";
 import type { RouteLocationNormalized } from "vue-router";
-import { useDesign } from "@/hooks/web/UseDesign";
-import { useSortable } from "@/hooks/web/UseSortable";
-import { useMultipleTabStore } from "@/store/modules/MultipleTab";
-import { isNullAndUnDef } from "@/utils/Is";
-import projectSetting from "@/settings/ProjectSetting";
+import { useDesign } from "@mfish/core";
+import { useSortable } from "@/hooks/UseSortable";
+import { useMultipleTabStore } from "@mfish/stores/modules";
+import { isNullAndUnDef } from "@mfish/core/src/utils/Is";
+import projectSetting from "@mfish/core/src/settings/ProjectSetting";
 import { useRouter } from "vue-router";
-import { ChangeEvent } from "@mfish/types";
 
 export function initAffixTabs(): string[] {
   const affixList = ref<RouteLocationNormalized[]>([]);
@@ -61,7 +60,7 @@ export function useTabsDrag(affixTextList: string[]) {
     if (!multiTabsSetting.canDrag) return;
     const el = document.querySelectorAll(`.${prefixCls} .ant-tabs-nav-wrap > div`)?.[0] as HTMLElement;
     const { initSortable } = useSortable(el, {
-      filter: (e: ChangeEvent) => {
+      filter: (e: any) => {
         const text = e?.target?.innerText;
         if (!text) return false;
         return affixTextList.includes(text);

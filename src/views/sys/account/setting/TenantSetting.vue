@@ -44,15 +44,15 @@
 <script lang="ts" setup>
   import { Avatar, List as AList, Button as AButton, Tag } from "ant-design-vue";
   import { onMounted, ref } from "vue";
-  import { CollapseContainer } from "@/components/general/Container";
-  import { imageUrl } from "@/utils/file/FileUtils";
-  import { Icon } from "@/components/general/Icon";
-  import { TenantVo } from "@/api/sys/model/SsoTenantModel";
+  import { CollapseContainer } from "@mfish/core/src/components/Container";
+  import { imageUrl } from "@mfish/core/src/utils/file/FileUtils";
+  import { Icon } from "@mfish/core/src/components/Icon";
+  import { TenantVo } from "@mfish/core/src/api/sys/model/SsoTenantModel";
   import SsoTenantModal from "@/views/sys/sso-tenant/SsoTenantModal.vue";
-  import { useModal } from "@/components/general/Modal";
-  import { getUserTenants } from "@/api/sys/User";
-  import { getLocalFileUrl } from "@/api/storage/SysFile";
-  import DictTag from "@/components/general/DictTag/DictTag.vue";
+  import { useModal } from "@mfish/core/src/components/Modal";
+  import { getUserTenants } from "@mfish/core/src/api/sys/User";
+  import { getLocalFileUrl } from "@mfish/core/src/utils/file/FileUtils";
+  import { DictTag } from "@mfish/core/src/components/DictTag";
   const AListItem = AList.Item;
   const AListItemMeta = AListItem.Meta;
 

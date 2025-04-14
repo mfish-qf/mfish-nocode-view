@@ -15,11 +15,11 @@
 </template>
 
 <script lang="ts" setup>
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { BasicForm, useForm } from "@/components/general/Form";
+  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
   import { formSchema } from "@/views/sys/account/pwd.data";
-  import { usePermission } from "@/hooks/web/UsePermission";
-  import { changePwd } from "@/api/sys/User";
+  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
+  import { changePwd } from "@mfish/core/src/api/sys/User";
   defineOptions({ name: "PasswordModal" });
 
   const [registerForm, { validate, resetFields, updateSchema, setFieldsValue }] = useForm({

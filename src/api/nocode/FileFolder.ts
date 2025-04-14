@@ -1,11 +1,11 @@
-import { defHttp } from "@/utils/http/axios";
+import { defHttp } from "@mfish/core/src/utils/http/axios";
 import { FileFolder, FileFolderPageModel, ReqFolder } from "@/api/nocode/model/FileFolderModel";
 
 /**
  * @description: 文件目录
  * @author: mfish
  * @date: 2023-07-21
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 enum Api {
   FileFolderTree = "/nocode/fileFolder/tree",

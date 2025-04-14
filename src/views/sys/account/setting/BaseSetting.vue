@@ -28,14 +28,14 @@
 <script lang="ts" setup>
   import { Button as AButton, Row as ARow, Col as ACol } from "ant-design-vue";
   import { onBeforeMount, onMounted, ref } from "vue";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
-  import { CollapseContainer } from "@/components/general/Container";
-  import { CropperAvatar } from "@/components/general/Cropper";
-  import { getUserInfo, updateMe } from "@/api/sys/User";
+  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { CollapseContainer } from "@mfish/core/src/components/Container";
+  import { CropperAvatar } from "@mfish/core/src/components/Cropper";
+  import { getUserInfo, updateMe } from "@mfish/core/src/api/sys/User";
   import { baseSetSchemas } from "./setting.data";
-  import { useUserStore } from "@/store/modules/User";
-  import { uploadApi } from "@/api/storage/Upload";
-  import { setHeaderImg } from "@/utils/file/FileUtils";
+  import { useUserStore } from "@mfish/stores/modules";
+  import { uploadApi } from "@mfish/core/src/api/storage/Upload";
+  import { setHeaderImg } from "@mfish/core/src/utils/file/FileUtils";
 
   const userStore = useUserStore();
   const [register, { setFieldsValue, validate }] = useForm({

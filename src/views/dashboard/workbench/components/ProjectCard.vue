@@ -24,7 +24,7 @@
 </template>
 <script lang="ts" setup>
   import { Card } from "ant-design-vue";
-  import { Icon } from "@/components/general/Icon";
+  import { Icon } from "@mfish/core/src/components/Icon";
   import { groupItems } from "./Data";
   const items = groupItems;
   function clickCard(item) {

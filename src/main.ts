@@ -1,21 +1,21 @@
 import "virtual:uno.css";
 import "virtual:unocss-devtools";
-import "@/design/index.less";
+import "@mfish/styles";
 import "virtual:svg-icons-register";
 import "ant-design-vue/dist/reset.css";
 // 引入动画
 import "animate.css/animate.min.css";
 import App from "./App.vue";
 import { createApp } from "vue";
-import { router, setupRouter } from "./router";
-import { setupStore } from "@/store";
-import { setLocal } from "@/i18n/SetupI18n";
-import { setupRouterGuard } from "@/router/guard";
-import { setupErrorHandle } from "@/logics/error-handle";
-import { isDevMode } from "@/utils/Env";
-import { registerGlobComponent } from "@/components/RegisterGlobComponent";
-import { setupGlobDirectives } from "./directives";
-import { initAppConfigStore } from "@/logics/InitAppConfig";
+import { router, setupRouter } from "@mfish/core/src/router";
+import { setupStore } from "@mfish/stores";
+import { setLocal } from "@mfish/core/src/i18n/SetupI18n";
+import { setupRouterGuard } from "@mfish/core/src/router/guard";
+import { setupErrorHandle } from "@mfish/core/src/logics/error-handle";
+import { isDevMode } from "@mfish/core/src/utils/Env";
+import { registerGlobComponent } from "@mfish/core/src/components/RegisterGlobComponent";
+import { setupGlobDirectives } from "@mfish/core/src/directives";
+import { initAppConfigStore } from "@mfish/core/src/logics/InitAppConfig";
 
 if (isDevMode()) {
   import("ant-design-vue/es/style");

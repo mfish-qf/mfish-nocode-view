@@ -9,10 +9,10 @@
   import type { SubMenuProvider } from "./Types";
   import { ref, computed, onMounted, watchEffect, watch, nextTick, getCurrentInstance, provide } from "vue";
 
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { propTypes } from "@/utils/PropTypes";
+  import { useDesign } from "@mfish/core";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
   import { createSimpleRootMenuContext } from "./UseSimpleMenuContext";
-  import { mitt } from "@/utils/Mitt";
+  import { mitt } from "@mfish/core/src/utils/Mitt";
   defineOptions({ name: "MfishMenu" });
 
   const props = defineProps({

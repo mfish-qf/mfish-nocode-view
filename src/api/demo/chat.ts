@@ -1,4 +1,4 @@
-import { defHttp } from "@/utils/http/axios";
+import { defHttp } from "@mfish/core/src/utils/http/axios";
 import { CompletionResult, QuestionModel } from "@/api/demo/model/QuestionModel";
 
 /**

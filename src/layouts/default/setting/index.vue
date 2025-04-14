@@ -6,9 +6,9 @@
 </template>
 <script lang="ts" setup>
   import SettingDrawer from "./SettingDrawer";
-  import { Icon } from "@/components/general/Icon";
-  import { useDrawer } from "@/components/general/Drawer";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { Icon } from "@mfish/core/src/components/Icon";
+  import { useDrawer } from "@mfish/core/src/components/Drawer";
+  import { useDesign } from "@mfish/core";
   defineOptions({ name: "SettingButton" });
   const [register, { openDrawer }] = useDrawer();
   const { prefixCls } = useDesign("theme-setting");

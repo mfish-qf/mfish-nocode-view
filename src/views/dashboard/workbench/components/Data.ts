@@ -1,4 +1,4 @@
-import { formatToDate } from "@/utils/DateUtil";
+import { formatToDate } from "@mfish/core/src/utils/DateUtil";
 
 interface GroupItem {
   title: string;
@@ -65,49 +65,49 @@ export const navItems: NavItem[] = [
 
 export const dynamicInfoItems: DynamicInfoItem[] = [
   {
-    avatar: "dynamic-avatar-1|svg",
+    avatar: "svg:dynamic-avatar-1",
     name: "mfish",
     date: "刚刚",
     desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>github</a> 发布了1.3.2最新版本后端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>mfish-nocode</a>`
   },
   {
-    avatar: "dynamic-avatar-2|svg",
+    avatar: "svg:dynamic-avatar-2",
     name: "mfish",
     date: "1个小时前",
-    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>gitee</a> 发布了V1.3.2最新版本后端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>mfish-nocode</a>`
+    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>gitee</a> 发布了V2.0.0最新版本后端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>mfish-nocode</a>`
   },
   {
-    avatar: "dynamic-avatar-3|svg",
+    avatar: "svg:dynamic-avatar-3",
     name: "克里斯",
     date: "1天前",
     desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>github</a> 发布了1.3.2最新版本前端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>mfish-nocode-view</a>`
   },
   {
-    avatar: "dynamic-avatar-4|svg",
+    avatar: "svg:dynamic-avatar-4",
     name: "Mfish",
     date: "2天前",
-    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>gitee</a> 发布了V1.3.2最新版本前端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>mfish-nocode-view</a>`
+    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>gitee</a> 发布了V2.0.0最新版本前端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>mfish-nocode-view</a>`
   },
   {
-    avatar: "dynamic-avatar-5|svg",
+    avatar: "svg:dynamic-avatar-5",
     name: "皮特",
     date: "3天前",
     desc: `回复了 <a>杰克</a> 的问题 <a>如何进行项目优化？</a>`
   },
   {
-    avatar: "dynamic-avatar-6|svg",
+    avatar: "svg:dynamic-avatar-6",
     name: "杰克",
     date: "1周前",
     desc: `关闭了问题 <a>如何运行项目</a> `
   },
   {
-    avatar: "dynamic-avatar-1|svg",
+    avatar: "svg:dynamic-avatar-1",
     name: "威廉",
     date: "1周前",
     desc: `发布了 <a>个人动态</a> `
   },
   {
-    avatar: "dynamic-avatar-1|svg",
+    avatar: "svg:dynamic-avatar-1",
     name: "威廉",
     date: "2021-04-01 20:00",
     desc: `推送了代码到 <a>Github</a>`

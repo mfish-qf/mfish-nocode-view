@@ -1,11 +1,11 @@
-import { defHttp } from "@/utils/http/axios";
+import { defHttp } from "@mfish/core/src/utils/http/axios";
 import { DemoOrderDetail, ReqDemoOrderDetail, DemoOrderDetailPageModel } from "@/api/demo/model/DemoOrderDetailModel";
 
 /**
  * @description: 销售订单明细
  * @author: mfish
  * @date: 2024-09-02
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 enum Api {
   DemoOrderDetail = "/demo/demoOrderDetail"

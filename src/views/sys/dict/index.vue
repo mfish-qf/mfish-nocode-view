@@ -46,12 +46,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
   import { deleteDict, exportDict, getDictList } from "@/api/sys/Dict";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import DictModal from "./DictModal.vue";
   import { columns, searchFormSchema } from "./dict.data";
-  import { useGo } from "@/hooks/web/UsePage";
+  import { useGo } from "@mfish/core/src/hooks/web/UsePage";
   import { Dict } from "@/api/sys/model/DictModel";
   defineOptions({ name: "DictManagement" });
 

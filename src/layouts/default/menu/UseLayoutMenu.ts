@@ -1,13 +1,13 @@
-import type { Menu } from "@/router/Types";
+import type { Menu } from "@mfish/core/src/router/Types";
 import type { Ref } from "vue";
 import { computed, ref, unref, watch } from "vue";
 import { useRouter } from "vue-router";
-import { MenuSplitTyeEnum } from "@/enums/MenuEnum";
+import { MenuSplitTyeEnum } from "@mfish/core/enums";
 import { useThrottleFn } from "@vueuse/core";
-import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-import { getChildrenMenus, getCurrentParentPath, getMenus, getShallowMenus } from "@/router/menus";
-import { usePermissionStore } from "@/store/modules/Permission";
-import { useAppInject } from "@/hooks/web/UseAppInject";
+import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
+import { getChildrenMenus, getCurrentParentPath, getMenus, getShallowMenus } from "@mfish/core/src/router/menus";
+import { usePermissionStore } from "@mfish/stores/modules";
+import { useAppInject } from "@/hooks/UseAppInject";
 
 export function useSplitMenu(splitType: Ref<MenuSplitTyeEnum>) {
   // Menu array

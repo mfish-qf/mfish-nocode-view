@@ -4,8 +4,8 @@
 </template>
 <script lang="ts">
   import { defineComponent } from "vue";
-  import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
-  import { propTypes } from "@/utils/PropTypes";
+  import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
   import HeaderTrigger from "./HeaderTrigger.vue";
 
   export default defineComponent({

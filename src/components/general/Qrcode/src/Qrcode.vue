@@ -7,7 +7,7 @@
   import { defineComponent, watch, PropType, ref, unref, onMounted } from "vue";
   import { toCanvas, QRCodeRenderersOptions, LogoType } from "./QrcodePlus";
   import { toDataURL } from "qrcode";
-  import { downloadByUrl } from "@/utils/file/Download";
+  import { downloadByUrl } from "@mfish/core/src/utils/file/Download";
   import { QrcodeDoneEventParams } from "./Typing";
 
   export default defineComponent({

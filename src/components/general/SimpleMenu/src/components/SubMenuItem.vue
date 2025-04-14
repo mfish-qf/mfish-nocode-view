@@ -65,15 +65,15 @@
     onBeforeMount,
     inject
   } from "vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { propTypes } from "@/utils/PropTypes";
+  import { useDesign } from "@mfish/core";
+  import { propTypes } from "@mfish/core/src/utils/PropTypes";
   import { useMenuItem } from "./UseMenu";
   import { useSimpleRootMenuContext } from "./UseSimpleMenuContext";
-  import { CollapseTransition } from "@/components/general/Transition";
-  import { Icon } from "@/components/general/Icon";
+  import { CollapseTransition } from "@mfish/core/src/components/Transition";
+  import { Icon } from "@mfish/core/src/components/Icon";
   import { Popover } from "ant-design-vue";
-  import { isBoolean, isObject } from "@/utils/Is";
-  import { mitt } from "@/utils/Mitt";
+  import { isBoolean, isObject } from "@mfish/core/src/utils/Is";
+  import { mitt } from "@mfish/core/src/utils/Mitt";
   import { Recordable, TimeoutHandle } from "@mfish/types";
 
   const DELAY = 200;

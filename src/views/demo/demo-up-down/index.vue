@@ -2,7 +2,7 @@
  @description: 上传下载Demo
  @author: mfish
  @date: 2024-09-08
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <PageWrapper
@@ -35,12 +35,12 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
   import { columns, searchFormSchema } from "./demoUpDown.data";
   import { PageWrapper } from "@/components/general/Page";
   import { getDemoImportExportList } from "@/api/demo/DemoImportExport";
   import DemoUpModal from "@/views/demo/demo-up-down/DemoUpModal.vue";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/src/components/Modal";
   import DemoUpPicModal from "@/views/demo/demo-up-down/DemoUpPicModal.vue";
 
   defineOptions({ name: "DemoUpDownManagement" });

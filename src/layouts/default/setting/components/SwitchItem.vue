@@ -14,8 +14,8 @@
   import { defineComponent, PropType, computed } from "vue";
 
   import { Switch } from "ant-design-vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useDesign } from "@mfish/core";
+  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
   import { baseHandler } from "../Handler";
   import { HandlerEnum } from "../Enum";
 

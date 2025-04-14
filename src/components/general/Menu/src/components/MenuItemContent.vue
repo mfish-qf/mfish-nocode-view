@@ -7,9 +7,9 @@
 <script lang="ts">
   import { computed, defineComponent } from "vue";
 
-  import { Icon } from "@/components/general/Icon";
-  import { useI18n } from "@/hooks/web/UseI18n";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { Icon } from "@mfish/core/src/components/Icon";
+  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
+  import { useDesign } from "@mfish/core";
   import { contentProps } from "../Props";
 
   const { t } = useI18n();

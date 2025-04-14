@@ -45,6 +45,14 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
           {
             find: /#\//,
             replacement: `${pathResolve("types")}/`
+          },
+          {
+            find: /@core\//,
+            replacement: `${pathResolve("packages/core/src")}/`
+          },
+          {
+            find: /@nocode\//,
+            replacement: `${pathResolve("packages/nocode/src")}/`
           }
         ]
       },
