@@ -15,10 +15,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { useI18n } from "@core/hooks/web/UseI18n";
-  import { useDesign } from "@core/index";
+  import { useDesign, useI18n } from "@core/hooks";
   import type { TableActionType } from "../types/Table";
   import { Alert as AAlert } from "ant-design-vue";
+
   defineOptions({
     name: "TableSelectBar"
   });

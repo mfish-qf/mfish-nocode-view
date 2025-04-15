@@ -1,4 +1,4 @@
-import type { RouteRecordRaw, RouteMeta } from "vue-router";
+import type { RouteMeta, RouteRecordRaw } from "vue-router";
 import { defineComponent } from "vue";
 import { Recordable } from "@mfish/types";
 

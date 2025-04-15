@@ -11,7 +11,7 @@ import { changeTheme } from "@core/logics/theme/UpdateTheme.ts";
 import { getCommonStoragePrefix, getStorageShortName } from "@core/utils/Env.ts";
 import { ThemeEnum } from "@core/enums";
 import { getSysConfig } from "@/api/sys/SysConfig.ts";
-import { useUserStoreWithOut, useTableSettingStore, useAppStore } from "@mfish/stores/modules";
+import { useAppStore, useTableSettingStore, useUserStoreWithOut } from "@mfish/stores/modules";
 import { sleep } from "@core/utils/Utils.ts";
 
 export async function initAppConfigStore() {

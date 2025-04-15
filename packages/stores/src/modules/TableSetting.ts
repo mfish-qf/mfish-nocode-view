@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { Nullable, Recordable } from "@mfish/types";
-import { ColumnOptionsType, SizeType } from "@mfish/core/src/components/Table";
+import { ColumnOptionsType, SizeType } from "@mfish/core/components/Table";
 
 interface TableSetting {
   size: Nullable<SizeType>;
@@ -8,6 +8,7 @@ interface TableSetting {
   columns: Recordable<Nullable<Array<ColumnOptionsType>>>;
   showRowSelection: Recordable<Nullable<boolean>>;
 }
+
 interface TableSettingState {
   setting: Nullable<TableSetting>;
 }

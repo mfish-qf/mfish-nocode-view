@@ -15,9 +15,7 @@
 <script lang="ts" setup>
   import { computed, unref } from "vue";
   import FrameLayout from "@/layouts/iframe/index.vue";
-  import { useRootSetting } from "@mfish/core";
-  import { useTransitionSetting } from "@mfish/core/src/hooks/setting/UseTransitionSetting";
-  import { useMultipleTabSetting } from "@mfish/core/src/hooks/setting/UseMultipleTabSetting";
+  import { useMultipleTabSetting, useRootSetting, useTransitionSetting } from "@mfish/core/hooks";
   import { useMultipleTabStore } from "@mfish/stores/modules";
   import { RouterTransitionEnum } from "@mfish/core/enums";
 

@@ -24,12 +24,11 @@
 </template>
 <script lang="ts">
   import { computed, defineComponent, ref } from "vue";
-  import { Popover, Tabs, Badge } from "ant-design-vue";
+  import { Badge, Popover, Tabs } from "ant-design-vue";
   import { BellOutlined } from "@ant-design/icons-vue";
-  import { tabListData, ListItem } from "./Data";
+  import { ListItem, tabListData } from "./Data";
   import NoticeList from "./NoticeList.vue";
-  import { useDesign } from "@mfish/core";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
+  import { useDesign, useMessage } from "@mfish/core/hooks";
 
   export default defineComponent({
     components: { Popover, BellOutlined, Tabs, TabPane: Tabs.TabPane, Badge, NoticeList },
@@ -77,6 +76,7 @@
     .ant-badge {
       font-size: 18px;
       color: @header-color;
+
       .ant-badge-multiple-words {
         padding: 0 4px;
       }
@@ -84,12 +84,14 @@
       svg {
         width: 0.9em;
       }
+
       &:hover {
         svg {
           animation: bell-ring 1.2s both;
         }
       }
     }
+
     @keyframes bell-ring {
       0%,
       100% {

@@ -49,15 +49,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
-  import { deleteFormulaInfo, exportFormulaInfo, getFormulaInfoList } from "@mfish/nocode";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
+  import { deleteFormulaInfo, exportFormulaInfo, FormulaInfo, getFormulaInfoList } from "@mfish/nocode";
+  import { useModal } from "@mfish/core/components/Modal";
   import FormulaInfoModal from "./FormulaInfoModal.vue";
   import FormulaInfoViewModal from "./FormulaInfoViewModal.vue";
   import { columns, searchFormSchema } from "./formulaInfo.data";
-  import { FormulaInfo } from "@mfish/nocode";
   import { ref } from "vue";
-  import { Button as AButton } from "@mfish/core/src/components/Button";
+  import { Button as AButton } from "@mfish/core/components/Button";
 
   defineOptions({ name: "FormulaInfoManagement" });
   const [registerModal, { openModal }] = useModal();
@@ -89,6 +88,7 @@
       dataIndex: "action"
     }
   });
+
   /**
    * 新建
    */

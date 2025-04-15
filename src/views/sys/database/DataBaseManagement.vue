@@ -64,17 +64,17 @@
   </NLayout>
 </template>
 <script lang="ts" setup>
-  import { ref, unref, computed, toRaw } from "vue";
-  import { ScrollContainer } from "@mfish/core/src/components/Container";
+  import { computed, ref, toRaw, unref } from "vue";
+  import { ScrollContainer } from "@mfish/core/components/Container";
   import DBTree from "./DBTree.vue";
-  import { Icon } from "@mfish/core/src/components/Icon";
-  import { Tooltip, Row as ARow, Col as ACol, Breadcrumb as ABreadcrumb, Divider as ADivider } from "ant-design-vue";
-  import { TableInfo } from "@mfish/core/src/api/sys/model/DbConnectModel";
-  import { useDesign } from "@mfish/core";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { Breadcrumb as ABreadcrumb, Col as ACol, Divider as ADivider, Row as ARow, Tooltip } from "ant-design-vue";
+  import { TableInfo } from "@mfish/core/api";
+  import { useDesign, useRootSetting } from "@mfish/core/hooks";
   import TableDetail from "@/views/sys/database/TableDetail.vue";
-  import { TreeItem } from "@mfish/core/src/components/Tree";
-  import { useRootSetting } from "@mfish/core";
+  import { TreeItem } from "@mfish/core/components/Tree";
   import { NLayout, NLayoutContent, NLayoutSider } from "naive-ui";
+
   defineOptions({ name: "DataBaseManagement" });
   defineProps({
     resizeHeightOffset: { type: Number, default: 0 }
@@ -160,18 +160,22 @@
     .@{prefix-cls} {
       background-color: #121212;
     }
+
     .@{prefix-cls}-card {
       &-item {
         background: @sider-bg-color;
+
         &:hover {
           box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.1);
         }
       }
     }
   }
+
   .@{prefix-cls} {
     background-color: @white;
     height: 100%;
+
     &-left {
       flex: 1;
       padding: 6px;
@@ -221,6 +225,7 @@
         display: flex;
         flex-direction: column;
         gap: 4px;
+
         > span {
           overflow: hidden;
           text-overflow: ellipsis;

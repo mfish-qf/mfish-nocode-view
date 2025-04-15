@@ -1,6 +1,6 @@
 import type { RuleObject } from "ant-design-vue/lib/form/interface";
 import type { ComponentType } from "./types";
-import { useI18n } from "@core/hooks/web/UseI18n";
+import { useI18n } from "@core/hooks";
 import { isNumber } from "@core/utils/Is";
 
 const { t } = useI18n();
@@ -61,6 +61,7 @@ export const dateItemType = genType();
 export const defaultValueComponents = ["Input", "InputPassword", "InputNumber", "InputSearch", "InputTextArea"];
 
 export const simpleComponents = ["Divider", "BasicTitle"];
+
 export function isIncludeSimpleComponents(component?: ComponentType) {
   return simpleComponents.includes(component || "");
 }

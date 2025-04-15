@@ -1,13 +1,13 @@
 import { h } from "vue";
-import { JsonPreview } from "@mfish/core/src/components/CodeEditor";
-import { useRootSetting } from "@mfish/core";
+import { JsonPreview } from "@core/components/CodeEditor";
+import { useRootSetting } from "@core/hooks";
 
 /**
  * @description: vue通过h动态创建组件
  * @author: mfish
  * @date: 2023/2/28 21:03
  */
-export function buildJsonPreview(data) {
+export function buildJsonPreview(data: any) {
   if (data === undefined || data === null || data === "" || (!data.startsWith("{") && !data.startsWith("["))) {
     return h("div", data);
   }

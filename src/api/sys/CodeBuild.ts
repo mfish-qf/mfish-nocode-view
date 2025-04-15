@@ -1,5 +1,5 @@
-import { defHttp } from "@mfish/core/src/utils/http/axios";
-import { CodeBuild, ReqCodeBuild, CodeBuildPageModel, CodeVo } from "@/api/sys/model/CodeBuildModel";
+import { defHttp } from "@mfish/core/utils/http/axios";
+import { CodeBuild, CodeBuildPageModel, CodeVo, ReqCodeBuild } from "@/api/sys/model/CodeBuildModel";
 
 /**
  * @description: 代码构建

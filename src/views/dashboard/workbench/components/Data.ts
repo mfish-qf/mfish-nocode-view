@@ -1,4 +1,4 @@
-import { formatToDate } from "@mfish/core/src/utils/DateUtil";
+import { formatToDate } from "@mfish/core/utils/DateUtil";
 
 interface GroupItem {
   title: string;
@@ -68,25 +68,25 @@ export const dynamicInfoItems: DynamicInfoItem[] = [
     avatar: "svg:dynamic-avatar-1",
     name: "mfish",
     date: "刚刚",
-    desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>github</a> 发布了1.3.2最新版本后端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>mfish-nocode</a>`
-  },
-  {
-    avatar: "svg:dynamic-avatar-2",
-    name: "mfish",
-    date: "1个小时前",
     desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>gitee</a> 发布了V2.0.0最新版本后端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>mfish-nocode</a>`
   },
   {
     avatar: "svg:dynamic-avatar-3",
     name: "克里斯",
-    date: "1天前",
-    desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>github</a> 发布了1.3.2最新版本前端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>mfish-nocode-view</a>`
+    date: "刚刚",
+    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>gitee</a> 发布了V2.0.0最新版本前端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>mfish-nocode-view</a>`
   },
   {
     avatar: "svg:dynamic-avatar-4",
     name: "Mfish",
-    date: "2天前",
-    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>gitee</a> 发布了V2.0.0最新版本前端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>mfish-nocode-view</a>`
+    date: "刚刚",
+    desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>github</a> 发布了V2.0.0最新版本前端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>mfish-nocode-view</a>`
+  },
+  {
+    avatar: "svg:dynamic-avatar-2",
+    name: "mfish",
+    date: "刚刚",
+    desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>github</a> 发布了V2.0.0最新版本后端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>mfish-nocode</a>`
   },
   {
     avatar: "svg:dynamic-avatar-5",

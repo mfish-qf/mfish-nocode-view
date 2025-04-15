@@ -20,20 +20,25 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { computed, ref, unref } from "vue";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { accountFormSchema } from "./account.data";
-  import { getOrg, getOrgRoles } from "@mfish/core/src/api/sys/Org";
-  import { getUserRoles, insertUser, updateUser } from "@mfish/core/src/api/sys/User";
-  import { getAllRoleList } from "@mfish/core/src/api/sys/Role";
-  import { RoleInfo } from "@mfish/core/src/api/sys/model/UserModel";
-  import { SsoRole } from "@mfish/core/src/api/sys/model/RoleModel";
-  import { getTenantOrgTree } from "@mfish/core/src/api/sys/SsoTenant";
+  import {
+    getAllRoleList,
+    getOrg,
+    getOrgRoles,
+    getTenantOrgTree,
+    getUserRoles,
+    insertUser,
+    RoleInfo,
+    SsoOrg,
+    SsoRole,
+    updateUser
+  } from "@mfish/core/api";
   import { Recordable } from "@mfish/types";
   import { TreeSelect } from "ant-design-vue";
-  import { SsoOrg } from "@mfish/core/src/api/sys/model/OrgModel";
-  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
+  import { usePermission } from "@mfish/core/hooks";
 
   defineOptions({ name: "AccountModal" });
 
@@ -151,6 +156,7 @@
   function handleChange(_, label) {
     curLabels.value = label;
   }
+
   async function handleSearch(value) {
     if (props.source === 1) return;
     const orgNames = curLabels.value?.join(",");
@@ -161,6 +167,7 @@
     });
     treeData.value = orgData.list;
   }
+
   const getTitle = computed(() => (unref(isUpdate) ? "编辑账号" : "新增账号"));
 
   function setRole(roles, userRoles, orgRoles) {

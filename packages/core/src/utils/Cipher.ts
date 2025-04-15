@@ -1,9 +1,8 @@
-import { encrypt, decrypt } from "crypto-js/aes";
-import { parse } from "crypto-js/enc-utf8";
+import { decrypt, encrypt } from "crypto-js/aes";
+import UTF8, { parse } from "crypto-js/enc-utf8";
 import pkcs7 from "crypto-js/pad-pkcs7";
 import ECB from "crypto-js/mode-ecb";
 import md5 from "crypto-js/md5";
-import UTF8 from "crypto-js/enc-utf8";
 import Base64 from "crypto-js/enc-base64";
 import { sm2, sm4 } from "sm-crypto";
 

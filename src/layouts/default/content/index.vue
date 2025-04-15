@@ -5,10 +5,9 @@
 </template>
 <script lang="ts" setup>
   import PageLayout from "@/layouts/page/index.vue";
-  import { useDesign } from "@mfish/core";
-  import { useRootSetting } from "@mfish/core";
-  import { useTransitionSetting } from "@mfish/core/src/hooks/setting/UseTransitionSetting";
+  import { useDesign, useRootSetting, useTransitionSetting } from "@mfish/core/hooks";
   import { useContentViewHeight } from "./UseContentViewHeight";
+
   defineOptions({ name: "LayoutContent" });
   const { prefixCls } = useDesign("layout-content");
   const { getOpenPageLoading } = useTransitionSetting();

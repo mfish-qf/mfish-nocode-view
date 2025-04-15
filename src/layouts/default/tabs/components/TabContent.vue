@@ -17,13 +17,12 @@
 </template>
 <script lang="ts">
   import type { PropType } from "vue";
+  import { computed, defineComponent, unref } from "vue";
   import type { RouteLocationNormalized } from "vue-router";
-  import { defineComponent, computed, unref } from "vue";
-  import { Dropdown } from "@mfish/core/src/components/Dropdown";
-  import { Icon } from "@mfish/core/src/components/Icon";
+  import { Dropdown } from "@mfish/core/components/Dropdown";
+  import { Icon } from "@mfish/core/components/Icon";
   import { TabContentProps } from "../types";
-  import { useDesign } from "@mfish/core";
-  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
+  import { useDesign, useI18n } from "@mfish/core/hooks";
   import { useTabDropdown } from "../UseTabDropdown";
 
   export default defineComponent({

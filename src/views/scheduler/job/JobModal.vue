@@ -15,18 +15,19 @@
     <JobConfig ref="jobConfigRef" v-show="currentStep === 0" :job-info="jobInfo" />
     <JobSubscribeManagement ref="triggerConfigRef" v-show="currentStep === 1" :job-id="jobId" />
     <template #centerFooter>
-      <a-button v-show="currentStep === 0" @click="stepChange(1)" type="primary" danger>下一步 </a-button>
-      <a-button v-show="currentStep === 1" @click="stepChange(0)" type="primary" danger>上一步 </a-button>
+      <a-button v-show="currentStep === 0" @click="stepChange(1)" type="primary" danger>下一步</a-button>
+      <a-button v-show="currentStep === 1" @click="stepChange(0)" type="primary" danger>上一步</a-button>
     </template>
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { computed, ref, unref } from "vue";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { insertJob, updateJob } from "@/api/scheduler/Job";
   import { Steps as ASteps } from "ant-design-vue";
   import JobConfig from "@/views/scheduler/job/JobConfig.vue";
   import JobSubscribeManagement from "@/views/scheduler/job-subscribe/index.vue";
+
   defineOptions({ name: "JobModal" });
   const emit = defineEmits(["success", "register"]);
   const AStep = ASteps.Step;

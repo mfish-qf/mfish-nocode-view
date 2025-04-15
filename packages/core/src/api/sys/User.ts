@@ -1,18 +1,18 @@
 import { defHttp } from "@core/utils/http/axios";
 import {
-  LoginParams,
   AccessToken,
+  CaptchaInfo,
+  LoginParams,
+  OnlineUserPageModel,
+  ReqPage,
+  ReqSsoUser,
+  RoleInfo,
   SsoUser,
   SsoUserPageModel,
-  OnlineUserPageModel,
-  RoleInfo,
-  ReqSsoUser,
-  CaptchaInfo
-} from "@core/api/sys/model/UserModel";
+  TenantVo
+} from "@core/api";
 import { MessageMode } from "@mfish/types/src/type/axios";
 import { ContentTypeEnum } from "@core/enums";
-import { ReqPage } from "@core/api/model/BaseModel";
-import { TenantVo } from "@core/api/sys/model/SsoTenantModel";
 
 enum Api {
   Captcha = "/captcha",
@@ -35,6 +35,7 @@ enum Api {
 export function getCaptcha() {
   return defHttp.get<CaptchaInfo>({ url: Api.Captcha });
 }
+
 /**
  * @description: user login api
  */

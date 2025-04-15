@@ -1,10 +1,8 @@
 import type { RouteRecordRaw } from "vue-router";
-import { usePermissionStore } from "@mfish/stores/modules";
-import { useUserStore } from "@mfish/stores/modules";
-import { useTabs } from "@core/hooks/web/UseTabs";
-import { router, resetRouter } from "@core/router";
+import { useMultipleTabStore, usePermissionStore, useUserStore } from "@mfish/stores/modules";
+import { useTabs } from "@core/hooks";
+import { resetRouter, router } from "@core/router";
 import { isArray } from "@core/utils/Is";
-import { useMultipleTabStore } from "@mfish/stores/modules";
 
 export function usePermission() {
   const userStore = useUserStore();
@@ -70,7 +68,7 @@ export function usePermission() {
     return false;
   }
 
-  function hasValue(value, values: Set<string>) {
+  function hasValue(value: any, values: Set<string>) {
     if (!isArray(value)) {
       return values.has(value);
     }

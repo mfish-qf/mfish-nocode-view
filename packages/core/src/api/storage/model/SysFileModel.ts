@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult } from "@core/api/model/BaseModel";
+import { BaseEntity, PageResult } from "@core/api";
 
 /**
  * @description: 文件存储

@@ -19,14 +19,13 @@
   </Layout.Sider>
 </template>
 <script lang="ts" setup>
-  import { computed, ref, unref, CSSProperties } from "vue";
+  import { computed, CSSProperties, ref, unref } from "vue";
   import { Layout } from "ant-design-vue";
   import LayoutMenu from "../menu/index.vue";
   import { MenuModeEnum, MenuSplitTyeEnum, TriggerEnum } from "@mfish/core/enums";
-  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
-  import { useTrigger, useDragLine, useSiderEvent } from "./UseLayoutSider";
+  import { useDesign, useMenuSetting } from "@mfish/core/hooks";
+  import { useDragLine, useSiderEvent, useTrigger } from "./UseLayoutSider";
   import { useAppInject } from "@/hooks/UseAppInject";
-  import { useDesign } from "@mfish/core";
   import DragBar from "./DragBar.vue";
 
   defineOptions({ name: "LayoutSideBar" });
@@ -110,6 +109,7 @@
 
     &.ant-layout-sider {
       background-color: @sider-bg-color;
+
       .ant-layout-sider-zero-width-trigger {
         background-color: @sider-bg-color;
         color: @main-color;

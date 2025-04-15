@@ -1,9 +1,9 @@
 import type { PaginationProps } from "./Pagination";
 import type { FormProps } from "@core/components/Form";
 import type { TableRowSelection as ITableRowSelection } from "ant-design-vue/lib/table/interface";
+import { Key } from "ant-design-vue/lib/table/interface";
 import type { ColumnProps } from "ant-design-vue/lib/table";
 import type { Recordable } from "@mfish/types";
-import { Key } from "ant-design-vue/lib/table/interface";
 import { ComponentType } from "./ComponentType";
 import { VueNode } from "@core/utils/PropTypes";
 import { FixedType } from "ant-design-vue/lib/vc-table/interface";
@@ -90,6 +90,7 @@ export type CellFormat =
   | Map<string | number, any>;
 
 export type SizeType = "default" | "middle" | "small" | "large";
+
 // @ts-expect-error - no types
 export interface BasicColumn extends ColumnProps<Recordable> {
   children?: BasicColumn[];

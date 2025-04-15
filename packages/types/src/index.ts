@@ -13,9 +13,11 @@ export type IntervalHandle = ReturnType<typeof setInterval>;
 export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]> };
 export type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
 export type ComponentRef<T extends HTMLElement = HTMLDivElement> = ComponentElRef<T> | null;
+
 export interface ComponentElRef<T extends HTMLElement = HTMLDivElement> {
   $el: T;
 }
+
 export type RefType<T> = T | null;
 export type TargetContext = "_self" | "_blank";
 /**

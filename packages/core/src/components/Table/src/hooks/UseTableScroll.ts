@@ -1,17 +1,15 @@
-import type { BasicTableProps, TableRowSelection, BasicColumn } from "../types/Table";
-import { Ref, ComputedRef, ref } from "vue";
-import { computed, unref, nextTick, watch } from "vue";
+import type { BasicColumn, BasicTableProps, TableRowSelection } from "../types/Table";
+import { computed, ComputedRef, nextTick, Ref, ref, unref, watch } from "vue";
 import { getViewportOffset } from "@core/utils/DomUtils";
 import { isBoolean } from "@core/utils/Is";
-import { useWindowSizeFn } from "@core/hooks/event/UseWindowSizeFn";
+import { onMountedOrActivated, useRootSetting, useWindowSizeFn } from "@core/hooks";
 import { useModalContext } from "@core/components/Modal";
-import { onMountedOrActivated } from "@core/hooks/core/OnMountedOrActivated";
-import { useDebounceFn, promiseTimeout } from "@vueuse/core";
+import { promiseTimeout, useDebounceFn } from "@vueuse/core";
 import { Nullable, Recordable } from "@mfish/types";
-import { useRootSetting } from "@core/index";
 
 const { getShowFooter, getFullContent } = useRootSetting();
 const layoutFooterHeight = 87;
+
 export function useTableScroll(
   propsRef: ComputedRef<BasicTableProps>,
   tableElRef: Ref<ComponentRef>,
@@ -280,6 +278,7 @@ export function useTableScroll(
 
     bodyEl.style.height = `${height}px`;
   }
+
   useWindowSizeFn(calcTableHeight, { wait: 280 });
   onMountedOrActivated(() => {
     calcTableHeight();

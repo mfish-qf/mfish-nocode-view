@@ -1,6 +1,6 @@
 import type { ComputedRef, Ref } from "vue";
-import type { FormSchemaInner as FormSchema, FormActionType, FormProps } from "../types/Form";
-import { unref, nextTick, watchEffect } from "vue";
+import { nextTick, unref, watchEffect } from "vue";
+import type { FormActionType, FormProps, FormSchemaInner as FormSchema } from "../types/Form";
 import { Nullable } from "@mfish/types";
 
 interface UseAutoFocusContext {
@@ -9,6 +9,7 @@ interface UseAutoFocusContext {
   isInitedDefault: Ref<boolean>;
   formElRef: Ref<FormActionType>;
 }
+
 export async function useAutoFocus({ getSchema, getProps, formElRef, isInitedDefault }: UseAutoFocusContext) {
   watchEffect(async () => {
     if (unref(isInitedDefault) || !unref(getProps).autoFocusFirstItem) {

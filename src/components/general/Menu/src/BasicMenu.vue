@@ -25,14 +25,11 @@
   import { MenuModeEnum, MenuTypeEnum } from "@mfish/core/enums";
   import { useOpenKeys } from "./UseOpenKeys";
   import { RouteLocationNormalizedLoaded, useRouter } from "vue-router";
-  import { isFunction } from "@mfish/core/src/utils/Is";
+  import { isFunction } from "@mfish/core/utils/Is";
   import { basicProps } from "./Props";
-  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
-  import { REDIRECT_NAME } from "@mfish/core/src/router/Constant";
-  import { useDesign } from "@mfish/core";
-  import { getCurrentParentPath } from "@mfish/core/src/router/menus";
-  import { listenerRouteChange } from "@mfish/core/src/logics/mitt/RouteChange";
-  import { getAllParentPath } from "@mfish/core/src/router/helper/MenuHelper";
+  import { useDesign, useMenuSetting } from "@mfish/core/hooks";
+  import { getAllParentPath, getCurrentParentPath, REDIRECT_NAME } from "@mfish/core/router";
+  import { listenerRouteChange } from "@mfish/core/logics/mitt/RouteChange";
 
   defineOptions({ name: "BasicMenu" });
   const props = defineProps(basicProps);

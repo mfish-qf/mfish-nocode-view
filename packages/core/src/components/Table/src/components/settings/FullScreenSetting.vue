@@ -9,9 +9,9 @@
 </template>
 <script lang="ts" setup>
   import { Tooltip } from "ant-design-vue";
-  import { FullscreenOutlined, FullscreenExitOutlined } from "@ant-design/icons-vue";
+  import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons-vue";
   import { useFullscreen } from "@vueuse/core";
-  import { useI18n } from "@core/hooks/web/UseI18n";
+  import { useI18n } from "@core/hooks";
   import { useTableContext } from "../../hooks/UseTableContext";
 
   defineOptions({ name: "FullScreenSetting" });

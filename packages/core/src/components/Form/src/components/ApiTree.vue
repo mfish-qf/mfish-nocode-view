@@ -10,13 +10,13 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, watch, ref, onMounted, unref, PropType } from "vue";
+  import { computed, defineComponent, onMounted, PropType, ref, unref, watch } from "vue";
   import { Tree } from "ant-design-vue";
   import { isArray, isFunction } from "@core/utils/Is";
   import { get } from "lodash-es";
   import { propTypes } from "@core/utils/PropTypes";
   import { LoadingOutlined } from "@ant-design/icons-vue";
-  import { Recordable, Fn } from "@mfish/types";
+  import { Fn, Recordable } from "@mfish/types";
 
   export default defineComponent({
     name: "ApiTree",

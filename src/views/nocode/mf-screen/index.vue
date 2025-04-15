@@ -54,36 +54,36 @@
 </template>
 <script lang="ts" setup>
   import FrameHeader from "@/components/nocode/screen/frame/FrameHeader/index.vue";
-  import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
-  import { NLayout, NLayoutHeader, NLayoutContent, NLayoutSider } from "naive-ui";
-  import { useDesign } from "@mfish/core";
+  import { createAsyncComponent } from "@mfish/core/utils/factory/CreateAsyncComponent";
+  import { NLayout, NLayoutContent, NLayoutHeader, NLayoutSider } from "naive-ui";
+  import { useDesign, useMessage } from "@mfish/core/hooks";
   import { computed, nextTick, onBeforeMount, onMounted, onUnmounted, ref, useTemplateRef } from "vue";
   import {
-    listenGlobalKeyboard,
     clearChartResource,
-    preSaveScreen,
+    FrameShortcut,
     getMfScreenById,
     insertMfScreen,
+    listenGlobalKeyboard,
+    preSaveScreen,
     updateMfScreen,
-    useScreenShortcut,
     useScreenEditStore,
-    useScreenShortcutStore,
     useScreenLayoutStore,
-    FrameShortcut
+    useScreenShortcut,
+    useScreenShortcutStore
   } from "@mfish/nocode";
   import { useRoute } from "vue-router";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
-  import { router } from "@mfish/core/src/router";
+  import { router } from "@mfish/core/router";
   import { debounce } from "lodash-es";
   import html2canvas from "html2canvas";
-  import { dataURLtoBlob } from "@mfish/core/src/utils/file/Base64Convert";
-  import { uploadApi } from "@mfish/core/src/api/storage/Upload";
-  import { useOutsideOpen } from "@mfish/core/src/utils/OutsideOpenUtils";
+  import { dataURLtoBlob } from "@mfish/core/utils/file/Base64Convert";
+  import { uploadApi } from "@mfish/core/api";
+  import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
   import { SCREEN_SAVE } from "@/views/nocode/screen-folder/screenFolder.data";
   import ScreenResource from "@/views/nocode/screen-resource/ScreenResource.vue";
   import ScreenShare from "@/views/nocode/mf-screen/ScreenShare.vue";
   import ScreenResourceModal from "@/views/nocode/mf-screen/ScreenResourceModal.vue";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
+
   const screenUrl = "/low-code/mf-screen/config";
 
   const FrameChart = createAsyncComponent(() => import("./frame/FrameChart.vue"), {
@@ -247,9 +247,11 @@
     });
     window.open(routeData.href, "_blank");
   }
+
   function screenShare() {
     shareOpen.value = true;
   }
+
   async function screenRelease() {
     if (!screenEditStore.getId) return;
     const screen = await getMfScreenById(screenEditStore.getId);
@@ -261,6 +263,7 @@
       price: 0
     });
   }
+
   function cloneScreen(data) {
     const routeData = router.resolve({
       path: screenUrl,

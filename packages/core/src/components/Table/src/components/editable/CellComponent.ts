@@ -1,9 +1,9 @@
 import type { defineComponent } from "vue";
+import { h } from "vue";
 import type { ComponentType } from "../../types/ComponentType";
 import { componentMap } from "@core/components/Table/src/ComponentMap";
 
 import { Popover } from "ant-design-vue";
-import { h } from "vue";
 
 export interface ComponentProps {
   component: ComponentType;

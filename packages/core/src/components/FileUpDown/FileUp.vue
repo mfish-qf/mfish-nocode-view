@@ -30,12 +30,9 @@
 <script setup lang="ts">
   import { Upload as AUpload, UploadProps } from "ant-design-vue";
   import { PropType, ref, toRaw, toRefs, unref, watch } from "vue";
-  import { uploadApi } from "@core/api/storage/Upload";
-  import { getSysFileByKey } from "@core/api/storage/SysFile";
-  import { getLocalFileUrl } from "@core/utils/file/FileUtils";
+  import { getSysFileByKey, SysFile, uploadApi } from "@core/api";
+  import { getLocalFileUrl, imageUrl } from "@core/utils/file/FileUtils";
   import { FilePreview } from "@core/components/FileUpDown";
-  import { imageUrl } from "@core/utils/file/FileUtils";
-  import { SysFile } from "@core/api/storage/model/SysFileModel";
   import { Icon } from "@core/components/Icon";
   import { UploadRequestOption } from "ant-design-vue/lib/vc-upload/interface";
 
@@ -105,11 +102,14 @@
   function handlePreview(file: any) {
     filePreviewRef.value?.show({ fileKey: file.response.fileKey, fileType: file.type });
   }
+
   function handleRemove(file: any) {
     emit("remove", toRaw(unref(file)), getFiles());
   }
+
   function getFiles() {
     return unref(fileList)?.map((file) => toRaw(file.response));
   }
+
   defineExpose({ getFiles });
 </script>

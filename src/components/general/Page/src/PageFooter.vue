@@ -11,8 +11,7 @@
 </template>
 <script lang="ts">
   import { defineComponent } from "vue";
-  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
-  import { useDesign } from "@mfish/core";
+  import { useDesign, useMenuSetting } from "@mfish/core/hooks";
 
   export default defineComponent({
     name: "PageFooter",

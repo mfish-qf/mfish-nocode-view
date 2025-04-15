@@ -50,43 +50,40 @@
 <script setup lang="ts">
   import { computed, type CSSProperties, nextTick, onBeforeMount, onMounted, onUnmounted, reactive, ref } from "vue";
   import { useRoute } from "vue-router";
-  import { useDesign } from "@mfish/core";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useDesign, useMessage, useRootSetting } from "@mfish/core/hooks";
+  import { useModal } from "@mfish/core/components/Modal";
   import {
-    getMfApiById,
-    getQueryData,
-    getSourceHeaders,
+    API_SAVE,
     ApiConfig,
-    SqlQueryModal,
-    Join,
-    MfApi,
-    SqlQuery,
     ApiConfigEvent,
     buildSql,
-    getInnerFields,
-    getParams,
-    useApiShortcut,
-    useApiStore,
-    ParamsModal,
     getApiParamsList,
-    UndoRedoManager,
-    API_SAVE,
+    getInnerFields,
+    getMfApiById,
+    getMfApiByResourceId,
+    getParams,
+    getQueryData,
+    getSourceHeaders,
+    Join,
     listenGlobalKeyboard,
-    getMfApiByResourceId
+    MfApi,
+    ParamsModal,
+    SqlQuery,
+    SqlQueryModal,
+    UndoRedoManager,
+    useApiShortcut,
+    useApiStore
   } from "@mfish/nocode";
   import HeaderBar from "@/components/nocode/common/HeaderBar/HeaderBar.vue";
-  import { ScrollContainer } from "@mfish/core/src/components/Container";
-  import { Icon } from "@mfish/core/src/components/Icon";
-  import { IconFont } from "@mfish/core/src/components/Icon";
-  import { useRootSetting } from "@mfish/core";
-  import { BasicColumn, BasicTable, useTable } from "@mfish/core/src/components/Table";
+  import { ScrollContainer } from "@mfish/core/components/Container";
+  import { Icon, IconFont } from "@mfish/core/components/Icon";
+  import { BasicColumn, BasicTable, useTable } from "@mfish/core/components/Table";
   import { HeaderBarAction } from "@/components/nocode/common/HeaderBar/HeaderBarUtils";
   import { useDebounceFn } from "@vueuse/core";
-  import { mitt } from "@mfish/core/src/utils/Mitt";
+  import { mitt } from "@mfish/core/utils/Mitt";
   import MfApiModal from "@/views/nocode/mf-api/MfApiModal.vue";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
-  import { router } from "@mfish/core/src/router";
-  import { useOutsideOpen } from "@mfish/core/src/utils/OutsideOpenUtils";
+  import { router } from "@mfish/core/router";
+  import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
   import { Spin as ASpin } from "ant-design-vue";
 
   const configKey = ref(1);
@@ -442,6 +439,7 @@
       isUpdate
     });
   }
+
   const { end } = useOutsideOpen(API_SAVE);
 
   function saveSuccess(values: MfApi) {

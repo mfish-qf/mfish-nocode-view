@@ -1,4 +1,4 @@
-import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
+import { createAsyncComponent } from "@mfish/core/utils/factory/CreateAsyncComponent";
 
 export const TypePicker = createAsyncComponent(() => import("./TypePicker.vue"));
 export const ThemeColorPicker = createAsyncComponent(() => import("./ThemeColorPicker.vue"));

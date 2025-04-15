@@ -24,12 +24,13 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { Icon } from "@mfish/core/src/components/Icon";
+  import { Icon } from "@mfish/core/components/Icon";
   import { Divider, Tooltip as ATooltip } from "ant-design-vue";
   import { LoadingOutlined } from "@ant-design/icons-vue";
   import { PropType } from "vue";
   import { HeaderBarAction } from "@/components/nocode/common/HeaderBar/HeaderBarUtils";
-  import { useDesign } from "@mfish/core";
+  import { useDesign } from "@mfish/core/hooks";
+
   defineProps({
     actions: { type: Object as PropType<HeaderBarAction[]> }
   });
@@ -44,9 +45,11 @@
       }
     }
   }
+
   .@{prefix-cls} {
     display: flex;
     align-items: center;
+
     &-action {
       display: flex;
       justify-content: center;
@@ -62,10 +65,12 @@
       &:hover {
         background-color: @header-bg-hover-color;
       }
+
       &-label {
         margin-left: 2px;
       }
     }
+
     .ant-divider {
       height: 16px;
       background-color: @border-color-base;

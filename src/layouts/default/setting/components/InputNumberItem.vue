@@ -7,7 +7,7 @@
 <script lang="ts" setup>
   import { PropType } from "vue";
   import { InputNumber } from "ant-design-vue";
-  import { useDesign } from "@mfish/core";
+  import { useDesign } from "@mfish/core/hooks";
   import { baseHandler } from "../Handler";
   import { HandlerEnum } from "../Enum";
 

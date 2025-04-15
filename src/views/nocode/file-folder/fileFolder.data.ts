@@ -1,5 +1,5 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { calcSize } from "@mfish/core/src/utils/file/FileUtils";
+import { BasicColumn } from "@mfish/core/components/Table";
+import { calcSize } from "@mfish/core/utils/file/FileUtils";
 
 /**
  * @description: 文件目录

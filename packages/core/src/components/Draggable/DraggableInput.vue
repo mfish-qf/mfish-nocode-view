@@ -26,7 +26,9 @@
             <div @drop="handleDropItem($event, index)">
               <slot v-bind="{ index, element }" name="tag" v-if="element.slot"></slot>
               <ATag v-else class="pointer" :color="blockColor" @click="editBlock(index, element)">
-                <template #icon> <slot v-bind="{ index, element }" name="tagIcon"></slot> </template>
+                <template #icon>
+                  <slot v-bind="{ index, element }" name="tagIcon"></slot>
+                </template>
                 {{ element.name }}
               </ATag>
             </div>
@@ -36,7 +38,9 @@
               shape="circle"
               @click="closeBlock(index)"
             >
-              <template #icon><CloseOutlined :style="{ fontSize: '10px', color: blockColor }" /></template>
+              <template #icon>
+                <CloseOutlined :style="{ fontSize: '10px', color: blockColor }" />
+              </template>
             </AButton>
           </div>
         </template>
@@ -67,15 +71,15 @@
 </template>
 <script setup lang="ts">
   import draggable from "vuedraggable";
-  import { useDesign } from "../../index";
+  import { useDesign, useRootSetting } from "@core/hooks";
   import { Icon, IconFont } from "../Icon";
-  import { Tag as ATag, Menu as AMenu, Dropdown as ADropdown, Button as AButton } from "ant-design-vue";
-  import { PlusOutlined, CloseOutlined } from "@ant-design/icons-vue";
-  import { computed, ref, watchEffect } from "vue";
+  import { Button as AButton, Dropdown as ADropdown, Menu as AMenu, Tag as ATag } from "ant-design-vue";
+  import { CloseOutlined, PlusOutlined } from "@ant-design/icons-vue";
   import type { PropType } from "vue";
+  import { computed, ref, watchEffect } from "vue";
   import { DragMenu } from "@core/components/Draggable";
   import { lighten } from "../../utils/Color";
-  import { useRootSetting } from "../../index";
+
   const props = defineProps({
     items: {
       type: Array as PropType<Array<Object>>,
@@ -96,9 +100,11 @@
   watchEffect(() => {
     dragItems.value = props.items;
   });
+
   function allowDrop(event) {
     event.preventDefault();
   }
+
   // 头回调
   const headerCallBack = (item: any) => {
     addItem(item);
@@ -114,11 +120,13 @@
   const onUpdate = () => {
     emit("dragChange", dragItems.value);
   };
+
   function drop(event: any) {
     event.stopPropagation();
     if (!blockBuildEvent(undefined, JSON.parse(event.dataTransfer.getData(dataTransferText)))) return;
     dropCreateItem(event);
   }
+
   function handleDropItem(e, index: number) {
     e.stopPropagation();
     // 判断拖放在组件左边还是右边
@@ -127,11 +135,13 @@
     if (!blockBuildEvent(newIndex, JSON.parse(e.dataTransfer.getData(dataTransferText)))) return;
     dropCreateItem(e, newIndex);
   }
+
   function dropCreateItem(event: any, index?: number | undefined) {
     const item = event.dataTransfer.getData(dataTransferText);
     if (!item) return;
     addItem(JSON.parse(item), index);
   }
+
   function addItem(item: object, index?: number | undefined) {
     if (index === undefined) {
       dragItems.value.push(item);
@@ -140,16 +150,20 @@
     }
     emit("dragChange", dragItems.value);
   }
+
   function menuDrag(event, item) {
     event.dataTransfer.setData(dataTransferText, JSON.stringify(item));
     event.stopPropagation();
   }
+
   function addBlock() {
     emit("addBlock");
   }
+
   function editBlock(index: number, item: any) {
     emit("editBlock", index, item);
   }
+
   function childMenuClick(event, item) {
     event.stopPropagation();
     if (item) {
@@ -173,12 +187,15 @@
     // 是否创建块 返回false内部不创建块 又外部控制
     return isCreate;
   }
+
   function tagMouseOver(index: number) {
     curTagOver.value = index;
   }
+
   function tagMouseLeave() {
     curTagOver.value = undefined;
   }
+
   function closeBlock(index: number) {
     const delItem = { ...dragItems.value[index] };
     dragItems.value.splice(index, 1);
@@ -191,15 +208,18 @@
   [data-theme="dark"] {
     .@{prefix-cls} {
       border: 1px #303030 solid;
+
       .close {
         background-color: #303030;
       }
     }
   }
+
   .@{prefix-cls}-header-bar {
     display: flex;
     margin-bottom: 3px;
   }
+
   .@{prefix-cls} {
     flex: 1;
     border: 1px #d9d9d9 solid;
@@ -217,6 +237,7 @@
       display: flex;
       align-items: center;
     }
+
     .block {
       display: flex;
       align-items: center;
@@ -224,10 +245,12 @@
       flex-wrap: wrap;
       max-width: 800px;
     }
+
     .move {
       border: none;
       cursor: move;
     }
+
     .pointer {
       border: none;
       cursor: pointer;
@@ -236,6 +259,7 @@
       height: 24px;
       margin-top: 2px;
     }
+
     .close {
       display: flex;
       justify-content: center;
@@ -249,6 +273,7 @@
       right: 2px;
     }
   }
+
   .@{prefix-cls}-menus {
     display: flex;
     align-items: center;

@@ -1,6 +1,6 @@
-@menu-prefix-cls: ~'@{namespace}-menu';
-@menu-popup-prefix-cls: ~'@{namespace}-menu-popup';
-@submenu-popup-prefix-cls: ~'@{namespace}-menu-submenu-popup';
+@menu-prefix-cls: ~"@{namespace}-menu";
+@menu-popup-prefix-cls: ~"@{namespace}-menu-popup";
+@submenu-popup-prefix-cls: ~"@{namespace}-menu-submenu-popup";
 
 @transition-time: 0.2s;
 .@{menu-prefix-cls} {
@@ -16,7 +16,7 @@
     bottom: 0;
     display: block;
     width: 2px;
-    content: '';
+    content: "";
     background-color: @button-primary-color;
   }
 }
@@ -59,10 +59,12 @@
     .@{menu-prefix-cls}-item,
     .@{menu-prefix-cls}-submenu-title {
       color: @text-color-base;
+
       &:hover {
         color: @button-primary-color;
         background-color: @sider-darken-bg-color;
       }
+
       span {
         &:hover {
           transform: scale(1.05);
@@ -74,11 +76,13 @@
         border-radius: 8px;
         background-color: @button-primary-hover-color !important;
         color: @menu-dark-subsidiary-color;
+
         &:hover {
           color: @white;
         }
       }
     }
+
     &-dark {
       .@{menu-prefix-cls}-item,
       .@{menu-prefix-cls}-submenu-title {
@@ -169,9 +173,10 @@
         &:hover {
           transform: scale(1.05);
           transform-origin: right;
-          background-color: @sider-darken-bg-color !important;;
+          background-color: @sider-darken-bg-color !important;
           color: @button-primary-color !important;
         }
+
         &:active {
           transform: scale(1);
         }
@@ -222,6 +227,7 @@
 
     &-light&-vertical &-item {
       transition: transform 0.25s ease;
+
       &-active:not(.@{menu-prefix-cls}-submenu) {
         margin: 5px 2px 5px 2px;
         border-radius: 8px;
@@ -250,7 +256,7 @@
           left: 0;
           width: 3px;
           height: 100%;
-          content: '';
+          content: "";
           background-color: @button-primary-hover-color;
         }
       }
@@ -260,6 +266,7 @@
     &-dark&-vertical &-submenu-title {
       color: @menu-dark-subsidiary-color;
       transition: transform 0.25s ease;
+
       &-active:not(.@{menu-prefix-cls}-submenu) {
         margin: 5px 2px 5px 2px;
         color: #fff !important;
@@ -278,13 +285,14 @@
       .@{menu-prefix-cls}-submenu-active {
         position: relative;
         color: #fff !important;
+
         &::before {
           position: absolute;
           top: 0;
           left: 0;
           width: 3px;
           height: 100%;
-          content: '';
+          content: "";
           background-color: @button-primary-hover-color;
         }
 

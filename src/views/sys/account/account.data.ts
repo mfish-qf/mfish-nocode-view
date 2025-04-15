@@ -1,15 +1,11 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
 import { h, ref, unref } from "vue";
-import { Tag, Switch } from "ant-design-vue";
-import { RenderCallbackParams } from "@mfish/core/src/components/Form";
-import { setUserStatus } from "@mfish/core/src/api/sys/User";
-import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
-import { DescItem } from "@mfish/core/src/components/Description";
-import { YNTag_Name, YNTag_Status } from "@mfish/core/src/components/DictTag";
-import { getRoleByIds } from "@mfish/core/src/api/sys/Role";
-import { getOrgByIds } from "@mfish/core/src/api/sys/Org";
-import { getTenantOrgByIds, getTenantRoleByIds } from "@mfish/core/src/api/sys/SsoTenant";
+import { Switch, Tag } from "ant-design-vue";
+import { RenderCallbackParams } from "@mfish/core/components/Form";
+import { getOrgByIds, getRoleByIds, getTenantOrgByIds, getTenantRoleByIds, setUserStatus } from "@mfish/core/api";
+import { usePermission } from "@mfish/core/hooks";
+import { DescItem } from "@mfish/core/components/Description";
+import { YNTag_Name, YNTag_Status } from "@mfish/core/components/DictTag";
 
 export const columns: BasicColumn[] = [
   {

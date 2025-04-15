@@ -55,16 +55,15 @@
 </template>
 <script lang="ts" setup>
   import { ref } from "vue";
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
-  import { deleteOrg, getOrg } from "@mfish/core/src/api/sys/Org";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
+  import { deleteOrg, deleteTenantOrg, getOrg, getTenantOrgTree } from "@mfish/core/api";
+  import { useModal } from "@mfish/core/components/Modal";
   import OrgModal from "./OrgModal.vue";
   import OrgViewModal from "./OrgViewModal.vue";
   import { columns, searchFormSchema } from "./org.data";
-  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
-  import { deleteTenantOrg, getTenantOrgTree } from "@mfish/core/src/api/sys/SsoTenant";
-  import { useDesign } from "@mfish/core";
+  import { useDesign, usePermission } from "@mfish/core/hooks";
   import { Recordable } from "@mfish/types";
+
   defineOptions({ name: "OrgManagement" });
 
   const props = defineProps({

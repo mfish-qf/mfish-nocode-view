@@ -33,17 +33,15 @@
 <script lang="ts" setup>
   import type { DrawerInstance, DrawerProps } from "./Typing";
   import type { CSSProperties, Ref } from "vue";
-  import { ref, computed, watch, unref, nextTick, getCurrentInstance, toRaw } from "vue";
+  import { computed, getCurrentInstance, nextTick, ref, toRaw, unref, watch } from "vue";
   import { Drawer } from "ant-design-vue";
-  import { useI18n } from "@core/hooks/web/UseI18n";
+  import { useAttrs, useDesign, useI18n } from "@core/hooks";
   import { isFunction, isNumber } from "@core/utils/Is";
   import { deepMerge } from "@core/utils";
   import DrawerFooter from "./components/DrawerFooter.vue";
   import DrawerHeader from "./components/DrawerHeader.vue";
   import { ScrollContainer } from "@core/components/Container";
   import { basicProps } from "./Props";
-  import { useDesign } from "@core/index";
-  import { useAttrs } from "@core/hooks/core/UseAttrs";
 
   defineOptions({ inheritAttrs: false });
 

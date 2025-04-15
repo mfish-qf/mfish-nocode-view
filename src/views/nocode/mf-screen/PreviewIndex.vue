@@ -8,9 +8,8 @@
 </template>
 <script setup lang="ts">
   import { onBeforeMount } from "vue";
-  import { useScreenEditStore } from "@mfish/nocode";
+  import { ScreenPreview, useScreenEditStore } from "@mfish/nocode";
   import { useRoute } from "vue-router";
-  import { ScreenPreview } from "@mfish/nocode";
 
   const { params, query } = useRoute();
   const screenEditStore = useScreenEditStore();

@@ -1,4 +1,4 @@
-import { colorIsDark, lighten, darken } from "@core/utils/Color.ts";
+import { colorIsDark, darken, lighten } from "@core/utils/Color.ts";
 import { useAppStore } from "@mfish/stores/modules";
 import { ThemeEnum } from "@core/enums";
 import { setCssVar } from "./Util.ts";
@@ -10,6 +10,7 @@ const HEADER_BG_HOVER_COLOR_VAR = "--header-bg-hover-color";
 const SIDER_BG_COLOR = "--sider-bg-color";
 const SIDER_DARKEN_BG_COLOR = "--sider-darken-bg-color";
 const SIDER_LIGHTEN_BG_COLOR = "--sider-lighten-bg-color";
+
 /**
  * Change the background color of the top header
  * @param color

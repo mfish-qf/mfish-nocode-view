@@ -12,10 +12,10 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { demoOrderFormSchema } from "./demoOrder.data";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { insertDemoOrder, updateDemoOrder } from "@/api/demo/DemoOrder";
   import DemoOrderDetailManagement from "@/views/demo/demo-order-detail/index.vue";
   import { Divider as ADivider } from "ant-design-vue";

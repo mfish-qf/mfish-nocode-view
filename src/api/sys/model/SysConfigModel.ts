@@ -1,4 +1,4 @@
-import { BaseEntity } from "@mfish/core/src/api/model/BaseModel";
+import { BaseEntity } from "@mfish/core/api";
 
 /**
  * @description: 界面配置

@@ -35,12 +35,12 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { columns, searchFormSchema } from "./demoUpDown.data";
   import { PageWrapper } from "@/components/general/Page";
   import { getDemoImportExportList } from "@/api/demo/DemoImportExport";
   import DemoUpModal from "@/views/demo/demo-up-down/DemoUpModal.vue";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import DemoUpPicModal from "@/views/demo/demo-up-down/DemoUpPicModal.vue";
 
   defineOptions({ name: "DemoUpDownManagement" });
@@ -67,15 +67,18 @@
   });
   const [registerModal, { openModal }] = useModal();
   const [registerPicModal, { openModal: openPicModal }] = useModal();
+
   function handleUp(record: any) {
     openModal(true, {
       record,
       isUpdate: true
     });
   }
+
   function handleSuccess() {
     reload();
   }
+
   function handleUpPic(record: any) {
     openPicModal(true, {
       record,

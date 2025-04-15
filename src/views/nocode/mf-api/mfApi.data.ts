@@ -1,4 +1,4 @@
-import { FormSchema } from "@mfish/core/src/components/Table";
+import { FormSchema } from "@mfish/core/components/Table";
 import { getApiFolderTree } from "@mfish/nocode";
 
 /**

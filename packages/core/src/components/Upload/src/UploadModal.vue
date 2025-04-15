@@ -39,7 +39,7 @@
   import { Alert, Upload } from "ant-design-vue";
   import { BasicModal, useModalInner } from "@core/components/Modal";
   import { useUploadType } from "./UseUpload";
-  import { useMessage } from "@core/hooks/web/UseMessage";
+  import { useI18n, useMessage } from "@core/hooks";
   import { FileItem, UploadResultStatus } from "./Typing";
   import { basicProps, UploadColumnName } from "./Props";
   import { createActionColumn, createTableColumns } from "./data";
@@ -48,8 +48,7 @@
   import { isFunction } from "@core/utils/Is";
   import { warn } from "@core/utils/Log";
   import FileList from "./FileList.vue";
-  import { useI18n } from "@core/hooks/web/UseI18n";
-  import { SysFile } from "@core/api/storage/model/SysFileModel";
+  import { SysFile } from "@core/api";
 
   const props = defineProps(basicProps);
   const emit = defineEmits(["change", "register", "delete", "success"]);

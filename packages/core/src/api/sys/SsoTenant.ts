@@ -1,9 +1,18 @@
 import { defHttp } from "@core/utils/http/axios";
-import { SsoTenant, ReqSsoTenant, SsoTenantPageModel } from "@core/api/sys/model/SsoTenantModel";
-import { ReqSsoOrg, SsoOrg } from "@core/api/sys/model/OrgModel";
-import { ReqSsoRole, SsoRole } from "@core/api/sys/model/RoleModel";
-import { MenuListItem, MenuParams } from "@core/api/sys/model/MenuModel";
-import { ReqSsoUser, SsoUserPageModel, UserOrg } from "@core/api/sys/model/UserModel";
+import {
+  MenuListItem,
+  MenuParams,
+  ReqSsoOrg,
+  ReqSsoRole,
+  ReqSsoTenant,
+  ReqSsoUser,
+  SsoOrg,
+  SsoRole,
+  SsoTenant,
+  SsoTenantPageModel,
+  SsoUserPageModel,
+  UserOrg
+} from "@core/api";
 
 /**
  * @description: 租户信息表

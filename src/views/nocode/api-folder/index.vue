@@ -12,6 +12,7 @@
 <script lang="ts" setup>
   import { PageWrapper } from "@/components/general/Page";
   import ApiList from "./ApiList.vue";
+
   defineOptions({ name: "ApiFolderManagement" });
 </script>
 <style lang="less" scoped></style>

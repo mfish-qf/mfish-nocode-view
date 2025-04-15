@@ -76,15 +76,15 @@
 <script lang="ts" setup>
   import { computed, onMounted, ref } from "vue";
   import { EditOutlined, EllipsisOutlined, RedoOutlined, TableOutlined } from "@ant-design/icons-vue";
-  import { List, Card, Image, Typography, Tooltip, Slider, Avatar } from "ant-design-vue";
+  import { Avatar, Card, Image, List, Slider, Tooltip, Typography } from "ant-design-vue";
   import { Dropdown } from "@core/components/Dropdown";
   import { BasicForm, useForm } from "@core/components/Form";
   import { propTypes } from "@core/utils/PropTypes";
   import { Button } from "@core/components/Button";
   import { isFunction } from "@core/utils/Is";
-  import { useSlider, grid } from "./data";
+  import { grid, useSlider } from "./data";
   import { PAGE_SIZE, PAGE_SIZE_OPTIONS } from "@core/components/Table";
-  import { useI18n } from "@core/hooks/web/UseI18n";
+  import { useI18n } from "@core/hooks";
 
   // 组件接收参数
   const props = defineProps({

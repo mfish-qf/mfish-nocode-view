@@ -1,8 +1,7 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { getDictProps } from "@mfish/core/src/components/DictTag";
-import { DescItem } from "@mfish/core/src/components/Description";
-import { buildJsonPreview } from "@/utils/HBuildUtils";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { getDictProps } from "@mfish/core/components/DictTag";
+import { DescItem } from "@mfish/core/components/Description";
+import { buildJsonPreview } from "@mfish/core/utils/HBuildUtils";
 
 /**
  * @description: 任务日志

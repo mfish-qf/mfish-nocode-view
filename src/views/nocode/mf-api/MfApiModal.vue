@@ -10,11 +10,11 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { mfApiFormSchema } from "./mfApi.data";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { insertMfApi, updateMfApi, MfApi } from "@mfish/nocode";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { insertMfApi, MfApi, updateMfApi } from "@mfish/nocode";
 
   const emit = defineEmits(["success", "register"]);
   const isUpdate = ref(true);

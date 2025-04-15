@@ -1,5 +1,5 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { DescItem } from "@mfish/core/src/components/Description";
+import { BasicColumn } from "@mfish/core/components/Table";
+import { DescItem } from "@mfish/core/components/Description";
 
 /**
  * @description: demo_data_scope

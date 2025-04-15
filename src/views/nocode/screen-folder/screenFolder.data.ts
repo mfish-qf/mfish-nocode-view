@@ -1,5 +1,4 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
 
 /**
  * @description: 大屏目录

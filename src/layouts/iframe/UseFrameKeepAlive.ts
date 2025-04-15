@@ -1,8 +1,8 @@
-import type { AppRouteRecordRaw } from "@mfish/core/src/router/Types";
+import type { AppRouteRecordRaw } from "@mfish/core/router";
 import { computed, toRaw, unref } from "vue";
 import { useMultipleTabStore } from "@mfish/stores/modules";
 import { uniqBy } from "lodash-es";
-import { useMultipleTabSetting } from "@mfish/core/src/hooks/setting/UseMultipleTabSetting";
+import { useMultipleTabSetting } from "@mfish/core/hooks";
 import { useRouter } from "vue-router";
 
 export function useFrameKeepAlive() {

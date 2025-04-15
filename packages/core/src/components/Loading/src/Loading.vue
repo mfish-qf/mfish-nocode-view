@@ -9,10 +9,9 @@
   </section>
 </template>
 <script lang="ts">
-  import { PropType } from "vue";
-  import { defineComponent } from "vue";
+  import { defineComponent, PropType } from "vue";
   import { Spin } from "ant-design-vue";
-  import { SizeEnum } from "../../../enums";
+  import { SizeEnum } from "@core/enums";
 
   export default defineComponent({
     name: "Loading",

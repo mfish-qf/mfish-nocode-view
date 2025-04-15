@@ -1,5 +1,5 @@
 <script lang="tsx">
-  import { defineComponent, watch, nextTick } from "vue";
+  import { defineComponent, nextTick, watch } from "vue";
   import { fileListProps } from "./Props";
   import { useModalContext } from "@core/components/Modal";
   import { Table as ATable } from "ant-design-vue";

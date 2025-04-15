@@ -1,5 +1,5 @@
 import { reactive, ref } from "vue";
-import { useI18n } from "@core/hooks/web/UseI18n";
+import { useI18n } from "@core/hooks";
 import componentSetting from "@core/settings/ComponentSetting.ts";
 
 /**
@@ -12,6 +12,7 @@ interface PageOptions {
   showSizeChanger?: boolean;
   showQuickJumper?: boolean;
 }
+
 export const usePagination = (pageRefresh: () => void, options?: PageOptions) => {
   const { pageSizeOptions, defaultPageSize } = componentSetting.table;
   const pageNum = ref<number>(1);
@@ -42,12 +43,15 @@ export const usePagination = (pageRefresh: () => void, options?: PageOptions) =>
     pageSize.value = size;
     pageNum.value = current;
   }
+
   function setCurrentPage(current: number) {
     pageNum.value = current;
   }
+
   function setTotal(_total: number) {
     total.value = _total;
   }
+
   const getPageNum = () => {
     return pageNum.value;
   };

@@ -23,16 +23,16 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { BasicForm, FormSchema, useForm } from "@mfish/core/src/components/Form";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicForm, FormSchema, useForm } from "@mfish/core/components/Form";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { ref } from "vue";
   import { Input as AInput } from "ant-design-vue";
   import { getApiParamsList, getApiUrl } from "@mfish/nocode";
-  import { CodeEditor, MODE } from "@mfish/core/src/components/CodeEditor";
-  import { defHttp } from "@mfish/core/src/utils/http/axios";
-  import { useGlobSetting } from "@mfish/core/src/hooks/setting";
+  import { CodeEditor, MODE } from "@mfish/core/components/CodeEditor";
+  import { defHttp } from "@mfish/core/utils/http/axios";
+  import { useGlobSetting } from "@mfish/core/hooks";
   import { useClipboard } from "@vueuse/core";
-  import { getToken } from "@mfish/core/src/utils/auth";
+  import { getToken } from "@mfish/core/utils/auth";
 
   const [registerForm, { resetFields, setFieldsValue, resetSchema, validate }] = useForm({
     name: "model_form_item",
@@ -121,6 +121,7 @@
       ).then();
     });
   });
+
   async function execute() {
     try {
       const values = await validate();

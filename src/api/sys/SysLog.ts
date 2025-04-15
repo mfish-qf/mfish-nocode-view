@@ -1,5 +1,5 @@
-import { defHttp } from "@mfish/core/src/utils/http/axios";
-import { SysLog, ReqSysLog, SysLogPageModel } from "@/api/sys/model/SysLogModel";
+import { defHttp } from "@mfish/core/utils/http/axios";
+import { ReqSysLog, SysLog, SysLogPageModel } from "@/api/sys/model/SysLogModel";
 
 /**
  * @description: 系统日志

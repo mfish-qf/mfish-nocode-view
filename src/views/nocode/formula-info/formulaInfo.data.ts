@@ -1,9 +1,7 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { DescItem } from "@mfish/core/src/components/Description";
-import { buildDictTag, getDictProps } from "@mfish/core/src/components/DictTag";
-import { buildJsonPreview } from "@/utils/HBuildUtils";
-import { YNTag } from "@mfish/core/src/components/DictTag";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { DescItem } from "@mfish/core/components/Description";
+import { buildDictTag, getDictProps, YNTag } from "@mfish/core/components/DictTag";
+import { buildJsonPreview } from "@mfish/core/utils/HBuildUtils";
 
 /**
  * @description: 公式信息

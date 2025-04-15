@@ -1,9 +1,7 @@
 import type { HeaderSetting } from "@mfish/types/src/type/config";
 import { computed, unref } from "vue";
 import { useAppStore } from "@mfish/stores/modules";
-import { useMenuSetting } from "./UseMenuSetting";
-import { useRootSetting } from "../../index";
-import { useFullContent } from "./UseFullContent";
+import { useFullContent, useMenuSetting, useRootSetting } from "@core/hooks";
 import { MenuModeEnum } from "../../enums";
 
 export function useHeaderSetting() {

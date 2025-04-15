@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult, ReqPage } from "@mfish/core/src/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "@mfish/core/api";
 
 /**
  * @description: 客户端信息

@@ -5,13 +5,11 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, unref } from "vue";
+  import { computed, defineComponent, unref } from "vue";
   import { FloatButton } from "ant-design-vue";
-  import { useRootSetting } from "@mfish/core";
-  import { useHeaderSetting } from "@mfish/core/src/hooks/setting/UseHeaderSetting";
-  import { useDesign } from "@mfish/core";
+  import { useDesign, useHeaderSetting, useRootSetting } from "@mfish/core/hooks";
   import { SettingButtonPositionEnum } from "@mfish/core/enums";
-  import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
+  import { createAsyncComponent } from "@mfish/core/utils/factory/CreateAsyncComponent";
 
   export default defineComponent({
     name: "LayoutFeatures",

@@ -1,8 +1,7 @@
 import type { Router } from "vue-router";
-import { usePermissionStoreWithOut } from "@mfish/stores/modules";
+import { usePermissionStoreWithOut, useUserStoreWithOut } from "@mfish/stores/modules";
 import { PageEnum } from "@core/enums";
-import { useUserStoreWithOut } from "@mfish/stores/modules";
-import { PAGE_NOT_FOUND_ROUTE, RootRoute } from "@core/router/routers/Basic";
+import { PAGE_NOT_FOUND_ROUTE, RootRoute } from "@core/router";
 import { curLoginType, oauth2Config } from "@core/settings/LoginSetting";
 import type { Recordable } from "@mfish/types";
 

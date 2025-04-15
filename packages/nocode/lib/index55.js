@@ -1,8 +1,8 @@
 import { defineComponent, useCssVars, computed, ref, watch, createBlock, openBlock, unref, mergeProps, toHandlers, withCtx, createCommentVNode, createTextVNode, toDisplayString } from "vue";
 import { Segmented } from "ant-design-vue";
-import { Icon } from "@mfish/core/src/components/Icon";
+import { Icon } from "@mfish/core/components/Icon";
 import { h as useChartEventHandle, as as getChartData } from "./index2.js";
-import { useDesign } from "@mfish/core";
+import { useDesign } from "@mfish/core/hooks";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "index",
   props: {
@@ -11,19 +11,19 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "2b53066a": `${height.value - 6}px`,
-      "5a3f19c5": textColor.value,
-      "f6063940": font.value,
-      "32fee75e": `${fontSize.value}px`,
-      "f609dcd4": bold.value,
-      "3eb09101": italic.value,
-      "5c6db25b": underline.value,
-      "1896b8e9": selectTextColor.value,
-      "381f5dbc": selectFont.value,
-      "93734796": `${selectFontSize.value}px`,
-      "381d8bf2": selectBold.value,
-      "99c43746": selectItalic.value,
-      "1ac5517f": selectUnderline.value
+      "041a3170": `${height.value - 6}px`,
+      "5f20436a": textColor.value,
+      "36f7869b": font.value,
+      "004440f6": `${fontSize.value}px`,
+      "36f5b4d1": bold.value,
+      "5c8f517c": italic.value,
+      "614edc00": underline.value,
+      "289952ce": selectTextColor.value,
+      "61392e92": selectFont.value,
+      "2bd7411a": `${selectFontSize.value}px`,
+      "613cd226": selectBold.value,
+      "ece9c6d0": selectItalic.value,
+      "2ac7eb64": selectUnderline.value
     }));
     const props = __props;
     const { commonEvents, emitEvent } = useChartEventHandle(props.chart, void 0, ["titleChange"]);

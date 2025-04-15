@@ -1,4 +1,4 @@
-import { AppRouteRecordRaw } from "@mfish/core/src/router/Types";
+import { AppRouteRecordRaw } from "@mfish/core/router";
 
 const modules = import.meta.glob("./modules/**/*.ts");
 

@@ -52,19 +52,19 @@
   </Modal>
 </template>
 <script lang="ts" setup>
-  import type { ModalProps, ModalMethods } from "./Typing";
-  import { computed, ref, watch, unref, watchEffect, toRef, getCurrentInstance, nextTick, useAttrs } from "vue";
+  import type { ModalMethods, ModalProps } from "./Typing";
+  import { computed, getCurrentInstance, nextTick, ref, toRef, unref, useAttrs, watch, watchEffect } from "vue";
   import Modal from "./components/Modal";
   import ModalWrapper from "./components/ModalWrapper.vue";
   import ModalClose from "./components/ModalClose.vue";
   import ModalFooter from "./components/ModalFooter.vue";
   import ModalHeader from "./components/ModalHeader.vue";
-  import { isFunction } from "../../../utils/Is";
-  import { deepMerge } from "../../../utils";
+  import { isFunction } from "@core/utils/Is";
+  import { deepMerge } from "@core/utils";
   import { basicProps } from "./Props";
   import { useFullScreen } from "./hooks/UseModalFullScreen";
   import { omit } from "lodash-es";
-  import { useDesign } from "../../../index";
+  import { useDesign } from "@core/hooks";
   import { Recordable } from "@mfish/types";
 
   defineOptions({ name: "BasicModal", inheritAttrs: false });

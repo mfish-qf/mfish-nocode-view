@@ -1,6 +1,6 @@
 import { reactive, Ref, watch } from "vue";
 import { theme } from "ant-design-vue";
-import { useRootSetting } from "../../index";
+import { useRootSetting } from "@core/hooks";
 import { colorError, colorSuccess, colorWarning } from "@mfish/types/BtnColor";
 import { ThemeEnum } from "../../enums";
 

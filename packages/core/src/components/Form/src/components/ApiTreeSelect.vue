@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, watch, ref, onMounted, unref, PropType } from "vue";
+  import { computed, defineComponent, onMounted, PropType, ref, unref, watch } from "vue";
   import { TreeSelect } from "ant-design-vue";
   import { isArray, isFunction } from "@core/utils/Is";
   import { get } from "lodash-es";

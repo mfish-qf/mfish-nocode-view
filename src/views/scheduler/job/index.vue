@@ -63,14 +63,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { deleteJob, executeJob, getJobList } from "@/api/scheduler/Job";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import JobModal from "./JobModal.vue";
   import { columns, searchFormSchema } from "./job.data";
   import { Job } from "@/api/scheduler/model/JobModel";
   import JobSubscribeList from "@/views/scheduler/job/JobSubscribeList.vue";
-  import { DictTag } from "@mfish/core/src/components/DictTag";
+  import { DictTag } from "@mfish/core/components/DictTag";
+
   defineOptions({ name: "JobManagement" });
   const [registerModal, { openModal }] = useModal();
   const [registerTable, { reload }] = useTable({

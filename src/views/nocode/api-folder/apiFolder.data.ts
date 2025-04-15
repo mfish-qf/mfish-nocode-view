@@ -1,6 +1,5 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { buildDictTag } from "@mfish/core/src/components/DictTag";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { buildDictTag } from "@mfish/core/components/DictTag";
 
 /**
  * @description: API目录

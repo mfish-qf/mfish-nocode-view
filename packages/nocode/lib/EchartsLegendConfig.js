@@ -1,27 +1,25 @@
 import { defineComponent, ref, watch, resolveComponent, createElementBlock, openBlock, normalizeClass, unref, createVNode, withCtx, createElementVNode, createTextVNode, Fragment, renderList, toDisplayString } from "vue";
 import { C as ConfigGroup } from "./ConfigGroup.js";
 import { RadioGroup, RadioButton, Tooltip } from "ant-design-vue";
-import { useDesign } from "@mfish/core";
+import { useDesign } from "@mfish/core/hooks";
 import "@vueuse/core";
-import { Icon } from "@mfish/core/src/components/Icon";
+import { Icon } from "@mfish/core/components/Icon";
 import "lodash-es";
 import { u as useScreenEditStore, f as ScreenInput, T as TextStyle, am as TextFont, D as _sfc_main$1, _ as _export_sfc } from "./index2.js";
 import "@mfish/core/enums";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 const _hoisted_1 = { class: "title" };
 const _hoisted_2 = { class: "title" };
 const _hoisted_3 = { class: "title" };
@@ -280,7 +278,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 "onUpdate:value": _cache[6] || (_cache[6] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.options.legend.top = $event)
               }, null, 8, ["value"])
             ]),
-            _cache[15] || (_cache[15] = createElementVNode("div", { class: "title" }, " 图例形状 ", -1)),
+            _cache[15] || (_cache[15] = createElementVNode("div", { class: "title" }, " 图例形状", -1)),
             createVNode(unref(RadioGroup), {
               size: "small",
               value: unref(screenEditStore).getCurConfigComponent.chart.options.legend.icon,
@@ -301,7 +299,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               ]),
               _: 1
             }, 8, ["value"]),
-            _cache[16] || (_cache[16] = createElementVNode("div", { class: "title" }, " 图例字体 ", -1)),
+            _cache[16] || (_cache[16] = createElementVNode("div", { class: "title" }, " 图例字体", -1)),
             createVNode(unref(TextStyle), {
               "hide-font-style": [unref(TextFont).Underline, unref(TextFont).Strikethrough],
               "hide-align": true,
@@ -336,7 +334,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsLegendConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d96806cd"]]);
+const EchartsLegendConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-cf7a519b"]]);
 export {
   EchartsLegendConfig as E
 };

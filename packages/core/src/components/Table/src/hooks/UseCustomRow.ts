@@ -1,6 +1,6 @@
 import type { ComputedRef } from "vue";
-import type { BasicTableProps } from "../types/Table";
 import { unref } from "vue";
+import type { BasicTableProps } from "../types/Table";
 import { Recordable } from "@mfish/types";
 import type { Key } from "ant-design-vue/lib/table/interface";
 import { parseRowKeyValue } from "@core/components/Table/src/Helper";
@@ -21,6 +21,7 @@ export function useCustomRow(
     return {
       onClick: (e: Event) => {
         e?.stopPropagation();
+
         function handleClick() {
           const { rowSelection, rowKey, clickToRowSelect } = unref(propsRef);
           if (!rowSelection || !clickToRowSelect) return;
@@ -61,6 +62,7 @@ export function useCustomRow(
             clearSelectedRowKeys();
           }
         }
+
         handleClick();
         emit("rowClick", record, index, e);
       },

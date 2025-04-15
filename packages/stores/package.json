@@ -2,12 +2,12 @@
   "name": "@mfish/stores",
   "version": "2.0.0",
   "private": true,
+  "license": "Apache-2.0",
   "author": {
     "name": "mfish",
     "email": "qiufeng9862@qq.com",
     "url": "https://github.com/mfish-qf"
   },
-  "license": "Apache-2.0",
   "type": "module",
   "exports": {
     ".": {

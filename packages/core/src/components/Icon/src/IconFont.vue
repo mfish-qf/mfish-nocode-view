@@ -9,7 +9,7 @@
   </svg>
 </template>
 <script setup lang="ts">
-  import { useDesign } from "../../../index";
+  import { useDesign } from "@core/hooks";
   import { computed } from "vue";
 
   const props = defineProps({

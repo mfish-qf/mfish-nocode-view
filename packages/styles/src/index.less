@@ -1,11 +1,11 @@
-@import 'transition/index.less';
-@import 'var/index.less';
-@import 'patch.less';
-@import 'public.less';
-@import 'ant/index.less';
-@import 'theme.less';
-@import 'dark.less';
-@import 'color.less';
+@import "transition/index.less";
+@import "var/index.less";
+@import "patch.less";
+@import "public.less";
+@import "ant/index.less";
+@import "theme.less";
+@import "dark.less";
+@import "color.less";
 
 input:-webkit-autofill {
   box-shadow: 0 0 0 1000px white inset !important;
@@ -48,9 +48,10 @@ html::view-transition-old(root),
 a {
   text-decoration: none !important;
   color: @button-primary-color !important;
+
   &:hover,
   &:focus {
-    color:  @button-primary-hover-color !important;
+    color: @button-primary-hover-color !important;
   }
 }
 

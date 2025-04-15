@@ -7,6 +7,7 @@ import { useGlobSetting } from "../hooks/setting";
 
 const { oauth2Url, oauth2RedirectUri, loginType, giteeClientId, giteeRedirectUri, githubClientId, githubRedirectUri } =
   useGlobSetting();
+
 interface OAuth2Config {
   url: string;
   client_id: string;
@@ -14,8 +15,10 @@ interface OAuth2Config {
   redirect_uri: string;
   response_type: string;
   state: string;
+
   [key: string]: string; // 如果有其他可能的属性
 }
+
 // oauth2配置
 export const oauth2Config: OAuth2Config = {
   url: oauth2Url as string,

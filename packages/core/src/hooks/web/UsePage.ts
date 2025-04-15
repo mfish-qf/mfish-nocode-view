@@ -1,10 +1,8 @@
 import type { RouteLocationRaw, Router } from "vue-router";
+import { useRouter } from "vue-router";
 import { PageEnum } from "@core/enums";
 import { unref } from "vue";
-import { useRouter } from "vue-router";
-import { getMenu } from "@core/router/menus";
-import { router } from "@core/router";
-import { REDIRECT_NAME } from "@core/router/Constant";
+import { getMenu, REDIRECT_NAME, router } from "@core/router";
 
 export type PathAsPageEnum<T> = T extends { path: string } ? T & { path: PageEnum } : T;
 export type RouteLocationRawEx = PathAsPageEnum<RouteLocationRaw>;
@@ -18,6 +16,7 @@ function handleError(e: Error) {
  */
 export function useGo(_router?: Router) {
   const { push, replace } = _router || useRouter();
+
   function go(opt: RouteLocationRawEx = PageEnum.BASE_HOME, isReplace = false) {
     if (!opt) {
       return;

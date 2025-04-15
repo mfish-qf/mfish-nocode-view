@@ -6,15 +6,17 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, unref, computed, CSSProperties } from "vue";
+  import { computed, CSSProperties, defineComponent, unref } from "vue";
   import LayoutHeader from "./index.vue";
   import MultipleTabs from "../tabs/index.vue";
-  import { useHeaderSetting } from "@mfish/core/src/hooks/setting/UseHeaderSetting";
-  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
-  import { useFullContent } from "@mfish/core/src/hooks/setting/UseFullContent";
-  import { useMultipleTabSetting } from "@mfish/core/src/hooks/setting/UseMultipleTabSetting";
+  import {
+    useDesign,
+    useFullContent,
+    useHeaderSetting,
+    useMenuSetting,
+    useMultipleTabSetting
+  } from "@mfish/core/hooks";
   import { useAppInject } from "@/hooks/UseAppInject";
-  import { useDesign } from "@mfish/core";
   import { useLayoutHeight } from "../content/UseContentViewHeight";
 
   const HEADER_HEIGHT = 42;

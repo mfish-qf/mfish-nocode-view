@@ -1,4 +1,4 @@
-import { PageResult } from "@mfish/core/src/api/model/BaseModel";
+import { PageResult } from "@mfish/core/api";
 
 /**
  * @description: 任务订阅表

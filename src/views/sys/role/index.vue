@@ -65,18 +65,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
-  import { deleteRole, getRoleList, setRoleStatus } from "@mfish/core/src/api/sys/Role";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
+  import { deleteRole, deleteTenantRole, getRoleList, getTenantRole, setRoleStatus, SsoRole } from "@mfish/core/api";
+  import { useModal } from "@mfish/core/components/Modal";
   import RoleModal from "./RoleModal.vue";
   import RoleViewModal from "./RoleViewModal.vue";
   import { columns, searchFormSchema } from "./role.data";
-  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
+  import { useDesign, usePermission } from "@mfish/core/hooks";
   import { ref } from "vue";
-  import { deleteTenantRole, getTenantRole } from "@mfish/core/src/api/sys/SsoTenant";
   import { Switch as ASwitch } from "ant-design-vue";
-  import { SsoRole } from "@mfish/core/src/api/sys/model/RoleModel";
-  import { useDesign } from "@mfish/core";
+
   defineOptions({ name: "RoleManagement" });
 
   const props = defineProps({
@@ -134,6 +132,7 @@
       isUpdate: true
     });
   }
+
   const statusLoading = ref(false);
   const statusDisabled = (record) =>
     isSuperRole(record.id) ||

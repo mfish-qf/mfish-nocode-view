@@ -1,5 +1,5 @@
 import { defHttp } from "@core/utils/http/axios";
-import { SysFile, ReqSysFile, SysFilePageModel } from "@core/api/storage/model/SysFileModel";
+import { ReqSysFile, SysFile, SysFilePageModel } from "@core/api";
 
 /**
  * @description: 文件存储

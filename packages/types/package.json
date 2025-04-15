@@ -2,12 +2,12 @@
   "name": "@mfish/types",
   "version": "2.0.0",
   "private": true,
+  "license": "Apache-2.0",
   "author": {
     "name": "mfish",
     "email": "qiufeng9862@qq.com",
     "url": "https://github.com/mfish-qf"
   },
-  "license": "Apache-2.0",
   "type": "module",
   "exports": {
     ".": {
@@ -30,14 +30,13 @@
       "types": "./src/type/axios.d.ts",
       "default": "./src/type/axios.d.ts"
     },
-    "./src/type/store":{
+    "./src/type/store": {
       "types": "./src/type/store.d.ts",
       "default": "./src/type/store.d.ts"
     },
-    "./src/type/utils":{
+    "./src/type/utils": {
       "types": "./src/type/utils.d.ts",
       "default": "./src/type/utils.d.ts"
     }
-
   }
 }

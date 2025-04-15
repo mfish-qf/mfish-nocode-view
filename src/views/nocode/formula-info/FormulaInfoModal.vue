@@ -17,12 +17,12 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { formulaInfoFormSchema } from "./formulaInfo.data";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { insertFormulaInfo, updateFormulaInfo } from "@mfish/nocode";
-  import { CodeEditor, MODE } from "@mfish/core/src/components/CodeEditor";
+  import { CodeEditor, MODE } from "@mfish/core/components/CodeEditor";
 
   defineOptions({ name: "FormulaInfoModal" });
   const emit = defineEmits(["success", "register"]);

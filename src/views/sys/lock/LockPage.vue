@@ -64,15 +64,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, onBeforeMount } from "vue";
+  import { computed, onBeforeMount, ref } from "vue";
   import { Input } from "ant-design-vue";
   import { useUserStore } from "@mfish/stores/modules";
   import { useLockStore } from "@/stores/Lock.ts";
-  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
+  import { useDesign, useI18n } from "@mfish/core/hooks";
   import { useNow } from "./UseNow";
-  import { useDesign } from "@mfish/core";
   import { LockOutlined } from "@ant-design/icons-vue";
-  import { setHeaderImg } from "@mfish/core/src/utils/file/FileUtils";
+  import { setHeaderImg } from "@mfish/core/utils/file/FileUtils";
 
   const InputPassword = Input.Password;
 

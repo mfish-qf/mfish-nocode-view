@@ -16,10 +16,10 @@
   </SubMenu>
 </template>
 <script lang="ts">
-  import type { Menu as MenuType } from "@mfish/core/src/router/Types";
-  import { defineComponent, computed } from "vue";
+  import type { Menu as MenuType } from "@mfish/core/router";
+  import { computed, defineComponent } from "vue";
   import { Menu } from "ant-design-vue";
-  import { useDesign } from "@mfish/core";
+  import { useDesign } from "@mfish/core/hooks";
   import { itemProps } from "../Props";
   import BasicMenuItem from "./BasicMenuItem.vue";
   import MenuItemContent from "./MenuItemContent.vue";

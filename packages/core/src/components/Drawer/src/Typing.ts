@@ -1,5 +1,5 @@
 import type { ButtonProps } from "ant-design-vue/lib/button/buttonTypes";
-import type { CSSProperties, VNodeChild, ComputedRef } from "vue";
+import type { ComputedRef, CSSProperties, VNodeChild } from "vue";
 import type { ScrollContainerOptions } from "@core/components/Container";
 
 export interface DrawerInstance {
@@ -69,6 +69,7 @@ export interface DrawerFooterProps {
   showFooter: boolean;
   footerHeight: string | number;
 }
+
 export interface DrawerProps extends DrawerFooterProps {
   isDetail?: boolean;
   loading?: boolean;
@@ -187,6 +188,7 @@ export interface DrawerProps extends DrawerFooterProps {
    */
   onClose?: (e?: Event) => void;
 }
+
 export interface DrawerActionType {
   scrollBottom: () => void;
   scrollTo: (to: number) => void;

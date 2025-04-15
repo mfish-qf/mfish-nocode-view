@@ -1,7 +1,7 @@
-import type { AppRouteRecordRaw } from "@core/router/Types";
+import type { AppRouteRecordRaw } from "@core/router";
 import type { Router, RouteRecordNormalized } from "vue-router";
-import { cloneDeep, omit } from "lodash-es";
 import { createRouter, createWebHashHistory } from "vue-router";
+import { cloneDeep, omit } from "lodash-es";
 
 const viewsModules = import.meta.glob("@/views/**/*.{vue,tsx}");
 

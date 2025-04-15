@@ -6,14 +6,14 @@
   </span>
 </template>
 <script lang="ts" setup>
-  import { PropType, computed } from "vue";
+  import { computed, PropType } from "vue";
   import SvgIcon from "./SvgIcon.vue";
   import { Icon } from "@iconify/vue";
   import { isString } from "../../../utils/Is";
   import { propTypes } from "../../../utils/PropTypes";
   import { theme } from "ant-design-vue";
   import IconFont from "./IconFont.vue";
-  import { useRootSetting } from "../../../index";
+  import { useRootSetting } from "@core/hooks";
 
   defineOptions({ name: "Icon" });
   const props = defineProps({

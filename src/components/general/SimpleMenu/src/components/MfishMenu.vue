@@ -6,13 +6,14 @@
 
 <script lang="ts" setup>
   import type { PropType } from "vue";
+  import { computed, getCurrentInstance, nextTick, onMounted, provide, ref, watch, watchEffect } from "vue";
   import type { SubMenuProvider } from "./Types";
-  import { ref, computed, onMounted, watchEffect, watch, nextTick, getCurrentInstance, provide } from "vue";
 
-  import { useDesign } from "@mfish/core";
-  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import { useDesign } from "@mfish/core/hooks";
+  import { propTypes } from "@mfish/core/utils/PropTypes";
   import { createSimpleRootMenuContext } from "./UseSimpleMenuContext";
-  import { mitt } from "@mfish/core/src/utils/Mitt";
+  import { mitt } from "@mfish/core/utils/Mitt";
+
   defineOptions({ name: "MfishMenu" });
 
   const props = defineProps({

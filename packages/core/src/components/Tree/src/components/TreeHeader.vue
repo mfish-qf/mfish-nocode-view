@@ -35,15 +35,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { computed, ref, watch, useSlots, PropType } from "vue";
-  import { Dropdown, Menu, MenuItem, MenuDivider } from "ant-design-vue";
+  import { computed, PropType, ref, useSlots, watch } from "vue";
+  import { Dropdown, Menu, MenuDivider, MenuItem } from "ant-design-vue";
   import { Icon } from "../../../Icon";
   import { BasicTitle } from "../../../Basic";
-  import { useI18n } from "../../../../hooks/web/UseI18n";
+  import { useI18n } from "@core/hooks";
   import { useDebounceFn } from "@vueuse/core";
-  import { createBEM } from "../../../../utils/Bem";
+  import { createBEM } from "@core/utils/Bem.ts";
   import { ToolbarEnum } from "../types/Tree";
   import InputSearch from "../../../InputSearch/index.vue";
+
   const props = defineProps({
     helpMessage: {
       type: [String, Array] as PropType<string | string[]>,
@@ -160,6 +161,7 @@
   function enterSearch(value) {
     emit("enterSearch", value);
   }
+
   function emitChange(value?: string): void {
     emit("search", value);
   }

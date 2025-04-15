@@ -12,9 +12,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { PropType, computed } from "vue";
+  import { computed, PropType } from "vue";
   import { Select as ASelect } from "ant-design-vue";
-  import { useDesign } from "@mfish/core";
+  import { useDesign } from "@mfish/core/hooks";
   import { baseHandler } from "../Handler";
   import { HandlerEnum } from "../Enum";
 

@@ -1,17 +1,17 @@
 import type { Component } from "vue";
 import {
-  Input,
-  Select,
-  Checkbox,
-  InputNumber,
-  Switch,
-  DatePicker,
-  Radio,
   AutoComplete,
+  Checkbox,
+  DatePicker,
+  Input,
+  InputNumber,
+  Radio,
+  Select,
+  Switch,
   TimePicker
 } from "ant-design-vue";
 import type { ComponentType } from "./types/ComponentType";
-import { ApiSelect, ApiTreeSelect, RadioButtonGroup, ApiRadioGroup } from "@core/components/Form";
+import { ApiRadioGroup, ApiSelect, ApiTreeSelect, RadioButtonGroup } from "@core/components/Form";
 
 const componentMap = new Map<ComponentType, Component>();
 

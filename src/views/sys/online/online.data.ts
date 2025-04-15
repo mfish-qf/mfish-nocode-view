@@ -1,4 +1,4 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
+import { BasicColumn } from "@mfish/core/components/Table";
 
 export const columns: BasicColumn[] = [
   {

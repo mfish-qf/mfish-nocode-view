@@ -1,5 +1,5 @@
-import { defHttp } from "@mfish/core/src/utils/http/axios";
-import { Job, ReqJob, JobPageModel } from "@/api/scheduler/model/JobModel";
+import { defHttp } from "@mfish/core/utils/http/axios";
+import { Job, JobPageModel, ReqJob } from "@/api/scheduler/model/JobModel";
 
 /**
  * @description: 定时调度任务

@@ -24,9 +24,8 @@
   import { propTypes } from "@core/utils/PropTypes";
   import { isFunction } from "@core/utils/Is";
   import { get, omit } from "lodash-es";
-  import { useRuleFormItem } from "@core/hooks/component/UseFormItem";
+  import { useI18n, useRuleFormItem } from "@core/hooks";
   import { LoadingOutlined } from "@ant-design/icons-vue";
-  import { useI18n } from "@core/hooks/web/UseI18n";
   import { ValueType } from "ant-design-vue/es/vc-cascader/Cascader";
   import { Recordable } from "@mfish/types";
   import { DefaultOptionType } from "ant-design-vue/lib/vc-cascader";
@@ -38,6 +37,7 @@
     isLeaf?: boolean;
     children?: Option[];
   }
+
   defineOptions({ name: "ApiCascader" });
   const props = defineProps({
     value: {

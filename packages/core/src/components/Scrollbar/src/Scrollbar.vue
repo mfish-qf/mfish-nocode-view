@@ -18,7 +18,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref, onMounted, onBeforeUnmount, nextTick, provide, unref, type PropType } from "vue";
+  import { nextTick, onBeforeUnmount, onMounted, type PropType, provide, ref, unref } from "vue";
   import { addResizeListener, removeResizeListener } from "../../../utils/event";
   import componentSetting from "../../../settings/ComponentSetting";
   import Bar from "./Bar";

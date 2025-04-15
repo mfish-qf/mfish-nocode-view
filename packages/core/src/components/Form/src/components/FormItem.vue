@@ -12,7 +12,7 @@
   import { createPlaceholderMessage, setComponentRuleType } from "../Helper";
   import { cloneDeep, upperFirst } from "lodash-es";
   import { useItemLabelWidth } from "../hooks/UseLabelWidth";
-  import { useI18n } from "@core/hooks/web/UseI18n";
+  import { useI18n } from "@core/hooks";
   import { Nullable, Recordable } from "@mfish/types";
 
   export default defineComponent({

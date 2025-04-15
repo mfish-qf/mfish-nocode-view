@@ -58,15 +58,13 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, unref, ref, watch, nextTick } from "vue";
+  import { computed, nextTick, ref, unref, watch } from "vue";
   import { SearchOutlined } from "@ant-design/icons-vue";
   import AppSearchFooter from "./AppSearchFooter.vue";
-  import { Icon } from "@mfish/core/src/components/Icon";
-  import { ClickOutside as vClickOutside } from "@mfish/core/src/directives";
-  import { useDesign } from "@mfish/core";
-  import { useRefs } from "@mfish/core/src/hooks/core/UseRefs";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { ClickOutside as vClickOutside } from "@mfish/core/directives";
+  import { useDesign, useI18n, useRefs } from "@mfish/core/hooks";
   import { useMenuSearch } from "./UseMenuSearch";
-  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
   import { useAppInject } from "@/hooks/UseAppInject";
   import { Nullable } from "@mfish/types";
 

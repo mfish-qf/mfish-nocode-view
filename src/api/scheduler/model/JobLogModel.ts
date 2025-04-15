@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult } from "@mfish/core/src/api/model/BaseModel";
+import { BaseEntity, PageResult } from "@mfish/core/api";
 
 /**
  * @description: 任务日志

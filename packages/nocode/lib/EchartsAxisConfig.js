@@ -1,26 +1,24 @@
 import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode, createTextVNode, computed, createElementBlock, Fragment, renderList, toDisplayString, resolveComponent } from "vue";
 import { Checkbox, RadioGroup, RadioButton, Slider } from "ant-design-vue";
-import { useDesign } from "@mfish/core";
+import { useDesign } from "@mfish/core/hooks";
 import "@vueuse/core";
-import "@mfish/core/src/components/Icon";
+import "@mfish/core/components/Icon";
 import "lodash-es";
 import { u as useScreenEditStore, f as ScreenInput, _ as _export_sfc, k as MfishColorPicker, T as TextStyle, am as TextFont } from "./index2.js";
 import "@mfish/core/enums";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 import { a as EchartsBaseConfig } from "./EchartsBaseConfig.js";
 import { C as ConfigGroup } from "./ConfigGroup.js";
 const _hoisted_1$2 = { style: { "display": "flex", "gap": "2px" } };
@@ -94,7 +92,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         class: normalizeClass(unref(prefixCls))
       }, {
         default: withCtx(() => [
-          _cache[8] || (_cache[8] = createElementVNode("div", { class: "title" }, " 图表边距 ", -1)),
+          _cache[8] || (_cache[8] = createElementVNode("div", { class: "title" }, " 图表边距", -1)),
           createElementVNode("div", _hoisted_1$2, [
             createVNode(unref(ScreenInput), {
               prefix: "左",
@@ -136,7 +134,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
               onChange: reverseChange
             }, {
               default: withCtx(() => _cache[6] || (_cache[6] = [
-                createTextVNode(" X、Y轴交换 ")
+                createTextVNode(" X、Y轴交换")
               ])),
               _: 1
             }, 8, ["checked"]),
@@ -146,7 +144,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
               onChange: showGridChange
             }, {
               default: withCtx(() => _cache[7] || (_cache[7] = [
-                createTextVNode(" 显示网格 ")
+                createTextVNode(" 显示网格")
               ])),
               _: 1
             }, 8, ["checked"])
@@ -157,7 +155,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsGridConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-776014ea"]]);
+const EchartsGridConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-e5e90967"]]);
 const _hoisted_1$1 = { class: "title" };
 const _hoisted_2$1 = { class: "title" };
 const _hoisted_3$1 = { class: "title" };
@@ -295,7 +293,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsLineConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-a5236ea9"]]);
+const EchartsLineConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-9a98d1ec"]]);
 const _hoisted_1 = { class: "title" };
 const _hoisted_2 = { class: "title" };
 const _hoisted_3 = { class: "title" };
@@ -883,7 +881,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsAxisConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-2266ae10"]]);
+const EchartsAxisConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-4207db68"]]);
 export {
   EchartsGridConfig as E,
   EchartsAxisConfig as a

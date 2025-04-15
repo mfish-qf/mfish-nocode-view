@@ -10,6 +10,7 @@ export interface DefineOptions {
   overrides?: UserConfig;
   options?: object;
 }
+
 const OUTPUT_DIR = "mfish-nocode-view";
 
 function defineApplicationConfig(defineOptions: DefineOptions = {}) {

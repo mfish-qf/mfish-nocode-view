@@ -23,8 +23,9 @@
 <script setup lang="ts">
   import { Dropdown as ADropdown, Menu as AMenu } from "ant-design-vue";
   import { onMounted, onUnmounted, ref, unref, useTemplateRef, watch } from "vue";
-  import { useDesign } from "@mfish/core";
+  import { useDesign } from "@mfish/core/hooks";
   import { useAppStore } from "@mfish/stores/modules";
+
   const emit = defineEmits(["cloneScreen"]);
   const { prefixCls } = useDesign("screen-resource");
   const frameSrc = "/low-code/mf-screen/resource";

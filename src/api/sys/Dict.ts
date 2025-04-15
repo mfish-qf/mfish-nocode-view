@@ -1,5 +1,5 @@
-import { defHttp } from "@mfish/core/src/utils/http/axios";
-import { Dict, ReqDict, DictPageModel } from "@/api/sys/model/DictModel";
+import { defHttp } from "@mfish/core/utils/http/axios";
+import { Dict, DictPageModel, ReqDict } from "@/api/sys/model/DictModel";
 
 /**
  * @description: 字典

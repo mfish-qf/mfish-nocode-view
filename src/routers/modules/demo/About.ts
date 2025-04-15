@@ -1,5 +1,5 @@
-import type { AppRouteRecordRaw } from "@mfish/core/src/router/Types";
-import { LAYOUT } from "@mfish/core/src/router/Constant";
+import type { AppRouteRecordRaw } from "@mfish/core/router";
+import { LAYOUT } from "@mfish/core/router";
 
 const abouts: AppRouteRecordRaw = {
   name: "About",

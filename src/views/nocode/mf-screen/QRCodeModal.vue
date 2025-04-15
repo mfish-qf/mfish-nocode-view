@@ -21,8 +21,8 @@
 <script setup lang="ts">
   import { Modal as AModal } from "ant-design-vue";
   import { ref, watchEffect } from "vue";
-  import { useDesign } from "@mfish/core";
-  import { Icon } from "@mfish/core/src/components/Icon";
+  import { useDesign } from "@mfish/core/hooks";
+  import { Icon } from "@mfish/core/components/Icon";
 
   const props = defineProps({
     title: { type: String, default: "分享二维码" },
@@ -49,17 +49,20 @@
       .tip {
         color: @screen-item-normal-color-light;
       }
+
       .qrcode-img {
         box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
       }
     }
   }
+
   .@{prefix-cls} {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 25px 25px 10px 25px;
+
     .title {
       width: 100%;
       font-size: 16px;
@@ -69,10 +72,12 @@
       white-space: nowrap;
       text-align: center;
     }
+
     .tip {
       color: @screen-item-normal-color;
       margin-bottom: 12px;
     }
+
     .qrcode-img {
       border-radius: 8px;
       background-color: @white;

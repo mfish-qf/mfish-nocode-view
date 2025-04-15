@@ -10,11 +10,12 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { sysFileFormSchema } from "./sysFile.data";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { insertSysFile, updateSysFile } from "@mfish/core/src/api/storage/SysFile";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { insertSysFile, updateSysFile } from "@mfish/core/api";
+
   defineOptions({ name: "SysFileModal" });
 
   const emit = defineEmits(["success", "register"]);

@@ -23,8 +23,10 @@ export const useOutsideOpen = (constant: string, complete?: () => void) => {
     localStorage.setItem(constant, buildUUID());
     window.open(routeData.href, "_blank");
   }
+
   function end() {
     localStorage.setItem(constant, buildUUID());
   }
+
   return { open, end };
 };

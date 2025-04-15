@@ -1,4 +1,4 @@
-import type { VNode, CSSProperties } from "vue";
+import type { CSSProperties, VNode } from "vue";
 import type { CollapseContainerOptions } from "@core/components/Container";
 import type { DescriptionsProps } from "ant-design-vue/es";
 import { Recordable } from "@mfish/types";
@@ -39,6 +39,7 @@ export interface DescriptionProps extends DescriptionsProps {
 
 export interface DescInstance {
   setDescProps(descProps: Partial<DescriptionProps>): void;
+
   getData(): object;
 }
 

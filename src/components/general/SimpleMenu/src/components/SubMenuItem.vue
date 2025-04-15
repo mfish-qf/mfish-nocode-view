@@ -53,27 +53,27 @@
 
 <script lang="ts">
   import type { CSSProperties, PropType } from "vue";
-  import type { SubMenuProvider } from "./Types";
   import {
-    defineComponent,
     computed,
-    unref,
+    defineComponent,
     getCurrentInstance,
-    toRefs,
-    reactive,
-    provide,
+    inject,
     onBeforeMount,
-    inject
+    provide,
+    reactive,
+    toRefs,
+    unref
   } from "vue";
-  import { useDesign } from "@mfish/core";
-  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import type { SubMenuProvider } from "./Types";
+  import { useDesign } from "@mfish/core/hooks";
+  import { propTypes } from "@mfish/core/utils/PropTypes";
   import { useMenuItem } from "./UseMenu";
   import { useSimpleRootMenuContext } from "./UseSimpleMenuContext";
-  import { CollapseTransition } from "@mfish/core/src/components/Transition";
-  import { Icon } from "@mfish/core/src/components/Icon";
+  import { CollapseTransition } from "@mfish/core/components/Transition";
+  import { Icon } from "@mfish/core/components/Icon";
   import { Popover } from "ant-design-vue";
-  import { isBoolean, isObject } from "@mfish/core/src/utils/Is";
-  import { mitt } from "@mfish/core/src/utils/Mitt";
+  import { isBoolean, isObject } from "@mfish/core/utils/Is";
+  import { mitt } from "@mfish/core/utils/Mitt";
   import { Recordable, TimeoutHandle } from "@mfish/types";
 
   const DELAY = 200;

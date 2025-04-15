@@ -1,19 +1,19 @@
 import type {
-  ProjectConfig,
   HeaderSetting,
   MenuSetting,
-  TransitionSetting,
-  MultiTabsSetting
+  MultiTabsSetting,
+  ProjectConfig,
+  TransitionSetting
 } from "@mfish/types/src/type/config";
 import type { BeforeMiniState } from "@mfish/types/src/type/store";
 import { defineStore } from "pinia";
 import { store } from "../index";
 import { RouterTransitionEnum, ThemeEnum } from "@mfish/core/enums";
-import { Persistent } from "@mfish/core/src/utils/cache/Persistent";
-import { darkMode } from "@mfish/core/src/settings/DesignSetting";
-import { resetRouter } from "@mfish/core/src/router";
-import { deepMerge } from "@mfish/core/src/utils";
-import projectSetting from "@mfish/core/src/settings/ProjectSetting";
+import { Persistent } from "@mfish/core/utils/cache/Persistent";
+import { darkMode } from "@mfish/core/settings/DesignSetting";
+import { resetRouter } from "@mfish/core/router";
+import { deepMerge } from "@mfish/core/utils";
+import projectSetting from "@mfish/core/settings/ProjectSetting";
 import { DeepPartial, TimeoutHandle } from "@mfish/types";
 
 interface AppState {

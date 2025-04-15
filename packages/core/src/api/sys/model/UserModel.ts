@@ -1,11 +1,11 @@
-import { PageResult, ReqPage } from "@core/api/model/BaseModel";
-import { TenantVo } from "@core/api/sys/model/SsoTenantModel";
+import { PageResult, ReqPage, TenantVo } from "@core/api";
 
 export interface CaptchaInfo {
   captchaKey: string;
   img: string;
   captchaOnOff: boolean;
 }
+
 /**
  * @description: 用户信息
  * @author: mfish

@@ -1,12 +1,10 @@
 import { MenuModeEnum } from "@mfish/core/enums";
-import type { Menu as MenuType } from "@mfish/core/src/router/Types";
-import type { MenuState, Key } from "./Types";
-import { computed, Ref, toRaw } from "vue";
-import { unref } from "vue";
+import type { Menu as MenuType } from "@mfish/core/router";
+import { getAllParentPath } from "@mfish/core/router";
+import type { Key, MenuState } from "./Types";
+import { computed, Ref, toRaw, unref } from "vue";
 import { uniq } from "lodash-es";
-import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
-import { getAllParentPath } from "@mfish/core/src/router/helper/MenuHelper";
-import { useTimeoutFn } from "@mfish/core/src/hooks/core/UseTimeout";
+import { useMenuSetting, useTimeoutFn } from "@mfish/core/hooks";
 
 export function useOpenKeys(
   menuState: MenuState,
@@ -78,5 +76,6 @@ export function useOpenKeys(
       }
     }
   }
+
   return { setOpenKeys, resetKeys, getOpenKeys, handleOpenChange };
 }

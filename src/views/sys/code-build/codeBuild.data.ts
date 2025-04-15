@@ -1,6 +1,5 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { getDBTree } from "@mfish/core/src/api/sys/DbConnect";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { getDBTree } from "@mfish/core/api";
 import { h } from "vue";
 import { Cascader, Select } from "ant-design-vue";
 

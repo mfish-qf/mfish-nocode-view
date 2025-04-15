@@ -9,7 +9,7 @@
   </CollapseContainer>
 </template>
 <script setup lang="ts">
-  import { CollapseContainer } from "@mfish/core/src/components/Container";
+  import { CollapseContainer } from "@mfish/core/components/Container";
   import AccountManagement from "@/views/sys/account/index.vue";
 </script>
 <style scoped lang="less"></style>

@@ -51,15 +51,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { getDemoOrderDetailList } from "@/api/demo/DemoOrderDetail";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import DemoOrderDetailModal from "./DemoOrderDetailModal.vue";
   import DemoOrderDetailViewModal from "./DemoOrderDetailViewModal.vue";
   import { columns, searchFormSchema } from "./demoOrderDetail.data";
   import { DemoOrderDetail } from "@/api/demo/model/DemoOrderDetailModel";
   import { ref, watch } from "vue";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
+  import { useMessage } from "@mfish/core/hooks";
 
   defineOptions({ name: "DemoOrderDetailManagement" });
   const props = defineProps({
@@ -167,6 +167,7 @@
       dataSource.value = res.list;
     });
   }
+
   /**
    * 处理完成
    */
@@ -177,5 +178,6 @@
       insertTableDataRecord(values.record);
     }
   }
+
   defineExpose({ reload, getDataSource });
 </script>

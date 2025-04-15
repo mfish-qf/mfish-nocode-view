@@ -1,13 +1,13 @@
 import {
+  CacheTypeEnum,
   ContentEnum,
-  ThemeEnum,
+  MenuModeEnum,
+  MenuTypeEnum,
+  MixSidebarTriggerEnum,
   RouterTransitionEnum,
   SettingButtonPositionEnum,
-  MenuTypeEnum,
-  MenuModeEnum,
-  TriggerEnum,
-  MixSidebarTriggerEnum,
-  CacheTypeEnum
+  ThemeEnum,
+  TriggerEnum
 } from "@mfish/core/enums";
 
 /**

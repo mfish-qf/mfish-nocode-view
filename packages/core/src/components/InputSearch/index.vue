@@ -13,7 +13,7 @@
 <script setup lang="ts">
   import { SearchOutlined } from "@ant-design/icons-vue";
   import { ref } from "vue";
-  import { useDesign } from "../../index";
+  import { useDesign } from "@core/hooks";
   import { Input as AInput } from "ant-design-vue";
 
   defineOptions({ name: "InputSearch" });
@@ -33,6 +33,7 @@
       emit("search", "");
     }
   }
+
   function onSearch() {
     emit("search", searchValue.value);
   }
@@ -44,9 +45,11 @@
       color: @screen-item-normal-color;
     }
   }
+
   .@{prefix-cls}_button {
     cursor: pointer;
     color: @screen-item-normal-color-light;
+
     &:hover {
       color: @main-color;
     }

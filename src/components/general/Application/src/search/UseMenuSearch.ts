@@ -1,12 +1,10 @@
-import type { Menu } from "@mfish/core/src/router/Types";
-import { ref, onBeforeMount, unref, Ref, nextTick } from "vue";
-import { getMenus } from "@mfish/core/src/router/menus";
+import type { Menu } from "@mfish/core/router";
+import { getMenus } from "@mfish/core/router";
+import { nextTick, onBeforeMount, Ref, ref, unref } from "vue";
 import { cloneDeep } from "lodash-es";
-import { filter, forEach } from "@mfish/core/src/utils/helper/TreeHelper";
-import { useGo } from "@mfish/core/src/hooks/web/UsePage";
-import { useScrollTo } from "@mfish/core/src/hooks/event/UseScrollTo";
+import { filter, forEach } from "@mfish/core/utils/helper/TreeHelper";
+import { useGo, useI18n, useScrollTo } from "@mfish/core/hooks";
 import { onKeyStroke, useDebounceFn } from "@vueuse/core";
-import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
 import { ChangeEvent, ElRef } from "@mfish/types";
 
 export interface SearchResult {

@@ -2,25 +2,23 @@ import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, un
 import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index2.js";
 import "lodash-es";
 import "@mfish/core/enums";
-import "@mfish/core/src/components/Icon";
-import { useDesign } from "@mfish/core";
+import "@mfish/core/components/Icon";
+import { useDesign } from "@mfish/core/hooks";
 import "ant-design-vue";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
 import "@vueuse/core";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 import MfDecorationConfig from "./MfDecorationConfig.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfBorderConfig",
@@ -48,7 +46,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         class: normalizeClass(unref(prefixCls))
       }, {
         default: withCtx(() => [
-          _cache[0] || (_cache[0] = createElementVNode("div", { class: "title" }, "填充色 ", -1)),
+          _cache[0] || (_cache[0] = createElementVNode("div", { class: "title" }, "填充色", -1)),
           createVNode(unref(MfishColorPicker), {
             placeholder: "设置填充颜色，格式#FFFFFF",
             type: 1,
@@ -63,7 +61,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfBorderConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-9b9aaf6f"]]);
+const MfBorderConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-4d4c8082"]]);
 export {
   MfBorderConfig as default
 };

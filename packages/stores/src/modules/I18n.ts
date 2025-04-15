@@ -7,8 +7,8 @@ import type { LocaleSetting, LocaleType } from "@mfish/types/src/type/config";
 import { defineStore } from "pinia";
 import { store } from "../index";
 import { LOCALE_KEY } from "@mfish/core/enums";
-import { createLocalStorage } from "@mfish/core/src/utils/cache";
-import { localeSetting } from "@mfish/core/src/settings/I18nSetting";
+import { createLocalStorage } from "@mfish/core/utils/cache";
+import { localeSetting } from "@mfish/core/settings/I18nSetting";
 
 const ls = createLocalStorage();
 const lsLocaleSetting = (ls.get(LOCALE_KEY) || localeSetting) as LocaleSetting;

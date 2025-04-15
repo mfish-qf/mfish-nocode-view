@@ -27,7 +27,7 @@
 <script lang="ts" setup>
   import type { CSSProperties } from "vue";
   import { computed } from "vue";
-  import { useDesign } from "@core/index";
+  import { useDesign } from "@core/hooks";
   import { footerProps } from "../Props";
 
   defineOptions({ name: "BasicDrawerFooter" });

@@ -13,16 +13,16 @@
 </template>
 <script setup lang="ts">
   import { ref, watch } from "vue";
-  import { getSysFileByKey } from "@core/api/storage/SysFile";
-  import { useDesign } from "@core/index";
+  import { getSysFileByKey, SysFile } from "@core/api";
+  import { useDesign } from "@core/hooks";
   import { FilePreview } from "@core/components/FileUpDown";
-  import { SysFile } from "@core/api/storage/model/SysFileModel";
 
   export interface FileHrefModel {
     fileKey: string;
     fileName: string;
     fileType?: string;
   }
+
   const props = defineProps({
     keys: { type: Array<string>, default: [] }
   });

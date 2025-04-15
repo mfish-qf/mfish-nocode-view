@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult, ReqPage } from "@core/api/model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "@core/api";
 
 /**
  * @description: 租户信息表

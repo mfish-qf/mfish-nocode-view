@@ -6,7 +6,7 @@
 <script lang="ts" setup>
   import { computed } from "vue";
   import { Icon } from "../../Icon";
-  import { useDesign } from "../../../index";
+  import { useDesign } from "@core/hooks";
 
   const props = defineProps({
     /**

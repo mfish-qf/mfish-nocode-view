@@ -1,7 +1,5 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { getDictProps } from "@mfish/core/src/components/DictTag";
-import { YNTag } from "@mfish/core/src/components/DictTag";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { getDictProps, YNTag } from "@mfish/core/components/DictTag";
 
 /**
  * @description: 数据库连接

@@ -1,12 +1,10 @@
-import { BasicColumn, TableImage } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { DescItem } from "@mfish/core/src/components/Description";
-import { queryCategoryTreeByCode } from "@mfish/core/src/api/sys/DictCategory";
-import { Icon } from "@mfish/core/src/components/Icon";
+import { BasicColumn, FormSchema, TableImage } from "@mfish/core/components/Table";
+import { DescItem } from "@mfish/core/components/Description";
+import { queryCategoryTreeByCode } from "@mfish/core/api";
+import { Icon } from "@mfish/core/components/Icon";
 import { h } from "vue";
-import { imageUrl } from "@mfish/core/src/utils/file/FileUtils";
-import { getLocalFileUrl } from "@mfish/core/src/utils/file/FileUtils";
-import { FileUp } from "@mfish/core/src/components/FileUpDown";
+import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
+import { FileUp } from "@mfish/core/components/FileUpDown";
 import { Image as AImage } from "ant-design-vue";
 
 /**

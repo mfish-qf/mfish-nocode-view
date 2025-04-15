@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { defineComponent, toRefs, ref, unref } from "vue";
-  import { createAppProviderContext } from "@mfish/core";
-  import { createBreakpointListen } from "@mfish/core/src/hooks/event/UseBreakpoint";
-  import { prefixCls } from "@mfish/core/src/settings/DesignSetting";
+  import { defineComponent, ref, toRefs, unref } from "vue";
+  import { createAppProviderContext, createBreakpointListen } from "@mfish/core/hooks";
+  import { prefixCls } from "@mfish/core/settings/DesignSetting";
   import { useAppStore } from "@mfish/stores/modules";
   import { MenuModeEnum, MenuTypeEnum } from "@mfish/core/enums";
 

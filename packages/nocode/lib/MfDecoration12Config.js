@@ -1,27 +1,25 @@
 import { defineComponent, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createTextVNode, createVNode } from "vue";
 import MfDecorationConfig from "./MfDecorationConfig.js";
 import "ant-design-vue";
-import { useDesign } from "@mfish/core";
+import { useDesign } from "@mfish/core/hooks";
 import "@vueuse/core";
-import "@mfish/core/src/components/Icon";
+import "@mfish/core/components/Icon";
 import "lodash-es";
 import { u as useScreenEditStore, f as ScreenInput, _ as _export_sfc } from "./index2.js";
 import "@mfish/core/enums";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 const _hoisted_1 = { class: "title" };
 const _hoisted_2 = { class: "title" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
@@ -64,7 +62,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfDecoration12Config = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-685cdefe"]]);
+const MfDecoration12Config = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-630737c8"]]);
 export {
   MfDecoration12Config as default
 };

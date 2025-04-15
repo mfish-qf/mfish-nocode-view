@@ -1,19 +1,26 @@
 <script lang="tsx">
-  import { CSSProperties } from "vue";
-  import { FieldNames, TreeState, TreeItem, KeyType, CheckKeys, TreeActionType, treeProps } from "./types/Tree";
-  import { reactive, computed, unref, ref, watchEffect, toRaw, watch, onMounted } from "vue";
+  import { computed, CSSProperties, onMounted, reactive, ref, toRaw, unref, watch, watchEffect } from "vue";
+  import {
+    CheckKeys,
+    FieldNames,
+    KeyType,
+    TreeActionType,
+    treeEmits,
+    TreeItem,
+    treeProps,
+    TreeState
+  } from "./types/Tree";
   import TreeHeader from "./components/TreeHeader.vue";
-  import { Tree, Spin, Empty, Pagination } from "ant-design-vue";
+  import { Empty, Pagination, Spin, Tree } from "ant-design-vue";
   import { TreeIcon } from "./TreeIcon";
   import { ScrollContainer } from "../../Container";
-  import { omit, get, difference, cloneDeep } from "lodash-es";
+  import { cloneDeep, difference, get, omit } from "lodash-es";
   import { isArray, isBoolean, isEmpty, isFunction, isNumber } from "../../../utils/Is";
   import { extendSlots, getSlot } from "../../../utils/helper/TsxHelper";
-  import { filter, treeToList, eachTree } from "../../../utils/helper/TreeHelper";
+  import { eachTree, filter, treeToList } from "../../../utils/helper/TreeHelper";
   import { useTree } from "./hooks/UseTree";
   import { useContextMenu } from "../../../hooks/web/UseContextMenu";
   import { CreateContextOptions } from "../../ContextMenu";
-  import { treeEmits } from "./types/Tree";
   import { createBEM } from "../../../utils/Bem";
   import { Recordable } from "@mfish/types";
 

@@ -84,15 +84,14 @@
 </template>
 <script lang="ts" setup>
   import { onMounted, ref } from "vue";
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { deleteSsoClientDetails, getSecret, getSsoClientDetailsList, resetSecret } from "@/api/sys/SsoClientDetails";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import SsoClientDetailsModal from "./SsoClientDetailsModal.vue";
   import { columns, searchFormSchema } from "./ssoClientDetails.data";
-  import { getDictItems } from "@mfish/core/src/api/sys/DictItem";
-  import { useDesign } from "@mfish/core";
+  import { DictItem, getDictItems } from "@mfish/core/api";
+  import { useDesign } from "@mfish/core/hooks";
   import { Tag as ATag } from "ant-design-vue";
-  import { DictItem } from "@mfish/core/src/api/sys/model/DictItemModel";
   import { Recordable } from "@mfish/types";
   import SsoClientDetailsViewModal from "@/views/sys/sso-client-details/SsoClientDetailsViewModal.vue";
 
@@ -144,6 +143,7 @@
       isUpdate: false
     });
   }
+
   onMounted(() => {
     getDictItems("sso_grant_type").then((res) => {
       grantTypes.value = res;

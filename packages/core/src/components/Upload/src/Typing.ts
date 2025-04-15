@@ -1,5 +1,6 @@
-import { SysFile } from "@core/api/storage/model/SysFileModel";
+import { SysFile } from "@core/api";
 import { Fn } from "@mfish/types";
+
 export enum UploadResultStatus {
   SUCCESS = "success",
   ERROR = "error",

@@ -1,30 +1,28 @@
 import { defineComponent, ref, watch, createElementBlock, openBlock, normalizeClass, unref, Fragment, renderList, createVNode, createElementVNode, toDisplayString, onMounted, withCtx, reactive, createBlock, createSlots, createCommentVNode, withModifiers, resolveComponent, createTextVNode } from "vue";
 import { Switch, InputGroup, TreeSelect, List, Dropdown, Input, Menu, RadioGroup, RadioButton, Empty } from "ant-design-vue";
-import { ScrollContainer } from "@mfish/core/src/components/Container";
-import { useDesign } from "@mfish/core";
+import { ScrollContainer } from "@mfish/core/components/Container";
+import { useDesign } from "@mfish/core/hooks";
 import { C as ConfigGroup } from "./ConfigGroup.js";
 import "@vueuse/core";
-import { Icon } from "@mfish/core/src/components/Icon";
+import { Icon } from "@mfish/core/components/Icon";
 import "lodash-es";
 import { C as ChartEventEnum, u as useScreenEditStore, b as ComponentsEnum, g as getEventName, _ as _export_sfc, c as getScreenFolderTree, d as getMfScreenList, P as PageJumpType, e as PageType, f as ScreenInput } from "./index2.js";
 import "@mfish/core/enums";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
-import InputSearch from "@mfish/core/src/components/InputSearch";
-import { imageUrl, getLocalFileUrl } from "@mfish/core/src/utils/file/FileUtils";
-import { usePagination } from "@mfish/core/src/utils/PageUtils";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
+import InputSearch from "@mfish/core/components/InputSearch";
+import { imageUrl, getLocalFileUrl } from "@mfish/core/utils/file/FileUtils";
+import { usePagination } from "@mfish/core/utils/PageUtils";
 const _hoisted_1$3 = ["onClick"];
 const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   __name: "EventListen",
@@ -96,7 +94,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EventListen = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-bff44bba"]]);
+const EventListen = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-a24fafed"]]);
 const _hoisted_1$2 = {
   target: "_blank",
   onClick: () => {
@@ -219,7 +217,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const PageList = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-9d4c6c28"]]);
+const PageList = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-efbe8537"]]);
 const _hoisted_1$1 = ["src"];
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "PageSelect",
@@ -351,7 +349,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const PageSelect = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-8bdeb2a5"]]);
+const PageSelect = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-6fc78000"]]);
 const _hoisted_1 = { class: "title" };
 const _hoisted_2 = { class: "title" };
 const _hoisted_3 = {
@@ -568,7 +566,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const Index = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-3e6f48ed"]]);
+const Index = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-1a4eda71"]]);
 const _sfc_main = /* @__PURE__ */ defineComponent({
   ...{ name: "AdvanceConfig" },
   __name: "index",
@@ -598,7 +596,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-fdf9d8a0"]]);
+const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-fcbfd2e1"]]);
 export {
   index as default
 };

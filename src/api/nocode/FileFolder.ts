@@ -1,4 +1,4 @@
-import { defHttp } from "@mfish/core/src/utils/http/axios";
+import { defHttp } from "@mfish/core/utils/http/axios";
 import { FileFolder, FileFolderPageModel, ReqFolder } from "@/api/nocode/model/FileFolderModel";
 
 /**
@@ -25,6 +25,7 @@ export const getFileFolderTree = (reqFileFolder?: ReqFolder) => {
 export const getFileFolderAndFile = (reqFileFolder?: ReqFolder) => {
   return defHttp.get<FileFolderPageModel>({ url: Api.FileFolder, params: reqFileFolder });
 };
+
 /**
  * 导出文件目录
  * @param reqFileFolder

@@ -1,6 +1,6 @@
 import type { TreeDataItem } from "ant-design-vue/es/tree/Tree";
-import { Recordable, Fn } from "@mfish/types";
-import { buildProps } from "../../../../utils/Props";
+import { Fn, Recordable } from "@mfish/types";
+import { buildProps } from "@core/utils/Props.ts";
 import { PropType } from "vue";
 
 export enum ToolbarEnum {

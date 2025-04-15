@@ -57,16 +57,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { deleteBatchDemoOrder, deleteDemoOrder, exportDemoOrder, getDemoOrderList } from "@/api/demo/DemoOrder";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import DemoOrderModal from "./DemoOrderModal.vue";
   import DemoOrderViewModal from "./DemoOrderViewModal.vue";
   import { columns, searchFormSchema } from "./demoOrder.data";
   import { DemoOrder } from "@/api/demo/model/DemoOrderModel";
   import { ref } from "vue";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
-  import { Button as AButton } from "@mfish/core/src/components/Button";
+  import { useMessage } from "@mfish/core/hooks";
+  import { Button as AButton } from "@mfish/core/components/Button";
   import DemoOrderDetailManagement from "@/views/demo/demo-order-detail/index.vue";
 
   defineOptions({ name: "DemoOrderManagement" });
@@ -102,6 +102,7 @@
     }
   });
   const { createMessage } = useMessage();
+
   /**
    * 新建
    */

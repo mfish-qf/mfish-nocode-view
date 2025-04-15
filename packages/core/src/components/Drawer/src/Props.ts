@@ -1,5 +1,5 @@
 import type { PropType } from "vue";
-import { useI18n } from "@core/hooks/web/UseI18n";
+import { useI18n } from "@core/hooks";
 import { Recordable } from "@mfish/types";
 
 const { t } = useI18n();

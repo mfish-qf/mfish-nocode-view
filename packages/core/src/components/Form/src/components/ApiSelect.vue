@@ -21,14 +21,12 @@
   </ASelect>
 </template>
 <script lang="ts" setup>
-  import { PropType, ref, watchEffect, computed, unref, watch } from "vue";
+  import { computed, PropType, ref, unref, watch, watchEffect } from "vue";
   import { Select as ASelect } from "ant-design-vue";
   import { isFunction } from "@core/utils/Is";
-  import { useRuleFormItem } from "@core/hooks/component/UseFormItem";
-  import { useAttrs } from "@core/hooks/core/UseAttrs";
+  import { useAttrs, useI18n, useRuleFormItem } from "@core/hooks";
   import { get, omit } from "lodash-es";
   import { LoadingOutlined } from "@ant-design/icons-vue";
-  import { useI18n } from "@core/hooks/web/UseI18n";
   import { propTypes } from "@core/utils/PropTypes";
   import { SelectValue } from "ant-design-vue/es/select";
   import { Recordable } from "@mfish/types";

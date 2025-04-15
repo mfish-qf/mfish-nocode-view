@@ -40,13 +40,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
-  import { deleteMenu, getMenuList } from "@mfish/core/src/api/sys/Menu";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
+  import { deleteMenu, getMenuList } from "@mfish/core/api";
   import MenuModal from "./MenuModal.vue";
   import { columns, searchFormSchema } from "./menu.data";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import { Recordable } from "@mfish/types";
   import MenuViewModal from "@/views/sys/menu/MenuViewModal.vue";
+
   defineOptions({ name: "MenuManagement" });
 
   const [registerModal, { openModal }] = useModal();

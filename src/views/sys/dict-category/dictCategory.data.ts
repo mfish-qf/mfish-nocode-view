@@ -1,6 +1,5 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { Icon } from "@mfish/core/src/components/Icon";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { Icon } from "@mfish/core/components/Icon";
 import { h } from "vue";
 
 /**

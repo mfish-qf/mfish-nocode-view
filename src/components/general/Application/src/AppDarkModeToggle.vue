@@ -7,11 +7,10 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from "vue";
-  import { SvgIcon } from "@mfish/core/src/components/Icon";
-  import { useDesign } from "@mfish/core";
-  import { useRootSetting } from "@mfish/core";
+  import { SvgIcon } from "@mfish/core/components/Icon";
+  import { useDesign, useRootSetting } from "@mfish/core/hooks";
   import { ThemeEnum } from "@mfish/core/enums";
-  import { setDarkTheme } from "../../../../../packages/core/src/logics/InitAppConfig";
+  import { setDarkTheme } from "@mfish/core/logics/InitAppConfig";
   import { saveSysConfig } from "@/api/sys/SysConfig";
   import { useAppStore } from "@mfish/stores/modules";
 
@@ -70,6 +69,7 @@
       border: 1px solid @border-color-dark;
     }
   }
+
   .@{prefix-cls} {
     border: 1px solid @border-color-base;
     position: relative;
@@ -82,9 +82,11 @@
     justify-content: space-between;
     align-items: center;
     transition: background 0.5s ease;
+
     &:hover {
       background-color: @header-bg-hover-color;
     }
+
     &-inner {
       position: absolute;
       z-index: 1;

@@ -15,11 +15,10 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from "vue";
-  import { FullscreenExitOutlined, FullscreenOutlined, CloseOutlined } from "@ant-design/icons-vue";
-  import { useDesign } from "../../../../index";
+  import { computed, defineComponent } from "vue";
+  import { CloseOutlined, FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons-vue";
+  import { useDesign, useI18n } from "@core/hooks";
   import { Tooltip } from "ant-design-vue";
-  import { useI18n } from "../../../../hooks/web/UseI18n";
 
   export default defineComponent({
     name: "ModalClose",

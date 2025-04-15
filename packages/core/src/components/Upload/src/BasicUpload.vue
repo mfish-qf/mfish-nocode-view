@@ -19,14 +19,14 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from "vue";
+  import { computed, defineComponent } from "vue";
   import { Space } from "ant-design-vue";
   import { useModal } from "@core/components/Modal";
   import { uploadContainerProps } from "./Props";
   import { omit } from "lodash-es";
-  import { useI18n } from "@core/hooks/web/UseI18n";
+  import { useI18n } from "@core/hooks";
   import UploadModal from "./UploadModal.vue";
-  import { SysFile } from "@core/api/storage/model/SysFileModel";
+  import { SysFile } from "@core/api";
   import { Recordable } from "@mfish/types";
 
   export default defineComponent({
@@ -56,6 +56,7 @@
       function handleSuccess(files: SysFile[]) {
         emit("success", files);
       }
+
       return {
         registerUploadModal,
         openUploadModal,

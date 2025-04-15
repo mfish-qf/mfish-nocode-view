@@ -18,8 +18,8 @@ import {
   Slider,
   Switch,
   TimePicker,
-  TreeSelect,
-  Transfer
+  Transfer,
+  TreeSelect
 } from "ant-design-vue";
 import ApiRadioGroup from "./components/ApiRadioGroup.vue";
 import RadioButtonGroup from "./components/RadioButtonGroup.vue";

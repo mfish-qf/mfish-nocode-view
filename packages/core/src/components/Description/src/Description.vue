@@ -1,16 +1,14 @@
 <script lang="tsx">
-  import type { DescriptionProps, DescInstance, DescItem } from "./Typing";
+  import type { DescInstance, DescItem, DescriptionProps } from "./Typing";
   import type { DescriptionsProps } from "ant-design-vue/es/descriptions";
-  import { CSSProperties, PropType, toRaw } from "vue";
+  import { computed, CSSProperties, defineComponent, PropType, ref, toRaw, toRefs, unref } from "vue";
   import type { CollapseContainerOptions } from "@core/components/Container";
-  import { defineComponent, computed, ref, unref, toRefs } from "vue";
+  import { CollapseContainer } from "@core/components/Container";
   import { get } from "lodash-es";
   import { Descriptions } from "ant-design-vue";
-  import { CollapseContainer } from "@core/components/Container";
-  import { useDesign } from "@core/index";
+  import { useAttrs, useDesign } from "@core/hooks";
   import { isFunction } from "@core/utils/Is";
   import { getSlot } from "@core/utils/helper/TsxHelper";
-  import { useAttrs } from "@core/hooks/core/UseAttrs";
   import { Recordable } from "@mfish/types";
 
   const props = {

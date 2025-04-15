@@ -1,9 +1,8 @@
 import { ComputedRef, isRef, nextTick, Ref, ref, unref, watch } from "vue";
-import { onMountedOrActivated } from "@mfish/core/src/hooks/core/OnMountedOrActivated";
-import { useWindowSizeFn } from "@mfish/core/src/hooks/event/UseWindowSizeFn";
+import { onMountedOrActivated, useWindowSizeFn } from "@mfish/core/hooks";
 import { useLayoutHeight } from "@/layouts/default/content/UseContentViewHeight";
-import { getViewportOffset } from "@mfish/core/src/utils/DomUtils";
-import { isNumber, isString } from "@mfish/core/src/utils/Is";
+import { getViewportOffset } from "@mfish/core/utils/DomUtils";
+import { isNumber, isString } from "@mfish/core/utils/Is";
 import { Nullable } from "@mfish/types";
 
 export interface CompensationHeight {

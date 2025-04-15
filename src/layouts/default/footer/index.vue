@@ -10,18 +10,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, defineComponent, unref, ref } from "vue";
+  import { computed, defineComponent, ref, unref } from "vue";
   import { Layout } from "ant-design-vue";
   import { GithubFilled } from "@ant-design/icons-vue";
-  import { DOC_URL, GITHUB_URL, SITE_URL } from "@mfish/core/src/settings/SiteSetting";
-  import { openWindow } from "@mfish/core/src/utils";
-  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
-  import { useRootSetting } from "@mfish/core";
+  import { DOC_URL, GITHUB_URL, SITE_URL } from "@mfish/core/settings/SiteSetting";
+  import { openWindow } from "@mfish/core/utils";
+  import { useDesign, useGlobSetting, useI18n, useRootSetting } from "@mfish/core/hooks";
   import { useRouter } from "vue-router";
-  import { useDesign } from "@mfish/core";
   import { useLayoutHeight } from "../content/UseContentViewHeight";
   import { ComponentRef } from "@mfish/types";
-  import { useGlobSetting } from "@mfish/core/src/hooks/setting";
 
   defineComponent({ name: "LayoutFooter" });
   const AFooter = Layout.Footer;

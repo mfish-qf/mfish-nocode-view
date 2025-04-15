@@ -11,11 +11,10 @@
   </RadioGroup>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, computed, ref } from "vue";
+  import { computed, defineComponent, PropType, ref } from "vue";
   import { Radio } from "ant-design-vue";
   import { isString } from "@core/utils/Is";
-  import { useRuleFormItem } from "@core/hooks/component/UseFormItem";
-  import { useAttrs } from "@core/hooks/core/UseAttrs";
+  import { useAttrs, useRuleFormItem } from "@core/hooks";
 
   type OptionsItem = { label: string; value: string | number | boolean; disabled?: boolean };
   type RadioItem = string | OptionsItem;

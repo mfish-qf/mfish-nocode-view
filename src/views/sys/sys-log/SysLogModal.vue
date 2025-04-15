@@ -11,8 +11,8 @@
 </template>
 <script lang="ts" setup>
   import { ref } from "vue";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { Description, useDescription } from "@mfish/core/src/components/Description";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { Description, useDescription } from "@mfish/core/components/Description";
   import { sysLogSchema } from "@/views/sys/sys-log/sysLog.data";
 
   const sysLogData = ref();

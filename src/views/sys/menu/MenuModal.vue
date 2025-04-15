@@ -5,11 +5,10 @@
 </template>
 <script lang="ts" setup>
   import { computed, ref, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { formSchema } from "./menu.data";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { getMenuList, insertMenu, updateMenu } from "@mfish/core/src/api/sys/Menu";
-  import { MenuListItem, MenuType } from "@mfish/core/src/api/sys/model/MenuModel";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { getMenuList, insertMenu, MenuListItem, MenuType, updateMenu } from "@mfish/core/api";
 
   const emit = defineEmits(["success", "register"]);
   const isUpdate = ref(true);

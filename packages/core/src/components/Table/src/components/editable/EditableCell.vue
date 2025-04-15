@@ -4,7 +4,7 @@
   import type { BasicColumn } from "../../types/Table";
   import { CheckOutlined, CloseOutlined, FormOutlined } from "@ant-design/icons-vue";
   import { CellComponent } from "./CellComponent";
-  import { useDesign } from "@core/index";
+  import { useDesign } from "@core/hooks";
   import { useTableContext } from "../../hooks/UseTableContext";
   import clickOutside from "@core/directives/ClickOutside";
   import { propTypes } from "@core/utils/PropTypes";
@@ -120,6 +120,7 @@
           disabled: unref(getDisable)
         } as any;
       });
+
       function upEditDynamicDisabled(record, column, value) {
         if (!record) return false;
         const { key, dataIndex } = column;
@@ -497,6 +498,7 @@
       color: @error-color;
     }
   }
+
   .@{prefix-cls} {
     position: relative;
     min-height: 24px; // 设置高度让其始终可被hover

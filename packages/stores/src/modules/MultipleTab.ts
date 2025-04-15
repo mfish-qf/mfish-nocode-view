@@ -1,12 +1,12 @@
 import { RouteLocationNormalized, RouteLocationRaw, Router } from "vue-router";
 import { toRaw, unref } from "vue";
 import { defineStore } from "pinia";
-import { useGo, useRedo } from "@mfish/core/src/hooks/web/UsePage";
-import { Persistent } from "@mfish/core/src/utils/cache/Persistent";
-import { PageEnum, MULTIPLE_TABS_KEY } from "@mfish/core/enums";
-import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "@mfish/core/src/router/routers/Basic";
-import { getRawRoute } from "@mfish/core/src/utils";
-import projectSetting from "@mfish/core/src/settings/ProjectSetting";
+import { useGo, useRedo } from "@mfish/core/hooks";
+import { Persistent } from "@mfish/core/utils/cache/Persistent";
+import { MULTIPLE_TABS_KEY, PageEnum } from "@mfish/core/enums";
+import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "@mfish/core/router";
+import { getRawRoute } from "@mfish/core/utils";
+import projectSetting from "@mfish/core/settings/ProjectSetting";
 import { usePermissionStore } from "./Permission";
 
 export interface MultipleTabState {

@@ -19,10 +19,10 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, ref, watch, unref, watchEffect } from "vue";
+  import { computed, defineComponent, ref, unref, watch, watchEffect } from "vue";
   import { Input } from "ant-design-vue";
   import { zxcvbn } from "@zxcvbn-ts/core";
-  import { useDesign } from "@core/index";
+  import { useDesign } from "@core/hooks";
   import { propTypes } from "@core/utils/PropTypes";
 
   export default defineComponent({
@@ -77,6 +77,7 @@
     .@{prefix-cls} {
       &-bar {
         background-color: rgba(255, 255, 255, 0.1);
+
         &::before,
         &::after {
           border-color: @black;
@@ -84,6 +85,7 @@
       }
     }
   }
+
   .@{prefix-cls} {
     &-bar {
       position: relative;

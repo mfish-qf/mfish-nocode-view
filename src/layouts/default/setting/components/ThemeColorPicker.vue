@@ -19,7 +19,7 @@
 <script lang="ts" setup>
   import { PropType } from "vue";
   import { CheckOutlined } from "@ant-design/icons-vue";
-  import { useDesign } from "@mfish/core";
+  import { useDesign } from "@mfish/core/hooks";
   import { baseHandler } from "../Handler";
   import { HandlerEnum } from "../Enum";
 
@@ -59,13 +59,16 @@
       border: 1px solid @border-color-base;
       border-radius: 6px;
       transition: all 0.2s ease-in;
+
       svg {
         display: none;
       }
+
       &:hover {
         transform: scale(1.05);
         border: 1px solid @button-primary-hover-color;
       }
+
       &--active {
         border: 1px solid @button-primary-hover-color;
 

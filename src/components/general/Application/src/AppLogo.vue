@@ -1,6 +1,6 @@
 <template>
   <div class="anticon" :class="getAppLogoClass" @click="allowGoHome ? goHome : ''">
-    <img src="@mfish/core/src/assets/images/logo.png" alt="logo" />
+    <img src="@mfish/core/assets/images/logo.png" alt="logo" />
     <div class="ml-2 truncate md:opacity-100" :class="getTitleClass" v-show="showTitle">
       <slot v-if="titleSlot" name="title"></slot>
       <span v-else>{{ shortName }}</span>
@@ -9,10 +9,7 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from "vue";
-  import { useGlobSetting } from "@mfish/core/src/hooks/setting";
-  import { useGo } from "@mfish/core/src/hooks/web/UsePage";
-  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
-  import { useDesign } from "@mfish/core";
+  import { useDesign, useGlobSetting, useGo, useMenuSetting } from "@mfish/core/hooks";
   import { usePermissionStore } from "@mfish/stores/modules";
 
   const props = defineProps({

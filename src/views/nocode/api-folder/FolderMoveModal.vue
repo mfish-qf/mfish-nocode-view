@@ -9,8 +9,8 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { BasicForm, FormSchema, useForm } from "@mfish/core/src/components/Form";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicForm, FormSchema, useForm } from "@mfish/core/components/Form";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { PropType } from "vue";
 
   const props = defineProps({

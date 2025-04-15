@@ -12,11 +12,10 @@
   </BasicModal>
 </template>
 <script setup lang="ts">
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { demoUpDownDesc, demoUpFormSchema } from "@/views/demo/demo-up-down/demoUpDown.data";
-  import { Description } from "@mfish/core/src/components/Description";
-  import { useDescription } from "@mfish/core/src/components/Description";
+  import { Description, useDescription } from "@mfish/core/components/Description";
   import { ref } from "vue";
   import { Divider as ADivider } from "ant-design-vue";
 

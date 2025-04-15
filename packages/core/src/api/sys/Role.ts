@@ -1,5 +1,5 @@
 import { defHttp } from "@core/utils/http/axios";
-import { ReqSsoRole, RolePageModel, SsoRole } from "@core/api/sys/model/RoleModel";
+import { ReqSsoRole, RolePageModel, SsoRole } from "@core/api";
 
 /**
  * @description: 角色请求类
@@ -19,9 +19,11 @@ export const getRoleList = (params?: ReqSsoRole) => {
 export const getAllRoleList = (params?: ReqSsoRole) => {
   return defHttp.get<SsoRole[]>({ url: Api.AllRole, params });
 };
+
 export function getRoleByIds(ids: string) {
   return defHttp.get<SsoRole[]>({ url: `${Api.Role}/${ids}` });
 }
+
 export const getRoleMenus = (roleId?: string) => {
   return defHttp.get<string[]>({ url: `${Api.Menus}/${roleId}` });
 };

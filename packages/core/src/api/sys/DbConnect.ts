@@ -1,16 +1,16 @@
 import { defHttp } from "@core/utils/http/axios";
 import {
-  DbConnect,
-  ReqDbConnect,
-  DbConnectPageModel,
-  ReqTable,
-  TableInfo,
-  FieldInfo,
   DataTable,
+  DbConnect,
+  DbConnectPageModel,
   DBTreeNode,
-  MetaDataHeader
-} from "@core/api/sys/model/DbConnectModel.ts";
-import { PageResult } from "@core/api/model/BaseModel.ts";
+  FieldInfo,
+  MetaDataHeader,
+  PageResult,
+  ReqDbConnect,
+  ReqTable,
+  TableInfo
+} from "@core/api";
 
 /**
  * @description: 数据库连接

@@ -3,8 +3,7 @@
   import { Tooltip } from "ant-design-vue";
   import { SearchOutlined } from "@ant-design/icons-vue";
   import AppSearchModal from "./AppSearchModal.vue";
-  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
-  import { useDesign } from "@mfish/core";
+  import { useDesign, useI18n } from "@mfish/core/hooks";
 
   export default defineComponent({
     name: "AppSearch",
@@ -12,6 +11,7 @@
       const showModal = ref(false);
       const { t } = useI18n();
       const { prefixCls } = useDesign("app-search");
+
       function changeModal(show: boolean) {
         showModal.value = show;
       }
@@ -37,6 +37,7 @@
 
   .@{prefix-cls} {
     transition: all 0.2s ease-in;
+
     &:hover {
       transform: scale(1.2);
     }

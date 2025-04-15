@@ -1,6 +1,6 @@
 import type { ComputedRef } from "vue";
-import type { BasicTableProps, TableCustomRecord } from "../types/Table";
 import { unref } from "vue";
+import type { BasicTableProps, TableCustomRecord } from "../types/Table";
 import { isFunction } from "@core/utils/Is";
 
 export function useTableStyle(propsRef: ComputedRef<BasicTableProps>, prefixCls: string) {

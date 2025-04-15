@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, unref, nextTick } from "vue";
+  import { nextTick, ref, unref } from "vue";
   import { Scrollbar, ScrollbarType } from "../../Scrollbar";
   import { useScrollTo } from "../../../hooks/event/UseScrollTo";
   import { Nullable } from "@mfish/types";

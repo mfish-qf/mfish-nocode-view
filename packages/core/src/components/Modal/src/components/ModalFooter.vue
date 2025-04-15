@@ -17,6 +17,7 @@
   defineOptions({ name: "BasicModalFooter" });
   defineProps(basicProps);
   const emit = defineEmits(["ok", "cancel"]);
+
   function handleOk(e: Event) {
     emit("ok", e);
   }

@@ -1,5 +1,5 @@
 import { InjectionKey } from "vue";
-import { createContext, useContext } from "../../../../index";
+import { createContext, useContext } from "@core/hooks";
 
 export interface ModalContextProps {
   redoModalHeight: () => void;

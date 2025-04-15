@@ -10,11 +10,11 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { mfScreenFormSchema } from "./mfScreen.data";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { insertMfScreen, updateMfScreen, MfScreen } from "@mfish/nocode";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { insertMfScreen, MfScreen, updateMfScreen } from "@mfish/nocode";
 
   defineOptions({ name: "MfScreenModal" });
   const emit = defineEmits(["success", "register"]);

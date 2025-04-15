@@ -2,7 +2,7 @@
   background-color: @component-background !important;
 }
 
-html[data-theme='light'] {
+html[data-theme="light"] {
   .text-secondary {
     color: rgb(0 0 0 / 45%);
   }
@@ -23,19 +23,25 @@ html[data-theme='light'] {
   }
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   .text-secondary {
     color: #8b949e;
   }
 
   .ant-card-grid-hoverable:hover {
-    box-shadow: 0 3px 6px -4px rgb(0 0 0 / 48%), 0 6px 16px 0 rgb(0 0 0 / 32%),
-    0 9px 28px 8px rgb(0 0 0 / 20%);
+    box-shadow:
+      0 3px 6px -4px rgb(0 0 0 / 48%),
+      0 6px 16px 0 rgb(0 0 0 / 32%),
+      0 9px 28px 8px rgb(0 0 0 / 20%);
   }
 
   .ant-card-grid {
-    box-shadow: 1px 0 0 0 #434343, 0 1px 0 0 #434343, 1px 1px 0 0 #434343, 1px 0 0 0 #434343 inset,
-    0 1px 0 0 #434343 inset;
+    box-shadow:
+      1px 0 0 0 #434343,
+      0 1px 0 0 #434343,
+      1px 1px 0 0 #434343,
+      1px 0 0 0 #434343 inset,
+      0 1px 0 0 #434343 inset;
   }
 
   .ant-calendar-selected-day .ant-calendar-date {

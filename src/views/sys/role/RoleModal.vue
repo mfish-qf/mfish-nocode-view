@@ -17,20 +17,22 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { formSchema } from "./role.data";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { BasicTree, TreeItem } from "@mfish/core/src/components/Tree";
-  import { getMenuTree } from "@mfish/core/src/api/sys/Menu";
-  import { getRoleMenus, insertRole, updateRole } from "@mfish/core/src/api/sys/Role";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { BasicTree, TreeItem } from "@mfish/core/components/Tree";
   import {
+    getMenuTree,
+    getRoleMenus,
     getTenantMenuTree,
     getTenantRoleMenus,
+    insertRole,
     insertTenantRole,
+    updateRole,
     updateTenantRole
-  } from "@mfish/core/src/api/sys/SsoTenant";
-  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
+  } from "@mfish/core/api";
+  import { usePermission } from "@mfish/core/hooks";
 
   const props = defineProps({
     source: {

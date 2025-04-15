@@ -17,6 +17,7 @@
   import { buttonProps } from "./props";
   import { Button } from "ant-design-vue";
   import { useAttrs } from "../../../hooks/core/UseAttrs";
+
   defineOptions({
     name: "AButton",
     extends: Button as ComponentOptionsMixin,

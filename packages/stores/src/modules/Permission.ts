@@ -1,16 +1,20 @@
-import type { AppRouteRecordRaw, Menu } from "@mfish/core/src/router/Types";
+import type { AppRouteRecordRaw, Menu } from "@mfish/core/router";
+import {
+  flatMultiLevelRoutes,
+  formatPath,
+  IFRAME,
+  importComponent,
+  LAYOUT,
+  RootRoute,
+  transformRouteToMenu
+} from "@mfish/core/router";
 import type { Router, RouteRecordRaw } from "vue-router";
 import { defineStore } from "pinia";
 import { store } from "../index";
-import { getRoleMenuTree } from "@mfish/core/src/api/sys/Menu";
+import { getRoleMenuTree, MenuListItem, MenuType } from "@mfish/core/api";
 import { PageEnum } from "@mfish/core/enums";
-import { routeModuleList } from "../../../../src/routers";
-import { MenuListItem, MenuType } from "@mfish/core/src/api/sys/model/MenuModel";
-import { IFRAME, LAYOUT } from "@mfish/core/src/router/Constant";
-import { formatPath, transformRouteToMenu } from "@mfish/core/src/router/helper/MenuHelper";
-import { flatMultiLevelRoutes, importComponent } from "@mfish/core/src/router/helper/RouteHelper";
-import { isUrl } from "@mfish/core/src/utils/Is";
-import { RootRoute } from "@mfish/core/src/router/routers/Basic";
+import { routeModuleList } from "@/routers";
+import { isUrl } from "@mfish/core/utils/Is";
 import { Nullable } from "@mfish/types";
 
 interface PermissionState {

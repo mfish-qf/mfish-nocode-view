@@ -16,8 +16,7 @@
 </template>
 <script setup lang="ts">
   import { ref } from "vue";
-  import { imageUrl } from "@core/utils/file/FileUtils";
-  import { getLocalFileUrl } from "@core/utils/file/FileUtils";
+  import { getLocalFileUrl, imageUrl } from "@core/utils/file/FileUtils";
   import { Image as AImage } from "ant-design-vue";
 
   const fileUrl = ref("");

@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
   import { defineComponent } from "vue";
-  import { addClass, removeClass } from "@mfish/core/src/utils/DomUtils";
+  import { addClass, removeClass } from "@mfish/core/utils/DomUtils";
 
   export default defineComponent({
     name: "MenuCollapseTransition",

@@ -1,14 +1,52 @@
 import type { EChartsOption } from "echarts";
 import type { Ref } from "vue";
-import { useTimeoutFn } from "@mfish/core/src/hooks/core/UseTimeout";
-import { tryOnUnmounted } from "@vueuse/core";
-import { unref, nextTick, watch, computed, ref } from "vue";
-import { useDebounceFn } from "@vueuse/core";
-import { useEventListener } from "@mfish/core/src/hooks/event/UseEventListener";
-import { useBreakpoint } from "@mfish/core/src/hooks/event/UseBreakpoint";
-import echarts from "@/utils/lib/Echarts";
-import { useRootSetting } from "@mfish/core";
-import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
+import { computed, nextTick, ref, unref, watch } from "vue";
+import { useBreakpoint, useEventListener, useMenuSetting, useRootSetting, useTimeoutFn } from "@mfish/core/hooks";
+import { tryOnUnmounted, useDebounceFn } from "@vueuse/core";
+import * as echarts from "echarts/core";
+import { BarChart, LineChart, MapChart, PictorialBarChart, PieChart, RadarChart, ScatterChart } from "echarts/charts";
+import {
+  AriaComponent,
+  CalendarComponent,
+  DataZoomComponent,
+  GraphicComponent,
+  GridComponent,
+  LegendComponent,
+  ParallelComponent,
+  PolarComponent,
+  RadarComponent,
+  TimelineComponent,
+  TitleComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  VisualMapComponent
+} from "echarts/components";
+import { SVGRenderer } from "echarts/renderers";
+
+echarts.use([
+  LegendComponent,
+  TitleComponent,
+  TooltipComponent,
+  GridComponent,
+  PolarComponent,
+  AriaComponent,
+  ParallelComponent,
+  BarChart,
+  LineChart,
+  PieChart,
+  MapChart,
+  RadarChart,
+  SVGRenderer,
+  PictorialBarChart,
+  RadarComponent,
+  ToolboxComponent,
+  DataZoomComponent,
+  VisualMapComponent,
+  TimelineComponent,
+  CalendarComponent,
+  GraphicComponent,
+  ScatterChart
+]);
 
 export function useECharts(elRef: Ref<HTMLDivElement>, theme: "light" | "dark" | "default" = "default") {
   const { getDarkMode: getSysDarkMode } = useRootSetting();

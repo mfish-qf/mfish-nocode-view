@@ -1,4 +1,4 @@
-import { nextTick, onMounted, onActivated } from "vue";
+import { nextTick, onActivated, onMounted } from "vue";
 import { Fn } from "@mfish/types";
 
 export function onMountedOrActivated(hook: Fn) {

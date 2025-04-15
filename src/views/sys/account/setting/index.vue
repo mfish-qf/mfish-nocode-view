@@ -28,8 +28,9 @@
   import TenantRoleSetting from "./TenantRoleSetting.vue";
   import TenantUserSetting from "./TenantUserSetting.vue";
   import { useRoute } from "vue-router";
-  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
+  import { usePermission } from "@mfish/core/hooks";
   import { PageWrapper } from "@/components/general/Page";
+
   const ATabPane = ATabs.TabPane;
   const components = {
     BaseSetting,
@@ -55,6 +56,7 @@
       }
     }
   });
+
   function tabChange(e) {
     tabType.value = e;
   }
@@ -67,6 +69,7 @@
   [data-theme="dark"] .account-setting {
     background-color: #151515;
   }
+
   .account-setting {
     padding: 16px;
     margin: 16px;

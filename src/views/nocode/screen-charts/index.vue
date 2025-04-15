@@ -50,7 +50,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import {
     deleteBatchScreenCharts,
     deleteScreenCharts,
@@ -58,13 +58,13 @@
     getScreenChartsList,
     ScreenCharts
   } from "@mfish/nocode";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import ScreenChartsModal from "./ScreenChartsModal.vue";
   import ScreenChartsViewModal from "./ScreenChartsViewModal.vue";
   import { columns, searchFormSchema } from "./screenCharts.data";
   import { ref } from "vue";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
-  import { Button as AButton } from "@mfish/core/src/components/Button";
+  import { useMessage } from "@mfish/core/hooks";
+  import { Button as AButton } from "@mfish/core/components/Button";
 
   defineOptions({ name: "ScreenChartsManagement" });
   const [registerModal, { openModal }] = useModal();
@@ -97,6 +97,7 @@
     }
   });
   const { createMessage } = useMessage();
+
   /**
    * 新建
    */

@@ -10,10 +10,10 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { demoOrderDetailFormSchema } from "./demoOrderDetail.data";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
 
   defineOptions({ name: "DemoOrderDetailModal" });
   const emit = defineEmits(["success", "register"]);

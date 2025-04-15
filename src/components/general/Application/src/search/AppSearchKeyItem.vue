@@ -4,7 +4,7 @@
   </span>
 </template>
 <script lang="ts" setup>
-  import { Icon } from "@mfish/core/src/components/Icon";
+  import { Icon } from "@mfish/core/components/Icon";
 
   defineProps({
     icon: String

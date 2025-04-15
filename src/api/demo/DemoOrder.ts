@@ -1,5 +1,5 @@
-import { defHttp } from "@mfish/core/src/utils/http/axios";
-import { DemoOrder, ReqDemoOrder, DemoOrderPageModel } from "@/api/demo/model/DemoOrderModel";
+import { defHttp } from "@mfish/core/utils/http/axios";
+import { DemoOrder, DemoOrderPageModel, ReqDemoOrder } from "@/api/demo/model/DemoOrderModel";
 
 /**
  * @description: 销售订单

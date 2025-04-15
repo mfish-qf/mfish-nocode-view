@@ -111,15 +111,14 @@
   </BasicModal>
 </template>
 <script lang="ts">
-  import type { CropperResult, Cropper } from "./typing";
+  import type { Cropper, CropperResult } from "./typing";
   import { defineComponent, PropType, ref } from "vue";
   import CropperImage from "./Cropper.vue";
-  import { Space, Upload, Avatar, Tooltip } from "ant-design-vue";
-  import { useDesign } from "@core/index";
+  import { Avatar, Space, Tooltip, Upload } from "ant-design-vue";
+  import { useDesign, useI18n } from "@core/hooks";
   import { BasicModal, useModalInner } from "@core/components/Modal";
   import { dataURLtoBlob } from "@core/utils/file/Base64Convert";
   import { isFunction } from "@core/utils/Is";
-  import { useI18n } from "@core/hooks/web/UseI18n";
   import { UploadFileParams } from "@mfish/types/src/type/axios";
 
   const props = {

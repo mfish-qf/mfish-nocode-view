@@ -46,14 +46,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { deleteSysLog, getSysLogList } from "@/api/sys/SysLog";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import SysLogModal from "./SysLogModal.vue";
   import { columns, searchFormSchema } from "./sysLog.data";
   import { SysLog } from "@/api/sys/model/SysLogModel";
-  import { buildDictTag } from "@mfish/core/src/components/DictTag";
-  import { DictTag } from "@mfish/core/src/components/DictTag";
+  import { buildDictTag, DictTag } from "@mfish/core/components/DictTag";
+
   defineOptions({ name: "SysLogManagement" });
 
   const [registerModal, { openModal }] = useModal();

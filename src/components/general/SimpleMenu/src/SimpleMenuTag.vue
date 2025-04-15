@@ -2,10 +2,10 @@
   <span :class="getTagClass" v-if="getShowTag">{{ getContent }}</span>
 </template>
 <script lang="ts" setup>
-  import type { Menu } from "@mfish/core/src/router/Types";
+  import type { Menu } from "@mfish/core/router";
   import { computed, PropType } from "vue";
-  import { useDesign } from "@mfish/core";
-  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import { useDesign } from "@mfish/core/hooks";
+  import { propTypes } from "@mfish/core/utils/PropTypes";
 
   defineOptions({ name: "SimpleMenuTag" });
 

@@ -1,10 +1,8 @@
 import type { RouteLocationNormalized, Router } from "vue-router";
-
 import { useRouter } from "vue-router";
 import { unref } from "vue";
 
-import { useMultipleTabStore } from "@mfish/stores/modules";
-import { useAppStore } from "@mfish/stores/modules";
+import { useAppStore, useMultipleTabStore } from "@mfish/stores/modules";
 
 enum TableActionEnum {
   REFRESH,

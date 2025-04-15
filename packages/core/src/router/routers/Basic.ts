@@ -1,7 +1,6 @@
-import type { AppRouteRecordRaw } from "@core/router/Types";
-import { REDIRECT_NAME, LAYOUT, EXCEPTION_COMPONENT, PAGE_NOT_FOUND_NAME } from "@core/router/Constant";
+import type { AppRouteRecordRaw } from "../Types";
+import { EXCEPTION_COMPONENT, LAYOUT, PAGE_NOT_FOUND_NAME, REDIRECT_NAME } from "../Constant";
 import { PageEnum } from "@core/enums";
-import { t } from "@core/hooks/web/UseI18n";
 
 // 根路由
 export const RootRoute = (redirect: string = PageEnum.BASE_HOME): AppRouteRecordRaw => {
@@ -21,7 +20,7 @@ export const LoginRoute: AppRouteRecordRaw = {
   name: "Login",
   component: () => import("@/views/sys/login/Login.vue"),
   meta: {
-    title: t("routes.basic.login")
+    title: "Login"
   }
 };
 
@@ -31,7 +30,7 @@ export const ErrorLoginRoute: AppRouteRecordRaw = {
   name: "ErrorLogin",
   component: () => import("@/views/sys/login/Login.vue"),
   meta: {
-    title: t("routes.basic.login")
+    title: "Login"
   }
 };
 
@@ -41,7 +40,7 @@ export const Oauth2Route: AppRouteRecordRaw = {
   name: "Oauth2",
   component: () => import("@/views/sys/login/Oauth2.vue"),
   meta: {
-    title: "oauth2"
+    title: "Oauth2"
   }
 };
 
@@ -97,7 +96,7 @@ export const GiteeRoute: AppRouteRecordRaw = {
   name: "giteeOauth2",
   component: () => import("@/views/sys/login/Gitee.vue"),
   meta: {
-    title: "giteeOauth2"
+    title: "GiteeOauth2"
   }
 };
 // github登录
@@ -106,7 +105,7 @@ export const GithubRoute: AppRouteRecordRaw = {
   name: "githubOauth2",
   component: () => import("@/views/sys/login/Github.vue"),
   meta: {
-    title: "githubOauth2"
+    title: "GithubOauth2"
   }
 };
 

@@ -1,9 +1,8 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { DescItem } from "@mfish/core/src/components/Description";
-import { buildDictTag, getDictProps } from "@mfish/core/src/components/DictTag";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { DescItem } from "@mfish/core/components/Description";
+import { buildDictTag, getDictProps } from "@mfish/core/components/DictTag";
 import { h } from "vue";
-import { FileHref, FileUp } from "@mfish/core/src/components/FileUpDown";
+import { FileHref, FileUp } from "@mfish/core/components/FileUpDown";
 import { updateDemoImportExport } from "@/api/demo/DemoImportExport";
 
 /**

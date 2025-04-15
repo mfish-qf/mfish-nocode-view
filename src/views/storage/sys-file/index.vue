@@ -34,15 +34,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
-  import { deleteSysFile, getSysFileList } from "@mfish/core/src/api/storage/SysFile";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
+  import { deleteSysFile, getSysFileList, SysFile, uploadApi } from "@mfish/core/api";
+  import { useModal } from "@mfish/core/components/Modal";
   import SysFileModal from "./SysFileModal.vue";
   import { columns, searchFormSchema } from "./sysFile.data";
-  import { uploadApi } from "@mfish/core/src/api/storage/Upload";
-  import { BasicUpload } from "@mfish/core/src/components/Upload";
-  import { SysFile } from "@mfish/core/src/api/storage/model/SysFileModel";
+  import { BasicUpload } from "@mfish/core/components/Upload";
   import { Recordable } from "@mfish/types";
+
   defineOptions({ name: "SysFileManagement" });
 
   const [registerModal] = useModal();
@@ -76,6 +75,7 @@
   function handleSuccess() {
     reload();
   }
+
   const handleChange = (files: SysFile[]) => {
     files.forEach((file) => {
       insertTableDataRecord(file, 0);

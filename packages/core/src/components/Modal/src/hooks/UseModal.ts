@@ -1,12 +1,11 @@
-import type { UseModalReturnType, ModalMethods, ModalProps, ReturnMethods, UseModalInnerReturnType } from "../Typing";
-import { ref, onUnmounted, unref, getCurrentInstance, reactive, watchEffect, nextTick, toRaw } from "vue";
-import { isProdMode } from "../../../../utils/Env";
-import { isFunction } from "../../../../utils/Is";
+import type { ModalMethods, ModalProps, ReturnMethods, UseModalInnerReturnType, UseModalReturnType } from "../Typing";
+import { computed, getCurrentInstance, nextTick, onUnmounted, reactive, ref, toRaw, unref, watchEffect } from "vue";
+import { isProdMode } from "@core/utils/Env.ts";
+import { isFunction } from "@core/utils/Is.ts";
 import { isEqual } from "lodash-es";
 import { tryOnUnmounted } from "@vueuse/core";
-import { error } from "../../../../utils/Log";
-import { computed } from "vue";
-import { Nullable, Fn } from "@mfish/types";
+import { error } from "@core/utils/Log.ts";
+import { Fn, Nullable } from "@mfish/types";
 
 const dataTransfer = reactive<any>({});
 

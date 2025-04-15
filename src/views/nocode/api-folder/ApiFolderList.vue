@@ -122,30 +122,29 @@
 </template>
 <script lang="ts" setup>
   import { onMounted, onUnmounted, ref, toRaw, watch } from "vue";
-  import { BasicTable, useTable, TableAction, PaginationProps } from "@mfish/core/src/components/Table";
+  import { BasicTable, PaginationProps, TableAction, useTable } from "@mfish/core/components/Table";
   import {
+    API_SAVE,
+    ApiFolderVo,
+    ApiParams,
     deleteMfApi,
-    updateMfApi,
     getApiFolderAndFile,
     getApiFolderTree,
-    ApiFolderVo,
-    API_SAVE,
     getApiParamsList,
-    ApiParams
+    updateMfApi
   } from "@mfish/nocode";
-  import { Popover as APopover, Tag as ATag, Tooltip as ATooltip, List as AList } from "ant-design-vue";
-  import { Icon } from "@mfish/core/src/components/Icon";
-  import { useRootSetting } from "@mfish/core";
+  import { List as AList, Popover as APopover, Tag as ATag, Tooltip as ATooltip } from "ant-design-vue";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { useDesign, useRootSetting } from "@mfish/core/hooks";
   import { columns } from "@/views/nocode/api-folder/apiFolder.data";
-  import { useModal } from "@mfish/core/src/components/Modal";
-  import { router } from "@mfish/core/src/router";
-  import { useDesign } from "@mfish/core";
+  import { useModal } from "@mfish/core/components/Modal";
+  import { router } from "@mfish/core/router";
   import ApiTestModal from "@/views/nocode/api-folder/ApiTestModal.vue";
   import FolderMoveModal from "./FolderMoveModal.vue";
   import ApiDataSourceModal from "./ApiDataSourceModal.vue";
   import { FolderTwoTone } from "@ant-design/icons-vue";
-  import { useOutsideOpen } from "@mfish/core/src/utils/OutsideOpenUtils";
-  import InputSearch from "@mfish/core/src/components/InputSearch";
+  import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
+  import InputSearch from "@mfish/core/components/InputSearch";
 
   const props = defineProps({
     folderId: { type: String, default: "" },

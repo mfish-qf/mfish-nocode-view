@@ -1,8 +1,7 @@
 import { defineComponent, ref, createElementBlock, openBlock, normalizeClass, unref, createElementVNode, createVNode, createTextVNode, toDisplayString, withCtx } from "vue";
-import { CodeEditor, MODE } from "@mfish/core/src/components/CodeEditor";
-import { useDesign } from "@mfish/core";
-import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
-import { Icon } from "@mfish/core/src/components/Icon";
+import { CodeEditor, MODE } from "@mfish/core/components/CodeEditor";
+import { useDesign, useMessage } from "@mfish/core/hooks";
+import { Icon } from "@mfish/core/components/Icon";
 import { Tooltip } from "ant-design-vue";
 import { _ as _export_sfc } from "./index2.js";
 const _hoisted_1 = { class: "title" };
@@ -59,7 +58,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const JsonData = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-edef066e"]]);
+const JsonData = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-35a33965"]]);
 export {
   JsonData as J
 };

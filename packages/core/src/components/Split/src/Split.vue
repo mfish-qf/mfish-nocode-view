@@ -19,7 +19,7 @@
 </template>
 <script setup lang="ts">
   import { NSplit } from "naive-ui";
-  import { useDesign } from "@core/index";
+  import { useDesign } from "@core/hooks";
   import { PropType } from "vue";
 
   defineProps({
@@ -35,6 +35,7 @@
       .resize-trigger {
         background-color: #303030;
         border: 1px solid #303030;
+
         &:hover {
           box-shadow: 0 0 2px 0 rgb(255 255 255 / 15%);
         }
@@ -62,6 +63,7 @@
       align-items: center;
       background: #f8f8f9;
       border: 1px solid #dcdee2;
+
       &:hover {
         box-shadow: 0 0 2px 0 rgb(28 36 56 / 15%);
       }

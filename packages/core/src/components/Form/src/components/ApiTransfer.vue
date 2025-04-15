@@ -12,13 +12,13 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, watch, ref, unref, watchEffect, PropType } from "vue";
+  import { computed, PropType, ref, unref, watch, watchEffect } from "vue";
   import { Transfer } from "ant-design-vue";
   import { isFunction } from "@core/utils/Is";
   import { get, omit } from "lodash-es";
   import { propTypes } from "@core/utils/PropTypes";
   import { TransferDirection, TransferItem } from "ant-design-vue/lib/transfer";
-  import { Recordable, Fn } from "@mfish/types";
+  import { Fn, Recordable } from "@mfish/types";
 
   const props = defineProps({
     value: { type: Array as PropType<Array<string>> },

@@ -1,5 +1,6 @@
 export * from "./src/types/Form";
 export * from "./src/types/FormItem";
+export * from "./src/types/index.ts";
 export { useComponentRegister } from "./src/hooks/UseComponentRegister";
 export { useForm } from "./src/hooks/UseForm";
 export { default as ApiSelect } from "./src/components/ApiSelect.vue";

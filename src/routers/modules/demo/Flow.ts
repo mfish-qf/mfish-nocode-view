@@ -1,6 +1,6 @@
-import type { AppRouteRecordRaw } from "@mfish/core/src/router/Types";
-import { LAYOUT } from "@mfish/core/src/router/Constant";
-import { t } from "@mfish/core/src/hooks/web/UseI18n";
+import type { AppRouteRecordRaw } from "@mfish/core/router";
+import { LAYOUT } from "@mfish/core/router";
+import { t } from "@mfish/core/hooks";
 
 const flows: AppRouteRecordRaw = {
   path: "/flow",

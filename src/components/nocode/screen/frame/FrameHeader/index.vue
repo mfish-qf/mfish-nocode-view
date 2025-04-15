@@ -33,11 +33,9 @@
   import HeaderBar from "@/components/nocode/common/HeaderBar/HeaderBar.vue";
   import { computed, onMounted, reactive, ref, watch } from "vue";
   import { HeaderBarAction } from "@/components/nocode/common/HeaderBar/HeaderBarUtils";
-  import { useDesign } from "@mfish/core";
-  import { IconFont } from "@mfish/core/src/components/Icon";
-  import { FrameShow, ScreenEventEnum } from "@mfish/nocode";
-  import { useRootSetting } from "@mfish/core";
-  import { screenEvent, useScreenLayoutStore, useScreenEditStore } from "@mfish/nocode";
+  import { useDesign, useRootSetting } from "@mfish/core/hooks";
+  import { IconFont } from "@mfish/core/components/Icon";
+  import { FrameShow, screenEvent, ScreenEventEnum, useScreenEditStore, useScreenLayoutStore } from "@mfish/nocode";
 
   defineOptions({ name: "FrameHeader" });
   const emit = defineEmits(["saveScreen", "previewScreen", "shareScreen", "releaseScreen"]);
@@ -189,13 +187,16 @@
       isLoading.value = loading;
     });
   }
+
   function screenPreview() {
     screenEditStore.saveCache();
     emit("previewScreen");
   }
+
   function screenShare() {
     emit("shareScreen");
   }
+
   async function screenRelease() {
     emit("releaseScreen");
   }
@@ -212,6 +213,7 @@
       }
     }
   }
+
   function frameChange(e: string, checked: boolean) {
     switch (e) {
       case FrameShow.Chart: {
@@ -237,12 +239,14 @@
         &:not(.ant-radio-button-wrapper-checked) {
           color: @screen-item-normal-color;
         }
+
         &:hover:not(.ant-radio-button-wrapper-checked) {
           color: @screen-item-normal-color-light;
         }
       }
     }
   }
+
   .@{prefix-cls} {
     &-radio-button {
       padding: 2px;
@@ -250,16 +254,20 @@
       padding-block: 0;
       border: 0 solid transparent;
       background-color: transparent !important;
+
       &:not(.ant-radio-button-wrapper-checked) {
         color: @screen-item-normal-color-light;
       }
+
       &:hover:not(.ant-radio-button-wrapper-checked) {
         color: @screen-item-normal-color;
       }
+
       &::before {
         background: transparent;
       }
     }
+
     .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover::before {
       background: transparent;
     }

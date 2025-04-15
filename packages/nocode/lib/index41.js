@@ -1,12 +1,12 @@
 import { defineComponent, computed, createBlock, openBlock, unref, withCtx, createElementVNode, normalizeStyle, toDisplayString } from "vue";
 import "ant-design-vue";
-import "@mfish/core";
+import "@mfish/core/hooks";
 import "@vueuse/core";
-import "@mfish/core/src/components/Icon";
+import "@mfish/core/components/Icon";
 import "lodash-es";
 import { a3 as getFontStyle, ab as Decoration7 } from "./index2.js";
 import "@mfish/core/enums";
-import "@mfish/core/src/utils/Is";
+import "@mfish/core/utils/Is";
 import { _ as _sfc_main$1 } from "./index.vue_vue_type_script_setup_true_lang.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   ...{ name: "MfDecoration7" },

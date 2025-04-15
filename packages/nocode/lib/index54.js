@@ -1,26 +1,24 @@
 import { defineComponent, useTemplateRef, computed, watch, createBlock, openBlock, unref, mergeProps, toHandlers } from "vue";
 import { h as useChartEventHandle, u as useScreenEditStore, ar as ScrollTable, as as getChartData } from "./index2.js";
 import "ant-design-vue";
-import "@mfish/core";
+import "@mfish/core/hooks";
 import "@vueuse/core";
-import "@mfish/core/src/components/Icon";
+import "@mfish/core/components/Icon";
 import { throttle } from "lodash-es";
 import "@mfish/core/enums";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "index",
   props: {

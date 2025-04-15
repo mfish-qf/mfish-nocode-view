@@ -1,9 +1,8 @@
 import { computed, onUnmounted, unref, watchEffect } from "vue";
 import { useThrottleFn } from "@vueuse/core";
-import { useAppStore } from "@mfish/stores/modules";
+import { useAppStore, useUserStore } from "@mfish/stores/modules";
 import { useLockStore } from "@/stores/Lock.ts";
-import { useUserStore } from "@mfish/stores/modules";
-import { useRootSetting } from "@mfish/core";
+import { useRootSetting } from "@mfish/core/hooks";
 import { TimeoutHandle } from "@mfish/types";
 
 export function useLockPage() {

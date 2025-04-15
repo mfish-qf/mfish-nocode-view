@@ -22,15 +22,13 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { Description, useDescription } from "@mfish/core/src/components/Description";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { Description, useDescription } from "@mfish/core/components/Description";
   import { Divider as ADivider } from "ant-design-vue";
   import { ref, unref } from "vue";
   import { RoleDesc } from "./role.data";
-  import { BasicTree, TreeItem } from "@mfish/core/src/components/Tree";
-  import { getTenantMenuTree, getTenantRoleMenus } from "@mfish/core/src/api/sys/SsoTenant";
-  import { getMenuTree } from "@mfish/core/src/api/sys/Menu";
-  import { getRoleMenus } from "@mfish/core/src/api/sys/Role";
+  import { BasicTree, TreeItem } from "@mfish/core/components/Tree";
+  import { getMenuTree, getRoleMenus, getTenantMenuTree, getTenantRoleMenus } from "@mfish/core/api";
 
   defineOptions({ name: "RoleViewModal" });
   const props = defineProps({

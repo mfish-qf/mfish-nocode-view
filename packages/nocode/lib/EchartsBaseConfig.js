@@ -1,27 +1,25 @@
 import { defineComponent, ref, watch, resolveComponent, createElementBlock, openBlock, normalizeClass, unref, createVNode, withCtx, createElementVNode, createTextVNode, Fragment, renderList, createBlock, toDisplayString, normalizeStyle, renderSlot } from "vue";
 import { RadioGroup, Tooltip, RadioButton, Select, SelectOption } from "ant-design-vue";
-import { useDesign } from "@mfish/core";
+import { useDesign } from "@mfish/core/hooks";
 import "@vueuse/core";
-import { Icon } from "@mfish/core/src/components/Icon";
+import { Icon } from "@mfish/core/components/Icon";
 import "lodash-es";
 import { u as useScreenEditStore, T as TextStyle, am as TextFont, f as ScreenInput, _ as _export_sfc, an as EchartsTheme } from "./index2.js";
 import "@mfish/core/enums";
-import "@mfish/core/src/utils/Is";
+import "@mfish/core/utils/Is";
 import { C as ConfigGroup } from "./ConfigGroup.js";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 const _hoisted_1$1 = { class: "title" };
 const _hoisted_2 = { style: { "display": "flex", "gap": "6px" } };
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
@@ -118,7 +116,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
           onChecked: titleChecked
         }, {
           default: withCtx(() => [
-            _cache[7] || (_cache[7] = createElementVNode("div", { class: "title" }, " 主标题 ", -1)),
+            _cache[7] || (_cache[7] = createElementVNode("div", { class: "title" }, " 主标题", -1)),
             createVNode(_component_AInput, {
               value: unref(screenEditStore).getCurConfigComponent.chart.options.title.text,
               "onUpdate:value": _cache[0] || (_cache[0] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.options.title.text = $event),
@@ -136,7 +134,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
               onFontStyleChange: fontStyleChange,
               onColorChange: textStyleChange
             }, null, 8, ["hide-font-style", "text-style"]),
-            _cache[8] || (_cache[8] = createElementVNode("div", { class: "title" }, " 副标题 ", -1)),
+            _cache[8] || (_cache[8] = createElementVNode("div", { class: "title" }, " 副标题", -1)),
             createVNode(_component_AInput, {
               value: unref(screenEditStore).getCurConfigComponent.chart.options.title.subtext,
               "onUpdate:value": _cache[1] || (_cache[1] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.options.title.subtext = $event),
@@ -244,7 +242,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsTitleConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-0f2ebdeb"]]);
+const EchartsTitleConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-a59448b6"]]);
 const _hoisted_1 = { class: "color-contain" };
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "EchartsThemeConfig",
@@ -301,7 +299,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsThemeConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-d4656db1"]]);
+const EchartsThemeConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-2778f8a0"]]);
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "EchartsBaseConfig",
   emits: ["themeChange"],
@@ -320,7 +318,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }, [
         createVNode(ConfigGroup, { title: "基础配置" }, {
           default: withCtx(() => [
-            _cache[0] || (_cache[0] = createElementVNode("div", { class: "title" }, " 主题 ", -1)),
+            _cache[0] || (_cache[0] = createElementVNode("div", { class: "title" }, " 主题", -1)),
             createVNode(EchartsThemeConfig, {
               color: unref(screenEditStore).getCurConfigComponent.chart.options.themeColor,
               onThemeChange: themeChange
@@ -333,7 +331,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsBaseConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-498bbe1b"]]);
+const EchartsBaseConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-72a9fe66"]]);
 export {
   EchartsTitleConfig as E,
   EchartsBaseConfig as a

@@ -9,4 +9,5 @@ export function setupGlobDirectives(app: App) {
   setupPermissionDirective(app);
   setupLoadingDirective(app);
 }
+
 export { default as ClickOutside } from "./ClickOutside.ts";

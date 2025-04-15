@@ -8,7 +8,10 @@
     <ATabs :class="prefixCls" v-model:active-key="activeKey">
       <ATabPane key="1">
         <template #tab>
-          <div :class="`${prefixCls}-tab`"><DatabaseOutlined />数据库</div>
+          <div :class="`${prefixCls}-tab`">
+            <DatabaseOutlined />
+            数据库
+          </div>
         </template>
         <DataBaseManagement :resize-height-offset="52">
           <template #[item]="data" v-for="item in Object.keys($slots)">
@@ -18,7 +21,10 @@
       </ATabPane>
       <ATabPane key="2">
         <template #tab>
-          <div :class="`${prefixCls}-tab`"><FileExcelOutlined />文件</div>
+          <div :class="`${prefixCls}-tab`">
+            <FileExcelOutlined />
+            文件
+          </div>
         </template>
         <FileFolderManagement @api-create="apiCreate" />
       </ATabPane>
@@ -28,11 +34,12 @@
 <script lang="ts" setup>
   import { DatabaseOutlined, FileExcelOutlined } from "@ant-design/icons-vue";
   import { onMounted, ref } from "vue";
-  import { Tabs as ATabs, TabPane as ATabPane } from "ant-design-vue";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { TabPane as ATabPane, Tabs as ATabs } from "ant-design-vue";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import DataBaseManagement from "@/views/sys/database/DataBaseManagement.vue";
-  import { useDesign } from "@mfish/core";
+  import { useDesign } from "@mfish/core/hooks";
   import FileFolderManagement from "@/views/nocode/file-folder/index.vue";
+
   const emit = defineEmits(["register", "apiCreate"]);
   const activeKey = ref("1");
   const [registerModal, { setModalProps }] = useModalInner();
@@ -45,6 +52,7 @@
       defaultFullscreen: true
     });
   });
+
   function apiCreate(data) {
     emit("apiCreate", data);
   }
@@ -56,8 +64,10 @@
     align-items: center;
     border-radius: 6px;
   }
+
   .@{prefix-cls} {
     height: 100%;
+
     .ant-tabs-content {
       height: 100%;
       top: -10px;

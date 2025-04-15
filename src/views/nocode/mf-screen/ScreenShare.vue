@@ -37,14 +37,14 @@
   <QRCodeModal :open="qrCodeOpen" :img="qrCodeImg" :title="title" />
 </template>
 <script setup lang="ts">
-  import { Icon } from "@mfish/core/src/components/Icon";
-  import { Modal as AModal, InputNumber as AInputNumber } from "ant-design-vue";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { InputNumber as AInputNumber, Modal as AModal } from "ant-design-vue";
   import { ref, watch, watchEffect } from "vue";
-  import { useDesign } from "@mfish/core";
+  import { useDesign, useMessage } from "@mfish/core/hooks";
   import { shareMfScreenById, shareMfScreenByQRCode } from "@mfish/nocode";
   import QRCodeModal from "@/views/nocode/mf-screen/QRCodeModal.vue";
   import { useClipboard } from "@vueuse/core";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
+
   const props = defineProps({
     open: Boolean,
     title: String,
@@ -70,6 +70,7 @@
       }
     }
   );
+
   function shareLink() {
     if (props.screenId) {
       shareMfScreenById(props.screenId, shareTime.value).then((res) => {
@@ -96,6 +97,7 @@
       });
     }
   }
+
   function closeHandle() {
     emit("close");
   }
@@ -107,6 +109,7 @@
     font-size: 14px;
     border-radius: 6px;
     color: @screen-item-normal-color-light;
+
     .share-group {
       display: flex;
       gap: 20px;

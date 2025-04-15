@@ -27,16 +27,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { CSSProperties, PropType, provide, useAttrs, useSlots } from "vue";
-  import { computed, watch, ref, unref } from "vue";
+  import { computed, CSSProperties, PropType, provide, ref, unref, useAttrs, useSlots, watch } from "vue";
   import PageFooter from "./PageFooter.vue";
-  import { useDesign } from "@mfish/core";
-  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import { useDesign } from "@mfish/core/hooks";
+  import { propTypes } from "@mfish/core/utils/PropTypes";
   import { debounce, omit } from "lodash-es";
   import { PageHeader } from "ant-design-vue";
   import { useContentHeight } from "@/hooks/UseContentHeight";
   import { PageWrapperFixedHeightKey } from "../index";
   import { useElementSize } from "@vueuse/core";
+
   defineOptions({
     name: "PageWrapper",
     inheritAttrs: false

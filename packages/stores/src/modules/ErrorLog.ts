@@ -1,7 +1,7 @@
 import type { ErrorLogInfo } from "@mfish/types/src/type/store";
 import { defineStore } from "pinia";
 import { store } from "../index";
-import projectSetting from "@mfish/core/src/settings/ProjectSetting";
+import projectSetting from "@mfish/core/settings/ProjectSetting";
 import { ErrorTypeEnum } from "@mfish/core/enums";
 import dayjs from "dayjs";
 import { Nullable } from "@mfish/types";

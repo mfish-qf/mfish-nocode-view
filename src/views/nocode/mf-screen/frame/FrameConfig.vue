@@ -14,7 +14,9 @@
   import { FrameConfig } from "@mfish/nocode";
   import ApiList from "@/views/nocode/api-folder/ApiList.vue";
   import { useTemplateRef } from "vue";
+
   const frameConfigRef = useTemplateRef("frameConfigRef");
+
   function rowSelectHandle(e: any) {
     frameConfigRef.value?.rowSelect(e);
   }

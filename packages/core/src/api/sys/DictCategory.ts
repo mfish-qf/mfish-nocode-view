@@ -1,5 +1,5 @@
 import { defHttp } from "@core/utils/http/axios";
-import { DictCategory, ReqDictCategory, DictCategoryPageModel } from "@core/api/sys/model/DictCategoryModel.ts";
+import { DictCategory, DictCategoryPageModel, ReqDictCategory } from "@core/api";
 
 /**
  * @description: 属性分类字典

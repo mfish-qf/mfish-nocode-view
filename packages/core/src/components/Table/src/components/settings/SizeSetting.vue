@@ -25,9 +25,9 @@
 <script lang="ts" setup>
   import type { SizeType } from "../../types/Table";
   import { onMounted, ref } from "vue";
-  import { Tooltip, Dropdown, Menu, type MenuProps } from "ant-design-vue";
+  import { Dropdown, Menu, type MenuProps, Tooltip } from "ant-design-vue";
   import { ColumnHeightOutlined } from "@ant-design/icons-vue";
-  import { useI18n } from "@core/hooks/web/UseI18n";
+  import { useI18n } from "@core/hooks";
   import { useTableContext } from "../../hooks/UseTableContext";
   import { getPopupContainer } from "@core/utils";
   import { useTableSettingStore } from "@mfish/stores/modules";

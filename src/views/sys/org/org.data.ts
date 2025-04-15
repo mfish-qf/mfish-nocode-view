@@ -1,14 +1,11 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
 import { h, ref } from "vue";
 import { Tag } from "ant-design-vue";
-import { Icon } from "@mfish/core/src/components/Icon";
+import { Icon } from "@mfish/core/components/Icon";
 import { useAppStore } from "@mfish/stores/modules";
-import { DescItem } from "@mfish/core/src/components/Description";
-import { YNTag_Status } from "@mfish/core/src/components/DictTag";
-import { getOrgByIds } from "@mfish/core/src/api/sys/Org";
-import { getRoleByIds } from "@mfish/core/src/api/sys/Role";
-import { getTenantOrgByIds, getTenantRoleByIds } from "@mfish/core/src/api/sys/SsoTenant";
+import { DescItem } from "@mfish/core/components/Description";
+import { YNTag_Status } from "@mfish/core/components/DictTag";
+import { getOrgByIds, getRoleByIds, getTenantOrgByIds, getTenantRoleByIds } from "@mfish/core/api";
 
 export const columns: BasicColumn[] = [
   {
@@ -182,9 +179,11 @@ export const formSchema: FormSchema[] = [
 
 export class OrgDesc {
   source: number;
+
   constructor(s: number) {
     this.source = s;
   }
+
   orgName = ref("");
   roleNames = ref<string[]>([]);
   viewSchema: DescItem[] = [

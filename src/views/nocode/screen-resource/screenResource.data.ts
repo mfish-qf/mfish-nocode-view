@@ -1,6 +1,5 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { DescItem } from "@mfish/core/src/components/Description";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { DescItem } from "@mfish/core/components/Description";
 
 /**
  * @description: 大屏资源信息

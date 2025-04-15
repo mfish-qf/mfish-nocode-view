@@ -1,13 +1,14 @@
-import type { BasicColumn, ActionItem } from "@core/components/Table";
-import { FileItem, UploadResultStatus } from "./Typing";
-import { Progress, Switch, Input } from "ant-design-vue";
+import type { ActionItem, BasicColumn } from "@core/components/Table";
 import { TableAction } from "@core/components/Table";
+import { FileItem, UploadResultStatus } from "./Typing";
+import { Input, Progress, Switch } from "ant-design-vue";
 import ThumbUrl from "./ThumbUrl.vue";
-import { useI18n } from "@core/hooks/web/UseI18n";
+import { useI18n } from "@core/hooks";
 import { calcSize, getFileIcon } from "@core/utils/file/FileUtils";
 import { Fn } from "@mfish/types";
 
 const { t } = useI18n();
+
 // 文件上传列表
 export function createTableColumns(): BasicColumn[] {
   return [

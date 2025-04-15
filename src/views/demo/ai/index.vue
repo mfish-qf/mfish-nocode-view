@@ -21,15 +21,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, unref, onMounted } from "vue";
-  import { SvgIcon } from "@mfish/core/src/components/Icon";
-  import { ScrollActionType, ScrollContainer } from "@mfish/core/src/components/Container";
+  import { onMounted, ref, unref } from "vue";
+  import { SvgIcon } from "@mfish/core/components/Icon";
+  import { ScrollActionType, ScrollContainer } from "@mfish/core/components/Container";
   import { InputSearch } from "ant-design-vue";
   import { answer } from "@/api/demo/chat";
   import { ChatsModel } from "@/api/demo/model/QuestionModel";
-  import { buildUUID } from "@mfish/core/src/utils/Uuid";
-  import { useDesign } from "@mfish/core";
+  import { buildUUID } from "@mfish/core/utils/Uuid";
+  import { useDesign } from "@mfish/core/hooks";
   import { Nullable } from "@mfish/types";
+
   defineOptions({ name: "ChartGpt" });
   const scrollRef = ref<Nullable<ScrollActionType>>(null);
   const { prefixCls } = useDesign("ai-chat");

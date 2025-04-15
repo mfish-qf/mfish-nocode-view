@@ -3,25 +3,23 @@ import { S as StyleConfig } from "./StyleConfig.js";
 import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index2.js";
 import "lodash-es";
 import "@mfish/core/enums";
-import "@mfish/core/src/components/Icon";
-import { useDesign } from "@mfish/core";
+import "@mfish/core/components/Icon";
+import { useDesign } from "@mfish/core/hooks";
 import { Slider, RadioGroup, RadioButton, Checkbox } from "ant-design-vue";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
 import "@vueuse/core";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 import { C as ConfigGroup } from "./ConfigGroup.js";
 const _hoisted_1 = { class: "title" };
 const _hoisted_2 = { class: "title" };
@@ -198,7 +196,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               default: withCtx(() => {
                 var _a2;
                 return [
-                  _cache[8] || (_cache[8] = createElementVNode("div", { class: "title" }, " 背景颜色 ", -1)),
+                  _cache[8] || (_cache[8] = createElementVNode("div", { class: "title" }, " 背景颜色", -1)),
                   createVNode(unref(MfishColorPicker), {
                     placeholder: "设置背景颜色，格式#FFFFFF",
                     value: headerBGC.value,
@@ -222,7 +220,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     onChecked: headerIndexCheck
                   }, {
                     default: withCtx(() => [
-                      _cache[7] || (_cache[7] = createElementVNode("div", { class: "title" }, " 行号表头名称 ", -1)),
+                      _cache[7] || (_cache[7] = createElementVNode("div", { class: "title" }, " 行号表头名称", -1)),
                       createVNode(_component_AInput, {
                         value: indexHeader.value,
                         "onUpdate:value": _cache[1] || (_cache[1] = ($event) => indexHeader.value = $event),
@@ -247,14 +245,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     onChange: rowNumChange
                   }, null, 8, ["value"])
                 ]),
-                _cache[13] || (_cache[13] = createElementVNode("div", { class: "title" }, " 奇数行颜色 ", -1)),
+                _cache[13] || (_cache[13] = createElementVNode("div", { class: "title" }, " 奇数行颜色", -1)),
                 createVNode(unref(MfishColorPicker), {
                   placeholder: "设置奇数行颜色，格式#FFFFFF",
                   value: oddRowBGC.value,
                   onConfirmChange: confirmOddRowBGC,
                   onInputChange: changeOddRowBGC
                 }, null, 8, ["value"]),
-                _cache[14] || (_cache[14] = createElementVNode("div", { class: "title" }, " 偶数行颜色 ", -1)),
+                _cache[14] || (_cache[14] = createElementVNode("div", { class: "title" }, " 偶数行颜色", -1)),
                 createVNode(unref(MfishColorPicker), {
                   placeholder: "设置偶数行颜色，格式#FFFFFF",
                   value: evenRowBGC.value,
@@ -304,7 +302,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   onChange: hoverPauseChange
                 }, {
                   default: withCtx(() => _cache[12] || (_cache[12] = [
-                    createTextVNode(" 悬浮暂停轮播 ")
+                    createTextVNode(" 悬浮暂停轮播")
                   ])),
                   _: 1
                 }, 8, ["checked"])
@@ -365,7 +363,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfScrollTableConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-056f061d"]]);
+const MfScrollTableConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-031127ec"]]);
 export {
   MfScrollTableConfig as default
 };

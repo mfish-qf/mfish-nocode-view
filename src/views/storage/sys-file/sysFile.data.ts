@@ -1,12 +1,9 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
+import { BasicColumn, FormSchema, TableImage } from "@mfish/core/components/Table";
 import { h } from "vue";
 import { Switch } from "ant-design-vue";
-import { getToken } from "@mfish/core/src/utils/auth";
-import { TableImage } from "@mfish/core/src/components/Table";
-import { logicDeleteFile, restoreFile, setFileStatus } from "@mfish/core/src/api/storage/SysFile";
-import { getLocalFileUrl } from "@mfish/core/src/utils/file/FileUtils";
-import { getFileIcon, calcSize, imageUrl } from "@mfish/core/src/utils/file/FileUtils";
+import { getToken } from "@mfish/core/utils/auth";
+import { logicDeleteFile, restoreFile, setFileStatus } from "@mfish/core/api";
+import { calcSize, getFileIcon, getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
 
 /**
  * @description: 文件存储

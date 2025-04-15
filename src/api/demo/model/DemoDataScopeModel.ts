@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult } from "@mfish/core/src/api/model/BaseModel";
+import { BaseEntity, PageResult } from "@mfish/core/api";
 
 /**
  * @description: demo_data_scope

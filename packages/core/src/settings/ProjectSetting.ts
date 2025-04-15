@@ -2,15 +2,15 @@ import type { ProjectConfig } from "@mfish/types/src/type/config";
 import {
   CacheTypeEnum,
   ContentEnum,
-  ThemeEnum,
+  MenuModeEnum,
+  MenuTypeEnum,
+  MixSidebarTriggerEnum,
   RouterTransitionEnum,
   SettingButtonPositionEnum,
-  MenuTypeEnum,
-  MenuModeEnum,
-  TriggerEnum,
-  MixSidebarTriggerEnum
+  ThemeEnum,
+  TriggerEnum
 } from "../enums";
-import { SIDE_BAR_BG_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, APP_PRESET_COLOR_LIST } from "./DesignSetting";
+import { APP_PRESET_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST } from "./DesignSetting";
 
 // ! You need to clear the browser cache after the change
 const setting: ProjectConfig = {

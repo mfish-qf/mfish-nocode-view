@@ -3,14 +3,14 @@ import type { PaginationProps } from "./types/Pagination";
 import type {
   BasicColumn,
   FetchSetting,
-  TableSetting,
+  SizeType,
   SorterResult,
   TableCustomRecord,
   TableRowSelection,
-  SizeType
+  TableSetting
 } from "./types/Table";
 import type { FormProps } from "@core/components/Form";
-import { DEFAULT_FILTER_FN, DEFAULT_SORT_FN, FETCH_SETTING, DEFAULT_SIZE } from "./Const";
+import { DEFAULT_FILTER_FN, DEFAULT_SIZE, DEFAULT_SORT_FN, FETCH_SETTING } from "./Const";
 import { propTypes } from "@core/utils/PropTypes";
 import type { Recordable } from "@mfish/types";
 

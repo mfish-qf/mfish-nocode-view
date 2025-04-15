@@ -1,7 +1,7 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
+import { BasicColumn } from "@mfish/core/components/Table";
 import { h } from "vue";
 import { Input, RangePicker, Switch } from "ant-design-vue";
-import { dateUtil, formatToDateTime } from "@mfish/core/src/utils/DateUtil";
+import { dateUtil, formatToDateTime } from "@mfish/core/utils/DateUtil";
 
 /**
  * @description: 任务订阅表

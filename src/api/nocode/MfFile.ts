@@ -1,5 +1,5 @@
-import { defHttp } from "@mfish/core/src/utils/http/axios";
-import { MfFile, ReqMfFile, MfFilePageModel } from "@/api/nocode/model/MfFileModel";
+import { defHttp } from "@mfish/core/utils/http/axios";
+import { MfFile, MfFilePageModel, ReqMfFile } from "@/api/nocode/model/MfFileModel";
 
 /**
  * @description: 文件数据源

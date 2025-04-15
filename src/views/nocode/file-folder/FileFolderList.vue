@@ -84,23 +84,23 @@
 </template>
 <script lang="ts" setup>
   import { onMounted, watch } from "vue";
-  import { BasicTable, useTable, TableAction, PaginationProps } from "@mfish/core/src/components/Table";
+  import { BasicTable, PaginationProps, TableAction, useTable } from "@mfish/core/components/Table";
   import { Tooltip as ATooltip } from "ant-design-vue";
-  import { Icon } from "@mfish/core/src/components/Icon";
-  import { useRootSetting } from "@mfish/core";
-  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { useDesign, useRootSetting } from "@mfish/core/hooks";
+  import { propTypes } from "@mfish/core/utils/PropTypes";
   import { FileFolder, FileFolderVo } from "@/api/nocode/model/FileFolderModel";
   import { columns } from "@/views/nocode/file-folder/fileFolder.data";
-  import { useModal } from "@mfish/core/src/components/Modal";
-  import { useDesign } from "@mfish/core";
+  import { useModal } from "@mfish/core/components/Modal";
   import FolderMoveModal from "@/views/nocode/api-folder/FolderMoveModal.vue";
   import { getFileFolderAndFile, getFileFolderTree } from "@/api/nocode/FileFolder";
-  import { BasicUpload, FileItem } from "@mfish/core/src/components/Upload";
-  import { uploadApi } from "@mfish/core/src/api/storage/Upload";
-  import { insertMfFile, updateMfFile, deleteMfFile } from "@/api/nocode/MfFile";
-  import { getFileIconName } from "@mfish/core/src/utils/file/FileUtils";
+  import { BasicUpload, FileItem } from "@mfish/core/components/Upload";
+  import { uploadApi } from "@mfish/core/api";
+  import { deleteMfFile, insertMfFile, updateMfFile } from "@/api/nocode/MfFile";
+  import { getFileIconName } from "@mfish/core/utils/file/FileUtils";
   import { FolderTwoTone } from "@ant-design/icons-vue";
-  import InputSearch from "@mfish/core/src/components/InputSearch";
+  import InputSearch from "@mfish/core/components/InputSearch";
+
   const props = defineProps({
     folderId: propTypes.string.def("")
   });
@@ -169,6 +169,7 @@
       });
     }
   }
+
   function handleMove(folderVo: FileFolderVo) {
     openFileMoveModal(true, folderVo);
   }
@@ -205,6 +206,7 @@
   function apiCreate(data: FileFolder) {
     emit("apiCreate", data);
   }
+
   function moveSuccess() {
     reload();
   }
@@ -215,6 +217,7 @@
     display: flex;
     justify-content: flex-start;
     margin: 0 0 10px 10px;
+
     .title {
       width: 100px;
     }

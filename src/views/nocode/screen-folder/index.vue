@@ -49,23 +49,23 @@
 </template>
 <script lang="ts" setup>
   import { Breadcrumb as ABreadcrumb, Divider as ADivider } from "ant-design-vue";
-  import { DragFolderTree } from "@mfish/core/src/components/DragTree";
-  import { useDesign } from "@mfish/core";
+  import { DragFolderTree } from "@mfish/core/components/DragTree";
+  import { useDesign, useMessage } from "@mfish/core/hooks";
   import { onMounted, reactive, ref } from "vue";
   import {
     deleteScreenFolder,
     dragScreenFolder,
     getScreenFolderTree,
     insertScreenFolder,
+    ScreenFolderVo,
     updateScreenFolder
   } from "@mfish/nocode";
-  import { Icon } from "@mfish/core/src/components/Icon";
-  import { ScreenFolderVo } from "@mfish/nocode";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
+  import { Icon } from "@mfish/core/components/Icon";
   import { PageWrapper } from "@/components/general/Page";
   import ScreenFolderList from "@/views/nocode/screen-folder/ScreenFolderList.vue";
-  import { ScrollContainer } from "@mfish/core/src/components/Container";
+  import { ScrollContainer } from "@mfish/core/components/Container";
   import { NLayout, NLayoutContent, NLayoutSider } from "naive-ui";
+
   defineOptions({ name: "ScreenFolderManagement" });
 
   const ABreadcrumbItem = ABreadcrumb.Item;
@@ -171,6 +171,7 @@
 
     &-right {
       padding: 0 10px 0 10px;
+
       .breadcrumb {
         margin: 12px 0 0 12px;
       }
@@ -183,6 +184,7 @@
     .n-layout-toggle-bar {
       right: -24px;
     }
+
     .divider {
       height: calc(100% - 20px);
       top: 10px;

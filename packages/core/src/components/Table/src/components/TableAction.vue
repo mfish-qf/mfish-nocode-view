@@ -37,16 +37,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { PropType, computed, toRaw, unref } from "vue";
+  import { computed, PropType, toRaw, unref } from "vue";
   import { MoreOutlined } from "@ant-design/icons-vue";
   import { Divider, Tooltip, TooltipProps } from "ant-design-vue";
   import { Icon } from "@core/components/Icon";
   import { ActionItem, TableActionType } from "@core/components/Table";
   import { PopConfirmButton } from "@core/components/Button";
   import { Dropdown } from "@core/components/Dropdown";
-  import { useDesign } from "@core/index";
+  import { useDesign, usePermission } from "@core/hooks";
   import { useTableContext } from "../hooks/UseTableContext";
-  import { usePermission } from "@core/hooks/web/UsePermission";
   import { isBoolean, isFunction, isString } from "@core/utils/Is";
   import { propTypes } from "@core/utils/PropTypes";
   import { ACTION_COLUMN_FLAG } from "../Const";

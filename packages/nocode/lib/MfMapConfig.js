@@ -2,27 +2,25 @@ import { defineComponent, ref, computed, watch, createElementBlock, openBlock, n
 import { S as StyleConfig } from "./StyleConfig.js";
 import { a as EchartsBaseConfig, E as EchartsTitleConfig } from "./EchartsBaseConfig.js";
 import { RadioGroup, RadioButton, Slider, Checkbox } from "ant-design-vue";
-import { useDesign } from "@mfish/core";
+import { useDesign } from "@mfish/core/hooks";
 import "@vueuse/core";
-import { Icon } from "@mfish/core/src/components/Icon";
+import { Icon } from "@mfish/core/components/Icon";
 import { cloneDeep } from "lodash-es";
 import { u as useScreenEditStore, ao as useEchartsData, _ as _export_sfc, k as MfishColorPicker, an as EchartsTheme } from "./index2.js";
 import "@mfish/core/enums";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 import { C as ConfigGroup } from "./ConfigGroup.js";
 import { E as EchartsSeriesLabelConfig } from "./EchartsSeriesLabelConfig.js";
 const _hoisted_1 = { class: "title" };
@@ -139,7 +137,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
           default: withCtx(() => {
             var _a, _b, _c;
             return [
-              _cache[9] || (_cache[9] = createElementVNode("div", { class: "title" }, " 形状 ", -1)),
+              _cache[9] || (_cache[9] = createElementVNode("div", { class: "title" }, " 形状", -1)),
               createVNode(unref(RadioGroup), {
                 size: "small",
                 value: symbol.value,
@@ -225,7 +223,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfEffectScatterConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-50411e81"]]);
+const MfEffectScatterConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-372c080c"]]);
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "MfColorIntervalConfig",
   props: {
@@ -326,7 +324,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfColorIntervalConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-6ef3febc"]]);
+const MfColorIntervalConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-75318fa2"]]);
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfMapConfig",
   setup(__props) {
@@ -370,7 +368,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             onChange: showTooltipChange
           }, {
             default: withCtx(() => _cache[1] || (_cache[1] = [
-              createTextVNode(" 提示框 ")
+              createTextVNode(" 提示框")
             ])),
             _: 1
           }, 8, ["checked"]),
@@ -382,7 +380,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfMapConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-59b2e044"]]);
+const MfMapConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-ce235759"]]);
 export {
   MfMapConfig as default
 };

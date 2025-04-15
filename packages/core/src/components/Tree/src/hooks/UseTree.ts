@@ -1,9 +1,9 @@
-import type { InsertNodeParams, KeyType, FieldNames, TreeItem } from "../types/Tree";
-import type { Ref, ComputedRef } from "vue";
+import type { FieldNames, InsertNodeParams, KeyType, TreeItem } from "../types/Tree";
+import type { ComputedRef, Ref } from "vue";
+import { unref } from "vue";
 import type { TreeDataItem } from "ant-design-vue/es/tree/Tree";
 import { cloneDeep } from "lodash-es";
-import { unref } from "vue";
-import { forEach } from "../../../../utils/helper/TreeHelper";
+import { forEach } from "@core/utils/helper/TreeHelper.ts";
 
 export function useTree(treeDataRef: Ref<TreeDataItem[]>, getFieldNames: ComputedRef<FieldNames>) {
   function getAllKeys(list?: TreeDataItem[]) {

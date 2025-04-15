@@ -1,4 +1,4 @@
-import type { Menu, AppRouteRecordRaw } from "../Types";
+import type { AppRouteRecordRaw, Menu } from "../Types";
 import { findPath, treeMap } from "@core/utils/helper/TreeHelper";
 import { cloneDeep } from "lodash-es";
 import { isUrl } from "@core/utils/Is";

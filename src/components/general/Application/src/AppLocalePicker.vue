@@ -15,12 +15,12 @@
 </template>
 <script lang="ts" setup>
   import type { LocaleType } from "@mfish/types/src/type/config";
-  import type { DropMenu } from "@mfish/core/src/components/Dropdown";
-  import { Dropdown } from "@mfish/core/src/components/Dropdown";
-  import { ref, watchEffect, unref, computed } from "vue";
-  import { Icon } from "@mfish/core/src/components/Icon";
-  import { useLocale } from "@mfish/core/src/i18n/UseLocale";
-  import { localeList } from "@mfish/core/src/settings/I18nSetting";
+  import type { DropMenu } from "@mfish/core/components/Dropdown";
+  import { Dropdown } from "@mfish/core/components/Dropdown";
+  import { computed, ref, unref, watchEffect } from "vue";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { useLocale } from "@mfish/core/i18n/UseLocale";
+  import { localeList } from "@mfish/core/settings/I18nSetting";
 
   const props = defineProps({
     /**

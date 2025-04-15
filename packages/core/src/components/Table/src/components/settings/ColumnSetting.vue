@@ -94,16 +94,15 @@
   </Tooltip>
 </template>
 <script lang="ts" setup>
-  import type { BasicColumn, ColumnOptionsType, ColumnChangeParam, TableRowSelection } from "../../types/Table";
-  import { ref, nextTick, unref, computed, watch, onMounted } from "vue";
-  import { Tooltip, Popover, Checkbox, Divider } from "ant-design-vue";
+  import type { BasicColumn, ColumnChangeParam, ColumnOptionsType, TableRowSelection } from "../../types/Table";
+  import { computed, nextTick, onMounted, ref, unref, watch } from "vue";
+  import { Checkbox, Divider, Popover, Tooltip } from "ant-design-vue";
   import type { CheckboxChangeEvent } from "ant-design-vue/lib/checkbox/interface";
-  import { SettingOutlined, DragOutlined } from "@ant-design/icons-vue";
+  import { DragOutlined, SettingOutlined } from "@ant-design/icons-vue";
   import { Icon } from "@core/components/Icon";
   import { ScrollContainer } from "@core/components/Container";
-  import { useI18n } from "@core/hooks/web/UseI18n";
+  import { useDesign, useI18n } from "@core/hooks";
   import { useTableContext } from "../../hooks/UseTableContext";
-  import { useDesign } from "@core/index";
   import { isFunction } from "@core/utils/Is";
   import { getPopupContainer as getParentContainer } from "@core/utils";
   import { cloneDeep, isNil, omit } from "lodash-es";

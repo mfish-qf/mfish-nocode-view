@@ -1,4 +1,5 @@
 export type Key = string | number;
+
 export interface MenuState {
   // 默认选中的列表
   defaultSelectedKeys: Key[];

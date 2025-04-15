@@ -1,26 +1,24 @@
 import { defineComponent, useCssVars, computed, ref, createBlock, openBlock, unref, normalizeClass, withCtx, createElementVNode, createTextVNode, toDisplayString, createCommentVNode, createVNode, onMounted, onUnmounted, createElementBlock, Fragment, renderList, withModifiers, normalizeStyle, nextTick } from "vue";
 import { theme, Dropdown, InputNumber, Checkbox, Empty, Tooltip, Segmented } from "ant-design-vue";
-import { Icon } from "@mfish/core/src/components/Icon";
+import { Icon } from "@mfish/core/components/Icon";
 import { u as useScreenEditStore, _ as _export_sfc, a as animationData, s as screenEvent, S as ScreenEventEnum, p as playAnimation } from "./index2.js";
-import { useDesign, useRootSetting } from "@mfish/core";
+import { useDesign, useRootSetting } from "@mfish/core/hooks";
 import { ThemeEnum } from "@mfish/core/enums";
 import "@vueuse/core";
 import { pick } from "lodash-es";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import { PauseCircleTwoTone, PlayCircleTwoTone } from "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import { ScrollContainer } from "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/utils/Uuid";
+import { ScrollContainer } from "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 import draggable from "vuedraggable";
 const _hoisted_1$1 = ["onMouseenter"];
 const _hoisted_2$1 = { class: "setting" };
@@ -28,7 +26,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "AnimationSet",
   setup(__props) {
     useCssVars((_ctx) => ({
-      "5675fa06": bgColor.value
+      "6fb0308f": bgColor.value
     }));
     const screenEditStore = useScreenEditStore();
     const animationList = computed(() => screenEditStore.getCurConfigComponent.chartContain.animations);
@@ -113,7 +111,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                       onChange: ($event) => changeRepeat(element)
                     }, {
                       default: withCtx(() => _cache[1] || (_cache[1] = [
-                        createTextVNode(" 无限循环 ")
+                        createTextVNode(" 无限循环")
                       ])),
                       _: 2
                     }, 1032, ["checked", "onUpdate:checked", "onChange"])
@@ -135,7 +133,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const AnimationSet = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-3d16218e"]]);
+const AnimationSet = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-3971a868"]]);
 const _hoisted_1 = {
   key: 1,
   class: "animation-set"
@@ -148,8 +146,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "index",
   setup(__props) {
     useCssVars((_ctx) => ({
-      "4ad9144c": bgColor.value,
-      "31c83dde": unref(color)
+      "494f91ab": bgColor.value,
+      "24ffaba0": unref(color)
     }));
     const value = ref("");
     const hoverAnimation = ref("");
@@ -295,7 +293,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6c6468e4"]]);
+const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-a8561aa6"]]);
 export {
   index as default
 };

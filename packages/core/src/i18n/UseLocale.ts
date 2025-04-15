@@ -6,7 +6,7 @@
 import { LocaleType } from "@mfish/types/src/type/config";
 import { i18n } from "./SetupI18n";
 import { useLocaleStoreWithOut } from "@mfish/stores/modules";
-import { unref, computed } from "vue";
+import { computed, unref } from "vue";
 import { loadLocalePool, setHtmlPageLang } from "./Helper";
 import { Recordable } from "@mfish/types";
 

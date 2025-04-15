@@ -32,15 +32,14 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref, Ref, onBeforeMount } from "vue";
-  import { BasicForm, FormSchema, useForm } from "@mfish/core/src/components/Form";
+  import { computed, onBeforeMount, Ref, ref, unref } from "vue";
+  import { BasicForm, FormSchema, useForm, ComponentType } from "@mfish/core/components/Form";
   import { dbConnectFormSchema } from "./dbConnect.data";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { insertDbConnect, testDbConnect, updateDbConnect } from "@mfish/core/src/api/sys/DbConnect";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { getDictItems, insertDbConnect, testDbConnect, updateDbConnect } from "@mfish/core/api";
   import { Tabs as ATabs } from "ant-design-vue";
-  import { getDictItems } from "@mfish/core/src/api/sys/DictItem";
-  import { ComponentType } from "../../../../packages/core/src/components/Form/src/types";
-  import { buildSm2Key, sm2Encrypt } from "@mfish/core/src/utils/Cipher";
+  import { buildSm2Key, sm2Encrypt } from "@mfish/core/utils/Cipher";
+
   const emit = defineEmits(["success", "register"]);
   const ATabPane = ATabs.TabPane;
   const isUpdate = ref(true);

@@ -1,7 +1,7 @@
 import { defHttp } from "@core/utils/http/axios";
 import { UploadFileParams } from "@mfish/types/src/type/axios";
 import { AxiosProgressEvent } from "axios";
-import { SysFile } from "@core/api/storage/model/SysFileModel";
+import { SysFile } from "@core/api";
 
 /**
  * @description: Upload interface

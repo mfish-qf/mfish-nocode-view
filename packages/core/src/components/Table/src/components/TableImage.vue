@@ -31,8 +31,8 @@
 <script lang="ts" setup>
   import type { CSSProperties } from "vue";
   import { computed } from "vue";
-  import { useDesign } from "@core/index";
-  import { Image, Badge } from "ant-design-vue";
+  import { useDesign } from "@core/hooks";
+  import { Badge, Image } from "ant-design-vue";
   import { propTypes } from "@core/utils/PropTypes";
 
   defineOptions({ name: "TableImage" });

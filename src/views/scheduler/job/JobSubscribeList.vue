@@ -28,9 +28,10 @@
 
 <script lang="ts" setup>
   import { computed, PropType, ref } from "vue";
-  import { useDesign } from "@mfish/core";
+  import { useDesign } from "@mfish/core/hooks";
   import { Switch as ASwitch } from "ant-design-vue";
   import { setJobSubscribeStatus } from "@/api/scheduler/JobSubscribe";
+
   defineOptions({ name: "JobSubscribeList" });
   defineProps({
     subscribes: {

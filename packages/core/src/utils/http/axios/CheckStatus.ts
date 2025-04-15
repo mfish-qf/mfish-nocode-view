@@ -1,9 +1,10 @@
 import type { AxiosError } from "axios";
 import type { MessageMode } from "@mfish/types/src/type/axios";
-import { useI18n } from "../../../hooks/web/UseI18n";
+import { useI18n } from "@core/hooks";
 import { messageTips } from "./Helper";
 import { useUserStoreWithOut } from "@mfish/stores/modules";
-import { router } from "../../../router";
+import { router } from "@core/router";
+
 /**
  * 判断状态码
  * @param status 状态码

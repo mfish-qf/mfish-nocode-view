@@ -11,9 +11,10 @@
 </template>
 <script lang="ts" setup>
   import { ref } from "vue";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { Description, useDescription } from "@mfish/core/src/components/Description";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { Description, useDescription } from "@mfish/core/components/Description";
   import { jobLogSchema } from "@/views/scheduler/job-log/jobLog.data";
+
   defineOptions({ name: "JobLogModal" });
 
   defineEmits(["success", "register"]);

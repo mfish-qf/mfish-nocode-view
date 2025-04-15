@@ -38,7 +38,9 @@
             </div>
           </div>
           <template v-else>
-            <div class="p-5"><Empty /> </div>
+            <div class="p-5">
+              <Empty />
+            </div>
           </template>
         </template>
 
@@ -53,19 +55,17 @@
   </Input>
 </template>
 <script lang="ts" setup>
-  import { ref, watchEffect, watch, unref } from "vue";
-  import { useDesign } from "../../../index";
+  import { ref, unref, watch, watchEffect } from "vue";
+  import { useCopyToClipboard, useDesign, useI18n, useMessage } from "@core/hooks";
   import { ScrollContainer } from "../../Container";
-  import { Input, Popover, Pagination, Empty } from "ant-design-vue";
+  import { Empty, Input, Pagination, Popover } from "ant-design-vue";
   import Icon from "./Icon.vue";
   import SvgIcon from "./SvgIcon.vue";
   import iconsData from "../data/icons.data";
   import { usePagination } from "@core/utils/PageUtils";
   import { useDebounceFn } from "@vueuse/core";
-  import { useI18n } from "@core/hooks/web/UseI18n";
-  import { useCopyToClipboard } from "@core/hooks/web/UseCopyToClipboard";
   import svgIcons from "virtual:svg-icons-names";
-  import { useMessage } from "@core/hooks/web/UseMessage";
+
   interface Props {
     value?: string;
     width?: string;
@@ -75,6 +75,7 @@
     allowClear?: boolean;
     readonly?: boolean;
   }
+
   // Don't inherit FormItem disabled、placeholder...
   defineOptions({
     inheritAttrs: false,

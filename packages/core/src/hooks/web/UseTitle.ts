@@ -6,9 +6,8 @@
 import { unref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useTitle as usePageTitle } from "@vueuse/core";
-import { REDIRECT_NAME } from "@core/router/Constant";
-import { useGlobSetting } from "@core/hooks/setting";
-import { useI18n } from "@core/hooks/web/UseI18n";
+import { REDIRECT_NAME } from "@core/router";
+import { useGlobSetting, useI18n } from "@core/hooks";
 import { useLocaleStore } from "@mfish/stores/modules";
 
 export function useTitle() {

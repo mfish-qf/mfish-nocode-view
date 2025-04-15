@@ -14,14 +14,12 @@
   </RadioGroup>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, ref, watchEffect, computed, unref, watch } from "vue";
+  import { computed, defineComponent, PropType, ref, unref, watch, watchEffect } from "vue";
   import { Radio } from "ant-design-vue";
   import { isFunction } from "@core/utils/Is";
-  import { useRuleFormItem } from "@core/hooks/component/UseFormItem";
-  import { useAttrs } from "@core/hooks/core/UseAttrs";
+  import { useAttrs, useI18n, useRuleFormItem } from "@core/hooks";
   import { propTypes } from "@core/utils/PropTypes";
   import { get, omit } from "lodash-es";
-  import { useI18n } from "@core/hooks/web/UseI18n";
   import { Recordable } from "@mfish/types";
 
   type OptionsItem = { label: string; value: string | number | boolean; disabled?: boolean };

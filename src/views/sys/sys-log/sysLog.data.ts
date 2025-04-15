@@ -1,11 +1,10 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { dateUtil } from "@mfish/core/src/utils/DateUtil";
-import { getDictProps } from "@mfish/core/src/components/DictTag";
-import { DescItem } from "@mfish/core/src/components/Description";
-import { buildJsonPreview } from "@/utils/HBuildUtils";
+import { dateUtil } from "@mfish/core/utils/DateUtil";
+import { getDictProps } from "@mfish/core/components/DictTag";
+import { DescItem } from "@mfish/core/components/Description";
+import { buildJsonPreview } from "@mfish/core/utils/HBuildUtils";
 
 /**
  * @description: 系统日志

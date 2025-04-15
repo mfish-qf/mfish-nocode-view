@@ -1,10 +1,10 @@
 <script lang="tsx">
   import type { PropType } from "vue";
+  import { computed, defineComponent } from "vue";
   import type { BasicColumn } from "../types/Table";
-  import { defineComponent, computed } from "vue";
   import BasicHelp from "../../../Basic/src/BasicHelp.vue";
   import EditTableHeaderCell from "./EditTableHeaderIcon.vue";
-  import { useDesign } from "@core/index";
+  import { useDesign } from "@core/hooks";
   import { ColumnType } from "ant-design-vue/lib/table/interface";
 
   export default defineComponent({

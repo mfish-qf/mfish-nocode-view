@@ -47,10 +47,10 @@
 </template>
 <script setup lang="ts">
   import { Breadcrumb as ABreadcrumb, Divider as ADivider } from "ant-design-vue";
-  import { DragFolderTree } from "@mfish/core/src/components/DragTree";
-  import { useDesign } from "@mfish/core";
+  import { DragFolderTree } from "@mfish/core/components/DragTree";
+  import { useDesign, useMessage } from "@mfish/core/hooks";
   import { onMounted, reactive, ref } from "vue";
-  import { Icon } from "@mfish/core/src/components/Icon";
+  import { Icon } from "@mfish/core/components/Icon";
   import {
     ApiFolderVo,
     deleteApiFolder,
@@ -60,7 +60,6 @@
     updateApiFolder
   } from "@mfish/nocode";
   import ApiFolderList from "./ApiFolderList.vue";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
   import { NLayout, NLayoutContent, NLayoutSider } from "naive-ui";
 
   defineProps({
@@ -166,10 +165,12 @@
 
     &-right {
       padding: 0 10px 0 10px;
+
       .breadcrumb {
         margin: 12px 0 0 12px;
       }
     }
+
     .divider {
       height: calc(100% - 20px);
       top: 10px;

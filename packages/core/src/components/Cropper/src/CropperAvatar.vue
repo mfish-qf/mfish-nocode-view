@@ -24,12 +24,10 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, CSSProperties, unref, ref, watchEffect, watch, PropType } from "vue";
+  import { computed, CSSProperties, defineComponent, PropType, ref, unref, watch, watchEffect } from "vue";
   import CopperModal from "./CopperModal.vue";
-  import { useDesign } from "@core/index";
+  import { useDesign, useI18n, useMessage } from "@core/hooks";
   import { useModal } from "@core/components/Modal";
-  import { useMessage } from "@core/hooks/web/UseMessage";
-  import { useI18n } from "@core/hooks/web/UseI18n";
   import type { ButtonProps } from "@core/components/Button";
   import { Icon } from "@core/components/Icon";
   import { UploadFileParams } from "@mfish/types/src/type/axios";

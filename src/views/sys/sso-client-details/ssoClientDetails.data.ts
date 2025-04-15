@@ -1,7 +1,6 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { buildDictTag, getDictProps } from "@mfish/core/src/components/DictTag";
-import { DescItem } from "@mfish/core/src/components/Description";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { buildDictTag, getDictProps } from "@mfish/core/components/DictTag";
+import { DescItem } from "@mfish/core/components/Description";
 import { Tag } from "ant-design-vue";
 import { h } from "vue";
 

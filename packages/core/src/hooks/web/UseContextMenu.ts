@@ -1,4 +1,4 @@
-import { onUnmounted, getCurrentInstance } from "vue";
+import { getCurrentInstance, onUnmounted } from "vue";
 import { createContextMenu, destroyContextMenu } from "../../components/ContextMenu";
 
 export function useContextMenu(authRemove = true) {

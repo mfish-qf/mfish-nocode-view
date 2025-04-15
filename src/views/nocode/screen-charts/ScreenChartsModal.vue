@@ -10,10 +10,10 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { screenChartsFormSchema } from "./screenCharts.data";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { insertScreenCharts, updateScreenCharts } from "@mfish/nocode";
 
   defineOptions({ name: "ScreenChartsModal" });

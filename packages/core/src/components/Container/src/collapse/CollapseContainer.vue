@@ -30,8 +30,7 @@
   import CollapseHeader from "./CollapseHeader.vue";
   import { triggerWindowResize as windowResize } from "../../../../utils/event";
   // hook
-  import { useTimeoutFn } from "@core/hooks/core/UseTimeout";
-  import { useDesign } from "../../../../index";
+  import { useDesign, useTimeoutFn } from "@core/hooks";
 
   const props = defineProps({
     title: { type: String, default: "" },

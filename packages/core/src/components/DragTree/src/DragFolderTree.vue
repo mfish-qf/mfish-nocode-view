@@ -102,15 +102,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { PropType, ref, watch, unref, reactive, nextTick } from "vue";
+  import { nextTick, PropType, reactive, ref, unref, watch } from "vue";
   import {
-    Empty,
     Button as AButton,
-    Tree,
-    Tooltip,
-    Input as AInput,
     Dropdown as ADropdown,
-    Menu as AMenu
+    Empty,
+    Input as AInput,
+    Menu as AMenu,
+    Tooltip,
+    Tree
   } from "ant-design-vue";
   import type { AntTreeNodeDropEvent, TreeProps } from "ant-design-vue/es/tree";
   import { TreeDataItem } from "ant-design-vue/es/tree/Tree";
@@ -122,10 +122,11 @@
   import { ScrollContainer } from "../../Container";
   import "../../Tree/style";
   import { cloneDeep } from "lodash-es";
-  import { useRootSetting } from "../../../index";
+  import { useRootSetting } from "@core/hooks";
   import { useAppStore } from "@mfish/stores/modules";
-  import { FolderTwoTone, FolderOpenTwoTone } from "@ant-design/icons-vue";
+  import { FolderOpenTwoTone, FolderTwoTone } from "@ant-design/icons-vue";
   import { Nullable } from "@mfish/types";
+
   const props = defineProps({
     treeData: {
       type: Array as PropType<TreeDataItem[]>
@@ -161,6 +162,7 @@
   const dataList: TreeProps["treeData"] = [];
   const folderInputRef = ref<Nullable<HTMLInputElement>>(null);
   const newFolder = "新目录";
+
   interface NodeType {
     id: string;
     parentId: string;
@@ -171,6 +173,7 @@
     parent?: NodeType;
     children?: NodeType[];
   }
+
   const newNode = (): NodeType => {
     const key = buildUUID();
     return {
@@ -241,6 +244,7 @@
     emit("expand", expandedKeys.value);
     autoExpandParent.value = true;
   });
+
   function handleSearch(value: string) {
     searchValue.value = value;
   }
@@ -290,6 +294,7 @@
     node.title = name;
     dftKey.value++;
   }
+
   function clearSelect() {
     selectedKeys.value = [];
     emit("select");
@@ -417,7 +422,10 @@
   }, 200);
 
   const { focused } = useFocus(folderInputRef, { initialValue: true });
-  const inputBlur = reactive({ key: "", inputBlur: () => {} });
+  const inputBlur = reactive({
+    key: "",
+    inputBlur: () => {}
+  });
   const addChildFolder = (treeKey) => {
     // 判断是否存在未保存记录
     if (inputBlur.key) {

@@ -1,7 +1,7 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { DescItem } from "@mfish/core/src/components/Description";
-import { YNTag_Status } from "@mfish/core/src/components/DictTag";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { DescItem } from "@mfish/core/components/Description";
+import { YNTag_Status } from "@mfish/core/components/DictTag";
+
 export const columns: BasicColumn[] = [
   {
     title: "角色名称",

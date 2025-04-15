@@ -1,5 +1,5 @@
-import { defHttp } from "@mfish/core/src/utils/http/axios";
-import { DemoDataScope, ReqDemoDataScope, DemoDataScopePageModel } from "@/api/demo/model/DemoDataScopeModel";
+import { defHttp } from "@mfish/core/utils/http/axios";
+import { DemoDataScope, DemoDataScopePageModel, ReqDemoDataScope } from "@/api/demo/model/DemoDataScopeModel";
 
 /**
  * @description: demo_data_scope

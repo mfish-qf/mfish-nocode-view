@@ -1,28 +1,26 @@
 import { defineComponent, createBlock, openBlock, unref, withCtx, renderSlot, useCssVars, computed, watch, reactive, ref, createElementBlock, normalizeClass, createElementVNode, createVNode, createCommentVNode, normalizeStyle, toDisplayString, withModifiers, resolveComponent, Fragment, renderList, nextTick, createTextVNode, onMounted, onUnmounted } from "vue";
 import { theme, Tooltip, Empty, Dropdown, Button, Menu, Input, RadioGroup, RadioButton, Divider } from "ant-design-vue";
-import { useDesign } from "@mfish/core";
-import { Icon } from "@mfish/core/src/components/Icon";
-import { useModalInner, BasicModal, useModal } from "@mfish/core/src/components/Modal";
-import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
-import { router } from "@mfish/core/src/router";
-import { useOutsideOpen } from "@mfish/core/src/utils/OutsideOpenUtils";
+import { useMessage, useDesign } from "@mfish/core/hooks";
+import { Icon } from "@mfish/core/components/Icon";
+import { useModalInner, BasicModal, useModal } from "@mfish/core/components/Modal";
+import { router } from "@mfish/core/router";
+import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
 import "@vueuse/core";
 import { debounce, omit, cloneDeep, throttle, pick } from "lodash-es";
 import { E as API_SAVE, _ as _export_sfc, u as useScreenEditStore, F as getFieldIcon, G as renameField, s as screenEvent, S as ScreenEventEnum, H as FIELD_DATA_DRAG, I as getComponentById, J as ComType, L as LayerItem, K as LayerGroup, g as getEventName, N as ParamType, i as useDynamicDataConfig, b as ComponentsEnum, O as getFieldsByResourceId, Q as getDataFieldsById, R as getApiParamsList, f as ScreenInput } from "./index2.js";
 import "@mfish/core/enums";
-import { isArray } from "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import { isArray } from "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import { ScrollContainer } from "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/utils/Uuid";
+import { ScrollContainer } from "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 import { C as ConfigGroup } from "./ConfigGroup.js";
 import draggable from "vuedraggable";
 const _sfc_main$8 = /* @__PURE__ */ defineComponent({
@@ -89,7 +87,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   emits: ["dataChange", "dataRefresh"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "77363802": colorBorder.value
+      "54d92964": colorBorder.value
     }));
     const props = __props;
     const emit = __emit;
@@ -177,7 +175,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
                 class: "title",
                 style: normalizeStyle(__props.isResource ? { textDecoration: "line-through", color: "#999" } : {})
               }, toDisplayString(data.name), 5),
-              __props.isResource ? (openBlock(), createElementBlock("div", _hoisted_2$6, " 注意：请将样例数据更换为自己的数据 ")) : createCommentVNode("", true)
+              __props.isResource ? (openBlock(), createElementBlock("div", _hoisted_2$6, " 注意：请将样例数据更换为自己的数据")) : createCommentVNode("", true)
             ]),
             _: 1
           }, 8, ["title"])),
@@ -232,7 +230,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const DataSelect = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-73805734"]]);
+const DataSelect = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-3a060ac3"]]);
 const _hoisted_1$5 = ["draggable", "onMouseenter", "onDragstart"];
 const _hoisted_2$5 = { class: "title" };
 const _sfc_main$6 = /* @__PURE__ */ defineComponent({
@@ -242,7 +240,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "21dd04ea": bgColor.value
+      "53068519": bgColor.value
     }));
     const props = __props;
     const enterField = ref(-1);
@@ -355,7 +353,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FieldConfig = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-16c7b11f"]]);
+const FieldConfig = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-74c54ba3"]]);
 const _hoisted_1$4 = {
   key: 0,
   class: "header",
@@ -371,14 +369,17 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "EventSelectItems",
   props: {
     componentList: { type: Array, default: () => [] },
-    value: { type: Object, default: () => {
-    } },
+    value: {
+      type: Object,
+      default: () => {
+      }
+    },
     hideEvent: { type: Boolean, default: false }
   },
   emits: ["selectChange"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "90ac150a": bgColor.value
+      "34fa90cb": bgColor.value
     }));
     const props = __props;
     const emit = __emit;
@@ -591,7 +592,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EventSelectItems = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-e0ed0e7e"]]);
+const EventSelectItems = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-e15dd0a7"]]);
 const _hoisted_1$3 = ["onMouseenter"];
 const _hoisted_2$3 = { class: "title" };
 const _sfc_main$4 = /* @__PURE__ */ defineComponent({
@@ -604,7 +605,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   emits: ["ok", "delete", "eventLose"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "de455df6": bgColor.value
+      "69c18b27": bgColor.value
     }));
     const props = __props;
     const emit = __emit;
@@ -829,12 +830,15 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EventSelect = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-11a8757e"]]);
+const EventSelect = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-cff6e861"]]);
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   __name: "VariableSelect",
   props: {
-    variable: { type: Object, default: () => {
-    } },
+    variable: {
+      type: Object,
+      default: () => {
+      }
+    },
     //是否过滤自己 不允许自己触发自己时需要过滤
     filterSelf: { type: Boolean, default: false }
   },
@@ -1018,7 +1022,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const VariableSelect = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-7206f0c4"]]);
+const VariableSelect = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-03fd5ce6"]]);
 const _hoisted_1$2 = { class: "title" };
 const _hoisted_2$2 = { class: "param" };
 const _hoisted_3$1 = {
@@ -1034,7 +1038,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   emits: ["paramChange"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "55ca7dba": colorBorder.value
+      "1cb670c5": colorBorder.value
     }));
     const emit = __emit;
     const { prefixCls } = useDesign("data-params-config");
@@ -1283,7 +1287,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const DataParamsConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-c724f131"]]);
+const DataParamsConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-df9cd9b5"]]);
 const _hoisted_1$1 = { class: "title" };
 const _hoisted_2$1 = { class: "title" };
 const _hoisted_3 = { class: "title" };
@@ -1524,7 +1528,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                   placement: "left"
                 }, {
                   default: withCtx(() => _cache[5] || (_cache[5] = [
-                    createTextVNode(" 数据限制 ")
+                    createTextVNode(" 数据限制")
                   ])),
                   _: 1
                 }),
@@ -1580,7 +1584,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const DataConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-81fe26dc"]]);
+const DataConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-afe54816"]]);
 const _hoisted_1 = ["onMouseenter"];
 const _hoisted_2 = { class: "title" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
@@ -1602,7 +1606,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   emits: ["dataChange"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "76d4bff3": bgColor.value
+      "4bae6fc2": bgColor.value
     }));
     const props = __props;
     const emit = __emit;
@@ -1706,7 +1710,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const DragInData = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-05e202ab"]]);
+const DragInData = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-c9719241"]]);
 export {
   DataConfig as D,
   DragInData as a

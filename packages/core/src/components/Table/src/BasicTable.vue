@@ -42,13 +42,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import type { BasicTableProps, TableActionType, SizeType, ColumnChangeParam, InnerMethods } from "./types/Table";
-  import { ref, computed, unref, toRaw, inject, useSlots, useAttrs, watch } from "vue";
+  import type { BasicTableProps, ColumnChangeParam, InnerMethods, SizeType, TableActionType } from "./types/Table";
+  import { InnerHandlers } from "./types/Table";
+  import { computed, inject, ref, toRaw, unref, useAttrs, useSlots, watch } from "vue";
   import { Table } from "ant-design-vue";
   import { BasicForm, useForm } from "@core/components/Form";
   import { PageWrapperFixedHeightKey } from "@/components/general/Page";
   import HeaderCell from "./components/HeaderCell.vue";
-  import { InnerHandlers } from "./types/Table";
   import { useTablePagination } from "./hooks/UseTablePagination.ts";
   import { useColumns } from "./hooks/UseColumns";
   import { useDataSource } from "./hooks/UseDataSource";
@@ -63,7 +63,7 @@
   import { createTableContext } from "./hooks/UseTableContext";
   import { useTableFooter } from "./hooks/UseTableFooter";
   import { useTableForm } from "./hooks/UseTableForm";
-  import { useDesign } from "@core/index";
+  import { useDesign } from "@core/hooks";
   import { debounce, omit } from "lodash-es";
   import { basicProps } from "./Props";
   import { isFunction } from "@core/utils/Is";
@@ -382,6 +382,7 @@
         padding: 8px 6px;
         border-bottom: none;
       }
+
       .ant-table-content {
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
@@ -395,6 +396,7 @@
     .ant-table-footer {
       background-color: @component-background;
       padding: 4px !important;
+
       .ant-table-wrapper {
         padding: 0;
       }

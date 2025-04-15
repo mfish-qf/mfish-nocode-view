@@ -54,13 +54,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
-  import { deleteSsoTenant, exportSsoTenant, getSsoTenantList } from "@mfish/core/src/api/sys/SsoTenant";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
+  import { deleteSsoTenant, exportSsoTenant, getSsoTenantList, SsoTenant } from "@mfish/core/api";
+  import { useModal } from "@mfish/core/components/Modal";
   import SsoTenantModal from "./SsoTenantModal.vue";
   import { columns, searchFormSchema } from "./ssoTenant.data";
-  import { SsoTenant } from "@mfish/core/src/api/sys/model/SsoTenantModel";
-  import { DictTag } from "@mfish/core/src/components/DictTag";
+  import { DictTag } from "@mfish/core/components/DictTag";
+
   defineOptions({ name: "SsoTenantManagement" });
   const [registerModal, { openModal }] = useModal();
   const [registerTable, { reload, getForm }] = useTable({

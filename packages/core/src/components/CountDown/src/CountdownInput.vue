@@ -11,8 +11,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from "vue";
   import CountButton from "./CountButton.vue";
-  import { useDesign } from "@core/index";
-  import { useRuleFormItem } from "@core/hooks/component/UseFormItem";
+  import { useDesign, useRuleFormItem } from "@core/hooks";
 
   const props = {
     value: { type: String },

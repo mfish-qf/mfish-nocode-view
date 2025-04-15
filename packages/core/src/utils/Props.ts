@@ -1,9 +1,10 @@
+import type { ExtractPropTypes, PropType } from "vue";
 import { warn } from "vue";
 import { isObject } from "@vue/shared";
 import { fromPairs } from "lodash-es";
-import type { ExtractPropTypes, PropType } from "vue";
 
 const wrapperKey = Symbol("wrapper-key");
+
 export interface PropWrapper<T> {
   [wrapperKey]: T;
 }
@@ -63,17 +64,17 @@ export type BuildPropReturn<T, D, R, V, C> = {
  // limited options
  // the type will be PropType<'light' | 'dark'>
  buildProp({
-    type: String,
-    values: ['light', 'dark'],
-  } as const)
+ type: String,
+ values: ['light', 'dark'],
+ } as const)
  * @example
  // limited options and other types
  // the type will be PropType<'small' | 'medium' | number>
  buildProp({
-    type: [String, Number],
-    values: ['small', 'medium'],
-    validator: (val: unknown): val is number => typeof val === 'number',
-  } as const)
+ type: [String, Number],
+ values: ['small', 'medium'],
+ validator: (val: unknown): val is number => typeof val === 'number',
+ } as const)
  @link see more: https://github.com/element-plus/element-plus/pull/3341
  */
 export function buildProp<

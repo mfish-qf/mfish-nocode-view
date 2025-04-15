@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
-import { getDictItems } from "@mfish/core/src/api/sys/DictItem";
-import { DictItem } from "@mfish/core/src/api/sys/model/DictItemModel";
+import { DictItem, getDictItems } from "@mfish/core/api";
 import { ref, Ref } from "vue";
 
 /**
@@ -11,6 +10,7 @@ import { ref, Ref } from "vue";
 interface DictState {
   dictMap: Map<string, Ref<DictItem[]>>;
 }
+
 export const useDictStore = defineStore("dict", {
   state: (): DictState => ({
     dictMap: new Map<string, Ref<DictItem[]>>()

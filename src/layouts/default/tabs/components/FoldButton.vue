@@ -4,12 +4,10 @@
   </span>
 </template>
 <script lang="ts">
-  import { defineComponent, unref, computed } from "vue";
-  import { Icon } from "@mfish/core/src/components/Icon";
-  import { useDesign } from "@mfish/core";
-  import { useHeaderSetting } from "@mfish/core/src/hooks/setting/UseHeaderSetting";
-  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
-  import { triggerWindowResize } from "@mfish/core/src/utils/event";
+  import { computed, defineComponent, unref } from "vue";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { useDesign, useHeaderSetting, useMenuSetting } from "@mfish/core/hooks";
+  import { triggerWindowResize } from "@mfish/core/utils/event";
 
   export default defineComponent({
     name: "FoldButton",

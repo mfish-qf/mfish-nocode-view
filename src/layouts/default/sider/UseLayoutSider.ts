@@ -1,7 +1,7 @@
 import type { Ref } from "vue";
-import { computed, unref, onMounted, nextTick } from "vue";
+import { computed, nextTick, onMounted, unref } from "vue";
 import { TriggerEnum } from "@mfish/core/enums";
-import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
+import { useMenuSetting } from "@mfish/core/hooks";
 import { useDebounceFn } from "@vueuse/core";
 import { useAppStore } from "@mfish/stores/modules";
 

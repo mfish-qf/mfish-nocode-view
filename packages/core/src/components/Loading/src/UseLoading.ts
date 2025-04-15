@@ -1,7 +1,7 @@
+import type { Ref } from "vue";
 import { unref } from "vue";
 import { createLoading } from "./CreateLoading";
 import type { LoadingProps } from "./Typing";
-import type { Ref } from "vue";
 
 export interface UseLoadingOptions {
   target?: any;

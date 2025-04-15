@@ -79,7 +79,7 @@ export function removeClass(el: Element, cls: string) {
  * rightIncludeBody: the distance between the leftmost element and the right side of the document
  * bottomIncludeBody: the distance from the bottom of the element to the bottom of the document
  *
-  @description: */
+ @description: */
 export function getViewportOffset(element: Element): ViewportOffsetResult {
   const doc = document.documentElement;
 

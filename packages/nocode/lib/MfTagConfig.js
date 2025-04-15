@@ -1,26 +1,24 @@
 import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, unref, withCtx, renderSlot, createElementBlock, createCommentVNode, createElementVNode, createVNode, createTextVNode } from "vue";
-import { useDesign } from "@mfish/core";
+import { useDesign } from "@mfish/core/hooks";
 import { Input, Checkbox } from "ant-design-vue";
 import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index2.js";
 import "lodash-es";
 import "@mfish/core/enums";
-import { IconPicker } from "@mfish/core/src/components/Icon";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import { IconPicker } from "@mfish/core/components/Icon";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
 import "@vueuse/core";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 import { S as StyleConfig } from "./StyleConfig.js";
 import { T as TitleConfig } from "./TitleConfig.js";
 const _hoisted_1 = {
@@ -93,7 +91,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               "onUpdate:checked": _cache[1] || (_cache[1] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.options.hide = $event)
             }, {
               default: withCtx(() => _cache[2] || (_cache[2] = [
-                createTextVNode(" 文字超出隐藏 ")
+                createTextVNode(" 文字超出隐藏")
               ])),
               _: 1
             }, 8, ["checked"])
@@ -104,7 +102,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfTagConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-16caa40c"]]);
+const MfTagConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-062523a7"]]);
 export {
   MfTagConfig as default
 };

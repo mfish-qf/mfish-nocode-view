@@ -1,27 +1,25 @@
 import { defineComponent, watch, nextTick, ref, createElementBlock, openBlock, normalizeClass, unref, createVNode, withCtx, createCommentVNode, createElementVNode, createTextVNode, Fragment, renderList, toDisplayString, onMounted } from "vue";
 import { C as ConfigGroup } from "./ConfigGroup.js";
-import { useDesign } from "@mfish/core";
+import { useDesign } from "@mfish/core/hooks";
 import { RadioGroup, RadioButton } from "ant-design-vue";
 import "@vueuse/core";
-import "@mfish/core/src/components/Icon";
+import "@mfish/core/components/Icon";
 import { cloneDeep } from "lodash-es";
 import { u as useScreenEditStore, _ as _export_sfc } from "./index2.js";
 import "@mfish/core/enums";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 const _hoisted_1 = {
   key: 0,
   class: "title"
@@ -178,7 +176,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsTooltipConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-ffc36495"]]);
+const EchartsTooltipConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-1c90e3a5"]]);
 function useEchartsSeriesConfig() {
   const screenEditStore = useScreenEditStore();
   onMounted(() => {

@@ -1,4 +1,4 @@
-import { Ref, watchEffect, ref } from "vue";
+import { Ref, ref, watchEffect } from "vue";
 import { Nullable } from "@mfish/types";
 
 interface IntersectionObserverProps {

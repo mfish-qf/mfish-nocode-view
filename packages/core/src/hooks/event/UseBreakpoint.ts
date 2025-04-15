@@ -1,6 +1,6 @@
-import { ref, computed, ComputedRef, unref } from "vue";
+import { computed, ComputedRef, ref, unref } from "vue";
 import { useEventListener } from "./UseEventListener";
-import { screenMap, sizeEnum, screenEnum } from "../../enums";
+import { screenEnum, screenMap, sizeEnum } from "../../enums";
 
 let globalScreenRef: ComputedRef<sizeEnum | undefined>;
 let globalWidthRef: ComputedRef<number>;

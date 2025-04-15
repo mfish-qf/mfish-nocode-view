@@ -27,14 +27,13 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { Spin as ASpin, Select as ASelect } from "ant-design-vue";
-  import { BasicForm, RenderCallbackParams, useForm } from "@mfish/core/src/components/Form";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { bindUserOrg, getTenantOrgTree } from "@mfish/core/src/api/sys/SsoTenant";
+  import { Select as ASelect, Spin as ASpin } from "ant-design-vue";
+  import { BasicForm, RenderCallbackParams, useForm } from "@mfish/core/components/Form";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { bindUserOrg, getTenantOrgTree, searchUserList } from "@mfish/core/api";
   import { reactive } from "vue";
   import { debounce } from "lodash-es";
-  import { searchUserList } from "@mfish/core/src/api/sys/User";
-  import { TreeItem } from "@mfish/core/src/components/Tree";
+  import { TreeItem } from "@mfish/core/components/Tree";
 
   const emit = defineEmits(["success", "register"]);
   const [registerForm, { setFieldsValue, validate, updateSchema, resetFields }] = useForm({

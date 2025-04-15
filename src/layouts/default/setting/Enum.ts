@@ -1,6 +1,12 @@
-import { ContentEnum } from "@mfish/core/enums";
-import { MenuModeEnum, MenuTypeEnum, TopMenuAlignEnum, TriggerEnum, MixSidebarTriggerEnum } from "@mfish/core/enums";
-import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
+import {
+  ContentEnum,
+  MenuModeEnum,
+  MenuTypeEnum,
+  MixSidebarTriggerEnum,
+  TopMenuAlignEnum,
+  TriggerEnum
+} from "@mfish/core/enums";
+import { useI18n } from "@mfish/core/hooks";
 
 const { t } = useI18n();
 

@@ -1,4 +1,4 @@
-import type { InternalAxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios";
+import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import type { RequestOptions, Result } from "@mfish/types/src/type/axios";
 
 export interface CreateAxiosOptions extends InternalAxiosRequestConfig {

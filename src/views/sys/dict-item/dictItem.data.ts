@@ -1,8 +1,7 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { Icon } from "@mfish/core/src/components/Icon";
+import { Icon } from "@mfish/core/components/Icon";
 
 /**
  * @description: 字典项

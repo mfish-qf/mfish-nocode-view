@@ -23,11 +23,11 @@
 <script lang="ts" setup>
   import type { ColEx } from "../types";
   import { computed, PropType } from "vue";
-  import { Form, Col as ACol, Button as AButton } from "ant-design-vue";
+  import { Button as AButton, Col as ACol, Form } from "ant-design-vue";
   import { ButtonProps } from "@core/components/Button";
   import { BasicArrow } from "@core/components/Basic";
   import { useFormContext } from "../hooks/UseFormContext";
-  import { useI18n } from "@core/hooks/web/UseI18n";
+  import { useI18n } from "@core/hooks";
   import { propTypes } from "@core/utils/PropTypes";
 
   defineOptions({ name: "BasicFormAction" });

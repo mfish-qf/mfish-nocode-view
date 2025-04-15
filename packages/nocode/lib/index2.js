@@ -3,41 +3,38 @@ var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { en
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 import { defineComponent, useCssVars, useTemplateRef, computed, watch, reactive, onMounted, createElementBlock, openBlock, normalizeStyle, normalizeClass, unref, createElementVNode, createCommentVNode, createBlock, createVNode, ref, Fragment, renderList, nextTick, toRaw, withCtx, withModifiers, resolveComponent, createTextVNode, toDisplayString, onUnmounted, mergeProps, readonly, normalizeProps, guardReactiveProps, shallowRef, toHandlers, renderSlot, onBeforeMount, toRefs, withDirectives, resolveDynamicComponent, vShow, markRaw, Transition } from "vue";
 import { theme, Input, InputNumber, Tooltip, Segmented, Dropdown, Checkbox, RadioButton, RadioGroup, Select, Image, Divider, Button, Menu, Cascader, Radio, Form, DatePicker, RangePicker, Switch, Breadcrumb, Descriptions, Row, Col, Card, Drawer, Alert, Tag, ConfigProvider, Modal, InputGroup, Empty, Textarea, Watermark, MenuItem } from "ant-design-vue";
-import { useDesign, useRootSetting } from "@mfish/core";
+import { useDesign, useRootSetting, useMessage, useDarkModeTheme } from "@mfish/core/hooks";
 import { useEyeDropper, useClipboard, useDebounceFn, useFocus } from "@vueuse/core";
-import { Icon, IconFont } from "@mfish/core/src/components/Icon";
+import { Icon, IconFont } from "@mfish/core/components/Icon";
 import { cloneDeep, debounce, once, isElement, merge, uniqueId, sum, random, throttle, omit } from "lodash-es";
 import { ThemeEnum } from "@mfish/core/enums";
 import { fade } from "@jiaminghi/color";
-import { buildUUID } from "@mfish/core/src/utils/Uuid";
-import { isFunction, isArray, isObject, isString, isNumber } from "@mfish/core/src/utils/Is";
-import { defHttp } from "@mfish/core/src/utils/http/axios";
+import { buildUUID } from "@mfish/core/utils/Uuid";
+import { isFunction, isArray, isObject, isString, isNumber } from "@mfish/core/utils/Is";
+import { defHttp } from "@mfish/core/utils/http/axios";
 import { defineStore } from "pinia";
-import { getTableList } from "@mfish/core/src/api/sys/DbConnect";
+import { getTableList, queryCategoryTreeByCode } from "@mfish/core/api";
 import { useAppStore } from "@mfish/stores/modules";
-import noImage from "@mfish/core/src/assets/images/noImage.png";
-import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
-import { mitt } from "@mfish/core/src/utils/Mitt";
-import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
+import noImage from "@mfish/core/assets/images/noImage.png";
+import { mitt } from "@mfish/core/utils/Mitt";
+import { createAsyncComponent } from "@mfish/core/utils/factory/CreateAsyncComponent";
 import { DeleteOutlined, CaretRightOutlined, CheckOutlined, FolderOpenTwoTone, FolderTwoTone } from "@ant-design/icons-vue";
-import { ScrollContainer } from "@mfish/core/src/components/Container";
-import { DraggableInput } from "@mfish/core/src/components/Draggable";
-import { BasicModal, useModalInner, useModal } from "@mfish/core/src/components/Modal";
-import { BasicForm, useForm } from "@mfish/core/src/components/Form";
-import { BasicTree } from "@mfish/core/src/components/Tree";
-import { Split } from "@mfish/core/src/components/Split";
-import { useTable, BasicTable } from "@mfish/core/src/components/Table";
-import { CodeEditor, MODE } from "@mfish/core/src/components/CodeEditor";
-import { useLocale } from "@mfish/core/src/i18n/UseLocale";
-import { useDarkModeTheme } from "@mfish/core/src/hooks/setting/UseDarkModeTheme";
-import { propTypes } from "@mfish/core/src/utils/PropTypes";
+import { ScrollContainer } from "@mfish/core/components/Container";
+import { DraggableInput } from "@mfish/core/components/Draggable";
+import { BasicModal, useModalInner, useModal } from "@mfish/core/components/Modal";
+import { BasicForm, useForm } from "@mfish/core/components/Form";
+import { BasicTree } from "@mfish/core/components/Tree";
+import { Split } from "@mfish/core/components/Split";
+import { useTable, BasicTable } from "@mfish/core/components/Table";
+import { CodeEditor, MODE } from "@mfish/core/components/CodeEditor";
+import { useLocale } from "@mfish/core/i18n/UseLocale";
+import { propTypes } from "@mfish/core/utils/PropTypes";
 import draggable$1 from "vuedraggable";
-import { imageUrl, getLocalFileUrl, imageSrc } from "@mfish/core/src/utils/file/FileUtils";
-import { queryCategoryTreeByCode } from "@mfish/core/src/api/sys/DictCategory";
+import { imageUrl, getLocalFileUrl, imageSrc } from "@mfish/core/utils/file/FileUtils";
 import { NCollapseTransition } from "naive-ui";
-import { FileUp } from "@mfish/core/src/components/FileUpDown";
-import { formatToDateTime } from "@mfish/core/src/utils/DateUtil";
-import { router } from "@mfish/core/src/router";
+import { FileUp } from "@mfish/core/components/FileUpDown";
+import { formatToDateTime } from "@mfish/core/utils/DateUtil";
+import { router } from "@mfish/core/router";
 const colorStorage = "color_recently_bi";
 const gradientColorStorage = "gradient_color_recently_bi";
 const recentlyColors = [
@@ -409,7 +406,7 @@ const _sfc_main$1b = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "8a328924": `${__props.height}px`
+      "003068da": `${__props.height}px`
     }));
     const props = __props;
     const colorPanelRef = useTemplateRef("colorPanelRef");
@@ -517,7 +514,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const ColorPanel = /* @__PURE__ */ _export_sfc(_sfc_main$1b, [["__scopeId", "data-v-aa6fa437"]]);
+const ColorPanel = /* @__PURE__ */ _export_sfc(_sfc_main$1b, [["__scopeId", "data-v-696c5dfb"]]);
 const _sfc_main$1a = /* @__PURE__ */ defineComponent({
   __name: "ColorHueSlider",
   props: {
@@ -663,7 +660,7 @@ const _sfc_main$1a = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ColorHueSlider = /* @__PURE__ */ _export_sfc(_sfc_main$1a, [["__scopeId", "data-v-e64ea82d"]]);
+const ColorHueSlider = /* @__PURE__ */ _export_sfc(_sfc_main$1a, [["__scopeId", "data-v-b2d0e443"]]);
 const _hoisted_1$y = { class: "background" };
 const _hoisted_2$n = { class: "color-text" };
 const _hoisted_3$d = { class: "color-input" };
@@ -678,7 +675,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "6238d624": colorBorder.value
+      "3ebb910a": colorBorder.value
     }));
     const props = __props;
     const customInput = ref("");
@@ -811,7 +808,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ColorText = /* @__PURE__ */ _export_sfc(_sfc_main$19, [["__scopeId", "data-v-ef7e7ee3"]]);
+const ColorText = /* @__PURE__ */ _export_sfc(_sfc_main$19, [["__scopeId", "data-v-516dae5e"]]);
 const _hoisted_1$x = { class: "colors" };
 const _hoisted_2$m = ["onClick"];
 const _sfc_main$18 = /* @__PURE__ */ defineComponent({
@@ -822,7 +819,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "060afbc0": colorBorder.value
+      "8433eb3a": colorBorder.value
     }));
     const props = __props;
     const colors = ref(recentlyColors);
@@ -898,7 +895,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ColorRecently = /* @__PURE__ */ _export_sfc(_sfc_main$18, [["__scopeId", "data-v-e6ec2705"]]);
+const ColorRecently = /* @__PURE__ */ _export_sfc(_sfc_main$18, [["__scopeId", "data-v-98ec7ef1"]]);
 const _hoisted_1$w = { class: "colors" };
 const _hoisted_2$l = ["onClick"];
 const _sfc_main$17 = /* @__PURE__ */ defineComponent({
@@ -910,7 +907,7 @@ const _sfc_main$17 = /* @__PURE__ */ defineComponent({
   emits: ["selectColor"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "0781a16e": colorBorder.value
+      "7fb04f44": colorBorder.value
     }));
     const props = __props;
     const emit = __emit;
@@ -979,7 +976,7 @@ const _sfc_main$17 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const GradientColorRecently = /* @__PURE__ */ _export_sfc(_sfc_main$17, [["__scopeId", "data-v-77ebad7b"]]);
+const GradientColorRecently = /* @__PURE__ */ _export_sfc(_sfc_main$17, [["__scopeId", "data-v-be7486eb"]]);
 const _hoisted_1$v = { class: "hue-slider" };
 const _hoisted_2$k = ["onMousedown", "onDblclick"];
 const _hoisted_3$c = { class: "color-input-percentage" };
@@ -1009,7 +1006,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
   emits: ["colorChange", "startEyeDropper", "endEyeDropper"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "461ec64c": colorBorder.value
+      "71fd9e25": colorBorder.value
     }));
     const props = __props;
     const emit = __emit;
@@ -1227,7 +1224,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const GradientColor = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["__scopeId", "data-v-1be11894"]]);
+const GradientColor = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["__scopeId", "data-v-d9188a6e"]]);
 const _hoisted_1$u = { class: "header" };
 const _hoisted_2$j = {
   key: 0,
@@ -1470,7 +1467,7 @@ const _sfc_main$14 = /* @__PURE__ */ defineComponent({
   emits: ["inputChange", "confirmChange"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "77186c3b": colorBorder.value
+      "563f8672": colorBorder.value
     }));
     const props = __props;
     const emit = __emit;
@@ -1791,7 +1788,7 @@ const _sfc_main$14 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfishColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$14, [["__scopeId", "data-v-dbbc4e3a"]]);
+const MfishColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$14, [["__scopeId", "data-v-37336a80"]]);
 function withPrefix(loggerPrefix) {
   const prefix = `[DataV - ${loggerPrefix}]`;
   return {
@@ -5168,7 +5165,7 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const Decoration4 = /* @__PURE__ */ _export_sfc(_sfc_main$13, [["__scopeId", "data-v-53480a72"]]);
+const Decoration4 = /* @__PURE__ */ _export_sfc(_sfc_main$13, [["__scopeId", "data-v-97e7e3ce"]]);
 const defaultColor$d = ["#2e6099", "#7ce7fd"];
 function createDecoration5Props() {
   return {
@@ -9774,7 +9771,7 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ScrollTable = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["__scopeId", "data-v-741419c1"]]);
+const ScrollTable = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["__scopeId", "data-v-ccb14245"]]);
 const _hoisted_1$q = ["onClick"];
 const _sfc_main$11 = /* @__PURE__ */ defineComponent({
   __name: "MacButton",
@@ -9858,7 +9855,7 @@ const _sfc_main$11 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MacButton = /* @__PURE__ */ _export_sfc(_sfc_main$11, [["__scopeId", "data-v-4ede9177"]]);
+const MacButton = /* @__PURE__ */ _export_sfc(_sfc_main$11, [["__scopeId", "data-v-5c20d434"]]);
 const _sfc_main$10 = /* @__PURE__ */ defineComponent({
   ...{ name: "ScreenCheckbox" },
   __name: "index",
@@ -9904,7 +9901,7 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
   emits: ["change"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "374f24e1": colorBorder.value
+      "cd77f8d8": colorBorder.value
     }));
     const emit = __emit;
     const { prefixCls } = useDesign("screen-input");
@@ -9934,7 +9931,7 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ScreenInput = /* @__PURE__ */ _export_sfc(_sfc_main$$, [["__scopeId", "data-v-b65dfca9"]]);
+const ScreenInput = /* @__PURE__ */ _export_sfc(_sfc_main$$, [["__scopeId", "data-v-107119ae"]]);
 const listenGlobalKeyboard = ({ CtrlShiftKeysEnum, CtrlKeysEnum, ShiftKeysEnum, KeysEnum }) => {
   const shortKeys = (e, enums) => {
     if (!enums) return;
@@ -10104,7 +10101,7 @@ const _sfc_main$_ = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TextFontStyle = /* @__PURE__ */ _export_sfc(_sfc_main$_, [["__scopeId", "data-v-bb277b09"]]);
+const TextFontStyle = /* @__PURE__ */ _export_sfc(_sfc_main$_, [["__scopeId", "data-v-3b6dd2cf"]]);
 const _sfc_main$Z = /* @__PURE__ */ defineComponent({
   __name: "TextHAlignStyle",
   props: {
@@ -10175,7 +10172,7 @@ const _sfc_main$Z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TextHAlignStyle = /* @__PURE__ */ _export_sfc(_sfc_main$Z, [["__scopeId", "data-v-836d676d"]]);
+const TextHAlignStyle = /* @__PURE__ */ _export_sfc(_sfc_main$Z, [["__scopeId", "data-v-63ee2427"]]);
 const _sfc_main$Y = /* @__PURE__ */ defineComponent({
   __name: "TextVAlignStyle",
   props: {
@@ -10246,7 +10243,7 @@ const _sfc_main$Y = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TextVAlignStyle = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["__scopeId", "data-v-2a9ea693"]]);
+const TextVAlignStyle = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["__scopeId", "data-v-a40ac773"]]);
 const _hoisted_1$o = { class: "line" };
 const _hoisted_2$f = { class: "input" };
 const _hoisted_3$8 = { class: "line" };
@@ -10260,8 +10257,11 @@ const _sfc_main$X = /* @__PURE__ */ defineComponent({
   __name: "index",
   props: {
     verticalAlign: { type: Boolean, default: false },
-    textStyle: { type: Object, default: () => {
-    } },
+    textStyle: {
+      type: Object,
+      default: () => {
+      }
+    },
     hideAlign: { type: Boolean, default: false },
     hideFontStyle: { type: Array, default: () => [] },
     colorType: {
@@ -10280,7 +10280,7 @@ const _sfc_main$X = /* @__PURE__ */ defineComponent({
   ],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "6c30b640": colorBorder.value
+      "954d8ee2": colorBorder.value
     }));
     const props = __props;
     const emit = __emit;
@@ -10449,7 +10449,7 @@ const _sfc_main$X = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TextStyle = /* @__PURE__ */ _export_sfc(_sfc_main$X, [["__scopeId", "data-v-f7295985"]]);
+const TextStyle = /* @__PURE__ */ _export_sfc(_sfc_main$X, [["__scopeId", "data-v-c65c80c4"]]);
 const fonts = [
   {
     value: "微软雅黑",
@@ -12098,7 +12098,7 @@ const _sfc_main$W = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfTag = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["__scopeId", "data-v-6f57aea4"]]);
+const MfTag = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["__scopeId", "data-v-540aeb6f"]]);
 function mfTagCreate(chart) {
   chart.chart.data.dataSet = cloneDeep(mfTagData.defaultData);
   chart.chart.data.headers = mfTagData.defaultHeaders && mfTagData.defaultHeaders();
@@ -16059,7 +16059,7 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ConfigWrapper = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["__scopeId", "data-v-983b5363"]]);
+const ConfigWrapper = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["__scopeId", "data-v-bb171bf9"]]);
 const _sfc_main$S = /* @__PURE__ */ defineComponent({
   __name: "SelectFields",
   props: {
@@ -16209,7 +16209,7 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const SelectFields = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["__scopeId", "data-v-d77a46a8"]]);
+const SelectFields = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["__scopeId", "data-v-8e560497"]]);
 const _sfc_main$R = /* @__PURE__ */ defineComponent({
   __name: "TableFields",
   props: {
@@ -16318,7 +16318,7 @@ const _sfc_main$R = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TableFields = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["__scopeId", "data-v-ab30c414"]]);
+const TableFields = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["__scopeId", "data-v-d17c3e23"]]);
 const buildTableFields = async (index2, sqlQuery) => {
   var _a, _b;
   const apiStore = useApiStore();
@@ -16423,7 +16423,7 @@ const _sfc_main$Q = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ConfigButton = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["__scopeId", "data-v-5def58d3"]]);
+const ConfigButton = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["__scopeId", "data-v-749209b7"]]);
 const _hoisted_1$m = { class: "condition" };
 const _sfc_main$P = /* @__PURE__ */ defineComponent({
   __name: "TableJoins",
@@ -16854,7 +16854,7 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TableJoins = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["__scopeId", "data-v-3c8de60e"]]);
+const TableJoins = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["__scopeId", "data-v-994f0722"]]);
 const _sfc_main$O = /* @__PURE__ */ defineComponent({
   __name: "TableLimit",
   props: {
@@ -17167,7 +17167,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FilterVariable = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-93d6e10b"]]);
+const FilterVariable = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-682f1b0b"]]);
 const _sfc_main$L = /* @__PURE__ */ defineComponent({
   __name: "TableField",
   props: {
@@ -17359,7 +17359,7 @@ const _sfc_main$K = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FilterValue = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["__scopeId", "data-v-47b0aa9c"]]);
+const FilterValue = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["__scopeId", "data-v-51d7780d"]]);
 const _sfc_main$J = /* @__PURE__ */ defineComponent({
   __name: "FilterModal",
   emits: ["submit", "register"],
@@ -18180,7 +18180,7 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TableAggregate = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["__scopeId", "data-v-309b8487"]]);
+const TableAggregate = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["__scopeId", "data-v-015514d7"]]);
 const otherField = "其他";
 const _sfc_main$E = /* @__PURE__ */ defineComponent({
   __name: "OrderModal",
@@ -18745,7 +18745,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FormulaManagement = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-29c529a0"]]);
+const FormulaManagement = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-c153f5dd"]]);
 const _hoisted_1$k = {
   key: 0,
   class: "content"
@@ -18884,7 +18884,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FormulaSelect = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__scopeId", "data-v-4dfff9d1"]]);
+const FormulaSelect = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__scopeId", "data-v-8a326608"]]);
 const DisplayName = "displayName";
 const formulaProps = {
   config: {
@@ -19147,7 +19147,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FormulaCompact = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__scopeId", "data-v-f0c693d9"]]);
+const FormulaCompact = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__scopeId", "data-v-6be925b3"]]);
 const _hoisted_1$j = { style: { "margin-top": "6px", "display": "flex", "justify-content": "flex-end" } };
 const _sfc_main$y = /* @__PURE__ */ defineComponent({
   __name: "FormulaAround",
@@ -19223,7 +19223,7 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
                           onClick: handleCancel
                         }, {
                           default: withCtx(() => _cache[1] || (_cache[1] = [
-                            createTextVNode(" 取消 ")
+                            createTextVNode(" 取消")
                           ])),
                           _: 1
                         }),
@@ -19234,7 +19234,7 @@ const _sfc_main$y = /* @__PURE__ */ defineComponent({
                           onClick: handleOk
                         }, {
                           default: withCtx(() => _cache[2] || (_cache[2] = [
-                            createTextVNode(" 确定 ")
+                            createTextVNode(" 确定")
                           ])),
                           _: 1
                         })
@@ -19484,7 +19484,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FormulaConfig = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__scopeId", "data-v-ace9349f"]]);
+const FormulaConfig = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__scopeId", "data-v-1728fc4d"]]);
 const _sfc_main$w = /* @__PURE__ */ defineComponent({
   __name: "ParamsModal",
   emits: ["register", "submit"],
@@ -20160,7 +20160,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }, null, 8, ["onRegister", "onSubmit"])
   ], 64);
 }
-const CustomColModal = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render], ["__scopeId", "data-v-59409dba"]]);
+const CustomColModal = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render], ["__scopeId", "data-v-96c57642"]]);
 const _sfc_main$s = /* @__PURE__ */ defineComponent({
   __name: "TableCustomCol",
   props: {
@@ -20622,7 +20622,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ApiConfig = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__scopeId", "data-v-81dcf4cf"]]);
+const ApiConfig = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__scopeId", "data-v-2e1e444e"]]);
 const _hoisted_1$g = { key: 0 };
 const _hoisted_2$b = { key: 1 };
 const _sfc_main$q = /* @__PURE__ */ defineComponent({
@@ -20790,7 +20790,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const PreviewFrame = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__scopeId", "data-v-4737b900"]]);
+const PreviewFrame = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["__scopeId", "data-v-1bb3fd25"]]);
 const _hoisted_1$e = { class: "share-title" };
 const _sfc_main$o = /* @__PURE__ */ defineComponent({
   __name: "ScreenPreview",
@@ -20966,7 +20966,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ScreenPreview = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__scopeId", "data-v-2a3111f6"]]);
+const ScreenPreview = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__scopeId", "data-v-a6d73872"]]);
 const _sfc_main$n = /* @__PURE__ */ defineComponent({
   __name: "ScreenSizeConfig",
   setup(__props) {
@@ -21078,7 +21078,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ScreenSizeConfig = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-363b4ecc"]]);
+const ScreenSizeConfig = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-ce9ed6e3"]]);
 const _sfc_main$m = /* @__PURE__ */ defineComponent({
   __name: "ParamsConfig",
   setup(__props) {
@@ -21266,7 +21266,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
             ]),
             _cache[12] || (_cache[12] = createElementVNode("div", { class: "title" }, "全局参数", -1)),
             createVNode(_sfc_main$m),
-            _cache[13] || (_cache[13] = createElementVNode("div", { class: "title" }, " 描述 ", -1)),
+            _cache[13] || (_cache[13] = createElementVNode("div", { class: "title" }, " 描述", -1)),
             createVNode(unref(Textarea), {
               value: unref(screenEditStore2).getCanvasConfig.screenDesc,
               "onUpdate:value": _cache[4] || (_cache[4] = ($event) => unref(screenEditStore2).getCanvasConfig.screenDesc = $event),
@@ -21280,7 +21280,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const CanvasConfig = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-b6f374cd"]]);
+const CanvasConfig = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-df5fcc0e"]]);
 const _hoisted_1$c = { class: "header" };
 const _sfc_main$k = /* @__PURE__ */ defineComponent({
   ...{ name: "FrameConfig" },
@@ -21424,7 +21424,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const CanvasRulerLine = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-cf51c4b6"]]);
+const CanvasRulerLine = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-1e39d4b2"]]);
 const _hoisted_1$a = {
   id: "horn",
   class: "horn"
@@ -21687,7 +21687,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const CanvasRuler = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-ac4533da"]]);
+const CanvasRuler = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-6923d374"]]);
 const _sfc_main$h = /* @__PURE__ */ defineComponent({
   __name: "CanvasBackground",
   props: {
@@ -21729,7 +21729,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const CanvasBackground = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-b6b2d490"]]);
+const CanvasBackground = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-180591b6"]]);
 const _hoisted_1$9 = { class: "scale-add-reduce" };
 const _hoisted_2$7 = { class: "scale-lock" };
 const _sfc_main$g = /* @__PURE__ */ defineComponent({
@@ -21955,7 +21955,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const CanvasOperator = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-202e0a7f"]]);
+const CanvasOperator = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-2148ffa6"]]);
 const calcPoints = {
   lt: calcLeftTop,
   t: calcTopBottom,
@@ -22169,7 +22169,7 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "2856ddb7": bgColor.value
+      "755a5475": bgColor.value
     }));
     const props = __props;
     const { token } = theme.useToken();
@@ -22562,7 +22562,7 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ChartContain = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-89d1b0a6"]]);
+const ChartContain = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-4921766f"]]);
 const LinesEnum = {
   rt: "横上",
   rm: "横中",
@@ -22830,13 +22830,16 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ChartNearLine = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-601ca6cd"]]);
+const ChartNearLine = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-b5e6ef52"]]);
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
   ...{ name: "ChartMultiSelect" },
   __name: "index",
   props: {
-    selectArea: { type: Object, default: () => {
-    } }
+    selectArea: {
+      type: Object,
+      default: () => {
+      }
+    }
   },
   setup(__props) {
     const screenEditStore2 = useScreenEditStore();
@@ -22857,7 +22860,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ChartMultiSelect = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-8a38985c"]]);
+const ChartMultiSelect = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-71b99035"]]);
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
   ...{ name: "ScreenCanvas" },
   __name: "index",
@@ -23044,7 +23047,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ScreenCanvas = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-b52e3cb3"]]);
+const ScreenCanvas = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-b35b1ecc"]]);
 const minScale = 0.2;
 const maxScale = 5;
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
@@ -23232,7 +23235,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index$3 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-91461ab9"]]);
+const index$3 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-8f6b942e"]]);
 const _hoisted_1$6 = {
   key: 0,
   class: "header"
@@ -23348,7 +23351,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FrameBox = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-a63f4cd9"]]);
+const FrameBox = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-8929fb33"]]);
 const _hoisted_1$5 = { class: "item-content" };
 const _hoisted_2$4 = ["src"];
 const _sfc_main$7 = /* @__PURE__ */ defineComponent({
@@ -23367,7 +23370,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   emits: ["expand", "select", "enter", "leave"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "3506f7ca": bgColor.value
+      "63b586c6": bgColor.value
     }));
     const props = __props;
     const emit = __emit;
@@ -23456,7 +23459,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const LayerItem = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-2b519d29"]]);
+const LayerItem = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-426de506"]]);
 const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   __name: "LayerGroup",
   props: {
@@ -23560,7 +23563,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const LayerGroup = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-927d4d02"]]);
+const LayerGroup = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-952c113c"]]);
 const _hoisted_1$4 = ["onDrop"];
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   ...{ name: "FrameLayer" },
@@ -23703,7 +23706,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index$2 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-26a68659"]]);
+const index$2 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-bae16fe9"]]);
 const _hoisted_1$3 = { class: "menu-item-hide-title" };
 const _hoisted_2$3 = { class: "title" };
 const _sfc_main$4 = /* @__PURE__ */ defineComponent({
@@ -23728,10 +23731,10 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   emits: ["menuClick", "menuChange"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "20f14070": darkBack.value,
-      "12108711": `${unref(width)}px`,
-      "d3d9e2ec": lightBack.value,
-      "743029ae": `${unref(width) - 15}px`
+      "0d1a8dbe": darkBack.value,
+      "4d1bbc42": `${unref(width)}px`,
+      "2f136afc": lightBack.value,
+      "4b451fa0": `${unref(width) - 15}px`
     }));
     const props = __props;
     const emit = __emit;
@@ -23816,7 +23819,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ChartMenus = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-709f293c"]]);
+const ChartMenus = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-dea86191"]]);
 const _hoisted_1$2 = ["onDragstart", "onDblclick"];
 const _hoisted_2$2 = { class: "box-header" };
 const _hoisted_3$2 = { class: "box-header-text" };
@@ -23911,7 +23914,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ChartItems = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-242dbad8"]]);
+const ChartItems = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-ccbcba0b"]]);
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   ...{ name: "FrameChart" },
   __name: "index",
@@ -24049,7 +24052,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index$1 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-e8ad4e97"]]);
+const index$1 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-c92d9539"]]);
 const _hoisted_1$1 = ["onClick"];
 const _hoisted_2$1 = { class: "name" };
 const _hoisted_3$1 = { class: "short-cut" };
@@ -24114,7 +24117,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const AlignMenu = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-ac9328a7"]]);
+const AlignMenu = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-f4307b07"]]);
 const _hoisted_1 = { class: "short-cut" };
 const _hoisted_2 = { class: "short-cut" };
 const _hoisted_3 = { class: "short-cut" };
@@ -24511,7 +24514,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-4bec2733"]]);
+const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-05b7ebee"]]);
 export {
   BorderBox8 as $,
   BorderBox21 as A,

@@ -13,9 +13,9 @@
 </template>
 <script lang="ts">
   import type { ToolbarConfig } from "./Types";
-  import { defineComponent, ref, onUnmounted, unref, nextTick, watchEffect } from "vue";
+  import { defineComponent, nextTick, onUnmounted, ref, unref, watchEffect } from "vue";
   import { Divider, Tooltip } from "ant-design-vue";
-  import { Icon } from "@mfish/core/src/components/Icon";
+  import { Icon } from "@mfish/core/components/Icon";
   import { useFlowChartContext } from "./UseFlowContext";
   import { ToolbarTypeEnum } from "./Enum";
 
@@ -141,6 +141,7 @@
     .lf-graph {
       background: @app-content-background;
     }
+
     .@{prefix-cls} {
       .disabled {
         color: rgba(255, 255, 255, 0.3);

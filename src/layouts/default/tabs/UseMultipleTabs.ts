@@ -1,11 +1,11 @@
-import { toRaw, ref, nextTick } from "vue";
+import { nextTick, ref, toRaw } from "vue";
 import type { RouteLocationNormalized } from "vue-router";
-import { useDesign } from "@mfish/core";
+import { useRouter } from "vue-router";
+import { useDesign } from "@mfish/core/hooks";
 import { useSortable } from "@/hooks/UseSortable";
 import { useMultipleTabStore } from "@mfish/stores/modules";
-import { isNullAndUnDef } from "@mfish/core/src/utils/Is";
-import projectSetting from "@mfish/core/src/settings/ProjectSetting";
-import { useRouter } from "vue-router";
+import { isNullAndUnDef } from "@mfish/core/utils/Is";
+import projectSetting from "@mfish/core/settings/ProjectSetting";
 
 export function initAffixTabs(): string[] {
   const affixList = ref<RouteLocationNormalized[]>([]);

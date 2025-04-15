@@ -2,8 +2,8 @@ import { Modal as AModal } from "ant-design-vue";
 import { defineComponent, toRefs, unref } from "vue";
 import { basicProps } from "../Props";
 import { useModalDragMove } from "../hooks/UseModalDrag";
-import { useAttrs } from "../../../../hooks/core/UseAttrs";
-import { extendSlots } from "../../../../utils/helper/TsxHelper";
+import { useAttrs } from "@core/hooks";
+import { extendSlots } from "@core/utils/helper/TsxHelper.tsx";
 import { Recordable } from "@mfish/types";
 
 export default defineComponent({

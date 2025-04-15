@@ -45,20 +45,18 @@
   <DbConnectModal @register="registerDBModal" @success="addDBSuccess" />
 </template>
 <script lang="ts" setup>
-  import { ref, onMounted, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { onMounted, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { codeBuildFormSchema, reqSearches } from "./codeBuild.data";
-  import { BasicModal, useModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicModal, useModal, useModalInner } from "@mfish/core/components/Modal";
   import { insertCodeBuild, updateCodeBuild } from "@/api/sys/CodeBuild";
-  import { buildUUID } from "@mfish/core/src/utils/Uuid";
-  import { getDictItems } from "@mfish/core/src/api/sys/DictItem";
-  import { getDBTree, getFieldList } from "@mfish/core/src/api/sys/DbConnect";
-  import { DictItem } from "@mfish/core/src/api/sys/model/DictItemModel";
+  import { buildUUID } from "@mfish/core/utils/Uuid";
+  import { DictItem, getDBTree, getDictItems, getFieldList } from "@mfish/core/api";
   import { getDictList } from "@/api/sys/Dict";
   import { Recordable } from "@mfish/types";
   import DbConnectModal from "@/views/sys/db-connect/DbConnectModal.vue";
-  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
+  import { usePermission } from "@mfish/core/hooks";
 
   defineOptions({ name: "CodeBuildModal" });
 
@@ -218,6 +216,7 @@
       isUpdate: false
     });
   }
+
   function addDBSuccess() {
     //改变参数强制更新
     updateSchema({

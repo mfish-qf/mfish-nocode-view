@@ -93,21 +93,19 @@
 </template>
 <script lang="ts" setup>
   import { reactive, ref } from "vue";
-  import { BasicTable, useTable, TableAction, BasicColumn } from "@mfish/core/src/components/Table";
-  import { deleteUser, getUserList } from "@mfish/core/src/api/sys/User";
+  import { BasicColumn, BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
+  import { deleteUser, deleteUserOrg, getTenantUserList, getUserList } from "@mfish/core/api";
   import { PageWrapper } from "@/components/general/Page";
   import OrgTree from "./OrgTree.vue";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import AccountModal from "./AccountModal.vue";
   import { columns, searchFormSchema } from "./account.data";
-  import { usePermission } from "@mfish/core/src/hooks/web/UsePermission";
+  import { useDesign, useMessage, usePermission } from "@mfish/core/hooks";
   import PasswordModal from "@/views/sys/account/PasswordModal.vue";
-  import { deleteUserOrg, getTenantUserList } from "@mfish/core/src/api/sys/SsoTenant";
-  import { useDesign } from "@mfish/core";
   import AccountSelectModal from "@/views/sys/account/AccountSelectModal.vue";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
   import { Recordable } from "@mfish/types";
   import AccountViewModal from "@/views/sys/account/AccountViewModal.vue";
+
   defineOptions({ name: "AccountManagement" });
   const props = defineProps({
     source: {
@@ -212,6 +210,7 @@
       handleSuccess();
     });
   }
+
   function handleSelect(orgId = "") {
     searchInfo.orgId = orgId;
     reload();
@@ -224,6 +223,7 @@
       border-left: 1px solid #303030;
     }
   }
+
   .@{prefix-cls} {
     padding: 0 0 0 5px;
     border-left: 1px solid #d9d9d9;

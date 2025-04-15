@@ -48,14 +48,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { deleteScreenResourceApi, getScreenResourceApiList, ScreenResourceApi } from "@mfish/nocode";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import ScreenResourceApiModal from "./ScreenResourceApiModal.vue";
   import ScreenResourceApiViewModal from "./ScreenResourceApiViewModal.vue";
   import { columns, searchFormSchema } from "./screenResourceApi.data";
   import { ref } from "vue";
-  import { Button as AButton } from "@mfish/core/src/components/Button";
+  import { Button as AButton } from "@mfish/core/components/Button";
 
   defineOptions({ name: "ScreenResourceApiManagement" });
   const [registerModal, { openModal }] = useModal();
@@ -87,6 +87,7 @@
       dataIndex: "action"
     }
   });
+
   /**
    * 新建
    */

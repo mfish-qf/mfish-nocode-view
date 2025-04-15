@@ -12,7 +12,7 @@
   />
 </template>
 <script lang="ts" setup>
-  import { unref, computed, toRaw } from "vue";
+  import { computed, toRaw, unref } from "vue";
   import { Table as ATable } from "ant-design-vue";
   import { cloneDeep } from "lodash-es";
   import { isFunction } from "@core/utils/Is";
@@ -20,7 +20,7 @@
   import { INDEX_COLUMN_FLAG } from "../Const";
   import { useTableContext } from "../hooks/UseTableContext";
   import { ColumnType } from "ant-design-vue/es/table/interface";
-  import { Recordable, Fn } from "@mfish/types";
+  import { Fn, Recordable } from "@mfish/types";
   import { parseRowKey } from "@core/components/Table/src/Helper";
 
   defineOptions({ name: "BasicTableFooter" });

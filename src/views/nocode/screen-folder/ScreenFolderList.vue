@@ -14,7 +14,7 @@
       </template>
       <template #renderItem="{ item, index }">
         <ACard v-if="index === 0" v-auth="'sys:screen:insert'" class="add-screen">
-          <AButton type="primary" @click="createScreen" pre-icon="ant-design:plus-outlined"> 新建大屏 </AButton>
+          <AButton type="primary" @click="createScreen" pre-icon="ant-design:plus-outlined"> 新建大屏</AButton>
         </ACard>
         <ScreenCard
           v-else
@@ -48,18 +48,18 @@
 <script setup lang="ts">
   import ScreenCard from "@/views/nocode/screen-folder/ScreenCard.vue";
   import { computed, ref, watch } from "vue";
-  import { List as AList, Card as ACard, theme, Pagination } from "ant-design-vue";
-  import { propTypes } from "@mfish/core/src/utils/PropTypes";
-  import { getScreenFolderAndFile, getScreenFolderTree, deleteMfScreen, updateMfScreen } from "@mfish/nocode";
-  import { useDesign } from "@mfish/core";
+  import { Card as ACard, List as AList, Pagination, theme } from "ant-design-vue";
+  import { propTypes } from "@mfish/core/utils/PropTypes";
+  import { deleteMfScreen, getScreenFolderAndFile, getScreenFolderTree, updateMfScreen } from "@mfish/nocode";
+  import { useDesign } from "@mfish/core/hooks";
   import { FileFolderVo } from "@/api/nocode/model/FileFolderModel";
-  import { usePagination } from "@mfish/core/src/utils/PageUtils";
+  import { usePagination } from "@mfish/core/utils/PageUtils";
   import FolderMoveModal from "@/views/nocode/api-folder/FolderMoveModal.vue";
-  import { useModal } from "@mfish/core/src/components/Modal";
-  import { useOutsideOpen } from "@mfish/core/src/utils/OutsideOpenUtils";
-  import { router } from "@mfish/core/src/router";
+  import { useModal } from "@mfish/core/components/Modal";
+  import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
+  import { router } from "@mfish/core/router";
   import { SCREEN_SAVE } from "@/views/nocode/screen-folder/screenFolder.data";
-  import InputSearch from "@mfish/core/src/components/InputSearch";
+  import InputSearch from "@mfish/core/components/InputSearch";
   import PreviewModal from "@/views/nocode/screen-folder/PreviewModal.vue";
   import ScreenResource from "@/views/nocode/screen-resource/ScreenResource.vue";
 
@@ -110,6 +110,7 @@
     }
     fetch(props.folderId);
   }
+
   function folderClick(record: FileFolderVo) {
     if (record.fType === 0) {
       emit("folderClick", record);
@@ -133,6 +134,7 @@
       });
     }
   }
+
   function folderRename(value) {
     data.value.forEach((item) => {
       if (item.id === value.id) {
@@ -145,6 +147,7 @@
   function folderMove(data) {
     openFolderMoveModal(true, data);
   }
+
   function moveSuccess() {
     pageRefresh();
   }
@@ -164,6 +167,7 @@
     });
     open(routeData);
   }
+
   function cloneScreen(data) {
     const routeData = router.resolve({
       path: screenUrl,
@@ -171,11 +175,13 @@
     });
     open(routeData);
   }
+
   function releasedScreen(index) {
     if (data.value.length > index) {
       data.value[index].released = true;
     }
   }
+
   function rollbackScreen(index) {
     if (data.value.length > index) {
       data.value[index].released = false;
@@ -193,10 +199,12 @@
       }
     }
   }
+
   .@{prefix-cls} {
     .ant-list-header {
       border-block-end: none !important;
     }
+
     .header {
       display: flex;
       justify-content: flex-end;
@@ -204,6 +212,7 @@
       gap: 12px;
       margin: 0 10px 0 10px;
     }
+
     .add-screen {
       border-radius: 8px;
       box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.05);
@@ -216,6 +225,7 @@
       height: 34vh;
       min-height: 258px;
       background-color: v-bind(bgColor);
+
       &:hover {
         box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
         transform: scale(1.01);

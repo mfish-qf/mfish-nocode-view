@@ -7,15 +7,14 @@ import "ant-design-vue/dist/reset.css";
 import "animate.css/animate.min.css";
 import App from "./App.vue";
 import { createApp } from "vue";
-import { router, setupRouter } from "@mfish/core/src/router";
+import { router, setupRouter, setupRouterGuard } from "@mfish/core/router";
 import { setupStore } from "@mfish/stores";
-import { setLocal } from "@mfish/core/src/i18n/SetupI18n";
-import { setupRouterGuard } from "@mfish/core/src/router/guard";
-import { setupErrorHandle } from "@mfish/core/src/logics/error-handle";
-import { isDevMode } from "@mfish/core/src/utils/Env";
-import { registerGlobComponent } from "@mfish/core/src/components/RegisterGlobComponent";
-import { setupGlobDirectives } from "@mfish/core/src/directives";
-import { initAppConfigStore } from "@mfish/core/src/logics/InitAppConfig";
+import { setLocal } from "@mfish/core/i18n/SetupI18n";
+import { setupErrorHandle } from "@mfish/core/logics/error-handle";
+import { isDevMode } from "@mfish/core/utils/Env";
+import { registerGlobComponent } from "@mfish/core/components/RegisterGlobComponent";
+import { setupGlobDirectives } from "@mfish/core/directives";
+import { initAppConfigStore } from "@mfish/core/logics/InitAppConfig";
 
 if (isDevMode()) {
   import("ant-design-vue/es/style");

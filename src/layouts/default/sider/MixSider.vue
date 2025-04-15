@@ -66,27 +66,23 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import type { Menu } from "@mfish/core/src/router/Types";
+  import type { Menu } from "@mfish/core/router";
+  import { getChildrenMenus, getCurrentParentPath, getShallowMenus } from "@mfish/core/router";
   import type { CSSProperties } from "vue";
   import { computed, onMounted, ref, unref, watch } from "vue";
   import type { RouteLocationNormalized } from "vue-router";
-  import { ScrollContainer } from "@mfish/core/src/components/Container";
+  import { ScrollContainer } from "@mfish/core/components/Container";
   import { SimpleMenu, SimpleMenuTag } from "@/components/general/SimpleMenu";
-  import { Icon } from "@mfish/core/src/components/Icon";
+  import { Icon } from "@mfish/core/components/Icon";
   import { AppLogo } from "@/components/general/Application";
-  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
+  import { externalOpen, useDesign, useGlobSetting, useGo, useI18n, useMenuSetting } from "@mfish/core/hooks";
   import { usePermissionStore } from "@mfish/stores/modules";
   import { useDragLine } from "./UseLayoutSider";
-  import { useGlobSetting } from "@mfish/core/src/hooks/setting";
-  import { useDesign } from "@mfish/core";
-  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
-  import { externalOpen, useGo } from "@mfish/core/src/hooks/web/UsePage";
   import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from "@mfish/core/enums";
-  import { ClickOutside as vClickOutside } from "@mfish/core/src/directives";
-  import { getChildrenMenus, getCurrentParentPath, getShallowMenus } from "@mfish/core/src/router/menus";
-  import { listenerRouteChange } from "@mfish/core/src/logics/mitt/RouteChange";
+  import { ClickOutside as vClickOutside } from "@mfish/core/directives";
+  import { listenerRouteChange } from "@mfish/core/logics/mitt/RouteChange";
   import LayoutTrigger from "../trigger/index.vue";
-  import { Nullable, ElRef } from "@mfish/types";
+  import { ElRef, Nullable } from "@mfish/types";
 
   defineOptions({ name: "LayoutMixSider" });
   const menuModules = ref<Menu[]>([]);
@@ -348,6 +344,7 @@
 
         &__title {
           font-size: 16px;
+
           .pushpin {
             color: rgb(0 0 0 / 25%);
 
@@ -358,6 +355,7 @@
         }
       }
     }
+
     &.open {
       > .scrollbar {
         border-right: 1px solid @sider-bg-color;
@@ -415,6 +413,7 @@
 
         &--active {
           font-weight: 700;
+
           &::before {
             position: absolute;
             top: 0;

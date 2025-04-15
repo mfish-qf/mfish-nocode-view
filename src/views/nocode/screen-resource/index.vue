@@ -25,16 +25,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { useDesign } from "@mfish/core";
+  import { useDesign } from "@mfish/core/hooks";
   import ScreenResourceList from "@/views/nocode/screen-resource/ScreenResourceList.vue";
   import { Avatar, theme } from "ant-design-vue";
   import { computed, onMounted, ref } from "vue";
-  import { Icon } from "@mfish/core/src/components/Icon";
-  import { queryCategoryTreeByCode } from "@mfish/core/src/api/sys/DictCategory";
-  import { DictCategory } from "@mfish/core/src/api/sys/model/DictCategoryModel";
-  import { imageUrl } from "@mfish/core/src/utils/file/FileUtils";
-  import { getLocalFileUrl } from "@mfish/core/src/utils/file/FileUtils";
-  import logo from "@mfish/core/src/assets/images/logo.png";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { DictCategory, queryCategoryTreeByCode } from "@mfish/core/api";
+  import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
+  import logo from "@mfish/core/assets/images/logo.png";
   import { useUserStore } from "@mfish/stores/modules";
 
   defineOptions({ name: "ScreenResourceManagement" });
@@ -73,11 +71,13 @@
       }
     });
   });
+
   function checkHandle(index: number) {
     tagGroup.value.forEach((item, i) => {
       item.checked = i === index;
     });
   }
+
   function cloneScreen(id: string) {
     emit("cloneScreen", id);
     window.parent.postMessage({ cloneScreen: id }, "/");
@@ -91,6 +91,7 @@
         .tag-group {
           .tag {
             box-shadow: 0 0 4px rgba(255, 255, 255, 0.15);
+
             &:hover {
               box-shadow: 0 2px 8px rgba(255, 255, 255, 0.15);
             }
@@ -107,10 +108,12 @@
       align-content: center;
       justify-content: space-between;
       padding-right: 10px;
+
       .tag-group {
         margin: 12px;
         display: flex;
         gap: 12px;
+
         .tag {
           border-radius: 4px;
           box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
@@ -119,11 +122,13 @@
           font-size: 14px;
           cursor: pointer;
           transition: scale 0.2s ease-in-out;
+
           &:hover {
             scale: 1.02;
             color: @main-color;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
           }
+
           &.checked {
             scale: 1;
             border: 1px solid @main-color;

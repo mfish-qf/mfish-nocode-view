@@ -1,4 +1,4 @@
-import type { QRCodeSegment, QRCodeRenderersOptions } from "qrcode";
+import type { QRCodeRenderersOptions, QRCodeSegment } from "qrcode";
 
 export type ContentType = string | QRCodeSegment[];
 

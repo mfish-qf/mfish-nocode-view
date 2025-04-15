@@ -19,14 +19,16 @@
           :custom-request="handleImport"
         >
           <AButton ref="ref1" color="success" :loading="importLoading" v-auth="'demo:demoImportExport:import'">
-            <ImportOutlined />导入
+            <ImportOutlined />
+            导入
           </AButton>
         </AUpload>
 
         <AButton ref="ref2" color="warning" @click="handleExport" v-auth="'demo:demoImportExport:export'">
-          <ExportOutlined />导出
+          <ExportOutlined />
+          导出
         </AButton>
-        <AButton color="error" @click="handleBatchDelete" v-auth="'demo:demoImportExport:delete'"> 批量删除 </AButton>
+        <AButton color="error" @click="handleBatchDelete" v-auth="'demo:demoImportExport:delete'"> 批量删除</AButton>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -76,7 +78,7 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import {
     deleteBatchDemoImportExport,
     deleteDemoImportExport,
@@ -85,18 +87,18 @@
     getDemoImportExportList,
     importDemo
   } from "@/api/demo/DemoImportExport";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import DemoImportExportModal from "./DemoImportExportModal.vue";
   import DemoImportExportViewModal from "./DemoImportExportViewModal.vue";
   import { columns, searchFormSchema } from "./demoImportExport.data";
   import { DemoImportExport } from "@/api/demo/model/DemoImportExportModel";
   import { onMounted, ref } from "vue";
-  import { Upload as AUpload, Tour as ATour } from "ant-design-vue";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
-  import { ImportOutlined, ExportOutlined } from "@ant-design/icons-vue";
-  import { DictTag } from "@mfish/core/src/components/DictTag";
-  import { Button as AButton } from "@mfish/core/src/components/Button";
   import type { TourProps } from "ant-design-vue";
+  import { Tour as ATour, Upload as AUpload } from "ant-design-vue";
+  import { useMessage } from "@mfish/core/hooks";
+  import { ExportOutlined, ImportOutlined } from "@ant-design/icons-vue";
+  import { DictTag } from "@mfish/core/components/DictTag";
+  import { Button as AButton } from "@mfish/core/components/Button";
   import { PageWrapper } from "@/components/general/Page";
 
   defineOptions({ name: "DemoImportExportManagement" });
@@ -224,6 +226,7 @@
   function handleSuccess() {
     reload();
   }
+
   function tourClose() {
     open.value = false;
   }

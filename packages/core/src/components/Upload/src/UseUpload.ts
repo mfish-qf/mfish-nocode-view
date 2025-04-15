@@ -1,5 +1,5 @@
-import { Ref, unref, computed } from "vue";
-import { useI18n } from "@core/hooks/web/UseI18n";
+import { computed, Ref, unref } from "vue";
+import { useI18n } from "@core/hooks";
 
 const { t } = useI18n();
 

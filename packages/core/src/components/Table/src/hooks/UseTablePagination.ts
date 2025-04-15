@@ -1,10 +1,10 @@
 import type { PaginationProps } from "../types/Pagination";
 import type { BasicTableProps } from "../types/Table";
-import { computed, unref, ref, ComputedRef, watch, h } from "vue";
+import { computed, ComputedRef, h, ref, unref, watch } from "vue";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons-vue";
 import { isBoolean } from "@core/utils/Is";
 import { PAGE_SIZE, PAGE_SIZE_OPTIONS } from "../Const";
-import { useI18n } from "@core/hooks/web/UseI18n";
+import { useI18n } from "@core/hooks";
 
 interface ItemRender {
   page: number;

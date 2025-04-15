@@ -22,12 +22,12 @@
   </BasicModal>
 </template>
 <script setup lang="ts">
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { ScreenPreview, useScreenEditStore } from "@mfish/nocode";
   import { computed, ref } from "vue";
-  import { Icon } from "@mfish/core/src/components/Icon";
+  import { Icon } from "@mfish/core/components/Icon";
   import { Tooltip as ATooltip } from "ant-design-vue";
-  import { router } from "@mfish/core/src/router";
+  import { router } from "@mfish/core/router";
 
   const emit = defineEmits(["cloneScreen", "submit", "register"]);
   const screenEditStore = useScreenEditStore();
@@ -50,6 +50,7 @@
     screenEditStore.setIsResource(data.isResource);
   });
   const title = computed(() => screenEditStore.getCanvasConfig.screenName);
+
   function previewScreen() {
     closeModal();
     clearData();
@@ -62,11 +63,13 @@
       window.open(routeData.href, "_blank");
     }, 1);
   }
+
   function clearData() {
     screenEditStore.setId("");
     screenEditStore.setIsResource(false);
     screenEditStore.setComponentList([]);
   }
+
   function cloneScreen() {
     closeModal();
     clearData();

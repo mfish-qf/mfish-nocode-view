@@ -75,17 +75,17 @@
   <ScreenResourceModal @register="registerModal" @success="releaseSuccess" />
 </template>
 <script lang="ts" setup>
-  import { RollbackOutlined, FolderTwoTone, EditTwoTone, DeleteTwoTone, EllipsisOutlined } from "@ant-design/icons-vue";
-  import { Card as ACard, Tooltip as ATooltip, Popconfirm as APopconfirm, Input as AInput } from "ant-design-vue";
-  import { Dropdown } from "@mfish/core/src/components/Dropdown";
-  import { ScreenFolderVo, deleteScreenResource, updateScreenFolder } from "@mfish/nocode";
-  import { useRootSetting, useDesign } from "@mfish/core";
-  import { nextTick, ref, watchEffect } from "vue";
+  import { DeleteTwoTone, EditTwoTone, EllipsisOutlined, FolderTwoTone, RollbackOutlined } from "@ant-design/icons-vue";
+  import { Card as ACard, Input as AInput, Popconfirm as APopconfirm, Tooltip as ATooltip } from "ant-design-vue";
+  import { Dropdown } from "@mfish/core/components/Dropdown";
+  import { deleteScreenResource, ScreenFolderVo, updateScreenFolder } from "@mfish/nocode";
+  import { useDesign, useRootSetting } from "@mfish/core/hooks";
   import type { PropType } from "vue";
-  import { setImage } from "@mfish/core/src/utils/file/FileUtils";
+  import { nextTick, ref, watchEffect } from "vue";
+  import { setImage } from "@mfish/core/utils/file/FileUtils";
   import { Nullable } from "@mfish/types";
   import ScreenResourceModal from "@/views/nocode/mf-screen/ScreenResourceModal.vue";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import ScreenShare from "@/views/nocode/mf-screen/ScreenShare.vue";
 
   const props = defineProps({
@@ -186,6 +186,7 @@
   function releaseSuccess() {
     emit("cardReleased", props.index);
   }
+
   function handleRollback() {
     if (!props.data?.id) return;
     deleteScreenResource(props.data.id).then((res) => {
@@ -210,10 +211,12 @@
       &:hover {
         box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.1);
       }
+
       .published-tag {
         box-shadow: 1px 1px 4px 1px rgba(255, 255, 255, 0.3);
       }
     }
+
     .@{prefix-cls}-share {
       color: @screen-item-normal-color;
     }
@@ -264,6 +267,7 @@
       color: rgba(0, 0, 0, 0.45);
       cursor: text;
     }
+
     .published-tag {
       position: absolute;
       z-index: 1;
@@ -278,6 +282,7 @@
       box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
     }
   }
+
   .share-title {
     width: calc(100% - 20px);
     font-size: 16px;

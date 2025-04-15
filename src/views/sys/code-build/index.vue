@@ -77,7 +77,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import {
     deleteBatchCodeBuild,
     deleteCodeBuild,
@@ -85,14 +85,14 @@
     getCodeBuildList,
     saveCodeLocal
   } from "@/api/sys/CodeBuild";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import CodeBuildModal from "./CodeBuildModal.vue";
   import { columns, searchFormSchema } from "./codeBuild.data";
   import { TableProps } from "ant-design-vue";
   import CodeQueryModal from "@/views/sys/code-build/CodeQueryModal.vue";
   import { CodeBuild } from "@/api/sys/model/CodeBuildModel";
-  import { isProdMode } from "@mfish/core/src/utils/Env";
-  import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
+  import { isProdMode } from "@mfish/core/utils/Env";
+  import { useMessage } from "@mfish/core/hooks";
   import CodeMenuModal from "@/views/sys/code-build/CodeMenuModal.vue";
   import { ref } from "vue";
   import { Recordable } from "@mfish/types";

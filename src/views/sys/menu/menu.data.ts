@@ -1,11 +1,10 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
 import { h, ref } from "vue";
 import { Tag } from "ant-design-vue";
-import { Icon } from "@mfish/core/src/components/Icon";
-import { DescItem } from "@mfish/core/src/components/Description";
-import { getMenuById } from "@mfish/core/src/api/sys/Menu";
-import { YNTag, YNTag_Name } from "@mfish/core/src/components/DictTag";
+import { Icon } from "@mfish/core/components/Icon";
+import { DescItem } from "@mfish/core/components/Description";
+import { getMenuById } from "@mfish/core/api";
+import { YNTag, YNTag_Name } from "@mfish/core/components/DictTag";
 
 export const columns: BasicColumn[] = [
   {

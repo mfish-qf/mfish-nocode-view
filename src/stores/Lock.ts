@@ -1,10 +1,10 @@
 import type { LockInfo } from "@mfish/types/src/type/store";
 import { defineStore } from "pinia";
 import { LOCK_INFO_KEY } from "@mfish/core/enums";
-import { Persistent } from "@mfish/core/src/utils/cache/Persistent";
+import { Persistent } from "@mfish/core/utils/cache/Persistent";
 import { useUserStore } from "@mfish/stores/modules";
-import { oauth2Config } from "@mfish/core/src/settings/LoginSetting";
-import { unLock } from "@mfish/core/src/api/sys/User";
+import { oauth2Config } from "@mfish/core/settings/LoginSetting";
+import { unLock } from "@mfish/core/api";
 import { Nullable } from "@mfish/types";
 
 interface LockState {

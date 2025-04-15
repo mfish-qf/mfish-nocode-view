@@ -1,5 +1,5 @@
 import { defHttp } from "../../utils/http/axios";
-import { DictItem, ReqDictItem, DictItemPageModel } from "./model/DictItemModel";
+import { DictItem, DictItemPageModel, ReqDictItem } from "./model/DictItemModel";
 
 /**
  * @description: 字典项

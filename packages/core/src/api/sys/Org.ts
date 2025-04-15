@@ -1,6 +1,5 @@
 import { defHttp } from "@core/utils/http/axios";
-import { ReqOrgUser, ReqSsoOrg, SsoOrg, SsoOrgPageModel } from "@core/api/sys/model/OrgModel";
-import { RoleInfo, SsoUserPageModel } from "@core/api/sys/model/UserModel";
+import { ReqOrgUser, ReqSsoOrg, RoleInfo, SsoOrg, SsoOrgPageModel, SsoUserPageModel } from "@core/api";
 
 /**
  * @description: 组织请求类

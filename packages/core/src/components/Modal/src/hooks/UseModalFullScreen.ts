@@ -20,5 +20,6 @@ export function useFullScreen(context: UseFullScreenContext) {
     e && e.stopPropagation();
     fullScreenRef.value = !unref(fullScreenRef);
   }
+
   return { getWrapClassName, handleFullScreen, fullScreenRef };
 }

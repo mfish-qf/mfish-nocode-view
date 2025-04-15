@@ -11,11 +11,10 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, computed } from "vue";
+  import { computed, defineComponent, PropType } from "vue";
 
   import { Switch } from "ant-design-vue";
-  import { useDesign } from "@mfish/core";
-  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
+  import { useDesign, useI18n } from "@mfish/core/hooks";
   import { baseHandler } from "../Handler";
   import { HandlerEnum } from "../Enum";
 

@@ -1,7 +1,6 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { DescItem } from "@mfish/core/src/components/Description";
-import { buildDictTag, getDictProps } from "@mfish/core/src/components/DictTag";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { DescItem } from "@mfish/core/components/Description";
+import { buildDictTag, getDictProps } from "@mfish/core/components/DictTag";
 
 /**
  * @description: 导入导出Demo

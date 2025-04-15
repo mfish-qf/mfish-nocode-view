@@ -1,6 +1,6 @@
-import type { Menu } from "@core/router/Types";
+import type { Menu } from "../Types.ts";
 import { usePermissionStore } from "@mfish/stores/modules";
-import { getAllParentPath } from "@core/router/helper/MenuHelper";
+import { getAllParentPath } from "@core/router";
 
 export function getAllMenus() {
   const permissionStore = usePermissionStore();

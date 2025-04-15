@@ -9,8 +9,8 @@
   </BasicModal>
 </template>
 <script setup lang="ts">
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { demoUpPicFormSchema } from "@/views/demo/demo-up-down/demoUpDown.data";
   import { ref } from "vue";
 

@@ -3,10 +3,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, onMounted, onUnmounted, watchEffect, watch, unref, nextTick, PropType } from "vue";
+  import { nextTick, onMounted, onUnmounted, PropType, ref, unref, watch, watchEffect } from "vue";
   import { useDebounceFn } from "@vueuse/core";
   import { useAppStore } from "@mfish/stores/modules";
-  import { useWindowSizeFn } from "@core/hooks/event/UseWindowSizeFn";
+  import { useWindowSizeFn } from "@core/hooks";
   import CodeMirror from "codemirror";
   import { MODE } from "../Typing";
   // css

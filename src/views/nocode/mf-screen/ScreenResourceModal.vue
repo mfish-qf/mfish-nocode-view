@@ -26,20 +26,20 @@
 </template>
 <script lang="ts" setup>
   import { h, ref, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import {
-    ScreenResource,
     getScreenResourceBySourceId,
     insertScreenResource,
-    updateScreenResource
+    ScreenPreview,
+    ScreenResource,
+    updateScreenResource,
+    useScreenEditStore
   } from "@mfish/nocode";
-  import { queryCategoryTreeByCode } from "@mfish/core/src/api/sys/DictCategory";
-  import { ScreenPreview, useScreenEditStore } from "@mfish/nocode";
-  import { Popconfirm as APopconfirm, Image as AImage } from "ant-design-vue";
-  import { FormSchema } from "@mfish/core/src/components/Table";
-  import { imageUrl } from "@mfish/core/src/utils/file/FileUtils";
-  import { getLocalFileUrl } from "@mfish/core/src/utils/file/FileUtils";
+  import { queryCategoryTreeByCode } from "@mfish/core/api";
+  import { Image as AImage, Popconfirm as APopconfirm } from "ant-design-vue";
+  import { FormSchema } from "@mfish/core/components/Table";
+  import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
 
   defineOptions({ name: "ScreenResourceModal" });
   const props = defineProps({

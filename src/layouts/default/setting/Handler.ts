@@ -1,12 +1,12 @@
 import { HandlerEnum } from "./Enum";
-import { updateHeaderBgColor, updateSidebarBgColor } from "@mfish/core/src/logics/theme/UpdateBackground";
-import { updateColorWeak } from "@mfish/core/src/logics/theme/UpdateColorWeak";
-import { updateGrayMode } from "@mfish/core/src/logics/theme/UpdateGrayMode";
+import { updateHeaderBgColor, updateSidebarBgColor } from "@mfish/core/logics/theme/UpdateBackground";
+import { updateColorWeak } from "@mfish/core/logics/theme/UpdateColorWeak";
+import { updateGrayMode } from "@mfish/core/logics/theme/UpdateGrayMode";
 import { useAppStore } from "@mfish/stores/modules";
 import { ProjectConfig } from "@mfish/types/src/type/config";
-import { changeTheme } from "@mfish/core/src/logics/theme/UpdateTheme";
-import { updateDarkTheme } from "@mfish/core/src/logics/theme/Dark";
-import { useRootSetting } from "@mfish/core";
+import { changeTheme } from "@mfish/core/logics/theme/UpdateTheme";
+import { updateDarkTheme } from "@mfish/core/logics/theme/Dark";
+import { useRootSetting } from "@mfish/core/hooks";
 import { DeepPartial } from "@mfish/types";
 import { saveSysConfig } from "@/api/sys/SysConfig";
 import { unref } from "vue";

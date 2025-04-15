@@ -4,18 +4,18 @@ import type { RouteLocationNormalized } from "vue-router";
 import { createLocalStorage, createSessionStorage } from "./index";
 import { Memory } from "./Memory";
 import {
-  TOKEN_KEY,
-  LOCK_INFO_KEY,
-  PROJ_CFG_KEY,
   APP_LOCAL_CACHE_KEY,
   APP_SESSION_CACHE_KEY,
+  LOCK_INFO_KEY,
   MULTIPLE_TABS_KEY,
+  PROJ_CFG_KEY,
   REFRESH_TOKEN_KEY,
-  TENANT_ID_KEY
+  TENANT_ID_KEY,
+  TOKEN_KEY
 } from "../../enums";
 import { DEFAULT_CACHE_TIME } from "../../settings/EncryptionSetting";
 import { toRaw } from "vue";
-import { pick, omit } from "lodash-es";
+import { omit, pick } from "lodash-es";
 import { Nullable } from "@mfish/types";
 
 interface BasicStore {

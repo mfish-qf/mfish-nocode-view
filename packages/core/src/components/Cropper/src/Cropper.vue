@@ -5,12 +5,12 @@
 </template>
 <script lang="ts">
   import type { CSSProperties, PropType } from "vue";
-  import { defineComponent, onMounted, ref, unref, computed, onUnmounted } from "vue";
+  import { computed, defineComponent, onMounted, onUnmounted, ref, unref } from "vue";
   import Cropper from "cropperjs";
   import "cropperjs/dist/cropper.css";
-  import { useDesign } from "@core/index";
+  import { useDesign } from "@core/hooks";
   import { useDebounceFn } from "@vueuse/shared";
-  import { Nullable, ElRef } from "@mfish/types";
+  import { ElRef, Nullable } from "@mfish/types";
 
   type Options = Cropper.Options;
 

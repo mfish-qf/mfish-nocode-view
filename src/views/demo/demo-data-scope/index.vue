@@ -20,7 +20,7 @@
         </AFlex>
         <div class="mt-1"></div>
       </template>
-      <template #form-advanceBefore> </template>
+      <template #form-advanceBefore></template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
@@ -41,7 +41,7 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@mfish/core/src/components/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import {
     getAdminOrg,
     getCurrentOrg,
@@ -51,7 +51,7 @@
     getFixRole,
     getMixScope
   } from "@/api/demo/DemoDataScope";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import DemoDataScopeViewModal from "./DemoDataScopeViewModal.vue";
   import { columns } from "./demoDataScope.data";
   import { DemoDataScope } from "@/api/demo/model/DemoDataScopeModel";
@@ -98,9 +98,11 @@
     });
     reload();
   }
+
   onMounted(() => {
     init();
   });
+
   /**
    * 查看
    * @param demoDataScope demo_data_scope对象

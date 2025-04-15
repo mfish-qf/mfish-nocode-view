@@ -1,12 +1,12 @@
-import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from "axios";
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
 import type { RequestOptions, Result } from "@mfish/types/src/type/axios";
 import type { CreateAxiosOptions } from "./AxiosTransform";
-import axios from "axios";
 import qs from "qs";
 import { AxiosCanceler } from "./AxiosCancel";
 import { isFunction } from "../../../utils/Is";
 import { cloneDeep, isArray } from "lodash-es";
-import { ContentTypeEnum, RequestEnum } from "../../../enums";
+import { ContentTypeEnum, RequestEnum } from "@core/enums";
 
 export * from "./AxiosTransform";
 

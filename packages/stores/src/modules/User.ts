@@ -2,17 +2,15 @@ import type { MessageMode } from "@mfish/types/src/type/axios";
 import { defineStore } from "pinia";
 import { store } from "../index";
 import { PageEnum, REFRESH_TOKEN_KEY, TENANT_ID_KEY, TOKEN_KEY } from "@mfish/core/enums";
-import { clearAuthCache, getAuthCache, setAuthCache } from "@mfish/core/src/utils/auth";
-import { LoginParams, RoleInfo, SsoUser } from "@mfish/core/src/api/sys/model/UserModel";
-import { doLogout, getUserInfo, loginApi } from "@mfish/core/src/api/sys/User";
-import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
-import { useMessage } from "@mfish/core/src/hooks/web/UseMessage";
-import { router } from "@mfish/core/src/router";
+import { clearAuthCache, getAuthCache, setAuthCache } from "@mfish/core/utils/auth";
+import { doLogout, getUserInfo, loginApi, LoginParams, RoleInfo, SsoUser } from "@mfish/core/api";
+import { useI18n, useMessage } from "@mfish/core/hooks";
+import { router } from "@mfish/core/router";
 import { usePermissionStore } from "./Permission";
-import { isArray } from "@mfish/core/src/utils/Is";
+import { isArray } from "@mfish/core/utils/Is";
 import { h } from "vue";
 import { Nullable } from "@mfish/types";
-import { oauth2Config } from "@mfish/core/src/settings/LoginSetting";
+import { oauth2Config } from "@mfish/core/settings/LoginSetting";
 
 interface UserState {
   userInfo: Nullable<SsoUser>;

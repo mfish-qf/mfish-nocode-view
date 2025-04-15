@@ -1,12 +1,12 @@
 import type { ComputedRef, Ref } from "vue";
-import type { FormProps, FormSchemaInner as FormSchema, FormActionType } from "../types/Form";
+import { nextTick, toRaw, unref } from "vue";
+import type { FormActionType, FormProps, FormSchemaInner as FormSchema } from "../types/Form";
 import type { NamePath } from "ant-design-vue/lib/form/interface";
-import { unref, toRaw, nextTick } from "vue";
 import { isArray, isFunction, isObject, isString } from "@core/utils/Is";
 import { deepMerge } from "@core/utils";
 import { dateItemType, defaultValueComponents, isIncludeSimpleComponents } from "../Helper";
 import { dateUtil } from "@core/utils/DateUtil";
-import { cloneDeep, has, uniqBy, get, set, isNil } from "lodash-es";
+import { cloneDeep, get, has, isNil, set, uniqBy } from "lodash-es";
 import { error } from "@core/utils/Log";
 import { Recordable } from "@mfish/types";
 
@@ -38,6 +38,7 @@ function tryConstructArray(field: string, values: Recordable = {}): any[] | unde
     }
   }
 }
+
 export function useFormEvents({
   emit,
   getProps,
@@ -71,11 +72,13 @@ export function useFormEvents({
     emit("reset", toRaw(formModel));
     submitOnReset && handleSubmit();
   }
+
   // 获取表单fields
   const getAllFields = () =>
     unref(getSchema)
       .flatMap((item) => [...(item.fields || []), item.field])
       .filter(Boolean);
+
   /**
    * @description: Set form value
    */

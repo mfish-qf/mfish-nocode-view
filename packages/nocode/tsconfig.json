@@ -5,6 +5,7 @@
     "allowImportingTsExtensions": true,
     "paths": {
       "@nocode/*": ["./src/*"],
+      "@/*": ["../../src/*"]
     }
   },
   "include": ["src", "src/**/*.ts"]

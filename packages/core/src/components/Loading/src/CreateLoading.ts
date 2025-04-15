@@ -1,6 +1,5 @@
-import { VNode, defineComponent } from "vue";
+import { createVNode, defineComponent, h, reactive, render, VNode } from "vue";
 import type { LoadingProps } from "./Typing";
-import { createVNode, render, reactive, h } from "vue";
 import Loading from "./Loading.vue";
 import { Nullable } from "@mfish/types";
 

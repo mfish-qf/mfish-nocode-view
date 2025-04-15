@@ -1,8 +1,13 @@
 import type { MenuSetting } from "@mfish/types/src/type/config";
-import { computed, unref, ref } from "vue";
+import { computed, ref, unref } from "vue";
 import { useAppStore } from "@mfish/stores/modules";
-import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from "../../enums";
-import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from "../../enums";
+import {
+  MenuModeEnum,
+  MenuTypeEnum,
+  SIDE_BAR_MINI_WIDTH,
+  SIDE_BAR_SHOW_TIT_MINI_WIDTH,
+  TriggerEnum
+} from "../../enums";
 import { useFullContent } from "./UseFullContent";
 
 const mixSideHasChildren = ref(false);

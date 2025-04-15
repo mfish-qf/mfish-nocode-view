@@ -1,10 +1,9 @@
 import type { NamePath, RuleObject } from "ant-design-vue/lib/form/interface";
-import type { VNode } from "vue";
+import type { CSSProperties, VNode } from "vue";
 import type { ButtonProps as AntdButtonProps } from "@core/components/Button";
 import type { FormItem } from "./FormItem";
 import type { ColEx, ComponentType } from "./index";
 import type { TableActionType } from "@core/components/Table";
-import type { CSSProperties } from "vue";
 import type { RowProps } from "ant-design-vue/lib/grid/Row";
 import { Recordable } from "@mfish/types";
 
@@ -128,8 +127,10 @@ export interface FormProps {
   transformDateFunc?: (date: any) => string;
   colon?: boolean;
 }
+
 export interface RenderOpts {
   disabled: boolean;
+
   [key: string]: any;
 }
 
@@ -218,6 +219,7 @@ interface BaseFormSchema<T extends ComponentType = any> {
 
   dynamicRules?: (renderCallbackParams: RenderCallbackParams) => Rule[];
 }
+
 export interface ComponentFormSchema<T extends ComponentType = any> extends BaseFormSchema<T> {
   // render component
   component: T;
@@ -241,6 +243,7 @@ export function isSlotFormSchema(schema: FormSchemaInner): schema is SlotFormSch
 export function isComponentFormSchema(schema: FormSchemaInner): schema is ComponentFormSchema {
   return !isSlotFormSchema(schema);
 }
+
 export interface HelpComponentProps {
   maxWidth: string;
   // Whether to display the serial number

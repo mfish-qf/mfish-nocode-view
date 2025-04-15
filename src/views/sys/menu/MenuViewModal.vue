@@ -9,8 +9,8 @@
   </BasicModal>
 </template>
 <script setup lang="ts">
-  import { Description, useDescription } from "@mfish/core/src/components/Description";
-  import { useModalInner, BasicModal } from "@mfish/core/src/components/Modal";
+  import { Description, useDescription } from "@mfish/core/components/Description";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { ref } from "vue";
   import { MenuDesc } from "@/views/sys/menu/menu.data";
 

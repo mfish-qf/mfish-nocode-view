@@ -7,8 +7,8 @@
 </template>
 <script lang="ts" setup>
   import type { CSSProperties } from "vue";
-  import { computed, ref, watchEffect, unref, watch, onMounted, nextTick } from "vue";
-  import { useWindowSizeFn } from "@core/hooks/event/UseWindowSizeFn.ts";
+  import { computed, nextTick, onMounted, ref, unref, watch, watchEffect } from "vue";
+  import { useWindowSizeFn } from "@core/hooks";
   import { ScrollContainer } from "../../../Container";
   import { createModalContext } from "../hooks/UseModalContext";
   import { useMutationObserver } from "@vueuse/core";
@@ -123,5 +123,6 @@
       console.log(error);
     }
   }
+
   defineExpose({ scrollTop, setModalHeight });
 </script>

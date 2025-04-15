@@ -1,4 +1,5 @@
 import { Fn } from "@mfish/types";
+
 export interface Axis {
   x: number;
   y: number;

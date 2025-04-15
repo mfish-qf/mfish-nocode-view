@@ -10,10 +10,10 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { ssoClientDetailsFormSchema } from "./ssoClientDetails.data";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { insertSsoClientDetails, updateSsoClientDetails } from "@/api/sys/SsoClientDetails";
 
   const emit = defineEmits(["success", "register"]);

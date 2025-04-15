@@ -26,14 +26,14 @@
   import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
   import { onBeforeMount, reactive, ref, toRaw } from "vue";
   import { useUserStore } from "@mfish/stores/modules";
-  import { useDesign } from "@mfish/core";
-  import { propTypes } from "@mfish/core/src/utils/PropTypes";
-  import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
-  import { setHeaderImg } from "@mfish/core/src/utils/file/FileUtils";
-  import { TenantVo } from "@mfish/core/src/api/sys/model/SsoTenantModel";
-  import { changeSsoTenant } from "@mfish/core/src/api/sys/SsoTenant";
-  import { router } from "@mfish/core/src/router";
-  import { sleep } from "@mfish/core/src/utils/Utils";
+  import { useDesign } from "@mfish/core/hooks";
+  import { propTypes } from "@mfish/core/utils/PropTypes";
+  import { createAsyncComponent } from "@mfish/core/utils/factory/CreateAsyncComponent";
+  import { setHeaderImg } from "@mfish/core/utils/file/FileUtils";
+  import { changeSsoTenant, TenantVo } from "@mfish/core/api";
+  import { router } from "@mfish/core/router";
+  import { sleep } from "@mfish/core/utils/Utils";
+
   export default {
     name: "TenantDropdown",
     components: {

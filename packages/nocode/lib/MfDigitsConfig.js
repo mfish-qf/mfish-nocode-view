@@ -1,26 +1,24 @@
 import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode } from "vue";
-import { useDesign } from "@mfish/core";
+import { useDesign } from "@mfish/core/hooks";
 import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index2.js";
 import "lodash-es";
 import "@mfish/core/enums";
-import "@mfish/core/src/components/Icon";
+import "@mfish/core/components/Icon";
 import "ant-design-vue";
-import "@mfish/core/src/utils/Is";
-import "@mfish/core/src/utils/http/axios";
+import "@mfish/core/utils/Is";
+import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
-import "@mfish/core/src/utils/Uuid";
-import "@mfish/core/src/components/Container";
-import "@mfish/core/src/components/Draggable";
-import "@mfish/core/src/components/Modal";
-import "@mfish/core/src/components/Form";
-import "@mfish/core/src/hooks/web/UseMessage";
-import "@mfish/core/src/components/Tree";
-import "@mfish/core/src/components/Split";
-import "@mfish/core/src/components/Table";
+import "@mfish/core/utils/Uuid";
+import "@mfish/core/components/Container";
+import "@mfish/core/components/Draggable";
+import "@mfish/core/components/Modal";
+import "@mfish/core/components/Form";
+import "@mfish/core/components/Tree";
+import "@mfish/core/components/Split";
+import "@mfish/core/components/Table";
 import "@vueuse/core";
-import "@mfish/core/src/components/CodeEditor";
-import "@mfish/core/src/i18n/UseLocale";
-import "@mfish/core/src/hooks/setting/UseDarkModeTheme";
+import "@mfish/core/components/CodeEditor";
+import "@mfish/core/i18n/UseLocale";
 import { S as StyleConfig } from "./StyleConfig.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfDigitsConfig",
@@ -89,7 +87,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfDigitsConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6ac4db88"]]);
+const MfDigitsConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-031c1fe6"]]);
 export {
   MfDigitsConfig as default
 };

@@ -1,11 +1,8 @@
-import { BasicColumn } from "@mfish/core/src/components/Table";
-import { FormSchema } from "@mfish/core/src/components/Table";
-import { getDictProps } from "@mfish/core/src/components/DictTag";
+import { BasicColumn, FormSchema, TableImage } from "@mfish/core/components/Table";
+import { getDictProps } from "@mfish/core/components/DictTag";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { imageUrl } from "@mfish/core/src/utils/file/FileUtils";
-import { getLocalFileUrl } from "@mfish/core/src/utils/file/FileUtils";
-import { TableImage } from "@mfish/core/src/components/Table";
+import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
 
 /**
  * @description: 租户信息表

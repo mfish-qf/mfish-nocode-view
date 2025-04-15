@@ -1,6 +1,5 @@
 import type { Router } from "vue-router";
-import { configureDynamicParamsMenu } from "@core/router/helper/MenuHelper";
-import { Menu } from "@core/router/Types";
+import { configureDynamicParamsMenu, Menu } from "@core/router";
 import { usePermissionStoreWithOut } from "@mfish/stores/modules";
 
 export function createParamMenuGuard(router: Router) {

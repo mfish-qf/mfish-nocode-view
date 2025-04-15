@@ -48,19 +48,18 @@
 </template>
 <script lang="ts" setup>
   import { onMounted, onUnmounted, PropType, ref, watch } from "vue";
-  import InputSearch from "@mfish/core/src/components/InputSearch";
-  import { Card as ACard, List as AList, Avatar, Tabs as ATabs, Pagination } from "ant-design-vue";
-  import { usePagination } from "@mfish/core/src/utils/PageUtils";
-  import { useDesign } from "@mfish/core";
+  import InputSearch from "@mfish/core/components/InputSearch";
+  import { Avatar, Card as ACard, List as AList, Pagination, Tabs as ATabs } from "ant-design-vue";
+  import { usePagination } from "@mfish/core/utils/PageUtils";
+  import { useDesign, useRootSetting } from "@mfish/core/hooks";
   import { getScreenResourceList } from "@mfish/nocode";
-  import { imageUrl, getLocalFileUrl } from "@mfish/core/src/utils/file/FileUtils";
-  import { formatToDate } from "@mfish/core/src/utils/DateUtil";
-  import { DictCategory } from "@mfish/core/src/api/sys/model/DictCategoryModel";
-  import { useModal } from "@mfish/core/src/components/Modal";
+  import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
+  import { formatToDate } from "@mfish/core/utils/DateUtil";
+  import { DictCategory } from "@mfish/core/api";
+  import { useModal } from "@mfish/core/components/Modal";
   import PreviewModal from "@/views/nocode/screen-folder/PreviewModal.vue";
-  import { ScrollContainer } from "@mfish/core/src/components/Container";
-  import { setDarkTheme } from "../../../../packages/core/src/logics/InitAppConfig";
-  import { useRootSetting } from "@mfish/core";
+  import { ScrollContainer } from "@mfish/core/components/Container";
+  import { setDarkTheme } from "@mfish/core/logics/InitAppConfig";
 
   defineOptions({ name: "ScreenResourceList" });
   const props = defineProps({
@@ -86,6 +85,7 @@
       pageRefresh();
     }
   );
+
   function messageHandler(e: MessageEvent) {
     //跳转iframe中主题样式
     const theme = e.data;
@@ -97,6 +97,7 @@
       setDarkTheme(theme);
     }
   }
+
   const updateHeight = () => {
     height.value = Math.max(window.innerHeight - 140, 200);
   };
@@ -125,6 +126,7 @@
     }
     fetch(props.category[activeCategory.value]?.id);
   }
+
   async function fetch(category?: string, name?: string) {
     const result = await getScreenResourceList({
       category,
@@ -136,13 +138,16 @@
     setTotal(result.total);
     listKey.value++;
   }
+
   function tabChange(e) {
     setCurrentPage(1);
     fetch(props.category[e]?.id);
   }
+
   function cardClick(item) {
     openPreviewModal(true, { id: item.sourceId, isResource: true });
   }
+
   function cloneScreen(e) {
     emit("cloneScreen", e);
   }
@@ -153,6 +158,7 @@
     .@{prefix-cls} {
       .resource-card {
         background-color: @screen-header-color-dark;
+
         &:hover {
           box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.1);
         }
@@ -166,6 +172,7 @@
 
   .@{prefix-cls} {
     margin: 2px;
+
     .ant-list-header {
       border-block-end: none !important;
     }
@@ -173,6 +180,7 @@
     .header {
       margin: 0 10px 0 10px;
     }
+
     .resource-card {
       background-color: @screen-header-color-light;
       border-radius: 8px;
@@ -189,6 +197,7 @@
         box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
         transform: scale(1.01);
       }
+
       .thumbnail {
         display: flex;
         align-items: center;
@@ -202,11 +211,13 @@
           border-radius: 8px;
         }
       }
+
       .description {
         font-size: 12px;
         height: 20px;
         color: @screen-item-normal-color-light;
       }
+
       .over {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -224,6 +235,7 @@
       }
     }
   }
+
   .@{prefix-cls} {
     .ant-card-cover {
       flex: 1;
@@ -233,17 +245,21 @@
       margin: 16px 16px 0 16px;
       border-radius: 8px;
     }
+
     .ant-list-header {
       border-block-end: none !important;
     }
+
     .ant-card-body {
       border-radius: 0 0 6px 6px;
       background-color: @screen-header-color-light-hover;
       padding: 12px;
     }
+
     .ant-list-header {
       padding: 0;
     }
+
     .ant-tabs-nav {
       margin: 0;
     }

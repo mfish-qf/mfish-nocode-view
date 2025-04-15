@@ -23,12 +23,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import type { TableSetting, ColumnChangeParam, TableActionType } from "../types/Table";
+  import type { ColumnChangeParam, TableActionType, TableSetting } from "../types/Table";
   import type { PropType } from "vue";
   import { Divider } from "ant-design-vue";
   import TableSettingComponent from "./settings/index.vue";
   import TableTitle from "./TableTitle.vue";
-  import { useDesign } from "@core/index";
+  import { useDesign } from "@core/hooks";
   import TableSelectionBar from "./TableSelectionBar.vue";
 
   defineOptions({ name: "BasicTableHeader" });
@@ -62,6 +62,7 @@
 
   const emit = defineEmits(["columnsChange"]);
   const { prefixCls } = useDesign("basic-table-header");
+
   function handleColumnChange(data: ColumnChangeParam[]) {
     emit("columnsChange", data);
   }

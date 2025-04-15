@@ -1,4 +1,4 @@
-import { defHttp } from "@mfish/core/src/utils/http/axios";
+import { defHttp } from "@mfish/core/utils/http/axios";
 import { SysConfig } from "@/api/sys/model/SysConfigModel";
 
 /**

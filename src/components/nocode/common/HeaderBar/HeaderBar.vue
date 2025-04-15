@@ -19,7 +19,7 @@
     </div>
     <!-- left end -->
 
-    <div :class="`${prefixCls}-center`"> </div>
+    <div :class="`${prefixCls}-center`"></div>
 
     <!-- action  -->
     <div :class="`${prefixCls}-action`">
@@ -30,17 +30,17 @@
   </AHeader>
 </template>
 <script lang="ts" setup>
-  import { unref, computed, PropType } from "vue";
-  import { propTypes } from "@mfish/core/src/utils/PropTypes";
+  import { computed, PropType, unref } from "vue";
+  import { propTypes } from "@mfish/core/utils/PropTypes";
   import { Layout } from "ant-design-vue";
   import { AppLogo } from "@/components/general/Application";
-  import { useHeaderSetting } from "@mfish/core/src/hooks/setting/UseHeaderSetting";
+  import { useDesign, useHeaderSetting } from "@mfish/core/hooks";
   import { useAppInject } from "@/hooks/UseAppInject";
-  import { useDesign } from "@mfish/core";
   import { HeaderBarAction } from "@/components/nocode/common/HeaderBar/HeaderBarUtils";
   import AppDarkModeToggle from "@/components/general/Application/src/AppDarkModeToggle.vue";
-  import { createAsyncComponent } from "@mfish/core/src/utils/factory/CreateAsyncComponent";
+  import { createAsyncComponent } from "@mfish/core/utils/factory/CreateAsyncComponent";
   import HeaderActions from "@/components/nocode/common/HeaderBar/HeaderActions.vue";
+
   defineOptions({ name: "HeaderBar" });
   const props = defineProps({
     fixed: propTypes.bool,
@@ -74,6 +74,7 @@
   span.anticon:not(.app-iconify) {
     vertical-align: 0 !important;
   }
+
   .@{header-prefix-cls} {
     position: relative;
     display: flex;
@@ -131,6 +132,7 @@
       display: flex;
       height: 100%;
       align-items: center;
+
       &-button {
         margin: 0 10px 0 10px;
       }

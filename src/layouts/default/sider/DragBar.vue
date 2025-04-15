@@ -4,8 +4,7 @@
 <script lang="ts" setup>
   import { computed, unref } from "vue";
 
-  import { useDesign } from "@mfish/core";
-  import { useMenuSetting } from "@mfish/core/src/hooks/setting/UseMenuSetting";
+  import { useDesign, useMenuSetting } from "@mfish/core/hooks";
 
   const props = defineProps({
     mobile: Boolean

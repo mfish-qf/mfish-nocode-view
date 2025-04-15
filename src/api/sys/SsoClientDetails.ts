@@ -1,7 +1,7 @@
-import { defHttp } from "@mfish/core/src/utils/http/axios";
+import { defHttp } from "@mfish/core/utils/http/axios";
 import {
-  SsoClientDetails,
   ReqSsoClientDetails,
+  SsoClientDetails,
   SsoClientDetailsPageModel
 } from "@/api/sys/model/SsoClientDetailsModel";
 

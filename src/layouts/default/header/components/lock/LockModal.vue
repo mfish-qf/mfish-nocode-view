@@ -25,14 +25,13 @@
   </BasicModal>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, ref, onBeforeMount } from "vue";
-  import { useI18n } from "@mfish/core/src/hooks/web/UseI18n";
-  import { useDesign } from "@mfish/core";
-  import { BasicModal, useModalInner } from "@mfish/core/src/components/Modal";
-  import { BasicForm, useForm } from "@mfish/core/src/components/Form";
+  import { computed, defineComponent, onBeforeMount, ref } from "vue";
+  import { useDesign, useI18n } from "@mfish/core/hooks";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { useUserStore } from "@mfish/stores/modules";
   import { useLockStore } from "@/stores/Lock.ts";
-  import { setHeaderImg } from "@mfish/core/src/utils/file/FileUtils";
+  import { setHeaderImg } from "@mfish/core/utils/file/FileUtils";
 
   export default defineComponent({
     name: "LockModal",

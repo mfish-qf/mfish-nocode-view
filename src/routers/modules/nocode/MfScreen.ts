@@ -3,7 +3,7 @@
  * @author: mfish
  * @date: 2024/8/7
  */
-import type { AppRouteRecordRaw } from "@mfish/core/src/router/Types";
+import type { AppRouteRecordRaw } from "@mfish/core/router";
 
 const screenConfig: AppRouteRecordRaw = {
   path: "/low-code/mf-screen/config",
