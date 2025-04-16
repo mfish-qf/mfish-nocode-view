@@ -1,4 +1,4 @@
-import { defineComponent, useTemplateRef, computed, watch, createBlock, openBlock, unref, mergeProps, toHandlers } from "vue";
+import { defineComponent, useTemplateRef, computed, watch, nextTick, createBlock, openBlock, unref, mergeProps, toHandlers } from "vue";
 import { h as useChartEventHandle, u as useScreenEditStore, ar as ScrollTable, as as getChartData } from "./index.js";
 import "ant-design-vue";
 import "@mfish/core/hooks";
@@ -49,6 +49,20 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         var _a;
         (_a = scrollTableRef.value) == null ? void 0 : _a.resize();
       }, 100)
+    );
+    watch(
+      () => {
+        var _a;
+        return (_a = props.chartContain) == null ? void 0 : _a.show;
+      },
+      (val) => {
+        if (val) {
+          nextTick(() => {
+            var _a;
+            (_a = scrollTableRef.value) == null ? void 0 : _a.resize();
+          });
+        }
+      }
     );
     function rowClick(ci) {
       if (ci.rowIndex >= 0) {
