@@ -7,7 +7,7 @@
   <PageWrapper :title="`字典${dictCode}`" @back="goBack">
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-auth="'sys:dict:insert'">新增字典项 </a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:dict:insert'">新增字典项</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column?.key === 'action'">
@@ -37,17 +37,17 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { unref, ref, onBeforeMount } from "vue";
+  import { onBeforeMount, ref, unref } from "vue";
   import { useRoute } from "vue-router";
   import { PageWrapper } from "@/components/general/Page";
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
-  import { deleteDictItem, getDictItemList } from "@/api/sys/DictItem";
-  import { useModal } from "@/components/general/Modal";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
+  import { deleteDictItem, getDictItemList } from "@mfish/core/api";
+  import { useModal } from "@mfish/core/components/Modal";
   import DictItemModal from "./DictItemModal.vue";
   import { columns, searchFormSchema } from "./dictItem.data";
-  import { useGo } from "@/hooks/web/UsePage";
-  import { useTabs } from "@/hooks/web/UseTabs";
+  import { useGo, useTabs } from "@mfish/core/hooks";
   import { Recordable } from "@mfish/types";
+
   defineOptions({ name: "DictItemManagement" });
 
   const [registerModal, { openModal }] = useModal();

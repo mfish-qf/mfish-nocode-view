@@ -2,7 +2,7 @@
  @description: 属性分类字典
  @author: mfish
  @date: 2024-03-12
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <div>
@@ -46,12 +46,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
-  import { deleteDictCategory, getDictCategoryList } from "@/api/sys/DictCategory";
-  import { useModal } from "@/components/general/Modal";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
+  import { deleteDictCategory, DictCategory, getDictCategoryList } from "@mfish/core/api";
+  import { useModal } from "@mfish/core/components/Modal";
   import DictCategoryModal from "./DictCategoryModal.vue";
   import { columns, searchFormSchema } from "./dictCategory.data";
-  import { DictCategory } from "@/api/sys/model/DictCategoryModel";
+
   defineOptions({ name: "DictCategoryManagement" });
 
   const [registerModal, { openModal }] = useModal();

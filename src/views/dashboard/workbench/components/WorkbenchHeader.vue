@@ -27,11 +27,10 @@
 <script lang="ts" setup>
   import { computed, ComputedRef } from "vue";
   import { Avatar } from "ant-design-vue";
-  import { useUserStore } from "@/store/modules/User";
-  import logo from "@/assets/images/logo.png";
-  import { imageUrl } from "@/utils/file/FileUtils";
-  import { getLocalFileUrl } from "@/api/storage/SysFile";
-  import { SsoUser } from "@/api/sys/model/UserModel";
+  import { useUserStore } from "@mfish/stores/modules";
+  import logo from "@mfish/core/assets/images/logo.png";
+  import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
+  import { SsoUser } from "@mfish/core/api";
   import { Nullable } from "@mfish/types";
 
   const userStore = useUserStore();

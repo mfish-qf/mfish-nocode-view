@@ -10,6 +10,7 @@ export interface DefineOptions {
   overrides?: UserConfig;
   options?: object;
 }
+
 const OUTPUT_DIR = "mfish-nocode-view";
 
 function defineApplicationConfig(defineOptions: DefineOptions = {}) {
@@ -45,6 +46,14 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
           {
             find: /#\//,
             replacement: `${pathResolve("types")}/`
+          },
+          {
+            find: /@core\//,
+            replacement: `${pathResolve("packages/core/src")}/`
+          },
+          {
+            find: /@nocode\//,
+            replacement: `${pathResolve("packages/nocode/src")}/`
           }
         ]
       },

@@ -1,13 +1,12 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
-import { DescItem } from "@/components/general/Description";
-import { buildDictTag, getDictProps } from "@/utils/DictUtils";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { DescItem } from "@mfish/core/components/Description";
+import { buildDictTag, getDictProps } from "@mfish/core/components/DictTag";
 
 /**
  * @description: 导入导出Demo
  * @author: mfish
  * @date: 2024-09-02
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

@@ -1,11 +1,11 @@
-import { defHttp } from "@/utils/http/axios";
-import { Job, ReqJob, JobPageModel } from "@/api/scheduler/model/JobModel";
+import { defHttp } from "@mfish/core/utils/http/axios";
+import { Job, JobPageModel, ReqJob } from "@/api/scheduler/model/JobModel";
 
 /**
  * @description: 定时调度任务
  * @author: mfish
  * @date: 2023-02-20
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 enum Api {
   Job = "/scheduler/job",

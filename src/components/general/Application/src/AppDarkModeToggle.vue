@@ -7,13 +7,12 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from "vue";
-  import { SvgIcon } from "@/components/general/Icon";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-  import { ThemeEnum } from "@/enums/AppEnum";
-  import { setDarkTheme } from "@/logics/InitAppConfig";
+  import { SvgIcon } from "@mfish/core/components/Icon";
+  import { useDesign, useRootSetting } from "@mfish/core/hooks";
+  import { ThemeEnum } from "@mfish/core/enums";
+  import { setDarkTheme } from "@mfish/core/logics/InitAppConfig";
   import { saveSysConfig } from "@/api/sys/SysConfig";
-  import { useAppStore } from "@/store/modules/App";
+  import { useAppStore } from "@mfish/stores/modules";
 
   const { prefixCls } = useDesign("dark-switch");
   const { getDarkMode, setDarkMode } = useRootSetting();
@@ -70,6 +69,7 @@
       border: 1px solid @border-color-dark;
     }
   }
+
   .@{prefix-cls} {
     border: 1px solid @border-color-base;
     position: relative;
@@ -82,9 +82,11 @@
     justify-content: space-between;
     align-items: center;
     transition: background 0.5s ease;
+
     &:hover {
       background-color: @header-bg-hover-color;
     }
+
     &-inner {
       position: absolute;
       z-index: 1;

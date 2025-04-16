@@ -2,7 +2,7 @@
  @description: 任务订阅表
  @author: mfish
  @date: 2023-02-20
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicTable @register="registerTable">
@@ -31,12 +31,13 @@
 </template>
 <script lang="ts" setup>
   import { watch } from "vue";
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { getJobSubscribeById } from "@/api/scheduler/JobSubscribe";
   import { columns } from "./jobSubscribe.data";
-  import { dateUtil, formatToDateTime } from "@/utils/DateUtil";
-  import { buildUUID } from "@/utils/Uuid";
+  import { dateUtil, formatToDateTime } from "@mfish/core/utils/DateUtil";
+  import { buildUUID } from "@mfish/core/utils/Uuid";
   import { Recordable } from "@mfish/types";
+
   defineOptions({ name: "JobSubscribeManagement" });
   const props = defineProps({
     jobId: { type: String, default: "" }

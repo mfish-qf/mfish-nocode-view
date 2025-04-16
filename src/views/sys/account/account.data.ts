@@ -1,15 +1,11 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
 import { h, ref, unref } from "vue";
-import { Tag, Switch } from "ant-design-vue";
-import { RenderCallbackParams } from "@/components/general/Form";
-import { setUserStatus } from "@/api/sys/User";
-import { usePermission } from "@/hooks/web/UsePermission";
-import { DescItem } from "@/components/general/Description";
-import { YNTag_Name, YNTag_Status } from "@/components/general/DictTag/CommonTag";
-import { getRoleByIds } from "@/api/sys/Role";
-import { getOrgByIds } from "@/api/sys/Org";
-import { getTenantOrgByIds, getTenantRoleByIds } from "@/api/sys/SsoTenant";
+import { Switch, Tag } from "ant-design-vue";
+import { RenderCallbackParams } from "@mfish/core/components/Form";
+import { getOrgByIds, getRoleByIds, getTenantOrgByIds, getTenantRoleByIds, setUserStatus } from "@mfish/core/api";
+import { usePermission } from "@mfish/core/hooks";
+import { DescItem } from "@mfish/core/components/Description";
+import { YNTag_Name, YNTag_Status } from "@mfish/core/components/DictTag";
 
 export const columns: BasicColumn[] = [
   {

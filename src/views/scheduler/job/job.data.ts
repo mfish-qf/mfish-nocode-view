@@ -1,16 +1,14 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
-import { getDictProps } from "@/utils/DictUtils";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { getDictProps } from "@mfish/core/components/DictTag";
 import { h } from "vue";
-import { Tag } from "ant-design-vue";
-import { Switch } from "ant-design-vue";
+import { Switch, Tag } from "ant-design-vue";
 import { setJobStatus } from "@/api/scheduler/Job";
 
 /**
  * @description: 定时调度任务
  * @author: mfish
  * @date: 2023-02-20
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

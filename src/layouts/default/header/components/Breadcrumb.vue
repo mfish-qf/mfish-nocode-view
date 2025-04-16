@@ -15,18 +15,13 @@
   import { useRouter } from "vue-router";
   import { computed, ref, watchEffect } from "vue";
   import { Breadcrumb as ABreadcrumb } from "ant-design-vue";
-  import { Icon } from "@/components/general/Icon";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-  import { useGo } from "@/hooks/web/UsePage";
-  import { isString } from "@/utils/Is";
-  import { filter } from "@/utils/helper/TreeHelper";
-  import { getMenus } from "@/router/menus";
-  import { REDIRECT_NAME } from "@/router/Constant";
-  import { getAllParentPath } from "@/router/helper/MenuHelper";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { useDesign, useGo, useI18n, useRootSetting } from "@mfish/core/hooks";
+  import { isString } from "@mfish/core/utils/Is";
+  import { filter } from "@mfish/core/utils/helper/TreeHelper";
+  import { getAllParentPath, getMenus, REDIRECT_NAME } from "@mfish/core/router";
   import type { Route } from "ant-design-vue/es/breadcrumb/Breadcrumb";
-  import { useAppStore } from "@/store/modules/App";
-  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useAppStore } from "@mfish/stores/modules";
 
   defineOptions({ name: "LayoutBreadcrumb" });
   const appStore = useAppStore();
@@ -149,9 +144,11 @@
     .ant-breadcrumb-link {
       color: @header-color;
     }
+
     .anticon-down {
       color: v-bind(color);
     }
+
     &--dark {
       .ant-breadcrumb-separator {
         color: @trigger-dark-bg-color;

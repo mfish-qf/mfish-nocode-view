@@ -14,13 +14,13 @@
   </Dropdown>
 </template>
 <script lang="ts" setup>
-  import type { LocaleType } from "#/config";
-  import type { DropMenu } from "@/components/general/Dropdown";
-  import { Dropdown } from "@/components/general/Dropdown";
-  import { ref, watchEffect, unref, computed } from "vue";
-  import { Icon } from "@/components/general/Icon";
-  import { useLocale } from "@/i18n/UseLocale";
-  import { localeList } from "@/settings/I18nSetting";
+  import type { LocaleType } from "@mfish/types/src/type/config";
+  import type { DropMenu } from "@mfish/core/components/Dropdown";
+  import { Dropdown } from "@mfish/core/components/Dropdown";
+  import { computed, ref, unref, watchEffect } from "vue";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { useLocale } from "@mfish/core/i18n/UseLocale";
+  import { localeList } from "@mfish/core/settings/I18nSetting";
 
   const props = defineProps({
     /**

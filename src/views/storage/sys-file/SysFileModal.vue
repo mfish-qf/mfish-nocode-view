@@ -2,7 +2,7 @@
  @description: 文件存储
  @author: mfish
  @date: 2023-03-02
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
@@ -10,11 +10,12 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { sysFileFormSchema } from "./sysFile.data";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { insertSysFile, updateSysFile } from "@/api/storage/SysFile";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { insertSysFile, updateSysFile } from "@mfish/core/api";
+
   defineOptions({ name: "SysFileModal" });
 
   const emit = defineEmits(["success", "register"]);

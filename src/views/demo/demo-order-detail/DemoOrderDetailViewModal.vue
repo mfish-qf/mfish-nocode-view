@@ -2,7 +2,7 @@
  @description: 销售订单明细查看
  @author: mfish
  @date: 2024-09-02
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="销售订单明细信息">
@@ -10,8 +10,8 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { Description, useDescription } from "@/components/general/Description";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { Description, useDescription } from "@mfish/core/components/Description";
   import { ref } from "vue";
   import { DemoOrderDetailDesc } from "./demoOrderDetail.data";
 

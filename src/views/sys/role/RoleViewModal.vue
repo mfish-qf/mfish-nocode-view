@@ -2,7 +2,7 @@
  @description: 角色表查看
  @author: mfish
  @date: 2024-08-29
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="角色信息">
@@ -22,15 +22,13 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { Description, useDescription } from "@/components/general/Description";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { Description, useDescription } from "@mfish/core/components/Description";
   import { Divider as ADivider } from "ant-design-vue";
   import { ref, unref } from "vue";
   import { RoleDesc } from "./role.data";
-  import { BasicTree, TreeItem } from "@/components/general/Tree";
-  import { getTenantMenuTree, getTenantRoleMenus } from "@/api/sys/SsoTenant";
-  import { getMenuTree } from "@/api/sys/Menu";
-  import { getRoleMenus } from "@/api/sys/Role";
+  import { BasicTree, TreeItem } from "@mfish/core/components/Tree";
+  import { getMenuTree, getRoleMenus, getTenantMenuTree, getTenantRoleMenus } from "@mfish/core/api";
 
   defineOptions({ name: "RoleViewModal" });
   const props = defineProps({

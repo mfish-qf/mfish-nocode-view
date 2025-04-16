@@ -58,16 +58,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, unref, ref, watch, nextTick } from "vue";
+  import { computed, nextTick, ref, unref, watch } from "vue";
   import { SearchOutlined } from "@ant-design/icons-vue";
   import AppSearchFooter from "./AppSearchFooter.vue";
-  import { Icon } from "@/components/general/Icon";
-  import vClickOutside from "@/directives/ClickOutside";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useRefs } from "@/hooks/core/UseRefs";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { ClickOutside as vClickOutside } from "@mfish/core/directives";
+  import { useDesign, useI18n, useRefs } from "@mfish/core/hooks";
   import { useMenuSearch } from "./UseMenuSearch";
-  import { useI18n } from "@/hooks/web/UseI18n";
-  import { useAppInject } from "@/hooks/web/UseAppInject";
+  import { useAppInject } from "@/hooks/UseAppInject";
   import { Nullable } from "@mfish/types";
 
   const props = defineProps({

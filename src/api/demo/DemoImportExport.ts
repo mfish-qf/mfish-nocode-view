@@ -1,15 +1,15 @@
-import { defHttp } from "@/utils/http/axios";
+import { defHttp } from "@mfish/core/utils/http/axios";
 import {
   DemoImportExport,
-  ReqDemoImportExport,
-  DemoImportExportPageModel
+  DemoImportExportPageModel,
+  ReqDemoImportExport
 } from "@/api/demo/model/DemoImportExportModel";
 
 /**
  * @description: 导入导出Demo
  * @author: mfish
  * @date: 2024-09-02
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 enum Api {
   DemoImportExport = "/demo/demoImportExport"

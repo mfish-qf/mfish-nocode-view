@@ -1,17 +1,15 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
-import { DescItem } from "@/components/general/Description";
-import { buildDictTag, getDictProps } from "@/utils/DictUtils";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { DescItem } from "@mfish/core/components/Description";
+import { buildDictTag, getDictProps } from "@mfish/core/components/DictTag";
 import { h } from "vue";
-import FileHref from "@/components/general/FileUpDown/FileHref.vue";
-import FileUp from "@/components/general/FileUpDown/FileUp.vue";
+import { FileHref, FileUp } from "@mfish/core/components/FileUpDown";
 import { updateDemoImportExport } from "@/api/demo/DemoImportExport";
 
 /**
  * @description: 上传下载样例
  * @author: mfish
  * @date: 2024-09-08
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

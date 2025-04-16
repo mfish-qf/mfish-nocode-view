@@ -6,8 +6,7 @@
 <script lang="ts">
   import { defineComponent, ref } from "vue";
   import { RedoOutlined } from "@ant-design/icons-vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useTabs } from "@/hooks/web/UseTabs";
+  import { useDesign, useTabs } from "@mfish/core/hooks";
 
   export default defineComponent({
     name: "TabRedo",

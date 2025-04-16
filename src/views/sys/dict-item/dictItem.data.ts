@@ -1,14 +1,13 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { Icon } from "@/components/general/Icon";
+import { Icon } from "@mfish/core/components/Icon";
 
 /**
  * @description: 字典项
  * @Author: mfish
  * @Date: 2023-01-03
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

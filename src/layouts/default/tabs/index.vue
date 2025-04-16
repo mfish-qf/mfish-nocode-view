@@ -26,20 +26,17 @@
 </template>
 <script lang="ts" setup>
   import type { RouteLocationNormalized, RouteMeta } from "vue-router";
-  import { computed, unref, ref } from "vue";
+  import { useRouter } from "vue-router";
+  import { computed, ref, unref } from "vue";
   import { Tabs } from "ant-design-vue";
   import TabContent from "./components/TabContent.vue";
   import FoldButton from "./components/FoldButton.vue";
   import TabRedo from "./components/TabRedo.vue";
-  import { useGo } from "@/hooks/web/UsePage";
-  import { useMultipleTabStore } from "@/store/modules/MultipleTab";
-  import { useUserStore } from "@/store/modules/User";
+  import { useDesign, useGo, useMultipleTabSetting } from "@mfish/core/hooks";
+  import { useMultipleTabStore, useUserStore } from "@mfish/stores/modules";
   import { initAffixTabs, useTabsDrag } from "./UseMultipleTabs";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useMultipleTabSetting } from "@/hooks/setting/UseMultipleTabSetting";
-  import { REDIRECT_NAME } from "@/router/Constant";
-  import { listenerRouteChange } from "@/logics/mitt/RouteChange";
-  import { useRouter } from "vue-router";
+  import { REDIRECT_NAME } from "@mfish/core/router";
+  import { listenerRouteChange } from "@mfish/core/logics/mitt/RouteChange";
 
   defineOptions({ name: "MultipleTabs" });
 

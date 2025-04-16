@@ -1,25 +1,25 @@
 {
   "name": "@mfish/stylelint-config",
-  "version": "1.3.2",
+  "version": "2.0.0",
   "private": true,
+  "license": "Apache-2.0",
   "author": {
     "name": "mfish",
     "email": "qiufeng9862@qq.com",
     "url": "https://github.com/mfish-qf"
   },
-  "license": "Apache-2.0",
   "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "index.mjs",
-  "module": "index.mjs",
   "exports": {
     ".": {
       "import": "./index.mjs",
       "default": "./index.mjs"
     }
   },
+  "main": "index.mjs",
+  "module": "index.mjs",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@stylistic/stylelint-plugin": "^3.1.2",
     "stylelint-config-recess-order": "^5.1.1",
@@ -30,7 +30,7 @@
     "postcss-html": "^1.8.0",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.5.3",
-    "stylelint": "^16.17.0",
+    "stylelint": "^16.18.0",
     "stylelint-config-recommended": "^14.0.1",
     "stylelint-config-recommended-scss": "^14.1.0",
     "stylelint-config-recommended-vue": "^1.6.0",

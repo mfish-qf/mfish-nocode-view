@@ -9,10 +9,9 @@
 <script lang="ts" setup>
   import { computed, unref } from "vue";
   import { Tooltip } from "ant-design-vue";
-  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useDesign, useI18n } from "@mfish/core/hooks";
   import { useFullscreen } from "@vueuse/core";
   import { FullscreenExitOutlined, FullscreenOutlined } from "@ant-design/icons-vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
 
   const { t } = useI18n();
   const { toggle, isFullscreen } = useFullscreen();
@@ -34,6 +33,7 @@
 
   .@{prefix-cls} {
     transition: all 0.2s ease-in;
+
     &:hover {
       transform: scale(1.2);
     }

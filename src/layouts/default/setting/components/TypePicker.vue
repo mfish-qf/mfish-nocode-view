@@ -21,7 +21,7 @@
 <script lang="ts">
   import { defineComponent, PropType } from "vue";
   import { Tooltip } from "ant-design-vue";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useDesign } from "@mfish/core/hooks";
   import { menuTypeList } from "../Enum";
 
   export default defineComponent({
@@ -55,6 +55,7 @@
   .@{prefix-cls} {
     display: flex;
     justify-content: space-between;
+
     &__item {
       position: relative;
       width: 56px;
@@ -153,7 +154,9 @@
           background-color: #fff;
         }
       }
+
       transition: all 0.2s ease-in;
+
       &:hover,
       &--active {
         padding: 12px;

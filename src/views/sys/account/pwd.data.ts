@@ -1,4 +1,4 @@
-import { FormSchema } from "@/components/general/Form";
+import { FormSchema } from "@mfish/core/components/Form";
 
 export const formSchema: FormSchema[] = [
   {

@@ -1,17 +1,14 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
-import { getDictProps } from "@/utils/DictUtils";
+import { BasicColumn, FormSchema, TableImage } from "@mfish/core/components/Table";
+import { getDictProps } from "@mfish/core/components/DictTag";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { imageUrl } from "@/utils/file/FileUtils";
-import { getLocalFileUrl } from "@/api/storage/SysFile";
-import TableImage from "@/components/general/Table/src/components/TableImg.vue";
+import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
 
 /**
  * @description: 租户信息表
  * @author: mfish
  * @date: 2023-05-31
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

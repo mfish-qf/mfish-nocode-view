@@ -1,32 +1,32 @@
-import { defineComponent, computed, unref } from "vue";
-import { BasicDrawer } from "@/components/general/Drawer";
+import { computed, defineComponent, unref } from "vue";
+import { BasicDrawer } from "@mfish/core/components/Drawer";
 import { Divider } from "ant-design-vue";
 import {
-  TypePicker,
-  ThemeColorPicker,
+  Animation,
+  InputNumberItem,
+  SelectItem,
   SettingSave,
   SwitchItem,
-  SelectItem,
-  InputNumberItem,
-  Animation
+  ThemeColorPicker,
+  TypePicker
 } from "./components";
 import { AppDarkModeToggle } from "@/components/general/Application";
-import { MenuTypeEnum, TriggerEnum } from "@/enums/MenuEnum";
-import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-import { useHeaderSetting } from "@/hooks/setting/UseHeaderSetting";
-import { useMultipleTabSetting } from "@/hooks/setting/UseMultipleTabSetting";
-import { useI18n } from "@/hooks/web/UseI18n";
+import { MenuTypeEnum, TriggerEnum } from "@mfish/core/enums";
+import { useHeaderSetting, useI18n, useMenuSetting, useMultipleTabSetting, useRootSetting } from "@mfish/core/hooks";
 import { baseHandler } from "./Handler";
 import {
-  HandlerEnum,
   contentModeOptions,
-  topMenuAlignOptions,
   getMenuTriggerOptions,
+  HandlerEnum,
   menuTypeList,
-  mixSidebarTriggerOptions
+  mixSidebarTriggerOptions,
+  topMenuAlignOptions
 } from "./Enum";
-import { HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST, APP_PRESET_COLOR_LIST } from "@/settings/DesignSetting";
+import {
+  APP_PRESET_COLOR_LIST,
+  HEADER_PRESET_BG_COLOR_LIST,
+  SIDE_BAR_BG_COLOR_LIST
+} from "@mfish/core/settings/DesignSetting";
 
 const { t } = useI18n();
 
@@ -123,7 +123,7 @@ export default defineComponent({
     }
 
     /**
-      @description: */
+     @description: */
     function renderFeatures() {
       let triggerDef = unref(getTrigger);
 

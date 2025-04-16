@@ -4,10 +4,10 @@
   </span>
 </template>
 <script lang="ts" setup>
-  import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
-  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { propTypes } from "@/utils/PropTypes";
+  import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons-vue";
+  import { useDesign, useMenuSetting } from "@mfish/core/hooks";
+  import { propTypes } from "@mfish/core/utils/PropTypes";
+
   defineOptions({ name: "HeaderTrigger" });
   defineProps({
     theme: propTypes.oneOf(["light", "dark"])

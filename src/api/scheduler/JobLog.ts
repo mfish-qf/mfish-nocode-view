@@ -1,11 +1,11 @@
-import { defHttp } from "@/utils/http/axios";
-import { JobLog, ReqJobLog, JobLogPageModel } from "@/api/scheduler/model/JobLogModel";
+import { defHttp } from "@mfish/core/utils/http/axios";
+import { JobLog, JobLogPageModel, ReqJobLog } from "@/api/scheduler/model/JobLogModel";
 
 /**
  * @description: 任务日志
  * @author: mfish
  * @date: 2023-02-14
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 enum Api {
   JobLog = "/scheduler/jobLog"

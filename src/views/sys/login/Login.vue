@@ -169,14 +169,12 @@
 <script lang="ts" setup>
   import "bootstrap/dist/js/bootstrap.min.js";
   import { computed, onMounted, onUnmounted, reactive, ref, unref } from "vue";
-  import { getCaptcha } from "@/api/sys/User";
-  import { oauth2Config, giteeConfig, githubConfig } from "@/settings/LoginSetting";
-  import { useMessage } from "@/hooks/web/UseMessage";
-  import { useUserStore } from "@/store/modules/User";
-  import { useI18n } from "@/hooks/web/UseI18n";
+  import { getCaptcha } from "@mfish/core/api";
+  import { giteeConfig, githubConfig, oauth2Config } from "@mfish/core/settings/LoginSetting";
+  import { useGlobSetting, useI18n, useMessage } from "@mfish/core/hooks";
+  import { useUserStore } from "@mfish/stores/modules";
   import { debounce } from "lodash-es";
-  import { useGlobSetting } from "@/hooks/setting";
-  import { Icon } from "@/components/general/Icon";
+  import { Icon } from "@mfish/core/components/Icon";
 
   const username = ref("");
   const password = ref("");
@@ -333,6 +331,7 @@
   function giteeLogin() {
     globalThis.location.href = `https://gitee.com/oauth/authorize?client_id=${giteeConfig.client_id}&redirect_uri=${giteeConfig.redirect_uri}&response_type=code`;
   }
+
   function githubLogin() {
     globalThis.location.href = `https://github.com/login/oauth/authorize?client_id=${githubConfig.client_id}&redirect_uri=${githubConfig.redirect_uri}&response_type=code`;
   }
@@ -553,6 +552,7 @@
     color: #888;
     text-align: center;
   }
+
   .login-divider {
     display: flex;
     align-items: center;
@@ -564,6 +564,7 @@
     justify-content: center;
     gap: 8px;
   }
+
   @media screen and (max-width: 540px) {
     .login .logo {
       margin: 20px 0 0 20px;

@@ -9,17 +9,17 @@
 </template>
 <script lang="ts">
   import type { PropType, Ref } from "vue";
+  import { computed, defineComponent, nextTick, onMounted, ref, unref, watch } from "vue";
   import type { Definition } from "@logicflow/core";
-  import { defineComponent, ref, onMounted, unref, nextTick, computed, watch } from "vue";
-  import FlowChartToolbar from "./FlowChartToolbar.vue";
   import LogicFlow from "@logicflow/core";
-  import { Snapshot, BpmnElement, Menu, DndPanel, SelectionSelect } from "@logicflow/extension";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useAppStore } from "@/store/modules/App";
+  import FlowChartToolbar from "./FlowChartToolbar.vue";
+  import { BpmnElement, DndPanel, Menu, SelectionSelect, Snapshot } from "@logicflow/extension";
+  import { useDesign } from "@mfish/core/hooks";
+  import { useAppStore } from "@mfish/stores/modules";
   import { createFlowChartContext } from "./UseFlowContext";
   import { toLogicFlowData } from "./AdpterForTurbo";
-  import { useModal, BasicModal } from "@/components/general/Modal";
-  import { JsonPreview } from "@/components/general/CodeEditor";
+  import { BasicModal, useModal } from "@mfish/core/components/Modal";
+  import { JsonPreview } from "@mfish/core/components/CodeEditor";
   import { configDefaultDndPanel } from "./Config";
   import "@logicflow/core/dist/style/index.css";
   import "@logicflow/extension/lib/style/index.css";

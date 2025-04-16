@@ -22,8 +22,9 @@
   import { h } from "vue";
   import { Tag } from "ant-design-vue";
   import { PageWrapper } from "@/components/general/Page";
-  import { Description, DescItem, useDescription } from "@/components/general/Description";
-  import { GITHUB_URL, GITHUB_BACK_URL, SITE_URL, DOC_URL } from "@/settings/SiteSetting";
+  import { DescItem, Description, useDescription } from "@mfish/core/components/Description";
+  import { DOC_URL, GITHUB_BACK_URL, GITHUB_URL, SITE_URL } from "@mfish/core/settings/SiteSetting";
+
   defineOptions({ name: "AboutInfo" });
 
   // eslint-disable-next-line no-undef

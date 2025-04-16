@@ -16,16 +16,15 @@
 <script lang="ts" setup>
   import { computed, unref } from "vue";
   import { Layout } from "ant-design-vue";
-  import { createAsyncComponent } from "@/utils/factory/CreateAsyncComponent";
+  import { createAsyncComponent } from "@mfish/core/utils/factory/CreateAsyncComponent";
   import LayoutHeader from "./header/index.vue";
   import LayoutContent from "./content/index.vue";
   import LayoutSideBar from "./sider/index.vue";
   import LayoutMultipleHeader from "./header/MultipleHeader.vue";
-  import { useHeaderSetting } from "@/hooks/setting/UseHeaderSetting";
-  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useLockPage } from "@/hooks/web/UseLockPage";
-  import { useAppInject } from "@/hooks/web/UseAppInject";
+  import { useDesign, useHeaderSetting, useMenuSetting } from "@mfish/core/hooks";
+  import { useLockPage } from "@/hooks/UseLockPage";
+  import { useAppInject } from "@/hooks/UseAppInject";
+
   defineOptions({ name: "DefaultLayout" });
 
   const LayoutFeatures = createAsyncComponent(() => import("@/layouts/default/feature/index.vue"));

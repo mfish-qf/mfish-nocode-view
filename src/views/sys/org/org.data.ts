@@ -1,14 +1,11 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
 import { h, ref } from "vue";
 import { Tag } from "ant-design-vue";
-import { Icon } from "@/components/general/Icon";
-import { useAppStore } from "@/store/modules/App";
-import { DescItem } from "@/components/general/Description";
-import { YNTag_Status } from "@/components/general/DictTag/CommonTag";
-import { getOrgByIds } from "@/api/sys/Org";
-import { getRoleByIds } from "@/api/sys/Role";
-import { getTenantOrgByIds, getTenantRoleByIds } from "@/api/sys/SsoTenant";
+import { Icon } from "@mfish/core/components/Icon";
+import { useAppStore } from "@mfish/stores/modules";
+import { DescItem } from "@mfish/core/components/Description";
+import { YNTag_Status } from "@mfish/core/components/DictTag";
+import { getOrgByIds, getRoleByIds, getTenantOrgByIds, getTenantRoleByIds } from "@mfish/core/api";
 
 export const columns: BasicColumn[] = [
   {
@@ -182,9 +179,11 @@ export const formSchema: FormSchema[] = [
 
 export class OrgDesc {
   source: number;
+
   constructor(s: number) {
     this.source = s;
   }
+
   orgName = ref("");
   roleNames = ref<string[]>([]);
   viewSchema: DescItem[] = [

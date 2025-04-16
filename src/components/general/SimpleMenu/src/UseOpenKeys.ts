@@ -1,10 +1,9 @@
-import type { Menu as MenuType } from "@/router/Types";
+import type { Menu as MenuType } from "@mfish/core/router";
+import { getAllParentPath } from "@mfish/core/router";
 import type { MenuState } from "./Types";
-import { computed, Ref, toRaw } from "vue";
-import { unref } from "vue";
+import { computed, Ref, toRaw, unref } from "vue";
 import { uniq } from "lodash-es";
-import { getAllParentPath } from "@/router/helper/MenuHelper";
-import { useTimeoutFn } from "@/hooks/core/UseTimeout";
+import { useTimeoutFn } from "@mfish/core/hooks";
 import { useDebounceFn } from "@vueuse/core";
 
 export function useOpenKeys(

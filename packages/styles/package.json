@@ -1,0 +1,23 @@
+{
+  "name": "@mfish/styles",
+  "version": "2.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": {
+    "name": "mfish",
+    "email": "qiufeng9862@qq.com",
+    "url": "https://github.com/mfish-qf"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.less",
+      "default": "./src/index.less"
+    },
+    "./config": {
+      "types": "./src/config.less",
+      "default": "./src/config.less"
+    }
+  },
+  "main": "src/index.less"
+}

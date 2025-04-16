@@ -29,4 +29,3 @@ coverage
 /mfish-nocode-view/
 .turbo
 /.vite/
-/packages/mfish-ruler/lib/

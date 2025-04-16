@@ -13,13 +13,10 @@
 <script lang="ts" setup>
   import { unref } from "vue";
   import { CopyOutlined, RedoOutlined } from "@ant-design/icons-vue";
-  import { useAppStore } from "@/store/modules/App";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useI18n } from "@/hooks/web/UseI18n";
-  import { useMessage } from "@/hooks/web/UseMessage";
-  import { useCopyToClipboard } from "@/hooks/web/UseCopyToClipboard";
-  import defaultSetting from "@/settings/ProjectSetting";
-  import { changeAppConfig } from "@/logics/InitAppConfig";
+  import { useAppStore } from "@mfish/stores/modules";
+  import { useCopyToClipboard, useDesign, useI18n, useMessage } from "@mfish/core/hooks";
+  import defaultSetting from "@mfish/core/settings/ProjectSetting";
+  import { changeAppConfig } from "@mfish/core/logics/InitAppConfig";
   import { saveSysConfig } from "@/api/sys/SysConfig";
 
   const { prefixCls } = useDesign("setting-save");
@@ -53,6 +50,7 @@
   .@{prefix-cls} {
     display: flex;
     justify-content: space-evenly;
+
     button {
       display: flex;
       align-items: center;

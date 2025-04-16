@@ -25,13 +25,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { onMounted, ref, unref, nextTick, reactive } from "vue";
-  import { BasicTree, TreeActionType, TreeItem } from "@/components/general/Tree";
-  import { getOrg } from "@/api/sys/Org";
-  import { getTenantOrgTree } from "@/api/sys/SsoTenant";
-  import { Icon } from "@/components/general/Icon";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+  import { nextTick, onMounted, reactive, ref, unref } from "vue";
+  import { BasicTree, TreeActionType, TreeItem } from "@mfish/core/components/Tree";
+  import { getOrg, getTenantOrgTree } from "@mfish/core/api";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { useRootSetting } from "@mfish/core/hooks";
   import { Nullable } from "@mfish/types";
+
   defineOptions({ name: "OrgTree" });
 
   const props = defineProps({
@@ -49,6 +49,7 @@
     current: 1,
     pageSize: 50
   });
+
   async function fetch(orgName?: string) {
     if (props.source === 1) {
       treeData.value = (await getTenantOrgTree()) as unknown as TreeItem[];
@@ -67,12 +68,14 @@
       unref(asyncExpandTreeRef)?.expandAll(true);
     }).then();
   }
+
   function handleBeforeSearch(searchValue, callback) {
     pagination.current = 1;
     fetch(searchValue).then(() => {
       callback();
     });
   }
+
   function handlePageChange(page: number, searchValue) {
     pagination.current = page;
     fetch(searchValue);

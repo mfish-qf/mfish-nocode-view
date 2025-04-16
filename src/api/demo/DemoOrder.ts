@@ -1,11 +1,11 @@
-import { defHttp } from "@/utils/http/axios";
-import { DemoOrder, ReqDemoOrder, DemoOrderPageModel } from "@/api/demo/model/DemoOrderModel";
+import { defHttp } from "@mfish/core/utils/http/axios";
+import { DemoOrder, DemoOrderPageModel, ReqDemoOrder } from "@/api/demo/model/DemoOrderModel";
 
 /**
  * @description: 销售订单
  * @author: mfish
  * @date: 2024-09-13
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 enum Api {
   DemoOrder = "/demo/demoOrder"
@@ -37,7 +37,7 @@ export function getDemoOrderById(id: string) {
  */
 export function exportDemoOrder(reqDemoOrder?: ReqDemoOrder) {
   return defHttp.download({ url: Api.DemoOrder + "/export", params: reqDemoOrder });
-};
+}
 
 /**
  * 新增销售订单
@@ -47,7 +47,7 @@ export function exportDemoOrder(reqDemoOrder?: ReqDemoOrder) {
  */
 export function insertDemoOrder(demoOrder: DemoOrder) {
   return defHttp.post<DemoOrder>({ url: Api.DemoOrder, params: demoOrder }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 修改销售订单
@@ -57,7 +57,7 @@ export function insertDemoOrder(demoOrder: DemoOrder) {
  */
 export function updateDemoOrder(demoOrder: DemoOrder) {
   return defHttp.put<DemoOrder>({ url: Api.DemoOrder, params: demoOrder }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 删除销售订单
@@ -67,7 +67,7 @@ export function updateDemoOrder(demoOrder: DemoOrder) {
  */
 export function deleteDemoOrder(id: string) {
   return defHttp.delete<boolean>({ url: `${Api.DemoOrder}/${id}` }, { successMessageMode: "message" });
-};
+}
 
 /**
  * 批量删除销售订单
@@ -77,4 +77,4 @@ export function deleteDemoOrder(id: string) {
  */
 export function deleteBatchDemoOrder(ids: string) {
   return defHttp.delete<boolean>({ url: Api.DemoOrder + "/batch/" + ids }, { successMessageMode: "message" });
-};
+}

@@ -1,13 +1,13 @@
-import { BasicColumn } from "@/components/general/Table";
+import { BasicColumn } from "@mfish/core/components/Table";
 import { h } from "vue";
 import { Input, RangePicker, Switch } from "ant-design-vue";
-import { dateUtil, formatToDateTime } from "@/utils/DateUtil";
+import { dateUtil, formatToDateTime } from "@mfish/core/utils/DateUtil";
 
 /**
  * @description: 任务订阅表
  * @author: mfish
  * @date: 2023-02-20
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

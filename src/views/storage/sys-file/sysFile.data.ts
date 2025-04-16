@@ -1,17 +1,15 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
+import { BasicColumn, FormSchema, TableImage } from "@mfish/core/components/Table";
 import { h } from "vue";
 import { Switch } from "ant-design-vue";
-import { getToken } from "@/utils/auth";
-import TableImage from "@/components/general/Table/src/components/TableImg.vue";
-import { getLocalFileUrl, logicDeleteFile, restoreFile, setFileStatus } from "@/api/storage/SysFile";
-import { getFileIcon, calcSize, imageUrl } from "@/utils/file/FileUtils";
+import { getToken } from "@mfish/core/utils/auth";
+import { logicDeleteFile, restoreFile, setFileStatus } from "@mfish/core/api";
+import { calcSize, getFileIcon, getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
 
 /**
  * @description: 文件存储
  * @author: mfish
  * @date: 2023-03-02
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

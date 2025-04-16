@@ -1,11 +1,11 @@
-import { defHttp } from "@/utils/http/axios";
-import { MfFile, ReqMfFile, MfFilePageModel } from "@/api/nocode/model/MfFileModel";
+import { defHttp } from "@mfish/core/utils/http/axios";
+import { MfFile, MfFilePageModel, ReqMfFile } from "@/api/nocode/model/MfFileModel";
 
 /**
  * @description: 文件数据源
  * @author: mfish
  * @date: 2023-12-13
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 enum Api {
   MfFile = "/nocode/mfFile"

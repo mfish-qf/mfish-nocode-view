@@ -1,13 +1,11 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
-import { getDictProps } from "@/utils/DictUtils";
-import { YNTag } from "@/components/general/DictTag/CommonTag";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
+import { getDictProps, YNTag } from "@mfish/core/components/DictTag";
 
 /**
  * @description: 数据库连接
  * @author: mfish
  * @date: 2023-03-13
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

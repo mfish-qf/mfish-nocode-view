@@ -19,10 +19,10 @@
   import LayoutSider from "./LayoutSider.vue";
   import MixSider from "./MixSider.vue";
   import { Drawer } from "ant-design-vue";
-  import { useAppInject } from "@/hooks/web/UseAppInject";
-  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useAppInject } from "@/hooks/UseAppInject";
+  import { useDesign, useMenuSetting } from "@mfish/core/hooks";
   import { nextTick, onBeforeMount, unref } from "vue";
+
   defineOptions({ name: "SiderWrapper" });
 
   const { prefixCls } = useDesign("layout-sider");
@@ -34,6 +34,7 @@
       collapsed: true
     });
   }
+
   onBeforeMount(async () => {
     await nextTick();
     if (unref(getIsMobile)) {

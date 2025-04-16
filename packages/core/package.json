@@ -1,0 +1,342 @@
+{
+  "name": "@mfish/core",
+  "version": "2.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": {
+    "name": "mfish",
+    "email": "qiufeng9862@qq.com",
+    "url": "https://github.com/mfish-qf"
+  },
+  "type": "module",
+  "exports": {
+    "./enums": {
+      "types": "./src/enums/index.ts",
+      "default": "./src/enums/index.ts"
+    },
+    "./api": {
+      "types": "./src/api/index.ts",
+      "default": "./src/api/index.ts"
+    },
+    "./hooks": {
+      "types": "./src/hooks/index.ts",
+      "default": "./src/hooks/index.ts"
+    },
+    "./router": {
+      "types": "./src/router/index.ts",
+      "default": "./src/router/index.ts"
+    },
+    "./settings/DesignSetting": {
+      "types": "./src/settings/DesignSetting.ts",
+      "default": "./src/settings/DesignSetting.ts"
+    },
+    "./settings/ProjectSetting": {
+      "types": "./src/settings/ProjectSetting.ts",
+      "default": "./src/settings/ProjectSetting.ts"
+    },
+    "./settings/EncryptionSetting": {
+      "types": "./src/settings/EncryptionSetting.ts",
+      "default": "./src/settings/EncryptionSetting.ts"
+    },
+    "./settings/I18nSetting": {
+      "types": "./src/settings/I18nSetting.ts",
+      "default": "./src/settings/I18nSetting.ts"
+    },
+    "./settings/ComponentSetting": {
+      "types": "./src/settings/ComponentSetting.ts",
+      "default": "./src/settings/ComponentSetting.ts"
+    },
+    "./settings/LoginSetting": {
+      "types": "./src/settings/LoginSetting.ts",
+      "default": "./src/settings/LoginSetting.ts"
+    },
+    "./settings/SiteSetting": {
+      "types": "./src/settings/SiteSetting.ts",
+      "default": "./src/settings/SiteSetting.ts"
+    },
+    "./utils": {
+      "types": "./src/utils/index.ts",
+      "default": "./src/utils/index.ts"
+    },
+    "./utils/Log": {
+      "types": "./src/utils/Log.ts",
+      "default": "./src/utils/Log.ts"
+    },
+    "./utils/Env": {
+      "types": "./src/utils/Env.ts",
+      "default": "./src/utils/Env.ts"
+    },
+    "./utils/Bem": {
+      "types": "./src/utils/Bem.ts",
+      "default": "./src/utils/Bem.ts"
+    },
+    "./utils/Is": {
+      "types": "./src/utils/Is.ts",
+      "default": "./src/utils/Is.ts"
+    },
+    "./utils/Mitt": {
+      "types": "./src/utils/Mitt.ts",
+      "default": "./src/utils/Mitt.ts"
+    },
+    "./utils/Props": {
+      "types": "./src/utils/Props.ts",
+      "default": "./src/utils/Props.ts"
+    },
+    "./utils/PropTypes": {
+      "types": "./src/utils/PropTypes.ts",
+      "default": "./src/utils/PropTypes.ts"
+    },
+    "./utils/DomUtils": {
+      "types": "./src/utils/DomUtils.ts",
+      "default": "./src/utils/DomUtils.ts"
+    },
+    "./utils/Utils": {
+      "types": "./src/utils/Utils.ts",
+      "default": "./src/utils/Utils.ts"
+    },
+    "./utils/Cipher": {
+      "types": "./src/utils/Cipher.ts",
+      "default": "./src/utils/Cipher.ts"
+    },
+    "./utils/Uuid": {
+      "types": "./src/utils/Uuid.ts",
+      "default": "./src/utils/Uuid.ts"
+    },
+    "./utils/DateUtil": {
+      "types": "./src/utils/DateUtil.ts",
+      "default": "./src/utils/DateUtil.ts"
+    },
+    "./utils/Validator": {
+      "types": "./src/utils/Validator.ts",
+      "default": "./src/utils/Validator.ts"
+    },
+    "./utils/Color": {
+      "types": "./src/utils/Color.ts",
+      "default": "./src/utils/Color.ts"
+    },
+    "./utils/auth": {
+      "types": "./src/utils/auth/index.ts",
+      "default": "./src/utils/auth/index.ts"
+    },
+    "./utils/cache": {
+      "types": "./src/utils/cache/index.ts",
+      "default": "./src/utils/cache/index.ts"
+    },
+    "./utils/cache/Persistent": {
+      "types": "./src/utils/cache/Persistent.ts",
+      "default": "./src/utils/cache/Persistent.ts"
+    },
+    "./utils/event": {
+      "types": "./src/utils/event/index.ts",
+      "default": "./src/utils/event/index.ts"
+    },
+    "./utils/factory/CreateAsyncComponent": {
+      "types": "./src/utils/factory/CreateAsyncComponent.tsx",
+      "default": "./src/utils/factory/CreateAsyncComponent.tsx"
+    },
+    "./utils/helper/TsxHelper": {
+      "types": "./src/utils/helper/TsxHelper.tsx",
+      "default": "./src/utils/helper/TsxHelper.tsx"
+    },
+    "./utils/helper/TreeHelper": {
+      "types": "./src/utils/helper/TreeHelper.ts",
+      "default": "./src/utils/helper/TreeHelper.ts"
+    },
+    "./utils/file/FileUtils": {
+      "types": "./src/utils/file/FileUtils.ts",
+      "default": "./src/utils/file/FileUtils.ts"
+    },
+    "./utils/file/Download": {
+      "types": "./src/utils/file/Download.ts",
+      "default": "./src/utils/file/Download.ts"
+    },
+    "./utils/file/Base64Convert": {
+      "types": "./src/utils/file/Base64Convert.ts",
+      "default": "./src/utils/file/Base64Convert.ts"
+    },
+    "./utils/OutsideOpenUtils": {
+      "types": "./src/utils/OutsideOpenUtils.ts",
+      "default": "./src/utils/OutsideOpenUtils.ts"
+    },
+    "./utils/PageUtils": {
+      "types": "./src/utils/PageUtils.ts",
+      "default": "./src/utils/PageUtils.ts"
+    },
+    "./utils/HBuildUtils": {
+      "types": "./src/utils/HBuildUtils.ts",
+      "default": "./src/utils/HBuildUtils.ts"
+    },
+    "./utils/http/axios": {
+      "types": "./src/utils/http/axios/index.ts",
+      "default": "./src/utils/http/axios/index.ts"
+    },
+    "./utils/http/axios/AxiosCancel": {
+      "types": "./src/utils/http/axios/AxiosCancel.ts",
+      "default": "./src/utils/http/axios/AxiosCancel.ts"
+    },
+    "./i18n/SetupI18n": {
+      "types": "./src/i18n/SetupI18n.ts",
+      "default": "./src/i18n/SetupI18n.ts"
+    },
+    "./i18n/UseLocale": {
+      "types": "./src/i18n/UseLocale.ts",
+      "default": "./src/i18n/UseLocale.ts"
+    },
+    "./components/RegisterGlobComponent": {
+      "types": "./src/components/RegisterGlobComponent.ts",
+      "default": "./src/components/RegisterGlobComponent.ts"
+    },
+    "./components/Basic": {
+      "types": "./src/components/Basic/index.ts",
+      "default": "./src/components/Basic/index.ts"
+    },
+    "./components/Container": {
+      "types": "./src/components/Container/index.ts",
+      "default": "./src/components/Container/index.ts"
+    },
+    "./components/Icon": {
+      "types": "./src/components/Icon/index.ts",
+      "default": "./src/components/Icon/index.ts"
+    },
+    "./components/Scrollbar": {
+      "types": "./src/components/Scrollbar/index.ts",
+      "default": "./src/components/Scrollbar/index.ts"
+    },
+    "./components/Transition": {
+      "types": "./src/components/Transition/index.ts",
+      "default": "./src/components/Transition/index.ts"
+    },
+    "./components/Modal": {
+      "types": "./src/components/Modal/index.ts",
+      "default": "./src/components/Modal/index.ts"
+    },
+    "./components/Button": {
+      "types": "./src/components/Button/index.ts",
+      "default": "./src/components/Button/index.ts"
+    },
+    "./components/Draggable": {
+      "types": "./src/components/Draggable/index.ts",
+      "default": "./src/components/Draggable/index.ts"
+    },
+    "./components/Dropdown": {
+      "types": "./src/components/Dropdown/index.ts",
+      "default": "./src/components/Dropdown/index.ts"
+    },
+    "./components/DictTag": {
+      "types": "./src/components/DictTag/index.ts",
+      "default": "./src/components/DictTag/index.ts"
+    },
+    "./components/Tree": {
+      "types": "./src/components/Tree/index.ts",
+      "default": "./src/components/Tree/index.ts"
+    },
+    "./components/Loading": {
+      "types": "./src/components/Loading/index.ts",
+      "default": "./src/components/Loading/index.ts"
+    },
+    "./components/InputSearch": {
+      "types": "./src/components/InputSearch/index.vue",
+      "default": "./src/components/InputSearch/index.vue"
+    },
+    "./components/DragTree": {
+      "types": "./src/components/DragTree/index.ts",
+      "default": "./src/components/DragTree/index.ts"
+    },
+    "./components/CodeEditor": {
+      "types": "./src/components/CodeEditor/index.ts",
+      "default": "./src/components/CodeEditor/index.ts"
+    },
+    "./components/Form": {
+      "types": "./src/components/Form/index.ts",
+      "default": "./src/components/Form/index.ts"
+    },
+    "./components/Table": {
+      "types": "./src/components/Table/index.ts",
+      "default": "./src/components/Table/index.ts"
+    },
+    "./components/Cropper": {
+      "types": "./src/components/Cropper/index.ts",
+      "default": "./src/components/Cropper/index.ts"
+    },
+    "./components/StrengthMeter": {
+      "types": "./src/components/StrengthMeter/index.ts",
+      "default": "./src/components/StrengthMeter/index.ts"
+    },
+    "./components/CountDown": {
+      "types": "./src/components/CountDown/index.ts",
+      "default": "./src/components/CountDown/index.ts"
+    },
+    "./components/Upload": {
+      "types": "./src/components/Upload/index.ts",
+      "default": "./src/components/Upload/index.ts"
+    },
+    "./components/Split": {
+      "types": "./src/components/Split/index.ts",
+      "default": "./src/components/Split/index.ts"
+    },
+    "./components/Description": {
+      "types": "./src/components/Description/index.ts",
+      "default": "./src/components/Description/index.ts"
+    },
+    "./components/FileUpDown": {
+      "types": "./src/components/FileUpDown/index.ts",
+      "default": "./src/components/FileUpDown/index.ts"
+    },
+    "./components/CountTo": {
+      "types": "./src/components/CountTo/index.ts",
+      "default": "./src/components/CountTo/index.ts"
+    },
+    "./components/CardList": {
+      "types": "./src/components/CardList/index.ts",
+      "default": "./src/components/CardList/index.ts"
+    },
+    "./components/Drawer": {
+      "types": "./src/components/Drawer/index.ts",
+      "default": "./src/components/Drawer/index.ts"
+    },
+    "./logics/mitt/RouteChange": {
+      "types": "./src/logics/mitt/RouteChange.ts",
+      "default": "./src/logics/mitt/RouteChange.ts"
+    },
+    "./logics/error-handle": {
+      "types": "./src/logics/error-handle/index.ts",
+      "default": "./src/logics/error-handle/index.ts"
+    },
+    "./logics/InitAppConfig": {
+      "types": "./src/logics/InitAppConfig.ts",
+      "default": "./src/logics/InitAppConfig.ts"
+    },
+    "./logics/theme/Dark": {
+      "types": "./src/logics/theme/Dark.ts",
+      "default": "./src/logics/theme/Dark.ts"
+    },
+    "./logics/theme/UpdateBackground": {
+      "types": "./src/logics/theme/UpdateBackground.ts",
+      "default": "./src/logics/theme/UpdateBackground.ts"
+    },
+    "./logics/theme/UpdateColorWeak": {
+      "types": "./src/logics/theme/UpdateColorWeak.ts",
+      "default": "./src/logics/theme/UpdateColorWeak.ts"
+    },
+    "./logics/theme/UpdateGrayMode": {
+      "types": "./src/logics/theme/UpdateGrayMode.ts",
+      "default": "./src/logics/theme/UpdateGrayMode.ts"
+    },
+    "./logics/theme/UpdateTheme": {
+      "types": "./src/logics/theme/UpdateTheme.ts",
+      "default": "./src/logics/theme/UpdateTheme.ts"
+    },
+    "./assets/images/*.png": {
+      "types": "./src/assets/images/*.png",
+      "default": "./src/assets/images/*.png"
+    },
+    "./assets/svg/*.svg": {
+      "types": "./src/assets/svg/*.svg",
+      "default": "./src/assets/svg/*.svg"
+    },
+    "./directives": {
+      "types": "./src/directives/index.ts",
+      "default": "./src/directives/index.ts"
+    }
+  }
+}

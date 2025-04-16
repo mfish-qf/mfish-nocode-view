@@ -2,7 +2,7 @@
  @description: 销售订单
  @author: mfish
  @date: 2024-09-13
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
@@ -12,10 +12,10 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { demoOrderFormSchema } from "./demoOrder.data";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { insertDemoOrder, updateDemoOrder } from "@/api/demo/DemoOrder";
   import DemoOrderDetailManagement from "@/views/demo/demo-order-detail/index.vue";
   import { Divider as ADivider } from "ant-design-vue";

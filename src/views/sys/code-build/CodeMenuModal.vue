@@ -9,12 +9,12 @@
   </BasicModal>
 </template>
 <script setup lang="ts">
-  import { BasicForm, useForm } from "@/components/general/Form";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { MenuListItem, MenuType } from "@/api/sys/model/MenuModel";
-  import { getMenuList } from "@/api/sys/Menu";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { getMenuList, MenuListItem, MenuType } from "@mfish/core/api";
   import { codeCreateMenu } from "@/api/sys/CodeBuild";
   import { ref } from "vue";
+
   const [registerForm, { resetFields, validate }] = useForm({
     labelWidth: 100,
     schemas: [

@@ -2,7 +2,7 @@
  @description: 文件存储
  @author: mfish
  @date: 2023-03-02
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <div>
@@ -34,15 +34,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
-  import { deleteSysFile, getSysFileList } from "@/api/storage/SysFile";
-  import { useModal } from "@/components/general/Modal";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
+  import { deleteSysFile, getSysFileList, SysFile, uploadApi } from "@mfish/core/api";
+  import { useModal } from "@mfish/core/components/Modal";
   import SysFileModal from "./SysFileModal.vue";
   import { columns, searchFormSchema } from "./sysFile.data";
-  import { uploadApi } from "@/api/storage/Upload";
-  import BasicUpload from "@/components/general/Upload/src/BasicUpload.vue";
-  import { SysFile } from "@/api/storage/model/SysFileModel";
+  import { BasicUpload } from "@mfish/core/components/Upload";
   import { Recordable } from "@mfish/types";
+
   defineOptions({ name: "SysFileManagement" });
 
   const [registerModal] = useModal();
@@ -76,6 +75,7 @@
   function handleSuccess() {
     reload();
   }
+
   const handleChange = (files: SysFile[]) => {
     files.forEach((file) => {
       insertTableDataRecord(file, 0);

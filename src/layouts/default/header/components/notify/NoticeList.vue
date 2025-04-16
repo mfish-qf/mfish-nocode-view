@@ -52,11 +52,11 @@
   </a-list>
 </template>
 <script lang="ts">
-  import { computed, defineComponent, PropType, ref, watch, unref } from "vue";
+  import { computed, defineComponent, PropType, ref, unref, watch } from "vue";
   import { ListItem } from "./Data";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { List, Avatar, Tag, Typography } from "ant-design-vue";
-  import { isNumber } from "@/utils/Is";
+  import { useDesign } from "@mfish/core/hooks";
+  import { Avatar, List, Tag, Typography } from "ant-design-vue";
+  import { isNumber } from "@mfish/core/utils/Is";
 
   export default defineComponent({
     components: {

@@ -2,7 +2,7 @@
  @description: 数据库连接
  @author: mfish
  @date: 2023-03-13
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
@@ -32,15 +32,14 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref, Ref, onBeforeMount } from "vue";
-  import { BasicForm, FormSchema, useForm } from "@/components/general/Form/index";
+  import { computed, onBeforeMount, Ref, ref, unref } from "vue";
+  import { BasicForm, FormSchema, useForm, ComponentType } from "@mfish/core/components/Form";
   import { dbConnectFormSchema } from "./dbConnect.data";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { insertDbConnect, testDbConnect, updateDbConnect } from "@/api/sys/DbConnect";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { getDictItems, insertDbConnect, testDbConnect, updateDbConnect } from "@mfish/core/api";
   import { Tabs as ATabs } from "ant-design-vue";
-  import { getDictItems } from "@/api/sys/DictItem";
-  import { ComponentType } from "@/components/general/Form/src/types";
-  import { buildSm2Key, sm2Encrypt } from "@/utils/Cipher";
+  import { buildSm2Key, sm2Encrypt } from "@mfish/core/utils/Cipher";
+
   const emit = defineEmits(["success", "register"]);
   const ATabPane = ATabs.TabPane;
   const isUpdate = ref(true);

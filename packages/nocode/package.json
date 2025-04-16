@@ -1,0 +1,27 @@
+{
+  "name": "@mfish/nocode",
+  "version": "2.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": {
+    "name": "mfish",
+    "email": "qiufeng9862@qq.com",
+    "url": "https://github.com/mfish-qf"
+  },
+  "type": "module",
+  "main": "./core/index.mjs",
+  "module": "./core/index.mjs",
+  "types": "./core/index.mjs",
+  "files": [
+    "core"
+  ],
+  "exports": {
+    ".": {
+      "types": "./core/index.mjs",
+      "import": "./core/index.mjs"
+    }
+  },
+  "devDependencies": {
+    "vite-plugin-style-inject": "^0.0.1"
+  }
+}

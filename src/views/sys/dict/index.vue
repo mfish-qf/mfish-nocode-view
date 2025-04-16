@@ -7,8 +7,8 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-auth="'sys:dict:insert'">新增 </a-button>
-        <a-button color="error" @click="handleExport" v-auth="'sys:dict:export'">导出 </a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:dict:insert'">新增</a-button>
+        <a-button color="error" @click="handleExport" v-auth="'sys:dict:export'">导出</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -46,13 +46,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { deleteDict, exportDict, getDictList } from "@/api/sys/Dict";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import DictModal from "./DictModal.vue";
   import { columns, searchFormSchema } from "./dict.data";
-  import { useGo } from "@/hooks/web/UsePage";
+  import { useGo } from "@mfish/core/hooks";
   import { Dict } from "@/api/sys/model/DictModel";
+
   defineOptions({ name: "DictManagement" });
 
   const [registerModal, { openModal }] = useModal();

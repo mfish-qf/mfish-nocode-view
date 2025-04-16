@@ -2,7 +2,7 @@
  @description: 定时调度任务
  @author: mfish
  @date: 2023-02-20
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <div>
@@ -63,14 +63,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { deleteJob, executeJob, getJobList } from "@/api/scheduler/Job";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import JobModal from "./JobModal.vue";
   import { columns, searchFormSchema } from "./job.data";
   import { Job } from "@/api/scheduler/model/JobModel";
   import JobSubscribeList from "@/views/scheduler/job/JobSubscribeList.vue";
-  import DictTag from "@/components/general/DictTag/DictTag.vue";
+  import { DictTag } from "@mfish/core/components/DictTag";
+
   defineOptions({ name: "JobManagement" });
   const [registerModal, { openModal }] = useModal();
   const [registerTable, { reload }] = useTable({

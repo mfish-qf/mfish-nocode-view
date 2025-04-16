@@ -9,6 +9,6 @@
   </CollapseContainer>
 </template>
 <script lang="ts" setup>
-  import { CollapseContainer } from "@/components/general/Container";
+  import { CollapseContainer } from "@mfish/core/components/Container";
   import OrgManagement from "../../org/index.vue";
 </script>

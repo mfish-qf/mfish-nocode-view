@@ -20,20 +20,25 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { computed, ref, unref } from "vue";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { accountFormSchema } from "./account.data";
-  import { getOrg, getOrgRoles } from "@/api/sys/Org";
-  import { getUserRoles, insertUser, updateUser } from "@/api/sys/User";
-  import { getAllRoleList } from "@/api/sys/Role";
-  import { RoleInfo } from "@/api/sys/model/UserModel";
-  import { SsoRole } from "@/api/sys/model/RoleModel";
-  import { getTenantOrgTree } from "@/api/sys/SsoTenant";
+  import {
+    getAllRoleList,
+    getOrg,
+    getOrgRoles,
+    getTenantOrgTree,
+    getUserRoles,
+    insertUser,
+    RoleInfo,
+    SsoOrg,
+    SsoRole,
+    updateUser
+  } from "@mfish/core/api";
   import { Recordable } from "@mfish/types";
   import { TreeSelect } from "ant-design-vue";
-  import { SsoOrg } from "@/api/sys/model/OrgModel";
-  import { usePermission } from "@/hooks/web/UsePermission";
+  import { usePermission } from "@mfish/core/hooks";
 
   defineOptions({ name: "AccountModal" });
 
@@ -151,6 +156,7 @@
   function handleChange(_, label) {
     curLabels.value = label;
   }
+
   async function handleSearch(value) {
     if (props.source === 1) return;
     const orgNames = curLabels.value?.join(",");
@@ -161,6 +167,7 @@
     });
     treeData.value = orgData.list;
   }
+
   const getTitle = computed(() => (unref(isUpdate) ? "编辑账号" : "新增账号"));
 
   function setRole(roles, userRoles, orgRoles) {

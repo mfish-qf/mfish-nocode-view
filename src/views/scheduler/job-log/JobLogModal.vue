@@ -2,7 +2,7 @@
  @description: 系统日志
  @author: mfish
  @date: 2023-01-08
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="查看任务日志" :show-ok-btn="false" cancel-text="关闭">
@@ -11,9 +11,10 @@
 </template>
 <script lang="ts" setup>
   import { ref } from "vue";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { Description, useDescription } from "@/components/general/Description";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { Description, useDescription } from "@mfish/core/components/Description";
   import { jobLogSchema } from "@/views/scheduler/job-log/jobLog.data";
+
   defineOptions({ name: "JobLogModal" });
 
   defineEmits(["success", "register"]);

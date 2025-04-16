@@ -1,7 +1,7 @@
-@header-trigger-prefix-cls: ~'@{namespace}-layout-header-trigger';
-@header-prefix-cls: ~'@{namespace}-layout-header';
-@breadcrumb-prefix-cls: ~'@{namespace}-layout-breadcrumb';
-@logo-prefix-cls: ~'@{namespace}-app-logo';
+@header-trigger-prefix-cls: ~"@{namespace}-layout-header-trigger";
+@header-prefix-cls: ~"@{namespace}-layout-header";
+@breadcrumb-prefix-cls: ~"@{namespace}-layout-breadcrumb";
+@logo-prefix-cls: ~"@{namespace}-app-logo";
 
 .@{header-prefix-cls} {
   position: relative;
@@ -113,7 +113,6 @@
 
       &:hover {
         background-color: @header-bg-hover-color !important;
-
       }
     }
   }
@@ -149,6 +148,7 @@
 
   &--dark {
     box-shadow: 0 0 6px 0 @trigger-dark-bg-color;
+
     .ant-divider {
       background-color: @trigger-dark-bg-color;
     }

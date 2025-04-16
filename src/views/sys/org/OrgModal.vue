@@ -18,19 +18,25 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref, toRaw } from "vue";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { computed, ref, toRaw, unref } from "vue";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { formSchema } from "./org.data";
-  import { getOrg, insertOrg, updateOrg } from "@/api/sys/Org";
-  import { getAllRoleList } from "@/api/sys/Role";
-  import { getTenantOrgTree, insertTenantOrg, updateTenantOrg } from "@/api/sys/SsoTenant";
-  import { useMessage } from "@/hooks/web/UseMessage";
-  import { isNullOrUnDef } from "@/utils/Is";
-  import { SsoOrg } from "@/api/sys/model/OrgModel";
+  import {
+    getAllRoleList,
+    getOrg,
+    getTenantOrgTree,
+    insertOrg,
+    insertTenantOrg,
+    SsoOrg,
+    SsoRole,
+    updateOrg,
+    updateTenantOrg
+  } from "@mfish/core/api";
+  import { useMessage } from "@mfish/core/hooks";
+  import { isNullOrUnDef } from "@mfish/core/utils/Is";
   import { TreeSelect } from "ant-design-vue";
   import { Recordable } from "@mfish/types";
-  import { SsoRole } from "@/api/sys/model/RoleModel";
 
   const props = defineProps({
     source: {
@@ -159,6 +165,7 @@
     });
     treeData.value = orgData.list;
   }
+
   async function orgChange(orgId, _, extra) {
     setFieldsValue({ parentId: orgId }).then();
     const id = extra.triggerNode?.props?.id;

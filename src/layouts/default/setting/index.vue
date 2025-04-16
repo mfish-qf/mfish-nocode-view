@@ -6,9 +6,10 @@
 </template>
 <script lang="ts" setup>
   import SettingDrawer from "./SettingDrawer";
-  import { Icon } from "@/components/general/Icon";
-  import { useDrawer } from "@/components/general/Drawer";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { useDrawer } from "@mfish/core/components/Drawer";
+  import { useDesign } from "@mfish/core/hooks";
+
   defineOptions({ name: "SettingButton" });
   const [register, { openDrawer }] = useDrawer();
   const { prefixCls } = useDesign("theme-setting");
@@ -20,6 +21,7 @@
     &:hover {
       animation: spin 1s linear forwards;
     }
+
     @keyframes spin {
       0%,
       100% {

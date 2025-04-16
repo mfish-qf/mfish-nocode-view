@@ -1,4 +1,4 @@
-import { dateUtil } from "@/utils/DateUtil";
+import { dateUtil } from "@mfish/core/utils/DateUtil";
 import { reactive, toRefs } from "vue";
 import { tryOnMounted, tryOnUnmounted } from "@vueuse/core";
 import { IntervalHandle } from "@mfish/types";

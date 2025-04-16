@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { defineComponent, toRefs, ref, unref } from "vue";
-  import { createAppProviderContext } from "./UseAppContext";
-  import { createBreakpointListen } from "@/hooks/event/UseBreakpoint";
-  import { prefixCls } from "@/settings/DesignSetting";
-  import { useAppStore } from "@/store/modules/App";
-  import { MenuModeEnum, MenuTypeEnum } from "@/enums/MenuEnum";
+  import { defineComponent, ref, toRefs, unref } from "vue";
+  import { createAppProviderContext, createBreakpointListen } from "@mfish/core/hooks";
+  import { prefixCls } from "@mfish/core/settings/DesignSetting";
+  import { useAppStore } from "@mfish/stores/modules";
+  import { MenuModeEnum, MenuTypeEnum } from "@mfish/core/enums";
 
   const props = {
     /**

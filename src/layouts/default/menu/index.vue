@@ -1,21 +1,17 @@
 <script lang="tsx">
-  import type { PropType, CSSProperties } from "vue";
-  import { computed, defineComponent, unref, toRef } from "vue";
+  import type { CSSProperties, PropType } from "vue";
+  import { computed, defineComponent, toRef, unref } from "vue";
   import { BasicMenu } from "@/components/general/Menu";
   import { SimpleMenu } from "@/components/general/SimpleMenu";
   import { AppLogo } from "@/components/general/Application";
-  import { MenuModeEnum, MenuSplitTyeEnum } from "@/enums/MenuEnum";
-  import { useMenuSetting } from "@/hooks/setting/UseMenuSetting";
-  import { ScrollContainer } from "@/components/general/Container";
-  import { externalOpen, useGo } from "@/hooks/web/UsePage";
+  import { MenuModeEnum, MenuSplitTyeEnum, ThemeEnum } from "@mfish/core/enums";
+  import { externalOpen, useDesign, useGo, useMenuSetting, useRootSetting } from "@mfish/core/hooks";
+  import { ScrollContainer } from "@mfish/core/components/Container";
   import { useSplitMenu } from "./UseLayoutMenu";
-  import { openWindow } from "@/utils";
-  import { propTypes } from "@/utils/PropTypes";
-  import { isUrl } from "@/utils/Is";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-  import { useAppInject } from "@/hooks/web/UseAppInject";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { ThemeEnum } from "@/enums/AppEnum";
+  import { openWindow } from "@mfish/core/utils";
+  import { propTypes } from "@mfish/core/utils/PropTypes";
+  import { isUrl } from "@mfish/core/utils/Is";
+  import { useAppInject } from "@/hooks/UseAppInject";
   import { Nullable } from "@mfish/types";
 
   export default defineComponent({

@@ -1,17 +1,13 @@
 <script lang="tsx">
   import type { PropType } from "vue";
-  import { Result, Button } from "ant-design-vue";
-  import { defineComponent, ref, computed, unref } from "vue";
-  import { ExceptionEnum } from "@/enums/ExceptionEnum";
-  import notDataSvg from "@/assets/svg/no-data.svg";
-  import netWorkSvg from "@/assets/svg/net-error.svg";
+  import { computed, defineComponent, ref, unref } from "vue";
+  import { Button, Result } from "ant-design-vue";
+  import { ExceptionEnum, PageEnum } from "@mfish/core/enums";
+  import notDataSvg from "@mfish/core/assets/svg/no-data.svg";
+  import netWorkSvg from "@mfish/core/assets/svg/net-error.svg";
   import { useRoute } from "vue-router";
-  import { useDesign } from "@/hooks/web/UseDesign";
-  import { useI18n } from "@/hooks/web/UseI18n";
-  import { useGo, useRedo } from "@/hooks/web/UsePage";
-  import { usePermissionStore } from "@/store/modules/Permission";
-  import { PageEnum } from "@/enums/PageEnum";
-  import { useTabs } from "@/hooks/web/UseTabs";
+  import { useDesign, useGo, useI18n, useRedo, useTabs } from "@mfish/core/hooks";
+  import { usePermissionStore } from "@mfish/stores/modules";
 
   interface MapValue {
     title: string;

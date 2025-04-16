@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@mfish/ts-config/web.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@core/*": ["./src/*"],
+      "@/*": ["../../src/*"]
+    }
+  },
+  "include": ["src", "../../types"],
+  "exclude": ["node_modules"]
+}

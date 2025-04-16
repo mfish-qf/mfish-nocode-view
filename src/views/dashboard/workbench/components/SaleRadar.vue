@@ -4,9 +4,9 @@
   </Card>
 </template>
 <script lang="ts" setup>
-  import { Ref, ref, watch } from "vue";
+  import { PropType, ref, Ref, watch } from "vue";
   import { Card } from "ant-design-vue";
-  import { useECharts } from "@/hooks/web/UseECharts";
+  import { useECharts } from "@/hooks/UseECharts";
 
   const props = defineProps({
     loading: Boolean,

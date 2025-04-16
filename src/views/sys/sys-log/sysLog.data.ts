@@ -1,17 +1,16 @@
-import { BasicColumn } from "@/components/general/Table";
-import { FormSchema } from "@/components/general/Table";
+import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
-import { dateUtil } from "@/utils/DateUtil";
-import { getDictProps } from "@/utils/DictUtils";
-import { DescItem } from "@/components/general/Description";
-import { buildJsonPreview } from "@/utils/HBuildUtils";
+import { dateUtil } from "@mfish/core/utils/DateUtil";
+import { getDictProps } from "@mfish/core/components/DictTag";
+import { DescItem } from "@mfish/core/components/Description";
+import { buildJsonPreview } from "@mfish/core/utils/HBuildUtils";
 
 /**
  * @description: 系统日志
  * @author: mfish
  * @date: 2023-01-08
- * @version: V1.3.2
+ * @version: V2.0.0
  */
 export const columns: BasicColumn[] = [
   {

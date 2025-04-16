@@ -15,11 +15,9 @@
 <script lang="ts" setup>
   import { computed, unref } from "vue";
   import FrameLayout from "@/layouts/iframe/index.vue";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-  import { useTransitionSetting } from "@/hooks/setting/UseTransitionSetting";
-  import { useMultipleTabSetting } from "@/hooks/setting/UseMultipleTabSetting";
-  import { useMultipleTabStore } from "@/store/modules/MultipleTab";
-  import { RouterTransitionEnum } from "@/enums/AppEnum";
+  import { useMultipleTabSetting, useRootSetting, useTransitionSetting } from "@mfish/core/hooks";
+  import { useMultipleTabStore } from "@mfish/stores/modules";
+  import { RouterTransitionEnum } from "@mfish/core/enums";
 
   defineOptions({ name: "PageLayout" });
 

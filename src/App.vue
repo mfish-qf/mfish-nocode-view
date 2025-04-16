@@ -16,11 +16,9 @@
   import { RouterView } from "vue-router";
   import { darkTheme as nDarkTheme, lightTheme as nLightTheme, NConfigProvider } from "naive-ui";
   import { AppProvider } from "@/components/general/Application";
-  import { useTitle } from "@/hooks/web/UseTitle";
-  import { useLocale } from "@/i18n/UseLocale";
-  import { useDarkModeTheme } from "@/hooks/setting/UseDarkModeTheme";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
-  import { ThemeEnum } from "@/enums/AppEnum";
+  import { useDarkModeTheme, useRootSetting, useTitle } from "@mfish/core/hooks";
+  import { useLocale } from "@mfish/core/i18n/UseLocale";
+  import { ThemeEnum } from "@mfish/core/enums";
 
   const { getAntdLocale } = useLocale();
   const { getDarkMode } = useRootSetting();

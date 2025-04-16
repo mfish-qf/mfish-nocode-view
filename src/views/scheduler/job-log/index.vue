@@ -2,7 +2,7 @@
  @description: 任务日志
  @author: mfish
  @date: 2023-02-14
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <div>
@@ -43,15 +43,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { deleteJobLog, getJobLogList } from "@/api/scheduler/JobLog";
   import { columns, searchFormSchema } from "./jobLog.data";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import JobLogModal from "@/views/scheduler/job-log/JobLogModal.vue";
-  import { buildDictTag } from "@/utils/DictUtils";
+  import { buildDictTag, DictTag } from "@mfish/core/components/DictTag";
   import { Job } from "@/api/scheduler/model/JobModel";
-  import DictTag from "@/components/general/DictTag/DictTag.vue";
   import { Recordable } from "@mfish/types";
+
   defineOptions({ name: "JobLogManagement" });
   const [registerModal, { openModal }] = useModal();
   const [registerTable, { reload }] = useTable({

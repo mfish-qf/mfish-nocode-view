@@ -13,9 +13,10 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { onMounted } from "vue";
   import DataBaseManagement from "@/views/sys/database/DataBaseManagement.vue";
+
   const [registerModal, { setModalProps }] = useModalInner();
   onMounted(() => {
     setModalProps({ width: "1200px", height: 600, defaultFullscreen: true });

@@ -26,13 +26,14 @@
   <PasswordModal @register="registerPwd" />
 </template>
 <script lang="ts" setup>
-  import { List as AList, Button as AButton } from "ant-design-vue";
-  import { CollapseContainer } from "@/components/general/Container";
+  import { Button as AButton, List as AList } from "ant-design-vue";
+  import { CollapseContainer } from "@mfish/core/components/Container";
   import { ListItem } from "./setting.data";
-  import { useUserStore } from "@/store/modules/User";
-  import { Icon } from "@/components/general/Icon";
+  import { useUserStore } from "@mfish/stores/modules";
+  import { Icon } from "@mfish/core/components/Icon";
   import PasswordModal from "@/views/sys/account/PasswordModal.vue";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
+
   const AListItem = AList.Item;
   const AListItemMeta = AListItem.Meta;
   const userStore = useUserStore();
@@ -72,6 +73,7 @@
       extra: "修改"
     }
   ];
+
   function handleClick(e) {
     switch (e.key) {
       case "1": {
@@ -83,6 +85,7 @@
       }
     }
   }
+
   function changePwd() {
     openPwdModal(true, { userId: userInfo?.id });
   }

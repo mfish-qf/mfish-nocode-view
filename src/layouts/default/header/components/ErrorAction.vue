@@ -11,12 +11,12 @@
   </Tooltip>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from "vue";
-  import { Tooltip, Badge } from "ant-design-vue";
-  import { Icon } from "@/components/general/Icon";
-  import { useI18n } from "@/hooks/web/UseI18n";
-  import { useErrorLogStore } from "@/store/modules/ErrorLog";
-  import { PageEnum } from "@/enums/PageEnum";
+  import { computed, defineComponent } from "vue";
+  import { Badge, Tooltip } from "ant-design-vue";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { useI18n } from "@mfish/core/hooks";
+  import { useErrorLogStore } from "@mfish/stores/modules";
+  import { PageEnum } from "@mfish/core/enums";
   import { useRouter } from "vue-router";
 
   export default defineComponent({

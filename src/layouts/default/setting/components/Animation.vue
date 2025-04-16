@@ -31,12 +31,10 @@
 </template>
 <script setup lang="ts">
   import SwitchItem from "./SwitchItem.vue";
-  import { useI18n } from "@/hooks/web/UseI18n";
+  import { useDesign, useI18n, useTransitionSetting } from "@mfish/core/hooks";
   import { HandlerEnum } from "@/layouts/default/setting/Enum";
-  import { useTransitionSetting } from "@/hooks/setting/UseTransitionSetting";
   import { baseHandler } from "@/layouts/default/setting/Handler";
-  import { RouterTransitionEnum } from "@/enums/AppEnum";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { RouterTransitionEnum } from "@mfish/core/enums";
 
   defineOptions({
     name: "PreferenceAnimation"
@@ -47,6 +45,7 @@
   function handleClick(value: string) {
     baseHandler(HandlerEnum.ROUTER_TRANSITION, value);
   }
+
   const { prefixCls } = useDesign("animation");
 </script>
 <style scoped lang="less">
@@ -58,10 +57,13 @@
       border: 1px solid @border-color-base;
       box-shadow: 0 1px 2.5px 0 rgb(0 0 0 / 18%);
       border-radius: 8px;
+
       .box-content {
         background: @header-bg-hover-color;
       }
+
       transition: all 0.2s ease-in;
+
       &:hover,
       &-active {
         transform: scale(1.05);

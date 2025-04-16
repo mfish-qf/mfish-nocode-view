@@ -2,13 +2,13 @@
  @description: 数据库连接
  @author: mfish
  @date: 2023-03-13
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate" v-auth="'sys:database:insert'">新增连接 </a-button>
+        <a-button type="primary" @click="handleCreate" v-auth="'sys:database:insert'">新增连接</a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -46,13 +46,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
-  import { deleteDbConnect, getDbConnectList } from "@/api/sys/DbConnect";
-  import { useModal } from "@/components/general/Modal";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
+  import { deleteDbConnect, getDbConnectList } from "@mfish/core/api";
+  import { useModal } from "@mfish/core/components/Modal";
   import DbConnectModal from "./DbConnectModal.vue";
   import { columns, searchFormSchema } from "./dbConnect.data";
-  import DictTag from "@/components/general/DictTag/DictTag.vue";
+  import { DictTag } from "@mfish/core/components/DictTag";
   import { Recordable } from "@mfish/types";
+
   defineOptions({ name: "DbConnectManagement" });
 
   const [registerModal, { openModal }] = useModal();

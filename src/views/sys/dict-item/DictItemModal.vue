@@ -9,11 +9,11 @@
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from "vue";
-  import { BasicForm, useForm } from "@/components/general/Form/index";
+  import { computed, ref, unref } from "vue";
+  import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { dictItemFormSchema } from "./dictItem.data";
-  import { BasicModal, useModalInner } from "@/components/general/Modal";
-  import { insertDictItem, updateDictItem } from "@/api/sys/DictItem";
+  import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
+  import { insertDictItem, updateDictItem } from "@mfish/core/api";
 
   const emit = defineEmits(["success", "register"]);
   const isUpdate = ref(true);

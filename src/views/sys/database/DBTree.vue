@@ -32,17 +32,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTree, ContextMenuItem, TreeActionType, TreeItem } from "@/components/general/Tree";
-  import { onMounted, ref, unref, createVNode } from "vue";
-  import { deleteDbConnect, getDbConnectList, getTableList } from "@/api/sys/DbConnect";
-  import { PageResult } from "@/api/model/BaseModel";
-  import { TableInfo } from "@/api/sys/model/DbConnectModel";
-  import Icon from "@/components/general/Icon/src/Icon.vue";
-  import { Button as AButton, Tooltip as ATooltip, Modal } from "ant-design-vue";
-  import { usePermission } from "@/hooks/web/UsePermission";
+  import { BasicTree, ContextMenuItem, TreeActionType, TreeItem } from "@mfish/core/components/Tree";
+  import { createVNode, onMounted, ref, unref } from "vue";
+  import { deleteDbConnect, getDbConnectList, getTableList, PageResult, TableInfo } from "@mfish/core/api";
+  import { Icon } from "@mfish/core/components/Icon";
+  import { Button as AButton, Modal, Tooltip as ATooltip } from "ant-design-vue";
+  import { usePermission, useRootSetting } from "@mfish/core/hooks";
   import DbConnectModal from "@/views/sys/db-connect/DbConnectModal.vue";
-  import { useModal } from "@/components/general/Modal";
-  import { useRootSetting } from "@/hooks/setting/UseRootSetting";
+  import { useModal } from "@mfish/core/components/Modal";
   import { Nullable, Recordable } from "@mfish/types";
 
   const emit = defineEmits(["select", "search"]);

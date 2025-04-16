@@ -2,7 +2,7 @@
  @description: 销售订单
  @author: mfish
  @date: 2024-09-13
- @version: V1.3.2
+ @version: V2.0.0
 -->
 <template>
   <div>
@@ -57,16 +57,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { deleteBatchDemoOrder, deleteDemoOrder, exportDemoOrder, getDemoOrderList } from "@/api/demo/DemoOrder";
-  import { useModal } from "@/components/general/Modal";
+  import { useModal } from "@mfish/core/components/Modal";
   import DemoOrderModal from "./DemoOrderModal.vue";
   import DemoOrderViewModal from "./DemoOrderViewModal.vue";
   import { columns, searchFormSchema } from "./demoOrder.data";
   import { DemoOrder } from "@/api/demo/model/DemoOrderModel";
   import { ref } from "vue";
-  import { useMessage } from "@/hooks/web/UseMessage";
-  import AButton from "@/components/general/Button/src/BasicButton.vue";
+  import { useMessage } from "@mfish/core/hooks";
+  import { Button as AButton } from "@mfish/core/components/Button";
   import DemoOrderDetailManagement from "@/views/demo/demo-order-detail/index.vue";
 
   defineOptions({ name: "DemoOrderManagement" });
@@ -102,6 +102,7 @@
     }
   });
   const { createMessage } = useMessage();
+
   /**
    * 新建
    */

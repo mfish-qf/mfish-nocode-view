@@ -16,5 +16,5 @@ pnpm add @mfish/types --workspace
 
 ```ts
 // 推荐加上 type
-import type { Recordable } from '@mfish/types';
+import type { Recordable } from "@mfish/types";
 ```

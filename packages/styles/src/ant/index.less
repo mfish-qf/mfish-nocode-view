@@ -1,0 +1,89 @@
+@import "input.less";
+@import "btn.less";
+
+.ant-image-preview-root {
+  img {
+    display: unset;
+  }
+}
+
+.ant-back-top {
+  right: 20px;
+  bottom: 20px;
+}
+
+.collapse-container__body {
+  > .ant-descriptions {
+    margin-left: 6px;
+  }
+}
+
+.ant-image-preview-operations {
+  background-color: rgb(0 0 0 / 30%);
+}
+
+.ant-popover {
+  &-content {
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+  }
+}
+
+// =================================
+// ==============modal message======
+// =================================
+.modal-icon-warning {
+  color: @warning-color !important;
+}
+
+.modal-icon-success {
+  color: @success-color !important;
+}
+
+.modal-icon-error {
+  color: @error-color !important;
+}
+
+.modal-icon-info {
+  color: @button-primary-color !important;
+}
+
+.ant-layout-header {
+  height: @header-height !important;
+  padding-inline: 0 !important;
+  line-height: @header-height !important;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner::after,
+.ant-tree-checkbox-checked .ant-tree-checkbox-inner::after {
+  border-top: 0 !important;
+  border-left: 0 !important;
+}
+
+.ant-pagination-options {
+  .ant-select.ant-select-in-form-item {
+    width: auto;
+  }
+}
+
+.ant-form-item-control-input-content {
+  > div {
+    > div {
+      max-width: 100%;
+
+      > div {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.ant-segmented-item-selected {
+  .ant-segmented-item-label {
+    color: @main-color;
+    font-weight: bold;
+  }
+}
+
+.ant-segmented-item {
+  margin: 0 2px 0 2px;
+}

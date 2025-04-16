@@ -12,7 +12,7 @@
         <QuickNav :loading="loading" class="enter-y" />
 
         <Card class="!my-4 enter-y" :loading="loading">
-          <img class="xl:h-50 h-30" src="../../../assets/svg/illustration.svg" />
+          <img class="xl:h-50 h-30" src="@mfish/core/assets/svg/illustration.svg" />
         </Card>
 
         <SaleRadar :loading="loading" class="enter-y" />
@@ -29,6 +29,7 @@
   import QuickNav from "./components/QuickNav.vue";
   import DynamicInfo from "./components/DynamicInfo.vue";
   import SaleRadar from "./components/SaleRadar.vue";
+
   defineOptions({ name: "WorkbenchIndex" });
   const loading = ref(true);
 

@@ -1,24 +1,24 @@
 {
   "name": "@mfish/prettier-config",
-  "version": "1.3.2",
+  "version": "2.0.0",
   "private": true,
+  "license": "Apache-2.0",
   "author": {
     "name": "mfish",
     "email": "qiufeng9862@qq.com",
     "url": "https://github.com/mfish-qf"
   },
-  "license": "Apache-2.0",
   "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "./index.mjs",
-  "module": "./index.mjs",
   "exports": {
     ".": {
       "default": "./index.mjs"
     }
   },
+  "main": "./index.mjs",
+  "module": "./index.mjs",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "prettier": "^3.5.3"
   },

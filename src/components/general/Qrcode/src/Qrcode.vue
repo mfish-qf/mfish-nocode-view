@@ -4,10 +4,10 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, watch, PropType, ref, unref, onMounted } from "vue";
-  import { toCanvas, QRCodeRenderersOptions, LogoType } from "./QrcodePlus";
+  import { defineComponent, onMounted, PropType, ref, unref, watch } from "vue";
+  import { LogoType, QRCodeRenderersOptions, toCanvas } from "./QrcodePlus";
   import { toDataURL } from "qrcode";
-  import { downloadByUrl } from "@/utils/file/Download";
+  import { downloadByUrl } from "@mfish/core/utils/file/Download";
   import { QrcodeDoneEventParams } from "./Typing";
 
   export default defineComponent({

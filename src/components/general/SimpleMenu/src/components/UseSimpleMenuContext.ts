@@ -1,6 +1,6 @@
 import type { InjectionKey, Ref } from "vue";
-import type { Emitter } from "@/utils/Mitt";
-import { createContext, useContext } from "@/hooks/core/UseContext";
+import type { Emitter } from "@mfish/core/utils/Mitt";
+import { createContext, useContext } from "@mfish/core/hooks";
 
 export interface SimpleRootMenuContextProps {
   rootMenuEmitter: Emitter;

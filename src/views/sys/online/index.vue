@@ -26,11 +26,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { BasicTable, useTable, TableAction } from "@/components/general/Table";
+  import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
   import { columns } from "./online.data";
-  import { getOnlineList, logoutUser } from "@/api/sys/User";
-  import { OnlineUser } from "@/api/sys/model/UserModel";
-  import DictTag from "@/components/general/DictTag/DictTag.vue";
+  import { getOnlineList, logoutUser, OnlineUser } from "@mfish/core/api";
+  import { DictTag } from "@mfish/core/components/DictTag";
+
   defineOptions({ name: "OnlineManagement" });
 
   const [registerTable, { reload }] = useTable({

@@ -1,4 +1,4 @@
-import { BasicColumn } from "@/components/general/Table";
+import { BasicColumn } from "@mfish/core/components/Table";
 import { Checkbox } from "ant-design-vue";
 import { h } from "vue";
 

@@ -14,7 +14,9 @@
           {{ `数据表：${curNode?.tableName?.toUpperCase() ? curNode.tableName.toUpperCase() : "无"}` }}
         </div>
       </div>
-      <div><slot name="button" v-bind="{ data: curNode }"></slot></div>
+      <div>
+        <slot name="button" v-bind="{ data: curNode }"></slot>
+      </div>
     </div>
     <ATabs default-active-key="1" @change="changeTab">
       <ATabPane key="1" tab="基本信息">
@@ -37,13 +39,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref, watch, onMounted, computed, nextTick, ComputedRef } from "vue";
-  import { BasicColumn, BasicTable, useTable } from "@/components/general/Table";
+  import { computed, ComputedRef, nextTick, onMounted, ref, watch } from "vue";
+  import { BasicColumn, BasicTable, useTable } from "@mfish/core/components/Table";
   import { Descriptions as ADescriptions, Tabs as ATabs } from "ant-design-vue";
-  import { ReqTable, TableInfo } from "@/api/sys/model/DbConnectModel";
-  import { getDataTable, getFieldList } from "@/api/sys/DbConnect";
+  import { getDataTable, getFieldList, ReqTable, TableInfo } from "@mfish/core/api";
   import { columns } from "@/views/sys/database/tableInfo.data";
-  import { useDesign } from "@/hooks/web/UseDesign";
+  import { useDesign } from "@mfish/core/hooks";
+
   const props = defineProps({
     curNode: Object as () => TableInfo,
     resizeHeightOffset: { type: Number, default: 0 }
@@ -156,10 +158,12 @@
   @prefix-cls: ~"@{namespace}-table-detail";
   .@{prefix-cls} {
     margin: 0 10px 0 20px;
+
     .title {
       font-size: 18px;
       font-weight: bold;
     }
+
     .header {
       display: flex;
       justify-content: space-between;
