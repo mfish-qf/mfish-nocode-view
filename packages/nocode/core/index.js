@@ -15569,19 +15569,22 @@ const useScreenShortcutStore = defineStore("screen-shortcut", {
           components2.push(component);
         }
       });
-      const groupComponent = chartInit({ type: ComType.MfCombine, name: "组合" });
-      if (groupComponent === null) return;
-      groupComponent.chartContain.dropInfo = Object.assign(
-        groupComponent.chartContain.dropInfo,
-        screenEditStore$1.getSelectArea.dropInfo
-      );
-      groupComponent.chart.options.components = components2;
-      createGroupStyle(groupComponent);
-      screenEditStore$1.batchDeleteComponent(screenEditStore$1.getSelectArea.components);
-      screenEditStore$1.addComponent(groupComponent, 0);
-      screenEditStore$1.cleanSelectArea();
-      screenEditStore$1.setCurComponent(groupComponent, 0);
-      screenEditStore$1.setUndoRedoData("组件组合");
+      nextTick(() => {
+        const groupComponent = chartInit({ type: ComType.MfCombine, name: "组合" });
+        if (groupComponent === null) return;
+        console.log(screenEditStore$1.getSelectArea.dropInfo);
+        groupComponent.chartContain.dropInfo = Object.assign(
+          groupComponent.chartContain.dropInfo,
+          screenEditStore$1.getSelectArea.dropInfo
+        );
+        groupComponent.chart.options.components = components2;
+        createGroupStyle(groupComponent);
+        screenEditStore$1.batchDeleteComponent(screenEditStore$1.getSelectArea.components);
+        screenEditStore$1.addComponent(groupComponent, 0);
+        screenEditStore$1.cleanSelectArea();
+        screenEditStore$1.setCurComponent(groupComponent, 0);
+        screenEditStore$1.setUndoRedoData("组件组合");
+      });
     },
     //拆分组合组件
     decomposeComponent() {
@@ -15614,9 +15617,9 @@ const useScreenShortcutStore = defineStore("screen-shortcut", {
         list.forEach((component) => {
           component.chartContain.show = false;
         });
+        selectComponents(screenEditStore$1.getSelectArea.components);
+        screenEditStore$1.setUndoRedoData("组件拆分");
       });
-      selectComponents(screenEditStore$1.getSelectArea.components);
-      screenEditStore$1.setUndoRedoData("组件拆分");
     },
     //加锁
     lockComponent() {
