@@ -338,14 +338,5 @@
       "types": "./src/directives/index.ts",
       "default": "./src/directives/index.ts"
     }
-  },
-  "dependencies": {
-    "codemirror": "5.65.16",
-    "cropperjs": "^1.6.2",
-    "qs": "^6.14.0"
-  },
-  "devDependencies": {
-    "@types/nprogress": "^0.2.3",
-    "vite-plugin-svg-icons": "^2.0.1"
   }
 }

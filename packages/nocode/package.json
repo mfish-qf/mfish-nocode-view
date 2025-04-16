@@ -9,30 +9,19 @@
     "url": "https://github.com/mfish-qf"
   },
   "type": "module",
-  "main": "./lib/index.js",
-  "module": "./lib/index.js",
-  "types": "./lib/index.js",
+  "main": "./core/index.mjs",
+  "module": "./core/index.mjs",
+  "types": "./core/index.mjs",
   "files": [
-    "lib"
+    "core"
   ],
   "exports": {
     ".": {
-      "types": "./lib/index.js",
-      "import": "./lib/index.js"
+      "types": "./core/index.mjs",
+      "import": "./core/index.mjs"
     }
   },
-  "dependencies": {
-    "ant-design-vue": "^4.2.6"
-  },
   "devDependencies": {
-    "@mfish/core": "workspace:*",
-    "@mfish/styles": "workspace:*",
-    "@mfish/types": "workspace:*",
-    "@vitejs/plugin-vue-jsx": "^4.1.2",
-    "rollup-plugin-visualizer": "^5.14.0",
-    "vite": "^6.2.6",
-    "vite-plugin-style-inject": "^0.0.1",
-    "vite-plugin-svg-icons": "^2.0.1",
-    "vue": "^3.5.13"
+    "vite-plugin-style-inject": "^0.0.1"
   }
 }

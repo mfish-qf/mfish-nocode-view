@@ -19,8 +19,5 @@
       "default": "./src/config.less"
     }
   },
-  "main": "src/index.less",
-  "devDependencies": {
-    "less": "^4.3.0"
-  }
+  "main": "src/index.less"
 }

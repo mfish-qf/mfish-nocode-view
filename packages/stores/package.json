@@ -22,8 +22,5 @@
       "types": "./src/screen/index.ts",
       "default": "./src/screen/index.ts"
     }
-  },
-  "dependencies": {
-    "pinia": "^3.0.2"
   }
 }
