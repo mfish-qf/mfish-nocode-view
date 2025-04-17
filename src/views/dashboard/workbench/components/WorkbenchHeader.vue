@@ -1,6 +1,6 @@
 <template>
   <div class="lg:flex">
-    <Avatar :src="avatar" :size="72" class="!mx-auto !block" />
+    <Avatar :src="avatar" :size="72" class="!mx-auto !block" :load-error="errorAvatarHandle" />
     <div class="md:ml-6 flex flex-col justify-center md:mt-0 mt-2">
       <h1 class="md:text-lg text-md">
         早安, {{ userInfo?.nickname ? userInfo?.nickname : userInfo?.account }}, 开始您一天的工作吧！
@@ -25,7 +25,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { computed, ComputedRef } from "vue";
+  import { computed, ComputedRef, ref } from "vue";
   import { Avatar } from "ant-design-vue";
   import { useUserStore } from "@mfish/stores/modules";
   import logo from "@mfish/core/assets/images/logo.png";
@@ -35,11 +35,20 @@
 
   const userStore = useUserStore();
   const userInfo: ComputedRef<Nullable<SsoUser>> = computed(() => userStore.getUserInfo);
+  const isError = ref(false);
   const avatar = computed(() => {
+    if (isError.value) {
+      return logo;
+    }
     const imgUrl = userStore.getUserInfo?.headImgUrl;
     if (imgUrl) {
       return imageUrl(getLocalFileUrl(imgUrl));
     }
     return logo;
   });
+
+  const errorAvatarHandle = (): boolean => {
+    isError.value = true;
+    return false;
+  };
 </script>

@@ -2,24 +2,12 @@ import { defineComponent, createBlock, openBlock, normalizeClass, unref, withCtx
 import { Checkbox } from "ant-design-vue";
 import MfBorderConfig from "./MfBorderConfig.js";
 import { useDesign } from "@mfish/core/hooks";
+import { u as useScreenEditStore, f as ScreenInput, _ as _export_sfc } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
-import { u as useScreenEditStore, f as ScreenInput, _ as _export_sfc } from "./index.js";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 const _hoisted_1 = { class: "title" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfBorder8Config",
@@ -59,7 +47,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfBorder8Config = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-0b2ebb3f"]]);
+const MfBorder8Config = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-649ee8d3"]]);
 export {
   MfBorder8Config as default
 };

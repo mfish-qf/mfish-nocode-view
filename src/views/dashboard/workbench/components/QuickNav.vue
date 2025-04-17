@@ -1,5 +1,5 @@
 <template>
-  <Card title="快捷导航">
+  <Card title="快捷导航" style="overflow: hidden">
     <CardGrid v-for="item in navItems" :key="item.title" class="cursor-pointer" @click="clickCard(item)">
       <span class="flex flex-col items-center">
         <Icon :icon="item.icon" :color="item.color" size="20" />

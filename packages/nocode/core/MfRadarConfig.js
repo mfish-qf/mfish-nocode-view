@@ -2,27 +2,10 @@ import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, un
 import { S as StyleConfig } from "./StyleConfig.js";
 import { a as EchartsBaseConfig, E as EchartsTitleConfig } from "./EchartsBaseConfig.js";
 import { u as useEchartsSeriesConfig, E as EchartsTooltipConfig } from "./UseEchartsSeriesConfig.js";
+import { u as useScreenEditStore, _ as _export_sfc } from "./index.js";
+import { E as EchartsSeriesLabelConfig } from "./EchartsSeriesLabelConfig.js";
 import { Checkbox, Slider } from "ant-design-vue";
 import { useDesign } from "@mfish/core/hooks";
-import "@vueuse/core";
-import "@mfish/core/components/Icon";
-import "lodash-es";
-import { u as useScreenEditStore, _ as _export_sfc } from "./index.js";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
-import { E as EchartsSeriesLabelConfig } from "./EchartsSeriesLabelConfig.js";
 const _hoisted_1 = { class: "title" };
 const _hoisted_2 = {
   key: 0,
@@ -97,7 +80,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfRadarConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-c3f7c6d0"]]);
+const MfRadarConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-8bb17531"]]);
 export {
   MfRadarConfig as default
 };

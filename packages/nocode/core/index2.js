@@ -4,21 +4,9 @@ import { Icon } from "@mfish/core/components/Icon";
 import { u as useScreenEditStore, _ as _export_sfc, a as animationData, s as screenEvent, S as ScreenEventEnum, p as playAnimation } from "./index.js";
 import { useDesign, useRootSetting } from "@mfish/core/hooks";
 import { ThemeEnum } from "@mfish/core/enums";
-import "@vueuse/core";
 import { pick } from "lodash-es";
-import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
 import { PauseCircleTwoTone, PlayCircleTwoTone } from "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
 import { ScrollContainer } from "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 import draggable from "vuedraggable";
 const _hoisted_1$1 = ["onMouseenter"];
 const _hoisted_2$1 = { class: "setting" };
@@ -26,7 +14,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "AnimationSet",
   setup(__props) {
     useCssVars((_ctx) => ({
-      "6fb0308f": bgColor.value
+      "536783ac": bgColor.value
     }));
     const screenEditStore = useScreenEditStore();
     const animationList = computed(() => screenEditStore.getCurConfigComponent.chartContain.animations);
@@ -133,7 +121,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const AnimationSet = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-3971a868"]]);
+const AnimationSet = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-27cd3180"]]);
 const _hoisted_1 = {
   key: 1,
   class: "animation-set"
@@ -146,8 +134,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "index",
   setup(__props) {
     useCssVars((_ctx) => ({
-      "494f91ab": bgColor.value,
-      "24ffaba0": unref(color)
+      "02e0c480": bgColor.value,
+      "e3e390f6": unref(color)
     }));
     const value = ref("");
     const hoverAnimation = ref("");
@@ -293,7 +281,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-a8561aa6"]]);
+const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-9602bb09"]]);
 export {
   index as default
 };

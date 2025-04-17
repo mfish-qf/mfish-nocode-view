@@ -1,25 +1,12 @@
 import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode } from "vue";
 import { useDesign } from "@mfish/core/hooks";
 import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index.js";
+import { S as StyleConfig } from "./StyleConfig.js";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/components/Icon";
 import "ant-design-vue";
 import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@vueuse/core";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
-import { S as StyleConfig } from "./StyleConfig.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfDigitsConfig",
   setup(__props) {
@@ -87,7 +74,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfDigitsConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-031c1fe6"]]);
+const MfDigitsConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-ad8834b9"]]);
 export {
   MfDigitsConfig as default
 };

@@ -17,9 +17,12 @@
   ],
   "exports": {
     ".": {
-      "types": "./core/index.mjs",
-      "import": "./core/index.mjs"
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
     }
+  },
+  "scripts": {
+    "stub": "vite build"
   },
   "devDependencies": {
     "vite-plugin-style-inject": "^0.0.1"

@@ -87,14 +87,16 @@
   );
 
   function messageHandler(e: MessageEvent) {
-    //跳转iframe中主题样式
-    const theme = e.data;
-    const main = document.querySelector("#mainHtml");
-    if (main && theme) {
-      //@ts-ignore 忽略主题设置
-      main.dataset.theme = theme;
-      setDarkMode(theme);
-      setDarkTheme(theme);
+    if (e.data?.theme) {
+      //跳转iframe中主题样式
+      const theme = e.data.theme;
+      const main = document.querySelector("#mainHtml");
+      if (main && theme) {
+        //@ts-ignore 忽略主题设置
+        main.dataset.theme = theme;
+        setDarkMode(theme);
+        setDarkTheme(theme);
+      }
     }
   }
 

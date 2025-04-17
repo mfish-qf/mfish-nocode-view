@@ -1,25 +1,7 @@
 import { defineComponent, computed, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode, renderSlot } from "vue";
 import { D as DataConfig, a as DragInData } from "./DragInData.js";
 import { useDesign } from "@mfish/core/hooks";
-import "ant-design-vue";
-import "@vueuse/core";
-import "@mfish/core/components/Icon";
-import "lodash-es";
 import { u as useScreenEditStore, i as useDynamicDataConfig, aq as useRadarData, _ as _export_sfc } from "./index.js";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 import { J as JsonData } from "./JsonData.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfRadarDataConfig",
@@ -137,7 +119,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfRadarDataConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-ab215d29"]]);
+const MfRadarDataConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-23efd3ba"]]);
 export {
   MfRadarDataConfig as default
 };

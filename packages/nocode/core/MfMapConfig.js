@@ -1,28 +1,15 @@
 import { defineComponent, ref, computed, watch, createElementBlock, openBlock, normalizeClass, unref, createVNode, withCtx, createElementVNode, createCommentVNode, Fragment, renderList, createTextVNode, toDisplayString, resolveComponent, createBlock } from "vue";
 import { S as StyleConfig } from "./StyleConfig.js";
 import { a as EchartsBaseConfig, E as EchartsTitleConfig } from "./EchartsBaseConfig.js";
-import { RadioGroup, RadioButton, Slider, Checkbox } from "ant-design-vue";
-import { useDesign } from "@mfish/core/hooks";
-import "@vueuse/core";
-import { Icon } from "@mfish/core/components/Icon";
-import { cloneDeep } from "lodash-es";
 import { u as useScreenEditStore, ao as useEchartsData, _ as _export_sfc, k as MfishColorPicker, an as EchartsTheme } from "./index.js";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
+import { useDesign } from "@mfish/core/hooks";
+import { RadioGroup, RadioButton, Slider, Checkbox } from "ant-design-vue";
 import { C as ConfigGroup } from "./ConfigGroup.js";
 import { E as EchartsSeriesLabelConfig } from "./EchartsSeriesLabelConfig.js";
+import { cloneDeep } from "lodash-es";
+import "@mfish/core/enums";
+import { Icon } from "@mfish/core/components/Icon";
+import "@mfish/core/utils/Is";
 const _hoisted_1 = { class: "title" };
 const _hoisted_2 = {
   key: 0,
@@ -223,7 +210,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfEffectScatterConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-372c080c"]]);
+const MfEffectScatterConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-b55e2c44"]]);
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "MfColorIntervalConfig",
   props: {
@@ -325,7 +312,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfColorIntervalConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-e1901074"]]);
+const MfColorIntervalConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-a73fcec4"]]);
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfMapConfig",
   setup(__props) {
@@ -381,7 +368,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfMapConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-ce235759"]]);
+const MfMapConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-7970d757"]]);
 export {
   MfMapConfig as default
 };

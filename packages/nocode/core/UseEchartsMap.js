@@ -1,24 +1,6 @@
 import { watch, nextTick } from "vue";
 import { cloneDeep } from "lodash-es";
-import "ant-design-vue";
-import "@mfish/core/hooks";
-import "@vueuse/core";
-import "@mfish/core/components/Icon";
 import { u as useScreenEditStore } from "./index.js";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 const geoCoordinate = {
   "安庆市": [117.044965, 30.506375],
   "蚌埠市": [117.245, 32.865],

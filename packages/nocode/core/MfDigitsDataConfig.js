@@ -2,24 +2,7 @@ import { defineComponent, computed, createBlock, openBlock, normalizeClass, unre
 import { D as DataConfig, a as DragInData } from "./DragInData.js";
 import { useDesign } from "@mfish/core/hooks";
 import { InputNumber } from "ant-design-vue";
-import "@vueuse/core";
-import "@mfish/core/components/Icon";
-import "lodash-es";
 import { u as useScreenEditStore, i as useDynamicDataConfig, _ as _export_sfc } from "./index.js";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 const fieldName = "num";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfDigitsDataConfig",
@@ -76,7 +59,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfDigitsDataConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-2856c2c9"]]);
+const MfDigitsDataConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6c95642a"]]);
 export {
   MfDigitsDataConfig as default
 };

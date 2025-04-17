@@ -8,18 +8,6 @@ import { u as useScreenEditStore, T as TextStyle, am as TextFont, f as ScreenInp
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
 import { C as ConfigGroup } from "./ConfigGroup.js";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 const _hoisted_1$1 = { class: "title" };
 const _hoisted_2 = { style: { "display": "flex", "gap": "6px" } };
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
@@ -242,7 +230,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsTitleConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-a59448b6"]]);
+const EchartsTitleConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-73b5e00b"]]);
 const _hoisted_1 = { class: "color-contain" };
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "EchartsThemeConfig",
@@ -331,7 +319,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsBaseConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-72a9fe66"]]);
+const EchartsBaseConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-05e379d5"]]);
 export {
   EchartsTitleConfig as E,
   EchartsBaseConfig as a

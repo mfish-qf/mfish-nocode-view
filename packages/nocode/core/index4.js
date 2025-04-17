@@ -2,23 +2,7 @@ import { defineComponent, computed, ref, watch, onMounted, nextTick, createEleme
 import { useDesign } from "@mfish/core/hooks";
 import { u as useScreenEditStore, s as screenEvent, S as ScreenEventEnum, p as playAnimation, h as useChartEventHandle, b as ComponentsEnum, C as ChartEventEnum, _ as _export_sfc } from "./index.js";
 import { theme } from "ant-design-vue";
-import "@vueuse/core";
-import "@mfish/core/components/Icon";
 import { throttle, omit } from "lodash-es";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   ...{ name: "MfCombine" },
   __name: "index",
@@ -183,7 +167,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-25e5ed82"]]);
+const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-80ec4365"]]);
 export {
   index as default
 };

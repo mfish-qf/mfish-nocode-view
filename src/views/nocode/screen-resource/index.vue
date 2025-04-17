@@ -19,7 +19,7 @@
           {{ item.name }}
         </span>
       </div>
-      <Avatar :src="avatar" />
+      <Avatar :src="avatar" :load-error="errorAvatarHandle" />
     </div>
     <ScreenResourceList :category="curCategory" @clone-screen="cloneScreen" />
   </div>
@@ -44,13 +44,22 @@
   const curCategory = computed(() => {
     return tagGroup.value.find((item) => item.checked)?.children || [];
   });
+  const isError = ref(false);
   const avatar = computed(() => {
+    if (isError.value) {
+      return logo;
+    }
     const imgUrl = useUserStore().getUserInfo?.headImgUrl;
     if (imgUrl) {
       return imageUrl(getLocalFileUrl(imgUrl));
     }
     return logo;
   });
+
+  const errorAvatarHandle = (): boolean => {
+    isError.value = true;
+    return false;
+  };
   onMounted(() => {
     queryCategoryTreeByCode("screen_resource", "down").then((res) => {
       if (res.length > 0 && res[0].children?.length > 0) {

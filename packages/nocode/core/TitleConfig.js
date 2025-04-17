@@ -7,18 +7,6 @@ import "lodash-es";
 import { u as useScreenEditStore, T as TextStyle, _ as _export_sfc } from "./index.js";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 const _hoisted_1 = { class: "title" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "TitleConfig",
@@ -86,7 +74,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TitleConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-33c1b4cc"]]);
+const TitleConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-d5d58608"]]);
 export {
   TitleConfig as T
 };

@@ -2,24 +2,11 @@ import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, un
 import { useDesign } from "@mfish/core/hooks";
 import { Input, Checkbox } from "ant-design-vue";
 import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index.js";
+import { S as StyleConfig } from "./StyleConfig.js";
+import { IconPicker } from "@mfish/core/components/Icon";
 import "lodash-es";
 import "@mfish/core/enums";
-import { IconPicker } from "@mfish/core/components/Icon";
 import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@vueuse/core";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
-import { S as StyleConfig } from "./StyleConfig.js";
 import { T as TitleConfig } from "./TitleConfig.js";
 const _hoisted_1 = {
   key: 0,
@@ -102,7 +89,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfTagConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-062523a7"]]);
+const MfTagConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-30f2ad7e"]]);
 export {
   MfTagConfig as default
 };

@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult, ReqPage } from "../../model/BaseModel";
+import { BaseEntity, PageResult, ReqPage } from "@core/api/model/BaseModel.ts";
 
 /**
  * @description: 字典项
