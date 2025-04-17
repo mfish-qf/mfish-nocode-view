@@ -1,4 +1,5 @@
-import { PageResult, ReqPage, TenantVo } from "@core/api";
+import { PageResult, ReqPage } from "@core/api/model/BaseModel.ts";
+import { TenantVo } from "@core/api/sys/model/SsoTenantModel.ts";
 
 export interface CaptchaInfo {
   captchaKey: string;

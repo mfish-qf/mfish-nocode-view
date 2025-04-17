@@ -1,4 +1,4 @@
-import { PageResult, ReqPage } from "@core/api";
+import { PageResult, ReqPage } from "@core/api/model/BaseModel.ts";
 
 /**
  * @description: 角色信息

@@ -7,19 +7,6 @@ import "@mfish/core/components/Icon";
 import { useDesign } from "@mfish/core/hooks";
 import { Slider, RadioGroup, RadioButton, Checkbox } from "ant-design-vue";
 import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@vueuse/core";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 import { C as ConfigGroup } from "./ConfigGroup.js";
 const _hoisted_1 = { class: "title" };
 const _hoisted_2 = { class: "title" };
@@ -363,7 +350,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfScrollTableConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-031127ec"]]);
+const MfScrollTableConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-88b50ad8"]]);
 export {
   MfScrollTableConfig as default
 };

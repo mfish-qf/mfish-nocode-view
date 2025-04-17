@@ -1,4 +1,4 @@
-import { BaseEntity, PageResult, ReqPage } from "@core/api";
+import { BaseEntity, PageResult, ReqPage } from "@core/api/model/BaseModel.ts";
 
 /**
  * @description: 属性分类字典
@@ -23,6 +23,7 @@ export interface DictCategory extends BaseEntity<string> {
   remark?: string;
   // 排序
   sort?: number;
+  children?: DictCategory[];
 }
 
 export interface ReqDictCategory extends ReqPage {

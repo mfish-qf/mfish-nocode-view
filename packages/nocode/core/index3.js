@@ -3,26 +3,15 @@ import { Switch, InputGroup, TreeSelect, List, Dropdown, Input, Menu, RadioGroup
 import { ScrollContainer } from "@mfish/core/components/Container";
 import { useDesign } from "@mfish/core/hooks";
 import { C as ConfigGroup } from "./ConfigGroup.js";
-import "@vueuse/core";
-import { Icon } from "@mfish/core/components/Icon";
-import "lodash-es";
 import { C as ChartEventEnum, u as useScreenEditStore, b as ComponentsEnum, g as getEventName, _ as _export_sfc, c as getScreenFolderTree, d as getMfScreenList, P as PageJumpType, e as PageType, f as ScreenInput } from "./index.js";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
+import { Icon } from "@mfish/core/components/Icon";
 import InputSearch from "@mfish/core/components/InputSearch";
 import { imageUrl, getLocalFileUrl } from "@mfish/core/utils/file/FileUtils";
 import { usePagination } from "@mfish/core/utils/PageUtils";
+import "@vueuse/core";
+import "lodash-es";
+import "@mfish/core/enums";
+import "@mfish/core/utils/Is";
 const _hoisted_1$3 = ["onClick"];
 const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   __name: "EventListen",
@@ -94,7 +83,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EventListen = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-a24fafed"]]);
+const EventListen = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-dc2a8daf"]]);
 const _hoisted_1$2 = {
   target: "_blank",
   onClick: () => {
@@ -349,7 +338,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const PageSelect = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-6fc78000"]]);
+const PageSelect = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-eb4ee99b"]]);
 const _hoisted_1 = { class: "title" };
 const _hoisted_2 = { class: "title" };
 const _hoisted_3 = {
@@ -566,7 +555,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const Index = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-1a4eda71"]]);
+const Index = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-2186b2e9"]]);
 const _sfc_main = /* @__PURE__ */ defineComponent({
   ...{ name: "AdvanceConfig" },
   __name: "index",

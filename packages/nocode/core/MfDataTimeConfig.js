@@ -2,24 +2,7 @@ import { defineComponent, ref, createElementBlock, openBlock, normalizeClass, un
 import MfTagConfig from "./MfTagConfig.js";
 import { useDesign } from "@mfish/core/hooks";
 import { RadioGroup, RadioButton } from "ant-design-vue";
-import "@vueuse/core";
-import "@mfish/core/components/Icon";
-import "lodash-es";
 import { u as useScreenEditStore, _ as _export_sfc } from "./index.js";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 const _hoisted_1 = { class: "title" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfDataTimeConfig",
@@ -71,7 +54,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfDataTimeConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-3ea85515"]]);
+const MfDataTimeConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-93ac9c5a"]]);
 export {
   MfDataTimeConfig as default
 };

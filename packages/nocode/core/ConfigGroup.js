@@ -3,23 +3,7 @@ import { Checkbox, Tooltip } from "ant-design-vue";
 import { useDesign } from "@mfish/core/hooks";
 import { Icon } from "@mfish/core/components/Icon";
 import { NCollapseTransition } from "naive-ui";
-import "@vueuse/core";
-import "lodash-es";
 import { u as useScreenEditStore, _ as _export_sfc } from "./index.js";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 const _hoisted_1 = { key: 2 };
 const _hoisted_2 = {
   key: 0,
@@ -141,7 +125,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ConfigGroup = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-0b072661"]]);
+const ConfigGroup = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-2ae28ab9"]]);
 export {
   ConfigGroup as C
 };

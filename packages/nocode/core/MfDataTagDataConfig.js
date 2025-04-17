@@ -2,24 +2,7 @@ import { defineComponent, computed, resolveComponent, createBlock, openBlock, no
 import { D as DataConfig, a as DragInData } from "./DragInData.js";
 import { IconPicker } from "@mfish/core/components/Icon";
 import { useDesign } from "@mfish/core/hooks";
-import "ant-design-vue";
-import "@vueuse/core";
-import "lodash-es";
 import { u as useScreenEditStore, i as useDynamicDataConfig, j as useDataTag, _ as _export_sfc } from "./index.js";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfDataTagDataConfig",
   setup(__props) {
@@ -116,7 +99,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfDataTagDataConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-04b3e97f"]]);
+const MfDataTagDataConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-e8ed5d65"]]);
 export {
   MfDataTagDataConfig as default
 };

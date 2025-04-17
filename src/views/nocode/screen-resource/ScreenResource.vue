@@ -45,7 +45,7 @@
   watch(
     () => useAppStore().getDarkMode,
     (val) => {
-      postMessage(val, "/");
+      postMessage({ theme: val }, "/");
     }
   );
   /**

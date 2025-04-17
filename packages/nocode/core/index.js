@@ -18,6 +18,9 @@ import { useAppStore } from "@mfish/stores/modules";
 import noImage from "@mfish/core/assets/images/noImage.png";
 import { mitt } from "@mfish/core/utils/Mitt";
 import { createAsyncComponent } from "@mfish/core/utils/factory/CreateAsyncComponent";
+import { router } from "@mfish/core/router";
+import { formatToDateTime } from "@mfish/core/utils/DateUtil";
+import { imageUrl, getLocalFileUrl, imageSrc } from "@mfish/core/utils/file/FileUtils";
 import { DeleteOutlined, CaretRightOutlined, CheckOutlined, FolderOpenTwoTone, FolderTwoTone } from "@ant-design/icons-vue";
 import { ScrollContainer } from "@mfish/core/components/Container";
 import { DraggableInput } from "@mfish/core/components/Draggable";
@@ -29,12 +32,9 @@ import { useTable, BasicTable } from "@mfish/core/components/Table";
 import { CodeEditor, MODE } from "@mfish/core/components/CodeEditor";
 import { useLocale } from "@mfish/core/i18n/UseLocale";
 import { propTypes } from "@mfish/core/utils/PropTypes";
-import draggable$1 from "vuedraggable";
-import { imageUrl, getLocalFileUrl, imageSrc } from "@mfish/core/utils/file/FileUtils";
-import { NCollapseTransition } from "naive-ui";
 import { FileUp } from "@mfish/core/components/FileUpDown";
-import { formatToDateTime } from "@mfish/core/utils/DateUtil";
-import { router } from "@mfish/core/router";
+import draggable$1 from "vuedraggable";
+import { NCollapseTransition } from "naive-ui";
 const colorStorage = "color_recently_bi";
 const gradientColorStorage = "gradient_color_recently_bi";
 const recentlyColors = [
@@ -21003,7 +21003,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ScreenPreview = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__scopeId", "data-v-93d5f5ca"]]);
+const ScreenPreview = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["__scopeId", "data-v-09570150"]]);
 const _sfc_main$n = /* @__PURE__ */ defineComponent({
   __name: "ScreenSizeConfig",
   setup(__props) {
@@ -21115,7 +21115,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ScreenSizeConfig = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-ce9ed6e3"]]);
+const ScreenSizeConfig = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-148656f7"]]);
 const _sfc_main$m = /* @__PURE__ */ defineComponent({
   __name: "ParamsConfig",
   setup(__props) {
@@ -21317,7 +21317,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const CanvasConfig = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-df5fcc0e"]]);
+const CanvasConfig = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["__scopeId", "data-v-b101a035"]]);
 const _hoisted_1$c = { class: "header" };
 const _sfc_main$k = /* @__PURE__ */ defineComponent({
   ...{ name: "FrameConfig" },
@@ -21461,7 +21461,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const CanvasRulerLine = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-1e39d4b2"]]);
+const CanvasRulerLine = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-91bb6b29"]]);
 const _hoisted_1$a = {
   id: "horn",
   class: "horn"
@@ -21724,7 +21724,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const CanvasRuler = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-1cc6051e"]]);
+const CanvasRuler = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-eeb86e63"]]);
 const _sfc_main$h = /* @__PURE__ */ defineComponent({
   __name: "CanvasBackground",
   props: {
@@ -21766,7 +21766,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const CanvasBackground = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-180591b6"]]);
+const CanvasBackground = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-2efcd248"]]);
 const _hoisted_1$9 = { class: "scale-add-reduce" };
 const _hoisted_2$7 = { class: "scale-lock" };
 const _sfc_main$g = /* @__PURE__ */ defineComponent({
@@ -22206,7 +22206,7 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "755a5475": bgColor.value
+      "5851a81c": bgColor.value
     }));
     const props = __props;
     const { token } = theme.useToken();
@@ -22599,7 +22599,7 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ChartContain = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-4921766f"]]);
+const ChartContain = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-bdd5aa92"]]);
 const LinesEnum = {
   rt: "横上",
   rm: "横中",
@@ -22867,7 +22867,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ChartNearLine = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-b5e6ef52"]]);
+const ChartNearLine = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-88d9d34f"]]);
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
   ...{ name: "ChartMultiSelect" },
   __name: "index",
@@ -22897,7 +22897,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ChartMultiSelect = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-71b99035"]]);
+const ChartMultiSelect = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-e9844525"]]);
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
   ...{ name: "ScreenCanvas" },
   __name: "index",
@@ -23087,7 +23087,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ScreenCanvas = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-d5a16b06"]]);
+const ScreenCanvas = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-17c82941"]]);
 const minScale = 0.2;
 const maxScale = 5;
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
@@ -23275,7 +23275,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index$3 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-8f6b942e"]]);
+const index$3 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-de9ae999"]]);
 const _hoisted_1$6 = {
   key: 0,
   class: "header"
@@ -23416,7 +23416,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   emits: ["expand", "select", "enter", "leave"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "0154829e": bgColor.value
+      "56d1bd00": bgColor.value
     }));
     const props = __props;
     const emit = __emit;
@@ -23502,7 +23502,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const LayerItem = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-7d325564"]]);
+const LayerItem = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-925f45da"]]);
 const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   __name: "LayerGroup",
   props: {
@@ -23611,7 +23611,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const LayerGroup = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-6659bf48"]]);
+const LayerGroup = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-b118e01c"]]);
 const _hoisted_1$4 = ["onDrop"];
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   ...{ name: "FrameLayer" },
@@ -23755,7 +23755,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index$2 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-f8ad4ed3"]]);
+const index$2 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-3b66e5f3"]]);
 const _hoisted_1$3 = { class: "menu-item-hide-title" };
 const _hoisted_2$3 = { class: "title" };
 const _sfc_main$4 = /* @__PURE__ */ defineComponent({
@@ -23963,7 +23963,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ChartItems = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-ccbcba0b"]]);
+const ChartItems = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-74651cba"]]);
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   ...{ name: "FrameChart" },
   __name: "index",
@@ -24101,7 +24101,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index$1 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-c92d9539"]]);
+const index$1 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-3b8e6093"]]);
 const _hoisted_1$1 = ["onClick"];
 const _hoisted_2$1 = { class: "name" };
 const _hoisted_3$1 = { class: "short-cut" };
@@ -24563,7 +24563,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-05b7ebee"]]);
+const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-2dcb7415"]]);
 export {
   BorderBox8 as $,
   BorderBox21 as A,

@@ -1,24 +1,12 @@
 import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode, createTextVNode, computed, createElementBlock, Fragment, renderList, toDisplayString, resolveComponent } from "vue";
 import { Checkbox, RadioGroup, RadioButton, Slider } from "ant-design-vue";
 import { useDesign } from "@mfish/core/hooks";
+import { u as useScreenEditStore, f as ScreenInput, _ as _export_sfc, k as MfishColorPicker, T as TextStyle, am as TextFont } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
-import { u as useScreenEditStore, f as ScreenInput, _ as _export_sfc, k as MfishColorPicker, T as TextStyle, am as TextFont } from "./index.js";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
 import { a as EchartsBaseConfig } from "./EchartsBaseConfig.js";
 import { C as ConfigGroup } from "./ConfigGroup.js";
 const _hoisted_1$2 = { style: { "display": "flex", "gap": "2px" } };
@@ -155,7 +143,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsGridConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-e5e90967"]]);
+const EchartsGridConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-933ebb53"]]);
 const _hoisted_1$1 = { class: "title" };
 const _hoisted_2$1 = { class: "title" };
 const _hoisted_3$1 = { class: "title" };
@@ -293,7 +281,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsLineConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-9a98d1ec"]]);
+const EchartsLineConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-8514ac74"]]);
 const _hoisted_1 = { class: "title" };
 const _hoisted_2 = { class: "title" };
 const _hoisted_3 = { class: "title" };
@@ -881,7 +869,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const EchartsAxisConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-4207db68"]]);
+const EchartsAxisConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-9459b2a1"]]);
 export {
   EchartsGridConfig as E,
   EchartsAxisConfig as a

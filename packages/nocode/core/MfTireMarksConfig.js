@@ -1,26 +1,13 @@
 import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, unref, withCtx, createVNode, createElementVNode, createTextVNode, createElementBlock, Fragment, renderList, toDisplayString, createCommentVNode } from "vue";
 import { useDesign } from "@mfish/core/hooks";
 import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index.js";
+import { S as StyleConfig } from "./StyleConfig.js";
+import { C as ConfigGroup } from "./ConfigGroup.js";
+import { RadioGroup, RadioButton, Checkbox, Slider } from "ant-design-vue";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/components/Icon";
-import { RadioGroup, RadioButton, Checkbox, Slider } from "ant-design-vue";
 import "@mfish/core/utils/Is";
-import "@mfish/core/utils/http/axios";
-import "@ant-design/icons-vue";
-import "@mfish/core/utils/Uuid";
-import "@mfish/core/components/Container";
-import "@mfish/core/components/Draggable";
-import "@mfish/core/components/Modal";
-import "@mfish/core/components/Form";
-import "@mfish/core/components/Tree";
-import "@mfish/core/components/Split";
-import "@mfish/core/components/Table";
-import "@vueuse/core";
-import "@mfish/core/components/CodeEditor";
-import "@mfish/core/i18n/UseLocale";
-import { S as StyleConfig } from "./StyleConfig.js";
-import { C as ConfigGroup } from "./ConfigGroup.js";
 const _hoisted_1 = { class: "title" };
 const _hoisted_2 = { class: "title" };
 const _hoisted_3 = { class: "title" };
@@ -321,7 +308,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const MfTireMarksConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-18a9cbf2"]]);
+const MfTireMarksConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-936c49de"]]);
 export {
   MfTireMarksConfig as default
 };
