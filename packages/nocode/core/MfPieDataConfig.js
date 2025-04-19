@@ -1,10 +1,18 @@
-import { defineComponent, createBlock, openBlock } from "vue";
+import { defineComponent, resolveDirective, withDirectives, createBlock, openBlock, withCtx, renderSlot } from "vue";
 import MfBarLineDataConfig from "./MfBarLineDataConfig.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfPieDataConfig",
   setup(__props) {
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(MfBarLineDataConfig, { "y-max-count": 1 });
+      const _directive_s = resolveDirective("s");
+      return withDirectives((openBlock(), createBlock(MfBarLineDataConfig, { "y-max-count": 1 }, {
+        "data-select": withCtx(() => [
+          renderSlot(_ctx.$slots, "data-select")
+        ]),
+        _: 3
+      })), [
+        [_directive_s]
+      ]);
     };
   }
 });

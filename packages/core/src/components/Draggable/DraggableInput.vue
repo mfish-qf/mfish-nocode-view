@@ -19,6 +19,7 @@
         @start="onStart"
         @end="onEnd"
         @update="onUpdate"
+        :disabled="queryMode"
         item-key="id"
       >
         <template #item="{ index, element }">
@@ -33,7 +34,7 @@
               </ATag>
             </div>
             <AButton
-              v-if="!drag && curTagOver === index && !element.hideClose"
+              v-if="!drag && curTagOver === index && !element.hideClose && !queryMode"
               class="close"
               shape="circle"
               @click="closeBlock(index)"
@@ -45,7 +46,7 @@
           </div>
         </template>
       </draggable>
-      <ADropdown>
+      <ADropdown v-if="!queryMode">
         <template #overlay>
           <AMenu v-if="!drag && menus.length > 0">
             <AMenuItem v-for="(item, index) in menus" :key="index" @click="childMenuClick($event, item.value)">
@@ -87,7 +88,8 @@
     },
     addIcon: { type: String, default: "ant-design:plus-outlined" },
     addTitle: { type: String, default: "添加" },
-    menus: { type: Array as PropType<DragMenu<Object>[]>, default: () => [] }
+    menus: { type: Array as PropType<DragMenu<Object>[]>, default: () => [] },
+    queryMode: { type: Boolean, default: false }
   });
   const emit = defineEmits(["dragChange", "blockBuild", "addBlock", "editBlock", "closeBlock"]);
   const AMenuItem = AMenu.Item;
@@ -101,7 +103,7 @@
     dragItems.value = props.items;
   });
 
-  function allowDrop(event) {
+  function allowDrop(event: any) {
     event.preventDefault();
   }
 
@@ -127,7 +129,7 @@
     dropCreateItem(event);
   }
 
-  function handleDropItem(e, index: number) {
+  function handleDropItem(e: any, index: number) {
     e.stopPropagation();
     // 判断拖放在组件左边还是右边
     const newIndex = index + (e.offsetX < e.target.offsetWidth / 2 ? 0 : 1);
@@ -151,12 +153,13 @@
     emit("dragChange", dragItems.value);
   }
 
-  function menuDrag(event, item) {
+  function menuDrag(event: any, item: any) {
     event.dataTransfer.setData(dataTransferText, JSON.stringify(item));
     event.stopPropagation();
   }
 
   function addBlock() {
+    if (props.queryMode) return;
     emit("addBlock");
   }
 
@@ -164,7 +167,7 @@
     emit("editBlock", index, item);
   }
 
-  function childMenuClick(event, item) {
+  function childMenuClick(event: any, item: any) {
     event.stopPropagation();
     if (item) {
       // 如果存在事件回调，走回调添加项

@@ -2,10 +2,10 @@ import { defineComponent, createBlock, openBlock, normalizeClass, unref, withCtx
 import MfDecorationConfig from "./MfDecorationConfig.js";
 import "ant-design-vue";
 import { useDesign } from "@mfish/core/hooks";
+import { u as useScreenEditStore, f as ScreenInput, _ as _export_sfc } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
-import { u as useScreenEditStore, f as ScreenInput, _ as _export_sfc } from "./index.js";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
 const _hoisted_1 = { class: "title" };

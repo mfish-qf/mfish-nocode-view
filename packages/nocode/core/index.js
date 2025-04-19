@@ -1,7 +1,7 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import { defineComponent, useCssVars, useTemplateRef, computed, watch, reactive, onMounted, createElementBlock, openBlock, normalizeStyle, normalizeClass, unref, createElementVNode, createCommentVNode, createBlock, createVNode, ref, Fragment, renderList, nextTick, toRaw, withCtx, withModifiers, resolveComponent, createTextVNode, toDisplayString, onUnmounted, mergeProps, readonly, normalizeProps, guardReactiveProps, shallowRef, toHandlers, renderSlot, onBeforeMount, toRefs, withDirectives, resolveDynamicComponent, vShow, markRaw, Transition } from "vue";
+import { defineComponent, useCssVars, useTemplateRef, computed, watch, reactive, onMounted, createElementBlock, openBlock, normalizeStyle, normalizeClass, unref, createElementVNode, createCommentVNode, createBlock, createVNode, ref, Fragment, renderList, nextTick, toRaw, withCtx, withModifiers, resolveComponent, createTextVNode, toDisplayString, onUnmounted, mergeProps, readonly, normalizeProps, guardReactiveProps, shallowRef, toHandlers, renderSlot, onBeforeMount, createSlots, toRefs, withDirectives, resolveDynamicComponent, vShow, markRaw, Transition } from "vue";
 import { theme, Input, InputNumber, Tooltip, Segmented, Dropdown, Checkbox, RadioButton, RadioGroup, Select, Image, Divider, Button, Menu, Cascader, Radio, Form, DatePicker, RangePicker, Switch, Breadcrumb, Descriptions, Row, Col, Card, Drawer, Alert, Tag, ConfigProvider, Modal, InputGroup, Empty, Textarea, Watermark, MenuItem } from "ant-design-vue";
 import { useDesign, useRootSetting, useMessage, useDarkModeTheme } from "@mfish/core/hooks";
 import { useEyeDropper, useClipboard, useDebounceFn, useFocus } from "@vueuse/core";
@@ -13,7 +13,6 @@ import { buildUUID } from "@mfish/core/utils/Uuid";
 import { isFunction, isArray, isObject, isString, isNumber } from "@mfish/core/utils/Is";
 import { defHttp } from "@mfish/core/utils/http/axios";
 import { defineStore } from "pinia";
-import { getTableList, queryCategoryTreeByCode } from "@mfish/core/api";
 import { useAppStore } from "@mfish/stores/modules";
 import noImage from "@mfish/core/assets/images/noImage.png";
 import { mitt } from "@mfish/core/utils/Mitt";
@@ -35,6 +34,7 @@ import { propTypes } from "@mfish/core/utils/PropTypes";
 import { FileUp } from "@mfish/core/components/FileUpDown";
 import draggable$1 from "vuedraggable";
 import { NCollapseTransition } from "naive-ui";
+import { queryCategoryTreeByCode } from "@mfish/core/api";
 const colorStorage = "color_recently_bi";
 const gradientColorStorage = "gradient_color_recently_bi";
 const recentlyColors = [
@@ -661,7 +661,7 @@ const _sfc_main$1a = /* @__PURE__ */ defineComponent({
   }
 });
 const ColorHueSlider = /* @__PURE__ */ _export_sfc(_sfc_main$1a, [["__scopeId", "data-v-b2d0e443"]]);
-const _hoisted_1$y = { class: "background" };
+const _hoisted_1$z = { class: "background" };
 const _hoisted_2$n = { class: "color-text" };
 const _hoisted_3$e = { class: "color-input" };
 const _hoisted_4$7 = { class: "color-input-percentage" };
@@ -675,7 +675,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     useCssVars((_ctx) => ({
-      "3ebb910a": colorBorder.value
+      "09aca737": colorBorder.value
     }));
     const props = __props;
     const customInput = ref("");
@@ -713,6 +713,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
     }
     function change() {
       props.color.fromString(customInput.value);
+      props.color.set("alpha", rgba.a);
     }
     function changeRgb() {
       props.color.fromString(unref(displayedColor));
@@ -721,7 +722,7 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", {
         class: normalizeClass(unref(prefixCls))
       }, [
-        createElementVNode("div", _hoisted_1$y, [
+        createElementVNode("div", _hoisted_1$z, [
           createElementVNode("div", {
             class: "background-color",
             style: normalizeStyle({ backgroundColor: displayedColor.value })
@@ -808,8 +809,8 @@ const _sfc_main$19 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ColorText = /* @__PURE__ */ _export_sfc(_sfc_main$19, [["__scopeId", "data-v-516dae5e"]]);
-const _hoisted_1$x = { class: "colors" };
+const ColorText = /* @__PURE__ */ _export_sfc(_sfc_main$19, [["__scopeId", "data-v-2bab5fee"]]);
+const _hoisted_1$y = { class: "colors" };
 const _hoisted_2$m = ["onClick"];
 const _sfc_main$18 = /* @__PURE__ */ defineComponent({
   __name: "ColorRecently",
@@ -877,7 +878,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
         class: normalizeClass(unref(prefixCls))
       }, [
         _cache[0] || (_cache[0] = createElementVNode("div", { class: "last-time-text" }, "最近使用", -1)),
-        createElementVNode("div", _hoisted_1$x, [
+        createElementVNode("div", _hoisted_1$y, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(rgbaColors.value, (item, index2) => {
             return openBlock(), createElementBlock("div", {
               class: normalizeClass(["color-selector", { selected: item.selected }]),
@@ -896,7 +897,7 @@ const _sfc_main$18 = /* @__PURE__ */ defineComponent({
   }
 });
 const ColorRecently = /* @__PURE__ */ _export_sfc(_sfc_main$18, [["__scopeId", "data-v-98ec7ef1"]]);
-const _hoisted_1$w = { class: "colors" };
+const _hoisted_1$x = { class: "colors" };
 const _hoisted_2$l = ["onClick"];
 const _sfc_main$17 = /* @__PURE__ */ defineComponent({
   __name: "GradientColorRecently",
@@ -958,7 +959,7 @@ const _sfc_main$17 = /* @__PURE__ */ defineComponent({
         class: normalizeClass(unref(prefixCls))
       }, [
         _cache[0] || (_cache[0] = createElementVNode("div", { class: "last-time-text" }, "最近使用", -1)),
-        createElementVNode("div", _hoisted_1$w, [
+        createElementVNode("div", _hoisted_1$x, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(gradientColors.value, (item, index2) => {
             return openBlock(), createElementBlock("div", {
               class: normalizeClass(["color-selector", { selected: selectIndex.value === index2 }]),
@@ -977,7 +978,7 @@ const _sfc_main$17 = /* @__PURE__ */ defineComponent({
   }
 });
 const GradientColorRecently = /* @__PURE__ */ _export_sfc(_sfc_main$17, [["__scopeId", "data-v-be7486eb"]]);
-const _hoisted_1$v = { class: "hue-slider" };
+const _hoisted_1$w = { class: "hue-slider" };
 const _hoisted_2$k = ["onMousedown", "onDblclick"];
 const _hoisted_3$d = { class: "color-input-percentage" };
 const _sfc_main$16 = /* @__PURE__ */ defineComponent({
@@ -1148,7 +1149,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
         createElementVNode("div", {
           class: normalizeClass(unref(prefixCls))
         }, [
-          createElementVNode("div", _hoisted_1$v, [
+          createElementVNode("div", _hoisted_1$w, [
             createVNode(unref(Tooltip), {
               title: "点击增加新颜色",
               placement: "left"
@@ -1227,7 +1228,7 @@ const _sfc_main$16 = /* @__PURE__ */ defineComponent({
   }
 });
 const GradientColor = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["__scopeId", "data-v-cf05475f"]]);
-const _hoisted_1$u = { class: "header" };
+const _hoisted_1$v = { class: "header" };
 const _hoisted_2$j = {
   key: 0,
   class: "content"
@@ -1339,7 +1340,7 @@ const _sfc_main$15 = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", {
         class: normalizeClass(unref(prefixCls))
       }, [
-        createElementVNode("div", _hoisted_1$u, [
+        createElementVNode("div", _hoisted_1$v, [
           createVNode(unref(Segmented), {
             value: activeType.value,
             options: configs.value,
@@ -1417,7 +1418,7 @@ const _sfc_main$15 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$t = {
+const _hoisted_1$u = {
   key: 0,
   class: "color-background-text"
 };
@@ -1469,13 +1470,14 @@ const _sfc_main$14 = /* @__PURE__ */ defineComponent({
   emits: ["inputChange", "confirmChange"],
   setup(__props, { emit: __emit }) {
     useCssVars((_ctx) => ({
-      "563f8672": colorBorder.value
+      "56ad25b7": colorBorder.value
     }));
     const props = __props;
     const emit = __emit;
     const { prefixCls } = useDesign("color-picker");
     const selectType = ref(1);
     const darkMode = useRootSetting().getDarkMode;
+    const mouseEnter = ref(false);
     const color2 = ref(
       new Color({
         value: unref(darkMode) === ThemeEnum.DARK ? "#000000" : "#FFFFFF",
@@ -1696,6 +1698,10 @@ const _sfc_main$14 = /* @__PURE__ */ defineComponent({
       }
       confirmValue(val);
     }
+    function clearColor() {
+      color2.value.set("alpha", 100);
+      emit("confirmChange", "", "");
+    }
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(Dropdown), {
         trigger: ["click"],
@@ -1724,14 +1730,23 @@ const _sfc_main$14 = /* @__PURE__ */ defineComponent({
         ]),
         default: withCtx(() => [
           createElementVNode("div", {
-            class: normalizeClass(unref(prefixCls))
+            class: normalizeClass(unref(prefixCls)),
+            onMouseenter: _cache[5] || (_cache[5] = () => mouseEnter.value = true),
+            onMouseleave: _cache[6] || (_cache[6] = () => mouseEnter.value = false)
           }, [
-            selectType.value === 2 ? (openBlock(), createElementBlock("div", _hoisted_1$t, [
+            selectType.value === 2 ? (openBlock(), createElementBlock("div", _hoisted_1$u, [
               createElementVNode("div", _hoisted_2$i, [
                 createElementVNode("div", {
                   style: normalizeStyle(backStyle.value)
                 }, null, 4)
-              ])
+              ]),
+              mouseEnter.value ? (openBlock(), createBlock(unref(Icon), {
+                key: 0,
+                onClick: withModifiers(clearColor, ["stop"]),
+                size: "14",
+                class: "close-icon",
+                icon: "ant-design:close-circle-filled"
+              })) : createCommentVNode("", true)
             ])) : (openBlock(), createElementBlock("div", _hoisted_3$b, [
               createElementVNode("div", _hoisted_4$5, [
                 createElementVNode("div", _hoisted_5$4, [
@@ -1753,7 +1768,14 @@ const _sfc_main$14 = /* @__PURE__ */ defineComponent({
                     onPressEnter: inputChange,
                     bordered: false,
                     maxlength: 7
-                  }, null, 8, ["placeholder", "value"])
+                  }, null, 8, ["placeholder", "value"]),
+                  mouseEnter.value && !!hex.value ? (openBlock(), createBlock(unref(Icon), {
+                    key: 0,
+                    onClick: withModifiers(clearColor, ["stop"]),
+                    size: "14",
+                    class: "close-icon",
+                    icon: "ant-design:close-circle-filled"
+                  })) : createCommentVNode("", true)
                 ], 8, _hoisted_6$1)
               ]),
               __props.showAlpha ? (openBlock(), createElementBlock("div", {
@@ -1775,22 +1797,22 @@ const _sfc_main$14 = /* @__PURE__ */ defineComponent({
                   onPressEnter: alphaChange,
                   maxlength: 3
                 }, {
-                  prefix: withCtx(() => _cache[5] || (_cache[5] = [
+                  prefix: withCtx(() => _cache[7] || (_cache[7] = [
                     createElementVNode("div", { class: "prefix" }, "A", -1)
                   ])),
                   _: 1
                 }, 8, ["value"]),
-                _cache[6] || (_cache[6] = createElementVNode("div", { style: { "user-select": "none" } }, "%", -1))
+                _cache[8] || (_cache[8] = createElementVNode("div", { style: { "user-select": "none" } }, "%", -1))
               ])) : createCommentVNode("", true)
             ]))
-          ], 2)
+          ], 34)
         ]),
         _: 1
       }, 8, ["open"]);
     };
   }
 });
-const MfishColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$14, [["__scopeId", "data-v-37336a80"]]);
+const MfishColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main$14, [["__scopeId", "data-v-3d0fe0b2"]]);
 function withPrefix(loggerPrefix) {
   const prefix = `[DataV - ${loggerPrefix}]`;
   return {
@@ -5110,7 +5132,7 @@ const Decoration3 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$s = ["width", "height"];
+const _hoisted_1$t = ["width", "height"];
 const _hoisted_2$h = ["stroke", "points"];
 const _hoisted_3$a = ["stroke", "points"];
 const _sfc_main$13 = /* @__PURE__ */ defineComponent({
@@ -5161,7 +5183,7 @@ const _sfc_main$13 = /* @__PURE__ */ defineComponent({
               "stroke-dashoffset": "-30",
               points: _ctx.reverse ? `0, 2.5 ${width.value}, 2.5` : `2.5, 0 2.5, ${height.value}`
             }, null, 8, _hoisted_3$a)
-          ], 8, _hoisted_1$s))
+          ], 8, _hoisted_1$t))
         ], 6)
       ], 512);
     };
@@ -9342,7 +9364,7 @@ const Header6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$r = ["onClick", "onMouseenter", "onMouseleave"];
+const _hoisted_1$s = ["onClick", "onMouseenter", "onMouseleave"];
 const _sfc_main$12 = /* @__PURE__ */ defineComponent({
   ...{ name: "ScrollTable" },
   __name: "index",
@@ -9764,7 +9786,7 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
                   }, toDisplayString(ceil), 5)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
                     createTextVNode(toDisplayString(ceil), 1)
                   ], 64))
-                ], 44, _hoisted_1$r);
+                ], 44, _hoisted_1$s);
               }), 128))
             ], 4);
           }), 128))
@@ -9774,7 +9796,7 @@ const _sfc_main$12 = /* @__PURE__ */ defineComponent({
   }
 });
 const ScrollTable = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["__scopeId", "data-v-ccb14245"]]);
-const _hoisted_1$q = ["onClick"];
+const _hoisted_1$r = ["onClick"];
 const _sfc_main$11 = /* @__PURE__ */ defineComponent({
   __name: "MacButton",
   props: {
@@ -9851,7 +9873,7 @@ const _sfc_main$11 = /* @__PURE__ */ defineComponent({
               size: "10",
               class: normalizeClass(["icon-base", { hover: !__props.disabled }])
             }, null, 8, ["icon", "class"])
-          ], 10, _hoisted_1$q);
+          ], 10, _hoisted_1$r);
         }), 128))
       ], 2);
     };
@@ -9887,7 +9909,7 @@ const _sfc_main$10 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$p = {
+const _hoisted_1$q = {
   key: 0,
   class: "prefix"
 };
@@ -9913,7 +9935,7 @@ const _sfc_main$$ = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", {
         class: normalizeClass(unref(prefixCls))
       }, [
-        __props.prefix ? (openBlock(), createElementBlock("div", _hoisted_1$p, toDisplayString(__props.prefix), 1)) : createCommentVNode("", true),
+        __props.prefix ? (openBlock(), createElementBlock("div", _hoisted_1$q, toDisplayString(__props.prefix), 1)) : createCommentVNode("", true),
         __props.isNumber ? (openBlock(), createBlock(unref(InputNumber), mergeProps({
           key: 1,
           class: "input"
@@ -9944,8 +9966,19 @@ const listenGlobalKeyboard = ({ CtrlShiftKeysEnum, CtrlKeysEnum, ShiftKeysEnum, 
     e.stopPropagation();
     fun();
   };
+  const { prefixCls } = useDesign("chart-contain");
+  function innerContain(node) {
+    var _a;
+    if ((_a = node.className) == null ? void 0 : _a.startsWith(`${prefixCls} active`)) {
+      return true;
+    }
+    if (node.parentNode) {
+      return innerContain(node.parentNode);
+    }
+    return false;
+  }
   const keyDownHandle = (e) => {
-    if (e.target !== document.body) {
+    if (e.target !== document.body && !innerContain(e.target)) {
       return;
     }
     if (e.ctrlKey && e.shiftKey) {
@@ -10246,7 +10279,7 @@ const _sfc_main$Y = /* @__PURE__ */ defineComponent({
   }
 });
 const TextVAlignStyle = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["__scopeId", "data-v-a40ac773"]]);
-const _hoisted_1$o = { class: "line" };
+const _hoisted_1$p = { class: "line" };
 const _hoisted_2$f = { class: "input" };
 const _hoisted_3$9 = { class: "line" };
 const _hoisted_4$4 = { style: { "flex": "1" } };
@@ -10402,7 +10435,7 @@ const _sfc_main$X = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", {
         class: normalizeClass(unref(prefixCls))
       }, [
-        createElementVNode("div", _hoisted_1$o, [
+        createElementVNode("div", _hoisted_1$p, [
           createVNode(unref(Select), {
             style: { "flex": "1" },
             value: font.value,
@@ -10785,6 +10818,12 @@ function getDataTableByResourceId(id, reqPage, params) {
     { errorMessageMode: "message" }
   );
 }
+function getTablesByResourceId(id) {
+  return defHttp.get(
+    { url: `${"/nocode/screenResourceApi"}/tables/${id}` },
+    { errorMessageMode: "message" }
+  );
+}
 function getFieldsByResourceId(id) {
   return defHttp.get(
     { url: `${"/nocode/screenResourceApi"}/fields/${id}` },
@@ -10911,16 +10950,10 @@ const useApiStore = defineStore("custom-api", {
       });
       return this.tableFields;
     },
-    async setTableList(connectId) {
-      const pageTable = await getTableList({
-        connectId,
-        pageNum: 1,
-        pageSize: 1e4
-      });
+    setTableList(pageTable) {
       if ((pageTable == null ? void 0 : pageTable.list.length) > 0) {
         this.tableList = pageTable.list;
       }
-      return this.tableList;
     },
     setLevel(level) {
       this.level = level;
@@ -15381,7 +15414,7 @@ function preSaveScreen(componentList, canvasConfig) {
   const clearData = (chart) => {
     delete chart.data.headers;
     delete chart.data.result;
-    if (chart.data.type === 1) {
+    if (chart.data.type === 1 && chart.data.id) {
       delete chart.data.dataSet;
     }
     delete chart.data.paramsValue;
@@ -15981,7 +16014,7 @@ const useScreenShortcut = (screenEditStore2, screenShortcutStore) => {
   const NoneShortcutKeyEnum = useAlign(screenEditStore2, screenShortcutStore);
   return { KeysEnum, CtrlKeysEnum, ShiftKeysEnum, CtrlShiftKeysEnum, NoneShortcutKeyEnum };
 };
-const _hoisted_1$n = { class: "title" };
+const _hoisted_1$o = { class: "title" };
 const _sfc_main$T = /* @__PURE__ */ defineComponent({
   __name: "ConfigWrapper",
   props: {
@@ -15990,7 +16023,8 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
     title: { type: String, default: "" },
     allowDelete: { type: Boolean, default: true },
     full: { type: Boolean, default: false },
-    highlight: { type: Boolean, default: false }
+    highlight: { type: Boolean, default: false },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["deleteConfig", "execute"],
   setup(__props, { emit: __emit }) {
@@ -16034,12 +16068,15 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
           icon: __props.icon,
           size: 14
         }, null, 8, ["color", "icon"])) : createCommentVNode("", true),
-        createElementVNode("div", _hoisted_1$n, toDisplayString(__props.title), 1),
-        __props.allowDelete ? (openBlock(), createBlock(unref(Divider), {
+        createElementVNode("div", _hoisted_1$o, toDisplayString(__props.title), 1),
+        __props.allowDelete && !__props.queryMode ? (openBlock(), createBlock(unref(Divider), {
           key: 3,
           type: "vertical"
         })) : createCommentVNode("", true),
-        createVNode(unref(Tooltip), { title: "删除" }, {
+        !__props.queryMode ? (openBlock(), createBlock(unref(Tooltip), {
+          key: 4,
+          title: "删除"
+        }, {
           default: withCtx(() => [
             __props.allowDelete ? (openBlock(), createBlock(unref(Button), {
               key: 0,
@@ -16054,7 +16091,7 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
             })) : createCommentVNode("", true)
           ]),
           _: 1
-        }),
+        })) : createCommentVNode("", true),
         createElementVNode("div", {
           class: normalizeClass(["config", __props.full ? "full" : ""])
         }, [
@@ -16082,12 +16119,13 @@ const _sfc_main$T = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ConfigWrapper = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["__scopeId", "data-v-bb171bf9"]]);
+const ConfigWrapper = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["__scopeId", "data-v-c5dcf0b5"]]);
 const _sfc_main$S = /* @__PURE__ */ defineComponent({
   __name: "SelectFields",
   props: {
     tableFields: { type: Object, require: true, default: void 0 },
-    fields: { type: Object, require: true, default: void 0 }
+    fields: { type: Object, require: true, default: void 0 },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["fieldChange"],
   setup(__props, { emit: __emit }) {
@@ -16176,13 +16214,14 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
                   }, [
                     createVNode(unref(Checkbox), {
                       checked: allCheck.value,
-                      onChange: checkAll
+                      onChange: checkAll,
+                      disabled: __props.queryMode
                     }, {
                       default: withCtx(() => _cache[0] || (_cache[0] = [
                         createTextVNode("全选")
                       ])),
                       _: 1
-                    }, 8, ["checked"])
+                    }, 8, ["checked", "disabled"])
                   ], 2)),
                   createVNode(unref(Divider), { style: { "margin": "4px 0" } }),
                   createVNode(unref(ScrollContainer), {
@@ -16197,13 +16236,14 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
                           createVNode(unref(Checkbox), {
                             checked: item.checked,
                             id: item.colName,
-                            onChange: checkChange
+                            onChange: checkChange,
+                            disabled: __props.queryMode
                           }, {
                             default: withCtx(() => [
                               createTextVNode(toDisplayString(item.colName), 1)
                             ]),
                             _: 2
-                          }, 1032, ["checked", "id"])
+                          }, 1032, ["checked", "id", "disabled"])
                         ], 2);
                       }), 128))
                     ]),
@@ -16232,12 +16272,13 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const SelectFields = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["__scopeId", "data-v-8e560497"]]);
+const SelectFields = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["__scopeId", "data-v-7f8e0ebf"]]);
 const _sfc_main$R = /* @__PURE__ */ defineComponent({
   __name: "TableFields",
   props: {
     sqlQuery: { type: Object, require: true, default: void 0 },
-    configMitt: { type: Object, default: void 0 }
+    configMitt: { type: Object, default: void 0 },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["fieldChange"],
   setup(__props, { emit: __emit }) {
@@ -16312,7 +16353,8 @@ const _sfc_main$R = /* @__PURE__ */ defineComponent({
         iconfont: "icon-mfish-table",
         title: "数据源",
         "allow-delete": false,
-        onExecute: executeSql
+        onExecute: executeSql,
+        "query-mode": __props.queryMode
       }, {
         config: withCtx(() => [
           createVNode(unref(AInputGroup), {
@@ -16329,19 +16371,20 @@ const _sfc_main$R = /* @__PURE__ */ defineComponent({
                 createVNode(SelectFields, mergeProps(_ctx.$attrs, {
                   "table-fields": tableFields.value,
                   fields: (_b = props.sqlQuery) == null ? void 0 : _b.fields,
-                  onFieldChange: fieldChange
-                }), null, 16, ["table-fields", "fields"])
+                  onFieldChange: fieldChange,
+                  "query-mode": __props.queryMode
+                }), null, 16, ["table-fields", "fields", "query-mode"])
               ];
             }),
             _: 1
           }, 8, ["class"])
         ]),
         _: 1
-      });
+      }, 8, ["query-mode"]);
     };
   }
 });
-const TableFields = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["__scopeId", "data-v-d17c3e23"]]);
+const TableFields = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["__scopeId", "data-v-5708821c"]]);
 const buildTableFields = async (index2, sqlQuery) => {
   var _a, _b;
   const apiStore = useApiStore();
@@ -16447,13 +16490,14 @@ const _sfc_main$Q = /* @__PURE__ */ defineComponent({
   }
 });
 const ConfigButton = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["__scopeId", "data-v-749209b7"]]);
-const _hoisted_1$m = { class: "condition" };
+const _hoisted_1$n = { class: "condition" };
 const _sfc_main$P = /* @__PURE__ */ defineComponent({
   __name: "TableJoins",
   props: {
     sqlQuery: { type: Object, require: true },
     level: { type: Number, default: 1 },
-    configMitt: { type: Object }
+    configMitt: { type: Object },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["joinChange"],
   setup(__props, { emit: __emit }) {
@@ -16470,7 +16514,7 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
     const joinTypes = { left: "左联", inner: "内联", right: "右联", full: "全联" };
     const showJoinButton = computed(() => {
       var _a;
-      if (apiStore.getSourceType === 1) {
+      if (apiStore.getSourceType === 1 || props.queryMode) {
         return false;
       }
       if (props.sqlQuery && ((_a = props.sqlQuery) == null ? void 0 : _a.joins)) {
@@ -16481,6 +16525,7 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
       return isNeedNest(props.sqlQuery, props.level);
     });
     function allFields(key) {
+      if (!key) return [];
       if (!apiStore.getTableFieldsMap.has(key)) {
         return [];
       }
@@ -16714,6 +16759,7 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
             iconfont: "icon-mfish-join",
             title: "关联",
             key: index2,
+            "query-mode": __props.queryMode,
             onDeleteConfig: ($event) => deleteJoin(index2),
             onExecute: ($event) => executeSql($event, index2)
           }, {
@@ -16734,7 +16780,8 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
                 createVNode(unref(Dropdown), {
                   class: "condition",
                   placement: "bottom",
-                  arrow: { pointAtCenter: true }
+                  arrow: { pointAtCenter: true },
+                  disabled: __props.queryMode
                 }, {
                   overlay: withCtx(() => [
                     createVNode(unref(Menu), {
@@ -16775,13 +16822,14 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
                     ])
                   ]),
                   _: 2
-                }, 1024),
+                }, 1032, ["disabled"]),
                 createVNode(_component_AInputGroup, {
                   class: "right-table",
                   compact: ""
                 }, {
                   default: withCtx(() => [
                     createVNode(unref(Cascader), {
+                      disabled: __props.queryMode,
                       "show-search": "",
                       "allow-clear": false,
                       class: "input-select",
@@ -16808,12 +16856,13 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
                         ];
                       }),
                       _: 2
-                    }, 1032, ["value", "options", "onChange"]),
+                    }, 1032, ["disabled", "value", "options", "onChange"]),
                     createVNode(SelectFields, {
+                      "query-mode": __props.queryMode,
                       "table-fields": allFields(join.table),
                       fields: join.fields,
                       onFieldChange: ($event) => fieldChange($event, index2)
-                    }, null, 8, ["table-fields", "fields", "onFieldChange"])
+                    }, null, 8, ["query-mode", "table-fields", "fields", "onFieldChange"])
                   ]),
                   _: 2
                 }, 1024),
@@ -16822,6 +16871,7 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
                   style: normalizeStyle({ color: unref(iconColor) })
                 }, "当", 4),
                 createVNode(unref(Cascader), {
+                  disabled: __props.queryMode,
                   "show-search": "",
                   "allow-clear": false,
                   class: "input-select",
@@ -16842,8 +16892,8 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
                     }, 1032, ["title"])
                   ]),
                   _: 2
-                }, 1032, ["options", "value", "placeholder", "onChange"]),
-                createElementVNode("div", _hoisted_1$m, [
+                }, 1032, ["disabled", "options", "value", "placeholder", "onChange"]),
+                createElementVNode("div", _hoisted_1$n, [
                   createVNode(unref(Icon), {
                     icon: "iconfont:icon-mfish-equals",
                     color: unref(iconColor),
@@ -16851,6 +16901,7 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
                   }, null, 8, ["color"])
                 ]),
                 createVNode(unref(Select), {
+                  disabled: __props.queryMode,
                   "show-search": "",
                   "allow-clear": false,
                   class: "input-select",
@@ -16859,11 +16910,11 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
                   options: getSecondFields(index2),
                   placeholder: `${join.tableAlias}字段`,
                   onSelect: (_, option) => secondFieldsSelect(option, index2, join)
-                }, null, 8, ["value", "options", "placeholder", "onSelect"])
+                }, null, 8, ["disabled", "value", "options", "placeholder", "onSelect"])
               ];
             }),
             _: 2
-          }, 1032, ["onDeleteConfig", "onExecute"]);
+          }, 1032, ["query-mode", "onDeleteConfig", "onExecute"]);
         }), 128)),
         showJoinButton.value ? (openBlock(), createBlock(ConfigButton, {
           key: 0,
@@ -16877,12 +16928,13 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TableJoins = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["__scopeId", "data-v-994f0722"]]);
+const TableJoins = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["__scopeId", "data-v-1a605ef6"]]);
 const _sfc_main$O = /* @__PURE__ */ defineComponent({
   __name: "TableLimit",
   props: {
     sqlQuery: { type: Object, require: true },
-    configMitt: { type: Object }
+    configMitt: { type: Object },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["limitChange"],
   setup(__props, { emit: __emit }) {
@@ -16917,6 +16969,7 @@ const _sfc_main$O = /* @__PURE__ */ defineComponent({
       var _a;
       return ((_a = __props.sqlQuery) == null ? void 0 : _a.limit) !== void 0 ? (openBlock(), createBlock(ConfigWrapper, {
         key: 0,
+        "query-mode": __props.queryMode,
         icon: "ant-design:column-height-outlined",
         title: "行数",
         onDeleteConfig: deleteLimit,
@@ -16924,16 +16977,17 @@ const _sfc_main$O = /* @__PURE__ */ defineComponent({
       }, {
         config: withCtx(() => [
           createVNode(unref(InputNumber), {
+            disabled: __props.queryMode,
             "default-value": curLimit.value,
             "addon-after": "行",
             step: "10",
             onChange: valueChange,
             onPressEnter: limitChange,
             onBlur: limitChange
-          }, null, 8, ["default-value"])
+          }, null, 8, ["disabled", "default-value"])
         ]),
         _: 1
-      })) : createCommentVNode("", true);
+      }, 8, ["query-mode"])) : createCommentVNode("", true);
     };
   }
 });
@@ -17049,7 +17103,7 @@ const _sfc_main$N = {
     };
   }
 };
-function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_BasicForm = resolveComponent("BasicForm");
   const _component_BasicModal = resolveComponent("BasicModal");
   return openBlock(), createBlock(_component_BasicModal, mergeProps(_ctx.$attrs, {
@@ -17066,11 +17120,13 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 16, ["onRegister", "title", "onOk"]);
 }
-const ApiParamsModal = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$1]]);
+const ApiParamsModal = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render]]);
+const _hoisted_1$m = { key: 0 };
 const _sfc_main$M = /* @__PURE__ */ defineComponent({
   __name: "FilterVariable",
   props: {
-    value: { type: String }
+    value: { type: String },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["variableChange"],
   setup(__props, { emit: __emit }) {
@@ -17128,7 +17184,8 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
         createVNode(unref(Select), {
           value: selectValue.value,
           "onUpdate:value": _cache[0] || (_cache[0] = ($event) => selectValue.value = $event),
-          onChange: selectChange
+          onChange: selectChange,
+          disabled: __props.queryMode
         }, {
           dropdownRender: withCtx(({ menuNode }) => [
             createVNode(VNodes, { vnodes: menuNode }, null, 8, ["vnodes"]),
@@ -17159,7 +17216,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                   }, [
                     createTextVNode(toDisplayString(item.name) + " ", 1),
                     createElementVNode("div", null, toDisplayString(item.remark), 1),
-                    createElementVNode("div", null, [
+                    !__props.queryMode ? (openBlock(), createElementBlock("div", _hoisted_1$m, [
                       createVNode(unref(Icon), {
                         icon: "ant-design:edit-outlined",
                         color: unref(themeColor),
@@ -17171,7 +17228,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
                         color: unref(themeColor),
                         onClick: withModifiers(($event) => deleteVariable(index2), ["stop"])
                       }, null, 8, ["color", "onClick"])
-                    ])
+                    ])) : createCommentVNode("", true)
                   ], 2)
                 ]),
                 _: 2
@@ -17179,7 +17236,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
             }), 128))
           ]),
           _: 1
-        }, 8, ["value"]),
+        }, 8, ["value", "disabled"]),
         createVNode(ApiParamsModal, {
           onRegister: unref(registerModal),
           onAddSuccess: addSuccess,
@@ -17190,12 +17247,13 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FilterVariable = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-682f1b0b"]]);
+const FilterVariable = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-f526817e"]]);
 const _sfc_main$L = /* @__PURE__ */ defineComponent({
   __name: "TableField",
   props: {
     tableFields: { type: Object },
-    value: { type: Object }
+    value: { type: Object },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["change"],
   setup(__props, { emit: __emit }) {
@@ -17240,6 +17298,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
     }
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(Cascader), {
+        disabled: __props.queryMode,
         "show-search": "",
         "allow-clear": false,
         "option-filter-prop": "label",
@@ -17264,7 +17323,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
           }, 1032, ["title"])
         ]),
         _: 1
-      }, 8, ["options", "value"]);
+      }, 8, ["disabled", "options", "value"]);
     };
   }
 });
@@ -17277,7 +17336,8 @@ const _sfc_main$K = /* @__PURE__ */ defineComponent({
     tableFields: {
       type: Array,
       default: () => []
-    }
+    },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["typeChange", "variableChange", "fieldChange"],
   setup(__props, { emit: __emit }) {
@@ -17322,7 +17382,8 @@ const _sfc_main$K = /* @__PURE__ */ defineComponent({
           value: type.value,
           "onUpdate:value": _cache[0] || (_cache[0] = ($event) => type.value = $event),
           "button-style": "solid",
-          onChange: typeChange
+          onChange: typeChange,
+          disabled: __props.queryMode
         }, {
           default: withCtx(() => [
             createVNode(unref(ARadioButton), { value: "0" }, {
@@ -17345,36 +17406,44 @@ const _sfc_main$K = /* @__PURE__ */ defineComponent({
             })
           ]),
           _: 1
-        }, 8, ["value"]),
+        }, 8, ["value", "disabled"]),
         type.value === "0" ? (openBlock(), createBlock(unref(AFormItemRest), { key: 0 }, {
           default: withCtx(() => [
-            __props.fieldType === "NUMBER" ? (openBlock(), createBlock(unref(InputNumber), normalizeProps(mergeProps({ key: 0 }, _ctx.$attrs)), null, 16)) : __props.fieldType === "DATE" && __props.operator !== "between" ? (openBlock(), createBlock(unref(DatePicker), mergeProps({ key: 1 }, _ctx.$attrs, {
+            __props.fieldType === "NUMBER" ? (openBlock(), createBlock(unref(InputNumber), mergeProps({ key: 0 }, _ctx.$attrs, { disabled: __props.queryMode }), null, 16, ["disabled"])) : __props.fieldType === "DATE" && __props.operator !== "between" ? (openBlock(), createBlock(unref(DatePicker), mergeProps({
+              key: 1,
+              disabled: __props.queryMode
+            }, _ctx.$attrs, {
               "show-time": true,
               "value-format": "YYYY-MM-DD HH:mm:ss"
-            }), null, 16)) : __props.fieldType === "DATE" && __props.operator === "between" ? (openBlock(), createBlock(unref(RangePicker), mergeProps({ key: 2 }, _ctx.$attrs, {
+            }), null, 16, ["disabled"])) : __props.fieldType === "DATE" && __props.operator === "between" ? (openBlock(), createBlock(unref(RangePicker), mergeProps({
+              key: 2,
+              disabled: __props.queryMode
+            }, _ctx.$attrs, {
               "show-time": true,
               placeholder: ["开始时间", "结束时间"],
               "value-format": "YYYY-MM-DD HH:mm:ss"
-            }), null, 16)) : (openBlock(), createBlock(unref(AInput), normalizeProps(mergeProps({ key: 3 }, _ctx.$attrs)), null, 16))
+            }), null, 16, ["disabled"])) : (openBlock(), createBlock(unref(AInput), mergeProps({ key: 3 }, _ctx.$attrs, { disabled: __props.queryMode }), null, 16, ["disabled"]))
           ]),
           _: 1
         })) : createCommentVNode("", true),
         type.value === "1" ? (openBlock(), createBlock(unref(AFormItemRest), { key: 1 }, {
           default: withCtx(() => [
             createVNode(FilterVariable, {
+              "query-mode": __props.queryMode,
               value: _ctx.$attrs.value,
               onVariableChange: variableChange
-            }, null, 8, ["value"])
+            }, null, 8, ["query-mode", "value"])
           ]),
           _: 1
         })) : createCommentVNode("", true),
         type.value === "2" ? (openBlock(), createBlock(unref(AFormItemRest), { key: 2 }, {
           default: withCtx(() => [
             createVNode(_sfc_main$L, {
+              "query-mode": __props.queryMode,
               "table-fields": __props.tableFields,
               value: _ctx.$attrs.value,
               onChange: fieldChange
-            }, null, 8, ["table-fields", "value"])
+            }, null, 8, ["query-mode", "table-fields", "value"])
           ]),
           _: 1
         })) : createCommentVNode("", true)
@@ -17382,9 +17451,12 @@ const _sfc_main$K = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FilterValue = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["__scopeId", "data-v-51d7780d"]]);
+const FilterValue = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["__scopeId", "data-v-d05230c2"]]);
 const _sfc_main$J = /* @__PURE__ */ defineComponent({
   __name: "FilterModal",
+  props: {
+    queryMode: { type: Boolean, default: false }
+  },
   emits: ["submit", "register"],
   setup(__props, { emit: __emit }) {
     const emit = __emit;
@@ -17571,10 +17643,11 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                 }, {
                   default: withCtx(() => [
                     createVNode(_sfc_main$L, {
+                      "query-mode": __props.queryMode,
                       "table-fields": tableFields.value,
                       value: filter.field,
                       onChange: fieldChange
-                    }, null, 8, ["table-fields", "value"])
+                    }, null, 8, ["query-mode", "table-fields", "value"])
                   ]),
                   _: 1
                 }),
@@ -17585,6 +17658,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                 }, {
                   default: withCtx(() => [
                     createVNode(unref(Select), {
+                      disabled: __props.queryMode,
                       "show-search": "",
                       "allow-clear": false,
                       class: "input-select",
@@ -17594,7 +17668,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                       options: operator.value,
                       placeholder: "选择条件",
                       onSelect: selectOperator
-                    }, null, 8, ["value", "options"])
+                    }, null, 8, ["disabled", "value", "options"])
                   ]),
                   _: 1
                 }),
@@ -17608,6 +17682,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                     var _a2;
                     return [
                       createVNode(FilterValue, {
+                        "query-mode": __props.queryMode,
                         placeholder: "输入值",
                         value: formState.value,
                         "onUpdate:value": _cache[1] || (_cache[1] = ($event) => formState.value = $event),
@@ -17618,7 +17693,7 @@ const _sfc_main$J = /* @__PURE__ */ defineComponent({
                         onTypeChange: valueTypeChange,
                         onVariableChange: variableChange,
                         onFieldChange: fieldValueChange
-                      }, null, 8, ["value", "value-type", "field-type", "operator", "table-fields"])
+                      }, null, 8, ["query-mode", "value", "value-type", "field-type", "operator", "table-fields"])
                     ];
                   }),
                   _: 1
@@ -17638,7 +17713,8 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
   props: {
     sqlQuery: { type: Object },
     level: { type: Number, default: 1 },
-    configMitt: { type: Object }
+    configMitt: { type: Object },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["filterChange"],
   setup(__props, { emit: __emit }) {
@@ -17647,7 +17723,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
     const tableFilters = ref([]);
     const showFilterButton = computed(() => {
       var _a;
-      return ((_a = props.sqlQuery) == null ? void 0 : _a.filters) === void 0 && isNeedNest(props.sqlQuery, props.level);
+      return ((_a = props.sqlQuery) == null ? void 0 : _a.filters) === void 0 && isNeedNest(props.sqlQuery, props.level) && !props.queryMode;
     });
     watch(
       () => {
@@ -17767,6 +17843,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", null, [
         ((_a = __props.sqlQuery) == null ? void 0 : _a.filters) !== void 0 ? (openBlock(), createBlock(ConfigWrapper, {
           key: 0,
+          "query-mode": __props.queryMode,
           icon: "ant-design:filter-outlined",
           title: "过滤",
           onDeleteConfig: deleteFilter,
@@ -17775,6 +17852,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
         }, {
           config: withCtx(() => [
             createVNode(unref(DraggableInput), {
+              "query-mode": __props.queryMode,
               items: tableFilters.value,
               menus: menus.value,
               "add-title": "添加过滤条件",
@@ -17785,6 +17863,7 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
             }, {
               tag: withCtx(({ index: index2, element }) => [
                 createVNode(unref(Switch), {
+                  disabled: __props.queryMode,
                   style: { "margin-right": "8px" },
                   checked: element == null ? void 0 : element.value,
                   "checked-children": "且",
@@ -17793,13 +17872,13 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
                   "un-checked-value": "or",
                   size: "small",
                   onChange: ($event) => switchChange($event, index2)
-                }, null, 8, ["checked", "onChange"])
+                }, null, 8, ["disabled", "checked", "onChange"])
               ]),
               _: 1
-            }, 8, ["items", "menus"])
+            }, 8, ["query-mode", "items", "menus"])
           ]),
           _: 1
-        })) : createCommentVNode("", true),
+        }, 8, ["query-mode"])) : createCommentVNode("", true),
         showFilterButton.value ? (openBlock(), createBlock(ConfigButton, {
           key: 1,
           class: "config-button",
@@ -17809,15 +17888,22 @@ const _sfc_main$I = /* @__PURE__ */ defineComponent({
           onClick: withModifiers(addFilters, ["prevent"])
         })) : createCommentVNode("", true),
         createVNode(_sfc_main$J, {
+          "query-mode": __props.queryMode,
           onRegister: unref(registerModal),
           onSubmit: createFilter
-        }, null, 8, ["onRegister"])
+        }, null, 8, ["query-mode", "onRegister"])
       ]);
     };
   }
 });
 const _sfc_main$H = /* @__PURE__ */ defineComponent({
   __name: "AggregateModal",
+  props: {
+    queryMode: {
+      type: Boolean,
+      default: false
+    }
+  },
   emits: ["submit", "register"],
   setup(__props, { emit: __emit }) {
     const emit = __emit;
@@ -17916,6 +18002,7 @@ const _sfc_main$H = /* @__PURE__ */ defineComponent({
               }, {
                 default: withCtx(() => [
                   createVNode(unref(Select), {
+                    disabled: __props.queryMode,
                     "show-search": "",
                     "allow-clear": false,
                     "option-filter-prop": "label",
@@ -17924,7 +18011,7 @@ const _sfc_main$H = /* @__PURE__ */ defineComponent({
                     options: unref(aggFunc),
                     placeholder: "选择聚合方式",
                     onSelect: selectAggFunc
-                  }, null, 8, ["value", "options"])
+                  }, null, 8, ["disabled", "value", "options"])
                 ]),
                 _: 1
               }),
@@ -17936,10 +18023,11 @@ const _sfc_main$H = /* @__PURE__ */ defineComponent({
               }, {
                 default: withCtx(() => [
                   createVNode(_sfc_main$L, {
+                    "query-mode": __props.queryMode,
                     "table-fields": tableFields.value,
                     value: aggregate.field,
                     onChange: fieldChange
-                  }, null, 8, ["table-fields", "value"])
+                  }, null, 8, ["query-mode", "table-fields", "value"])
                 ]),
                 _: 1
               })) : createCommentVNode("", true)
@@ -17954,6 +18042,9 @@ const _sfc_main$H = /* @__PURE__ */ defineComponent({
 });
 const _sfc_main$G = /* @__PURE__ */ defineComponent({
   __name: "GroupModal",
+  props: {
+    queryMode: { type: Boolean, default: false }
+  },
   emits: ["submit", "register"],
   setup(__props, { emit: __emit }) {
     const emit = __emit;
@@ -18023,10 +18114,11 @@ const _sfc_main$G = /* @__PURE__ */ defineComponent({
               }, {
                 default: withCtx(() => [
                   createVNode(_sfc_main$L, {
+                    "query-mode": __props.queryMode,
                     "table-fields": tableFields.value,
                     value: group.field,
                     onChange: fieldChange
-                  }, null, 8, ["table-fields", "value"])
+                  }, null, 8, ["query-mode", "table-fields", "value"])
                 ]),
                 _: 1
               })
@@ -18043,7 +18135,8 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
   __name: "TableAggregate",
   props: {
     sqlQuery: { type: Object },
-    configMitt: { type: Object }
+    configMitt: { type: Object },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["aggregateChange", "groupChange", "deleteAggregate"],
   setup(__props, { emit: __emit }) {
@@ -18160,6 +18253,7 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
       }, [
         ((_a = __props.sqlQuery) == null ? void 0 : _a.aggregates) !== void 0 ? (openBlock(), createBlock(ConfigWrapper, {
           key: 0,
+          "query-mode": __props.queryMode,
           iconfont: "icon-mfish-sum",
           title: "聚合",
           onDeleteConfig: deleteAggregate,
@@ -18168,12 +18262,13 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
         }, {
           config: withCtx(() => [
             createVNode(unref(DraggableInput), {
+              "query-mode": __props.queryMode,
               items: tableAggregates.value,
               "add-title": "添加聚合指标",
               onAddBlock: addAggregate,
               onEditBlock: editAggregate,
               onDragChange: dragAggregate
-            }, null, 8, ["items"]),
+            }, null, 8, ["query-mode", "items"]),
             createVNode(unref(Icon), {
               class: "groupIcon",
               icon: "ant-design:group-outlined",
@@ -18182,28 +18277,31 @@ const _sfc_main$F = /* @__PURE__ */ defineComponent({
             }, null, 8, ["color"]),
             _cache[0] || (_cache[0] = createElementVNode("div", { class: "group" }, "分组", -1)),
             createVNode(unref(DraggableInput), {
+              "query-mode": __props.queryMode,
               items: tableGroups.value,
               "add-title": "添加分组指标",
               onAddBlock: addGroup,
               onEditBlock: editGroup,
               onDragChange: dragGroup
-            }, null, 8, ["items"])
+            }, null, 8, ["query-mode", "items"])
           ]),
           _: 1
-        })) : createCommentVNode("", true),
+        }, 8, ["query-mode"])) : createCommentVNode("", true),
         createVNode(_sfc_main$H, {
+          "query-mode": __props.queryMode,
           onRegister: unref(registerAggModal),
           onSubmit: createAggregate
-        }, null, 8, ["onRegister"]),
+        }, null, 8, ["query-mode", "onRegister"]),
         createVNode(_sfc_main$G, {
+          "query-mode": __props.queryMode,
           onRegister: unref(registerGroupModal),
           onSubmit: createGroup
-        }, null, 8, ["onRegister"])
+        }, null, 8, ["query-mode", "onRegister"])
       ], 2);
     };
   }
 });
-const TableAggregate = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["__scopeId", "data-v-015514d7"]]);
+const TableAggregate = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["__scopeId", "data-v-a3fb541b"]]);
 const otherField = "其他";
 const _sfc_main$E = /* @__PURE__ */ defineComponent({
   __name: "OrderModal",
@@ -18316,7 +18414,8 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
   __name: "TableOrder",
   props: {
     sqlQuery: { type: Object, default: void 0 },
-    configMitt: { type: Object, default: void 0 }
+    configMitt: { type: Object, default: void 0 },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["orderChange"],
   setup(__props, { emit: __emit }) {
@@ -18378,6 +18477,7 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", null, [
         ((_a = __props.sqlQuery) == null ? void 0 : _a.orders) !== void 0 ? (openBlock(), createBlock(ConfigWrapper, {
           key: 0,
+          "query-mode": __props.queryMode,
           icon: "ant-design:sort-ascending-outlined",
           title: "排序",
           onDeleteConfig: deleteOrder,
@@ -18386,6 +18486,7 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
         }, {
           config: withCtx(() => [
             createVNode(unref(DraggableInput), {
+              "query-mode": __props.queryMode,
               items: tableOrders.value,
               "add-title": "添加排序指标",
               onAddBlock: addOrder,
@@ -18399,10 +18500,10 @@ const _sfc_main$D = /* @__PURE__ */ defineComponent({
                 }, null, 8, ["icon"])
               ]),
               _: 1
-            }, 8, ["items"])
+            }, 8, ["query-mode", "items"])
           ]),
           _: 1
-        })) : createCommentVNode("", true),
+        }, 8, ["query-mode"])) : createCommentVNode("", true),
         createVNode(_sfc_main$E, {
           onRegister: unref(registerModal),
           onSubmit: createOrder
@@ -18540,9 +18641,12 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
       () => props.isShow,
       (val) => {
         if (val) {
-          setSelect(props.curKey);
+          setTimeout(() => {
+            setSelect(props.curKey);
+          }, 200);
         }
-      }
+      },
+      { immediate: true }
     );
     function selectTree(node, parentNode) {
       const list = [];
@@ -18768,7 +18872,7 @@ const _sfc_main$B = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FormulaManagement = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-c153f5dd"]]);
+const FormulaManagement = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-6dc5ed8e"]]);
 const _hoisted_1$k = {
   key: 0,
   class: "content"
@@ -18780,7 +18884,8 @@ const _hoisted_2$d = {
 const _sfc_main$A = /* @__PURE__ */ defineComponent({
   __name: "FormulaSelect",
   props: {
-    formulaKey: { type: String, default: "" }
+    formulaKey: { type: String, default: "" },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["formulaChange"],
   setup(__props, { emit: __emit }) {
@@ -18831,6 +18936,7 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
     }
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(Dropdown), {
+        disabled: __props.queryMode,
         trigger: ["click"],
         open: isShow.value,
         onOpenChange: visibleChange,
@@ -18903,11 +19009,11 @@ const _sfc_main$A = /* @__PURE__ */ defineComponent({
           }, 8, ["class"])
         ]),
         _: 1
-      }, 8, ["open"]);
+      }, 8, ["disabled", "open"]);
     };
   }
 });
-const FormulaSelect = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__scopeId", "data-v-8a326608"]]);
+const FormulaSelect = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__scopeId", "data-v-4015d717"]]);
 const DisplayName = "displayName";
 const formulaProps = {
   config: {
@@ -18935,7 +19041,8 @@ const formulaProps = {
   },
   sqlQuery: { type: Object },
   // 组件索引，如果是可变参数需要设置该属性
-  index: { type: Number, default: 0 }
+  index: { type: Number, default: 0 },
+  queryMode: { type: Boolean, default: false }
 };
 const buildFormula = (formula) => {
   if (!formula) return { type: ExpressionType.formula, value: null };
@@ -19070,6 +19177,7 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
       }, [
         props.showRadio ? (openBlock(), createBlock(unref(ARadioGroup), {
           key: 0,
+          disabled: props.queryMode,
           class: "radio-group",
           value: formulaType.value,
           "onUpdate:value": _cache[0] || (_cache[0] = ($event) => formulaType.value = $event),
@@ -19128,49 +19236,54 @@ const _sfc_main$z = /* @__PURE__ */ defineComponent({
             }, 8, ["value"])
           ]),
           _: 1
-        }, 8, ["value"])) : createCommentVNode("", true),
+        }, 8, ["disabled", "value"])) : createCommentVNode("", true),
         createElementVNode("div", {
           class: normalizeClass(props.showRadio ? "formula-select" : "formula-select-show")
         }, [
           formulaType.value === unref(ExpressionType).param && cType.value === "string" ? (openBlock(), createBlock(unref(Input), {
             key: 0,
+            disabled: props.queryMode,
             value: inputValue.value,
             "onUpdate:value": _cache[1] || (_cache[1] = ($event) => inputValue.value = $event),
             class: "input-com",
             placeholder: "请输入字符常量",
             onChange: inputChange
-          }, null, 8, ["value"])) : formulaType.value === unref(ExpressionType).param && cType.value === "number" ? (openBlock(), createBlock(unref(InputNumber), {
+          }, null, 8, ["disabled", "value"])) : formulaType.value === unref(ExpressionType).param && cType.value === "number" ? (openBlock(), createBlock(unref(InputNumber), {
             key: 1,
+            disabled: props.queryMode,
             value: inputValue.value,
             "onUpdate:value": _cache[2] || (_cache[2] = ($event) => inputValue.value = $event),
             class: "input-com",
             placeholder: "请输入数字常量",
             onChange: inputChange
-          }, null, 8, ["value"])) : formulaType.value === unref(ExpressionType).param && cType.value === "list" && isField.value ? (openBlock(), createBlock(_sfc_main$L, {
+          }, null, 8, ["disabled", "value"])) : formulaType.value === unref(ExpressionType).param && cType.value === "list" && isField.value ? (openBlock(), createBlock(_sfc_main$L, {
             key: 2,
+            "query-mode": props.queryMode,
             class: "select-com",
             "table-fields": tableFields.value,
             value: fieldRef.value,
             onChange: fieldChange
-          }, null, 8, ["table-fields", "value"])) : formulaType.value === unref(ExpressionType).param && cType.value === "list" && !isField.value ? (openBlock(), createBlock(unref(Select), {
+          }, null, 8, ["query-mode", "table-fields", "value"])) : formulaType.value === unref(ExpressionType).param && cType.value === "list" && !isField.value ? (openBlock(), createBlock(unref(Select), {
             key: 3,
+            disabled: props.queryMode,
             class: "select-com",
             value: selectValue.value,
             "onUpdate:value": _cache[3] || (_cache[3] = ($event) => selectValue.value = $event),
             options: listValue.value,
             placeholder: "请选择参数",
             onSelect: selectChange
-          }, null, 8, ["value", "options"])) : (openBlock(), createBlock(FormulaSelect, {
+          }, null, 8, ["disabled", "value", "options"])) : (openBlock(), createBlock(FormulaSelect, {
             key: 4,
+            "query-mode": props.queryMode,
             "formula-key": formulaKey.value,
             onFormulaChange: formulaChange
-          }, null, 8, ["formula-key"]))
+          }, null, 8, ["query-mode", "formula-key"]))
         ], 2)
       ], 2);
     };
   }
 });
-const FormulaCompact = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__scopeId", "data-v-6be925b3"]]);
+const FormulaCompact = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["__scopeId", "data-v-8048866c"]]);
 const _hoisted_1$j = { style: { "margin-top": "6px", "display": "flex", "justify-content": "flex-end" } };
 const _sfc_main$y = /* @__PURE__ */ defineComponent({
   __name: "FormulaAround",
@@ -19426,6 +19539,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
       }, [
         createElementVNode("div", _hoisted_1$i, [
           createVNode(FormulaCompact, {
+            "query-mode": props.queryMode,
             class: "main",
             index: props.index,
             "com-type": props.comType,
@@ -19437,8 +19551,8 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
             onInputChange: inputChange,
             onFormulaSelect: formulaSelect,
             onTypeChange: typeChange
-          }, null, 8, ["index", "com-type", "param-type", "param-value", "config", "sql-query", "show-radio"]),
-          ((_a = formulaConfig.value) == null ? void 0 : _a.type) === unref(ExpressionType).formula ? (openBlock(), createBlock(_sfc_main$y, {
+          }, null, 8, ["query-mode", "index", "com-type", "param-type", "param-value", "config", "sql-query", "show-radio"]),
+          ((_a = formulaConfig.value) == null ? void 0 : _a.type) === unref(ExpressionType).formula && !props.queryMode ? (openBlock(), createBlock(_sfc_main$y, {
             key: 0,
             onSubmit: handleAround
           })) : createCommentVNode("", true)
@@ -19469,6 +19583,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
                   }, 1032, ["title"])
                 ]),
                 createVNode(_component_FormulaConfig, {
+                  "query-mode": props.queryMode,
                   index: childIndex,
                   "com-type": item.comType,
                   "param-type": item.paramType,
@@ -19476,7 +19591,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
                   config: isListParam(item.paramType) && ((_b = (_a2 = formulaConfig.value) == null ? void 0 : _a2.value) == null ? void 0 : _b.param) && ((_e = (_d = (_c = formulaConfig.value) == null ? void 0 : _c.value) == null ? void 0 : _d.param[index2]) == null ? void 0 : _e.value) ? (_h = (_g = (_f = formulaConfig.value) == null ? void 0 : _f.value) == null ? void 0 : _g.param[index2]) == null ? void 0 : _h.value[childIndex] : (_j = (_i = formulaConfig.value) == null ? void 0 : _i.value) == null ? void 0 : _j.param[index2],
                   "sql-query": props.sqlQuery,
                   onFormulaChange: ($event) => setPramValue($event, index2, item.paramType, childIndex)
-                }, null, 8, ["index", "com-type", "param-type", "param-value", "config", "sql-query", "onFormulaChange"]),
+                }, null, 8, ["query-mode", "index", "com-type", "param-type", "param-value", "config", "sql-query", "onFormulaChange"]),
                 childIndex > 0 ? (openBlock(), createBlock(unref(Button), {
                   key: 0,
                   size: "small",
@@ -19507,7 +19622,7 @@ const _sfc_main$x = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FormulaConfig = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__scopeId", "data-v-1728fc4d"]]);
+const FormulaConfig = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__scopeId", "data-v-0526f220"]]);
 const _sfc_main$w = /* @__PURE__ */ defineComponent({
   __name: "ParamsModal",
   emits: ["register", "submit"],
@@ -19515,7 +19630,7 @@ const _sfc_main$w = /* @__PURE__ */ defineComponent({
     const emit = __emit;
     const [registerForm, { resetFields, setFieldsValue, validate, resetSchema }] = useForm({
       name: "model_form_item",
-      labelWidth: 100,
+      labelWidth: 180,
       baseColProps: { span: 24 },
       showActionButtonGroup: false,
       autoSubmitOnEnter: true
@@ -19666,6 +19781,9 @@ const _sfc_main$v = /* @__PURE__ */ defineComponent({
 });
 const _sfc_main$u = /* @__PURE__ */ defineComponent({
   __name: "FormulaColModal",
+  props: {
+    queryMode: { type: Boolean, default: false }
+  },
   emits: ["submit", "register"],
   setup(__props, { emit: __emit }) {
     const emit = __emit;
@@ -19794,12 +19912,13 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
               _: 1
             }, 8, ["message"])) : createCommentVNode("", true),
             (openBlock(), createBlock(FormulaConfig, {
+              "query-mode": __props.queryMode,
               key: key.value,
               "sql-query": unref(sqlQuery),
               "show-radio": false,
               config: formulaConfig,
               onFormulaChange: formulaChange
-            }, null, 8, ["sql-query", "config"])),
+            }, null, 8, ["query-mode", "sql-query", "config"])),
             createVNode(_sfc_main$v, {
               "cur-query": curQuery.value,
               "cur-params": curParams.value,
@@ -19817,25 +19936,16 @@ const _sfc_main$u = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_main$t = {
-  name: "CustomColModal",
-  components: {
-    ParamsModal: _sfc_main$w,
-    FormulaTest: _sfc_main$v,
-    FormulaColModal: _sfc_main$u,
-    FieldColModal: _sfc_main$C,
-    IconFont,
-    DraggableInput,
-    BasicModal,
-    BasicForm,
-    ATag: Tag,
-    ATooltip: Tooltip
-  },
+const _sfc_main$t = /* @__PURE__ */ defineComponent({
+  __name: "CustomColModal",
   props: {
-    sqlQuery: { type: Object }
+    sqlQuery: { type: Object },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["submit", "register"],
-  setup(props, { emit }) {
+  setup(__props, { emit: __emit }) {
+    const props = __props;
+    const emit = __emit;
     const isUpdate = ref(true);
     const color2 = useRootSetting().getThemeColor;
     const { prefixCls } = useDesign("col-modal");
@@ -19904,6 +20014,9 @@ const _sfc_main$t = {
         field: "name",
         label: "名称",
         component: "Input",
+        componentProps: {
+          disabled: props.queryMode
+        },
         required: true
       }
     ];
@@ -20049,147 +20162,120 @@ const _sfc_main$t = {
       curParams.value = data;
       open.value = true;
     }
-    return {
-      prefixCls,
-      registerModal,
-      registerForm,
-      handleSubmit,
-      expressions,
-      dragItems,
-      dragValues,
-      color: color2,
-      blockBuild,
-      dragButton,
-      addField,
-      editField,
-      registerFieldModal,
-      registerFormulaModal,
-      fieldCreate,
-      formulaCreate,
-      headerBarClick,
-      testFormula,
-      registerParamsModal,
-      paramQuery,
-      curQuery,
-      curParams,
-      open
-    };
-  }
-};
-function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_IconFont = resolveComponent("IconFont");
-  const _component_ATag = resolveComponent("ATag");
-  const _component_ATooltip = resolveComponent("ATooltip");
-  const _component_DraggableInput = resolveComponent("DraggableInput");
-  const _component_BasicForm = resolveComponent("BasicForm");
-  const _component_FieldColModal = resolveComponent("FieldColModal");
-  const _component_FormulaColModal = resolveComponent("FormulaColModal");
-  const _component_AButton = resolveComponent("AButton");
-  const _component_FormulaTest = resolveComponent("FormulaTest");
-  const _component_BasicModal = resolveComponent("BasicModal");
-  const _component_ParamsModal = resolveComponent("ParamsModal");
-  return openBlock(), createElementBlock(Fragment, null, [
-    createVNode(_component_BasicModal, mergeProps(_ctx.$attrs, {
-      onRegister: $setup.registerModal,
-      title: "自定义列配置",
-      onOk: $setup.handleSubmit
-    }), {
-      centerFooter: withCtx(() => [
-        createVNode(_component_AButton, {
-          onClick: $setup.testFormula,
-          type: "primary",
-          danger: ""
-        }, {
-          default: withCtx(() => _cache[1] || (_cache[1] = [
-            createTextVNode("测试")
-          ])),
-          _: 1
-        }, 8, ["onClick"])
-      ]),
-      default: withCtx(() => [
-        createVNode(_component_BasicForm, {
-          onRegister: $setup.registerForm,
-          onSubmit: $setup.handleSubmit
-        }, {
-          customCol: withCtx(() => [
-            createVNode(_component_DraggableInput, {
-              "add-title": "添加字段",
-              items: $setup.expressions,
-              onBlockBuild: $setup.blockBuild,
-              onAddBlock: $setup.addField,
-              onEditBlock: $setup.editField
+    return (_ctx, _cache) => {
+      const _component_AButton = resolveComponent("AButton");
+      return openBlock(), createElementBlock(Fragment, null, [
+        createVNode(unref(BasicModal), mergeProps(_ctx.$attrs, {
+          onRegister: unref(registerModal),
+          title: "自定义列配置",
+          onOk: handleSubmit
+        }), {
+          centerFooter: withCtx(() => [
+            createVNode(_component_AButton, {
+              onClick: testFormula,
+              type: "primary",
+              danger: ""
             }, {
-              headerBar: withCtx(({ headerCallBack }) => [
-                (openBlock(true), createElementBlock(Fragment, null, renderList($setup.dragItems, (item, index2) => {
-                  return openBlock(), createBlock(_component_ATooltip, {
-                    key: index2,
-                    title: item.name
-                  }, {
-                    default: withCtx(() => [
-                      createVNode(_component_ATag, {
-                        style: { "cursor": "pointer" },
-                        color: item.color,
-                        draggable: "true",
-                        onClick: ($event) => $setup.headerBarClick(headerCallBack, $setup.dragValues[item.key]),
-                        onDragstart: ($event) => $setup.dragButton($event, item)
-                      }, {
-                        icon: withCtx(() => [
-                          createVNode(_component_IconFont, {
-                            icon: item.icon
-                          }, null, 8, ["icon"])
-                        ]),
-                        _: 2
-                      }, 1032, ["color", "onClick", "onDragstart"])
-                    ]),
-                    _: 2
-                  }, 1032, ["title"]);
-                }), 128))
-              ]),
-              tag: withCtx(({ element }) => [
-                createElementVNode("div", {
-                  class: normalizeClass(`${$setup.prefixCls}-slot-tag`)
+              default: withCtx(() => _cache[1] || (_cache[1] = [
+                createTextVNode("测试")
+              ])),
+              _: 1
+            })
+          ]),
+          default: withCtx(() => [
+            createVNode(unref(BasicForm), {
+              onRegister: unref(registerForm),
+              onSubmit: handleSubmit
+            }, {
+              customCol: withCtx(() => [
+                createVNode(unref(DraggableInput), {
+                  "query-mode": __props.queryMode,
+                  "add-title": "添加字段",
+                  items: expressions.value,
+                  onBlockBuild: blockBuild,
+                  onAddBlock: addField,
+                  onEditBlock: editField
+                }, createSlots({
+                  tag: withCtx(({ element }) => [
+                    createElementVNode("div", {
+                      class: normalizeClass(`${unref(prefixCls)}-slot-tag`)
+                    }, [
+                      createVNode(unref(IconFont), {
+                        icon: dragItems[element.name].icon,
+                        color: unref(color2)
+                      }, null, 8, ["icon", "color"])
+                    ], 2)
+                  ]),
+                  _: 2
                 }, [
-                  createVNode(_component_IconFont, {
-                    icon: $setup.dragItems[element.name].icon,
-                    color: $setup.color
-                  }, null, 8, ["icon", "color"])
-                ], 2)
+                  !__props.queryMode ? {
+                    name: "headerBar",
+                    fn: withCtx(({ headerCallBack }) => [
+                      (openBlock(true), createElementBlock(Fragment, null, renderList(dragItems, (item, index22) => {
+                        return openBlock(), createBlock(unref(Tooltip), {
+                          key: index22,
+                          title: item.name
+                        }, {
+                          default: withCtx(() => [
+                            createVNode(unref(Tag), {
+                              style: { "cursor": "pointer" },
+                              color: item.color,
+                              draggable: "true",
+                              onClick: ($event) => headerBarClick(headerCallBack, dragValues[item.key]),
+                              onDragstart: ($event) => dragButton($event, item)
+                            }, {
+                              icon: withCtx(() => [
+                                createVNode(unref(IconFont), {
+                                  icon: item.icon
+                                }, null, 8, ["icon"])
+                              ]),
+                              _: 2
+                            }, 1032, ["color", "onClick", "onDragstart"])
+                          ]),
+                          _: 2
+                        }, 1032, ["title"]);
+                      }), 128))
+                    ]),
+                    key: "0"
+                  } : void 0
+                ]), 1032, ["query-mode", "items"])
               ]),
               _: 1
-            }, 8, ["items", "onBlockBuild", "onAddBlock", "onEditBlock"])
+            }, 8, ["onRegister"]),
+            createVNode(_sfc_main$C, {
+              onRegister: unref(registerFieldModal),
+              onSubmit: fieldCreate
+            }, null, 8, ["onRegister"]),
+            createVNode(_sfc_main$u, {
+              "query-mode": __props.queryMode,
+              onRegister: unref(registerFormulaModal),
+              onSubmit: formulaCreate
+            }, null, 8, ["query-mode", "onRegister"]),
+            createVNode(_sfc_main$v, {
+              "cur-query": curQuery.value,
+              "cur-params": curParams.value,
+              open: open.value,
+              onClose: _cache[0] || (_cache[0] = () => open.value = false)
+            }, null, 8, ["cur-query", "cur-params", "open"])
           ]),
           _: 1
-        }, 8, ["onRegister", "onSubmit"]),
-        createVNode(_component_FieldColModal, {
-          onRegister: $setup.registerFieldModal,
-          onSubmit: $setup.fieldCreate
-        }, null, 8, ["onRegister", "onSubmit"]),
-        createVNode(_component_FormulaColModal, {
-          onRegister: $setup.registerFormulaModal,
-          onSubmit: $setup.formulaCreate
-        }, null, 8, ["onRegister", "onSubmit"]),
-        createVNode(_component_FormulaTest, {
-          "cur-query": $setup.curQuery,
-          "cur-params": $setup.curParams,
-          open: $setup.open,
-          onClose: _cache[0] || (_cache[0] = () => $setup.open = false)
-        }, null, 8, ["cur-query", "cur-params", "open"])
-      ]),
-      _: 1
-    }, 16, ["onRegister", "onOk"]),
-    createVNode(_component_ParamsModal, {
-      onRegister: $setup.registerParamsModal,
-      onSubmit: $setup.paramQuery
-    }, null, 8, ["onRegister", "onSubmit"])
-  ], 64);
-}
-const CustomColModal = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render], ["__scopeId", "data-v-96c57642"]]);
+        }, 16, ["onRegister"]),
+        createVNode(_sfc_main$w, {
+          onRegister: unref(registerParamsModal),
+          onSubmit: paramQuery
+        }, null, 8, ["onRegister"])
+      ], 64);
+    };
+  }
+});
+const CustomColModal = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["__scopeId", "data-v-df8a88df"]]);
 const _sfc_main$s = /* @__PURE__ */ defineComponent({
   __name: "TableCustomCol",
   props: {
     sqlQuery: { type: Object },
     level: { type: Number, default: 1 },
-    configMitt: { type: Object }
+    configMitt: { type: Object },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["customColChange"],
   setup(__props, { emit: __emit }) {
@@ -20202,7 +20288,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
     const [registerModal, { openModal }] = useModal();
     const showCustomColButton = computed(() => {
       var _a;
-      return ((_a = props.sqlQuery) == null ? void 0 : _a.customColumns) === void 0 && isNeedNest(props.sqlQuery, props.level);
+      return ((_a = props.sqlQuery) == null ? void 0 : _a.customColumns) === void 0 && isNeedNest(props.sqlQuery, props.level) && !props.queryMode;
     });
     watch(
       () => {
@@ -20267,6 +20353,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", null, [
         ((_a = __props.sqlQuery) == null ? void 0 : _a.customColumns) !== void 0 ? (openBlock(), createBlock(ConfigWrapper, {
           key: 0,
+          "query-mode": __props.queryMode,
           icon: "ant-design:insert-row-right-outlined",
           title: "自定义列",
           onDeleteConfig: deleteColumn,
@@ -20275,15 +20362,16 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
         }, {
           config: withCtx(() => [
             createVNode(unref(DraggableInput), {
+              "query-mode": __props.queryMode,
               items: customColumns.value,
               "add-title": "添加自定义列",
               onAddBlock: addColumn,
               onEditBlock: editColumn,
               onDragChange: dragColumn
-            }, null, 8, ["items"])
+            }, null, 8, ["query-mode", "items"])
           ]),
           _: 1
-        })) : createCommentVNode("", true),
+        }, 8, ["query-mode"])) : createCommentVNode("", true),
         showCustomColButton.value ? (openBlock(), createBlock(ConfigButton, {
           key: 1,
           class: "config-button",
@@ -20293,10 +20381,11 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
           onClick: withModifiers(addCustomCols, ["prevent"])
         })) : createCommentVNode("", true),
         createVNode(CustomColModal, {
+          "query-mode": __props.queryMode,
           onRegister: unref(registerModal),
           "sql-query": __props.sqlQuery,
           onSubmit: createCustomCol
-        }, null, 8, ["onRegister", "sql-query"])
+        }, null, 8, ["query-mode", "onRegister", "sql-query"])
       ]);
     };
   }
@@ -20309,7 +20398,8 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     configKey: { type: Number, default: 0, require: true },
     sqlQuery: { type: Object, require: true, default: void 0 },
     level: { type: Number, default: 1 },
-    configMitt: { type: Object, default: void 0 }
+    configMitt: { type: Object, default: void 0 },
+    queryMode: { type: Boolean, default: false }
   },
   emits: ["configChange"],
   setup(__props, { emit: __emit }) {
@@ -20326,7 +20416,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     const queryEnter = ref(false);
     const showJoinButton = computed(() => {
       var _a;
-      if (apiStore.getSourceType === 1) {
+      if (apiStore.getSourceType === 1 || props.queryMode) {
         return false;
       }
       if (props.sqlQuery && ((_a = props.sqlQuery) == null ? void 0 : _a.joins)) {
@@ -20338,23 +20428,23 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     });
     const showFilterButton = computed(() => {
       var _a;
-      return ((_a = props.sqlQuery) == null ? void 0 : _a.filters) === void 0 || isNeedNest(props.sqlQuery, props.level);
+      return (((_a = props.sqlQuery) == null ? void 0 : _a.filters) === void 0 || isNeedNest(props.sqlQuery, props.level)) && !props.queryMode;
     });
     const showCustomColButton = computed(() => {
       var _a;
-      return ((_a = props.sqlQuery) == null ? void 0 : _a.customColumns) === void 0 || isNeedNest(props.sqlQuery, props.level);
+      return (((_a = props.sqlQuery) == null ? void 0 : _a.customColumns) === void 0 || isNeedNest(props.sqlQuery, props.level)) && !props.queryMode;
     });
     const showAggButton = computed(() => {
       var _a;
-      return ((_a = props.sqlQuery) == null ? void 0 : _a.aggregates) === void 0 || isNeedNest(props.sqlQuery, props.level);
+      return (((_a = props.sqlQuery) == null ? void 0 : _a.aggregates) === void 0 || isNeedNest(props.sqlQuery, props.level)) && !props.queryMode;
     });
     const showOrderButton = computed(() => {
       var _a;
-      return ((_a = props.sqlQuery) == null ? void 0 : _a.orders) === void 0;
+      return ((_a = props.sqlQuery) == null ? void 0 : _a.orders) === void 0 && !props.queryMode;
     });
     const showLimitButton = computed(() => {
       var _a;
-      return ((_a = props.sqlQuery) == null ? void 0 : _a.limit) === void 0;
+      return ((_a = props.sqlQuery) == null ? void 0 : _a.limit) === void 0 && !props.queryMode;
     });
     function fieldChange(fields) {
       emit("configChange", { ...props.sqlQuery, fields });
@@ -20510,43 +20600,49 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
         ((_a = unref(sqlQuery)) == null ? void 0 : _a.sqlQuery) !== void 0 ? (openBlock(), createBlock(_component_ApiConfig, {
           key: 1,
           "config-key": __props.configKey,
+          "query-mode": __props.queryMode,
           "sql-query": unref(sqlQuery).sqlQuery,
           level: __props.level - 1,
           "config-mitt": __props.configMitt,
           onConfigChange: configChange
-        }, null, 8, ["config-key", "sql-query", "level", "config-mitt"])) : createCommentVNode("", true),
+        }, null, 8, ["config-key", "query-mode", "sql-query", "level", "config-mitt"])) : createCommentVNode("", true),
         (openBlock(), createBlock(TableFields, {
           key: __props.configKey + unref(apiStore).getFieldsChange,
           class: "config",
           "sql-query": unref(sqlQuery),
+          "query-mode": __props.queryMode,
           "config-mitt": __props.configMitt,
           onFieldChange: fieldChange
-        }, null, 8, ["sql-query", "config-mitt"])),
+        }, null, 8, ["sql-query", "query-mode", "config-mitt"])),
         (openBlock(), createBlock(TableJoins, {
           level: __props.level,
           key: __props.configKey,
           class: "config",
           "sql-query": unref(sqlQuery),
           "config-mitt": __props.configMitt,
+          "query-mode": __props.queryMode,
           onJoinChange: joinChange
-        }, null, 8, ["level", "sql-query", "config-mitt"])),
+        }, null, 8, ["level", "sql-query", "config-mitt", "query-mode"])),
         (openBlock(), createBlock(_sfc_main$I, {
+          "query-mode": __props.queryMode,
           level: __props.level,
           key: __props.configKey,
           class: "config",
           "sql-query": unref(sqlQuery),
           "config-mitt": __props.configMitt,
           onFilterChange: filterChange
-        }, null, 8, ["level", "sql-query", "config-mitt"])),
+        }, null, 8, ["query-mode", "level", "sql-query", "config-mitt"])),
         (openBlock(), createBlock(_sfc_main$s, {
+          "query-mode": __props.queryMode,
           level: __props.level,
           key: __props.configKey,
           class: "config",
           "sql-query": unref(sqlQuery),
           "config-mitt": __props.configMitt,
           onCustomColChange: customColChange
-        }, null, 8, ["level", "sql-query", "config-mitt"])),
+        }, null, 8, ["query-mode", "level", "sql-query", "config-mitt"])),
         (openBlock(), createBlock(TableAggregate, {
+          "query-mode": __props.queryMode,
           key: __props.configKey,
           class: "config",
           "sql-query": unref(sqlQuery),
@@ -20554,21 +20650,23 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
           onAggregateChange: aggregateChange,
           onGroupChange: groupChange,
           onDeleteAggregate: deleteAggregate
-        }, null, 8, ["sql-query", "config-mitt"])),
+        }, null, 8, ["query-mode", "sql-query", "config-mitt"])),
         (openBlock(), createBlock(_sfc_main$D, {
+          "query-mode": __props.queryMode,
           key: __props.configKey,
           class: "config",
           "sql-query": unref(sqlQuery),
           "config-mitt": __props.configMitt,
           onOrderChange: orderChange
-        }, null, 8, ["sql-query", "config-mitt"])),
+        }, null, 8, ["query-mode", "sql-query", "config-mitt"])),
         (openBlock(), createBlock(_sfc_main$O, {
+          "query-mode": __props.queryMode,
           key: __props.configKey,
           class: "config",
           "sql-query": unref(sqlQuery),
           "config-mitt": __props.configMitt,
           onLimitChange: limitChange
-        }, null, 8, ["sql-query", "config-mitt"])),
+        }, null, 8, ["query-mode", "sql-query", "config-mitt"])),
         createElementVNode("div", _hoisted_1$h, [
           showJoinButton.value ? (openBlock(), createBlock(ConfigButton, {
             key: 0,
@@ -20645,7 +20743,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const ApiConfig = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__scopeId", "data-v-2e1e444e"]]);
+const ApiConfig = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__scopeId", "data-v-32695b70"]]);
 const _hoisted_1$g = { key: 0 };
 const _hoisted_2$b = { key: 1 };
 const _sfc_main$q = /* @__PURE__ */ defineComponent({
@@ -24659,7 +24757,7 @@ export {
   index$3 as ay,
   index$2 as az,
   ComponentsEnum as b,
-  useApiStore as b$,
+  buildSql as b$,
   getFormulaInfoList as b0,
   getFormulaInfoById as b1,
   exportFormulaInfo as b2,
@@ -24680,23 +24778,23 @@ export {
   updateScreenResourceApi as bH,
   deleteScreenResourceApi as bI,
   getDataTableByResourceId as bJ,
-  getMfApiByResourceId as bK,
-  getScreenLayers as bL,
-  getScreenResourceList as bM,
-  getScreenResourceBySourceId as bN,
-  insertScreenResource as bO,
-  updateScreenResource as bP,
-  deleteScreenResource as bQ,
-  getLayersBySourceId as bR,
-  useApiShortcut as bS,
-  formulaColName as bT,
-  ApiConfigEvent as bU,
-  getInnerFields as bV,
-  containNest as bW,
-  isNeedNest as bX,
-  queryDataEvent as bY,
-  getParams as bZ,
-  buildSql as b_,
+  getTablesByResourceId as bK,
+  getMfApiByResourceId as bL,
+  getScreenLayers as bM,
+  getScreenResourceList as bN,
+  getScreenResourceBySourceId as bO,
+  insertScreenResource as bP,
+  updateScreenResource as bQ,
+  deleteScreenResource as bR,
+  getLayersBySourceId as bS,
+  useApiShortcut as bT,
+  formulaColName as bU,
+  ApiConfigEvent as bV,
+  getInnerFields as bW,
+  containNest as bX,
+  isNeedNest as bY,
+  queryDataEvent as bZ,
+  getParams as b_,
   insertMfApi as ba,
   updateMfApi as bb,
   deleteMfApi as bc,
@@ -24724,35 +24822,36 @@ export {
   getScreenFolderAndFile as by,
   exportScreenFolder as bz,
   getScreenFolderTree as c,
-  useScreenLayoutStore as c0,
-  useScreenShortcutStore as c1,
-  getCanvasStyle as c2,
-  createChart as c3,
-  pasteChart as c4,
-  buildName as c5,
-  chartInit as c6,
-  getComponentStyle as c7,
-  getChartStyle as c8,
-  getComponentRotatedStyle as c9,
-  initScreen as ca,
-  preSaveScreen as cb,
-  clearChartResource as cc,
-  MENU_CHART_DRAG as cd,
-  FrameShow as ce,
-  FitType as cf,
-  StyleEnum as cg,
-  comOption as ch,
-  chartContain as ci,
-  createGroupStyle as cj,
-  decomposeComponent as ck,
-  getAreaComponents as cl,
-  selectComponents as cm,
-  addSelectComponent as cn,
-  ALIGN_MENU_TYPE as co,
-  useAlign as cp,
-  comConfigDisplay as cq,
-  buildHeaders as cr,
-  useScreenShortcut as cs,
+  useApiStore as c0,
+  useScreenLayoutStore as c1,
+  useScreenShortcutStore as c2,
+  getCanvasStyle as c3,
+  createChart as c4,
+  pasteChart as c5,
+  buildName as c6,
+  chartInit as c7,
+  getComponentStyle as c8,
+  getChartStyle as c9,
+  getComponentRotatedStyle as ca,
+  initScreen as cb,
+  preSaveScreen as cc,
+  clearChartResource as cd,
+  MENU_CHART_DRAG as ce,
+  FrameShow as cf,
+  FitType as cg,
+  StyleEnum as ch,
+  comOption as ci,
+  chartContain as cj,
+  createGroupStyle as ck,
+  decomposeComponent as cl,
+  getAreaComponents as cm,
+  selectComponents as cn,
+  addSelectComponent as co,
+  ALIGN_MENU_TYPE as cp,
+  useAlign as cq,
+  comConfigDisplay as cr,
+  buildHeaders as cs,
+  useScreenShortcut as ct,
   getMfScreenList as d,
   PageType as e,
   ScreenInput as f,

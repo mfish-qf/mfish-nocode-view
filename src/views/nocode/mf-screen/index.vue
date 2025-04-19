@@ -8,7 +8,7 @@
   <NLayout
     :class="prefixCls"
     :native-scrollbar="false"
-    :position="'absolute'"
+    position="absolute"
     @dragover.prevent
     @mousedown="hideShortcutMenu"
   >

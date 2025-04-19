@@ -17,8 +17,9 @@
                 :level="apiStore.getLevel"
                 @config-change="configChange"
                 :config-mitt="configMitt"
+                :query-mode="queryMode"
               />
-              <ASpin style="display: flex; justify-content: center" :spinning="loading" size="middle" />
+              <ASpin style="display: flex; justify-content: center" :spinning="loading" />
             </div>
           </ScrollContainer>
         </div>
@@ -44,7 +45,7 @@
     </div>
     <SqlQueryModal @register="registerQueryModal" />
     <ParamsModal @register="registerParamsModal" @submit="paramQuery" />
-    <MfApiModal @register="registerMfApiModal" @success="saveSuccess" />
+    <MfApiModal v-if="!queryMode" @register="registerMfApiModal" @success="saveSuccess" />
   </div>
 </template>
 <script setup lang="ts">
@@ -64,6 +65,7 @@
     getParams,
     getQueryData,
     getSourceHeaders,
+    getTablesByResourceId,
     Join,
     listenGlobalKeyboard,
     MfApi,
@@ -85,6 +87,7 @@
   import { router } from "@mfish/core/router";
   import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
   import { Spin as ASpin } from "ant-design-vue";
+  import { getTableList, PageResult, TableInfo } from "@mfish/core/api";
 
   const configKey = ref(1);
   const { query } = useRoute();
@@ -120,7 +123,6 @@
   };
   const themeColor = useRootSetting().getThemeColor;
   const configMitt = mitt();
-
   const [
     registerDataTable,
     { setColumns, setTableData: setDataTable, setPagination, setLoading: tableLoading, redoHeight, setProps }
@@ -166,18 +168,27 @@
       });
   }, 200);
   const showData = computed(() => apiStore.getShowData);
+  const isUpdate = ref<boolean>(false);
+  const { createMessage } = useMessage();
+  const undoRedoManager = new UndoRedoManager(100);
+  const screenId = ref<string>();
+  const queryMode = computed(() => {
+    return !!screenId.value;
+  });
   const barActions = ref<HeaderBarAction[]>([
     {
       icon: "ant-design:undo-outlined",
       label: "撤回",
       click: undoClick,
-      tooltip: "撤回 (CTRL+Z)"
+      tooltip: "撤回 (CTRL+Z)",
+      disabled: queryMode
     },
     {
       icon: "ant-design:redo-outlined",
       label: "重做",
       click: redoClick,
-      tooltip: "重做 (CTRL+SHIFT+Z)"
+      tooltip: "重做 (CTRL+SHIFT+Z)",
+      disabled: queryMode
     },
     {
       showDivider: true,
@@ -185,15 +196,10 @@
       label: "保存",
       click: saveClick,
       tooltip: "保存 (CTRL+S)",
-      disabled: computed(() => {
-        return !!screenId.value;
-      })
+      disabled: queryMode
     }
   ]);
-  const isUpdate = ref<boolean>(false);
-  const { createMessage } = useMessage();
-  const undoRedoManager = new UndoRedoManager(100);
-  const screenId = ref<string>();
+
   onBeforeMount(async () => {
     setSplitValue().then();
     const configId = query.configId as string;
@@ -203,7 +209,17 @@
         apiStore.setSourceId(mfApi.sourceId || "");
         apiStore.setSourceType(mfApi.sourceType || 0);
         if (mfApi.sourceType === 0) {
-          await apiStore.setTableList(apiStore.getSourceId);
+          let pageTable: PageResult<TableInfo>;
+          if (screenId.value) {
+            pageTable = await getTablesByResourceId(`${screenId.value},${configId}`);
+          } else {
+            pageTable = await getTableList({
+              connectId: apiStore.getSourceId,
+              pageNum: 1,
+              pageSize: 10_000
+            });
+          }
+          apiStore.setTableList(pageTable);
         }
         const sqlQuery: SqlQuery = mfApi.config
           ? JSON.parse(mfApi.config)
