@@ -1,10 +1,10 @@
 import { defineComponent, ref, watch, createElementBlock, openBlock, normalizeClass, unref, createElementVNode, createVNode, toDisplayString } from "vue";
 import "ant-design-vue";
 import { useDesign } from "@mfish/core/hooks";
+import { u as useScreenEditStore, T as TextStyle, _ as _export_sfc } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
-import { u as useScreenEditStore, T as TextStyle, _ as _export_sfc } from "./index.js";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
 const _hoisted_1 = { class: "title" };

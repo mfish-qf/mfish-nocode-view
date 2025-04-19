@@ -1,4 +1,4 @@
-import { defineComponent, createBlock, openBlock } from "vue";
+import { defineComponent, createBlock, openBlock, withCtx, renderSlot } from "vue";
 import MfBarLineDataConfig from "./MfBarLineDataConfig.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "MfScatterDataConfig",
@@ -7,6 +7,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return openBlock(), createBlock(MfBarLineDataConfig, {
         "x-title": "X轴 / 值",
         "y-max-count": 1
+      }, {
+        "data-select": withCtx(() => [
+          renderSlot(_ctx.$slots, "data-select")
+        ]),
+        _: 3
       });
     };
   }

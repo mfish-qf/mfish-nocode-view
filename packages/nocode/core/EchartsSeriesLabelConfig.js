@@ -2,10 +2,10 @@ import { defineComponent, ref, watch, createElementBlock, openBlock, normalizeCl
 import { C as ConfigGroup } from "./ConfigGroup.js";
 import { Select } from "ant-design-vue";
 import { useDesign } from "@mfish/core/hooks";
+import { u as useScreenEditStore, T as TextStyle, am as TextFont, _ as _export_sfc } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
-import { u as useScreenEditStore, T as TextStyle, am as TextFont, _ as _export_sfc } from "./index.js";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
 const _hoisted_1 = { class: "title" };

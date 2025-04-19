@@ -6,10 +6,10 @@ import { u as useEchartsSeriesConfig, E as EchartsTooltipConfig } from "./UseEch
 import { C as ConfigGroup } from "./ConfigGroup.js";
 import { useDesign, useMessage } from "@mfish/core/hooks";
 import { Slider, Checkbox } from "ant-design-vue";
+import { T as TextStyle, am as TextFont, _ as _export_sfc, u as useScreenEditStore } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
-import { T as TextStyle, am as TextFont, _ as _export_sfc, u as useScreenEditStore } from "./index.js";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
 const _hoisted_1 = { class: "title" };
