@@ -16240,7 +16240,7 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
                             disabled: __props.queryMode
                           }, {
                             default: withCtx(() => [
-                              createTextVNode(toDisplayString(item.colName), 1)
+                              createTextVNode(toDisplayString(item.colName + (item.comment ? `[${item.comment}]` : "")), 1)
                             ]),
                             _: 2
                           }, 1032, ["checked", "id", "disabled"])
@@ -16272,7 +16272,7 @@ const _sfc_main$S = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const SelectFields = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["__scopeId", "data-v-7f8e0ebf"]]);
+const SelectFields = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["__scopeId", "data-v-88afb51f"]]);
 const _sfc_main$R = /* @__PURE__ */ defineComponent({
   __name: "TableFields",
   props: {
@@ -16404,7 +16404,11 @@ const buildTableFields = async (index2, sqlQuery) => {
     var _a2;
     return {
       ...item,
-      children: (_a2 = apiStore.getTableFieldsMap.get(item.realValue)) == null ? void 0 : _a2.map((field) => ({ value: field.colName, label: field.colName, realValue: { ...field } }))
+      children: (_a2 = apiStore.getTableFieldsMap.get(item.realValue)) == null ? void 0 : _a2.map((field) => ({
+        value: field.colName,
+        label: field.colName + (field.comment ? `[${field.comment}]` : ""),
+        realValue: { ...field }
+      }))
     };
   });
 };
@@ -16693,7 +16697,11 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
         const join = joins.value[index2];
         if (!join) return;
         if (join.table) {
-          const fields = (_a2 = apiStore.getTableFieldsMap.get(join.table)) == null ? void 0 : _a2.map((field) => ({ value: field.colName, label: field.colName, realValue: { ...field } }));
+          const fields = (_a2 = apiStore.getTableFieldsMap.get(join.table)) == null ? void 0 : _a2.map((field) => ({
+            value: field.colName,
+            label: field.colName + (field.comment ? `[${field.comment}]` : ""),
+            realValue: { ...field }
+          }));
           if (fields) {
             secondFields == null ? void 0 : secondFields.value.splice(index2, 1, fields);
           }
@@ -16908,7 +16916,7 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
                   "option-filter-prop": "label",
                   value: getSecondValue(index2),
                   options: getSecondFields(index2),
-                  placeholder: `${join.tableAlias}字段`,
+                  placeholder: `${join.tableAlias || "关联表"}字段`,
                   onSelect: (_, option) => secondFieldsSelect(option, index2, join)
                 }, null, 8, ["disabled", "value", "options", "placeholder", "onSelect"])
               ];
@@ -16928,7 +16936,7 @@ const _sfc_main$P = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const TableJoins = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["__scopeId", "data-v-1a605ef6"]]);
+const TableJoins = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["__scopeId", "data-v-a23df3af"]]);
 const _sfc_main$O = /* @__PURE__ */ defineComponent({
   __name: "TableLimit",
   props: {
@@ -17247,7 +17255,7 @@ const _sfc_main$M = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const FilterVariable = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-f526817e"]]);
+const FilterVariable = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["__scopeId", "data-v-68d91e73"]]);
 const _sfc_main$L = /* @__PURE__ */ defineComponent({
   __name: "TableField",
   props: {
@@ -17269,7 +17277,7 @@ const _sfc_main$L = /* @__PURE__ */ defineComponent({
         if (val) {
           if (val.tableAlias && val.colName) {
             valueField.value = val;
-            displayField.value = [val.tableAlias, val.colName];
+            displayField.value = [val.tableAlias, val.colName + (val.comment ? `[${val.comment}]` : "")];
             setFieldType(val.dataType);
           } else {
             displayField.value = [];
@@ -18333,7 +18341,11 @@ const _sfc_main$E = /* @__PURE__ */ defineComponent({
               value: otherField,
               label: otherField,
               realValue: otherField,
-              children: res.map((field) => ({ value: field.colName, label: field.colName, realValue: { ...field } }))
+              children: res.map((field) => ({
+                value: field.colName,
+                label: field.colName + (field.comment ? `[${field.comment}]` : ""),
+                realValue: { ...field }
+              }))
             }
           ];
         });
