@@ -1,22 +1,14 @@
-import { defineComponent, createBlock, openBlock, unref } from "vue";
+import { defineComponent as o, createBlock as e, openBlock as t, unref as m } from "vue";
 import "ant-design-vue";
 import "@mfish/core/hooks";
-import { a1 as Decoration1 } from "./index.js";
+import { a1 as r } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-import { _ as _sfc_main$1 } from "./index.vue_vue_type_script_setup_true_lang.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  ...{ name: "MfDecoration1" },
-  __name: "index",
-  setup(__props) {
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(_sfc_main$1, { component: unref(Decoration1) }, null, 8, ["component"]);
-    };
-  }
-});
+import { _ as s } from "./index.vue_vue_type_script_setup_true_lang.js";
+const i = o({ name: "MfDecoration1", __name: "index", setup: (o2) => (o3, i2) => (t(), e(s, { component: m(r) }, null, 8, ["component"])) });
 export {
-  _sfc_main as default
+  i as default
 };

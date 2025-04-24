@@ -72,6 +72,7 @@ export interface MetaDataHeader {
   dataType?: DataType;
   tableAlias?: string;
   targetType?: string;
+  index?: number;
 }
 
 export interface ReqTable extends ReqPage {

@@ -1,52 +1,22 @@
-import { defineComponent, watch, nextTick, createBlock, openBlock, unref, mergeProps, toHandlers } from "vue";
-import { VueUiTiremarks } from "vue-data-ui";
+import { defineComponent as t, watch as a, nextTick as o, createBlock as e, openBlock as r, unref as i, mergeProps as n, toHandlers as c } from "vue";
+import { VueUiTiremarks as s } from "vue-data-ui";
 import "vue-data-ui/style.css";
-import { h as useChartEventHandle, u as useScreenEditStore } from "./index.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  ...{ name: "MfTireMarks" },
-  __name: "index",
-  props: {
-    chart: { type: Object, required: true },
-    chartContain: { type: Object, required: true }
-  },
-  setup(__props) {
-    const props = __props;
-    const { commonEvents } = useChartEventHandle(props.chart);
-    const screenEditStore = useScreenEditStore();
-    watch(
-      () => screenEditStore.getTheme,
-      (val) => {
-        if (!props.chart) {
-          return;
-        }
-        nextTick().then(() => {
-          changeTheme(props.chart, val);
-        });
-      },
-      { immediate: true }
-    );
-    function changeTheme(chart, theme) {
-      const color = {
-        dark: "#3A3A3A",
-        light: "#E1E5E8"
-      };
-      if (!chart.options.style.chart.layout.inactiveColor) {
-        chart.options.style.chart.layout.inactiveColor = color[theme];
-        return;
-      }
-      if (chart.options.style.chart.layout.inactiveColor === color.dark || chart.options.style.chart.layout.inactiveColor === color.light) {
-        chart.options.style.chart.layout.inactiveColor = color[theme];
-      }
-    }
-    return (_ctx, _cache) => {
-      var _a;
-      return openBlock(), createBlock(unref(VueUiTiremarks), mergeProps({
-        dataset: ((_a = __props.chart.data) == null ? void 0 : _a.dataSet) || { percentage: 0 },
-        config: __props.chart.options
-      }, toHandlers(unref(commonEvents))), null, 16, ["dataset", "config"]);
-    };
-  }
-});
+import { h as l, u } from "./index.js";
+const h = t({ name: "MfTireMarks", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(t2) {
+  const h2 = t2, { commonEvents: p } = l(h2.chart), d = u();
+  return a(() => d.getTheme, (t3) => {
+    h2.chart && o().then(() => {
+      !function(t4, a2) {
+        const o2 = { dark: "#3A3A3A", light: "#E1E5E8" };
+        if (!t4.options.style.chart.layout.inactiveColor) return void (t4.options.style.chart.layout.inactiveColor = o2[a2]);
+        t4.options.style.chart.layout.inactiveColor !== o2.dark && t4.options.style.chart.layout.inactiveColor !== o2.light || (t4.options.style.chart.layout.inactiveColor = o2[a2]);
+      }(h2.chart, t3);
+    });
+  }, { immediate: true }), (a2, o2) => {
+    var _a;
+    return r(), e(i(s), n({ dataset: ((_a = t2.chart.data) == null ? void 0 : _a.dataSet) || { percentage: 0 }, config: t2.chart.options }, c(i(p))), null, 16, ["dataset", "config"]);
+  };
+} });
 export {
-  _sfc_main as default
+  h as default
 };

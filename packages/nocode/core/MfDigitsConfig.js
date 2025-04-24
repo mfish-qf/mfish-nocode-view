@@ -1,80 +1,31 @@
-import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode } from "vue";
-import { useDesign } from "@mfish/core/hooks";
-import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index.js";
-import { S as StyleConfig } from "./StyleConfig.js";
+import { defineComponent as o, ref as t, watch as n, createBlock as e, openBlock as i, normalizeClass as s, unref as r, withCtx as a, createElementVNode as l, createVNode as u } from "vue";
+import { useDesign as p } from "@mfish/core/hooks";
+import { u as C, k as m, _ as g } from "./index.js";
+import { S as c } from "./StyleConfig.js";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/components/Icon";
 import "ant-design-vue";
 import "@mfish/core/utils/Is";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfDigitsConfig",
-  setup(__props) {
-    const screenEditStore = useScreenEditStore();
-    const { prefixCls } = useDesign("digits-config");
-    const numColor = ref();
-    const skeletonColor = ref();
-    watch(
-      () => screenEditStore.getCurConfigComponent,
-      (val) => {
-        if (!val) return;
-        initValue();
-      },
-      { immediate: true }
-    );
-    function initValue() {
-      var _a, _b, _c, _d;
-      numColor.value = (_b = (_a = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _a.digits) == null ? void 0 : _b.color;
-      skeletonColor.value = (_d = (_c = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _c.digits) == null ? void 0 : _d.skeletonColor;
-    }
-    function confirmNumColor(_, hex) {
-      changeNumColor(_, hex);
-      numColor.value = hex;
-    }
-    function changeNumColor(_, hex) {
-      screenEditStore.getCurConfigComponent.chart.options.digits = {
-        ...screenEditStore.getCurConfigComponent.chart.options.digits,
-        color: hex
-      };
-    }
-    function confirmSkeletonColor(_, hex) {
-      changeSkeletonColor(_, hex);
-      skeletonColor.value = hex;
-    }
-    function changeSkeletonColor(_, hex) {
-      screenEditStore.getCurConfigComponent.chart.options.digits = {
-        ...screenEditStore.getCurConfigComponent.chart.options.digits,
-        skeletonColor: hex
-      };
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(StyleConfig, {
-        class: normalizeClass(unref(prefixCls))
-      }, {
-        default: withCtx(() => [
-          _cache[0] || (_cache[0] = createElementVNode("div", { class: "title" }, "数字颜色", -1)),
-          createVNode(unref(MfishColorPicker), {
-            placeholder: "设置数字颜色，格式#FFFFFF",
-            type: 1,
-            value: numColor.value,
-            onConfirmChange: confirmNumColor,
-            onInputChange: changeNumColor
-          }, null, 8, ["value"]),
-          _cache[1] || (_cache[1] = createElementVNode("div", { class: "title" }, "框架颜色", -1)),
-          createVNode(unref(MfishColorPicker), {
-            placeholder: "设置框架颜色，格式#FFFFFF",
-            type: 1,
-            value: skeletonColor.value,
-            onConfirmChange: confirmSkeletonColor,
-            onInputChange: changeSkeletonColor
-          }, null, 8, ["value"])
-        ]),
-        _: 1
-      }, 8, ["class"]);
-    };
+const f = g(o({ __name: "MfDigitsConfig", setup(o2) {
+  const g2 = C(), { prefixCls: f2 } = p("digits-config"), d = t(), h = t();
+  function v(o3, t2) {
+    F(o3, t2), d.value = t2;
   }
-});
-const MfDigitsConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-ad8834b9"]]);
+  function F(o3, t2) {
+    g2.getCurConfigComponent.chart.options.digits = { ...g2.getCurConfigComponent.chart.options.digits, color: t2 };
+  }
+  function _(o3, t2) {
+    I(o3, t2), h.value = t2;
+  }
+  function I(o3, t2) {
+    g2.getCurConfigComponent.chart.options.digits = { ...g2.getCurConfigComponent.chart.options.digits, skeletonColor: t2 };
+  }
+  return n(() => g2.getCurConfigComponent, (o3) => {
+    var _a, _b, _c, _d;
+    o3 && (d.value = (_b = (_a = g2.getCurConfigComponent.chart.options) == null ? void 0 : _a.digits) == null ? void 0 : _b.color, h.value = (_d = (_c = g2.getCurConfigComponent.chart.options) == null ? void 0 : _c.digits) == null ? void 0 : _d.skeletonColor);
+  }, { immediate: true }), (o3, t2) => (i(), e(c, { class: s(r(f2)) }, { default: a(() => [t2[0] || (t2[0] = l("div", { class: "title" }, "数字颜色", -1)), u(r(m), { placeholder: "设置数字颜色，格式#FFFFFF", type: 1, value: d.value, onConfirmChange: v, onInputChange: F }, null, 8, ["value"]), t2[1] || (t2[1] = l("div", { class: "title" }, "框架颜色", -1)), u(r(m), { placeholder: "设置框架颜色，格式#FFFFFF", type: 1, value: h.value, onConfirmChange: _, onInputChange: I }, null, 8, ["value"])]), _: 1 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-ad8834b9"]]);
 export {
-  MfDigitsConfig as default
+  f as default
 };

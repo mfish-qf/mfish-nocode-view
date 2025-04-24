@@ -1,125 +1,40 @@
-import { defineComponent, computed, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode, renderSlot } from "vue";
-import { D as DataConfig, a as DragInData } from "./DragInData.js";
-import { useDesign } from "@mfish/core/hooks";
-import { u as useScreenEditStore, i as useDynamicDataConfig, aq as useRadarData, _ as _export_sfc } from "./index.js";
-import { J as JsonData } from "./JsonData.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfRadarDataConfig",
-  setup(__props) {
-    const screenEditStore = useScreenEditStore();
-    const { setFields, deleteFields, getFields, setDataTable } = useDynamicDataConfig();
-    const { prefixCls } = useDesign("radar-data-config");
-    const { resetDefault } = useRadarData();
-    const dimensions = computed(() => {
-      var _a;
-      if (screenEditStore.getCurConfigComponent.chart.data.fields) {
-        return ((_a = screenEditStore.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.dimensions) ?? [];
-      }
-      return [];
-    });
-    const source = computed(() => {
-      var _a;
-      if (screenEditStore.getCurConfigComponent.chart.data.fields) {
-        return ((_a = screenEditStore.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.source) ?? [];
-      }
-      return [];
-    });
-    const curIndicator = computed(() => {
-      var _a;
-      if ((_a = screenEditStore.getCurConfigComponent.chart.data.dataSet) == null ? void 0 : _a.indicator) {
-        return JSON.stringify(screenEditStore.getCurConfigComponent.chart.data.dataSet.indicator);
-      } else {
-        return "";
-      }
-    });
-    const curData = computed(() => {
-      var _a;
-      if ((_a = screenEditStore.getCurConfigComponent.chart.data.dataSet) == null ? void 0 : _a.data) {
-        return JSON.stringify(screenEditStore.getCurConfigComponent.chart.data.dataSet.data);
-      } else {
-        return "";
-      }
-    });
-    function dataSourceChange() {
-      const dimensions2 = getFields("dimensions");
-      if (dimensions2 && dimensions2.length > 0) {
-        setDataTable();
-      } else {
-        resetDefault(screenEditStore.getCurConfigComponent.chart);
-      }
-    }
-    function changeDimensions(data) {
-      if ((data == null ? void 0 : data.length) > 0) {
-        setFields("dimensions", data);
-      } else {
-        deleteFields("dimensions");
-      }
-      dataSourceChange();
-    }
-    function changeSource(data) {
-      if (data.length > 0) {
-        setFields("source", data);
-      } else {
-        deleteFields("source");
-      }
-      dataSourceChange();
-    }
-    function indicatorChange(data) {
-      if (data) {
-        screenEditStore.getCurConfigComponent.chart.data.dataSet.indicator = data;
-      } else {
-        delete screenEditStore.getCurConfigComponent.chart.data.dataSet.indicator;
-      }
-    }
-    function dataChange(data) {
-      if (data) {
-        screenEditStore.getCurConfigComponent.chart.data.dataSet.data = data;
-      } else {
-        delete screenEditStore.getCurConfigComponent.chart.data.dataSet.data;
-      }
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(DataConfig, {
-        class: normalizeClass(unref(prefixCls)),
-        onRefreshData: dataSourceChange
-      }, {
-        "data-select": withCtx(() => [
-          renderSlot(_ctx.$slots, "data-select", {}, void 0, true)
-        ]),
-        "static-data": withCtx(() => [
-          createVNode(JsonData, {
-            title: "维度名",
-            data: curIndicator.value,
-            onDataChange: indicatorChange
-          }, null, 8, ["data"]),
-          createVNode(JsonData, {
-            title: "维度值",
-            data: curData.value,
-            onDataChange: dataChange
-          }, null, 8, ["data"])
-        ]),
-        "target-data": withCtx(() => [
-          _cache[0] || (_cache[0] = createElementVNode("div", { class: "title" }, "类型", -1)),
-          createVNode(DragInData, {
-            "max-count": 1,
-            height: 100,
-            onDataChange: changeDimensions,
-            fields: dimensions.value
-          }, null, 8, ["fields"]),
-          _cache[1] || (_cache[1] = createElementVNode("div", { class: "title" }, "维度值", -1)),
-          createVNode(DragInData, {
-            "max-count": 10,
-            height: 250,
-            onDataChange: changeSource,
-            fields: source.value
-          }, null, 8, ["fields"])
-        ]),
-        _: 3
-      }, 8, ["class"]);
-    };
+import { defineComponent as t, computed as a, createBlock as e, openBlock as n, normalizeClass as o, unref as i, withCtx as d, createElementVNode as s, createVNode as r, renderSlot as C } from "vue";
+import { D as l, a as f } from "./DragInData.js";
+import { useDesign as g } from "@mfish/core/hooks";
+import { u as c, i as u, aq as m, _ as h } from "./index.js";
+import { J as p } from "./JsonData.js";
+const D = h(t({ __name: "MfRadarDataConfig", setup(t2) {
+  const h2 = c(), { setFields: D2, deleteFields: S, getFields: v, setDataTable: _ } = u(), { prefixCls: x } = g("radar-data-config"), { resetDefault: J } = m(), j = a(() => {
+    var _a;
+    return h2.getCurConfigComponent.chart.data.fields ? ((_a = h2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.dimensions) ?? [] : [];
+  }), F = a(() => {
+    var _a;
+    return h2.getCurConfigComponent.chart.data.fields ? ((_a = h2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.source) ?? [] : [];
+  }), b = a(() => {
+    var _a;
+    return ((_a = h2.getCurConfigComponent.chart.data.dataSet) == null ? void 0 : _a.indicator) ? JSON.stringify(h2.getCurConfigComponent.chart.data.dataSet.indicator) : "";
+  }), y = a(() => {
+    var _a;
+    return ((_a = h2.getCurConfigComponent.chart.data.dataSet) == null ? void 0 : _a.data) ? JSON.stringify(h2.getCurConfigComponent.chart.data.dataSet.data) : "";
+  });
+  function I() {
+    const t3 = v("dimensions");
+    t3 && t3.length > 0 ? _() : J(h2.getCurConfigComponent.chart);
   }
-});
-const MfRadarDataConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-23efd3ba"]]);
+  function N(t3) {
+    (t3 == null ? void 0 : t3.length) > 0 ? D2("dimensions", t3) : S("dimensions"), I();
+  }
+  function O(t3) {
+    t3.length > 0 ? D2("source", t3) : S("source"), I();
+  }
+  function R(t3) {
+    t3 ? h2.getCurConfigComponent.chart.data.dataSet.indicator = t3 : delete h2.getCurConfigComponent.chart.data.dataSet.indicator;
+  }
+  function k(t3) {
+    t3 ? h2.getCurConfigComponent.chart.data.dataSet.data = t3 : delete h2.getCurConfigComponent.chart.data.dataSet.data;
+  }
+  return (t3, a2) => (n(), e(l, { class: o(i(x)), onRefreshData: I }, { "data-select": d(() => [C(t3.$slots, "data-select", {}, void 0, true)]), "static-data": d(() => [r(p, { title: "维度名", data: b.value, onDataChange: R }, null, 8, ["data"]), r(p, { title: "维度值", data: y.value, onDataChange: k }, null, 8, ["data"])]), "target-data": d(() => [a2[0] || (a2[0] = s("div", { class: "title" }, "类型", -1)), r(f, { "max-count": 1, height: 100, onDataChange: N, fields: j.value }, null, 8, ["fields"]), a2[1] || (a2[1] = s("div", { class: "title" }, "维度值", -1)), r(f, { "max-count": 10, height: 250, onDataChange: O, fields: F.value }, null, 8, ["fields"])]), _: 3 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-23efd3ba"]]);
 export {
-  MfRadarDataConfig as default
+  D as default
 };

@@ -1,122 +1,44 @@
-import { defineComponent, computed, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode, renderSlot } from "vue";
-import { D as DataConfig, a as DragInData } from "./DragInData.js";
-import { useDesign } from "@mfish/core/hooks";
-import { u as useScreenEditStore, i as useDynamicDataConfig, ap as useEchartsMapLineData, _ as _export_sfc } from "./index.js";
-import { J as JsonData } from "./JsonData.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfMapLineDataConfig",
-  setup(__props) {
-    const screenEditStore = useScreenEditStore();
-    const { setFields, deleteFields, getFields, setDataTable } = useDynamicDataConfig();
-    const { prefixCls } = useDesign("map-line-data-config");
-    const { resetDefault } = useEchartsMapLineData();
-    const start = computed(() => {
-      var _a;
-      if (screenEditStore.getCurConfigComponent.chart.data.fields) {
-        return ((_a = screenEditStore.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.start) ?? [];
-      }
-      return [];
-    });
-    const end = computed(() => {
-      var _a;
-      if (screenEditStore.getCurConfigComponent.chart.data.fields) {
-        return ((_a = screenEditStore.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.end) ?? [];
-      }
-      return [];
-    });
-    const value = computed(() => {
-      var _a;
-      if (screenEditStore.getCurConfigComponent.chart.data.fields) {
-        return ((_a = screenEditStore.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.value) ?? [];
-      }
-      return [];
-    });
-    const curData = computed(() => {
-      var _a;
-      if ((_a = screenEditStore.getCurConfigComponent.chart.data.dataSet) == null ? void 0 : _a.source) {
-        return JSON.stringify(screenEditStore.getCurConfigComponent.chart.data.dataSet.source);
-      } else {
-        return "";
-      }
-    });
-    function dataSourceChange() {
-      const start2 = getFields("start");
-      const end2 = getFields("end");
-      if (start2 && start2.length > 0 && end2 && end2.length > 0) {
-        setDataTable();
-      } else {
-        resetDefault(screenEditStore.getCurConfigComponent.chart);
-      }
-    }
-    const changeData = (field, data) => {
-      if ((data == null ? void 0 : data.length) > 0) {
-        setFields(field, data);
-      } else {
-        deleteFields(field);
-      }
-      dataSourceChange();
-    };
-    function changeStart(data) {
-      changeData("start", data);
-    }
-    function changeEnd(data) {
-      changeData("end", data);
-    }
-    function changeValue(data) {
-      changeData("value", data);
-    }
-    function dataChange(data) {
-      var _a;
-      if (data) {
-        screenEditStore.getCurConfigComponent.chart.data.dataSet.source = data;
-      } else {
-        (_a = screenEditStore.getCurConfigComponent.chart.data.dataSet) == null ? true : delete _a.source;
-      }
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(DataConfig, {
-        class: normalizeClass(unref(prefixCls)),
-        onRefreshData: dataSourceChange
-      }, {
-        "data-select": withCtx(() => [
-          renderSlot(_ctx.$slots, "data-select", {}, void 0, true)
-        ]),
-        "static-data": withCtx(() => [
-          createVNode(JsonData, {
-            title: "地图数据",
-            data: curData.value,
-            onDataChange: dataChange
-          }, null, 8, ["data"])
-        ]),
-        "target-data": withCtx(() => [
-          _cache[0] || (_cache[0] = createElementVNode("div", { class: "title" }, "开始地", -1)),
-          createVNode(DragInData, {
-            "max-count": 1,
-            height: 100,
-            onDataChange: changeStart,
-            fields: start.value
-          }, null, 8, ["fields"]),
-          _cache[1] || (_cache[1] = createElementVNode("div", { class: "title" }, "结束地", -1)),
-          createVNode(DragInData, {
-            "max-count": 1,
-            height: 100,
-            onDataChange: changeEnd,
-            fields: end.value
-          }, null, 8, ["fields"]),
-          _cache[2] || (_cache[2] = createElementVNode("div", { class: "title" }, "数据值", -1)),
-          createVNode(DragInData, {
-            "max-count": 1,
-            height: 100,
-            onDataChange: changeValue,
-            fields: value.value
-          }, null, 8, ["fields"])
-        ]),
-        _: 3
-      }, 8, ["class"]);
-    };
+import { defineComponent as t, computed as a, createBlock as e, openBlock as n, normalizeClass as o, unref as s, withCtx as i, createElementVNode as l, createVNode as d, renderSlot as r } from "vue";
+import { D as f, a as c } from "./DragInData.js";
+import { useDesign as u } from "@mfish/core/hooks";
+import { u as C, i as g, ap as h, _ as m } from "./index.js";
+import { J as p } from "./JsonData.js";
+const v = m(t({ __name: "MfMapLineDataConfig", setup(t2) {
+  const m2 = C(), { setFields: v2, deleteFields: D, getFields: x, setDataTable: _ } = g(), { prefixCls: S } = u("map-line-data-config"), { resetDefault: j } = h(), F = a(() => {
+    var _a;
+    return m2.getCurConfigComponent.chart.data.fields ? ((_a = m2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.start) ?? [] : [];
+  }), J = a(() => {
+    var _a;
+    return m2.getCurConfigComponent.chart.data.fields ? ((_a = m2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.end) ?? [] : [];
+  }), b = a(() => {
+    var _a;
+    return m2.getCurConfigComponent.chart.data.fields ? ((_a = m2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.value) ?? [] : [];
+  }), I = a(() => {
+    var _a;
+    return ((_a = m2.getCurConfigComponent.chart.data.dataSet) == null ? void 0 : _a.source) ? JSON.stringify(m2.getCurConfigComponent.chart.data.dataSet.source) : "";
+  });
+  function M() {
+    const t3 = x("start"), a2 = x("end");
+    t3 && t3.length > 0 && a2 && a2.length > 0 ? _() : j(m2.getCurConfigComponent.chart);
   }
-});
-const MfMapLineDataConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-ecb05a09"]]);
+  const k = (t3, a2) => {
+    (a2 == null ? void 0 : a2.length) > 0 ? v2(t3, a2) : D(t3), M();
+  };
+  function y(t3) {
+    k("start", t3);
+  }
+  function L(t3) {
+    k("end", t3);
+  }
+  function N(t3) {
+    k("value", t3);
+  }
+  function O(t3) {
+    var _a;
+    t3 ? m2.getCurConfigComponent.chart.data.dataSet.source = t3 : (_a = m2.getCurConfigComponent.chart.data.dataSet) == null ? true : delete _a.source;
+  }
+  return (t3, a2) => (n(), e(f, { class: o(s(S)), onRefreshData: M }, { "data-select": i(() => [r(t3.$slots, "data-select", {}, void 0, true)]), "static-data": i(() => [d(p, { title: "地图数据", data: I.value, onDataChange: O }, null, 8, ["data"])]), "target-data": i(() => [a2[0] || (a2[0] = l("div", { class: "title" }, "开始地", -1)), d(c, { "max-count": 1, height: 100, onDataChange: y, fields: F.value }, null, 8, ["fields"]), a2[1] || (a2[1] = l("div", { class: "title" }, "结束地", -1)), d(c, { "max-count": 1, height: 100, onDataChange: L, fields: J.value }, null, 8, ["fields"]), a2[2] || (a2[2] = l("div", { class: "title" }, "数据值", -1)), d(c, { "max-count": 1, height: 100, onDataChange: N, fields: b.value }, null, 8, ["fields"])]), _: 3 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-ecb05a09"]]);
 export {
-  MfMapLineDataConfig as default
+  v as default
 };

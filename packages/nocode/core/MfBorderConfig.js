@@ -1,54 +1,24 @@
-import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode, renderSlot } from "vue";
-import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index.js";
+import { defineComponent as o, ref as e, watch as t, createBlock as n, openBlock as r, normalizeClass as i, unref as s, withCtx as a, createElementVNode as m, createVNode as f, renderSlot as u } from "vue";
+import { u as l, k as p, _ as c } from "./index.js";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/components/Icon";
-import { useDesign } from "@mfish/core/hooks";
+import { useDesign as C } from "@mfish/core/hooks";
 import "ant-design-vue";
 import "@mfish/core/utils/Is";
-import MfDecorationConfig from "./MfDecorationConfig.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfBorderConfig",
-  setup(__props) {
-    const { prefixCls } = useDesign("border-config");
-    const backgroundColor = ref();
-    const screenEditStore = useScreenEditStore();
-    watch(
-      () => screenEditStore.getCurConfigComponent,
-      (val) => {
-        if (!val) return;
-        backgroundColor.value = screenEditStore.getCurConfigComponent.chart.options.backgroundColor;
-      },
-      { immediate: true }
-    );
-    function confirmBackgroundColor(e) {
-      changeBackgroundColor(e);
-      backgroundColor.value = e;
-    }
-    function changeBackgroundColor(e) {
-      screenEditStore.getCurConfigComponent.chart.options.backgroundColor = e;
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(MfDecorationConfig, {
-        class: normalizeClass(unref(prefixCls))
-      }, {
-        default: withCtx(() => [
-          _cache[0] || (_cache[0] = createElementVNode("div", { class: "title" }, "填充色", -1)),
-          createVNode(unref(MfishColorPicker), {
-            placeholder: "设置填充颜色，格式#FFFFFF",
-            type: 1,
-            value: backgroundColor.value,
-            onConfirmChange: confirmBackgroundColor,
-            onInputChange: changeBackgroundColor
-          }, null, 8, ["value"]),
-          renderSlot(_ctx.$slots, "default", {}, void 0, true)
-        ]),
-        _: 3
-      }, 8, ["class"]);
-    };
+import d from "./MfDecorationConfig.js";
+const g = c(o({ __name: "MfBorderConfig", setup(o2) {
+  const { prefixCls: c2 } = C("border-config"), g2 = e(), h = l();
+  function v(o3) {
+    F(o3), g2.value = o3;
   }
-});
-const MfBorderConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-87ff2ab3"]]);
+  function F(o3) {
+    h.getCurConfigComponent.chart.options.backgroundColor = o3;
+  }
+  return t(() => h.getCurConfigComponent, (o3) => {
+    o3 && (g2.value = h.getCurConfigComponent.chart.options.backgroundColor);
+  }, { immediate: true }), (o3, e2) => (r(), n(d, { class: i(s(c2)) }, { default: a(() => [e2[0] || (e2[0] = m("div", { class: "title" }, "填充色", -1)), f(s(p), { placeholder: "设置填充颜色，格式#FFFFFF", type: 1, value: g2.value, onConfirmChange: v, onInputChange: F }, null, 8, ["value"]), u(o3.$slots, "default", {}, void 0, true)]), _: 3 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-87ff2ab3"]]);
 export {
-  MfBorderConfig as default
+  g as default
 };

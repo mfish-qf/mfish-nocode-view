@@ -1,75 +1,42 @@
-import { defineComponent, useTemplateRef, computed, watch, nextTick, createBlock, openBlock, unref, mergeProps, toHandlers } from "vue";
-import { h as useChartEventHandle, u as useScreenEditStore, ar as ScrollTable, as as getChartData } from "./index.js";
+import { defineComponent as e, useTemplateRef as o, computed as t, watch as r, nextTick as i, createBlock as n, openBlock as a, unref as s, mergeProps as c, toHandlers as m } from "vue";
+import { h, u as p, ar as f, as as l } from "./index.js";
 import "ant-design-vue";
 import "@mfish/core/hooks";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
-import { throttle } from "lodash-es";
+import { throttle as u } from "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "index",
-  props: {
-    chart: { type: Object, required: true },
-    chartContain: { type: Object, required: true }
-  },
-  setup(__props) {
-    const props = __props;
-    const { commonEvents, emitEvent } = useChartEventHandle(props.chart, void 0, ["rowClick"]);
-    const screenEditStore = useScreenEditStore();
-    const scrollTableRef = useTemplateRef("scrollTableRef");
-    const config = computed(() => {
-      var _a;
-      return {
-        ...props.chart.options,
-        ...(_a = props.chart.data) == null ? void 0 : _a.dataSet
-      };
-    });
-    watch(
-      [() => {
-        var _a, _b;
-        return (_b = (_a = props.chartContain) == null ? void 0 : _a.dropInfo) == null ? void 0 : _b.width;
-      }, () => {
-        var _a, _b;
-        return (_b = (_a = props.chartContain) == null ? void 0 : _a.dropInfo) == null ? void 0 : _b.height;
-      }],
-      throttle(() => {
-        var _a;
-        (_a = scrollTableRef.value) == null ? void 0 : _a.resize();
-      }, 100)
-    );
-    watch(
-      () => {
-        var _a;
-        return (_a = props.chartContain) == null ? void 0 : _a.show;
-      },
-      (val) => {
-        if (val) {
-          nextTick(() => {
-            var _a;
-            (_a = scrollTableRef.value) == null ? void 0 : _a.resize();
-          });
-        }
-      }
-    );
-    function rowClick(ci) {
-      if (ci.rowIndex >= 0) {
-        const data = getChartData(props.chart);
-        if (data.length > ci.rowIndex) {
-          emitEvent("rowClick", data[ci.rowIndex]);
-        }
-      }
+const d = e({ __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
+  const d2 = e2, { commonEvents: v, emitEvent: w } = h(d2.chart, void 0, ["rowClick"]), C = p(), I = o("scrollTableRef"), g = t(() => {
+    var _a;
+    return { ...d2.chart.options, ...(_a = d2.chart.data) == null ? void 0 : _a.dataSet };
+  });
+  function x(e3) {
+    if (e3.rowIndex >= 0) {
+      const o2 = l(d2.chart);
+      o2.length > e3.rowIndex && w("rowClick", o2[e3.rowIndex]);
     }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(ScrollTable), mergeProps({
-        ref_key: "scrollTableRef",
-        ref: scrollTableRef,
-        theme: unref(screenEditStore).getTheme,
-        config: config.value
-      }, toHandlers(unref(commonEvents)), { onRowClick: rowClick }), null, 16, ["theme", "config"]);
-    };
   }
-});
+  return r([() => {
+    var _a, _b;
+    return (_b = (_a = d2.chartContain) == null ? void 0 : _a.dropInfo) == null ? void 0 : _b.width;
+  }, () => {
+    var _a, _b;
+    return (_b = (_a = d2.chartContain) == null ? void 0 : _a.dropInfo) == null ? void 0 : _b.height;
+  }], u(() => {
+    var _a;
+    (_a = I.value) == null ? void 0 : _a.resize();
+  }, 100)), r(() => {
+    var _a;
+    return (_a = d2.chartContain) == null ? void 0 : _a.show;
+  }, (e3) => {
+    e3 && i(() => {
+      var _a;
+      (_a = I.value) == null ? void 0 : _a.resize();
+    });
+  }), (e3, o2) => (a(), n(s(f), c({ ref_key: "scrollTableRef", ref: I, theme: s(C).getTheme, config: g.value }, m(s(v)), { onRowClick: x }), null, 16, ["theme", "config"]));
+} });
 export {
-  _sfc_main as default
+  d as default
 };

@@ -1,29 +1,12 @@
-import { defineComponent, useTemplateRef, onMounted, createElementBlock, openBlock, mergeProps, toHandlers, unref } from "vue";
-import { u as useEcharts } from "./UseEcharts.js";
-import { h as useChartEventHandle } from "./index.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  ...{ name: "MfBar" },
-  __name: "index",
-  props: {
-    chart: { type: Object, required: true },
-    chartContain: { type: Object, required: true }
-  },
-  setup(__props) {
-    const props = __props;
-    const mfBarRef = useTemplateRef("mfBarRef");
-    const { commonEvents } = useChartEventHandle(props.chart);
-    onMounted(() => {
-      useEcharts(mfBarRef.value, props.chart, props.chartContain);
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", mergeProps({
-        ref_key: "mfBarRef",
-        ref: mfBarRef,
-        style: { "width": "100%", "height": "100%" }
-      }, toHandlers(unref(commonEvents), true)), null, 16);
-    };
-  }
-});
+import { defineComponent as e, useTemplateRef as r, onMounted as t, createElementBlock as a, openBlock as n, mergeProps as o, toHandlers as s, unref as i } from "vue";
+import { u as m } from "./UseEcharts.js";
+import { h as c } from "./index.js";
+const f = e({ name: "MfBar", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
+  const f2 = e2, h = r("mfBarRef"), { commonEvents: p } = c(f2.chart);
+  return t(() => {
+    m(h.value, f2.chart, f2.chartContain);
+  }), (e3, r2) => (n(), a("div", o({ ref_key: "mfBarRef", ref: h, style: { width: "100%", height: "100%" } }, s(i(p), true)), null, 16));
+} });
 export {
-  _sfc_main as default
+  f as default
 };

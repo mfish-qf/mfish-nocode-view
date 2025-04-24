@@ -1,73 +1,24 @@
-import { defineComponent, computed, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode, renderSlot } from "vue";
-import { D as DataConfig, a as DragInData } from "./DragInData.js";
-import { useDesign } from "@mfish/core/hooks";
-import { u as useScreenEditStore, i as useDynamicDataConfig, _ as _export_sfc } from "./index.js";
-import { J as JsonData } from "./JsonData.js";
-const fieldName = "fieldName";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfScrollTableDataConfig",
-  setup(__props) {
-    const screenEditStore = useScreenEditStore();
-    const { setFields, deleteFields, setDataTable } = useDynamicDataConfig();
-    const { prefixCls } = useDesign("scroll-table-data-config");
-    const headerName = computed(() => {
-      if (screenEditStore.getCurConfigComponent.chart.data.fields) {
-        return screenEditStore.getCurConfigComponent.chart.data.fields[fieldName] ?? [];
-      }
-      return [];
-    });
-    const curData = computed(() => {
-      var _a;
-      if ((_a = screenEditStore.getCurConfigComponent.chart.data) == null ? void 0 : _a.dataSet) {
-        return JSON.stringify(screenEditStore.getCurConfigComponent.chart.data.dataSet);
-      } else {
-        return "";
-      }
-    });
-    function dataSourceChange() {
-      setDataTable();
-    }
-    function changeField(data) {
-      if (data.length > 0) {
-        setFields(fieldName, data);
-        setDataTable();
-      } else {
-        deleteFields(fieldName);
-      }
-    }
-    function dataChange(value) {
-      if (value) {
-        screenEditStore.getCurConfigComponent.chart.data.dataSet = value;
-      }
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(DataConfig, {
-        class: normalizeClass(unref(prefixCls)),
-        onRefreshData: dataSourceChange
-      }, {
-        "data-select": withCtx(() => [
-          renderSlot(_ctx.$slots, "data-select", {}, void 0, true)
-        ]),
-        "static-data": withCtx(() => [
-          createVNode(JsonData, {
-            data: curData.value,
-            onDataChange: dataChange
-          }, null, 8, ["data"])
-        ]),
-        "target-data": withCtx(() => [
-          _cache[0] || (_cache[0] = createElementVNode("div", { class: "title" }, "显示内容", -1)),
-          createVNode(DragInData, {
-            height: 500,
-            onDataChange: changeField,
-            fields: headerName.value
-          }, null, 8, ["fields"])
-        ]),
-        _: 3
-      }, 8, ["class"]);
-    };
+import { defineComponent as a, computed as t, createBlock as e, openBlock as o, normalizeClass as s, unref as n, withCtx as i, createElementVNode as l, createVNode as r, renderSlot as d } from "vue";
+import { D as f, a as c } from "./DragInData.js";
+import { useDesign as g } from "@mfish/core/hooks";
+import { u as C, i as m, _ as u } from "./index.js";
+import { J as p } from "./JsonData.js";
+const h = "fieldName", D = u(a({ __name: "MfScrollTableDataConfig", setup(a2) {
+  const u2 = C(), { setFields: D2, deleteFields: v, setDataTable: _ } = m(), { prefixCls: b } = g("scroll-table-data-config"), S = t(() => u2.getCurConfigComponent.chart.data.fields ? u2.getCurConfigComponent.chart.data.fields[h] ?? [] : []), j = t(() => {
+    var _a;
+    return ((_a = u2.getCurConfigComponent.chart.data) == null ? void 0 : _a.dataSet) ? JSON.stringify(u2.getCurConfigComponent.chart.data.dataSet) : "";
+  });
+  function x() {
+    _();
   }
-});
-const MfScrollTableDataConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-0c7c15bb"]]);
+  function J(a3) {
+    a3.length > 0 ? (D2(h, a3), _()) : v(h);
+  }
+  function F(a3) {
+    a3 && (u2.getCurConfigComponent.chart.data.dataSet = a3);
+  }
+  return (a3, t2) => (o(), e(f, { class: s(n(b)), onRefreshData: x }, { "data-select": i(() => [d(a3.$slots, "data-select", {}, void 0, true)]), "static-data": i(() => [r(p, { data: j.value, onDataChange: F }, null, 8, ["data"])]), "target-data": i(() => [t2[0] || (t2[0] = l("div", { class: "title" }, "显示内容", -1)), r(c, { height: 500, onDataChange: J, fields: S.value }, null, 8, ["fields"])]), _: 3 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-0c7c15bb"]]);
 export {
-  MfScrollTableDataConfig as default
+  D as default
 };

@@ -1,105 +1,35 @@
-import { defineComponent, computed, resolveComponent, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode, renderSlot } from "vue";
-import { D as DataConfig, a as DragInData } from "./DragInData.js";
-import { IconPicker } from "@mfish/core/components/Icon";
-import { useDesign } from "@mfish/core/hooks";
-import { u as useScreenEditStore, i as useDynamicDataConfig, j as useDataTag, _ as _export_sfc } from "./index.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfDataTagDataConfig",
-  setup(__props) {
-    const screenEditStore = useScreenEditStore();
-    const { setFields, deleteFields, getFields, setDataTable } = useDynamicDataConfig();
-    const { clearTitle, clearIcon } = useDataTag();
-    function changeIcon(e) {
-      screenEditStore.getCurConfigComponent.chart.data.dataSet.icon = e;
-    }
-    const { prefixCls } = useDesign("tag-data-config");
-    const title = computed(() => {
-      var _a;
-      if (screenEditStore.getCurConfigComponent.chart.data.fields) {
-        return ((_a = screenEditStore.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.title) ?? [];
-      }
-      return [];
-    });
-    const icon = computed(() => {
-      var _a;
-      if (screenEditStore.getCurConfigComponent.chart.data.fields) {
-        return ((_a = screenEditStore.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.icon) ?? [];
-      }
-      return [];
-    });
-    function dataSourceChange() {
-      const title2 = getFields("title");
-      const icon2 = getFields("icon");
-      if (title2 && title2.length > 0 || icon2 && icon2.length > 0) {
-        setDataTable();
-      } else {
-        clearTitle(screenEditStore.getCurConfigComponent.chart);
-        clearIcon(screenEditStore.getCurConfigComponent.chart);
-      }
-    }
-    function changeTitle(data) {
-      if (data.length > 0) {
-        setFields("title", data);
-        setDataTable();
-      } else {
-        deleteFields("title");
-        clearTitle(screenEditStore.getCurConfigComponent.chart);
-      }
-    }
-    function changeIcon2(data) {
-      if (data.length > 0) {
-        setFields("icon", data);
-        setDataTable();
-      } else {
-        deleteFields("icon");
-        clearIcon(screenEditStore.getCurConfigComponent.chart);
-      }
-    }
-    return (_ctx, _cache) => {
-      const _component_AInput = resolveComponent("AInput");
-      return openBlock(), createBlock(DataConfig, {
-        class: normalizeClass(unref(prefixCls)),
-        onRefreshData: dataSourceChange
-      }, {
-        "data-select": withCtx(() => [
-          renderSlot(_ctx.$slots, "data-select", {}, void 0, true)
-        ]),
-        "static-data": withCtx(() => [
-          _cache[1] || (_cache[1] = createElementVNode("div", { class: "title" }, "标签内容", -1)),
-          createVNode(_component_AInput, {
-            value: unref(screenEditStore).getCurConfigComponent.chart.data.dataSet.title,
-            "onUpdate:value": _cache[0] || (_cache[0] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.data.dataSet.title = $event),
-            "show-count": "",
-            maxlength: 50
-          }, null, 8, ["value"]),
-          _cache[2] || (_cache[2] = createElementVNode("div", { class: "title" }, "图标", -1)),
-          createVNode(unref(IconPicker), {
-            value: unref(screenEditStore).getCurConfigComponent.chart.data.dataSet.icon,
-            onChange: changeIcon
-          }, null, 8, ["value"])
-        ]),
-        "target-data": withCtx(() => [
-          _cache[3] || (_cache[3] = createElementVNode("div", { class: "title" }, "标签内容", -1)),
-          createVNode(DragInData, {
-            "max-count": 1,
-            height: 150,
-            onDataChange: changeTitle,
-            fields: title.value
-          }, null, 8, ["fields"]),
-          _cache[4] || (_cache[4] = createElementVNode("div", { class: "title" }, "图标", -1)),
-          createVNode(DragInData, {
-            "max-count": 1,
-            height: 150,
-            onDataChange: changeIcon2,
-            fields: icon.value
-          }, null, 8, ["fields"])
-        ]),
-        _: 3
-      }, 8, ["class"]);
-    };
+import { defineComponent as t, computed as a, resolveComponent as e, createBlock as n, openBlock as o, normalizeClass as i, unref as l, withCtx as s, createElementVNode as c, createVNode as r, renderSlot as d } from "vue";
+import { D as g, a as C } from "./DragInData.js";
+import { IconPicker as f } from "@mfish/core/components/Icon";
+import { useDesign as u } from "@mfish/core/hooks";
+import { u as h, i as m, j as p, _ as v } from "./index.js";
+const D = v(t({ __name: "MfDataTagDataConfig", setup(t2) {
+  const v2 = h(), { setFields: D2, deleteFields: x, getFields: _, setDataTable: I } = m(), { clearTitle: S, clearIcon: j } = p();
+  function F(t3) {
+    v2.getCurConfigComponent.chart.data.dataSet.icon = t3;
   }
-});
-const MfDataTagDataConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-e8ed5d65"]]);
+  const { prefixCls: T } = u("tag-data-config"), b = a(() => {
+    var _a;
+    return v2.getCurConfigComponent.chart.data.fields ? ((_a = v2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.title) ?? [] : [];
+  }), k = a(() => {
+    var _a;
+    return v2.getCurConfigComponent.chart.data.fields ? ((_a = v2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.icon) ?? [] : [];
+  });
+  function w() {
+    const t3 = _("title"), a2 = _("icon");
+    t3 && t3.length > 0 || a2 && a2.length > 0 ? I() : (S(v2.getCurConfigComponent.chart), j(v2.getCurConfigComponent.chart));
+  }
+  function A(t3) {
+    t3.length > 0 ? (D2("title", t3), I()) : (x("title"), S(v2.getCurConfigComponent.chart));
+  }
+  function M(t3) {
+    t3.length > 0 ? (D2("icon", t3), I()) : (x("icon"), j(v2.getCurConfigComponent.chart));
+  }
+  return (t3, a2) => {
+    const u2 = e("AInput");
+    return o(), n(g, { class: i(l(T)), onRefreshData: w }, { "data-select": s(() => [d(t3.$slots, "data-select", {}, void 0, true)]), "static-data": s(() => [a2[1] || (a2[1] = c("div", { class: "title" }, "标签内容", -1)), r(u2, { value: l(v2).getCurConfigComponent.chart.data.dataSet.title, "onUpdate:value": a2[0] || (a2[0] = (t4) => l(v2).getCurConfigComponent.chart.data.dataSet.title = t4), "show-count": "", maxlength: 50 }, null, 8, ["value"]), a2[2] || (a2[2] = c("div", { class: "title" }, "图标", -1)), r(l(f), { value: l(v2).getCurConfigComponent.chart.data.dataSet.icon, onChange: F }, null, 8, ["value"])]), "target-data": s(() => [a2[3] || (a2[3] = c("div", { class: "title" }, "标签内容", -1)), r(C, { "max-count": 1, height: 150, onDataChange: A, fields: b.value }, null, 8, ["fields"]), a2[4] || (a2[4] = c("div", { class: "title" }, "图标", -1)), r(C, { "max-count": 1, height: 150, onDataChange: M, fields: k.value }, null, 8, ["fields"])]), _: 3 }, 8, ["class"]);
+  };
+} }), [["__scopeId", "data-v-e8ed5d65"]]);
 export {
-  MfDataTagDataConfig as default
+  D as default
 };

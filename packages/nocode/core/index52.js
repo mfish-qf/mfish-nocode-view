@@ -1,41 +1,17 @@
-import { defineComponent, useTemplateRef, onMounted, createElementBlock, openBlock, mergeProps, toHandlers, unref } from "vue";
-import { u as useEcharts } from "./UseEcharts.js";
-import { h as useChartEventHandle } from "./index.js";
-import { cloneDeep } from "lodash-es";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  ...{ name: "MfRadar" },
-  __name: "index",
-  props: {
-    chart: { type: Object, required: true },
-    chartContain: { type: Object, required: true }
-  },
-  setup(__props) {
-    const props = __props;
-    const mfBarRef = useTemplateRef("mfRadarRef");
-    const { commonEvents } = useChartEventHandle(props.chart);
-    onMounted(() => {
-      useEcharts(mfBarRef.value, props.chart, props.chartContain, setOption);
-    });
-    function setOption(eChart, dataSet) {
-      const options = {
-        ...cloneDeep(props.chart.options),
-        backgroundColor: "transparent"
-      };
-      options.radar = {
-        ...options.radar,
-        indicator: cloneDeep(dataSet == null ? void 0 : dataSet.indicator)
-      };
-      options.series[0].data = cloneDeep(dataSet == null ? void 0 : dataSet.data);
-      eChart == null ? void 0 : eChart.setOption(options, true);
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", mergeProps({
-        ref: "mfRadarRef",
-        style: { "width": "100%", "height": "100%" }
-      }, toHandlers(unref(commonEvents), true)), null, 16);
-    };
+import { defineComponent as r, useTemplateRef as t, onMounted as a, createElementBlock as e, openBlock as o, mergeProps as n, toHandlers as i, unref as s } from "vue";
+import { u as d } from "./UseEcharts.js";
+import { h as c } from "./index.js";
+import { cloneDeep as m } from "lodash-es";
+const p = r({ name: "MfRadar", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(r2) {
+  const p2 = r2, f = t("mfRadarRef"), { commonEvents: h } = c(p2.chart);
+  function u(r3, t2) {
+    const a2 = { ...m(p2.chart.options), backgroundColor: "transparent" };
+    a2.radar = { ...a2.radar, indicator: m(t2 == null ? void 0 : t2.indicator) }, a2.series[0].data = m(t2 == null ? void 0 : t2.data), r3 == null ? void 0 : r3.setOption(a2, true);
   }
-});
+  return a(() => {
+    d(f.value, p2.chart, p2.chartContain, u);
+  }), (r3, t2) => (o(), e("div", n({ ref: "mfRadarRef", style: { width: "100%", height: "100%" } }, i(s(h), true)), null, 16));
+} });
 export {
-  _sfc_main as default
+  p as default
 };

@@ -1,287 +1,59 @@
-import { defineComponent, useCssVars, computed, ref, createBlock, openBlock, unref, normalizeClass, withCtx, createElementVNode, createTextVNode, toDisplayString, createCommentVNode, createVNode, onMounted, onUnmounted, createElementBlock, Fragment, renderList, withModifiers, normalizeStyle, nextTick } from "vue";
-import { theme, Dropdown, InputNumber, Checkbox, Empty, Tooltip, Segmented } from "ant-design-vue";
-import { Icon } from "@mfish/core/components/Icon";
-import { u as useScreenEditStore, _ as _export_sfc, a as animationData, s as screenEvent, S as ScreenEventEnum, p as playAnimation } from "./index.js";
-import { useDesign, useRootSetting } from "@mfish/core/hooks";
-import { ThemeEnum } from "@mfish/core/enums";
-import { pick } from "lodash-es";
-import { PauseCircleTwoTone, PlayCircleTwoTone } from "@ant-design/icons-vue";
-import { ScrollContainer } from "@mfish/core/components/Container";
-import draggable from "vuedraggable";
-const _hoisted_1$1 = ["onMouseenter"];
-const _hoisted_2$1 = { class: "setting" };
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
-  __name: "AnimationSet",
-  setup(__props) {
-    useCssVars((_ctx) => ({
-      "536783ac": bgColor.value
-    }));
-    const screenEditStore = useScreenEditStore();
-    const animationList = computed(() => screenEditStore.getCurConfigComponent.chartContain.animations);
-    const enterAnimation = ref(-1);
-    const { prefixCls } = useDesign("animation-set");
-    const { token } = theme.useToken();
-    const bgColor = computed(() => token.value.colorInfoBg);
-    const isShow = ref(false);
-    function enterHandle(index2) {
-      enterAnimation.value = index2;
-    }
-    function removeAnimation(index2) {
-      screenEditStore.getCurConfigComponent.chartContain.animations.splice(index2, 1);
-      enterAnimation.value = -1;
-    }
-    const onMoveCallback = (val) => {
-      const { oldIndex, newIndex } = val.moved;
-      const moveTarget = screenEditStore.getCurConfigComponent.chartContain.animations.splice(oldIndex, 1)[0];
-      screenEditStore.getCurConfigComponent.chartContain.animations.splice(newIndex, 0, moveTarget);
-    };
-    const visibleChange = (show) => {
-      isShow.value = show;
-    };
-    function changeRepeat(element) {
-      if (element.loop) {
-        element.repeat = void 0;
-      }
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(draggable), {
-        "item-key": "id",
-        class: normalizeClass(unref(prefixCls)),
-        modelValue: animationList.value,
-        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => animationList.value = $event),
-        animation: "300",
-        "ghost-class": "ghost",
-        onChange: onMoveCallback
-      }, {
-        item: withCtx(({ element, index: index2 }) => [
-          createElementVNode("div", {
-            class: "animation",
-            onMouseenter: ($event) => enterHandle(index2)
-          }, [
-            createTextVNode(toDisplayString(element.label) + " ", 1),
-            createElementVNode("div", null, [
-              enterAnimation.value === index2 ? (openBlock(), createBlock(unref(Icon), {
-                key: 0,
-                class: "icon",
-                icon: "ant-design:delete-outlined",
-                onClick: ($event) => removeAnimation(index2)
-              }, null, 8, ["onClick"])) : createCommentVNode("", true),
-              createVNode(unref(Dropdown), {
-                placement: "bottom",
-                open: isShow.value && enterAnimation.value === index2,
-                onOpenChange: visibleChange,
-                arrow: true
-              }, {
-                overlay: withCtx(() => [
-                  createElementVNode("div", _hoisted_2$1, [
-                    createVNode(unref(InputNumber), {
-                      value: element.duration,
-                      "onUpdate:value": ($event) => element.duration = $event,
-                      size: "small",
-                      placeholder: "时长 ms",
-                      step: 100,
-                      min: 0,
-                      max: 1e5
-                    }, null, 8, ["value", "onUpdate:value"]),
-                    createVNode(unref(InputNumber), {
-                      disabled: element.loop,
-                      value: element.repeat,
-                      "onUpdate:value": ($event) => element.repeat = $event,
-                      size: "small",
-                      placeholder: "重复次数",
-                      step: 1,
-                      min: 0,
-                      max: 3
-                    }, null, 8, ["disabled", "value", "onUpdate:value"]),
-                    createVNode(unref(Checkbox), {
-                      checked: element.loop,
-                      "onUpdate:checked": ($event) => element.loop = $event,
-                      onChange: ($event) => changeRepeat(element)
-                    }, {
-                      default: withCtx(() => _cache[1] || (_cache[1] = [
-                        createTextVNode(" 无限循环")
-                      ])),
-                      _: 2
-                    }, 1032, ["checked", "onUpdate:checked", "onChange"])
-                  ])
-                ]),
-                default: withCtx(() => [
-                  createVNode(unref(Icon), {
-                    class: "icon",
-                    icon: "ant-design:setting-outlined"
-                  })
-                ]),
-                _: 2
-              }, 1032, ["open"])
-            ])
-          ], 40, _hoisted_1$1)
-        ]),
-        _: 1
-      }, 8, ["class", "modelValue"]);
-    };
+import { defineComponent as e, useCssVars as n, computed as o, ref as a, createBlock as t, openBlock as l, unref as i, normalizeClass as s, withCtx as u, createElementVNode as c, createTextVNode as r, toDisplayString as m, createCommentVNode as d, createVNode as v, onMounted as p, onUnmounted as f, createElementBlock as C, Fragment as g, renderList as h, withModifiers as k, normalizeStyle as _, nextTick as y } from "vue";
+import { theme as I, Dropdown as x, InputNumber as A, Checkbox as b, Empty as M, Tooltip as T, Segmented as E } from "ant-design-vue";
+import { Icon as N } from "@mfish/core/components/Icon";
+import { u as w, _ as O, a as P, s as S, S as U, p as L } from "./index.js";
+import { useDesign as z, useRootSetting as R } from "@mfish/core/hooks";
+import { ThemeEnum as D } from "@mfish/core/enums";
+import { pick as V } from "lodash-es";
+import { PauseCircleTwoTone as Y, PlayCircleTwoTone as B } from "@ant-design/icons-vue";
+import { ScrollContainer as j } from "@mfish/core/components/Container";
+import G from "vuedraggable";
+const K = ["onMouseenter"], q = { class: "setting" }, F = e({ __name: "AnimationSet", setup(e2) {
+  n((e3) => ({ "536783ac": k2.value }));
+  const p2 = w(), f2 = o(() => p2.getCurConfigComponent.chartContain.animations), C2 = a(-1), { prefixCls: g2 } = z("animation-set"), { token: h2 } = I.useToken(), k2 = o(() => h2.value.colorInfoBg), _2 = a(false);
+  const y2 = (e3) => {
+    const { oldIndex: n2, newIndex: o2 } = e3.moved, a2 = p2.getCurConfigComponent.chartContain.animations.splice(n2, 1)[0];
+    p2.getCurConfigComponent.chartContain.animations.splice(o2, 0, a2);
+  }, M2 = (e3) => {
+    _2.value = e3;
+  };
+  return (e3, n2) => (l(), t(i(G), { "item-key": "id", class: s(i(g2)), modelValue: f2.value, "onUpdate:modelValue": n2[0] || (n2[0] = (e4) => f2.value = e4), animation: "300", "ghost-class": "ghost", onChange: y2 }, { item: u(({ element: e4, index: o2 }) => [c("div", { class: "animation", onMouseenter: (e5) => function(e6) {
+    C2.value = e6;
+  }(o2) }, [r(m(e4.label) + " ", 1), c("div", null, [C2.value === o2 ? (l(), t(i(N), { key: 0, class: "icon", icon: "ant-design:delete-outlined", onClick: (e5) => function(e6) {
+    p2.getCurConfigComponent.chartContain.animations.splice(e6, 1), C2.value = -1;
+  }(o2) }, null, 8, ["onClick"])) : d("", true), v(i(x), { placement: "bottom", open: _2.value && C2.value === o2, onOpenChange: M2, arrow: true }, { overlay: u(() => [c("div", q, [v(i(A), { value: e4.duration, "onUpdate:value": (n3) => e4.duration = n3, size: "small", placeholder: "时长 ms", step: 100, min: 0, max: 1e5 }, null, 8, ["value", "onUpdate:value"]), v(i(A), { disabled: e4.loop, value: e4.repeat, "onUpdate:value": (n3) => e4.repeat = n3, size: "small", placeholder: "重复次数", step: 1, min: 0, max: 3 }, null, 8, ["disabled", "value", "onUpdate:value"]), v(i(b), { checked: e4.loop, "onUpdate:checked": (n3) => e4.loop = n3, onChange: (n3) => function(e5) {
+    e5.loop && (e5.repeat = void 0);
+  }(e4) }, { default: u(() => n2[1] || (n2[1] = [r(" 无限循环")])), _: 2 }, 1032, ["checked", "onUpdate:checked", "onChange"])])]), default: u(() => [v(i(N), { class: "icon", icon: "ant-design:setting-outlined" })]), _: 2 }, 1032, ["open"])])], 40, K)]), _: 1 }, 8, ["class", "modelValue"]));
+} }), H = O(F, [["__scopeId", "data-v-27cd3180"]]), J = { key: 1, class: "animation-set" }, Q = { class: "setting" }, W = { class: "mask-layer" }, X = ["onClick", "onMouseenter"], Z = O(e({ name: "AnimationConfig", __name: "index", setup(e2) {
+  n((e3) => ({ "02e0c480": $.value, e3e390f6: i(G2) }));
+  const x2 = a(""), A2 = a(""), b2 = R().getDarkMode, O2 = o(() => b2.value === D.DARK ? { color: "rgba(255,255,255,0.3)" } : { color: "rgba(0,0,0,0.2)" }), G2 = R().getThemeColor, K2 = w(), q2 = o(() => K2.getCurConfigComponent.chartContain.animations), F2 = o(() => {
+    var _a;
+    return (_a = P.find((e3) => e3.value === x2.value)) == null ? void 0 : _a.payload.data;
+  }), { token: Z2 } = I.useToken(), $ = o(() => Z2.value.colorInfoBg), { prefixCls: ee } = z("animation-config"), ne = a(false), oe = () => {
+    ne.value = false;
+  };
+  function ae(e3) {
+    x2.value = e3;
   }
-});
-const AnimationSet = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-27cd3180"]]);
-const _hoisted_1 = {
-  key: 1,
-  class: "animation-set"
-};
-const _hoisted_2 = { class: "setting" };
-const _hoisted_3 = { class: "mask-layer" };
-const _hoisted_4 = ["onClick", "onMouseenter"];
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  ...{ name: "AnimationConfig" },
-  __name: "index",
-  setup(__props) {
-    useCssVars((_ctx) => ({
-      "02e0c480": bgColor.value,
-      "e3e390f6": unref(color)
-    }));
-    const value = ref("");
-    const hoverAnimation = ref("");
-    const darkMode = useRootSetting().getDarkMode;
-    const hoverColor = computed(() => {
-      return darkMode.value === ThemeEnum.DARK ? { color: "rgba(255,255,255,0.3)" } : { color: "rgba(0,0,0,0.2)" };
-    });
-    const color = useRootSetting().getThemeColor;
-    const screenEditStore = useScreenEditStore();
-    const animationList = computed(() => screenEditStore.getCurConfigComponent.chartContain.animations);
-    const data = computed(
-      () => {
-        var _a;
-        return (_a = animationData.find((item) => item.value === value.value)) == null ? void 0 : _a.payload.data;
-      }
-    );
-    const { token } = theme.useToken();
-    const bgColor = computed(() => token.value.colorInfoBg);
-    const { prefixCls } = useDesign("animation-config");
-    const running = ref(false);
-    const stopRun = () => {
-      running.value = false;
-    };
-    onMounted(() => {
-      value.value = animationData[0].value;
-      screenEvent.on(ScreenEventEnum.PLAY_ANIMATION_COMPLETE, stopRun);
-    });
-    onUnmounted(() => {
-      screenEvent.off(ScreenEventEnum.PLAY_ANIMATION_COMPLETE, stopRun);
-    });
-    function typeChange(e) {
-      value.value = e;
-    }
-    async function runAnimation(animate) {
-      hoverAnimation.value = animate.value;
-      await nextTick();
-      await playAnimation(animate.animationRef, [animate]);
-    }
-    function addAnimation(animate) {
-      const value2 = pick(animate, ["label", "value"]);
-      if (screenEditStore.getCurConfigComponent.chartContain.animations) {
-        screenEditStore.getCurConfigComponent.chartContain.animations.push(value2);
-      } else {
-        screenEditStore.getCurConfigComponent.chartContain.animations = [value2];
-      }
-    }
-    function startAnimation() {
-      running.value = true;
-      nextTick(() => screenEvent.emit(ScreenEventEnum.PLAY_ANIMATION));
-    }
-    function stopAnimation() {
-      running.value = false;
-      screenEvent.emit(ScreenEventEnum.STOP_ANIMATION);
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(unref(prefixCls))
-      }, [
-        createVNode(unref(ScrollContainer), { style: { "min-height": "250px", "height": "250px" } }, {
-          default: withCtx(() => [
-            !animationList.value || animationList.value.length === 0 ? (openBlock(), createBlock(unref(Empty), {
-              key: 0,
-              description: "未添加动画",
-              image: unref(Empty).PRESENTED_IMAGE_SIMPLE
-            }, null, 8, ["image"])) : (openBlock(), createElementBlock("div", _hoisted_1, [
-              createVNode(AnimationSet),
-              createElementVNode("div", _hoisted_2, [
-                createVNode(unref(Tooltip), {
-                  title: running.value ? "暂停动画" : "播放动画"
-                }, {
-                  default: withCtx(() => [
-                    createElementVNode("div", _hoisted_3, [
-                      running.value ? (openBlock(), createBlock(unref(PauseCircleTwoTone), {
-                        key: 0,
-                        "two-tone-color": unref(color),
-                        style: { fontSize: "60px" },
-                        onClick: stopAnimation
-                      }, null, 8, ["two-tone-color"])) : (openBlock(), createBlock(unref(PlayCircleTwoTone), {
-                        key: 1,
-                        "two-tone-color": unref(color),
-                        style: { fontSize: "60px" },
-                        onClick: startAnimation
-                      }, null, 8, ["two-tone-color"]))
-                    ])
-                  ]),
-                  _: 1
-                }, 8, ["title"])
-              ])
-            ]))
-          ]),
-          _: 1
-        }),
-        createVNode(unref(Segmented), {
-          class: "segment",
-          value: value.value,
-          options: unref(animationData),
-          onChange: typeChange,
-          block: ""
-        }, {
-          label: withCtx(({ value: val, payload }) => [
-            payload.icon ? (openBlock(), createBlock(unref(Icon), {
-              key: 0,
-              icon: payload.icon
-            }, null, 8, ["icon"])) : createCommentVNode("", true),
-            createTextVNode(" " + toDisplayString(val), 1)
-          ]),
-          _: 1
-        }, 8, ["value", "options"]),
-        createVNode(unref(ScrollContainer), null, {
-          default: withCtx(() => [
-            createElementVNode("div", {
-              class: "animation-contain",
-              onMouseleave: _cache[0] || (_cache[0] = ($event) => hoverAnimation.value = "")
-            }, [
-              (openBlock(true), createElementBlock(Fragment, null, renderList(data.value, (item) => {
-                return openBlock(), createElementBlock("div", {
-                  style: { "cursor": "pointer", "height": "28px" },
-                  key: item.value,
-                  onClick: ($event) => addAnimation(item),
-                  onMouseenter: withModifiers(($event) => runAnimation(item), ["stop", "prevent"])
-                }, [
-                  createElementVNode("div", {
-                    class: "animation-block",
-                    style: normalizeStyle(hoverAnimation.value === item.value ? hoverColor.value : {}),
-                    ref_for: true,
-                    ref: (el) => {
-                      item.animationRef = el;
-                    }
-                  }, toDisplayString(item.label), 5),
-                  hoverAnimation.value === item.value ? (openBlock(), createBlock(unref(Icon), {
-                    key: 0,
-                    class: "mask-icon",
-                    icon: "ant-design:plus-outlined",
-                    size: 24
-                  })) : createCommentVNode("", true)
-                ], 40, _hoisted_4);
-              }), 128))
-            ], 32)
-          ]),
-          _: 1
-        })
-      ], 2);
-    };
+  function te() {
+    ne.value = true, y(() => S.emit(U.PLAY_ANIMATION));
   }
-});
-const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-9602bb09"]]);
+  function le() {
+    ne.value = false, S.emit(U.STOP_ANIMATION);
+  }
+  return p(() => {
+    x2.value = P[0].value, S.on(U.PLAY_ANIMATION_COMPLETE, oe);
+  }), f(() => {
+    S.off(U.PLAY_ANIMATION_COMPLETE, oe);
+  }), (e3, n2) => (l(), C("div", { class: s(i(ee)) }, [v(i(j), { style: { "min-height": "250px", height: "250px" } }, { default: u(() => [q2.value && 0 !== q2.value.length ? (l(), C("div", J, [v(H), c("div", Q, [v(i(T), { title: ne.value ? "暂停动画" : "播放动画" }, { default: u(() => [c("div", W, [ne.value ? (l(), t(i(Y), { key: 0, "two-tone-color": i(G2), style: { fontSize: "60px" }, onClick: le }, null, 8, ["two-tone-color"])) : (l(), t(i(B), { key: 1, "two-tone-color": i(G2), style: { fontSize: "60px" }, onClick: te }, null, 8, ["two-tone-color"]))])]), _: 1 }, 8, ["title"])])])) : (l(), t(i(M), { key: 0, description: "未添加动画", image: i(M).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"]))]), _: 1 }), v(i(E), { class: "segment", value: x2.value, options: i(P), onChange: ae, block: "" }, { label: u(({ value: e4, payload: n3 }) => [n3.icon ? (l(), t(i(N), { key: 0, icon: n3.icon }, null, 8, ["icon"])) : d("", true), r(" " + m(e4), 1)]), _: 1 }, 8, ["value", "options"]), v(i(j), null, { default: u(() => [c("div", { class: "animation-contain", onMouseleave: n2[0] || (n2[0] = (e4) => A2.value = "") }, [(l(true), C(g, null, h(F2.value, (e4) => (l(), C("div", { style: { cursor: "pointer", height: "28px" }, key: e4.value, onClick: (n3) => function(e5) {
+    const n4 = V(e5, ["label", "value"]);
+    K2.getCurConfigComponent.chartContain.animations ? K2.getCurConfigComponent.chartContain.animations.push(n4) : K2.getCurConfigComponent.chartContain.animations = [n4];
+  }(e4), onMouseenter: k((n3) => async function(e5) {
+    A2.value = e5.value, await y(), await L(e5.animationRef, [e5]);
+  }(e4), ["stop", "prevent"]) }, [c("div", { class: "animation-block", style: _(A2.value === e4.value ? O2.value : {}), ref_for: true, ref: (n3) => {
+    e4.animationRef = n3;
+  } }, m(e4.label), 5), A2.value === e4.value ? (l(), t(i(N), { key: 0, class: "mask-icon", icon: "ant-design:plus-outlined", size: 24 })) : d("", true)], 40, X))), 128))], 32)]), _: 1 })], 2));
+} }), [["__scopeId", "data-v-9602bb09"]]);
 export {
-  index as default
+  Z as default
 };

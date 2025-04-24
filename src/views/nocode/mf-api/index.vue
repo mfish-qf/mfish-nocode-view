@@ -148,10 +148,12 @@
       { pageNum, pageSize }
     )
       .then((res) => {
-        const columns: BasicColumn[] = Object.keys(res.headers).map((key) => ({
-          title: key,
-          dataIndex: key
-        }));
+        const columns: BasicColumn[] = Object.values(res.headers)
+          .sort((a: any, b: any) => a.index - b.index)
+          .map((value) => ({
+            title: value.colName,
+            dataIndex: value.colName
+          }));
         setColumns(columns);
         setDataTable(res.table.list);
         setPagination({

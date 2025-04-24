@@ -1,51 +1,24 @@
-import { defineComponent, createBlock, openBlock, withCtx, createVNode, unref } from "vue";
-import { S as StyleConfig } from "./StyleConfig.js";
-import { E as EchartsTitleConfig } from "./EchartsBaseConfig.js";
-import { E as EchartsLegendConfig } from "./EchartsLegendConfig.js";
-import { E as EchartsGridConfig, a as EchartsAxisConfig } from "./EchartsAxisConfig.js";
-import { u as useEchartsSeriesConfig, E as EchartsTooltipConfig } from "./UseEchartsSeriesConfig.js";
-import { u as useScreenEditStore } from "./index.js";
-import { E as EchartsSeriesLabelConfig } from "./EchartsSeriesLabelConfig.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfScatterConfig",
-  setup(__props) {
-    const screenEditStore = useScreenEditStore();
-    const { seriesChange } = useEchartsSeriesConfig();
-    function xAxisChange(e) {
-      screenEditStore.getCurConfigComponent.chart.options.xAxis = e;
-    }
-    function yAxisChange(e) {
-      screenEditStore.getCurConfigComponent.chart.options.yAxis = e;
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(StyleConfig, null, {
-        default: withCtx(() => {
-          var _a;
-          return [
-            createVNode(EchartsGridConfig),
-            createVNode(EchartsTitleConfig),
-            createVNode(EchartsTooltipConfig),
-            createVNode(EchartsLegendConfig),
-            createVNode(EchartsAxisConfig, {
-              axis: unref(screenEditStore).getCurConfigComponent.chart.options.xAxis,
-              onAxisChange: xAxisChange
-            }, null, 8, ["axis"]),
-            createVNode(EchartsAxisConfig, {
-              "axis-type": "Y",
-              axis: unref(screenEditStore).getCurConfigComponent.chart.options.yAxis,
-              onAxisChange: yAxisChange
-            }, null, 8, ["axis"]),
-            createVNode(EchartsSeriesLabelConfig, {
-              series: (_a = unref(screenEditStore).getCurConfigComponent.chart.options) == null ? void 0 : _a.series[0],
-              onLabelChange: _cache[0] || (_cache[0] = ($event) => unref(seriesChange)($event, 0))
-            }, null, 8, ["series"])
-          ];
-        }),
-        _: 1
-      });
-    };
+import { defineComponent as o, createBlock as s, openBlock as n, withCtx as i, createVNode as t, unref as e } from "vue";
+import { S as r } from "./StyleConfig.js";
+import { E as a } from "./EchartsBaseConfig.js";
+import { E as C } from "./EchartsLegendConfig.js";
+import { E as f, a as g } from "./EchartsAxisConfig.js";
+import { u as m, E as p } from "./UseEchartsSeriesConfig.js";
+import { u } from "./index.js";
+import { E as x } from "./EchartsSeriesLabelConfig.js";
+const c = o({ __name: "MfScatterConfig", setup(o2) {
+  const c2 = u(), { seriesChange: h } = m();
+  function l(o3) {
+    c2.getCurConfigComponent.chart.options.xAxis = o3;
   }
-});
+  function E(o3) {
+    c2.getCurConfigComponent.chart.options.yAxis = o3;
+  }
+  return (o3, m2) => (n(), s(r, null, { default: i(() => {
+    var _a;
+    return [t(f), t(a), t(p), t(C), t(g, { axis: e(c2).getCurConfigComponent.chart.options.xAxis, onAxisChange: l }, null, 8, ["axis"]), t(g, { "axis-type": "Y", axis: e(c2).getCurConfigComponent.chart.options.yAxis, onAxisChange: E }, null, 8, ["axis"]), t(x, { series: (_a = e(c2).getCurConfigComponent.chart.options) == null ? void 0 : _a.series[0], onLabelChange: m2[0] || (m2[0] = (o4) => e(h)(o4, 0)) }, null, 8, ["series"])];
+  }), _: 1 }));
+} });
 export {
-  _sfc_main as default
+  c as default
 };

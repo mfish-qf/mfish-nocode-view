@@ -1,374 +1,83 @@
-import { defineComponent, ref, computed, watch, createElementBlock, openBlock, normalizeClass, unref, createVNode, withCtx, createElementVNode, createCommentVNode, Fragment, renderList, createTextVNode, toDisplayString, resolveComponent, createBlock } from "vue";
-import { S as StyleConfig } from "./StyleConfig.js";
-import { a as EchartsBaseConfig, E as EchartsTitleConfig } from "./EchartsBaseConfig.js";
-import { u as useScreenEditStore, ao as useEchartsData, _ as _export_sfc, k as MfishColorPicker, an as EchartsTheme } from "./index.js";
-import { useDesign } from "@mfish/core/hooks";
-import { RadioGroup, RadioButton, Slider, Checkbox } from "ant-design-vue";
-import { C as ConfigGroup } from "./ConfigGroup.js";
-import { E as EchartsSeriesLabelConfig } from "./EchartsSeriesLabelConfig.js";
-import { cloneDeep } from "lodash-es";
+import { defineComponent as e, ref as o, computed as t, watch as n, createElementBlock as i, openBlock as a, normalizeClass as l, unref as s, createVNode as r, withCtx as u, createElementVNode as p, createCommentVNode as C, Fragment as c, renderList as g, createTextVNode as f, toDisplayString as m, resolveComponent as h, createBlock as v } from "vue";
+import { S as d } from "./StyleConfig.js";
+import { a as y, E as _ } from "./EchartsBaseConfig.js";
+import { u as b, ao as k, _ as E, k as M, an as x } from "./index.js";
+import { useDesign as R } from "@mfish/core/hooks";
+import { RadioGroup as F, RadioButton as I, Slider as S, Checkbox as w } from "ant-design-vue";
+import { C as U } from "./ConfigGroup.js";
+import { E as j } from "./EchartsSeriesLabelConfig.js";
+import { cloneDeep as z } from "lodash-es";
 import "@mfish/core/enums";
-import { Icon } from "@mfish/core/components/Icon";
+import { Icon as T } from "@mfish/core/components/Icon";
 import "@mfish/core/utils/Is";
-const _hoisted_1 = { class: "title" };
-const _hoisted_2 = {
-  key: 0,
-  class: "title"
-};
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
-  __name: "MfEffectScatterConfig",
-  setup(__props) {
-    const { prefixCls } = useDesign("effect-scatter-config");
-    const screenEditStore = useScreenEditStore();
-    const { getSeries } = useEchartsData();
-    const symbol = ref("circle");
-    const symbols = [
-      { title: "圆形", value: "circle" },
-      { title: "方形", value: "rect" },
-      { title: "三角形", value: "triangle" },
-      { title: "菱形", value: "diamond" },
-      { title: "定位", value: "pin" },
-      { title: "箭头", value: "arrow" }
-    ];
-    const brushType = ref("stroke");
-    const brushTypes = [
-      { title: "描边", value: "stroke" },
-      { title: "填充", value: "fill" }
-    ];
-    const symbolSize = ref(10);
-    const symbolRotate = ref(0);
-    const showLabel = ref(true);
-    const rippleNumber = ref(3);
-    const labelSeries = computed(() => {
-      var _a;
-      if (((_a = screenEditStore.getCurConfigComponent.chart.options.series) == null ? void 0 : _a.length) > 1) {
-        return screenEditStore.getCurConfigComponent.chart.options.series[1];
-      }
-      return {};
-    });
-    watch(
-      () => screenEditStore.getCurConfigComponent,
-      (val) => {
-        if (!val) return;
-        initValue();
-      },
-      { immediate: true }
-    );
-    function initValue() {
-      var _a, _b, _c;
-      if (((_a = screenEditStore.getCurConfigComponent.chart.options.series) == null ? void 0 : _a.length) > 1) {
-        if (screenEditStore.getCurConfigComponent.chart.options.series[1].symbol !== void 0) {
-          symbol.value = screenEditStore.getCurConfigComponent.chart.options.series[1].symbol;
-        }
-        if (screenEditStore.getCurConfigComponent.chart.options.series[1].symbolSize !== void 0) {
-          symbolSize.value = screenEditStore.getCurConfigComponent.chart.options.series[1].symbolSize;
-        }
-        if (screenEditStore.getCurConfigComponent.chart.options.series[1].symbolRotate !== void 0) {
-          symbolRotate.value = screenEditStore.getCurConfigComponent.chart.options.series[1].symbolRotate;
-        }
-        if (((_b = screenEditStore.getCurConfigComponent.chart.options.series[1].label) == null ? void 0 : _b.show) !== void 0) {
-          showLabel.value = screenEditStore.getCurConfigComponent.chart.options.series[1].label.show;
-        }
-        if (((_c = screenEditStore.getCurConfigComponent.chart.options.series[1].rippleEffect) == null ? void 0 : _c.brushType) !== void 0) {
-          brushType.value = screenEditStore.getCurConfigComponent.chart.options.series[1].rippleEffect.brushType;
-        }
-      }
-    }
-    const showScatter = computed(() => {
-      return screenEditStore.getCurConfigComponent.chart.options.series && screenEditStore.getCurConfigComponent.chart.options.series.length > 1;
-    });
-    function showScatterChecked(val) {
-      screenEditStore.getCurConfigComponent.chart.options.series = getSeries(
-        screenEditStore.getCurConfigComponent.chart,
-        Array.from({ length: val ? 2 : 1 })
-      );
-    }
-    function symbolChange() {
-      screenEditStore.getCurConfigComponent.chart.options.series[1].symbol = symbol.value;
-    }
-    function symbolSizeChange(val) {
-      screenEditStore.getCurConfigComponent.chart.options.series[1].symbolSize = val;
-    }
-    function symbolRotateChange(val) {
-      screenEditStore.getCurConfigComponent.chart.options.series[1].symbolRotate = val;
-    }
-    function labelChange(e) {
-      screenEditStore.getCurConfigComponent.chart.options.series[1].label = {
-        ...screenEditStore.getCurConfigComponent.chart.options.series[1].label,
-        ...e.label
-      };
-    }
-    function brushTypeChange() {
-      screenEditStore.getCurConfigComponent.chart.options.series[1].rippleEffect = {
-        ...screenEditStore.getCurConfigComponent.chart.options.series[1].rippleEffect,
-        brushType: brushType.value
-      };
-    }
-    function rippleNumberChange(val) {
-      screenEditStore.getCurConfigComponent.chart.options.series[1].rippleEffect = {
-        ...screenEditStore.getCurConfigComponent.chart.options.series[1].rippleEffect,
-        number: val
-      };
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(unref(prefixCls))
-      }, [
-        createVNode(ConfigGroup, {
-          title: "气泡配置",
-          "default-expand": false,
-          "allow-check": true,
-          "title-check": showScatter.value,
-          onChecked: showScatterChecked
-        }, {
-          default: withCtx(() => {
-            var _a, _b, _c;
-            return [
-              _cache[9] || (_cache[9] = createElementVNode("div", { class: "title" }, " 形状", -1)),
-              createVNode(unref(RadioGroup), {
-                size: "small",
-                value: symbol.value,
-                "onUpdate:value": _cache[0] || (_cache[0] = ($event) => symbol.value = $event),
-                onChange: symbolChange
-              }, {
-                default: withCtx(() => [
-                  (openBlock(), createElementBlock(Fragment, null, renderList(symbols, (item) => {
-                    return createVNode(unref(RadioButton), {
-                      key: item.value,
-                      value: item.value
-                    }, {
-                      default: withCtx(() => [
-                        createTextVNode(toDisplayString(item.title), 1)
-                      ]),
-                      _: 2
-                    }, 1032, ["value"]);
-                  }), 64))
-                ]),
-                _: 1
-              }, 8, ["value"]),
-              createElementVNode("div", _hoisted_1, [
-                _cache[5] || (_cache[5] = createTextVNode(" 大小 ")),
-                createVNode(unref(Slider), {
-                  value: symbolSize.value,
-                  "onUpdate:value": _cache[1] || (_cache[1] = ($event) => symbolSize.value = $event),
-                  min: 5,
-                  max: 50,
-                  onChange: symbolSizeChange
-                }, null, 8, ["value"]),
-                _cache[6] || (_cache[6] = createTextVNode(" 角度 ")),
-                createVNode(unref(Slider), {
-                  value: symbolRotate.value,
-                  "onUpdate:value": _cache[2] || (_cache[2] = ($event) => symbolRotate.value = $event),
-                  min: 0,
-                  max: 360,
-                  onChange: symbolRotateChange
-                }, null, 8, ["value"])
-              ]),
-              createVNode(EchartsSeriesLabelConfig, {
-                series: labelSeries.value,
-                onLabelChange: labelChange
-              }, null, 8, ["series"]),
-              ((_c = (_b = (_a = unref(screenEditStore).getCurConfigComponent) == null ? void 0 : _a.chart) == null ? void 0 : _b.options) == null ? void 0 : _c.geo) ? (openBlock(), createElementBlock("div", _hoisted_2, [
-                _cache[7] || (_cache[7] = createTextVNode(" 涟漪类型 ")),
-                createElementVNode("div", null, [
-                  createVNode(unref(RadioGroup), {
-                    size: "small",
-                    value: brushType.value,
-                    "onUpdate:value": _cache[3] || (_cache[3] = ($event) => brushType.value = $event),
-                    onChange: brushTypeChange
-                  }, {
-                    default: withCtx(() => [
-                      (openBlock(), createElementBlock(Fragment, null, renderList(brushTypes, (item) => {
-                        return createVNode(unref(RadioButton), {
-                          key: item.value,
-                          value: item.value
-                        }, {
-                          default: withCtx(() => [
-                            createTextVNode(toDisplayString(item.title), 1)
-                          ]),
-                          _: 2
-                        }, 1032, ["value"]);
-                      }), 64))
-                    ]),
-                    _: 1
-                  }, 8, ["value"])
-                ]),
-                _cache[8] || (_cache[8] = createTextVNode(" 数量 ")),
-                createVNode(unref(Slider), {
-                  value: rippleNumber.value,
-                  "onUpdate:value": _cache[4] || (_cache[4] = ($event) => rippleNumber.value = $event),
-                  min: 0,
-                  max: 10,
-                  onChange: rippleNumberChange
-                }, null, 8, ["value"])
-              ])) : createCommentVNode("", true)
-            ];
-          }),
-          _: 1
-        }, 8, ["title-check"])
-      ], 2);
-    };
+const A = { class: "title" }, B = { key: 0, class: "title" }, L = E(e({ __name: "MfEffectScatterConfig", setup(e2) {
+  const { prefixCls: h2 } = R("effect-scatter-config"), v2 = b(), { getSeries: d2 } = k(), y2 = o("circle"), _2 = [{ title: "圆形", value: "circle" }, { title: "方形", value: "rect" }, { title: "三角形", value: "triangle" }, { title: "菱形", value: "diamond" }, { title: "定位", value: "pin" }, { title: "箭头", value: "arrow" }], E2 = o("stroke"), M2 = [{ title: "描边", value: "stroke" }, { title: "填充", value: "fill" }], x2 = o(10), w2 = o(0), z2 = o(true), T2 = o(3), L2 = t(() => {
+    var _a;
+    return ((_a = v2.getCurConfigComponent.chart.options.series) == null ? void 0 : _a.length) > 1 ? v2.getCurConfigComponent.chart.options.series[1] : {};
+  });
+  n(() => v2.getCurConfigComponent, (e3) => {
+    var _a, _b, _c;
+    e3 && ((_a = v2.getCurConfigComponent.chart.options.series) == null ? void 0 : _a.length) > 1 && (void 0 !== v2.getCurConfigComponent.chart.options.series[1].symbol && (y2.value = v2.getCurConfigComponent.chart.options.series[1].symbol), void 0 !== v2.getCurConfigComponent.chart.options.series[1].symbolSize && (x2.value = v2.getCurConfigComponent.chart.options.series[1].symbolSize), void 0 !== v2.getCurConfigComponent.chart.options.series[1].symbolRotate && (w2.value = v2.getCurConfigComponent.chart.options.series[1].symbolRotate), void 0 !== ((_b = v2.getCurConfigComponent.chart.options.series[1].label) == null ? void 0 : _b.show) && (z2.value = v2.getCurConfigComponent.chart.options.series[1].label.show), void 0 !== ((_c = v2.getCurConfigComponent.chart.options.series[1].rippleEffect) == null ? void 0 : _c.brushType) && (E2.value = v2.getCurConfigComponent.chart.options.series[1].rippleEffect.brushType));
+  }, { immediate: true });
+  const G2 = t(() => v2.getCurConfigComponent.chart.options.series && v2.getCurConfigComponent.chart.options.series.length > 1);
+  function q2(e3) {
+    v2.getCurConfigComponent.chart.options.series = d2(v2.getCurConfigComponent.chart, Array.from({ length: e3 ? 2 : 1 }));
   }
-});
-const MfEffectScatterConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-b55e2c44"]]);
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
-  __name: "MfColorIntervalConfig",
-  props: {
-    themeColors: {
-      type: Array,
-      default: () => {
-        return [];
-      }
-    }
-  },
-  setup(__props) {
-    const props = __props;
-    const screenEditStore = useScreenEditStore();
-    const { prefixCls } = useDesign("color-interval-config");
-    const colors = computed(() => {
-      var _a, _b;
-      return ((_b = (_a = screenEditStore.getCurComponent.chart.options.visualMap) == null ? void 0 : _a.inRange) == null ? void 0 : _b.color) || [];
-    });
-    watch(
-      () => props.themeColors,
-      (val) => {
-        if ((val == null ? void 0 : val.length) > 0) {
-          screenEditStore.getCurComponent.chart.options.visualMap.inRange.color = cloneDeep(val);
-        }
-      }
-    );
-    watch(
-      () => screenEditStore.getCurConfigComponent,
-      (val) => {
-        if (!val) return;
-      },
-      { immediate: true }
-    );
-    function changeIntervalColor(value, index) {
-      if (value) {
-        screenEditStore.getCurComponent.chart.options.visualMap.inRange.color[index] = value;
-      } else {
-        screenEditStore.getCurComponent.chart.options.visualMap.inRange.color[index] = "";
-      }
-    }
-    function deleteColor(index) {
-      screenEditStore.getCurComponent.chart.options.visualMap.inRange.color.splice(index, 1);
-    }
-    function addColor() {
-      const length = screenEditStore.getCurComponent.chart.options.visualMap.inRange.color.length;
-      if (props.themeColors.length > length) {
-        screenEditStore.getCurComponent.chart.options.visualMap.inRange.color.push(props.themeColors[length]);
-      } else {
-        screenEditStore.getCurComponent.chart.options.visualMap.inRange.color.push("#FF0000");
-      }
-    }
-    return (_ctx, _cache) => {
-      const _component_AButton = resolveComponent("AButton");
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(unref(prefixCls))
-      }, [
-        createVNode(ConfigGroup, {
-          title: "颜色区间配置",
-          "default-expand": true
-        }, {
-          default: withCtx(() => [
-            (openBlock(true), createElementBlock(Fragment, null, renderList(colors.value, (item, index) => {
-              return openBlock(), createElementBlock("div", {
-                class: "title",
-                key: index
-              }, [
-                _cache[0] || (_cache[0] = createTextVNode(" 区间颜色 ")),
-                createElementVNode("div", null, [
-                  createVNode(unref(MfishColorPicker), {
-                    type: 1,
-                    placeholder: "设置区间颜色，格式#FFFFFF",
-                    value: item,
-                    "hide-cancel": true,
-                    "hide-confirm": true,
-                    onInputChange: ($event) => changeIntervalColor($event, index)
-                  }, null, 8, ["value", "onInputChange"])
-                ]),
-                index > 0 ? (openBlock(), createBlock(unref(Icon), {
-                  key: 0,
-                  class: "color-delete",
-                  icon: "ant-design:delete-outlined",
-                  onClick: ($event) => deleteColor(index)
-                }, null, 8, ["onClick"])) : createCommentVNode("", true)
-              ]);
-            }), 128)),
-            createVNode(_component_AButton, { onClick: addColor }, {
-              icon: withCtx(() => [
-                createVNode(unref(Icon), { icon: "ant-design:plus-outlined" })
-              ]),
-              default: withCtx(() => [
-                _cache[1] || (_cache[1] = createTextVNode(" 添加区间颜色 "))
-              ]),
-              _: 1
-            })
-          ]),
-          _: 1
-        })
-      ], 2);
-    };
+  function D() {
+    v2.getCurConfigComponent.chart.options.series[1].symbol = y2.value;
   }
-});
-const MfColorIntervalConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-a73fcec4"]]);
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfMapConfig",
-  setup(__props) {
-    const screenEditStore = useScreenEditStore();
-    const { prefixCls } = useDesign("map-chart-config");
-    const showTooltip = ref(true);
-    const themeColor = ref(cloneDeep(EchartsTheme[0].color));
-    watch(
-      () => screenEditStore.getCurConfigComponent,
-      (val) => {
-        if (!val) return;
-        initValue();
-      },
-      { immediate: true }
-    );
-    function initValue() {
-      var _a, _b;
-      if (((_a = screenEditStore.getCurConfigComponent.chart.options.tooltip) == null ? void 0 : _a.show) !== void 0) {
-        showTooltip.value = ((_b = screenEditStore.getCurConfigComponent.chart.options.tooltip) == null ? void 0 : _b.show) || false;
-      }
-    }
-    function showTooltipChange() {
-      screenEditStore.getCurConfigComponent.chart.options.tooltip = {
-        ...screenEditStore.getCurConfigComponent.chart.options.tooltip,
-        show: showTooltip.value
-      };
-    }
-    function themeChange(e) {
-      themeColor.value = cloneDeep(e.color);
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(StyleConfig, {
-        class: normalizeClass(unref(prefixCls))
-      }, {
-        default: withCtx(() => [
-          createVNode(EchartsBaseConfig, { onThemeChange: themeChange }),
-          createVNode(EchartsTitleConfig),
-          createVNode(unref(Checkbox), {
-            checked: showTooltip.value,
-            "onUpdate:checked": _cache[0] || (_cache[0] = ($event) => showTooltip.value = $event),
-            onChange: showTooltipChange
-          }, {
-            default: withCtx(() => _cache[1] || (_cache[1] = [
-              createTextVNode(" 提示框")
-            ])),
-            _: 1
-          }, 8, ["checked"]),
-          createVNode(MfEffectScatterConfig),
-          createVNode(MfColorIntervalConfig, { "theme-colors": themeColor.value }, null, 8, ["theme-colors"])
-        ]),
-        _: 1
-      }, 8, ["class"]);
-    };
+  function H(e3) {
+    v2.getCurConfigComponent.chart.options.series[1].symbolSize = e3;
   }
-});
-const MfMapConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-7970d757"]]);
+  function J(e3) {
+    v2.getCurConfigComponent.chart.options.series[1].symbolRotate = e3;
+  }
+  function K(e3) {
+    v2.getCurConfigComponent.chart.options.series[1].label = { ...v2.getCurConfigComponent.chart.options.series[1].label, ...e3.label };
+  }
+  function N() {
+    v2.getCurConfigComponent.chart.options.series[1].rippleEffect = { ...v2.getCurConfigComponent.chart.options.series[1].rippleEffect, brushType: E2.value };
+  }
+  function O(e3) {
+    v2.getCurConfigComponent.chart.options.series[1].rippleEffect = { ...v2.getCurConfigComponent.chart.options.series[1].rippleEffect, number: e3 };
+  }
+  return (e3, o2) => (a(), i("div", { class: l(s(h2)) }, [r(U, { title: "气泡配置", "default-expand": false, "allow-check": true, "title-check": G2.value, onChecked: q2 }, { default: u(() => {
+    var _a, _b, _c;
+    return [o2[9] || (o2[9] = p("div", { class: "title" }, " 形状", -1)), r(s(F), { size: "small", value: y2.value, "onUpdate:value": o2[0] || (o2[0] = (e4) => y2.value = e4), onChange: D }, { default: u(() => [(a(), i(c, null, g(_2, (e4) => r(s(I), { key: e4.value, value: e4.value }, { default: u(() => [f(m(e4.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"]), p("div", A, [o2[5] || (o2[5] = f(" 大小 ")), r(s(S), { value: x2.value, "onUpdate:value": o2[1] || (o2[1] = (e4) => x2.value = e4), min: 5, max: 50, onChange: H }, null, 8, ["value"]), o2[6] || (o2[6] = f(" 角度 ")), r(s(S), { value: w2.value, "onUpdate:value": o2[2] || (o2[2] = (e4) => w2.value = e4), min: 0, max: 360, onChange: J }, null, 8, ["value"])]), r(j, { series: L2.value, onLabelChange: K }, null, 8, ["series"]), ((_c = (_b = (_a = s(v2).getCurConfigComponent) == null ? void 0 : _a.chart) == null ? void 0 : _b.options) == null ? void 0 : _c.geo) ? (a(), i("div", B, [o2[7] || (o2[7] = f(" 涟漪类型 ")), p("div", null, [r(s(F), { size: "small", value: E2.value, "onUpdate:value": o2[3] || (o2[3] = (e4) => E2.value = e4), onChange: N }, { default: u(() => [(a(), i(c, null, g(M2, (e4) => r(s(I), { key: e4.value, value: e4.value }, { default: u(() => [f(m(e4.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])]), o2[8] || (o2[8] = f(" 数量 ")), r(s(S), { value: T2.value, "onUpdate:value": o2[4] || (o2[4] = (e4) => T2.value = e4), min: 0, max: 10, onChange: O }, null, 8, ["value"])])) : C("", true)];
+  }), _: 1 }, 8, ["title-check"])], 2));
+} }), [["__scopeId", "data-v-b55e2c44"]]), G = E(e({ __name: "MfColorIntervalConfig", props: { themeColors: { type: Array, default: () => [] } }, setup(e2) {
+  const o2 = e2, m2 = b(), { prefixCls: d2 } = R("color-interval-config"), y2 = t(() => {
+    var _a, _b;
+    return ((_b = (_a = m2.getCurComponent.chart.options.visualMap) == null ? void 0 : _a.inRange) == null ? void 0 : _b.color) || [];
+  });
+  function _2() {
+    const e3 = m2.getCurComponent.chart.options.visualMap.inRange.color.length;
+    o2.themeColors.length > e3 ? m2.getCurComponent.chart.options.visualMap.inRange.color.push(o2.themeColors[e3]) : m2.getCurComponent.chart.options.visualMap.inRange.color.push("#FF0000");
+  }
+  return n(() => o2.themeColors, (e3) => {
+    (e3 == null ? void 0 : e3.length) > 0 && (m2.getCurComponent.chart.options.visualMap.inRange.color = z(e3));
+  }), n(() => m2.getCurConfigComponent, (e3) => {
+  }, { immediate: true }), (e3, o3) => {
+    const t2 = h("AButton");
+    return a(), i("div", { class: l(s(d2)) }, [r(U, { title: "颜色区间配置", "default-expand": true }, { default: u(() => [(a(true), i(c, null, g(y2.value, (e4, t3) => (a(), i("div", { class: "title", key: t3 }, [o3[0] || (o3[0] = f(" 区间颜色 ")), p("div", null, [r(s(M), { type: 1, placeholder: "设置区间颜色，格式#FFFFFF", value: e4, "hide-cancel": true, "hide-confirm": true, onInputChange: (e5) => function(e6, o4) {
+      m2.getCurComponent.chart.options.visualMap.inRange.color[o4] = e6 || "";
+    }(e5, t3) }, null, 8, ["value", "onInputChange"])]), t3 > 0 ? (a(), v(s(T), { key: 0, class: "color-delete", icon: "ant-design:delete-outlined", onClick: (e5) => function(e6) {
+      m2.getCurComponent.chart.options.visualMap.inRange.color.splice(e6, 1);
+    }(t3) }, null, 8, ["onClick"])) : C("", true)]))), 128)), r(t2, { onClick: _2 }, { icon: u(() => [r(s(T), { icon: "ant-design:plus-outlined" })]), default: u(() => [o3[1] || (o3[1] = f(" 添加区间颜色 "))]), _: 1 })]), _: 1 })], 2);
+  };
+} }), [["__scopeId", "data-v-a73fcec4"]]), q = E(e({ __name: "MfMapConfig", setup(e2) {
+  const t2 = b(), { prefixCls: i2 } = R("map-chart-config"), p2 = o(true), C2 = o(z(x[0].color));
+  function c2() {
+    t2.getCurConfigComponent.chart.options.tooltip = { ...t2.getCurConfigComponent.chart.options.tooltip, show: p2.value };
+  }
+  function g2(e3) {
+    C2.value = z(e3.color);
+  }
+  return n(() => t2.getCurConfigComponent, (e3) => {
+    var _a, _b;
+    e3 && void 0 !== ((_a = t2.getCurConfigComponent.chart.options.tooltip) == null ? void 0 : _a.show) && (p2.value = ((_b = t2.getCurConfigComponent.chart.options.tooltip) == null ? void 0 : _b.show) || false);
+  }, { immediate: true }), (e3, o2) => (a(), v(d, { class: l(s(i2)) }, { default: u(() => [r(y, { onThemeChange: g2 }), r(_), r(s(w), { checked: p2.value, "onUpdate:checked": o2[0] || (o2[0] = (e4) => p2.value = e4), onChange: c2 }, { default: u(() => o2[1] || (o2[1] = [f(" 提示框")])), _: 1 }, 8, ["checked"]), r(L), r(G, { "theme-colors": C2.value }, null, 8, ["theme-colors"])]), _: 1 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-7970d757"]]);
 export {
-  MfMapConfig as default
+  q as default
 };

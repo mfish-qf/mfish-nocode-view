@@ -1,356 +1,102 @@
-import { defineComponent, ref, computed, watch, resolveComponent, createBlock, openBlock, normalizeClass, unref, withCtx, createVNode, createCommentVNode, createElementVNode, createTextVNode, createElementBlock, Fragment, renderList, toDisplayString } from "vue";
-import { S as StyleConfig } from "./StyleConfig.js";
-import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index.js";
+import { defineComponent as e, ref as t, computed as o, watch as n, resolveComponent as a, createBlock as l, openBlock as u, normalizeClass as i, unref as C, withCtx as r, createVNode as g, createCommentVNode as p, createElementVNode as c, createTextVNode as v, createElementBlock as h, Fragment as s, renderList as f, toDisplayString as d } from "vue";
+import { S as m } from "./StyleConfig.js";
+import { u as F, k, _ as w } from "./index.js";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/components/Icon";
-import { useDesign } from "@mfish/core/hooks";
-import { Slider, RadioGroup, RadioButton, Checkbox } from "ant-design-vue";
+import { useDesign as x } from "@mfish/core/hooks";
+import { Slider as _, RadioGroup as U, RadioButton as S, Checkbox as H } from "ant-design-vue";
 import "@mfish/core/utils/Is";
-import { C as ConfigGroup } from "./ConfigGroup.js";
-const _hoisted_1 = { class: "title" };
-const _hoisted_2 = { class: "title" };
-const _hoisted_3 = { class: "title" };
-const _hoisted_4 = { class: "title" };
-const _hoisted_5 = { style: { "width": "90px", "font-weight": "500" } };
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfScrollTableConfig",
-  setup(__props) {
-    const { prefixCls } = useDesign("scroll-table-config");
-    const headerBGC = ref();
-    const oddRowBGC = ref();
-    const evenRowBGC = ref();
-    const screenEditStore = useScreenEditStore();
-    const headerHeight = ref(35);
-    const rowNum = ref(5);
-    const waitTime = ref(1.5);
-    const maxHeight = computed(() => {
-      return Math.round(screenEditStore.getCurConfigComponent.chartContain.dropInfo.height / 2);
-    });
-    const indexHeader = ref("");
-    const hoverPause = ref(true);
-    const carousel = ref("single");
-    const carousels = [
-      { title: "单条", value: "single" },
-      { title: "整页", value: "page" }
-    ];
-    const align = ref([]);
-    const aligns = [
-      { title: "左", value: "left" },
-      { title: "中", value: "center" },
-      { title: "右", value: "right" }
-    ];
-    const columns = computed(() => {
-      var _a;
-      let cols;
-      if (screenEditStore.getCurConfigComponent.chart.data.dataSet.data && screenEditStore.getCurConfigComponent.chart.data.dataSet.data.length > 0) {
-        cols = screenEditStore.getCurConfigComponent.chart.data.dataSet.data[0].length;
-      } else if (screenEditStore.getCurConfigComponent.chart.data.dataSet.header && screenEditStore.getCurConfigComponent.chart.data.dataSet.header.length > 0) {
-        cols = screenEditStore.getCurConfigComponent.chart.data.dataSet.header.length;
-      }
-      if ((_a = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _a.index) {
-        cols = cols + 1;
-      }
-      return cols;
-    });
-    const columnWidth = ref([]);
-    watch(
-      () => screenEditStore.getCurConfigComponent,
-      (val) => {
-        if (!val) return;
-        initValue();
-      },
-      { immediate: true }
-    );
-    function initValue() {
-      headerBGC.value = screenEditStore.getCurConfigComponent.chart.options.headerBGC;
-      oddRowBGC.value = screenEditStore.getCurConfigComponent.chart.options.oddRowBGC;
-      evenRowBGC.value = screenEditStore.getCurConfigComponent.chart.options.evenRowBGC;
-      if (screenEditStore.getCurConfigComponent.chart.options.headerHeight !== void 0) {
-        headerHeight.value = screenEditStore.getCurConfigComponent.chart.options.headerHeight;
-      }
-      if (screenEditStore.getCurConfigComponent.chart.options.waitTime !== void 0) {
-        waitTime.value = screenEditStore.getCurConfigComponent.chart.options.waitTime / 1e3;
-      }
-      if (screenEditStore.getCurConfigComponent.chart.options.rowNum !== void 0) {
-        rowNum.value = screenEditStore.getCurConfigComponent.chart.options.rowNum;
-      }
-      if (screenEditStore.getCurConfigComponent.chart.options.indexHeader !== void 0) {
-        indexHeader.value = screenEditStore.getCurConfigComponent.chart.options.indexHeader;
-      }
-      if (screenEditStore.getCurConfigComponent.chart.options.hoverPause !== void 0) {
-        hoverPause.value = screenEditStore.getCurConfigComponent.chart.options.hoverPause;
-      }
-      if (screenEditStore.getCurConfigComponent.chart.options.carousel !== void 0) {
-        carousel.value = screenEditStore.getCurConfigComponent.chart.options.carousel;
-      }
-      if (screenEditStore.getCurConfigComponent.chart.options.columnWidth === void 0) {
-        for (let i = 0; i < columns.value; i++) {
-          columnWidth.value.push(0);
-        }
-      } else {
-        const widths = [];
-        for (let i = 0; i < columns.value; i++) {
-          if (screenEditStore.getCurConfigComponent.chart.options.columnWidth[i]) {
-            widths.push(screenEditStore.getCurConfigComponent.chart.options.columnWidth[i]);
-          } else {
-            widths.push(0);
-          }
-        }
-        columnWidth.value = widths;
-      }
-      if (screenEditStore.getCurConfigComponent.chart.options.align === void 0) {
-        for (let i = 0; i < columns.value; i++) {
-          align.value.push("center");
-        }
-      } else {
-        const aligns2 = [];
-        for (let i = 0; i < columns.value; i++) {
-          if (screenEditStore.getCurConfigComponent.chart.options.align[i]) {
-            aligns2.push(screenEditStore.getCurConfigComponent.chart.options.align[i]);
-          } else {
-            aligns2.push("center");
-          }
-        }
-        align.value = aligns2;
-      }
-    }
-    function confirmHeaderBGC(e) {
-      changeHeaderBGC(e);
-      headerBGC.value = e;
-    }
-    function changeHeaderBGC(e) {
-      screenEditStore.getCurConfigComponent.chart.options.headerBGC = e;
-    }
-    function rowNumChange() {
-      screenEditStore.getCurConfigComponent.chart.options.rowNum = rowNum.value;
-    }
-    function confirmOddRowBGC(e) {
-      changeOddRowBGC(e);
-      oddRowBGC.value = e;
-    }
-    function changeOddRowBGC(e) {
-      screenEditStore.getCurConfigComponent.chart.options.oddRowBGC = e;
-    }
-    function confirmEvenRowBGC(e) {
-      changeEvenRowBGC(e);
-      evenRowBGC.value = e;
-    }
-    function changeEvenRowBGC(e) {
-      screenEditStore.getCurConfigComponent.chart.options.evenRowBGC = e;
-    }
-    function headerCheck(checked) {
-      screenEditStore.getCurConfigComponent.chart.options.showHeader = checked;
-    }
-    function headerHeightChange() {
-      screenEditStore.getCurConfigComponent.chart.options.headerHeight = headerHeight.value;
-    }
-    function waitTimeChange() {
-      screenEditStore.getCurConfigComponent.chart.options.waitTime = waitTime.value * 1e3;
-    }
-    function headerIndexCheck(checked) {
-      screenEditStore.getCurConfigComponent.chart.options.index = checked;
-    }
-    function indexHeaderChange() {
-      screenEditStore.getCurConfigComponent.chart.options.indexHeader = indexHeader.value;
-    }
-    function hoverPauseChange() {
-      screenEditStore.getCurConfigComponent.chart.options.hoverPause = hoverPause.value;
-    }
-    function carouselChange() {
-      screenEditStore.getCurConfigComponent.chart.options.carousel = carousel.value;
-    }
-    function alignChange() {
-      screenEditStore.getCurConfigComponent.chart.options.align = align.value;
-    }
-    function widthChange() {
-      screenEditStore.getCurConfigComponent.chart.options.columnWidth = columnWidth.value;
-    }
-    return (_ctx, _cache) => {
-      const _component_AInput = resolveComponent("AInput");
-      return openBlock(), createBlock(StyleConfig, {
-        class: normalizeClass(unref(prefixCls))
-      }, {
-        default: withCtx(() => {
-          var _a;
-          return [
-            createVNode(ConfigGroup, {
-              title: "表头设置",
-              "allow-check": true,
-              "title-check": (_a = unref(screenEditStore).getCurConfigComponent.chart.options) == null ? void 0 : _a.showHeader,
-              onChecked: headerCheck
-            }, {
-              default: withCtx(() => {
-                var _a2;
-                return [
-                  _cache[8] || (_cache[8] = createElementVNode("div", { class: "title" }, " 背景颜色", -1)),
-                  createVNode(unref(MfishColorPicker), {
-                    placeholder: "设置背景颜色，格式#FFFFFF",
-                    value: headerBGC.value,
-                    onConfirmChange: confirmHeaderBGC,
-                    onInputChange: changeHeaderBGC
-                  }, null, 8, ["value"]),
-                  createElementVNode("div", _hoisted_1, [
-                    _cache[6] || (_cache[6] = createTextVNode(" 表头高度 ")),
-                    createVNode(unref(Slider), {
-                      value: headerHeight.value,
-                      "onUpdate:value": _cache[0] || (_cache[0] = ($event) => headerHeight.value = $event),
-                      min: 0,
-                      max: maxHeight.value,
-                      onChange: headerHeightChange
-                    }, null, 8, ["value", "max"])
-                  ]),
-                  createVNode(ConfigGroup, {
-                    title: "行号设置",
-                    "allow-check": true,
-                    "title-check": (_a2 = unref(screenEditStore).getCurConfigComponent.chart.options) == null ? void 0 : _a2.index,
-                    onChecked: headerIndexCheck
-                  }, {
-                    default: withCtx(() => [
-                      _cache[7] || (_cache[7] = createElementVNode("div", { class: "title" }, " 行号表头名称", -1)),
-                      createVNode(_component_AInput, {
-                        value: indexHeader.value,
-                        "onUpdate:value": _cache[1] || (_cache[1] = ($event) => indexHeader.value = $event),
-                        onChange: indexHeaderChange
-                      }, null, 8, ["value"])
-                    ]),
-                    _: 1
-                  }, 8, ["title-check"])
-                ];
-              }),
-              _: 1
-            }, 8, ["title-check"]),
-            createVNode(ConfigGroup, { title: "表体设置" }, {
-              default: withCtx(() => [
-                createElementVNode("div", _hoisted_2, [
-                  _cache[9] || (_cache[9] = createTextVNode(" 表行数（行） ")),
-                  createVNode(unref(Slider), {
-                    value: rowNum.value,
-                    "onUpdate:value": _cache[2] || (_cache[2] = ($event) => rowNum.value = $event),
-                    min: 1,
-                    max: 50,
-                    onChange: rowNumChange
-                  }, null, 8, ["value"])
-                ]),
-                _cache[13] || (_cache[13] = createElementVNode("div", { class: "title" }, " 奇数行颜色", -1)),
-                createVNode(unref(MfishColorPicker), {
-                  placeholder: "设置奇数行颜色，格式#FFFFFF",
-                  value: oddRowBGC.value,
-                  onConfirmChange: confirmOddRowBGC,
-                  onInputChange: changeOddRowBGC
-                }, null, 8, ["value"]),
-                _cache[14] || (_cache[14] = createElementVNode("div", { class: "title" }, " 偶数行颜色", -1)),
-                createVNode(unref(MfishColorPicker), {
-                  placeholder: "设置偶数行颜色，格式#FFFFFF",
-                  value: evenRowBGC.value,
-                  onConfirmChange: confirmEvenRowBGC,
-                  onInputChange: changeEvenRowBGC
-                }, null, 8, ["value"]),
-                createElementVNode("div", _hoisted_3, [
-                  _cache[10] || (_cache[10] = createTextVNode(" 轮播方式 ")),
-                  createElementVNode("div", null, [
-                    createVNode(unref(RadioGroup), {
-                      size: "small",
-                      value: carousel.value,
-                      "onUpdate:value": _cache[3] || (_cache[3] = ($event) => carousel.value = $event),
-                      onChange: carouselChange
-                    }, {
-                      default: withCtx(() => [
-                        (openBlock(), createElementBlock(Fragment, null, renderList(carousels, (item) => {
-                          return createVNode(unref(RadioButton), {
-                            key: item.value,
-                            value: item.value
-                          }, {
-                            default: withCtx(() => [
-                              createTextVNode(toDisplayString(item.title), 1)
-                            ]),
-                            _: 2
-                          }, 1032, ["value"]);
-                        }), 64))
-                      ]),
-                      _: 1
-                    }, 8, ["value"])
-                  ])
-                ]),
-                createElementVNode("div", _hoisted_4, [
-                  _cache[11] || (_cache[11] = createTextVNode(" 轮播间隔（秒） ")),
-                  createVNode(unref(Slider), {
-                    value: waitTime.value,
-                    "onUpdate:value": _cache[4] || (_cache[4] = ($event) => waitTime.value = $event),
-                    min: 0.1,
-                    max: 5,
-                    step: 0.1,
-                    onChange: waitTimeChange
-                  }, null, 8, ["value"])
-                ]),
-                createVNode(unref(Checkbox), {
-                  checked: hoverPause.value,
-                  "onUpdate:checked": _cache[5] || (_cache[5] = ($event) => hoverPause.value = $event),
-                  onChange: hoverPauseChange
-                }, {
-                  default: withCtx(() => _cache[12] || (_cache[12] = [
-                    createTextVNode(" 悬浮暂停轮播")
-                  ])),
-                  _: 1
-                }, 8, ["checked"])
-              ]),
-              _: 1
-            }),
-            columns.value > 0 ? (openBlock(), createBlock(ConfigGroup, {
-              key: 0,
-              title: "列配置"
-            }, {
-              default: withCtx(() => [
-                (openBlock(true), createElementBlock(Fragment, null, renderList(columns.value, (index) => {
-                  var _a2;
-                  return openBlock(), createElementBlock("div", {
-                    key: index,
-                    class: "title"
-                  }, [
-                    createTextVNode(toDisplayString(((_a2 = unref(screenEditStore).getCurConfigComponent.chart.options) == null ? void 0 : _a2.index) && index === 1 ? `行号` : `${index}列`) + " 宽度 ", 1),
-                    createVNode(unref(Slider), {
-                      value: columnWidth.value[index - 1],
-                      "onUpdate:value": ($event) => columnWidth.value[index - 1] = $event,
-                      min: 0,
-                      max: 500,
-                      onChange: widthChange
-                    }, null, 8, ["value", "onUpdate:value"]),
-                    createElementVNode("span", _hoisted_5, [
-                      createVNode(unref(RadioGroup), {
-                        size: "small",
-                        value: align.value[index - 1],
-                        "onUpdate:value": ($event) => align.value[index - 1] = $event,
-                        onChange: alignChange
-                      }, {
-                        default: withCtx(() => [
-                          (openBlock(), createElementBlock(Fragment, null, renderList(aligns, (item) => {
-                            return createVNode(unref(RadioButton), {
-                              key: item.value,
-                              value: item.value
-                            }, {
-                              default: withCtx(() => [
-                                createTextVNode(toDisplayString(item.title), 1)
-                              ]),
-                              _: 2
-                            }, 1032, ["value"]);
-                          }), 64))
-                        ]),
-                        _: 2
-                      }, 1032, ["value", "onUpdate:value"])
-                    ])
-                  ]);
-                }), 128))
-              ]),
-              _: 1
-            })) : createCommentVNode("", true)
-          ];
-        }),
-        _: 1
-      }, 8, ["class"]);
-    };
+import { C as I } from "./ConfigGroup.js";
+const G = { class: "title" }, y = { class: "title" }, B = { class: "title" }, R = { class: "title" }, T = { style: { width: "90px", "font-weight": "500" } }, W = w(e({ __name: "MfScrollTableConfig", setup(e2) {
+  const { prefixCls: w2 } = x("scroll-table-config"), W2 = t(), b = t(), j = t(), N = F(), P = t(35), z = t(5), M = t(1.5), A = o(() => Math.round(N.getCurConfigComponent.chartContain.dropInfo.height / 2)), $ = t(""), q = t(true), D = t("single"), E = [{ title: "单条", value: "single" }, { title: "整页", value: "page" }], J = t([]), K = [{ title: "左", value: "left" }, { title: "中", value: "center" }, { title: "右", value: "right" }], L = o(() => {
+    var _a;
+    let e3;
+    return N.getCurConfigComponent.chart.data.dataSet.data && N.getCurConfigComponent.chart.data.dataSet.data.length > 0 ? e3 = N.getCurConfigComponent.chart.data.dataSet.data[0].length : N.getCurConfigComponent.chart.data.dataSet.header && N.getCurConfigComponent.chart.data.dataSet.header.length > 0 && (e3 = N.getCurConfigComponent.chart.data.dataSet.header.length), ((_a = N.getCurConfigComponent.chart.options) == null ? void 0 : _a.index) && (e3 += 1), e3;
+  }), O = t([]);
+  function Q(e3) {
+    V(e3), W2.value = e3;
   }
-});
-const MfScrollTableConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-88b50ad8"]]);
+  function V(e3) {
+    N.getCurConfigComponent.chart.options.headerBGC = e3;
+  }
+  function X() {
+    N.getCurConfigComponent.chart.options.rowNum = z.value;
+  }
+  function Y(e3) {
+    Z(e3), b.value = e3;
+  }
+  function Z(e3) {
+    N.getCurConfigComponent.chart.options.oddRowBGC = e3;
+  }
+  function ee(e3) {
+    te(e3), j.value = e3;
+  }
+  function te(e3) {
+    N.getCurConfigComponent.chart.options.evenRowBGC = e3;
+  }
+  function oe(e3) {
+    N.getCurConfigComponent.chart.options.showHeader = e3;
+  }
+  function ne() {
+    N.getCurConfigComponent.chart.options.headerHeight = P.value;
+  }
+  function ae() {
+    N.getCurConfigComponent.chart.options.waitTime = 1e3 * M.value;
+  }
+  function le(e3) {
+    N.getCurConfigComponent.chart.options.index = e3;
+  }
+  function ue() {
+    N.getCurConfigComponent.chart.options.indexHeader = $.value;
+  }
+  function ie() {
+    N.getCurConfigComponent.chart.options.hoverPause = q.value;
+  }
+  function Ce() {
+    N.getCurConfigComponent.chart.options.carousel = D.value;
+  }
+  function re() {
+    N.getCurConfigComponent.chart.options.align = J.value;
+  }
+  function ge() {
+    N.getCurConfigComponent.chart.options.columnWidth = O.value;
+  }
+  return n(() => N.getCurConfigComponent, (e3) => {
+    e3 && function() {
+      W2.value = N.getCurConfigComponent.chart.options.headerBGC, b.value = N.getCurConfigComponent.chart.options.oddRowBGC, j.value = N.getCurConfigComponent.chart.options.evenRowBGC, void 0 !== N.getCurConfigComponent.chart.options.headerHeight && (P.value = N.getCurConfigComponent.chart.options.headerHeight);
+      void 0 !== N.getCurConfigComponent.chart.options.waitTime && (M.value = N.getCurConfigComponent.chart.options.waitTime / 1e3);
+      void 0 !== N.getCurConfigComponent.chart.options.rowNum && (z.value = N.getCurConfigComponent.chart.options.rowNum);
+      void 0 !== N.getCurConfigComponent.chart.options.indexHeader && ($.value = N.getCurConfigComponent.chart.options.indexHeader);
+      void 0 !== N.getCurConfigComponent.chart.options.hoverPause && (q.value = N.getCurConfigComponent.chart.options.hoverPause);
+      void 0 !== N.getCurConfigComponent.chart.options.carousel && (D.value = N.getCurConfigComponent.chart.options.carousel);
+      if (void 0 === N.getCurConfigComponent.chart.options.columnWidth) for (let e4 = 0; e4 < L.value; e4++) O.value.push(0);
+      else {
+        const e4 = [];
+        for (let t2 = 0; t2 < L.value; t2++) N.getCurConfigComponent.chart.options.columnWidth[t2] ? e4.push(N.getCurConfigComponent.chart.options.columnWidth[t2]) : e4.push(0);
+        O.value = e4;
+      }
+      if (void 0 === N.getCurConfigComponent.chart.options.align) for (let e4 = 0; e4 < L.value; e4++) J.value.push("center");
+      else {
+        const e4 = [];
+        for (let t2 = 0; t2 < L.value; t2++) N.getCurConfigComponent.chart.options.align[t2] ? e4.push(N.getCurConfigComponent.chart.options.align[t2]) : e4.push("center");
+        J.value = e4;
+      }
+    }();
+  }, { immediate: true }), (e3, t2) => {
+    const o2 = a("AInput");
+    return u(), l(m, { class: i(C(w2)) }, { default: r(() => {
+      var _a;
+      return [g(I, { title: "表头设置", "allow-check": true, "title-check": (_a = C(N).getCurConfigComponent.chart.options) == null ? void 0 : _a.showHeader, onChecked: oe }, { default: r(() => {
+        var _a2;
+        return [t2[8] || (t2[8] = c("div", { class: "title" }, " 背景颜色", -1)), g(C(k), { placeholder: "设置背景颜色，格式#FFFFFF", value: W2.value, onConfirmChange: Q, onInputChange: V }, null, 8, ["value"]), c("div", G, [t2[6] || (t2[6] = v(" 表头高度 ")), g(C(_), { value: P.value, "onUpdate:value": t2[0] || (t2[0] = (e4) => P.value = e4), min: 0, max: A.value, onChange: ne }, null, 8, ["value", "max"])]), g(I, { title: "行号设置", "allow-check": true, "title-check": (_a2 = C(N).getCurConfigComponent.chart.options) == null ? void 0 : _a2.index, onChecked: le }, { default: r(() => [t2[7] || (t2[7] = c("div", { class: "title" }, " 行号表头名称", -1)), g(o2, { value: $.value, "onUpdate:value": t2[1] || (t2[1] = (e4) => $.value = e4), onChange: ue }, null, 8, ["value"])]), _: 1 }, 8, ["title-check"])];
+      }), _: 1 }, 8, ["title-check"]), g(I, { title: "表体设置" }, { default: r(() => [c("div", y, [t2[9] || (t2[9] = v(" 表行数（行） ")), g(C(_), { value: z.value, "onUpdate:value": t2[2] || (t2[2] = (e4) => z.value = e4), min: 1, max: 50, onChange: X }, null, 8, ["value"])]), t2[13] || (t2[13] = c("div", { class: "title" }, " 奇数行颜色", -1)), g(C(k), { placeholder: "设置奇数行颜色，格式#FFFFFF", value: b.value, onConfirmChange: Y, onInputChange: Z }, null, 8, ["value"]), t2[14] || (t2[14] = c("div", { class: "title" }, " 偶数行颜色", -1)), g(C(k), { placeholder: "设置偶数行颜色，格式#FFFFFF", value: j.value, onConfirmChange: ee, onInputChange: te }, null, 8, ["value"]), c("div", B, [t2[10] || (t2[10] = v(" 轮播方式 ")), c("div", null, [g(C(U), { size: "small", value: D.value, "onUpdate:value": t2[3] || (t2[3] = (e4) => D.value = e4), onChange: Ce }, { default: r(() => [(u(), h(s, null, f(E, (e4) => g(C(S), { key: e4.value, value: e4.value }, { default: r(() => [v(d(e4.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])])]), c("div", R, [t2[11] || (t2[11] = v(" 轮播间隔（秒） ")), g(C(_), { value: M.value, "onUpdate:value": t2[4] || (t2[4] = (e4) => M.value = e4), min: 0.1, max: 5, step: 0.1, onChange: ae }, null, 8, ["value"])]), g(C(H), { checked: q.value, "onUpdate:checked": t2[5] || (t2[5] = (e4) => q.value = e4), onChange: ie }, { default: r(() => t2[12] || (t2[12] = [v(" 悬浮暂停轮播")])), _: 1 }, 8, ["checked"])]), _: 1 }), L.value > 0 ? (u(), l(I, { key: 0, title: "列配置" }, { default: r(() => [(u(true), h(s, null, f(L.value, (e4) => {
+        var _a2;
+        return u(), h("div", { key: e4, class: "title" }, [v(d(((_a2 = C(N).getCurConfigComponent.chart.options) == null ? void 0 : _a2.index) && 1 === e4 ? "行号" : `${e4}列`) + " 宽度 ", 1), g(C(_), { value: O.value[e4 - 1], "onUpdate:value": (t3) => O.value[e4 - 1] = t3, min: 0, max: 500, onChange: ge }, null, 8, ["value", "onUpdate:value"]), c("span", T, [g(C(U), { size: "small", value: J.value[e4 - 1], "onUpdate:value": (t3) => J.value[e4 - 1] = t3, onChange: re }, { default: r(() => [(u(), h(s, null, f(K, (e5) => g(C(S), { key: e5.value, value: e5.value }, { default: r(() => [v(d(e5.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 2 }, 1032, ["value", "onUpdate:value"])])]);
+      }), 128))]), _: 1 })) : p("", true)];
+    }), _: 1 }, 8, ["class"]);
+  };
+} }), [["__scopeId", "data-v-88b50ad8"]]);
 export {
-  MfScrollTableConfig as default
+  W as default
 };

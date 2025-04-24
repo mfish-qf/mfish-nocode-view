@@ -1,591 +1,118 @@
-import { defineComponent, ref, watch, createElementBlock, openBlock, normalizeClass, unref, Fragment, renderList, createVNode, createElementVNode, toDisplayString, onMounted, withCtx, reactive, createBlock, createSlots, createCommentVNode, withModifiers, resolveComponent, createTextVNode } from "vue";
-import { Switch, InputGroup, TreeSelect, List, Dropdown, Input, Menu, RadioGroup, RadioButton, Empty } from "ant-design-vue";
-import { ScrollContainer } from "@mfish/core/components/Container";
-import { useDesign } from "@mfish/core/hooks";
-import { C as ConfigGroup } from "./ConfigGroup.js";
-import { C as ChartEventEnum, u as useScreenEditStore, b as ComponentsEnum, g as getEventName, _ as _export_sfc, c as getScreenFolderTree, d as getMfScreenList, P as PageJumpType, e as PageType, f as ScreenInput } from "./index.js";
-import { Icon } from "@mfish/core/components/Icon";
-import InputSearch from "@mfish/core/components/InputSearch";
-import { imageUrl, getLocalFileUrl } from "@mfish/core/utils/file/FileUtils";
-import { usePagination } from "@mfish/core/utils/PageUtils";
+import { defineComponent as e, ref as t, watch as a, createElementBlock as n, openBlock as o, normalizeClass as l, unref as i, Fragment as u, renderList as r, createVNode as c, createElementVNode as m, toDisplayString as p, onMounted as s, withCtx as g, reactive as C, createBlock as v, createSlots as d, createCommentVNode as h, withModifiers as f, resolveComponent as _, createTextVNode as k } from "vue";
+import { Switch as y, InputGroup as j, TreeSelect as w, List as x, Dropdown as b, Input as I, Menu as S, RadioGroup as E, RadioButton as U, Empty as P } from "ant-design-vue";
+import { ScrollContainer as T } from "@mfish/core/components/Container";
+import { useDesign as A } from "@mfish/core/hooks";
+import { C as O } from "./ConfigGroup.js";
+import { C as z, u as L, b as H, g as R, _ as M, c as N, d as D, P as K, e as J, f as G } from "./index.js";
+import { Icon as W } from "@mfish/core/components/Icon";
+import B from "@mfish/core/components/InputSearch";
+import { imageUrl as F, getLocalFileUrl as Q } from "@mfish/core/utils/file/FileUtils";
+import { usePagination as V } from "@mfish/core/utils/PageUtils";
 import "@vueuse/core";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-const _hoisted_1$3 = ["onClick"];
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
-  __name: "EventListen",
-  setup(__props) {
-    const { prefixCls } = useDesign("event-listen");
-    const events = ref({
-      [ChartEventEnum.CHART_CLICK]: false,
-      [ChartEventEnum.CHART_DBLCLICK]: false,
-      [ChartEventEnum.CHART_MOUSE_ENTER]: false,
-      [ChartEventEnum.CHART_MOUSE_LEAVE]: false
+const $ = ["onClick"], q = M(e({ __name: "EventListen", setup(e2) {
+  const { prefixCls: s2 } = A("event-listen"), g2 = t({ [z.CHART_CLICK]: false, [z.CHART_DBLCLICK]: false, [z.CHART_MOUSE_ENTER]: false, [z.CHART_MOUSE_LEAVE]: false }), C2 = L();
+  function v2() {
+    C2.getCurConfigComponent.chart.events.emits || (C2.getCurConfigComponent.chart.events = { emits: [] }), C2.getCurConfigComponent.chart.events.emits = Object.keys(i(g2)).filter((e3) => g2.value[e3]).map((e3) => e3);
+  }
+  return a(() => C2.getCurConfigComponent.chart.id, (e3) => {
+    var _a, _b;
+    (_a = H[C2.getCurConfigComponent.chart.type].customEvents) == null ? void 0 : _a.forEach((e4) => {
+      g2.value[e4.value] = false;
+    }), e3 ? ((_b = C2.getCurConfigComponent.chart.events) == null ? void 0 : _b.emits) && C2.getCurConfigComponent.chart.events.emits.forEach((e4) => {
+      g2.value[e4] = true;
+    }) : Object.keys(g2.value).forEach((e4) => {
+      g2.value[e4] = false;
     });
-    const screenEditStore = useScreenEditStore();
-    watch(
-      () => screenEditStore.getCurConfigComponent.chart.id,
-      (val) => {
-        var _a, _b;
-        (_a = ComponentsEnum[screenEditStore.getCurConfigComponent.chart.type].customEvents) == null ? void 0 : _a.forEach((item) => {
-          events.value[item.value] = false;
-        });
-        if (val) {
-          if ((_b = screenEditStore.getCurConfigComponent.chart.events) == null ? void 0 : _b.emits) {
-            screenEditStore.getCurConfigComponent.chart.events.emits.forEach((item) => {
-              events.value[item] = true;
-            });
-          }
-        } else {
-          Object.keys(events.value).forEach((item) => {
-            events.value[item] = false;
-          });
-        }
-      },
-      { immediate: true }
-    );
-    function changeEvent(item) {
-      events.value[item] = !events.value[item];
-      setEvent();
-    }
-    function setEvent() {
-      if (!screenEditStore.getCurConfigComponent.chart.events.emits) {
-        screenEditStore.getCurConfigComponent.chart.events = { emits: [] };
-      }
-      screenEditStore.getCurConfigComponent.chart.events.emits = Object.keys(unref(events)).filter((item) => events.value[item]).map((item) => item);
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(unref(prefixCls))
-      }, [
-        (openBlock(true), createElementBlock(Fragment, null, renderList(Object.keys(events.value), (item) => {
-          var _a;
-          return openBlock(), createElementBlock("div", {
-            class: "check-item",
-            key: item
-          }, [
-            createVNode(unref(Switch), {
-              size: "small",
-              checked: events.value[item],
-              "onUpdate:checked": ($event) => events.value[item] = $event,
-              "checked-children": "开",
-              "un-checked-children": "关",
-              onChange: setEvent
-            }, null, 8, ["checked", "onUpdate:checked"]),
-            createElementVNode("div", {
-              class: normalizeClass(events.value[item] ? "checked" : ""),
-              onClick: ($event) => changeEvent(item)
-            }, toDisplayString(unref(getEventName)(item, (_a = unref(screenEditStore).getCurConfigComponent) == null ? void 0 : _a.chart.type)), 11, _hoisted_1$3)
-          ]);
-        }), 128))
-      ], 2);
-    };
-  }
-});
-const EventListen = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-dc2a8daf"]]);
-const _hoisted_1$2 = {
-  target: "_blank",
-  onClick: () => {
-  }
-};
-const _hoisted_2$1 = ["src"];
-const _sfc_main$3 = /* @__PURE__ */ defineComponent({
-  __name: "PageList",
-  emits: ["selectScreen"],
-  setup(__props, { emit: __emit }) {
-    const emit = __emit;
-    const treeValue = ref();
-    const treeData = ref();
-    const searchValue = ref();
-    const { prefixCls } = useDesign("page-list");
-    const data = ref([]);
-    const { paginationProp, getPageNum, setCurrentPage, getPageSize, setTotal } = usePagination(onSearch, {
-      showSizeChanger: false,
-      showQuickJumper: false
+  }, { immediate: true }), (e3, t2) => (o(), n("div", { class: l(i(s2)) }, [(o(true), n(u, null, r(Object.keys(g2.value), (e4) => {
+    var _a;
+    return o(), n("div", { class: "check-item", key: e4 }, [c(i(y), { size: "small", checked: g2.value[e4], "onUpdate:checked": (t3) => g2.value[e4] = t3, "checked-children": "开", "un-checked-children": "关", onChange: v2 }, null, 8, ["checked", "onUpdate:checked"]), m("div", { class: l(g2.value[e4] ? "checked" : ""), onClick: (t3) => function(e5) {
+      g2.value[e5] = !g2.value[e5], v2();
+    }(e4) }, p(i(R)(e4, (_a = i(C2).getCurConfigComponent) == null ? void 0 : _a.chart.type)), 11, $)]);
+  }), 128))], 2));
+} }), [["__scopeId", "data-v-dc2a8daf"]]), X = { target: "_blank", onClick: () => {
+} }, Y = ["src"], Z = M(e({ __name: "PageList", emits: ["selectScreen"], setup(e2, { emit: a2 }) {
+  const u2 = a2, r2 = t(), C2 = t(), v2 = t(), { prefixCls: d2 } = A("page-list"), h2 = t([]), { paginationProp: f2, getPageNum: _2, setCurrentPage: k2, getPageSize: y2, setTotal: b2 } = V(I2, { showSizeChanger: false, showQuickJumper: false });
+  function I2(e3) {
+    e3 && k2(e3), D({ folderId: r2.value, name: v2.value, pageNum: e3 ?? _2(), pageSize: y2() }).then((e4) => {
+      h2.value = e4.list, b2(e4.total);
     });
-    onMounted(() => {
-      getScreenFolderTree().then((res) => {
-        treeData.value = [{ name: "我的大屏", children: res, id: "" }];
-      });
-      onSearch(1);
-    });
-    function onSearch(currentPage) {
-      if (currentPage) {
-        setCurrentPage(currentPage);
-      }
-      getMfScreenList({
-        folderId: treeValue.value,
-        name: searchValue.value,
-        pageNum: currentPage ?? getPageNum(),
-        pageSize: getPageSize()
-      }).then((res) => {
-        data.value = res.list;
-        setTotal(res.total);
-      });
-    }
-    function selectScreen(item) {
-      emit("selectScreen", item);
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(unref(prefixCls))
-      }, [
-        createVNode(unref(InputGroup), { compact: "" }, {
-          default: withCtx(() => [
-            createVNode(unref(TreeSelect), {
-              value: treeValue.value,
-              "onUpdate:value": _cache[0] || (_cache[0] = ($event) => treeValue.value = $event),
-              "tree-data": treeData.value,
-              style: { "width": "35%", "border-right": "0" },
-              "allow-clear": "",
-              placeholder: "选择大屏目录",
-              "dropdown-style": { minWidth: "300px", maxHeight: "400px", overflow: "auto" },
-              "field-names": {
-                children: "children",
-                label: "name",
-                value: "id"
-              },
-              "tree-node-filter-prop": "name",
-              "show-search": "",
-              onChange: _cache[1] || (_cache[1] = ($event) => onSearch(1))
-            }, null, 8, ["value", "tree-data"]),
-            createVNode(unref(InputSearch), {
-              visible: true,
-              value: searchValue.value,
-              "onUpdate:value": _cache[2] || (_cache[2] = ($event) => searchValue.value = $event),
-              style: { "width": "65%", "height": "32px" },
-              "allow-clear": "",
-              placeholder: "输入大屏名称",
-              onSearch: _cache[3] || (_cache[3] = ($event) => onSearch(1))
-            }, null, 8, ["value"])
-          ]),
-          _: 1
-        }),
-        createVNode(unref(ScrollContainer), {
-          class: "mt-2",
-          style: { "height": "45vh" }
-        }, {
-          default: withCtx(() => [
-            createVNode(unref(List), {
-              "item-layout": "horizontal",
-              "data-source": data.value,
-              pagination: unref(paginationProp)
-            }, {
-              renderItem: withCtx(({ item }) => [
-                createVNode(unref(List).Item, {
-                  class: "screen_item",
-                  onClick: ($event) => selectScreen(item)
-                }, {
-                  default: withCtx(() => [
-                    createVNode(unref(List).Item.Meta, {
-                      description: item.remark
-                    }, {
-                      title: withCtx(() => [
-                        createElementVNode("a", _hoisted_1$2, toDisplayString(item.name), 1)
-                      ]),
-                      avatar: withCtx(() => [
-                        createElementVNode("img", {
-                          alt: "screen",
-                          src: unref(imageUrl)(unref(getLocalFileUrl)(item.thumbnail)),
-                          class: "screen_img"
-                        }, null, 8, _hoisted_2$1)
-                      ]),
-                      _: 2
-                    }, 1032, ["description"])
-                  ]),
-                  _: 2
-                }, 1032, ["onClick"])
-              ]),
-              _: 1
-            }, 8, ["data-source", "pagination"])
-          ]),
-          _: 1
-        })
-      ], 2);
-    };
   }
-});
-const PageList = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-efbe8537"]]);
-const _hoisted_1$1 = ["src"];
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
-  __name: "PageSelect",
-  props: { page: { type: Object } },
-  emits: ["ok"],
-  setup(__props, { emit: __emit }) {
-    const props = __props;
-    const emit = __emit;
-    const { prefixCls } = useDesign("page-select");
-    const isShow = ref(false);
-    const screenEditStore = useScreenEditStore();
-    const isEnter = ref(false);
-    const screenPage = reactive({
-      name: void 0,
-      value: void 0,
-      img: void 0,
-      width: void 0,
-      height: void 0
-    });
-    watch(
-      () => {
-        var _a;
-        return (_a = screenEditStore.getCurConfigComponent) == null ? void 0 : _a.chart.id;
-      },
-      (val) => {
-        var _a, _b, _c;
-        isShow.value = false;
-        if (val) {
-          screenPage.value = (_a = props.page) == null ? void 0 : _a.value;
-          screenPage.name = (_b = props.page) == null ? void 0 : _b.name;
-          screenPage.img = (_c = props.page) == null ? void 0 : _c.img;
-        }
-      },
-      { immediate: true }
-    );
-    const visibleChange = (show) => {
-      isShow.value = show;
-    };
-    function clearData() {
-      screenPage.value = void 0;
-      screenPage.name = void 0;
-      screenPage.img = void 0;
-      screenPage.width = void 0;
-      screenPage.height = void 0;
-      emit("ok", screenPage);
-    }
-    function selectScreen(item) {
-      isShow.value = false;
-      screenPage.value = (item == null ? void 0 : item.id) ?? void 0;
-      screenPage.name = (item == null ? void 0 : item.name) ?? void 0;
-      screenPage.img = (item == null ? void 0 : item.thumbnail) ?? void 0;
-      if (item.canvasConfig) {
-        const config = JSON.parse(item.canvasConfig);
-        screenPage.width = config == null ? void 0 : config.width;
-        screenPage.height = config == null ? void 0 : config.height;
-      }
-      emit("ok", screenPage);
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Dropdown), {
-        trigger: ["click"],
-        open: isShow.value,
-        onOpenChange: visibleChange,
-        placement: "bottom",
-        arrow: { pointAtCenter: true },
-        "overlay-style": { width: "400px" }
-      }, {
-        overlay: withCtx(() => [
-          createVNode(unref(Menu), null, {
-            default: withCtx(() => [
-              createVNode(unref(Menu).Item, {
-                disabled: "",
-                style: { "padding": "0", "cursor": "default" }
-              }, {
-                default: withCtx(() => [
-                  createVNode(PageList, { onSelectScreen: selectScreen })
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          })
-        ]),
-        default: withCtx(() => [
-          createElementVNode("div", {
-            class: normalizeClass(unref(prefixCls)),
-            onMouseenter: _cache[2] || (_cache[2] = ($event) => isEnter.value = true),
-            onMouseleave: _cache[3] || (_cache[3] = ($event) => isEnter.value = false)
-          }, [
-            createVNode(unref(Input), {
-              class: normalizeClass(`${unref(prefixCls)}-drop-input`),
-              placeholder: "请选择页面",
-              value: screenPage.name,
-              "onUpdate:value": _cache[0] || (_cache[0] = ($event) => screenPage.name = $event),
-              onChange: _cache[1] || (_cache[1] = ($event) => isShow.value = true)
-            }, createSlots({
-              suffix: withCtx(() => [
-                screenPage.value && isEnter.value ? (openBlock(), createBlock(unref(Icon), {
-                  key: 0,
-                  class: "delete-icon",
-                  size: 14,
-                  icon: "ant-design:close-circle-filled",
-                  onClick: withModifiers(clearData, ["stop"])
-                })) : createCommentVNode("", true),
-                createVNode(unref(Icon), {
-                  class: "drop-icon",
-                  size: 12,
-                  icon: isShow.value ? "ant-design:up-outlined" : "ant-design:down-outlined"
-                }, null, 8, ["icon"])
-              ]),
-              _: 2
-            }, [
-              screenPage.img ? {
-                name: "prefix",
-                fn: withCtx(() => [
-                  createElementVNode("img", {
-                    alt: "screen",
-                    src: unref(imageUrl)(unref(getLocalFileUrl)(screenPage.img)),
-                    class: "screen_img"
-                  }, null, 8, _hoisted_1$1)
-                ]),
-                key: "0"
-              } : void 0
-            ]), 1032, ["class", "value"])
-          ], 34)
-        ]),
-        _: 1
-      }, 8, ["open"]);
-    };
+  return s(() => {
+    N().then((e3) => {
+      C2.value = [{ name: "我的大屏", children: e3, id: "" }];
+    }), I2(1);
+  }), (e3, t2) => (o(), n("div", { class: l(i(d2)) }, [c(i(j), { compact: "" }, { default: g(() => [c(i(w), { value: r2.value, "onUpdate:value": t2[0] || (t2[0] = (e4) => r2.value = e4), "tree-data": C2.value, style: { width: "35%", "border-right": "0" }, "allow-clear": "", placeholder: "选择大屏目录", "dropdown-style": { minWidth: "300px", maxHeight: "400px", overflow: "auto" }, "field-names": { children: "children", label: "name", value: "id" }, "tree-node-filter-prop": "name", "show-search": "", onChange: t2[1] || (t2[1] = (e4) => I2(1)) }, null, 8, ["value", "tree-data"]), c(i(B), { visible: true, value: v2.value, "onUpdate:value": t2[2] || (t2[2] = (e4) => v2.value = e4), style: { width: "65%", height: "32px" }, "allow-clear": "", placeholder: "输入大屏名称", onSearch: t2[3] || (t2[3] = (e4) => I2(1)) }, null, 8, ["value"])]), _: 1 }), c(i(T), { class: "mt-2", style: { height: "45vh" } }, { default: g(() => [c(i(x), { "item-layout": "horizontal", "data-source": h2.value, pagination: i(f2) }, { renderItem: g(({ item: e4 }) => [c(i(x).Item, { class: "screen_item", onClick: (t3) => function(e5) {
+    u2("selectScreen", e5);
+  }(e4) }, { default: g(() => [c(i(x).Item.Meta, { description: e4.remark }, { title: g(() => [m("a", X, p(e4.name), 1)]), avatar: g(() => [m("img", { alt: "screen", src: i(F)(i(Q)(e4.thumbnail)), class: "screen_img" }, null, 8, Y)]), _: 2 }, 1032, ["description"])]), _: 2 }, 1032, ["onClick"])]), _: 1 }, 8, ["data-source", "pagination"])]), _: 1 })], 2));
+} }), [["__scopeId", "data-v-efbe8537"]]), ee = ["src"], te = M(e({ __name: "PageSelect", props: { page: { type: Object } }, emits: ["ok"], setup(e2, { emit: n2 }) {
+  const u2 = e2, r2 = n2, { prefixCls: p2 } = A("page-select"), s2 = t(false), _2 = L(), k2 = t(false), y2 = C({ name: void 0, value: void 0, img: void 0, width: void 0, height: void 0 });
+  a(() => {
+    var _a;
+    return (_a = _2.getCurConfigComponent) == null ? void 0 : _a.chart.id;
+  }, (e3) => {
+    var _a, _b, _c;
+    s2.value = false, e3 && (y2.value = (_a = u2.page) == null ? void 0 : _a.value, y2.name = (_b = u2.page) == null ? void 0 : _b.name, y2.img = (_c = u2.page) == null ? void 0 : _c.img);
+  }, { immediate: true });
+  const j2 = (e3) => {
+    s2.value = e3;
+  };
+  function w2() {
+    y2.value = void 0, y2.name = void 0, y2.img = void 0, y2.width = void 0, y2.height = void 0, r2("ok", y2);
   }
-});
-const PageSelect = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-eb4ee99b"]]);
-const _hoisted_1 = { class: "title" };
-const _hoisted_2 = { class: "title" };
-const _hoisted_3 = {
-  key: 2,
-  class: "title"
-};
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
-  ...{ name: "PageJumpConfig" },
-  __name: "index",
-  setup(__props) {
-    const screenEditStore = useScreenEditStore();
-    const { prefixCls } = useDesign("page-jump-config");
-    const jumpTypes = [PageJumpType.CurPage, PageJumpType.NewTab, PageJumpType.Dialog];
-    const jumpType = ref();
-    const pageTypes = [PageType.System, PageType.External];
-    const pageType = ref();
-    const page = ref();
-    const pageUrl = ref();
-    const width = ref();
-    const height = ref();
-    watch(
-      () => {
-        var _a;
-        return (_a = screenEditStore.getCurConfigComponent) == null ? void 0 : _a.chart.id;
-      },
-      (val) => {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k;
-        if (!val) return;
-        if ((_a = screenEditStore.getCurConfigComponent.chart.jump) == null ? void 0 : _a.type) {
-          jumpType.value = (_b = screenEditStore.getCurConfigComponent.chart.jump) == null ? void 0 : _b.type;
-        } else {
-          jumpType.value = PageJumpType.CurPage;
-          jumpTypeChange();
-        }
-        if ((_c = screenEditStore.getCurConfigComponent.chart.jump) == null ? void 0 : _c.pageType) {
-          pageType.value = (_d = screenEditStore.getCurConfigComponent.chart.jump) == null ? void 0 : _d.pageType;
-        } else {
-          pageType.value = PageType.System;
-          pageTypeChange();
-        }
-        if (pageType.value === PageType.System) {
-          page.value = (_e = screenEditStore.getCurConfigComponent.chart.jump) == null ? void 0 : _e.page;
-        } else {
-          pageUrl.value = (_g = (_f = screenEditStore.getCurConfigComponent.chart.jump) == null ? void 0 : _f.page) == null ? void 0 : _g.value;
-        }
-        width.value = (_i = (_h = screenEditStore.getCurConfigComponent.chart.jump) == null ? void 0 : _h.page) == null ? void 0 : _i.width;
-        height.value = (_k = (_j = screenEditStore.getCurConfigComponent.chart.jump) == null ? void 0 : _j.page) == null ? void 0 : _k.height;
-      },
-      { immediate: true }
-    );
-    function jumpCheck(checked) {
-      var _a;
-      screenEditStore.getCurConfigComponent.chart.jump = {
-        ...screenEditStore.getCurConfigComponent.chart.jump,
-        open: checked
-      };
-      if (checked) {
-        let emits = (_a = screenEditStore.getCurConfigComponent.chart.events) == null ? void 0 : _a.emits;
-        if (!emits) {
-          emits = [];
-        }
-        const index2 = emits.indexOf(ChartEventEnum.CHART_CLICK);
-        if (index2 === -1) {
-          emits.push(ChartEventEnum.CHART_CLICK);
-          screenEditStore.getCurConfigComponent.chart.events = {
-            ...screenEditStore.getCurConfigComponent.chart.events,
-            emits
-          };
-        }
-      }
+  function x2(e3) {
+    if (s2.value = false, y2.value = (e3 == null ? void 0 : e3.id) ?? void 0, y2.name = (e3 == null ? void 0 : e3.name) ?? void 0, y2.img = (e3 == null ? void 0 : e3.thumbnail) ?? void 0, e3.canvasConfig) {
+      const t2 = JSON.parse(e3.canvasConfig);
+      y2.width = t2 == null ? void 0 : t2.width, y2.height = t2 == null ? void 0 : t2.height;
     }
-    function jumpTypeChange() {
-      screenEditStore.getCurConfigComponent.chart.jump = {
-        ...screenEditStore.getCurConfigComponent.chart.jump,
-        type: jumpType.value
-      };
-    }
-    function pageTypeChange() {
-      screenEditStore.getCurConfigComponent.chart.jump = {
-        ...screenEditStore.getCurConfigComponent.chart.jump,
-        pageType: pageType.value
-      };
-      if (pageType.value === PageType.System) {
-        pageSelect(page.value);
-      } else {
-        pageUrlChange();
-      }
-    }
-    function pageSelect(item) {
-      screenEditStore.getCurConfigComponent.chart.jump = {
-        ...screenEditStore.getCurConfigComponent.chart.jump,
-        page: item
-      };
-      width.value = item == null ? void 0 : item.width;
-      height.value = item == null ? void 0 : item.height;
-    }
-    function pageUrlChange() {
-      screenEditStore.getCurConfigComponent.chart.jump = {
-        ...screenEditStore.getCurConfigComponent.chart.jump,
-        page: { value: pageUrl.value }
-      };
-    }
-    function wChange() {
-      screenEditStore.getCurConfigComponent.chart.jump.page = {
-        ...screenEditStore.getCurConfigComponent.chart.jump.page,
-        width: width.value
-      };
-    }
-    function hChange() {
-      screenEditStore.getCurConfigComponent.chart.jump.page = {
-        ...screenEditStore.getCurConfigComponent.chart.jump.page,
-        height: height.value
-      };
-    }
-    return (_ctx, _cache) => {
-      var _a;
-      const _component_AInput = resolveComponent("AInput");
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(unref(prefixCls))
-      }, [
-        createVNode(ConfigGroup, {
-          title: "页面跳转",
-          "allow-check": true,
-          tooltip: "组件开启页面跳转功能，开启后点击组件页面跳到配置页面，配置页面不支持跳转，请在预览界面查看效果",
-          "title-check": (_a = unref(screenEditStore).getCurConfigComponent.chart.jump) == null ? void 0 : _a.open,
-          onChecked: jumpCheck
-        }, {
-          default: withCtx(() => [
-            createElementVNode("div", _hoisted_1, [
-              _cache[5] || (_cache[5] = createTextVNode(" 跳转方式 ")),
-              createVNode(unref(RadioGroup), {
-                size: "small",
-                value: jumpType.value,
-                "onUpdate:value": _cache[0] || (_cache[0] = ($event) => jumpType.value = $event),
-                onChange: jumpTypeChange
-              }, {
-                default: withCtx(() => [
-                  (openBlock(), createElementBlock(Fragment, null, renderList(jumpTypes, (item, index2) => {
-                    return createVNode(unref(RadioButton), {
-                      key: index2,
-                      value: item
-                    }, {
-                      default: withCtx(() => [
-                        createTextVNode(toDisplayString(item), 1)
-                      ]),
-                      _: 2
-                    }, 1032, ["value"]);
-                  }), 64))
-                ]),
-                _: 1
-              }, 8, ["value"])
-            ]),
-            createElementVNode("div", _hoisted_2, [
-              _cache[6] || (_cache[6] = createTextVNode(" 跳转页面 ")),
-              createVNode(unref(RadioGroup), {
-                size: "small",
-                value: pageType.value,
-                "onUpdate:value": _cache[1] || (_cache[1] = ($event) => pageType.value = $event),
-                onChange: pageTypeChange
-              }, {
-                default: withCtx(() => [
-                  (openBlock(), createElementBlock(Fragment, null, renderList(pageTypes, (item, index2) => {
-                    return createVNode(unref(RadioButton), {
-                      key: index2,
-                      value: item
-                    }, {
-                      default: withCtx(() => [
-                        createTextVNode(toDisplayString(item), 1)
-                      ]),
-                      _: 2
-                    }, 1032, ["value"]);
-                  }), 64))
-                ]),
-                _: 1
-              }, 8, ["value"])
-            ]),
-            pageType.value === unref(PageType).System ? (openBlock(), createBlock(PageSelect, {
-              key: 0,
-              page: page.value,
-              onOk: pageSelect
-            }, null, 8, ["page"])) : (openBlock(), createBlock(_component_AInput, {
-              key: 1,
-              placeholder: "请输入外部链接，例如https://www.bing.com",
-              value: pageUrl.value,
-              "onUpdate:value": _cache[2] || (_cache[2] = ($event) => pageUrl.value = $event),
-              onChange: pageUrlChange
-            }, null, 8, ["value"])),
-            jumpType.value === unref(PageJumpType).Dialog ? (openBlock(), createElementBlock("div", _hoisted_3, [
-              createVNode(unref(ScreenInput), {
-                prefix: "W",
-                placeholder: "宽度",
-                value: width.value,
-                "onUpdate:value": _cache[3] || (_cache[3] = ($event) => width.value = $event),
-                min: 0,
-                max: 99999,
-                maxlength: 5,
-                onChange: wChange
-              }, null, 8, ["value"]),
-              createVNode(unref(ScreenInput), {
-                prefix: "H",
-                placeholder: "高度",
-                value: height.value,
-                "onUpdate:value": _cache[4] || (_cache[4] = ($event) => height.value = $event),
-                min: 0,
-                max: 99999,
-                maxlength: 5,
-                onChange: hChange
-              }, null, 8, ["value"])
-            ])) : createCommentVNode("", true)
-          ]),
-          _: 1
-        }, 8, ["title-check"])
-      ], 2);
-    };
+    r2("ok", y2);
   }
-});
-const Index = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-2186b2e9"]]);
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  ...{ name: "AdvanceConfig" },
-  __name: "index",
-  setup(__props) {
-    const { prefixCls } = useDesign("advance-config");
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(ScrollContainer), null, {
-        default: withCtx(() => [
-          createElementVNode("div", {
-            class: normalizeClass(unref(prefixCls))
-          }, [
-            createVNode(ConfigGroup, { title: "事件开启" }, {
-              default: withCtx(() => [
-                createVNode(EventListen)
-              ]),
-              _: 1
-            }),
-            createVNode(Index)
-          ], 2),
-          createVNode(unref(Empty), {
-            description: "进阶配置开发中......",
-            image: unref(Empty).PRESENTED_IMAGE_SIMPLE
-          }, null, 8, ["image"])
-        ]),
-        _: 1
-      });
-    };
+  return (e3, t2) => (o(), v(i(b), { trigger: ["click"], open: s2.value, onOpenChange: j2, placement: "bottom", arrow: { pointAtCenter: true }, "overlay-style": { width: "400px" } }, { overlay: g(() => [c(i(S), null, { default: g(() => [c(i(S).Item, { disabled: "", style: { padding: "0", cursor: "default" } }, { default: g(() => [c(Z, { onSelectScreen: x2 })]), _: 1 })]), _: 1 })]), default: g(() => [m("div", { class: l(i(p2)), onMouseenter: t2[2] || (t2[2] = (e4) => k2.value = true), onMouseleave: t2[3] || (t2[3] = (e4) => k2.value = false) }, [c(i(I), { class: l(`${i(p2)}-drop-input`), placeholder: "请选择页面", value: y2.name, "onUpdate:value": t2[0] || (t2[0] = (e4) => y2.name = e4), onChange: t2[1] || (t2[1] = (e4) => s2.value = true) }, d({ suffix: g(() => [y2.value && k2.value ? (o(), v(i(W), { key: 0, class: "delete-icon", size: 14, icon: "ant-design:close-circle-filled", onClick: f(w2, ["stop"]) })) : h("", true), c(i(W), { class: "drop-icon", size: 12, icon: s2.value ? "ant-design:up-outlined" : "ant-design:down-outlined" }, null, 8, ["icon"])]), _: 2 }, [y2.img ? { name: "prefix", fn: g(() => [m("img", { alt: "screen", src: i(F)(i(Q)(y2.img)), class: "screen_img" }, null, 8, ee)]), key: "0" } : void 0]), 1032, ["class", "value"])], 34)]), _: 1 }, 8, ["open"]));
+} }), [["__scopeId", "data-v-eb4ee99b"]]), ae = { class: "title" }, ne = { class: "title" }, oe = { key: 2, class: "title" }, le = e({ name: "PageJumpConfig", __name: "index", setup(e2) {
+  const s2 = L(), { prefixCls: C2 } = A("page-jump-config"), d2 = [K.CurPage, K.NewTab, K.Dialog], f2 = t(), y2 = [J.System, J.External], j2 = t(), w2 = t(), x2 = t(), b2 = t(), I2 = t();
+  function S2(e3) {
+    var _a;
+    if (s2.getCurConfigComponent.chart.jump = { ...s2.getCurConfigComponent.chart.jump, open: e3 }, e3) {
+      let e4 = (_a = s2.getCurConfigComponent.chart.events) == null ? void 0 : _a.emits;
+      e4 || (e4 = []);
+      -1 === e4.indexOf(z.CHART_CLICK) && (e4.push(z.CHART_CLICK), s2.getCurConfigComponent.chart.events = { ...s2.getCurConfigComponent.chart.events, emits: e4 });
+    }
   }
-});
-const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-fcbfd2e1"]]);
+  function P2() {
+    s2.getCurConfigComponent.chart.jump = { ...s2.getCurConfigComponent.chart.jump, type: f2.value };
+  }
+  function T2() {
+    s2.getCurConfigComponent.chart.jump = { ...s2.getCurConfigComponent.chart.jump, pageType: j2.value }, j2.value === J.System ? H2(w2.value) : R2();
+  }
+  function H2(e3) {
+    s2.getCurConfigComponent.chart.jump = { ...s2.getCurConfigComponent.chart.jump, page: e3 }, b2.value = e3 == null ? void 0 : e3.width, I2.value = e3 == null ? void 0 : e3.height;
+  }
+  function R2() {
+    s2.getCurConfigComponent.chart.jump = { ...s2.getCurConfigComponent.chart.jump, page: { value: x2.value } };
+  }
+  function M2() {
+    s2.getCurConfigComponent.chart.jump.page = { ...s2.getCurConfigComponent.chart.jump.page, width: b2.value };
+  }
+  function N2() {
+    s2.getCurConfigComponent.chart.jump.page = { ...s2.getCurConfigComponent.chart.jump.page, height: I2.value };
+  }
+  return a(() => {
+    var _a;
+    return (_a = s2.getCurConfigComponent) == null ? void 0 : _a.chart.id;
+  }, (e3) => {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k;
+    e3 && (((_a = s2.getCurConfigComponent.chart.jump) == null ? void 0 : _a.type) ? f2.value = (_b = s2.getCurConfigComponent.chart.jump) == null ? void 0 : _b.type : (f2.value = K.CurPage, P2()), ((_c = s2.getCurConfigComponent.chart.jump) == null ? void 0 : _c.pageType) ? j2.value = (_d = s2.getCurConfigComponent.chart.jump) == null ? void 0 : _d.pageType : (j2.value = J.System, T2()), j2.value === J.System ? w2.value = (_e = s2.getCurConfigComponent.chart.jump) == null ? void 0 : _e.page : x2.value = (_g = (_f = s2.getCurConfigComponent.chart.jump) == null ? void 0 : _f.page) == null ? void 0 : _g.value, b2.value = (_i = (_h = s2.getCurConfigComponent.chart.jump) == null ? void 0 : _h.page) == null ? void 0 : _i.width, I2.value = (_k = (_j = s2.getCurConfigComponent.chart.jump) == null ? void 0 : _j.page) == null ? void 0 : _k.height);
+  }, { immediate: true }), (e3, t2) => {
+    var _a;
+    const a2 = _("AInput");
+    return o(), n("div", { class: l(i(C2)) }, [c(O, { title: "页面跳转", "allow-check": true, tooltip: "组件开启页面跳转功能，开启后点击组件页面跳到配置页面，配置页面不支持跳转，请在预览界面查看效果", "title-check": (_a = i(s2).getCurConfigComponent.chart.jump) == null ? void 0 : _a.open, onChecked: S2 }, { default: g(() => [m("div", ae, [t2[5] || (t2[5] = k(" 跳转方式 ")), c(i(E), { size: "small", value: f2.value, "onUpdate:value": t2[0] || (t2[0] = (e4) => f2.value = e4), onChange: P2 }, { default: g(() => [(o(), n(u, null, r(d2, (e4, t3) => c(i(U), { key: t3, value: e4 }, { default: g(() => [k(p(e4), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])]), m("div", ne, [t2[6] || (t2[6] = k(" 跳转页面 ")), c(i(E), { size: "small", value: j2.value, "onUpdate:value": t2[1] || (t2[1] = (e4) => j2.value = e4), onChange: T2 }, { default: g(() => [(o(), n(u, null, r(y2, (e4, t3) => c(i(U), { key: t3, value: e4 }, { default: g(() => [k(p(e4), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])]), j2.value === i(J).System ? (o(), v(te, { key: 0, page: w2.value, onOk: H2 }, null, 8, ["page"])) : (o(), v(a2, { key: 1, placeholder: "请输入外部链接，例如https://www.bing.com", value: x2.value, "onUpdate:value": t2[2] || (t2[2] = (e4) => x2.value = e4), onChange: R2 }, null, 8, ["value"])), f2.value === i(K).Dialog ? (o(), n("div", oe, [c(i(G), { prefix: "W", placeholder: "宽度", value: b2.value, "onUpdate:value": t2[3] || (t2[3] = (e4) => b2.value = e4), min: 0, max: 99999, maxlength: 5, onChange: M2 }, null, 8, ["value"]), c(i(G), { prefix: "H", placeholder: "高度", value: I2.value, "onUpdate:value": t2[4] || (t2[4] = (e4) => I2.value = e4), min: 0, max: 99999, maxlength: 5, onChange: N2 }, null, 8, ["value"])])) : h("", true)]), _: 1 }, 8, ["title-check"])], 2);
+  };
+} }), ie = M(le, [["__scopeId", "data-v-2186b2e9"]]), ue = M(e({ name: "AdvanceConfig", __name: "index", setup(e2) {
+  const { prefixCls: t2 } = A("advance-config");
+  return (e3, a2) => (o(), v(i(T), null, { default: g(() => [m("div", { class: l(i(t2)) }, [c(O, { title: "事件开启" }, { default: g(() => [c(q)]), _: 1 }), c(ie)], 2), c(i(P), { description: "进阶配置开发中......", image: i(P).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"])]), _: 1 }));
+} }), [["__scopeId", "data-v-fcbfd2e1"]]);
 export {
-  index as default
+  ue as default
 };

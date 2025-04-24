@@ -1,39 +1,18 @@
-import { defineComponent, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode } from "vue";
-import MfDecorationConfig from "./MfDecorationConfig.js";
-import { useDesign } from "@mfish/core/hooks";
-import { u as useScreenEditStore, f as ScreenInput, _ as _export_sfc } from "./index.js";
+import { defineComponent as o, createBlock as t, openBlock as e, normalizeClass as i, unref as s, withCtx as r, createElementVNode as n, createVNode as a } from "vue";
+import m from "./MfDecorationConfig.js";
+import { useDesign as p } from "@mfish/core/hooks";
+import { u as f, f as c, _ as l } from "./index.js";
 import "ant-design-vue";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-import { T as TitleConfig } from "./TitleConfig.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfDecoration7Config",
-  setup(__props) {
-    const { prefixCls } = useDesign("decoration7-config");
-    const screenEditStore = useScreenEditStore();
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(MfDecorationConfig, {
-        class: normalizeClass(unref(prefixCls))
-      }, {
-        default: withCtx(() => [
-          _cache[1] || (_cache[1] = createElementVNode("div", { class: "title" }, "标题", -1)),
-          createVNode(unref(ScreenInput), {
-            value: unref(screenEditStore).getCurConfigComponent.chart.options.title,
-            "onUpdate:value": _cache[0] || (_cache[0] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.options.title = $event),
-            "is-number": false,
-            placeholder: "标题内容"
-          }, null, 8, ["value"]),
-          createVNode(TitleConfig)
-        ]),
-        _: 1
-      }, 8, ["class"]);
-    };
-  }
-});
-const MfDecoration7Config = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-2a6938b0"]]);
+import { T as u } from "./TitleConfig.js";
+const d = l(o({ __name: "MfDecoration7Config", setup(o2) {
+  const { prefixCls: l2 } = p("decoration7-config"), d2 = f();
+  return (o3, p2) => (e(), t(m, { class: i(s(l2)) }, { default: r(() => [p2[1] || (p2[1] = n("div", { class: "title" }, "标题", -1)), a(s(c), { value: s(d2).getCurConfigComponent.chart.options.title, "onUpdate:value": p2[0] || (p2[0] = (o4) => s(d2).getCurConfigComponent.chart.options.title = o4), "is-number": false, placeholder: "标题内容" }, null, 8, ["value"]), a(u)]), _: 1 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-2a6938b0"]]);
 export {
-  MfDecoration7Config as default
+  d as default
 };
