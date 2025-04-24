@@ -1,60 +1,15 @@
-import { defineComponent, ref, createElementBlock, openBlock, normalizeClass, unref, createVNode, withCtx, createElementVNode, createTextVNode, Fragment, renderList, toDisplayString } from "vue";
-import MfTagConfig from "./MfTagConfig.js";
-import { useDesign } from "@mfish/core/hooks";
-import { RadioGroup, RadioButton } from "ant-design-vue";
-import { u as useScreenEditStore, _ as _export_sfc } from "./index.js";
-const _hoisted_1 = { class: "title" };
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfDataTimeConfig",
-  setup(__props) {
-    const { prefixCls } = useDesign("date-time-config");
-    const format = ref("YYYY-MM-DD HH:mm:ss");
-    const formats = [
-      { title: "日期时间", value: "YYYY-MM-DD HH:mm:ss" },
-      { title: "时间", value: "HH:mm:ss" }
-    ];
-    const screenEditStore = useScreenEditStore();
-    function formatChange() {
-      screenEditStore.getCurConfigComponent.chart.options.format = format.value;
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(unref(prefixCls))
-      }, [
-        createVNode(MfTagConfig, { "hide-title": true }, {
-          default: withCtx(() => [
-            createElementVNode("div", _hoisted_1, [
-              _cache[1] || (_cache[1] = createTextVNode(" 时间格式 ")),
-              createVNode(unref(RadioGroup), {
-                size: "small",
-                value: format.value,
-                "onUpdate:value": _cache[0] || (_cache[0] = ($event) => format.value = $event),
-                onChange: formatChange
-              }, {
-                default: withCtx(() => [
-                  (openBlock(), createElementBlock(Fragment, null, renderList(formats, (item) => {
-                    return createVNode(unref(RadioButton), {
-                      key: item.value,
-                      value: item.value
-                    }, {
-                      default: withCtx(() => [
-                        createTextVNode(toDisplayString(item.title), 1)
-                      ]),
-                      _: 2
-                    }, 1032, ["value"]);
-                  }), 64))
-                ]),
-                _: 1
-              }, 8, ["value"])
-            ])
-          ]),
-          _: 1
-        })
-      ], 2);
-    };
+import { defineComponent as e, ref as a, createElementBlock as t, openBlock as o, normalizeClass as l, unref as i, createVNode as s, withCtx as u, createElementVNode as m, createTextVNode as n, Fragment as f, renderList as r, toDisplayString as v } from "vue";
+import d from "./MfTagConfig.js";
+import { useDesign as p } from "@mfish/core/hooks";
+import { RadioGroup as c, RadioButton as g } from "ant-design-vue";
+import { u as Y, _ } from "./index.js";
+const C = { class: "title" }, H = _(e({ __name: "MfDataTimeConfig", setup(e2) {
+  const { prefixCls: _2 } = p("date-time-config"), H2 = a("YYYY-MM-DD HH:mm:ss"), M = [{ title: "日期时间", value: "YYYY-MM-DD HH:mm:ss" }, { title: "时间", value: "HH:mm:ss" }], h = Y();
+  function D() {
+    h.getCurConfigComponent.chart.options.format = H2.value;
   }
-});
-const MfDataTimeConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-93ac9c5a"]]);
+  return (e3, a2) => (o(), t("div", { class: l(i(_2)) }, [s(d, { "hide-title": true }, { default: u(() => [m("div", C, [a2[1] || (a2[1] = n(" 时间格式 ")), s(i(c), { size: "small", value: H2.value, "onUpdate:value": a2[0] || (a2[0] = (e4) => H2.value = e4), onChange: D }, { default: u(() => [(o(), t(f, null, r(M, (e4) => s(i(g), { key: e4.value, value: e4.value }, { default: u(() => [n(v(e4.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])])]), _: 1 })], 2));
+} }), [["__scopeId", "data-v-93ac9c5a"]]);
 export {
-  MfDataTimeConfig as default
+  H as default
 };

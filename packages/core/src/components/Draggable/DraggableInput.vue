@@ -26,7 +26,7 @@
           <div @mouseover="tagMouseOver(index)" @mouseleave="tagMouseLeave" style="position: relative">
             <div @drop="handleDropItem($event, index)">
               <slot v-bind="{ index, element }" name="tag" v-if="element.slot"></slot>
-              <ATag v-else class="pointer" :color="blockColor" @click="editBlock(index, element)">
+              <ATag v-else class="pointer" :color="blockColor" @click="editBlock(index, element)" :title="element.name">
                 <template #icon>
                   <slot v-bind="{ index, element }" name="tagIcon"></slot>
                 </template>
@@ -261,6 +261,10 @@
       align-items: center;
       height: 24px;
       margin-top: 2px;
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .close {

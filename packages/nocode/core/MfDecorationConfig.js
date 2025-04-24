@@ -1,74 +1,30 @@
-import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode, renderSlot } from "vue";
-import { S as StyleConfig } from "./StyleConfig.js";
-import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index.js";
+import { defineComponent as o, ref as n, watch as e, createBlock as t, openBlock as i, normalizeClass as a, unref as r, withCtx as s, createElementVNode as l, createVNode as u, renderSlot as m } from "vue";
+import { S as c } from "./StyleConfig.js";
+import { u as p, k as C, _ as f } from "./index.js";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/components/Icon";
-import { useDesign } from "@mfish/core/hooks";
+import { useDesign as g } from "@mfish/core/hooks";
 import "ant-design-vue";
 import "@mfish/core/utils/Is";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfDecorationConfig",
-  setup(__props) {
-    const { prefixCls } = useDesign("decoration-config");
-    const mainBorderColor = ref();
-    const secBorderColor = ref();
-    const screenEditStore = useScreenEditStore();
-    watch(
-      () => screenEditStore.getCurConfigComponent,
-      (val) => {
-        if (!val) return;
-        initValue();
-      },
-      { immediate: true }
-    );
-    function initValue() {
-      mainBorderColor.value = screenEditStore.getCurConfigComponent.chart.options.mainColor;
-      secBorderColor.value = screenEditStore.getCurConfigComponent.chart.options.secondColor;
-    }
-    function confirmMainColor(e) {
-      changeMainColor(e);
-      mainBorderColor.value = e;
-    }
-    function changeMainColor(e) {
-      screenEditStore.getCurConfigComponent.chart.options.mainColor = e;
-    }
-    function confirmSecColor(e) {
-      changeSecColor(e);
-      secBorderColor.value = e;
-    }
-    function changeSecColor(e) {
-      screenEditStore.getCurConfigComponent.chart.options.secondColor = e;
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(StyleConfig, {
-        class: normalizeClass(unref(prefixCls))
-      }, {
-        default: withCtx(() => [
-          _cache[0] || (_cache[0] = createElementVNode("div", { class: "title" }, " 主体色", -1)),
-          createVNode(unref(MfishColorPicker), {
-            placeholder: "设置主体颜色，格式#FFFFFF",
-            type: 1,
-            value: mainBorderColor.value,
-            onConfirmChange: confirmMainColor,
-            onInputChange: changeMainColor
-          }, null, 8, ["value"]),
-          _cache[1] || (_cache[1] = createElementVNode("div", { class: "title" }, " 搭配色", -1)),
-          createVNode(unref(MfishColorPicker), {
-            placeholder: "设置搭配颜色，格式#FFFFFF",
-            type: 1,
-            value: secBorderColor.value,
-            onConfirmChange: confirmSecColor,
-            onInputChange: changeSecColor
-          }, null, 8, ["value"]),
-          renderSlot(_ctx.$slots, "default", {}, void 0, true)
-        ]),
-        _: 3
-      }, 8, ["class"]);
-    };
+const d = f(o({ __name: "MfDecorationConfig", setup(o2) {
+  const { prefixCls: f2 } = g("decoration-config"), d2 = n(), h = n(), v = p();
+  function F(o3) {
+    _(o3), d2.value = o3;
   }
-});
-const MfDecorationConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-73423ace"]]);
+  function _(o3) {
+    v.getCurConfigComponent.chart.options.mainColor = o3;
+  }
+  function I(o3) {
+    x(o3), h.value = o3;
+  }
+  function x(o3) {
+    v.getCurConfigComponent.chart.options.secondColor = o3;
+  }
+  return e(() => v.getCurConfigComponent, (o3) => {
+    o3 && (d2.value = v.getCurConfigComponent.chart.options.mainColor, h.value = v.getCurConfigComponent.chart.options.secondColor);
+  }, { immediate: true }), (o3, n2) => (i(), t(c, { class: a(r(f2)) }, { default: s(() => [n2[0] || (n2[0] = l("div", { class: "title" }, " 主体色", -1)), u(r(C), { placeholder: "设置主体颜色，格式#FFFFFF", type: 1, value: d2.value, onConfirmChange: F, onInputChange: _ }, null, 8, ["value"]), n2[1] || (n2[1] = l("div", { class: "title" }, " 搭配色", -1)), u(r(C), { placeholder: "设置搭配颜色，格式#FFFFFF", type: 1, value: h.value, onConfirmChange: I, onInputChange: x }, null, 8, ["value"]), m(o3.$slots, "default", {}, void 0, true)]), _: 3 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-73423ace"]]);
 export {
-  MfDecorationConfig as default
+  d as default
 };

@@ -1,105 +1,33 @@
-import { defineComponent, useTemplateRef, onMounted, createElementBlock, openBlock, mergeProps, toHandlers, unref } from "vue";
-import { u as useEcharts } from "./UseEcharts.js";
-import { h as useChartEventHandle } from "./index.js";
-import { cloneDeep } from "lodash-es";
-import { u as useEchartsMap, g as geoCoordinate } from "./UseEchartsMap.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  ...{ name: "MfMapLine" },
-  __name: "index",
-  props: {
-    chart: { type: Object, required: true },
-    chartContain: { type: Object, required: true }
-  },
-  setup(__props) {
-    const props = __props;
-    const mfMapLineRef = useTemplateRef("mfMapLineRef");
-    const { commonEvents } = useChartEventHandle(props.chart);
-    useEchartsMap(props.chart.options.geo);
-    onMounted(() => {
-      useEcharts(mfMapLineRef.value, props.chart, props.chartContain, setOption);
-    });
-    const convertData = (data) => {
-      const rippleDataArray = [];
-      const lineDataArray = [];
-      const set = /* @__PURE__ */ new Set();
-      let max = 0;
-      let min = data && data.length > 1 && data[1].length > 2 ? data[1][2] : 0;
-      const addData = (data2, value) => {
-        if (set.has(data2)) {
-          const index = rippleDataArray.findIndex((item) => item.name === data2);
-          rippleDataArray[index].value[2] += value;
-          if (max < rippleDataArray[index].value[2]) {
-            max = rippleDataArray[index].value[2];
-          }
-          if (min > rippleDataArray[index].value[2]) {
-            min = rippleDataArray[index].value[2];
-          }
-        } else {
-          rippleDataArray.push({
-            name: data2,
-            value: [...geoCoordinate[data2], value]
-          });
-          if (max < value) {
-            max = value;
-          }
-          if (min > value) {
-            min = value;
-          }
-          set.add(data2);
-        }
+import { defineComponent as e, useTemplateRef as a, onMounted as t, createElementBlock as r, openBlock as o, mergeProps as s, toHandlers as n, unref as i } from "vue";
+import { u as m } from "./UseEcharts.js";
+import { h as l } from "./index.js";
+import { cloneDeep as p } from "lodash-es";
+import { u, g as c } from "./UseEchartsMap.js";
+const f = e({ name: "MfMapLine", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
+  const f2 = e2, h = a("mfMapLineRef"), { commonEvents: d } = l(f2.chart);
+  u(f2.chart.options.geo), t(() => {
+    m(h.value, f2.chart, f2.chartContain, v);
+  });
+  function v(e3, a2) {
+    const t2 = { ...p(f2.chart.options), backgroundColor: "transparent" }, r2 = ((e4) => {
+      const a3 = [], t3 = [], r3 = /* @__PURE__ */ new Set();
+      let o2 = 0, s2 = e4 && e4.length > 1 && e4[1].length > 2 ? e4[1][2] : 0;
+      const n2 = (e5, t4) => {
+        if (r3.has(e5)) {
+          const r4 = a3.findIndex((a4) => a4.name === e5);
+          a3[r4].value[2] += t4, o2 < a3[r4].value[2] && (o2 = a3[r4].value[2]), s2 > a3[r4].value[2] && (s2 = a3[r4].value[2]);
+        } else a3.push({ name: e5, value: [...c[e5], t4] }), o2 < t4 && (o2 = t4), s2 > t4 && (s2 = t4), r3.add(e5);
       };
-      for (const [i, item] of data.entries()) {
-        if (i > 0) {
-          const from = geoCoordinate[item[0]];
-          const to = geoCoordinate[item[1]];
-          const val = Number.parseFloat(item[2]) || 0;
-          lineDataArray.push({
-            fromName: item[0],
-            toName: item[1],
-            coords: [from, to],
-            value: val
-          });
-          addData(item[1], val);
-          addData(item[0], 0);
-        }
+      for (const [a4, r4] of e4.entries()) if (a4 > 0) {
+        const e5 = c[r4[0]], a5 = c[r4[1]], o3 = Number.parseFloat(r4[2]) || 0;
+        t3.push({ fromName: r4[0], toName: r4[1], coords: [e5, a5], value: o3 }), n2(r4[1], o3), n2(r4[0], 0);
       }
-      return { lineDataArray, rippleDataArray, max, min };
-    };
-    function setOption(eChart, dataSet) {
-      const options = {
-        ...cloneDeep(props.chart.options),
-        backgroundColor: "transparent"
-      };
-      const data = convertData(dataSet.source);
-      options.series[0].data = data.lineDataArray;
-      options.series[0].tooltip = {
-        trigger: "item",
-        formatter: (params) => {
-          return `${params.data.fromName} → ${params.data.toName}<br>值: ${params.data.value}`;
-        }
-      };
-      if (options.series.length > 1) {
-        options.series[1].data = data.rippleDataArray;
-        options.series[1].tooltip = {
-          trigger: "item",
-          formatter: (params) => {
-            return `${params.name}<br>合计: ${params.value[2]}`;
-          }
-        };
-      }
-      options.visualMap.min = data.min;
-      options.visualMap.max = data.max;
-      eChart == null ? void 0 : eChart.setOption(options, true);
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", mergeProps({
-        ref_key: "mfMapLineRef",
-        ref: mfMapLineRef,
-        style: { "width": "100%", "height": "100%" }
-      }, toHandlers(unref(commonEvents), true)), null, 16);
-    };
+      return { lineDataArray: t3, rippleDataArray: a3, max: o2, min: s2 };
+    })(a2.source);
+    t2.series[0].data = r2.lineDataArray, t2.series[0].tooltip = { trigger: "item", formatter: (e4) => `${e4.data.fromName} → ${e4.data.toName}<br>值: ${e4.data.value}` }, t2.series.length > 1 && (t2.series[1].data = r2.rippleDataArray, t2.series[1].tooltip = { trigger: "item", formatter: (e4) => `${e4.name}<br>合计: ${e4.value[2]}` }), t2.visualMap.min = r2.min, t2.visualMap.max = r2.max, e3 == null ? void 0 : e3.setOption(t2, true);
   }
-});
+  return (e3, a2) => (o(), r("div", s({ ref_key: "mfMapLineRef", ref: h, style: { width: "100%", height: "100%" } }, n(i(d), true)), null, 16));
+} });
 export {
-  _sfc_main as default
+  f as default
 };

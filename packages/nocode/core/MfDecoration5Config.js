@@ -1,43 +1,17 @@
-import { defineComponent, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createTextVNode, createVNode } from "vue";
-import MfDecorationConfig from "./MfDecorationConfig.js";
+import { defineComponent as o, createBlock as t, openBlock as e, normalizeClass as i, unref as r, withCtx as s, createElementVNode as n, createTextVNode as a, createVNode as m } from "vue";
+import f from "./MfDecorationConfig.js";
 import "ant-design-vue";
-import { useDesign } from "@mfish/core/hooks";
-import { u as useScreenEditStore, f as ScreenInput, _ as _export_sfc } from "./index.js";
+import { useDesign as p } from "@mfish/core/hooks";
+import { u as c, f as u, _ as l } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-const _hoisted_1 = { class: "title" };
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfDecoration5Config",
-  setup(__props) {
-    const { prefixCls } = useDesign("decoration5-config");
-    const screenEditStore = useScreenEditStore();
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(MfDecorationConfig, {
-        class: normalizeClass(unref(prefixCls))
-      }, {
-        default: withCtx(() => [
-          createElementVNode("div", _hoisted_1, [
-            _cache[1] || (_cache[1] = createTextVNode(" 单次动画时长 ")),
-            createVNode(unref(ScreenInput), {
-              suffix: "秒",
-              value: unref(screenEditStore).getCurConfigComponent.chart.options.duration,
-              "onUpdate:value": _cache[0] || (_cache[0] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.options.duration = $event),
-              placeholder: "单次动画时长",
-              min: 1,
-              max: 100,
-              maxlength: 3
-            }, null, 8, ["value"])
-          ])
-        ]),
-        _: 1
-      }, 8, ["class"]);
-    };
-  }
-});
-const MfDecoration5Config = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-1606d90f"]]);
+const d = { class: "title" }, h = l(o({ __name: "MfDecoration5Config", setup(o2) {
+  const { prefixCls: l2 } = p("decoration5-config"), h2 = c();
+  return (o3, p2) => (e(), t(f, { class: i(r(l2)) }, { default: s(() => [n("div", d, [p2[1] || (p2[1] = a(" 单次动画时长 ")), m(r(u), { suffix: "秒", value: r(h2).getCurConfigComponent.chart.options.duration, "onUpdate:value": p2[0] || (p2[0] = (o4) => r(h2).getCurConfigComponent.chart.options.duration = o4), placeholder: "单次动画时长", min: 1, max: 100, maxlength: 3 }, null, 8, ["value"])])]), _: 1 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-1606d90f"]]);
 export {
-  MfDecoration5Config as default
+  h as default
 };

@@ -1,30 +1,17 @@
-import { defineComponent, createBlock, openBlock, unref } from "vue";
+import { defineComponent as e, createBlock as o, openBlock as r, unref as t } from "vue";
 import "ant-design-vue";
 import "@mfish/core/hooks";
-import { ac as Decoration8 } from "./index.js";
+import { ac as s } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-import { _ as _sfc_main$1 } from "./index.vue_vue_type_script_setup_true_lang.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  ...{ name: "MfDecoration8" },
-  __name: "index",
-  props: {
-    chart: { type: Object }
-  },
-  setup(__props) {
-    return (_ctx, _cache) => {
-      var _a;
-      return openBlock(), createBlock(_sfc_main$1, {
-        component: unref(Decoration8),
-        chart: __props.chart,
-        reverse: (_a = __props.chart) == null ? void 0 : _a.options.reverse
-      }, null, 8, ["component", "chart", "reverse"]);
-    };
-  }
-});
+import { _ as m } from "./index.vue_vue_type_script_setup_true_lang.js";
+const i = e({ name: "MfDecoration8", __name: "index", props: { chart: { type: Object } }, setup: (e2) => (i2, p) => {
+  var _a;
+  return r(), o(m, { component: t(s), chart: e2.chart, reverse: (_a = e2.chart) == null ? void 0 : _a.options.reverse }, null, 8, ["component", "chart", "reverse"]);
+} });
 export {
-  _sfc_main as default
+  i as default
 };

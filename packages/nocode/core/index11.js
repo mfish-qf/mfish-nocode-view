@@ -1,31 +1,17 @@
-import { defineComponent, createBlock, openBlock, unref } from "vue";
+import { defineComponent as t, createBlock as e, openBlock as o, unref as i } from "vue";
 import "ant-design-vue";
 import "@mfish/core/hooks";
-import { m as BorderBox11 } from "./index.js";
+import { m as r } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-import { _ as _sfc_main$1 } from "./index.vue_vue_type_script_setup_true_lang.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  ...{ name: "MfBorder11" },
-  __name: "index",
-  props: {
-    chart: { type: Object }
-  },
-  setup(__props) {
-    return (_ctx, _cache) => {
-      var _a, _b;
-      return openBlock(), createBlock(_sfc_main$1, {
-        component: unref(BorderBox11),
-        chart: __props.chart,
-        title: (_a = __props.chart) == null ? void 0 : _a.options.title,
-        "title-width": (_b = __props.chart) == null ? void 0 : _b.options.titleWidth
-      }, null, 8, ["component", "chart", "title", "title-width"]);
-    };
-  }
-});
+import { _ as s } from "./index.vue_vue_type_script_setup_true_lang.js";
+const m = t({ name: "MfBorder11", __name: "index", props: { chart: { type: Object } }, setup: (t2) => (m2, p) => {
+  var _a, _b;
+  return o(), e(s, { component: i(r), chart: t2.chart, title: (_a = t2.chart) == null ? void 0 : _a.options.title, "title-width": (_b = t2.chart) == null ? void 0 : _b.options.titleWidth }, null, 8, ["component", "chart", "title", "title-width"]);
+} });
 export {
-  _sfc_main as default
+  m as default
 };

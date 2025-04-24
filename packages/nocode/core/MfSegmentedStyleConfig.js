@@ -1,156 +1,62 @@
-import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode } from "vue";
-import { S as StyleConfig } from "./StyleConfig.js";
-import { useDesign } from "@mfish/core/hooks";
-import { u as useScreenEditStore, T as TextStyle, am as TextFont, D as _sfc_main$1, k as MfishColorPicker, _ as _export_sfc } from "./index.js";
+import { defineComponent as t, ref as e, watch as o, createBlock as n, openBlock as l, normalizeClass as i, unref as a, withCtx as s, createElementVNode as r, createVNode as C } from "vue";
+import { S as c } from "./StyleConfig.js";
+import { useDesign as u } from "@mfish/core/hooks";
+import { u as g, T as p, am as f, D as h, k as m, _ as y } from "./index.js";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/components/Icon";
 import "ant-design-vue";
 import "@mfish/core/utils/Is";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfSegmentedStyleConfig",
-  setup(__props) {
-    const { prefixCls } = useDesign("segmented-style-config");
-    const screenEditStore = useScreenEditStore();
-    const textStyleInfo = ref({});
-    const selectStyleInfo = ref({});
-    const transparent = ref(false);
-    const selectBackground = ref();
-    watch(
-      () => screenEditStore.getCurConfigComponent,
-      (val) => {
-        if (!val) return;
-        initValue(val);
-      },
-      { immediate: true }
-    );
-    function initValue(component) {
-      var _a, _b, _c, _d, _e, _f, _g, _h, _i;
-      textStyleInfo.value = (_b = (_a = component.chart) == null ? void 0 : _a.options) == null ? void 0 : _b.textStyle;
-      selectStyleInfo.value = (_d = (_c = component.chart) == null ? void 0 : _c.options) == null ? void 0 : _d.selectStyle;
-      transparent.value = ((_f = (_e = component.chart) == null ? void 0 : _e.options) == null ? void 0 : _f.transparent) || false;
-      selectBackground.value = (_i = (_h = (_g = component.chart) == null ? void 0 : _g.options) == null ? void 0 : _h.selectStyle) == null ? void 0 : _i.selectBackground;
-    }
-    function colorChange(e) {
-      var _a;
-      screenEditStore.getCurConfigComponent.chart.options.textStyle = {
-        ...(_a = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _a.textStyle,
-        textColor: e.value
-      };
-    }
-    function fontChange(e) {
-      var _a;
-      screenEditStore.getCurConfigComponent.chart.options.textStyle = {
-        ...(_a = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _a.textStyle,
-        font: e.value
-      };
-    }
-    function fontSizeChange(e) {
-      var _a;
-      screenEditStore.getCurConfigComponent.chart.options.textStyle = {
-        ...(_a = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _a.textStyle,
-        fontSize: e.value
-      };
-    }
-    function fontStyleChange(e) {
-      var _a;
-      screenEditStore.getCurConfigComponent.chart.options.textStyle = {
-        ...(_a = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _a.textStyle,
-        fontStyle: e.value
-      };
-    }
-    function selectColorChange(e) {
-      var _a;
-      screenEditStore.getCurConfigComponent.chart.options.selectStyle = {
-        ...(_a = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle,
-        textColor: e.value
-      };
-    }
-    function selectFontChange(e) {
-      var _a;
-      screenEditStore.getCurConfigComponent.chart.options.selectStyle = {
-        ...(_a = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle,
-        font: e.value
-      };
-    }
-    function selectFontSizeChange(e) {
-      var _a;
-      screenEditStore.getCurConfigComponent.chart.options.selectStyle = {
-        ...(_a = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle,
-        fontSize: e.value
-      };
-    }
-    function selectFontStyleChange(e) {
-      var _a;
-      screenEditStore.getCurConfigComponent.chart.options.selectStyle = {
-        ...(_a = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle,
-        fontStyle: e.value
-      };
-    }
-    function transparentChange(e) {
-      screenEditStore.getCurConfigComponent.chart.options.transparent = e.target.checked;
-    }
-    function confirmColor(value) {
-      changeColor(value);
-      selectBackground.value = value;
-    }
-    function changeColor(value) {
-      var _a;
-      if (!value) {
-        value = "";
-      }
-      screenEditStore.getCurConfigComponent.chart.options.selectStyle = {
-        ...(_a = screenEditStore.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle,
-        selectBackground: value
-      };
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(StyleConfig, {
-        class: normalizeClass(unref(prefixCls))
-      }, {
-        default: withCtx(() => [
-          _cache[1] || (_cache[1] = createElementVNode("div", { class: "title" }, "文本样式", -1)),
-          createVNode(unref(TextStyle), {
-            "color-type": 1,
-            "text-style": textStyleInfo.value,
-            "hide-align": true,
-            "hide-font-style": [unref(TextFont).Strikethrough],
-            onColorChange: colorChange,
-            onFontChange: fontChange,
-            onSizeChange: fontSizeChange,
-            onFontStyleChange: fontStyleChange
-          }, null, 8, ["text-style", "hide-font-style"]),
-          _cache[2] || (_cache[2] = createElementVNode("div", { class: "title" }, "选中样式", -1)),
-          createVNode(unref(TextStyle), {
-            "color-type": 1,
-            "text-style": selectStyleInfo.value,
-            "hide-align": true,
-            "hide-font-style": [unref(TextFont).Strikethrough],
-            onColorChange: selectColorChange,
-            onFontChange: selectFontChange,
-            onSizeChange: selectFontSizeChange,
-            onFontStyleChange: selectFontStyleChange
-          }, null, 8, ["text-style", "hide-font-style"]),
-          createVNode(unref(_sfc_main$1), {
-            checked: transparent.value,
-            "onUpdate:checked": _cache[0] || (_cache[0] = ($event) => transparent.value = $event),
-            title: "整体背景透明",
-            tooltip: "设置背景透明后，可以通过通用配置-背景色设置背景颜色",
-            onChange: transparentChange
-          }, null, 8, ["checked"]),
-          _cache[3] || (_cache[3] = createElementVNode("div", { class: "title" }, "选中项背景色", -1)),
-          createVNode(unref(MfishColorPicker), {
-            value: selectBackground.value,
-            onConfirmChange: confirmColor,
-            onInputChange: changeColor
-          }, null, 8, ["value"])
-        ]),
-        _: 1
-      }, 8, ["class"]);
-    };
+const S = y(t({ __name: "MfSegmentedStyleConfig", setup(t2) {
+  const { prefixCls: y2 } = u("segmented-style-config"), S2 = g(), v = e({}), d = e({}), x = e(false), k = e();
+  function _(t3) {
+    var _a;
+    S2.getCurConfigComponent.chart.options.textStyle = { ...(_a = S2.getCurConfigComponent.chart.options) == null ? void 0 : _a.textStyle, textColor: t3.value };
   }
-});
-const MfSegmentedStyleConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-66e5afa1"]]);
+  function z(t3) {
+    var _a;
+    S2.getCurConfigComponent.chart.options.textStyle = { ...(_a = S2.getCurConfigComponent.chart.options) == null ? void 0 : _a.textStyle, font: t3.value };
+  }
+  function F(t3) {
+    var _a;
+    S2.getCurConfigComponent.chart.options.textStyle = { ...(_a = S2.getCurConfigComponent.chart.options) == null ? void 0 : _a.textStyle, fontSize: t3.value };
+  }
+  function I(t3) {
+    var _a;
+    S2.getCurConfigComponent.chart.options.textStyle = { ...(_a = S2.getCurConfigComponent.chart.options) == null ? void 0 : _a.textStyle, fontStyle: t3.value };
+  }
+  function j(t3) {
+    var _a;
+    S2.getCurConfigComponent.chart.options.selectStyle = { ...(_a = S2.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle, textColor: t3.value };
+  }
+  function B(t3) {
+    var _a;
+    S2.getCurConfigComponent.chart.options.selectStyle = { ...(_a = S2.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle, font: t3.value };
+  }
+  function D(t3) {
+    var _a;
+    S2.getCurConfigComponent.chart.options.selectStyle = { ...(_a = S2.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle, fontSize: t3.value };
+  }
+  function M(t3) {
+    var _a;
+    S2.getCurConfigComponent.chart.options.selectStyle = { ...(_a = S2.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle, fontStyle: t3.value };
+  }
+  function T(t3) {
+    S2.getCurConfigComponent.chart.options.transparent = t3.target.checked;
+  }
+  function U(t3) {
+    b(t3), k.value = t3;
+  }
+  function b(t3) {
+    var _a;
+    t3 || (t3 = ""), S2.getCurConfigComponent.chart.options.selectStyle = { ...(_a = S2.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle, selectBackground: t3 };
+  }
+  return o(() => S2.getCurConfigComponent, (t3) => {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i;
+    var e2;
+    t3 && (e2 = t3, v.value = (_b = (_a = e2.chart) == null ? void 0 : _a.options) == null ? void 0 : _b.textStyle, d.value = (_d = (_c = e2.chart) == null ? void 0 : _c.options) == null ? void 0 : _d.selectStyle, x.value = ((_f = (_e = e2.chart) == null ? void 0 : _e.options) == null ? void 0 : _f.transparent) || false, k.value = (_i = (_h = (_g = e2.chart) == null ? void 0 : _g.options) == null ? void 0 : _h.selectStyle) == null ? void 0 : _i.selectBackground);
+  }, { immediate: true }), (t3, e2) => (l(), n(c, { class: i(a(y2)) }, { default: s(() => [e2[1] || (e2[1] = r("div", { class: "title" }, "文本样式", -1)), C(a(p), { "color-type": 1, "text-style": v.value, "hide-align": true, "hide-font-style": [a(f).Strikethrough], onColorChange: _, onFontChange: z, onSizeChange: F, onFontStyleChange: I }, null, 8, ["text-style", "hide-font-style"]), e2[2] || (e2[2] = r("div", { class: "title" }, "选中样式", -1)), C(a(p), { "color-type": 1, "text-style": d.value, "hide-align": true, "hide-font-style": [a(f).Strikethrough], onColorChange: j, onFontChange: B, onSizeChange: D, onFontStyleChange: M }, null, 8, ["text-style", "hide-font-style"]), C(a(h), { checked: x.value, "onUpdate:checked": e2[0] || (e2[0] = (t4) => x.value = t4), title: "整体背景透明", tooltip: "设置背景透明后，可以通过通用配置-背景色设置背景颜色", onChange: T }, null, 8, ["checked"]), e2[3] || (e2[3] = r("div", { class: "title" }, "选中项背景色", -1)), C(a(m), { value: k.value, onConfirmChange: U, onInputChange: b }, null, 8, ["value"])]), _: 1 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-66e5afa1"]]);
 export {
-  MfSegmentedStyleConfig as default
+  S as default
 };

@@ -1,20 +1,6 @@
-import { defineComponent, createBlock, openBlock } from "vue";
-import { M as MfTag } from "./index.js";
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "index",
-  props: {
-    chart: { type: Object, required: true },
-    chartContain: { type: Object, required: true }
-  },
-  setup(__props) {
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(MfTag, {
-        "chart-contain": __props.chartContain,
-        chart: __props.chart
-      }, null, 8, ["chart-contain", "chart"]);
-    };
-  }
-});
+import { defineComponent as t, createBlock as r, openBlock as a } from "vue";
+import { M as e } from "./index.js";
+const c = t({ __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup: (t2) => (c2, n) => (a(), r(e, { "chart-contain": t2.chartContain, chart: t2.chart }, null, 8, ["chart-contain", "chart"])) });
 export {
-  _sfc_main as default
+  c as default
 };

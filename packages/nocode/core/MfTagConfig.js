@@ -1,95 +1,28 @@
-import { defineComponent, ref, watch, createBlock, openBlock, normalizeClass, unref, withCtx, renderSlot, createElementBlock, createCommentVNode, createElementVNode, createVNode, createTextVNode } from "vue";
-import { useDesign } from "@mfish/core/hooks";
-import { Input, Checkbox } from "ant-design-vue";
-import { u as useScreenEditStore, k as MfishColorPicker, _ as _export_sfc } from "./index.js";
-import { S as StyleConfig } from "./StyleConfig.js";
-import { IconPicker } from "@mfish/core/components/Icon";
+import { defineComponent as o, ref as e, watch as t, createBlock as n, openBlock as a, normalizeClass as i, unref as r, withCtx as l, renderSlot as s, createElementBlock as u, createCommentVNode as c, createElementVNode as d, createVNode as m, createTextVNode as p } from "vue";
+import { useDesign as f } from "@mfish/core/hooks";
+import { Input as C, Checkbox as h } from "ant-design-vue";
+import { u as g, k as v, _ as k } from "./index.js";
+import { S as y } from "./StyleConfig.js";
+import { IconPicker as _ } from "@mfish/core/components/Icon";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-import { T as TitleConfig } from "./TitleConfig.js";
-const _hoisted_1 = {
-  key: 0,
-  class: "title"
-};
-const _hoisted_2 = { class: "check-group" };
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfTagConfig",
-  props: {
-    hideTitle: { type: Boolean, default: false },
-    hideIcon: { type: Boolean, default: false }
-  },
-  setup(__props) {
-    const screenEditStore = useScreenEditStore();
-    const { prefixCls } = useDesign("tag-config");
-    const iconColor = ref();
-    watch(
-      () => screenEditStore.getCurConfigComponent,
-      (val) => {
-        if (!val) return;
-        initValue();
-      },
-      { immediate: true }
-    );
-    function initValue() {
-      iconColor.value = screenEditStore.getCurConfigComponent.chart.options.iconColor;
-    }
-    function changeIcon(e) {
-      screenEditStore.getCurConfigComponent.chart.data.dataSet.icon = e;
-    }
-    function confirmColor(e) {
-      changeColor(e);
-      iconColor.value = e;
-    }
-    function changeColor(e) {
-      screenEditStore.getCurConfigComponent.chart.options.numColor = e;
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(StyleConfig, {
-        class: normalizeClass(unref(prefixCls))
-      }, {
-        default: withCtx(() => [
-          renderSlot(_ctx.$slots, "default", {}, void 0, true),
-          !__props.hideTitle ? (openBlock(), createElementBlock("div", _hoisted_1, "标签内容")) : createCommentVNode("", true),
-          !__props.hideTitle ? (openBlock(), createBlock(unref(Input), {
-            key: 1,
-            value: unref(screenEditStore).getCurConfigComponent.chart.data.dataSet.title,
-            "onUpdate:value": _cache[0] || (_cache[0] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.data.dataSet.title = $event),
-            "show-count": "",
-            maxlength: 50
-          }, null, 8, ["value"])) : createCommentVNode("", true),
-          _cache[3] || (_cache[3] = createElementVNode("div", { class: "title" }, "图标", -1)),
-          !__props.hideIcon ? (openBlock(), createBlock(unref(IconPicker), {
-            key: 2,
-            value: unref(screenEditStore).getCurConfigComponent.chart.data.dataSet.icon,
-            onChange: changeIcon
-          }, null, 8, ["value"])) : createCommentVNode("", true),
-          createVNode(unref(MfishColorPicker), {
-            placeholder: "设置图标颜色，格式#FFFFFF",
-            type: 1,
-            value: iconColor.value,
-            onConfirmChange: confirmColor,
-            onInputChange: changeColor
-          }, null, 8, ["value"]),
-          createVNode(TitleConfig),
-          createElementVNode("div", _hoisted_2, [
-            createVNode(unref(Checkbox), {
-              checked: unref(screenEditStore).getCurConfigComponent.chart.options.hide,
-              "onUpdate:checked": _cache[1] || (_cache[1] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.options.hide = $event)
-            }, {
-              default: withCtx(() => _cache[2] || (_cache[2] = [
-                createTextVNode(" 文字超出隐藏")
-              ])),
-              _: 1
-            }, 8, ["checked"])
-          ])
-        ]),
-        _: 3
-      }, 8, ["class"]);
-    };
+import { T as F } from "./TitleConfig.js";
+const I = { key: 0, class: "title" }, S = { class: "check-group" }, T = k(o({ __name: "MfTagConfig", props: { hideTitle: { type: Boolean, default: false }, hideIcon: { type: Boolean, default: false } }, setup(o2) {
+  const k2 = g(), { prefixCls: T2 } = f("tag-config"), x = e();
+  function j(o3) {
+    k2.getCurConfigComponent.chart.data.dataSet.icon = o3;
   }
-});
-const MfTagConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-30f2ad7e"]]);
+  function B(o3) {
+    U(o3), x.value = o3;
+  }
+  function U(o3) {
+    k2.getCurConfigComponent.chart.options.numColor = o3;
+  }
+  return t(() => k2.getCurConfigComponent, (o3) => {
+    o3 && (x.value = k2.getCurConfigComponent.chart.options.iconColor);
+  }, { immediate: true }), (e2, t2) => (a(), n(y, { class: i(r(T2)) }, { default: l(() => [s(e2.$slots, "default", {}, void 0, true), o2.hideTitle ? c("", true) : (a(), u("div", I, "标签内容")), o2.hideTitle ? c("", true) : (a(), n(r(C), { key: 1, value: r(k2).getCurConfigComponent.chart.data.dataSet.title, "onUpdate:value": t2[0] || (t2[0] = (o3) => r(k2).getCurConfigComponent.chart.data.dataSet.title = o3), "show-count": "", maxlength: 50 }, null, 8, ["value"])), t2[3] || (t2[3] = d("div", { class: "title" }, "图标", -1)), o2.hideIcon ? c("", true) : (a(), n(r(_), { key: 2, value: r(k2).getCurConfigComponent.chart.data.dataSet.icon, onChange: j }, null, 8, ["value"])), m(r(v), { placeholder: "设置图标颜色，格式#FFFFFF", type: 1, value: x.value, onConfirmChange: B, onInputChange: U }, null, 8, ["value"]), m(F), d("div", S, [m(r(h), { checked: r(k2).getCurConfigComponent.chart.options.hide, "onUpdate:checked": t2[1] || (t2[1] = (o3) => r(k2).getCurConfigComponent.chart.options.hide = o3) }, { default: l(() => t2[2] || (t2[2] = [p(" 文字超出隐藏")])), _: 1 }, 8, ["checked"])])]), _: 3 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-30f2ad7e"]]);
 export {
-  MfTagConfig as default
+  T as default
 };

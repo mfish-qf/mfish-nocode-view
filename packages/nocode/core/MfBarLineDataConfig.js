@@ -1,120 +1,34 @@
-import { defineComponent, computed, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createVNode, toDisplayString, renderSlot } from "vue";
-import { D as DataConfig, a as DragInData } from "./DragInData.js";
-import { useDesign } from "@mfish/core/hooks";
-import { u as useScreenEditStore, i as useDynamicDataConfig, ao as useEchartsData, _ as _export_sfc } from "./index.js";
-import { J as JsonData } from "./JsonData.js";
-const _hoisted_1 = { class: "title" };
-const _hoisted_2 = { class: "title" };
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfBarLineDataConfig",
-  props: {
-    xTitle: {
-      type: String,
-      default: "X轴 / 维度"
-    },
-    yTitle: {
-      type: String,
-      default: "Y轴 / 值"
-    },
-    xMaxCount: {
-      type: Number,
-      default: 1
-    },
-    yMaxCount: {
-      type: Number,
-      default: 100
-    }
-  },
-  setup(__props) {
-    const screenEditStore = useScreenEditStore();
-    const { setFields, deleteFields, getFields, setDataTable } = useDynamicDataConfig();
-    const { resetDefault, setStaticData } = useEchartsData();
-    const { prefixCls } = useDesign("bar-line-data-config");
-    const curData = computed(() => {
-      var _a, _b;
-      if ((_b = (_a = screenEditStore.getCurConfigComponent.chart.data) == null ? void 0 : _a.dataSet) == null ? void 0 : _b.source) {
-        return JSON.stringify(screenEditStore.getCurConfigComponent.chart.data.dataSet.source);
-      } else {
-        return "";
-      }
-    });
-    const dimensions = computed(() => {
-      var _a;
-      if (screenEditStore.getCurConfigComponent.chart.data.fields) {
-        return ((_a = screenEditStore.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.dimensions) ?? [];
-      }
-      return [];
-    });
-    const source = computed(() => {
-      var _a;
-      if (screenEditStore.getCurConfigComponent.chart.data.fields) {
-        return ((_a = screenEditStore.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.source) ?? [];
-      }
-      return [];
-    });
-    function dataSourceChange() {
-      const dimensions2 = getFields("dimensions");
-      if (dimensions2 && dimensions2.length > 0) {
-        setDataTable();
-      } else {
-        resetDefault(screenEditStore.getCurConfigComponent.chart);
-      }
-    }
-    function changeDimensions(data) {
-      if ((data == null ? void 0 : data.length) > 0) {
-        setFields("dimensions", data);
-      } else {
-        deleteFields("dimensions");
-      }
-      dataSourceChange();
-    }
-    function changeSource(data) {
-      if (data.length > 0) {
-        setFields("source", data);
-      } else {
-        deleteFields("source");
-      }
-      dataSourceChange();
-    }
-    function dataChange(data) {
-      setStaticData(screenEditStore.getCurConfigComponent.chart, data);
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(DataConfig, {
-        class: normalizeClass(unref(prefixCls)),
-        onRefreshData: dataSourceChange
-      }, {
-        "data-select": withCtx(() => [
-          renderSlot(_ctx.$slots, "data-select", {}, void 0, true)
-        ]),
-        "static-data": withCtx(() => [
-          createVNode(JsonData, {
-            data: curData.value,
-            onDataChange: dataChange
-          }, null, 8, ["data"])
-        ]),
-        "target-data": withCtx(() => [
-          createElementVNode("div", _hoisted_1, toDisplayString(__props.xTitle), 1),
-          createVNode(DragInData, {
-            "max-count": __props.xMaxCount,
-            height: 150,
-            onDataChange: changeDimensions,
-            fields: dimensions.value
-          }, null, 8, ["max-count", "fields"]),
-          createElementVNode("div", _hoisted_2, toDisplayString(__props.yTitle), 1),
-          createVNode(DragInData, {
-            "max-count": __props.yMaxCount,
-            height: 150,
-            onDataChange: changeSource,
-            fields: source.value
-          }, null, 8, ["max-count", "fields"])
-        ]),
-        _: 3
-      }, 8, ["class"]);
-    };
+import { defineComponent as t, computed as a, createBlock as e, openBlock as n, normalizeClass as o, unref as s, withCtx as i, createElementVNode as r, createVNode as l, toDisplayString as u, renderSlot as d } from "vue";
+import { D as f, a as c } from "./DragInData.js";
+import { useDesign as C } from "@mfish/core/hooks";
+import { u as g, i as m, ao as p, _ as h } from "./index.js";
+import { J as x } from "./JsonData.js";
+const D = { class: "title" }, y = { class: "title" }, v = h(t({ __name: "MfBarLineDataConfig", props: { xTitle: { type: String, default: "X轴 / 维度" }, yTitle: { type: String, default: "Y轴 / 值" }, xMaxCount: { type: Number, default: 1 }, yMaxCount: { type: Number, default: 100 } }, setup(t2) {
+  const h2 = g(), { setFields: v2, deleteFields: S, getFields: _, setDataTable: M } = m(), { resetDefault: T, setStaticData: b } = p(), { prefixCls: j } = C("bar-line-data-config"), F = a(() => {
+    var _a, _b;
+    return ((_b = (_a = h2.getCurConfigComponent.chart.data) == null ? void 0 : _a.dataSet) == null ? void 0 : _b.source) ? JSON.stringify(h2.getCurConfigComponent.chart.data.dataSet.source) : "";
+  }), J = a(() => {
+    var _a;
+    return h2.getCurConfigComponent.chart.data.fields ? ((_a = h2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.dimensions) ?? [] : [];
+  }), N = a(() => {
+    var _a;
+    return h2.getCurConfigComponent.chart.data.fields ? ((_a = h2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.source) ?? [] : [];
+  });
+  function I() {
+    const t3 = _("dimensions");
+    t3 && t3.length > 0 ? M() : T(h2.getCurConfigComponent.chart);
   }
-});
-const MfBarLineDataConfig = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-c1e0ecfc"]]);
+  function k(t3) {
+    (t3 == null ? void 0 : t3.length) > 0 ? v2("dimensions", t3) : S("dimensions"), I();
+  }
+  function B(t3) {
+    t3.length > 0 ? v2("source", t3) : S("source"), I();
+  }
+  function L(t3) {
+    b(h2.getCurConfigComponent.chart, t3);
+  }
+  return (a2, C2) => (n(), e(f, { class: o(s(j)), onRefreshData: I }, { "data-select": i(() => [d(a2.$slots, "data-select", {}, void 0, true)]), "static-data": i(() => [l(x, { data: F.value, onDataChange: L }, null, 8, ["data"])]), "target-data": i(() => [r("div", D, u(t2.xTitle), 1), l(c, { "max-count": t2.xMaxCount, height: 150, onDataChange: k, fields: J.value }, null, 8, ["max-count", "fields"]), r("div", y, u(t2.yTitle), 1), l(c, { "max-count": t2.yMaxCount, height: 150, onDataChange: B, fields: N.value }, null, 8, ["max-count", "fields"])]), _: 3 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-c1e0ecfc"]]);
 export {
-  MfBarLineDataConfig as default
+  v as default
 };

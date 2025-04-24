@@ -1,56 +1,17 @@
-import { defineComponent, createBlock, openBlock, normalizeClass, unref, withCtx, createElementVNode, createTextVNode, createVNode } from "vue";
-import MfDecorationConfig from "./MfDecorationConfig.js";
+import { defineComponent as o, createBlock as t, openBlock as e, normalizeClass as n, unref as a, withCtx as i, createElementVNode as r, createTextVNode as s, createVNode as m } from "vue";
+import l from "./MfDecorationConfig.js";
 import "ant-design-vue";
-import { useDesign } from "@mfish/core/hooks";
-import { u as useScreenEditStore, f as ScreenInput, _ as _export_sfc } from "./index.js";
+import { useDesign as u } from "@mfish/core/hooks";
+import { u as p, f as c, _ as f } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-const _hoisted_1 = { class: "title" };
-const _hoisted_2 = { class: "title" };
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "MfDecoration12Config",
-  setup(__props) {
-    const { prefixCls } = useDesign("decoration12-config");
-    const screenEditStore = useScreenEditStore();
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(MfDecorationConfig, {
-        class: normalizeClass(unref(prefixCls))
-      }, {
-        default: withCtx(() => [
-          createElementVNode("div", _hoisted_1, [
-            _cache[2] || (_cache[2] = createTextVNode(" 扫描动画时长 ")),
-            createVNode(unref(ScreenInput), {
-              suffix: "秒",
-              value: unref(screenEditStore).getCurConfigComponent.chart.options.scanDuration,
-              "onUpdate:value": _cache[0] || (_cache[0] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.options.scanDuration = $event),
-              placeholder: "扫描动画时长",
-              min: 1,
-              max: 100,
-              maxlength: 3
-            }, null, 8, ["value"])
-          ]),
-          createElementVNode("div", _hoisted_2, [
-            _cache[3] || (_cache[3] = createTextVNode(" 光晕动画时长 ")),
-            createVNode(unref(ScreenInput), {
-              suffix: "秒",
-              value: unref(screenEditStore).getCurConfigComponent.chart.options.haloDuration,
-              "onUpdate:value": _cache[1] || (_cache[1] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.options.haloDuration = $event),
-              placeholder: "光晕动画时长",
-              min: 1,
-              max: 100,
-              maxlength: 3
-            }, null, 8, ["value"])
-          ])
-        ]),
-        _: 1
-      }, 8, ["class"]);
-    };
-  }
-});
-const MfDecoration12Config = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-f33675d5"]]);
+const h = { class: "title" }, d = { class: "title" }, C = f(o({ __name: "MfDecoration12Config", setup(o2) {
+  const { prefixCls: f2 } = u("decoration12-config"), C2 = p();
+  return (o3, u2) => (e(), t(l, { class: n(a(f2)) }, { default: i(() => [r("div", h, [u2[2] || (u2[2] = s(" 扫描动画时长 ")), m(a(c), { suffix: "秒", value: a(C2).getCurConfigComponent.chart.options.scanDuration, "onUpdate:value": u2[0] || (u2[0] = (o4) => a(C2).getCurConfigComponent.chart.options.scanDuration = o4), placeholder: "扫描动画时长", min: 1, max: 100, maxlength: 3 }, null, 8, ["value"])]), r("div", d, [u2[3] || (u2[3] = s(" 光晕动画时长 ")), m(a(c), { suffix: "秒", value: a(C2).getCurConfigComponent.chart.options.haloDuration, "onUpdate:value": u2[1] || (u2[1] = (o4) => a(C2).getCurConfigComponent.chart.options.haloDuration = o4), placeholder: "光晕动画时长", min: 1, max: 100, maxlength: 3 }, null, 8, ["value"])])]), _: 1 }, 8, ["class"]));
+} }), [["__scopeId", "data-v-f33675d5"]]);
 export {
-  MfDecoration12Config as default
+  C as default
 };

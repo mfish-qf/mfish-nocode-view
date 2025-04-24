@@ -1,19 +1,19 @@
-import { defineComponent, createBlock, openBlock, unref, withCtx, renderSlot, useCssVars, computed, watch, reactive, ref, createElementBlock, normalizeClass, createElementVNode, createVNode, createCommentVNode, normalizeStyle, toDisplayString, withModifiers, resolveComponent, Fragment, renderList, nextTick, createTextVNode, onMounted, onUnmounted } from "vue";
-import { theme, Tooltip, Empty, Dropdown, Button, Menu, Input, RadioGroup, RadioButton, Divider } from "ant-design-vue";
-import { useMessage, useDesign } from "@mfish/core/hooks";
-import { Icon } from "@mfish/core/components/Icon";
-import { useModalInner, BasicModal, useModal } from "@mfish/core/components/Modal";
-import { router } from "@mfish/core/router";
-import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
-import { E as API_SAVE, _ as _export_sfc, u as useScreenEditStore, F as getFieldIcon, G as renameField, s as screenEvent, S as ScreenEventEnum, H as FIELD_DATA_DRAG, I as getComponentById, J as ComType, L as LayerItem, K as LayerGroup, g as getEventName, N as ParamType, i as useDynamicDataConfig, b as ComponentsEnum, O as getFieldsByResourceId, Q as getDataFieldsById, R as getApiParamsList, f as ScreenInput } from "./index.js";
+import { defineComponent as e, createBlock as a, openBlock as t, unref as n, withCtx as o, renderSlot as l, useCssVars as i, computed as s, watch as r, reactive as c, ref as u, createElementBlock as d, normalizeClass as m, createElementVNode as p, createVNode as f, createCommentVNode as v, normalizeStyle as C, toDisplayString as g, withModifiers as h, resolveComponent as y, Fragment as k, renderList as _, nextTick as b, createTextVNode as E, onMounted as N, onUnmounted as I } from "vue";
+import { theme as x, Tooltip as D, Empty as T, Dropdown as M, Button as S, Menu as A, Input as w, RadioGroup as R, RadioButton as L, Divider as $ } from "ant-design-vue";
+import { useMessage as O, useDesign as V } from "@mfish/core/hooks";
+import { Icon as P } from "@mfish/core/components/Icon";
+import { useModalInner as B, BasicModal as U, useModal as j } from "@mfish/core/components/Modal";
+import { router as z } from "@mfish/core/router";
+import { useOutsideOpen as G } from "@mfish/core/utils/OutsideOpenUtils";
+import { E as H, _ as F, u as J, F as q, G as K, s as Q, S as W, H as X, I as Y, J as Z, L as ee, K as ae, g as te, N as ne, i as oe, b as le, O as ie, Q as se, R as re, f as ce } from "./index.js";
 import "@vueuse/core";
-import { debounce, omit, cloneDeep, throttle, pick } from "lodash-es";
+import { debounce as ue, omit as de, cloneDeep as me, throttle as pe, pick as fe } from "lodash-es";
 import "@mfish/core/enums";
-import { isArray } from "@mfish/core/utils/Is";
+import { isArray as ve } from "@mfish/core/utils/Is";
 import "@mfish/core/utils/http/axios";
 import "@ant-design/icons-vue";
 import "@mfish/core/utils/Uuid";
-import { ScrollContainer } from "@mfish/core/components/Container";
+import { ScrollContainer as Ce } from "@mfish/core/components/Container";
 import "@mfish/core/components/Draggable";
 import "@mfish/core/components/Form";
 import "@mfish/core/components/Tree";
@@ -21,1701 +21,417 @@ import "@mfish/core/components/Split";
 import "@mfish/core/components/Table";
 import "@mfish/core/components/CodeEditor";
 import "@mfish/core/i18n/UseLocale";
-import { C as ConfigGroup } from "./ConfigGroup.js";
-import draggable from "vuedraggable";
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
-  __name: "DataSelectModal",
-  props: {
-    selectData: {
-      type: Object
-    }
-  },
-  emits: ["success", "register"],
-  setup(__props, { emit: __emit }) {
-    const props = __props;
-    const emit = __emit;
-    const [registerModal, { setModalProps, closeModal }] = useModalInner(async () => {
-      setModalProps({ confirmLoading: false, width: "1200px", defaultFullscreen: true });
-    });
-    const { createMessage } = useMessage();
-    function handleSubmit() {
-      if (props.selectData) {
-        emit("success", props.selectData);
-        closeModal();
-        return;
-      }
-      createMessage.warning("请选择数据源");
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(BasicModal), {
-        width: "1200px",
-        onRegister: unref(registerModal),
-        title: "数据来源",
-        onOk: handleSubmit
-      }, {
-        default: withCtx(() => [
-          renderSlot(_ctx.$slots, "default")
-        ]),
-        _: 3
-      }, 8, ["onRegister"]);
-    };
+import { C as ge } from "./ConfigGroup.js";
+import he from "vuedraggable";
+const ye = e({ __name: "DataSelectModal", props: { selectData: { type: Object } }, emits: ["success", "register"], setup(e2, { emit: i2 }) {
+  const s2 = e2, r2 = i2, [c2, { setModalProps: u2, closeModal: d2 }] = B(async () => {
+    u2({ confirmLoading: false, width: "1200px", defaultFullscreen: true });
+  }), { createMessage: m2 } = O();
+  function p2() {
+    if (s2.selectData) return r2("success", s2.selectData), void d2();
+    m2.warning("请选择数据源");
   }
-});
-const _hoisted_1$6 = {
-  key: 0,
-  class: "placeholder"
-};
-const _hoisted_2$6 = {
-  key: 0,
-  class: "warning"
-};
-const _hoisted_3$3 = {
-  key: 2,
-  class: "icon-group"
-};
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
-  __name: "DataSelect",
-  props: {
-    selectData: {
-      type: Object
-    },
-    dataId: { type: String, default: "" },
-    dataName: { type: String, default: "" },
-    isResource: { type: Boolean, default: false },
-    screenId: { type: String, default: "" }
-  },
-  emits: ["dataChange", "dataRefresh"],
-  setup(__props, { emit: __emit }) {
-    useCssVars((_ctx) => ({
-      "54d92964": colorBorder.value
-    }));
-    const props = __props;
-    const emit = __emit;
-    watch(
-      () => props.dataId,
-      (val) => {
-        if (val) {
-          data.id = val;
-          data.name = props.dataName;
-        } else {
-          data.id = "";
-          data.name = "";
-        }
-      }
-    );
-    const { prefixCls } = useDesign("data-select");
-    const { token } = theme.useToken();
-    const colorBorder = computed(() => token.value.colorBorder);
-    const icon = ref("");
-    const [registerModal, { openModal }] = useModal();
-    const data = reactive({
-      id: props.dataId,
-      name: props.dataName
-    });
-    const spin = ref(false);
-    const { open } = useOutsideOpen(API_SAVE, refreshData);
-    function handleEnter() {
-      if (data.id) {
-        icon.value = "ant-design:close-circle-filled";
-      }
-    }
-    function handleLeave() {
-      icon.value = "";
-    }
-    function handleClick() {
-      openModal(true, {});
-    }
-    function handleSuccess(e) {
-      data.id = e.id;
-      data.name = e.name;
-      emit("dataChange", unref(data));
-    }
-    function handleDelete() {
-      data.id = "";
-      data.name = "";
-      emit("dataChange", unref(data));
-    }
-    function handleEdit() {
-      let query;
-      if (props.isResource) {
-        query = { configId: data.id, screenId: props.screenId };
-      } else {
-        query = { configId: data.id };
-      }
-      const routeData = router.resolve({
-        path: "/low-code/mf-api/config",
-        query
-      });
-      open(routeData);
-    }
-    const clickRefresh = debounce(() => refreshData(), 200);
-    function refreshData() {
-      spin.value = true;
-      setTimeout(() => {
-        spin.value = false;
-      }, 1e3);
-      emit("dataRefresh");
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(unref(prefixCls))
-      }, [
-        createElementVNode("div", {
-          class: "input",
-          onMouseenter: handleEnter,
-          onMouseleave: handleLeave,
-          onClick: handleClick
-        }, [
-          !data.id ? (openBlock(), createElementBlock("div", _hoisted_1$6, "请选择数据来源")) : (openBlock(), createBlock(unref(Tooltip), {
-            key: 1,
-            title: data.name
-          }, {
-            default: withCtx(() => [
-              createElementVNode("div", {
-                class: "title",
-                style: normalizeStyle(__props.isResource ? { textDecoration: "line-through", color: "#999" } : {})
-              }, toDisplayString(data.name), 5),
-              __props.isResource ? (openBlock(), createElementBlock("div", _hoisted_2$6, " 注意：请将样例数据更换为自己的数据")) : createCommentVNode("", true)
-            ]),
-            _: 1
-          }, 8, ["title"])),
-          icon.value ? (openBlock(), createElementBlock("div", _hoisted_3$3, [
-            createVNode(unref(Tooltip), {
-              title: __props.isResource ? "查看样例数据源配置" : "编辑数据源"
-            }, {
-              default: withCtx(() => [
-                createVNode(unref(Icon), {
-                  class: "icon",
-                  icon: __props.isResource ? "ant-design:search-outlined" : "ant-design:edit-outlined",
-                  onClick: withModifiers(handleEdit, ["stop"])
-                }, null, 8, ["icon"])
-              ]),
-              _: 1
-            }, 8, ["title"]),
-            createVNode(unref(Tooltip), { title: "清空数据源" }, {
-              default: withCtx(() => [
-                createVNode(unref(Icon), {
-                  class: "delete-icon",
-                  size: 14,
-                  icon: icon.value,
-                  onClick: withModifiers(handleDelete, ["stop"])
-                }, null, 8, ["icon"])
-              ]),
-              _: 1
-            })
-          ])) : createCommentVNode("", true),
-          createVNode(_sfc_main$8, {
-            onRegister: unref(registerModal),
-            onSuccess: handleSuccess,
-            "select-data": __props.selectData
-          }, {
-            default: withCtx(() => [
-              renderSlot(_ctx.$slots, "default", {}, void 0, true)
-            ]),
-            _: 3
-          }, 8, ["onRegister", "select-data"])
-        ], 32),
-        createVNode(unref(Tooltip), { title: "刷新数据源" }, {
-          default: withCtx(() => [
-            createVNode(unref(Icon), {
-              class: "icon",
-              icon: "ant-design:sync-outlined",
-              onClick: unref(clickRefresh),
-              spin: spin.value
-            }, null, 8, ["onClick", "spin"])
-          ]),
-          _: 1
-        })
-      ], 2);
-    };
+  return (e3, i3) => (t(), a(n(U), { width: "1200px", onRegister: n(c2), title: "数据来源", onOk: p2 }, { default: o(() => [l(e3.$slots, "default")]), _: 3 }, 8, ["onRegister"]));
+} }), ke = { key: 0, class: "placeholder" }, _e = { key: 0, class: "warning" }, be = { key: 2, class: "icon-group" }, Ee = F(e({ __name: "DataSelect", props: { selectData: { type: Object }, dataId: { type: String, default: "" }, dataName: { type: String, default: "" }, isResource: { type: Boolean, default: false }, screenId: { type: String, default: "" } }, emits: ["dataChange", "dataRefresh"], setup(e2, { emit: y2 }) {
+  i((e3) => ({ "54d92964": N2.value }));
+  const k2 = e2, _2 = y2;
+  r(() => k2.dataId, (e3) => {
+    e3 ? (S2.id = e3, S2.name = k2.dataName) : (S2.id = "", S2.name = "");
+  });
+  const { prefixCls: b2 } = V("data-select"), { token: E2 } = x.useToken(), N2 = s(() => E2.value.colorBorder), I2 = u(""), [T2, { openModal: M2 }] = j(), S2 = c({ id: k2.dataId, name: k2.dataName }), A2 = u(false), { open: w2 } = G(H, J2);
+  function R2() {
+    S2.id && (I2.value = "ant-design:close-circle-filled");
   }
-});
-const DataSelect = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__scopeId", "data-v-3a060ac3"]]);
-const _hoisted_1$5 = ["draggable", "onMouseenter", "onDragstart"];
-const _hoisted_2$5 = { class: "title" };
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
-  __name: "FieldConfig",
-  props: {
-    fieldList: { type: Array, default: () => [] }
-  },
-  setup(__props) {
-    useCssVars((_ctx) => ({
-      "699b0e88": bgColor.value
-    }));
-    const props = __props;
-    const enterField = ref(-1);
-    const editField = ref(-1);
-    const editValue = ref("");
-    const { prefixCls } = useDesign("field-config");
-    const { token } = theme.useToken();
-    const bgColor = computed(() => token.value.colorInfoBg);
-    const curInput = ref();
-    const screenEditStore = useScreenEditStore();
-    function enterHandle(index) {
-      enterField.value = index;
+  function L2() {
+    I2.value = "";
+  }
+  function $2() {
+    M2(true, {});
+  }
+  function O2(e3) {
+    S2.id = e3.id, S2.name = e3.name, _2("dataChange", n(S2));
+  }
+  function B2() {
+    S2.id = "", S2.name = "", _2("dataChange", n(S2));
+  }
+  function U2() {
+    let e3;
+    e3 = k2.isResource ? { configId: S2.id, screenId: k2.screenId } : { configId: S2.id };
+    const a2 = z.resolve({ path: "/low-code/mf-api/config", query: e3 });
+    w2(a2);
+  }
+  const F2 = ue(() => J2(), 200);
+  function J2() {
+    A2.value = true, setTimeout(() => {
+      A2.value = false;
+    }, 1e3), _2("dataRefresh");
+  }
+  return (i2, s2) => (t(), d("div", { class: m(n(b2)) }, [p("div", { class: "input", onMouseenter: R2, onMouseleave: L2, onClick: $2 }, [S2.id ? (t(), a(n(D), { key: 1, title: S2.name }, { default: o(() => [p("div", { class: "title", style: C(e2.isResource ? { textDecoration: "line-through", color: "#999" } : {}) }, g(S2.name), 5), e2.isResource ? (t(), d("div", _e, " 注意：请将样例数据更换为自己的数据")) : v("", true)]), _: 1 }, 8, ["title"])) : (t(), d("div", ke, "请选择数据来源")), I2.value ? (t(), d("div", be, [f(n(D), { title: e2.isResource ? "查看样例数据源配置" : "编辑数据源" }, { default: o(() => [f(n(P), { class: "icon", icon: e2.isResource ? "ant-design:search-outlined" : "ant-design:edit-outlined", onClick: h(U2, ["stop"]) }, null, 8, ["icon"])]), _: 1 }, 8, ["title"]), f(n(D), { title: "清空数据源" }, { default: o(() => [f(n(P), { class: "delete-icon", size: 14, icon: I2.value, onClick: h(B2, ["stop"]) }, null, 8, ["icon"])]), _: 1 })])) : v("", true), f(ye, { onRegister: n(T2), onSuccess: O2, "select-data": e2.selectData }, { default: o(() => [l(i2.$slots, "default", {}, void 0, true)]), _: 3 }, 8, ["onRegister", "select-data"])], 32), f(n(D), { title: "刷新数据源" }, { default: o(() => [f(n(P), { class: "icon", icon: "ant-design:sync-outlined", onClick: n(F2), spin: A2.value }, null, 8, ["onClick", "spin"])]), _: 1 })], 2));
+} }), [["__scopeId", "data-v-3a060ac3"]]), Ne = ["draggable", "onMouseenter", "onDragstart"], Ie = { class: "title" }, xe = F(e({ __name: "FieldConfig", props: { fieldList: { type: Array, default: () => [] } }, setup(e2) {
+  i((e3) => ({ "699b0e88": N2.value }));
+  const l2 = e2, r2 = u(-1), c2 = u(-1), C2 = u(""), { prefixCls: h2 } = V("field-config"), { token: E2 } = x.useToken(), N2 = s(() => E2.value.colorInfoBg), I2 = u(), T2 = J();
+  function M2() {
+    r2.value = -1;
+  }
+  function S2() {
+    c2.value = r2.value, C2.value = l2.fieldList[r2.value].rename ?? l2.fieldList[r2.value].colName, b(() => {
+      var _a, _b;
+      (_a = I2.value) == null ? void 0 : _a.focus(), (_b = I2.value) == null ? void 0 : _b.select();
+    });
+  }
+  async function A2(e3) {
+    if (C2.value !== e3.rename) {
+      await K(T2.getCurConfigComponent.chart.data.id, e3.colName, C2.value) && (e3.rename = C2.value);
     }
-    function leaveHandle() {
-      enterField.value = -1;
-    }
-    function editHandle() {
-      editField.value = enterField.value;
-      editValue.value = props.fieldList[enterField.value].rename ?? props.fieldList[enterField.value].colName;
-      nextTick(() => {
-        var _a, _b;
-        (_a = curInput.value) == null ? void 0 : _a.focus();
-        (_b = curInput.value) == null ? void 0 : _b.select();
-      });
-    }
-    async function saveHandle(item) {
-      if (editValue.value !== item.rename) {
-        const res = await renameField(screenEditStore.getCurConfigComponent.chart.data.id, item.colName, editValue.value);
-        if (res) {
-          item.rename = editValue.value;
-        }
-      }
-      restoreHandle();
-      screenEvent.emit(ScreenEventEnum.DATA_RENAME, item);
-    }
-    function restoreHandle() {
-      editField.value = -1;
-      editValue.value = "";
-    }
-    function dragstart(event, item) {
+    w2(), Q.emit(W.DATA_RENAME, e3);
+  }
+  function w2() {
+    c2.value = -1, C2.value = "";
+  }
+  return (l3, i2) => {
+    const s2 = y("AInput");
+    return t(), d("div", { class: m(n(h2)) }, [(t(true), d(k, null, _(e2.fieldList, (e3, l4) => (t(), d("div", { class: "field-block", key: e3.id, draggable: c2.value !== l4, onMouseenter: (e4) => function(e5) {
+      r2.value = e5;
+    }(l4), onMouseleave: M2, onDragstart: (a2) => function(e4, a3) {
       var _a;
-      (_a = event.dataTransfer) == null ? void 0 : _a.setData(FIELD_DATA_DRAG, JSON.stringify(item));
+      (_a = e4.dataTransfer) == null ? void 0 : _a.setData(X, JSON.stringify(a3));
+    }(a2, e3) }, [f(n(P), { class: "icon", icon: n(q)(e3.dataType) }, null, 8, ["icon"]), c2.value !== l4 ? (t(), a(n(D), { key: 0, title: e3.colName + (e3.comment ? `[${e3.comment}]` : ""), placement: "left" }, { default: o(() => [p("div", Ie, g(e3.rename ?? e3.colName), 1)]), _: 2 }, 1032, ["title"])) : (t(), a(s2, { key: 1, bordered: false, value: C2.value, "onUpdate:value": i2[0] || (i2[0] = (e4) => C2.value = e4), ref_for: true, ref: (e4) => I2.value = e4, onPressEnter: (a2) => A2(e3), onBlur: w2 }, null, 8, ["value", "onPressEnter"])), r2.value === l4 && c2.value !== l4 ? (t(), a(n(D), { key: 2, title: "重命名" }, { default: o(() => [f(n(P), { class: "icon edit", icon: "ant-design:edit-outlined", onClick: S2 })]), _: 1 })) : v("", true), c2.value === l4 ? (t(), a(n(D), { key: 3, title: "保存" }, { default: o(() => [f(n(P), { class: "icon edit", icon: "ant-design:save-outlined", onClick: (a2) => A2(e3) }, null, 8, ["onClick"])]), _: 2 }, 1024)) : v("", true)], 40, Ne))), 128))], 2);
+  };
+} }), [["__scopeId", "data-v-20f7782b"]]), De = { key: 0, class: "header", style: { width: "120px" } }, Te = { key: 0, class: "divide-line" }, Me = ["title", "onClick"], Se = ["title", "onClick"], Ae = F(e({ __name: "EventSelectItems", props: { componentList: { type: Array, default: () => [] }, value: { type: Object, default: () => {
+} }, hideEvent: { type: Boolean, default: false } }, emits: ["selectChange"], setup(e2, { emit: l2 }) {
+  i((e3) => ({ "803cda50": D2.value }));
+  const u2 = e2, C2 = l2, h2 = c({ id: "", event: "", param: "" });
+  r(() => u2.value, (e3) => {
+    e3 ? (h2.id = e3.id, h2.event = e3.event, h2.param = e3.param) : (h2.id = "", h2.event = "", h2.param = "");
+  }, { immediate: true });
+  const { prefixCls: y2 } = V("event-select-items"), b2 = s(() => Y(u2.componentList, h2.id)), E2 = s(() => {
+    var _a;
+    const e3 = b2.value;
+    return e3 && ((_a = e3.chart.events) == null ? void 0 : _a.emits) ? e3.chart.events.emits : [];
+  }), N2 = s(() => {
+    var _a;
+    const e3 = b2.value;
+    if (e3) {
+      if (!((_a = e3.chart.data) == null ? void 0 : _a.headers)) return [];
+      return Object.values(e3.chart.data.headers) ?? [];
     }
-    return (_ctx, _cache) => {
-      const _component_AInput = resolveComponent("AInput");
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(unref(prefixCls))
-      }, [
-        (openBlock(true), createElementBlock(Fragment, null, renderList(__props.fieldList, (item, index) => {
-          return openBlock(), createElementBlock("div", {
-            class: "field-block",
-            key: item.id,
-            draggable: editField.value !== index,
-            onMouseenter: ($event) => enterHandle(index),
-            onMouseleave: leaveHandle,
-            onDragstart: ($event) => dragstart($event, item)
-          }, [
-            createVNode(unref(Icon), {
-              class: "icon",
-              icon: unref(getFieldIcon)(item.dataType)
-            }, null, 8, ["icon"]),
-            editField.value !== index ? (openBlock(), createBlock(unref(Tooltip), {
-              key: 0,
-              title: item.colName + (item.comment ? `[${item.comment}]` : ""),
-              placement: "left"
-            }, {
-              default: withCtx(() => [
-                createElementVNode("div", _hoisted_2$5, toDisplayString(item.rename ?? item.colName), 1)
-              ]),
-              _: 2
-            }, 1032, ["title"])) : (openBlock(), createBlock(_component_AInput, {
-              key: 1,
-              bordered: false,
-              value: editValue.value,
-              "onUpdate:value": _cache[0] || (_cache[0] = ($event) => editValue.value = $event),
-              ref_for: true,
-              ref: (el) => curInput.value = el,
-              onPressEnter: ($event) => saveHandle(item),
-              onBlur: restoreHandle
-            }, null, 8, ["value", "onPressEnter"])),
-            enterField.value === index && editField.value !== index ? (openBlock(), createBlock(unref(Tooltip), {
-              key: 2,
-              title: "重命名"
-            }, {
-              default: withCtx(() => [
-                createVNode(unref(Icon), {
-                  class: "icon edit",
-                  icon: "ant-design:edit-outlined",
-                  onClick: editHandle
-                })
-              ]),
-              _: 1
-            })) : createCommentVNode("", true),
-            editField.value === index ? (openBlock(), createBlock(unref(Tooltip), {
-              key: 3,
-              title: "保存"
-            }, {
-              default: withCtx(() => [
-                createVNode(unref(Icon), {
-                  class: "icon edit",
-                  icon: "ant-design:save-outlined",
-                  onClick: ($event) => saveHandle(item)
-                }, null, 8, ["onClick"])
-              ]),
-              _: 2
-            }, 1024)) : createCommentVNode("", true)
-          ], 40, _hoisted_1$5);
-        }), 128))
-      ], 2);
-    };
+    return [];
+  }), { token: I2 } = x.useToken(), D2 = s(() => I2.value.colorInfoBg), M2 = J();
+  function S2() {
+    M2.setCurHoverComponent("");
   }
-});
-const FieldConfig = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-20f7782b"]]);
-const _hoisted_1$4 = {
-  key: 0,
-  class: "header",
-  style: { "width": "120px" }
-};
-const _hoisted_2$4 = {
-  key: 0,
-  class: "divide-line"
-};
-const _hoisted_3$2 = ["title", "onClick"];
-const _hoisted_4$2 = ["title", "onClick"];
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
-  __name: "EventSelectItems",
-  props: {
-    componentList: { type: Array, default: () => [] },
-    value: {
-      type: Object,
-      default: () => {
-      }
-    },
-    hideEvent: { type: Boolean, default: false }
-  },
-  emits: ["selectChange"],
-  setup(__props, { emit: __emit }) {
-    useCssVars((_ctx) => ({
-      "803cda50": bgColor.value
-    }));
-    const props = __props;
-    const emit = __emit;
-    const selectValue = reactive({
-      id: "",
-      event: "",
-      param: ""
-    });
-    watch(
-      () => props.value,
-      (val) => {
-        if (val) {
-          selectValue.id = val.id;
-          selectValue.event = val.event;
-          selectValue.param = val.param;
-        } else {
-          selectValue.id = "";
-          selectValue.event = "";
-          selectValue.param = "";
-        }
-      },
-      { immediate: true }
-    );
-    const { prefixCls } = useDesign("event-select-items");
-    const curComponent = computed(() => {
-      return getComponentById(props.componentList, selectValue.id);
-    });
-    const events = computed(() => {
-      var _a;
-      const com = curComponent.value;
-      if (com) {
-        if (!((_a = com.chart.events) == null ? void 0 : _a.emits)) return [];
-        return com.chart.events.emits;
-      }
-      return [];
-    });
-    const fields = computed(() => {
-      var _a;
-      const com = curComponent.value;
-      if (com) {
-        if (!((_a = com.chart.data) == null ? void 0 : _a.headers)) return [];
-        const fields2 = Object.values(com.chart.data.headers);
-        return fields2 ?? [];
-      }
-      return [];
-    });
-    const { token } = theme.useToken();
-    const bgColor = computed(() => token.value.colorInfoBg);
-    const screenEditStore = useScreenEditStore();
-    function mouseEnter(item) {
-      screenEditStore.setCurHoverComponent(item.chart.id);
-    }
-    function mouseLeave() {
-      screenEditStore.setCurHoverComponent("");
-    }
-    function setComponent(id) {
-      if (selectValue.id === id) {
-        return;
-      }
-      selectValue.id = id;
-      if (events.value && events.value.length > 0) {
-        selectValue.event = events.value[0];
-      } else {
-        selectValue.event = "";
-      }
-      if (fields.value && fields.value.length > 0) {
-        selectValue.param = fields.value[0].colName ?? "";
-      } else {
-        selectValue.param = "";
-      }
-      selectChange();
-    }
-    function setChildComponent(item) {
-      setComponent(item.chart.id);
-    }
-    function setEvent(event) {
-      if (selectValue.event === event) {
-        return;
-      }
-      selectValue.event = event;
-      selectChange();
-    }
-    function setParam(param) {
-      if (selectValue.param === param) {
-        return;
-      }
-      selectValue.param = param ?? "";
-      selectChange();
-    }
-    function selectChange() {
-      if (props.hideEvent) {
-        emit("selectChange", omit(unref(selectValue), "event"));
-      } else {
-        emit("selectChange", unref(selectValue));
-      }
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(unref(prefixCls))
-      }, [
-        createElementVNode("div", {
-          class: normalizeClass(`${unref(prefixCls)}-headers`)
-        }, [
-          _cache[0] || (_cache[0] = createElementVNode("div", {
-            class: "header",
-            style: { "width": "150px" }
-          }, "组件", -1)),
-          !__props.hideEvent ? (openBlock(), createElementBlock("div", _hoisted_1$4, "事件")) : createCommentVNode("", true),
-          _cache[1] || (_cache[1] = createElementVNode("div", {
-            class: "header",
-            style: { "width": "120px" }
-          }, "参数", -1))
-        ], 2),
-        createElementVNode("div", {
-          class: normalizeClass(`${unref(prefixCls)}-container`)
-        }, [
-          createVNode(unref(ScrollContainer), {
-            class: normalizeClass(`${unref(prefixCls)}-items`),
-            style: { "width": "150px" }
-          }, {
-            default: withCtx(() => {
-              var _a;
-              return [
-                ((_a = __props.componentList) == null ? void 0 : _a.length) > 0 ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList(__props.componentList, (item) => {
-                  return openBlock(), createElementBlock("div", {
-                    key: item.chart.id
-                  }, [
-                    item.chart.type !== unref(ComType).MfCombine ? (openBlock(), createBlock(LayerItem, {
-                      key: 0,
-                      style: { "margin": "2px 6px 0 6px" },
-                      "external-select": true,
-                      "is-select": selectValue.id === item.chart.id,
-                      item,
-                      "show-eye": false,
-                      "show-lock": false,
-                      onClick: ($event) => setComponent(item.chart.id),
-                      onEnter: ($event) => mouseEnter(item),
-                      onLeave: mouseLeave
-                    }, null, 8, ["is-select", "item", "onClick", "onEnter"])) : (openBlock(), createBlock(LayerGroup, {
-                      key: 1,
-                      style: { "margin": "2px", "font-size": "12px" },
-                      "external-select": true,
-                      "is-select": selectValue.id === item.chart.id,
-                      item,
-                      "show-eye": false,
-                      "show-lock": false,
-                      "show-child-eye": false,
-                      "show-child-lock": false,
-                      expand: true,
-                      "child-select": selectValue.id,
-                      onParentClick: ($event) => setComponent(item.chart.id),
-                      onChildClick: setChildComponent
-                    }, null, 8, ["is-select", "item", "child-select", "onParentClick"]))
-                  ]);
-                }), 128)) : (openBlock(), createBlock(unref(Empty), {
-                  key: 1,
-                  description: "暂无组件",
-                  image: unref(Empty).PRESENTED_IMAGE_SIMPLE
-                }, null, 8, ["image"]))
-              ];
-            }),
-            _: 1
-          }, 8, ["class"]),
-          !__props.hideEvent ? (openBlock(), createElementBlock("div", _hoisted_2$4)) : createCommentVNode("", true),
-          !__props.hideEvent ? (openBlock(), createBlock(unref(ScrollContainer), {
-            key: 1,
-            class: normalizeClass(`${unref(prefixCls)}-items`),
-            style: { "width": "120px" }
-          }, {
-            default: withCtx(() => [
-              events.value.length > 0 ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList(events.value, (item) => {
-                var _a;
-                return openBlock(), createElementBlock("div", {
-                  class: normalizeClass(["item", selectValue.event === item ? "select" : ""]),
-                  title: item,
-                  key: item,
-                  onClick: ($event) => setEvent(item)
-                }, [
-                  createElementVNode("div", null, toDisplayString(unref(getEventName)(item, (_a = curComponent.value) == null ? void 0 : _a.chart.type)), 1)
-                ], 10, _hoisted_3$2);
-              }), 128)) : (openBlock(), createBlock(unref(Empty), {
-                key: 1,
-                description: "暂无事件",
-                image: unref(Empty).PRESENTED_IMAGE_SIMPLE
-              }, null, 8, ["image"]))
-            ]),
-            _: 1
-          }, 8, ["class"])) : createCommentVNode("", true),
-          _cache[2] || (_cache[2] = createElementVNode("div", { class: "divide-line" }, null, -1)),
-          createVNode(unref(ScrollContainer), {
-            class: normalizeClass(`${unref(prefixCls)}-items`),
-            style: { "width": "120px" }
-          }, {
-            default: withCtx(() => [
-              fields.value.length > 0 ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList(fields.value, (item, index) => {
-                return openBlock(), createElementBlock("div", {
-                  class: normalizeClass(["item", selectValue.param === item.colName ? "select" : ""]),
-                  title: `${item.colName}${item.rename ? `[${item.rename}]` : ""}`,
-                  key: index,
-                  onClick: ($event) => setParam(item.colName)
-                }, [
-                  createElementVNode("div", null, toDisplayString(item.rename ?? item.colName), 1)
-                ], 10, _hoisted_4$2);
-              }), 128)) : (openBlock(), createBlock(unref(Empty), {
-                key: 1,
-                description: "暂无参数",
-                image: unref(Empty).PRESENTED_IMAGE_SIMPLE
-              }, null, 8, ["image"]))
-            ]),
-            _: 1
-          }, 8, ["class"])
-        ], 2)
-      ], 2);
-    };
+  function A2(e3) {
+    h2.id !== e3 && (h2.id = e3, E2.value && E2.value.length > 0 ? h2.event = E2.value[0] : h2.event = "", N2.value && N2.value.length > 0 ? h2.param = N2.value[0].colName ?? "" : h2.param = "", R2());
   }
-});
-const EventSelectItems = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__scopeId", "data-v-ba31ce1b"]]);
-const _hoisted_1$3 = ["onMouseenter"];
-const _hoisted_2$3 = { class: "title" };
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
-  __name: "EventSelect",
-  props: {
-    events: { type: Array, default: () => [] },
-    //是否过滤掉自己 不允许自己触发自己时需过滤
-    filterSelf: { type: Boolean, default: false }
-  },
-  emits: ["ok", "delete", "eventLose"],
-  setup(__props, { emit: __emit }) {
-    useCssVars((_ctx) => ({
-      "00be537e": bgColor.value
-    }));
-    const props = __props;
-    const emit = __emit;
-    const { prefixCls } = useDesign("event-select");
-    const isShow = ref(false);
-    const { token } = theme.useToken();
-    const bgColor = computed(() => token.value.colorInfoBg);
-    const componentList = ref([]);
-    const screenEditStore = useScreenEditStore();
-    const selectEvent = ref();
-    const enterParam = ref(-1);
-    const modifyIndex = ref(-1);
-    const eventDisplays = computed(() => {
-      if (props.events && props.events.length > 0) {
-        const events = [];
-        for (const event of props.events) {
-          const com = getComponentById(screenEditStore.getComponentList, event.id);
-          if (!com) {
-            emit("eventLose", event.id);
-            continue;
-          }
-          let param;
-          if (com.chart.data.headers) {
-            param = com.chart.data.headers[event.param];
-          }
-          if (param) {
-            events.push(
-              `${com.chart.name} / ${getEventName(event.event, com.chart.type)} / ${param.rename ?? param.colName}`
-            );
-          } else {
-            events.push(`${com.chart.name} / ${getEventName(event.event, com.chart.type)}`);
-          }
-        }
-        return events;
-      }
-      return [];
-    });
-    watch(
-      () => {
-        var _a;
-        return (_a = screenEditStore.getCurConfigComponent) == null ? void 0 : _a.chart.id;
-      },
-      () => {
-        isShow.value = false;
-      }
-    );
-    function cancelHandle() {
-      isShow.value = false;
-    }
-    function okHandle() {
-      emit("ok", { event: cloneDeep(selectEvent.value), modifyIndex: modifyIndex.value });
-      isShow.value = false;
-    }
-    const visibleChange = (show) => {
-      isShow.value = show;
-      modifyIndex.value = -1;
-      if (show) {
-        setComponentList();
-      }
-      selectEvent.value = void 0;
-    };
-    function setComponentList() {
-      componentList.value = [];
-      const isExist = (com) => {
-        return com.chart.events && com.chart.events.emits && com.chart.events.emits.length > 0 && (props.filterSelf && com.chart.id !== screenEditStore.getCurConfigComponent.chart.id || !props.filterSelf);
-      };
-      for (const com of screenEditStore.getComponentList) {
-        if (com.chart.type !== ComType.MfCombine) {
-          if (isExist(com)) {
-            componentList.value.push(cloneDeep(com));
-          }
+  function w2(e3) {
+    A2(e3.chart.id);
+  }
+  function R2() {
+    u2.hideEvent ? C2("selectChange", de(n(h2), "event")) : C2("selectChange", n(h2));
+  }
+  return (l3, i2) => (t(), d("div", { class: m(n(y2)) }, [p("div", { class: m(`${n(y2)}-headers`) }, [i2[0] || (i2[0] = p("div", { class: "header", style: { width: "150px" } }, "组件", -1)), e2.hideEvent ? v("", true) : (t(), d("div", De, "事件")), i2[1] || (i2[1] = p("div", { class: "header", style: { width: "120px" } }, "参数", -1))], 2), p("div", { class: m(`${n(y2)}-container`) }, [f(n(Ce), { class: m(`${n(y2)}-items`), style: { width: "150px" } }, { default: o(() => {
+    var _a;
+    return [((_a = e2.componentList) == null ? void 0 : _a.length) > 0 ? (t(true), d(k, { key: 0 }, _(e2.componentList, (e3) => (t(), d("div", { key: e3.chart.id }, [e3.chart.type !== n(Z).MfCombine ? (t(), a(ee, { key: 0, style: { margin: "2px 6px 0 6px" }, "external-select": true, "is-select": h2.id === e3.chart.id, item: e3, "show-eye": false, "show-lock": false, onClick: (a2) => A2(e3.chart.id), onEnter: (a2) => function(e4) {
+      M2.setCurHoverComponent(e4.chart.id);
+    }(e3), onLeave: S2 }, null, 8, ["is-select", "item", "onClick", "onEnter"])) : (t(), a(ae, { key: 1, style: { margin: "2px", "font-size": "12px" }, "external-select": true, "is-select": h2.id === e3.chart.id, item: e3, "show-eye": false, "show-lock": false, "show-child-eye": false, "show-child-lock": false, expand: true, "child-select": h2.id, onParentClick: (a2) => A2(e3.chart.id), onChildClick: w2 }, null, 8, ["is-select", "item", "child-select", "onParentClick"]))]))), 128)) : (t(), a(n(T), { key: 1, description: "暂无组件", image: n(T).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"]))];
+  }), _: 1 }, 8, ["class"]), e2.hideEvent ? v("", true) : (t(), d("div", Te)), e2.hideEvent ? v("", true) : (t(), a(n(Ce), { key: 1, class: m(`${n(y2)}-items`), style: { width: "120px" } }, { default: o(() => [E2.value.length > 0 ? (t(true), d(k, { key: 0 }, _(E2.value, (e3) => {
+    var _a;
+    return t(), d("div", { class: m(["item", h2.event === e3 ? "select" : ""]), title: e3, key: e3, onClick: (a2) => {
+      return t2 = e3, void (h2.event !== t2 && (h2.event = t2, R2()));
+      var t2;
+    } }, [p("div", null, g(n(te)(e3, (_a = b2.value) == null ? void 0 : _a.chart.type)), 1)], 10, Me);
+  }), 128)) : (t(), a(n(T), { key: 1, description: "暂无事件", image: n(T).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"]))]), _: 1 }, 8, ["class"])), i2[2] || (i2[2] = p("div", { class: "divide-line" }, null, -1)), f(n(Ce), { class: m(`${n(y2)}-items`), style: { width: "120px" } }, { default: o(() => [N2.value.length > 0 ? (t(true), d(k, { key: 0 }, _(N2.value, (e3, a2) => (t(), d("div", { class: m(["item", h2.param === e3.colName ? "select" : ""]), title: `${e3.colName}${e3.rename ? `[${e3.rename}]` : ""}`, key: a2, onClick: (a3) => {
+    return t2 = e3.colName, void (h2.param !== t2 && (h2.param = t2 ?? "", R2()));
+    var t2;
+  } }, [p("div", null, g(e3.rename ?? e3.colName), 1)], 10, Se))), 128)) : (t(), a(n(T), { key: 1, description: "暂无参数", image: n(T).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"]))]), _: 1 }, 8, ["class"])], 2)], 2));
+} }), [["__scopeId", "data-v-ba31ce1b"]]), we = ["onMouseenter"], Re = { class: "title" }, Le = F(e({ __name: "EventSelect", props: { events: { type: Array, default: () => [] }, filterSelf: { type: Boolean, default: false } }, emits: ["ok", "delete", "eventLose"], setup(e2, { emit: l2 }) {
+  i((e3) => ({ "00be537e": I2.value }));
+  const c2 = e2, C2 = l2, { prefixCls: y2 } = V("event-select"), b2 = u(false), { token: N2 } = x.useToken(), I2 = s(() => N2.value.colorInfoBg), T2 = u([]), w2 = J(), R2 = u(), L2 = u(-1), $2 = u(-1), O2 = s(() => {
+    if (c2.events && c2.events.length > 0) {
+      const e3 = [];
+      for (const a2 of c2.events) {
+        const t2 = Y(w2.getComponentList, a2.id);
+        if (!t2) {
+          C2("eventLose", a2.id);
           continue;
         }
-        const newCom = cloneDeep(com);
-        newCom.chart.options.components = newCom.chart.options.components.filter((item) => isExist(item));
-        if (newCom.chart.options.components.length > 0) {
-          componentList.value.push(newCom);
-        } else if (isExist(newCom)) {
-          componentList.value.push(newCom);
-        }
+        let n2;
+        t2.chart.data.headers && (n2 = t2.chart.data.headers[a2.param]), n2 ? e3.push(`${t2.chart.name} / ${te(a2.event, t2.chart.type)} / ${n2.rename ?? n2.colName}`) : e3.push(`${t2.chart.name} / ${te(a2.event, t2.chart.type)}`);
       }
+      return e3;
     }
-    function selectChange(event) {
-      selectEvent.value = event;
-    }
-    function enterHandle(index) {
-      enterParam.value = index;
-    }
-    function leaveHandle() {
-      enterParam.value = -1;
-    }
-    function editHandle(index) {
-      setComponentList();
-      selectEvent.value = props.events[index];
-      modifyIndex.value = index;
-      isShow.value = true;
-    }
-    function deleteHandle(index) {
-      emit("delete", index);
-      isShow.value = false;
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Dropdown), {
-        trigger: ["click"],
-        open: isShow.value,
-        onOpenChange: visibleChange,
-        placement: "bottom",
-        arrow: { pointAtCenter: true },
-        "overlay-style": { width: "380px" }
-      }, {
-        overlay: withCtx(() => [
-          createVNode(unref(Menu), null, {
-            default: withCtx(() => [
-              createVNode(unref(Menu).Item, {
-                disabled: "",
-                style: { "padding": "0", "cursor": "default" }
-              }, {
-                default: withCtx(() => [
-                  createVNode(EventSelectItems, {
-                    value: selectEvent.value,
-                    "component-list": componentList.value,
-                    onSelectChange: selectChange
-                  }, null, 8, ["value", "component-list"]),
-                  createElementVNode("div", {
-                    class: normalizeClass(`${unref(prefixCls)}-ok-button`)
-                  }, [
-                    createVNode(unref(Button), {
-                      class: "mr-2",
-                      onClick: cancelHandle
-                    }, {
-                      default: withCtx(() => _cache[1] || (_cache[1] = [
-                        createTextVNode("取消")
-                      ])),
-                      _: 1
-                    }),
-                    createVNode(unref(Button), {
-                      type: "primary",
-                      onClick: okHandle
-                    }, {
-                      default: withCtx(() => _cache[2] || (_cache[2] = [
-                        createTextVNode("确定")
-                      ])),
-                      _: 1
-                    })
-                  ], 2)
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          })
-        ]),
-        default: withCtx(() => [
-          createElementVNode("div", {
-            class: normalizeClass(unref(prefixCls))
-          }, [
-            (openBlock(true), createElementBlock(Fragment, null, renderList(eventDisplays.value, (item, index) => {
-              return openBlock(), createElementBlock("div", {
-                class: "item",
-                key: index,
-                onClick: _cache[0] || (_cache[0] = withModifiers(($event) => isShow.value = false, ["stop"])),
-                onMouseenter: ($event) => enterHandle(index),
-                onMouseleave: leaveHandle
-              }, [
-                createVNode(unref(Tooltip), {
-                  title: item,
-                  placement: "left"
-                }, {
-                  default: withCtx(() => [
-                    createElementVNode("div", _hoisted_2$3, toDisplayString(item), 1)
-                  ]),
-                  _: 2
-                }, 1032, ["title"]),
-                enterParam.value === index ? (openBlock(), createBlock(unref(Tooltip), {
-                  key: 0,
-                  title: "修改"
-                }, {
-                  default: withCtx(() => [
-                    createVNode(unref(Icon), {
-                      class: "icon",
-                      icon: "ant-design:edit-outlined",
-                      onClick: withModifiers(($event) => editHandle(index), ["stop"])
-                    }, null, 8, ["onClick"])
-                  ]),
-                  _: 2
-                }, 1024)) : createCommentVNode("", true),
-                enterParam.value === index ? (openBlock(), createBlock(unref(Tooltip), {
-                  key: 1,
-                  title: "删除"
-                }, {
-                  default: withCtx(() => [
-                    createVNode(unref(Icon), {
-                      class: "icon",
-                      icon: "ant-design:delete-outlined",
-                      onClick: ($event) => deleteHandle(index)
-                    }, null, 8, ["onClick"])
-                  ]),
-                  _: 2
-                }, 1024)) : createCommentVNode("", true)
-              ], 40, _hoisted_1$3);
-            }), 128)),
-            createVNode(unref(Button), {
-              size: "small",
-              type: "link",
-              class: normalizeClass(`${unref(prefixCls)}-drop-button`)
-            }, {
-              icon: withCtx(() => [
-                createVNode(unref(Icon), {
-                  size: 12,
-                  icon: "ant-design:plus-outlined"
-                })
-              ]),
-              default: withCtx(() => [
-                _cache[3] || (_cache[3] = createElementVNode("span", { class: "content" }, "绑定已开启事件", -1))
-              ]),
-              _: 1
-            }, 8, ["class"])
-          ], 2)
-        ]),
-        _: 1
-      }, 8, ["open"]);
-    };
+    return [];
+  });
+  function B2() {
+    b2.value = false;
   }
-});
-const EventSelect = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["__scopeId", "data-v-f8f8b1d8"]]);
-const _sfc_main$3 = /* @__PURE__ */ defineComponent({
-  __name: "VariableSelect",
-  props: {
-    variable: {
-      type: Object,
-      default: () => {
+  function U2() {
+    C2("ok", { event: me(R2.value), modifyIndex: $2.value }), b2.value = false;
+  }
+  r(() => {
+    var _a;
+    return (_a = w2.getCurConfigComponent) == null ? void 0 : _a.chart.id;
+  }, () => {
+    b2.value = false;
+  });
+  const j2 = (e3) => {
+    b2.value = e3, $2.value = -1, e3 && z2(), R2.value = void 0;
+  };
+  function z2() {
+    T2.value = [];
+    const e3 = (e4) => e4.chart.events && e4.chart.events.emits && e4.chart.events.emits.length > 0 && (c2.filterSelf && e4.chart.id !== w2.getCurConfigComponent.chart.id || !c2.filterSelf);
+    for (const a2 of w2.getComponentList) {
+      if (a2.chart.type !== Z.MfCombine) {
+        e3(a2) && T2.value.push(me(a2));
+        continue;
       }
-    },
-    //是否过滤自己 不允许自己触发自己时需要过滤
-    filterSelf: { type: Boolean, default: false }
-  },
-  emits: ["ok"],
-  setup(__props, { emit: __emit }) {
-    const props = __props;
-    const emit = __emit;
-    const { prefixCls } = useDesign("variable-select");
-    const isShow = ref(false);
-    const screenEditStore = useScreenEditStore();
-    const selectVariable = ref();
-    const componentList = ref([]);
-    const inputValue = ref("");
-    const isEnter = ref(false);
-    const variableDisplay = () => {
-      var _a;
-      if ((_a = props.variable) == null ? void 0 : _a.id) {
-        const com = getComponentById(screenEditStore.getComponentList, props.variable.id);
-        if (!com) {
-          emit("ok");
-          return "";
-        }
-        let param;
-        if (com.chart.data.headers) {
-          param = com.chart.data.headers[props.variable.param];
-        }
-        if (param) {
-          return `${com.chart.name} / ${param.rename ?? param.colName}`;
-        }
-      }
-      return "";
-    };
-    watch(
-      () => {
-        var _a;
-        return (_a = screenEditStore.getCurConfigComponent) == null ? void 0 : _a.chart.id;
-      },
-      () => {
-        isShow.value = false;
-      }
-    );
-    watch(
-      () => props.variable,
-      () => {
-        inputValue.value = variableDisplay();
-      },
-      {
-        deep: true,
-        immediate: true
-      }
-    );
-    function setComponentList() {
-      componentList.value = [];
-      const isExist = (com) => {
-        return com.chart.data && com.chart.data.dataSet && (props.filterSelf && com.chart.id !== screenEditStore.getCurConfigComponent.chart.id || !props.filterSelf);
-      };
-      for (const com of screenEditStore.getComponentList) {
-        if (com.chart.type !== ComType.MfCombine) {
-          if (isExist(com)) {
-            componentList.value.push(cloneDeep(com));
-          }
+      const t2 = me(a2);
+      t2.chart.options.components = t2.chart.options.components.filter((a3) => e3(a3)), (t2.chart.options.components.length > 0 || e3(t2)) && T2.value.push(t2);
+    }
+  }
+  function G2(e3) {
+    R2.value = e3;
+  }
+  function H2() {
+    L2.value = -1;
+  }
+  return (e3, l3) => (t(), a(n(M), { trigger: ["click"], open: b2.value, onOpenChange: j2, placement: "bottom", arrow: { pointAtCenter: true }, "overlay-style": { width: "380px" } }, { overlay: o(() => [f(n(A), null, { default: o(() => [f(n(A).Item, { disabled: "", style: { padding: "0", cursor: "default" } }, { default: o(() => [f(Ae, { value: R2.value, "component-list": T2.value, onSelectChange: G2 }, null, 8, ["value", "component-list"]), p("div", { class: m(`${n(y2)}-ok-button`) }, [f(n(S), { class: "mr-2", onClick: B2 }, { default: o(() => l3[1] || (l3[1] = [E("取消")])), _: 1 }), f(n(S), { type: "primary", onClick: U2 }, { default: o(() => l3[2] || (l3[2] = [E("确定")])), _: 1 })], 2)]), _: 1 })]), _: 1 })]), default: o(() => [p("div", { class: m(n(y2)) }, [(t(true), d(k, null, _(O2.value, (e4, i2) => (t(), d("div", { class: "item", key: i2, onClick: l3[0] || (l3[0] = h((e5) => b2.value = false, ["stop"])), onMouseenter: (e5) => function(e6) {
+    L2.value = e6;
+  }(i2), onMouseleave: H2 }, [f(n(D), { title: e4, placement: "left" }, { default: o(() => [p("div", Re, g(e4), 1)]), _: 2 }, 1032, ["title"]), L2.value === i2 ? (t(), a(n(D), { key: 0, title: "修改" }, { default: o(() => [f(n(P), { class: "icon", icon: "ant-design:edit-outlined", onClick: h((e5) => function(e6) {
+    z2(), R2.value = c2.events[e6], $2.value = e6, b2.value = true;
+  }(i2), ["stop"]) }, null, 8, ["onClick"])]), _: 2 }, 1024)) : v("", true), L2.value === i2 ? (t(), a(n(D), { key: 1, title: "删除" }, { default: o(() => [f(n(P), { class: "icon", icon: "ant-design:delete-outlined", onClick: (e5) => function(e6) {
+    C2("delete", e6), b2.value = false;
+  }(i2) }, null, 8, ["onClick"])]), _: 2 }, 1024)) : v("", true)], 40, we))), 128)), f(n(S), { size: "small", type: "link", class: m(`${n(y2)}-drop-button`) }, { icon: o(() => [f(n(P), { size: 12, icon: "ant-design:plus-outlined" })]), default: o(() => [l3[3] || (l3[3] = p("span", { class: "content" }, "绑定已开启事件", -1))]), _: 1 }, 8, ["class"])], 2)]), _: 1 }, 8, ["open"]));
+} }), [["__scopeId", "data-v-f8f8b1d8"]]), $e = F(e({ __name: "VariableSelect", props: { variable: { type: Object, default: () => {
+} }, filterSelf: { type: Boolean, default: false } }, emits: ["ok"], setup(e2, { emit: l2 }) {
+  const i2 = e2, s2 = l2, { prefixCls: c2 } = V("variable-select"), d2 = u(false), C2 = J(), g2 = u(), y2 = u([]), k2 = u(""), _2 = u(false), b2 = () => {
+    var _a;
+    if ((_a = i2.variable) == null ? void 0 : _a.id) {
+      const e3 = Y(C2.getComponentList, i2.variable.id);
+      if (!e3) return s2("ok"), "";
+      let a2;
+      if (e3.chart.data.headers && (a2 = e3.chart.data.headers[i2.variable.param]), a2) return `${e3.chart.name} / ${a2.rename ?? a2.colName}`;
+    }
+    return "";
+  };
+  function N2() {
+    d2.value = false, k2.value = b2();
+  }
+  function I2() {
+    s2("ok", me(g2.value)), d2.value = false;
+  }
+  r(() => {
+    var _a;
+    return (_a = C2.getCurConfigComponent) == null ? void 0 : _a.chart.id;
+  }, () => {
+    d2.value = false;
+  }), r(() => i2.variable, () => {
+    k2.value = b2();
+  }, { deep: true, immediate: true });
+  const x2 = (e3) => {
+    d2.value = e3, e3 ? function() {
+      y2.value = [];
+      const e4 = (e5) => e5.chart.data && e5.chart.data.dataSet && (i2.filterSelf && e5.chart.id !== C2.getCurConfigComponent.chart.id || !i2.filterSelf);
+      for (const a2 of C2.getComponentList) {
+        if (a2.chart.type !== Z.MfCombine) {
+          e4(a2) && y2.value.push(me(a2));
           continue;
         }
-        const newCom = cloneDeep(com);
-        newCom.chart.options.components = newCom.chart.options.components.filter((item) => isExist(item));
-        if (newCom.chart.options.components.length > 0) {
-          componentList.value.push(newCom);
-        } else if (isExist(newCom)) {
-          componentList.value.push(newCom);
-        }
+        const t2 = me(a2);
+        t2.chart.options.components = t2.chart.options.components.filter((a3) => e4(a3)), (t2.chart.options.components.length > 0 || e4(t2)) && y2.value.push(t2);
       }
-    }
-    function cancelHandle() {
-      isShow.value = false;
-      inputValue.value = variableDisplay();
-    }
-    function okHandle() {
-      emit("ok", cloneDeep(selectVariable.value));
-      isShow.value = false;
-    }
-    const visibleChange = (show) => {
-      isShow.value = show;
-      if (show) {
-        setComponentList();
-      } else {
-        inputValue.value = variableDisplay();
-      }
-      selectVariable.value = cloneDeep(props.variable);
-    };
-    function selectChange(event) {
-      selectVariable.value = event;
-    }
-    function clearData() {
-      emit("ok", {});
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Dropdown), {
-        trigger: ["click"],
-        open: isShow.value,
-        onOpenChange: visibleChange,
-        placement: "bottom",
-        arrow: { pointAtCenter: true },
-        "overlay-style": { width: "270px" }
-      }, {
-        overlay: withCtx(() => [
-          createVNode(unref(Menu), null, {
-            default: withCtx(() => [
-              createVNode(unref(Menu).Item, {
-                disabled: "",
-                style: { "padding": "0", "cursor": "default" }
-              }, {
-                default: withCtx(() => [
-                  createVNode(EventSelectItems, {
-                    "hide-event": true,
-                    value: selectVariable.value,
-                    "component-list": componentList.value,
-                    onSelectChange: selectChange
-                  }, null, 8, ["value", "component-list"]),
-                  createElementVNode("div", {
-                    class: normalizeClass(`${unref(prefixCls)}-ok-button`)
-                  }, [
-                    createVNode(unref(Button), {
-                      class: "mr-2",
-                      onClick: cancelHandle
-                    }, {
-                      default: withCtx(() => _cache[4] || (_cache[4] = [
-                        createTextVNode("取消")
-                      ])),
-                      _: 1
-                    }),
-                    createVNode(unref(Button), {
-                      type: "primary",
-                      onClick: okHandle
-                    }, {
-                      default: withCtx(() => _cache[5] || (_cache[5] = [
-                        createTextVNode("确定")
-                      ])),
-                      _: 1
-                    })
-                  ], 2)
-                ]),
-                _: 1
-              })
-            ]),
-            _: 1
-          })
-        ]),
-        default: withCtx(() => [
-          createElementVNode("div", {
-            class: normalizeClass(unref(prefixCls)),
-            onMouseenter: _cache[2] || (_cache[2] = ($event) => isEnter.value = true),
-            onMouseleave: _cache[3] || (_cache[3] = ($event) => isEnter.value = false)
-          }, [
-            createVNode(unref(Input), {
-              class: normalizeClass(`${unref(prefixCls)}-drop-input`),
-              placeholder: "请选择参数来源",
-              value: inputValue.value,
-              "onUpdate:value": _cache[0] || (_cache[0] = ($event) => inputValue.value = $event),
-              onChange: _cache[1] || (_cache[1] = ($event) => isShow.value = true)
-            }, {
-              suffix: withCtx(() => [
-                isEnter.value && inputValue.value ? (openBlock(), createBlock(unref(Icon), {
-                  key: 0,
-                  class: "delete-icon",
-                  size: 14,
-                  icon: "ant-design:close-circle-filled",
-                  onClick: withModifiers(clearData, ["stop"])
-                })) : createCommentVNode("", true),
-                createVNode(unref(Icon), {
-                  class: "drop-icon",
-                  size: 12,
-                  icon: isShow.value ? "ant-design:up-outlined" : "ant-design:down-outlined"
-                }, null, 8, ["icon"])
-              ]),
-              _: 1
-            }, 8, ["class", "value"])
-          ], 34)
-        ]),
-        _: 1
-      }, 8, ["open"]);
-    };
+    }() : k2.value = b2(), g2.value = me(i2.variable);
+  };
+  function D2(e3) {
+    g2.value = e3;
   }
-});
-const VariableSelect = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__scopeId", "data-v-e10c5339"]]);
-const _hoisted_1$2 = { class: "title" };
-const _hoisted_2$2 = { class: "param" };
-const _hoisted_3$1 = {
-  key: 0,
-  style: { "color": "red" }
-};
-const _hoisted_4$1 = { key: 0 };
-const _hoisted_5$1 = { key: 1 };
-const _hoisted_6$1 = { key: 2 };
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
-  __name: "DataParamsConfig",
-  props: { params: { type: Array, default: () => [] } },
-  emits: ["paramChange"],
-  setup(__props, { emit: __emit }) {
-    useCssVars((_ctx) => ({
-      "71549546": colorBorder.value
-    }));
-    const emit = __emit;
-    const { prefixCls } = useDesign("data-params-config");
-    const { token } = theme.useToken();
-    const colorBorder = computed(() => token.value.colorBorder);
-    const screenEditStore = useScreenEditStore();
-    const { createMessage } = useMessage();
-    function submitEvent(e, item) {
-      const event = e.event;
-      const params = cloneDeep(screenEditStore.getCurConfigComponent.chart.data.params);
-      let isChange = false;
-      if (!params[item.name].value) {
-        params[item.name].value = [];
-        isChange = true;
+  function T2() {
+    s2("ok", {});
+  }
+  return (e3, l3) => (t(), a(n(M), { trigger: ["click"], open: d2.value, onOpenChange: x2, placement: "bottom", arrow: { pointAtCenter: true }, "overlay-style": { width: "270px" } }, { overlay: o(() => [f(n(A), null, { default: o(() => [f(n(A).Item, { disabled: "", style: { padding: "0", cursor: "default" } }, { default: o(() => [f(Ae, { "hide-event": true, value: g2.value, "component-list": y2.value, onSelectChange: D2 }, null, 8, ["value", "component-list"]), p("div", { class: m(`${n(c2)}-ok-button`) }, [f(n(S), { class: "mr-2", onClick: N2 }, { default: o(() => l3[4] || (l3[4] = [E("取消")])), _: 1 }), f(n(S), { type: "primary", onClick: I2 }, { default: o(() => l3[5] || (l3[5] = [E("确定")])), _: 1 })], 2)]), _: 1 })]), _: 1 })]), default: o(() => [p("div", { class: m(n(c2)), onMouseenter: l3[2] || (l3[2] = (e4) => _2.value = true), onMouseleave: l3[3] || (l3[3] = (e4) => _2.value = false) }, [f(n(w), { class: m(`${n(c2)}-drop-input`), placeholder: "请选择参数来源", value: k2.value, "onUpdate:value": l3[0] || (l3[0] = (e4) => k2.value = e4), onChange: l3[1] || (l3[1] = (e4) => d2.value = true) }, { suffix: o(() => [_2.value && k2.value ? (t(), a(n(P), { key: 0, class: "delete-icon", size: 14, icon: "ant-design:close-circle-filled", onClick: h(T2, ["stop"]) })) : v("", true), f(n(P), { class: "drop-icon", size: 12, icon: d2.value ? "ant-design:up-outlined" : "ant-design:down-outlined" }, null, 8, ["icon"])]), _: 1 }, 8, ["class", "value"])], 34)]), _: 1 }, 8, ["open"]));
+} }), [["__scopeId", "data-v-e10c5339"]]), Oe = { class: "title" }, Ve = { class: "param" }, Pe = { key: 0, style: { color: "red" } }, Be = { key: 0 }, Ue = { key: 1 }, je = { key: 2 }, ze = F(e({ __name: "DataParamsConfig", props: { params: { type: Array, default: () => [] } }, emits: ["paramChange"], setup(e2, { emit: l2 }) {
+  i((e3) => ({ 71549546: C2.value }));
+  const r2 = l2, { prefixCls: c2 } = V("data-params-config"), { token: u2 } = x.useToken(), C2 = s(() => u2.value.colorBorder), h2 = J(), { createMessage: y2 } = O();
+  const b2 = (e3, a2) => {
+    const t2 = () => {
+      const e4 = "错误：组件参数存在循环引用，请检查";
+      throw y2.error(e4), new Error(e4);
+    }, n2 = (e4) => {
+      const a3 = h2.getComponent(e4);
+      if (a3 == null ? void 0 : a3.chart.data.params) {
+        for (const e5 of Object.values(a3 == null ? void 0 : a3.chart.data.params)) if (e5 == null ? void 0 : e5.value) if (ve(e5.value)) for (const a4 of e5.value) a4.id === h2.getCurConfigComponent.chart.id && t2(), n2(a4.id);
+        else e5.value.id === h2.getCurConfigComponent.chart.id ? t2() : n2(e5.value.id);
       }
-      const index = params[item.name].value.findIndex((item2) => item2.id === event.id && item2.event === event.event);
-      if (index === -1) {
-        if (e.modifyIndex >= 0) {
-          params[item.name].value.splice(e.modifyIndex, 1, event);
-        } else {
-          params[item.name].value.push(event);
-        }
-        isChange = true;
-      } else {
-        if (params[item.name].value.param !== event.param) {
-          params[item.name].value.splice(index, 1, event);
-          isChange = true;
-        }
-      }
-      if (isChange) {
-        setParamValue(getParamValue(e.event, item));
-        screenEditStore.getCurConfigComponent.chart.data.params = params;
-      }
+      return a3;
+    };
+    if (e3) {
+      const t3 = n2(e3.id);
+      if (!t3) return;
+      void 0 === h2.getCurConfigComponent.chart.data.priority && (h2.getCurConfigComponent.chart.data.priority = 0), h2.getCurConfigComponent.chart.data.priority <= (t3.chart.data.priority ?? 0) && (h2.getCurConfigComponent.chart.data.priority = t3.chart.data.priority + 1);
+      const o2 = 0 === (t3 == null ? void 0 : t3.chart.data.type) ? t3 == null ? void 0 : t3.chart.data.dataSet : t3 == null ? void 0 : t3.chart.data.result;
+      if (ve(o2)) return { [a2.name]: o2[0][e3.param] };
+      if (o2) return { [a2.name]: o2[e3.param] };
     }
-    function deleteEvent(index, item) {
-      var _a;
-      const params = cloneDeep(screenEditStore.getCurConfigComponent.chart.data.params);
-      params[item.name].value.splice(index, 1);
-      if (((_a = params[item.name].value) == null ? void 0 : _a.length) > 0) {
-        setParamValue(getParamValue(params[item.name].value[0], item));
-      } else {
-        setParamValue({ [item.name]: void 0 });
-      }
-      screenEditStore.getCurConfigComponent.chart.data.params = params;
+  };
+  function N2(e3) {
+    const a2 = h2.getCurConfigComponent.chart;
+    a2.data.paramsValue ? a2.data.paramsValue = { ...a2.data.paramsValue, ...e3 } : a2.data.paramsValue = e3, r2("paramChange");
+  }
+  const I2 = pe((e3, a2) => {
+    N2({ [a2.name]: e3.target.value });
+  }, 500);
+  return (l3, i2) => (t(true), d(k, null, _(e2.params, (e3) => (t(), d("div", { class: m(n(c2)), key: e3.name }, [p("div", Oe, [f(n(D), { title: e3.remark }, { default: o(() => [p("div", Ve, [1 === e3.required ? (t(), d("span", Pe, "*")) : v("", true), E(" " + g(e3.name), 1)])]), _: 2 }, 1032, ["title"]), f(n(D), { placement: "topRight" }, { title: o(() => i2[0] || (i2[0] = [p("div", null, [p("span", { style: { "font-weight": "700" } }, "常量："), E("设置固定参数")], -1), p("div", null, [p("span", { style: { "font-weight": "700" } }, "变量："), E("设置其他组件数据或全局参数（第一次加载设置，不会随前者变化） ")], -1), p("div", null, [p("span", { style: { "font-weight": "700" } }, "事件："), E(" 其他组件事件触发设置（绑定多个事件时，以最后触发事件的组件为准） ")], -1)])), default: o(() => [n(h2).getCurConfigComponent.chart.data.params && n(h2).getCurConfigComponent.chart.data.params[e3.name] ? (t(), a(n(R), { key: 0, class: "radio-group", size: "small", value: n(h2).getCurConfigComponent.chart.data.params[e3.name].type, "onUpdate:value": (a2) => n(h2).getCurConfigComponent.chart.data.params[e3.name].type = a2, onChange: (a2) => function(e4, a3) {
+    var _a;
+    const t2 = me(h2.getCurConfigComponent.chart.data.params);
+    switch ((_a = e4.target) == null ? void 0 : _a.value) {
+      case ne.VARIABLE:
+        t2[a3.name].value = void 0;
+        break;
+      case ne.EVENT:
+        t2[a3.name].value = [];
+        break;
+      default:
+        t2[a3.name].value = a3.defaultValue, a3.defaultValue && N2({ [a3.name]: a3.defaultValue });
     }
-    function changeType(type, item) {
-      var _a;
-      const params = cloneDeep(screenEditStore.getCurConfigComponent.chart.data.params);
-      switch ((_a = type.target) == null ? void 0 : _a.value) {
-        case ParamType.VARIABLE: {
-          params[item.name].value = void 0;
-          break;
-        }
-        case ParamType.EVENT: {
-          params[item.name].value = [];
-          break;
-        }
-        default: {
-          params[item.name].value = item.defaultValue;
-          if (item.defaultValue) {
-            setParamValue({ [item.name]: item.defaultValue });
-          }
-          break;
-        }
-      }
-      screenEditStore.getCurConfigComponent.chart.data.params = params;
-    }
-    const getParamValue = (param, item) => {
-      const throwError = () => {
-        const error = "错误：组件参数存在循环引用，请检查";
-        createMessage.error(error);
-        throw new Error(error);
-      };
-      const checkCycle = (id) => {
-        const com = screenEditStore.getComponent(id);
-        if (com == null ? void 0 : com.chart.data.params) {
-          for (const item2 of Object.values(com == null ? void 0 : com.chart.data.params)) {
-            if (!(item2 == null ? void 0 : item2.value)) continue;
-            if (isArray(item2.value)) {
-              for (const p of item2.value) {
-                if (p.id === screenEditStore.getCurConfigComponent.chart.id) {
-                  throwError();
-                }
-                checkCycle(p.id);
-              }
-              continue;
-            }
-            if (item2.value.id === screenEditStore.getCurConfigComponent.chart.id) {
-              throwError();
-            } else {
-              checkCycle(item2.value.id);
+    h2.getCurConfigComponent.chart.data.params = t2;
+  }(a2, e3) }, { default: o(() => [f(n(L), { class: "radio-button", value: n(ne).CONSTANT }, { default: o(() => i2[1] || (i2[1] = [E("常量")])), _: 1 }, 8, ["value"]), f(n(L), { class: "radio-button", value: n(ne).VARIABLE }, { default: o(() => i2[2] || (i2[2] = [E("变量")])), _: 1 }, 8, ["value"]), f(n(L), { class: "radio-button", value: n(ne).EVENT }, { default: o(() => i2[3] || (i2[3] = [E("事件")])), _: 1 }, 8, ["value"])]), _: 2 }, 1032, ["value", "onUpdate:value", "onChange"])) : v("", true)]), _: 2 }, 1024)]), n(h2).getCurConfigComponent.chart.data.params && n(h2).getCurConfigComponent.chart.data.params[e3.name] && n(h2).getCurConfigComponent.chart.data.params[e3.name].type === n(ne).CONSTANT ? (t(), d("div", Be, [f(n(w), { value: n(h2).getCurConfigComponent.chart.data.params[e3.name].value, "onUpdate:value": (a2) => n(h2).getCurConfigComponent.chart.data.params[e3.name].value = a2, placeholder: "请输入常量参数", onChange: (a2) => n(I2)(a2, e3) }, null, 8, ["value", "onUpdate:value", "onChange"])])) : v("", true), n(h2).getCurConfigComponent.chart.data.params && n(h2).getCurConfigComponent.chart.data.params[e3.name] && n(h2).getCurConfigComponent.chart.data.params[e3.name].type === n(ne).VARIABLE ? (t(), d("div", Ue, [f($e, { "filter-self": true, variable: n(h2).getCurConfigComponent.chart.data.params[e3.name].value, onOk: (a2) => function(e4, a3) {
+    const t2 = me(h2.getCurConfigComponent.chart.data.params);
+    t2[a3.name].value = e4, N2(b2(e4, a3)), h2.getCurConfigComponent.chart.data.params = t2;
+  }(a2, e3) }, null, 8, ["variable", "onOk"])])) : v("", true), n(h2).getCurConfigComponent.chart.data.params && n(h2).getCurConfigComponent.chart.data.params[e3.name] && n(h2).getCurConfigComponent.chart.data.params[e3.name].type === n(ne).EVENT ? (t(), d("div", je, [f(Le, { "filter-self": true, events: n(h2).getCurConfigComponent.chart.data.params[e3.name].value, onOk: (a2) => function(e4, a3) {
+    const t2 = e4.event, n2 = me(h2.getCurConfigComponent.chart.data.params);
+    let o2 = false;
+    n2[a3.name].value || (n2[a3.name].value = [], o2 = true);
+    const l4 = n2[a3.name].value.findIndex((e5) => e5.id === t2.id && e5.event === t2.event);
+    -1 === l4 ? (e4.modifyIndex >= 0 ? n2[a3.name].value.splice(e4.modifyIndex, 1, t2) : n2[a3.name].value.push(t2), o2 = true) : n2[a3.name].value.param !== t2.param && (n2[a3.name].value.splice(l4, 1, t2), o2 = true), o2 && (N2(b2(e4.event, a3)), h2.getCurConfigComponent.chart.data.params = n2);
+  }(a2, e3), onDelete: (a2) => function(e4, a3) {
+    var _a;
+    const t2 = me(h2.getCurConfigComponent.chart.data.params);
+    t2[a3.name].value.splice(e4, 1), ((_a = t2[a3.name].value) == null ? void 0 : _a.length) > 0 ? N2(b2(t2[a3.name].value[0], a3)) : N2({ [a3.name]: void 0 }), h2.getCurConfigComponent.chart.data.params = t2;
+  }(a2, e3), onEventLose: (a2) => function(e4, a3) {
+    var _a;
+    const t2 = me(h2.getCurConfigComponent.chart.data.params);
+    t2[a3.name].value = t2[a3.name].value.filter((a4) => a4.id !== e4), ((_a = t2[a3.name].value) == null ? void 0 : _a.length) > 0 ? N2(b2(t2[a3.name].value[0], a3)) : N2({ [a3.name]: void 0 }), h2.getCurConfigComponent.chart.data.params = t2;
+  }(a2, e3) }, null, 8, ["events", "onOk", "onDelete", "onEventLose"])])) : v("", true)], 2))), 128));
+} }), [["__scopeId", "data-v-004f2837"]]), Ge = { class: "title" }, He = { class: "title" }, Fe = { class: "title" }, Je = { class: "data-header" }, qe = { class: "data-set" }, Ke = { class: "target-data" }, Qe = e({ __name: "DataConfig", props: { selectData: { type: Object } }, emits: ["refreshData"], setup(e2, { emit: i2 }) {
+  const s2 = i2, c2 = J(), C2 = [{ label: "静态数据", value: 0 }, { label: "动态数据", value: 1 }], { prefixCls: g2 } = V("data-config"), h2 = u([]), y2 = u([]), { setDataTable: _2 } = oe();
+  function b2(e3) {
+    var _a;
+    c2.getCurConfigComponent.chart.data.id = e3.id, (_a = c2.getCurConfigComponent.chart) == null ? true : delete _a.isResource, c2.getCurConfigComponent.chart.data.name = e3.name;
+  }
+  function I2() {
+    var _a, _b, _c, _d, _e2, _f;
+    const e3 = ((_b = (_a = c2.getCurConfigComponent) == null ? void 0 : _a.chart) == null ? void 0 : _b.isResource) ? `${c2.getId},${(_c = c2.getCurConfigComponent) == null ? void 0 : _c.chart.data.id}` : (_d = c2.getCurConfigComponent) == null ? void 0 : _d.chart.data.id;
+    if (e3) {
+      const a2 = [], t2 = ((_f = (_e2 = c2.getCurConfigComponent) == null ? void 0 : _e2.chart) == null ? void 0 : _f.isResource) ? ie : se;
+      a2.push(t2(e3).then((e4) => {
+        h2.value = e4, function(e5) {
+          const a3 = {};
+          e5.forEach((e6) => {
+            e6.colName && (a3[e6.colName] = { colName: e6.colName, rename: e6.rename, dataType: e6.dataType });
+          }), c2.getCurConfigComponent.chart.data.headers = a3;
+        }(e4), function(e5) {
+          if (!c2.getCurConfigComponent.chart.data.fields) return void (c2.getCurConfigComponent.chart.data.fields = {});
+          const a3 = Object.keys(c2.getCurConfigComponent.chart.data.fields);
+          for (const t3 of a3) {
+            const a4 = c2.getCurConfigComponent.chart.data.fields[t3];
+            for (let t4 = 0; t4 < a4.length; t4++) {
+              const n2 = a4[t4], o2 = e5.find((e6) => e6.colName === n2.colName);
+              o2 ? (n2.rename = o2.rename, n2.dataType = o2.dataType) : a4.splice(t4--, 1);
             }
           }
-        }
-        return com;
-      };
-      if (param) {
-        const com = checkCycle(param.id);
-        if (!com) return;
-        if (screenEditStore.getCurConfigComponent.chart.data.priority === void 0) {
-          screenEditStore.getCurConfigComponent.chart.data.priority = 0;
-        }
-        if (screenEditStore.getCurConfigComponent.chart.data.priority <= (com.chart.data.priority ?? 0)) {
-          screenEditStore.getCurConfigComponent.chart.data.priority = com.chart.data.priority + 1;
-        }
-        const result = (com == null ? void 0 : com.chart.data.type) === 0 ? com == null ? void 0 : com.chart.data.dataSet : com == null ? void 0 : com.chart.data.result;
-        if (isArray(result)) {
-          return { [item.name]: result[0][param.param] };
-        } else if (result) {
-          return { [item.name]: result[param.param] };
-        }
-      }
-    };
-    function setParamValue(paramsValue) {
-      const chart = screenEditStore.getCurConfigComponent.chart;
-      if (chart.data.paramsValue) {
-        chart.data.paramsValue = { ...chart.data.paramsValue, ...paramsValue };
-      } else {
-        chart.data.paramsValue = paramsValue;
-      }
-      emit("paramChange");
-    }
-    function eventLose(id, item) {
-      var _a;
-      const params = cloneDeep(screenEditStore.getCurConfigComponent.chart.data.params);
-      params[item.name].value = params[item.name].value.filter((item2) => item2.id !== id);
-      if (((_a = params[item.name].value) == null ? void 0 : _a.length) > 0) {
-        setParamValue(getParamValue(params[item.name].value[0], item));
-      } else {
-        setParamValue({ [item.name]: void 0 });
-      }
-      screenEditStore.getCurConfigComponent.chart.data.params = params;
-    }
-    function submitVariable(e, item) {
-      const params = cloneDeep(screenEditStore.getCurConfigComponent.chart.data.params);
-      params[item.name].value = e;
-      setParamValue(getParamValue(e, item));
-      screenEditStore.getCurConfigComponent.chart.data.params = params;
-    }
-    const constantChange = throttle((e, item) => {
-      setParamValue({ [item.name]: e.target.value });
-    }, 500);
-    return (_ctx, _cache) => {
-      return openBlock(true), createElementBlock(Fragment, null, renderList(__props.params, (item) => {
-        return openBlock(), createElementBlock("div", {
-          class: normalizeClass(unref(prefixCls)),
-          key: item.name
-        }, [
-          createElementVNode("div", _hoisted_1$2, [
-            createVNode(unref(Tooltip), {
-              title: item.remark
-            }, {
-              default: withCtx(() => [
-                createElementVNode("div", _hoisted_2$2, [
-                  item.required === 1 ? (openBlock(), createElementBlock("span", _hoisted_3$1, "*")) : createCommentVNode("", true),
-                  createTextVNode(" " + toDisplayString(item.name), 1)
-                ])
-              ]),
-              _: 2
-            }, 1032, ["title"]),
-            createVNode(unref(Tooltip), { placement: "topRight" }, {
-              title: withCtx(() => _cache[0] || (_cache[0] = [
-                createElementVNode("div", null, [
-                  createElementVNode("span", { style: { "font-weight": "700" } }, "常量："),
-                  createTextVNode("设置固定参数")
-                ], -1),
-                createElementVNode("div", null, [
-                  createElementVNode("span", { style: { "font-weight": "700" } }, "变量："),
-                  createTextVNode("设置其他组件数据或全局参数（第一次加载设置，不会随前者变化） ")
-                ], -1),
-                createElementVNode("div", null, [
-                  createElementVNode("span", { style: { "font-weight": "700" } }, "事件："),
-                  createTextVNode(" 其他组件事件触发设置（绑定多个事件时，以最后触发事件的组件为准） ")
-                ], -1)
-              ])),
-              default: withCtx(() => [
-                unref(screenEditStore).getCurConfigComponent.chart.data.params && unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name] ? (openBlock(), createBlock(unref(RadioGroup), {
-                  key: 0,
-                  class: "radio-group",
-                  size: "small",
-                  value: unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name].type,
-                  "onUpdate:value": ($event) => unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name].type = $event,
-                  onChange: ($event) => changeType($event, item)
-                }, {
-                  default: withCtx(() => [
-                    createVNode(unref(RadioButton), {
-                      class: "radio-button",
-                      value: unref(ParamType).CONSTANT
-                    }, {
-                      default: withCtx(() => _cache[1] || (_cache[1] = [
-                        createTextVNode("常量")
-                      ])),
-                      _: 1
-                    }, 8, ["value"]),
-                    createVNode(unref(RadioButton), {
-                      class: "radio-button",
-                      value: unref(ParamType).VARIABLE
-                    }, {
-                      default: withCtx(() => _cache[2] || (_cache[2] = [
-                        createTextVNode("变量")
-                      ])),
-                      _: 1
-                    }, 8, ["value"]),
-                    createVNode(unref(RadioButton), {
-                      class: "radio-button",
-                      value: unref(ParamType).EVENT
-                    }, {
-                      default: withCtx(() => _cache[3] || (_cache[3] = [
-                        createTextVNode("事件")
-                      ])),
-                      _: 1
-                    }, 8, ["value"])
-                  ]),
-                  _: 2
-                }, 1032, ["value", "onUpdate:value", "onChange"])) : createCommentVNode("", true)
-              ]),
-              _: 2
-            }, 1024)
-          ]),
-          unref(screenEditStore).getCurConfigComponent.chart.data.params && unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name] && unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name].type === unref(ParamType).CONSTANT ? (openBlock(), createElementBlock("div", _hoisted_4$1, [
-            createVNode(unref(Input), {
-              value: unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name].value,
-              "onUpdate:value": ($event) => unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name].value = $event,
-              placeholder: "请输入常量参数",
-              onChange: ($event) => unref(constantChange)($event, item)
-            }, null, 8, ["value", "onUpdate:value", "onChange"])
-          ])) : createCommentVNode("", true),
-          unref(screenEditStore).getCurConfigComponent.chart.data.params && unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name] && unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name].type === unref(ParamType).VARIABLE ? (openBlock(), createElementBlock("div", _hoisted_5$1, [
-            createVNode(VariableSelect, {
-              "filter-self": true,
-              variable: unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name].value,
-              onOk: ($event) => submitVariable($event, item)
-            }, null, 8, ["variable", "onOk"])
-          ])) : createCommentVNode("", true),
-          unref(screenEditStore).getCurConfigComponent.chart.data.params && unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name] && unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name].type === unref(ParamType).EVENT ? (openBlock(), createElementBlock("div", _hoisted_6$1, [
-            createVNode(EventSelect, {
-              "filter-self": true,
-              events: unref(screenEditStore).getCurConfigComponent.chart.data.params[item.name].value,
-              onOk: ($event) => submitEvent($event, item),
-              onDelete: ($event) => deleteEvent($event, item),
-              onEventLose: ($event) => eventLose($event, item)
-            }, null, 8, ["events", "onOk", "onDelete", "onEventLose"])
-          ])) : createCommentVNode("", true)
-        ], 2);
-      }), 128);
-    };
-  }
-});
-const DataParamsConfig = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__scopeId", "data-v-004f2837"]]);
-const _hoisted_1$1 = { class: "title" };
-const _hoisted_2$1 = { class: "title" };
-const _hoisted_3 = { class: "title" };
-const _hoisted_4 = { class: "data-header" };
-const _hoisted_5 = { class: "data-set" };
-const _hoisted_6 = { class: "target-data" };
-const _sfc_main$1 = /* @__PURE__ */ defineComponent({
-  __name: "DataConfig",
-  props: {
-    selectData: {
-      type: Object
-    }
-  },
-  emits: ["refreshData"],
-  setup(__props, { emit: __emit }) {
-    const emit = __emit;
-    const screenEditStore = useScreenEditStore();
-    const dataTypes = [
-      {
-        label: "静态数据",
-        value: 0
-      },
-      {
-        label: "动态数据",
-        value: 1
-      }
-    ];
-    const { prefixCls } = useDesign("data-config");
-    const fieldList = ref([]);
-    const paramList = ref([]);
-    const { setDataTable } = useDynamicDataConfig();
-    function dataChange(e) {
-      var _a;
-      screenEditStore.getCurConfigComponent.chart.data.id = e.id;
-      (_a = screenEditStore.getCurConfigComponent.chart) == null ? true : delete _a.isResource;
-      screenEditStore.getCurConfigComponent.chart.data.name = e.name;
-    }
-    onMounted(() => {
-      screenEvent.on(ScreenEventEnum.DATA_RENAME, renameField2);
-    });
-    watch(
-      () => {
-        var _a;
-        return (_a = screenEditStore.getCurConfigComponent) == null ? void 0 : _a.chart.data.type;
-      },
-      (val) => {
-        var _a;
-        if (val === 0) {
-          const com = ComponentsEnum[(_a = screenEditStore.getCurConfigComponent) == null ? void 0 : _a.chart.type];
-          screenEditStore.getCurConfigComponent.chart.data.headers = com.defaultHeaders && com.defaultHeaders(screenEditStore.getCurConfigComponent.chart);
-          return;
-        }
-        dataRefresh();
-      },
-      { immediate: true }
-    );
-    watch(
-      () => {
-        var _a;
-        return (_a = screenEditStore.getCurConfigComponent) == null ? void 0 : _a.chart.data.id;
-      },
-      () => {
-        var _a;
-        if (((_a = screenEditStore.getCurConfigComponent) == null ? void 0 : _a.chart.data.type) === 0) {
-          return;
-        }
-        dataRefresh();
-        setDataTable();
-      }
-    );
-    function dataRefresh() {
-      var _a, _b, _c, _d, _e, _f;
-      const id = ((_b = (_a = screenEditStore.getCurConfigComponent) == null ? void 0 : _a.chart) == null ? void 0 : _b.isResource) ? `${screenEditStore.getId},${(_c = screenEditStore.getCurConfigComponent) == null ? void 0 : _c.chart.data.id}` : (_d = screenEditStore.getCurConfigComponent) == null ? void 0 : _d.chart.data.id;
-      if (id) {
-        const req = [];
-        const getFields = ((_f = (_e = screenEditStore.getCurConfigComponent) == null ? void 0 : _e.chart) == null ? void 0 : _f.isResource) ? getFieldsByResourceId : getDataFieldsById;
-        req.push(
-          getFields(id).then((res) => {
-            fieldList.value = res;
-            setHeaders(res);
-            setFields(res);
-          }).catch(() => {
-            fieldList.value = [];
-          }),
-          getParams()
-        );
-        Promise.all(req).then(() => {
-          emit("refreshData");
-        });
-      } else {
-        fieldList.value = [];
-        paramList.value = [];
-        screenEditStore.getCurConfigComponent.chart.data.fields = {};
-      }
-    }
-    async function getParams() {
-      var _a;
-      const res = await getApiParamsList({
-        apiId: (_a = screenEditStore.getCurConfigComponent) == null ? void 0 : _a.chart.data.id,
-        pageNum: 1,
-        pageSize: 1e4
-      });
-      if (res.total > 0) {
-        paramList.value = res.list;
-        initParams(res.list);
-      } else {
-        paramList.value = [];
-        screenEditStore.getCurConfigComponent.chart.data.params = void 0;
-      }
-    }
-    function initParams(list) {
-      var _a;
-      const newParams = () => {
-        const params = {};
-        const paramsValue = {};
-        list.forEach((item) => {
-          params[item.name] = {
-            type: ParamType.CONSTANT,
-            value: item.defaultValue
+        }(e4);
+      }).catch(() => {
+        h2.value = [];
+      }), async function() {
+        var _a2;
+        const e4 = await re({ apiId: (_a2 = c2.getCurConfigComponent) == null ? void 0 : _a2.chart.data.id, pageNum: 1, pageSize: 1e4 });
+        e4.total > 0 ? (y2.value = e4.list, function(e5) {
+          var _a3;
+          const a3 = () => {
+            const a4 = {}, t4 = {};
+            e5.forEach((e6) => {
+              a4[e6.name] = { type: ne.CONSTANT, value: e6.defaultValue }, e6.defaultValue && (t4[e6.name] = e6.defaultValue);
+            }), c2.getCurConfigComponent.chart.data.params = a4, c2.getCurConfigComponent.chart.data.paramsValue = t4;
           };
-          if (item.defaultValue) {
-            paramsValue[item.name] = item.defaultValue;
+          if (!((_a3 = c2.getCurConfigComponent.chart.data) == null ? void 0 : _a3.params)) return void a3();
+          let t3 = false;
+          for (const a4 of e5) if (!c2.getCurConfigComponent.chart.data.params[a4.name]) {
+            t3 = true;
+            break;
           }
-        });
-        screenEditStore.getCurConfigComponent.chart.data.params = params;
-        screenEditStore.getCurConfigComponent.chart.data.paramsValue = paramsValue;
-      };
-      if (!((_a = screenEditStore.getCurConfigComponent.chart.data) == null ? void 0 : _a.params)) {
-        newParams();
-        return;
-      }
-      let isChange = false;
-      for (const item of list) {
-        if (!screenEditStore.getCurConfigComponent.chart.data.params[item.name]) {
-          isChange = true;
-          break;
-        }
-      }
-      for (const item of Object.keys(screenEditStore.getCurConfigComponent.chart.data.params)) {
-        if (!list.some((i) => i.name === item)) {
-          isChange = true;
-          break;
-        }
-      }
-      if (isChange) {
-        newParams();
-      }
-    }
-    function setHeaders(list) {
-      const headers = {};
-      list.forEach((item) => {
-        if (item.colName) {
-          headers[item.colName] = {
-            colName: item.colName,
-            rename: item.rename,
-            dataType: item.dataType
-          };
-        }
-      });
-      screenEditStore.getCurConfigComponent.chart.data.headers = headers;
-    }
-    function setFields(list) {
-      if (!screenEditStore.getCurConfigComponent.chart.data.fields) {
-        screenEditStore.getCurConfigComponent.chart.data.fields = {};
-        return;
-      }
-      const keys = Object.keys(screenEditStore.getCurConfigComponent.chart.data.fields);
-      for (const key of keys) {
-        const fields = screenEditStore.getCurConfigComponent.chart.data.fields[key];
-        for (let i = 0; i < fields.length; i++) {
-          const field = fields[i];
-          const item = list.find((item2) => item2.colName === field.colName);
-          if (item) {
-            field.rename = item.rename;
-            field.dataType = item.dataType;
-          } else {
-            fields.splice(i--, 1);
+          for (const a4 of Object.keys(c2.getCurConfigComponent.chart.data.params)) if (!e5.some((e6) => e6.name === a4)) {
+            t3 = true;
+            break;
           }
-        }
-      }
-    }
-    function renameField2(field) {
-      var _a;
-      if ((_a = screenEditStore.getCurConfigComponent.chart.data) == null ? void 0 : _a.headers) {
-        const col = screenEditStore.getCurConfigComponent.chart.data.headers[field.colName];
-        if (col) {
-          col.rename = field.rename;
-        }
-      }
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(ScrollContainer), null, {
-        default: withCtx(() => [
-          createElementVNode("div", {
-            class: normalizeClass(unref(prefixCls))
-          }, [
-            createElementVNode("div", _hoisted_1$1, [
-              _cache[3] || (_cache[3] = createTextVNode(" 数据类型 ")),
-              createVNode(unref(RadioGroup), {
-                value: unref(screenEditStore).getCurConfigComponent.chart.data.type,
-                "onUpdate:value": _cache[0] || (_cache[0] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.data.type = $event),
-                options: dataTypes,
-                "option-type": "button",
-                "button-style": "solid",
-                size: "small"
-              }, null, 8, ["value"])
-            ]),
-            createVNode(unref(Divider), { style: { "margin": "0" } }),
-            unref(screenEditStore).getCurConfigComponent.chart.data.type === 0 ? renderSlot(_ctx.$slots, "static-data", { key: 0 }, void 0, true) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
-              createElementVNode("div", _hoisted_2$1, [
-                createVNode(unref(Tooltip), {
-                  title: "点击右侧输入框切换数据源",
-                  placement: "left"
-                }, {
-                  default: withCtx(() => _cache[4] || (_cache[4] = [
-                    createTextVNode(" 数据来源")
-                  ])),
-                  _: 1
-                }),
-                createVNode(DataSelect, {
-                  "select-data": __props.selectData,
-                  "data-id": unref(screenEditStore).getCurConfigComponent.chart.data.id,
-                  "data-name": unref(screenEditStore).getCurConfigComponent.chart.data.name,
-                  "is-resource": unref(screenEditStore).getCurConfigComponent.chart.isResource,
-                  "screen-id": unref(screenEditStore).getId,
-                  onDataChange: dataChange,
-                  onDataRefresh: dataRefresh
-                }, {
-                  default: withCtx(() => [
-                    renderSlot(_ctx.$slots, "data-select", {}, void 0, true)
-                  ]),
-                  _: 3
-                }, 8, ["select-data", "data-id", "data-name", "is-resource", "screen-id"])
-              ]),
-              createElementVNode("div", _hoisted_3, [
-                createVNode(unref(Tooltip), {
-                  title: "接口允许返回数据的最大条数",
-                  placement: "left"
-                }, {
-                  default: withCtx(() => _cache[5] || (_cache[5] = [
-                    createTextVNode(" 数据限制")
-                  ])),
-                  _: 1
-                }),
-                createVNode(unref(ScreenInput), {
-                  value: unref(screenEditStore).getCurConfigComponent.chart.data.limit,
-                  "onUpdate:value": _cache[1] || (_cache[1] = ($event) => unref(screenEditStore).getCurConfigComponent.chart.data.limit = $event),
-                  max: unref(screenEditStore).getCurConfigComponent.chart.data.maxLimit <= 0 ? Infinity : unref(screenEditStore).getCurConfigComponent.chart.data.maxLimit,
-                  min: 1,
-                  suffix: "条"
-                }, null, 8, ["value", "max"])
-              ]),
-              paramList.value && paramList.value.length > 0 ? (openBlock(), createBlock(ConfigGroup, {
-                key: 0,
-                title: "参数设置"
-              }, {
-                default: withCtx(() => [
-                  createVNode(DataParamsConfig, {
-                    params: paramList.value,
-                    onParamChange: _cache[2] || (_cache[2] = () => {
-                      emit("refreshData");
-                    })
-                  }, null, 8, ["params"])
-                ]),
-                _: 1
-              })) : createCommentVNode("", true),
-              fieldList.value && fieldList.value.length > 0 ? (openBlock(), createBlock(ConfigGroup, {
-                key: 1,
-                title: "数据设置",
-                "allow-collapse": false
-              }, {
-                default: withCtx(() => [
-                  createElementVNode("div", _hoisted_4, [
-                    _cache[6] || (_cache[6] = createElementVNode("div", null, "源数据", -1)),
-                    createVNode(unref(Icon), { icon: "ant-design:double-right-outlined" }),
-                    _cache[7] || (_cache[7] = createElementVNode("div", null, "目标数据", -1))
-                  ]),
-                  createElementVNode("div", _hoisted_5, [
-                    createVNode(FieldConfig, { "field-list": fieldList.value }, null, 8, ["field-list"]),
-                    _cache[8] || (_cache[8] = createElementVNode("div", { class: "divide-line" }, null, -1)),
-                    createElementVNode("div", _hoisted_6, [
-                      renderSlot(_ctx.$slots, "target-data", {}, void 0, true)
-                    ])
-                  ])
-                ]),
-                _: 3
-              })) : createCommentVNode("", true)
-            ], 64)),
-            renderSlot(_ctx.$slots, "default", {}, void 0, true)
-          ], 2)
-        ]),
-        _: 3
+          t3 && a3();
+        }(e4.list)) : (y2.value = [], c2.getCurConfigComponent.chart.data.params = void 0);
+      }()), Promise.all(a2).then(() => {
+        s2("refreshData");
       });
-    };
+    } else h2.value = [], y2.value = [], c2.getCurConfigComponent.chart.data.fields = {};
   }
-});
-const DataConfig = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-b903d006"]]);
-const _hoisted_1 = ["onMouseenter"];
-const _hoisted_2 = { class: "title" };
-const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "DragInData",
-  props: {
-    fields: {
-      type: Array,
-      default: () => []
-    },
-    maxCount: {
-      type: Number,
-      default: 9999
-    },
-    height: {
-      type: Number,
-      default: 0
+  function x2(e3) {
+    var _a;
+    if ((_a = c2.getCurConfigComponent.chart.data) == null ? void 0 : _a.headers) {
+      const a2 = c2.getCurConfigComponent.chart.data.headers[e3.colName];
+      a2 && (a2.rename = e3.rename);
     }
-  },
-  emits: ["dataChange"],
-  setup(__props, { emit: __emit }) {
-    useCssVars((_ctx) => ({
-      "4bae6fc2": bgColor.value
-    }));
-    const props = __props;
-    const emit = __emit;
-    const { prefixCls } = useDesign("drag-in-data");
-    const fieldList = ref(props.fields);
-    const enterField = ref(-1);
-    const { token } = theme.useToken();
-    const bgColor = computed(() => token.value.colorInfoBg);
-    watch(
-      () => props.fields,
-      () => {
-        fieldList.value = props.fields;
-      }
-    );
-    const handleDrop = (e) => {
-      var _a;
-      const strField = (_a = e.dataTransfer) == null ? void 0 : _a.getData(FIELD_DATA_DRAG);
-      if (!strField) return;
-      const newField = JSON.parse(strField);
-      const exist = fieldList.value.some((item) => item.colName === newField.colName && item.rename === newField.rename);
-      if (exist) return;
-      if (fieldList.value.length >= props.maxCount) {
-        fieldList.value.shift();
-      }
-      fieldList.value.push(pick(newField, ["colName", "rename", "dataType"]));
-      emit("dataChange", fieldList.value);
-    };
-    function enterHandle(index) {
-      enterField.value = index;
-    }
-    function leaveHandle() {
-      enterField.value = -1;
-    }
-    function renameField2(field) {
-      const index = fieldList.value.findIndex((item) => item.colName === field.colName);
-      if (index !== -1) {
-        fieldList.value[index].rename = field.rename;
-        emit("dataChange", fieldList.value);
-      }
-    }
-    function onMoveCallback() {
-      emit("dataChange", fieldList.value);
-    }
-    onMounted(() => {
-      screenEvent.on(ScreenEventEnum.DATA_RENAME, renameField2);
-    });
-    onUnmounted(() => {
-      screenEvent.off(ScreenEventEnum.DATA_RENAME, renameField2);
-    });
-    function deleteField(index) {
-      fieldList.value.splice(index, 1);
-      emit("dataChange", fieldList.value);
-    }
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(unref(prefixCls)),
-        style: normalizeStyle(__props.height > 0 ? { height: `${__props.height}px` } : {}),
-        onDrop: handleDrop
-      }, [
-        fieldList.value.length === 0 ? (openBlock(), createBlock(unref(Empty), {
-          key: 0,
-          class: "empty",
-          description: "拖动数据到此处",
-          image: unref(Empty).PRESENTED_IMAGE_SIMPLE
-        }, null, 8, ["image"])) : (openBlock(), createBlock(unref(ScrollContainer), { key: 1 }, {
-          default: withCtx(() => [
-            createVNode(unref(draggable), {
-              "item-key": "id",
-              modelValue: fieldList.value,
-              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => fieldList.value = $event),
-              animation: "300",
-              "ghost-class": "ghost",
-              class: "drag-data",
-              onChange: onMoveCallback
-            }, {
-              item: withCtx(({ index, element }) => [
-                createElementVNode("div", {
-                  class: "field-block",
-                  onMouseenter: ($event) => enterHandle(index),
-                  onMouseleave: leaveHandle
-                }, [
-                  createVNode(unref(Icon), {
-                    class: "icon",
-                    icon: unref(getFieldIcon)(element.dataType)
-                  }, null, 8, ["icon"]),
-                  createElementVNode("div", _hoisted_2, toDisplayString(element.rename ?? element.colName), 1),
-                  enterField.value === index ? (openBlock(), createBlock(unref(Icon), {
-                    key: 0,
-                    class: "icon",
-                    icon: "ant-design:delete-outlined",
-                    onClick: ($event) => deleteField(index)
-                  }, null, 8, ["onClick"])) : createCommentVNode("", true)
-                ], 40, _hoisted_1)
-              ]),
-              _: 1
-            }, 8, ["modelValue"])
-          ]),
-          _: 1
-        }))
-      ], 38);
-    };
   }
-});
-const DragInData = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-c9719241"]]);
+  return N(() => {
+    Q.on(W.DATA_RENAME, x2);
+  }), r(() => {
+    var _a;
+    return (_a = c2.getCurConfigComponent) == null ? void 0 : _a.chart.data.type;
+  }, (e3) => {
+    var _a;
+    if (0 !== e3) I2();
+    else {
+      const e4 = le[(_a = c2.getCurConfigComponent) == null ? void 0 : _a.chart.type];
+      c2.getCurConfigComponent.chart.data.headers = e4.defaultHeaders && e4.defaultHeaders(c2.getCurConfigComponent.chart);
+    }
+  }, { immediate: true }), r(() => {
+    var _a;
+    return (_a = c2.getCurConfigComponent) == null ? void 0 : _a.chart.data.id;
+  }, () => {
+    var _a;
+    0 !== ((_a = c2.getCurConfigComponent) == null ? void 0 : _a.chart.data.type) && (I2(), _2());
+  }), (i3, r2) => (t(), a(n(Ce), null, { default: o(() => [p("div", { class: m(n(g2)) }, [p("div", Ge, [r2[3] || (r2[3] = E(" 数据类型 ")), f(n(R), { value: n(c2).getCurConfigComponent.chart.data.type, "onUpdate:value": r2[0] || (r2[0] = (e3) => n(c2).getCurConfigComponent.chart.data.type = e3), options: C2, "option-type": "button", "button-style": "solid", size: "small" }, null, 8, ["value"])]), f(n($), { style: { margin: "0" } }), 0 === n(c2).getCurConfigComponent.chart.data.type ? l(i3.$slots, "static-data", { key: 0 }, void 0, true) : (t(), d(k, { key: 1 }, [p("div", He, [f(n(D), { title: "点击右侧输入框切换数据源", placement: "left" }, { default: o(() => r2[4] || (r2[4] = [E(" 数据来源")])), _: 1 }), f(Ee, { "select-data": e2.selectData, "data-id": n(c2).getCurConfigComponent.chart.data.id, "data-name": n(c2).getCurConfigComponent.chart.data.name, "is-resource": n(c2).getCurConfigComponent.chart.isResource, "screen-id": n(c2).getId, onDataChange: b2, onDataRefresh: I2 }, { default: o(() => [l(i3.$slots, "data-select", {}, void 0, true)]), _: 3 }, 8, ["select-data", "data-id", "data-name", "is-resource", "screen-id"])]), p("div", Fe, [f(n(D), { title: "接口允许返回数据的最大条数", placement: "left" }, { default: o(() => r2[5] || (r2[5] = [E(" 数据限制")])), _: 1 }), f(n(ce), { value: n(c2).getCurConfigComponent.chart.data.limit, "onUpdate:value": r2[1] || (r2[1] = (e3) => n(c2).getCurConfigComponent.chart.data.limit = e3), max: n(c2).getCurConfigComponent.chart.data.maxLimit <= 0 ? 1 / 0 : n(c2).getCurConfigComponent.chart.data.maxLimit, min: 1, suffix: "条" }, null, 8, ["value", "max"])]), y2.value && y2.value.length > 0 ? (t(), a(ge, { key: 0, title: "参数设置" }, { default: o(() => [f(ze, { params: y2.value, onParamChange: r2[2] || (r2[2] = () => {
+    s2("refreshData");
+  }) }, null, 8, ["params"])]), _: 1 })) : v("", true), h2.value && h2.value.length > 0 ? (t(), a(ge, { key: 1, title: "数据设置", "allow-collapse": false }, { default: o(() => [p("div", Je, [r2[6] || (r2[6] = p("div", null, "源数据", -1)), f(n(P), { icon: "ant-design:double-right-outlined" }), r2[7] || (r2[7] = p("div", null, "目标数据", -1))]), p("div", qe, [f(xe, { "field-list": h2.value }, null, 8, ["field-list"]), r2[8] || (r2[8] = p("div", { class: "divide-line" }, null, -1)), p("div", Ke, [l(i3.$slots, "target-data", {}, void 0, true)])])]), _: 3 })) : v("", true)], 64)), l(i3.$slots, "default", {}, void 0, true)], 2)]), _: 3 }));
+} }), We = F(Qe, [["__scopeId", "data-v-b903d006"]]), Xe = ["onMouseenter"], Ye = { class: "title" }, Ze = e({ __name: "DragInData", props: { fields: { type: Array, default: () => [] }, maxCount: { type: Number, default: 9999 }, height: { type: Number, default: 0 } }, emits: ["dataChange"], setup(e2, { emit: l2 }) {
+  i((e3) => ({ "4bae6fc2": E2.value }));
+  const c2 = e2, h2 = l2, { prefixCls: y2 } = V("drag-in-data"), k2 = u(c2.fields), _2 = u(-1), { token: b2 } = x.useToken(), E2 = s(() => b2.value.colorInfoBg);
+  r(() => c2.fields, () => {
+    k2.value = c2.fields;
+  });
+  const D2 = (e3) => {
+    var _a;
+    const a2 = (_a = e3.dataTransfer) == null ? void 0 : _a.getData(X);
+    if (!a2) return;
+    const t2 = JSON.parse(a2);
+    k2.value.some((e4) => e4.colName === t2.colName && e4.rename === t2.rename) || (k2.value.length >= c2.maxCount && k2.value.shift(), k2.value.push(fe(t2, ["colName", "rename", "dataType"])), h2("dataChange", k2.value));
+  };
+  function M2() {
+    _2.value = -1;
+  }
+  function S2(e3) {
+    const a2 = k2.value.findIndex((a3) => a3.colName === e3.colName);
+    -1 !== a2 && (k2.value[a2].rename = e3.rename, h2("dataChange", k2.value));
+  }
+  function A2() {
+    h2("dataChange", k2.value);
+  }
+  return N(() => {
+    Q.on(W.DATA_RENAME, S2);
+  }), I(() => {
+    Q.off(W.DATA_RENAME, S2);
+  }), (l3, i2) => (t(), d("div", { class: m(n(y2)), style: C(e2.height > 0 ? { height: `${e2.height}px` } : {}), onDrop: D2 }, [0 === k2.value.length ? (t(), a(n(T), { key: 0, class: "empty", description: "拖动数据到此处", image: n(T).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"])) : (t(), a(n(Ce), { key: 1 }, { default: o(() => [f(n(he), { "item-key": "id", modelValue: k2.value, "onUpdate:modelValue": i2[0] || (i2[0] = (e3) => k2.value = e3), animation: "300", "ghost-class": "ghost", class: "drag-data", onChange: A2 }, { item: o(({ index: e3, element: o2 }) => [p("div", { class: "field-block", onMouseenter: (a2) => function(e4) {
+    _2.value = e4;
+  }(e3), onMouseleave: M2 }, [f(n(P), { class: "icon", icon: n(q)(o2.dataType) }, null, 8, ["icon"]), p("div", Ye, g(o2.rename ?? o2.colName), 1), _2.value === e3 ? (t(), a(n(P), { key: 0, class: "icon", icon: "ant-design:delete-outlined", onClick: (a2) => function(e4) {
+    k2.value.splice(e4, 1), h2("dataChange", k2.value);
+  }(e3) }, null, 8, ["onClick"])) : v("", true)], 40, Xe)]), _: 1 }, 8, ["modelValue"])]), _: 1 }))], 38));
+} }), ea = F(Ze, [["__scopeId", "data-v-c9719241"]]);
 export {
-  DataConfig as D,
-  DragInData as a
+  We as D,
+  ea as a
 };
