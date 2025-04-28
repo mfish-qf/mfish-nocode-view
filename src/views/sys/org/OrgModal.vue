@@ -77,6 +77,7 @@
     } else {
       const orgData = await getOrg({
         orgName: data.record?.orgName ?? undefined,
+        addFlag: 1,
         pageNum: 1,
         pageSize: 100
       });
@@ -160,6 +161,7 @@
     if (props.source === 1) return;
     const orgData = await getOrg({
       orgName: value,
+      addFlag: 1,
       pageNum: 1,
       pageSize: 100
     });

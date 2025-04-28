@@ -110,6 +110,9 @@
       const userRoles = await getUserRoles({ userId: data.record.id });
       setRole(roles, userRoles, orgRoles);
     } else {
+      if (props.orgId) {
+        curOrgs.value = [props.orgId];
+      }
       updateSchema([
         {
           field: "password",
@@ -146,6 +149,7 @@
       const orgName = data.record?.orgNames?.join(",");
       const orgData = await getOrg({
         orgName,
+        addFlag: 1,
         pageNum: 1,
         pageSize: 100
       });
@@ -153,15 +157,18 @@
     }
   });
 
-  function handleChange(_, label) {
+  function handleChange(value, label) {
     curLabels.value = label;
+    setFieldsValue({ orgIds: curOrgs.value }).then();
+    valueChange("orgIds", value);
   }
 
   async function handleSearch(value) {
     if (props.source === 1) return;
     const orgNames = curLabels.value?.join(",");
     const orgData = await getOrg({
-      orgName: value ? `${value},${orgNames}` : orgNames,
+      orgName: value.trim() ? `${value.trim()},${orgNames.trim()}` : orgNames.trim(),
+      addFlag: 1,
       pageNum: 1,
       pageSize: 100
     });
@@ -236,6 +243,7 @@
           return true;
         })
       : undefined;
+    values.orgIds = values.orgIds ?? [];
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {
       saveAccount(updateUser, values);
