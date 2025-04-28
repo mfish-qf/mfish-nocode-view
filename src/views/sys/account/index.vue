@@ -154,6 +154,9 @@
 
   function handleCreate() {
     openModal(true, {
+      record: {
+        orgNames: searchInfo.orgName ? [searchInfo.orgName] : []
+      },
       isUpdate: false
     });
   }
@@ -211,8 +214,9 @@
     });
   }
 
-  function handleSelect(orgId = "") {
+  function handleSelect(orgId = "", orgName = "") {
     searchInfo.orgId = orgId;
+    searchInfo.orgName = orgName;
     reload();
   }
 </script>

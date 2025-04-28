@@ -9,7 +9,7 @@
       :click-row-to-expand="false"
       :tree-data="treeData"
       :pagination="pagination"
-      :field-names="{ key: 'id', title: 'orgName' }"
+      :field-names="{ key: 'id' }"
       @select="handleSelect"
       @before-search="handleBeforeSearch"
       @page-change="handlePageChange"
@@ -63,7 +63,6 @@
       pagination.total = org.total;
       pagination.current = org.pageNum;
     }
-
     nextTick(() => {
       unref(asyncExpandTreeRef)?.expandAll(true);
     }).then();
@@ -81,8 +80,8 @@
     fetch(searchValue);
   }
 
-  function handleSelect(keys) {
-    emit("select", keys[0]);
+  function handleSelect(keys: any[], e: any) {
+    emit("select", keys[0], e.node.orgName);
   }
 
   onMounted(() => {
