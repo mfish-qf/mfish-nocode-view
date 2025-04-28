@@ -9,7 +9,7 @@
       :click-row-to-expand="false"
       :tree-data="treeData"
       :pagination="pagination"
-      :field-names="{ key: 'id' }"
+      :field-names="{ key: 'id', title: 'title' }"
       @select="handleSelect"
       @before-search="handleBeforeSearch"
       @page-change="handlePageChange"
@@ -51,18 +51,29 @@
   });
 
   async function fetch(orgName?: string) {
+    let data: any[];
     if (props.source === 1) {
-      treeData.value = (await getTenantOrgTree()) as unknown as TreeItem[];
+      data = (await getTenantOrgTree()) as unknown as TreeItem[];
     } else {
       const org = await getOrg({
         orgName: orgName ?? undefined,
         pageNum: pagination.current,
         pageSize: pagination.pageSize
       });
-      treeData.value = org.list as unknown as TreeItem[];
+      data = org.list as unknown as TreeItem[];
       pagination.total = org.total;
       pagination.current = org.pageNum;
     }
+    const setTitle = (item: TreeItem) => {
+      item.title = item.orgName;
+      if (item.children && item.children.length > 0) {
+        item.children.forEach((child: TreeItem) => {
+          setTitle(child);
+        });
+      }
+    };
+    data.forEach((item: TreeItem) => setTitle(item));
+    treeData.value = data;
     nextTick(() => {
       unref(asyncExpandTreeRef)?.expandAll(true);
     }).then();
