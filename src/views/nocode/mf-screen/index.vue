@@ -173,7 +173,7 @@
   }
 
   const saveScreen = debounce(async (callback) => {
-    screenEditStore.saveCache();
+    screenEditStore.clearCache();
     screenEditStore.cleanCurComponent();
     if (!screenEditStore.getCanvasConfig.screenName) {
       createMessage.warning("请输入大屏名称");

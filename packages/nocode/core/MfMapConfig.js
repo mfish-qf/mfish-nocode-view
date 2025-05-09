@@ -1,7 +1,7 @@
 import { defineComponent as e, ref as o, computed as t, watch as n, createElementBlock as i, openBlock as a, normalizeClass as l, unref as s, createVNode as r, withCtx as u, createElementVNode as p, createCommentVNode as C, Fragment as c, renderList as g, createTextVNode as f, toDisplayString as m, resolveComponent as h, createBlock as v } from "vue";
 import { S as d } from "./StyleConfig.js";
 import { a as y, E as _ } from "./EchartsBaseConfig.js";
-import { u as b, ao as k, _ as E, k as M, an as x } from "./index.js";
+import { u as b, ao as k, _ as E, l as M, an as x } from "./index.js";
 import { useDesign as R } from "@mfish/core/hooks";
 import { RadioGroup as F, RadioButton as I, Slider as S, Checkbox as w } from "ant-design-vue";
 import { C as U } from "./ConfigGroup.js";

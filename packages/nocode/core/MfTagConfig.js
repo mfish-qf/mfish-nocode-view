@@ -1,7 +1,7 @@
-import { defineComponent as o, ref as e, watch as t, createBlock as n, openBlock as a, normalizeClass as i, unref as r, withCtx as l, renderSlot as s, createElementBlock as u, createCommentVNode as c, createElementVNode as d, createVNode as m, createTextVNode as p } from "vue";
+import { defineComponent as o, ref as e, watch as t, createBlock as n, openBlock as a, normalizeClass as i, unref as l, withCtx as r, renderSlot as s, createElementBlock as u, createCommentVNode as c, createElementVNode as d, createVNode as m, createTextVNode as p } from "vue";
 import { useDesign as f } from "@mfish/core/hooks";
 import { Input as C, Checkbox as h } from "ant-design-vue";
-import { u as g, k as v, _ as k } from "./index.js";
+import { u as g, l as v, _ as k } from "./index.js";
 import { S as y } from "./StyleConfig.js";
 import { IconPicker as _ } from "@mfish/core/components/Icon";
 import "lodash-es";
@@ -21,7 +21,7 @@ const I = { key: 0, class: "title" }, S = { class: "check-group" }, T = k(o({ __
   }
   return t(() => k2.getCurConfigComponent, (o3) => {
     o3 && (x.value = k2.getCurConfigComponent.chart.options.iconColor);
-  }, { immediate: true }), (e2, t2) => (a(), n(y, { class: i(r(T2)) }, { default: l(() => [s(e2.$slots, "default", {}, void 0, true), o2.hideTitle ? c("", true) : (a(), u("div", I, "标签内容")), o2.hideTitle ? c("", true) : (a(), n(r(C), { key: 1, value: r(k2).getCurConfigComponent.chart.data.dataSet.title, "onUpdate:value": t2[0] || (t2[0] = (o3) => r(k2).getCurConfigComponent.chart.data.dataSet.title = o3), "show-count": "", maxlength: 50 }, null, 8, ["value"])), t2[3] || (t2[3] = d("div", { class: "title" }, "图标", -1)), o2.hideIcon ? c("", true) : (a(), n(r(_), { key: 2, value: r(k2).getCurConfigComponent.chart.data.dataSet.icon, onChange: j }, null, 8, ["value"])), m(r(v), { placeholder: "设置图标颜色，格式#FFFFFF", type: 1, value: x.value, onConfirmChange: B, onInputChange: U }, null, 8, ["value"]), m(F), d("div", S, [m(r(h), { checked: r(k2).getCurConfigComponent.chart.options.hide, "onUpdate:checked": t2[1] || (t2[1] = (o3) => r(k2).getCurConfigComponent.chart.options.hide = o3) }, { default: l(() => t2[2] || (t2[2] = [p(" 文字超出隐藏")])), _: 1 }, 8, ["checked"])])]), _: 3 }, 8, ["class"]));
+  }, { immediate: true }), (e2, t2) => (a(), n(y, { class: i(l(T2)) }, { default: r(() => [s(e2.$slots, "default", {}, void 0, true), o2.hideTitle ? c("", true) : (a(), u("div", I, "标签内容")), o2.hideTitle ? c("", true) : (a(), n(l(C), { key: 1, value: l(k2).getCurConfigComponent.chart.data.dataSet.title, "onUpdate:value": t2[0] || (t2[0] = (o3) => l(k2).getCurConfigComponent.chart.data.dataSet.title = o3), "show-count": "", maxlength: 50 }, null, 8, ["value"])), t2[3] || (t2[3] = d("div", { class: "title" }, "图标", -1)), o2.hideIcon ? c("", true) : (a(), n(l(_), { key: 2, value: l(k2).getCurConfigComponent.chart.data.dataSet.icon, onChange: j }, null, 8, ["value"])), m(l(v), { placeholder: "设置图标颜色，格式#FFFFFF", type: 1, value: x.value, onConfirmChange: B, onInputChange: U }, null, 8, ["value"]), m(F), d("div", S, [m(l(h), { checked: l(k2).getCurConfigComponent.chart.options.hide, "onUpdate:checked": t2[1] || (t2[1] = (o3) => l(k2).getCurConfigComponent.chart.options.hide = o3) }, { default: r(() => t2[2] || (t2[2] = [p(" 文字超出隐藏")])), _: 1 }, 8, ["checked"])])]), _: 3 }, 8, ["class"]));
 } }), [["__scopeId", "data-v-30f2ad7e"]]);
 export {
   T as default

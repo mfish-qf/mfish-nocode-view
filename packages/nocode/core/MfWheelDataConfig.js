@@ -1,7 +1,7 @@
 import { defineComponent as t, computed as a, createBlock as e, openBlock as s, normalizeClass as o, unref as n, withCtx as i, createElementVNode as l, createVNode as d, renderSlot as r } from "vue";
 import { D as c, a as f } from "./DragInData.js";
 import { useDesign as g } from "@mfish/core/hooks";
-import { u as p, i as u, _ as m } from "./index.js";
+import { u as p, j as u, _ as m } from "./index.js";
 import { InputNumber as C } from "ant-design-vue";
 const h = "percentage", v = m(t({ __name: "MfWheelDataConfig", setup(t2) {
   const m2 = p(), { setFields: v2, deleteFields: D, setDataTable: _ } = u(), { prefixCls: x } = g("digits-data-config"), j = a(() => m2.getCurConfigComponent.chart.data.fields ? m2.getCurConfigComponent.chart.data.fields[h] ?? [] : []);

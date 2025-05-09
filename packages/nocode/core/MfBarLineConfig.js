@@ -5,7 +5,7 @@ import { E as k } from "./EchartsBaseConfig.js";
 import { E as b } from "./EchartsLegendConfig.js";
 import { E as x, a as _ } from "./EchartsAxisConfig.js";
 import { u as F, E } from "./UseEchartsSeriesConfig.js";
-import { u as U, k as R, ak as j, al as w, _ as A } from "./index.js";
+import { u as U, l as R, ak as j, al as w, _ as A } from "./index.js";
 import { C as I } from "./ConfigGroup.js";
 import { RadioGroup as G, RadioButton as L, Slider as $, Checkbox as B } from "ant-design-vue";
 import "lodash-es";

@@ -2,7 +2,7 @@ import { defineComponent as t, computed as a, createBlock as e, openBlock as s, 
 import { D as f, a as c } from "./DragInData.js";
 import { useDesign as u } from "@mfish/core/hooks";
 import { InputNumber as g } from "ant-design-vue";
-import { u as m, i as p, _ as C } from "./index.js";
+import { u as m, j as p, _ as C } from "./index.js";
 const h = "num", v = C(t({ __name: "MfDigitsDataConfig", setup(t2) {
   const C2 = m(), { setFields: v2, deleteFields: D, setDataTable: _ } = p(), { prefixCls: x } = u("digits-data-config"), j = a(() => C2.getCurConfigComponent.chart.data.fields ? C2.getCurConfigComponent.chart.data.fields[h] ?? [] : []);
   function F() {

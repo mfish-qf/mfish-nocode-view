@@ -8,6 +8,6 @@
  * 随眠等待
  * @param time
  */
-export function sleep(time) {
+export function sleep(time: number) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }

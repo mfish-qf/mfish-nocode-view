@@ -1,6 +1,6 @@
 import { defineComponent as t, ref as e, watch as o, createBlock as n, openBlock as a, normalizeClass as l, unref as i, withCtx as r, createVNode as c, createElementVNode as u, createTextVNode as s } from "vue";
 import { useDesign as h } from "@mfish/core/hooks";
-import { u as C, k as p, _ as g } from "./index.js";
+import { u as C, l as p, _ as g } from "./index.js";
 import { S as f } from "./StyleConfig.js";
 import "lodash-es";
 import "@mfish/core/enums";

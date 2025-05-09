@@ -1,6 +1,6 @@
 import { defineComponent as t, ref as e, watch as o, createBlock as n, openBlock as a, normalizeClass as l, unref as i, withCtx as r, createVNode as u, createElementVNode as c, createTextVNode as s, createElementBlock as C, Fragment as h, renderList as p, toDisplayString as g, createCommentVNode as v } from "vue";
 import { useDesign as f } from "@mfish/core/hooks";
-import { u as d, k as m, _ as y } from "./index.js";
+import { u as d, l as m, _ as y } from "./index.js";
 import { S as k } from "./StyleConfig.js";
 import { C as _ } from "./ConfigGroup.js";
 import { RadioGroup as U, RadioButton as z, Checkbox as I, Slider as w } from "ant-design-vue";
