@@ -1,12 +1,12 @@
 import { defineComponent as e, useTemplateRef as a, onMounted as t, createElementBlock as r, openBlock as o, mergeProps as s, toHandlers as n, unref as i } from "vue";
 import { u as m } from "./UseEcharts.js";
-import { h as l } from "./index.js";
+import { i as l } from "./index.js";
 import { cloneDeep as p } from "lodash-es";
 import { u, g as c } from "./UseEchartsMap.js";
 const f = e({ name: "MfMapLine", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  const f2 = e2, h = a("mfMapLineRef"), { commonEvents: d } = l(f2.chart);
+  const f2 = e2, d = a("mfMapLineRef"), { commonEvents: h } = l(f2.chart);
   u(f2.chart.options.geo), t(() => {
-    m(h.value, f2.chart, f2.chartContain, v);
+    m(d.value, f2.chart, f2.chartContain, v);
   });
   function v(e3, a2) {
     const t2 = { ...p(f2.chart.options), backgroundColor: "transparent" }, r2 = ((e4) => {
@@ -26,7 +26,7 @@ const f = e({ name: "MfMapLine", __name: "index", props: { chart: { type: Object
     })(a2.source);
     t2.series[0].data = r2.lineDataArray, t2.series[0].tooltip = { trigger: "item", formatter: (e4) => `${e4.data.fromName} → ${e4.data.toName}<br>值: ${e4.data.value}` }, t2.series.length > 1 && (t2.series[1].data = r2.rippleDataArray, t2.series[1].tooltip = { trigger: "item", formatter: (e4) => `${e4.name}<br>合计: ${e4.value[2]}` }), t2.visualMap.min = r2.min, t2.visualMap.max = r2.max, e3 == null ? void 0 : e3.setOption(t2, true);
   }
-  return (e3, a2) => (o(), r("div", s({ ref_key: "mfMapLineRef", ref: h, style: { width: "100%", height: "100%" } }, n(i(d), true)), null, 16));
+  return (e3, a2) => (o(), r("div", s({ ref_key: "mfMapLineRef", ref: d, style: { width: "100%", height: "100%" } }, n(i(h), true)), null, 16));
 } });
 export {
   f as default

@@ -1,6 +1,6 @@
 import { defineComponent as e, ref as t, computed as o, watch as n, resolveComponent as a, createBlock as l, openBlock as u, normalizeClass as i, unref as C, withCtx as r, createVNode as g, createCommentVNode as p, createElementVNode as c, createTextVNode as v, createElementBlock as h, Fragment as s, renderList as f, toDisplayString as d } from "vue";
 import { S as m } from "./StyleConfig.js";
-import { u as F, k, _ as w } from "./index.js";
+import { u as F, l as k, _ as w } from "./index.js";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/components/Icon";
@@ -10,9 +10,9 @@ import "@mfish/core/utils/Is";
 import { C as I } from "./ConfigGroup.js";
 const G = { class: "title" }, y = { class: "title" }, B = { class: "title" }, R = { class: "title" }, T = { style: { width: "90px", "font-weight": "500" } }, W = w(e({ __name: "MfScrollTableConfig", setup(e2) {
   const { prefixCls: w2 } = x("scroll-table-config"), W2 = t(), b = t(), j = t(), N = F(), P = t(35), z = t(5), M = t(1.5), A = o(() => Math.round(N.getCurConfigComponent.chartContain.dropInfo.height / 2)), $ = t(""), q = t(true), D = t("single"), E = [{ title: "单条", value: "single" }, { title: "整页", value: "page" }], J = t([]), K = [{ title: "左", value: "left" }, { title: "中", value: "center" }, { title: "右", value: "right" }], L = o(() => {
-    var _a;
+    var _a, _b, _c;
     let e3;
-    return N.getCurConfigComponent.chart.data.dataSet.data && N.getCurConfigComponent.chart.data.dataSet.data.length > 0 ? e3 = N.getCurConfigComponent.chart.data.dataSet.data[0].length : N.getCurConfigComponent.chart.data.dataSet.header && N.getCurConfigComponent.chart.data.dataSet.header.length > 0 && (e3 = N.getCurConfigComponent.chart.data.dataSet.header.length), ((_a = N.getCurConfigComponent.chart.options) == null ? void 0 : _a.index) && (e3 += 1), e3;
+    return ((_a = N.getCurConfigComponent.chart.data.dataSet) == null ? void 0 : _a.data) && N.getCurConfigComponent.chart.data.dataSet.data.length > 0 ? e3 = N.getCurConfigComponent.chart.data.dataSet.data[0].length : ((_b = N.getCurConfigComponent.chart.data.dataSet) == null ? void 0 : _b.header) && N.getCurConfigComponent.chart.data.dataSet.header.length > 0 && (e3 = N.getCurConfigComponent.chart.data.dataSet.header.length), ((_c = N.getCurConfigComponent.chart.options) == null ? void 0 : _c.index) && (e3 += 1), e3;
   }), O = t([]);
   function Q(e3) {
     V(e3), W2.value = e3;
@@ -96,7 +96,7 @@ const G = { class: "title" }, y = { class: "title" }, B = { class: "title" }, R 
       }), 128))]), _: 1 })) : p("", true)];
     }), _: 1 }, 8, ["class"]);
   };
-} }), [["__scopeId", "data-v-88b50ad8"]]);
+} }), [["__scopeId", "data-v-55b825e5"]]);
 export {
   W as default
 };

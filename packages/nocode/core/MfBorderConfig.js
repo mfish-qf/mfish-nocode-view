@@ -1,5 +1,5 @@
 import { defineComponent as o, ref as e, watch as t, createBlock as n, openBlock as r, normalizeClass as i, unref as s, withCtx as a, createElementVNode as m, createVNode as f, renderSlot as u } from "vue";
-import { u as l, k as p, _ as c } from "./index.js";
+import { u as l, l as p, _ as c } from "./index.js";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/components/Icon";

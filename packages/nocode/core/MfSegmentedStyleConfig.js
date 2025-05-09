@@ -1,7 +1,7 @@
 import { defineComponent as t, ref as e, watch as o, createBlock as n, openBlock as l, normalizeClass as i, unref as a, withCtx as s, createElementVNode as r, createVNode as C } from "vue";
 import { S as c } from "./StyleConfig.js";
 import { useDesign as u } from "@mfish/core/hooks";
-import { u as g, T as p, am as f, D as h, k as m, _ as y } from "./index.js";
+import { u as g, T as p, am as f, G as h, l as m, _ as y } from "./index.js";
 import "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/components/Icon";
@@ -33,7 +33,7 @@ const S = y(t({ __name: "MfSegmentedStyleConfig", setup(t2) {
     var _a;
     S2.getCurConfigComponent.chart.options.selectStyle = { ...(_a = S2.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle, font: t3.value };
   }
-  function D(t3) {
+  function G(t3) {
     var _a;
     S2.getCurConfigComponent.chart.options.selectStyle = { ...(_a = S2.getCurConfigComponent.chart.options) == null ? void 0 : _a.selectStyle, fontSize: t3.value };
   }
@@ -55,7 +55,7 @@ const S = y(t({ __name: "MfSegmentedStyleConfig", setup(t2) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _i;
     var e2;
     t3 && (e2 = t3, v.value = (_b = (_a = e2.chart) == null ? void 0 : _a.options) == null ? void 0 : _b.textStyle, d.value = (_d = (_c = e2.chart) == null ? void 0 : _c.options) == null ? void 0 : _d.selectStyle, x.value = ((_f = (_e = e2.chart) == null ? void 0 : _e.options) == null ? void 0 : _f.transparent) || false, k.value = (_i = (_h = (_g = e2.chart) == null ? void 0 : _g.options) == null ? void 0 : _h.selectStyle) == null ? void 0 : _i.selectBackground);
-  }, { immediate: true }), (t3, e2) => (l(), n(c, { class: i(a(y2)) }, { default: s(() => [e2[1] || (e2[1] = r("div", { class: "title" }, "文本样式", -1)), C(a(p), { "color-type": 1, "text-style": v.value, "hide-align": true, "hide-font-style": [a(f).Strikethrough], onColorChange: _, onFontChange: z, onSizeChange: F, onFontStyleChange: I }, null, 8, ["text-style", "hide-font-style"]), e2[2] || (e2[2] = r("div", { class: "title" }, "选中样式", -1)), C(a(p), { "color-type": 1, "text-style": d.value, "hide-align": true, "hide-font-style": [a(f).Strikethrough], onColorChange: j, onFontChange: B, onSizeChange: D, onFontStyleChange: M }, null, 8, ["text-style", "hide-font-style"]), C(a(h), { checked: x.value, "onUpdate:checked": e2[0] || (e2[0] = (t4) => x.value = t4), title: "整体背景透明", tooltip: "设置背景透明后，可以通过通用配置-背景色设置背景颜色", onChange: T }, null, 8, ["checked"]), e2[3] || (e2[3] = r("div", { class: "title" }, "选中项背景色", -1)), C(a(m), { value: k.value, onConfirmChange: U, onInputChange: b }, null, 8, ["value"])]), _: 1 }, 8, ["class"]));
+  }, { immediate: true }), (t3, e2) => (l(), n(c, { class: i(a(y2)) }, { default: s(() => [e2[1] || (e2[1] = r("div", { class: "title" }, "文本样式", -1)), C(a(p), { "color-type": 1, "text-style": v.value, "hide-align": true, "hide-font-style": [a(f).Strikethrough], onColorChange: _, onFontChange: z, onSizeChange: F, onFontStyleChange: I }, null, 8, ["text-style", "hide-font-style"]), e2[2] || (e2[2] = r("div", { class: "title" }, "选中样式", -1)), C(a(p), { "color-type": 1, "text-style": d.value, "hide-align": true, "hide-font-style": [a(f).Strikethrough], onColorChange: j, onFontChange: B, onSizeChange: G, onFontStyleChange: M }, null, 8, ["text-style", "hide-font-style"]), C(a(h), { checked: x.value, "onUpdate:checked": e2[0] || (e2[0] = (t4) => x.value = t4), title: "整体背景透明", tooltip: "设置背景透明后，可以通过通用配置-背景色设置背景颜色", onChange: T }, null, 8, ["checked"]), e2[3] || (e2[3] = r("div", { class: "title" }, "选中项背景色", -1)), C(a(m), { value: k.value, onConfirmChange: U, onInputChange: b }, null, 8, ["value"])]), _: 1 }, 8, ["class"]));
 } }), [["__scopeId", "data-v-66e5afa1"]]);
 export {
   S as default

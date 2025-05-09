@@ -1,7 +1,7 @@
 import { defineComponent as t, computed as a, createBlock as e, openBlock as n, normalizeClass as o, unref as s, withCtx as i, createElementVNode as l, createVNode as d, renderSlot as r } from "vue";
 import { D as f, a as c } from "./DragInData.js";
 import { useDesign as u } from "@mfish/core/hooks";
-import { u as C, i as g, ap as h, _ as m } from "./index.js";
+import { u as C, j as g, ap as h, _ as m } from "./index.js";
 import { J as p } from "./JsonData.js";
 const v = m(t({ __name: "MfMapLineDataConfig", setup(t2) {
   const m2 = C(), { setFields: v2, deleteFields: D, getFields: x, setDataTable: _ } = g(), { prefixCls: S } = u("map-line-data-config"), { resetDefault: j } = h(), F = a(() => {
