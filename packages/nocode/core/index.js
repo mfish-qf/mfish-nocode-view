@@ -2306,7 +2306,7 @@ function ss(e2, t2, o2) {
     if (l3) {
       const t3 = {};
       for (const e3 of Object.keys(l3)) l3[e3].type === Er.EVENT && Ve(l3[e3].value) && l3[e3].value.forEach((l4) => {
-        t3[e3] = d2(o3, l4);
+        o3.eventId === p2(l4) && (t3[e3] = d2(o3, l4));
       });
       e2.data.paramsValue ? e2.data.paramsValue = { ...e2.data.paramsValue, ...t3 } : e2.data.paramsValue = t3;
     }
@@ -2314,13 +2314,8 @@ function ss(e2, t2, o2) {
     u2(e2, n2), t2 && t2(n2);
   };
   function d2(e3, t3) {
-    const o3 = Object.keys(as).some((e4) => as[e4] === t3.event);
-    if (e3.eventId === p2(t3)) {
-      let l3;
-      if (l3 = o3 ? 0 === e3.data.type ? e3.data.dataSet : e3.data.result : e3.e, Ve(l3)) return l3.length > 0 ? l3[0][t3.param] : "";
-      if (We(l3)) return l3[t3.param];
-      if (Ze(l3)) return l3;
-    }
+    let o3;
+    return o3 = Object.keys(as).some((e4) => as[e4] === t3.event) ? 0 === e3.data.type ? e3.data.dataSet : e3.data.result : e3.e, Ve(o3) ? o3.length > 0 ? o3[0][t3.param] : "" : We(o3) ? o3[t3.param] : Ze(o3) ? o3 : void 0;
   }
   function p2(e3) {
     return e3.event + e3.id;
