@@ -2144,10 +2144,21 @@ const _r = async (e2) => {
     if (o3) for (const t4 of Object.values(o3)) Ve(t4.value) ? t4.value.forEach((t5) => {
       t5.id && (t5.id = e2.get(t5.id));
     }) : ((_a2 = t4.value) == null ? void 0 : _a2.id) && (t4.value.id = e2.get(t4.value.id));
+  }, l2 = (t3) => {
+    var _a2, _b;
+    (_b = (_a2 = t3.chart.showHide) == null ? void 0 : _a2.conditions) == null ? void 0 : _b.forEach((t4) => {
+      var _a3;
+      ((_a3 = t4.event) == null ? void 0 : _a3.id) && (t4.event.id = e2.get(t4.event.id));
+    });
+  }, n2 = (t3) => {
+    var _a2, _b;
+    (_b = (_a2 = t3.chart.data.eventRefresh) == null ? void 0 : _a2.events) == null ? void 0 : _b.forEach((t4) => {
+      t4.id && (t4.id = e2.get(t4.id));
+    });
   };
   this.componentList.forEach((e3) => {
-    o2(e3), e3.chart.type === es.MfCombine && e3.chart.options.components.forEach((e4) => {
-      o2(e4);
+    o2(e3), l2(e3), n2(e3), e3.chart.type === es.MfCombine && e3.chart.options.components.forEach((e4) => {
+      o2(e4), l2(e4), n2(e4);
     });
   });
 }, setCopyConfig(e2) {
@@ -2346,7 +2357,10 @@ function ss(e2, t2, o2) {
         Dd.emit(Fr.SHOW_MODAL, { ...t3, href: o3, jump: e2.jump });
     }
   };
-  function h2(t3) {
+  function h2(e3) {
+    if (e3) for (const t3 of e3) ns.off(p2(t3.event), g2);
+  }
+  function g2(t3) {
     var _a2, _b;
     if (!((_a2 = e2.showHide) == null ? void 0 : _a2.open) || !((_b = e2.showHide) == null ? void 0 : _b.conditions)) return;
     let o3;
@@ -2376,7 +2390,7 @@ function ss(e2, t2, o2) {
     }
     void 0 !== o3 && (e2.showHide.show = false);
   }
-  function g2() {
+  function y2() {
     var _a2, _b;
     const { getDataTable: t3 } = ls();
     ((_a2 = e2.data.eventRefresh) == null ? void 0 : _a2.open) && ((_b = e2.data.eventRefresh) == null ? void 0 : _b.events) && t3(e2).then((t4) => {
@@ -2394,14 +2408,11 @@ function ss(e2, t2, o2) {
     return (_a2 = e2 == null ? void 0 : e2.showHide) == null ? void 0 : _a2.conditions;
   }, (e3, t3) => {
     !function(e4, t4) {
-      if (function(e5) {
-        if (!e5) return;
-        for (const t5 of e5) ns.off(p2(t5.event), h2);
-      }(t4), !e4) return;
+      if (h2(t4), !e4) return;
       const o3 = /* @__PURE__ */ new Set();
       for (const t5 of e4) {
         const e5 = p2(t5.event);
-        o3.has(e5) || (o3.add(e5), ns.on(e5, h2));
+        o3.has(e5) || (o3.add(e5), ns.on(e5, g2));
       }
     }(e3, t3);
   }, { immediate: true, deep: true }), n(() => {
@@ -2411,17 +2422,17 @@ function ss(e2, t2, o2) {
     !function(e4, t4) {
       if (function(e5) {
         if (!e5) return;
-        for (const t5 of e5) ns.off(p2(t5), g2);
+        for (const t5 of e5) ns.off(p2(t5), y2);
       }(t4), !e4) return;
       const o3 = /* @__PURE__ */ new Set();
       for (const t5 of e4) {
         const e5 = p2(t5);
-        o3.has(e5) || (o3.add(e5), ns.on(e5, g2));
+        o3.has(e5) || (o3.add(e5), ns.on(e5, y2));
       }
     }(e3, t3);
   }, { immediate: true, deep: true }), _(() => {
     var _a2, _b;
-    s2((_a2 = e2.data) == null ? void 0 : _a2.params), showHideEventOff((_b = e2 == null ? void 0 : e2.showHide) == null ? void 0 : _b.conditions);
+    s2((_a2 = e2.data) == null ? void 0 : _a2.params), h2((_b = e2 == null ? void 0 : e2.showHide) == null ? void 0 : _b.conditions);
   }), { emitEvent: a2, commonEvents: r2, customEvents: o2 };
 }
 const us = Kt(e({ name: "MfTag", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, emits: ["eventHandler"], setup(e2, { emit: t2 }) {
