@@ -7,7 +7,7 @@
 <script lang="ts" setup>
   import { nextTick, ref, unref } from "vue";
   import { Scrollbar, ScrollbarType } from "../../Scrollbar";
-  import { useScrollTo } from "../../../hooks/event/UseScrollTo";
+  import { useScrollTo } from "@core/hooks";
   import { Nullable } from "@mfish/types";
 
   defineOptions({ name: "ScrollContainer" });

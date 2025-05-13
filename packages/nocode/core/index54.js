@@ -1,7 +1,7 @@
 import { defineComponent as e, useCssVars as t, computed as a, ref as o, watch as l, createBlock as n, openBlock as i, unref as c, mergeProps as r, toHandlers as s, withCtx as u, createCommentVNode as p, createTextVNode as f, toDisplayString as v } from "vue";
 import { Segmented as h } from "ant-design-vue";
 import { Icon as d } from "@mfish/core/components/Icon";
-import { i as m, u as y, as as S } from "./index.js";
+import { k as m, u as y, au as S } from "./index.js";
 import { useDesign as x } from "@mfish/core/hooks";
 import { ThemeEnum as b } from "@mfish/core/enums";
 const g = e({ __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {

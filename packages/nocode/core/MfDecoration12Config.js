@@ -2,7 +2,7 @@ import { defineComponent as o, createBlock as t, openBlock as e, normalizeClass 
 import l from "./MfDecorationConfig.js";
 import "ant-design-vue";
 import { useDesign as u } from "@mfish/core/hooks";
-import { u as p, f as c, _ as f } from "./index.js";
+import { u as p, h as c, _ as f } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";

@@ -2,7 +2,7 @@ import { defineComponent as o, createBlock as e, openBlock as t, normalizeClass 
 import { Checkbox as p } from "ant-design-vue";
 import c from "./MfBorderConfig.js";
 import { useDesign as f } from "@mfish/core/hooks";
-import { u, f as d, _ as l } from "./index.js";
+import { u, h as d, _ as l } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";

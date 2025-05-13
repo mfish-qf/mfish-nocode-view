@@ -4,8 +4,8 @@
   import { Popconfirm } from "ant-design-vue";
   import { extendSlots } from "../../../utils/helper/TsxHelper";
   import { omit } from "lodash-es";
-  import { useAttrs } from "../../../hooks/core/UseAttrs";
-  import { useI18n } from "../../../hooks/web/UseI18n";
+  import { useAttrs } from "@core/hooks";
+  import { useI18n } from "@core/hooks";
   import { Recordable } from "@mfish/types";
 
   const props = {
