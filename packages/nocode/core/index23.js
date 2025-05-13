@@ -1,7 +1,7 @@
 import { defineComponent as o, createBlock as e, openBlock as m, unref as r } from "vue";
 import "ant-design-vue";
 import "@mfish/core/hooks";
-import { U as t } from "./index.js";
+import { W as t } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";

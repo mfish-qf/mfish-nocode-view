@@ -1,6 +1,6 @@
 import { defineComponent as e, useTemplateRef as a, onMounted as t, createElementBlock as r, openBlock as o, mergeProps as s, toHandlers as n, unref as i } from "vue";
 import { u as m } from "./UseEcharts.js";
-import { i as p } from "./index.js";
+import { k as p } from "./index.js";
 import { cloneDeep as c } from "lodash-es";
 import { u as l, g as u } from "./UseEchartsMap.js";
 import { use as f } from "echarts";

@@ -224,7 +224,7 @@
     autoExpandParent.value = false;
     emit("expand", keys);
   };
-  const onSelect = (keys: any[], e) => {
+  const onSelect = (keys: any[], e: any) => {
     // 不允许不选中节点
     if (keys?.length === 0) return;
     selectedKeys.value = keys;
@@ -249,7 +249,7 @@
     searchValue.value = value;
   }
 
-  const onRightClick = (event) => {
+  const onRightClick = (event: any) => {
     selectedKeys.value = [event.node.key];
     selectEmit(undefined, event);
   };
@@ -262,7 +262,7 @@
     buildFullNode(pNode, data);
   };
 
-  const selectEmit = async (node?, e?) => {
+  const selectEmit = async (node?: any, e?: any) => {
     if (!node) {
       node = { ...e.node.dataRef };
     }
@@ -357,7 +357,7 @@
     if (info.dropToGap) {
       let ar: TreeProps["treeData"] = [];
       let i = 0;
-      loop(data, dropKey, (item, index: number, arr: TreeProps["treeData"]) => {
+      loop(data, dropKey, (item: any, index: number, arr: TreeProps["treeData"]) => {
         ar = arr;
         i = index;
         dropObj = item;
@@ -373,7 +373,7 @@
     } else {
       // 拖为子节点
       oldPId = dragObj.parentId;
-      loop(data, dropKey, (item) => {
+      loop(data, dropKey, (item: any) => {
         dropObj = item;
         if (!dragObj || !dropObj) return;
         item.children = item.children || [];
@@ -426,7 +426,7 @@
     key: "",
     inputBlur: () => {}
   });
-  const addChildFolder = (treeKey) => {
+  const addChildFolder = (treeKey: string) => {
     // 判断是否存在未保存记录
     if (inputBlur.key) {
       saveFolder(inputBlur.key);
@@ -471,7 +471,7 @@
     }, 300);
   };
 
-  const saveFolder = (key) => {
+  const saveFolder = (key: string) => {
     try {
       const node = findNode(gData.value, (node) => node.key === key);
       if (!node) return;
@@ -499,7 +499,7 @@
     }
   };
 
-  const editFolder = (treeKey) => {
+  const editFolder = (treeKey: string) => {
     draggable.value = false;
     const node = findNode(gData.value, (node) => node.key === treeKey);
     inputValue.value = node.title;
@@ -511,10 +511,10 @@
   };
 
   const deleteFolder = (treeKey: string, callback: (res: boolean) => void) => {
-    const loop = (treeKey: string, nodes, pNode?) => {
+    const loop = (treeKey: string, nodes: any[], pNode?: any) => {
       for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].key === treeKey) {
-          emit("save:delete", nodes[i], (res) => {
+          emit("save:delete", nodes[i], (res: any) => {
             callback(res);
             if (res) {
               nodes.splice(i, 1);
@@ -530,7 +530,7 @@
     };
     loop(treeKey, gData.value);
   };
-  const pNodeIconChange = (pNode) => {
+  const pNodeIconChange = (pNode: any) => {
     if (pNode) {
       pNode.isLeaf = !(pNode.children && pNode.children.length > 0);
       if (pNode.isLeaf) {

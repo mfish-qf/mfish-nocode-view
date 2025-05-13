@@ -1,7 +1,7 @@
 import { defineComponent as o, createBlock as e, openBlock as t, normalizeClass as i, unref as r, withCtx as s, createElementVNode as n, createVNode as a } from "vue";
 import l from "./MfBorderConfig.js";
 import { useDesign as m } from "@mfish/core/hooks";
-import { u as p, f as u, _ as f } from "./index.js";
+import { u as p, h as u, _ as f } from "./index.js";
 import "ant-design-vue";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
