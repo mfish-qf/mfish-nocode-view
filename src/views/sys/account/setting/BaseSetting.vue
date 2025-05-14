@@ -2,7 +2,19 @@
   <CollapseContainer title="个人信息" :can-expan="false">
     <ARow :gutter="24">
       <ACol :span="14">
-        <BasicForm @register="register" />
+        <BasicForm @register="register">
+          <template #changeAccount>
+            <ATooltip title="修改账号，账号只能修改一次">
+              <AButton
+                v-if="isAllowChangeAccount"
+                type="link"
+                pre-icon="ant-design:edit-outlined"
+                icon-size="16"
+                @click="changeAccount"
+              />
+            </ATooltip>
+          </template>
+        </BasicForm>
       </ACol>
       <ACol :span="10">
         <div class="change-avatar">
@@ -24,17 +36,20 @@
       </ACol>
     </ARow>
   </CollapseContainer>
+  <ChangeAccountModal @register="registerModal" @success="handleSuccess" />
 </template>
 <script lang="ts" setup>
-  import { Button as AButton, Col as ACol, Row as ARow } from "ant-design-vue";
+  import { Col as ACol, Row as ARow, Tooltip as ATooltip } from "ant-design-vue";
   import { onBeforeMount, onMounted, ref } from "vue";
   import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { CollapseContainer } from "@mfish/core/components/Container";
   import { CropperAvatar } from "@mfish/core/components/Cropper";
-  import { getUserInfo, updateMe, uploadApi } from "@mfish/core/api";
+  import { allowChangeAccount, getUserInfo, updateMe, uploadApi } from "@mfish/core/api";
   import { baseSetSchemas } from "./setting.data";
   import { useUserStore } from "@mfish/stores/modules";
   import { setHeaderImg } from "@mfish/core/utils/file/FileUtils";
+  import ChangeAccountModal from "@/views/sys/account/ChangeAccountModal.vue";
+  import { useModal } from "@mfish/core/components/Modal";
 
   const userStore = useUserStore();
   const [register, { setFieldsValue, validate }] = useForm({
@@ -42,14 +57,23 @@
     schemas: baseSetSchemas,
     showActionButtonGroup: false
   });
+  const isAllowChangeAccount = ref<boolean>(false);
+  const [registerModal, { openModal }] = useModal();
   let userInfo = userStore.getUserInfo;
   onMounted(async () => {
+    loadUserInfo();
+  });
+
+  async function loadUserInfo() {
     const user = await getUserInfo();
     if (userInfo !== null) {
       userInfo = Object.assign(userInfo, user);
       setFieldsValue(userInfo).then();
     }
-  });
+    allowChangeAccount(user.id).then((res) => {
+      isAllowChangeAccount.value = res;
+    });
+  }
 
   const avatar = ref("");
   onBeforeMount(() => {
@@ -70,6 +94,16 @@
   async function handleSubmit() {
     const values = await validate();
     updateMe(values).then();
+  }
+  function changeAccount() {
+    openModal(true, userInfo);
+  }
+
+  /**
+   * 处理完成
+   */
+  function handleSuccess() {
+    loadUserInfo();
   }
 </script>
 

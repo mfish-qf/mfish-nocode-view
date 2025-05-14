@@ -190,7 +190,7 @@ export function calcSize(fileSize: number, level: number) {
  * @param fileKey 图片key
  * @param setImg 图片设置Ref对象
  */
-export function setHeaderImg(fileKey: string, setImg: Ref) {
+export function setHeaderImg(fileKey: string | undefined, setImg: Ref) {
   setImage(fileKey, logo, setImg);
 }
 

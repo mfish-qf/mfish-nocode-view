@@ -123,7 +123,7 @@
     "stylelint": "^16.19.1",
     "stylelint-config-standard": "^37.0.0",
     "stylelint-order": "^6.0.4",
-    "terser": "^5.39.0",
+    "terser": "^5.39.1",
     "turbo": "^2.5.3",
     "typescript": "^5.8.3",
     "unbuild": "^3.5.0",

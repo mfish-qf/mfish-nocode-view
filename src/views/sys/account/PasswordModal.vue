@@ -19,7 +19,7 @@
   import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { formSchema } from "@/views/sys/account/pwd.data";
   import { usePermission } from "@mfish/core/hooks";
-  import { changePwd } from "@mfish/core/api";
+  import { changePwd, pwdExist } from "@mfish/core/api";
 
   defineOptions({ name: "PasswordModal" });
 
@@ -31,12 +31,14 @@
     schemas: formSchema,
     autoSubmitOnEnter: true
   });
-  const { hasRole, SUPER_ROLE } = usePermission();
-  const [registerModal, { closeModal }] = useModalInner((data) => {
+  const { hasRole, SUPER_ROLE, isSuperAdmin } = usePermission();
+  const [registerModal, { closeModal }] = useModalInner(async (data) => {
     resetFields().then();
     setFieldsValue(data).then();
-    // 是超户，不需要
-    if (hasRole(SUPER_ROLE) && data.userId !== "1") {
+    const exist = await pwdExist(data.userId);
+    //超户重置其他用户密码时，不需要输入旧密码
+    //无旧密码时，不需要输入旧密码
+    if ((hasRole(SUPER_ROLE) && !isSuperAdmin(data.userId)) || !exist) {
       updateSchema([
         {
           field: "oldPwd",

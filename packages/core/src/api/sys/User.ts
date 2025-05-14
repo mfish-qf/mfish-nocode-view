@@ -29,7 +29,10 @@ enum Api {
   Online = "/oauth2/user/online",
   UserRoles = "/oauth2/user/roles",
   Tenants = "/oauth2/user/tenants",
-  UnLock = "/oauth2/unLock"
+  UnLock = "/oauth2/unLock",
+  PwdExist = "/oauth2/user/pwdExist",
+  AllowChangeAccount = "/oauth2/user/allowChangeAccount",
+  ChangeAccount = "/oauth2/user/changeAccount"
 }
 
 export function getCaptcha() {
@@ -65,7 +68,10 @@ export function unLock(params: LoginParams) {
  * @description: getUserInfo
  */
 export function getUserInfo(refreshToken: boolean = true) {
-  return defHttp.get<SsoUser>({ url: Api.GetUserInfo }, { errorMessageMode: "none", refreshToken });
+  return defHttp.get<SsoUser>(
+    { url: Api.GetUserInfo },
+    refreshToken ? { errorMessageMode: "none", refreshToken } : { refreshToken }
+  );
 }
 
 /**
@@ -148,4 +154,16 @@ export const setUserStatus = (userId: string, status: number) => {
 
 export const getOnlineList = (params?: ReqPage) => {
   return defHttp.get<OnlineUserPageModel>({ url: Api.Online, params });
+};
+
+export const pwdExist = (userId: string) => {
+  return defHttp.get<boolean>({ url: `${Api.PwdExist}/${userId}` });
+};
+
+export const allowChangeAccount = (userId: string) => {
+  return defHttp.get<boolean>({ url: `${Api.AllowChangeAccount}/${userId}` });
+};
+
+export const changeAccount = (params: { id: string; account: string }) => {
+  return defHttp.put({ url: Api.ChangeAccount, params }, { successMessageMode: "message" });
 };
