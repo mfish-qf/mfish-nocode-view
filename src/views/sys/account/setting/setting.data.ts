@@ -56,6 +56,22 @@ export const baseSetSchemas: FormSchema[] = [
     show: false
   },
   {
+    field: "account",
+    component: "Input",
+    label: "账号",
+    componentProps: {
+      disabled: true
+    },
+    colProps: { span: 18 }
+  },
+  {
+    field: "",
+    component: "Button",
+    slot: "changeAccount",
+    colProps: { span: 1 }
+  },
+
+  {
     field: "nickname",
     component: "Input",
     label: "昵称",
