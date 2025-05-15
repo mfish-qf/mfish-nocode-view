@@ -96,6 +96,7 @@
   @prefix-cls: ~"@{namespace}-screen-resource";
   [data-theme="dark"] {
     .@{prefix-cls} {
+      background-color: #1f1f1f;
       .header {
         .tag-group {
           .tag {
@@ -111,6 +112,8 @@
   }
 
   .@{prefix-cls} {
+    height: 100%;
+    padding: 4px;
     .header {
       display: flex;
       align-items: center;

@@ -1,5 +1,5 @@
 <template>
-  <PageWrapper>
+  <PageWrapper content-full-height fixed-height>
     <template #headerContent>
       <WorkbenchHeader />
     </template>
@@ -7,14 +7,14 @@
       <div class="lg:flex">
         <div class="lg:w-7/10 m-4 enter-y">
           <Card class="enter-y" :loading="loading" :body-style="{ padding: '6px' }">
-            <ScreenResourceManagement @clone-screen="cloneScreen" />
+            <ScreenResourceManagement style="border-radius: 6px" @clone-screen="cloneScreen" />
           </Card>
           <ProjectCard :loading="loading" class="!my-4 enter-y" />
         </div>
         <div class="lg:w-3/10 w-full mt-4 mb-4 mr-4 enter-y">
           <QuickNav :loading="loading" class="enter-y" />
           <Card class="my-4 enter-y" :loading="loading">
-            <img class="xl:h-50 h-30" src="@mfish/core/assets/svg/illustration.svg" />
+            <img class="xl:h-50 h-30" src="@mfish/core/assets/svg/illustration.svg" alt="ill" />
           </Card>
           <DynamicInfo :loading="loading" class="my-4 enter-y" />
         </div>

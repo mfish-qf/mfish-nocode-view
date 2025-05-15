@@ -41,7 +41,7 @@
     "postcss": "^8.5.3",
     "rollup-plugin-visualizer": "^5.14.0",
     "unbuild": "^3.5.0",
-    "unocss": "^66.1.1",
+    "unocss": "^66.1.2",
     "vite": "^6.3.5",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-dts": "^3.9.1",

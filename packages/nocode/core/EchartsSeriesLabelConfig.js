@@ -1,5 +1,5 @@
 import { defineComponent as e, ref as l, watch as a, createElementBlock as t, openBlock as o, normalizeClass as i, unref as n, createVNode as u, withCtx as s, createElementVNode as v, createTextVNode as r } from "vue";
-import { u as b, f as h, T as c, ao as f, _ as p } from "./index.js";
+import { u as b, h, T as c, ao as f, _ as p } from "./index.js";
 import { Select as g } from "ant-design-vue";
 import { useDesign as d } from "@mfish/core/hooks";
 import "@vueuse/core";
