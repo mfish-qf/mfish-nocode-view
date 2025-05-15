@@ -105,8 +105,8 @@
   };
   onMounted(() => {
     //当前组件嵌入到iframe中会出现滚动条，设置当前body不可滚动
-    globalThis.document.body.style.overflow = "hidden";
-    globalThis.document.body.style.backgroundColor = "transparent";
+    // globalThis.document.body.style.overflow = "hidden";
+    // globalThis.document.body.style.backgroundColor = "transparent";
     window.addEventListener("message", messageHandler);
     updateHeight();
     window.addEventListener("resize", updateHeight);

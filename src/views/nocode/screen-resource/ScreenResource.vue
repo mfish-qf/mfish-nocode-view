@@ -86,5 +86,6 @@
     width: 100%;
     overflow: hidden;
     border: 0;
+    border-radius: 6px;
   }
 </style>

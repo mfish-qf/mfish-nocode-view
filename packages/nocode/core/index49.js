@@ -1,6 +1,6 @@
 import { defineComponent as e, useTemplateRef as r, onMounted as t, createElementBlock as a, openBlock as n, mergeProps as o, toHandlers as s, unref as i } from "vue";
 import { u as m } from "./UseEcharts.js";
-import { k as c } from "./index.js";
+import { l as c } from "./index.js";
 const f = e({ name: "MfBar", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
   const f2 = e2, h = r("mfBarRef"), { commonEvents: p } = c(f2.chart);
   return t(() => {

@@ -1,6 +1,6 @@
 import { defineComponent as e, useTemplateRef as a, onMounted as t, createElementBlock as r, openBlock as o, mergeProps as s, toHandlers as n, unref as i } from "vue";
 import { u as m } from "./UseEcharts.js";
-import { k as l } from "./index.js";
+import { l } from "./index.js";
 import { cloneDeep as p } from "lodash-es";
 import { u, g as c } from "./UseEchartsMap.js";
 const f = e({ name: "MfMapLine", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {

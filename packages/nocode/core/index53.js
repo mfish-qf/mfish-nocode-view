@@ -1,5 +1,5 @@
 import { defineComponent as e, useTemplateRef as o, computed as t, watch as r, nextTick as i, createBlock as n, openBlock as a, unref as s, mergeProps as c, toHandlers as h } from "vue";
-import { k as m, u as p, at as f, au as l } from "./index.js";
+import { l as m, u as l, at as p, au as f } from "./index.js";
 import "ant-design-vue";
 import "@mfish/core/hooks";
 import "@vueuse/core";
@@ -8,13 +8,13 @@ import { throttle as u } from "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
 const d = e({ __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  const d2 = e2, { commonEvents: w, emitEvent: v } = m(d2.chart, void 0, ["rowClick"]), C = p(), I = o("scrollTableRef"), g = t(() => {
+  const d2 = e2, { commonEvents: w, emitEvent: v } = m(d2.chart, void 0, ["rowClick"]), C = l(), I = o("scrollTableRef"), g = t(() => {
     var _a;
     return { ...d2.chart.options, ...(_a = d2.chart.data) == null ? void 0 : _a.dataSet };
   });
-  function k(e3) {
+  function x(e3) {
     if (e3.rowIndex >= 0) {
-      const o2 = l(d2.chart);
+      const o2 = f(d2.chart);
       o2.length > e3.rowIndex && v("rowClick", o2[e3.rowIndex]);
     }
   }
@@ -38,7 +38,7 @@ const d = e({ __name: "index", props: { chart: { type: Object, required: true },
       var _a;
       (_a = I.value) == null ? void 0 : _a.resize();
     });
-  }), (e3, o2) => (a(), n(s(f), c({ ref_key: "scrollTableRef", ref: I, theme: s(C).getTheme, config: g.value }, h(s(w)), { onRowClick: k }), null, 16, ["theme", "config"]));
+  }), (e3, o2) => (a(), n(s(p), c({ ref_key: "scrollTableRef", ref: I, theme: s(C).getTheme, config: g.value }, h(s(w)), { onRowClick: x }), null, 16, ["theme", "config"]));
 } });
 export {
   d as default

@@ -2,7 +2,7 @@ import { defineComponent as t, computed as a, resolveComponent as e, createBlock
 import { D as g, a as C } from "./DragInData.js";
 import { IconPicker as f } from "@mfish/core/components/Icon";
 import { useDesign as u } from "@mfish/core/hooks";
-import { u as m, l as h, m as p, _ as v } from "./index.js";
+import { u as m, m as h, n as p, _ as v } from "./index.js";
 const D = v(t({ __name: "MfDataTagDataConfig", setup(t2) {
   const v2 = m(), { setFields: D2, deleteFields: x, getFields: _, setDataTable: I } = h(), { clearTitle: S, clearIcon: F } = p();
   function T(t3) {

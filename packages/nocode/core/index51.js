@@ -1,20 +1,20 @@
 import { defineComponent as e, useTemplateRef as a, onMounted as t, createElementBlock as r, openBlock as o, mergeProps as s, toHandlers as n, unref as i } from "vue";
 import { u as m } from "./UseEcharts.js";
-import { k as p } from "./index.js";
-import { cloneDeep as c } from "lodash-es";
-import { u as l, g as u } from "./UseEchartsMap.js";
+import { l as p } from "./index.js";
+import { cloneDeep as l } from "lodash-es";
+import { u as c, g as u } from "./UseEchartsMap.js";
 import { use as f } from "echarts";
 import { Lines3DChart as h, Scatter3DChart as d } from "echarts-gl/charts";
 import { Geo3DComponent as v } from "echarts-gl/components";
 const g = e({ name: "MfMapLine3D", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
   const g2 = e2;
-  l(g2.chart.options.geo3D), f([h, d, v]);
+  c(g2.chart.options.geo3D), f([h, d, v]);
   const y = a("mfMapLineRef"), { commonEvents: x } = p(g2.chart);
   t(() => {
     m(y.value, g2.chart, g2.chartContain, M);
   });
   function M(e3, a2) {
-    const t2 = { ...c(g2.chart.options), backgroundColor: "transparent" }, r2 = ((e4) => {
+    const t2 = { ...l(g2.chart.options), backgroundColor: "transparent" }, r2 = ((e4) => {
       const a3 = [], t3 = [], r3 = /* @__PURE__ */ new Set();
       let o2 = 0, s2 = e4 && e4.length > 1 && e4[1].length > 2 ? e4[1][2] : 0;
       const n2 = (e5, t4) => {

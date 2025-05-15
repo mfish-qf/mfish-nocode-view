@@ -1,7 +1,7 @@
 import { defineComponent as t, watch as o, nextTick as i, createBlock as e, openBlock as r, unref as s, mergeProps as n, toHandlers as a } from "vue";
 import { VueUiDigits as d } from "vue-data-ui";
 import { cloneDeep as c } from "lodash-es";
-import { u as l, k as p } from "./index.js";
+import { u as l, l as p } from "./index.js";
 const g = t({ name: "MfDigits", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(t2) {
   const g2 = t2, m = l();
   o(() => m.getTheme, (t3) => {
