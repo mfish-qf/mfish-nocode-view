@@ -11,8 +11,38 @@
 [![GitHub stars](https://img.shields.io/github/stars/mfish-qf/mfish-nocode-view.svg?style=social&label=Stars)](https://github.com/mfish-qf/mfish-nocode-view)
 [![GitHub forks](https://img.shields.io/github/forks/mfish-qf/mfish-nocode-view.svg?style=social&label=Fork)](https://github.com/mfish-qf/mfish-nocode-view)
 
-## 项目介绍
+## 🐟项目介绍
 
+摸鱼低代码平台，是一款致力于 **让开发像摸鱼一样轻松** 的低代码/无代码平台。我们希望打破技术门槛，让程序员和非程序员都能快速构建业务系统，提升效率，释放创造力。
+
+这不仅是程序员偷闲时的效率神器，更是职场小白的建站利器，甚至是领导画原型的秘密武器！
+
+## 🧠我们的愿景
+打造一个真正让人省心省力的开发平台：
+
+对程序员来说，是加速上线、复用逻辑、快速交付的开发利器
+
+对业务人员来说，是所见即所得、拖拖拽拽就能搞定的效率工具
+
+一句话：让懂技术的跑得更快，让不懂技术的也能跑起来！
+
+## 🚀核心特点
+低代码 + 无代码统一平台：灵活切换，按需使用
+
+即可快速生成业务代码，也可以无代码生成API接口和可视化大屏
+
+单实例微服务一体化架构：支持单体服务和微服务两种开发部署模式，一套代码解决两种架构，开箱即用
+
+权限解耦：企业级的权限控制，安全可靠与业务代码完全解耦，通过注解控制权限
+
+## 🎯适用场景
+企业内部系统搭建（ERP、CRM、OA等）
+
+快速原型设计与验证
+
+数据展示看板等轻应用开发快速集成
+
+## 💡技术栈
 摸鱼低代码前端采用 Vue3.x、Vite6.x、 Ant-Design-Vue4.0.X、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
 是在Vben-Admin基础上进行优化研发的适合于摸鱼低代码平台的前端解决方案，目前已是稳定版本，可用于生产项目。
 
@@ -23,24 +53,24 @@
 * 支持可视化配置查询API接口，后端自动生成SQL执行
 * 支持注解方式进行数据权限控制，与业务代码完全解耦
 
-## 前端源码地址
+## 🌐前端源码地址
 
 [![github](https://img.shields.io/badge/前端地址-github-black.svg)](https://github.com/mfish-qf/mfish-nocode-view)
 [![gitee](https://img.shields.io/badge/前端地址-gitee-ad312d.svg)](https://gitee.com/qiufeng9862/mfish-nocode-view)
 [![gitcode](https://img.shields.io/badge/前端地址-gitcode-be3642.svg)](https://gitcode.com/mfish-qf/mfish-nocode-view.git)
 
-## 后端源码地址
+## 🌐后端源码地址
 
 [![github](https://img.shields.io/badge/后端地址-github-black.svg)](https://github.com/mfish-qf/mfish-nocode)
 [![gitee](https://img.shields.io/badge/后端地址-gitee-ad312d.svg)](https://gitee.com/qiufeng9862/mfish-nocode)
 [![gitcode](https://img.shields.io/badge/后端地址-gitcode-be3642.svg)](https://gitcode.com/mfish-qf/mfish-nocode.git)
 
-## 文档地址
+## 📖文档地址
 
 + [文档地址](http://www.mfish.com.cn)
 + [在线预览](http://app.mfish.com.cn:11119)
 
-## 平台交流
+## 🎭平台交流
 
 ### 微信:
 
@@ -58,7 +88,7 @@
 | `mfish-nocode-view` | Vue3.4+Vite5前端 | 
 | `mfish-nocode`      | JAVA后台（微服务架构）  |  
 
-## 技术文档
+## 📖技术文档
 
 ### 安装与使用
 
@@ -101,7 +131,7 @@ pnpm run build
 
 http://localhost:5186
 
-## 功能模块
+## 🧩功能模块
 
 ```
 ├─ChatGpt
@@ -158,6 +188,8 @@ http://localhost:5186
 
 [3.自助大屏配置系列-数据绑定](https://www.bilibili.com/video/BV1Mr5KzSE6V/?share_source=copy_web&vd_source=0cf425790dc7750eb5d8a4d1c0b028f4)
 
+[4.自助大屏配置系列-动画绑定](https://www.bilibili.com/video/BV1K1JNzdEG1/?share_source=copy_web&vd_source=0cf425790dc7750eb5d8a4d1c0b028f4)
+
 #### 项目截图
 
 <table>
@@ -199,7 +231,7 @@ http://localhost:5186
     </tr>
 </table>
 
-## 入门必备
+## 👑入门必备
 
 本项目需要一定前端基础知识，请确保掌握 Vue 的基础知识，以便能处理一些常见的问题。
 建议在开发前先学一下以下内容，提前了解和学习这些知识，会对项目理解非常有帮助:
@@ -216,7 +248,7 @@ http://localhost:5186
 * [Vue2 迁移到 3](https://v3.vuejs.org/guide/migration/introduction.html)
 * [Unocss](https://uno.antfu.me/)
 
-## 浏览器支持
+## 💻浏览器支持
 
 **本地开发**推荐使用`Chrome 最新版`浏览器，**不支持**`Chrome 80`以下版本。
 
