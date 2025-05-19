@@ -333,7 +333,7 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(less@4.3.0)(terser@5.39.2)(tsx@4.19.4))
       vue:
-        specifier: ^3.5.14
+        specifier: ^3.5.13
         version: 3.5.14(typescript@5.8.3)
       vue-eslint-parser:
         specifier: ^10.1.3
@@ -543,6 +543,9 @@ importers:
 
   packages/nocode:
     devDependencies:
+      rollup-plugin-terser:
+        specifier: ^7.0.2
+        version: 7.0.2(rollup@4.40.2)
       vite-plugin-style-inject:
         specifier: ^0.0.1
         version: 0.0.1(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(less@4.3.0)(terser@5.39.2)(tsx@4.19.4))
@@ -4989,6 +4992,10 @@ packages:
     resolution: {integrity: sha512-z676SuD6Z8o8qbmEGhoEUFOM1+jfEiL3DXHK/xgEiG2EyNYfFG60jluWcupY6dATjfEsKQuibReS1djInQnoVw==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
 
+  jest-worker@26.6.2:
+    resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
+    engines: {node: '>= 10.13.0'}
+
   jest-worker@27.5.1:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
@@ -6297,6 +6304,9 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
+  randombytes@2.1.0:
+    resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
+
   range-parser@1.2.1:
     resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
     engines: {node: '>= 0.6'}
@@ -6486,6 +6496,12 @@ packages:
       rollup: ^3.29.4 || ^4
       typescript: ^4.5 || ^5.0
 
+  rollup-plugin-terser@7.0.2:
+    resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
+    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
+    peerDependencies:
+      rollup: ^2.0.0
+
   rollup-plugin-visualizer@5.14.0:
     resolution: {integrity: sha512-VlDXneTDaKsHIw8yzJAFWtrzguoJ/LnQ+lMpoVfYJ3jJF4Ihe5oYLAqLklIK/35lgUY+1yEzCkHyZ1j4A5w5fA==}
     engines: {node: '>=18'}
@@ -6602,6 +6618,9 @@ packages:
   send@1.2.0:
     resolution: {integrity: sha512-uaW0WwXKpL9blXE2o0bRhoL2EGXIrZxQ2ZQ4mgcfoBxdFmQold+qWsD2jLrfZ0trjKL6vOw0j//eAwcALFjKSw==}
     engines: {node: '>= 18'}
+
+  serialize-javascript@4.0.0:
+    resolution: {integrity: sha512-GaNA54380uFefWghODBWEGisLZFj00nS5ACs6yHa9nLqlLpVLO8ChDGeKRjZnV4Nh4n0Qi7nhYZD/9fCPzEqkw==}
 
   serve-static@2.2.0:
     resolution: {integrity: sha512-61g9pCh0Vnh7IutZjtLGGpTA355+OPn2TyDv/6ivP2h/AdAVX9azsoxmg2/M6nZeQZNYBEwIcsne1mJd9oQItQ==}
@@ -13190,6 +13209,12 @@ snapshots:
       jest-util: 27.5.1
       string-length: 4.0.2
 
+  jest-worker@26.6.2:
+    dependencies:
+      '@types/node': 22.15.18
+      merge-stream: 2.0.0
+      supports-color: 7.2.0
+
   jest-worker@27.5.1:
     dependencies:
       '@types/node': 22.15.18
@@ -14478,6 +14503,10 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
+  randombytes@2.1.0:
+    dependencies:
+      safe-buffer: 5.2.1
+
   range-parser@1.2.1: {}
 
   raw-body@3.0.0:
@@ -14677,6 +14706,14 @@ snapshots:
     optionalDependencies:
       '@babel/code-frame': 7.27.1
 
+  rollup-plugin-terser@7.0.2(rollup@4.40.2):
+    dependencies:
+      '@babel/code-frame': 7.27.1
+      jest-worker: 26.6.2
+      rollup: 4.40.2
+      serialize-javascript: 4.0.0
+      terser: 5.39.2
+
   rollup-plugin-visualizer@5.14.0(rollup@4.40.2):
     dependencies:
       open: 8.4.2
@@ -14823,6 +14860,10 @@ snapshots:
       statuses: 2.0.1
     transitivePeerDependencies:
       - supports-color
+
+  serialize-javascript@4.0.0:
+    dependencies:
+      randombytes: 2.1.0
 
   serve-static@2.2.0:
     dependencies:

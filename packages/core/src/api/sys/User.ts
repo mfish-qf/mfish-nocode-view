@@ -68,10 +68,7 @@ export function unLock(params: LoginParams) {
  * @description: getUserInfo
  */
 export function getUserInfo(refreshToken: boolean = true) {
-  return defHttp.get<SsoUser>(
-    { url: Api.GetUserInfo },
-    refreshToken ? { errorMessageMode: "none", refreshToken } : { refreshToken }
-  );
+  return defHttp.get<SsoUser>({ url: Api.GetUserInfo }, { messageCode: [500], refreshToken });
 }
 
 /**
