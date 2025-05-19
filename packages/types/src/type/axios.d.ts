@@ -16,6 +16,8 @@ export interface RequestOptions {
   errorMessageMode?: MessageMode;
   //成功信息弹窗模式
   successMessageMode?: MessageMode;
+  //指定编码 用于指定哪些返回码需要进行提示 不指定则默认所有返回码根据设置的提示模式进行提示
+  messageCode?: number[];
   // Whether to add a timestamp
   joinTime?: boolean;
   ignoreCancelToken?: boolean;

@@ -10,6 +10,7 @@ import { router } from "@core/router";
  * @param status 状态码
  * @param msg 错误信息
  * @param errorMessageMode 错误信息弹窗模式
+ * @param messageCode 信息弹窗code
  * @param retryCount 接口请求失败重试次数
  * @param refreshToken 接口请求失败是否直接刷新token
  */
@@ -17,6 +18,7 @@ export function checkStatus(
   status: number,
   msg: string,
   errorMessageMode: MessageMode = "none",
+  messageCode: number[] = [],
   retryCount: number,
   refreshToken: boolean
 ): void {
@@ -87,7 +89,7 @@ export function checkStatus(
     errMessage = msg;
   }
   if (errMessage) {
-    messageTips(errorMessageMode, errMessage, true, retryCount);
+    messageTips(errorMessageMode, messageCode, errMessage, status, true, retryCount);
   }
 }
 
@@ -95,9 +97,17 @@ export function checkStatus(
  * 判断错误
  * @param error
  * @param errorMessageMode
+ * @param messageCode
+ * @param status
  * @param retryCount
  */
-export function checkError(error: AxiosError, errorMessageMode: MessageMode = "none", retryCount: number): boolean {
+export function checkError(
+  error: AxiosError,
+  errorMessageMode: MessageMode = "none",
+  messageCode: number[] = [],
+  status: number,
+  retryCount: number
+): boolean {
   const { code, message } = error;
   const { t } = useI18n();
   const err: string = error?.toString?.() ?? "";
@@ -109,7 +119,7 @@ export function checkError(error: AxiosError, errorMessageMode: MessageMode = "n
     errMessage = t("sys.api.networkExceptionMsg");
   }
   if (errMessage) {
-    messageTips(errorMessageMode, errMessage, true, retryCount);
+    messageTips(errorMessageMode, messageCode, errMessage, status, true, retryCount);
     return true;
   }
   return false;

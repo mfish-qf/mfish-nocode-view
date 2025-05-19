@@ -50,6 +50,11 @@ export const columns: BasicColumn[] = [
     }
   },
   {
+    title: "上传账号",
+    dataIndex: "createBy",
+    width: 120
+  },
+  {
     title: "上传时间",
     dataIndex: "createTime",
     width: 120

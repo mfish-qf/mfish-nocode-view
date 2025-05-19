@@ -48,20 +48,22 @@ const transform: AxiosTransform = {
       if (msg === null || msg === undefined || msg === "") {
         msg = t("sys.api.operationSuccess");
       }
-      messageTips(options.successMessageMode, msg, false, 0);
+      messageTips(options.successMessageMode, options.messageCode, msg, data.code, false, 0);
       if (options.completeResult) {
         return data;
       }
       return data.data;
     }
+
     // errorMessageMode=‘modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
     // errorMessageMode='none' 一般是调用时明确表示不希望自动弹出错误提示
-    messageTips(options.errorMessageMode, msg, true, 0);
+    messageTips(options.errorMessageMode, options.messageCode, msg, data.code, true, 0);
+
     throw new Error(msg || t("sys.api.apiRequestFailed"));
   },
   // 下载文件返回处理
   downloadResponseHook: (res: any, options: RequestOptions) => {
-    const { data } = res;
+    const { status, data } = res;
     const url = globalThis.URL.createObjectURL(data);
     const link = document.createElement("a");
     link.href = url;
@@ -74,7 +76,7 @@ const transform: AxiosTransform = {
       link.click();
       URL.revokeObjectURL(url);
     } else {
-      messageTips(options.errorMessageMode, "错误:下载文件出错", true, 0);
+      messageTips(options.errorMessageMode, options.messageCode, "错误:下载文件出错", status, true, 0);
     }
   },
   /**
@@ -162,18 +164,19 @@ const transform: AxiosTransform = {
     errorLogStore.addAjaxErrorInfo(error);
     const { response, config } = error || {};
     const errorMessageMode = config.requestOptions.errorMessageMode || "none";
+    const messageCode = config.requestOptions.messageCode || [];
     if (axios.isCancel(error)) {
       return Promise.reject(error);
     }
     const retryCount = config?.__retryCount ?? 0;
-    if (checkError(error, errorMessageMode, retryCount)) {
+    const status = error?.response?.status;
+    if (checkError(error, errorMessageMode, messageCode, status, retryCount)) {
       return Promise.reject(error);
     }
     // 后台返回信息包括错误信息
     const msg: string = response?.data?.msg ?? "";
-    const status = error?.response?.status;
     const refreshToken: boolean = error.response?.config?.requestOptions?.refreshToken;
-    checkStatus(status, msg, errorMessageMode, retryCount, refreshToken);
+    checkStatus(status, msg, errorMessageMode, messageCode, retryCount, refreshToken);
     // 添加自动重试机制 保险起见 只针对GET请求
     const retryRequest = new AxiosRetry();
     const { isOpenRetry } = config.requestOptions.retryRequest;
