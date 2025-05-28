@@ -180,6 +180,7 @@
     const values = await validate();
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {
+      values.roleIds = values.roleIds ?? [];
       if (source === 1) {
         saveSsoTenant(updateMeTenant, values);
       } else {
