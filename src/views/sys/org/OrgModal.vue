@@ -131,7 +131,8 @@
       field: "roleIds",
       componentProps: { options, optionFilterProp: "label" }
     }).then();
-    const roleValues = roleIds.filter((roleId) => roles.some((role) => role.id !== roleId));
+    // 过滤掉不存在的角色
+    const roleValues = roleIds.filter((roleId) => roles.some((role) => role.id === roleId));
     setFieldsValue({ roleIds: roleValues }).then();
   }
 
