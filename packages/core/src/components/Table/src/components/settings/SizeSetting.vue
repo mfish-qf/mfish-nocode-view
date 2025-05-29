@@ -7,7 +7,7 @@
     <Dropdown placement="bottom" :trigger="['click']" :get-popup-container="getPopupContainer">
       <ColumnHeightOutlined />
       <template #overlay>
-        <Menu @click="handleTitleClick" selectable v-model:selectedKeys="selectedKeysRef">
+        <Menu @click="handleTitleClick" selectable v-model:selected-keys="selectedKeysRef">
           <Menu.Item key="default">
             <span>{{ t("component.table.settingDensDefault") }}</span>
           </Menu.Item>
@@ -36,7 +36,7 @@
   const tableSettingStore = useTableSettingStore();
   const table = useTableContext();
   const { t } = useI18n();
-  const selectedKeysRef = ref<SizeType[]>([table.getSize()]);
+  const selectedKeysRef = ref<SizeType[]>([tableSettingStore.getTableSize]);
   const handleTitleClick: MenuProps["onClick"] = ({ key }) => {
     selectedKeysRef.value = [key as SizeType];
     tableSettingStore.setTableSize(key as SizeType);
@@ -45,7 +45,7 @@
     });
   };
   onMounted(() => {
-    selectedKeysRef.value = [tableSettingStore.getTableSize];
+    selectedKeysRef.value = [table.getSize()];
     table.setProps({
       size: selectedKeysRef.value[0]
     });

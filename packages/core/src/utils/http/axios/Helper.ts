@@ -1,7 +1,6 @@
 import { isObject, isString } from "../../../utils/Is";
 import { MessageMode } from "@mfish/types/src/type/axios";
-import { useI18n } from "../../../hooks/web/UseI18n";
-import { useMessage } from "../../../hooks/web/UseMessage";
+import { useI18n, useMessage } from "@core/hooks";
 import { Recordable } from "@mfish/types";
 
 const { createMessage, createErrorModal, createSuccessModal } = useMessage();
