@@ -16,9 +16,9 @@ export const rules = {
             throw "请输入邮箱!";
           }
           if (
-            !new RegExp(
-              /^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}])|(([\da-z\-]+\.)+[a-z]{2,}))$/i
-            ).test(value)
+            !/^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}\])|(([\da-z\-]+\.)+[a-z]{2,}))$/i.test(
+              value
+            )
           ) {
             throw "请输入正确邮箱格式!";
           }
@@ -35,7 +35,7 @@ export const rules = {
           if (required && !value) {
             throw "请输入手机号码1!";
           }
-          if (!new RegExp(/^1[3-9]\d{9}$/).test(value)) {
+          if (!/^1[3-9]\d{9}$/.test(value)) {
             throw "手机号码格式有误";
           }
         },
@@ -43,7 +43,7 @@ export const rules = {
       }
     ];
   },
-  startTime(endTime, required: boolean): RuleObject[] {
+  startTime(endTime: any, required: boolean): RuleObject[] {
     return [
       {
         required,
@@ -60,7 +60,7 @@ export const rules = {
       }
     ];
   },
-  endTime(startTime, required: boolean): RuleObject[] {
+  endTime(startTime: any, required: boolean): RuleObject[] {
     return [
       {
         required,

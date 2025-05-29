@@ -129,7 +129,7 @@
 
   const emit = defineEmits(["columnsChange"]);
   const tableSettingStore = useTableSettingStore();
-  const tableKey: string = useRoute().name + props.title;
+  const tableKey: string = (useRoute().name as string) + props.title;
   const { t } = useI18n();
   const { prefixCls } = useDesign("basic-column-setting");
   const table = useTableContext();
@@ -317,7 +317,7 @@
     for (const opt of columnOptions.value) {
       const colIdx = columns.findIndex((o) => o.dataIndex === opt.value);
       //
-      if (colIdx > -1) {
+      if (colIdx !== -1) {
         const target = columns[colIdx];
         target.defaultHidden = opt.column?.defaultHidden;
         target.fixed = opt.fixed;
@@ -328,7 +328,7 @@
 
     // 是否存在 action
     const actionIndex = columns.findIndex((o) => o.dataIndex === "action");
-    if (actionIndex > -1) {
+    if (actionIndex !== -1) {
       const actionCol = columns.splice(actionIndex, 1);
       columns.push(actionCol[0]);
     }
@@ -384,9 +384,9 @@
     if (
       cache &&
       JSON.stringify(columnOptions.value.map((o) => ({ value: o.value, label: o.label }))) !==
-        JSON.stringify(cache.map((o) => ({ value: o.value, label: o.label })))
+        JSON.stringify(cache.map((o: any) => ({ value: o.value, label: o.label })))
     ) {
-      const map = columnOptions.value.reduce((map, item) => {
+      const map = columnOptions.value.reduce((map: any, item: any) => {
         map[item.value] = item.label;
         return map;
       }, {});
@@ -394,10 +394,10 @@
         // remove消失的列
         cache = cache.filter((o) => map[o.value]);
         // 更新label
-        cache.forEach((o) => {
+        cache.forEach((o: any) => {
           o.label = map[o.value];
         });
-        const cacheKeys = new Set(cache.map((o) => o.value));
+        const cacheKeys = new Set(cache.map((o: any) => o.value));
         // push新出现的列
         cache = [...cache, ...columnOptions.value.filter((o) => !cacheKeys.has(o.value))];
         // 更新缓存
@@ -443,14 +443,14 @@
     isColumnAllSelected.value = columnOptions.value.length === columnCheckedOptions.value.length;
   };
   // 更新 showIndexColumn
-  const showIndexColumnUpdate = (showIndexColumn) => {
+  const showIndexColumnUpdate = (showIndexColumn: any) => {
     isInnerChange = true;
     table.setProps({
       showIndexColumn
     });
   };
   // 更新 rowSelection
-  const showRowSelectionUpdate = (showRowSelection) => {
+  const showRowSelectionUpdate = (showRowSelection: any) => {
     isInnerChange = true;
     table.setProps({
       rowSelection: showRowSelection
