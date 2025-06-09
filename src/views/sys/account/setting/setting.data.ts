@@ -25,7 +25,8 @@ export const settingList = [
   {
     key: 3,
     name: "租户信息",
-    component: "TenantSetting"
+    component: "TenantSetting",
+    auth: "sys:tenant:query"
   },
   {
     key: 4,
@@ -37,13 +38,13 @@ export const settingList = [
     key: 5,
     name: "租户角色",
     component: "TenantRoleSetting",
-    auth: "sys:tenantOrg:query"
+    auth: "sys:tenantRole:query"
   },
   {
     key: 6,
     name: "租户人员",
     component: "TenantUserSetting",
-    auth: "sys:tenantOrg:query"
+    auth: "sys:tenantUser:query"
   }
 ];
 
