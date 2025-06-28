@@ -1,11 +1,11 @@
-import { defineComponent as e, useCssVars as t, computed as a, ref as o, onMounted as l, createBlock as n, openBlock as r, unref as c, mergeProps as u, toHandlers as i } from "vue";
+import { defineComponent as e, useCssVars as t, computed as a, ref as o, watch as l, createBlock as n, openBlock as r, unref as c, mergeProps as i, toHandlers as u } from "vue";
 import { Select as s } from "ant-design-vue";
-import { l as p, u as h, au as v } from "./index.js";
-import { useDesign as f } from "@mfish/core/hooks";
+import { l as f, u as p, au as v } from "./index.js";
+import { useDesign as h } from "@mfish/core/hooks";
 import { ThemeEnum as d } from "@mfish/core/enums";
 const m = e({ name: "MfSelect", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  t((e3) => ({ "94e73eec": y.value, "5ec12938": `${g.value}px`, "41f94560": I.value - 6 + "px", "4ceb714c": j.value, bb1266aa: k.value, "3e2354e6": `${$.value}px`, bb160a3e: q.value, "355558e8": z.value, "488e4020": D.value }));
-  const m2 = e2, { commonEvents: b, emitEvent: x } = p(m2.chart, void 0, ["selectChange"]), S = a(() => {
+  t((e3) => ({ "513005b0": y.value, "599a1f5c": `${g.value}px`, "664ea97a": I.value - 6 + "px", "49ea6574": j.value, "166ec651": k.value, "6278b900": `${$.value}px`, "166cf487": q.value, "3b357bb2": z.value, "4c18fe0a": D.value }));
+  const m2 = e2, { commonEvents: b, emitEvent: x } = f(m2.chart, void 0, ["selectChange"]), S = a(() => {
     var _a, _b;
     return (_b = (_a = m2.chart.data) == null ? void 0 : _a.dataSet) == null ? void 0 : _b.map((e3) => ({ label: e3.label, value: e3.value || e3.label }));
   }), y = a(() => {
@@ -38,11 +38,11 @@ const m = e({ name: "MfSelect", __name: "index", props: { chart: { type: Object,
   }), D = a(() => {
     var _a, _b, _c;
     return ((_c = (_b = (_a = m2.chart.options) == null ? void 0 : _a.textStyle) == null ? void 0 : _b.fontStyle) == null ? void 0 : _c.underline) ? "underline" : "";
-  }), E = h(), I = a(() => {
+  }), E = p(), I = a(() => {
     var _a, _b;
     return (_b = (_a = m2.chartContain) == null ? void 0 : _a.dropInfo) == null ? void 0 : _b.height;
-  }), O = o(), { prefixCls: V } = f("mf-select");
-  function _(e3) {
+  }), O = o(), { prefixCls: _ } = h("mf-select");
+  function A(e3) {
     O.value = e3;
     const t2 = S.value.findIndex((t3) => t3.value === e3);
     if (-1 !== t2) {
@@ -52,8 +52,10 @@ const m = e({ name: "MfSelect", __name: "index", props: { chart: { type: Object,
   }
   return l(() => {
     var _a, _b;
-    ((_a = m2.chart.options) == null ? void 0 : _a.defaultValue) && (O.value = (_b = m2.chart.options) == null ? void 0 : _b.defaultValue);
-  }), (e3, t2) => (r(), n(c(s), u({ class: c(V), value: O.value, "onUpdate:value": t2[0] || (t2[0] = (e4) => O.value = e4), options: S.value, onChange: _ }, i(c(b)), { bordered: false, "show-search": C.value, "allow-clear": w.value, "option-filter-prop": "label", "dropdown-style": { scale: c(E).getScale, color: j.value, fontFamily: k.value, fontSize: `${$.value}px`, fontWeight: q.value, fontStyle: z.value, textDecoration: D.value, background: y.value } }), null, 16, ["class", "value", "options", "show-search", "allow-clear", "dropdown-style"]));
+    return (_b = (_a = m2.chart) == null ? void 0 : _a.options) == null ? void 0 : _b.defaultValue;
+  }, (e3) => {
+    e3 && (O.value = e3);
+  }, { immediate: true }), (e3, t2) => (r(), n(c(s), i({ class: c(_), value: O.value, "onUpdate:value": t2[0] || (t2[0] = (e4) => O.value = e4), options: S.value, onChange: A }, u(c(b)), { bordered: false, "show-search": C.value, "allow-clear": w.value, "option-filter-prop": "label", "dropdown-style": { scale: c(E).getScale, color: j.value, fontFamily: k.value, fontSize: `${$.value}px`, fontWeight: q.value, fontStyle: z.value, textDecoration: D.value, background: y.value } }), null, 16, ["class", "value", "options", "show-search", "allow-clear", "dropdown-style"]));
 } });
 export {
   m as default
