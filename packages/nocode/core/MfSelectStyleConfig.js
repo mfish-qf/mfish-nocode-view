@@ -2,7 +2,7 @@ import { defineComponent as t, ref as e, watch as o, createBlock as n, openBlock
 import { S as p } from "./StyleConfig.js";
 import { useDesign as C } from "@mfish/core/hooks";
 import { Input as h } from "ant-design-vue";
-import { u as f, T as g, ao as m, J as d, _ as v } from "./index.js";
+import { u as f, T as g, ao as m, I as d, _ as v } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";

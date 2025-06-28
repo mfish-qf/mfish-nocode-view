@@ -4,7 +4,7 @@
 
 [![Author](https://img.shields.io/badge/Author-mfish-orange.svg)](http://www.mfish.com.cn)
 [![Blog](https://img.shields.io/badge/Blog-个人博客-yellow.svg)](http://www.mfish.com.cn)
-[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)](https://github.com/mfish-qf/mfish-nocode-view/releases/tag/V1.3.2)
+[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)](https://github.com/mfish-qf/mfish-nocode-view/releases/tag/v2.0.0)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/mfish-qf/mfish-nocode-view/blob/main/LICENSE)
 
 [![GitHub watches](https://img.shields.io/github/watchers/mfish-qf/mfish-nocode-view.svg?style=social&label=Watch)](https://github.com/mfish-qf/mfish-nocode-view)
