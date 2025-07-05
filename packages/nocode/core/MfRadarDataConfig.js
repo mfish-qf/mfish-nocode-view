@@ -1,7 +1,7 @@
 import { defineComponent as t, computed as a, createBlock as e, openBlock as n, normalizeClass as o, unref as i, withCtx as d, createElementVNode as s, createVNode as r, renderSlot as C } from "vue";
 import { D as l, a as f } from "./DragInData.js";
 import { useDesign as g } from "@mfish/core/hooks";
-import { u as c, m as u, as as m, _ as h } from "./index.js";
+import { u as c, m as u, at as m, _ as h } from "./index.js";
 import { J as p } from "./JsonData.js";
 const D = h(t({ __name: "MfRadarDataConfig", setup(t2) {
   const h2 = c(), { setFields: D2, deleteFields: S, getFields: v, setDataTable: _ } = u(), { prefixCls: x } = g("radar-data-config"), { resetDefault: J } = m(), j = a(() => {

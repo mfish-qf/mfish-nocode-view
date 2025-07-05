@@ -33,7 +33,7 @@
     "@vitejs/plugin-vue-jsx": "^4.2.0",
     "ant-design-vue": "^4.2.6",
     "dayjs": "^1.11.13",
-    "dotenv": "^16.6.0",
+    "dotenv": "^16.6.1",
     "fs-extra": "^11.3.0",
     "less": "^4.3.0",
     "picocolors": "^1.1.1",
