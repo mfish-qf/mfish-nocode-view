@@ -4,19 +4,7 @@ import { useDesign as c } from "@mfish/core/hooks";
 import { u, m as C, _ as m } from "./index.js";
 import { J as h } from "./JsonData.js";
 const p = m(t({ __name: "MfSegmentedDataConfig", setup(t2) {
-  const m2 = u(), { setFields: p2, deleteFields: v, setDataTable: D } = C(), { prefixCls: x } = c("segmented-data-config"), _ = a(() => {
-    var _a;
-    return m2.getCurConfigComponent.chart.data.fields ? ((_a = m2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.title) ?? [] : [];
-  }), S = a(() => {
-    var _a;
-    return m2.getCurConfigComponent.chart.data.fields ? ((_a = m2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.value) ?? [] : [];
-  }), j = a(() => {
-    var _a;
-    return m2.getCurConfigComponent.chart.data.fields ? ((_a = m2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.icon) ?? [] : [];
-  }), J = a(() => {
-    var _a;
-    return ((_a = m2.getCurConfigComponent.chart.data) == null ? void 0 : _a.dataSet) ? JSON.stringify(m2.getCurConfigComponent.chart.data.dataSet) : "";
-  });
+  const m2 = u(), { setFields: p2, deleteFields: v, setDataTable: D } = C(), { prefixCls: x } = c("segmented-data-config"), _ = a(() => m2.getCurConfigComponent.chart.data.fields ? m2.getCurConfigComponent.chart.data.fields?.title ?? [] : []), S = a(() => m2.getCurConfigComponent.chart.data.fields ? m2.getCurConfigComponent.chart.data.fields?.value ?? [] : []), j = a(() => m2.getCurConfigComponent.chart.data.fields ? m2.getCurConfigComponent.chart.data.fields?.icon ?? [] : []), J = a(() => m2.getCurConfigComponent.chart.data?.dataSet ? JSON.stringify(m2.getCurConfigComponent.chart.data.dataSet) : "");
   function F() {
     D();
   }

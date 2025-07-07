@@ -8,8 +8,7 @@ const u = o({ __name: "MfMapScatterConfig", setup(o2) {
     u2.getCurConfigComponent.chart.options.series[0] = o3;
   }
   return t(() => u2.getCurConfigComponent, (o3) => {
-    var _a;
-    o3 && ((_a = u2.getCurConfigComponent.chart.options.series) == null ? void 0 : _a.length) > 0 && (C.value = u2.getCurConfigComponent.chart.options.series[0]);
+    o3 && u2.getCurConfigComponent.chart.options.series?.length > 0 && (C.value = u2.getCurConfigComponent.chart.options.series[0]);
   }, { immediate: true }), (o3, e2) => (i(), n(a, null, { default: r(() => [f(s, { "allow-check": false, "default-expand": true, config: C.value, onChange: g }, null, 8, ["config"])]), _: 1 }));
 } });
 export {

@@ -25,7 +25,7 @@ const f = e({ name: "MfMapLine", __name: "index", props: { chart: { type: Object
       }
       return { lineDataArray: t3, rippleDataArray: a3, max: o2, min: s2 };
     })(a2.source);
-    t2.series[0].data = r2.lineDataArray, t2.series[0].tooltip = { trigger: "item", formatter: (e4) => `${e4.data.fromName} → ${e4.data.toName}<br>值: ${e4.data.value}` }, t2.series.length > 1 && (t2.series[1].data = r2.rippleDataArray, t2.series[1].tooltip = { trigger: "item", formatter: (e4) => `${e4.name}<br>合计: ${e4.value[2]}` }), t2.visualMap.min = r2.min, t2.visualMap.max = r2.max, e3 == null ? void 0 : e3.setOption(t2, true);
+    t2.series[0].data = r2.lineDataArray, t2.series[0].tooltip = { trigger: "item", formatter: (e4) => `${e4.data.fromName} → ${e4.data.toName}<br>值: ${e4.data.value}` }, t2.series.length > 1 && (t2.series[1].data = r2.rippleDataArray, t2.series[1].tooltip = { trigger: "item", formatter: (e4) => `${e4.name}<br>合计: ${e4.value[2]}` }), t2.visualMap.min = r2.min, t2.visualMap.max = r2.max, e3?.setOption(t2, true);
   }
   return (e3, a2) => (o(), r("div", s({ ref_key: "mfMapLineRef", ref: d, style: { width: "100%", height: "100%" } }, n(i(h), true)), null, 16));
 } });

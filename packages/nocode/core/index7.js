@@ -14,10 +14,7 @@ const u = t({ name: "MfWheel", __name: "index", props: { chart: { type: Object, 
         t4.options.style.chart.layout.wheel.ticks.inactiveColor !== o2.dark && t4.options.style.chart.layout.wheel.ticks.inactiveColor !== o2.light || (t4.options.style.chart.layout.wheel.ticks.inactiveColor = o2[e2]);
       }(u2.chart, t3);
     });
-  }, { immediate: true }), (e2, o2) => {
-    var _a;
-    return i(), r(a(l), n({ dataset: ((_a = t2.chart.data) == null ? void 0 : _a.dataSet) || { percentage: 0 }, config: t2.chart.options }, s(a(y))), null, 16, ["dataset", "config"]);
-  };
+  }, { immediate: true }), (e2, o2) => (i(), r(a(l), n({ dataset: t2.chart.data?.dataSet || { percentage: 0 }, config: t2.chart.options }, s(a(y))), null, 16, ["dataset", "config"]));
 } });
 export {
   u as default

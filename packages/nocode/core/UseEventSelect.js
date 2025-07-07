@@ -12,14 +12,12 @@ const $ = { key: 0, class: "header", style: { width: "120px" } }, S = { key: 1, 
     e3 ? (G2.id = e3.id, G2.event = e3.event, G2.param = e3.param) : (G2.id = "", G2.event = "", G2.param = "");
   }, { immediate: true });
   const { prefixCls: T } = L("event-select-items"), D = a(() => y(N2.componentList, G2.id)), R = a(() => {
-    var _a;
     const e3 = D.value;
-    return e3 && ((_a = e3.chart.events) == null ? void 0 : _a.emits) ? e3.chart.events.emits : [];
+    return e3 && e3.chart.events?.emits ? e3.chart.events.emits : [];
   }), O = a(() => {
-    var _a;
     const e3 = D.value;
     if (e3) {
-      if (!((_a = e3.chart.data) == null ? void 0 : _a.headers)) return [];
+      if (!e3.chart.data?.headers) return [];
       return Object.values(e3.chart.data.headers) ?? [];
     }
     return [];
@@ -36,18 +34,12 @@ const $ = { key: 0, class: "header", style: { width: "120px" } }, S = { key: 1, 
   function V() {
     N2.hideEvent ? A2("selectChange", M(c(G2), "event")) : N2.hideParam ? A2("selectChange", M(c(G2), "param")) : A2("selectChange", c(G2));
   }
-  return (t2, a2) => (l(), s("div", { class: o(c(T)) }, [r("div", { class: o(`${c(T)}-headers`) }, [e2.hideHeader ? d("", true) : (l(), s(m, { key: 0 }, [a2[0] || (a2[0] = r("div", { class: "header", style: { width: "150px" } }, "组件", -1)), e2.hideEvent ? d("", true) : (l(), s("div", $, "事件")), e2.hideParam ? d("", true) : (l(), s("div", S, "参数"))], 64))], 2), r("div", { class: o(`${c(T)}-container`) }, [h(c(I), { class: o(`${c(T)}-items`), style: { width: "150px" } }, { default: p(() => {
-    var _a;
-    return [((_a = e2.componentList) == null ? void 0 : _a.length) > 0 ? (l(true), s(m, { key: 0 }, u(e2.componentList, (e3) => (l(), s("div", { key: e3.chart.id }, [e3.chart.type !== c(C).MfCombine ? (l(), v(g, { key: 0, style: { margin: "2px 6px 0 6px" }, "external-select": true, "is-select": G2.id === e3.chart.id, item: e3, "show-eye": false, "show-lock": false, onClick: (t3) => Q(e3.chart.id), onEnter: (t3) => function(e4) {
-      J.setCurHoverComponent(e4.chart.id);
-    }(e3), onLeave: K }, null, 8, ["is-select", "item", "onClick", "onEnter"])) : (l(), v(E, { key: 1, style: { margin: "2px", "font-size": "12px" }, "external-select": true, "is-select": G2.id === e3.chart.id, item: e3, "show-eye": false, "show-lock": false, "show-child-eye": false, "show-child-lock": false, expand: true, "child-select": G2.id, onParentClick: (t3) => Q(e3.chart.id), onChildClick: U }, null, 8, ["is-select", "item", "child-select", "onParentClick"]))]))), 128)) : (l(), v(c(w), { key: 1, description: "暂无组件", image: c(w).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"]))];
-  }), _: 1 }, 8, ["class"]), e2.hideEvent ? d("", true) : (l(), s("div", B)), e2.hideEvent ? d("", true) : (l(), v(c(I), { key: 1, class: o(`${c(T)}-items`), style: { width: "120px" } }, { default: p(() => [R.value.length > 0 ? (l(true), s(m, { key: 0 }, u(R.value, (e3) => {
-    var _a;
-    return l(), s("div", { class: o(["item", G2.event === e3 ? "select" : ""]), title: e3, key: e3, onClick: (t3) => {
-      return a3 = e3, void (G2.event !== a3 && (G2.event = a3, V()));
-      var a3;
-    } }, [r("div", null, f(c(x)(e3, (_a = D.value) == null ? void 0 : _a.chart.type)), 1)], 10, H);
-  }), 128)) : (l(), v(c(w), { key: 1, description: "暂无事件", image: c(w).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"]))]), _: 1 }, 8, ["class"])), e2.hideParam ? d("", true) : (l(), s("div", b)), e2.hideParam ? d("", true) : (l(), v(c(I), { key: 3, class: o(`${c(T)}-items`), style: { width: "120px" } }, { default: p(() => [O.value.length > 0 ? (l(true), s(m, { key: 0 }, u(O.value, (e3, t3) => (l(), s("div", { class: o(["item", G2.param === e3.colName ? "select" : ""]), title: `${e3.colName}${e3.rename ? `[${e3.rename}]` : ""}`, key: t3, onClick: (t4) => {
+  return (t2, a2) => (l(), s("div", { class: o(c(T)) }, [r("div", { class: o(`${c(T)}-headers`) }, [e2.hideHeader ? d("", true) : (l(), s(m, { key: 0 }, [a2[0] || (a2[0] = r("div", { class: "header", style: { width: "150px" } }, "组件", -1)), e2.hideEvent ? d("", true) : (l(), s("div", $, "事件")), e2.hideParam ? d("", true) : (l(), s("div", S, "参数"))], 64))], 2), r("div", { class: o(`${c(T)}-container`) }, [h(c(I), { class: o(`${c(T)}-items`), style: { width: "150px" } }, { default: p(() => [e2.componentList?.length > 0 ? (l(true), s(m, { key: 0 }, u(e2.componentList, (e3) => (l(), s("div", { key: e3.chart.id }, [e3.chart.type !== c(C).MfCombine ? (l(), v(g, { key: 0, style: { margin: "2px 6px 0 6px" }, "external-select": true, "is-select": G2.id === e3.chart.id, item: e3, "show-eye": false, "show-lock": false, onClick: (t3) => Q(e3.chart.id), onEnter: (t3) => function(e4) {
+    J.setCurHoverComponent(e4.chart.id);
+  }(e3), onLeave: K }, null, 8, ["is-select", "item", "onClick", "onEnter"])) : (l(), v(E, { key: 1, style: { margin: "2px", "font-size": "12px" }, "external-select": true, "is-select": G2.id === e3.chart.id, item: e3, "show-eye": false, "show-lock": false, "show-child-eye": false, "show-child-lock": false, expand: true, "child-select": G2.id, onParentClick: (t3) => Q(e3.chart.id), onChildClick: U }, null, 8, ["is-select", "item", "child-select", "onParentClick"]))]))), 128)) : (l(), v(c(w), { key: 1, description: "暂无组件", image: c(w).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"]))]), _: 1 }, 8, ["class"]), e2.hideEvent ? d("", true) : (l(), s("div", B)), e2.hideEvent ? d("", true) : (l(), v(c(I), { key: 1, class: o(`${c(T)}-items`), style: { width: "120px" } }, { default: p(() => [R.value.length > 0 ? (l(true), s(m, { key: 0 }, u(R.value, (e3) => (l(), s("div", { class: o(["item", G2.event === e3 ? "select" : ""]), title: e3, key: e3, onClick: (t3) => {
+    return a3 = e3, void (G2.event !== a3 && (G2.event = a3, V()));
+    var a3;
+  } }, [r("div", null, f(c(x)(e3, D.value?.chart.type)), 1)], 10, H))), 128)) : (l(), v(c(w), { key: 1, description: "暂无事件", image: c(w).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"]))]), _: 1 }, 8, ["class"])), e2.hideParam ? d("", true) : (l(), s("div", b)), e2.hideParam ? d("", true) : (l(), v(c(I), { key: 3, class: o(`${c(T)}-items`), style: { width: "120px" } }, { default: p(() => [O.value.length > 0 ? (l(true), s(m, { key: 0 }, u(O.value, (e3, t3) => (l(), s("div", { class: o(["item", G2.param === e3.colName ? "select" : ""]), title: `${e3.colName}${e3.rename ? `[${e3.rename}]` : ""}`, key: t3, onClick: (t4) => {
     return a3 = e3.colName, void (G2.param !== a3 && (G2.param = a3 ?? "", V()));
     var a3;
   } }, [r("div", null, f(e3.rename ?? e3.colName), 1)], 10, j))), 128)) : (l(), v(c(w), { key: 1, description: "暂无参数", image: c(w).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"]))]), _: 1 }, 8, ["class"]))], 2)], 2));

@@ -4,10 +4,7 @@ import { useDesign as g } from "@mfish/core/hooks";
 import { u as m, m as C, _ as u } from "./index.js";
 import { J as p } from "./JsonData.js";
 const h = "fieldName", D = u(a({ __name: "MfTableDataConfig", setup(a2) {
-  const u2 = m(), { setFields: D2, deleteFields: v, setDataTable: _ } = C(), { prefixCls: S } = g("table-data-config"), b = t(() => u2.getCurConfigComponent.chart.data.fields ? u2.getCurConfigComponent.chart.data.fields[h] ?? [] : []), j = t(() => {
-    var _a;
-    return ((_a = u2.getCurConfigComponent.chart.data) == null ? void 0 : _a.dataSet) ? JSON.stringify(u2.getCurConfigComponent.chart.data.dataSet) : "";
-  });
+  const u2 = m(), { setFields: D2, deleteFields: v, setDataTable: _ } = C(), { prefixCls: S } = g("table-data-config"), b = t(() => u2.getCurConfigComponent.chart.data.fields ? u2.getCurConfigComponent.chart.data.fields[h] ?? [] : []), j = t(() => u2.getCurConfigComponent.chart.data?.dataSet ? JSON.stringify(u2.getCurConfigComponent.chart.data.dataSet) : "");
   function x() {
     _();
   }

@@ -23,26 +23,23 @@ const z = { style: { display: "flex", gap: "2px" } }, F = { class: "check-group"
     r2.getCurConfigComponent.chart.options.grid.bottom = x2.value;
   }
   function w2() {
-    var _a, _b;
-    m2.value ? ((_a = r2.getCurConfigComponent.chart.options.xAxis) == null ? true : delete _a.type, r2.getCurConfigComponent.chart.options.yAxis.type = "category") : ((_b = r2.getCurConfigComponent.chart.options.yAxis) == null ? true : delete _b.type, r2.getCurConfigComponent.chart.options.xAxis.type = "category");
+    m2.value ? (delete r2.getCurConfigComponent.chart.options.xAxis?.type, r2.getCurConfigComponent.chart.options.yAxis.type = "category") : (delete r2.getCurConfigComponent.chart.options.yAxis?.type, r2.getCurConfigComponent.chart.options.xAxis.type = "category");
   }
   function U2() {
     r2.getCurConfigComponent.chart.options.grid.show = h2.value;
   }
   return l(() => r2.getCurConfigComponent, (e3) => {
     e3 && function() {
-      var _a, _b, _c, _d, _e, _f, _g, _h, _i;
-      m2.value = "category" === ((_a = r2.getCurConfigComponent.chart.options.yAxis) == null ? void 0 : _a.type), void 0 !== ((_c = (_b = r2.getCurConfigComponent.chart.options) == null ? void 0 : _b.grid) == null ? void 0 : _c.left) && (p2.value = r2.getCurConfigComponent.chart.options.grid.left);
-      void 0 !== ((_e = (_d = r2.getCurConfigComponent.chart.options) == null ? void 0 : _d.grid) == null ? void 0 : _e.right) && (g2.value = r2.getCurConfigComponent.chart.options.grid.right);
-      void 0 !== ((_g = (_f = r2.getCurConfigComponent.chart.options) == null ? void 0 : _f.grid) == null ? void 0 : _g.top) && (C2.value = r2.getCurConfigComponent.chart.options.grid.top);
-      void 0 !== ((_i = (_h = r2.getCurConfigComponent.chart.options) == null ? void 0 : _h.grid) == null ? void 0 : _i.bottom) && (x2.value = r2.getCurConfigComponent.chart.options.grid.bottom);
+      m2.value = "category" === r2.getCurConfigComponent.chart.options.yAxis?.type, void 0 !== r2.getCurConfigComponent.chart.options?.grid?.left && (p2.value = r2.getCurConfigComponent.chart.options.grid.left);
+      void 0 !== r2.getCurConfigComponent.chart.options?.grid?.right && (g2.value = r2.getCurConfigComponent.chart.options.grid.right);
+      void 0 !== r2.getCurConfigComponent.chart.options?.grid?.top && (C2.value = r2.getCurConfigComponent.chart.options.grid.top);
+      void 0 !== r2.getCurConfigComponent.chart.options?.grid?.bottom && (x2.value = r2.getCurConfigComponent.chart.options.grid.bottom);
     }();
   }, { immediate: true }), (e3, a2) => (i(), t(I, { class: n(o(d2)) }, { default: u(() => [a2[8] || (a2[8] = v("div", { class: "title" }, " 图表边距", -1)), v("div", z, [s(o(L), { prefix: "左", "is-number": false, placeholder: "数字或百分比", value: p2.value, "onUpdate:value": a2[0] || (a2[0] = (e4) => p2.value = e4), onChange: y2 }, null, 8, ["value"]), s(o(L), { prefix: "右", "is-number": false, placeholder: "数字或百分比", value: g2.value, "onUpdate:value": a2[1] || (a2[1] = (e4) => g2.value = e4), onChange: b2 }, null, 8, ["value"]), s(o(L), { prefix: "上", "is-number": false, placeholder: "数字或百分比", value: C2.value, "onUpdate:value": a2[2] || (a2[2] = (e4) => C2.value = e4), onChange: T2 }, null, 8, ["value"]), s(o(L), { prefix: "下", "is-number": false, placeholder: "数字或百分比", value: x2.value, "onUpdate:value": a2[3] || (a2[3] = (e4) => x2.value = e4), onChange: _2 }, null, 8, ["value"])]), v("div", F, [s(o(f), { checked: m2.value, "onUpdate:checked": a2[4] || (a2[4] = (e4) => m2.value = e4), onChange: w2 }, { default: u(() => a2[6] || (a2[6] = [c(" X、Y轴交换")])), _: 1, __: [6] }, 8, ["checked"]), s(o(f), { checked: h2.value, "onUpdate:checked": a2[5] || (a2[5] = (e4) => h2.value = e4), onChange: U2 }, { default: u(() => a2[7] || (a2[7] = [c(" 显示网格")])), _: 1, __: [7] }, 8, ["checked"])])]), _: 1, __: [8] }, 8, ["class"]));
 } }), [["__scopeId", "data-v-933ebb53"]]), M = { class: "title" }, X = { class: "title" }, j = { class: "title" }, E = b(e({ __name: "EchartsLineConfig", props: { axisType: { type: String, default: "X" }, lineStyle: { type: Object, default: () => ({}) } }, emits: ["lineStyleChange"], setup(e2, { emit: t2 }) {
   const C2 = e2, f2 = t2, { prefixCls: L2 } = k("echarts-line-config"), b2 = S(), _2 = a(C2.lineStyle), w2 = a(), U2 = a("solid"), I2 = [{ title: "实线", value: "solid" }, { title: "方形虚线", value: "dashed" }, { title: "圆点虚线", value: "dotted" }], z2 = r(() => "X" === C2.axisType ? Math.round(b2.getCurConfigComponent.chartContain.dropInfo.height / 50) : Math.round(b2.getCurConfigComponent.chartContain.dropInfo.width / 50));
   l(() => b2.getCurConfigComponent, (e3) => {
-    var _a, _b, _c, _d;
-    e3 && (void 0 !== ((_a = C2.lineStyle) == null ? void 0 : _a.color) && (w2.value = C2.lineStyle.color), void 0 !== ((_b = C2 == null ? void 0 : C2.lineStyle) == null ? void 0 : _b.type) && (U2.value = C2.lineStyle.type), void 0 !== ((_c = C2 == null ? void 0 : C2.lineStyle) == null ? void 0 : _c.width) && (F2.value = (_d = C2 == null ? void 0 : C2.lineStyle) == null ? void 0 : _d.width));
+    e3 && (void 0 !== C2.lineStyle?.color && (w2.value = C2.lineStyle.color), void 0 !== C2?.lineStyle?.type && (U2.value = C2.lineStyle.type), void 0 !== C2?.lineStyle?.width && (F2.value = C2?.lineStyle?.width));
   }, { immediate: true });
   const F2 = a(1);
   function A2(e3) {
@@ -66,12 +63,10 @@ const z = { style: { display: "flex", gap: "2px" } }, F = { class: "check-group"
     T2.value.name = F2.value;
   }
   function se(e3) {
-    var _a, _b;
-    (_a = T2.value.nameTextStyle) == null ? true : delete _a.fontStyle, (_b = T2.value.nameTextStyle) == null ? true : delete _b.fontWeight, ce(e3);
+    delete T2.value.nameTextStyle?.fontStyle, delete T2.value.nameTextStyle?.fontWeight, ce(e3);
   }
   function ce(e3) {
-    var _a;
-    T2.value.nameTextStyle = { ...(_a = T2.value) == null ? void 0 : _a.nameTextStyle, ...e3.style }, b2("axisChange", T2.value);
+    T2.value.nameTextStyle = { ...T2.value?.nameTextStyle, ...e3.style }, b2("axisChange", T2.value);
   }
   function re(e3) {
     T2.value.nameLocation = "left" === e3.value ? "start" : "right" === e3.value ? "end" : e3.value, b2("axisChange", T2.value);
@@ -92,12 +87,10 @@ const z = { style: { display: "flex", gap: "2px" } }, F = { class: "check-group"
     T2.value.axisLabel = { ...T2.value.axisLabel, rotate: ie.value }, b2("axisChange", T2.value);
   }
   function fe(e3) {
-    var _a, _b;
-    (_a = T2.value.axisLabel) == null ? true : delete _a.fontStyle, (_b = T2.value.axisLabel) == null ? true : delete _b.fontWeight, xe(e3);
+    delete T2.value.axisLabel?.fontStyle, delete T2.value.axisLabel?.fontWeight, xe(e3);
   }
   function xe(e3) {
-    var _a;
-    T2.value.axisLabel = { ...(_a = T2.value) == null ? void 0 : _a.axisLabel, ...e3.style }, b2("axisChange", T2.value);
+    T2.value.axisLabel = { ...T2.value?.axisLabel, ...e3.style }, b2("axisChange", T2.value);
   }
   function me() {
     T2.value.axisLabel = { ...T2.value.axisLabel, formatter: ne.value }, b2("axisChange", T2.value);
@@ -115,8 +108,7 @@ const z = { style: { display: "flex", gap: "2px" } }, F = { class: "check-group"
     T2.value.axisLine = { ...T2.value.axisLine, symbol: R.value.split(",") }, b2("axisChange", T2.value);
   }
   function be(e3) {
-    var _a;
-    T2.value.axisLine.lineStyle = { ...(_a = T2.value.axisLine) == null ? void 0 : _a.lineStyle, ...e3 }, b2("axisChange", T2.value);
+    T2.value.axisLine.lineStyle = { ...T2.value.axisLine?.lineStyle, ...e3 }, b2("axisChange", T2.value);
   }
   function Te() {
     T2.value.axisTick = { ...T2.value.axisTick, inside: P.value }, b2("axisChange", T2.value);
@@ -125,55 +117,41 @@ const z = { style: { display: "flex", gap: "2px" } }, F = { class: "check-group"
     T2.value.axisTick = { ...T2.value.axisTick, length: oe.value }, b2("axisChange", T2.value);
   }
   function we() {
-    var _a;
-    T2.value.axisTick.lineStyle = { ...(_a = T2.value.axisTick) == null ? void 0 : _a.lineStyle, width: ue.value }, b2("axisChange", T2.value);
+    T2.value.axisTick.lineStyle = { ...T2.value.axisTick?.lineStyle, width: ue.value }, b2("axisChange", T2.value);
   }
   function Ue() {
-    var _a;
-    T2.value.axisTick.lineStyle = { ...(_a = T2.value.axisTick) == null ? void 0 : _a.lineStyle, type: ae.value }, b2("axisChange", T2.value);
+    T2.value.axisTick.lineStyle = { ...T2.value.axisTick?.lineStyle, type: ae.value }, b2("axisChange", T2.value);
   }
   function Ie(e3) {
     T2.value.splitLine = { ...T2.value.splitLine, show: e3 }, b2("axisChange", T2.value);
   }
   function ze(e3) {
-    var _a;
-    T2.value.splitLine.lineStyle = { ...(_a = T2.value.splitLine) == null ? void 0 : _a.lineStyle, ...e3 }, b2("axisChange", T2.value);
+    T2.value.splitLine.lineStyle = { ...T2.value.splitLine?.lineStyle, ...e3 }, b2("axisChange", T2.value);
   }
   return l(() => z2.getCurConfigComponent, (e3) => {
     e3 && function() {
-      var _a, _b, _c, _d, _e2, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _A, _B;
       A2.value = {};
       const e4 = L2.axis;
       if (!e4) return;
-      F2.value = e4 == null ? void 0 : e4.name, A2.value.font = (_a = e4 == null ? void 0 : e4.nameTextStyle) == null ? void 0 : _a.fontFamily, A2.value.fontSize = (_c = (_b = e4 == null ? void 0 : e4.nameTextStyle) == null ? void 0 : _b.fontSize) == null ? void 0 : _c.replace("px", ""), A2.value.textColor = (_d = e4 == null ? void 0 : e4.nameTextStyle) == null ? void 0 : _d.color;
-      const a2 = ((_e2 = e4 == null ? void 0 : e4.nameTextStyle) == null ? void 0 : _e2.fontStyle) ? { italic: true } : {}, l2 = ((_f = e4 == null ? void 0 : e4.nameTextStyle) == null ? void 0 : _f.fontWeight) ? { bold: true } : {};
-      A2.value.fontStyle = { ...a2, ...l2 }, A2.value.hAlignType = "start" === (e4 == null ? void 0 : e4.nameLocation) ? "left" : "end" === (e4 == null ? void 0 : e4.nameLocation) ? "right" : e4 == null ? void 0 : e4.nameLocation, void 0 !== ((_g = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _g.interval) && (X2.value = (_h = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _h.interval);
-      void 0 !== ((_i = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _i.margin) && (te.value = (_j = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _j.margin);
-      void 0 !== ((_k = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _k.rotate) && (ie.value = (_l = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _l.rotate);
-      void 0 !== ((_m = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _m.formatter) && (ne.value = (_n = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _n.formatter);
+      F2.value = e4?.name, A2.value.font = e4?.nameTextStyle?.fontFamily, A2.value.fontSize = e4?.nameTextStyle?.fontSize?.replace("px", ""), A2.value.textColor = e4?.nameTextStyle?.color;
+      const a2 = e4?.nameTextStyle?.fontStyle ? { italic: true } : {}, l2 = e4?.nameTextStyle?.fontWeight ? { bold: true } : {};
+      A2.value.fontStyle = { ...a2, ...l2 }, A2.value.hAlignType = "start" === e4?.nameLocation ? "left" : "end" === e4?.nameLocation ? "right" : e4?.nameLocation, void 0 !== e4?.axisLabel?.interval && (X2.value = e4?.axisLabel?.interval);
+      void 0 !== e4?.axisLabel?.margin && (te.value = e4?.axisLabel?.margin);
+      void 0 !== e4?.axisLabel?.rotate && (ie.value = e4?.axisLabel?.rotate);
+      void 0 !== e4?.axisLabel?.formatter && (ne.value = e4?.axisLabel?.formatter);
       void 0 === e4.position ? Z.value = ee[L2.axisType][0].value : Z.value = e4.position;
       if (M2.value = {}, !e4) return;
-      M2.value.font = (_o = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _o.fontFamily, M2.value.fontSize = (_q = (_p = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _p.fontSize) == null ? void 0 : _q.replace("px", ""), M2.value.textColor = (_r = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _r.color;
-      const t2 = ((_s = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _s.fontStyle) ? { italic: true } : {}, i2 = ((_t = e4 == null ? void 0 : e4.axisLabel) == null ? void 0 : _t.fontWeight) ? { bold: true } : {};
-      M2.value.fontStyle = { ...t2, ...i2 }, void 0 !== ((_u = e4 == null ? void 0 : e4.axisLine) == null ? void 0 : _u.symbol) && (R.value = e4.axisLine.symbol.join(","));
-      void 0 !== ((_v = e4 == null ? void 0 : e4.axisTick) == null ? void 0 : _v.inside) && (P.value = (_w = e4 == null ? void 0 : e4.axisTick) == null ? void 0 : _w.inside);
-      void 0 !== ((_x = e4 == null ? void 0 : e4.axisTick) == null ? void 0 : _x.length) && (oe.value = e4.axisTick.length);
-      void 0 !== ((_z = (_y = e4 == null ? void 0 : e4.axisTick) == null ? void 0 : _y.lineStyle) == null ? void 0 : _z.width) && (ue.value = e4.axisTick.lineStyle.width);
-      void 0 !== ((_B = (_A = e4 == null ? void 0 : e4.axisTick) == null ? void 0 : _A.lineStyle) == null ? void 0 : _B.type) && (ae.value = e4 == null ? void 0 : e4.axisTick.lineStyle.type);
+      M2.value.font = e4?.axisLabel?.fontFamily, M2.value.fontSize = e4?.axisLabel?.fontSize?.replace("px", ""), M2.value.textColor = e4?.axisLabel?.color;
+      const t2 = e4?.axisLabel?.fontStyle ? { italic: true } : {}, i2 = e4?.axisLabel?.fontWeight ? { bold: true } : {};
+      M2.value.fontStyle = { ...t2, ...i2 }, void 0 !== e4?.axisLine?.symbol && (R.value = e4.axisLine.symbol.join(","));
+      void 0 !== e4?.axisTick?.inside && (P.value = e4?.axisTick?.inside);
+      void 0 !== e4?.axisTick?.length && (oe.value = e4.axisTick.length);
+      void 0 !== e4?.axisTick?.lineStyle?.width && (ue.value = e4.axisTick.lineStyle.width);
+      void 0 !== e4?.axisTick?.lineStyle?.type && (ae.value = e4?.axisTick.lineStyle.type);
     }();
   }, { immediate: true }), (a2, l2) => {
-    var _a;
     const r2 = C("AInput");
-    return i(), d("div", { class: n(o(I2)) }, [s(_, { title: `${e2.axisType}轴配置`, "default-expand": false, "allow-check": true, "title-check": (_a = e2.axis) == null ? void 0 : _a.show, onChecked: de }, { default: u(() => {
-      var _a2, _b, _c, _d, _e2, _f, _g, _h;
-      return [v("div", W, [c(g(`${e2.axisType}轴位置`) + " ", 1), s(o(x), { size: "small", value: Z.value, "onUpdate:value": l2[0] || (l2[0] = (e3) => Z.value = e3), onChange: Se }, { default: u(() => [(i(true), d(h, null, p(ee[e2.axisType], (e3, a3) => (i(), t(o(m), { key: a3, value: e3.value }, { default: u(() => [c(g(e3.title), 1)]), _: 2 }, 1032, ["value"]))), 128))]), _: 1 }, 8, ["value"])]), s(_, { title: "名称配置" }, { default: u(() => [v("div", O, [v("div", null, [s(r2, { value: F2.value, "onUpdate:value": l2[1] || (l2[1] = (e3) => F2.value = e3), "show-count": "", maxlength: 50, onChange: ve }, null, 8, ["value"])])]), s(o(w), { "hide-font-style": [o(U).Underline, o(U).Strikethrough], "color-type": 1, "text-style": A2.value, onFontChange: ce, onSizeChange: ce, onColorChange: ce, onHAlignChange: re, onFontStyleChange: se }, null, 8, ["hide-font-style", "text-style"])]), _: 1 }), s(_, { title: "标签配置", "default-expand": false, "allow-check": true, "title-check": (_b = (_a2 = e2.axis) == null ? void 0 : _a2.axisLabel) == null ? void 0 : _b.show, onChecked: he }, { default: u(() => [v("div", Y, [l2[11] || (l2[11] = c(" 标签间隔 ")), s(o(x), { size: "small", value: X2.value, "onUpdate:value": l2[2] || (l2[2] = (e3) => X2.value = e3), onChange: pe }, { default: u(() => [(i(), d(h, null, p(N, (e3) => s(o(m), { key: e3.value, value: e3.value }, { default: u(() => [c(g(e3.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])]), s(o(w), { "hide-font-style": [o(U).Underline, o(U).Strikethrough], "hide-align": true, "color-type": 1, "text-style": M2.value, onFontChange: xe, onSizeChange: xe, onColorChange: xe, onFontStyleChange: fe }, null, 8, ["hide-font-style", "text-style"]), v("div", $, [l2[12] || (l2[12] = c(" 标签与轴线间距 ")), s(o(y), { value: te.value, "onUpdate:value": l2[3] || (l2[3] = (e3) => te.value = e3), min: -100, max: 100, onChange: ge }, null, 8, ["value"])]), v("div", B, [l2[13] || (l2[13] = c(" 标签角度 ")), s(o(y), { value: ie.value, "onUpdate:value": l2[4] || (l2[4] = (e3) => ie.value = e3), min: -90, max: 90, onChange: Ce }, null, 8, ["value"])]), v("div", G, [l2[14] || (l2[14] = c(" 标签格式 ")), v("div", null, [s(r2, { value: ne.value, "onUpdate:value": l2[5] || (l2[5] = (e3) => ne.value = e3), placeholder: "格式{value}kg 详情参考echarts formatter属性", onChange: me }, null, 8, ["value"])])])]), _: 1 }, 8, ["title-check"]), s(_, { title: "轴线配置", "default-expand": false, "allow-check": true, "title-check": (_d = (_c = e2.axis) == null ? void 0 : _c.axisLine) == null ? void 0 : _d.show, onChecked: ye }, { default: u(() => {
-        var _a3, _b2;
-        return [s(E, { "axis-type": e2.axisType, "line-style": (_b2 = (_a3 = e2.axis) == null ? void 0 : _a3.axisLine) == null ? void 0 : _b2.lineStyle, onLineStyleChange: be }, null, 8, ["axis-type", "line-style"]), v("div", H, [l2[15] || (l2[15] = c(" 轴线箭头 ")), s(o(x), { size: "small", value: R.value, "onUpdate:value": l2[6] || (l2[6] = (e3) => R.value = e3), onChange: Le }, { default: u(() => [(i(), d(h, null, p(V, (e3, a3) => s(o(m), { key: a3, value: e3.value }, { default: u(() => [c(g(e3.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])])];
-      }), _: 1 }, 8, ["title-check"]), s(_, { title: "刻度配置", "default-expand": false, "allow-check": true, "title-check": (_f = (_e2 = e2.axis) == null ? void 0 : _e2.axisTick) == null ? void 0 : _f.show, onChecked: ke }, { default: u(() => [v("div", q, [l2[16] || (l2[16] = c(" 刻度方向 ")), s(o(x), { size: "small", value: P.value, "onUpdate:value": l2[7] || (l2[7] = (e3) => P.value = e3), onChange: Te }, { default: u(() => [(i(), d(h, null, p(Q, (e3, a3) => s(o(m), { key: a3, value: e3.value }, { default: u(() => [c(g(e3.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])]), v("div", D, [l2[17] || (l2[17] = c(" 刻度类型 ")), s(o(x), { size: "small", value: ae.value, "onUpdate:value": l2[8] || (l2[8] = (e3) => ae.value = e3), onChange: Ue }, { default: u(() => [(i(), d(h, null, p(le, (e3, a3) => s(o(m), { key: a3, value: e3.value }, { default: u(() => [c(g(e3.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])]), v("div", J, [l2[18] || (l2[18] = c(" 刻度长度 ")), s(o(y), { value: oe.value, "onUpdate:value": l2[9] || (l2[9] = (e3) => oe.value = e3), min: 1, max: K2.value, onChange: _e }, null, 8, ["value", "max"]), l2[19] || (l2[19] = c(" 刻度宽度 ")), s(o(y), { value: ue.value, "onUpdate:value": l2[10] || (l2[10] = (e3) => ue.value = e3), min: 1, max: j2.value, onChange: we }, null, 8, ["value", "max"])])]), _: 1 }, 8, ["title-check"]), s(_, { title: "分隔线配置", "default-expand": false, "allow-check": true, "title-check": (_h = (_g = e2.axis) == null ? void 0 : _g.splitLine) == null ? void 0 : _h.show, onChecked: Ie }, { default: u(() => {
-        var _a3;
-        return [s(E, { "axis-type": e2.axisType, "line-style": (_a3 = e2.axis) == null ? void 0 : _a3.splitLine.lineStyle, onLineStyleChange: ze }, null, 8, ["axis-type", "line-style"])];
-      }), _: 1 }, 8, ["title-check"])];
-    }), _: 1 }, 8, ["title", "title-check"])], 2);
+    return i(), d("div", { class: n(o(I2)) }, [s(_, { title: `${e2.axisType}轴配置`, "default-expand": false, "allow-check": true, "title-check": e2.axis?.show, onChecked: de }, { default: u(() => [v("div", W, [c(g(`${e2.axisType}轴位置`) + " ", 1), s(o(x), { size: "small", value: Z.value, "onUpdate:value": l2[0] || (l2[0] = (e3) => Z.value = e3), onChange: Se }, { default: u(() => [(i(true), d(h, null, p(ee[e2.axisType], (e3, a3) => (i(), t(o(m), { key: a3, value: e3.value }, { default: u(() => [c(g(e3.title), 1)]), _: 2 }, 1032, ["value"]))), 128))]), _: 1 }, 8, ["value"])]), s(_, { title: "名称配置" }, { default: u(() => [v("div", O, [v("div", null, [s(r2, { value: F2.value, "onUpdate:value": l2[1] || (l2[1] = (e3) => F2.value = e3), "show-count": "", maxlength: 50, onChange: ve }, null, 8, ["value"])])]), s(o(w), { "hide-font-style": [o(U).Underline, o(U).Strikethrough], "color-type": 1, "text-style": A2.value, onFontChange: ce, onSizeChange: ce, onColorChange: ce, onHAlignChange: re, onFontStyleChange: se }, null, 8, ["hide-font-style", "text-style"])]), _: 1 }), s(_, { title: "标签配置", "default-expand": false, "allow-check": true, "title-check": e2.axis?.axisLabel?.show, onChecked: he }, { default: u(() => [v("div", Y, [l2[11] || (l2[11] = c(" 标签间隔 ")), s(o(x), { size: "small", value: X2.value, "onUpdate:value": l2[2] || (l2[2] = (e3) => X2.value = e3), onChange: pe }, { default: u(() => [(i(), d(h, null, p(N, (e3) => s(o(m), { key: e3.value, value: e3.value }, { default: u(() => [c(g(e3.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])]), s(o(w), { "hide-font-style": [o(U).Underline, o(U).Strikethrough], "hide-align": true, "color-type": 1, "text-style": M2.value, onFontChange: xe, onSizeChange: xe, onColorChange: xe, onFontStyleChange: fe }, null, 8, ["hide-font-style", "text-style"]), v("div", $, [l2[12] || (l2[12] = c(" 标签与轴线间距 ")), s(o(y), { value: te.value, "onUpdate:value": l2[3] || (l2[3] = (e3) => te.value = e3), min: -100, max: 100, onChange: ge }, null, 8, ["value"])]), v("div", B, [l2[13] || (l2[13] = c(" 标签角度 ")), s(o(y), { value: ie.value, "onUpdate:value": l2[4] || (l2[4] = (e3) => ie.value = e3), min: -90, max: 90, onChange: Ce }, null, 8, ["value"])]), v("div", G, [l2[14] || (l2[14] = c(" 标签格式 ")), v("div", null, [s(r2, { value: ne.value, "onUpdate:value": l2[5] || (l2[5] = (e3) => ne.value = e3), placeholder: "格式{value}kg 详情参考echarts formatter属性", onChange: me }, null, 8, ["value"])])])]), _: 1 }, 8, ["title-check"]), s(_, { title: "轴线配置", "default-expand": false, "allow-check": true, "title-check": e2.axis?.axisLine?.show, onChecked: ye }, { default: u(() => [s(E, { "axis-type": e2.axisType, "line-style": e2.axis?.axisLine?.lineStyle, onLineStyleChange: be }, null, 8, ["axis-type", "line-style"]), v("div", H, [l2[15] || (l2[15] = c(" 轴线箭头 ")), s(o(x), { size: "small", value: R.value, "onUpdate:value": l2[6] || (l2[6] = (e3) => R.value = e3), onChange: Le }, { default: u(() => [(i(), d(h, null, p(V, (e3, a3) => s(o(m), { key: a3, value: e3.value }, { default: u(() => [c(g(e3.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])])]), _: 1 }, 8, ["title-check"]), s(_, { title: "刻度配置", "default-expand": false, "allow-check": true, "title-check": e2.axis?.axisTick?.show, onChecked: ke }, { default: u(() => [v("div", q, [l2[16] || (l2[16] = c(" 刻度方向 ")), s(o(x), { size: "small", value: P.value, "onUpdate:value": l2[7] || (l2[7] = (e3) => P.value = e3), onChange: Te }, { default: u(() => [(i(), d(h, null, p(Q, (e3, a3) => s(o(m), { key: a3, value: e3.value }, { default: u(() => [c(g(e3.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])]), v("div", D, [l2[17] || (l2[17] = c(" 刻度类型 ")), s(o(x), { size: "small", value: ae.value, "onUpdate:value": l2[8] || (l2[8] = (e3) => ae.value = e3), onChange: Ue }, { default: u(() => [(i(), d(h, null, p(le, (e3, a3) => s(o(m), { key: a3, value: e3.value }, { default: u(() => [c(g(e3.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])]), v("div", J, [l2[18] || (l2[18] = c(" 刻度长度 ")), s(o(y), { value: oe.value, "onUpdate:value": l2[9] || (l2[9] = (e3) => oe.value = e3), min: 1, max: K2.value, onChange: _e }, null, 8, ["value", "max"]), l2[19] || (l2[19] = c(" 刻度宽度 ")), s(o(y), { value: ue.value, "onUpdate:value": l2[10] || (l2[10] = (e3) => ue.value = e3), min: 1, max: j2.value, onChange: we }, null, 8, ["value", "max"])])]), _: 1 }, 8, ["title-check"]), s(_, { title: "分隔线配置", "default-expand": false, "allow-check": true, "title-check": e2.axis?.splitLine?.show, onChecked: Ie }, { default: u(() => [s(E, { "axis-type": e2.axisType, "line-style": e2.axis?.splitLine.lineStyle, onLineStyleChange: ze }, null, 8, ["axis-type", "line-style"])]), _: 1 }, 8, ["title-check"])]), _: 1 }, 8, ["title", "title-check"])], 2);
   };
 } }), [["__scopeId", "data-v-9459b2a1"]]);
 export {

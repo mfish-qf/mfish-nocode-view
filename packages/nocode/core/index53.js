@@ -19,7 +19,7 @@ const l = t({ name: "MfMapScatter", __name: "index", props: { chart: { type: Obj
       }
       return { dataArray: e3, max: r3, min: a3 };
     })(e2.source);
-    r2.series[0].data = a2.dataArray, r2.series[0].tooltip = { trigger: "item", formatter: (t4) => `${t4.name}<br>${e2.source[0][1]}: ${t4.value[2]}` }, r2.visualMap.min = a2.min, r2.visualMap.max = a2.max, t3 == null ? void 0 : t3.setOption(r2, true);
+    r2.series[0].data = a2.dataArray, r2.series[0].tooltip = { trigger: "item", formatter: (t4) => `${t4.name}<br>${e2.source[0][1]}: ${t4.value[2]}` }, r2.visualMap.min = a2.min, r2.visualMap.max = a2.max, t3?.setOption(r2, true);
   }
   return (t3, e2) => (o(), a("div", s({ ref_key: "mfMapScatterRef", ref: h, style: { width: "100%", height: "100%" } }, n(i(d), true)), null, 16));
 } });

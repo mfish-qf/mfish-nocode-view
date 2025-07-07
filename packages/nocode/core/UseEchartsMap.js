@@ -3,7 +3,7 @@ import { cloneDeep as t } from "lodash-es";
 import { u as r } from "./index.js";
 function l(l2) {
   const i = r();
-  e(() => i == null ? void 0 : i.getTheme, (e2) => {
+  e(() => i?.getTheme, (e2) => {
     l2 && o().then(() => {
       !function(e3, o2) {
         const r2 = { dark: "#03133D", light: "#E9F2FA" }, l3 = { dark: "#6699FF", light: "#4486C1" }, i2 = { dark: "#1773C3", light: "#FFFFFF" }, a = { dark: "#3146B3", light: "#6699FF" };

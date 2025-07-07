@@ -4,16 +4,7 @@ import { useDesign as u } from "@mfish/core/hooks";
 import { u as g, m as C, _ as m } from "./index.js";
 import { J as h } from "./JsonData.js";
 const p = m(a({ __name: "MfSelectDataConfig", setup(a2) {
-  const m2 = g(), { setFields: p2, deleteFields: v, setDataTable: D } = C(), { prefixCls: _ } = u("select-data-config"), b = t(() => {
-    var _a;
-    return m2.getCurConfigComponent.chart.data.fields ? ((_a = m2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.label) ?? [] : [];
-  }), x = t(() => {
-    var _a;
-    return m2.getCurConfigComponent.chart.data.fields ? ((_a = m2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.value) ?? [] : [];
-  }), S = t(() => {
-    var _a;
-    return ((_a = m2.getCurConfigComponent.chart.data) == null ? void 0 : _a.dataSet) ? JSON.stringify(m2.getCurConfigComponent.chart.data.dataSet) : "";
-  });
+  const m2 = g(), { setFields: p2, deleteFields: v, setDataTable: D } = C(), { prefixCls: _ } = u("select-data-config"), b = t(() => m2.getCurConfigComponent.chart.data.fields ? m2.getCurConfigComponent.chart.data.fields?.label ?? [] : []), x = t(() => m2.getCurConfigComponent.chart.data.fields ? m2.getCurConfigComponent.chart.data.fields?.value ?? [] : []), S = t(() => m2.getCurConfigComponent.chart.data?.dataSet ? JSON.stringify(m2.getCurConfigComponent.chart.data.dataSet) : "");
   function j() {
     D();
   }

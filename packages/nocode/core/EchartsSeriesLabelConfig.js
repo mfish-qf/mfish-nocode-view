@@ -20,28 +20,22 @@ const m = { class: "title" }, C = p(e({ __name: "EchartsSeriesLabelConfig", prop
     x.value.label.verticalAlign = e3.value, y("labelChange", x.value);
   }
   function B(e3) {
-    var _a, _b, _c, _d;
-    (_b = (_a = x.value) == null ? void 0 : _a.label) == null ? true : delete _b.fontStyle, (_d = (_c = x.value) == null ? void 0 : _c.label) == null ? true : delete _d.fontWeight, F(e3);
+    delete x.value?.label?.fontStyle, delete x.value?.label?.fontWeight, F(e3);
   }
   function F(e3) {
-    var _a;
-    x.value.label = { ...(_a = x.value) == null ? void 0 : _a.label, ...e3.style }, y("labelChange", x.value);
+    x.value.label = { ...x.value?.label, ...e3.style }, y("labelChange", x.value);
   }
   function I() {
     x.value.label.position = A.value, y("labelChange", x.value);
   }
   return a(() => _.getCurConfigComponent, (e3) => {
     e3 && function() {
-      var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
-      void 0 !== ((_a = x.value.label) == null ? void 0 : _a.position) && (A.value = x.value.label.position);
-      k.value = {}, k.value.font = (_c = (_b = x.value) == null ? void 0 : _b.label) == null ? void 0 : _c.fontFamily, k.value.fontSize = (_f = (_e = (_d = x.value) == null ? void 0 : _d.label) == null ? void 0 : _e.fontSize) == null ? void 0 : _f.replace("px", ""), k.value.textColor = (_h = (_g = x.value) == null ? void 0 : _g.label) == null ? void 0 : _h.color;
-      const e4 = ((_j = (_i = x.value) == null ? void 0 : _i.label) == null ? void 0 : _j.fontStyle) ? { italic: true } : {}, l2 = ((_l = (_k = x.value) == null ? void 0 : _k.label) == null ? void 0 : _l.fontWeight) ? { bold: true } : {};
-      k.value.fontStyle = { ...e4, ...l2 }, k.value.hAlignType = (_n = (_m = x.value) == null ? void 0 : _m.label) == null ? void 0 : _n.align, k.value.vAlignType = (_p = (_o = x.value) == null ? void 0 : _o.label) == null ? void 0 : _p.verticalAlign;
+      void 0 !== x.value.label?.position && (A.value = x.value.label.position);
+      k.value = {}, k.value.font = x.value?.label?.fontFamily, k.value.fontSize = x.value?.label?.fontSize?.replace("px", ""), k.value.textColor = x.value?.label?.color;
+      const e4 = x.value?.label?.fontStyle ? { italic: true } : {}, l2 = x.value?.label?.fontWeight ? { bold: true } : {};
+      k.value.fontStyle = { ...e4, ...l2 }, k.value.hAlignType = x.value?.label?.align, k.value.vAlignType = x.value?.label?.verticalAlign;
     }();
-  }, { immediate: true }), (l2, a2) => {
-    var _a, _b;
-    return o(), t("div", { class: i(n(S)) }, [u(h, { title: "标签设置", "default-expand": false, "allow-check": true, "title-check": (_b = (_a = e2.series) == null ? void 0 : _a.label) == null ? void 0 : _b.show, onChecked: w }, { default: s(() => [u(n(c), { "hide-font-style": [n(f).Underline, n(f).Strikethrough], "color-type": 1, "vertical-align": true, "text-style": k.value, onFontChange: F, onSizeChange: F, onFontStyleChange: B, onColorChange: F, onHAlignChange: L, onVAlignChange: z }, null, 8, ["hide-font-style", "text-style"]), v("div", m, [a2[1] || (a2[1] = r(" 标签位置 ")), u(n(d), { value: A.value, "onUpdate:value": a2[0] || (a2[0] = (e3) => A.value = e3), options: T, "show-search": false, "filter-option": false, placeholder: "请选择", onChange: I }, null, 8, ["value"])])]), _: 1 }, 8, ["title-check"])], 2);
-  };
+  }, { immediate: true }), (l2, a2) => (o(), t("div", { class: i(n(S)) }, [u(h, { title: "标签设置", "default-expand": false, "allow-check": true, "title-check": e2.series?.label?.show, onChecked: w }, { default: s(() => [u(n(c), { "hide-font-style": [n(f).Underline, n(f).Strikethrough], "color-type": 1, "vertical-align": true, "text-style": k.value, onFontChange: F, onSizeChange: F, onFontStyleChange: B, onColorChange: F, onHAlignChange: L, onVAlignChange: z }, null, 8, ["hide-font-style", "text-style"]), v("div", m, [a2[1] || (a2[1] = r(" 标签位置 ")), u(n(d), { value: A.value, "onUpdate:value": a2[0] || (a2[0] = (e3) => A.value = e3), options: T, "show-search": false, "filter-option": false, placeholder: "请选择", onChange: I }, null, 8, ["value"])])]), _: 1 }, 8, ["title-check"])], 2));
 } }), [["__scopeId", "data-v-d9fdc70b"]]);
 export {
   C as E

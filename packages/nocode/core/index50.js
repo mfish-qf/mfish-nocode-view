@@ -18,7 +18,7 @@ const h = t({ name: "MfMapChunks", __name: "index", props: { chart: { type: Obje
       }
       return { dataArray: r3, max: e3, min: a3 };
     })(r2.source);
-    e2.series[0].data = a2.dataArray, e2.series[0].tooltip = { trigger: "item", formatter: "{b}<br/>{c}" }, e2.visualMap.min = a2.min, e2.visualMap.max = a2.max, t3 == null ? void 0 : t3.setOption(e2, true);
+    e2.series[0].data = a2.dataArray, e2.series[0].tooltip = { trigger: "item", formatter: "{b}<br/>{c}" }, e2.visualMap.min = a2.min, e2.visualMap.max = a2.max, t3?.setOption(e2, true);
   }
   return (t3, r2) => (s(), a("div", o({ ref_key: "mfMapChunksRef", ref: f, style: { width: "100%", height: "100%" } }, n(i(l), true)), null, 16));
 } });

@@ -6,7 +6,7 @@ const p = r({ name: "MfRadar", __name: "index", props: { chart: { type: Object, 
   const p2 = r2, f = t("mfRadarRef"), { commonEvents: h } = c(p2.chart);
   function u(r3, t2) {
     const a2 = { ...m(p2.chart.options), backgroundColor: "transparent" };
-    a2.radar = { ...a2.radar, indicator: m(t2 == null ? void 0 : t2.indicator) }, a2.series[0].data = m(t2 == null ? void 0 : t2.data), r3 == null ? void 0 : r3.setOption(a2, true);
+    a2.radar = { ...a2.radar, indicator: m(t2?.indicator) }, a2.series[0].data = m(t2?.data), r3?.setOption(a2, true);
   }
   return a(() => {
     d(f.value, p2.chart, p2.chartContain, u);
