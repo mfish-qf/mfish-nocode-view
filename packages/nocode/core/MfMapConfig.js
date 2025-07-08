@@ -9,10 +9,7 @@ import "@mfish/core/enums";
 import { Icon as A } from "@mfish/core/components/Icon";
 import "@mfish/core/utils/Is";
 const B = R(o({ __name: "MfColorIntervalConfig", props: { themeColors: { type: Array, default: () => [] } }, setup(o2) {
-  const d2 = o2, v2 = k(), { prefixCls: _2 } = y("color-interval-config"), M2 = e(false), R2 = n(() => {
-    var _a, _b;
-    return ((_b = (_a = v2.getCurComponent.chart.options.visualMap) == null ? void 0 : _a.inRange) == null ? void 0 : _b.color) || [];
-  });
+  const d2 = o2, v2 = k(), { prefixCls: _2 } = y("color-interval-config"), M2 = e(false), R2 = n(() => v2.getCurComponent.chart.options.visualMap?.inRange?.color || []);
   function w2() {
     const o3 = v2.getCurComponent.chart.options.visualMap.inRange.color.length;
     d2.themeColors.length > o3 ? v2.getCurComponent.chart.options.visualMap.inRange.color.push(d2.themeColors[o3]) : v2.getCurComponent.chart.options.visualMap.inRange.color.push("#FF0000");
@@ -21,10 +18,9 @@ const B = R(o({ __name: "MfColorIntervalConfig", props: { themeColors: { type: A
     v2.getCurComponent.chart.options.visualMap.show = M2.value;
   }
   return t(() => d2.themeColors, (o3) => {
-    (o3 == null ? void 0 : o3.length) > 0 && (v2.getCurComponent.chart.options.visualMap.inRange.color = j(o3));
+    o3?.length > 0 && (v2.getCurComponent.chart.options.visualMap.inRange.color = j(o3));
   }), t(() => v2.getCurConfigComponent, (o3) => {
-    var _a, _b;
-    o3 && void 0 !== ((_a = v2.getCurConfigComponent.chart.options.visualMap) == null ? void 0 : _a.show) && (M2.value = ((_b = v2.getCurConfigComponent.chart.options.visualMap) == null ? void 0 : _b.show) || false);
+    o3 && void 0 !== v2.getCurConfigComponent.chart.options.visualMap?.show && (M2.value = v2.getCurConfigComponent.chart.options.visualMap?.show || false);
   }, { immediate: true }), (o3, e2) => {
     const n2 = a("AButton");
     return l(), i("div", { class: s(r(_2)) }, [c(F, { title: "颜色区间配置", "default-expand": true }, { action: p(() => [c(r(x), { checked: M2.value, "onUpdate:checked": e2[0] || (e2[0] = (o4) => M2.value = o4), onChange: B2 }, { default: p(() => e2[1] || (e2[1] = [h(" 显示颜色条 ")])), _: 1, __: [1] }, 8, ["checked"])]), default: p(() => [(l(true), i(u, null, C(R2.value, (o4, n3) => (l(), i("div", { class: "title", key: n3 }, [e2[2] || (e2[2] = h(" 区间颜色 ")), m("div", null, [c(r(I), { type: 1, placeholder: "设置区间颜色，格式#FFFFFF", value: o4, "hide-cancel": true, "hide-confirm": true, onInputChange: (o5) => function(o6, e3) {
@@ -42,8 +38,7 @@ const B = R(o({ __name: "MfColorIntervalConfig", props: { themeColors: { type: A
     u2.value = j(o3.color);
   }
   return t(() => n2.getCurConfigComponent, (o3) => {
-    var _a, _b;
-    o3 && void 0 !== ((_a = n2.getCurConfigComponent.chart.options.tooltip) == null ? void 0 : _a.show) && (i2.value = ((_b = n2.getCurConfigComponent.chart.options.tooltip) == null ? void 0 : _b.show) || false);
+    o3 && void 0 !== n2.getCurConfigComponent.chart.options.tooltip?.show && (i2.value = n2.getCurConfigComponent.chart.options.tooltip?.show || false);
   }, { immediate: true }), (o3, e2) => (l(), f(v, { class: s(r(a2)) }, { default: p(() => [c(_, { onThemeChange: m2 }), c(M), c(r(x), { checked: i2.value, "onUpdate:checked": e2[0] || (e2[0] = (o4) => i2.value = o4), onChange: C2 }, { default: p(() => e2[1] || (e2[1] = [h(" 提示框")])), _: 1, __: [1] }, 8, ["checked"]), d(o3.$slots, "default", {}, void 0, true), c(B, { "theme-colors": u2.value }, null, 8, ["theme-colors"])]), _: 3 }, 8, ["class"]));
 } }), [["__scopeId", "data-v-2f6088a9"]]);
 export {

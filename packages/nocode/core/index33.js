@@ -9,11 +9,8 @@ import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
 import { _ as u } from "./index.vue_vue_type_script_setup_true_lang.js";
 const h = t({ name: "MfDecoration11", __name: "index", props: { chart: { type: Object } }, setup(t2) {
-  const h2 = t2, f = e(() => n(h2 == null ? void 0 : h2.chart));
-  return (e2, n2) => (r(), o(u, { component: s(c), chart: t2.chart }, { default: i(() => {
-    var _a;
-    return [m("div", { style: p(f.value) }, a((_a = t2.chart) == null ? void 0 : _a.options.title), 5)];
-  }), _: 1 }, 8, ["component", "chart"]));
+  const h2 = t2, f = e(() => n(h2?.chart));
+  return (e2, n2) => (r(), o(u, { component: s(c), chart: t2.chart }, { default: i(() => [m("div", { style: p(f.value) }, a(t2.chart?.options.title), 5)]), _: 1 }, 8, ["component", "chart"]));
 } });
 export {
   h as default

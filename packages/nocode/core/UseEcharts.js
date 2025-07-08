@@ -9,30 +9,20 @@ function d(d2, c, i, p) {
   const s = (e2) => {
     p ? t(() => {
       p(l, e2);
-    }) : l == null ? void 0 : l.setOption({ dataset: e2, ...c.options, backgroundColor: "transparent" }, true);
+    }) : l?.setOption({ dataset: e2, ...c.options, backgroundColor: "transparent" }, true);
   };
   e(() => u.getTheme, (e2) => {
-    var _a;
-    l == null ? void 0 : l.dispose(), l = o.init(d2, e2), ((_a = c.type) == null ? void 0 : _a.startsWith("MfMap")) && o.registerMap("china", a), s(c.data.dataSet);
+    l?.dispose(), l = o.init(d2, e2), c.type?.startsWith("MfMap") && o.registerMap("china", a), s(c.data.dataSet);
   }, { immediate: true }), e(() => c.options, (e2) => {
     e2 && s(c.data.dataSet);
   }, { deep: true }), e(() => c.data.dataSet, (e2) => {
     e2 && s(e2);
-  }, { deep: true }), e([() => {
-    var _a;
-    return (_a = i == null ? void 0 : i.dropInfo) == null ? void 0 : _a.width;
-  }, () => {
-    var _a;
-    return (_a = i == null ? void 0 : i.dropInfo) == null ? void 0 : _a.height;
-  }, () => i == null ? void 0 : i.show, () => {
-    var _a;
-    return (_a = c == null ? void 0 : c.showHide) == null ? void 0 : _a.show;
-  }], r(() => {
+  }, { deep: true }), e([() => i?.dropInfo?.width, () => i?.dropInfo?.height, () => i?.show, () => c?.showHide?.show], r(() => {
     y();
   }, 100));
   const y = () => {
     t(() => {
-      l == null ? void 0 : l.resize();
+      l?.resize();
     }).then();
   };
 }

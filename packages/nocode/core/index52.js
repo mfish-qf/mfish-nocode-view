@@ -29,8 +29,8 @@ const g = e({ name: "MfMapLine3D", __name: "index", props: { chart: { type: Obje
         a3.push({ fromName: r4[0], toName: r4[1], coords: [[...e5, 0], [...t5, 0]], value: o3 }), n2(r4[1], o3), n2(r4[0], 0);
       }
       return { lineDataArray: a3, rippleDataArray: t3, max: o2, min: s2 };
-    })(t2 == null ? void 0 : t2.source);
-    a2.series[0].data = r2.lineDataArray, a2.series.length > 1 && (a2.series[1].data = r2.rippleDataArray, a2.series[1].tooltip = { trigger: "item", formatter: (e4) => `${e4.name}<br>合计: ${e4.value[3]}` }), a2.visualMap.min = r2.min, a2.visualMap.max = r2.max, e3 == null ? void 0 : e3.setOption(a2, true);
+    })(t2?.source);
+    a2.series[0].data = r2.lineDataArray, a2.series.length > 1 && (a2.series[1].data = r2.rippleDataArray, a2.series[1].tooltip = { trigger: "item", formatter: (e4) => `${e4.name}<br>合计: ${e4.value[3]}` }), a2.visualMap.min = r2.min, a2.visualMap.max = r2.max, e3?.setOption(a2, true);
   }
   return (e3, t2) => (o(), r("div", s({ ref_key: "mfMapLineRef", ref: y, style: { width: "100%", height: "100%" } }, n(i(x), true)), null, 16));
 } });

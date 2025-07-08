@@ -29,10 +29,7 @@ const w = ["onMouseenter"], z = { class: "title" }, A = B(e({ __name: "EventSele
   function W() {
     N("ok", { event: P(G.value), modifyIndex: J.value }), T.value = false;
   }
-  a(() => {
-    var _a;
-    return (_a = F.getCurConfigComponent) == null ? void 0 : _a.chart.id;
-  }, () => {
+  a(() => F.getCurConfigComponent?.chart.id, () => {
     T.value = false;
   });
   const X = (e3) => {

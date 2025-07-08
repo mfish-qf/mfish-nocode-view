@@ -4,22 +4,13 @@ import { useDesign as C } from "@mfish/core/hooks";
 import { u as g, m, aq as p, _ as h } from "./index.js";
 import { J as x } from "./JsonData.js";
 const D = { class: "title" }, y = { class: "title" }, v = h(t({ __name: "MfBarLineDataConfig", props: { xTitle: { type: String, default: "X轴 / 维度" }, yTitle: { type: String, default: "Y轴 / 值" }, xMaxCount: { type: Number, default: 1 }, yMaxCount: { type: Number, default: 100 } }, setup(t2) {
-  const h2 = g(), { setFields: v2, deleteFields: S, getFields: _, setDataTable: M } = m(), { resetDefault: T, setStaticData: b } = p(), { prefixCls: j } = C("bar-line-data-config"), F = a(() => {
-    var _a, _b;
-    return ((_b = (_a = h2.getCurConfigComponent.chart.data) == null ? void 0 : _a.dataSet) == null ? void 0 : _b.source) ? JSON.stringify(h2.getCurConfigComponent.chart.data.dataSet.source) : "";
-  }), J = a(() => {
-    var _a;
-    return h2.getCurConfigComponent.chart.data.fields ? ((_a = h2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.dimensions) ?? [] : [];
-  }), N = a(() => {
-    var _a;
-    return h2.getCurConfigComponent.chart.data.fields ? ((_a = h2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.source) ?? [] : [];
-  });
+  const h2 = g(), { setFields: v2, deleteFields: S, getFields: _, setDataTable: M } = m(), { resetDefault: T, setStaticData: b } = p(), { prefixCls: j } = C("bar-line-data-config"), F = a(() => h2.getCurConfigComponent.chart.data?.dataSet?.source ? JSON.stringify(h2.getCurConfigComponent.chart.data.dataSet.source) : ""), J = a(() => h2.getCurConfigComponent.chart.data.fields ? h2.getCurConfigComponent.chart.data.fields?.dimensions ?? [] : []), N = a(() => h2.getCurConfigComponent.chart.data.fields ? h2.getCurConfigComponent.chart.data.fields?.source ?? [] : []);
   function I() {
     const t3 = _("dimensions");
     t3 && t3.length > 0 ? M() : T(h2.getCurConfigComponent.chart);
   }
   function k(t3) {
-    (t3 == null ? void 0 : t3.length) > 0 ? v2("dimensions", t3) : S("dimensions"), I();
+    t3?.length > 0 ? v2("dimensions", t3) : S("dimensions"), I();
   }
   function q(t3) {
     t3.length > 0 ? v2("source", t3) : S("source"), I();

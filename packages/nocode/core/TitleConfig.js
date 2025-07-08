@@ -28,8 +28,7 @@ const m = { class: "title" }, c = f(o({ __name: "TitleConfig", props: { title: {
     f2.getCurConfigComponent.chart.options.textColor = o3;
   }
   return n(() => f2.getCurConfigComponent, (o3) => {
-    var _a, _b, _c, _d, _e, _f;
-    o3 && (c2.value = {}, c2.value.font = (_a = f2.getCurConfigComponent.chart.options.font) == null ? void 0 : _a.value, c2.value.fontSize = (_b = f2.getCurConfigComponent.chart.options.fontSize) == null ? void 0 : _b.value, c2.value.hAlignType = (_c = f2.getCurConfigComponent.chart.options.hAlign) == null ? void 0 : _c.value, c2.value.vAlignType = (_d = f2.getCurConfigComponent.chart.options.vAlign) == null ? void 0 : _d.value, c2.value.textColor = (_e = f2.getCurConfigComponent.chart.options.textColor) == null ? void 0 : _e.value, c2.value.fontStyle = (_f = f2.getCurConfigComponent.chart.options.fontStyle) == null ? void 0 : _f.value);
+    o3 && (c2.value = {}, c2.value.font = f2.getCurConfigComponent.chart.options.font?.value, c2.value.fontSize = f2.getCurConfigComponent.chart.options.fontSize?.value, c2.value.hAlignType = f2.getCurConfigComponent.chart.options.hAlign?.value, c2.value.vAlignType = f2.getCurConfigComponent.chart.options.vAlign?.value, c2.value.textColor = f2.getCurConfigComponent.chart.options.textColor?.value, c2.value.fontStyle = f2.getCurConfigComponent.chart.options.fontStyle?.value);
   }, { immediate: true }), (t2, n2) => (i(), e("div", { class: r(C(h)) }, [a("div", m, g(o2.title), 1), l(C(s), { "text-style": c2.value, onFontChange: v, onSizeChange: d, onHAlignChange: y, onVAlignChange: S, onFontStyleChange: x, onColorChange: A }, null, 8, ["text-style"])], 2));
 } }), [["__scopeId", "data-v-d5d58608"]]);
 export {

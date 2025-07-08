@@ -20,10 +20,9 @@ const G = { class: "title" }, U = { style: { width: "90px", "font-weight": "500"
   }
   t(() => T.getCurConfigComponent, (o3) => {
     o3 && function() {
-      var _a, _b, _c, _d;
       S2.value = T.getCurConfigComponent.chart.options.headerBGC, z.value = T.getCurConfigComponent.chart.options.oddRowBGC, R.value = T.getCurConfigComponent.chart.options.evenRowBGC, void 0 !== T.getCurConfigComponent.chart.options.headerHeight && (j.value = T.getCurConfigComponent.chart.options.headerHeight);
       void 0 !== T.getCurConfigComponent.chart.options.waitTime && (P.value = T.getCurConfigComponent.chart.options.waitTime / 1e3);
-      void 0 !== ((_b = (_a = T.getCurConfigComponent.chart.data) == null ? void 0 : _a.pagination) == null ? void 0 : _b.pageSize) && (M.value = (_d = (_c = T.getCurConfigComponent.chart.data) == null ? void 0 : _c.pagination) == null ? void 0 : _d.pageSize);
+      void 0 !== T.getCurConfigComponent.chart.data?.pagination?.pageSize && (M.value = T.getCurConfigComponent.chart.data?.pagination?.pageSize);
       void 0 !== T.getCurConfigComponent.chart.options.indexHeader && (A.value = T.getCurConfigComponent.chart.options.indexHeader);
       void 0 !== T.getCurConfigComponent.chart.options.hoverPause && (D.value = T.getCurConfigComponent.chart.options.hoverPause);
       void 0 !== T.getCurConfigComponent.chart.options.carousel && ($.value = T.getCurConfigComponent.chart.options.carousel);
@@ -36,10 +35,7 @@ const G = { class: "title" }, U = { style: { width: "90px", "font-weight": "500"
         q.value = e2;
       }
     }();
-  }, { immediate: true }), t(() => {
-    var _a, _b;
-    return (_b = (_a = T.getCurConfigComponent.chart) == null ? void 0 : _a.options) == null ? void 0 : _b.indexHeader;
-  }, (o3) => {
+  }, { immediate: true }), t(() => T.getCurConfigComponent.chart?.options?.indexHeader, (o3) => {
     o3 && (T.getCurConfigComponent.chart.options.tableInfo.columns[0].title = o3);
   });
   const Q = b(() => {
@@ -69,10 +65,7 @@ const G = { class: "title" }, U = { style: { width: "90px", "font-weight": "500"
   }
   return (o3, e2) => {
     const n2 = a("AInput");
-    return l(), i(d, { class: u(C(w2)) }, { default: r(() => [s(x, { title: "表头设置" }, { default: r(() => {
-      var _a;
-      return [e2[3] || (e2[3] = g("div", { class: "title" }, " 背景颜色", -1)), s(C(I), { placeholder: "设置背景颜色，格式#FFFFFF", value: S2.value, onConfirmChange: N, onInputChange: O }, null, 8, ["value"]), s(x, { title: "行号设置", "allow-check": true, "title-check": (_a = C(T).getCurConfigComponent.chart.options) == null ? void 0 : _a.index, onChecked: oo }, { default: r(() => [e2[2] || (e2[2] = g("div", { class: "title" }, " 行号表头名称", -1)), s(n2, { value: A.value, "onUpdate:value": e2[0] || (e2[0] = (o4) => A.value = o4), onChange: eo }, null, 8, ["value"])]), _: 1, __: [2] }, 8, ["title-check"])];
-    }), _: 1, __: [3] }), s(x, { title: "表体设置" }, { default: r(() => [g("div", G, [e2[4] || (e2[4] = c(" 表行数（行） ")), s(C(H), { value: M.value, "onUpdate:value": e2[1] || (e2[1] = (o4) => M.value = o4), min: 1, max: 50, onChange: V }, null, 8, ["value"])]), e2[5] || (e2[5] = g("div", { class: "title" }, " 奇数行颜色", -1)), s(C(I), { placeholder: "设置奇数行颜色，格式#FFFFFF", value: z.value, onConfirmChange: W, onInputChange: X }, null, 8, ["value"]), e2[6] || (e2[6] = g("div", { class: "title" }, " 偶数行颜色", -1)), s(C(I), { placeholder: "设置偶数行颜色，格式#FFFFFF", value: R.value, onConfirmChange: Y, onInputChange: Z }, null, 8, ["value"])]), _: 1, __: [5, 6] }), K.value > 0 ? (l(), i(x, { key: 0, title: "列配置" }, { default: r(() => [(l(true), f(h, null, m(K.value, (o4) => (l(), f("div", { key: o4, class: "title" }, [c(v(`${o4}列`) + " 宽度 ", 1), s(C(H), { value: L.value[o4 - 1], "onUpdate:value": (e3) => L.value[o4 - 1] = e3, min: 0, max: 1e3, onChange: (e3) => function(o5) {
+    return l(), i(d, { class: u(C(w2)) }, { default: r(() => [s(x, { title: "表头设置" }, { default: r(() => [e2[3] || (e2[3] = g("div", { class: "title" }, " 背景颜色", -1)), s(C(I), { placeholder: "设置背景颜色，格式#FFFFFF", value: S2.value, onConfirmChange: N, onInputChange: O }, null, 8, ["value"]), s(x, { title: "行号设置", "allow-check": true, "title-check": C(T).getCurConfigComponent.chart.options?.index, onChecked: oo }, { default: r(() => [e2[2] || (e2[2] = g("div", { class: "title" }, " 行号表头名称", -1)), s(n2, { value: A.value, "onUpdate:value": e2[0] || (e2[0] = (o4) => A.value = o4), onChange: eo }, null, 8, ["value"])]), _: 1, __: [2] }, 8, ["title-check"])]), _: 1, __: [3] }), s(x, { title: "表体设置" }, { default: r(() => [g("div", G, [e2[4] || (e2[4] = c(" 表行数（行） ")), s(C(H), { value: M.value, "onUpdate:value": e2[1] || (e2[1] = (o4) => M.value = o4), min: 1, max: 50, onChange: V }, null, 8, ["value"])]), e2[5] || (e2[5] = g("div", { class: "title" }, " 奇数行颜色", -1)), s(C(I), { placeholder: "设置奇数行颜色，格式#FFFFFF", value: z.value, onConfirmChange: W, onInputChange: X }, null, 8, ["value"]), e2[6] || (e2[6] = g("div", { class: "title" }, " 偶数行颜色", -1)), s(C(I), { placeholder: "设置偶数行颜色，格式#FFFFFF", value: R.value, onConfirmChange: Y, onInputChange: Z }, null, 8, ["value"])]), _: 1, __: [5, 6] }), K.value > 0 ? (l(), i(x, { key: 0, title: "列配置" }, { default: r(() => [(l(true), f(h, null, m(K.value, (o4) => (l(), f("div", { key: o4, class: "title" }, [c(v(`${o4}列`) + " 宽度 ", 1), s(C(H), { value: L.value[o4 - 1], "onUpdate:value": (e3) => L.value[o4 - 1] = e3, min: 0, max: 1e3, onChange: (e3) => function(o5) {
       T.getCurConfigComponent.chart.options.columns[o5].width = L.value[o5];
     }(o4 - 1) }, null, 8, ["value", "onUpdate:value", "onChange"]), g("span", U, [s(C(y), { size: "small", value: q.value[o4 - 1], "onUpdate:value": (e3) => q.value[o4 - 1] = e3, onChange: (e3) => function(o5) {
       T.getCurConfigComponent.chart.options.columns[o5].align = q.value[o5];

@@ -24,19 +24,16 @@ const q = ["onMouseenter"], F = { class: "setting" }, H = e({ __name: "Animation
     p2.getCurConfigComponent.chart.animations.splice(e6, 1), g2.value = -1;
   }(o2) }, null, 8, ["onClick"])) : v("", true), d(i(x), { placement: "bottom", trigger: ["click"], open: _2.value && g2.value === o2, onOpenChange: M2, arrow: true }, { overlay: u(() => [c("div", F, [d(i(A), { style: { width: "100%" }, value: e4.duration, "onUpdate:value": (n3) => e4.duration = n3, size: "small", placeholder: "时长 ms", step: 100, min: 0, max: 1e5 }, null, 8, ["value", "onUpdate:value"]), d(i(A), { style: { width: "100%" }, disabled: e4.loop, value: e4.repeat, "onUpdate:value": (n3) => e4.repeat = n3, size: "small", placeholder: "重复次数", step: 1, min: 0, max: 3 }, null, 8, ["disabled", "value", "onUpdate:value"]), d(i(b), { checked: e4.loop, "onUpdate:checked": (n3) => e4.loop = n3, onChange: (n3) => function(e5) {
     e5.loop && (e5.repeat = void 0);
-  }(e4) }, { default: u(() => n2[1] || (n2[1] = [r(" 无限循环")])), _: 2, __: [1] }, 1032, ["checked", "onUpdate:checked", "onChange"]), d(K, { "hide-param": true, events: e4 == null ? void 0 : e4.events, onOk: (n3) => function(e5, n4) {
-    (n4 == null ? void 0 : n4.events) || (n4.events = []);
+  }(e4) }, { default: u(() => n2[1] || (n2[1] = [r(" 无限循环")])), _: 2, __: [1] }, 1032, ["checked", "onUpdate:checked", "onChange"]), d(K, { "hide-param": true, events: e4?.events, onOk: (n3) => function(e5, n4) {
+    n4?.events || (n4.events = []);
     const o3 = n4.events.findIndex((n5) => n5.id === e5.event.id && n5.event === e5.event.event);
     -1 === o3 ? e5.modifyIndex >= 0 ? n4.events.splice(e5.modifyIndex, 1, e5.event) : n4.events.push(e5.event) : n4.events.splice(o3, 1, e5.event);
   }(n3, e4), onDelete: (n3) => function(e5, n4) {
-    -1 !== e5 && (n4 == null ? void 0 : n4.events.splice(e5, 1));
+    -1 !== e5 && n4?.events.splice(e5, 1);
   }(n3, e4) }, null, 8, ["events", "onOk", "onDelete"])])]), default: u(() => [d(i(w), { class: "icon", icon: "ant-design:setting-outlined" })]), _: 2 }, 1032, ["open"])])], 40, q)]), _: 1 }, 8, ["class", "modelValue"]));
 } }), J = N(H, [["__scopeId", "data-v-8d331eae"]]), Q = { key: 1, class: "animation-set" }, W = { class: "setting" }, X = { class: "mask-layer" }, Z = ["onClick", "onMouseenter"], $ = N(e({ name: "AnimationConfig", __name: "index", setup(e2) {
   n((e3) => ({ "3b9d7e0c": $2.value, "6e53613f": i(G2) }));
-  const x2 = a(""), A2 = a(""), b2 = D().getDarkMode, N2 = o(() => b2.value === R.DARK ? { color: "rgba(255,255,255,0.3)" } : { color: "rgba(0,0,0,0.2)" }), G2 = D().getThemeColor, K2 = O(), q2 = o(() => K2.getCurConfigComponent.chart.animations), F2 = o(() => {
-    var _a;
-    return (_a = P.find((e3) => e3.value === x2.value)) == null ? void 0 : _a.payload.data;
-  }), { token: H2 } = I.useToken(), $2 = o(() => H2.value.colorInfoBg), { prefixCls: ee } = z("animation-config"), ne = a(false), oe = () => {
+  const x2 = a(""), A2 = a(""), b2 = D().getDarkMode, N2 = o(() => b2.value === R.DARK ? { color: "rgba(255,255,255,0.3)" } : { color: "rgba(0,0,0,0.2)" }), G2 = D().getThemeColor, K2 = O(), q2 = o(() => K2.getCurConfigComponent.chart.animations), F2 = o(() => P.find((e3) => e3.value === x2.value)?.payload.data), { token: H2 } = I.useToken(), $2 = o(() => H2.value.colorInfoBg), { prefixCls: ee } = z("animation-config"), ne = a(false), oe = () => {
     ne.value = false;
   };
   function ae(e3) {

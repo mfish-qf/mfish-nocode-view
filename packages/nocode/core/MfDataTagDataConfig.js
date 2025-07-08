@@ -8,13 +8,7 @@ const D = v(t({ __name: "MfDataTagDataConfig", setup(t2) {
   function T(t3) {
     v2.getCurConfigComponent.chart.data.dataSet.icon = t3;
   }
-  const { prefixCls: j } = u("tag-data-config"), b = a(() => {
-    var _a;
-    return v2.getCurConfigComponent.chart.data.fields ? ((_a = v2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.title) ?? [] : [];
-  }), k = a(() => {
-    var _a;
-    return v2.getCurConfigComponent.chart.data.fields ? ((_a = v2.getCurConfigComponent.chart.data.fields) == null ? void 0 : _a.icon) ?? [] : [];
-  });
+  const { prefixCls: j } = u("tag-data-config"), b = a(() => v2.getCurConfigComponent.chart.data.fields ? v2.getCurConfigComponent.chart.data.fields?.title ?? [] : []), k = a(() => v2.getCurConfigComponent.chart.data.fields ? v2.getCurConfigComponent.chart.data.fields?.icon ?? [] : []);
   function w() {
     const t3 = _("title"), a2 = _("icon");
     t3 && t3.length > 0 || a2 && a2.length > 0 ? I() : (S(v2.getCurConfigComponent.chart), F(v2.getCurConfigComponent.chart));

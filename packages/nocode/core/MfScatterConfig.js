@@ -14,10 +14,7 @@ const c = o({ __name: "MfScatterConfig", setup(o2) {
   function E(o3) {
     c2.getCurConfigComponent.chart.options.yAxis = o3;
   }
-  return (o3, m2) => (n(), s(r, null, { default: i(() => {
-    var _a;
-    return [t(f), t(a), t(p), t(C), t(g, { axis: e(c2).getCurConfigComponent.chart.options.xAxis, onAxisChange: l }, null, 8, ["axis"]), t(g, { "axis-type": "Y", axis: e(c2).getCurConfigComponent.chart.options.yAxis, onAxisChange: E }, null, 8, ["axis"]), t(x, { series: (_a = e(c2).getCurConfigComponent.chart.options) == null ? void 0 : _a.series[0], onLabelChange: m2[0] || (m2[0] = (o4) => e(h)(o4, 0)) }, null, 8, ["series"])];
-  }), _: 1 }));
+  return (o3, m2) => (n(), s(r, null, { default: i(() => [t(f), t(a), t(p), t(C), t(g, { axis: e(c2).getCurConfigComponent.chart.options.xAxis, onAxisChange: l }, null, 8, ["axis"]), t(g, { "axis-type": "Y", axis: e(c2).getCurConfigComponent.chart.options.yAxis, onAxisChange: E }, null, 8, ["axis"]), t(x, { series: e(c2).getCurConfigComponent.chart.options?.series[0], onLabelChange: m2[0] || (m2[0] = (o4) => e(h)(o4, 0)) }, null, 8, ["series"])]), _: 1 }));
 } });
 export {
   c as default
