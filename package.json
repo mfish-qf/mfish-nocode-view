@@ -175,6 +175,9 @@
       "vue": "$vue",
       "vite": "$vite",
       "rollup": "$rollup"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "core-js"
+    ]
   }
 }
