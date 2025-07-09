@@ -36,7 +36,7 @@ export function hexToRGB(hex: string) {
     if (sHex.length === 4) {
       let sColorNew = "#";
       for (let i = 1; i < 4; i += 1) {
-        sColorNew += sHex.slice(i, i + 1).concat(sHex.slice(i, i + 1));
+        sColorNew += [...sHex.slice(i, i + 1), ...sHex.slice(i, i + 1)];
       }
       sHex = sColorNew;
     }
@@ -65,7 +65,7 @@ export function colorIsDark(color: string) {
  * @returns {string} The HEX representation of the processed color
  */
 export function darken(color: string, amount: number) {
-  color = color.includes("#") ? color.substring(1, color.length) : color;
+  color = color.includes("#") ? color.slice(1) : color;
   amount = Math.trunc((255 * amount) / 100);
   return `#${subtractLight(color.slice(0, 2), amount)}${subtractLight(
     color.slice(2, 4),
@@ -80,7 +80,7 @@ export function darken(color: string, amount: number) {
  * @returns {string} The processed color represented as HEX
  */
 export function lighten(color: string, amount: number) {
-  color = color.includes("#") ? color.substring(1, color.length) : color;
+  color = color.includes("#") ? color.slice(1) : color;
   amount = Math.trunc((255 * amount) / 100);
   return `#${addLight(color.slice(0, 2), amount)}${addLight(color.slice(2, 4), amount)}${addLight(
     color.slice(4, 6),
@@ -97,7 +97,7 @@ export function lighten(color: string, amount: number) {
  */
 function addLight(color: string, amount: number) {
   const cc = Number.parseInt(color, 16) + amount;
-  const c = cc > 255 ? 255 : cc;
+  const c = Math.min(cc, 255);
   return c.toString(16).length > 1 ? c.toString(16) : `0${c.toString(16)}`;
 }
 
@@ -146,6 +146,6 @@ export function calculateBestTextColor(hexColor: string) {
  */
 function subtractLight(color: string, amount: number) {
   const cc = Number.parseInt(color, 16) - amount;
-  const c = cc < 0 ? 0 : cc;
+  const c = Math.max(cc, 0);
   return c.toString(16).length > 1 ? c.toString(16) : `0${c.toString(16)}`;
 }

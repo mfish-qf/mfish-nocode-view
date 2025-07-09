@@ -23,6 +23,6 @@
     "prettier": "^3.6.2"
   },
   "devDependencies": {
-    "prettier-plugin-packagejson": "^2.5.17"
+    "prettier-plugin-packagejson": "^2.5.18"
   }
 }
