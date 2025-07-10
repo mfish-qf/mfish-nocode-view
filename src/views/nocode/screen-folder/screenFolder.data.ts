@@ -6,7 +6,6 @@ import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
  * @date: 2024-01-08
  * @version: V2.0.0
  */
-export const SCREEN_SAVE = "__SCREEN_SAVE__";
 export const columns: BasicColumn[] = [
   {
     title: "父节点",

@@ -1,8 +1,8 @@
 import { defineComponent as e, useTemplateRef as t, onMounted as a, createElementBlock as r, openBlock as o, mergeProps as s, toHandlers as n, unref as i } from "vue";
 import { u as m } from "./UseEcharts.js";
-import { l as p } from "./index.js";
-import { cloneDeep as l } from "lodash-es";
-import { g as c } from "./geoCoordinate.js";
+import { i as p } from "./index.js";
+import { cloneDeep as c } from "lodash-es";
+import { g as l } from "./geoCoordinate.js";
 import { use as u } from "echarts";
 import { Lines3DChart as f, Scatter3DChart as h } from "echarts-gl/charts";
 import { Geo3DComponent as d } from "echarts-gl/components";
@@ -15,17 +15,17 @@ const g = e({ name: "MfMapLine3D", __name: "index", props: { chart: { type: Obje
     m(y.value, g2.chart, g2.chartContain, M);
   });
   function M(e3, t2) {
-    const a2 = { ...l(g2.chart.options), backgroundColor: "transparent" }, r2 = ((e4) => {
+    const a2 = { ...c(g2.chart.options), backgroundColor: "transparent" }, r2 = ((e4) => {
       const t3 = [], a3 = [], r3 = /* @__PURE__ */ new Set();
       let o2 = 0, s2 = e4 && e4.length > 1 && e4[1].length > 2 ? e4[1][2] : 0;
       const n2 = (e5, a4) => {
         if (r3.has(e5)) {
           const r4 = t3.findIndex((t4) => t4.name === e5);
           t3[r4].value[3] += a4, o2 < t3[r4].value[3] && (o2 = t3[r4].value[3]), s2 > t3[r4].value[3] && (s2 = t3[r4].value[3]);
-        } else t3.push({ name: e5, value: [...c[e5], 0, a4] }), o2 < a4 && (o2 = a4), s2 > a4 && (s2 = a4), r3.add(e5);
+        } else t3.push({ name: e5, value: [...l[e5], 0, a4] }), o2 < a4 && (o2 = a4), s2 > a4 && (s2 = a4), r3.add(e5);
       };
       for (const [t4, r4] of e4.entries()) if (t4 > 0) {
-        const e5 = c[r4[0]], t5 = c[r4[1]], o3 = Number.parseFloat(r4[2]) || 0;
+        const e5 = l[r4[0]], t5 = l[r4[1]], o3 = Number.parseFloat(r4[2]) || 0;
         a3.push({ fromName: r4[0], toName: r4[1], coords: [[...e5, 0], [...t5, 0]], value: o3 }), n2(r4[1], o3), n2(r4[0], 0);
       }
       return { lineDataArray: a3, rippleDataArray: t3, max: o2, min: s2 };

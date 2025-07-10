@@ -1,6 +1,6 @@
 import { defineComponent as t, useTemplateRef as r, onMounted as e, createElementBlock as a, openBlock as s, mergeProps as o, toHandlers as n, unref as i } from "vue";
 import { u as m } from "./UseEcharts.js";
-import { l as p } from "./index.js";
+import { i as p } from "./index.js";
 import { cloneDeep as c } from "lodash-es";
 import { u } from "./UseEchartsMap.js";
 const h = t({ name: "MfMapChunks", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(t2) {

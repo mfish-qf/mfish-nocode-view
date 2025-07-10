@@ -50,7 +50,13 @@
   import { computed, ref, watch } from "vue";
   import { Card as ACard, List as AList, Pagination, theme } from "ant-design-vue";
   import { propTypes } from "@mfish/core/utils/PropTypes";
-  import { deleteMfScreen, getScreenFolderAndFile, getScreenFolderTree, updateMfScreen } from "@mfish/nocode";
+  import {
+    deleteMfScreen,
+    getScreenFolderAndFile,
+    getScreenFolderTree,
+    SCREEN_SAVE,
+    updateMfScreen
+  } from "@mfish/nocode";
   import { useDesign } from "@mfish/core/hooks";
   import { FileFolderVo } from "@/api/nocode/model/FileFolderModel";
   import { usePagination } from "@mfish/core/utils/PageUtils";
@@ -58,7 +64,6 @@
   import { useModal } from "@mfish/core/components/Modal";
   import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
   import { router } from "@mfish/core/router";
-  import { SCREEN_SAVE } from "@/views/nocode/screen-folder/screenFolder.data";
   import InputSearch from "@mfish/core/components/InputSearch";
   import PreviewModal from "@/views/nocode/screen-folder/PreviewModal.vue";
   import ScreenResource from "@/views/nocode/screen-resource/ScreenResource.vue";

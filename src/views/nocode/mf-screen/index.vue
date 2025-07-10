@@ -65,6 +65,7 @@
     insertMfScreen,
     listenGlobalKeyboard,
     preSaveScreen,
+    SCREEN_SAVE,
     updateMfScreen,
     useScreenEditStore,
     useScreenLayoutStore,
@@ -78,7 +79,6 @@
   import { dataURLtoBlob } from "@mfish/core/utils/file/Base64Convert";
   import { uploadApi } from "@mfish/core/api";
   import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
-  import { SCREEN_SAVE } from "@/views/nocode/screen-folder/screenFolder.data";
   import ScreenResource from "@/views/nocode/screen-resource/ScreenResource.vue";
   import ScreenShare from "@/views/nocode/mf-screen/ScreenShare.vue";
   import ScreenResourceModal from "@/views/nocode/mf-screen/ScreenResourceModal.vue";

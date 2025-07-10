@@ -1,7 +1,7 @@
 import { defineComponent as t, computed as a, createBlock as e, openBlock as n, normalizeClass as o, unref as i, withCtx as s, createElementVNode as l, createVNode as d, renderSlot as f } from "vue";
 import { D as r, a as g } from "./DragInData.js";
 import { useDesign as c } from "@mfish/core/hooks";
-import { u, m as C, _ as m } from "./index.js";
+import { u, j as C, _ as m } from "./index.js";
 import { J as h } from "./JsonData.js";
 const p = m(t({ __name: "MfSegmentedDataConfig", setup(t2) {
   const m2 = u(), { setFields: p2, deleteFields: v, setDataTable: D } = C(), { prefixCls: x } = c("segmented-data-config"), _ = a(() => m2.getCurConfigComponent.chart.data.fields ? m2.getCurConfigComponent.chart.data.fields?.title ?? [] : []), S = a(() => m2.getCurConfigComponent.chart.data.fields ? m2.getCurConfigComponent.chart.data.fields?.value ?? [] : []), j = a(() => m2.getCurConfigComponent.chart.data.fields ? m2.getCurConfigComponent.chart.data.fields?.icon ?? [] : []), J = a(() => m2.getCurConfigComponent.chart.data?.dataSet ? JSON.stringify(m2.getCurConfigComponent.chart.data.dataSet) : "");

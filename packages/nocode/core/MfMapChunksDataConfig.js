@@ -1,7 +1,7 @@
 import { defineComponent as t, computed as a, createBlock as e, openBlock as n, normalizeClass as o, unref as s, withCtx as i, createElementVNode as r, createVNode as l, renderSlot as d } from "vue";
 import { D as f, a as c } from "./DragInData.js";
 import { useDesign as u } from "@mfish/core/hooks";
-import { u as C, m as g, ar as m, _ as h } from "./index.js";
+import { u as C, j as g, as as m, _ as h } from "./index.js";
 import { J as p } from "./JsonData.js";
 const D = h(t({ __name: "MfMapChunksDataConfig", setup(t2) {
   const h2 = C(), { setFields: D2, deleteFields: v, getFields: _, setDataTable: x } = g(), { prefixCls: S } = u("map-chunks-data-config"), { resetDefault: j } = m(), k = a(() => h2.getCurConfigComponent.chart.data.fields ? h2.getCurConfigComponent.chart.data.fields?.name ?? [] : []), F = a(() => h2.getCurConfigComponent.chart.data.fields ? h2.getCurConfigComponent.chart.data.fields?.value ?? [] : []), J = a(() => h2.getCurConfigComponent.chart.data.dataSet?.source ? JSON.stringify(h2.getCurConfigComponent.chart.data.dataSet.source) : "");

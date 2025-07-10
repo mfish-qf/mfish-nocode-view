@@ -2,7 +2,7 @@ import { defineComponent as o, watch as t, createBlock as e, openBlock as n, nor
 import { Checkbox as f } from "ant-design-vue";
 import m from "./MfDecorationConfig.js";
 import { useDesign as C } from "@mfish/core/hooks";
-import { u, i as h, _ as g } from "./index.js";
+import { u, e as h, _ as g } from "./index.js";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
 import "lodash-es";
