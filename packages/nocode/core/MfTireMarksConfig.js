@@ -1,6 +1,6 @@
 import { defineComponent as t, ref as e, watch as o, createBlock as n, openBlock as a, normalizeClass as l, unref as i, withCtx as u, createVNode as r, createElementVNode as c, createTextVNode as s, createElementBlock as C, Fragment as h, renderList as p, toDisplayString as g, createCommentVNode as v } from "vue";
 import { useDesign as f } from "@mfish/core/hooks";
-import { u as d, h as m, M as y, _ as k } from "./index.js";
+import { u as d, d as m, M as y, _ as k } from "./index.js";
 import { S as _ } from "./StyleConfig.js";
 import { RadioGroup as U, RadioButton as z, Checkbox as I, Slider as w } from "ant-design-vue";
 import "lodash-es";

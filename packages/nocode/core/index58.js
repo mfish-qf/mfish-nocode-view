@@ -1,5 +1,5 @@
 import { defineComponent as t, useCssVars as o, computed as a, watch as e, createBlock as n, openBlock as r, unref as i, mergeProps as c, toHandlers as p } from "vue";
-import { l as s, u as d } from "./index.js";
+import { i as s, u as d } from "./index.js";
 import { Table as l } from "ant-design-vue";
 import { useDesign as h } from "@mfish/core/hooks";
 import { ThemeEnum as u } from "@mfish/core/enums";

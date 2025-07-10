@@ -1,7 +1,7 @@
 import { defineComponent as t, watch as a, nextTick as o, createBlock as e, openBlock as r, unref as i, mergeProps as n, toHandlers as c } from "vue";
 import { VueUiTiremarks as s } from "vue-data-ui";
 import "vue-data-ui/style.css";
-import { l, u } from "./index.js";
+import { i as l, u } from "./index.js";
 const p = t({ name: "MfTireMarks", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(t2) {
   const p2 = t2, { commonEvents: h } = l(p2.chart), d = u();
   return a(() => d.getTheme, (t3) => {

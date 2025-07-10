@@ -34,7 +34,7 @@
   import { ScrollContainer } from "@mfish/core/components/Container";
   import { router } from "@mfish/core/router";
   import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
-  import { SCREEN_SAVE } from "@/views/nocode/screen-folder/screenFolder.data";
+  import { SCREEN_SAVE } from "@mfish/nocode";
 
   defineOptions({ name: "WorkbenchIndex" });
   const loading = ref(true);

@@ -19,7 +19,7 @@
 </template>
 <script lang="ts" setup>
   import { nextTick, onBeforeUnmount, onMounted, type PropType, provide, ref, unref } from "vue";
-  import { addResizeListener, removeResizeListener } from "../../../utils/event";
+  import { addResizeListener, removeResizeListener } from "@core/utils/event";
   import componentSetting from "../../../settings/ComponentSetting";
   import Bar from "./Bar";
   import { StyleValue } from "@mfish/types";

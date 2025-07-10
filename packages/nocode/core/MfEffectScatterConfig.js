@@ -1,5 +1,5 @@
 import { defineComponent as e, ref as l, watch as a, createElementBlock as u, openBlock as t, normalizeClass as v, unref as o, createVNode as i, withCtx as n, createElementVNode as c, createCommentVNode as s, Fragment as f, renderList as r, createTextVNode as d, toDisplayString as p } from "vue";
-import { u as m, h, _ as g } from "./index.js";
+import { u as m, d as h, _ as g } from "./index.js";
 import { useDesign as b } from "@mfish/core/hooks";
 import { RadioGroup as C, RadioButton as y, Slider as k } from "ant-design-vue";
 import { E as _ } from "./EchartsSeriesLabelConfig.js";

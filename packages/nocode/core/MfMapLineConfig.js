@@ -1,7 +1,7 @@
 import { defineComponent as o, ref as e, watch as n, createBlock as t, openBlock as r, withCtx as i, createVNode as s } from "vue";
 import { M as f } from "./MfMapConfig.js";
 import { M as C } from "./MfEffectScatterConfig.js";
-import { u as a, aq as g } from "./index.js";
+import { u as a, ar as g } from "./index.js";
 const p = o({ __name: "MfMapLineConfig", setup(o2) {
   const { getSeries: p2 } = g(), u = a(), m = e();
   function c(o3) {

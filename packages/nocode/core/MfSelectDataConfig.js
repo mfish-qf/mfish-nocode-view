@@ -1,7 +1,7 @@
 import { defineComponent as a, computed as t, createBlock as e, openBlock as n, normalizeClass as o, unref as s, withCtx as l, createElementVNode as i, createVNode as d, renderSlot as r } from "vue";
 import { D as f, a as c } from "./DragInData.js";
 import { useDesign as u } from "@mfish/core/hooks";
-import { u as g, m as C, _ as m } from "./index.js";
+import { u as g, j as C, _ as m } from "./index.js";
 import { J as h } from "./JsonData.js";
 const p = m(a({ __name: "MfSelectDataConfig", setup(a2) {
   const m2 = g(), { setFields: p2, deleteFields: v, setDataTable: D } = C(), { prefixCls: _ } = u("select-data-config"), b = t(() => m2.getCurConfigComponent.chart.data.fields ? m2.getCurConfigComponent.chart.data.fields?.label ?? [] : []), x = t(() => m2.getCurConfigComponent.chart.data.fields ? m2.getCurConfigComponent.chart.data.fields?.value ?? [] : []), S = t(() => m2.getCurConfigComponent.chart.data?.dataSet ? JSON.stringify(m2.getCurConfigComponent.chart.data.dataSet) : "");
