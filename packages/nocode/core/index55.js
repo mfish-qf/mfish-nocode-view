@@ -1,28 +1,34 @@
-import { defineComponent as e, useTemplateRef as o, computed as t, watch as r, nextTick as i, createBlock as n, openBlock as a, unref as s, mergeProps as c, toHandlers as h } from "vue";
-import { i as m, u as l, aw as f, ax as p } from "./index.js";
+import { defineComponent as e, useTemplateRef as t, computed as o, watch as r, nextTick as s, createBlock as a, openBlock as i, unref as n, mergeProps as c, toHandlers as h } from "vue";
+import { i as m, u as l, aw as f, ax as p, _ as d } from "./index.js";
 import "ant-design-vue";
 import "@mfish/core/hooks";
 import "@vueuse/core";
 import "@mfish/core/components/Icon";
-import { throttle as d } from "lodash-es";
+import { throttle as u } from "lodash-es";
 import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
-const u = e({ name: "MfScrollTable", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  const u2 = e2, { commonEvents: w, emitEvent: v } = m(u2.chart, void 0, ["rowClick"]), x = l(), C = o("scrollTableRef"), I = t(() => ({ ...u2.chart.options, ...u2.chart.data?.dataSet }));
-  function g(e3) {
+const v = d(e({ name: "MfScrollTable", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
+  const d2 = e2, { commonEvents: v2, emitEvent: w } = m(d2.chart, void 0, ["rowClick"]), C = l(), I = t("scrollTableRef"), g = o(() => ({ ...d2.chart.options, ...d2.chart.data?.dataSet }));
+  function x(e3) {
     if (e3.rowIndex >= 0) {
-      const o2 = p(u2.chart);
-      o2.length > e3.rowIndex && v("rowClick", o2[e3.rowIndex]);
+      const t2 = p(d2.chart);
+      t2.length > e3.rowIndex && w("rowClick", t2[e3.rowIndex]);
     }
   }
-  return r([() => u2.chartContain?.dropInfo?.width, () => u2.chartContain?.dropInfo?.height], d(() => {
-    C.value?.resize();
-  }, 100)), r([() => u2.chartContain?.show, () => u2.chart?.showHide?.show], (e3) => {
-    e3 && i(() => {
-      C.value?.resize();
+  r([() => d2.chartContain?.dropInfo?.width, () => d2.chartContain?.dropInfo?.height], u(() => {
+    I.value?.resize();
+  }, 100)), r([() => d2.chartContain?.show, () => d2.chart?.showHide?.show], (e3) => {
+    e3 && s(() => {
+      I.value?.resize();
     });
-  }), (e3, o2) => (a(), n(s(f), c({ ref_key: "scrollTableRef", ref: C, theme: s(x).getTheme, config: I.value }, h(s(w)), { onRowClick: g }), null, 16, ["theme", "config"]));
-} });
+  });
+  const b = o(() => {
+    if (d2.chart?.events?.emits && d2.chart.events.emits.length > 0) {
+      for (const e3 of d2.chart.events.emits) if ("rowClick" === e3) return "allow-pointer";
+    }
+  });
+  return (e3, t2) => (i(), a(n(f), c({ class: b.value, ref_key: "scrollTableRef", ref: I, theme: n(C).getTheme, config: g.value }, h(n(v2)), { onRowClick: x }), null, 16, ["class", "theme", "config"]));
+} }), [["__scopeId", "data-v-d370b1e5"]]);
 export {
-  u as default
+  v as default
 };
