@@ -3304,7 +3304,7 @@ async function Rp(e2, t2) {
           const e3 = n4.get(o4.name);
           a3[t4] = e3 ?? o4.defaultValue;
         } else {
-          const n5 = Np(e2, o4.id);
+          const n5 = Np(e2, o4);
           n5 && (a3[t4] = n5);
         }
       };
