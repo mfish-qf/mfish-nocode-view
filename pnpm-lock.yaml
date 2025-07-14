@@ -12,7 +12,7 @@ overrides:
   pinia: ^3.0.3
   vue: ^3.5.17
   vite: ^7.0.4
-  rollup: ^4.44.2
+  rollup: ^4.45.0
 
 importers:
 
@@ -122,8 +122,8 @@ importers:
         version: 4.1.0(vue@3.5.17(typescript@5.8.3))
     devDependencies:
       '@iconify/json':
-        specifier: ^2.2.357
-        version: 2.2.357
+        specifier: ^2.2.358
+        version: 2.2.358
       '@logicflow/core':
         specifier: ^1.2.28
         version: 1.2.28
@@ -133,6 +133,9 @@ importers:
       '@mfish/core':
         specifier: workspace:*
         version: link:packages/core
+      '@mfish/custom-api':
+        specifier: workspace:*
+        version: link:packages/custom-api
       '@mfish/eslint-config':
         specifier: workspace:*
         version: link:internal/eslint-config
@@ -542,6 +545,12 @@ importers:
         version: 2.0.1(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(less@4.3.0)(terser@5.43.1)(tsx@4.20.3))
 
   packages/core: {}
+
+  packages/custom-api:
+    devDependencies:
+      vite-plugin-style-inject:
+        specifier: ^0.0.1
+        version: 0.0.1(vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(less@4.3.0)(terser@5.43.1)(tsx@4.20.3))
 
   packages/nocode:
     devDependencies:
@@ -1483,8 +1492,8 @@ packages:
     resolution: {integrity: sha512-1nemfyD/OJzh9ALepH7YfuuP8BdEB24Skhd8DXWh0hzcOxImbb1ZizSZkpCzAwSZSGcJFmscIBaBQu+yLyWaxQ==}
     deprecated: no longer maintained, switch to modern iconify-icon web component
 
-  '@iconify/json@2.2.357':
-    resolution: {integrity: sha512-v8fr/KwcJ0qsoEJ69k1+M928bfzNmmApyJBTIAwwIzHZrVEUneHTEOJRy7OVYKisauBMVVH067I2uFNoPA92iA==}
+  '@iconify/json@2.2.358':
+    resolution: {integrity: sha512-01NTf7QOYG+gCb8iSWNwkuy/oPFQTgWQzrRYErw1R2IepyvbBkUTaMlLZr8OgAteBxUjNxAWSae2eGk3v9WPCw==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -1828,14 +1837,14 @@ packages:
     resolution: {integrity: sha512-G0OnZbMWEs5LhDyqy2UL17vGhSVHkQIfVojMtEWVenvj0V5S84VBgy86kJIuNsGDp2p7sTKlpSIpBUWdC35OKg==}
     engines: {node: '>=20.0.0'}
 
-  '@rolldown/pluginutils@1.0.0-beta.26':
-    resolution: {integrity: sha512-r/5po89voz/QRPDmoErL10+hVuTAuz1SHvokx+yWBlOIPB5C41jC7QhLqq9kaebx/+EHyoV3z22/qBfX81Ns8A==}
+  '@rolldown/pluginutils@1.0.0-beta.27':
+    resolution: {integrity: sha512-+d0F4MKMCbeVUJwG96uQ4SgAznZNSq93I3V+9NHA4OpvqG8mRCpGdKmK8l/dl02h2CCDHwW2FqilnTyDcAnqjA==}
 
   '@rollup/plugin-alias@5.1.1':
     resolution: {integrity: sha512-PR9zDb+rOzkRb2VD+EuKB7UC41vU5DIwZ5qqCpk0KJudcWAyi8rvYOhS7+L5aZCspw1stTViLgN5v6FF1p5cgQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      rollup: ^4.44.2
+      rollup: ^4.45.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -1844,7 +1853,7 @@ packages:
     resolution: {integrity: sha512-XSQB1K7FUU5QP+3lOQmVCE3I0FcbbNvmNT4VJSj93iUjayaARrTQeoRdiYQoftAJBLrR9t2agwAd3ekaTgHNlw==}
     engines: {node: '>=16.0.0 || 14 >= 14.17'}
     peerDependencies:
-      rollup: ^4.44.2
+      rollup: ^4.45.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -1853,7 +1862,7 @@ packages:
     resolution: {integrity: sha512-EGI2te5ENk1coGeADSIwZ7G2Q8CJS2sF120T7jLw4xFw9n7wIOXHo+kIYRAoVpJAN+kmqZSoO3Fp4JtoNF4ReA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      rollup: ^4.44.2
+      rollup: ^4.45.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -1862,7 +1871,7 @@ packages:
     resolution: {integrity: sha512-tk5YCxJWIG81umIvNkSod2qK5KyQW19qcBF/B78n1bjtOON6gzKoVeSzAE8yHCZEDmqkHKkxplExA8KzdJLJpA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      rollup: ^4.44.2
+      rollup: ^4.45.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -1871,7 +1880,7 @@ packages:
     resolution: {integrity: sha512-7QaYCf8bqF04dOy7w/eHmJeNExxTYwvKAmlSAH/EaWWUzbT0h5sbF6bktFoX/0F/0qwng5/dWFMyf3gzaM8DsQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      rollup: ^4.44.2
+      rollup: ^4.45.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -1884,7 +1893,7 @@ packages:
     resolution: {integrity: sha512-qWJ2ZTbmumwiLFomfzTyt5Kng4hwPi9rwCYN4SHb6eaRU1KNO4ccxINHr/VhH4GgPlt1XfSTLX2LBTme8ne4Zw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      rollup: ^4.44.2
+      rollup: ^4.45.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -6462,7 +6471,7 @@ packages:
     resolution: {integrity: sha512-sR3CxYUl7i2CHa0O7bA45mCrgADyAQ0tVtGSqi3yvH28M+eg1+g5d7kQ9hLvEz5dorK3XVsH5L2jwHLQf72DzA==}
     engines: {node: '>=16'}
     peerDependencies:
-      rollup: ^4.44.2
+      rollup: ^4.45.0
       typescript: ^4.5 || ^5.0
 
   rollup-plugin-visualizer@5.14.0:
@@ -6471,7 +6480,7 @@ packages:
     hasBin: true
     peerDependencies:
       rolldown: 1.x
-      rollup: ^4.44.2
+      rollup: ^4.45.0
     peerDependenciesMeta:
       rolldown:
         optional: true
@@ -8796,7 +8805,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify/json@2.2.357':
+  '@iconify/json@2.2.358':
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.2
@@ -9259,7 +9268,7 @@ snapshots:
     dependencies:
       quansync: 0.2.10
 
-  '@rolldown/pluginutils@1.0.0-beta.26': {}
+  '@rolldown/pluginutils@1.0.0-beta.27': {}
 
   '@rollup/plugin-alias@5.1.1(rollup@4.45.0)':
     optionalDependencies:
@@ -9902,7 +9911,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.28.0
       '@babel/plugin-transform-typescript': 7.28.0(@babel/core@7.28.0)
-      '@rolldown/pluginutils': 1.0.0-beta.26
+      '@rolldown/pluginutils': 1.0.0-beta.27
       '@vue/babel-plugin-jsx': 1.4.0(@babel/core@7.28.0)
       vite: 7.0.4(@types/node@22.16.3)(jiti@2.4.2)(less@4.3.0)(terser@5.43.1)(tsx@4.20.3)
       vue: 3.5.17(typescript@5.8.3)
@@ -9913,7 +9922,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.28.0
       '@babel/plugin-transform-typescript': 7.28.0(@babel/core@7.28.0)
-      '@rolldown/pluginutils': 1.0.0-beta.26
+      '@rolldown/pluginutils': 1.0.0-beta.27
       '@vue/babel-plugin-jsx': 1.4.0(@babel/core@7.28.0)
       vite: 7.0.4(@types/node@24.0.13)(jiti@2.4.2)(less@4.3.0)(terser@5.43.1)(tsx@4.20.3)
       vue: 3.5.17(typescript@5.8.3)

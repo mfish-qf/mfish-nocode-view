@@ -54,6 +54,10 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
           {
             find: /@nocode\//,
             replacement: `${pathResolve("packages/nocode/src")}/`
+          },
+          {
+            find: /@custom-api\//,
+            replacement: `${pathResolve("packages/custom-api/src")}/`
           }
         ]
       },

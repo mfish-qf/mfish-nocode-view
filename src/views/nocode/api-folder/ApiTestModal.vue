@@ -27,7 +27,7 @@
   import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { ref } from "vue";
   import { Input as AInput } from "ant-design-vue";
-  import { getApiParamsList, getApiUrl } from "@mfish/nocode";
+  import { getApiParamsList, getApiUrl } from "@mfish/custom-api";
   import { CodeEditor, MODE } from "@mfish/core/components/CodeEditor";
   import { defHttp } from "@mfish/core/utils/http/axios";
   import { useGlobSetting } from "@mfish/core/hooks";

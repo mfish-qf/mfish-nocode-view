@@ -1,5 +1,5 @@
 import { FormSchema } from "@mfish/core/components/Table";
-import { getApiFolderTree } from "@mfish/nocode";
+import { getApiFolderTree } from "@mfish/custom-api";
 
 /**
  * @description: 自定义API

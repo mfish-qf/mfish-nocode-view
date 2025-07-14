@@ -1,7 +1,7 @@
 import { defineComponent as e, useCssVars as t, computed as a, ref as o, watch as l, createBlock as n, openBlock as i, unref as c, mergeProps as r, toHandlers as s, withCtx as u, createCommentVNode as f, createTextVNode as p, toDisplayString as v } from "vue";
 import { Segmented as d } from "ant-design-vue";
 import { Icon as h } from "@mfish/core/components/Icon";
-import { i as m, u as y, ax as S } from "./index.js";
+import { i as m, u as y, av as S } from "./index.js";
 import { useDesign as x } from "@mfish/core/hooks";
 import { ThemeEnum as g } from "@mfish/core/enums";
 const b = e({ name: "MfSegmented", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {

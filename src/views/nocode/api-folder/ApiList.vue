@@ -58,7 +58,7 @@
     getApiFolderTree,
     insertApiFolder,
     updateApiFolder
-  } from "@mfish/nocode";
+  } from "@mfish/custom-api";
   import ApiFolderList from "./ApiFolderList.vue";
   import { NLayout, NLayoutContent, NLayoutSider } from "naive-ui";
 

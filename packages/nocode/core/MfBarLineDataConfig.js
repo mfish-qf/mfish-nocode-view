@@ -1,7 +1,7 @@
 import { defineComponent as t, computed as a, createBlock as e, openBlock as n, normalizeClass as o, unref as s, withCtx as i, createElementVNode as r, createVNode as l, toDisplayString as u, renderSlot as d } from "vue";
 import { D as f, a as c } from "./DragInData.js";
 import { useDesign as C } from "@mfish/core/hooks";
-import { u as g, j as m, ar as p, _ as h } from "./index.js";
+import { u as g, j as m, ap as p, _ as h } from "./index.js";
 import { J as x } from "./JsonData.js";
 const D = { class: "title" }, y = { class: "title" }, v = h(t({ __name: "MfBarLineDataConfig", props: { xTitle: { type: String, default: "X轴 / 维度" }, yTitle: { type: String, default: "Y轴 / 值" }, xMaxCount: { type: Number, default: 1 }, yMaxCount: { type: Number, default: 100 } }, setup(t2) {
   const h2 = g(), { setFields: v2, deleteFields: S, getFields: _, setDataTable: M } = m(), { resetDefault: T, setStaticData: b } = p(), { prefixCls: j } = C("bar-line-data-config"), F = a(() => h2.getCurConfigComponent.chart.data?.dataSet?.source ? JSON.stringify(h2.getCurConfigComponent.chart.data.dataSet.source) : ""), J = a(() => h2.getCurConfigComponent.chart.data.fields ? h2.getCurConfigComponent.chart.data.fields?.dimensions ?? [] : []), N = a(() => h2.getCurConfigComponent.chart.data.fields ? h2.getCurConfigComponent.chart.data.fields?.source ?? [] : []);

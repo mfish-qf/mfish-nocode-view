@@ -3,7 +3,7 @@ import { S as m } from "./StyleConfig.js";
 import { a as p, E as C } from "./EchartsBaseConfig.js";
 import { E as b } from "./EchartsLegendConfig.js";
 import { u as y, E as S } from "./UseEchartsSeriesConfig.js";
-import { d as x, T as _, ap as U, _ as k, u as A } from "./index.js";
+import { d as x, T as _, an as U, _ as k, u as A } from "./index.js";
 import { useDesign as j, useMessage as w } from "@mfish/core/hooks";
 import { Slider as E, Checkbox as L, RadioGroup as $, RadioButton as z } from "ant-design-vue";
 import "@vueuse/core";

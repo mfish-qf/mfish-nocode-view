@@ -14,7 +14,7 @@
   import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { mfApiFormSchema } from "./mfApi.data";
   import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
-  import { insertMfApi, MfApi, updateMfApi } from "@mfish/nocode";
+  import { insertMfApi, MfApi, updateMfApi } from "@mfish/custom-api";
 
   const emit = defineEmits(["success", "register"]);
   const isUpdate = ref(true);

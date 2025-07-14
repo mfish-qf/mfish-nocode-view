@@ -1,7 +1,7 @@
 import { defineComponent as a, ref as t, computed as e, watch as n, resolveComponent as o, createBlock as l, openBlock as u, normalizeClass as s, unref as i, withCtx as d, createElementVNode as r, createVNode as f, renderSlot as c } from "vue";
 import { D as g, a as C } from "./DragInData.js";
 import { useDesign as m } from "@mfish/core/hooks";
-import { u as h, j as p, av as v, _ as D } from "./index.js";
+import { u as h, j as p, at as v, _ as D } from "./index.js";
 const _ = D(a({ __name: "MfInputDataConfig", setup(a2) {
   const D2 = h(), { setFields: _2, deleteFields: x, getFields: V, setDataTable: I } = p(), { prefixCls: b } = m("input-data-config"), { clearValue: j } = v(), F = t(), k = e(() => D2.getCurConfigComponent.chart.data.fields ? D2.getCurConfigComponent.chart.data.fields?.value ?? [] : []);
   function w() {

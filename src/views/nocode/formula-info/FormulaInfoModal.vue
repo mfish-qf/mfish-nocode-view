@@ -21,7 +21,7 @@
   import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { formulaInfoFormSchema } from "./formulaInfo.data";
   import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
-  import { insertFormulaInfo, updateFormulaInfo } from "@mfish/nocode";
+  import { insertFormulaInfo, updateFormulaInfo } from "@mfish/custom-api";
   import { CodeEditor, MODE } from "@mfish/core/components/CodeEditor";
 
   defineOptions({ name: "FormulaInfoModal" });

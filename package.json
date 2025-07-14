@@ -64,10 +64,11 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.357",
+    "@iconify/json": "^2.2.358",
     "@logicflow/core": "^1.2.28",
     "@logicflow/extension": "^1.2.28",
     "@mfish/core": "workspace:*",
+    "@mfish/custom-api": "workspace:*",
     "@mfish/eslint-config": "workspace:*",
     "@mfish/nocode": "workspace:*",
     "@mfish/prettier-config": "workspace:*",

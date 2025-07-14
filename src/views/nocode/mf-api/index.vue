@@ -53,29 +53,26 @@
   import { useRoute } from "vue-router";
   import { useDesign, useMessage, useRootSetting } from "@mfish/core/hooks";
   import { useModal } from "@mfish/core/components/Modal";
+  import { getMfApiByResourceId, getTablesByResourceId, listenGlobalKeyboard, UndoRedoManager } from "@mfish/nocode";
   import {
+    getApiParamsList,
+    getMfApiById,
+    getQueryData,
+    getSourceHeaders,
+    Join,
+    MfApi,
+    SqlQuery,
     API_SAVE,
     ApiConfig,
     ApiConfigEvent,
     buildSql,
-    getApiParamsList,
     getInnerFields,
-    getMfApiById,
-    getMfApiByResourceId,
     getParams,
-    getQueryData,
-    getSourceHeaders,
-    getTablesByResourceId,
-    Join,
-    listenGlobalKeyboard,
-    MfApi,
     ParamsModal,
-    SqlQuery,
     SqlQueryModal,
-    UndoRedoManager,
     useApiShortcut,
     useApiStore
-  } from "@mfish/nocode";
+  } from "@mfish/custom-api";
   import HeaderBar from "@/components/nocode/common/HeaderBar/HeaderBar.vue";
   import { ScrollContainer } from "@mfish/core/components/Container";
   import { Icon, IconFont } from "@mfish/core/components/Icon";
