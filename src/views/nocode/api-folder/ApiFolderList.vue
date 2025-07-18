@@ -2,7 +2,7 @@
  @description: 自定义API
  @author: mfish
  @date: 2023-07-28
- @version: V2.0.0
+ @version: V2.0.1
 -->
 <template>
   <div style="height: 100%">
@@ -153,7 +153,7 @@
   const emit = defineEmits(["folderClick", "folderDelete", "rowSelect"]);
 
   const iconColor = useRootSetting().getThemeColor;
-  const [registerModal, { openModal, closeModal }] = useModal();
+  const [registerModal, { openModal }] = useModal();
   const paramMap = ref<Map<string, ApiParams[]>>(new Map());
   const configUrl = "/low-code/mf-api/config";
   const [registerApiTestModal, { openModal: openApiTestModal }] = useModal();
@@ -243,7 +243,6 @@
 
   function apiCreate(routeData) {
     open(routeData);
-    closeModal();
   }
 
   function onStorageHandle() {

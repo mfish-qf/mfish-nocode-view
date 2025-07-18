@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@mfish/core/api";
  * @description: 文件目录
  * @author: mfish
  * @date: 2023-12-11
- * @version: V2.0.0
+ * @version: V2.0.1
  */
 export interface FileFolder extends BaseEntity<string> {
   parentId?: string;

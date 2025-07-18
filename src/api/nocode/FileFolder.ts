@@ -5,7 +5,7 @@ import { FileFolder, FileFolderPageModel, ReqFolder } from "@/api/nocode/model/F
  * @description: 文件目录
  * @author: mfish
  * @date: 2023-07-21
- * @version: V2.0.0
+ * @version: V2.0.1
  */
 enum Api {
   FileFolderTree = "/nocode/fileFolder/tree",

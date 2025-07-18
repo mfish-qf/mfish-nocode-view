@@ -14,6 +14,7 @@ export interface ActionItem extends ButtonProps {
   // 业务控制是否显示
   ifShow?: boolean | ((action: ActionItem) => boolean);
   tooltip?: string | TooltipProps;
+  slot?: string;
 }
 
 export interface PopConfirm {

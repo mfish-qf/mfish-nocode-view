@@ -46,6 +46,8 @@ export interface Result<T = any> {
 
 // multipart/form-data: upload file
 export interface UploadFileParams {
+  //更新文件时，需要传入
+  fileKey?: string;
   // 文件
   file: File | Blob;
   //文件名(不传直接采用file中的名称)

@@ -1,8 +1,28 @@
 <template>
   <div>
     <Space>
-      <a-button :type="buttonType" @click="openUploadModal" pre-icon="carbon:cloud-upload">
-        {{ t("component.upload.upload") }}
+      <Tooltip placement="bottom" v-if="buttonTooltip" :title="buttonTooltip">
+        <a-button
+          :size="buttonSize"
+          :type="buttonType"
+          :icon-size="iconSize"
+          :icon-color="iconColor"
+          @click="openUploadModal"
+          pre-icon="ant-design:cloud-upload-outlined"
+        >
+          {{ buttonText !== undefined ? buttonText : t("component.upload.upload") }}
+        </a-button>
+      </Tooltip>
+      <a-button
+        v-else
+        :size="buttonSize"
+        :type="buttonType"
+        :icon-size="iconSize"
+        :icon-color="iconColor"
+        @click="openUploadModal"
+        pre-icon="ant-design:cloud-upload-outlined"
+      >
+        {{ buttonText !== undefined ? buttonText : t("component.upload.upload") }}
       </a-button>
     </Space>
     <UploadModal
@@ -20,7 +40,7 @@
 </template>
 <script lang="ts">
   import { computed, defineComponent } from "vue";
-  import { Space } from "ant-design-vue";
+  import { Space, Tooltip } from "ant-design-vue";
   import { useModal } from "@core/components/Modal";
   import { uploadContainerProps } from "./Props";
   import { omit } from "lodash-es";
@@ -31,7 +51,7 @@
 
   export default defineComponent({
     name: "BasicUpload",
-    components: { UploadModal, Space },
+    components: { Tooltip, UploadModal, Space },
     props: uploadContainerProps,
     emits: ["change", "delete", "success"],
 

@@ -2,7 +2,7 @@
  @description: 公式信息查看
  @author: mfish
  @date: 2025-02-11
- @version: V2.0.0
+ @version: V2.0.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="公式信息信息">
