@@ -5,7 +5,7 @@ import { MfFile, MfFilePageModel, ReqMfFile } from "@/api/nocode/model/MfFileMod
  * @description: 文件数据源
  * @author: mfish
  * @date: 2023-12-13
- * @version: V2.0.0
+ * @version: V2.0.1
  */
 enum Api {
   MfFile = "/nocode/mfFile"
@@ -57,4 +57,12 @@ export function updateMfFile(mfFile: MfFile) {
  */
 export function deleteMfFile(id: string) {
   return defHttp.delete<MfFile>({ url: `${Api.MfFile}/${id}` }, { successMessageMode: "message" });
+}
+
+/**
+ * 下载文件
+ * @param id 唯一ID
+ */
+export function downloadMfFile(id: string) {
+  return defHttp.download({ url: `${Api.MfFile}/download/${id}` });
 }

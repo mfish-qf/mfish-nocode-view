@@ -1,7 +1,10 @@
 <template>
   <div :class="[prefixCls, getAlign]" @click="onCellClick">
     <template v-for="(action, index) in getActions" :key="`${index}-${action.label}`">
-      <Tooltip v-if="action.tooltip" v-bind="getTooltip(action.tooltip)">
+      <template v-if="action.slot">
+        <slot :name="action.slot"></slot>
+      </template>
+      <Tooltip v-else-if="action.tooltip" v-bind="getTooltip(action.tooltip)">
         <PopConfirmButton v-bind="omit(action, 'icon')">
           <Icon
             :icon="action.icon"

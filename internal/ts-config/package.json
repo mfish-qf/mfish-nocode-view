@@ -1,6 +1,6 @@
 {
   "name": "@mfish/ts-config",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "license": "Apache-2.0",
   "author": {
@@ -18,9 +18,9 @@
     "web.json"
   ],
   "dependencies": {
-    "@types/node": "^22.16.3"
+    "@types/node": "^22.16.4"
   },
   "devDependencies": {
-    "vite": "^7.0.4"
+    "vite": "^7.0.5"
   }
 }

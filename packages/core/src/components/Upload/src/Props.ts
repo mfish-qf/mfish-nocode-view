@@ -63,6 +63,11 @@ export const basicProps = {
   modalHeight: {
     type: Number as PropType<number>,
     default: 300
+  },
+  // 上传的文件是否需要更新，如果是更新，只能上传一个文件，并且需要传id
+  isUpdate: {
+    type: Boolean as PropType<boolean>,
+    default: false
   }
 };
 
@@ -83,6 +88,21 @@ export const uploadContainerProps = {
   buttonType: {
     type: String as PropType<string>,
     default: "primary"
+  },
+  buttonText: {
+    type: String as PropType<string>
+  },
+  buttonSize: {
+    type: String as PropType<string>
+  },
+  iconColor: {
+    type: String as PropType<string>
+  },
+  iconSize: {
+    type: Number as PropType<number>
+  },
+  buttonTooltip: {
+    type: String as PropType<string>
   }
 };
 

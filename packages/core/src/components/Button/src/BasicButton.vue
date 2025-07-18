@@ -4,9 +4,9 @@
       <slot name="icon"></slot>
     </template>
     <template #default="data">
-      <Icon :icon="preIcon" v-if="preIcon" :size="iconSize" />
+      <Icon :icon="preIcon" v-if="preIcon" :size="iconSize" :color="iconColor" />
       <slot v-bind="data || {}"></slot>
-      <Icon :icon="postIcon" v-if="postIcon" :size="iconSize" />
+      <Icon :icon="postIcon" v-if="postIcon" :size="iconSize" :color="iconColor" />
     </template>
   </Button>
 </template>

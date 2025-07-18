@@ -18,7 +18,8 @@ export const buttonProps = {
    * preIcon and postIcon icon size.
    * @default: 14
    */
-  iconSize: { type: Number, default: 14 },
+  iconSize: { type: Number, default: 16 },
+  iconColor: { type: String },
   onClick: { type: [Function, Array] as PropType<(() => any) | (() => any)[]>, default: null },
   text: { type: String }
 };

@@ -4,7 +4,7 @@ import { BaseEntity, PageResult } from "@core/api/model/BaseModel.ts";
  * @description: 文件存储
  * @author: mfish
  * @date: 2023-03-02
- * @version: V2.0.0
+ * @version: V2.0.1
  */
 export interface SysFile extends BaseEntity<string> {
   fileKey: string;

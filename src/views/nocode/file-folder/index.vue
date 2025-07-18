@@ -2,7 +2,7 @@
  @description: 文件目录
  @author: mfish
  @date: 2023-12-11
- @version: V2.0.0
+ @version: V2.0.1
 -->
 <template>
   <NLayout has-sider sider-placement="left" :class="prefixCls">
@@ -139,7 +139,7 @@
     folderTreeRef.value.setSelect(key);
   }
 
-  function folderClick(record) {
+  function folderClick(record: any) {
     // 如果是目录进入目录
     if (record.fType === 0) {
       setSelect(record.id);

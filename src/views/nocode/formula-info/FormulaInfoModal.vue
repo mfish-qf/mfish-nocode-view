@@ -2,7 +2,7 @@
  @description: 公式信息
  @author: mfish
  @date: 2025-02-11
- @version: V2.0.0
+ @version: V2.0.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
@@ -21,7 +21,7 @@
   import { BasicForm, useForm } from "@mfish/core/components/Form";
   import { formulaInfoFormSchema } from "./formulaInfo.data";
   import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
-  import { insertFormulaInfo, updateFormulaInfo } from "@mfish/nocode";
+  import { insertFormulaInfo, updateFormulaInfo } from "@mfish/custom-api";
   import { CodeEditor, MODE } from "@mfish/core/components/CodeEditor";
 
   defineOptions({ name: "FormulaInfoModal" });

@@ -6,7 +6,7 @@ import { buildDictTag, getDictProps } from "@mfish/core/components/DictTag";
  * @description: 销售订单
  * @author: mfish
  * @date: 2024-09-13
- * @version: V2.0.0
+ * @version: V2.0.1
  */
 export const columns: BasicColumn[] = [
   {

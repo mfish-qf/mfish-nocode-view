@@ -2,7 +2,7 @@
  @description: 公式信息
  @author: mfish
  @date: 2025-02-11
- @version: V2.0.0
+ @version: V2.0.1
 -->
 <template>
   <div>
@@ -50,7 +50,7 @@
 </template>
 <script lang="ts" setup>
   import { BasicTable, TableAction, useTable } from "@mfish/core/components/Table";
-  import { deleteFormulaInfo, exportFormulaInfo, FormulaInfo, getFormulaInfoList } from "@mfish/nocode";
+  import { deleteFormulaInfo, exportFormulaInfo, FormulaInfo, getFormulaInfoList } from "@mfish/custom-api";
   import { useModal } from "@mfish/core/components/Modal";
   import FormulaInfoModal from "./FormulaInfoModal.vue";
   import FormulaInfoViewModal from "./FormulaInfoViewModal.vue";

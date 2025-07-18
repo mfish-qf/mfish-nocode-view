@@ -83,7 +83,7 @@
   // 上传前校验
   function beforeUpload(file: File) {
     const { size, name } = file;
-    const { maxSize } = props;
+    const { maxSize, isUpdate } = props;
     // 设置最大值，则判断
     if (maxSize && file.size / 1024 / 1024 >= maxSize) {
       createMessage.error(t("component.upload.maxSizeMultiple", [maxSize]));
@@ -107,16 +107,29 @@
     // 生成图片缩略图
     if (checkImgType(file)) {
       getBase64WithFile(file).then(({ result: thumbUrl }) => {
-        fileListRef.value = [
-          ...unref(fileListRef),
-          {
-            thumbUrl,
-            ...commonItem
-          }
-        ];
+        if (isUpdate) {
+          fileListRef.value = [
+            {
+              thumbUrl,
+              ...commonItem
+            }
+          ];
+        } else {
+          fileListRef.value = [
+            ...unref(fileListRef),
+            {
+              thumbUrl,
+              ...commonItem
+            }
+          ];
+        }
       });
     } else {
-      fileListRef.value = [...unref(fileListRef), commonItem];
+      if (isUpdate) {
+        fileListRef.value = [commonItem];
+      } else {
+        fileListRef.value = [...unref(fileListRef), commonItem];
+      }
     }
     return false;
   }

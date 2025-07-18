@@ -8,7 +8,7 @@ import { h } from "vue";
  * @description: 客户端信息
  * @author: mfish
  * @date: 2023-05-12
- * @version: V2.0.0
+ * @version: V2.0.1
  */
 export const columns: BasicColumn[] = [
   {

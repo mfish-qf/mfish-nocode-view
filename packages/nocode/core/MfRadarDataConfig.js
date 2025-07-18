@@ -1,7 +1,7 @@
 import { defineComponent as t, computed as a, createBlock as e, openBlock as n, normalizeClass as o, unref as i, withCtx as d, createElementVNode as s, createVNode as r, renderSlot as C } from "vue";
 import { D as l, a as f } from "./DragInData.js";
 import { useDesign as g } from "@mfish/core/hooks";
-import { u as c, j as u, au as m, _ as h } from "./index.js";
+import { u as c, j as u, as as m, _ as h } from "./index.js";
 import { J as p } from "./JsonData.js";
 const D = h(t({ __name: "MfRadarDataConfig", setup(t2) {
   const h2 = c(), { setFields: D2, deleteFields: S, getFields: v, setDataTable: _ } = u(), { prefixCls: x } = g("radar-data-config"), { resetDefault: j } = m(), J = a(() => h2.getCurConfigComponent.chart.data.fields ? h2.getCurConfigComponent.chart.data.fields?.dimensions ?? [] : []), F = a(() => h2.getCurConfigComponent.chart.data.fields ? h2.getCurConfigComponent.chart.data.fields?.source ?? [] : []), b = a(() => h2.getCurConfigComponent.chart.data.dataSet?.indicator ? JSON.stringify(h2.getCurConfigComponent.chart.data.dataSet.indicator) : ""), y = a(() => h2.getCurConfigComponent.chart.data.dataSet?.data ? JSON.stringify(h2.getCurConfigComponent.chart.data.dataSet.data) : "");

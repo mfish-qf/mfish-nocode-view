@@ -9,7 +9,7 @@ import { updateDemoImportExport } from "@/api/demo/DemoImportExport";
  * @description: 上传下载样例
  * @author: mfish
  * @date: 2024-09-08
- * @version: V2.0.0
+ * @version: V2.0.1
  */
 export const columns: BasicColumn[] = [
   {

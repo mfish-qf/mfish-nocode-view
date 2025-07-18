@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@core/api/model/BaseModel.ts";
  * @description: 数据库连接
  * @author: mfish
  * @date: 2023-03-13
- * @version: V2.0.0
+ * @version: V2.0.1
  */
 export interface DbConnect extends BaseEntity<string> {
   dbTitle: string;

@@ -1,11 +1,11 @@
 import { FormSchema } from "@mfish/core/components/Table";
-import { getApiFolderTree } from "@mfish/nocode";
+import { getApiFolderTree } from "@mfish/custom-api";
 
 /**
  * @description: 自定义API
  * @author: mfish
  * @date: 2023-09-06
- * @version: V2.0.0
+ * @version: V2.0.1
  */
 export const mfApiFormSchema: FormSchema[] = [
   { field: "id", label: "id", component: "Input", show: false },

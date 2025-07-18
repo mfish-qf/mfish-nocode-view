@@ -2,7 +2,7 @@
  @description: 自定义API
  @author: mfish
  @date: 2023-07-28
- @version: V2.0.0
+ @version: V2.0.1
 -->
 <template>
   <div>
@@ -43,7 +43,20 @@
                 ifShow: record.fType === 1
               },
               {
+                slot: 'update',
+                auth: ['sys:mfApi:update', 'sys:mfApi:insert'],
+                ifShow: record.fType === 1
+              },
+              {
+                icon: 'ant-design:cloud-download-outlined',
+                onClick: handleDownload.bind(null, record),
+                auth: 'sys:mfApi:query',
+                tooltip: '下载文件',
+                ifShow: record.fType === 1
+              },
+              {
                 icon: 'carbon:api-1',
+                color: 'orange',
                 onClick: apiCreate.bind(null, record),
                 auth: 'sys:mfApi:insert',
                 tooltip: '创建API',
@@ -61,7 +74,38 @@
                 tooltip: '删除'
               }
             ]"
-          />
+          >
+            <template #update>
+              <BasicUpload
+                :modal-height="500"
+                button-size="small"
+                button-type="link"
+                button-tooltip="更新文件"
+                button-text=""
+                icon-color="green"
+                icon-size="16"
+                :is-update="true"
+                modal-title="上传数据文件"
+                default-path="nocode/excel"
+                :hide-column="['isPrivate', 'path']"
+                :max-size="10"
+                :accept="['.xls', '.xlsx', '.csv']"
+                @success="handleUpdate(record.id, $event)"
+                :api="uploadUpdateApi"
+                :upload-params="{
+                  fileKey: record.fileKey
+                }"
+                v-auth="['sys:mfApi:update', 'sys:mfApi:insert']"
+              >
+                <template #header>
+                  <div :class="`${prefixCls}-example`">
+                    <span class="title">文件数据规范（如右图）：</span>
+                    <img style="width: 600px" src="/resource/img/excel-data.png" alt="demo" />
+                  </div>
+                </template>
+              </BasicUpload>
+            </template>
+          </TableAction>
         </template>
         <template v-if="column.key === 'name'">
           <div style="display: flex; align-items: center; cursor: pointer" @click="folderClick(record)">
@@ -95,8 +139,8 @@
   import FolderMoveModal from "@/views/nocode/api-folder/FolderMoveModal.vue";
   import { getFileFolderAndFile, getFileFolderTree } from "@/api/nocode/FileFolder";
   import { BasicUpload, FileItem } from "@mfish/core/components/Upload";
-  import { uploadApi } from "@mfish/core/api";
-  import { deleteMfFile, insertMfFile, updateMfFile } from "@/api/nocode/MfFile";
+  import { uploadApi, uploadUpdateApi } from "@mfish/core/api";
+  import { deleteMfFile, downloadMfFile, insertMfFile, updateMfFile } from "@/api/nocode/MfFile";
   import { getFileIconName } from "@mfish/core/utils/file/FileUtils";
   import { FolderTwoTone } from "@ant-design/icons-vue";
   import InputSearch from "@mfish/core/components/InputSearch";
@@ -105,7 +149,7 @@
     folderId: propTypes.string.def("")
   });
 
-  const emit = defineEmits(["folderClick", "folderDelete", "apiCreate"]);
+  const emit = defineEmits(["folderClick", "folderDelete", "apiCreate", "fileClick"]);
   const iconColor = useRootSetting().getThemeColor;
   const [registerFileMoveModal, { openModal: openFileMoveModal }] = useModal();
   watch(
@@ -140,7 +184,7 @@
    */
   function handleUpload(files: FileItem[]) {
     const mfFiles = files.map((file) => ({
-      id: file.responseData?.fileKey,
+      fileKey: file.responseData?.fileKey,
       folderId: props.folderId,
       fileName: file.responseData?.fileName,
       fileSize: file.responseData?.fileSize
@@ -148,6 +192,27 @@
     insertMfFile(mfFiles).then(() => {
       handleSuccess();
     });
+  }
+
+  /**
+   * 上传更新文件
+   * @param id 唯一id
+   * @param files 文件信息
+   */
+  function handleUpdate(id: string, files: FileItem[]) {
+    const mfFiles = files.map((file) => ({
+      id,
+      fileKey: file.responseData?.fileKey,
+      folderId: props.folderId,
+      fileName: file.responseData?.fileName,
+      fileSize: file.responseData?.fileSize
+    }));
+    if (mfFiles?.length > 0) {
+      //上传更新只有单条
+      updateMfFile(mfFiles[0]).then(() => {
+        handleSuccess();
+      });
+    }
   }
 
   /**
@@ -200,7 +265,7 @@
       emit("folderClick", record);
       return;
     }
-    emit("apiCreate", record);
+    handleDownload(record);
   }
 
   function apiCreate(data: FileFolder) {
@@ -209,6 +274,10 @@
 
   function moveSuccess() {
     reload();
+  }
+
+  function handleDownload(record) {
+    downloadMfFile(record.id);
   }
 </script>
 <style lang="less">

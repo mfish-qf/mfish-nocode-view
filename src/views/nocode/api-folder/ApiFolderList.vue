@@ -2,7 +2,7 @@
  @description: 自定义API
  @author: mfish
  @date: 2023-07-28
- @version: V2.0.0
+ @version: V2.0.1
 -->
 <template>
   <div style="height: 100%">
@@ -124,7 +124,6 @@
   import { onMounted, onUnmounted, ref, toRaw, watch } from "vue";
   import { BasicTable, PaginationProps, TableAction, useTable } from "@mfish/core/components/Table";
   import {
-    API_SAVE,
     ApiFolderVo,
     ApiParams,
     deleteMfApi,
@@ -132,7 +131,7 @@
     getApiFolderTree,
     getApiParamsList,
     updateMfApi
-  } from "@mfish/nocode";
+  } from "@mfish/custom-api";
   import { List as AList, Popover as APopover, Tag as ATag, Tooltip as ATooltip } from "ant-design-vue";
   import { Icon } from "@mfish/core/components/Icon";
   import { useDesign, useRootSetting } from "@mfish/core/hooks";
@@ -145,6 +144,7 @@
   import { FolderTwoTone } from "@ant-design/icons-vue";
   import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
   import InputSearch from "@mfish/core/components/InputSearch";
+  import { API_SAVE } from "@mfish/custom-api";
 
   const props = defineProps({
     folderId: { type: String, default: "" },
@@ -153,7 +153,7 @@
   const emit = defineEmits(["folderClick", "folderDelete", "rowSelect"]);
 
   const iconColor = useRootSetting().getThemeColor;
-  const [registerModal, { openModal, closeModal }] = useModal();
+  const [registerModal, { openModal }] = useModal();
   const paramMap = ref<Map<string, ApiParams[]>>(new Map());
   const configUrl = "/low-code/mf-api/config";
   const [registerApiTestModal, { openModal: openApiTestModal }] = useModal();
@@ -243,7 +243,6 @@
 
   function apiCreate(routeData) {
     open(routeData);
-    closeModal();
   }
 
   function onStorageHandle() {

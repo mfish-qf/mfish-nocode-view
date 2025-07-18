@@ -1,6 +1,6 @@
 {
   "name": "@mfish/stylelint-config",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "license": "Apache-2.0",
   "author": {
@@ -30,7 +30,7 @@
     "postcss-html": "^1.8.0",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.6.2",
-    "stylelint": "^16.21.1",
+    "stylelint": "^16.22.0",
     "stylelint-config-recommended": "^14.0.1",
     "stylelint-config-recommended-scss": "^14.1.0",
     "stylelint-config-recommended-vue": "^1.6.1",

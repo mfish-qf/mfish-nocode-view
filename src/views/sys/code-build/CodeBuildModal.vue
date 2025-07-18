@@ -2,7 +2,7 @@
  @description: 代码构建
  @author: mfish
  @date: 2023-04-11
- @version: V2.0.0
+ @version: V2.0.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="代码构建" @ok="handleSubmit">
