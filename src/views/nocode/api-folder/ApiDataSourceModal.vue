@@ -28,6 +28,15 @@
         </template>
         <FileFolderManagement @api-create="apiCreate" />
       </ATabPane>
+      <ATabPane key="3">
+        <template #tab>
+          <div :class="`${prefixCls}-tab`">
+            <Icon icon="carbon:http" :size="18" />
+            HTTP请求
+          </div>
+        </template>
+        <HttpFolderManagement @api-create="apiCreate" />
+      </ATabPane>
     </ATabs>
   </BasicModal>
 </template>
@@ -39,6 +48,8 @@
   import DataBaseManagement from "@/views/sys/database/DataBaseManagement.vue";
   import { useDesign } from "@mfish/core/hooks";
   import FileFolderManagement from "@/views/nocode/file-folder/index.vue";
+  import HttpFolderManagement from "@/views/nocode/http-folder/index.vue";
+  import { Icon } from "@mfish/core/components/Icon";
 
   const emit = defineEmits(["register", "apiCreate"]);
   const activeKey = ref("1");

@@ -1,11 +1,11 @@
 <!--
- @description: 自定义API
+ @description: 文件目录列表
  @author: mfish
  @date: 2023-07-28
  @version: V2.0.1
 -->
 <template>
-  <div>
+  <div :class="prefixCls">
     <BasicTable @register="registerTable">
       <template #toolbar>
         <div style="margin-top: 2px; width: 100%; display: flex; justify-content: space-between">
@@ -109,10 +109,10 @@
         </template>
         <template v-if="column.key === 'name'">
           <div style="display: flex; align-items: center; cursor: pointer" @click="folderClick(record)">
-            <Icon :icon="getFileIconName(record.name)" v-if="record?.fType === 1" />
+            <Icon :icon="getFileIconName(record.name)" v-if="record?.fType === 1" :color="iconColor" />
             <FolderTwoTone v-else :two-tone-color="iconColor" />
             <ATooltip :title="record.remark">
-              <div style="margin-left: 12px">{{ record.name }}</div>
+              <div class="name-a">{{ record.name }}</div>
             </ATooltip>
           </div>
         </template>
@@ -269,7 +269,7 @@
   }
 
   function apiCreate(data: FileFolder) {
-    emit("apiCreate", data);
+    emit("apiCreate", { sourceType: 1, ...data });
   }
 
   function moveSuccess() {
@@ -282,13 +282,19 @@
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-api-folder";
-  .@{prefix-cls}-example {
-    display: flex;
-    justify-content: flex-start;
-    margin: 0 0 10px 10px;
+  .@{prefix-cls} {
+    .name-a {
+      margin-left: 8px;
+      color: @main-color;
+    }
+    &-example {
+      display: flex;
+      justify-content: flex-start;
+      margin: 0 0 10px 10px;
 
-    .title {
-      width: 100px;
+      .title {
+        width: 100px;
+      }
     }
   }
 </style>

@@ -10,7 +10,7 @@ import "@mfish/core/enums";
 import "@mfish/core/utils/Is";
 const d = { class: "title" }, h = l(o({ __name: "MfDecoration5Config", setup(o2) {
   const { prefixCls: l2 } = p("decoration5-config"), h2 = c();
-  return (o3, p2) => (t(), e(f, { class: i(r(l2)) }, { default: s(() => [n("div", d, [p2[1] || (p2[1] = a(" 单次动画时长 ")), m(r(u), { suffix: "秒", value: r(h2).getCurConfigComponent.chart.options.duration, "onUpdate:value": p2[0] || (p2[0] = (o4) => r(h2).getCurConfigComponent.chart.options.duration = o4), placeholder: "单次动画时长", min: 1, max: 100, maxlength: 3 }, null, 8, ["value"])])]), _: 1 }, 8, ["class"]));
+  return (o3, p2) => (t(), e(f, { class: i(r(l2)) }, { default: s(() => [n("div", d, [p2[1] || (p2[1] = a(" 单次动画时长 ", -1)), m(r(u), { suffix: "秒", value: r(h2).getCurConfigComponent.chart.options.duration, "onUpdate:value": p2[0] || (p2[0] = (o4) => r(h2).getCurConfigComponent.chart.options.duration = o4), placeholder: "单次动画时长", min: 1, max: 100, maxlength: 3 }, null, 8, ["value"])])]), _: 1 }, 8, ["class"]));
 } }), [["__scopeId", "data-v-1606d90f"]]);
 export {
   h as default

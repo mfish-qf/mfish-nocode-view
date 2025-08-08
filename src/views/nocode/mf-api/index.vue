@@ -5,7 +5,7 @@
 -->
 <template>
   <div :class="prefixCls">
-    <HeaderBar :title="title" :right-actions="barActions" />
+    <HeaderBar :title="title" :left-actions="leftActions" :right-actions="barActions" />
     <div class="config-container">
       <div style="position: relative; height: 100%; width: 100%">
         <div :style="firstPaneStyle">
@@ -46,6 +46,7 @@
     <SqlQueryModal @register="registerQueryModal" />
     <ParamsModal @register="registerParamsModal" @submit="paramQuery" />
     <MfApiModal v-if="!queryMode" @register="registerMfApiModal" @success="saveSuccess" />
+    <MfApiParamModal @register="registerApiParamModal" @success="httpParamConfigSuccess" />
   </div>
 </template>
 <script setup lang="ts">
@@ -85,6 +86,8 @@
   import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
   import { Spin as ASpin } from "ant-design-vue";
   import { getTableList, PageResult, TableInfo } from "@mfish/core/api";
+  import MfApiParamModal from "@/views/nocode/mf-api/MfApiParamModal.vue";
+  import { getMfHttpById } from "@/api/nocode/MfHttp";
 
   const configKey = ref(1);
   const { query } = useRoute();
@@ -112,6 +115,7 @@
   const [registerQueryModal, { openModal: openQueryModal }] = useModal();
   const [registerParamsModal, { openModal: openParamsModal }] = useModal();
   const [registerMfApiModal, { openModal: openMfApiModal }] = useModal();
+  const [registerApiParamModal, { openModal: openApiParamModal }] = useModal();
   const title = ref<string>("");
   const loading = ref<boolean>(false);
   const setTitle = (t: string) => {
@@ -171,6 +175,7 @@
   const { createMessage } = useMessage();
   const undoRedoManager = new UndoRedoManager(100);
   const screenId = ref<string>();
+  const configId = ref<string>();
   const queryMode = computed(() => {
     return !!screenId.value;
   });
@@ -199,46 +204,134 @@
     }
   ]);
 
+  const leftActions = computed(() =>
+    mfApi.value?.sourceType === 2
+      ? [
+          {
+            icon: "ant-design:setting-outlined",
+            label: "设置HTTP请求初始参数",
+            click: () => openApiParamModal(true, { isUpdate: isUpdate.value })
+          }
+        ]
+      : []
+  );
+
+  const initData = async (mfApi: MfApi, params?: string) => {
+    try {
+      if (mfApi.sourceType === 0) {
+        let pageTable: PageResult<TableInfo>;
+        if (screenId.value) {
+          pageTable = await getTablesByResourceId(`${screenId.value},${configId.value}`);
+        } else {
+          pageTable = await getTableList({
+            connectId: apiStore.getSourceId,
+            pageNum: 1,
+            pageSize: 10_000
+          });
+        }
+        apiStore.setTableList(pageTable);
+      }
+      const sqlQuery: SqlQuery = mfApi.config
+        ? JSON.parse(mfApi.config)
+        : { ...config.sqlQuery, schema: query.tableSchema, sourceTable: query.tableName };
+      await getAllTableFields(sqlQuery, params);
+      configMitt.on(ApiConfigEvent.QUERY_DATA, queryData);
+      configMitt.on(ApiConfigEvent.QUERY_SQL, querySql);
+      return sqlQuery;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  //创建时初始化
+  const createInitData = (params?: string) => {
+    initData(mfApi.value, params).then((sqlQuery) => {
+      config.sqlQuery = { ...sqlQuery, fields: apiStore.getTableFields };
+      undoRedoManager.setData(config.sqlQuery);
+    });
+  };
+  //编辑时初始化
+  const editInitData = (params?: string) => {
+    initData(mfApi.value, params).then((sqlQuery: SqlQuery) => {
+      config.sqlQuery = sqlQuery;
+      apiStore.setLevel(calcLevel(sqlQuery));
+      undoRedoManager.setData(sqlQuery);
+    });
+  };
+
+  const showHttpParams = async () => {
+    //如果是HTTP请求，需要先设置参数，回调后初始化
+    if (mfApi.value.sourceType === 2 && mfApi.value?.sourceId) {
+      const httpInfo = await getMfHttpById(mfApi.value.sourceId);
+      if (httpInfo) {
+        const header = httpInfo.headerParams ? JSON.parse(httpInfo.headerParams) : [];
+        const body = httpInfo.bodyParams ? JSON.parse(httpInfo.bodyParams) : {};
+        if (header?.length > 0 || body.page?.checked || body.other?.length > 0) {
+          return {
+            header,
+            body,
+            strHeader: httpInfo.headerParams,
+            strBody: httpInfo.bodyParams
+          };
+        }
+      }
+    }
+  };
+  // 显示HTTP请求参数弹窗
+  const showHttpParamsModal = async () => {
+    const params = await showHttpParams();
+    if (params) {
+      const addVariables = (item: any) => {
+        apiStore.getVariables.push({
+          id: item.id,
+          name: item.key,
+          defaultValue: item.value,
+          isUse: 0,
+          remark: item.remark || "",
+          required: item.isRequired ? 1 : 0,
+          isHttpParam: true
+        });
+      };
+      params?.header?.forEach((item: any) => {
+        addVariables(item);
+      });
+      params?.body?.other?.forEach((item: any) => {
+        addVariables(item);
+      });
+      if (params.body?.page?.checked) {
+        addVariables({ ...params.body.page.pageNum, remark: "当前页" });
+        addVariables({ ...params.body.page.pageSize, remark: "每页条数" });
+      }
+      nextTick(() =>
+        openApiParamModal(true, {
+          header: params.strHeader,
+          body: params.strBody,
+          isUpdate: isUpdate.value
+        })
+      ).then();
+      return true;
+    }
+    return false;
+  };
   onBeforeMount(async () => {
     setSplitValue().then();
-    const configId = query.configId as string;
+    configId.value = query.configId as string;
     screenId.value = query.screenId as string;
-    const initData = async (mfApi: MfApi) => {
-      try {
-        apiStore.setSourceId(mfApi.sourceId || "");
-        apiStore.setSourceType(mfApi.sourceType || 0);
-        if (mfApi.sourceType === 0) {
-          let pageTable: PageResult<TableInfo>;
-          if (screenId.value) {
-            pageTable = await getTablesByResourceId(`${screenId.value},${configId}`);
-          } else {
-            pageTable = await getTableList({
-              connectId: apiStore.getSourceId,
-              pageNum: 1,
-              pageSize: 10_000
-            });
-          }
-          apiStore.setTableList(pageTable);
-        }
-        const sqlQuery: SqlQuery = mfApi.config
-          ? JSON.parse(mfApi.config)
-          : { ...config.sqlQuery, schema: query.tableSchema, sourceTable: query.tableName };
-        await getAllTableFields(sqlQuery);
-        setTitle(mfApi.name || apiStore.tableName);
-        configMitt.on(ApiConfigEvent.QUERY_DATA, queryData);
-        configMitt.on(ApiConfigEvent.QUERY_SQL, querySql);
-        return sqlQuery;
-      } finally {
-        loading.value = false;
-      }
-    };
     loading.value = true;
-    if (configId) {
+    const setStore = (mfApi: MfApi) => {
+      apiStore.setSourceId(mfApi.sourceId || "");
+      apiStore.setSourceType(mfApi.sourceType || 0);
+      apiStore.setTableName(query.tableName as string);
+      setTitle(mfApi.name || (query.tableName as string));
+    };
+    //如果存在配置id说明是修改
+    if (configId.value) {
+      //如果存在screenId说明是从资源中心进行查询
       if (screenId.value) {
-        mfApi.value = await getMfApiByResourceId(`${screenId.value},${configId}`);
-        mfApi.value.id = configId;
+        mfApi.value = await getMfApiByResourceId(`${screenId.value},${configId.value}`);
+        mfApi.value.id = configId.value;
       } else {
-        mfApi.value = await getMfApiById(configId);
+        mfApi.value = await getMfApiById(configId.value);
       }
       if (!mfApi.value || !mfApi.value.config) {
         createMessage.error("错误:API配置信息不存在或没权限");
@@ -249,26 +342,29 @@
       if (!isUpdate.value) {
         mfApi.value.name = `${mfApi.value.name}_副本`;
       }
-      getApiParamsList({ apiId: configId, pageNum: 1, pageSize: 10_000 }).then((res) =>
+      getApiParamsList({ apiId: configId.value, pageNum: 1, pageSize: 10_000 }).then((res) =>
         apiStore.getVariables.push(...res.list)
       );
-      initData(mfApi.value).then((sqlQuery: SqlQuery) => {
-        config.sqlQuery = sqlQuery;
-        apiStore.setLevel(calcLevel(sqlQuery));
-        undoRedoManager.setData(sqlQuery);
-      });
+      setStore(mfApi.value);
+      //如果是HTTP请求，需要先设置参数，回调后初始化
+      if (await showHttpParamsModal()) {
+        return;
+      }
+      editInitData();
       return;
     }
     isUpdate.value = false;
     mfApi.value.sourceId = query.sourceId as string;
     mfApi.value.sourceType = Number.parseInt(query.sourceType as string);
-    initData(mfApi.value).then((sqlQuery) => {
-      config.sqlQuery = { ...sqlQuery, fields: apiStore.getTableFields };
-      undoRedoManager.setData(config.sqlQuery);
-    });
+    setStore(mfApi.value);
+    //如果是HTTP请求，需要先设置参数，回调后初始化
+    if (await showHttpParamsModal()) {
+      return;
+    }
+    createInitData();
   });
-  let globalKeyboard: any;
 
+  let globalKeyboard: any;
   onMounted(() => {
     setProps({ onChange: buildTableData });
     globalKeyboard = listenGlobalKeyboard(useApiShortcut(undoClick, redoClick, saveClick));
@@ -301,32 +397,32 @@
     })();
   });
 
-  async function getAllTableFields(sqlQuery: SqlQuery) {
+  async function getAllTableFields(sqlQuery: SqlQuery, params?: string) {
     let query = sqlQuery;
-    const setTableFields = async (tableName: string | undefined) => {
+    const setTableFields = async (tableName: string | undefined, params?: string) => {
       if (!tableName) return;
       const tableFields = await getSourceHeaders({
         sourceId: apiStore.getSourceId,
         tableName,
+        params,
         sourceType: apiStore.getSourceType
       });
       apiStore.addTableFieldsMap(tableName, tableFields);
     };
-    const setJoinFields = async (joins: Join[] | undefined) => {
+    const setJoinFields = async (joins: Join[] | undefined, params?: string) => {
       if (!joins) return;
       for (const join of joins) {
-        setTableFields(join.table).then();
+        setTableFields(join.table, params).then();
       }
     };
     while (query.sqlQuery) {
       const res = await getInnerFields(query);
       apiStore.addTableFieldsMap(query?.sourceTable, res);
-      await setJoinFields(query.joins);
+      await setJoinFields(query.joins, params);
       query = query.sqlQuery;
     }
-    await setJoinFields(query.joins);
-    await apiStore.setTableFields(apiStore.getSourceId, query.sourceTable);
-    apiStore.setTableName(query.sourceTable);
+    await setJoinFields(query.joins, params);
+    await apiStore.setTableFields(apiStore.getSourceId, query.sourceTable, params);
   }
 
   function configChange(data: SqlQuery, levelChange: boolean) {
@@ -358,9 +454,10 @@
   async function queryData({ sqlQuery, level }) {
     curSqlQuery.value = sqlQuery;
     const params = getParams(sqlQuery);
+    const httpParams = await showHttpParams();
     // 如果有变量参数，需要输入参数值后查询
-    if (params && params.size > 0) {
-      openParamsModal(true, { params, level });
+    if ((params && params.size > 0) || httpParams) {
+      openParamsModal(true, { params, level, httpParams });
       return;
     }
     paramQuery({}, level);
@@ -440,7 +537,7 @@
     const record: MfApi = isUpdate.value
       ? { ...mfApi.value, params, paramFlag, config: JSON.stringify(config.sqlQuery) }
       : {
-          name: mfApi.value.name || apiStore.tableName,
+          name: mfApi.value.name || (query.tableName as string),
           remark: title.value,
           sourceType: apiStore.sourceType,
           queryType: 0,
@@ -468,6 +565,14 @@
     }
     mfApi.value = { ...values };
     end();
+  }
+
+  function httpParamConfigSuccess(config: any) {
+    if (config.isUpdate) {
+      editInitData(JSON.stringify(config.params));
+    } else {
+      createInitData(JSON.stringify(config.params));
+    }
   }
 </script>
 <style scoped lang="less">
@@ -508,7 +613,6 @@
         display: flex;
         align-items: center;
         z-index: 10;
-        //border-top: 1px solid @border-color-base;
         .show-data {
           cursor: pointer;
 

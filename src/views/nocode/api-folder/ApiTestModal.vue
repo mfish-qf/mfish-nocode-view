@@ -33,6 +33,7 @@
   import { useGlobSetting } from "@mfish/core/hooks";
   import { useClipboard } from "@vueuse/core";
   import { getToken } from "@mfish/core/utils/auth";
+  import { getMfHttpByApiId } from "@/api/nocode/MfHttp";
 
   const [registerForm, { resetFields, setFieldsValue, resetSchema, validate }] = useForm({
     name: "model_form_item",
@@ -57,33 +58,7 @@
     id.value = data.id;
     url.value = `${urlPrefix.value}/${data.id}`;
     const variables: FormSchema[] = [];
-    result.value = "";
-    if (data.paramFlag === 1) {
-      const params = await getApiParamsList({ apiId: data.id, pageNum: 1, pageSize: 10_000 });
-      variables.push(
-        ...(params.list
-          .filter((item) => item.isUse === 1)
-          .map((item) => {
-            return {
-              field: item.name,
-              label: item.name,
-              component: "Input",
-              required: item.required || false,
-              helpMessage: item.remark || "",
-              defaultValue: item.defaultValue
-            };
-          }) as FormSchema[])
-      );
-    }
-
-    resetSchema([
-      {
-        field: "apiUrl",
-        label: "API地址",
-        component: "Input",
-        slot: "apiUrl"
-      },
-      ...variables,
+    const page = [
       {
         field: "pageNum",
         label: "pageNum",
@@ -101,7 +76,71 @@
         required: true,
         defaultValue: 10,
         colProps: { span: 12 }
+      }
+    ];
+    result.value = "";
+    if (data.paramFlag === 1) {
+      const params = await getApiParamsList({ apiId: data.id, pageNum: 1, pageSize: 10_000 });
+      variables.push(
+        ...(params.list
+          .filter((item) => item.isUse === 1)
+          .map((item) => {
+            return {
+              field: item.name,
+              label: item.name,
+              component: "Input",
+              required: item.required || false,
+              helpMessage: item.remark || "",
+              defaultValue: item.defaultValue
+            };
+          }) as FormSchema[])
+      );
+      const addVariables = (item: any) => {
+        variables.push({
+          field: item.key,
+          label: item.key,
+          component: "Input",
+          required: item.isRequired,
+          helpMessage: item.remark || "",
+          defaultValue: item.value,
+          colProps: item.colProps || {}
+        });
+      };
+      const httpInfo = await getMfHttpByApiId(data.id);
+      if (httpInfo) {
+        const header = httpInfo.headerParams ? JSON.parse(httpInfo.headerParams) : [];
+        const body = httpInfo.bodyParams ? JSON.parse(httpInfo.bodyParams) : {};
+        header?.forEach((item: any) => {
+          addVariables(item);
+        });
+        body?.other?.forEach((item: any) => {
+          addVariables(item);
+        });
+        if (body?.page?.checked) {
+          addVariables({ ...body.page.pageNum, remark: "当前页", colProps: { span: 12 } });
+          addVariables({ ...body.page.pageSize, remark: "每页条数", colProps: { span: 12 } });
+          //如果pageNum和pageSize都有值，就从page中删除
+          const numIndex = page.findIndex((item) => item.field === body?.page?.pageNum?.key);
+          if (numIndex !== -1) {
+            page.splice(numIndex, 1);
+          }
+          const sizeIndex = page.findIndex((item) => item.field === body?.page?.pageSize?.key);
+          if (sizeIndex !== -1) {
+            page.splice(sizeIndex, 1);
+          }
+        }
+      }
+    }
+
+    resetSchema([
+      {
+        field: "apiUrl",
+        label: "API地址",
+        component: "Input",
+        slot: "apiUrl"
       },
+      ...variables,
+      ...page,
       {
         field: "execute",
         label: " ",
