@@ -5,7 +5,7 @@
  @version: V2.0.1
 -->
 <template>
-  <div style="height: 100%">
+  <div :class="prefixCls">
     <BasicTable @register="registerTable">
       <template #toolbar>
         <div style="margin-top: 2px; width: 100%; display: flex; justify-content: space-between">
@@ -65,7 +65,7 @@
           />
         </template>
         <template v-if="column.key === 'name'">
-          <div style="display: flex; align-items: center; cursor: pointer" @click="folderClick(record)">
+          <div class="name-a" style="display: flex; align-items: center; cursor: pointer" @click="folderClick(record)">
             <Icon icon="carbon:api-1" v-if="record?.fType === 1" :color="iconColor" />
             <FolderTwoTone v-else :two-tone-color="iconColor" />
             <ATooltip :title="record.remark">
@@ -104,7 +104,7 @@
         </template>
       </template>
     </BasicTable>
-    <ApiDataSourceModal @register="registerModal" @api-create="file2api">
+    <ApiDataSourceModal @register="registerModal" @api-create="fileHttp2api">
       <template #button="{ data }">
         <AButton type="primary" @click="dataBase2api(data)" v-auth="'sys:mfApi:insert'" pre-icon="carbon:api-1">
           新建API
@@ -145,6 +145,7 @@
   import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
   import InputSearch from "@mfish/core/components/InputSearch";
   import { API_SAVE } from "@mfish/custom-api";
+  import { getMfHttpByApiId } from "@/api/nocode/MfHttp";
 
   const props = defineProps({
     folderId: { type: String, default: "" },
@@ -229,14 +230,15 @@
   }
 
   /**
-   * 通过文件创建API
+   * 通过文件或HTTP请求创建API
    * @param data
    */
-  function file2api(data) {
+  function fileHttp2api(data: any) {
     if (!data.key) return;
+    //sourceType 0 数据库创建api sourceType 1 文件创建api sourceType 2 Http请求创建api
     const routeData = router.resolve({
       path: configUrl,
-      query: { sourceId: data.id, tableName: data.name, sourceType: 1 }
+      query: { sourceId: data.id, tableName: data.name, sourceType: data.sourceType }
     });
     apiCreate(routeData);
   }
@@ -337,6 +339,32 @@
   async function getApiParams(apiId: string) {
     if (!paramMap.value.has(apiId)) {
       const params = await getApiParamsList({ apiId, isUse: 1 });
+
+      const addVariables = (item: any) => {
+        params.list?.push({
+          id: item.id,
+          name: item.key,
+          defaultValue: item.value,
+          isUse: 0,
+          remark: item.remark || "",
+          required: item.isRequired ? 1 : 0
+        });
+      };
+      const httpInfo = await getMfHttpByApiId(apiId);
+      if (httpInfo) {
+        const header = httpInfo.headerParams ? JSON.parse(httpInfo.headerParams) : [];
+        const body = httpInfo.bodyParams ? JSON.parse(httpInfo.bodyParams) : {};
+        header?.forEach((item: any) => {
+          addVariables(item);
+        });
+        body?.other?.forEach((item: any) => {
+          addVariables(item);
+        });
+        if (body?.page?.checked) {
+          addVariables({ ...body.page.pageNum, remark: "当前页" });
+          addVariables({ ...body.page.pageSize, remark: "每页条数" });
+        }
+      }
       paramMap.value.set(apiId, params.list);
     }
   }
@@ -348,6 +376,10 @@
 <style lang="less">
   @prefix-cls: ~"@{namespace}-api-folder";
   .@{prefix-cls} {
+    height: 100%;
+    .name-a {
+      color: @main-color;
+    }
     &-popover {
       .ant-popover-inner-content {
         padding: 0;

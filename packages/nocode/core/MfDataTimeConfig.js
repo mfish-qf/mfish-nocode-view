@@ -8,7 +8,7 @@ const C = { class: "title" }, H = _(e({ __name: "MfDataTimeConfig", setup(e2) {
   function D() {
     h.getCurConfigComponent.chart.options.format = H2.value;
   }
-  return (e3, a2) => (o(), t("div", { class: l(i(_2)) }, [s(d, { "hide-title": true }, { default: u(() => [m("div", C, [a2[1] || (a2[1] = n(" 时间格式 ")), s(i(c), { size: "small", value: H2.value, "onUpdate:value": a2[0] || (a2[0] = (e4) => H2.value = e4), onChange: D }, { default: u(() => [(o(), t(f, null, r(M, (e4) => s(i(g), { key: e4.value, value: e4.value }, { default: u(() => [n(v(e4.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])])]), _: 1 })], 2));
+  return (e3, a2) => (o(), t("div", { class: l(i(_2)) }, [s(d, { "hide-title": true }, { default: u(() => [m("div", C, [a2[1] || (a2[1] = n(" 时间格式 ", -1)), s(i(c), { size: "small", value: H2.value, "onUpdate:value": a2[0] || (a2[0] = (e4) => H2.value = e4), onChange: D }, { default: u(() => [(o(), t(f, null, r(M, (e4) => s(i(g), { key: e4.value, value: e4.value }, { default: u(() => [n(v(e4.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])])]), _: 1 })], 2));
 } }), [["__scopeId", "data-v-93ac9c5a"]]);
 export {
   H as default

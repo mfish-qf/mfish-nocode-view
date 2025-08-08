@@ -38,6 +38,8 @@
 
   async function handleSubmit() {
     const values = await validate();
+    values.params = values.params.filter((item: any) => !item.isHttpParam);
+
     setModalProps({ confirmLoading: true });
     if (unref(isUpdate)) {
       saveMfApi(updateMfApi, values);
