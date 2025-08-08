@@ -151,7 +151,7 @@
       .then((res) => {
         const columns: BasicColumn[] = Object.values(res.headers)
           .sort((a: any, b: any) => a.index - b.index)
-          .map((value) => ({
+          .map((value: any) => ({
             title: value.colName,
             dataIndex: value.colName
           }));
@@ -321,7 +321,6 @@
     const setStore = (mfApi: MfApi) => {
       apiStore.setSourceId(mfApi.sourceId || "");
       apiStore.setSourceType(mfApi.sourceType || 0);
-      apiStore.setTableName(query.tableName as string);
       setTitle(mfApi.name || (query.tableName as string));
     };
     //如果存在配置id说明是修改
@@ -423,6 +422,8 @@
     }
     await setJoinFields(query.joins, params);
     await apiStore.setTableFields(apiStore.getSourceId, query.sourceTable, params);
+    //通过tableName监听字段初始化，不要变更位置
+    apiStore.setTableName(query.sourceTable);
   }
 
   function configChange(data: SqlQuery, levelChange: boolean) {
