@@ -92,7 +92,7 @@
 <script lang="ts" setup>
   import { computed, reactive, ref, unref, useTemplateRef } from "vue";
   import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
-  import { getMfHttpById, insertMfHttp, testMfHttp, updateMfHttp } from "@/api/nocode/MfHttp";
+  import { getMfHttpById, insertMfHttp, testMfHttp, updateMfHttp, MfHttp } from "@mfish/nocode";
   import {
     Collapse as ACollapse,
     Input as AInput,
@@ -103,7 +103,6 @@
     Tooltip as ATooltip
   } from "ant-design-vue";
   import { CaretRightOutlined } from "@ant-design/icons-vue";
-  import { MfHttp } from "@/api/nocode/model/MfHttpModel";
   import { useDesign } from "@mfish/core/hooks";
   import { HttpParamConfig, HttpBodyParam } from "@mfish/custom-api";
   import { getDictItems } from "@mfish/core/api";

@@ -33,7 +33,7 @@
   import { useGlobSetting } from "@mfish/core/hooks";
   import { useClipboard } from "@vueuse/core";
   import { getToken } from "@mfish/core/utils/auth";
-  import { getMfHttpByApiId } from "@/api/nocode/MfHttp";
+  import { getMfHttpByApiId } from "@mfish/nocode";
 
   const [registerForm, { resetFields, setFieldsValue, resetSchema, validate }] = useForm({
     name: "model_form_item",
