@@ -9,12 +9,7 @@
     <BasicTable @register="registerTable">
       <template #toolbar>
         <div style="margin-top: 2px; width: 100%; display: flex; justify-content: space-between">
-          <AButton
-            type="primary"
-            @click="handleCreate"
-            v-auth="'sys:mfApi:insert'"
-            pre-icon="ant-design:plus-outlined"
-          >
+          <AButton type="primary" @click="handleCreate" v-auth="'sys:mfApi:insert'" pre-icon="ant-design:plus-outlined">
             新建HTTP请求
           </AButton>
           <InputSearch placeholder="输入HTTP请求路径" @search="onSearch" style="width: 260px" allow-clear />
@@ -92,7 +87,7 @@
   import InputSearch from "@mfish/core/components/InputSearch";
   import MfHttpModal from "@/views/nocode/mf-http/MfHttpModal.vue";
   import { DictTag } from "@mfish/core/components/DictTag";
-  import { deleteMfHttp } from "@/api/nocode/MfHttp";
+  import { deleteMfHttp } from "@mfish/nocode";
 
   const props = defineProps({
     folderId: propTypes.string.def("")

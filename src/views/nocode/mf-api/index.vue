@@ -87,7 +87,7 @@
   import { Spin as ASpin } from "ant-design-vue";
   import { getTableList, PageResult, TableInfo } from "@mfish/core/api";
   import MfApiParamModal from "@/views/nocode/mf-api/MfApiParamModal.vue";
-  import { getMfHttpById } from "@/api/nocode/MfHttp";
+  import { getMfHttpById } from "@mfish/nocode";
 
   const configKey = ref(1);
   const { query } = useRoute();

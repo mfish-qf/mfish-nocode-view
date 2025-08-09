@@ -145,7 +145,7 @@
   import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
   import InputSearch from "@mfish/core/components/InputSearch";
   import { API_SAVE } from "@mfish/custom-api";
-  import { getMfHttpByApiId } from "@/api/nocode/MfHttp";
+  import { getMfHttpByApiId } from "@mfish/nocode";
 
   const props = defineProps({
     folderId: { type: String, default: "" },
