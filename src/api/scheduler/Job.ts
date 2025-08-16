@@ -5,7 +5,7 @@ import { Job, JobPageModel, ReqJob } from "@/api/scheduler/model/JobModel";
  * @description: 定时调度任务
  * @author: mfish
  * @date: 2023-02-20
- * @version: V2.0.1
+ * @version: V2.1.0
  */
 enum Api {
   Job = "/scheduler/job",

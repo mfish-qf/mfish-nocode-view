@@ -5,7 +5,7 @@ import { DemoOrderDetail, DemoOrderDetailPageModel, ReqDemoOrderDetail } from "@
  * @description: 销售订单明细
  * @author: mfish
  * @date: 2024-09-02
- * @version: V2.0.1
+ * @version: V2.1.0
  */
 enum Api {
   DemoOrderDetail = "/demo/demoOrderDetail"

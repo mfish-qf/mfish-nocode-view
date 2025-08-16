@@ -4,7 +4,7 @@ import { PageResult } from "@mfish/core/api";
  * @description: 任务订阅表
  * @author: mfish
  * @date: 2023-02-20
- * @version: V2.0.1
+ * @version: V2.1.0
  */
 export interface JobSubscribe {
   jobId: string;

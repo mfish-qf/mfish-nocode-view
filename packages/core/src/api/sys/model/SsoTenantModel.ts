@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@core/api/model/BaseModel.ts";
  * @description: 租户信息表
  * @author: mfish
  * @date: 2023-05-31
- * @version: V2.0.1
+ * @version: V2.1.0
  */
 export interface SsoTenant extends BaseEntity<string> {
   name?: string;

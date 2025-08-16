@@ -2,7 +2,7 @@
  @description: 大屏资源API查看
  @author: mfish
  @date: 2025-03-21
- @version: V2.0.1
+ @version: V2.1.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="大屏资源API信息">

@@ -1,5 +1,5 @@
 import { defHttp } from "@mfish/core/utils/http/axios";
-import { CompletionResult, QuestionModel } from "@/api/demo/model/QuestionModel";
+import { ChatResponseVo, QuestionModel } from "@/api/demo/model/QuestionModel";
 
 /**
  * @description: 聊天机器人
@@ -7,11 +7,11 @@ import { CompletionResult, QuestionModel } from "@/api/demo/model/QuestionModel"
  * @date: 2023/2/8 20:18
  */
 enum Api {
-  Question = "/demo/openai/answer"
+  Question = "/ai/ollama/chat/stream"
 }
 
 export function answer(question: QuestionModel) {
-  return defHttp.post<CompletionResult>(
+  return defHttp.get<ChatResponseVo>(
     {
       url: Api.Question,
       params: question,

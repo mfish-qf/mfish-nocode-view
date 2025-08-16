@@ -2,7 +2,7 @@
  @description: 组织结构表查看
  @author: mfish
  @date: 2024-08-29
- @version: V2.0.1
+ @version: V2.1.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="组织结构信息">
