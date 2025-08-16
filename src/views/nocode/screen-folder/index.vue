@@ -2,7 +2,7 @@
  @description: 大屏目录
  @author: mfish
  @date: 2024-01-08
- @version: V2.0.1
+ @version: V2.1.0
 -->
 <template>
   <PageWrapper content-full-height fixed-height class="mt-3 ml-3 mr-3">

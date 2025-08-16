@@ -2,7 +2,7 @@
  @description: 大屏资源信息
  @author: mfish
  @date: 2025-03-19
- @version: V2.0.1
+ @version: V2.1.0
 -->
 <template>
   <div :class="prefixCls">

@@ -68,25 +68,25 @@ export const dynamicInfoItems: DynamicInfoItem[] = [
     avatar: "svg:dynamic-avatar-1",
     name: "mfish",
     date: "刚刚",
-    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>gitee</a> 发布了V2.0.1最新版本后端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>mfish-nocode</a>`
+    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>gitee</a> 发布了V2.1.0最新版本后端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode'>mfish-nocode</a>`
   },
   {
     avatar: "svg:dynamic-avatar-3",
     name: "克里斯",
     date: "刚刚",
-    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>gitee</a> 发布了V2.0.1最新版本前端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>mfish-nocode-view</a>`
+    desc: `在 <a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>gitee</a> 发布了V2.1.0最新版本前端<a target='_blank' href='https://gitee.com/qiufeng9862/mfish-nocode-view'>mfish-nocode-view</a>`
   },
   {
     avatar: "svg:dynamic-avatar-4",
     name: "Mfish",
     date: "刚刚",
-    desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>github</a> 发布了V2.0.1最新版本前端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>mfish-nocode-view</a>`
+    desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>github</a> 发布了V2.1.0最新版本前端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode-view'>mfish-nocode-view</a>`
   },
   {
     avatar: "svg:dynamic-avatar-2",
     name: "mfish",
     date: "刚刚",
-    desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>github</a> 发布了V2.0.1最新版本后端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>mfish-nocode</a>`
+    desc: `在 <a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>github</a> 发布了V2.1.0最新版本后端<a target='_blank' href='https://github.com/mfish-qf/mfish-nocode'>mfish-nocode</a>`
   },
   {
     avatar: "svg:dynamic-avatar-5",

@@ -2,7 +2,7 @@
  @description: 自定义API
  @author: mfish
  @date: 2023-07-28
- @version: V2.0.1
+ @version: V2.1.0
 -->
 <template>
   <div :class="prefixCls">

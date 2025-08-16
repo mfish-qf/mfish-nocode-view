@@ -3,7 +3,7 @@
     <div :class="`${prefixCls}-panel`">
       <ScrollContainer ref="scrollRef">
         <template v-for="(item, index) in chats">
-          <div :key="`${index}1`" :class="`${prefixCls}-wrapper`" v-if="item.user === 'chatGpt'">
+          <div :key="`${index}1`" :class="`${prefixCls}-wrapper`" v-if="item.user === '摸鱼机器人'">
             <img class="chat-img" src="/resource/img/logo.png" alt="chat-img" />
             <div class="chat-text" v-if="item.chat !== undefined && true && item.chat !== ''" v-html="item.chat"></div>
           </div>
@@ -25,11 +25,11 @@
   import { SvgIcon } from "@mfish/core/components/Icon";
   import { ScrollActionType, ScrollContainer } from "@mfish/core/components/Container";
   import { InputSearch } from "ant-design-vue";
-  import { answer } from "@/api/demo/chat";
   import { ChatsModel } from "@/api/demo/model/QuestionModel";
   import { buildUUID } from "@mfish/core/utils/Uuid";
   import { useDesign } from "@mfish/core/hooks";
   import { Nullable } from "@mfish/types";
+  import { getToken } from "@mfish/core/utils/auth";
 
   defineOptions({ name: "ChartGpt" });
   const scrollRef = ref<Nullable<ScrollActionType>>(null);
@@ -41,29 +41,39 @@
     }
     return scroll;
   };
-  const botName = "chatGpt";
+  const botName = "摸鱼机器人";
   const msg = ref<string>("");
   const chats = ref<ChatsModel[]>([]);
-  const QUERYING = "查询中...";
+  let eventSource: EventSource;
   const onSend = (value: string) => {
     chats.value.push({ id: "user", user: "user", chat: value });
     const id = buildUUID();
-    chats.value.push({ id, user: botName, chat: QUERYING });
+    chats.value.push({ id, user: botName, chat: "" });
     msg.value = "";
     scrollBottom();
-    answer({ data: value, id }).then((res) => {
-      const result = JSON.parse(res.result);
-      let question = "我现在忙不过来，请慢点提问！";
-      if (result.choices !== undefined && result.choices !== null && result.choices.length > 0) {
-        question = result?.choices[0]?.text ?? "";
-      }
+    // 关闭之前的 SSE
+    if (eventSource) {
+      eventSource.close();
+    }
+
+    // 建立新 SSE 连接，并把 prompt 传给后端
+    eventSource = new EventSource(
+      `/api/ai/openai/chat/stream?access_token=${getToken()}&id=${id}&prompt=${encodeURIComponent(value)}`
+    );
+
+    eventSource.addEventListener("message", (event) => {
+      const data = JSON.parse(event.data);
       for (let i = chats.value.length - 1; i >= 0; i--) {
-        if (chats.value[i].id === res.id) {
-          chats.value[i].chat = question;
+        if (chats.value[i].id === data.id) {
+          chats.value[i].chat += data.content;
+          scrollBottom();
           break;
         }
       }
-      scrollBottom();
+    });
+
+    eventSource.addEventListener("error", () => {
+      eventSource.close();
     });
   };
   onMounted(() => {
@@ -124,6 +134,7 @@
       border-radius: 4px;
       font-size: 16px;
       padding: 8px;
+      margin: 0 12px 0 12px;
       background-color: #fafafa;
     }
 

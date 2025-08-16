@@ -5,7 +5,7 @@
  */
 export interface QuestionModel {
   id: string;
-  data: string;
+  prompt: string;
 }
 
 export interface ChatsModel {
@@ -14,7 +14,7 @@ export interface ChatsModel {
   chat: string;
 }
 
-export interface CompletionResult {
+export interface ChatResponseVo {
   id: string;
-  result: string;
+  content: string;
 }

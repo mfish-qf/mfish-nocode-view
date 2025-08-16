@@ -2,7 +2,7 @@
  @description: 文件目录
  @author: mfish
  @date: 2023-12-11
- @version: V2.0.1
+ @version: V2.1.0
 -->
 <template>
   <NLayout has-sider sider-placement="left" :class="prefixCls">
