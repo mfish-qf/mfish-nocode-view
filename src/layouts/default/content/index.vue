@@ -1,5 +1,31 @@
 <template>
   <div :class="[prefixCls, getLayoutContentMode]" :loading="getOpenPageLoading && getPageLoading">
+    <ADropdown
+      :open="open"
+      :trigger="['click']"
+      placement="topLeft"
+      :arrow="{ pointAtCenter: true }"
+      :overlay-style="{ width: '500px', minWidth: '300px' }"
+    >
+      <template #overlay>
+        <AMenu>
+          <AMenu.Item disabled style="padding: 0; cursor: default">
+            <div>
+              <div :class="`${prefixCls}-chat-header`">
+                <div>摸鱼小助手</div>
+                <Icon icon="ant-design:minus-circle-outlined" size="20" style="cursor: pointer" @click="open = false" />
+              </div>
+              <ChartGpt style="height: 50vh" />
+            </div>
+          </AMenu.Item>
+        </AMenu>
+      </template>
+      <AFloatButton type="primary" tooltip="您好，我是您的摸鱼小助手" :style="{ right: '5px' }" @click="open = !open">
+        <template #icon>
+          <RedditOutlined />
+        </template>
+      </AFloatButton>
+    </ADropdown>
     <PageLayout />
   </div>
 </template>
@@ -7,6 +33,11 @@
   import PageLayout from "@/layouts/page/index.vue";
   import { useDesign, useRootSetting, useTransitionSetting } from "@mfish/core/hooks";
   import { useContentViewHeight } from "./UseContentViewHeight";
+  import { FloatButton as AFloatButton, Menu as AMenu, Dropdown as ADropdown } from "ant-design-vue";
+  import { RedditOutlined } from "@ant-design/icons-vue";
+  import ChartGpt from "@/views/demo/ai/index.vue";
+  import { ref } from "vue";
+  import { Icon } from "@mfish/core/components/Icon";
 
   defineOptions({ name: "LayoutContent" });
   const { prefixCls } = useDesign("layout-content");
@@ -14,6 +45,7 @@
   const { getLayoutContentMode, getPageLoading } = useRootSetting();
 
   useContentViewHeight();
+  const open = ref<boolean>(false);
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-layout-content";
@@ -33,5 +65,13 @@
       top: 200px;
       z-index: @page-loading-z-index;
     }
+  }
+  .@{prefix-cls}-chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px 0 10px;
+    font-weight: 700;
+    color: @main-color;
   }
 </style>

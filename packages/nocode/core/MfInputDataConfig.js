@@ -15,9 +15,9 @@ const _ = D(a({ __name: "MfInputDataConfig", setup(a2) {
     D2.getCurConfigComponent.chart.data.defaultValue = F.value;
   }
   return n(() => D2.getCurConfigComponent, (a3) => {
-    a3 && function(a4) {
+    a3 && (function(a4) {
       a4.chart.data.defaultValue && (F.value = a4.chart.data.defaultValue);
-    }(a3);
+    })(a3);
   }, { immediate: true }), (a3, t2) => {
     const e2 = o("AInput");
     return u(), l(g, { class: s(i(b)), onRefreshData: w }, { "data-select": d(() => [c(a3.$slots, "data-select", {}, void 0, true)]), "static-data": d(() => [t2[1] || (t2[1] = r("div", { class: "title" }, "默认值", -1)), f(e2, { value: F.value, "onUpdate:value": t2[0] || (t2[0] = (a4) => F.value = a4), "show-count": "", maxlength: 50, onChange: M }, null, 8, ["value"])]), "target-data": d(() => [t2[2] || (t2[2] = r("div", { class: "title" }, "默认值", -1)), f(C, { "max-count": 1, height: 150, onDataChange: A, fields: k.value }, null, 8, ["fields"])]), _: 3 }, 8, ["class"]);

@@ -6,12 +6,12 @@ const g = t({ name: "MfDigits", __name: "index", props: { chart: { type: Object,
   const g2 = t2, m = l();
   o(() => m.getTheme, (t3) => {
     g2.chart && i().then(() => {
-      !function(t4, o2) {
+      !(function(t4, o2) {
         const i2 = { dark: "#FFFFFF", light: "#2D353C" }, e2 = { dark: "#3A3A3A", light: "#E1E5E8" };
         if (!t4.options.digits) return void (t4.options.digits = c({ color: i2[o2], skeletonColor: e2[o2] }));
         t4.options.digits.color !== i2.dark && t4.options.digits.color !== i2.light || (t4.options.digits.color = i2[o2]);
         t4.options.digits.skeletonColor !== e2.dark && t4.options.digits.skeletonColor !== e2.light || (t4.options.digits.skeletonColor = e2[o2]);
-      }(g2.chart, t3);
+      })(g2.chart, t3);
     });
   }, { immediate: true });
   const { commonEvents: h } = p(g2.chart);
