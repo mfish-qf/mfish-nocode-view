@@ -34,7 +34,7 @@ const k = t({ name: "MfCombine", __name: "index", props: { chart: { type: Object
       N2.chart.options.components.forEach((o2, e2) => {
         A(t3, o2, B.value[N2.chart.options.components.length - e2 - 1]);
       });
-    }), function() {
+    }), (function() {
       const t3 = /* @__PURE__ */ new Map();
       for (let o2 = 0; o2 < N2.chart.options.components.length; o2++) {
         const e2 = N2.chart.options.components[o2], n2 = e2.chart.animations?.filter((t4) => !t4.events || 0 === t4.events.length);
@@ -44,12 +44,12 @@ const k = t({ name: "MfCombine", __name: "index", props: { chart: { type: Object
           });
         }, 600));
       }
-    }();
+    })();
   });
   const { commonEvents: D } = x(N2.chart);
-  return (o2, e2) => (s(), h("div", i({ class: c(k2), onClick: Y }, p(c(D), true), { key: L.value }), [(s(true), h(l, null, d(H2.value, (o3, n2) => u((s(), h("div", { class: C([V(o3, H2.value, n2), "component"]), style: m(j(o3)), ref_for: true, ref: (t3) => function(t4, o4) {
+  return (o2, e2) => (s(), h("div", i({ class: c(k2), onClick: Y }, p(c(D), true), { key: L.value }), [(s(true), h(l, null, d(H2.value, (o3, n2) => u((s(), h("div", { class: C([V(o3, H2.value, n2), "component"]), style: m(j(o3)), ref_for: true, ref: (t3) => (function(t4, o4) {
     B.value[o4] = t4;
-  }(t3, n2), key: n2 }, [(s(), v(f(c(T)[o3.chart.type].component), { style: m(q(o3)), class: "component", id: `com${o3.chart.id}`, chart: o3.chart, "chart-contain": o3.chartContain, onMouseenter: (e3) => {
+  })(t3, n2), key: n2 }, [(s(), v(f(c(T)[o3.chart.type].component), { style: m(q(o3)), class: "component", id: `com${o3.chart.id}`, chart: o3.chart, "chart-contain": o3.chartContain, onMouseenter: (e3) => {
     return n3 = t2.chart, r2 = o3.chart.id, void (c(R) || (n3.options.hoverId = r2));
     var n3, r2;
   }, onMouseleave: e2[0] || (e2[0] = (o4) => {
