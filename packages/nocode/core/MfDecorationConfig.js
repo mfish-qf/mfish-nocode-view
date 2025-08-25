@@ -23,7 +23,7 @@ const d = f(o({ __name: "MfDecorationConfig", setup(o2) {
   }
   return e(() => v.getCurConfigComponent, (o3) => {
     o3 && (d2.value = v.getCurConfigComponent.chart.options.mainColor, h.value = v.getCurConfigComponent.chart.options.secondColor);
-  }, { immediate: true }), (o3, n2) => (i(), t(c, { class: a(r(f2)) }, { default: s(() => [n2[0] || (n2[0] = l("div", { class: "title" }, " 主体色", -1)), u(r(C), { placeholder: "设置主体颜色，格式#FFFFFF", type: 1, value: d2.value, onConfirmChange: F, onInputChange: _ }, null, 8, ["value"]), n2[1] || (n2[1] = l("div", { class: "title" }, " 搭配色", -1)), u(r(C), { placeholder: "设置搭配颜色，格式#FFFFFF", type: 1, value: h.value, onConfirmChange: I, onInputChange: x }, null, 8, ["value"]), m(o3.$slots, "default", {}, void 0, true)]), _: 3 }, 8, ["class"]));
+  }, { immediate: true }), (o3, n2) => (i(), t(c, { class: a(r(f2)) }, { default: s(() => [n2[0] || (n2[0] = l("div", { class: "title" }, " 主体色", -1)), u(r(C), { placeholder: "设置主体颜色，格式#FFFFFF", type: 1, value: d2.value, onConfirmChange: F, onInputChange: _ }, null, 8, ["value"]), n2[1] || (n2[1] = l("div", { class: "title" }, " 搭配色", -1)), u(r(C), { placeholder: "设置搭配颜色，格式#FFFFFF", type: 1, value: h.value, onConfirmChange: I, onInputChange: x }, null, 8, ["value"]), m(o3.$slots, "default", {}, void 0, true)]), _: 3, __: [0, 1] }, 8, ["class"]));
 } }), [["__scopeId", "data-v-73423ace"]]);
 export {
   d as default

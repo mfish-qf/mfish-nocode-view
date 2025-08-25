@@ -15,7 +15,7 @@
                 <div>摸鱼小助手</div>
                 <Icon icon="ant-design:minus-circle-outlined" size="20" style="cursor: pointer" @click="open = false" />
               </div>
-              <ChartGpt style="height: 50vh" />
+              <ChartGpt style="height: 70vh" />
             </div>
           </AMenu.Item>
         </AMenu>
