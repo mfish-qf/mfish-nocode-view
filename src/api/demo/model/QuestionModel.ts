@@ -12,6 +12,7 @@ export interface ChatsModel {
   id: string;
   user: string;
   chat: string;
+  enter?: boolean;
 }
 
 export interface ChatResponseVo {

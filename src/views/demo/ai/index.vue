@@ -5,14 +5,59 @@
         <template v-for="(item, index) in chats">
           <div :key="`${index}1`" :class="`${prefixCls}-wrapper`" v-if="item.user === '摸鱼机器人'">
             <img class="chat-img" src="/resource/img/logo.png" alt="chat-img" />
-            <div class="chat-text" v-if="item.chat !== undefined && true && item.chat !== ''" v-html="item.chat"></div>
+            <div
+              class="chat-text"
+              v-if="item.chat !== undefined && true && item.chat !== ''"
+              @mouseenter="item.enter = true"
+              @mouseleave="item.enter = false"
+            >
+              <div v-html="item.chat"> </div>
+              <Icon
+                v-if="item.enter"
+                title="复制"
+                class="chat-copy right"
+                icon="ant-design:copy-filled"
+                :color="copied ? 'success' : ''"
+                @click="copyData(item.chat)"
+              />
+            </div>
           </div>
           <div v-else :key="`${index}2`" :class="`${prefixCls}-wrapper`" class="right">
-            <div class="chat-text right">{{ item.chat }}</div>
-            <SvgIcon name="dynamic-avatar-1" size="32" />
+            <div class="chat-text right" @mouseenter="item.enter = true" @mouseleave="item.enter = false">
+              <div v-html="item.chat"></div>
+              <Icon
+                v-if="item.enter"
+                title="复制"
+                class="chat-copy left"
+                icon="ant-design:copy-filled"
+                :color="copied ? 'success' : ''"
+                @click="copyData(item.chat)"
+              />
+            </div>
+            <SvgIcon name="dynamic-avatar-4" size="32" />
           </div>
         </template>
       </ScrollContainer>
+    </div>
+    <div>
+      <ATag :class="`${prefixCls}-tag`" :bordered="false" color="gold" @click="onSend('介绍下自己')"> 自我介绍 </ATag>
+      <ATag :class="`${prefixCls}-tag`" :bordered="false" color="lime" @click="onSend('我有哪些权限')"> 我的权限 </ATag>
+      <ATag
+        :class="`${prefixCls}-tag`"
+        :bordered="false"
+        color="processing"
+        @click="onSend('请帮我查询字典名称为“用户性别”的字典编码')"
+      >
+        查询字典编码
+      </ATag>
+      <ATag
+        :class="`${prefixCls}-tag`"
+        :bordered="false"
+        color="magenta"
+        @click="onSend('请帮我查询下字典编码为“sys_user_sex”的字典项')"
+      >
+        查询字典项
+      </ATag>
     </div>
     <div :class="`${prefixCls}-input`">
       <InputSearch v-model:value="msg" placeholder="请输入信息" enter-button="发送" size="large" @search="onSend" />
@@ -22,14 +67,16 @@
 
 <script lang="ts" setup>
   import { onMounted, ref, unref } from "vue";
-  import { SvgIcon } from "@mfish/core/components/Icon";
+  import { Icon, SvgIcon } from "@mfish/core/components/Icon";
   import { ScrollActionType, ScrollContainer } from "@mfish/core/components/Container";
-  import { InputSearch } from "ant-design-vue";
+  import { InputSearch, Tag as ATag } from "ant-design-vue";
   import { ChatsModel } from "@/api/demo/model/QuestionModel";
   import { buildUUID } from "@mfish/core/utils/Uuid";
   import { useDesign } from "@mfish/core/hooks";
   import { Nullable } from "@mfish/types";
   import { getToken } from "@mfish/core/utils/auth";
+  import { getAiRouter } from "@/api/ai/AiRouter";
+  import { useClipboard } from "@vueuse/core";
 
   defineOptions({ name: "ChartGpt" });
   const scrollRef = ref<Nullable<ScrollActionType>>(null);
@@ -45,7 +92,8 @@
   const msg = ref<string>("");
   const chats = ref<ChatsModel[]>([]);
   let eventSource: EventSource;
-  const onSend = (value: string) => {
+  const { copy, copied } = useClipboard({ legacy: true });
+  const onSend = async (value: string) => {
     if (!value) return;
 
     chats.value.push({ id: "user", user: "user", chat: value });
@@ -57,12 +105,14 @@
     if (eventSource) {
       eventSource.close();
     }
-
+    let aiRouter = await getAiRouter(value);
+    if (!aiRouter) {
+      aiRouter = { path: "/sys/ai/chat" };
+    }
     // 建立新 SSE 连接，并把 prompt 传给后端
     eventSource = new EventSource(
-      `/api/ai/openai/chat/stream?access_token=${getToken()}&id=${id}&prompt=${encodeURIComponent(value)}`
+      `/api${aiRouter?.path}?access_token=${getToken()}&id=${id}&prompt=${encodeURIComponent(value)}`
     );
-
     eventSource.addEventListener("message", (event) => {
       const data = JSON.parse(event.data);
       for (let i = chats.value.length - 1; i >= 0; i--) {
@@ -92,6 +142,9 @@
 
   function scrollBottom() {
     getScroll().scrollBottom();
+  }
+  function copyData(data: string) {
+    copy(data);
   }
 </script>
 <style lang="less">
@@ -126,8 +179,16 @@
       flex: 1;
       border-radius: 8px;
       overflow-y: auto;
-      margin-bottom: 15px;
       box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.05);
+    }
+
+    &-tag {
+      margin: 10px 4px;
+      transition: all 0.2s;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
     }
 
     &-wrapper {
@@ -143,12 +204,29 @@
       }
 
       .chat-text {
+        position: relative;
         border-radius: 6px;
         font-size: 16px;
         padding: 8px;
         margin: 0 12px 0 12px;
         background-color: #fafafa;
         box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
+        .chat-copy {
+          position: absolute;
+          bottom: 6px;
+          cursor: pointer;
+          color: @main-color;
+          transition: scale 0.2s ease-in-out;
+          &:hover {
+            scale: 1.1;
+          }
+          &.left {
+            left: 6px;
+          }
+          &.right {
+            right: 6px;
+          }
+        }
       }
 
       .chat-text.right {
