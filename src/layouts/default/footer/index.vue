@@ -44,32 +44,24 @@
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~"@{namespace}-layout-footer";
-
-  @normal-color: rgba(0, 0, 0, 0.45);
-
-  @hover-color: rgba(0, 0, 0, 0.85);
-
+  [data-theme="dark"] {
+    .@{prefix-cls} {
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
   .@{prefix-cls} {
-    color: @normal-color;
+    color: rgba(0, 0, 0, 0.4);
     text-align: center;
 
     &__links {
       margin-bottom: 8px;
-
-      a {
-        color: @normal-color;
-
-        &:hover {
-          color: @hover-color;
-        }
-      }
     }
 
     &__github {
       margin: 0 30px;
 
       &:hover {
-        color: @hover-color;
+        color: @main-color;
       }
     }
   }

@@ -128,6 +128,6 @@ function storageChange(e: any) {
   }
 }
 
-window.addEventListener("storage", storageChange);
+globalThis.addEventListener("storage", storageChange);
 
 initPersistentMemory();

@@ -24,8 +24,8 @@
     </div>
   </BasicModal>
 </template>
-<script lang="ts">
-  import { computed, defineComponent, onBeforeMount, ref } from "vue";
+<script lang="ts" setup>
+  import { computed, onBeforeMount, ref } from "vue";
   import { useDesign, useI18n } from "@mfish/core/hooks";
   import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import { BasicForm, useForm } from "@mfish/core/components/Form";
@@ -33,62 +33,46 @@
   import { useLockStore } from "@/stores/Lock.ts";
   import { setHeaderImg } from "@mfish/core/utils/file/FileUtils";
 
-  export default defineComponent({
-    name: "LockModal",
-    components: { BasicModal, BasicForm },
+  defineOptions({ name: "LockModal" });
 
-    setup() {
-      const { t } = useI18n();
-      const { prefixCls } = useDesign("header-lock-modal");
-      const userStore = useUserStore();
-      const lockStore = useLockStore();
+  const { t } = useI18n();
+  const { prefixCls } = useDesign("header-lock-modal");
+  const userStore = useUserStore();
+  const lockStore = useLockStore();
+  const getRealName = computed(() => userStore.getUserInfo?.nickname);
+  const [register, { closeModal }] = useModalInner();
 
-      const getRealName = computed(() => userStore.getUserInfo?.nickname);
-      const [register, { closeModal }] = useModalInner();
-
-      const [registerForm, { validateFields, resetFields }] = useForm({
-        showActionButtonGroup: false,
-        schemas: [
-          {
-            field: "password",
-            label: t("layout.header.lockScreenPassword"),
-            colProps: {
-              span: 24
-            },
-            component: "InputPassword",
-            required: true
-          }
-        ]
-      });
-
-      async function handleLock() {
-        const values = (await validateFields()) as any;
-        const password: string | undefined = values.password;
-        closeModal();
-
-        lockStore.setLockInfo({
-          isLock: true,
-          pwd: password
-        });
-        await resetFields();
+  const [registerForm, { validateFields, resetFields }] = useForm({
+    showActionButtonGroup: false,
+    schemas: [
+      {
+        field: "password",
+        label: t("layout.header.lockScreenPassword"),
+        colProps: {
+          span: 24
+        },
+        component: "InputPassword",
+        required: true
       }
+    ]
+  });
 
-      const avatar = ref("");
-      onBeforeMount(() => {
-        const imgUrl = userStore.getUserInfo?.headImgUrl;
-        setHeaderImg(imgUrl, avatar);
-      });
+  async function handleLock() {
+    const values = (await validateFields()) as any;
+    const password: string | undefined = values.password;
+    closeModal();
 
-      return {
-        t,
-        prefixCls,
-        getRealName,
-        register,
-        registerForm,
-        handleLock,
-        avatar
-      };
-    }
+    lockStore.setLockInfo({
+      isLock: true,
+      pwd: password
+    });
+    await resetFields();
+  }
+
+  const avatar = ref("");
+  onBeforeMount(() => {
+    const imgUrl = userStore.getUserInfo?.headImgUrl;
+    setHeaderImg(imgUrl, avatar);
   });
 </script>
 <style lang="less">

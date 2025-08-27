@@ -120,6 +120,12 @@ export const searchFormSchema: FormSchema[] = [
     colProps: { xl: 4, md: 6 }
   },
   {
+    field: "createBy",
+    label: "操作人",
+    component: "Input",
+    colProps: { xl: 4, md: 6 }
+  },
+  {
     field: "operStatus",
     label: "操作状态",
     component: "Select",

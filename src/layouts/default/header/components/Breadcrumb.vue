@@ -2,7 +2,7 @@
   <div :class="[prefixCls, `${prefixCls}--${theme}`]">
     <ABreadcrumb :routes="routes">
       <template #itemRender="{ route, routes: routesMatched }">
-        <Icon :icon="getIcon(route)" v-if="getShowBreadCrumbIcon && getIcon(route)" :color="color" />
+        <Icon :icon="getIcon(route)" v-if="getShowBreadCrumbIcon && getIcon(route)" :size="14" />
         <span v-if="!hasRedirect(routesMatched, route)" class="ml-2"> {{ getName(route) }} </span>
         <router-link v-else to="" @click="handleClick(route)" class="ml-2">
           {{ getName(route) }}
@@ -34,7 +34,6 @@
   const { prefixCls } = useDesign("layout-breadcrumb");
   const { getShowBreadCrumbIcon } = useRootSetting();
   const go = useGo();
-  const color = useRootSetting().getThemeColor;
   const { t } = useI18n();
 
   watchEffect(async () => {
@@ -141,17 +140,23 @@
     align-items: center;
     padding: 0 8px;
 
-    .ant-breadcrumb-link {
-      color: @header-color;
-    }
-
-    .anticon-down {
-      color: v-bind(color);
-    }
-
     &--dark {
+      .ant-breadcrumb-overlay-link {
+        .ant-breadcrumb-link {
+          color: @header-light-desc-color;
+          > a {
+            color: @header-light-desc-color;
+          }
+        }
+      }
+      .ant-breadcrumb-link {
+        color: @header-color;
+      }
+      .anticon-down {
+        color: @header-light-desc-color;
+      }
       .ant-breadcrumb-separator {
-        color: @trigger-dark-bg-color;
+        color: @header-light-desc-color;
       }
     }
   }

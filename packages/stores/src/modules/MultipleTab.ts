@@ -329,6 +329,9 @@ export const useMultipleTabStore = defineStore("app-multiple-tab", {
       if (this.getNewOpenTab === routeName) {
         this.newOpenTab = "";
       }
+    },
+    clearLocal() {
+      Persistent.removeLocal(MULTIPLE_TABS_KEY, true);
     }
   }
 });

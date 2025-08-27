@@ -69,6 +69,8 @@
 
 + [文档地址](http://www.mfish.com.cn)
 + [在线预览](http://app.mfish.com.cn:11119)
++ [阿里云折扣](https://www.aliyun.com/minisite/goods?userCode=ee6ukuyy)
++ [腾讯云折扣](https://curl.qcloud.com/ZTJbN0ik)
 
 ## 🎭平台交流
 
@@ -194,40 +196,40 @@ http://localhost:5186
 
 <table>
     <tr>
-      <td><img src="https://mfish-pic.pages.dev/login.png" alt='login'/></td>
-      <td><img src="https://mfish-pic.pages.dev/menu.png" alt='menu'/></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-88ced73c1f0228af408c50349497540b.png" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-c77cdb0b34e61b837cbfc22e5ad5acb7.png" /></td>
     </tr>
     <tr>
-      <td><img src="https://mfish-pic.pages.dev/screen.png" /></td>
-      <td><img src="https://mfish-pic.pages.dev/screenConfig.png" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-c95ce1019e5db9f461d8c5e9d973b7e7.png" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-90b38eb06367c9fdb0ff79362f3aa5bd.png" /></td>
     </tr>
     <tr>
-      <td><img src="https://mfish-pic.pages.dev/api.png"  alt="api"/></td>
-      <td><img src="https://mfish-pic.pages.dev/flow.png" alt="flow" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-51a14b3a3d460c40a5cad78404420d78.png" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-6b78130a40ccf3fcccae8891ccfb9737.png" /></td>
     </tr>
     <tr>
-      <td><img src="https://mfish-pic.pages.dev/datasource.png" alt='datasource'/></td>
-      <td><img src="https://mfish-pic.pages.dev/codebuild.png" alt='codebuild'/></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-68939a2ada4ed26028beebaa6cabac04.png" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-1e29d5d79f2176d1b54c06778010ab1a.png" /></td>
     </tr>
     <tr>
-      <td><img src="https://mfish-pic.pages.dev/org.png" alt='org'/></td>
-      <td><img src="https://mfish-pic.pages.dev/role.png" alt='role'/></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-a01321e2df1ead79c96e552b108b5332.png" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-444b8574b9965a5f031febde2337f0e6.png" /></td>
     </tr>
     <tr>
-      <td><img src="https://mfish-pic.pages.dev/dict.png" alt='dict'/></td>
-      <td><img src="https://mfish-pic.pages.dev/category.png" alt='category'/></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-1c749d25a5a7cf3f6d881ac252ff4a45.png" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-e12d1cf33ec7bed102e42d60306c13bb.png" /></td>
     </tr>
     <tr>
-      <td><img src="https://mfish-pic.pages.dev/account.png" alt='account'/></td>
-      <td><img src="https://mfish-pic.pages.dev/tenant.png" alt='tenant'/></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-aae99916987fd56a5106571ad16499c6.png" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-e62a5748e91eaf1909cb7f27a7c3b4a5.png" /></td>
     </tr>
     <tr>
-      <td><img src="https://mfish-pic.pages.dev/schedule.png" alt='schedule'/></td>
-      <td><img src="https://mfish-pic.pages.dev/monitor.png" alt='monitor'/></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-3cf5951020da20b3e7ccf445fadfc0c3.png" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-aee8abe754615fea679215bf23723cfa.png" /></td>
     </tr>
     <tr>
-      <td><img src="https://mfish-pic.pages.dev/file.png" alt='file'/></td>
-      <td><img src="https://mfish-pic.pages.dev/log.png" alt='log'/></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-7fa88472a42caa99f6606697b1b0a250.png" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-6723cb1d005c5760fdc2c004c379a8b4.png" /></td>
     </tr>
 </table>
 

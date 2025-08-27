@@ -22,7 +22,8 @@
         <ABreadcrumb separator=">" class="m-3">
           <ABreadcrumbItem v-for="(item, index) in breadList" :key="index">
             <Icon :icon="item.icon" />
-            <a @click="setSelect(item.key)" class="fw-bold text-decoration-none">{{ item.title }}</a>
+            <a v-if="index < breadList.length - 1" @click="setSelect(item.key)">{{ item.title }}</a>
+            <span v-else class="fw-bold">{{ item.title }}</span>
           </ABreadcrumbItem>
         </ABreadcrumb>
         <ScrollContainer v-if="curNode?.dbName">
