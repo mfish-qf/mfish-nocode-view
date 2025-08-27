@@ -24,7 +24,7 @@ const q = ["onMouseenter"], F = { class: "setting" }, H = e({ __name: "Animation
     p2.getCurConfigComponent.chart.animations.splice(e6, 1), g2.value = -1;
   })(o2) }, null, 8, ["onClick"])) : v("", true), d(i(x), { placement: "bottom", trigger: ["click"], open: _2.value && g2.value === o2, onOpenChange: M2, arrow: true }, { overlay: u(() => [c("div", F, [d(i(A), { style: { width: "100%" }, value: e4.duration, "onUpdate:value": (n3) => e4.duration = n3, size: "small", placeholder: "时长 ms", step: 100, min: 0, max: 1e5 }, null, 8, ["value", "onUpdate:value"]), d(i(A), { style: { width: "100%" }, disabled: e4.loop, value: e4.repeat, "onUpdate:value": (n3) => e4.repeat = n3, size: "small", placeholder: "重复次数", step: 1, min: 0, max: 3 }, null, 8, ["disabled", "value", "onUpdate:value"]), d(i(b), { checked: e4.loop, "onUpdate:checked": (n3) => e4.loop = n3, onChange: (n3) => (function(e5) {
     e5.loop && (e5.repeat = void 0);
-  })(e4) }, { default: u(() => n2[1] || (n2[1] = [r(" 无限循环", -1)])), _: 2, __: [1] }, 1032, ["checked", "onUpdate:checked", "onChange"]), d(K, { "hide-param": true, events: e4?.events, onOk: (n3) => (function(e5, n4) {
+  })(e4) }, { default: u(() => [...n2[1] || (n2[1] = [r(" 无限循环", -1)])]), _: 2 }, 1032, ["checked", "onUpdate:checked", "onChange"]), d(K, { "hide-param": true, events: e4?.events, onOk: (n3) => (function(e5, n4) {
     n4?.events || (n4.events = []);
     const o3 = n4.events.findIndex((n5) => n5.id === e5.event.id && n5.event === e5.event.event);
     -1 === o3 ? e5.modifyIndex >= 0 ? n4.events.splice(e5.modifyIndex, 1, e5.event) : n4.events.push(e5.event) : n4.events.splice(o3, 1, e5.event);

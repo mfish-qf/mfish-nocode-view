@@ -33,8 +33,8 @@
   <LockAction @register="register" />
   <PasswordModal @register="registerPwd" />
 </template>
-<script lang="ts">
-  import { Dropdown, Menu } from "ant-design-vue";
+<script lang="ts" setup>
+  import { Dropdown, Menu as AMenu } from "ant-design-vue";
   import type { MenuInfo } from "ant-design-vue/lib/menu/src/interface";
   import { onBeforeMount, reactive, ref, toRaw, unref } from "vue";
   import { DOC_URL } from "@mfish/core/settings/SiteSetting";
@@ -50,99 +50,78 @@
 
   type MenuEvent = "logout" | "doc" | "lock" | "changePwd" | "userInfo";
 
-  export default {
-    name: "UserDropdown",
-    components: {
-      PasswordModal,
-      Dropdown,
-      AMenu: Menu,
-      MenuItem: createAsyncComponent(() => import("./DropMenuItem.vue")),
-      MenuDivider: Menu.Divider,
-      LockAction: createAsyncComponent(() => import("../lock/LockModal.vue"))
-    },
-    props: {
-      theme: propTypes.oneOf(["dark", "light"])
-    },
-    setup() {
-      const { prefixCls } = useDesign("header-user-dropdown");
-      const { t } = useI18n();
-      const { getShowDoc, getUseLockPage } = useHeaderSetting();
-      const userStore = useUserStore();
-      const getUserInfo = reactive<{ nickname?: string; id?: string }>({
-        nickname: "",
-        id: ""
-      });
-      const userImg = ref("");
-      onBeforeMount(async () => {
-        let userInfo = toRaw(userStore.getUserInfo);
-        while (!userInfo) {
-          userInfo = toRaw(userStore.getUserInfo);
-          await sleep(500);
-        }
-        getUserInfo.id = userInfo.id;
-        getUserInfo.nickname = userInfo.nickname || userInfo.account;
-        setHeaderImg(userInfo.headImgUrl, userImg);
-      });
-      const [register, { openModal }] = useModal();
-      const [registerPwd, { openModal: openPwdModal }] = useModal();
-      const go = useGo();
-
-      function handleLock() {
-        openModal(true);
-      }
-
-      //  login out
-      function handleLoginOut() {
-        userStore.confirmLoginOut();
-      }
-
-      // open doc
-      function openDoc() {
-        openWindow(DOC_URL);
-      }
-
-      function changePwd() {
-        openPwdModal(true, { userId: unref(getUserInfo).id });
-      }
-
-      function handleMenuClick(e: MenuInfo) {
-        switch (e.key as MenuEvent) {
-          case "logout": {
-            handleLoginOut();
-            break;
-          }
-          case "doc": {
-            openDoc();
-            break;
-          }
-          case "lock": {
-            handleLock();
-            break;
-          }
-          case "changePwd": {
-            changePwd();
-            break;
-          }
-          case "userInfo": {
-            go("/tenant/info/1");
-            break;
-          }
-        }
-      }
-
-      return {
-        prefixCls,
-        t,
-        getUserInfo,
-        handleMenuClick,
-        getShowDoc,
-        register,
-        getUseLockPage,
-        registerPwd,
-        userImg
-      };
+  defineOptions({ name: "UserDropdown" });
+  defineProps({
+    theme: propTypes.oneOf(["dark", "light"])
+  });
+  const MenuItem = createAsyncComponent(() => import("./DropMenuItem.vue"));
+  const MenuDivider = AMenu.Divider;
+  const LockAction = createAsyncComponent(() => import("../lock/LockModal.vue"));
+  const { prefixCls } = useDesign("header-user-dropdown");
+  const { t } = useI18n();
+  const { getShowDoc, getUseLockPage } = useHeaderSetting();
+  const userStore = useUserStore();
+  const getUserInfo = reactive<{ nickname?: string; id?: string }>({
+    nickname: "",
+    id: ""
+  });
+  const userImg = ref("");
+  onBeforeMount(async () => {
+    let userInfo = toRaw(userStore.getUserInfo);
+    while (!userInfo) {
+      userInfo = toRaw(userStore.getUserInfo);
+      await sleep(500);
     }
-  };
+    getUserInfo.id = userInfo.id;
+    getUserInfo.nickname = userInfo.nickname || userInfo.account;
+    setHeaderImg(userInfo.headImgUrl, userImg);
+  });
+  const [register, { openModal }] = useModal();
+  const [registerPwd, { openModal: openPwdModal }] = useModal();
+  const go = useGo();
+
+  function handleLock() {
+    openModal(true);
+  }
+
+  //  login out
+  function handleLoginOut() {
+    userStore.confirmLoginOut();
+  }
+
+  // open doc
+  function openDoc() {
+    openWindow(DOC_URL);
+  }
+
+  function changePwd() {
+    openPwdModal(true, { userId: unref(getUserInfo).id });
+  }
+
+  function handleMenuClick(e: MenuInfo) {
+    switch (e.key as MenuEvent) {
+      case "logout": {
+        handleLoginOut();
+        break;
+      }
+      case "doc": {
+        openDoc();
+        break;
+      }
+      case "lock": {
+        handleLock();
+        break;
+      }
+      case "changePwd": {
+        changePwd();
+        break;
+      }
+      case "userInfo": {
+        go("/tenant/info/1");
+        break;
+      }
+    }
+  }
 </script>
 <style lang="less">
   @prefix-cls: ~"@{namespace}-header-user-dropdown";
