@@ -1,4 +1,4 @@
-import { colorIsDark, darken, lighten } from "@core/utils/Color.ts";
+import { colorIsDark, darken, lighten, rgbToHex } from "@core/utils/Color.ts";
 import { useAppStore } from "@mfish/stores/modules";
 import { ThemeEnum } from "@core/enums";
 import { setCssVar } from "./Util.ts";
@@ -26,7 +26,7 @@ export function updateHeaderBgColor(color?: string) {
   }
   // bg color
   setCssVar(HEADER_BG_COLOR_VAR, color);
-
+  color = calcLinearColor(color);
   // 计算当前头色系偏深色 还是偏浅色
   const isDark = colorIsDark(color);
   let hoverColor = darken(color, 6);
@@ -60,6 +60,7 @@ export function updateSidebarBgColor(color?: string) {
     color = "#212121";
   }
   setCssVar(SIDER_BG_COLOR, color);
+  color = calcLinearColor(color);
   setCssVar(SIDER_DARKEN_BG_COLOR, darken(color, 3));
   setCssVar(SIDER_LIGHTEN_BG_COLOR, lighten(color, 2));
   const isLight = !colorIsDark(color);
@@ -69,4 +70,16 @@ export function updateSidebarBgColor(color?: string) {
       theme: isLight && !darkMode ? ThemeEnum.LIGHT : ThemeEnum.DARK
     }
   });
+}
+
+export function calcLinearColor(color: string) {
+  //如果是渐变色取第一个颜色进行计算
+  const isGradient = color?.startsWith("linear-gradient");
+  if (isGradient) {
+    const colors = color?.match(/(?<=linear-gradient.*?)(rgba\(.*?\))/g);
+    if (colors && colors.length > 0) {
+      color = rgbToHex(colors[0]);
+    }
+  }
+  return color;
 }

@@ -3,9 +3,6 @@
 @submenu-popup-prefix-cls: ~"@{namespace}-menu-submenu-popup";
 
 @transition-time: 0.2s;
-.@{menu-prefix-cls} {
-  background-color: @sider-bg-color;
-}
 
 @menu-dark-subsidiary-color: rgba(255, 255, 255, 0.7);
 .light-border {
@@ -24,12 +21,13 @@
 .@{menu-prefix-cls}-menu-popover {
   .ant-popover-arrow {
     &::before {
-      background-color: @sider-bg-color;
+      background: @sider-lighten-bg-color;
     }
   }
 
   .ant-popover-inner {
-    background-color: @sider-bg-color;
+
+    background: @sider-lighten-bg-color;
     padding: 3px;
   }
 
@@ -62,7 +60,7 @@
 
       &:hover {
         color: @button-primary-color;
-        background-color: @sider-darken-bg-color;
+        background: @sider-darken-bg-color;
       }
 
       span {
@@ -147,7 +145,7 @@
     &-vertical &-submenu-title {
       position: relative;
       z-index: 1;
-      padding: 14px 24px;
+      padding: 10px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -157,7 +155,7 @@
       &:hover {
         transform: scale(1.05);
         transform-origin: right;
-        background-color: @sider-darken-bg-color !important;
+        background: @sider-darken-bg-color !important;
         color: @button-primary-color !important;
       }
 
@@ -173,7 +171,7 @@
         &:hover {
           transform: scale(1.05);
           transform-origin: right;
-          background-color: @sider-darken-bg-color !important;
+          background: @sider-darken-bg-color !important;
           color: @button-primary-color !important;
         }
 
@@ -229,11 +227,11 @@
       transition: transform 0.25s ease;
 
       &-active:not(.@{menu-prefix-cls}-submenu) {
-        margin: 5px 2px 5px 2px;
         border-radius: 8px;
+
         color: #fff !important;
         transform: scale(1);
-        background-color: @button-primary-hover-color !important;
+        background: @button-primary-hover-color !important;
       }
 
       &-active.@{menu-prefix-cls}-submenu {
@@ -268,11 +266,10 @@
       transition: transform 0.25s ease;
 
       &-active:not(.@{menu-prefix-cls}-submenu) {
-        margin: 5px 2px 5px 2px;
         color: #fff !important;
         border-radius: 8px;
         transform: scale(1);
-        background-color: @button-primary-hover-color !important;
+        background: @button-primary-hover-color !important;
       }
 
       &:hover {
