@@ -108,10 +108,10 @@
     }
 
     &.ant-layout-sider {
-      background-color: @sider-bg-color;
+      background: @sider-bg-color;
 
       .ant-layout-sider-zero-width-trigger {
-        background-color: @sider-bg-color;
+        background: @sider-bg-color;
         color: @main-color;
       }
     }

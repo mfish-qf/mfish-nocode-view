@@ -15,11 +15,13 @@ export function isHexColor(color: string) {
  * r, g, 和 b 需要在 [0, 255] 范围内
  *
  * @return  String          类似#ff00ff
- * @param r
- * @param g
- * @param b
+ * @param rgb
  */
-export function rgbToHex(r: number, g: number, b: number) {
+export function rgbToHex(rgb: string) {
+  const [r, g, b] = rgb
+    .replaceAll(/(?:\(|\)|rgba|RGBA|rgb|RGB)*/g, "")
+    .split(",")
+    .map(Number);
   // tslint:disable-next-line:no-bitwise
   const hex = ((r << 16) | (g << 8) | b).toString(16);
   return `#${Array.from({ length: Math.abs(hex.length - 7) }).join("0")}${hex}`;
@@ -49,9 +51,13 @@ export function hexToRGB(hex: string) {
   return sHex;
 }
 
-export function colorIsDark(color: string) {
-  if (!isHexColor(color)) return;
-  const [r, g, b] = hexToRGB(color)
+export function colorIsDark(hex: string) {
+  if (!isHexColor(hex)) return;
+  return colorIsDarkRGB(hexToRGB(hex));
+}
+
+export function colorIsDarkRGB(rgb: string) {
+  const [r, g, b] = rgb
     .replaceAll(/(?:\(|\)|rgb|RGB)*/g, "")
     .split(",")
     .map(Number);

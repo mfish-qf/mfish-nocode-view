@@ -1,7 +1,7 @@
 <template>
-  <ul :class="getClass">
+  <div :class="getClass">
     <slot></slot>
-  </ul>
+  </div>
 </template>
 
 <script lang="ts" setup>

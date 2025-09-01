@@ -118,6 +118,7 @@ export default defineComponent({
           colorList={APP_PRESET_COLOR_LIST}
           def={unref(getThemeColor)}
           event={HandlerEnum.CHANGE_THEME_COLOR}
+          pickerType={1}
         />
       );
     }

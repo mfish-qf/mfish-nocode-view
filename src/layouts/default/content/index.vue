@@ -9,14 +9,15 @@
     >
       <template #overlay>
         <AMenu>
-          <AMenu.Item disabled style="padding: 0; cursor: default">
-            <div>
-              <div :class="`${prefixCls}-chat-header`">
-                <div>摸鱼小助手</div>
-                <Icon icon="ant-design:minus-circle-outlined" size="20" style="cursor: pointer" @click="open = false" />
-              </div>
-              <ChartGpt style="height: 70vh" />
-            </div>
+          <AMenu.Item style="padding: 0; cursor: default; background: transparent">
+            <!--            <div>-->
+            <!--              <div :class="`${prefixCls}-chat-header`">-->
+            <!--                <div>摸鱼小助手</div>-->
+            <!--                <Icon icon="ant-design:minus-circle-outlined" size="20" style="cursor: pointer" @click="open = false" />-->
+            <!--              </div>-->
+            <!--              <ChartGpt style="height: 70vh" />-->
+            <!--            </div>-->
+            <MfishChat style="height: 70vh; display: flex" @close="open = false" />
           </AMenu.Item>
         </AMenu>
       </template>
@@ -38,6 +39,7 @@
   import ChartGpt from "@/views/demo/ai/index.vue";
   import { ref } from "vue";
   import { Icon } from "@mfish/core/components/Icon";
+  import MfishChat from "@/views/demo/ai/MfishChat.vue";
 
   defineOptions({ name: "LayoutContent" });
   const { prefixCls } = useDesign("layout-content");

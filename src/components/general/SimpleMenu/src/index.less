@@ -4,26 +4,15 @@
 .@{prefix-cls}-menu-popover {
   .@{simple-prefix-cls}__children,
   &-popup .@{simple-prefix-cls}__children {
-    background-color: @sider-bg-color;
+    background: @sider-bg-color;
   }
 }
 
 .@{prefix-cls} {
-  &-vertical .@{simple-prefix-cls}__parent {
-    background-color: @sider-bg-color;
-
-    > .@{prefix-cls}-submenu-title {
-      background-color: @sider-bg-color;
-    }
-  }
 
   .@{simple-prefix-cls}__children,
   &-popup .@{simple-prefix-cls}__children {
-    background-color: @sider-lighten-bg-color;
-
-    > .@{prefix-cls}-submenu-title {
-      background-color: @sider-bg-color;
-    }
+    background: @sider-lighten-bg-color;
   }
 
   .collapse-title {

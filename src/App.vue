@@ -1,5 +1,5 @@
 <template>
-  <ConfigProvider :locale="getAntdLocale" :theme="antTheme">
+  <XProvider :locale="getAntdLocale" :theme="antTheme">
     <NConfigProvider
       style="height: 100%"
       :theme="getDarkMode === ThemeEnum.DARK ? nDarkTheme : nLightTheme"
@@ -9,10 +9,10 @@
         <RouterView />
       </AppProvider>
     </NConfigProvider>
-  </ConfigProvider>
+  </XProvider>
 </template>
 <script setup lang="ts">
-  import { ConfigProvider } from "ant-design-vue";
+  import { XProvider } from "ant-design-x-vue";
   import { RouterView } from "vue-router";
   import { darkTheme as nDarkTheme, lightTheme as nLightTheme, NConfigProvider } from "naive-ui";
   import { AppProvider } from "@/components/general/Application";

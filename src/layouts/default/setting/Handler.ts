@@ -11,7 +11,7 @@ import { DeepPartial } from "@mfish/types";
 import { saveSysConfig } from "@/api/sys/SysConfig";
 import { unref } from "vue";
 
-export function baseHandler(event: HandlerEnum, value: any) {
+export function baseHandler(event: HandlerEnum, value: any, noSave?: boolean) {
   const appStore = useAppStore();
   const config = handler(event, value);
   appStore.setProjectConfig(config);
@@ -19,7 +19,9 @@ export function baseHandler(event: HandlerEnum, value: any) {
     updateHeaderBgColor();
     updateSidebarBgColor();
   }
-  saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)), type: 0 }, false).then();
+  if (!noSave) {
+    saveSysConfig({ config: JSON.stringify(unref(appStore.getProjectConfig)), type: 0 }, false).then();
+  }
 }
 
 export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConfig> {

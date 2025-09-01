@@ -56,13 +56,17 @@ export const createStorage = ({
      * @memberof Cache
      */
     set(key: string, value: any, expire: number | null = timeout) {
-      const stringData = JSON.stringify({
-        value,
-        time: Date.now(),
-        expire: isNullOrUnDef(expire) ? null : Date.now() + expire * 1000
-      });
-      const stringifyValue = this.hasEncrypt ? this.encryption.encryptByAES(stringData) : stringData;
-      this.storage.setItem(this.getKey(key), stringifyValue);
+      try {
+        const stringData = JSON.stringify({
+          value,
+          time: Date.now(),
+          expire: isNullOrUnDef(expire) ? null : Date.now() + expire * 1000
+        });
+        const stringifyValue = this.hasEncrypt ? this.encryption.encryptByAES(stringData) : stringData;
+        this.storage.setItem(this.getKey(key), stringifyValue);
+      } catch (error) {
+        console.log(value, error);
+      }
     }
 
     /**

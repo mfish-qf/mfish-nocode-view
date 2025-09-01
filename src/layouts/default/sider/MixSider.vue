@@ -297,7 +297,7 @@
     z-index: @layout-mix-sider-fixed-z-index;
     height: 100%;
     overflow: hidden;
-    background-color: @sider-bg-color;
+    background: @sider-bg-color;
     transition: all 0.2s ease 0s;
 
     &-dom {
@@ -363,7 +363,7 @@
     }
 
     .@{prefix-cls}-menu-list {
-      background-color: @sider-bg-color;
+      background: @sider-bg-color;
 
       &__title {
         border-bottom: none;
@@ -407,7 +407,7 @@
         &:hover {
           transform: scale(1.05);
           transform-origin: left;
-          background-color: @sider-darken-bg-color;
+          background: @sider-darken-bg-color;
           color: @button-primary-color !important;
         }
 
