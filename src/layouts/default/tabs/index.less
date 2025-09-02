@@ -14,13 +14,14 @@
         }
       }
     }
-  }
-}
-
-[data-theme="light"] {
-  .@{prefix-cls} {
-    .ant-tabs-tab:not(.ant-tabs-tab-active) {
-      border: 1px solid @border-color-base !important;
+    .ant-tabs.ant-tabs-card {
+      .ant-tabs-nav {
+        .ant-tabs-tab {
+          &:hover {
+            box-shadow: 0 0 4px 0 rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
     }
   }
 }
@@ -56,7 +57,7 @@
         transition: all 0.2s ease;
 
         &:hover {
-          box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 
           .ant-tabs-tab-remove {
             width: 8px;
@@ -86,6 +87,7 @@
       }
 
       .ant-tabs-tab:not(.ant-tabs-tab-active) {
+        border-bottom: 1px solid @component-background !important;
         &:hover {
           color: @button-primary-color;
         }
@@ -103,7 +105,7 @@
           bottom: 0;
           left: 0;
           width: 100%;
-          height: 2px;
+          height: 1px;
           content: "";
           background-color: @button-primary-active-color;
         }
