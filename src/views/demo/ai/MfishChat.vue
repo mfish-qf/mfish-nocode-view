@@ -381,8 +381,8 @@
     await chatRequest.value.create(
       {
         id,
-        message: { role: "user", content: val },
-        messages: messages.value
+        sessionId: curSession.value,
+        message: { role: "user", content: val }
       },
       {
         onSuccess: (data) => {
