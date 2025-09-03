@@ -240,6 +240,7 @@
   const SUGGEST_QUESTIONS = [
     "介绍一下自己吧！",
     "请帮我查询一下我有哪些权限？",
+    "摸鱼低代码有哪些菜单，请列出菜单树结构？",
     "请帮我查询字典名称为“用户性别”的字典编码？",
     "请帮我查询下字典编码为“sys_user_sex”的字典项？"
   ];
@@ -418,7 +419,7 @@
       },
       new TransformStream<string, { id: string; content: string }>({
         transform(chunk, controller) {
-          const regexData = /data:(?<data>\{"id":"\w+","content":".*?\})/g;
+          const regexData = /data:(?<data>\{"id":"\w+","content":".+\})/g;
           let content = "";
           let id = "";
           for (const match of chunk.matchAll(regexData)) {
