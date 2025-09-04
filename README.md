@@ -1,6 +1,6 @@
 摸鱼低代码开发平台（前端）
 ======================================
-当前最新版本： V2.1.0
+当前最新版本： V2.1.1
 
 [![Author](https://img.shields.io/badge/Author-mfish-orange.svg)](http://www.mfish.com.cn)
 [![Blog](https://img.shields.io/badge/Blog-个人博客-yellow.svg)](http://www.mfish.com.cn)

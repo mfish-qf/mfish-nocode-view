@@ -96,7 +96,7 @@
         <Suggestion :items="() => MOCK_SUGGESTIONS" @select="(itemVal) => (inputValue = `[${itemVal}]:`)">
           <template #default="{ onTrigger }">
             <Sender
-              :loading="status === 'loading'"
+              :loading="status === 'pending' || status === 'loading'"
               :value="inputValue"
               allow-speech
               placeholder="询问或输入 / 使用技巧"
@@ -164,7 +164,7 @@
               >
                 <div :style="{ display: 'flex', alignItems: 'center', gap: 4 }">
                   <component :is="SpeechButton" :style="styles.speechButton" />
-                  <component :is="LoadingButton" v-if="status === 'loading'" type="default" />
+                  <component :is="LoadingButton" v-if="status === 'pending' || status === 'loading'" type="default" />
                   <component :is="SendButton" v-else type="primary" />
                 </div>
               </template>
@@ -202,7 +202,7 @@
   } from "ant-design-x-vue";
   import { Icon } from "@mfish/core/components/Icon";
   import { Button as AButton, Popover, Space, Spin, message } from "ant-design-vue";
-  import { ref, watch, computed, h } from "vue";
+  import { ref, watch, computed, h, nextTick } from "vue";
   import { useDesign, useRootSetting } from "@mfish/core/hooks";
   import { getToken } from "@mfish/core/utils/auth";
   import { buildUUID } from "@mfish/core/utils/Uuid";
@@ -369,17 +369,28 @@
   async function request(val) {
     status.value = "pending";
     const id = buildUUID();
-    messages.value.push({ id, message: { role: "user", content: val }, status: "local" });
-    let aiRouter = await getAiRouter(val);
-    if (!aiRouter) {
-      aiRouter = { path: "/sys/ai/chat" };
-    }
+    const answer = { id, message: { role: "assistant", content: "" }, status: "pending" };
+    messages.value.push({ id, message: { role: "user", content: val }, status: "local" }, answer);
+    getAiRouter(val)
+      .then((aiRouter) => {
+        sseRequest(aiRouter?.path || "/sys/ai/chat", id, val);
+      })
+      .catch((error) => {
+        status.value = error;
+        const index = messages.value.findIndex((msg) => msg.id === id && msg.message.role === "assistant");
+        if (index !== -1) {
+          messages.value[index].message.content += error.message;
+          messages.value[index].status = "error";
+        }
+      });
+  }
 
+  function sseRequest(path: string, id: string, val: string) {
     // 建立新 SSE 连接，并把 prompt 传给后端
     const chatRequest = XRequest({
-      baseURL: `/api${aiRouter?.path}?access_token=${getToken()}`
+      baseURL: `/api${path}?access_token=${getToken()}`
     });
-    await chatRequest.value.create(
+    chatRequest.value.create(
       {
         id,
         sessionId: curSession.value,
@@ -391,6 +402,9 @@
             const index = messages.value.findIndex((msg) => msg.id === data[0].id && msg.message.role === "assistant");
             status.value = "success";
             messages.value[index].status = "success";
+            if (!messages.value[index].message?.content) {
+              messages.value[index].message.content = "小助手未获取到回复";
+            }
           } else {
             status.value = "error";
           }
@@ -413,13 +427,12 @@
           }
         },
         onStream: (controller) => {
-          messages.value.push({ id, message: { role: "assistant", content: "" }, status: "pending" });
           abortController.value = controller;
         }
       },
       new TransformStream<string, { id: string; content: string }>({
         transform(chunk, controller) {
-          const regexData = /data:(?<data>\{"id":"\w+","content":".+\})/g;
+          const regexData = /data:(?<data>\{"id":"\w+","content":.+\})/g;
           let content = "";
           let id = "";
           for (const match of chunk.matchAll(regexData)) {

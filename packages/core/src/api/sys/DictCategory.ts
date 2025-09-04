@@ -5,7 +5,7 @@ import { DictCategory, DictCategoryPageModel, ReqDictCategory } from "@core/api"
  * @description: 属性分类字典
  * @author: mfish
  * @date: 2024-03-12
- * @version: V2.1.0
+ * @version: V2.1.1
  */
 enum Api {
   DictCategory = "/sys/dictCategory",

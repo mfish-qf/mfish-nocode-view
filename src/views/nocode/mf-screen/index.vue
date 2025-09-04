@@ -2,7 +2,7 @@
  @description: 我的大屏信息
  @author: mfish
  @date: 2024-08-07
- @version: V2.1.0
+ @version: V2.1.1
 -->
 <template>
   <NLayout

@@ -69,7 +69,7 @@ const G = { class: "title" }, U = { style: { width: "90px", "font-weight": "500"
       T.getCurConfigComponent.chart.options.columns[o5].width = L.value[o5];
     })(o4 - 1) }, null, 8, ["value", "onUpdate:value", "onChange"]), g("span", U, [s(C(y), { size: "small", value: q.value[o4 - 1], "onUpdate:value": (e3) => q.value[o4 - 1] = e3, onChange: (e3) => (function(o5) {
       T.getCurConfigComponent.chart.options.columns[o5].align = q.value[o5];
-    })(o4 - 1) }, { default: r(() => [(l(), f(h, null, m(E, (o5) => s(C(B), { key: o5.value, value: o5.value }, { default: r(() => [c(v(o5.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 2 }, 1032, ["value", "onUpdate:value", "onChange"])])]))), 128))]), _: 1 })) : p("", true)]), _: 1 }, 8, ["class"]);
+    })(o4 - 1) }, { default: r(() => [(l(), f(h, null, m(E, (o5) => s(C(B), { key: o5.value, value: o5.value }, { default: r(() => [c(v(o5.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value", "onUpdate:value", "onChange"])])]))), 128))]), _: 1 })) : p("", true)]), _: 1 }, 8, ["class"]);
   };
 } }), [["__scopeId", "data-v-aa3abd20"]]);
 export {

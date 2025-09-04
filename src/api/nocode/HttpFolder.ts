@@ -5,7 +5,7 @@ import { HttpFolder, HttpFolderPageModel, ReqFolder } from "@/api/nocode/model/H
  * @description: Http接口目录
  * @author: mfish
  * @date: 2023-07-21
- * @version: V2.1.0
+ * @version: V2.1.1
  */
 enum Api {
   HttpFolderTree = "/nocode/httpFolder/tree",
