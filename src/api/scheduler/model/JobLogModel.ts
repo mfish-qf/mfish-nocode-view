@@ -4,7 +4,7 @@ import { BaseEntity, PageResult } from "@mfish/core/api";
  * @description: 任务日志
  * @author: mfish
  * @date: 2023-02-14
- * @version: V2.1.0
+ * @version: V2.1.1
  */
 export interface JobLog extends BaseEntity<string> {
   jobId: string;

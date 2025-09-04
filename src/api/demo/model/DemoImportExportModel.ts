@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@mfish/core/api";
  * @description: 导入导出Demo
  * @author: mfish
  * @date: 2024-09-02
- * @version: V2.1.0
+ * @version: V2.1.1
  */
 export interface DemoImportExport extends BaseEntity<string> {
   //姓名

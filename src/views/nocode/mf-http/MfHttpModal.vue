@@ -2,7 +2,7 @@
  @description: HTTP请求数据源表
  @author: mfish
  @date: 2025-07-22
- @version: V2.1.0
+ @version: V2.1.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @height-change="modalHeightChange">

@@ -6,7 +6,7 @@ import { Tag } from "ant-design-vue";
  * @description: 字典
  * @Author: mfish
  * @Date: 2023-01-03
- * @version: V2.1.0
+ * @version: V2.1.1
  */
 export const columns: BasicColumn[] = [
   {

@@ -4,7 +4,7 @@ import { BaseEntity, PageResult } from "@mfish/core/api";
  * @description: demo_data_scope
  * @author: mfish
  * @date: 2024-09-04
- * @version: V2.1.0
+ * @version: V2.1.1
  */
 export interface DemoDataScope extends BaseEntity<number> {
   //角色id

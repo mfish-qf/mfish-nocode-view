@@ -2,7 +2,7 @@
  @description: 自定义API HTTP请求参数设置
  @author: mfish
  @date: 2025-08-05
- @version: V2.1.0
+ @version: V2.1.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="设置HTTP请求初始参数" @ok="handleSubmit">

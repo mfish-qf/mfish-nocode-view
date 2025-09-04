@@ -5,7 +5,7 @@ import { DictItem, DictItemPageModel, ReqDictItem } from "./model/DictItemModel"
  * @description: 字典项
  * @Author: mfish
  * @Date: 2023-01-03
- * @version: V2.1.0
+ * @version: V2.1.1
  */
 enum Api {
   DictItem = "/sys/dictItem"
