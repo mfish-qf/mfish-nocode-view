@@ -2,7 +2,7 @@
  @description: API目录
  @author: mfish
  @date: 2023-07-18
- @version: V2.1.1
+ @version: V2.2.0
 -->
 <template>
   <PageWrapper content-full-height fixed-height class="mt-3 ml-3 mr-3">

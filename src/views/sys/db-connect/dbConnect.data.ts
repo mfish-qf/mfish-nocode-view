@@ -5,7 +5,7 @@ import { getDictProps, YNTag } from "@mfish/core/components/DictTag";
  * @description: 数据库连接
  * @author: mfish
  * @date: 2023-03-13
- * @version: V2.1.1
+ * @version: V2.2.0
  */
 export const columns: BasicColumn[] = [
   {

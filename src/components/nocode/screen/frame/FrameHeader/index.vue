@@ -142,7 +142,7 @@
       icon: "ant-design:cloud-upload-outlined",
       label: "发布",
       tooltip: "发布",
-      disabled: computed(() => !screenId.value),
+      disabled: computed(() => !screenId.value || screenEditStore.getIsReleased),
       click: () => {
         screenRelease();
       }
@@ -173,6 +173,7 @@
       icon: "ant-design:save-outlined",
       label: "保存",
       tooltip: "保存 (CTRL+S)",
+      disabled: computed(() => screenEditStore.getIsReleased),
       isLoading,
       click: () => {
         screenSave();

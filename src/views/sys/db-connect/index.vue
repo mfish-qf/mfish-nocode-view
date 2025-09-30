@@ -2,7 +2,7 @@
  @description: 数据库连接
  @author: mfish
  @date: 2023-03-13
- @version: V2.1.1
+ @version: V2.2.0
 -->
 <template>
   <div>

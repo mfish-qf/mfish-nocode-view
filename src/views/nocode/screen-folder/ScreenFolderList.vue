@@ -183,13 +183,13 @@
 
   function releasedScreen(index) {
     if (data.value.length > index) {
-      data.value[index].released = true;
+      data.value[index].released = 0;
     }
   }
 
   function rollbackScreen(index) {
     if (data.value.length > index) {
-      data.value[index].released = false;
+      data.value[index].released = null;
     }
   }
 </script>

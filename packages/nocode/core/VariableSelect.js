@@ -7,7 +7,7 @@ import { E as O } from "./EventSelectItems.js";
 import { cloneDeep as R } from "lodash-es";
 import { ScrollContainer as D } from "@mfish/core/components/Container";
 const G = ["title", "onClick", "onMouseenter"], N = { class: "title" }, F = { class: "title" }, q = { class: "operator" }, H = { key: 1, class: "param-edit" }, J = { key: 2, class: "error" }, K = w(e({ __name: "GlobalParamsSelect", props: { value: { type: Object, default: () => ({}) } }, emits: ["selectChange"], setup(e2, { emit: _2 }) {
-  a((e3) => ({ "14eab416": U2.value }));
+  a((e3) => ({ v14eab416: U2.value }));
   const S2 = e2, z2 = _2, { prefixCls: M2 } = B("global-params-select"), P2 = j(), T2 = n([]), { token: V2 } = x.useToken(), U2 = l(() => V2.value.colorInfoBg);
   l(() => V2.value.colorBorder);
   const w2 = n(-1), A2 = n(-1), L2 = n(-1), O2 = n(), K2 = t("scrollContainerRef"), Q2 = n();

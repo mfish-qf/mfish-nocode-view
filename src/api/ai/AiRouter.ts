@@ -5,7 +5,7 @@ import { AiRouter } from "@/api/ai/model/AiRouterModel";
  * @description: 天气表
  * @author: mfish
  * @date: 2025-08-18
- * @version: V2.1.1
+ * @version: V2.2.0
  */
 enum Api {
   AiRouter = "/ai/router"

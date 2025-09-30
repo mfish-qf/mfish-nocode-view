@@ -12,7 +12,7 @@
       </div>
     </template>
     <template #actions>
-      <ATooltip v-if="data?.released" placement="bottom" title="撤回发布">
+      <ATooltip v-if="computedReleased" placement="bottom" title="撤回发布">
         <APopconfirm title="是否确认撤回发布" @confirm="handleRollback">
           <RollbackOutlined key="edit" :style="{ color: '#faad14' }" @click.stop />
         </APopconfirm>
@@ -58,7 +58,13 @@
         <EllipsisOutlined @click.prevent.stop />
       </Dropdown>
     </template>
-    <div class="published-tag" v-if="data?.released">已发布</div>
+    <div
+      class="published-tag"
+      v-if="computedReleased"
+      :style="data?.released ? { backgroundColor: data.released === 2 ? 'red' : 'green' } : {}"
+    >
+      {{ data?.released === 0 ? "审核中" : data?.released === 1 ? "已发布" : "未通过" }}
+    </div>
     <div v-if="!isEdit" class="title">{{ title }}</div>
     <AInput
       ref="titleInputRef"
@@ -80,7 +86,7 @@
   import { Dropdown } from "@mfish/core/components/Dropdown";
   import { deleteScreenResource, ScreenFolderVo, updateScreenFolder } from "@mfish/nocode";
   import { useDesign, useRootSetting } from "@mfish/core/hooks";
-  import type { PropType } from "vue";
+  import { computed, PropType } from "vue";
   import { nextTick, ref, watchEffect } from "vue";
   import { setImage } from "@mfish/core/utils/file/FileUtils";
   import { Nullable } from "@mfish/types";
@@ -102,6 +108,9 @@
     "cardReleased",
     "cardRollback"
   ]);
+  const computedReleased = computed(() => {
+    return props.data?.released !== undefined && props.data?.released !== null;
+  });
   const color = useRootSetting().getThemeColor;
   const { prefixCls } = useDesign("screen-card");
   const thumbnail = ref<string>("");

@@ -5,7 +5,7 @@ import { DemoDataScope, DemoDataScopePageModel, ReqDemoDataScope } from "@/api/d
  * @description: demo_data_scope
  * @author: mfish
  * @date: 2024-09-04
- * @version: V2.1.1
+ * @version: V2.2.0
  */
 enum Api {
   DemoDataScope = "/demo/demoDataScope"

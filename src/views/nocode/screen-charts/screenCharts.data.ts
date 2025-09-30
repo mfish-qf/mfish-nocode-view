@@ -11,7 +11,7 @@ import { Image as AImage } from "ant-design-vue";
  * @description: 组件基础信息
  * @author: mfish
  * @date: 2024-11-19
- * @version: V2.1.1
+ * @version: V2.2.0
  */
 export const columns: BasicColumn[] = [
   {

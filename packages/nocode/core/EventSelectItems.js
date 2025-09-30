@@ -6,7 +6,7 @@ import { ScrollContainer as L } from "@mfish/core/components/Container";
 import { omit as N } from "lodash-es";
 const $ = { key: 0, class: "header", style: { width: "120px" } }, M = { key: 1, class: "header", style: { width: "120px" } }, S = { key: 0, class: "divide-line" }, B = ["title", "onClick"], A = { key: 2, class: "divide-line" }, D = ["title", "onClick"], H = _(e({ __name: "EventSelectItems", props: { componentList: { type: Array, default: () => [] }, value: { type: Object, default: () => {
 } }, hideHeader: { type: Boolean, default: false }, hideEvent: { type: Boolean, default: false }, hideParam: { type: Boolean, default: false } }, emits: ["selectChange"], setup(e2, { emit: _2 }) {
-  t((e3) => ({ "7dd54e08": F.value, "65c95f37": q.value }));
+  t((e3) => ({ v7dd54e08: F.value, v65c95f37: q.value }));
   const H2 = e2, T = _2, b = i({ id: "", event: "", param: "" });
   l(() => H2.value, (e3) => {
     e3 ? (b.id = e3.id, b.event = e3.event, b.param = e3.param) : (b.id = "", b.event = "", b.param = "");

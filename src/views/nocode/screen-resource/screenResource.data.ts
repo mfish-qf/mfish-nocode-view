@@ -5,7 +5,7 @@ import { DescItem } from "@mfish/core/components/Description";
  * @description: 大屏资源信息
  * @author: mfish
  * @date: 2025-03-19
- * @version: V2.1.1
+ * @version: V2.2.0
  */
 export const columns: BasicColumn[] = [
   {

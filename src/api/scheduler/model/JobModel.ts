@@ -4,7 +4,7 @@ import { BaseEntity, PageResult } from "@mfish/core/api";
  * @description: 定时调度任务
  * @author: mfish
  * @date: 2023-02-20
- * @version: V2.1.1
+ * @version: V2.2.0
  */
 export interface Job extends BaseEntity<string> {
   jobName: string;

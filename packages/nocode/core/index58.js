@@ -5,7 +5,7 @@ import { useDesign as d } from "@mfish/core/hooks";
 import { ThemeEnum as m } from "@mfish/core/enums";
 import { cloneDeep as u } from "lodash-es";
 const C = t({ __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(t2) {
-  e((t3) => ({ "74993c04": `${B.value}px`, "5934e2a0": x.value, "2500025f": S.value, "0c23db5c": I.value }));
+  e((t3) => ({ v74993c04: `${B.value}px`, v5934e2a0: x.value, v2500025f: S.value, v0c23db5c: I.value }));
   const C2 = t2, { commonEvents: f, emitEvent: g } = p(C2.chart, void 0, ["rowClick"]), { prefixCls: v } = d("mf-table"), w = o(() => {
     const t3 = u(C2.chart.options.tableInfo.columns);
     if (t3 && t3.length > 0) for (let e2 = 0; e2 < t3.length; e2++) t3[e2] = { ...t3[e2], ...C2.chart.options.columns[e2] }, C2.chart.options.index && 0 === e2 && (t3[e2].customRender = ({ index: t4 }) => `${(C2.chart.data.pagination.current ?? 0) * C2.chart.data.pagination.pageSize + t4 + 1}`);
