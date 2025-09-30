@@ -8,16 +8,15 @@
       <span class="text-secondary"> 今日晴，20℃ - 32℃！ </span>
     </div>
     <div class="flex flex-1 justify-end md:mt-0 mt-4">
-      <div class="flex flex-col justify-center text-right">
+      <div class="flex flex-col justify-center text-center">
         <span class="text-secondary"> 待办 </span>
-        <span class="text-2xl">2/10</span>
+        <span class="text-2xl">{{ taskList.total }}</span>
       </div>
-
-      <div class="flex flex-col justify-center text-right md:mx-16 mx-12">
+      <div class="flex flex-col justify-center text-center md:mx-16 mx-12">
         <span class="text-secondary"> 项目 </span>
         <span class="text-2xl">8</span>
       </div>
-      <div class="flex flex-col justify-center text-right md:mr-10 mr-4">
+      <div class="flex flex-col justify-center text-center md:mr-10 mr-4">
         <span class="text-secondary"> 团队 </span>
         <span class="text-2xl">300</span>
       </div>
@@ -25,13 +24,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { computed, ComputedRef, ref } from "vue";
+  import { computed, ComputedRef, onMounted, ref } from "vue";
   import { Avatar } from "ant-design-vue";
   import { useUserStore } from "@mfish/stores/modules";
   import logo from "@mfish/core/assets/images/logo.png";
   import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
   import { SsoUser } from "@mfish/core/api";
   import { Nullable } from "@mfish/types";
+  import { getPendingTask } from "@/api/flow/FlowProcess";
+  import { MfTaskPageModel } from "@/api/flow/model/MfTaskModel";
 
   const userStore = useUserStore();
   const userInfo: ComputedRef<Nullable<SsoUser>> = computed(() => userStore.getUserInfo);
@@ -51,4 +52,11 @@
     isError.value = true;
     return false;
   };
+  const taskList = ref<MfTaskPageModel>({ pageNum: 1, pageSize: 10, pages: 0, list: [], total: 0 });
+
+  onMounted(() => {
+    getPendingTask().then((res) => {
+      taskList.value = res;
+    });
+  });
 </script>

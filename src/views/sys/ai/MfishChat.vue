@@ -43,15 +43,38 @@
               key: index,
               styles: {
                 content:
-                  i.status === 'pending' ? styles.loadingMessage : i.status === 'error' ? styles.errorMessage : {}
+                  i.status === 'pending' ? styles.loadingMessage : i.status === 'error' ? styles.errorMessage : {},
+                footer: {
+                  marginTop: '2px'
+                }
               },
               loading: i.status === 'pending',
-              typing: { step: 3, interval: 30, suffix: '💖' },
-              messageRender: renderMarkdown
+              typing: { step: 3, interval: 30 },
+              messageRender: renderView
             }))
           "
           :roles="roles"
-        />
+        >
+          <template #footer="{ item }">
+            <div>
+              <AButton
+                type="text"
+                size="small"
+                v-if="item.role !== 'user'"
+                :icon="h(ReloadOutlined)"
+                style="cursor: pointer"
+                @click="refreshRequest(item.key)"
+              />
+              <AButton
+                type="text"
+                size="small"
+                :style="{ cursor: 'pointer', color: copied ? 'green' : 'inherit' }"
+                :icon="h(CopyOutlined)"
+                @click="copy(item.content)"
+              />
+            </div>
+          </template>
+        </Bubble.List>
         <template v-else>
           <Welcome
             variant="borderless"
@@ -90,7 +113,7 @@
       <!-- {chatSender} -->
       <div :style="styles.chatSend">
         <div :style="styles.sendAction">
-          <AButton :icon="h(ScheduleOutlined)" @click="handleUserSubmit('请给我讲一个笑话?')"> 讲个笑话 </AButton>
+          <AButton :icon="h(SmileOutlined)" @click="handleUserSubmit('请给我讲一个笑话?')"> 讲个笑话 </AButton>
         </div>
         <!-- 输入框 -->
         <Suggestion :items="() => MOCK_SUGGESTIONS" @select="(itemVal) => (inputValue = `[${itemVal}]:`)">
@@ -184,7 +207,7 @@
     PaperClipOutlined,
     PlusOutlined,
     ReloadOutlined,
-    ScheduleOutlined,
+    SmileOutlined,
     UserOutlined
   } from "@ant-design/icons-vue";
   import {
@@ -202,13 +225,14 @@
   } from "ant-design-x-vue";
   import { Icon } from "@mfish/core/components/Icon";
   import { Button as AButton, Popover, Space, Spin, message } from "ant-design-vue";
-  import { ref, watch, computed, h, nextTick } from "vue";
+  import { ref, watch, computed, h } from "vue";
   import { useDesign, useRootSetting } from "@mfish/core/hooks";
   import { getToken } from "@mfish/core/utils/auth";
   import { buildUUID } from "@mfish/core/utils/Uuid";
   import markdownit from "markdown-it";
   import { useClipboard } from "@vueuse/core";
   import { getAiRouter } from "@/api/ai/AiRouter";
+  import { JsonPreview } from "@mfish/core/components/CodeEditor";
 
   defineOptions({ name: "MfishChat" });
   const emit = defineEmits(["close"]);
@@ -257,10 +281,27 @@
   const messages = ref<any[]>([]);
 
   const md = markdownit({ html: true, breaks: true });
-  const { copy } = useClipboard({ legacy: true });
+  const { copy, copied } = useClipboard({ legacy: true });
   const renderMarkdown: BubbleProps["messageRender"] = (content) => {
     return h("div", { innerHTML: md.render(content) });
   };
+  const renderView: BubbleProps["messageRender"] = (content) => {
+    if (
+      content === undefined ||
+      content === null ||
+      content === "" ||
+      (!content.startsWith("{") && !content.startsWith("["))
+    ) {
+      return renderMarkdown(content);
+    }
+    try {
+      const json = JSON.parse(content);
+      return h(JsonPreview, { data: json, deep: 2, showLine: false, showLineNumber: false, collapsedNodeLength: 10 });
+    } catch {
+      return renderMarkdown(content);
+    }
+  };
+
   // ==================== Style ====================
   const { token } = theme.useToken();
   const styles = computed(() => {
@@ -330,26 +371,6 @@
       avatar: {
         icon: h("img", { class: "chat-img", src: "/resource/img/logo.png", alt: "chat-img" })
       },
-      footer: (data) =>
-        h("div", { style: { display: "flex" } }, [
-          // h(AButton, {
-          //   type: "text",
-          //   size: "small",
-          //   icon: h(ReloadOutlined),
-          //   style: { cursor: "pointer" },
-          //   onClick: () => {
-          //   }
-          // }),
-          h(AButton, {
-            type: "text",
-            size: "small",
-            icon: h(CopyOutlined),
-            style: { cursor: "pointer" },
-            onClick: () => {
-              copy(data);
-            }
-          })
-        ]),
       loadingRender: () => h(Space, () => [h(Spin, { size: "small" }), "正在生成内容，请稍后..."])
     },
     user: { placement: "end", avatar: { icon: h(UserOutlined), style: { background: color } } }
@@ -366,11 +387,15 @@
     messages.value = messageHistory.value?.[val] || [];
   });
 
-  async function request(val) {
+  async function request(val: string) {
     status.value = "pending";
     const id = buildUUID();
     const answer = { id, message: { role: "assistant", content: "" }, status: "pending" };
     messages.value.push({ id, message: { role: "user", content: val }, status: "local" }, answer);
+    sendMessage(id, val);
+  }
+
+  function sendMessage(id: string, val: string) {
     getAiRouter(val)
       .then((aiRouter) => {
         sseRequest(aiRouter?.path || "/sys/ai/chat", id, val);
@@ -384,7 +409,6 @@
         }
       });
   }
-
   function sseRequest(path: string, id: string, val: string) {
     // 建立新 SSE 连接，并把 prompt 传给后端
     const chatRequest = XRequest({
@@ -411,11 +435,14 @@
         },
         onError: (error: Error) => {
           status.value = "error";
-          messages.value[messages.value.length - 1].status = "error";
-          if (error.name === "AbortError") {
-            messages.value[messages.value.length - 1].message.content = "请求已终止";
-          } else {
-            messages.value[messages.value.length - 1].message.content = "请求出错";
+          const index = messages.value.findIndex((msg) => msg.id === id && msg.message.role === "assistant");
+          if (index !== -1) {
+            messages.value[index].status = "error";
+            if (error.name === "AbortError") {
+              messages.value[index].message.content = "请求已终止";
+            } else {
+              messages.value[index].message.content = "请求出错";
+            }
           }
         },
         onUpdate: (data) => {
@@ -446,13 +473,26 @@
     );
   }
 
+  function refreshRequest(index: number) {
+    status.value = "pending";
+    const message = messages.value[index - 1];
+    if (message) {
+      const answer = messages.value[index];
+      if (answer) {
+        answer.message.content = "";
+        answer.status = "pending";
+      }
+      sendMessage(message.id, message.message.content);
+    }
+  }
+
   // ==================== Event ====================
   const handleUserSubmit = (val: string) => {
     request(val);
   };
 
   const onPasteFile = (_: File, files: FileList) => {
-    for (const file of [...files]) {
+    for (const file of files) {
       attachmentsRef.value?.upload(file);
     }
     attachmentsOpen.value = true;
@@ -469,8 +509,6 @@
       } catch (error) {
         console.error(error);
       }
-      // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
-      // In future versions, the sessionId capability will be added to resolve this problem.
       setTimeout(() => {
         curSession.value = buildUUID();
       }, 100);
@@ -485,8 +523,6 @@
     } catch (error) {
       console.error(error);
     }
-    // The abort execution will trigger an asynchronous requestFallback, which may lead to timing issues.
-    // In future versions, the sessionId capability will be added to resolve this problem.
     setTimeout(() => {
       curSession.value = val;
     }, 100);

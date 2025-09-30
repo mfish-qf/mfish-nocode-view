@@ -1,6 +1,6 @@
 {
   "name": "@mfish/eslint-config",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "private": true,
   "license": "Apache-2.0",
   "author": {
@@ -25,15 +25,15 @@
     "stub": "pnpm unbuild --stub"
   },
   "dependencies": {
-    "eslint-config-turbo": "^2.5.6",
+    "eslint-config-turbo": "^2.5.8",
     "eslint-plugin-command": "^0.2.7"
   },
   "devDependencies": {
-    "@eslint/js": "^9.34.0",
+    "@eslint/js": "^9.36.0",
     "@types/eslint": "^9.6.1",
-    "@typescript-eslint/eslint-plugin": "^8.42.0",
-    "@typescript-eslint/parser": "^8.42.0",
-    "eslint": "^9.34.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "eslint": "^9.36.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-jsdoc": "^50.8.0",
@@ -43,9 +43,9 @@
     "eslint-plugin-regexp": "^2.10.0",
     "eslint-plugin-unicorn": "^56.0.1",
     "eslint-plugin-unused-imports": "^4.2.0",
-    "eslint-plugin-vue": "^10.4.0",
+    "eslint-plugin-vue": "^10.5.0",
     "globals": "^15.15.0",
-    "jsonc-eslint-parser": "^2.4.0",
+    "jsonc-eslint-parser": "^2.4.1",
     "vue-eslint-parser": "^10.2.0"
   }
 }

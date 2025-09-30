@@ -2,7 +2,7 @@
  @description: 文件存储
  @author: mfish
  @date: 2023-03-02
- @version: V2.1.1
+ @version: V2.2.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">

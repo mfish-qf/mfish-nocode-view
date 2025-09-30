@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@core/api/model/BaseModel.ts";
  * @description: 属性分类字典
  * @author: mfish
  * @date: 2024-03-12
- * @version: V2.1.1
+ * @version: V2.2.0
  */
 export interface DictCategory extends BaseEntity<string> {
   // 父分类id

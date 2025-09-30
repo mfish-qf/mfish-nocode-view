@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@mfish/core/api";
  * @description: 字典
  * @Author: mfish
  * @Date: 2023-01-03
- * @version: V2.1.1
+ * @version: V2.2.0
  */
 export interface Dict extends BaseEntity<string> {
   dictName: string;

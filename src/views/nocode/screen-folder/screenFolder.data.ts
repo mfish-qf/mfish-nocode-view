@@ -4,7 +4,7 @@ import { BasicColumn, FormSchema } from "@mfish/core/components/Table";
  * @description: 大屏目录
  * @author: mfish
  * @date: 2024-01-08
- * @version: V2.1.1
+ * @version: V2.2.0
  */
 export const columns: BasicColumn[] = [
   {

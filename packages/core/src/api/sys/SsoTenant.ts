@@ -18,7 +18,7 @@ import {
  * @description: 租户信息表
  * @author: mfish
  * @date: 2023-05-31
- * @version: V2.1.1
+ * @version: V2.2.0
  */
 enum Api {
   SsoTenant = "/oauth2/ssoTenant",

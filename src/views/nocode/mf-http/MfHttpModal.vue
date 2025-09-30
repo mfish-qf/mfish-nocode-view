@@ -2,7 +2,7 @@
  @description: HTTP请求数据源表
  @author: mfish
  @date: 2025-07-22
- @version: V2.1.1
+ @version: V2.2.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @height-change="modalHeightChange">
@@ -17,7 +17,7 @@
     </template>
     <div :class="prefixCls">
       <AInputGroup compact>
-        <ASelect disabled style="width: 100px" v-model:value="formData.requestMethod">
+        <ASelect style="width: 100px" v-model:value="formData.requestMethod">
           <ASelect.Option v-for="item in requestMethods" :key="item.dictValue" :value="item.dictValue">
             <ATag :color="item.color" style="width: 100%; text-align: center">{{ item.dictLabel }}</ATag>
           </ASelect.Option>
@@ -45,7 +45,6 @@
             <template #extra>
               <span style="margin-right: 10px; font-weight: 700">Content-Type</span>
               <ASelect
-                disabled
                 style="width: 280px"
                 v-model:value="formData.contentType"
                 :field-names="{ label: 'dictLabel', value: 'dictValue' }"
@@ -200,7 +199,7 @@
     }
   }
 
-  const getTitle = computed(() => (unref(isUpdate) ? "编辑HTTP请求数据源" : "新增HTTP请求数据源"));
+  const getTitle = computed(() => (unref(isUpdate) ? "编辑HTTP请求" : "新增HTTP请求"));
 
   function handleOk() {
     verifyUrl();

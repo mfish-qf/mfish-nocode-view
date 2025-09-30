@@ -2,7 +2,7 @@
  @description: Http接口目录
  @author: mfish
  @date: 2025-07-21
- @version: V2.1.1
+ @version: V2.2.0
 -->
 <template>
   <NLayout has-sider sider-placement="left" :class="prefixCls">

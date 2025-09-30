@@ -2,7 +2,7 @@
  @description: 我的大屏信息
  @author: mfish
  @date: 2024-08-07
- @version: V2.1.1
+ @version: V2.2.0
 -->
 <template>
   <NLayout
@@ -50,7 +50,7 @@
     <FrameShortcut ref="frameShortcutRef" :menu-left="menuLeft" :menu-top="menuTop" />
   </NLayout>
   <ScreenShare :title="title" :screen-id="screenId" :open="shareOpen" @close="() => (shareOpen = false)" />
-  <ScreenResourceModal :preview="false" @register="registerModal" />
+  <ScreenResourceModal :preview="false" @register="registerModal" @success="releaseResourceSuccess" />
 </template>
 <script lang="ts" setup>
   import FrameHeader from "@/components/nocode/screen/frame/FrameHeader/index.vue";
@@ -270,6 +270,9 @@
       query: { folderId, id: data.id, isResource: data.isResource }
     });
     open(routeData);
+  }
+  function releaseResourceSuccess() {
+    screenEditStore.setIsReleased(true);
   }
 </script>
 <style lang="less">
