@@ -7,10 +7,14 @@
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @height-change="modalHeightChange">
     <template #appendFooter>
-      <APopconfirm @confirm="handleSubmit" placement="topRight" :open="nameOpen" @cancel="nameOpen = false">
+      <APopconfirm v-model:open="nameOpen" icon="" placement="topRight">
+        <template #okButton>
+          <AButton type="primary" size="small" @click="handleSubmit">确认</AButton>
+        </template>
         <template #title>
-          <span>请求名称</span>
-          <AInput size="small" v-model:value="formData.name" :status="nameStatus" />
+          <div class="mr-2">
+            <AInput size="small" v-model:value="formData.name" :status="nameStatus" placeholder="请输入请求名称" />
+          </div>
         </template>
         <AButton type="primary" @click="handleOk">确认</AButton>
       </APopconfirm>

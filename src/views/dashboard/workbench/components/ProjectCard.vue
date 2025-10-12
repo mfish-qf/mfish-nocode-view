@@ -5,8 +5,8 @@
     </template>
 
     <Card.Grid
-      v-for="item in items"
-      :key="item.title"
+      v-for="(item, index) in items"
+      :key="index"
       class="!md:w-1/3 !w-full cursor-pointer"
       @click="clickCard(item)"
     >

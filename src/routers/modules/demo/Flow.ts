@@ -3,14 +3,14 @@ import { LAYOUT } from "@mfish/core/router";
 import { t } from "@mfish/core/hooks";
 
 const flows: AppRouteRecordRaw = {
-  path: "/flow",
+  path: "/workflow",
   name: "FlowDemo",
   component: LAYOUT,
-  redirect: "/flow/flowChart",
+  redirect: "/workflow/flowChart",
   meta: {
     menuSort: 998,
     icon: "tabler:chart-dots",
-    title: t("routes.demo.flow.name")
+    title: t("routes.demo.workflow.name")
   },
   children: [
     {
@@ -18,7 +18,7 @@ const flows: AppRouteRecordRaw = {
       name: "flowChartDemo",
       component: () => import("@/views/demo/flow-chart/index.vue"),
       meta: {
-        title: t("routes.demo.flow.flowChart")
+        title: t("routes.demo.workflow.flowChart")
       }
     }
   ]
