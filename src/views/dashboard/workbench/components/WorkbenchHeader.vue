@@ -9,16 +9,16 @@
     </div>
     <div class="flex flex-1 justify-end md:mt-0 mt-4">
       <div class="flex flex-col justify-center text-center">
-        <span class="text-secondary"> 待办 </span>
-        <span class="text-2xl">{{ taskList.total }}</span>
+        <span class="text-secondary"> 待审批 </span>
+        <span class="text-2xl">{{ taskTotal.todoCount }}</span>
       </div>
       <div class="flex flex-col justify-center text-center md:mx-16 mx-12">
-        <span class="text-secondary"> 项目 </span>
-        <span class="text-2xl">8</span>
+        <span class="text-secondary"> 已审批 </span>
+        <span class="text-2xl">{{ taskTotal.completedCount }}</span>
       </div>
       <div class="flex flex-col justify-center text-center md:mr-10 mr-4">
-        <span class="text-secondary"> 团队 </span>
-        <span class="text-2xl">300</span>
+        <span class="text-secondary"> 已取消 </span>
+        <span class="text-2xl">{{ taskTotal.cancelledCount }}</span>
       </div>
     </div>
   </div>
@@ -31,8 +31,8 @@
   import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
   import { SsoUser } from "@mfish/core/api";
   import { Nullable } from "@mfish/types";
-  import { getPendingTask } from "@/api/flow/FlowProcess";
-  import { MfTaskPageModel } from "@/api/flow/model/MfTaskModel";
+  import { getTotalTasks } from "@/api/workflow/FlowProcess";
+  import { TaskTotal } from "@/api/workflow/model/MfTaskModel";
 
   const userStore = useUserStore();
   const userInfo: ComputedRef<Nullable<SsoUser>> = computed(() => userStore.getUserInfo);
@@ -52,11 +52,17 @@
     isError.value = true;
     return false;
   };
-  const taskList = ref<MfTaskPageModel>({ pageNum: 1, pageSize: 10, pages: 0, list: [], total: 0 });
+  const taskTotal = ref<TaskTotal>({ todoCount: 0, completedCount: 0, cancelledCount: 0, totalCount: 0 });
 
   onMounted(() => {
-    getPendingTask().then((res) => {
-      taskList.value = res;
+    fetchTasks();
+  });
+  function fetchTasks() {
+    getTotalTasks().then((res) => {
+      taskTotal.value = res;
     });
+  }
+  defineExpose({
+    fetchTasks
   });
 </script>

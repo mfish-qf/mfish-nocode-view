@@ -1,4 +1,4 @@
-import { PageResult } from "@mfish/core/api";
+import { PageResult, ReqPage } from "@mfish/core/api";
 
 /**
  * @description: 流程任务
@@ -18,6 +18,17 @@ export interface MfProcess {
   deleteReason: string;
 }
 
+export interface AuditComment {
+  taskId: string;
+  processInstanceId: string;
+  processDefinitionId: string;
+  name: string;
+  type: string;
+  assignee: string;
+  comment: string;
+  time: string;
+}
+
 export interface MfTask {
   id: string;
   processInstanceId: string;
@@ -31,10 +42,12 @@ export interface MfTask {
   candidateGroups: string[];
   formKey: string;
   assignee: string;
+  startAccount: string;
   startTime: string;
   endTime: string;
   status: string;
-  comments: string[];
+  deleteReason: string;
+  comments: AuditComment[];
 }
 export type MfProcessPageModel = PageResult<MfProcess>;
 export type MfTaskPageModel = PageResult<MfTask>;
@@ -44,8 +57,19 @@ export interface ReqProcess {
   businessKey: string;
   processInstanceIds: string;
 }
-export interface ReqTask {
+export interface ReqTask extends ReqPage {
   startTime?: string;
   endTime?: string;
   taskName?: string;
+  status?: number;
+}
+export interface TaskTotal {
+  todoCount: number;
+  completedCount: number;
+  cancelledCount: number;
+  totalCount: number;
+}
+export interface ApproveInfo {
+  taskId?: string;
+  message?: string;
 }
