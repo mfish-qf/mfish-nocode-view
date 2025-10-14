@@ -59,16 +59,18 @@ export default {
     copyBtn: "拷贝",
     saveBtn: "保存",
 
-    drawerTitle: "界面风格",
+    themeStyle: "界面风格",
 
     darkMode: "主题",
-    navMode: "导航栏模式",
+    frameLayout: "界面布局",
     interfaceFunction: "界面功能",
     interfaceDisplay: "界面显示",
     animation: "动画",
     splitMenu: "分割菜单",
     closeMixSidebarOnChange: "切换页面关闭菜单",
 
+    themeAnimation: "主题动画",
+    frameSetting: "界面设置",
     sysTheme: "系统主题",
     headerTheme: "顶栏主题",
     sidebarTheme: "菜单主题",

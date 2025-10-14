@@ -99,6 +99,7 @@
           width: 100%;
           height: 25%;
           background: @header-bg-color;
+          box-shadow: 0 0 2px 0 rgb(0 0 0 / 20%);
         }
       }
 
@@ -119,6 +120,7 @@
           width: 100%;
           height: 25%;
           background: @header-bg-color;
+          box-shadow: 0 0 2px 0 rgb(0 0 0 / 20%);
         }
       }
 
@@ -129,6 +131,7 @@
           width: 100%;
           height: 25%;
           background: @header-bg-color;
+          box-shadow: 0 0 2px 0 rgb(0 0 0 / 20%);
         }
       }
 
@@ -149,6 +152,7 @@
           width: 100%;
           height: 15%;
           background: @header-bg-color;
+          box-shadow: 0 0 2px 0 rgb(0 0 0 / 20%);
         }
       }
 
