@@ -52,19 +52,28 @@
 <style lang="less" scoped>
   @prefix-cls: ~"@{namespace}-setting-menu-type-picker";
 
+  [data-theme="dark"] {
+    .@{prefix-cls} {
+      &__item {
+        background-color: @black;
+        box-shadow: 0 0 2px 0 rgb(255 255 255 / 30%);
+      }
+    }
+  }
+
   .@{prefix-cls} {
     display: flex;
     justify-content: space-between;
 
     &__item {
       position: relative;
-      width: 56px;
+      width: 65px;
       height: 48px;
       overflow: hidden;
       cursor: pointer;
-      background-color: @screen-header-color-light;
-      border-radius: 8px;
-      box-shadow: 0 1px 2.5px 0 rgb(0 0 0 / 18%);
+      background-color: @white;
+      border-radius: 6px;
+      box-shadow: 0 0 2px 0 rgb(0 0 0 / 15%);
 
       &::before,
       &::after {
@@ -80,7 +89,7 @@
           z-index: 1;
           width: 33%;
           height: 100%;
-          background-color: #273352;
+          background: @sider-bg-color;
           border-radius: 4px 0 0 4px;
         }
 
@@ -89,7 +98,7 @@
           left: 0;
           width: 100%;
           height: 25%;
-          background-color: #fff;
+          background: @header-bg-color;
         }
       }
 
@@ -99,7 +108,7 @@
           left: 0;
           width: 33%;
           height: 100%;
-          background-color: #fff;
+          background: @sider-bg-color;
           border-radius: 4px 0 0 4px;
         }
 
@@ -109,7 +118,7 @@
           z-index: 1;
           width: 100%;
           height: 25%;
-          background-color: #273352;
+          background: @header-bg-color;
         }
       }
 
@@ -119,12 +128,8 @@
           left: 0;
           width: 100%;
           height: 25%;
-          background-color: #273352;
+          background: @header-bg-color;
         }
-      }
-
-      &--dark {
-        background-color: #273352;
       }
 
       &--mix-sidebar {
@@ -132,9 +137,9 @@
           top: 0;
           left: 0;
           z-index: 1;
-          width: 25%;
+          width: 20%;
           height: 100%;
-          background-color: #273352;
+          background: @sider-bg-color;
           border-radius: 4px 0 0 4px;
         }
 
@@ -142,16 +147,8 @@
           top: 0;
           left: 0;
           width: 100%;
-          height: 25%;
-          background-color: #fff;
-        }
-
-        .mix-sidebar {
-          position: absolute;
-          left: 25%;
-          width: 15%;
-          height: 100%;
-          background-color: #fff;
+          height: 15%;
+          background: @header-bg-color;
         }
       }
 
