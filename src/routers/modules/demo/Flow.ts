@@ -1,6 +1,5 @@
 import type { AppRouteRecordRaw } from "@mfish/core/router";
 import { LAYOUT } from "@mfish/core/router";
-import { t } from "@mfish/core/hooks";
 
 const flows: AppRouteRecordRaw = {
   path: "/workflow",
@@ -10,7 +9,7 @@ const flows: AppRouteRecordRaw = {
   meta: {
     menuSort: 998,
     icon: "tabler:chart-dots",
-    title: t("routes.demo.workflow.name")
+    title: "图形编辑器"
   },
   children: [
     {
@@ -18,7 +17,7 @@ const flows: AppRouteRecordRaw = {
       name: "flowChartDemo",
       component: () => import("@/views/demo/flow-chart/index.vue"),
       meta: {
-        title: t("routes.demo.workflow.flowChart")
+        title: "流程图"
       }
     }
   ]

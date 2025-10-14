@@ -1,6 +1,6 @@
-import { computed, defineComponent, unref } from "vue";
+import { computed, defineComponent, ref, Transition, unref } from "vue";
 import { BasicDrawer } from "@mfish/core/components/Drawer";
-import { Divider } from "ant-design-vue";
+import { Divider, Segmented } from "ant-design-vue";
 import {
   Animation,
   InputNumberItem,
@@ -329,29 +329,42 @@ export default defineComponent({
     function renderTransition() {
       return <Animation />;
     }
+    const curTab = ref(t("layout.setting.themeAnimation"));
 
     return () => (
-      <BasicDrawer {...attrs} title={t("layout.setting.drawerTitle")} width={330} class='setting-drawer'>
-        {unref(getShowDarkModeToggle) && <Divider>{() => t("layout.setting.darkMode")}</Divider>}
-        {unref(getShowDarkModeToggle) && (
-          <div style='display: flex;justify-content: center;'>
-            <AppDarkModeToggle />
+      <BasicDrawer {...attrs} title={t("layout.setting.themeStyle")} width={330}>
+        <Segmented
+          block
+          value={curTab.value}
+          options={[t("layout.setting.themeAnimation"), t("layout.setting.frameSetting")]}
+          onChange={(val) => (curTab.value = val as string)}
+        />
+        <Transition name='fade-slide-left'>
+          <div v-show={curTab.value === t("layout.setting.themeAnimation")}>
+            {unref(getShowDarkModeToggle) && <Divider>{() => t("layout.setting.darkMode")}</Divider>}
+            {unref(getShowDarkModeToggle) && (
+              <div style='display: flex;justify-content: center;'>
+                <AppDarkModeToggle />
+              </div>
+            )}
+            <Divider>{() => t("layout.setting.frameLayout")}</Divider>
+            {renderSidebar()}
+            <Divider>{() => t("layout.setting.sysTheme")}</Divider>
+            {renderMainTheme()}
+            <Divider>{() => t("layout.setting.headerTheme")}</Divider>
+            {renderHeaderTheme()}
+            <Divider>{() => t("layout.setting.sidebarTheme")}</Divider>
+            {renderSiderTheme()}
+            <Divider>{() => t("layout.setting.animation")}</Divider>
+            {renderTransition()}
           </div>
-        )}
-        <Divider>{() => t("layout.setting.navMode")}</Divider>
-        {renderSidebar()}
-        <Divider>{() => t("layout.setting.sysTheme")}</Divider>
-        {renderMainTheme()}
-        <Divider>{() => t("layout.setting.headerTheme")}</Divider>
-        {renderHeaderTheme()}
-        <Divider>{() => t("layout.setting.sidebarTheme")}</Divider>
-        {renderSiderTheme()}
-        <Divider>{() => t("layout.setting.animation")}</Divider>
-        {renderTransition()}
-        <Divider>{() => t("layout.setting.interfaceFunction")}</Divider>
-        {renderFeatures()}
-        <Divider>{() => t("layout.setting.interfaceDisplay")}</Divider>
-        {renderContent()}
+        </Transition>
+        <div v-show={curTab.value === t("layout.setting.frameSetting")}>
+          <Divider>{() => t("layout.setting.interfaceFunction")}</Divider>
+          {renderFeatures()}
+          <Divider>{() => t("layout.setting.interfaceDisplay")}</Divider>
+          {renderContent()}
+        </div>
         <SettingSave />
       </BasicDrawer>
     );

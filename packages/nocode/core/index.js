@@ -1991,7 +1991,7 @@ function Hi(e2) {
 function Fi(e2) {
   return (e2 + 360) % 360;
 }
-const Gi = { style: { value: "样式", show: true, payload: { icon: "carbon:color-palette", component: null } }, data: { value: "数据", show: true, payload: { icon: "carbon:data-structured", component: null } }, animation: { value: "动画", show: true, payload: { icon: "carbon:workflow-modeler", component: B(Ge(() => import("./index2.js"), { loading: true, size: "large" })) } }, advance: { value: "进阶", show: true, payload: { icon: "iconfont:icon-mfish-config", component: B(Ge(() => import("./index3.js"), { loading: true, size: "large" })) } } }, Vi = (e2) => ({ padding: `${Math.round((e2?.options.fontSize?.value ?? 12) / 10)}px`, ...e2?.options.font?.style, ...e2?.options.fontSize?.style, ...e2?.options.fontStyle?.style, ...e2?.options.textColor?.style }), Ui = (e2) => {
+const Gi = { style: { value: "样式", show: true, payload: { icon: "carbon:color-palette", component: null } }, data: { value: "数据", show: true, payload: { icon: "carbon:data-structured", component: null } }, animation: { value: "动画", show: true, payload: { icon: "ant-design:star-outlined", component: B(Ge(() => import("./index2.js"), { loading: true, size: "large" })) } }, advance: { value: "进阶", show: true, payload: { icon: "iconfont:icon-mfish-config", component: B(Ge(() => import("./index3.js"), { loading: true, size: "large" })) } } }, Vi = (e2) => ({ padding: `${Math.round((e2?.options.fontSize?.value ?? 12) / 10)}px`, ...e2?.options.font?.style, ...e2?.options.fontSize?.style, ...e2?.options.fontStyle?.style, ...e2?.options.textColor?.style }), Ui = (e2) => {
   const t2 = {};
   return Ne(e2) && e2.forEach((e3) => {
     t2[e3] = { colName: e3, dataType: "string", rename: e3 };

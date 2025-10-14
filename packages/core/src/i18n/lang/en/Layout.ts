@@ -58,16 +58,18 @@ export default {
     copyBtn: "Copy",
     saveBtn: "Save",
 
-    drawerTitle: "Theme Style",
+    themeStyle: "Theme Style",
 
     darkMode: "Dark mode",
-    navMode: "Navigation mode",
+    frameLayout: "Frame layout",
     interfaceFunction: "Interface function",
     interfaceDisplay: "Interface display",
     animation: "Animation",
     splitMenu: "Split menu",
     closeMixSidebarOnChange: "Switch page to close menu",
 
+    themeAnimation: "Theme animation",
+    frameSetting: "Frame setting",
     sysTheme: "System theme",
     headerTheme: "Header theme",
     sidebarTheme: "Menu theme",
