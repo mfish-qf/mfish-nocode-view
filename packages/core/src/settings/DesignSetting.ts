@@ -38,6 +38,7 @@ export const APP_PRESET_COLOR_LIST: string[] = [
 
 // header preset color
 export const HEADER_PRESET_BG_COLOR_LIST: string[] = [
+  "#F2F3F4",
   "linear-gradient(120deg, rgba(243, 231, 233, 1) 0%,rgba(227,238,255,1) 100%)",
   "#FFFFFF",
   "#E4E7EC",
@@ -56,7 +57,6 @@ export const HEADER_PRESET_BG_COLOR_LIST: string[] = [
   "#F7F9ED",
   "#F3E5F5",
   "#FFF3E0",
-  "#F2F3F4",
   "#F1948A",
   "#1A5276",
   "#607D8B",
