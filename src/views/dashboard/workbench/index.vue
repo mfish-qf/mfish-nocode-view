@@ -29,7 +29,7 @@
   import WorkbenchHeader from "./components/WorkbenchHeader.vue";
   import ProjectCard from "./components/ProjectCard.vue";
   import QuickNav from "./components/QuickNav.vue";
-  import AuditList from "../../workflow/AuditList.vue";
+  import AuditList from "../../workflow/com/AuditList.vue";
   import ScreenResourceManagement from "@/views/nocode/screen-resource/index.vue";
   import { ScrollContainer } from "@mfish/core/components/Container";
   import { router } from "@mfish/core/router";

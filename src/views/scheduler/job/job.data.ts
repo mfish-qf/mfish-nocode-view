@@ -47,7 +47,7 @@ export const columns: BasicColumn[] = [
       const enable = Math.trunc(record.allowConcurrent) === 1;
       const color = enable ? "green" : "red";
       const text = enable ? "允许" : "不允许";
-      return h(Tag, { color }, () => text);
+      return h(Tag, { color, bordered: false }, () => text);
     }
   },
   {

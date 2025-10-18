@@ -54,7 +54,7 @@ export const columns: BasicColumn[] = [
       const enable = Math.trunc(status) === 0;
       const color = enable ? "green" : "red";
       const text = enable ? "启用" : "停用";
-      return h(Tag, { color }, () => text);
+      return h(Tag, { color, bordered: false }, () => text);
     }
   }
 ];
@@ -217,7 +217,7 @@ export class OrgDesc {
         } else {
           getOrgByIds(val).then((res) => setOrgName(res));
         }
-        return h(Tag, () => this.orgName.value);
+        return h(Tag, { bordered: false }, () => this.orgName.value);
       }
     },
     {
@@ -249,7 +249,7 @@ export class OrgDesc {
       render: () => {
         return h(
           "div",
-          this.roleNames.value.map((roleName) => h(Tag, () => roleName))
+          this.roleNames.value.map((roleName) => h(Tag, { bordered: false }, () => roleName))
         );
       }
     },

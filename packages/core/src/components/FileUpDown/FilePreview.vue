@@ -21,7 +21,7 @@
 
   const fileUrl = ref("");
   const previewVisible = ref(false);
-  const setPreviewVisible = (value): void => {
+  const setPreviewVisible = (value: boolean): void => {
     previewVisible.value = value;
   };
 

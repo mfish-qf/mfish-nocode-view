@@ -4,6 +4,7 @@ import {
   MfProcessPageModel,
   MfTask,
   MfTaskPageModel,
+  ReqAllTask,
   ReqProcess,
   ReqTask,
   TaskTotal
@@ -19,6 +20,7 @@ enum Api {
   Tasks = "/workflow/process/tasks",
   PendingTask = "/workflow/process/tasks/pending",
   AllTasks = "/workflow/process/tasks/all",
+  ApplyTasks = "/workflow/process/tasks/apply",
   TotalTasks = "/workflow/process/tasks/total",
   Approved = "/workflow/process/tasks/approved",
   Rejected = "/workflow/process/tasks/rejected"
@@ -41,8 +43,15 @@ export const getPendingTask = (reqTask?: ReqTask) => {
 /**
  * @description: 获取所有任务列表
  */
-export const getAllTasks = (reqTask?: ReqTask) => {
+export const getAllTasks = (reqTask?: ReqAllTask) => {
   return defHttp.get<MfTaskPageModel>({ url: Api.AllTasks, params: reqTask });
+};
+
+/**
+ * @description: 获取所有申请任务列表
+ */
+export const getApplyTasks = (reqTask?: ReqAllTask) => {
+  return defHttp.get<MfTaskPageModel>({ url: Api.ApplyTasks, params: reqTask });
 };
 
 /**
@@ -56,6 +65,20 @@ export const getTotalTasks = (reqTask?: ReqTask) => {
  */
 export const getProcessTasks = (processInstanceId: string) => {
   return defHttp.get<MfTask[]>({ url: `${Api.Tasks}/${processInstanceId}` });
+};
+
+/**
+ * @description: 删除流程实例
+ */
+export const delProcess = (processInstanceId: string, reason: string) => {
+  return defHttp.delete({ url: `${Api.Process}/${processInstanceId}?reason=${reason}` });
+};
+
+/**
+ * @description: 查询流程实例图片
+ */
+export const queryImage = (processInstanceId: string) => {
+  return defHttp.get({ url: `${Api.Process}/image/${processInstanceId}` });
 };
 
 /**

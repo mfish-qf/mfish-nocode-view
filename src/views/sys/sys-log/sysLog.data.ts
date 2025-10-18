@@ -51,7 +51,7 @@ export const columns: BasicColumn[] = [
       const enable = Math.trunc(record.operStatus) === 0;
       const color = enable ? "green" : "red";
       const text = enable ? "正常" : "异常";
-      return h(Tag, { color }, () => text);
+      return h(Tag, { color, bordered: false }, () => text);
     }
   },
   {
@@ -205,7 +205,7 @@ export const sysLogSchema: DescItem[] = [
       const enable = Math.trunc(record) === 0;
       const color = enable ? "green" : "red";
       const text = enable ? "正常" : "异常";
-      return h(Tag, { color }, () => text);
+      return h(Tag, { color, bordered: false }, () => text);
     }
   },
   {

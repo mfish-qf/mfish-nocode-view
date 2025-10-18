@@ -47,7 +47,7 @@
 </template>
 <script setup lang="ts">
   import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
-  import TaskStepView from "@/views/workflow/TaskStepView.vue";
+  import TaskStepView from "@/views/workflow/com/TaskStepView.vue";
   import { Popconfirm, Textarea } from "ant-design-vue";
   import { ref } from "vue";
   import { MfTask } from "@/api/workflow/model/MfTaskModel";

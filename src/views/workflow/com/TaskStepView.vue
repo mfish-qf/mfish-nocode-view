@@ -11,12 +11,16 @@
   import { computed, h, ref, watch } from "vue";
   import { getProcessTasks } from "@/api/workflow/FlowProcess";
   import { MfTask } from "@/api/workflow/model/MfTaskModel";
-  import AuditCommentView from "@/views/workflow/AuditCommentView.vue";
+  import AuditCommentView from "@/views/workflow/com/AuditCommentView.vue";
 
   const props = defineProps({
     progressDot: {
       type: Boolean,
       default: true
+    },
+    status: {
+      type: String,
+      default: ""
     },
     processInstanceId: {
       type: String,
@@ -26,14 +30,18 @@
   const tasks = ref<MfTask[]>([]);
   const current = computed(() => {
     const currentIndex = tasks.value.findIndex((item) => item.status === "created");
-    return currentIndex === -1 ? tasks.value.length : currentIndex;
+    return currentIndex === -1
+      ? props.status === "terminated"
+        ? tasks.value.length - 1
+        : tasks.value.length
+      : currentIndex;
   });
   const items = computed(() => {
     const items = tasks.value.map((item: MfTask) => ({
-      title: item.name,
+      title: item.taskName,
       subTitle: item.description,
       description: h(AuditCommentView, {
-        comments: item?.comments || []
+        task: item
       })
     }));
     items.push({ title: "审批完成", subTitle: "", description: h("span") });

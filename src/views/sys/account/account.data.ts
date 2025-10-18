@@ -37,7 +37,7 @@ export const columns: BasicColumn[] = [
       const enable = Math.trunc(sex) === 1;
       const color = enable ? "green" : "red";
       const text = enable ? "男" : "女";
-      return h(Tag, { color }, () => text);
+      return h(Tag, { color, bordered: false }, () => text);
     }
   },
   {
@@ -47,7 +47,7 @@ export const columns: BasicColumn[] = [
     customRender: ({ value }) => {
       const tags: any[] = [];
       for (const tag of value) {
-        tags.push(h(Tag, { class: "ml-1 mt-1" }, () => tag));
+        tags.push(h(Tag, { class: "ml-1 mt-1", bordered: false }, () => tag));
       }
       return h("div", tags);
     }
@@ -284,7 +284,7 @@ export class AccountDesc {
       render: () => {
         return h(
           "div",
-          unref(this.orgNames).map((orgName) => h(Tag, () => orgName))
+          unref(this.orgNames).map((orgName) => h(Tag, { bordered: false }, () => orgName))
         );
       }
     },
@@ -319,7 +319,7 @@ export class AccountDesc {
       render: () => {
         return h(
           "div",
-          unref(this.roleNames).map((roleName) => h(Tag, () => roleName))
+          unref(this.roleNames).map((roleName) => h(Tag, { bordered: false }, () => roleName))
         );
       }
     },

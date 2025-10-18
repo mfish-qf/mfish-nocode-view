@@ -17,6 +17,14 @@
       },
       value: {
         type: [String, Number, Boolean] as PropType<string | number | boolean>
+      },
+      border: {
+        type: Boolean,
+        default: false
+      },
+      icon: {
+        type: String,
+        default: ""
       }
     },
     setup(props) {
@@ -29,6 +37,8 @@
           if (props.value === status.dictValue) {
             return (
               <Tag
+                bordered={props.border}
+                icon={props.icon}
                 color={status.color === "primary" ? "processing" : status.color}
                 key={status.dictCode + status.dictValue}
               >
