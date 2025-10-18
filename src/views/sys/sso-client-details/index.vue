@@ -70,7 +70,13 @@
         <template v-else-if="column.key === 'grantTypes'">
           <template v-for="(type, index) in record.grantTypes.split(',')">
             <template v-for="item in grantTypes">
-              <ATag class="ml-1" :key="index + item.dictCode" v-if="type === item.dictValue" :color="item.color">
+              <ATag
+                :bordered="false"
+                class="ml-1"
+                :key="index + item.dictCode"
+                v-if="type === item.dictValue"
+                :color="item.color"
+              >
                 {{ item.dictLabel }}
               </ATag>
             </template>

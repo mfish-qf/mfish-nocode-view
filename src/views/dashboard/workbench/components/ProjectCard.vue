@@ -1,9 +1,5 @@
 <template>
   <Card title="项目" v-bind="$attrs" style="overflow: hidden">
-    <template #extra>
-      <a-button type="link" size="small">更多</a-button>
-    </template>
-
     <Card.Grid
       v-for="(item, index) in items"
       :key="index"

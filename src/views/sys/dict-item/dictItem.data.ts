@@ -32,7 +32,7 @@ export const columns: BasicColumn[] = [
     customRender: ({ record }) => {
       const color = record.color;
       if (color) {
-        return h(Tag, { color: color === "primary" ? "processing" : color }, () => color);
+        return h(Tag, { color: color === "primary" ? "processing" : color, bordered: false }, () => color);
       }
       return color;
     }
@@ -69,7 +69,7 @@ export const columns: BasicColumn[] = [
           break;
         }
       }
-      return h(Tag, { color }, () => text);
+      return h(Tag, { color, bordered: false }, () => text);
     }
   },
   {
@@ -86,7 +86,7 @@ export const columns: BasicColumn[] = [
       const enable = Math.trunc(status) === 0;
       const color = enable ? "green" : "red";
       const text = enable ? "启用" : "停用";
-      return h(Tag, { color }, () => text);
+      return h(Tag, { color, bordered: false }, () => text);
     }
   },
   {

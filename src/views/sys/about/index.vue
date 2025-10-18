@@ -35,7 +35,7 @@
   const schema: DescItem[] = [];
   const devSchema: DescItem[] = [];
 
-  const commonTagRender = (color: string) => (curVal) => h(Tag, { color }, () => curVal);
+  const commonTagRender = (color: string) => (curVal) => h(Tag, { color, bordered: false }, () => curVal);
   const commonLinkRender = (text: string) => (href) => h("a", { href, target: "_blank" }, text);
 
   const infoSchema: DescItem[] = [

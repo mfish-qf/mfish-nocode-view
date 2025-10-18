@@ -28,7 +28,7 @@ export const columns: BasicColumn[] = [
       const enable = Math.trunc(status) === 0;
       const color = enable ? "green" : "red";
       const text = enable ? "启用" : "停用";
-      return h(Tag, { color }, () => text);
+      return h(Tag, { color, bordered: false }, () => text);
     }
   },
   {

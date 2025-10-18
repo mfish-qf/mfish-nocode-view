@@ -29,11 +29,11 @@
     "eslint-plugin-command": "^0.2.7"
   },
   "devDependencies": {
-    "@eslint/js": "^9.37.0",
+    "@eslint/js": "^9.38.0",
     "@types/eslint": "^9.6.1",
     "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.46.1",
-    "eslint": "^9.37.0",
+    "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-jsdoc": "^50.8.0",
@@ -43,7 +43,7 @@
     "eslint-plugin-regexp": "^2.10.0",
     "eslint-plugin-unicorn": "^56.0.1",
     "eslint-plugin-unused-imports": "^4.2.0",
-    "eslint-plugin-vue": "^10.5.0",
+    "eslint-plugin-vue": "^10.5.1",
     "globals": "^15.15.0",
     "jsonc-eslint-parser": "^2.4.1",
     "vue-eslint-parser": "^10.2.0"

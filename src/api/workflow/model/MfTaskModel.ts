@@ -22,7 +22,7 @@ export interface AuditComment {
   taskId: string;
   processInstanceId: string;
   processDefinitionId: string;
-  name: string;
+  taskName: string;
   type: string;
   assignee: string;
   comment: string;
@@ -34,7 +34,7 @@ export interface MfTask {
   processInstanceId: string;
   processDefinitionId: string;
   processDefinitionKey: string;
-  name: string;
+  taskName: string;
   processName: string;
   businessKey: string;
   description: string;
@@ -58,10 +58,16 @@ export interface ReqProcess {
   processInstanceIds: string;
 }
 export interface ReqTask extends ReqPage {
-  startTime?: string;
-  endTime?: string;
+  applyStartTime?: string;
+  applyEndTime?: string;
   taskName?: string;
-  status?: number;
+  processDefinitionKey?: string;
+  processInstanceId?: string;
+}
+export interface ReqAllTask extends ReqTask {
+  auditStartTime?: string;
+  auditEndTime?: string;
+  status?: string;
 }
 export interface TaskTotal {
   todoCount: number;

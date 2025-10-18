@@ -104,7 +104,7 @@ export class SsoClientDetailsDesc {
     {
       field: "grantTypes",
       label: "认证方式",
-      render: (val) => {
+      render: (val): any => {
         if (!val) return;
         const types: string[] = val.split(",");
         return types.map((type) => h("div", { class: "mt-1 mb-1" }, buildDictTag("sso_grant_type", type)));
@@ -113,14 +113,14 @@ export class SsoClientDetailsDesc {
     {
       field: "redirectUrl",
       label: "回调地址",
-      render: (val) => {
+      render: (val): any => {
         if (!val) return;
         const types: string[] = val.split(",");
         return types.map((type) =>
           h(
             "div",
             { class: "mt-1 mb-1" },
-            h(Tag, () => type)
+            h(Tag, { bordered: false }, () => type)
           )
         );
       }

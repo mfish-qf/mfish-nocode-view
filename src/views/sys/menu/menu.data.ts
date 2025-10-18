@@ -18,7 +18,7 @@ export const columns: BasicColumn[] = [
     title: "菜单类型",
     width: 80,
     customRender: ({ value }) =>
-      h(Tag, value === 0 ? { color: "green" } : value === 1 ? { color: "blue" } : {}, () =>
+      h(Tag, { color: value === 0 ? "green" : "blue", bordered: false }, () =>
         value === 0 ? "目录" : value === 1 ? "菜单" : value === 2 ? "按钮" : "未知"
       )
   },
@@ -31,7 +31,7 @@ export const columns: BasicColumn[] = [
       const enable = Math.trunc(status) === 1;
       const color = enable ? "green" : "red";
       const text = enable ? "显示" : "隐藏";
-      return h(Tag, { color }, () => text);
+      return h(Tag, { color, bordered: false }, () => text);
     }
   },
   {
@@ -240,7 +240,7 @@ export class MenuDesc {
       field: "menuType",
       label: "菜单类型",
       render: (value) =>
-        h(Tag, value === 0 ? { color: "green" } : value === 1 ? { color: "blue" } : {}, () =>
+        h(Tag, { color: value === 0 ? "green" : "blue", bordered: false }, () =>
           value === 0 ? "目录" : value === 1 ? "菜单" : value === 2 ? "按钮" : "未知"
         )
     },
