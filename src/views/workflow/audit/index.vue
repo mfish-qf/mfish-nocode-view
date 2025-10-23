@@ -1,5 +1,5 @@
 <!--
- @description: 审核管理
+ @description: 审批管理
  @author: mfish
  @date: 2025/10/15
 -->
@@ -11,15 +11,23 @@
           <TableAction
             :actions="[
               {
-                icon: 'ant-design:audit-outlined',
+                icon: record.status === 'created' ? 'ant-design:audit-outlined' : 'ant-design:file-search-outlined',
                 onClick: handleAudit.bind(null, record),
-                tooltip: '审核'
+                tooltip: record.status === 'created' ? '审批' : '查看'
               },
               {
                 icon: 'ant-design:close-circle-outlined',
                 color: 'error',
                 popConfirm: {
-                  title: '是否确认终止审核，终止后发起人需要重新发起审核，请谨慎操作！',
+                  title: h('div', { style: 'display: flex;flex-direction: column;' }, [
+                    h('span', '是否确认终止审批？'),
+                    h('span', '终止后发起人需要重新发起审批，请谨慎操作！')
+                  ]),
+                  description: h(Input, {
+                    status: 'warning',
+                    placeholder: '请输入终止审批原因',
+                    onChange: (e) => reasonChange(e)
+                  }),
                   placement: 'left',
                   confirm: handleCancel.bind(null, record)
                 },
@@ -50,7 +58,8 @@
   import { MfTask } from "@/api/workflow/model/MfTaskModel";
   import { usePermission } from "@mfish/core/hooks";
   import FlowImgPreview from "@/views/workflow/com/FlowImgPreview.vue";
-  import { useTemplateRef } from "vue";
+  import { h, ref, useTemplateRef } from "vue";
+  import { Input } from "ant-design-vue";
 
   defineOptions({ name: "AuditManagement" });
   const [registerTable, { reload }] = useTable({
@@ -77,6 +86,7 @@
   const [registerModal, { openModal }] = useModal();
   const { userIsSuperAdmin } = usePermission();
   const flowImgPreviewRef = useTemplateRef<typeof FlowImgPreview>("flowImgPreviewRef");
+  const cancelReason = ref<string>("");
   function handleSuccess() {
     reload();
   }
@@ -84,8 +94,15 @@
   function handleAudit(item: MfTask) {
     openModal(true, item);
   }
+  function reasonChange(e: any) {
+    cancelReason.value = e.target.value;
+  }
+
   function handleCancel(item: MfTask) {
-    delProcess(item.processInstanceId, "终止审核").then(() => {
+    if (!cancelReason.value) {
+      return;
+    }
+    delProcess(item.processInstanceId, cancelReason.value).then(() => {
       handleSuccess();
     });
   }

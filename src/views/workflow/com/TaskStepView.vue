@@ -4,7 +4,7 @@
  @date: 2025/10/11
 -->
 <template>
-  <ASteps v-bind="$attrs" :progress-dot="progressDot" :current="current" :items="items" />
+  <ASteps v-bind="$attrs" disabled :progress-dot="progressDot" :current="current" :items="items" />
 </template>
 <script setup lang="ts">
   import { Steps as ASteps } from "ant-design-vue";

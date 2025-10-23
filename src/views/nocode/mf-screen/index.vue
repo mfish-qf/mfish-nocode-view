@@ -49,8 +49,8 @@
     </NLayoutContent>
     <FrameShortcut ref="frameShortcutRef" :menu-left="menuLeft" :menu-top="menuTop" />
   </NLayout>
-  <ScreenShare :title="title" :screen-id="screenId" :open="shareOpen" @close="() => (shareOpen = false)" />
-  <ScreenResourceModal :preview="false" @register="registerModal" @success="releaseResourceSuccess" />
+  <ScreenShareModal :title="title" :screen-id="screenId" :open="shareOpen" @close="() => (shareOpen = false)" />
+  <ScreenReleaseModal :preview="false" @register="registerModal" @success="releaseResourceSuccess" />
 </template>
 <script lang="ts" setup>
   import FrameHeader from "@/components/nocode/screen/frame/FrameHeader/index.vue";
@@ -80,8 +80,8 @@
   import { uploadApi } from "@mfish/core/api";
   import { useOutsideOpen } from "@mfish/core/utils/OutsideOpenUtils";
   import ScreenResource from "@/views/nocode/screen-resource/ScreenResource.vue";
-  import ScreenShare from "@/views/nocode/mf-screen/ScreenShare.vue";
-  import ScreenResourceModal from "@/views/nocode/mf-screen/ScreenResourceModal.vue";
+  import ScreenShareModal from "@/views/nocode/mf-screen/ScreenShareModal.vue";
+  import ScreenReleaseModal from "@/views/nocode/mf-screen/ScreenReleaseModal.vue";
   import { useModal } from "@mfish/core/components/Modal";
 
   const screenUrl = "/low-code/mf-screen/config";

@@ -48,6 +48,12 @@
     ? [...settingList]
     : settingList.filter((set) => set.key <= 3);
   onBeforeMount(() => {
+    // 处理回调参数，如 gitee、github 绑定回调后，返回安全设置页
+    const callback = route.query?.callback as string;
+    if (callback) {
+      tabType.value = 2;
+      return;
+    }
     const index = route.path.lastIndexOf("/");
     if (index) {
       const type = Number.parseInt(route.path.slice(Math.max(0, index + 1)));

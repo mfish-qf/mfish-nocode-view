@@ -5,8 +5,17 @@
  */
 import { useGlobSetting } from "../hooks/setting";
 
-const { oauth2Url, oauth2RedirectUri, loginType, giteeClientId, giteeRedirectUri, githubClientId, githubRedirectUri } =
-  useGlobSetting();
+const {
+  oauth2Url,
+  oauth2RedirectUri,
+  loginType,
+  giteeClientId,
+  giteeRedirectUri,
+  giteeBindUri,
+  githubClientId,
+  githubRedirectUri,
+  githubBindUri
+} = useGlobSetting();
 
 interface OAuth2Config {
   url: string;
@@ -31,11 +40,13 @@ export const oauth2Config: OAuth2Config = {
 
 export const giteeConfig = {
   client_id: giteeClientId as string,
-  redirect_uri: giteeRedirectUri as string
+  redirect_uri: giteeRedirectUri as string,
+  bind_uri: giteeBindUri as string
 };
 export const githubConfig = {
   client_id: githubClientId as string,
-  redirect_uri: githubRedirectUri as string
+  redirect_uri: githubRedirectUri as string,
+  bind_uri: githubBindUri as string
 };
 // 当前登录类型
 export const curLoginType = loginType;

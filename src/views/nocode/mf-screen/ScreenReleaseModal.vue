@@ -1,5 +1,5 @@
 <!--
- @description: 大屏资源信息
+ @description: 大屏资源发布
  @author: mfish
  @date: 2025-03-19
  @version: V2.2.0
@@ -41,7 +41,7 @@
   import { FormSchema } from "@mfish/core/components/Table";
   import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
 
-  defineOptions({ name: "ScreenResourceModal" });
+  defineOptions({ name: "ScreenReleaseModal" });
   const props = defineProps({
     preview: {
       type: Boolean,

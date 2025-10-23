@@ -1,5 +1,5 @@
 <!--
- @description: 审核窗口
+ @description: 审批窗口
  @author: mfish
  @date: 2025/10/11
 -->
@@ -11,7 +11,7 @@
     :show-ok-btn="false"
     cancel-text="关闭"
   >
-    <template #appendFooter>
+    <template #appendFooter v-if="task?.status === 'created'">
       <Popconfirm icon="" v-model:open="rejectOpen">
         <template #okButton>
           <AButton type="primary" size="small" @click="handleReject">确认</AButton>
@@ -42,19 +42,18 @@
       </Popconfirm>
     </template>
     <TaskStepView class="p-2" direction="horizontal" :process-instance-id="task?.processInstanceId" />
-    <slot></slot>
+    <component :is="auditComponent?.component" class="pl-4 pr-4" :business-key="task?.businessKey" />
   </BasicModal>
 </template>
 <script setup lang="ts">
   import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import TaskStepView from "@/views/workflow/com/TaskStepView.vue";
   import { Popconfirm, Textarea } from "ant-design-vue";
-  import { ref } from "vue";
+  import { computed, ref } from "vue";
   import { MfTask } from "@/api/workflow/model/MfTaskModel";
   import { approveTask, rejectTask } from "@/api/workflow/FlowProcess";
-  const props = defineProps({
-    width: { type: String, default: "800px" }
-  });
+  import { useWorkflow } from "@/views/workflow/com/UseWorkflow";
+
   const emit = defineEmits(["register", "success"]);
   const task = ref<MfTask>();
   const rejectLoading = ref(false);
@@ -63,10 +62,11 @@
   const approveLoading = ref(false);
   const approveOpen = ref<boolean>(false);
   const approveReason = ref("");
-
+  const { getAuditComponent } = useWorkflow();
+  const auditComponent = computed(() => getAuditComponent(task.value?.processDefinitionKey));
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
     task.value = data;
-    setModalProps({ confirmLoading: false, width: props.width });
+    setModalProps({ confirmLoading: false, width: `${auditComponent.value?.width || 800}px` });
   });
   function handleReject() {
     if (!rejectReason.value) {

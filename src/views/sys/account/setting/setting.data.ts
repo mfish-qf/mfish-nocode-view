@@ -8,6 +8,7 @@ export interface ListItem {
   avatar?: string;
   color?: string;
   tenantType?: number;
+  icon?: string;
 }
 
 // tab的list

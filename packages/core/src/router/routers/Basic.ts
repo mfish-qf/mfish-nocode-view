@@ -99,6 +99,7 @@ export const GiteeRoute: AppRouteRecordRaw = {
     title: "GiteeOauth2"
   }
 };
+
 // github登录
 export const GithubRoute: AppRouteRecordRaw = {
   path: "/githubOauth2",

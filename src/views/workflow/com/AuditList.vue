@@ -23,8 +23,8 @@
                     :status="item.status"
                   />
                 </div>
-                <AButton type="primary" size="small" v-if="item.status === 'created'" @click="handleAudit(item)">
-                  审核
+                <AButton type="primary" size="small" @click="handleAudit(item)">
+                  {{ item.status === "created" ? "审批" : "查看" }}
                 </AButton>
               </div>
               <div class="flex items-center justify-between">

@@ -77,8 +77,8 @@
     />
     <div class="description" @click.stop>{{ data?.remark ? data?.remark : data?.name }}</div>
   </ACard>
-  <ScreenShare :title="title" :screen-id="props.data?.id" :open="shareOpen" @close="() => (shareOpen = false)" />
-  <ScreenResourceModal @register="registerModal" @success="releaseSuccess" />
+  <ScreenShareModal :title="title" :screen-id="props.data?.id" :open="shareOpen" @close="() => (shareOpen = false)" />
+  <ScreenReleaseModal @register="registerModal" @success="releaseSuccess" />
 </template>
 <script lang="ts" setup>
   import { DeleteTwoTone, EditTwoTone, EllipsisOutlined, FolderTwoTone, RollbackOutlined } from "@ant-design/icons-vue";
@@ -90,9 +90,9 @@
   import { nextTick, ref, watchEffect } from "vue";
   import { setImage } from "@mfish/core/utils/file/FileUtils";
   import { Nullable } from "@mfish/types";
-  import ScreenResourceModal from "@/views/nocode/mf-screen/ScreenResourceModal.vue";
+  import ScreenReleaseModal from "@/views/nocode/mf-screen/ScreenReleaseModal.vue";
   import { useModal } from "@mfish/core/components/Modal";
-  import ScreenShare from "@/views/nocode/mf-screen/ScreenShare.vue";
+  import ScreenShareModal from "@/views/nocode/mf-screen/ScreenShareModal.vue";
 
   const props = defineProps({
     data: { type: Object as PropType<ScreenFolderVo> },

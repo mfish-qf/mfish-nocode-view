@@ -5,7 +5,7 @@ import { dateUtil } from "@mfish/core/utils/DateUtil";
 import AuditStatusTag from "@/views/workflow/com/AuditStatusTag.vue";
 
 /**
- * @description: 审核管理
+ * @description: 审批管理
  * @author: mfish
  * @date: 2025-10-15
  * @version: V2.2.0
@@ -25,7 +25,7 @@ export const columns: BasicColumn[] = [
     width: 120
   },
   {
-    title: "审核状态",
+    title: "审批状态",
     dataIndex: "status",
     width: 120,
     customRender: ({ record }) => {

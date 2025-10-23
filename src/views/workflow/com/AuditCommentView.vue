@@ -1,5 +1,5 @@
 <!--
- @description: 审核评论组件
+ @description: 审批评论组件
  @author: mfish
  @date: 2025/10/11
 -->
@@ -7,31 +7,33 @@
   <ListItem v-if="task?.deleteReason" style="padding: 2px !important">
     <ListItemMeta>
       <template #description>
-        <div class="text-ellipsis whitespace-nowrap overflow-hidden max-w-[300px]" :title="task.deleteReason">
+        <div class="text-ellipsis whitespace-nowrap overflow-hidden max-w-[300px] text-left" :title="task.deleteReason">
           终止原因：{{ task?.deleteReason.replace("terminated:", "") }}
         </div>
-        <div>终止时间：{{ task.endTime }}</div>
+        <div class="text-ellipsis whitespace-nowrap overflow-hidden max-w-[300px] text-left" :title="task.endTime">
+          终止时间：{{ task.endTime }}
+        </div>
       </template>
     </ListItemMeta>
   </ListItem>
-  <List
-    v-else-if="task?.comments && task.comments.length > 0"
-    item-layout="horizontal"
-    :data-source="task.comments || []"
-  >
+  <List v-else-if="task?.comments && task.comments.length > 0" :data-source="task.comments || []">
     <template #renderItem="{ item }">
       <ListItem style="padding: 2px !important">
         <ListItemMeta>
           <template #description>
             <div
               v-if="item.comment"
-              class="text-ellipsis whitespace-nowrap overflow-hidden max-w-[300px]"
+              class="text-ellipsis whitespace-nowrap overflow-hidden max-w-[300px] text-left"
               :title="item.comment"
             >
               审批意见：{{ item.comment }}
             </div>
-            <div>审批人：{{ item.assignee }}</div>
-            <div>审批时间：{{ item.time }}</div>
+            <div class="text-ellipsis whitespace-nowrap overflow-hidden max-w-[300px] text-left" :title="item.assignee">
+              审批人：{{ item.assignee }}
+            </div>
+            <div class="text-ellipsis whitespace-nowrap overflow-hidden max-w-[300px] text-left" :title="item.time">
+              审批时间：{{ item.time }}
+            </div>
           </template>
         </ListItemMeta>
       </ListItem>
