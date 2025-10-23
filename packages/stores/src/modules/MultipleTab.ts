@@ -248,6 +248,7 @@ export const useMultipleTabStore = defineStore("app-multiple-tab", {
         this.bulkCloseTabs(pathList).then();
       }
       handleGotoPage(router);
+      cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList);
     },
 
     // Close the tab on the left and jump
@@ -267,12 +268,14 @@ export const useMultipleTabStore = defineStore("app-multiple-tab", {
         this.bulkCloseTabs(pathList).then();
       }
       handleGotoPage(router);
+      cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList);
     },
 
     async closeAllTab(router: Router) {
       this.tabList = this.tabList.filter((item) => item?.meta?.affix ?? false);
       this.clearCacheTabs();
       this.goToPage(router);
+      cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList);
     },
 
     /**
@@ -297,6 +300,7 @@ export const useMultipleTabStore = defineStore("app-multiple-tab", {
       }
       this.bulkCloseTabs(pathList).then();
       handleGotoPage(router);
+      cacheTab && Persistent.setLocal(MULTIPLE_TABS_KEY, this.tabList);
     },
 
     /**

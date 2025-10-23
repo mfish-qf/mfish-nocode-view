@@ -12,8 +12,10 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     VITE_GLOB_OAUTH2_REDIRECT_URI,
     VITE_GLOB_GITEE_CLIENT_ID,
     VITE_GLOB_GITEE_REDIRECT_URI,
+    VITE_GLOB_GITEE_BIND_URI,
     VITE_GLOB_GITHUB_CLIENT_ID,
-    VITE_GLOB_GITHUB_REDIRECT_URI
+    VITE_GLOB_GITHUB_REDIRECT_URI,
+    VITE_GLOB_GITHUB_BIND_URI
   } = getAppEnvConfig();
   if (!/[\s_a-z]*/i.test(VITE_GLOB_APP_SHORT_NAME)) {
     warn(
@@ -30,8 +32,10 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     oauth2RedirectUri: VITE_GLOB_OAUTH2_REDIRECT_URI,
     giteeClientId: VITE_GLOB_GITEE_CLIENT_ID,
     giteeRedirectUri: VITE_GLOB_GITEE_REDIRECT_URI,
+    giteeBindUri: VITE_GLOB_GITEE_BIND_URI,
     githubClientId: VITE_GLOB_GITHUB_CLIENT_ID,
-    githubRedirectUri: VITE_GLOB_GITHUB_REDIRECT_URI
+    githubRedirectUri: VITE_GLOB_GITHUB_REDIRECT_URI,
+    githubBindUri: VITE_GLOB_GITHUB_BIND_URI
   };
   return glob as Readonly<GlobConfig>;
 };

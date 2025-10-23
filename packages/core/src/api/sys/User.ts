@@ -32,7 +32,10 @@ enum Api {
   UnLock = "/oauth2/unLock",
   PwdExist = "/oauth2/user/pwdExist",
   AllowChangeAccount = "/oauth2/user/allowChangeAccount",
-  ChangeAccount = "/oauth2/user/changeAccount"
+  ChangeAccount = "/oauth2/user/changeAccount",
+  SecureSetting = "/oauth2/user/secureSetting",
+  UnbindGitee = "/oauth2/user/unbind/gitee",
+  UnbindGithub = "/oauth2/user/unbind/github"
 }
 
 export function getCaptcha() {
@@ -163,4 +166,16 @@ export const allowChangeAccount = (userId: string) => {
 
 export const changeAccount = (params: { id: string; account: string }) => {
   return defHttp.put({ url: Api.ChangeAccount, params }, { successMessageMode: "message" });
+};
+
+export const getSecureSetting = (userId: string) => {
+  return defHttp.get<SsoUser>({ url: `${Api.SecureSetting}/${userId}` });
+};
+
+export const unbindGitee = (userId: string) => {
+  return defHttp.put({ url: `${Api.UnbindGitee}/${userId}` }, { successMessageMode: "message" });
+};
+
+export const unbindGithub = (userId: string) => {
+  return defHttp.put({ url: `${Api.UnbindGithub}/${userId}` }, { successMessageMode: "message" });
 };

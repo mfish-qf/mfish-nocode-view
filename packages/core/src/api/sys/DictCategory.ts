@@ -71,7 +71,7 @@ export function deleteDictCategory(id: string) {
  * @param code
  * @param direction
  */
-export function queryCategoryTreeByCode(code: string, direction: "up" | "down" | "all") {
+export function queryCategoryTreeByCode(code: string, direction: "current" | "up" | "down" | "all") {
   return defHttp.get<DictCategory[]>({ url: `${Api.DictCategoryTree}/${code}`, params: { direction } });
 }
 
@@ -80,7 +80,7 @@ export function queryCategoryTreeByCode(code: string, direction: "up" | "down" |
  * @param code
  * @param direction
  */
-export function queryCategoryListByCode(code: string, direction: "up" | "down" | "all") {
+export function queryCategoryListByCode(code: string, direction: "current" | "up" | "down" | "all") {
   return defHttp.get<DictCategory[]>({ url: `${Api.DictCategoryList}/${code}`, params: { direction } });
 }
 
@@ -89,7 +89,7 @@ export function queryCategoryListByCode(code: string, direction: "up" | "down" |
  * @param id
  * @param direction
  */
-export function queryCategoryTreeById(id: string, direction: "up" | "down" | "all") {
+export function queryCategoryTreeById(id: string, direction: "current" | "up" | "down" | "all") {
   return defHttp.get<DictCategory[]>({ url: `${Api.DictCategoryTree}/id/${id}`, params: { direction } });
 }
 
@@ -98,7 +98,7 @@ export function queryCategoryTreeById(id: string, direction: "up" | "down" | "al
  * @param id
  * @param direction
  */
-export function queryCategoryListById(id: string, direction: "up" | "down" | "all") {
+export function queryCategoryListById(id: string, direction: "current" | "up" | "down" | "all") {
   return defHttp.get<DictCategory[]>({ url: `${Api.DictCategoryList}/id/${id}`, params: { direction } });
 }
 

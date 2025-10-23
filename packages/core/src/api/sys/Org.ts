@@ -54,7 +54,7 @@ export function getOrgRoles(orgId: string) {
  * @param code 组织编码
  * @param direction 查询方向
  */
-export function getOrgByCode(code: string, direction: "up" | "down" | "all") {
+export function getOrgByCode(code: string, direction: "current" | "up" | "down" | "all") {
   return defHttp.get<SsoOrg[]>({ url: `${Api.OrgByCode}/${code}`, params: { direction } });
 }
 

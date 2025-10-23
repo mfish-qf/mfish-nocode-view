@@ -80,6 +80,8 @@ export interface SsoUser {
   userRoles: RoleInfo[];
   permissions: Set<string>;
   tenants: TenantVo[];
+  gitee?: string;
+  github?: string;
 }
 
 export interface UserOrg {
