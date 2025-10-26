@@ -21,6 +21,6 @@
     "@types/node": "^22.18.12"
   },
   "devDependencies": {
-    "vite": "^7.1.12"
+    "vite": "^7.1.11"
   }
 }

@@ -1,5 +1,4 @@
 @menu-prefix-cls: ~"@{namespace}-menu";
-@menu-popup-prefix-cls: ~"@{namespace}-menu-popup";
 @submenu-popup-prefix-cls: ~"@{namespace}-menu-submenu-popup";
 
 @transition-time: 0.2s;
@@ -41,7 +40,7 @@
       position: relative;
       z-index: 1;
       padding: 12px 20px;
-      color: @menu-dark-subsidiary-color;
+      color: @main-color;
       cursor: pointer;
       transition: all @transition-time @ease-in-out;
 
@@ -72,8 +71,8 @@
 
       &-selected {
         border-radius: 8px;
-        background-color: @button-primary-hover-color !important;
-        color: @menu-dark-subsidiary-color;
+        background-color: @sider-darken-bg-color !important;
+        color: @main-color !important;
 
         &:hover {
           color: @white;
@@ -228,10 +227,9 @@
 
       &-active:not(.@{menu-prefix-cls}-submenu) {
         border-radius: 8px;
-
-        color: #fff !important;
+        color: @main-color !important;
         transform: scale(1);
-        background: @button-primary-hover-color !important;
+        background: @sider-darken-bg-color !important;
       }
 
       &-active.@{menu-prefix-cls}-submenu {
@@ -266,10 +264,10 @@
       transition: transform 0.25s ease;
 
       &-active:not(.@{menu-prefix-cls}-submenu) {
-        color: #fff !important;
         border-radius: 8px;
         transform: scale(1);
-        background: @button-primary-hover-color !important;
+        color: @main-color !important;
+        background: @sider-darken-bg-color !important;
       }
 
       &:hover {
