@@ -35,6 +35,9 @@
   import { getSecureSetting, SsoUser, unbindGitee, unbindGithub } from "@mfish/core/api";
   import { giteeConfig, githubConfig } from "@mfish/core/settings/LoginSetting";
   import { defHttp } from "@mfish/core/utils/http/axios";
+  import { useRoute } from "vue-router";
+  import { router } from "@mfish/core/router";
+  import { CollapseContainer } from "@mfish/core/components/Container";
 
   const AListItem = AList.Item;
   const AListItemMeta = AListItem.Meta;
@@ -83,14 +86,11 @@
       icon: userInfo.value?.github ? "ant-design:stop-outlined" : "ant-design:link-outlined"
     }
   ]);
-
+  const route = useRoute();
   onBeforeMount(() => {
-    //此处不从路由取参数，而是从url参数取callback和code
-    //因为后面clearUrl只修改了链接未清除路由参数，如果清除路由参数会造成页面刷新，无法返回安全设置页面
-    const params = new URLSearchParams(globalThis.location.search);
-    const callback = params.get("callback");
+    const callback = route.query?.callback as string;
     if (callback === "gitee") {
-      const code = params.get("code");
+      const code = route.query?.code as string;
       defHttp
         .put<boolean>({ url: `/oauth2/gitee/bind/${code}` })
         .then((res) => {
@@ -104,7 +104,7 @@
       return;
     }
     if (callback === "github") {
-      const code = params.get("code");
+      const code = route.query?.code as string;
       defHttp
         .put<boolean>({ url: `/oauth2/github/bind/${code}` })
         .then((res) => {
@@ -119,8 +119,7 @@
   });
 
   function clearUrl() {
-    const { pathname } = globalThis.location;
-    globalThis.history.replaceState({}, "", pathname);
+    router.replace({ query: {} });
   }
 
   onMounted(() => {
