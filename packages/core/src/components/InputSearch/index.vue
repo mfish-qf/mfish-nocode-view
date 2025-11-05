@@ -4,7 +4,7 @@
  @date: 2025/3/13
 -->
 <template>
-  <AInput v-bind="$attrs" @press-enter="onSearch" @change="valueChange">
+  <AInput v-bind="$attrs" @press-enter.stop.prevent="onSearch" @change="valueChange">
     <template #suffix v-if="enterButton">
       <SearchOutlined :class="`${prefixCls}_button`" @click="onSearch" />
     </template>
