@@ -54,7 +54,7 @@ const E = { class: "title" }, W = { style: { display: "flex", gap: "6px" } }, j 
     n2.getCurConfigComponent.chart.options.themeColor = t3.name, n2.getCurConfigComponent.chart.options.color = t3.color, o2("themeChange", t3);
   }
   return (t3, e3) => (i(), l("div", { class: a(u(f2)) }, [s(z, { title: "基础配置" }, { default: r(() => [e3[0] || (e3[0] = c("div", { class: "title" }, " 主题", -1)), s(H, { color: u(n2).getCurConfigComponent.chart.options.themeColor, onThemeChange: p2 }, null, 8, ["color"]), v(t3.$slots, "default", {}, void 0, true)]), _: 3 })], 2));
-} }), [["__scopeId", "data-v-05e379d5"]]);
+} }), [["__scopeId", "data-v-8b5c7641"]]);
 export {
   j as E,
   q as a
