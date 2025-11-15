@@ -25,27 +25,27 @@
     "stub": "pnpm unbuild --stub"
   },
   "dependencies": {
-    "eslint-config-turbo": "^2.6.0",
-    "eslint-plugin-command": "^0.2.7"
+    "eslint-config-turbo": "catalog:",
+    "eslint-plugin-command": "catalog:"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@types/eslint": "^9.6.1",
-    "@typescript-eslint/eslint-plugin": "^8.46.3",
-    "@typescript-eslint/parser": "^8.46.3",
-    "eslint": "^9.39.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-jsdoc": "^50.8.0",
-    "eslint-plugin-jsonc": "^2.21.0",
-    "eslint-plugin-no-only-tests": "^3.3.0",
-    "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-regexp": "^2.10.0",
-    "eslint-plugin-unicorn": "^56.0.1",
-    "eslint-plugin-unused-imports": "^4.3.0",
-    "eslint-plugin-vue": "^10.5.1",
-    "globals": "^15.15.0",
-    "jsonc-eslint-parser": "^2.4.1",
-    "vue-eslint-parser": "^10.2.0"
+    "@eslint/js": "catalog:",
+    "@types/eslint": "catalog:",
+    "@typescript-eslint/eslint-plugin": "catalog:",
+    "@typescript-eslint/parser": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "eslint-plugin-eslint-comments": "catalog:",
+    "eslint-plugin-jsdoc": "catalog:",
+    "eslint-plugin-jsonc": "catalog:",
+    "eslint-plugin-no-only-tests": "catalog:",
+    "eslint-plugin-prettier": "catalog:",
+    "eslint-plugin-regexp": "catalog:",
+    "eslint-plugin-unicorn": "catalog:",
+    "eslint-plugin-unused-imports": "catalog:",
+    "eslint-plugin-vue": "catalog:",
+    "globals": "catalog:",
+    "jsonc-eslint-parser": "catalog:",
+    "vue-eslint-parser": "catalog:"
   }
 }

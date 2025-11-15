@@ -1,6 +1,6 @@
 {
   "name": "@mfish/nocode",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "private": true,
   "license": "Apache-2.0",
   "author": {
@@ -22,6 +22,6 @@
     }
   },
   "devDependencies": {
-    "vite-plugin-style-inject": "^0.0.1"
+    "vite-plugin-style-inject": "catalog:"
   }
 }

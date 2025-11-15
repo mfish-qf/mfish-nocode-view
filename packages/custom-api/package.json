@@ -1,6 +1,6 @@
 {
   "name": "@mfish/custom-api",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "private": true,
   "license": "Apache-2.0",
   "author": {
@@ -9,19 +9,19 @@
     "url": "https://github.com/mfish-qf"
   },
   "type": "module",
-  "main": "./core/index.mjs",
-  "module": "./core/index.mjs",
-  "types": "./core/index.mjs",
-  "files": [
-    "core"
-  ],
   "exports": {
     ".": {
       "types": "./core/index.mjs",
       "import": "./core/index.mjs"
     }
   },
+  "main": "./core/index.mjs",
+  "module": "./core/index.mjs",
+  "types": "./core/index.mjs",
+  "files": [
+    "core"
+  ],
   "devDependencies": {
-    "vite-plugin-style-inject": "^0.0.1"
+    "vite-plugin-style-inject": "catalog:"
   }
 }
