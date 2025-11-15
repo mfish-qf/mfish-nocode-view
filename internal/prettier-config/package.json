@@ -20,9 +20,9 @@
     "dist"
   ],
   "dependencies": {
-    "prettier": "^3.6.2"
+    "prettier": "catalog:"
   },
   "devDependencies": {
-    "prettier-plugin-packagejson": "^2.5.19"
+    "prettier-plugin-packagejson": "catalog:"
   }
 }
