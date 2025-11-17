@@ -71,6 +71,7 @@ export function colorIsDarkRGB(rgb: string) {
  * @returns {string} The HEX representation of the processed color
  */
 export function darken(color: string, amount: number) {
+  if (!color) return;
   color = color.includes("#") ? color.slice(1) : color;
   amount = Math.trunc((255 * amount) / 100);
   return `#${subtractLight(color.slice(0, 2), amount)}${subtractLight(
@@ -86,6 +87,7 @@ export function darken(color: string, amount: number) {
  * @returns {string} The processed color represented as HEX
  */
 export function lighten(color: string, amount: number) {
+  if (!color) return;
   color = color.includes("#") ? color.slice(1) : color;
   amount = Math.trunc((255 * amount) / 100);
   return `#${addLight(color.slice(0, 2), amount)}${addLight(color.slice(2, 4), amount)}${addLight(
