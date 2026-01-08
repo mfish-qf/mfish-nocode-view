@@ -1,5 +1,5 @@
-import { defineComponent as e, useCssVars as t, useTemplateRef as o, computed as n, watch as a, reactive as l, onMounted as i, createElementBlock as r, openBlock as s, normalizeStyle as c, normalizeClass as p, unref as d, createElementVNode as u, createCommentVNode as f, createBlock as h, createVNode as g, ref as y, Fragment as m, renderList as v, nextTick as C, toRaw as b, withCtx as M, withModifiers as w, resolveComponent as x, createTextVNode as S, toDisplayString as k, onUnmounted as $, mergeProps as L, readonly as _, normalizeProps as I, guardReactiveProps as D, shallowRef as T, onBeforeMount as N, toHandlers as B, createSlots as z, inject as O, provide as R, triggerRef as j, useSlots as A, withDirectives as P, resolveDynamicComponent as E, vShow as F, renderSlot as H, markRaw as G, Transition as V } from "vue";
-import { theme as U, Input as W, InputNumber as Z, Tooltip as Y, Segmented as X, Dropdown as q, Checkbox as K, Divider as J, FloatButton as Q, Image as ee, ConfigProvider as te, Watermark as oe, Modal as ne, InputGroup as ae, Select as le, Table as ie, Textarea as re, RadioGroup as se, RadioButton as ce, Empty as pe, Menu as de, MenuItem as ue } from "ant-design-vue";
+import { defineComponent as e, useCssVars as t, useTemplateRef as o, computed as n, watch as a, reactive as l, onMounted as i, createElementBlock as r, openBlock as s, normalizeStyle as c, normalizeClass as p, unref as d, createElementVNode as u, createCommentVNode as f, createBlock as h, createVNode as g, ref as y, Fragment as m, renderList as v, nextTick as C, toRaw as b, withCtx as M, withModifiers as w, resolveComponent as x, createTextVNode as S, toDisplayString as k, onUnmounted as $, mergeProps as L, readonly as _, normalizeProps as I, guardReactiveProps as D, shallowRef as T, onBeforeMount as N, toHandlers as B, createSlots as O, inject as z, provide as R, triggerRef as j, useSlots as A, withDirectives as P, resolveDynamicComponent as E, vShow as F, renderSlot as H, markRaw as G, Transition as V } from "vue";
+import { theme as U, Input as W, InputNumber as q, Tooltip as Z, Segmented as Y, Dropdown as X, Checkbox as K, Divider as J, FloatButton as Q, Image as ee, ConfigProvider as te, Watermark as oe, Modal as ne, InputGroup as ae, Select as le, Table as ie, Textarea as re, RadioGroup as se, RadioButton as ce, Empty as pe, Menu as de, MenuItem as ue } from "ant-design-vue";
 import { useDesign as fe, useRootSetting as he, useMessage as ge, useI18n as ye, useDarkModeTheme as me } from "@mfish/core/hooks";
 import { useEyeDropper as ve, useClipboard as Ce } from "@vueuse/core";
 import { Icon as be } from "@mfish/core/components/Icon";
@@ -7,7 +7,7 @@ import { cloneDeep as Me, debounce as we, once as xe, isElement as Se, merge as 
 import { ThemeEnum as Te } from "@mfish/core/enums";
 import { fade as Ne } from "@jiaminghi/color";
 import { buildUUID as Be } from "@mfish/core/utils/Uuid";
-import { isFunction as ze, isArray as Oe, isObject as Re, isString as je, isNumber as Ae } from "@mfish/core/utils/Is";
+import { isFunction as Oe, isArray as ze, isObject as Re, isString as je, isNumber as Ae } from "@mfish/core/utils/Is";
 import { defHttp as Pe } from "@mfish/core/utils/http/axios";
 import { defineStore as Ee } from "pinia";
 import { useAppStore as Fe } from "@mfish/stores/modules";
@@ -16,9 +16,9 @@ import { mitt as Ge } from "@mfish/core/utils/Mitt";
 import { createAsyncComponent as Ve } from "@mfish/core/utils/factory/CreateAsyncComponent";
 import { Button as Ue } from "@mfish/core/components/Button";
 import { sleep as We } from "@mfish/core/utils/Utils";
-import { router as Ze } from "@mfish/core/router";
-import { formatToDateTime as Ye, dateUtil as Xe } from "@mfish/core/utils/DateUtil";
-import { colorIsDark as qe, darken as Ke, lighten as Je } from "@mfish/core/utils/Color";
+import { router as qe } from "@mfish/core/router";
+import { formatToDateTime as Ze, dateUtil as Ye } from "@mfish/core/utils/DateUtil";
+import { colorIsDark as Xe, darken as Ke, lighten as Je } from "@mfish/core/utils/Color";
 import * as Qe from "echarts";
 import { propTypes as et } from "@mfish/core/utils/PropTypes";
 import { ScrollContainer as tt } from "@mfish/core/components/Container";
@@ -187,7 +187,7 @@ class Nt {
   }
 }
 let Bt = false;
-function zt(e2, t2) {
+function Ot(e2, t2) {
   const o2 = function(e3) {
     t2.drag?.(e3);
   }, n2 = function(e3) {
@@ -197,11 +197,11 @@ function zt(e2, t2) {
   };
   e2.addEventListener("mousedown", a2), e2.addEventListener("touchstart", a2, { passive: false });
 }
-const Ot = (e2, t2) => {
+const zt = (e2, t2) => {
   const o2 = e2.__vccOpts || e2;
   for (const [e3, n2] of t2) o2[e3] = n2;
   return o2;
-}, Rt = Ot(e({ __name: "ColorPanel", props: { color: { type: Object, required: true }, height: { type: Number, default: 150 }, isShow: { type: Boolean, default: false } }, setup(e2) {
+}, Rt = zt(e({ __name: "ColorPanel", props: { color: { type: Object, required: true }, height: { type: Number, default: 150 }, isShow: { type: Boolean, default: false } }, setup(e2) {
   t((t2) => ({ v003068da: `${e2.height}px` }));
   const h2 = e2, g2 = o("colorPanelRef"), y2 = n(() => ({ hue: h2.color.get("hue"), value: h2.color.get("value") })), { prefixCls: m2 } = fe("color-panel");
   a(() => y2, () => {
@@ -225,13 +225,13 @@ const Ot = (e2, t2) => {
     n2 = Math.max(0, n2), n2 = Math.min(n2, o2.width), a2 = Math.max(0, a2), a2 = Math.min(a2, o2.height), v2.cursorLeft = n2, v2.cursorTop = a2, v2.HSL = { saturation: n2 / o2.width * 100, value: 100 - a2 / o2.height * 100 }, h2.color.set({ saturation: n2 / o2.width * 100, value: 100 - a2 / o2.height * 100 });
   }
   return i(() => {
-    g2.value && zt(g2.value, { drag: (e3) => {
+    g2.value && Ot(g2.value, { drag: (e3) => {
       b2(e3);
     }, end: (e3) => {
       b2(e3);
     } });
   }), (e3, t2) => (s(), r("div", { class: p(d(m2)), ref_key: "colorPanelRef", ref: g2, style: c({ backgroundColor: v2.background }) }, [t2[1] || (t2[1] = u("div", { class: "color__white" }, null, -1)), t2[2] || (t2[2] = u("div", { class: "color__black" }, null, -1)), v2.showCursor ? (s(), r("div", { key: 0, class: "color-cursor", style: c({ top: `${v2.cursorTop}px`, left: `${v2.cursorLeft}px` }) }, [...t2[0] || (t2[0] = [u("div", null, null, -1)])], 4)) : f("", true)], 6));
-} }), [["__scopeId", "data-v-696c5dfb"]]), jt = Ot(e({ __name: "ColorHueSlider", props: { color: { type: Object, required: true }, vertical: { type: Boolean, default: false } }, emits: ["startEyeDropper", "endEyeDropper"], setup(e2, { emit: t2 }) {
+} }), [["__scopeId", "data-v-696c5dfb"]]), jt = zt(e({ __name: "ColorHueSlider", props: { color: { type: Object, required: true }, vertical: { type: Boolean, default: false } }, emits: ["startEyeDropper", "endEyeDropper"], setup(e2, { emit: t2 }) {
   const y2 = e2, m2 = t2, v2 = l({ left: 0, top: 0, hue: 0 }), C2 = o("barRef"), b2 = o("thumbRef"), M2 = o("colorHueSliderRef"), { prefixCls: w2 } = fe("hue-slider"), { isSupported: x2, open: S2, sRGBHex: k2 } = ve(), $2 = n(() => y2.color.get("hue"));
   function L2() {
     m2("startEyeDropper"), S2();
@@ -277,7 +277,7 @@ const Ot = (e2, t2) => {
     }, end: (e4) => {
       I2(e4);
     } };
-    zt(e3, o2), zt(t3, o2), D2();
+    Ot(e3, o2), Ot(t3, o2), D2();
   }), a(k2, (e3) => {
     e3 && (y2.color.fromString(e3), setTimeout(() => {
       m2("endEyeDropper", e3);
@@ -285,7 +285,7 @@ const Ot = (e2, t2) => {
   }), a(() => $2.value, () => {
     D2();
   }), (e3, t3) => (s(), r("div", { class: p(d(w2)) }, [d(x2) ? (s(), h(d(be), { key: 0, class: "icon", icon: "ion:eyedrop-outline", onClick: L2 })) : f("", true), u("div", { class: "bar-contain", ref_key: "colorHueSliderRef", ref: M2 }, [u("div", { class: "bar", onClick: _2, ref_key: "barRef", ref: C2 }, null, 512), u("div", { class: "thumb", ref_key: "thumbRef", ref: b2, style: c({ left: `${v2.left}px`, top: `${v2.top}px` }) }, [g(d(be), { class: "thumb__icon", icon: "ant-design:caret-up-outlined" })], 4)], 512)], 2));
-} }), [["__scopeId", "data-v-b2d0e443"]]), At = { class: "background" }, Pt = { class: "color-text" }, Et = { class: "color-input" }, Ft = { class: "color-input-percentage" }, Ht = { class: "color-input-percentage" }, Gt = { class: "color-input-percentage" }, Vt = { class: "color-input-percentage a" }, Ut = Ot(e({ __name: "ColorText", props: { color: { type: Object, required: true } }, setup(e2) {
+} }), [["__scopeId", "data-v-b2d0e443"]]), At = { class: "background" }, Pt = { class: "color-text" }, Et = { class: "color-input" }, Ft = { class: "color-input-percentage" }, Ht = { class: "color-input-percentage" }, Gt = { class: "color-input-percentage" }, Vt = { class: "color-input-percentage a" }, Ut = zt(e({ __name: "ColorText", props: { color: { type: Object, required: true } }, setup(e2) {
   t((e3) => ({ v09aca737: v2.value }));
   const o2 = e2, i2 = y(""), f2 = l({ r: 0, g: 0, b: 0, a: 100 }), { prefixCls: h2 } = fe("color-text"), { token: m2 } = U.useToken(), v2 = n(() => m2.value.colorBorder), C2 = n(() => `rgba(${f2.r}, ${f2.g}, ${f2.b}, ${f2.a / 100})`);
   function b2() {
@@ -302,8 +302,8 @@ const Ot = (e2, t2) => {
     f2.r = e3.r, f2.g = e3.g, f2.b = e3.b, f2.a = o2.color.get("alpha"), i2.value = o2.color.toHex();
   }, { immediate: true, deep: true }), a(i2, (e3) => {
     e3.startsWith("#") || (i2.value = `#${e3}`);
-  }), (e3, t2) => (s(), r("div", { class: p(d(h2)) }, [u("div", At, [u("div", { class: "background-color", style: c({ backgroundColor: C2.value }) }, null, 4)]), u("div", Pt, [u("div", Et, [g(d(W), { size: "small", value: i2.value, "onUpdate:value": t2[0] || (t2[0] = (e4) => i2.value = e4), onPressEnter: M2, onBlur: M2, maxlength: 7 }, null, 8, ["value"])])]), u("div", Ft, [t2[5] || (t2[5] = u("div", { class: "prefix" }, "R", -1)), g(d(Z), { size: "small", value: f2.r, "onUpdate:value": t2[1] || (t2[1] = (e4) => f2.r = e4), bordered: false, controls: false, onPressEnter: w2, onBlur: w2, step: 1, min: 0, max: 255, maxlength: 3 }, null, 8, ["value"])]), u("div", Ht, [t2[6] || (t2[6] = u("div", { class: "prefix" }, "G", -1)), g(d(Z), { size: "small", bordered: false, value: f2.g, "onUpdate:value": t2[2] || (t2[2] = (e4) => f2.g = e4), controls: false, onPressEnter: w2, onBlur: w2, step: 1, min: 0, max: 255, maxlength: 3 }, null, 8, ["value"])]), u("div", Gt, [t2[7] || (t2[7] = u("div", { class: "prefix" }, "B", -1)), g(d(Z), { size: "small", bordered: false, value: f2.b, "onUpdate:value": t2[3] || (t2[3] = (e4) => f2.b = e4), controls: false, onPressEnter: w2, onBlur: w2, step: 1, min: 0, max: 255, maxlength: 3 }, null, 8, ["value"])]), u("div", Vt, [t2[8] || (t2[8] = u("div", { class: "prefix" }, "A", -1)), g(d(Z), { size: "small", bordered: false, value: f2.a, "onUpdate:value": t2[4] || (t2[4] = (e4) => f2.a = e4), controls: false, onPressEnter: b2, onChange: b2, step: 1, min: 0, max: 100, maxlength: 3 }, null, 8, ["value"]), t2[9] || (t2[9] = u("div", null, "%", -1))])], 2));
-} }), [["__scopeId", "data-v-2bab5fee"]]), Wt = { class: "colors" }, Zt = ["onClick"], Yt = e({ __name: "ColorRecently", props: { color: { type: Object, required: true }, isShow: { type: Boolean, default: false } }, setup(e2) {
+  }), (e3, t2) => (s(), r("div", { class: p(d(h2)) }, [u("div", At, [u("div", { class: "background-color", style: c({ backgroundColor: C2.value }) }, null, 4)]), u("div", Pt, [u("div", Et, [g(d(W), { size: "small", value: i2.value, "onUpdate:value": t2[0] || (t2[0] = (e4) => i2.value = e4), onPressEnter: M2, onBlur: M2, maxlength: 7 }, null, 8, ["value"])])]), u("div", Ft, [t2[5] || (t2[5] = u("div", { class: "prefix" }, "R", -1)), g(d(q), { size: "small", value: f2.r, "onUpdate:value": t2[1] || (t2[1] = (e4) => f2.r = e4), bordered: false, controls: false, onPressEnter: w2, onBlur: w2, step: 1, min: 0, max: 255, maxlength: 3 }, null, 8, ["value"])]), u("div", Ht, [t2[6] || (t2[6] = u("div", { class: "prefix" }, "G", -1)), g(d(q), { size: "small", bordered: false, value: f2.g, "onUpdate:value": t2[2] || (t2[2] = (e4) => f2.g = e4), controls: false, onPressEnter: w2, onBlur: w2, step: 1, min: 0, max: 255, maxlength: 3 }, null, 8, ["value"])]), u("div", Gt, [t2[7] || (t2[7] = u("div", { class: "prefix" }, "B", -1)), g(d(q), { size: "small", bordered: false, value: f2.b, "onUpdate:value": t2[3] || (t2[3] = (e4) => f2.b = e4), controls: false, onPressEnter: w2, onBlur: w2, step: 1, min: 0, max: 255, maxlength: 3 }, null, 8, ["value"])]), u("div", Vt, [t2[8] || (t2[8] = u("div", { class: "prefix" }, "A", -1)), g(d(q), { size: "small", bordered: false, value: f2.a, "onUpdate:value": t2[4] || (t2[4] = (e4) => f2.a = e4), controls: false, onPressEnter: b2, onChange: b2, step: 1, min: 0, max: 100, maxlength: 3 }, null, 8, ["value"]), t2[9] || (t2[9] = u("div", null, "%", -1))])], 2));
+} }), [["__scopeId", "data-v-2bab5fee"]]), Wt = { class: "colors" }, qt = ["onClick"], Zt = e({ __name: "ColorRecently", props: { color: { type: Object, required: true }, isShow: { type: Boolean, default: false } }, setup(e2) {
   t((e3) => ({ v8433eb3a: g2.value }));
   const o2 = e2, l2 = y(Ct), i2 = y([]), { prefixCls: f2 } = fe("color-recently"), { token: h2 } = U.useToken(), g2 = n(() => h2.value.colorBorder);
   function C2(e3, t2) {
@@ -327,8 +327,8 @@ const Ot = (e2, t2) => {
     })();
   }, { immediate: true }), (e3, t2) => (s(), r("div", { class: p(d(f2)) }, [t2[0] || (t2[0] = u("div", { class: "last-time-text" }, "最近使用", -1)), u("div", Wt, [(s(true), r(m, null, v(i2.value, (e4, t3) => (s(), r("div", { class: p(["color-selector", { selected: e4.selected }]), key: t3, onClick: (e5) => (function(e6) {
     o2.color.fromString(l2.value[e6]);
-  })(t3) }, [u("div", { class: "default", style: c({ "background-color": e4.value }) }, null, 4)], 10, Zt))), 128))])], 2));
-} }), Xt = Ot(Yt, [["__scopeId", "data-v-98ec7ef1"]]), qt = { class: "colors" }, Kt = ["onClick"], Jt = e({ __name: "GradientColorRecently", props: { color: { type: String, default: "" }, isShow: { type: Boolean, default: false } }, emits: ["selectColor"], setup(e2, { emit: o2 }) {
+  })(t3) }, [u("div", { class: "default", style: c({ "background-color": e4.value }) }, null, 4)], 10, qt))), 128))])], 2));
+} }), Yt = zt(Zt, [["__scopeId", "data-v-98ec7ef1"]]), Xt = { class: "colors" }, Kt = ["onClick"], Jt = e({ __name: "GradientColorRecently", props: { color: { type: String, default: "" }, isShow: { type: Boolean, default: false } }, emits: ["selectColor"], setup(e2, { emit: o2 }) {
   t((e3) => ({ v7fb04f44: C2.value }));
   const l2 = e2, i2 = o2, f2 = y([]), { prefixCls: h2 } = fe("color-recently"), { token: g2 } = U.useToken(), C2 = n(() => g2.value.colorBorder), b2 = y();
   return a(() => l2.isShow, (e3) => {
@@ -342,19 +342,19 @@ const Ot = (e2, t2) => {
       const e4 = l2.color.replaceAll(/\s*/g, "");
       for (let t2 = 0; t2 < f2.value.length; t2++) if (f2.value[t2].replaceAll(/\s*/g, "") === e4) return void (b2.value = t2);
     }, 5));
-  }, { immediate: true }), (e3, t2) => (s(), r("div", { class: p(d(h2)) }, [t2[0] || (t2[0] = u("div", { class: "last-time-text" }, "最近使用", -1)), u("div", qt, [(s(true), r(m, null, v(f2.value, (e4, t3) => (s(), r("div", { class: p(["color-selector", { selected: b2.value === t3 }]), key: t3, onClick: (o3) => (function(e5, t4) {
+  }, { immediate: true }), (e3, t2) => (s(), r("div", { class: p(d(h2)) }, [t2[0] || (t2[0] = u("div", { class: "last-time-text" }, "最近使用", -1)), u("div", Xt, [(s(true), r(m, null, v(f2.value, (e4, t3) => (s(), r("div", { class: p(["color-selector", { selected: b2.value === t3 }]), key: t3, onClick: (o3) => (function(e5, t4) {
     b2.value = e5;
     const o4 = wt(t4);
     i2("selectColor", o4);
   })(t3, e4) }, [u("div", { class: "default", style: c({ background: e4 }) }, null, 4)], 10, Kt))), 128))])], 2));
-} }), Qt = Ot(Jt, [["__scopeId", "data-v-be7486eb"]]), eo = { class: "hue-slider" }, to = ["onMousedown", "onDblclick"], oo = { class: "color-input-percentage" }, no = e({ __name: "GradientColor", props: { isShow: { type: Boolean, default: false }, colors: { type: Object, default: () => ({ deg: 45, colors: [{ rgba: "rgba(255, 255, 0, 1)", rgbaLength: "0%" }, { rgba: "rgba(0, 0, 255, 0.9)", rgbaLength: "100%" }] }) } }, emits: ["colorChange", "startEyeDropper", "endEyeDropper"], setup(e2, { emit: l2 }) {
+} }), Qt = zt(Jt, [["__scopeId", "data-v-be7486eb"]]), eo = { class: "hue-slider" }, to = ["onMousedown", "onDblclick"], oo = { class: "color-input-percentage" }, no = e({ __name: "GradientColor", props: { isShow: { type: Boolean, default: false }, colors: { type: Object, default: () => ({ deg: 45, colors: [{ rgba: "rgba(255, 255, 0, 1)", rgbaLength: "0%" }, { rgba: "rgba(0, 0, 255, 0.9)", rgbaLength: "100%" }] }) } }, emits: ["colorChange", "startEyeDropper", "endEyeDropper"], setup(e2, { emit: l2 }) {
   t((e3) => ({ v40133406: T2.value }));
   const i2 = e2, f2 = l2, h2 = y(new Nt({ enableAlpha: true, format: "rgba" }));
   const x2 = y(0), S2 = y([]), k2 = y(45), $2 = y(), L2 = o("barRef"), _2 = y([]), { prefixCls: I2 } = fe("gradient-color"), { token: D2 } = U.useToken(), T2 = n(() => D2.value.colorBorder), N2 = n(() => $2.value ? { background: $2.value } : {});
   function B2(e3) {
-    S2.value = Me(b(e3.colors)), $2.value = z2(false), x2.value = 0, h2.value.fromString(S2.value[0].rgba), k2.value = e3.deg;
+    S2.value = Me(b(e3.colors)), $2.value = O2(false), x2.value = 0, h2.value.fromString(S2.value[0].rgba), k2.value = e3.deg;
   }
-  function z2(e3 = true) {
+  function O2(e3 = true) {
     if (S2.value && S2.value.length > 0) {
       let t2 = "";
       const o2 = JSON.parse(JSON.stringify(S2.value)).sort((e4, t3) => e4.rgbaLength.match(/\d*/)[0] - t3.rgbaLength.match(/\d*/)[0]);
@@ -363,7 +363,7 @@ const Ot = (e2, t2) => {
       }), t2 = `linear-gradient(${k2.value}deg, ${t2})`, e3 && f2("colorChange", t2), t2;
     }
   }
-  function O2(e3) {
+  function z2(e3) {
     if (!L2.value) return;
     const t2 = L2.value.getBoundingClientRect();
     let o2 = 0;
@@ -375,17 +375,17 @@ const Ot = (e2, t2) => {
     S2.value.push({ rgbaLength: `${o2}%`, rgba: n2 }), x2.value = S2.value.length - 1;
   }
   function R2() {
-    d(k2) || (k2.value = 0), $2.value = z2();
+    d(k2) || (k2.value = 0), $2.value = O2();
   }
   return a(() => i2.isShow, (e3) => {
     C(() => {
       e3 && B2(i2.colors);
     });
   }, { immediate: true }), a(S2, (e3) => {
-    i2.isShow && (S2.value = e3, $2.value = z2());
+    i2.isShow && (S2.value = e3, $2.value = O2());
   }, { deep: true }), a(h2, (e3) => {
     i2.isShow && (S2.value[x2.value].rgba = e3.value);
-  }, { deep: true }), (t2, o2) => (s(), r("div", null, [u("div", { class: p(d(I2)) }, [u("div", eo, [g(d(Y), { title: "点击增加新颜色", placement: "left" }, { default: M(() => [u("div", { class: "bar", ref_key: "barRef", ref: L2, onClick: w(O2, ["stop", "prevent"]), style: c(N2.value) }, null, 4)]), _: 1 }), (s(true), r(m, null, v(S2.value, (e3, t3) => (s(), r("div", { class: "thumb", ref_for: true, ref: (e4) => (function(e5, t4) {
+  }, { deep: true }), (t2, o2) => (s(), r("div", null, [u("div", { class: p(d(I2)) }, [u("div", eo, [g(d(Z), { title: "点击增加新颜色", placement: "left" }, { default: M(() => [u("div", { class: "bar", ref_key: "barRef", ref: L2, onClick: w(z2, ["stop", "prevent"]), style: c(N2.value) }, null, 4)]), _: 1 }), (s(true), r(m, null, v(S2.value, (e3, t3) => (s(), r("div", { class: "thumb", ref_for: true, ref: (e4) => (function(e5, t4) {
     _2.value[t4] = e5;
   })(e4, t3), key: `gradientColors${t3}`, onMousedown: (e4) => (function(e5) {
     if (!L2.value || !_2.value) return;
@@ -403,8 +403,8 @@ const Ot = (e2, t2) => {
     document.addEventListener("mousemove", n2), document.addEventListener("mouseup", a2);
   })(t3), onDblclick: (e4) => (function(e5) {
     S2.value.splice(e5, 1);
-  })(t3), style: c({ left: e3.rgbaLength }) }, [g(d(be), { title: "双击取消", class: p(["thumb__icon", x2.value === t3 ? "selected" : ""]), icon: "ant-design:caret-up-outlined" }, null, 8, ["class"])], 44, to))), 128))]), u("div", oo, [o2[3] || (o2[3] = u("div", { class: "prefix" }, "D", -1)), g(d(Z), { value: k2.value, "onUpdate:value": o2[0] || (o2[0] = (e3) => k2.value = e3), bordered: false, controls: false, max: 360, min: -360, step: 1, onChange: R2, maxlength: 4 }, null, 8, ["value"]), o2[4] || (o2[4] = u("div", { class: "suffix" }, "°", -1))])], 2), g(Rt, { style: { "margin-top": "4px" }, color: h2.value, height: 118, "is-show": e2.isShow }, null, 8, ["color", "is-show"]), g(jt, { style: { "margin-top": "8px" }, color: h2.value, onStartEyeDropper: o2[1] || (o2[1] = () => f2("startEyeDropper")), onEndEyeDropper: o2[2] || (o2[2] = (e3) => f2("endEyeDropper", e3)) }, null, 8, ["color"]), g(Ut, { style: { "margin-top": "15px" }, color: h2.value }, null, 8, ["color"]), g(Qt, { style: { "margin-top": "8px" }, color: $2.value, "is-show": e2.isShow, onSelectColor: B2 }, null, 8, ["color", "is-show"])]));
-} }), ao = Ot(no, [["__scopeId", "data-v-cf05475f"]]), lo = { class: "header" }, io = { key: 0, class: "content" }, ro = { key: 1, class: "content" }, so = { class: "confirm" }, co = { key: 0 }, po = { key: 1 }, uo = e({ __name: "PickerDropdown", props: { type: { type: Number, default: 3 }, selectType: { type: Number, default: 1 }, color: { type: Object, required: true }, colors: { type: Object, default: () => ({ deg: 45, colors: [{ rgba: "rgba(255, 255, 0, 1)", rgbaLength: "0%" }, { rgba: "rgba(0, 0, 255, 0.9)", rgbaLength: "100%" }] }) }, isShow: { type: Boolean, default: false }, hideConfirm: { type: Boolean, default: false }, hideCancel: { type: Boolean, default: false } }, emits: ["changeGradientColor", "pickColor", "restColor", "selectTypeChange", "startEyeDropper", "endEyeDropper"], setup(e2, { emit: t2 }) {
+  })(t3), style: c({ left: e3.rgbaLength }) }, [g(d(be), { title: "双击取消", class: p(["thumb__icon", x2.value === t3 ? "selected" : ""]), icon: "ant-design:caret-up-outlined" }, null, 8, ["class"])], 44, to))), 128))]), u("div", oo, [o2[3] || (o2[3] = u("div", { class: "prefix" }, "D", -1)), g(d(q), { value: k2.value, "onUpdate:value": o2[0] || (o2[0] = (e3) => k2.value = e3), bordered: false, controls: false, max: 360, min: -360, step: 1, onChange: R2, maxlength: 4 }, null, 8, ["value"]), o2[4] || (o2[4] = u("div", { class: "suffix" }, "°", -1))])], 2), g(Rt, { style: { "margin-top": "4px" }, color: h2.value, height: 118, "is-show": e2.isShow }, null, 8, ["color", "is-show"]), g(jt, { style: { "margin-top": "8px" }, color: h2.value, onStartEyeDropper: o2[1] || (o2[1] = () => f2("startEyeDropper")), onEndEyeDropper: o2[2] || (o2[2] = (e3) => f2("endEyeDropper", e3)) }, null, 8, ["color"]), g(Ut, { style: { "margin-top": "15px" }, color: h2.value }, null, 8, ["color"]), g(Qt, { style: { "margin-top": "8px" }, color: $2.value, "is-show": e2.isShow, onSelectColor: B2 }, null, 8, ["color", "is-show"])]));
+} }), ao = zt(no, [["__scopeId", "data-v-cf05475f"]]), lo = { class: "header" }, io = { key: 0, class: "content" }, ro = { key: 1, class: "content" }, so = { class: "confirm" }, co = { key: 0 }, po = { key: 1 }, uo = e({ __name: "PickerDropdown", props: { type: { type: Number, default: 3 }, selectType: { type: Number, default: 1 }, color: { type: Object, required: true }, colors: { type: Object, default: () => ({ deg: 45, colors: [{ rgba: "rgba(255, 255, 0, 1)", rgbaLength: "0%" }, { rgba: "rgba(0, 0, 255, 0.9)", rgbaLength: "100%" }] }) }, isShow: { type: Boolean, default: false }, hideConfirm: { type: Boolean, default: false }, hideCancel: { type: Boolean, default: false } }, emits: ["changeGradientColor", "pickColor", "restColor", "selectTypeChange", "startEyeDropper", "endEyeDropper"], setup(e2, { emit: t2 }) {
   const o2 = e2, n2 = t2, { copy: l2, copied: c2 } = Ce({ legacy: true }), m2 = y([{ value: 1, payload: "纯色" }, { value: 2, payload: "渐变色" }]), v2 = y(), C2 = y(o2.selectType);
   function b2(e3) {
     C2.value = e3, n2("selectTypeChange", e3);
@@ -436,7 +436,7 @@ const Ot = (e2, t2) => {
   }
   return (t3, n3) => {
     const a2 = x("AButton");
-    return s(), r("div", { class: p(d(w2)) }, [u("div", lo, [g(d(X), { value: C2.value, options: m2.value, onChange: b2, block: "" }, { label: M(({ payload: e3 }) => [S(k(e3), 1)]), _: 1 }, 8, ["value", "options"])]), 1 !== C2.value || 1 !== e2.type && 3 !== e2.type ? f("", true) : (s(), r("div", io, [g(Rt, { style: { "margin-top": "4px" }, color: e2.color, "is-show": e2.isShow }, null, 8, ["color", "is-show"]), g(jt, { style: { "margin-top": "8px" }, color: e2.color, onEndEyeDropper: T2, onStartEyeDropper: D2 }, null, 8, ["color"]), g(Ut, { style: { "margin-top": "15px" }, color: e2.color }, null, 8, ["color"]), g(Xt, { style: { "margin-top": "8px" }, color: e2.color, "is-show": e2.isShow }, null, 8, ["color", "is-show"])])), 2 !== C2.value || 2 !== e2.type && 3 !== e2.type ? f("", true) : (s(), r("div", ro, [g(ao, { onColorChange: d(_2), colors: e2.colors, "is-show": e2.isShow, onStartEyeDropper: D2, onEndEyeDropper: T2 }, null, 8, ["onColorChange", "colors", "is-show"])])), u("div", so, [o2.hideCancel ? f("", true) : (s(), h(a2, { key: 0, onClick: L2 }, { default: M(() => [...n3[0] || (n3[0] = [S("取消", -1)])]), _: 1 })), g(a2, { onClick: I2, color: d(c2) ? "warning" : "primary" }, { default: M(() => [d(c2) ? (s(), r("span", po, "!已拷贝")) : (s(), r("span", co, "拷贝"))]), _: 1 }, 8, ["color"]), o2.hideConfirm ? f("", true) : (s(), h(a2, { key: 1, onClick: $2, color: "success" }, { default: M(() => [...n3[1] || (n3[1] = [S("确定", -1)])]), _: 1 }))])], 2);
+    return s(), r("div", { class: p(d(w2)) }, [u("div", lo, [g(d(Y), { value: C2.value, options: m2.value, onChange: b2, block: "" }, { label: M(({ payload: e3 }) => [S(k(e3), 1)]), _: 1 }, 8, ["value", "options"])]), 1 !== C2.value || 1 !== e2.type && 3 !== e2.type ? f("", true) : (s(), r("div", io, [g(Rt, { style: { "margin-top": "4px" }, color: e2.color, "is-show": e2.isShow }, null, 8, ["color", "is-show"]), g(jt, { style: { "margin-top": "8px" }, color: e2.color, onEndEyeDropper: T2, onStartEyeDropper: D2 }, null, 8, ["color"]), g(Ut, { style: { "margin-top": "15px" }, color: e2.color }, null, 8, ["color"]), g(Yt, { style: { "margin-top": "8px" }, color: e2.color, "is-show": e2.isShow }, null, 8, ["color", "is-show"])])), 2 !== C2.value || 2 !== e2.type && 3 !== e2.type ? f("", true) : (s(), r("div", ro, [g(ao, { onColorChange: d(_2), colors: e2.colors, "is-show": e2.isShow, onStartEyeDropper: D2, onEndEyeDropper: T2 }, null, 8, ["onColorChange", "colors", "is-show"])])), u("div", so, [o2.hideCancel ? f("", true) : (s(), h(a2, { key: 0, onClick: L2 }, { default: M(() => [...n3[0] || (n3[0] = [S("取消", -1)])]), _: 1 })), g(a2, { onClick: I2, color: d(c2) ? "warning" : "primary" }, { default: M(() => [d(c2) ? (s(), r("span", po, "!已拷贝")) : (s(), r("span", co, "拷贝"))]), _: 1 }, 8, ["color"]), o2.hideConfirm ? f("", true) : (s(), h(a2, { key: 1, onClick: $2, color: "success" }, { default: M(() => [...n3[1] || (n3[1] = [S("确定", -1)])]), _: 1 }))])], 2);
   };
 } }), fo = { key: 0, class: "color-background-text" }, ho = { class: "color-background-show-box" }, go = { key: 1, style: { display: "flex" } }, yo = { class: "color-text" }, mo = { class: "color-show-box" }, vo = ["title"], Co = e({ name: "MfishColorPicker", __name: "index", props: { value: String, showAlpha: { type: Boolean, default: true }, type: { type: Number, default: 3 }, isDelete: { type: Boolean, default: false }, placeholder: { type: String, default: "请输入颜色，格式#FFFFFF" }, title: { type: String, default: "清空则为无色" }, hideConfirm: { type: Boolean, default: false }, hideCancel: { type: Boolean, default: false } }, emits: ["inputChange", "confirmChange"], setup(e2, { emit: o2 }) {
   t((e3) => ({ v5c8ae500: I2.value }));
@@ -451,8 +451,8 @@ const Ot = (e2, t2) => {
   const B2 = () => {
     const { r: e3, g: t2, b: o3 } = S2.value.toRgb();
     D2.value = `rgba(${e3}, ${t2}, ${o3}, ${S2.value.get("alpha") / 100})`;
-  }, z2 = y(false), O2 = (e3) => {
-    e3 ? R2() : z2.value && V2(), z2.value !== e3 && (z2.value = e3);
+  }, O2 = y(false), z2 = (e3) => {
+    e3 ? R2() : O2.value && V2(), O2.value !== e3 && (O2.value = e3);
   };
   function R2() {
     T2.value = l2.value, j2();
@@ -467,7 +467,7 @@ const Ot = (e2, t2) => {
   }
   const P2 = () => {
     $2.value = S2.value.toHex();
-    Y2(S2.value.value), C(() => i2("confirmChange", d(D2), d($2)));
+    Z2(S2.value.value), C(() => i2("confirmChange", d(D2), d($2)));
   };
   function E2() {
     if (A2($2.value, 2)) return S2.value.fromString($2.value), S2.value.set("alpha", L2.value), void P2();
@@ -480,12 +480,12 @@ const Ot = (e2, t2) => {
     e3.startsWith("linear-gradient(") ? (D2.value = e3, k2.value = wt(e3), i2("inputChange", e3)) : (e3.value.fromString(e3), $2.value = e3.value.toHex());
   }
   function G2(e3) {
-    z2.value = false, 2 === v2.value ? (D2.value = e3, k2.value = wt(e3), Y2(e3), C(() => i2("confirmChange", d(D2), ""))) : P2();
+    O2.value = false, 2 === v2.value ? (D2.value = e3, k2.value = wt(e3), Z2(e3), C(() => i2("confirmChange", d(D2), ""))) : P2();
   }
   function V2() {
-    z2.value = false, j2(), C(() => i2("confirmChange", d(D2), d($2)));
+    O2.value = false, j2(), C(() => i2("confirmChange", d(D2), d($2)));
   }
-  function Y2(e3) {
+  function Z2(e3) {
     let t2 = [];
     const o3 = (e4, o4, n2) => {
       if (e4) {
@@ -501,7 +501,7 @@ const Ot = (e2, t2) => {
     }
     o3(localStorage.getItem(mt), Ct, e3), t2 = t2.slice(0, 20), localStorage.setItem(mt, JSON.stringify(t2));
   }
-  function X2(e3) {
+  function Y2(e3) {
     v2.value = e3, 1 === e3 && (B2(), i2("inputChange", d(D2), d($2)));
   }
   const K2 = y(false);
@@ -514,10 +514,10 @@ const Ot = (e2, t2) => {
   function ee2() {
     S2.value.set("alpha", 100), i2("confirmChange", "", "");
   }
-  return (t2, o3) => (s(), h(d(q), { trigger: ["click"], open: z2.value, onOpenChange: O2, placement: "bottom", arrow: { pointAtCenter: true } }, { overlay: M(() => [g(uo, { color: S2.value, colors: k2.value, type: e2.type, "select-type": v2.value, "is-show": z2.value, "hide-cancel": e2.hideCancel, "hide-confirm": e2.hideConfirm, onPickColor: G2, onRestColor: V2, onChangeGradientColor: H2, onSelectTypeChange: X2, onMouseleave: o3[0] || (o3[0] = (e3) => !K2.value && O2(false)), onStartEyeDropper: J2, onEndEyeDropper: Q2 }, null, 8, ["color", "colors", "type", "select-type", "is-show", "hide-cancel", "hide-confirm"])]), default: M(() => [u("div", { class: p(d(m2)), onMouseenter: o3[5] || (o3[5] = () => x2.value = true), onMouseleave: o3[6] || (o3[6] = () => x2.value = false) }, [2 === v2.value ? (s(), r("div", fo, [u("div", ho, [u("div", { style: c(N2.value) }, null, 4)]), x2.value ? (s(), h(d(be), { key: 0, onClick: w(ee2, ["stop"]), size: "14", class: "close-icon", icon: "ant-design:close-circle-filled" })) : f("", true)])) : (s(), r("div", go, [u("div", yo, [u("div", mo, [u("div", { style: c(N2.value) }, null, 4)]), u("div", { class: "color-input", title: e2.title, onClick: o3[2] || (o3[2] = w(() => {
+  return (t2, o3) => (s(), h(d(X), { trigger: ["click"], open: O2.value, onOpenChange: z2, placement: "bottom", arrow: { pointAtCenter: true } }, { overlay: M(() => [g(uo, { color: S2.value, colors: k2.value, type: e2.type, "select-type": v2.value, "is-show": O2.value, "hide-cancel": e2.hideCancel, "hide-confirm": e2.hideConfirm, onPickColor: G2, onRestColor: V2, onChangeGradientColor: H2, onSelectTypeChange: Y2, onMouseleave: o3[0] || (o3[0] = (e3) => !K2.value && z2(false)), onStartEyeDropper: J2, onEndEyeDropper: Q2 }, null, 8, ["color", "colors", "type", "select-type", "is-show", "hide-cancel", "hide-confirm"])]), default: M(() => [u("div", { class: p(d(m2)), onMouseenter: o3[5] || (o3[5] = () => x2.value = true), onMouseleave: o3[6] || (o3[6] = () => x2.value = false) }, [2 === v2.value ? (s(), r("div", fo, [u("div", ho, [u("div", { style: c(N2.value) }, null, 4)]), x2.value ? (s(), h(d(be), { key: 0, onClick: w(ee2, ["stop"]), size: "14", class: "close-icon", icon: "ant-design:close-circle-filled" })) : f("", true)])) : (s(), r("div", go, [u("div", yo, [u("div", mo, [u("div", { style: c(N2.value) }, null, 4)]), u("div", { class: "color-input", title: e2.title, onClick: o3[2] || (o3[2] = w(() => {
   }, ["stop"])) }, [g(d(W), { placeholder: e2.placeholder, value: $2.value, "onUpdate:value": o3[1] || (o3[1] = (e3) => $2.value = e3), onBlur: E2, onPressEnter: E2, bordered: false, maxlength: 7 }, null, 8, ["placeholder", "value"]), x2.value && $2.value ? (s(), h(d(be), { key: 0, onClick: w(ee2, ["stop"]), size: "14", class: "close-icon", icon: "ant-design:close-circle-filled" })) : f("", true)], 8, vo)]), e2.showAlpha ? (s(), r("div", { key: 0, class: "color-input-percentage", onClick: o3[4] || (o3[4] = w(() => {
-  }, ["stop"])) }, [g(d(Z), { class: "percent-input", bordered: false, value: L2.value, "onUpdate:value": o3[3] || (o3[3] = (e3) => L2.value = e3), min: 0, max: 100, step: 1, controls: false, onBlur: F2, onPressEnter: F2, maxlength: 3 }, { prefix: M(() => [...o3[7] || (o3[7] = [u("div", { class: "prefix" }, "A", -1)])]), _: 1 }, 8, ["value"]), o3[8] || (o3[8] = u("div", { style: { "user-select": "none" } }, "%", -1))])) : f("", true)]))], 34)]), _: 1 }, 8, ["open"]));
-} }), bo = Ot(Co, [["__scopeId", "data-v-23f06e32"]]);
+  }, ["stop"])) }, [g(d(q), { class: "percent-input", bordered: false, value: L2.value, "onUpdate:value": o3[3] || (o3[3] = (e3) => L2.value = e3), min: 0, max: 100, step: 1, controls: false, onBlur: F2, onPressEnter: F2, maxlength: 3 }, { prefix: M(() => [...o3[7] || (o3[7] = [u("div", { class: "prefix" }, "A", -1)])]), _: 1 }, 8, ["value"]), o3[8] || (o3[8] = u("div", { style: { "user-select": "none" } }, "%", -1))])) : f("", true)]))], 34)]), _: 1 }, 8, ["open"]));
+} }), bo = zt(Co, [["__scopeId", "data-v-23f06e32"]]);
 const Mo = { info(...e2) {
 }, warn(...e2) {
 }, error(...e2) {
@@ -633,7 +633,7 @@ const Lo = $o.div`
                 ${i2 - 24}, 11 ${i2 - 38}, 11 ${i2 - 41}, 8 ${i2 - 73}, 8 ${i2 - 75}, 10
                 ${i2 - 81}, 10 ${i2 - 85}, 6 85, 6 81, 10 75, 10 73, 8 41, 8 38, 11 24, 11 13, 21 13, 24` }, null)] }), Do.map((e3) => g(To, { key: e3, width: "150", height: "150", class: e3 }, { default: () => [g("polygon", { fill: s2[0], points: "6,66 6,18 12,12 18,12 24,6 27,6 30,9 36,9 39,6 84,6 81,9 75,9 73.2,7 40.8,7 37.8,10.2 24,10.2 12,21 12,24 9,27 9,51 7.8,54 7.8,63" }, [g("animate", { attributeName: "fill", values: `${s2[0]};${s2[1]};${s2[0]}`, dur: "0.5s", begin: "0s", repeatCount: "indefinite" }, null)]), g("polygon", { fill: s2[1], points: "27.6,4.8 38.4,4.8 35.4,7.8 30.6,7.8" }, [g("animate", { attributeName: "fill", values: `${s2[1]};${s2[0]};${s2[1]}`, dur: "0.5s", begin: "0s", repeatCount: "indefinite" }, null)]), g("polygon", { fill: s2[0], points: "9,54 9,63 7.2,66 7.2,75 7.8,78 7.8,110 8.4,110 8.4,66 9.6,66 9.6,54" }, [g("animate", { attributeName: "fill", values: `${s2[0]};${s2[1]};transparent`, dur: "1s", begin: "0s", repeatCount: "indefinite" }, null)])] })), g(_o, null, { default: () => [t2.default?.()] })] });
   };
-} }), Bo = ["#2e6099", "#7ce7fd"], zo = $o.svg`
+} }), Bo = ["#2e6099", "#7ce7fd"], Oo = $o.svg`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -644,11 +644,11 @@ const Lo = $o.div`
     fill: none;
     stroke-width: 1;
   }
-`("border-svg-container"), Oo = e({ name: "BorderBox2", props: xo(), setup(e2, { slots: t2, expose: o2 }) {
+`("border-svg-container"), zo = e({ name: "BorderBox2", props: xo(), setup(e2, { slots: t2, expose: o2 }) {
   const { autoBindRef: n2, refreshLayoutSize: a2, domSize: l2 } = wo();
   return o2({ refreshLayoutSize: a2 }), () => {
     const { color: o3, backgroundColor: a3 } = e2, { width: i2, height: r2 } = l2, s2 = So(Bo, o3);
-    return g(Lo, { class: $o.getClassNameForBind("border-box-2"), ref: n2 }, { default: () => [g(zo, { width: i2, height: r2 }, { default: () => [g("polygon", { fill: a3, points: `7, 7 ${i2 - 7}, 7 ${i2 - 7}, ${r2 - 7} 7, ${r2 - 7}` }, null), g("polyline", { stroke: s2[0], points: `2, 2 ${i2 - 2} ,2 ${i2 - 2}, ${r2 - 2} 2, ${r2 - 2} 2, 2` }, null), g("polyline", { stroke: s2[1], points: `6, 6 ${i2 - 6}, 6 ${i2 - 6}, ${r2 - 6} 6, ${r2 - 6} 6, 6` }, null), g("circle", { fill: s2[0], cx: "11", cy: "11", r: "1" }, null), g("circle", { fill: s2[0], cx: i2 - 11, cy: "11", r: "1" }, null), g("circle", { fill: s2[0], cx: i2 - 11, cy: r2 - 11, r: "1" }, null), g("circle", { fill: s2[0], cx: "11", cy: r2 - 11, r: "1" }, null)] }), g(_o, null, { default: () => [t2.default?.()] })] });
+    return g(Lo, { class: $o.getClassNameForBind("border-box-2"), ref: n2 }, { default: () => [g(Oo, { width: i2, height: r2 }, { default: () => [g("polygon", { fill: a3, points: `7, 7 ${i2 - 7}, 7 ${i2 - 7}, ${r2 - 7} 7, ${r2 - 7}` }, null), g("polyline", { stroke: s2[0], points: `2, 2 ${i2 - 2} ,2 ${i2 - 2}, ${r2 - 2} 2, ${r2 - 2} 2, 2` }, null), g("polyline", { stroke: s2[1], points: `6, 6 ${i2 - 6}, 6 ${i2 - 6}, ${r2 - 6} 6, ${r2 - 6} 6, 6` }, null), g("circle", { fill: s2[0], cx: "11", cy: "11", r: "1" }, null), g("circle", { fill: s2[0], cx: i2 - 11, cy: "11", r: "1" }, null), g("circle", { fill: s2[0], cx: i2 - 11, cy: r2 - 11, r: "1" }, null), g("circle", { fill: s2[0], cx: "11", cy: r2 - 11, r: "1" }, null)] }), g(_o, null, { default: () => [t2.default?.()] })] });
   };
 } }), Ro = ["#2e6099", "#7ce7fd"], jo = $o.svg`
   position: absolute;
@@ -750,14 +750,14 @@ const Lo = $o.div`
     fill: none;
     stroke-width: 1;
   }
-`("border-svg-container"), Zo = e({ name: "BorderBox6", props: xo(), setup(e2, { slots: t2, expose: o2 }) {
+`("border-svg-container"), qo = e({ name: "BorderBox6", props: xo(), setup(e2, { slots: t2, expose: o2 }) {
   const { autoBindRef: n2, refreshLayoutSize: a2, domSize: l2 } = wo();
   return o2({ refreshLayoutSize: a2 }), () => {
     const { color: o3, backgroundColor: a3 } = e2, { width: i2, height: r2 } = l2, s2 = So(Uo, o3);
     return g(Lo, { class: $o.getClassNameForBind("border-box-6"), ref: n2 }, { default: () => [g(Wo, { width: i2, height: r2 }, { default: () => [g("polygon", { fill: a3, points: `
               9, 7 ${i2 - 9}, 7 ${i2 - 9}, ${r2 - 7} 9, ${r2 - 7}` }, null), g("circle", { fill: s2[1], cx: "5", cy: "5", r: "2" }, null), g("circle", { fill: s2[1], cx: i2 - 5, cy: "5", r: "2" }, null), g("circle", { fill: s2[1], cx: i2 - 5, cy: r2 - 5, r: "2" }, null), g("circle", { fill: s2[1], cx: "5", cy: r2 - 5, r: "2" }, null), g("polyline", { stroke: s2[0], points: `10, 4 ${i2 - 10}, 4` }, null), g("polyline", { stroke: s2[0], points: `10, ${r2 - 4} ${i2 - 10}, ${r2 - 4}` }, null), g("polyline", { stroke: s2[0], points: "5, 70 5, " + (r2 - 70) }, null), g("polyline", { stroke: s2[0], points: `${i2 - 5}, 70 ${i2 - 5}, ${r2 - 70}` }, null), g("polyline", { stroke: s2[0], points: "3, 10, 3, 50" }, null), g("polyline", { stroke: s2[0], points: "7, 30 7, 80" }, null), g("polyline", { stroke: s2[0], points: `${i2 - 3}, 10 ${i2 - 3}, 50` }, null), g("polyline", { stroke: s2[0], points: `${i2 - 7}, 30 ${i2 - 7}, 80` }, null), g("polyline", { stroke: s2[0], points: `3, ${r2 - 10} 3, ${r2 - 50}` }, null), g("polyline", { stroke: s2[0], points: `7, ${r2 - 30} 7, ${r2 - 80}` }, null), g("polyline", { stroke: s2[0], points: `${i2 - 3}, ${r2 - 10} ${i2 - 3}, ${r2 - 50}` }, null), g("polyline", { stroke: s2[0], points: `${i2 - 7}, ${r2 - 30} ${i2 - 7}, ${r2 - 80}` }, null)] }), g(_o, null, { default: () => [t2.default?.()] })] });
   };
-} }), Yo = ["#2e6099", "#7ce7fd"], Xo = $o.svg`
+} }), Zo = ["#2e6099", "#7ce7fd"], Yo = $o.svg`
   position: absolute;
   top: 0;
   left: 0;
@@ -776,11 +776,11 @@ const Lo = $o.div`
   .stroke-width5 {
     stroke-width: 5px;
   }
-`("border-svg-container"), qo = e({ name: "BorderBox7", props: xo(), setup(e2, { slots: t2, expose: o2 }) {
+`("border-svg-container"), Xo = e({ name: "BorderBox7", props: xo(), setup(e2, { slots: t2, expose: o2 }) {
   const { autoBindRef: n2, refreshLayoutSize: a2, domSize: l2 } = wo();
   return o2({ refreshLayoutSize: a2 }), () => {
-    const { color: o3, backgroundColor: a3 } = e2, { width: i2, height: r2 } = l2, s2 = So(Yo, o3);
-    return g(Lo, { class: $o.getClassNameForBind("border-box-7"), ref: n2, style: { boxShadow: `inset 0 0 40px ${s2[0]}`, border: `1px solid ${s2[0]}`, backgroundColor: a3 } }, { default: () => [g(Xo, { width: i2, height: r2 }, { default: () => [g("polyline", { class: "stroke-width2", stroke: s2[0], points: "0, 25 0, 0 25, 0" }, null), g("polyline", { class: "stroke-width2", stroke: s2[0], points: `${i2 - 25}, 0 ${i2}, 0 ${i2}, 25` }, null), g("polyline", { class: "stroke-width2", stroke: s2[0], points: `${i2 - 25}, ${r2} ${i2}, ${r2} ${i2}, ${r2 - 25}` }, null), g("polyline", { class: "stroke-width2", stroke: s2[0], points: `0, ${r2 - 25} 0, ${r2} 25, ${r2}` }, null), g("polyline", { class: "stroke-width5", stroke: s2[1], points: "0, 10 0, 0 10, 0" }, null), g("polyline", { class: "stroke-width5", stroke: s2[1], points: `${i2 - 10}, 0 ${i2}, 0 ${i2}, 10` }, null), g("polyline", { class: "stroke-width5", stroke: s2[1], points: `${i2 - 10}, ${r2} ${i2}, ${r2} ${i2}, ${r2 - 10}` }, null), g("polyline", { class: "stroke-width5", stroke: s2[1], points: `0, ${r2 - 10} 0, ${r2} 10, ${r2}` }, null)] }), g(_o, null, { default: () => [t2.default?.()] })] });
+    const { color: o3, backgroundColor: a3 } = e2, { width: i2, height: r2 } = l2, s2 = So(Zo, o3);
+    return g(Lo, { class: $o.getClassNameForBind("border-box-7"), ref: n2, style: { boxShadow: `inset 0 0 40px ${s2[0]}`, border: `1px solid ${s2[0]}`, backgroundColor: a3 } }, { default: () => [g(Yo, { width: i2, height: r2 }, { default: () => [g("polyline", { class: "stroke-width2", stroke: s2[0], points: "0, 25 0, 0 25, 0" }, null), g("polyline", { class: "stroke-width2", stroke: s2[0], points: `${i2 - 25}, 0 ${i2}, 0 ${i2}, 25` }, null), g("polyline", { class: "stroke-width2", stroke: s2[0], points: `${i2 - 25}, ${r2} ${i2}, ${r2} ${i2}, ${r2 - 25}` }, null), g("polyline", { class: "stroke-width2", stroke: s2[0], points: `0, ${r2 - 25} 0, ${r2} 25, ${r2}` }, null), g("polyline", { class: "stroke-width5", stroke: s2[1], points: "0, 10 0, 0 10, 0" }, null), g("polyline", { class: "stroke-width5", stroke: s2[1], points: `${i2 - 10}, 0 ${i2}, 0 ${i2}, 10` }, null), g("polyline", { class: "stroke-width5", stroke: s2[1], points: `${i2 - 10}, ${r2} ${i2}, ${r2} ${i2}, ${r2 - 10}` }, null), g("polyline", { class: "stroke-width5", stroke: s2[1], points: `0, ${r2 - 10} 0, ${r2} 10, ${r2}` }, null)] }), g(_o, null, { default: () => [t2.default?.()] })] });
   };
 } });
 function Ko() {
@@ -1040,17 +1040,17 @@ const Jo = ["#2e6099", "#7ce7fd"], Qo = $o.svg`
     const { width: t3, height: n3 } = a2, { backgroundColor: l2, color: i2 } = e2, r2 = So(Dn, i2);
     return g(Lo, { class: $o.getClassNameForBind("border-box-18"), ref: o2, style: { backgroundColor: l2 } }, { default: () => [g(Tn, { width: t3, height: n3, viewBox: "0 0 550 381", preserveAspectRatio: "none slice" }, { default: () => [g("title", null, [S("框18")]), g("defs", null, [g("polygon", { id: "path18-1", points: "33.8251065 0 532.838033 0 549 17.1369358 549 348.609342 526.820348 380 25.2742898 380 0 350.531484 0 163.323634 18.3 140.790415 18.3 12.9030282" }, null)]), g("g", { id: "8-19", stroke: "none", "stroke-width": "1", fill: "none", "fill-rule": "evenodd" }, [g("g", { id: "4-大屏-外框素材", transform: "translate(-685.000000, -627.000000)" }, [g("g", { id: "框5", transform: "translate(685.000000, 627.000000)" }, [g("g", { id: "仪表盘", opacity: "0.764834449", transform: "translate(274.500000, 190.000000) scale(-1, -1) translate(-274.500000, -190.000000) " }, [g("path", { stroke: r2[0], "stroke-width": "2", d: "M532.6223,0.5 L548.5,17.3355203 L548.5,348.450522 L526.561415,379.5 L25.5041651,379.5 L0.5,350.346435 L0.5,163.501093 L18.8,140.967873 L18.8,13.1376167 L34.0057597,0.5 L532.6223,0.5 Z", "stroke-linejoin": "square" }, null)]), g("g", { id: "Group-4", transform: "translate(546.000000, 311.000000) scale(-1, 1) rotate(90.000000) translate(-546.000000, -311.000000) translate(476.000000, 307.000000)", fill: r2[1] }, [g("path", { d: "M2.71119426,0 L34.136503,0 C34.6887877,1.00876996e-15 35.136503,0.44771525 35.136503,1 C35.136503,1.13296129 35.1099875,1.26458761 35.0585077,1.38717855 L33.2108105,5.78717855 C33.0548976,6.15846068 32.6914958,6.4 32.2888057,6.4 L0.863497035,6.4 C0.311212285,6.4 -0.136502965,5.95228475 -0.136502965,5.4 C-0.136502965,5.26703871 -0.10998748,5.13541239 -0.0585077212,5.01282145 L1.7891895,0.612821449 C1.94510244,0.24153932 2.30850422,7.39729597e-17 2.71119426,0 Z", id: "Rectangle-3" }, null), g("path", { d: "M121.98823,0.8 L138.310437,0.8 C138.862722,0.8 139.310437,1.24771525 139.310437,1.8 C139.310437,1.94054325 139.280812,2.07950817 139.223494,2.20783216 L137.25816,6.60783216 C137.097264,6.96804813 136.73962,7.2 136.345103,7.2 L120.022896,7.2 C119.470612,7.2 119.022896,6.75228475 119.022896,6.2 C119.022896,6.05945675 119.052521,5.92049183 119.10984,5.79216784 L121.075173,1.39216784 C121.23607,1.03195187 121.593714,0.8 121.98823,0.8 Z", id: "Rectangle-3" }, null), g("path", { d: "M40.9012197,0 L42.4646838,0 C43.0169685,1.20591542e-16 43.4646838,0.44771525 43.4646838,1 C43.4646838,1.12319713 43.4419191,1.24533373 43.3975363,1.36025848 L41.6982995,5.76025848 C41.5494152,6.14577913 41.1787177,6.4 40.765447,6.4 L39.2019829,6.4 C38.6496981,6.4 38.2019829,5.95228475 38.2019829,5.4 C38.2019829,5.27680287 38.2247476,5.15466627 38.2691304,5.03974152 L39.9683672,0.639741519 C40.1172514,0.254220867 40.4879489,5.20005813e-16 40.9012197,0 Z", id: "Rectangle-3" }, null), g("path", { d: "M49.234553,0 L50.7980171,0 C51.3503019,1.20591542e-16 51.7980171,0.44771525 51.7980171,1 C51.7980171,1.12319713 51.7752524,1.24533373 51.7308696,1.36025848 L50.0316328,5.76025848 C49.8827486,6.14577913 49.5120511,6.4 49.0987803,6.4 L47.5353162,6.4 C46.9830315,6.4 46.5353162,5.95228475 46.5353162,5.4 C46.5353162,5.27680287 46.5580809,5.15466627 46.6024637,5.03974152 L48.3017005,0.639741519 C48.4505848,0.254220867 48.8212823,5.20005813e-16 49.234553,0 Z", id: "Rectangle-3" }, null), g("path", { d: "M57.5678863,0 L59.1313504,0 C59.6836352,1.20591542e-16 60.1313504,0.44771525 60.1313504,1 C60.1313504,1.12319713 60.1085858,1.24533373 60.064203,1.36025848 L58.3649662,5.76025848 C58.2160819,6.14577913 57.8453844,6.4 57.4321137,6.4 L55.8686496,6.4 C55.3163648,6.4 54.8686496,5.95228475 54.8686496,5.4 C54.8686496,5.27680287 54.8914142,5.15466627 54.935797,5.03974152 L56.6350338,0.639741519 C56.7839181,0.254220867 57.1546156,5.20005813e-16 57.5678863,0 Z", id: "Rectangle-3" }, null), g("path", { d: "M64.234553,0 L65.7980171,0 C66.3503019,-7.67586877e-16 66.7980171,0.44771525 66.7980171,1 C66.7980171,1.12319713 66.7752524,1.24533373 66.7308696,1.36025848 L65.0316328,5.76025848 C64.8827486,6.14577913 64.5120511,6.4 64.0987803,6.4 L62.5353162,6.4 C61.9830315,6.4 61.5353162,5.95228475 61.5353162,5.4 C61.5353162,5.27680287 61.5580809,5.15466627 61.6024637,5.03974152 L63.3017005,0.639741519 C63.4505848,0.254220867 63.8212823,2.97961208e-16 64.234553,0 Z", id: "Rectangle-3" }, null), g("path", { d: "M72.5678863,0 L74.1313504,0 C74.6836352,1.20591542e-16 75.1313504,0.44771525 75.1313504,1 C75.1313504,1.12319713 75.1085858,1.24533373 75.064203,1.36025848 L73.3649662,5.76025848 C73.2160819,6.14577913 72.8453844,6.4 72.4321137,6.4 L70.8686496,6.4 C70.3163648,6.4 69.8686496,5.95228475 69.8686496,5.4 C69.8686496,5.27680287 69.8914142,5.15466627 69.935797,5.03974152 L71.6350338,0.639741519 C71.7839181,0.254220867 72.1546156,5.20005813e-16 72.5678863,0 Z", id: "Rectangle-3" }, null), g("path", { d: "M80.9012197,0 L82.4646838,0 C83.0169685,1.20591542e-16 83.4646838,0.44771525 83.4646838,1 C83.4646838,1.12319713 83.4419191,1.24533373 83.3975363,1.36025848 L81.6982995,5.76025848 C81.5494152,6.14577913 81.1787177,6.4 80.765447,6.4 L79.2019829,6.4 C78.6496981,6.4 78.2019829,5.95228475 78.2019829,5.4 C78.2019829,5.27680287 78.2247476,5.15466627 78.2691304,5.03974152 L79.9683672,0.639741519 C80.1172514,0.254220867 80.4879489,5.20005813e-16 80.9012197,0 Z", id: "Rectangle-3" }, null), g("path", { d: "M89.234553,0 L90.7980171,0 C91.3503019,1.20591542e-16 91.7980171,0.44771525 91.7980171,1 C91.7980171,1.12319713 91.7752524,1.24533373 91.7308696,1.36025848 L90.0316328,5.76025848 C89.8827486,6.14577913 89.5120511,6.4 89.0987803,6.4 L87.5353162,6.4 C86.9830315,6.4 86.5353162,5.95228475 86.5353162,5.4 C86.5353162,5.27680287 86.5580809,5.15466627 86.6024637,5.03974152 L88.3017005,0.639741519 C88.4505848,0.254220867 88.8212823,5.20005813e-16 89.234553,0 Z", id: "Rectangle-3" }, null), g("path", { d: "M97.5678863,0 L99.1313504,0 C99.6836352,1.20591542e-16 100.13135,0.44771525 100.13135,1 C100.13135,1.12319713 100.108586,1.24533373 100.064203,1.36025848 L98.3649662,5.76025848 C98.2160819,6.14577913 97.8453844,6.4 97.4321137,6.4 L95.8686496,6.4 C95.3163648,6.4 94.8686496,5.95228475 94.8686496,5.4 C94.8686496,5.27680287 94.8914142,5.15466627 94.935797,5.03974152 L96.6350338,0.639741519 C96.7839181,0.254220867 97.1546156,5.20005813e-16 97.5678863,0 Z", id: "Rectangle-3" }, null), g("path", { d: "M104.234553,0 L105.798017,0 C106.350302,1.20591542e-16 106.798017,0.44771525 106.798017,1 C106.798017,1.12319713 106.775252,1.24533373 106.73087,1.36025848 L105.031633,5.76025848 C104.882749,6.14577913 104.512051,6.4 104.09878,6.4 L102.535316,6.4 C101.983031,6.4 101.535316,5.95228475 101.535316,5.4 C101.535316,5.27680287 101.558081,5.15466627 101.602464,5.03974152 L103.3017,0.639741519 C103.450585,0.254220867 103.821282,5.20005813e-16 104.234553,0 Z", id: "Rectangle-3" }, null), g("path", { d: "M112.567886,0 L114.13135,0 C114.683635,1.20591542e-16 115.13135,0.44771525 115.13135,1 C115.13135,1.12319713 115.108586,1.24533373 115.064203,1.36025848 L113.364966,5.76025848 C113.216082,6.14577913 112.845384,6.4 112.432114,6.4 L110.86865,6.4 C110.316365,6.4 109.86865,5.95228475 109.86865,5.4 C109.86865,5.27680287 109.891414,5.15466627 109.935797,5.03974152 L111.635034,0.639741519 C111.783918,0.254220867 112.154616,5.20005813e-16 112.567886,0 Z", id: "Rectangle-3" }, null)])])])])] })] });
   };
-} }), Bn = ["#7ce7fd", "#2e6099"], zn = $o.svg`
+} }), Bn = ["#7ce7fd", "#2e6099"], On = $o.svg`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-`("border-svg-container"), On = e({ name: "BorderBox19", props: xo(), setup(e2, { expose: t2 }) {
+`("border-svg-container"), zn = e({ name: "BorderBox19", props: xo(), setup(e2, { expose: t2 }) {
   const { autoBindRef: o2, refreshLayoutSize: n2, domSize: a2 } = wo();
   return t2({ refreshLayoutSize: n2 }), () => {
     const { width: t3, height: n3 } = a2, { backgroundColor: l2, color: i2 } = e2, r2 = So(Bn, i2);
-    return g(Lo, { class: $o.getClassNameForBind("border-box-19"), ref: o2, style: { backgroundColor: l2, boxShadow: `inset 0 0 20px ${r2[0]}` } }, { default: () => [g(zn, { width: t3, height: n3, viewBox: "0 0 551 381", preserveAspectRatio: "none slice" }, { default: () => [g("title", null, [S("框19")]), g("g", { id: "8-19", stroke: "none", "stroke-width": "1", fill: "none", "fill-rule": "evenodd" }, [g("g", { id: "4-大屏-外框素材", transform: "translate(-1261.000000, -627.000000)" }, [g("g", { id: "框6", transform: "translate(1261.000000, 627.000000)" }, [g("g", { id: "Rectangle-7-Copy" }, [g("path", { stroke: r2[0], "stroke-width": "1.5", d: "M549.5,1.5 L549.5,380.5 L0.5,380.5 L0.5,1.5 L549.5,1.5 Z", "stroke-linejoin": "square" }, null)]), g("g", { id: "Group-34-Copy-2", transform: "translate(64.848457, 17.179245) rotate(180.000000) translate(-64.848457, -17.179245) translate(0.348457, 0.679245)", stroke: r2[1], "stroke-width": "1" }, [g("polyline", { id: "Path-28", points: "8.0365245 7.7352773 34.6174397 24.5734706 119.713108 24.5734706 128.214043 32.2709303" }, null), g("ellipse", { id: "Oval-8", cx: "4.79242287", cy: "4.81091236", rx: "4.79242287", ry: "4.81091236" }, null)]), g("g", { id: "Group-34-Copy-2", transform: "translate(421.348457, 347.679245)", stroke: r2[1], "stroke-width": "1" }, [g("polyline", { id: "Path-28", points: "8.0365245 7.7352773 34.6174397 24.5734706 119.713108 24.5734706 128.214043 32.2709303" }, null), g("ellipse", { id: "Oval-8", cx: "4.79242287", cy: "4.81091236", rx: "4.79242287", ry: "4.81091236" }, null)])])])])] })] });
+    return g(Lo, { class: $o.getClassNameForBind("border-box-19"), ref: o2, style: { backgroundColor: l2, boxShadow: `inset 0 0 20px ${r2[0]}` } }, { default: () => [g(On, { width: t3, height: n3, viewBox: "0 0 551 381", preserveAspectRatio: "none slice" }, { default: () => [g("title", null, [S("框19")]), g("g", { id: "8-19", stroke: "none", "stroke-width": "1", fill: "none", "fill-rule": "evenodd" }, [g("g", { id: "4-大屏-外框素材", transform: "translate(-1261.000000, -627.000000)" }, [g("g", { id: "框6", transform: "translate(1261.000000, 627.000000)" }, [g("g", { id: "Rectangle-7-Copy" }, [g("path", { stroke: r2[0], "stroke-width": "1.5", d: "M549.5,1.5 L549.5,380.5 L0.5,380.5 L0.5,1.5 L549.5,1.5 Z", "stroke-linejoin": "square" }, null)]), g("g", { id: "Group-34-Copy-2", transform: "translate(64.848457, 17.179245) rotate(180.000000) translate(-64.848457, -17.179245) translate(0.348457, 0.679245)", stroke: r2[1], "stroke-width": "1" }, [g("polyline", { id: "Path-28", points: "8.0365245 7.7352773 34.6174397 24.5734706 119.713108 24.5734706 128.214043 32.2709303" }, null), g("ellipse", { id: "Oval-8", cx: "4.79242287", cy: "4.81091236", rx: "4.79242287", ry: "4.81091236" }, null)]), g("g", { id: "Group-34-Copy-2", transform: "translate(421.348457, 347.679245)", stroke: r2[1], "stroke-width": "1" }, [g("polyline", { id: "Path-28", points: "8.0365245 7.7352773 34.6174397 24.5734706 119.713108 24.5734706 128.214043 32.2709303" }, null), g("ellipse", { id: "Oval-8", cx: "4.79242287", cy: "4.81091236", rx: "4.79242287", ry: "4.81091236" }, null)])])])])] })] });
   };
 } }), Rn = ["#7ce7fd", "#2e6099"], jn = $o.svg`
   position: absolute;
@@ -1095,13 +1095,13 @@ function Un() {
 function Wn() {
   return { reverse: { type: Boolean, default: false } };
 }
-function Zn(e2) {
+function qn(e2) {
   return { duration: { type: Number, default: e2 } };
 }
-const Yn = ["#2e6099", "#7ce7fd"], Xn = 2.5, qn = (function({ width: e2, height: t2, rowPoints: o2, rowCount: n2 }) {
+const Zn = ["#2e6099", "#7ce7fd"], Yn = 2.5, Xn = (function({ width: e2, height: t2, rowPoints: o2, rowCount: n2 }) {
   const a2 = e2 / (o2 + 1), l2 = t2 / (n2 + 1);
   return Array.from({ length: n2 }).fill(0).flatMap((e3, t3) => Array.from({ length: o2 }).fill(0).map((e4, o3) => [a2 * (o3 + 1), l2 * (t3 + 1)]));
-})({ width: 200, height: 50, rowPoints: 20, rowCount: 4 }), Kn = qn[39], Jn = qn[37], Qn = $o.div`
+})({ width: 200, height: 50, rowPoints: 20, rowCount: 4 }), Kn = Xn[39], Jn = Xn[37], Qn = $o.div`
   width: 100%;
   height: 100%;
 
@@ -1111,11 +1111,11 @@ const Yn = ["#2e6099", "#7ce7fd"], Xn = 2.5, qn = (function({ width: e2, height:
 `("decoration-1"), ea = e({ name: "Decoration1", props: Un(), setup(e2, { expose: t2 }) {
   const { autoBindRef: o2, refreshLayoutSize: n2, domSize: a2 } = wo();
   return t2({ refreshLayoutSize: n2 }), () => {
-    const { color: t3 } = e2, { width: n3, height: l2 } = a2, i2 = So(Yn, t3), r2 = { transform: `scale(${n3 / 200},${l2 / 50})` };
-    return g(Qn, { ref: o2 }, { default: () => [g("svg", { width: 200, height: 50, style: r2 }, [qn.map(([e3, t4], o3) => {
+    const { color: t3 } = e2, { width: n3, height: l2 } = a2, i2 = So(Zn, t3), r2 = { transform: `scale(${n3 / 200},${l2 / 50})` };
+    return g(Qn, { ref: o2 }, { default: () => [g("svg", { width: 200, height: 50, style: r2 }, [Xn.map(([e3, t4], o3) => {
       const n4 = e3 - 1.25, a3 = t4 - 1.25;
-      return Math.random() > 0.6 ? g("rect", { key: o3, x: n4, y: a3, width: Xn, height: Xn, fill: i2[0] }, [Math.random() > 0.6 && g("animate", { attributeName: "fill", values: `${i2[0]};transparent`, dur: "1s", begin: 2 * Math.random(), repeatCount: "indefinite" }, null)]) : null;
-    }), g("rect", { fill: i2[1], x: Kn[0] - Xn, y: Kn[1] - Xn, width: 5, height: 5 }, [g("animate", { attributeName: "width", values: "0;5", dur: "2s", repeatCount: "indefinite" }, null), g("animate", { attributeName: "height", values: "0;5", dur: "2s", repeatCount: "indefinite" }, null), g("animate", { attributeName: "x", values: `${Kn[0]};${Kn[0] - Xn}`, dur: "2s", repeatCount: "indefinite" }, null), g("animate", { attributeName: "y", values: `${Kn[1]};${Kn[1] - Xn}`, dur: "2s", repeatCount: "indefinite" }, null)]), g("rect", { fill: i2[1], x: Jn[0] - Xn, y: Jn[1] - Xn, width: 5, height: 5 }, [g("animate", { attributeName: "width", values: "0;40;0", dur: "2s", repeatCount: "indefinite" }, null), g("animate", { attributeName: "x", values: `${Jn[0]};${Jn[0] - 40};${Jn[0]}`, dur: "2s", repeatCount: "indefinite" }, null)])])] });
+      return Math.random() > 0.6 ? g("rect", { key: o3, x: n4, y: a3, width: Yn, height: Yn, fill: i2[0] }, [Math.random() > 0.6 && g("animate", { attributeName: "fill", values: `${i2[0]};transparent`, dur: "1s", begin: 2 * Math.random(), repeatCount: "indefinite" }, null)]) : null;
+    }), g("rect", { fill: i2[1], x: Kn[0] - Yn, y: Kn[1] - Yn, width: 5, height: 5 }, [g("animate", { attributeName: "width", values: "0;5", dur: "2s", repeatCount: "indefinite" }, null), g("animate", { attributeName: "height", values: "0;5", dur: "2s", repeatCount: "indefinite" }, null), g("animate", { attributeName: "x", values: `${Kn[0]};${Kn[0] - Yn}`, dur: "2s", repeatCount: "indefinite" }, null), g("animate", { attributeName: "y", values: `${Kn[1]};${Kn[1] - Yn}`, dur: "2s", repeatCount: "indefinite" }, null)]), g("rect", { fill: i2[1], x: Jn[0] - Yn, y: Jn[1] - Yn, width: 5, height: 5 }, [g("animate", { attributeName: "width", values: "0;40;0", dur: "2s", repeatCount: "indefinite" }, null), g("animate", { attributeName: "x", values: `${Jn[0]};${Jn[0] - 40};${Jn[0]}`, dur: "2s", repeatCount: "indefinite" }, null)])])] });
   };
 } }), ta = ["#2e6099", "#7ce7fd"];
 const oa = $o.div`
@@ -1124,7 +1124,7 @@ const oa = $o.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-`("decoration-2"), na = e({ name: "Decoration2", props: { ...Un(), ...Wn(), ...Zn(6) }, setup(e2, { expose: t2 }) {
+`("decoration-2"), na = e({ name: "Decoration2", props: { ...Un(), ...Wn(), ...qn(6) }, setup(e2, { expose: t2 }) {
   const { autoBindRef: o2, refreshLayoutSize: n2, domSize: a2 } = wo();
   return t2({ refreshLayoutSize: n2 }), () => {
     const { width: t3, height: n3 } = a2, { color: l2, reverse: i2, duration: r2 } = e2, s2 = So(ta, l2), { x: c2, y: p2, width: d2, height: u2 } = (function(e3, t4, o3) {
@@ -1152,12 +1152,12 @@ const aa = ["#7ce7fd", "transparent"], la = (function({ width: e2, height: t2, r
       return Math.random() > 0.6 ? g("rect", { key: o3, x: n4, y: a3, width: 7, height: 7, fill: i2[0] }, [Math.random() > 0.6 && g("animate", { attributeName: "fill", values: i2.join(";"), dur: `${Math.random() + 1}s`, begin: 2 * Math.random(), repeatCount: "indefinite" }, null)]) : null;
     })])] });
   };
-} }), sa = ["width", "height"], ca = ["stroke", "points"], pa = ["stroke", "points"], da = e({ name: "Decoration4", __name: "index", props: { ...Un(), ...Wn(), ...Zn(3) }, setup(e2) {
+} }), sa = ["width", "height"], ca = ["stroke", "points"], pa = ["stroke", "points"], da = e({ name: "Decoration4", __name: "index", props: { ...Un(), ...Wn(), ...qn(3) }, setup(e2) {
   const t2 = ["#2e6099", "#7ce7fd"], a2 = o("decoration4Ref"), l2 = n(() => a2.value?.clientWidth), i2 = n(() => a2.value?.clientHeight), d2 = n(() => (function(e3, t3 = []) {
     return ke(e3, t3);
   })(t2, e2.color));
   return (e3, t3) => (s(), r("div", { class: "dv-decoration-4", ref_key: "decoration4Ref", ref: a2 }, [u("div", { class: p("container " + (e3.reverse ? "reverse" : "normal")), style: c(e3.reverse ? `width:${l2.value}px;height:5px;animation-duration:${e3.duration}s` : `width:5px;height:${i2.value}px;animation-duration:${e3.duration}s`) }, [(s(), r("svg", { width: e3.reverse ? l2.value : 5, height: e3.reverse ? 5 : i2.value }, [u("polyline", { stroke: d2.value[0], points: e3.reverse ? `0, 2.5 ${l2.value}, 2.5` : `2.5, 0 2.5, ${i2.value}` }, null, 8, ca), u("polyline", { class: "bold-line", stroke: d2.value[1], "stroke-width": "3", "stroke-dasharray": "20, 80", "stroke-dashoffset": "-30", points: e3.reverse ? `0, 2.5 ${l2.value}, 2.5` : `2.5, 0 2.5, ${i2.value}` }, null, 8, pa)], 8, sa))], 6)], 512));
-} }), ua = Ot(da, [["__scopeId", "data-v-97e7e3ce"]]), fa = ["#2e6099", "#7ce7fd"];
+} }), ua = zt(da, [["__scopeId", "data-v-97e7e3ce"]]), fa = ["#2e6099", "#7ce7fd"];
 function ha(e2) {
   return Array.from({ length: e2.length - 1 }).fill(0).map((t2, o2) => ((e3, t3) => {
     const o3 = Math.abs(e3[0] - t3[0]), n2 = Math.abs(e3[1] - t3[1]);
@@ -1167,7 +1167,7 @@ function ha(e2) {
 const ga = $o.div`
   width: 100%;
   height: 100%;
-`("decoration-5"), ya = e({ name: "Decoration5", props: { ...Un(), ...Zn(1.2) }, setup(e2, { expose: t2 }) {
+`("decoration-5"), ya = e({ name: "Decoration5", props: { ...Un(), ...qn(1.2) }, setup(e2, { expose: t2 }) {
   const { autoBindRef: o2, refreshLayoutSize: n2, domSize: a2 } = wo();
   return t2({ refreshLayoutSize: n2 }), () => {
     const { width: t3, height: n3 } = a2, { color: l2, duration: i2 } = e2, r2 = So(fa, l2), { line1Sum: s2, line2Sum: c2, line1Point: p2, line2Point: d2 } = (function(e3, t4) {
@@ -1231,7 +1231,7 @@ const Da = ["#2e6099", "#7ce7fd"], Ta = $o.div`
     top: 0;
     transform-origin: left top;
   }
-`("decoration-9"), Na = e({ name: "Decoration9", props: { ...Un(), ...Zn(3) }, setup(e2, { slots: t2, expose: o2 }) {
+`("decoration-9"), Na = e({ name: "Decoration9", props: { ...Un(), ...qn(3) }, setup(e2, { slots: t2, expose: o2 }) {
   const { autoBindRef: n2, refreshLayoutSize: a2, domSize: l2 } = wo();
   o2({ refreshLayoutSize: a2 });
   const i2 = `decoration-9-polygon-${Ko().id}`;
@@ -1243,12 +1243,12 @@ const Da = ["#2e6099", "#7ce7fd"], Ta = $o.div`
   width: 100%;
   height: 100%;
   display: flex;
-`("decoration-10"), za = ["#2e6099", "#7ce7fd"], Oa = e({ name: "Decoration10", props: Un(), setup(e2, { expose: t2 }) {
+`("decoration-10"), Oa = ["#2e6099", "#7ce7fd"], za = e({ name: "Decoration10", props: Un(), setup(e2, { expose: t2 }) {
   const { autoBindRef: o2, refreshLayoutSize: n2, domSize: a2 } = wo();
   t2({ refreshLayoutSize: n2 });
   const l2 = Ko(), i2 = `d10ani${l2.id}1`, r2 = `d10ani${l2.id}2`, s2 = `d10ani${l2.id}3`, c2 = `d10ani${l2.id}4`, p2 = `d10ani${l2.id}5`, d2 = `d10ani${l2.id}6`, u2 = `d10ani${l2.id}7`;
   return () => {
-    const { width: t3, height: n3 } = a2, { color: l3 } = e2, f2 = So(za, l3);
+    const { width: t3, height: n3 } = a2, { color: l3 } = e2, f2 = So(Oa, l3);
     return g(Ba, { ref: o2 }, { default: () => [g("svg", { width: t3, height: n3 }, [g("polyline", { stroke: f2[1], "stroke-width": "2", points: `0, ${n3 / 2} ${t3}, ${n3 / 2}` }, null), g("polyline", { stroke: f2[0], "stroke-width": "2", points: `5, ${n3 / 2} ${0.2 * t3 - 3}, ${n3 / 2}`, "stroke-dasharray": "0, " + 0.2 * t3, fill: "freeze" }, [g("animate", { id: r2, attributeName: "stroke-dasharray", values: `0, ${0.2 * t3};${0.2 * t3}, 0;`, dur: "3s", begin: `${i2}.end`, fill: "freeze" }, null), g("animate", { attributeName: "stroke-dasharray", values: `${0.2 * t3}, 0;0, ${0.2 * t3}`, dur: "0.01s", begin: `${u2}.end`, fill: "freeze" }, null)]), g("polyline", { stroke: f2[0], "stroke-width": "2", points: `${0.2 * t3 + 3}, ${n3 / 2} ${0.8 * t3 - 3}, ${n3 / 2}`, "stroke-dasharray": "0, " + 0.6 * t3 }, [g("animate", { id: c2, attributeName: "stroke-dasharray", values: `0, ${0.6 * t3};${0.6 * t3}, 0`, dur: "3s", begin: `${s2}.end + 1s`, fill: "freeze" }, null), g("animate", { attributeName: "stroke-dasharray", values: `${0.6 * t3}, 0;0, ${0.6 * t3}`, dur: "0.01s", begin: `${u2}.end`, fill: "freeze" }, null)]), g("polyline", { stroke: f2[0], "stroke-width": "2", points: `${0.8 * t3 + 3}, ${n3 / 2} ${t3 - 5}, ${n3 / 2}`, "stroke-dasharray": "0, " + 0.2 * t3 }, [g("animate", { id: d2, attributeName: "stroke-dasharray", values: `0, ${0.2 * t3};${0.2 * t3}, 0`, dur: "3s", begin: `${p2}.end + 1s`, fill: "freeze" }, null), g("animate", { attributeName: "stroke-dasharray", values: `${0.2 * t3}, 0;0, ${0.3 * t3}`, dur: "0.01s", begin: `${u2}.end`, fill: "freeze" }, null)]), g("circle", { cx: "2", cy: n3 / 2, r: "2", fill: f2[1] }, [g("animate", { id: i2, attributeName: "fill", values: `${f2[1]};${f2[0]}`, begin: `0s;${u2}.end`, dur: "0.3s", fill: "freeze" }, null)]), g("circle", { cx: 0.2 * t3, cy: n3 / 2, r: "2", fill: f2[1] }, [g("animate", { id: s2, attributeName: "fill", values: `${f2[1]};${f2[0]}`, begin: `${r2}.end`, dur: "0.3s", fill: "freeze" }, null), g("animate", { attributeName: "fill", values: `${f2[1]};${f2[1]}`, dur: "0.01s", begin: `${u2}.end`, fill: "freeze" }, null)]), g("circle", { cx: 0.8 * t3, cy: n3 / 2, r: "2", fill: f2[1] }, [g("animate", { id: p2, attributeName: "fill", values: `${f2[1]};${f2[0]}`, begin: `${c2}.end`, dur: "0.3s", fill: "freeze" }, null), g("animate", { attributeName: "fill", values: `${f2[1]};${f2[1]}`, dur: "0.01s", begin: `${u2}.end`, fill: "freeze" }, null)]), g("circle", { cx: t3 - 2, cy: n3 / 2, r: "2", fill: f2[1] }, [g("animate", { id: u2, attributeName: "fill", values: `${f2[1]};${f2[0]}`, begin: `${d2}.end`, dur: "0.3s", fill: "freeze" }, null), g("animate", { attributeName: "fill", values: `${f2[1]};${f2[1]}`, dur: "0.01s", begin: `${u2}.end`, fill: "freeze" }, null)])])] });
   };
 } }), Ra = $o.div`
@@ -1322,19 +1322,19 @@ const Va = (e2, t2, o2, n2) => [e2 + Math.cos(n2) * o2, t2 + Math.sin(n2) * o2],
     })({ x: r2, y: s2, width: o3 });
     return g(Ea, { ref: n2 }, { default: () => [g("svg", { width: o3, height: a3 }, [g("defs", null, [g("g", { id: u2 }, [m2.map((e3, t3) => g("path", { stroke: y2[t3], "stroke-width": o3 / 2, fill: "transparent", key: e3, d: e3 }, null))]), g("radialGradient", { id: f2, cx: "50%", cy: "50%", r: "50%" }, [g("stop", { offset: "0%", "stop-color": "transparent", "stop-opacity": "1" }, null), g("stop", { offset: "100%", "stop-color": Ne(h2[1] || Ha[1], 30), "stop-opacity": "1" }, null)])]), v2.map((e3) => g("circle", { r: e3, cx: r2, cy: s2, stroke: h2[1], "stroke-width": "0.5", fill: "transparent" }, null)), g("circle", { r: "1", cx: r2, cy: s2, stroke: "transparent", fill: `url(#${f2})` }, [g("animate", { attributeName: "r", values: "1;" + o3 / 2, dur: `${d2}s`, repeatCount: "indefinite" }, null), g("animate", { attributeName: "opacity", values: "1;0", dur: `${d2}s`, repeatCount: "indefinite" }, null)]), g("circle", { r: "2", cx: r2, cy: s2, fill: h2[1] }, null), g("g", null, [C2.map((e3) => g("polyline", { key: e3, points: e3, stroke: h2[1], "stroke-width": "0.5", opacity: "0.5" }, null))]), b2.map((e3) => g("path", { key: e3, d: e3, stroke: h2[1], "stroke-width": "2", fill: "transparent" }, null)), g("use", { "xlink:href": `#${u2}` }, [g("animateTransform", { attributeName: "transform", type: "rotate", values: `0, ${r2} ${s2};360, ${r2} ${s2}`, dur: `${p2}s`, repeatCount: "indefinite" }, null)])]), g(Fa, null, { default: () => [t2.default?.()] })] });
   };
-} }), Wa = ["#0042A2", "#0042A2"], Za = $o.svg`
+} }), Wa = ["#0042A2", "#0042A2"], qa = $o.svg`
   position: absolute;
   top: 0;
   left: 4px;
   width: 100%;
   height: 100%;
-`("header-svg-container"), Ya = e({ name: "Header1", props: xo(), setup(e2, { expose: t2 }) {
+`("header-svg-container"), Za = e({ name: "Header1", props: xo(), setup(e2, { expose: t2 }) {
   const { autoBindRef: o2, refreshLayoutSize: n2, domSize: a2 } = wo();
   return t2({ refreshLayoutSize: n2 }), () => {
     const { width: t3, height: n3 } = a2, { backgroundColor: l2, color: i2 } = e2, r2 = So(Wa, i2), s2 = Be(), c2 = Be(), p2 = Be(), d2 = Be(), u2 = Be(), f2 = Be();
-    return g(Lo, { class: $o.getClassNameForBind("header-1"), ref: o2, style: { backgroundColor: l2 } }, { default: () => [g(Za, { width: t3, height: n3, viewBox: "0 0 1920 76", preserveAspectRatio: "none slice" }, { default: () => [g("title", null, [S("导航1")]), g("defs", null, [g("linearGradient", { x1: "50%", y1: "0%", x2: "50%", y2: "90.1729911%", id: s2 }, [g("stop", { "stop-color": r2[0], "stop-opacity": "0.282219733", offset: "0%" }, null), g("stop", { "stop-color": r2[0], offset: "32.4599473%" }, null), g("stop", { "stop-color": r2[0], "stop-opacity": "0.183433266", offset: "100%" }, null)]), g("polygon", { id: "path-3", points: "12.423552 3.0356786e-14 706.941248 6.0905055e-14 719.893999 20.0956358 675.962761 75 48.3985693 75 0 20.3481229" }, null), g("linearGradient", { x1: "50%", y1: "0.677614796%", x2: "50%", y2: "100%", id: c2 }, [g("stop", { "stop-color": r2[1], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0.0116641171", offset: "100%" }, null)]), g("linearGradient", { x1: "50%", y1: "0.677614796%", x2: "50%", y2: "100%", id: p2 }, [g("stop", { "stop-color": r2[1], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0.0116641171", offset: "100%" }, null)]), g("linearGradient", { x1: "99.7433963%", y1: "49.7433963%", x2: "0.256603748%", y2: "49.7433963%", id: d2 }, [g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "0%" }, null), g("stop", { "stop-color": r2[1], offset: "54.4973093%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)]), g("linearGradient", { x1: "138.999809%", y1: "49.9523588%", x2: "0%", y2: "50.0476412%", id: u2 }, [g("stop", { "stop-color": r2[1], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)]), g("linearGradient", { x1: "138.999809%", y1: "49.9515511%", x2: "0%", y2: "50.0484489%", id: f2 }, [g("stop", { "stop-color": r2[1], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)])]), g("g", { id: "8-19", stroke: "none", "stroke-width": "1", fill: "none", "fill-rule": "evenodd" }, [g("g", { id: "导航1", transform: "translate(0.000000, -1411.000000)" }, [g("g", { transform: "translate(0.000000, 1411.000000)" }, [g("g", { id: "矩形", opacity: "0.699999988", transform: "translate(600.000000, 0.000000)" }, [g("mask", { id: "mask-4", fill: "white" }, [g("use", { "xlink:href": "#path-3" }, null)]), g("use", { id: "蒙版", fill: `url(#${s2})`, opacity: "0.74046689", "xlink:href": "#path-3" }, null)]), g("polygon", { id: "Rectangle-18", fill: `url(#${c2})`, opacity: "0.5", points: "1305.12397 0 1920 0 1920 20.0704225 1318.40447 20.0704225" }, null), g("polygon", { id: "Rectangle-18", fill: `url(#${p2})`, opacity: "0.5", transform: "translate(306.446281, 10.035211) scale(-1, 1) translate(-306.446281, -10.035211) ", points: "0 0 612.892562 0 612.892562 20.0704225 12.4704007 20.0704225" }, null), g("polyline", { id: "Rectangle-34", stroke: r2[1], points: "649.586777 68.6619718 607.933884 19.2333343 620.019616 3.16901408" }, null), g("rect", { id: "Rectangle-23", stroke: r2[1], x: "649.095041", y: "68.1056338", width: "621.809917", height: "1" }, null), g("rect", { id: "Rectangle-23备份", stroke: `url(#${d2})`, x: "649.095041", y: "75.1056338", width: "621.809917", height: "1" }, null), g("polyline", { id: "Rectangle-34", stroke: r2[1], transform: "translate(1292.330579, 35.746479) scale(-1, 1) translate(-1292.330579, -35.746479) ", points: "1312.66116 68.4929577 1272 19.0573969 1283.83528 3" }, null), g("polyline", { id: "Path-16", stroke: `url(#${u2})`, "stroke-width": "2", opacity: "0.800000012", transform: "translate(1573.830579, 34.000000) scale(-1, -1) translate(-1573.830579, -34.000000) ", points: "1833 26 1819.93141 42 1314.66116 42" }, null), g("polyline", { id: "Path-16备份-2", stroke: `url(#${f2})`, "stroke-width": "2", opacity: "0.800000012", transform: "translate(1574.000000, 9.000000) scale(-1, 1) translate(-1574.000000, -9.000000) ", points: "1831 1 1820.27025 17 1317 17" }, null), g("polyline", { id: "Path-16备份", stroke: `url(#${f2})`, "stroke-width": "2", opacity: "0.800000012", points: "602 1 591.270255 17 88 17" }, null), g("polyline", { id: "Path-16备份", stroke: `url(#${f2})`, "stroke-width": "2", opacity: "0.800000012", transform: "translate(349.000000, 34.000000) scale(1, -1) translate(-349.000000, -34.000000) ", points: "606 26 591.270255 42 92 42" }, null)])])])] })] });
+    return g(Lo, { class: $o.getClassNameForBind("header-1"), ref: o2, style: { backgroundColor: l2 } }, { default: () => [g(qa, { width: t3, height: n3, viewBox: "0 0 1920 76", preserveAspectRatio: "none slice" }, { default: () => [g("title", null, [S("导航1")]), g("defs", null, [g("linearGradient", { x1: "50%", y1: "0%", x2: "50%", y2: "90.1729911%", id: s2 }, [g("stop", { "stop-color": r2[0], "stop-opacity": "0.282219733", offset: "0%" }, null), g("stop", { "stop-color": r2[0], offset: "32.4599473%" }, null), g("stop", { "stop-color": r2[0], "stop-opacity": "0.183433266", offset: "100%" }, null)]), g("polygon", { id: "path-3", points: "12.423552 3.0356786e-14 706.941248 6.0905055e-14 719.893999 20.0956358 675.962761 75 48.3985693 75 0 20.3481229" }, null), g("linearGradient", { x1: "50%", y1: "0.677614796%", x2: "50%", y2: "100%", id: c2 }, [g("stop", { "stop-color": r2[1], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0.0116641171", offset: "100%" }, null)]), g("linearGradient", { x1: "50%", y1: "0.677614796%", x2: "50%", y2: "100%", id: p2 }, [g("stop", { "stop-color": r2[1], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0.0116641171", offset: "100%" }, null)]), g("linearGradient", { x1: "99.7433963%", y1: "49.7433963%", x2: "0.256603748%", y2: "49.7433963%", id: d2 }, [g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "0%" }, null), g("stop", { "stop-color": r2[1], offset: "54.4973093%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)]), g("linearGradient", { x1: "138.999809%", y1: "49.9523588%", x2: "0%", y2: "50.0476412%", id: u2 }, [g("stop", { "stop-color": r2[1], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)]), g("linearGradient", { x1: "138.999809%", y1: "49.9515511%", x2: "0%", y2: "50.0484489%", id: f2 }, [g("stop", { "stop-color": r2[1], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)])]), g("g", { id: "8-19", stroke: "none", "stroke-width": "1", fill: "none", "fill-rule": "evenodd" }, [g("g", { id: "导航1", transform: "translate(0.000000, -1411.000000)" }, [g("g", { transform: "translate(0.000000, 1411.000000)" }, [g("g", { id: "矩形", opacity: "0.699999988", transform: "translate(600.000000, 0.000000)" }, [g("mask", { id: "mask-4", fill: "white" }, [g("use", { "xlink:href": "#path-3" }, null)]), g("use", { id: "蒙版", fill: `url(#${s2})`, opacity: "0.74046689", "xlink:href": "#path-3" }, null)]), g("polygon", { id: "Rectangle-18", fill: `url(#${c2})`, opacity: "0.5", points: "1305.12397 0 1920 0 1920 20.0704225 1318.40447 20.0704225" }, null), g("polygon", { id: "Rectangle-18", fill: `url(#${p2})`, opacity: "0.5", transform: "translate(306.446281, 10.035211) scale(-1, 1) translate(-306.446281, -10.035211) ", points: "0 0 612.892562 0 612.892562 20.0704225 12.4704007 20.0704225" }, null), g("polyline", { id: "Rectangle-34", stroke: r2[1], points: "649.586777 68.6619718 607.933884 19.2333343 620.019616 3.16901408" }, null), g("rect", { id: "Rectangle-23", stroke: r2[1], x: "649.095041", y: "68.1056338", width: "621.809917", height: "1" }, null), g("rect", { id: "Rectangle-23备份", stroke: `url(#${d2})`, x: "649.095041", y: "75.1056338", width: "621.809917", height: "1" }, null), g("polyline", { id: "Rectangle-34", stroke: r2[1], transform: "translate(1292.330579, 35.746479) scale(-1, 1) translate(-1292.330579, -35.746479) ", points: "1312.66116 68.4929577 1272 19.0573969 1283.83528 3" }, null), g("polyline", { id: "Path-16", stroke: `url(#${u2})`, "stroke-width": "2", opacity: "0.800000012", transform: "translate(1573.830579, 34.000000) scale(-1, -1) translate(-1573.830579, -34.000000) ", points: "1833 26 1819.93141 42 1314.66116 42" }, null), g("polyline", { id: "Path-16备份-2", stroke: `url(#${f2})`, "stroke-width": "2", opacity: "0.800000012", transform: "translate(1574.000000, 9.000000) scale(-1, 1) translate(-1574.000000, -9.000000) ", points: "1831 1 1820.27025 17 1317 17" }, null), g("polyline", { id: "Path-16备份", stroke: `url(#${f2})`, "stroke-width": "2", opacity: "0.800000012", points: "602 1 591.270255 17 88 17" }, null), g("polyline", { id: "Path-16备份", stroke: `url(#${f2})`, "stroke-width": "2", opacity: "0.800000012", transform: "translate(349.000000, 34.000000) scale(1, -1) translate(-349.000000, -34.000000) ", points: "606 26 591.270255 42 92 42" }, null)])])])] })] });
   };
-} }), Xa = ["#0077CF", "#0042A2"], qa = $o.svg`
+} }), Ya = ["#0077CF", "#0042A2"], Xa = $o.svg`
   position: absolute;
   top: 0;
   left: 2px;
@@ -1343,8 +1343,8 @@ const Va = (e2, t2, o2, n2) => [e2 + Math.cos(n2) * o2, t2 + Math.sin(n2) * o2],
 `("header-svg-container"), Ka = e({ name: "Header2", props: xo(), setup(e2, { expose: t2 }) {
   const { autoBindRef: o2, refreshLayoutSize: n2, domSize: a2 } = wo();
   return t2({ refreshLayoutSize: n2 }), () => {
-    const { width: t3, height: n3 } = a2, { backgroundColor: l2, color: i2 } = e2, r2 = So(Xa, i2), s2 = Be(), c2 = Be(), p2 = Be(), d2 = Be();
-    return g(Lo, { class: $o.getClassNameForBind("header-2"), ref: o2, style: { backgroundColor: l2 } }, { default: () => [g(qa, { width: t3, height: n3, viewBox: "0 0 1920 80", preserveAspectRatio: "none slice" }, { default: () => [g("title", null, [S("导航2")]), g("defs", null, [g("linearGradient", { x1: "50%", y1: "0%", x2: "50%", y2: "100%", id: s2 }, [g("stop", { "stop-color": r2[0], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)]), g("linearGradient", { x1: "50%", y1: "0%", x2: "50%", y2: "72.202846%", id: c2 }, [g("stop", { "stop-color": r2[0], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)]), g("linearGradient", { x1: "50%", y1: "0%", x2: "50%", y2: "72.202846%", id: p2 }, [g("stop", { "stop-color": r2[0], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)]), g("linearGradient", { x1: "50%", y1: "0%", x2: "50%", y2: "72.202846%", id: d2 }, [g("stop", { "stop-color": r2[0], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)])]), g("g", { id: "8-19", stroke: "none", "stroke-width": "1", fill: "none", "fill-rule": "evenodd" }, [g("g", { id: "4-大屏-头部素材", transform: "translate(1.000000, -1085.000000)" }, [g("g", { id: "导航", transform: "translate(-1.000000, 1085.000000)" }, [g("path", { d: "M1918.18628,0.5 L1884.46176,42.3799336 L1410.16051,42.3799336 L1397.00421,53.2643777 L1128.92285,53.3791297 L1114.87529,68.2703465 L800.006564,68.2703338 L785.959019,53.3791297 L518.196384,53.3791297 L504.721197,42.3799336 L30.4428759,42.3799336 L1.1171313,1.29046247 L956.825895,0.5 L1918.18628,0.5 Z", id: "Combined-Shape", stroke: r2[0], "fill-opacity": "0.365517437", fill: r2[0] }, null), g("g", { transform: "translate(561.902273, 8.663981)", id: "Rectangle-2" }, [g("polygon", { fill: `url(#${s2})`, points: "113.383852 8.44738114 677.292919 8.44738114 691.030046 26.3541589 662.221318 61.0088638 136.944368 61.0088638 102.698076 26.1797894" }, null), g("polygon", { fill: `url(#${c2})`, opacity: "0.200000003", points: "18.8136922 0 781.1445 0 798.161907 25.4739865 760.048858 70.3948429 42.047344 70.3948429 0.290794433 28.7856581" }, null), g("polygon", { fill: `url(#${p2})`, opacity: "0.400000006", points: "46.638359 1.87719581 748.784949 1.87719581 767.36426 26.8955516 732.956067 68.0483481 67.8512948 68.0483481 27.40029 27.1451689" }, null), g("polygon", { fill: `url(#${d2})`, opacity: "0.400000006", points: "75.7564672 5.16228848 715.672851 5.16228848 732.141766 27.7558158 700.901937 65.2325544 98.9452132 65.2325544 62.7469036 28.5185552" }, null)]), g("g", { id: "Group-17", transform: "translate(40.637575, 49.817889)" }, [g("g", { id: "Group-16", transform: "translate(1083.800132, 0.000000)" }, [g("path", { d: "M22.5497346,8.64414182 L29.0531687,14.4020467 L25.1954999,14.4020467 L18.6920658,8.64414182 L22.5497346,8.64414182 Z M14.0657744,8.64414182 L20.5692085,14.4020467 L16.7115397,14.4020467 L10.2081057,8.64414182 L14.0657744,8.64414182 Z M5.58181428,8.64414182 L12.0852483,14.4020467 L8.22757956,14.4020467 L1.7241455,8.64414182 L5.58181428,8.64414182 Z", id: "Combined-Shape", stroke: r2[0], transform: "translate(15.388657, 11.523094) scale(-1, 1) translate(-15.388657, -11.523094) " }, null), g("polyline", { id: "Path-10", stroke: r2[1], points: "26.2077068 11.5230943 256.98704 11.5230943 270.569967 0 754.772244 0" }, null)]), g("g", { id: "Group-16", transform: "translate(374.103918, 7.529412) scale(-1, 1) translate(-374.103918, -7.529412) translate(0.043973, 0.000000)" }, [g("path", { d: "M20.61633,8.64414182 L26.3217289,13.5276875 L23.6411661,14.4020467 L17.9357672,9.51850103 L20.61633,8.64414182 Z M12.1323698,8.64414182 L17.8377687,13.5276875 L15.1572059,14.4020467 L9.45180703,9.51850103 L12.1323698,8.64414182 Z M3.64840965,8.64414182 L9.35380856,13.5276875 L6.67324577,14.4020467 L0.967846865,9.51850103 L3.64840965,8.64414182 Z", id: "Combined-Shape", stroke: r2[0], transform: "translate(13.644788, 11.523094) scale(-1, 1) translate(-13.644788, -11.523094) " }, null), g("polyline", { id: "Path-10", stroke: r2[1], points: "24.4638375 11.5230943 255.243171 11.5230943 268.826098 0 748.011391 0" }, null)])])])])])] })] });
+    const { width: t3, height: n3 } = a2, { backgroundColor: l2, color: i2 } = e2, r2 = So(Ya, i2), s2 = Be(), c2 = Be(), p2 = Be(), d2 = Be();
+    return g(Lo, { class: $o.getClassNameForBind("header-2"), ref: o2, style: { backgroundColor: l2 } }, { default: () => [g(Xa, { width: t3, height: n3, viewBox: "0 0 1920 80", preserveAspectRatio: "none slice" }, { default: () => [g("title", null, [S("导航2")]), g("defs", null, [g("linearGradient", { x1: "50%", y1: "0%", x2: "50%", y2: "100%", id: s2 }, [g("stop", { "stop-color": r2[0], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)]), g("linearGradient", { x1: "50%", y1: "0%", x2: "50%", y2: "72.202846%", id: c2 }, [g("stop", { "stop-color": r2[0], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)]), g("linearGradient", { x1: "50%", y1: "0%", x2: "50%", y2: "72.202846%", id: p2 }, [g("stop", { "stop-color": r2[0], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)]), g("linearGradient", { x1: "50%", y1: "0%", x2: "50%", y2: "72.202846%", id: d2 }, [g("stop", { "stop-color": r2[0], offset: "0%" }, null), g("stop", { "stop-color": r2[1], "stop-opacity": "0", offset: "100%" }, null)])]), g("g", { id: "8-19", stroke: "none", "stroke-width": "1", fill: "none", "fill-rule": "evenodd" }, [g("g", { id: "4-大屏-头部素材", transform: "translate(1.000000, -1085.000000)" }, [g("g", { id: "导航", transform: "translate(-1.000000, 1085.000000)" }, [g("path", { d: "M1918.18628,0.5 L1884.46176,42.3799336 L1410.16051,42.3799336 L1397.00421,53.2643777 L1128.92285,53.3791297 L1114.87529,68.2703465 L800.006564,68.2703338 L785.959019,53.3791297 L518.196384,53.3791297 L504.721197,42.3799336 L30.4428759,42.3799336 L1.1171313,1.29046247 L956.825895,0.5 L1918.18628,0.5 Z", id: "Combined-Shape", stroke: r2[0], "fill-opacity": "0.365517437", fill: r2[0] }, null), g("g", { transform: "translate(561.902273, 8.663981)", id: "Rectangle-2" }, [g("polygon", { fill: `url(#${s2})`, points: "113.383852 8.44738114 677.292919 8.44738114 691.030046 26.3541589 662.221318 61.0088638 136.944368 61.0088638 102.698076 26.1797894" }, null), g("polygon", { fill: `url(#${c2})`, opacity: "0.200000003", points: "18.8136922 0 781.1445 0 798.161907 25.4739865 760.048858 70.3948429 42.047344 70.3948429 0.290794433 28.7856581" }, null), g("polygon", { fill: `url(#${p2})`, opacity: "0.400000006", points: "46.638359 1.87719581 748.784949 1.87719581 767.36426 26.8955516 732.956067 68.0483481 67.8512948 68.0483481 27.40029 27.1451689" }, null), g("polygon", { fill: `url(#${d2})`, opacity: "0.400000006", points: "75.7564672 5.16228848 715.672851 5.16228848 732.141766 27.7558158 700.901937 65.2325544 98.9452132 65.2325544 62.7469036 28.5185552" }, null)]), g("g", { id: "Group-17", transform: "translate(40.637575, 49.817889)" }, [g("g", { id: "Group-16", transform: "translate(1083.800132, 0.000000)" }, [g("path", { d: "M22.5497346,8.64414182 L29.0531687,14.4020467 L25.1954999,14.4020467 L18.6920658,8.64414182 L22.5497346,8.64414182 Z M14.0657744,8.64414182 L20.5692085,14.4020467 L16.7115397,14.4020467 L10.2081057,8.64414182 L14.0657744,8.64414182 Z M5.58181428,8.64414182 L12.0852483,14.4020467 L8.22757956,14.4020467 L1.7241455,8.64414182 L5.58181428,8.64414182 Z", id: "Combined-Shape", stroke: r2[0], transform: "translate(15.388657, 11.523094) scale(-1, 1) translate(-15.388657, -11.523094) " }, null), g("polyline", { id: "Path-10", stroke: r2[1], points: "26.2077068 11.5230943 256.98704 11.5230943 270.569967 0 754.772244 0" }, null)]), g("g", { id: "Group-16", transform: "translate(374.103918, 7.529412) scale(-1, 1) translate(-374.103918, -7.529412) translate(0.043973, 0.000000)" }, [g("path", { d: "M20.61633,8.64414182 L26.3217289,13.5276875 L23.6411661,14.4020467 L17.9357672,9.51850103 L20.61633,8.64414182 Z M12.1323698,8.64414182 L17.8377687,13.5276875 L15.1572059,14.4020467 L9.45180703,9.51850103 L12.1323698,8.64414182 Z M3.64840965,8.64414182 L9.35380856,13.5276875 L6.67324577,14.4020467 L0.967846865,9.51850103 L3.64840965,8.64414182 Z", id: "Combined-Shape", stroke: r2[0], transform: "translate(13.644788, 11.523094) scale(-1, 1) translate(-13.644788, -11.523094) " }, null), g("polyline", { id: "Path-10", stroke: r2[1], points: "24.4638375 11.5230943 255.243171 11.5230943 268.826098 0 748.011391 0" }, null)])])])])])] })] });
   };
 } }), Ja = ["#0077CF", "#0042A2"], Qa = $o.svg`
   position: absolute;
@@ -1400,26 +1400,26 @@ const Va = (e2, t2, o2, n2) => [e2 + Math.cos(n2) * o2, t2 + Math.sin(n2) * o2],
   const L2 = y([]), _2 = y([]), I2 = y([]);
   let D2 = 0;
   const T2 = y([]);
-  let N2, B2 = 0, z2 = 0, O2 = false;
+  let N2, B2 = 0, O2 = 0, z2 = false;
   const R2 = y(0), j2 = y(0), A2 = "#303030", P2 = "#141414", E2 = "#1D1D1D", F2 = "#F0F0F0", H2 = "#FFFFFF", G2 = "#FAFAFA";
   function V2() {
-    j2.value = g2.value?.clientWidth || 0, R2.value = g2.value?.clientHeight || 0, X2(), q2(true);
+    j2.value = g2.value?.clientWidth || 0, R2.value = g2.value?.clientHeight || 0, Y2(), X2(true);
   }
   function U2() {
-    z2 = (z2 + 1) % 999999, N2 && clearTimeout(N2);
+    O2 = (O2 + 1) % 999999, N2 && clearTimeout(N2);
   }
   function W2() {
-    Z2(), (function() {
+    q2(), (function() {
       const { header: e3, index: t3, indexHeader: o2 } = M2.value;
       if (0 === e3.length) return void (w2.value = []);
       t3 && e3.unshift(o2);
       w2.value = e3;
-    })(), Y2(), X2(), q2(), K2(), Q2(true);
+    })(), Z2(), Y2(), X2(), K2(), Q2(true);
   }
-  function Z2() {
+  function q2() {
     M2.value = Me({ ...b2, ...u2.config });
   }
-  function Y2() {
+  function Z2() {
     let { data: e3, index: t3, rowNum: o2 } = M2.value;
     t3 && (e3 = e3.map((e4, t4) => {
       const o3 = `${t4 + 1}`;
@@ -1428,7 +1428,7 @@ const Va = (e2, t2, o2, n2) => [e2 + Math.cos(n2) * o2, t2 + Math.sin(n2) * o2],
     const n2 = e3.length;
     n2 > o2 && n2 < 2 * o2 && (e3 = [...e3, ...e3]), e3 = e3.map((e4, t4) => ({ ...e4, scroll: t4 })), x2 = e3, L2.value = e3;
   }
-  function X2() {
+  function Y2() {
     const { columnWidth: e3, header: t3 } = M2.value;
     let o2 = 0, n2 = 0;
     e3.forEach((e4) => {
@@ -1440,7 +1440,7 @@ const Va = (e2, t2, o2, n2) => [e2 + Math.cos(n2) * o2, t2 + Math.sin(n2) * o2],
     for (let t4 = 0; t4 < a2; t4++) e3[t4] ? i2.push(e3[t4]) : i2.push(l3);
     _2.value = i2;
   }
-  function q2(e3 = false) {
+  function X2(e3 = false) {
     const { headerHeight: t3, rowNum: o2, data: n2 } = M2.value;
     let a2 = R2.value;
     C2.value && w2.value.length > 0 && (a2 -= t3);
@@ -1457,14 +1457,14 @@ const Va = (e2, t2, o2, n2) => [e2 + Math.cos(n2) * o2, t2 + Math.sin(n2) * o2],
     h2(e3, { row: a2, ceil: n2, rowIndex: l3, columnIndex: t3 });
   }
   async function Q2(e3 = false) {
-    O2 && (Y2(), q2(), O2 = false);
-    const t3 = z2;
+    z2 && (Z2(), X2(), z2 = false);
+    const t3 = O2;
     let o2 = B2;
     const { waitTime: n2, carousel: a2, rowNum: l3 } = M2.value, i2 = x2.length;
     if (l3 >= i2) return;
-    if (e3 && (await new Promise((e4) => setTimeout(e4, n2)), t3 !== z2)) return;
+    if (e3 && (await new Promise((e4) => setTimeout(e4, n2)), t3 !== O2)) return;
     const r2 = "single" === a2 ? 1 : l3, s2 = x2.slice(o2);
-    if (s2.push(...x2.slice(0, o2)), L2.value = s2.slice(0, "page" === a2 ? 2 * l3 : l3 + 1), I2.value = Array.from({ length: i2 }).fill(D2), await new Promise((e4) => setTimeout(e4, 300)), t3 !== z2) return;
+    if (s2.push(...x2.slice(0, o2)), L2.value = s2.slice(0, "page" === a2 ? 2 * l3 : l3 + 1), I2.value = Array.from({ length: i2 }).fill(D2), await new Promise((e4) => setTimeout(e4, 300)), t3 !== O2) return;
     I2.value.splice(0, r2, ...Array.from({ length: r2 }).fill(0)), o2 += r2;
     const c2 = o2 - i2;
     c2 >= 0 && (o2 = c2), B2 = o2, N2 = setTimeout(Q2, n2 - 300);
@@ -1472,9 +1472,9 @@ const Va = (e2, t2, o2, n2) => [e2 + Math.cos(n2) * o2, t2 + Math.sin(n2) * o2],
   return a(() => u2.config, () => {
     U2(), B2 = 0, W2();
   }), a(() => u2.config?.columnWidth, Ie(() => {
-    Z2(), X2();
+    q2(), Y2();
   }, 100), { deep: true }), a(() => u2.config?.align, () => {
-    Z2(), K2();
+    q2(), K2();
   }, { deep: true }), a(() => u2.theme, (e3) => {
     e3 === Te.DARK ? (M2.value.headerBGC === F2 && (M2.value.headerBGC = A2), M2.value.oddRowBGC === H2 && (M2.value.oddRowBGC = P2), M2.value.evenRowBGC === G2 && (M2.value.evenRowBGC = E2)) : (M2.value.headerBGC === A2 && (M2.value.headerBGC = F2), M2.value.oddRowBGC === P2 && (M2.value.oddRowBGC = H2), M2.value.evenRowBGC === E2 && (M2.value.evenRowBGC = G2));
   }, { immediate: true }), i(() => {
@@ -1482,7 +1482,7 @@ const Va = (e2, t2, o2, n2) => [e2 + Math.cos(n2) * o2, t2 + Math.sin(n2) * o2],
   }), $(() => {
     U2(), window.removeEventListener("resize", V2);
   }), t2({ resize: V2, updateRows: function(e3, t3) {
-    M2.value = { ...M2.value, data: [...e3] }, O2 = true, B2 = t3, N2 || Q2(true);
+    M2.value = { ...M2.value, data: [...e3] }, z2 = true, B2 = t3, N2 || Q2(true);
   } }), (e3, t3) => (s(), r("div", { class: "dv-scroll-board", ref_key: "scrollTableRef", ref: g2 }, [C2.value ? (s(), r("div", { key: 0, class: "header", style: c(`background: ${M2.value.headerBGC};`) }, [(s(true), r(m, null, v(w2.value, (e4, t4) => (s(), r("div", { class: "header-item", key: `${e4}${t4}`, style: c(`
           height: ${M2.value.headerHeight}px;
           line-height: ${M2.value.headerHeight}px;
@@ -1498,21 +1498,21 @@ const Va = (e2, t2, o2, n2) => [e2 + Math.cos(n2) * o2, t2 + Math.sin(n2) * o2],
   })(n2, e4, o2), onMouseleave: (t5) => (function(e5, t6, o3) {
     J2("mouseleave", e5, t6, o3), M2.value.hoverPause && Q2(true);
   })(n2, e4, o2) }, [M2.value.index && 0 === n2 ? (s(), r("span", { key: 0, class: "index", style: c(`background: ${M2.value.headerBGC};`) }, k(o2), 5)) : (s(), r(m, { key: 1 }, [S(k(o2), 1)], 64))], 44, pl))), 128))], 6))), 128))], 4)) : f("", true)], 512));
-} }), ul = Ot(dl, [["__scopeId", "data-v-b0322d00"]]), fl = ["onClick"], hl = Ot(e({ __name: "MacButton", props: { size: { type: String, default: () => "default" }, disabled: { request: false, type: Boolean, default: false }, hidden: { request: false, type: Array, default: () => [] }, narrow: { request: false, type: Boolean, default: false } }, emits: ["close", "remove", "resize", "fullResize"], setup(e2, { emit: t2 }) {
+} }), ul = zt(dl, [["__scopeId", "data-v-b0322d00"]]), fl = ["onClick"], hl = zt(e({ __name: "MacButton", props: { size: { type: String, default: () => "default" }, disabled: { request: false, type: Boolean, default: false }, hidden: { request: false, type: Array, default: () => [] }, narrow: { request: false, type: Boolean, default: false } }, emits: ["close", "remove", "resize", "fullResize"], setup(e2, { emit: t2 }) {
   const o2 = e2, a2 = t2, { prefixCls: l2 } = fe("mac-btn"), i2 = n(() => u2.filter((e3) => !o2.hidden.includes(e3.key))), c2 = n(() => o2.narrow), u2 = [{ title: "关闭", key: "close", icon: "ant-design:close-outlined" }, { title: "缩小", key: "remove", icon: "ant-design:shrink-outlined" }, { title: c2.value ? "缩小" : "放大", key: o2.narrow ? "fullResize" : "resize", icon: c2.value ? "ant-design:shrink-outlined" : "ant-design:arrows-alt-outlined" }];
   return (t3, o3) => (s(), r("div", { class: p(d(l2)) }, [(s(true), r(m, null, v(i2.value, (t4) => (s(), r("div", { key: t4.key, class: p(["btn", [t4.key, e2.disabled && "disabled", e2.size]]), onClick: w((e3) => {
     return o4 = t4.key, void a2(o4);
     var o4;
   }, ["stop"]) }, [g(d(be), { icon: t4.icon, size: "10", class: p(["icon-base", { hover: !e2.disabled }]) }, null, 8, ["icon", "class"])], 10, fl))), 128))], 2));
-} }), [["__scopeId", "data-v-5c20d434"]]), gl = e({ name: "ScreenCheckbox", __name: "index", props: { title: { type: String }, tooltip: { type: String } }, setup: (e2) => (t2, o2) => (s(), r("div", null, [g(d(K), I(D(t2.$attrs)), { default: M(() => [S(k(e2.title), 1)]), _: 1 }, 16), e2.tooltip ? (s(), h(d(Y), { key: 0, title: e2.tooltip }, { default: M(() => [g(d(be), { icon: "ant-design:exclamation-circle-outlined" })]), _: 1 }, 8, ["title"])) : f("", true)])) }), yl = { key: 0, class: "prefix" }, ml = { key: 3 }, vl = Ot(e({ name: "ScreenInput", __name: "index", props: { isNumber: { type: Boolean, default: true }, prefix: { type: String }, suffix: { type: String } }, emits: ["change"], setup(e2, { emit: o2 }) {
+} }), [["__scopeId", "data-v-5c20d434"]]), gl = e({ name: "ScreenCheckbox", __name: "index", props: { title: { type: String }, tooltip: { type: String } }, setup: (e2) => (t2, o2) => (s(), r("div", null, [g(d(K), I(D(t2.$attrs)), { default: M(() => [S(k(e2.title), 1)]), _: 1 }, 16), e2.tooltip ? (s(), h(d(Z), { key: 0, title: e2.tooltip }, { default: M(() => [g(d(be), { icon: "ant-design:exclamation-circle-outlined" })]), _: 1 }, 8, ["title"])) : f("", true)])) }), yl = { key: 0, class: "prefix" }, ml = { key: 3 }, vl = zt(e({ name: "ScreenInput", __name: "index", props: { isNumber: { type: Boolean, default: true }, prefix: { type: String }, suffix: { type: String } }, emits: ["change"], setup(e2, { emit: o2 }) {
   t((e3) => ({ v236dc44e: c2.value }));
   const a2 = o2, { prefixCls: l2 } = fe("screen-input"), { token: i2 } = U.useToken(), c2 = n(() => i2.value.colorBorder);
-  return (t2, o3) => (s(), r("div", { class: p(d(l2)) }, [e2.prefix ? (s(), r("div", yl, k(e2.prefix), 1)) : f("", true), e2.isNumber ? (s(), h(d(Z), L({ key: 1, class: "input" }, t2.$attrs, { onChange: o3[0] || (o3[0] = (e3) => a2("change", e3)), bordered: false, controls: false }), null, 16)) : (s(), h(d(W), L({ key: 2, class: "input" }, t2.$attrs, { bordered: false, onChange: o3[1] || (o3[1] = (e3) => a2("change", e3)) }), null, 16)), e2.suffix ? (s(), r("div", ml, k(e2.suffix), 1)) : f("", true)], 2));
+  return (t2, o3) => (s(), r("div", { class: p(d(l2)) }, [e2.prefix ? (s(), r("div", yl, k(e2.prefix), 1)) : f("", true), e2.isNumber ? (s(), h(d(q), L({ key: 1, class: "input" }, t2.$attrs, { onChange: o3[0] || (o3[0] = (e3) => a2("change", e3)), bordered: false, controls: false }), null, 16)) : (s(), h(d(W), L({ key: 2, class: "input" }, t2.$attrs, { bordered: false, onChange: o3[1] || (o3[1] = (e3) => a2("change", e3)) }), null, 16)), e2.suffix ? (s(), r("div", ml, k(e2.suffix), 1)) : f("", true)], 2));
 } }), [["__scopeId", "data-v-00593fb6"]]), Cl = ({ CtrlShiftKeysEnum: e2, CtrlKeysEnum: t2, ShiftKeysEnum: o2, KeysEnum: n2 }) => {
   const a2 = (e3, t3) => {
     if (!t3) return;
     const o3 = t3[1 === e3.key.length ? e3.key.toLowerCase() : e3.key];
-    o3 && ze(o3) && (e3.preventDefault(), e3.stopPropagation(), o3());
+    o3 && Oe(o3) && (e3.preventDefault(), e3.stopPropagation(), o3());
   }, { prefixCls: l2 } = fe("chart-contain");
   function i2(e3) {
     return !!e3.className?.startsWith(`${l2} active`) || !!e3.parentNode && i2(e3.parentNode);
@@ -1580,10 +1580,10 @@ function Nl(e2, t2, o2) {
   return Pe.get({ url: `/nocode/mfScreen/share/code/${e2}`, params: { path: t2, duration: o2 } });
 }
 const Bl = (e2) => Pe.get({ url: "/nocode/screenCharts", params: e2 });
-function zl(e2) {
+function Ol(e2) {
   return Pe.get({ url: `/nocode/screenCharts/${e2}` });
 }
-function Ol(e2) {
+function zl(e2) {
   return Pe.download({ url: "/nocode/screenCharts/export", params: e2 });
 }
 function Rl(e2) {
@@ -1614,14 +1614,14 @@ function Ul(e2) {
 function Wl(e2) {
   return Pe.delete({ url: `/nocode/screenFolder/${e2}` }, { successMessageMode: "message" });
 }
-const Zl = (e2) => Pe.get({ url: "/nocode/screenResourceApi", params: e2 });
-function Yl(e2) {
+const ql = (e2) => Pe.get({ url: "/nocode/screenResourceApi", params: e2 });
+function Zl(e2) {
   return Pe.get({ url: `/nocode/screenResourceApi/${e2}` });
 }
-function Xl(e2) {
+function Yl(e2) {
   return Pe.post({ url: "/nocode/screenResourceApi", params: e2 }, { successMessageMode: "message" });
 }
-function ql(e2) {
+function Xl(e2) {
   return Pe.put({ url: "/nocode/screenResourceApi", params: e2 }, { successMessageMode: "message" });
 }
 function Kl(e2) {
@@ -1782,7 +1782,7 @@ const Ci = Ee("screen-edit", { state: () => ({ key: 0, id: "", isResource: false
 }, getChartImg(e2) {
   return e2 && this.chartImgCache.has(e2) ? this.chartImgCache.get(e2) : He;
 }, getComponent(e2) {
-  return zd(this.componentList, e2);
+  return Od(this.componentList, e2);
 }, async initCache(e2) {
   if (this.setInitComplete(false), e2) {
     const t2 = JSON.parse(e2);
@@ -1844,7 +1844,7 @@ const Ci = Ee("screen-edit", { state: () => ({ key: 0, id: "", isResource: false
   });
   const o2 = (t3) => {
     const o3 = t3.chart.data.params;
-    if (o3) for (const t4 of Object.values(o3)) Oe(t4.value) ? t4.value.forEach((t5) => {
+    if (o3) for (const t4 of Object.values(o3)) ze(t4.value) ? t4.value.forEach((t5) => {
       t5.id && (t5.id = e2.get(t5.id));
     }) : t4.value?.id && (t4.value.id = e2.get(t4.value.id));
   }, n2 = (t3) => {
@@ -1901,10 +1901,10 @@ const Ti = { id: "", name: "", data: { type: 0, dataSet: void 0, limit: 100, max
 function Bi(e2) {
   return e2 * Math.PI / 180;
 }
-function zi(e2, t2, o2) {
+function Oi(e2, t2, o2) {
   return { x: (e2.x - t2.x) * Math.cos(Bi(o2)) - (e2.y - t2.y) * Math.sin(Bi(o2)) + t2.x, y: (e2.x - t2.x) * Math.sin(Bi(o2)) + (e2.y - t2.y) * Math.cos(Bi(o2)) + t2.y };
 }
-function Oi(e2, t2) {
+function zi(e2, t2) {
   return { x: e2.x + (t2.x - e2.x) / 2, y: e2.y + (t2.y - e2.y) / 2 };
 }
 function Ri(e2) {
@@ -1918,7 +1918,7 @@ function Ai(e2) {
 }
 const Pi = { style: { value: "样式", show: true, payload: { icon: "carbon:color-palette", component: null } }, data: { value: "数据", show: true, payload: { icon: "carbon:data-structured", component: null } }, animation: { value: "动画", show: true, payload: { icon: "ant-design:star-outlined", component: T(Ve(() => import("./index2.js"), { loading: true, size: "large" })) } }, advance: { value: "进阶", show: true, payload: { icon: "iconfont:icon-mfish-config", component: T(Ve(() => import("./index3.js"), { loading: true, size: "large" })) } } }, Ei = (e2) => ({ padding: `${Math.round((e2?.options.fontSize?.value ?? 12) / 10)}px`, ...e2?.options.font?.style, ...e2?.options.fontSize?.style, ...e2?.options.fontStyle?.style, ...e2?.options.textColor?.style }), Fi = (e2) => {
   const t2 = {};
-  return Oe(e2) && e2.forEach((e3) => {
+  return ze(e2) && e2.forEach((e3) => {
     t2[e3] = { colName: e3, dataType: "string", rename: e3 };
   }), t2;
 };
@@ -1957,22 +1957,22 @@ function Ui(e2, t2) {
       const o3 = {};
       for (const n3 of e2.params) if (n3.type === Di.CONSTANT) o3[n3.name] = n3.value;
       else if (n3.type === Di.VARIABLE) {
-        const e3 = Od(t2.getComponentList, n3.value);
+        const e3 = zd(t2.getComponentList, n3.value);
         e3 && (o3[n3.name] = e3);
       }
       return o3;
     })();
     if (e2?.pageType === $i.System) {
-      let t3 = e2?.page.value || "";
-      (t3.startsWith("http://") || t3.startsWith("https://")) && (t3 = "");
-      o2 = Ze.resolve({ name: "ScreenPreview", params: { id: t3 }, query: { ...n2 } }).href;
+      let a2 = e2?.page.value || "";
+      (a2.startsWith("http://") || a2.startsWith("https://")) && (a2 = "");
+      o2 = qe.resolve({ name: "ScreenPreview", params: { id: a2 }, query: { ...n2, isResource: t2.getIsResource } }).href;
     } else o2 = e2?.page.value, o2.startsWith("http") || (o2 = `http://${o2}`), Object.keys(n2).length > 0 && (o2 += `?${new URLSearchParams(n2).toString()}`);
     return o2;
   } };
 }
 const Wi = Ge();
-var Zi = ((e2) => (e2.CHART_BEFORE_MOUNT = "before_mount", e2.CHART_MOUNTED = "mounted", e2.CHART_CLICK = "click", e2.CHART_DBLCLICK = "dblclick", e2.CHART_MOUSE_ENTER = "mouseenter", e2.CHART_MOUSE_LEAVE = "mouseleave", e2))(Zi || {});
-const Yi = (e2, t2) => {
+var qi = ((e2) => (e2.CHART_BEFORE_MOUNT = "before_mount", e2.CHART_MOUNTED = "mounted", e2.CHART_CLICK = "click", e2.CHART_DBLCLICK = "dblclick", e2.CHART_MOUSE_ENTER = "mouseenter", e2.CHART_MOUSE_LEAVE = "mouseleave", e2))(qi || {});
+const Zi = (e2, t2) => {
   switch (e2) {
     case "before_mount":
       return "初始化前";
@@ -1990,7 +1990,7 @@ const Yi = (e2, t2) => {
       return t2 ? Sd[t2].customEvents?.find((t3) => t3.value === e2)?.name ?? "" : "";
   }
 };
-function Xi(e2, t2, o2) {
+function Yi(e2, t2, o2) {
   const n2 = Ci(), l2 = (t3, o3) => {
     ((e3) => {
       if (e3.events?.emits && e3.events.emits.includes(t3)) {
@@ -2018,7 +2018,7 @@ function Xi(e2, t2, o2) {
   }, dblclick: (e3) => {
     l2("dblclick", e3);
   } }, s2 = (e3) => {
-    if (e3) for (const t3 of Object.keys(e3)) Oe(e3[t3].value) && e3[t3].value.forEach((e4) => {
+    if (e3) for (const t3 of Object.keys(e3)) ze(e3[t3].value) && e3[t3].value.forEach((e4) => {
       Wi.off(u2(e4), c2);
     });
   }, c2 = (t3) => {
@@ -2026,7 +2026,7 @@ function Xi(e2, t2, o2) {
     const o3 = e2.data.params;
     if (o3) {
       const n3 = {};
-      for (const e3 of Object.keys(o3)) o3[e3].type === Di.EVENT && Oe(o3[e3].value) && o3[e3].value.forEach((o4) => {
+      for (const e3 of Object.keys(o3)) o3[e3].type === Di.EVENT && ze(o3[e3].value) && o3[e3].value.forEach((o4) => {
         t3.eventId === u2(o4) && (n3[e3] = d2(t3, o4));
       });
       e2.data.paramsValue ? e2.data.paramsValue = { ...e2.data.paramsValue, ...n3 } : e2.data.paramsValue = n3;
@@ -2041,7 +2041,7 @@ function Xi(e2, t2, o2) {
   }
   function d2(e3, t3) {
     let o3;
-    return o3 = Object.keys(Zi).some((e4) => Zi[e4] === t3.event) ? 0 === e3.data.type ? e3.data.dataSet : e3.data.result : e3.e, Oe(o3) ? o3.length > 0 ? o3[0][t3.param] : "" : Re(o3) ? o3[t3.param] : je(o3) ? o3 : void 0;
+    return o3 = Object.keys(qi).some((e4) => qi[e4] === t3.event) ? 0 === e3.data.type ? e3.data.dataSet : e3.data.result : e3.e, ze(o3) ? o3.length > 0 ? o3[0][t3.param] : "" : Re(o3) ? o3[t3.param] : je(o3) ? o3 : void 0;
   }
   function u2(e3) {
     return e3.event + e3.id;
@@ -2050,7 +2050,7 @@ function Xi(e2, t2, o2) {
     !(function(e4, t4) {
       if (s2(t4), !e4) return;
       const o3 = /* @__PURE__ */ new Set();
-      for (const t5 of Object.keys(e4)) Oe(e4[t5].value) && e4[t5].value.forEach((e5) => {
+      for (const t5 of Object.keys(e4)) ze(e4[t5].value) && e4[t5].value.forEach((e5) => {
         const t6 = u2(e5);
         o3.has(t6) || (o3.add(t6), Wi.on(t6, c2));
       });
@@ -2156,14 +2156,14 @@ function Xi(e2, t2, o2) {
     s2(e2.data?.params), h2(e2?.showHide?.conditions);
   }), { emitEvent: l2, commonEvents: r2, customEvents: o2 };
 }
-const qi = e({ name: "MfButton", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  const t2 = e2, { commonEvents: o2 } = Xi(t2.chart), a2 = n(() => t2.chartContain.dropInfo.width > t2.chartContain.dropInfo.height ? t2.chartContain.dropInfo.height / 2.2 + "px" : t2.chartContain.dropInfo.width / 3 + "px");
+const Xi = e({ name: "MfButton", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
+  const t2 = e2, { commonEvents: o2 } = Yi(t2.chart), a2 = n(() => t2.chartContain.dropInfo.width > t2.chartContain.dropInfo.height ? t2.chartContain.dropInfo.height / 2.2 + "px" : t2.chartContain.dropInfo.width / 3 + "px");
   return (t3, n2) => (s(), h(d(Ue), L({ style: { color: e2.chart.options.iconColor, background: e2.chart.options.buttonColor, fontSize: a2.value } }, B(d(o2)), { type: e2.chart.options.type, ghost: e2.chart.options.ghost, shape: e2.chart.options.shape }), { icon: M(() => [e2.chart.data.dataSet?.icon ? (s(), h(d(be), { key: 0, size: a2.value, icon: e2.chart.data.dataSet?.icon, color: e2.chart.options.iconColor }, null, 8, ["size", "icon", "color"])) : f("", true)]), default: M(() => [S(" " + k(e2.chart.data.dataSet?.title), 1)]), _: 1 }, 16, ["style", "type", "ghost", "shape"]));
 } });
 function Ki(e2) {
   return e2.chart.data.dataSet = Me(Ji.defaultData), e2.chart.data.headers = Ji.defaultHeaders && Ji.defaultHeaders(), e2.chart.data.limit = 1, e2.chart.data.maxLimit = 1, e2.chart.options.bordered = true, e2.chartContain.dropInfo.width = 80, e2.chartContain.dropInfo.height = 34, e2;
 }
-const Ji = { type: Hi.MfButton, component: qi, create: Ki, config: (() => {
+const Ji = { type: Hi.MfButton, component: Xi, create: Ki, config: (() => {
   const e2 = Me(Pi);
   return e2.data.show = false, e2.style.payload.component = T(Ve(() => import("./MfButtonConfig.js"), { loading: true, size: "large" })), e2;
 })(), defaultData: { title: "按钮", icon: "" }, defaultHeaders: () => Me({ title: { colName: "title", dataType: "string", rename: "按钮" }, icon: { colName: "icon", dataType: "string", rename: "图标" } }), initData: () => {
@@ -2173,8 +2173,8 @@ const er = { type: Hi.MfCombine, component: Ve(() => import("./index4.js"), { lo
 }, config: (() => {
   const e2 = Me(Pi);
   return e2.data.show = false, e2.style.payload.component = T(Ve(() => import("./MfCombineConfig.js"), { loading: true, size: "large" })), e2;
-})() }, tr = Object.freeze(Object.defineProperty({ __proto__: null, default: er }, Symbol.toStringTag, { value: "Module" })), or = Ot(e({ name: "MfTag", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, emits: ["eventHandler"], setup(e2, { emit: t2 }) {
-  const o2 = e2, l2 = t2, { prefixCls: i2 } = fe("mf-tag"), g2 = n(() => Ei(o2.chart)), { emitEvent: y2, commonEvents: m2 } = Xi(o2.chart, function(e3) {
+})() }, tr = Object.freeze(Object.defineProperty({ __proto__: null, default: er }, Symbol.toStringTag, { value: "Module" })), or = zt(e({ name: "MfTag", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, emits: ["eventHandler"], setup(e2, { emit: t2 }) {
+  const o2 = e2, l2 = t2, { prefixCls: i2 } = fe("mf-tag"), g2 = n(() => Ei(o2.chart)), { emitEvent: y2, commonEvents: m2 } = Yi(o2.chart, function(e3) {
     l2("eventHandler", e3);
   }, ["titleChange"]);
   return a(() => o2.chart.data.dataSet?.title, (e3) => {
@@ -2319,7 +2319,7 @@ function Br(e2) {
   const t2 = wr.create(e2);
   return t2.chartContain.border.radius = 0, t2;
 }
-const zr = { ...wr, type: Hi.MfBorder14, component: Ve(() => import("./index14.js"), { loading: true }), create: Br }, Or = Object.freeze(Object.defineProperty({ __proto__: null, default: zr, mfBorder14Create: Br }, Symbol.toStringTag, { value: "Module" })), Rr = { ...zr, type: Hi.MfBorder15, component: Ve(() => import("./index15.js"), { loading: true }) }, jr = Object.freeze(Object.defineProperty({ __proto__: null, default: Rr }, Symbol.toStringTag, { value: "Module" })), Ar = { ...zr, type: Hi.MfBorder16, component: Ve(() => import("./index16.js"), { loading: true }) }, Pr = Object.freeze(Object.defineProperty({ __proto__: null, default: Ar }, Symbol.toStringTag, { value: "Module" })), Er = { ...zr, type: Hi.MfBorder17, component: Ve(() => import("./index17.js"), { loading: true }) }, Fr = Object.freeze(Object.defineProperty({ __proto__: null, default: Er }, Symbol.toStringTag, { value: "Module" })), Hr = { ...zr, type: Hi.MfBorder18, component: Ve(() => import("./index18.js"), { loading: true }) }, Gr = Object.freeze(Object.defineProperty({ __proto__: null, default: Hr }, Symbol.toStringTag, { value: "Module" })), Vr = { ...zr, type: Hi.MfBorder19, component: Ve(() => import("./index19.js"), { loading: true }) }, Ur = Object.freeze(Object.defineProperty({ __proto__: null, default: Vr }, Symbol.toStringTag, { value: "Module" })), Wr = { ...wr, type: Hi.MfBorder2, component: Ve(() => import("./index20.js"), { loading: true }) }, Zr = Object.freeze(Object.defineProperty({ __proto__: null, default: Wr }, Symbol.toStringTag, { value: "Module" })), Yr = { ...zr, type: Hi.MfBorder20, component: Ve(() => import("./index21.js"), { loading: true }) }, Xr = Object.freeze(Object.defineProperty({ __proto__: null, default: Yr }, Symbol.toStringTag, { value: "Module" })), qr = { ...zr, type: Hi.MfBorder21, component: Ve(() => import("./index22.js"), { loading: true }) }, Kr = Object.freeze(Object.defineProperty({ __proto__: null, default: qr }, Symbol.toStringTag, { value: "Module" })), Jr = { ...zr, type: Hi.MfBorder22, component: Ve(() => import("./index23.js"), { loading: true }) }, Qr = Object.freeze(Object.defineProperty({ __proto__: null, default: Jr }, Symbol.toStringTag, { value: "Module" })), es = { ...wr, type: Hi.MfBorder3, component: Ve(() => import("./index24.js"), { loading: true }) }, ts = Object.freeze(Object.defineProperty({ __proto__: null, default: es }, Symbol.toStringTag, { value: "Module" })), os = { ...wr, type: Hi.MfBorder4, component: Ve(() => import("./index25.js"), { loading: true }), config: (() => {
+const Or = { ...wr, type: Hi.MfBorder14, component: Ve(() => import("./index14.js"), { loading: true }), create: Br }, zr = Object.freeze(Object.defineProperty({ __proto__: null, default: Or, mfBorder14Create: Br }, Symbol.toStringTag, { value: "Module" })), Rr = { ...Or, type: Hi.MfBorder15, component: Ve(() => import("./index15.js"), { loading: true }) }, jr = Object.freeze(Object.defineProperty({ __proto__: null, default: Rr }, Symbol.toStringTag, { value: "Module" })), Ar = { ...Or, type: Hi.MfBorder16, component: Ve(() => import("./index16.js"), { loading: true }) }, Pr = Object.freeze(Object.defineProperty({ __proto__: null, default: Ar }, Symbol.toStringTag, { value: "Module" })), Er = { ...Or, type: Hi.MfBorder17, component: Ve(() => import("./index17.js"), { loading: true }) }, Fr = Object.freeze(Object.defineProperty({ __proto__: null, default: Er }, Symbol.toStringTag, { value: "Module" })), Hr = { ...Or, type: Hi.MfBorder18, component: Ve(() => import("./index18.js"), { loading: true }) }, Gr = Object.freeze(Object.defineProperty({ __proto__: null, default: Hr }, Symbol.toStringTag, { value: "Module" })), Vr = { ...Or, type: Hi.MfBorder19, component: Ve(() => import("./index19.js"), { loading: true }) }, Ur = Object.freeze(Object.defineProperty({ __proto__: null, default: Vr }, Symbol.toStringTag, { value: "Module" })), Wr = { ...wr, type: Hi.MfBorder2, component: Ve(() => import("./index20.js"), { loading: true }) }, qr = Object.freeze(Object.defineProperty({ __proto__: null, default: Wr }, Symbol.toStringTag, { value: "Module" })), Zr = { ...Or, type: Hi.MfBorder20, component: Ve(() => import("./index21.js"), { loading: true }) }, Yr = Object.freeze(Object.defineProperty({ __proto__: null, default: Zr }, Symbol.toStringTag, { value: "Module" })), Xr = { ...Or, type: Hi.MfBorder21, component: Ve(() => import("./index22.js"), { loading: true }) }, Kr = Object.freeze(Object.defineProperty({ __proto__: null, default: Xr }, Symbol.toStringTag, { value: "Module" })), Jr = { ...Or, type: Hi.MfBorder22, component: Ve(() => import("./index23.js"), { loading: true }) }, Qr = Object.freeze(Object.defineProperty({ __proto__: null, default: Jr }, Symbol.toStringTag, { value: "Module" })), es = { ...wr, type: Hi.MfBorder3, component: Ve(() => import("./index24.js"), { loading: true }) }, ts = Object.freeze(Object.defineProperty({ __proto__: null, default: es }, Symbol.toStringTag, { value: "Module" })), os = { ...wr, type: Hi.MfBorder4, component: Ve(() => import("./index25.js"), { loading: true }), config: (() => {
   const e2 = Me(Pi);
   return e2.data.show = false, e2.style.payload.component = T(Ve(() => import("./MfBorder4Config.js"), { loading: true, size: "large" })), e2;
 })() }, ns = Object.freeze(Object.defineProperty({ __proto__: null, default: os }, Symbol.toStringTag, { value: "Module" })), as = { ...os, type: Hi.MfBorder5, component: Ve(() => import("./index26.js"), { loading: true }) }, ls = Object.freeze(Object.defineProperty({ __proto__: null, default: as }, Symbol.toStringTag, { value: "Module" })), is = { ...wr, type: Hi.MfBorder6, component: Ve(() => import("./index27.js"), { loading: true }) }, rs = Object.freeze(Object.defineProperty({ __proto__: null, default: is }, Symbol.toStringTag, { value: "Module" })), ss = { ...wr, type: Hi.MfBorder7, component: Ve(() => import("./index28.js"), { loading: true }) }, cs = Object.freeze(Object.defineProperty({ __proto__: null, default: ss }, Symbol.toStringTag, { value: "Module" }));
@@ -2382,11 +2382,11 @@ const Ts = { type: Hi.MfDecoration3, component: Ve(() => import("./index36.js"),
 function Bs(e2) {
   return e2.chartContain.dropInfo.width = 30, e2.chartContain.dropInfo.height = 200, e2.chart.options.mainColor = "#2e6099", e2.chart.options.secondColor = "#7ce7fd", e2.chart.options.duration = 3, e2;
 }
-const zs = { type: Hi.MfDecoration4, component: Ve(() => import("./index37.js"), { loading: true }), create: Bs, config: (() => {
+const Os = { type: Hi.MfDecoration4, component: Ve(() => import("./index37.js"), { loading: true }), create: Bs, config: (() => {
   const e2 = Me(Pi);
   return e2.data.show = false, e2.style.payload.component = T(Ve(() => import("./MfDecoration2Config.js"), { loading: true, size: "large" })), e2;
 })(), initData: () => {
-} }, Os = Object.freeze(Object.defineProperty({ __proto__: null, default: zs, mfDecoration4Create: Bs }, Symbol.toStringTag, { value: "Module" }));
+} }, zs = Object.freeze(Object.defineProperty({ __proto__: null, default: Os, mfDecoration4Create: Bs }, Symbol.toStringTag, { value: "Module" }));
 function Rs(e2) {
   return e2.chartContain.dropInfo.width = 320, e2.chartContain.dropInfo.height = 70, e2.chart.options.mainColor = "#2e6099", e2.chart.options.secondColor = "#7ce7fd", e2.chart.options.duration = 3, e2;
 }
@@ -2418,15 +2418,15 @@ const Ws = { type: Hi.MfDecoration8, component: Ve(() => import("./index41.js"),
   const e2 = Me(Pi);
   return e2.data.show = false, e2.style.payload.component = T(Ve(() => import("./MfDecoration8Config.js"), { loading: true, size: "large" })), e2;
 })(), initData: () => {
-} }, Zs = Object.freeze(Object.defineProperty({ __proto__: null, default: Ws, mfDecoration8Create: Us }, Symbol.toStringTag, { value: "Module" }));
-function Ys(e2) {
+} }, qs = Object.freeze(Object.defineProperty({ __proto__: null, default: Ws, mfDecoration8Create: Us }, Symbol.toStringTag, { value: "Module" }));
+function Zs(e2) {
   return e2.chartContain.dropInfo.width = 200, e2.chartContain.dropInfo.height = 200, e2.chart.options.mainColor = "#2e6099", e2.chart.options.secondColor = "#7ce7fd", e2.chart.options.duration = 3, e2;
 }
-const Xs = { type: Hi.MfDecoration9, component: Ve(() => import("./index42.js"), { loading: true }), create: Ys, config: (() => {
+const Ys = { type: Hi.MfDecoration9, component: Ve(() => import("./index42.js"), { loading: true }), create: Zs, config: (() => {
   const e2 = Me(Pi);
   return e2.data.show = false, e2.style.payload.component = T(Ve(() => import("./MfDecoration5Config.js"), { loading: true, size: "large" })), e2;
 })(), initData: () => {
-} }, qs = Object.freeze(Object.defineProperty({ __proto__: null, default: Xs, mfDecoration9Create: Ys }, Symbol.toStringTag, { value: "Module" }));
+} }, Xs = Object.freeze(Object.defineProperty({ __proto__: null, default: Ys, mfDecoration9Create: Zs }, Symbol.toStringTag, { value: "Module" }));
 function Ks(e2) {
   return e2.chartContain.dropInfo.width = 1920, e2.chartContain.dropInfo.height = 76, e2.chart.options.mainColor = "#0042A2", e2.chart.options.secondColor = "#0042A2", e2;
 }
@@ -2476,7 +2476,7 @@ const fc = { type: Hi.MfHeader6, create: uc, component: Ve(() => import("./index
 })(), initData: () => {
 } }, hc = Object.freeze(Object.defineProperty({ __proto__: null, default: fc, mfHeader6Create: uc }, Symbol.toStringTag, { value: "Module" })), gc = e({ name: "MfDateTime", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
   const t2 = e2, o2 = y(t2.chart), n2 = () => {
-    t2.chart.options?.format ? o2.value.data.dataSet.title = Ye(Xe(), t2.chart.options.format) : o2.value.data.dataSet.title = Ye();
+    t2.chart.options?.format ? o2.value.data.dataSet.title = Ze(Ye(), t2.chart.options.format) : o2.value.data.dataSet.title = Ze();
   };
   return i(() => {
     n2(), setInterval(n2, 1e3);
@@ -2490,7 +2490,7 @@ const mc = { type: Hi.MfDateTime, component: gc, create: yc, config: (() => {
   return e2.data.show = false, e2.style.payload.component = T(Ve(() => import("./MfDataTimeConfig.js"), { loading: true, size: "large" })), e2;
 })(), defaultData: { title: "" }, defaultHeaders: () => Me({ title: { colName: "title", dataType: "string", rename: "标签" } }), initData: () => {
 } }, vc = Object.freeze(Object.defineProperty({ __proto__: null, default: mc, mfDateTimeCreate: yc }, Symbol.toStringTag, { value: "Module" })), Cc = e({ name: "MfDivider", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  const t2 = e2, { commonEvents: o2 } = Xi(t2.chart), a2 = n(() => (t2.chartContain?.dropInfo.height - t2.chart.options.lineWidth) / 2), l2 = n(() => t2.chartContain?.dropInfo.width / 2 - 1), i2 = n(() => Ei(t2.chart)), p2 = n(() => {
+  const t2 = e2, { commonEvents: o2 } = Yi(t2.chart), a2 = n(() => (t2.chartContain?.dropInfo.height - t2.chart.options.lineWidth) / 2), l2 = n(() => t2.chartContain?.dropInfo.width / 2 - 1), i2 = n(() => Ei(t2.chart)), p2 = n(() => {
     const e3 = {};
     return t2.chart.options?.lineColor && (e3.borderColor = t2.chart.options.lineColor), "vertical" === t2.chart.options.type ? (t2.chart.data.dataSet?.title || t2.chart.data.dataSet?.icon || (e3.margin = `0 ${l2.value}px`), e3) : t2.chart.data.dataSet?.title || t2.chart.data.dataSet?.icon ? (e3.margin = "0", e3) : (e3.margin = `${a2.value}px 0`, e3);
   });
@@ -2576,19 +2576,19 @@ const Nc = { ...Sc, type: Hi.MfBarPlusMinus, create: function(e2) {
   const t2 = Sc.create(e2);
   return t2.chart.data.dataSet = Me(Nc.defaultData), t2.chart.data.headers = Nc.defaultHeaders && Nc.defaultHeaders(t2.chart), t2.chart.options = { ...t2.chart.options, xAxis: { show: true, type: "value", position: "top", splitLine: { show: true, lineStyle: { type: "dashed" } } }, yAxis: { show: true, type: "category", axisLine: { show: false }, axisLabel: { show: false }, axisTick: { show: false } }, series: Me(Nc.defaultSeries) }, t2;
 }, defaultData: { source: [["维度", "数据"], ["ten", -0.07], ["nine", -0.09], ["eight", 0.2], ["seven", -0.44], ["six", -0.23], ["five", 0.08], ["four", -0.17], ["three", 0.47], ["two", -0.36], ["one", 0.18]] } }, Bc = Object.freeze(Object.defineProperty({ __proto__: null, default: Nc }, Symbol.toStringTag, { value: "Module" }));
-const zc = { ...Sc, type: Hi.MfLine, create: function(e2) {
-  return e2.chart.data.dataSet = Me(zc.defaultData), e2.chart.data.headers = zc.defaultHeaders && zc.defaultHeaders(e2.chart), e2.chart.data.limit = 100, e2.chart.data.maxLimit = 1e3, e2.chart.options = { grid: { left: "10%", right: "10%", top: "10%", bottom: "10%" }, xAxis: { show: true, type: "category" }, yAxis: { show: true }, series: Me(zc.defaultSeries) }, e2.chartContain.dropInfo.width = 400, e2.chartContain.dropInfo.height = 300, e2;
-}, defaultSeries: [{ type: "line" }] }, Oc = Object.freeze(Object.defineProperty({ __proto__: null, default: zc }, Symbol.toStringTag, { value: "Module" }));
-const Rc = { ...zc, type: Hi.MfLineArea, create: function(e2) {
-  const t2 = zc.create(e2);
+const Oc = { ...Sc, type: Hi.MfLine, create: function(e2) {
+  return e2.chart.data.dataSet = Me(Oc.defaultData), e2.chart.data.headers = Oc.defaultHeaders && Oc.defaultHeaders(e2.chart), e2.chart.data.limit = 100, e2.chart.data.maxLimit = 1e3, e2.chart.options = { grid: { left: "10%", right: "10%", top: "10%", bottom: "10%" }, xAxis: { show: true, type: "category" }, yAxis: { show: true }, series: Me(Oc.defaultSeries) }, e2.chartContain.dropInfo.width = 400, e2.chartContain.dropInfo.height = 300, e2;
+}, defaultSeries: [{ type: "line" }] }, zc = Object.freeze(Object.defineProperty({ __proto__: null, default: Oc }, Symbol.toStringTag, { value: "Module" }));
+const Rc = { ...Oc, type: Hi.MfLineArea, create: function(e2) {
+  const t2 = Oc.create(e2);
   return t2.chart.options.series = Me(Rc.defaultSeries), t2;
 }, defaultSeries: [{ type: "line", areaStyle: {} }] }, jc = Object.freeze(Object.defineProperty({ __proto__: null, default: Rc }, Symbol.toStringTag, { value: "Module" }));
 const Ac = { ..._c, type: Hi.MfLineAreaStack, create: function(e2) {
   const t2 = _c.create(e2);
   return t2.chart.options.series = Me(Ac.defaultSeries), t2;
 }, defaultSeries: [{ type: "line", areaStyle: {}, stack: "total" }, { type: "line", areaStyle: {}, stack: "total" }] }, Pc = Object.freeze(Object.defineProperty({ __proto__: null, default: Ac }, Symbol.toStringTag, { value: "Module" }));
-const Ec = { ...zc, type: Hi.MfLineSmooth, create: function(e2) {
-  const t2 = zc.create(e2);
+const Ec = { ...Oc, type: Hi.MfLineSmooth, create: function(e2) {
+  const t2 = Oc.create(e2);
   return t2.chart.options.series = Me(Ec.defaultSeries), t2;
 }, defaultSeries: [{ type: "line", smooth: true }] }, Fc = Object.freeze(Object.defineProperty({ __proto__: null, default: Ec }, Symbol.toStringTag, { value: "Module" }));
 const Hc = { ..._c, type: Hi.MfLineStack, create: function(e2) {
@@ -2617,25 +2617,25 @@ function Wc(e2, t2) {
     e2 && C().then(() => {
       let n3 = t3;
       t3 || (n3 = Uc[o2?.getTheme || Te.LIGHT]);
-      const a2 = qe(n3) ? Te.DARK : Te.LIGHT;
+      const a2 = Xe(n3) ? Te.DARK : Te.LIGHT;
       e2.itemStyle.color = n3, e2.itemStyle.areaColor = i2(a2, n3), e2.emphasis.itemStyle.areaColor = e2.itemStyle.areaColor, e2.itemStyle.shadowColor = r2(a2, n3);
     });
   });
 }
-const Zc = { type: Hi.MfMapChunks, component: Ve(() => import("./index50.js"), { loading: true, size: "large" }), create: function(e2) {
-  e2.chart.data.dataSet = Me(Zc.defaultData), e2.chart.data.headers = Zc.defaultHeaders && Zc.defaultHeaders(e2.chart), e2.chart.data.limit = 100, e2.chart.data.maxLimit = 1e3;
+const qc = { type: Hi.MfMapChunks, component: Ve(() => import("./index50.js"), { loading: true, size: "large" }), create: function(e2) {
+  e2.chart.data.dataSet = Me(qc.defaultData), e2.chart.data.headers = qc.defaultHeaders && qc.defaultHeaders(e2.chart), e2.chart.data.limit = 100, e2.chart.data.maxLimit = 1e3;
   const t2 = Ke(Uc.dark, 18);
-  return e2.chart.options = { tooltip: { show: true }, geo: { map: "china", scale: true, zoom: 1.2, scaleLimit: { min: 0.5, max: 2 }, emphasis: { itemStyle: { shadowOffsetY: 18, shadowBlur: 18 } }, itemStyle: { areaColor: { type: "linear", x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: t2 }, { offset: 1, color: Uc.dark }] }, borderColor: "#6699FF", shadowColor: t2, shadowOffsetY: 10, shadowBlur: 10, borderWidth: 1 } }, visualMap: { show: false, min: 0, max: 100, text: ["高", "低"], realtime: false, calculable: true, inRange: { color: Me(Vc[0].color) } }, series: Me(Zc.defaultSeries) }, e2.chartContain.dropInfo.width = 800, e2.chartContain.dropInfo.height = 650, e2;
+  return e2.chart.options = { tooltip: { show: true }, geo: { map: "china", scale: true, zoom: 1.2, scaleLimit: { min: 0.5, max: 2 }, emphasis: { itemStyle: { shadowOffsetY: 18, shadowBlur: 18 } }, itemStyle: { areaColor: { type: "linear", x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: t2 }, { offset: 1, color: Uc.dark }] }, borderColor: "#6699FF", shadowColor: t2, borderWidth: 1 } }, visualMap: { show: false, min: 0, max: 100, text: ["高", "低"], realtime: false, calculable: true, inRange: { color: Me(Vc[0].color) } }, series: Me(qc.defaultSeries) }, e2.chartContain.dropInfo.width = 800, e2.chartContain.dropInfo.height = 650, e2;
 }, config: (() => {
   const e2 = Me(Pi);
   return e2.style.payload.component = T(Ve(() => import("./MfMapChunksConfig.js"), { loading: true, size: "large" })), e2.data.payload.component = T(Ve(() => import("./MfMapChunksDataConfig.js"), { loading: true, size: "large" })), e2;
 })(), defaultData: { source: [["区域", "值"], ["河北省", 90], ["湖北省", 60], ["江苏省", 30], ["北京市", 100], ["陕西省", 50], ["四川省", 20], ["湖南省", 80], ["内蒙古自治区", 40], ["新疆维吾尔自治区", 70], ["安徽省", 10]] }, defaultHeaders: (e2) => Fi(e2?.data?.dataSet?.source[0]), defaultSeries: [{ name: "分布图", type: "map", map: "china", scale: true, zoom: 1.2, scaleLimit: { min: 0.5, max: 2 } }], initData: (e2, t2) => {
-  const { setDynamicData: o2 } = Yc();
+  const { setDynamicData: o2 } = Zc();
   o2(e2, t2);
 } };
-function Yc() {
+function Zc() {
   function e2(e3) {
-    e3.data.dataSet = Me(Zc.defaultData);
+    e3.data.dataSet = Me(qc.defaultData);
   }
   return { resetDefault: e2, setDynamicData: function(t2, o2) {
     if (t2) {
@@ -2663,11 +2663,11 @@ function Yc() {
     }
   } };
 }
-const Xc = Object.freeze(Object.defineProperty({ __proto__: null, default: Zc, useEchartsMapChunksData: Yc }, Symbol.toStringTag, { value: "Module" }));
-const qc = { type: Hi.MfMapLine, component: Ve(() => import("./index51.js"), { loading: true, size: "large" }), create: function(e2) {
-  e2.chart.data.dataSet = Me(qc.defaultData), e2.chart.data.headers = qc.defaultHeaders && qc.defaultHeaders(e2.chart), e2.chart.data.limit = 100, e2.chart.data.maxLimit = 1e3;
+const Yc = Object.freeze(Object.defineProperty({ __proto__: null, default: qc, useEchartsMapChunksData: Zc }, Symbol.toStringTag, { value: "Module" }));
+const Xc = { type: Hi.MfMapLine, component: Ve(() => import("./index51.js"), { loading: true, size: "large" }), create: function(e2) {
+  e2.chart.data.dataSet = Me(Xc.defaultData), e2.chart.data.headers = Xc.defaultHeaders && Xc.defaultHeaders(e2.chart), e2.chart.data.limit = 100, e2.chart.data.maxLimit = 1e3;
   const t2 = Ke(Uc.dark, 18);
-  return e2.chart.options = { tooltip: { show: true }, geo: { map: "china", scale: true, zoom: 1.2, scaleLimit: { min: 0.5, max: 2 }, emphasis: { itemStyle: { shadowOffsetY: 18, shadowBlur: 18 } }, itemStyle: { areaColor: { type: "linear", x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: t2 }, { offset: 1, color: Uc.dark }] }, borderColor: "#6699FF", shadowColor: t2, shadowOffsetY: 10, shadowBlur: 10, borderWidth: 1 } }, visualMap: { show: false, min: 0, max: 100, text: ["高", "低"], realtime: false, calculable: true, inRange: { color: Me(Vc[0].color) } }, series: Me(qc.defaultSeries) }, e2.chartContain.dropInfo.width = 800, e2.chartContain.dropInfo.height = 650, e2;
+  return e2.chart.options = { tooltip: { show: true }, geo: { map: "china", scale: true, zoom: 1.2, scaleLimit: { min: 0.5, max: 2 }, emphasis: { itemStyle: { shadowOffsetY: 18, shadowBlur: 18 } }, itemStyle: { areaColor: { type: "linear", x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: t2 }, { offset: 1, color: Uc.dark }] }, borderColor: "#6699FF", shadowColor: t2, shadowOffsetY: 10, shadowBlur: 10, borderWidth: 1 } }, visualMap: { show: false, min: 0, max: 100, text: ["高", "低"], realtime: false, calculable: true, inRange: { color: Me(Vc[0].color) } }, series: Me(Xc.defaultSeries) }, e2.chartContain.dropInfo.width = 800, e2.chartContain.dropInfo.height = 650, e2;
 }, config: (() => {
   const e2 = Me(Pi);
   return e2.style.payload.component = T(Ve(() => import("./MfMapLineConfig.js"), { loading: true, size: "large" })), e2.data.payload.component = T(Ve(() => import("./MfMapLineDataConfig.js"), { loading: true, size: "large" })), e2;
@@ -2677,7 +2677,7 @@ const qc = { type: Hi.MfMapLine, component: Ve(() => import("./index51.js"), { l
 } };
 function Kc() {
   function e2(e3) {
-    e3.data.dataSet = Me(qc.defaultData);
+    e3.data.dataSet = Me(Xc.defaultData);
   }
   return { resetDefault: e2, setDynamicData: function(t2, o2) {
     if (t2) {
@@ -2707,12 +2707,12 @@ function Kc() {
     }
   } };
 }
-const Jc = Object.freeze(Object.defineProperty({ __proto__: null, default: qc, useEchartsMapLineData: Kc }, Symbol.toStringTag, { value: "Module" }));
-const Qc = { ...qc, type: Hi.MfMapLine3D, component: Ve(() => import("./index52.js"), { loading: true, size: "large" }), create: function(e2) {
-  const t2 = qc.create(e2);
+const Jc = Object.freeze(Object.defineProperty({ __proto__: null, default: Xc, useEchartsMapLineData: Kc }, Symbol.toStringTag, { value: "Module" }));
+const Qc = { ...Xc, type: Hi.MfMapLine3D, component: Ve(() => import("./index52.js"), { loading: true, size: "large" }), create: function(e2) {
+  const t2 = Xc.create(e2);
   return delete t2.chart.options?.geo, t2.chart.options = { ...t2.chart.options, geo3D: { map: "china", shading: "lambert", viewControl: { distance: 85, rotateSensitivity: 0, zoomSensitivity: 0 }, light: { main: { intensity: 1.2, shadow: true } }, itemStyle: { areaColor: Uc.dark, color: Uc.dark, borderColor: "#6699FF", shadowColor: "#1773C3", shadowBlur: 10, borderWidth: 1 }, emphasis: { itemStyle: { areaColor: "#3146B3", color: "#3146B3" } }, label: { distance: 0, color: "#ffffff", emphasis: { color: "#ffffff" } } }, series: Me(Qc.defaultSeries) }, t2;
 }, defaultSeries: [{ name: "飞线图", type: "lines3D", coordinateSystem: "geo3D", effect: { show: true, trailWidth: 2, trailLength: 0.8, trailOpacity: 0.8, trailColor: "#fff" }, lineStyle: { width: 1, curveness: 0.2 } }, { name: "城市", type: "scatter3D", coordinateSystem: "geo3D", rippleEffect: { brushType: "stroke" }, label: { show: true, position: "right", formatter: "{b}" } }] }, ep = Object.freeze(Object.defineProperty({ __proto__: null, default: Qc }, Symbol.toStringTag, { value: "Module" }));
-const tp = { ...Zc, type: Hi.MfMapScatter, component: Ve(() => import("./index53.js"), { loading: true, size: "large" }), create: function(e2) {
+const tp = { ...qc, type: Hi.MfMapScatter, component: Ve(() => import("./index53.js"), { loading: true, size: "large" }), create: function(e2) {
   e2.chart.data.dataSet = Me(tp.defaultData), e2.chart.data.headers = tp.defaultHeaders && tp.defaultHeaders(e2.chart), e2.chart.data.limit = 100, e2.chart.data.maxLimit = 1e3;
   const t2 = Ke(Uc.dark, 18);
   return e2.chart.options = { tooltip: { show: true }, geo: { map: "china", scale: true, zoom: 1.2, scaleLimit: { min: 0.5, max: 2 }, emphasis: { itemStyle: { shadowOffsetY: 18, shadowBlur: 18 } }, itemStyle: { areaColor: { type: "linear", x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: t2 }, { offset: 1, color: Uc.dark }] }, borderColor: "#6699FF", shadowColor: t2, shadowOffsetY: 10, shadowBlur: 10, borderWidth: 1 } }, visualMap: { show: false, min: 0, max: 100, text: ["高", "低"], realtime: false, calculable: true, inRange: { color: Me(Vc[0].color) } }, series: Me(tp.defaultSeries) }, e2.chartContain.dropInfo.width = 800, e2.chartContain.dropInfo.height = 650, e2;
@@ -2810,7 +2810,7 @@ function Cp(e2, t2, o2, n2, l2) {
   };
 }
 const bp = e({ name: "MfStrokeTag", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  const t2 = e2, n2 = o("mfStrokeTagRef"), { commonEvents: l2 } = Xi(t2.chart), c2 = Ci();
+  const t2 = e2, n2 = o("mfStrokeTagRef"), { commonEvents: l2 } = Yi(t2.chart), c2 = Ci();
   return a(() => c2.getTheme, (e3) => {
     t2.chart && C().then(() => {
       !(function(e4, t3) {
@@ -2834,8 +2834,8 @@ const wp = { type: Hi.MfStrokeTag, component: bp, create: Mp, config: (() => {
 })(), defaultData: { text: "描边动画标签" }, defaultHeaders: () => Me({ text: { colName: "text", dataType: "string", rename: "文本" } }), initData: () => {
 }, customEvents: [{ name: "文本值改变", value: "textChange" }] }, xp = Object.freeze(Object.defineProperty({ __proto__: null, default: wp, mfStrokeTagCreate: Mp }, Symbol.toStringTag, { value: "Module" })), Sp = e({ name: "MfFloatButton", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
   t((e3) => ({ v32a5bfdb: r2.value, aed89aac: i2.value, v0d2465e5: p2.value, v318ec178: l2.value, v4eeb5abb: u2.value }));
-  const o2 = e2, { prefixCls: a2 } = fe("float-button"), l2 = n(() => o2.chart.options.color), i2 = n(() => o2.chart.options.buttonColor ? o2.chart.options.buttonColor : "unset"), r2 = n(() => `${o2.chartContain.dropInfo.width}px`), { commonEvents: c2 } = Xi(o2.chart), p2 = n(() => o2.chartContain.dropInfo.width > o2.chartContain.dropInfo.height ? o2.chartContain.dropInfo.height / 2 + "px" : o2.chartContain.dropInfo.width / 2 + "px"), u2 = n(() => o2.chartContain.dropInfo.width > o2.chartContain.dropInfo.height ? o2.chartContain.dropInfo.height / 5 + "px" : o2.chartContain.dropInfo.width / 5 + "px");
-  return (t2, o3) => (s(), h(d(Q), L({ class: d(a2), style: { insetInlineEnd: 0, insetBlockEnd: 0 } }, B(d(c2)), { description: e2.chart.data.dataSet?.title, shape: e2.chart.options.shape, badge: e2.chart.options.badge }), z({ _: 2 }, [e2.chart.data.dataSet?.icon ? { name: "icon", fn: M(() => [g(d(be), { size: p2.value, icon: e2.chart.data.dataSet?.icon, color: l2.value }, null, 8, ["size", "icon", "color"])]), key: "0" } : void 0]), 1040, ["class", "description", "shape", "badge"]));
+  const o2 = e2, { prefixCls: a2 } = fe("float-button"), l2 = n(() => o2.chart.options.color), i2 = n(() => o2.chart.options.buttonColor ? o2.chart.options.buttonColor : "unset"), r2 = n(() => `${o2.chartContain.dropInfo.width}px`), { commonEvents: c2 } = Yi(o2.chart), p2 = n(() => o2.chartContain.dropInfo.width > o2.chartContain.dropInfo.height ? o2.chartContain.dropInfo.height / 2 + "px" : o2.chartContain.dropInfo.width / 2 + "px"), u2 = n(() => o2.chartContain.dropInfo.width > o2.chartContain.dropInfo.height ? o2.chartContain.dropInfo.height / 5 + "px" : o2.chartContain.dropInfo.width / 5 + "px");
+  return (t2, o3) => (s(), h(d(Q), L({ class: d(a2), style: { insetInlineEnd: 0, insetBlockEnd: 0 } }, B(d(c2)), { description: e2.chart.data.dataSet?.title, shape: e2.chart.options.shape, badge: e2.chart.options.badge }), O({ _: 2 }, [e2.chart.data.dataSet?.icon ? { name: "icon", fn: M(() => [g(d(be), { size: p2.value, icon: e2.chart.data.dataSet?.icon, color: l2.value }, null, 8, ["size", "icon", "color"])]), key: "0" } : void 0]), 1040, ["class", "description", "shape", "badge"]));
 } });
 function kp(e2) {
   return e2.chart.data.dataSet = Me($p.defaultData), e2.chart.data.headers = $p.defaultHeaders && $p.defaultHeaders(), e2.chart.data.limit = 1, e2.chart.data.maxLimit = 1, e2.chart.options.bordered = true, e2.chart.options.badge = { count: 6 }, e2.chartContain.dropInfo.width = 50, e2.chartContain.dropInfo.height = 50, e2;
@@ -2844,7 +2844,7 @@ const $p = { type: Hi.MfFloatButton, component: Sp, create: kp, config: (() => {
   const e2 = Me(Pi);
   return e2.data.show = false, e2.style.payload.component = T(Ve(() => import("./MfFloatButtonConfig.js"), { loading: true, size: "large" })), e2;
 })(), defaultData: { title: "", icon: "" }, defaultHeaders: () => Me({ title: { colName: "title", dataType: "string", rename: "按钮" }, icon: { colName: "icon", dataType: "string", rename: "图标" } }), initData: () => {
-} }, Lp = Object.freeze(Object.defineProperty({ __proto__: null, default: $p, mfFloatButtonCreate: kp }, Symbol.toStringTag, { value: "Module" })), _p = ["src"], Ip = Ot(e({ name: "PreviewFrame", __name: "PreviewFrame", props: { frameSrc: et.string.def(""), frameWidth: et.number.def(400), frameHeight: et.number.def(300) }, emits: ["message"], setup(e2, { expose: t2, emit: o2 }) {
+} }, Lp = Object.freeze(Object.defineProperty({ __proto__: null, default: $p, mfFloatButtonCreate: kp }, Symbol.toStringTag, { value: "Module" })), _p = ["src"], Ip = zt(e({ name: "PreviewFrame", __name: "PreviewFrame", props: { frameSrc: et.string.def(""), frameWidth: et.number.def(400), frameHeight: et.number.def(300) }, emits: ["message"], setup(e2, { expose: t2, emit: o2 }) {
   const a2 = e2, l2 = o2, r2 = y(true), f2 = y(), { prefixCls: g2 } = fe("preview-frame"), m2 = n(() => ({ width: `${a2.frameWidth}px`, height: `${a2.frameHeight}px` }));
   function v2() {
     r2.value = false;
@@ -2870,16 +2870,16 @@ const $p = { type: Hi.MfFloatButton, component: Sp, create: kp, config: (() => {
     return e3();
   });
   return (t3, n2) => (s(), r("div", { class: p(d(o2)) }, [d(a2).getScreenCanvas ? (s(), r("div", Dp)) : f("", true), g(Ip, { "frame-src": l2.value, "frame-width": e2.chartContain.dropInfo.width - 2, "frame-height": e2.chartContain.dropInfo.height - 2 }, null, 8, ["frame-src", "frame-width", "frame-height"])], 2));
-} }), Np = Ot(Tp, [["__scopeId", "data-v-273bff45"]]);
+} }), Np = zt(Tp, [["__scopeId", "data-v-273bff45"]]);
 function Bp(e2) {
-  return e2.chart.data.dataSet = Me(zp.defaultData), e2.chart.data.headers = zp.defaultHeaders && zp.defaultHeaders(), e2.chart.options.pageType = $i.External, e2.chart.options.page = { value: "http://www.mfish.com.cn" }, e2.chartContain.dropInfo.width = 500, e2.chartContain.dropInfo.height = 400, e2;
+  return e2.chart.data.dataSet = Me(Op.defaultData), e2.chart.data.headers = Op.defaultHeaders && Op.defaultHeaders(), e2.chart.options.pageType = $i.External, e2.chart.options.page = { value: "http://www.mfish.com.cn" }, e2.chartContain.dropInfo.width = 500, e2.chartContain.dropInfo.height = 400, e2;
 }
-const zp = { type: Hi.MfFrame, component: Np, create: Bp, config: (() => {
+const Op = { type: Hi.MfFrame, component: Np, create: Bp, config: (() => {
   const e2 = Me(Pi);
   return e2.data.show = false, e2.style.payload.component = T(Ve(() => import("./MfFrameConfig.js"), { loading: true, size: "large" })), e2;
 })(), defaultData: { value: "" }, defaultHeaders: () => Me({ value: { colName: "value", dataType: "string", rename: "值" } }), initData: () => {
-} }, Op = Object.freeze(Object.defineProperty({ __proto__: null, default: zp, mfFrameCreate: Bp }, Symbol.toStringTag, { value: "Module" })), Rp = e({ name: "MfInput", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  const t2 = e2, { emitEvent: o2, commonEvents: n2 } = Xi(t2.chart, void 0, ["change", "pressEnter", "blur"]), l2 = y();
+} }, zp = Object.freeze(Object.defineProperty({ __proto__: null, default: Op, mfFrameCreate: Bp }, Symbol.toStringTag, { value: "Module" })), Rp = e({ name: "MfInput", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
+  const t2 = e2, { emitEvent: o2, commonEvents: n2 } = Yi(t2.chart, void 0, ["change", "pressEnter", "blur"]), l2 = y();
   function i2() {
     o2("change", d(l2));
   }
@@ -2918,7 +2918,7 @@ function Pp() {
   } };
 }
 const Ep = Object.freeze(Object.defineProperty({ __proto__: null, default: Ap, mfInputCreate: jp, useDataInput: Pp }, Symbol.toStringTag, { value: "Module" })), Fp = e({ name: "MfInputNumber", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  const t2 = e2, { emitEvent: o2, commonEvents: n2 } = Xi(t2.chart, void 0, ["change", "pressEnter", "blur"]), l2 = y();
+  const t2 = e2, { emitEvent: o2, commonEvents: n2 } = Yi(t2.chart, void 0, ["change", "pressEnter", "blur"]), l2 = y();
   function i2() {
     o2("change", d(l2));
   }
@@ -2930,7 +2930,7 @@ const Ep = Object.freeze(Object.defineProperty({ __proto__: null, default: Ap, m
   }
   return a([() => t2.chart?.data?.defaultValue, () => t2.chart?.data?.dataSet?.value], ([e3, o3]) => {
     void 0 === e3 && void 0 === o3 || (l2.value = 0 === t2.chart?.data.type ? e3 : o3);
-  }, { immediate: true }), (t3, o3) => (s(), h(d(Z), L(e2.chart.options, { value: l2.value, "onUpdate:value": o3[0] || (o3[0] = (e3) => l2.value = e3) }, B(d(n2)), { onBlur: r2, onPressEnter: c2, onChange: i2 }), null, 16, ["value"]));
+  }, { immediate: true }), (t3, o3) => (s(), h(d(q), L(e2.chart.options, { value: l2.value, "onUpdate:value": o3[0] || (o3[0] = (e3) => l2.value = e3) }, B(d(n2)), { onBlur: r2, onPressEnter: c2, onChange: i2 }), null, 16, ["value"]));
 } });
 function Hp(e2) {
   return (e2 = jp(e2)).chart.data.dataSet = Me(Gp.defaultData), e2.chart.data.headers = Gp.defaultHeaders && Gp.defaultHeaders(), e2.chart.options.placeholder = "数字输入框", e2;
@@ -2942,7 +2942,7 @@ const Gp = { type: Hi.MfInputNumber, component: Fp, create: Hp, config: (() => {
   const { setDynamicData: o2 } = Pp();
   o2(e2, t2);
 }, customEvents: [{ name: "输入框值改变", value: "change" }, { name: "按下回车", value: "pressEnter" }, { name: "离开组件", value: "blur" }] }, Vp = Object.freeze(Object.defineProperty({ __proto__: null, default: Gp, mfInputNumberCreate: Hp }, Symbol.toStringTag, { value: "Module" })), Up = e({ name: "MfInputTextArea", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  const t2 = e2, { emitEvent: o2, commonEvents: n2 } = Xi(t2.chart, void 0, ["change", "pressEnter", "blur"]), l2 = y();
+  const t2 = e2, { emitEvent: o2, commonEvents: n2 } = Yi(t2.chart, void 0, ["change", "pressEnter", "blur"]), l2 = y();
   function i2() {
     o2("change", d(l2));
   }
@@ -2960,21 +2960,21 @@ function Wp(e2) {
   const t2 = jp(e2);
   return t2.chart.options.placeholder = "文本输入框", t2.chartContain.dropInfo.width = 300, t2.chartContain.dropInfo.height = 80, t2;
 }
-const Zp = { ...Ap, type: Hi.MfInputTextArea, component: Up, config: (() => {
+const qp = { ...Ap, type: Hi.MfInputTextArea, component: Up, config: (() => {
   const e2 = Me(Pi);
   return e2.style.payload.component = T(Ve(() => import("./MfInputTextAreaConfig.js"), { loading: true, size: "large" })), e2.data.payload.component = T(Ve(() => import("./MfInputDataConfig.js"), { loading: true, size: "large" })), e2;
-})(), create: Wp }, Yp = Object.freeze(Object.defineProperty({ __proto__: null, default: Zp, mfInputTextAreaCreate: Wp }, Symbol.toStringTag, { value: "Module" })), Xp = e({ name: "MfPicture", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  const t2 = e2, { commonEvents: o2 } = Xi(t2.chart), a2 = n(() => t2.chart.data.dataSet?.key ? ot(nt(t2.chart.data.dataSet.key)) : He);
+})(), create: Wp }, Zp = Object.freeze(Object.defineProperty({ __proto__: null, default: qp, mfInputTextAreaCreate: Wp }, Symbol.toStringTag, { value: "Module" })), Yp = e({ name: "MfPicture", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
+  const t2 = e2, { commonEvents: o2 } = Yi(t2.chart), a2 = n(() => t2.chart.data.dataSet?.key ? ot(nt(t2.chart.data.dataSet.key)) : He);
   return (t3, n2) => (s(), h(d(ee), L({ src: a2.value, alt: e2.chart.data.dataSet?.alt || "图片" }, e2.chart.options, { width: e2.chartContain.dropInfo.width - 2, height: e2.chartContain.dropInfo.height - 2, fallback: d(He) }, B(d(o2))), null, 16, ["src", "alt", "width", "height", "fallback"]));
 } });
-function qp(e2) {
+function Xp(e2) {
   return e2.chart.data.dataSet = Me(Kp.defaultData), e2.chart.data.headers = Kp.defaultHeaders && Kp.defaultHeaders(), e2.chart.data.limit = 1, e2.chart.data.maxLimit = 1, e2.chart.options.preview = false, e2.chartContain.dropInfo.width = 200, e2.chartContain.dropInfo.height = 200, e2;
 }
-const Kp = { type: Hi.MfPicture, component: Xp, create: qp, config: (() => {
+const Kp = { type: Hi.MfPicture, component: Yp, create: Xp, config: (() => {
   const e2 = Me(Pi);
   return e2.data.show = false, e2.style.payload.component = T(Ve(() => import("./MfPictureConfig.js"), { loading: true, size: "large" })), e2;
 })(), defaultData: { key: "", alt: "" }, defaultHeaders: () => Me({ key: { colName: "key", dataType: "string", rename: "图片key" }, alt: { colName: "alt", dataType: "string", rename: "描述" } }), initData: () => {
-} }, Jp = Object.freeze(Object.defineProperty({ __proto__: null, default: Kp, mfPictureCreate: qp }, Symbol.toStringTag, { value: "Module" }));
+} }, Jp = Object.freeze(Object.defineProperty({ __proto__: null, default: Kp, mfPictureCreate: Xp }, Symbol.toStringTag, { value: "Module" }));
 function Qp(e2) {
   return e2.chart.data.dataSet = Me(ed.defaultData), e2.chart.data.headers = ed.defaultHeaders && ed.defaultHeaders(e2.chart), e2.chart.data.limit = 50, e2.chart.data.maxLimit = 1e3, e2.chartContain.dropInfo.width = 600, e2.chartContain.dropInfo.height = 300, e2.chart.options = { indexHeader: "序号", showHeader: true, index: true }, e2;
 }
@@ -3007,9 +3007,9 @@ function td() {
     t2.data.dataSet = { header: a2, data: l2 };
   } };
 }
-const od = Object.freeze(Object.defineProperty({ __proto__: null, default: ed, mfScrollTableCreate: Qp, useDataScrollTable: td }, Symbol.toStringTag, { value: "Module" })), nd = Ot(e({ name: "MfScrollTag", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, emits: ["eventHandler"], setup(e2, { emit: l2 }) {
+const od = Object.freeze(Object.defineProperty({ __proto__: null, default: ed, mfScrollTableCreate: Qp, useDataScrollTable: td }, Symbol.toStringTag, { value: "Module" })), nd = zt(e({ name: "MfScrollTag", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, emits: ["eventHandler"], setup(e2, { emit: l2 }) {
   t((e3) => ({ a6dbcf52: `${I2.value}px`, v5472ae0c: `${D2.value}s` }));
-  const g2 = e2, b2 = l2, M2 = o("spanRef"), w2 = o("iconRef"), { prefixCls: x2 } = fe("mf-scroll-tag"), S2 = n(() => Ei(g2.chart)), { emitEvent: $2, commonEvents: _2 } = Xi(g2.chart, function(e3) {
+  const g2 = e2, b2 = l2, M2 = o("spanRef"), w2 = o("iconRef"), { prefixCls: x2 } = fe("mf-scroll-tag"), S2 = n(() => Ei(g2.chart)), { emitEvent: $2, commonEvents: _2 } = Yi(g2.chart, function(e3) {
     b2("eventHandler", e3);
   }, ["titleChange"]), I2 = n(() => g2.chart.options?.letterSpacing || 0), D2 = n(() => Math.round(g2.chartContain?.dropInfo.width / g2.chart.options.animationSpeed) || 80), T2 = y();
   async function N2() {
@@ -3152,7 +3152,7 @@ const Cd = Object.freeze(Object.defineProperty({ __proto__: null, default: md, m
   }
   Md(o2, n2).then(() => {
   });
-}, xd = Object.assign({ "./MfButton/mfButton.data.ts": Qi, "./MfCombine/mfCombine.data.ts": tr, "./MfDataTag/mfDataTag.data.ts": sr, "./MfDataUi/MfDigits/mfDigits.data.ts": fr, "./MfDataUi/MfTireMarks/mfTireMarks.data.ts": br, "./MfDataUi/MfWheel/mfWheel.data.ts": mr, "./MfDataV/MfBorder1/mfBorder1.data.ts": xr, "./MfDataV/MfBorder10/mfBorder10.data.ts": kr, "./MfDataV/MfBorder11/mfBorder11.data.ts": _r, "./MfDataV/MfBorder12/mfBorder12.data.ts": Dr, "./MfDataV/MfBorder13/mfBorder13.data.ts": Nr, "./MfDataV/MfBorder14/mfBorder14.data.ts": Or, "./MfDataV/MfBorder15/mfBorder15.data.ts": jr, "./MfDataV/MfBorder16/mfBorder16.data.ts": Pr, "./MfDataV/MfBorder17/mfBorder17.data.ts": Fr, "./MfDataV/MfBorder18/mfBorder18.data.ts": Gr, "./MfDataV/MfBorder19/mfBorder19.data.ts": Ur, "./MfDataV/MfBorder2/mfBorder2.data.ts": Zr, "./MfDataV/MfBorder20/mfBorder20.data.ts": Xr, "./MfDataV/MfBorder21/mfBorder21.data.ts": Kr, "./MfDataV/MfBorder22/mfBorder22.data.ts": Qr, "./MfDataV/MfBorder3/mfBorder3.data.ts": ts, "./MfDataV/MfBorder4/mfBorder4.data.ts": ns, "./MfDataV/MfBorder5/mfBorder5.data.ts": ls, "./MfDataV/MfBorder6/mfBorder6.data.ts": rs, "./MfDataV/MfBorder7/mfBorder7.data.ts": cs, "./MfDataV/MfBorder8/mfBorder8.data.ts": us, "./MfDataV/MfBorder9/mfBorder9.data.ts": hs, "./MfDataV/MfDecoration1/mfDecoration.data.ts": ms, "./MfDataV/MfDecoration10/mfDecoration.data.ts": bs, "./MfDataV/MfDecoration11/mfDecoration.data.ts": xs, "./MfDataV/MfDecoration12/mfDecoration.data.ts": $s, "./MfDataV/MfDecoration2/mfDecoration.data.ts": Is, "./MfDataV/MfDecoration3/mfDecoration.data.ts": Ns, "./MfDataV/MfDecoration4/mfDecoration.data.ts": Os, "./MfDataV/MfDecoration5/mfDecoration.data.ts": As, "./MfDataV/MfDecoration6/mfDecoration.data.ts": Fs, "./MfDataV/MfDecoration7/mfDecoration.data.ts": Vs, "./MfDataV/MfDecoration8/mfDecoration.data.ts": Zs, "./MfDataV/MfDecoration9/mfDecoration.data.ts": qs, "./MfDataV/MfHeader1/mfHeader1.data.ts": Qs, "./MfDataV/MfHeader2/mfHeader2.data.ts": oc, "./MfDataV/MfHeader3/mfHeader3.data.ts": lc, "./MfDataV/MfHeader4/mfHeader4.data.ts": sc, "./MfDataV/MfHeader5/mfHeader5.data.ts": dc, "./MfDataV/MfHeader6/mfHeader6.data.ts": hc, "./MfDateTime/mfDateTime.data.ts": vc, "./MfDivider/mfDivider.data.ts": wc, "./MfEcharts/MfBar/mfBar.data.ts": kc, "./MfEcharts/MfBarHorizontal/mfBarHorizontal.data.ts": Lc, "./MfEcharts/MfBarLine/mfBarLine.data.ts": Tc, "./MfEcharts/MfBarPlusMinus/mfBarPlusMinus.data.ts": Bc, "./MfEcharts/MfBarStack/mfBarStack.data.ts": Ic, "./MfEcharts/MfLine/mfLine.data.ts": Oc, "./MfEcharts/MfLineArea/mfLineArea.data.ts": jc, "./MfEcharts/MfLineAreaStack/mfLineAreaStack.data.ts": Pc, "./MfEcharts/MfLineSmooth/mfLineSmooth.data.ts": Fc, "./MfEcharts/MfLineStack/mfLineStack.data.ts": Gc, "./MfEcharts/MfMapChunks/mfMapChunks.data.ts": Xc, "./MfEcharts/MfMapLine/mfMapLine.data.ts": Jc, "./MfEcharts/MfMapLine3D/mfMapLine3D.data.ts": ep, "./MfEcharts/MfMapScatter/mfMapScatter.data.ts": op, "./MfEcharts/MfPie/mfPie.data.ts": ap, "./MfEcharts/MfPieCircular/mfPieCircular.data.ts": ip, "./MfEcharts/MfPieHalf/mfPieHalf.data.ts": sp, "./MfEcharts/MfPieRose/mfPieRose.data.ts": pp, "./MfEcharts/MfRadar/mfRadar.data.ts": fp, "./MfEcharts/MfRadarCircle/mfRadarCircle.data.ts": gp, "./MfEcharts/MfScatter/mfScatter.data.ts": mp, "./MfEcharts/MfStrokeTag/mfStrokeTag.data.ts": xp, "./MfFloatButton/mfFloatButton.data.ts": Lp, "./MfFrame/mfFrame.data.ts": Op, "./MfInput/mfInput.data.ts": Ep, "./MfInputNumber/mfInputNumber.data.ts": Vp, "./MfInputTextArea/mfInputTextArea.data.ts": Yp, "./MfPicture/mfPicture.data.ts": Jp, "./MfScrollTable/mfScrollTable.data.ts": od, "./MfScrollTag/mfScrollTag.data.ts": id, "./MfSegmented/mfSegmented.data.ts": pd, "./MfSelect/mfSelect.data.ts": hd, "./MfTable/mfTable.data.ts": Cd, "./MfTag/mfTag.data.ts": lr });
+}, xd = Object.assign({ "./MfButton/mfButton.data.ts": Qi, "./MfCombine/mfCombine.data.ts": tr, "./MfDataTag/mfDataTag.data.ts": sr, "./MfDataUi/MfDigits/mfDigits.data.ts": fr, "./MfDataUi/MfTireMarks/mfTireMarks.data.ts": br, "./MfDataUi/MfWheel/mfWheel.data.ts": mr, "./MfDataV/MfBorder1/mfBorder1.data.ts": xr, "./MfDataV/MfBorder10/mfBorder10.data.ts": kr, "./MfDataV/MfBorder11/mfBorder11.data.ts": _r, "./MfDataV/MfBorder12/mfBorder12.data.ts": Dr, "./MfDataV/MfBorder13/mfBorder13.data.ts": Nr, "./MfDataV/MfBorder14/mfBorder14.data.ts": zr, "./MfDataV/MfBorder15/mfBorder15.data.ts": jr, "./MfDataV/MfBorder16/mfBorder16.data.ts": Pr, "./MfDataV/MfBorder17/mfBorder17.data.ts": Fr, "./MfDataV/MfBorder18/mfBorder18.data.ts": Gr, "./MfDataV/MfBorder19/mfBorder19.data.ts": Ur, "./MfDataV/MfBorder2/mfBorder2.data.ts": qr, "./MfDataV/MfBorder20/mfBorder20.data.ts": Yr, "./MfDataV/MfBorder21/mfBorder21.data.ts": Kr, "./MfDataV/MfBorder22/mfBorder22.data.ts": Qr, "./MfDataV/MfBorder3/mfBorder3.data.ts": ts, "./MfDataV/MfBorder4/mfBorder4.data.ts": ns, "./MfDataV/MfBorder5/mfBorder5.data.ts": ls, "./MfDataV/MfBorder6/mfBorder6.data.ts": rs, "./MfDataV/MfBorder7/mfBorder7.data.ts": cs, "./MfDataV/MfBorder8/mfBorder8.data.ts": us, "./MfDataV/MfBorder9/mfBorder9.data.ts": hs, "./MfDataV/MfDecoration1/mfDecoration.data.ts": ms, "./MfDataV/MfDecoration10/mfDecoration.data.ts": bs, "./MfDataV/MfDecoration11/mfDecoration.data.ts": xs, "./MfDataV/MfDecoration12/mfDecoration.data.ts": $s, "./MfDataV/MfDecoration2/mfDecoration.data.ts": Is, "./MfDataV/MfDecoration3/mfDecoration.data.ts": Ns, "./MfDataV/MfDecoration4/mfDecoration.data.ts": zs, "./MfDataV/MfDecoration5/mfDecoration.data.ts": As, "./MfDataV/MfDecoration6/mfDecoration.data.ts": Fs, "./MfDataV/MfDecoration7/mfDecoration.data.ts": Vs, "./MfDataV/MfDecoration8/mfDecoration.data.ts": qs, "./MfDataV/MfDecoration9/mfDecoration.data.ts": Xs, "./MfDataV/MfHeader1/mfHeader1.data.ts": Qs, "./MfDataV/MfHeader2/mfHeader2.data.ts": oc, "./MfDataV/MfHeader3/mfHeader3.data.ts": lc, "./MfDataV/MfHeader4/mfHeader4.data.ts": sc, "./MfDataV/MfHeader5/mfHeader5.data.ts": dc, "./MfDataV/MfHeader6/mfHeader6.data.ts": hc, "./MfDateTime/mfDateTime.data.ts": vc, "./MfDivider/mfDivider.data.ts": wc, "./MfEcharts/MfBar/mfBar.data.ts": kc, "./MfEcharts/MfBarHorizontal/mfBarHorizontal.data.ts": Lc, "./MfEcharts/MfBarLine/mfBarLine.data.ts": Tc, "./MfEcharts/MfBarPlusMinus/mfBarPlusMinus.data.ts": Bc, "./MfEcharts/MfBarStack/mfBarStack.data.ts": Ic, "./MfEcharts/MfLine/mfLine.data.ts": zc, "./MfEcharts/MfLineArea/mfLineArea.data.ts": jc, "./MfEcharts/MfLineAreaStack/mfLineAreaStack.data.ts": Pc, "./MfEcharts/MfLineSmooth/mfLineSmooth.data.ts": Fc, "./MfEcharts/MfLineStack/mfLineStack.data.ts": Gc, "./MfEcharts/MfMapChunks/mfMapChunks.data.ts": Yc, "./MfEcharts/MfMapLine/mfMapLine.data.ts": Jc, "./MfEcharts/MfMapLine3D/mfMapLine3D.data.ts": ep, "./MfEcharts/MfMapScatter/mfMapScatter.data.ts": op, "./MfEcharts/MfPie/mfPie.data.ts": ap, "./MfEcharts/MfPieCircular/mfPieCircular.data.ts": ip, "./MfEcharts/MfPieHalf/mfPieHalf.data.ts": sp, "./MfEcharts/MfPieRose/mfPieRose.data.ts": pp, "./MfEcharts/MfRadar/mfRadar.data.ts": fp, "./MfEcharts/MfRadarCircle/mfRadarCircle.data.ts": gp, "./MfEcharts/MfScatter/mfScatter.data.ts": mp, "./MfEcharts/MfStrokeTag/mfStrokeTag.data.ts": xp, "./MfFloatButton/mfFloatButton.data.ts": Lp, "./MfFrame/mfFrame.data.ts": zp, "./MfInput/mfInput.data.ts": Ep, "./MfInputNumber/mfInputNumber.data.ts": Vp, "./MfInputTextArea/mfInputTextArea.data.ts": Zp, "./MfPicture/mfPicture.data.ts": Jp, "./MfScrollTable/mfScrollTable.data.ts": od, "./MfScrollTag/mfScrollTag.data.ts": id, "./MfSegmented/mfSegmented.data.ts": pd, "./MfSelect/mfSelect.data.ts": hd, "./MfTable/mfTable.data.ts": Cd, "./MfTag/mfTag.data.ts": lr });
 const Sd = { ...(function() {
   const e2 = {};
   return Object.keys(xd).forEach((t2) => {
@@ -3213,7 +3213,7 @@ function Bd(e2) {
   }
   return t2.bottom = t2.y + t2.height, t2.right = t2.x + t2.width, t2;
 }
-function zd(e2, t2) {
+function Od(e2, t2) {
   for (const o2 of e2) {
     if (o2.chart.id === t2) return o2;
     if (o2.chart.type === Hi.MfCombine) {
@@ -3221,14 +3221,14 @@ function zd(e2, t2) {
     }
   }
 }
-function Od(e2, t2) {
-  return Rd(zd(e2, t2.id), t2);
+function zd(e2, t2) {
+  return Rd(Od(e2, t2.id), t2);
 }
 function Rd(e2, t2) {
   if (!e2) return;
   if (e2 && void 0 !== e2.chart.data?.defaultValue) return e2.chart.data.defaultValue;
   const o2 = 0 === e2.chart.data.type ? e2.chart.data.dataSet : e2.chart.data.result;
-  return Oe(o2) ? o2[0][t2.param] : o2 ? o2[t2.param] : void 0;
+  return ze(o2) ? o2[0][t2.param] : o2 ? o2[t2.param] : void 0;
 }
 async function jd(e2, t2) {
   const o2 = (t3) => {
@@ -3243,11 +3243,11 @@ async function jd(e2, t2) {
           const e3 = a4.get(o4.name);
           n3[t4] = e3 ?? o4.defaultValue;
         } else {
-          const a5 = Od(e2, o4);
+          const a5 = zd(e2, o4);
           a5 && (n3[t4] = a5);
         }
       };
-      for (const e3 of Object.keys(o3)) Oe(o3[e3].value) ? o3[e3].value.forEach((t4) => {
+      for (const e3 of Object.keys(o3)) ze(o3[e3].value) ? o3[e3].value.forEach((t4) => {
         a3(e3, t4);
       }) : a3(e3, o3[e3].value);
       t3.data.paramsValue ? t3.data.paramsValue = { ...t3.data.paramsValue, ...n3 } : t3.data.paramsValue = n3;
@@ -3317,7 +3317,7 @@ const Hd = Ci(), Gd = (e2) => e2 <= 0, Vd = (e2, t2) => e2 >= t2.length - 1, Ud 
   Hd.getSelectArea?.components.length > 0 ? this.copyData = Me(Hd.getSelectArea?.components) : Hd.getCurComponent && (this.copyData = Me(Hd.getCurComponent));
 }, pasteComponent() {
   if (this.copyData) {
-    if (Oe(this.copyData)) this.copyData.forEach((e2) => {
+    if (ze(this.copyData)) this.copyData.forEach((e2) => {
       const t2 = _d(e2, e2.chartContain.dropInfo.x + 10, e2.chartContain.dropInfo.y + 10);
       t2 && Hd.addComponent(t2, 0);
     });
@@ -3344,12 +3344,12 @@ const Hd = Ci(), Gd = (e2) => e2 <= 0, Vd = (e2, t2) => e2 >= t2.length - 1, Ud 
     if (t2.chart.type === Hi.MfCombine) {
       const o2 = { ...t2.chartContain.dropInfo }, n2 = t2.chart.options.components, a2 = Hd.getScreenCanvas?.getBoundingClientRect();
       n2.forEach((e3) => {
-        Xd(e3, a2, o2, Hd.getScale);
+        Yd(e3, a2, o2, Hd.getScale);
       }), e2.push(...t2.chart.options.components);
     } else e2.push(t2);
   }), C(() => {
     const t2 = Dd({ type: Hi.MfCombine, name: "组合" });
-    null !== t2 && (t2.chartContain.dropInfo = Object.assign(t2.chartContain.dropInfo, Hd.getSelectArea.dropInfo), t2.chart.options.components = e2, Yd(t2), Hd.batchDeleteComponent(Hd.getSelectArea.components), Hd.addComponent(t2, 0), Hd.cleanSelectArea(), Hd.setCurComponent(t2, 0), Hd.setUndoRedoData("组件组合"));
+    null !== t2 && (t2.chartContain.dropInfo = Object.assign(t2.chartContain.dropInfo, Hd.getSelectArea.dropInfo), t2.chart.options.components = e2, Zd(t2), Hd.batchDeleteComponent(Hd.getSelectArea.components), Hd.addComponent(t2, 0), Hd.cleanSelectArea(), Hd.setCurComponent(t2, 0), Hd.setUndoRedoData("组件组合"));
   });
 }, decomposeComponent() {
   if (!Hd.getCurComponent) return;
@@ -3362,7 +3362,7 @@ const Hd = Ci(), Gd = (e2) => e2 <= 0, Vd = (e2, t2) => e2 >= t2.length - 1, Ud 
     if (!Hd.getScreenCanvas) return;
     const n2 = Hd.getScreenCanvas.getBoundingClientRect(), a2 = Hd.getCurComponentIndex;
     Hd.deleteComponent(a2);
-    for (let t3 = e2.length - 1; t3 >= 0; t3--) Xd(e2[t3], n2, o2, Hd.getScale), Hd.addComponent(e2[t3], a2), Hd.getSelectArea.components.push(e2[t3]);
+    for (let t3 = e2.length - 1; t3 >= 0; t3--) Yd(e2[t3], n2, o2, Hd.getScale), Hd.addComponent(e2[t3], a2), Hd.getSelectArea.components.push(e2[t3]);
     t2.forEach((e3) => {
       e3.chartContain.show = false;
     }), Kd(Hd.getSelectArea.components), Hd.setUndoRedoData("组件拆分");
@@ -3392,22 +3392,22 @@ const Hd = Ci(), Gd = (e2) => e2 <= 0, Vd = (e2, t2) => e2 >= t2.length - 1, Ud 
 }, screenPreview() {
   kd.emit(_i.SCREEN_PREVIEW);
 } } });
-function Zd(e2) {
+function qd(e2) {
   return 100 * e2 + "%";
 }
-function Yd(e2) {
+function Zd(e2) {
   const t2 = e2.chartContain.dropInfo;
   e2.chart.options.components.forEach((e3) => {
-    e3.chartContain.groupStyle = Td(e3, [Ii.x, Ii.y]), e3.chartContain.groupStyle.left = Zd((e3.chartContain.dropInfo.x - t2.x) / t2.width), e3.chartContain.groupStyle.top = Zd((e3.chartContain.dropInfo.y - t2.y) / t2.height), e3.chartContain.groupStyle.width = Zd(e3.chartContain.dropInfo.width / t2.width), e3.chartContain.groupStyle.height = Zd(e3.chartContain.dropInfo.height / t2.height);
+    e3.chartContain.groupStyle = Td(e3, [Ii.x, Ii.y]), e3.chartContain.groupStyle.left = qd((e3.chartContain.dropInfo.x - t2.x) / t2.width), e3.chartContain.groupStyle.top = qd((e3.chartContain.dropInfo.y - t2.y) / t2.height), e3.chartContain.groupStyle.width = qd(e3.chartContain.dropInfo.width / t2.width), e3.chartContain.groupStyle.height = qd(e3.chartContain.dropInfo.height / t2.height);
   });
 }
-function Xd(e2, t2, o2, n2) {
+function Yd(e2, t2, o2, n2) {
   const a2 = document.querySelector(`#com${e2.chart.id}`);
   if (!a2) return;
   const l2 = a2.getBoundingClientRect(), i2 = l2.left - t2.left + l2.width / 2, r2 = l2.top - t2.top + l2.height / 2;
   e2.chartContain.dropInfo.rotate = Ai(e2.chartContain.dropInfo.rotate + o2.rotate), e2.chartContain.dropInfo.width = Math.abs(Math.round(Number.parseFloat(e2.chartContain.groupStyle.width) / 100 * o2.width)), e2.chartContain.dropInfo.height = Math.abs(Math.round(Number.parseFloat(e2.chartContain.groupStyle.height) / 100 * o2.height)), e2.chartContain.dropInfo.x = Math.abs(Math.round((i2 - e2.chartContain.dropInfo.width * n2 / 2) / n2)), e2.chartContain.dropInfo.y = Math.abs(Math.round((r2 - e2.chartContain.dropInfo.height * n2 / 2) / n2)), e2.chartContain.groupStyle = {};
 }
-function qd(e2) {
+function Xd(e2) {
   const t2 = Ci(), o2 = [], { x: n2, y: a2 } = e2;
   return t2.getComponentList.forEach((t3) => {
     const { x: l2, y: i2, width: r2, height: s2 } = Bd(t3.chartContain.dropInfo);
@@ -3510,42 +3510,48 @@ const eu = (e2, t2) => {
 }, tu = (e2, t2) => {
   const o2 = 150;
   return { KeysEnum: { ArrowUp: Ie(() => t2.moveComponent("y", -1), o2), ArrowDown: Ie(() => t2.moveComponent("y", 1), o2), ArrowLeft: Ie(() => t2.moveComponent("x", -1), o2), ArrowRight: Ie(() => t2.moveComponent("x", 1), o2), Delete: we(() => t2.deleteComponent(), o2) }, CtrlKeysEnum: { c: we(() => t2.copyComponent(), o2), v: we(() => t2.pasteComponent(), o2), ArrowUp: Ie(() => t2.moveComponent("y", -10), o2), ArrowDown: Ie(() => t2.moveComponent("y", 10), o2), ArrowLeft: Ie(() => t2.moveComponent("x", -10), o2), ArrowRight: Ie(() => t2.moveComponent("x", 10), o2), g: we(() => t2.composeComponent(), o2), l: we(() => t2.lockComponent(), o2), h: we(() => t2.hideComponent(), o2), a: we(() => t2.selectAllComponent(), o2), p: we(() => t2.screenPreview(), o2), s: we(() => t2.screenSave(), o2), z: we(() => e2.undo(), o2) }, ShiftKeysEnum: { ArrowUp: Ie(() => t2.upComponent(), o2), ArrowDown: Ie(() => t2.downComponent(), o2) }, CtrlShiftKeysEnum: { ArrowUp: we(() => t2.topComponent(), o2), ArrowDown: we(() => t2.bottomComponent(), o2), g: we(() => t2.decomposeComponent(), o2), l: we(() => t2.unLockComponent(), o2), h: we(() => t2.showComponent(), o2), z: we(() => e2.redo(), o2) }, NoneShortcutKeyEnum: eu(e2, t2) };
-}, ou = Symbol("configProvider"), nu = { getPrefixCls: (e2, t2) => t2 || (e2 ? `ant-${e2}` : "ant"), iconPrefixCls: n(() => "anticon"), getPopupContainer: n(() => () => document.body), direction: n(() => "ltr") };
+}, ou = /* @__PURE__ */ Symbol("configProvider"), nu = { getPrefixCls: (e2, t2) => t2 || (e2 ? `ant-${e2}` : "ant"), iconPrefixCls: n(() => "anticon"), getPopupContainer: n(() => () => document.body), direction: n(() => "ltr") };
 function au() {
-  const { getPrefixCls: e2, direction: t2, csp: o2, iconPrefixCls: n2, theme: a2 } = O(ou, nu);
+  const { getPrefixCls: e2, direction: t2, csp: o2, iconPrefixCls: n2, theme: a2 } = z(ou, nu);
   return { theme: a2, getPrefixCls: e2, direction: t2, csp: o2, iconPrefixCls: n2 };
 }
-const lu = Symbol("XProviderContext"), iu = T(), ru = e({ props: { value: /* @__PURE__ */ (function(e2) {
+const lu = (e2, t2) => {
+  const o2 = e2.__vccOpts || e2;
+  for (const [e3, n2] of t2) o2[e3] = n2;
+  return o2;
+};
+const iu = /* @__PURE__ */ Symbol("XProviderContext"), ru = T(), su = e({ props: { value: /* @__PURE__ */ (function(e2) {
   return { type: Object, default: e2 };
 })() }, setup: (e2, { slots: t2 }) => (((e3) => {
-  R(lu, e3), a(e3, () => {
-    iu.value = d(e3), j(iu);
+  R(iu, e3), a(e3, () => {
+    ru.value = d(e3), j(ru);
   }, { immediate: true, deep: true });
 })(n(() => e2.value)), () => {
   var e3;
   return null == (e3 = t2.default) ? void 0 : e3.call(t2);
-}) }), su = e({ name: "AXProvider", inheritAttrs: false, __name: "index", props: { bubble: {}, conversations: {}, prompts: {}, sender: {}, suggestion: {}, thoughtChain: {}, attachments: {}, welcome: {}, iconPrefixCls: {}, getTargetContainer: {}, getPopupContainer: {}, prefixCls: {}, getPrefixCls: {}, renderEmpty: {}, transformCellText: {}, csp: {}, input: {}, autoInsertSpaceInButton: { type: Boolean }, locale: {}, pageHeader: {}, componentSize: {}, componentDisabled: { type: Boolean }, direction: {}, space: {}, virtual: { type: Boolean }, dropdownMatchSelectWidth: {}, form: {}, pagination: {}, theme: {}, select: {}, wave: {} }, setup(e2) {
-  const t2 = (function(e3, t3) {
+}) }), cu = e({ name: "AXProvider", inheritAttrs: false, __name: "index", props: { actions: { type: null, required: false }, bubble: { type: null, required: false }, conversations: { type: null, required: false }, prompts: { type: null, required: false }, sender: { type: null, required: false }, suggestion: { type: null, required: false }, thoughtChain: { type: null, required: false }, attachments: { type: null, required: false }, welcome: { type: null, required: false }, iconPrefixCls: { type: String, required: false }, getTargetContainer: { type: Function, required: false }, getPopupContainer: { type: Function, required: false }, prefixCls: { type: String, required: false }, getPrefixCls: { type: Function, required: false }, renderEmpty: { type: null, required: false }, transformCellText: { type: Function, required: false }, csp: { type: null, required: false }, input: { type: Object, required: false }, autoInsertSpaceInButton: { type: Boolean, required: false }, locale: { type: null, required: false }, pageHeader: { type: Object, required: false }, componentSize: { type: null, required: false }, componentDisabled: { type: Boolean, required: false }, direction: { type: String, required: false }, space: { type: Object, required: false }, virtual: { type: Boolean, required: false }, dropdownMatchSelectWidth: { type: null, required: false }, form: { type: Object, required: false }, pagination: { type: Object, required: false }, theme: { type: null, required: false }, select: { type: Object, required: false }, wave: { type: Object, required: false } }, setup(e2, { expose: t2 }) {
+  t2();
+  const o2 = (function(e3, t3) {
     const o3 = /* @__PURE__ */ Object.create(null);
     for (const n2 in e3) t3.includes(n2) || Object.defineProperty(o3, n2, { enumerable: true, get: () => e3[n2] });
     return o3;
-  })(e2, ["attachments", "bubble", "conversations", "prompts", "sender", "suggestion", "thoughtChain", "welcome"]), o2 = A(), a2 = n(() => ({ attachments: e2.attachments, bubble: e2.bubble, conversations: e2.conversations, prompts: e2.prompts, sender: e2.sender, suggestion: e2.suggestion, thoughtChain: e2.thoughtChain, welcome: e2.welcome })), { theme: l2 } = au(), i2 = n(() => ({ ...(null == l2 ? void 0 : l2.value) || {}, ...t2.theme })), r2 = n(() => {
+  })(e2, ["attachments", "bubble", "conversations", "prompts", "sender", "suggestion", "thoughtChain", "welcome"]), a2 = A(), l2 = n(() => ({ attachments: e2.attachments, bubble: e2.bubble, conversations: e2.conversations, prompts: e2.prompts, sender: e2.sender, suggestion: e2.suggestion, thoughtChain: e2.thoughtChain, welcome: e2.welcome })), { theme: i2 } = au(), r2 = n(() => ({ ...(null == i2 ? void 0 : i2.value) || {}, ...o2.theme })), s2 = n(() => {
     var e3;
-    return null == (e3 = o2.default) ? void 0 : e3.call(o2);
+    return null == (e3 = a2.default) ? void 0 : e3.call(a2);
   });
-  return () => g(ru, { value: a2.value }, { default: () => [g(te, L(t2, { theme: i2.value }), { default: () => [r2.value] })] });
-} });
-const cu = { class: "share-title" }, pu = e({ __name: "ScreenPreview", props: { fixScale: { type: Number, default: 1 }, borderRadius: { type: String } }, setup(e2) {
-  const t2 = e2, { prefixCls: a2 } = fe("screen-preview"), { token: C2 } = U.useToken(), b2 = n(() => C2.value.colorBorder), w2 = o("fitDomRef"), x2 = y([]), { getAntdLocale: S2 } = lt(), L2 = Ci(), { antTheme: _2 } = me(n(() => L2.getTheme)), I2 = y(false), D2 = y(""), T2 = y(window.innerWidth), N2 = y(window.innerHeight), B2 = y(), z2 = n(() => [...L2.getComponentList].reverse()), O2 = l({ width: 0, height: 0 }), R2 = n(() => ({ ...$d(L2.getCanvasConfig), width: L2.getCanvasConfig.width * O2.width * t2.fixScale + "px", height: L2.getCanvasConfig.height * O2.height * t2.fixScale + "px" })), j2 = (e3) => Nd({ ...e3.chartContain.dropInfo }), A2 = (e3) => {
+  return () => g(su, { value: l2.value }, { default: () => [g(te, L(o2, { theme: r2.value }), { default: () => [s2.value] })] });
+} }), pu = lu(cu, [["__file", "/Users/wangzhichao/办公/code/github/ant-design-x-vue-pure/ant-design-x-vue/src/x-provider/index.vue"]]);
+const du = { class: "share-title" }, uu = e({ __name: "ScreenPreview", props: { fixScale: { type: Number, default: 1 }, borderRadius: { type: String } }, setup(e2) {
+  const t2 = e2, { prefixCls: a2 } = fe("screen-preview"), { token: C2 } = U.useToken(), b2 = n(() => C2.value.colorBorder), w2 = o("fitDomRef"), x2 = y([]), { getAntdLocale: S2 } = lt(), L2 = Ci(), { antTheme: _2 } = me(n(() => L2.getTheme)), I2 = y(false), D2 = y(""), T2 = y(window.innerWidth), N2 = y(window.innerHeight), B2 = y(), O2 = n(() => [...L2.getComponentList].reverse()), z2 = l({ width: 0, height: 0 }), R2 = n(() => ({ ...$d(L2.getCanvasConfig), width: L2.getCanvasConfig.width * z2.width * t2.fixScale + "px", height: L2.getCanvasConfig.height * z2.height * t2.fixScale + "px" })), j2 = (e3) => Nd({ ...e3.chartContain.dropInfo }), A2 = (e3) => {
     if (e3.chart?.events?.emits && e3.chart.events.emits.length > 0) {
-      for (const t3 of e3.chart.events.emits) if (t3 === Zi.CHART_CLICK || t3 === Zi.CHART_DBLCLICK) return "allow-pointer";
+      for (const t3 of e3.chart.events.emits) if (t3 === qi.CHART_CLICK || t3 === qi.CHART_DBLCLICK) return "allow-pointer";
     }
   }, H2 = (e3) => {
     const t3 = Td(e3);
     return t3.borderColor || (t3.borderColor = b2.value), De(t3, ["transform"]);
   }, G2 = () => window.parent.document.body;
   let V2;
-  const { register: W2, unRegister: Z2 } = (function() {
+  const { register: W2, unRegister: q2 } = (function() {
     const { getDataTable: e3 } = Vi(), t3 = [], o2 = Ci();
     return { register: async function() {
       const n2 = (o3) => {
@@ -3561,8 +3567,8 @@ const cu = { class: "share-title" }, pu = e({ __name: "ScreenPreview", props: { 
       for (const e4 of t3) clearInterval(e4);
     } };
   })();
-  function Y2(e3) {
-    O2.width = e3.width, O2.height = e3.height;
+  function Z2(e3) {
+    z2.width = e3.width, z2.height = e3.height;
   }
   return i(() => {
     setTimeout(() => {
@@ -3596,16 +3602,16 @@ const cu = { class: "share-title" }, pu = e({ __name: "ScreenPreview", props: { 
           }, unWindowResize: () => {
             window.removeEventListener("resize", s2);
           }, calcScale: r2 };
-        })(L2.getCanvasConfig.width, L2.getCanvasConfig.height, L2.getCanvasConfig.fitType, w2.value, Y2, t2.fixScale);
+        })(L2.getCanvasConfig.width, L2.getCanvasConfig.height, L2.getCanvasConfig.fitType, w2.value, Z2, t2.fixScale);
         e3(), o2(), V2 = n2, W2();
         const a3 = /* @__PURE__ */ new Map();
-        for (let e4 = 0; e4 < z2.value.length; e4++) {
-          const t3 = z2.value[e4];
+        for (let e4 = 0; e4 < O2.value.length; e4++) {
+          const t3 = O2.value[e4];
           kd.on(_i.EVENT_ANIMATION, (o4) => {
             wd(o4, t3, x2.value[e4]);
           });
           const o3 = t3.chart.animations?.filter((e5) => !e5.events || 0 === e5.events.length);
-          !o3 || 0 === o3.length || x2.value.length <= e4 || (z2.value[e4].chartContain.show && z2.value[e4].chart.type !== Hi.MfCombine && (z2.value[e4].chartContain.show = false, a3.set(e4, z2.value[e4])), setTimeout(() => {
+          !o3 || 0 === o3.length || x2.value.length <= e4 || (O2.value[e4].chartContain.show && O2.value[e4].chart.type !== Hi.MfCombine && (O2.value[e4].chartContain.show = false, a3.set(e4, O2.value[e4])), setTimeout(() => {
             a3.has(e4) && (a3.get(e4).chartContain.show = true), Md(x2.value[e4], o3).then();
           }, 600));
         }
@@ -3613,14 +3619,14 @@ const cu = { class: "share-title" }, pu = e({ __name: "ScreenPreview", props: { 
     }, 10), kd.on(_i.SHOW_MODAL, (e3) => {
       D2.value = e3.href, B2.value = e3.jump?.page?.name || e3.href, T2.value = e3.jump?.page?.width, N2.value = e3.jump?.page?.height, I2.value = true;
     }), document.addEventListener("visibilitychange", () => {
-      document.hidden ? Z2 && Z2() : W2();
+      document.hidden ? q2 && q2() : W2();
     });
   }), $(() => {
     V2 && V2();
-  }), (t3, o2) => (s(), h(d(su), { locale: d(S2), theme: d(_2) }, { default: M(() => [g(d(tt), { class: p(d(a2)), style: c({ borderRadius: e2.borderRadius }) }, { default: M(() => [u("div", { class: "screen-wrap", style: c(R2.value) }, [u("div", { class: "screen-canvas", ref_key: "fitDomRef", ref: w2 }, [d(L2).getCanvasConfig.watermark ? (s(), h(d(oe), { key: 0, content: d(L2).getCanvasConfig.watermark, style: c({ position: "absolute", width: `${d(L2).getCanvasConfig.width}px`, height: `${d(L2).getCanvasConfig.height}px` }) }, null, 8, ["content", "style"])) : f("", true), (s(true), r(m, null, v(z2.value, (e3, t4) => P((s(), r("div", { class: p(["chart-contain", A2(e3)]), style: c(j2(e3)), key: e3?.chart.id }, [u("div", { ref_for: true, ref: (e4) => (function(e5, t5) {
+  }), (t3, o2) => (s(), h(d(pu), { locale: d(S2), theme: d(_2) }, { default: M(() => [g(d(tt), { class: p(d(a2)), style: c({ borderRadius: e2.borderRadius }) }, { default: M(() => [u("div", { class: "screen-wrap", style: c(R2.value) }, [u("div", { class: "screen-canvas", ref_key: "fitDomRef", ref: w2 }, [d(L2).getCanvasConfig.watermark ? (s(), h(d(oe), { key: 0, content: d(L2).getCanvasConfig.watermark, style: c({ position: "absolute", width: `${d(L2).getCanvasConfig.width}px`, height: `${d(L2).getCanvasConfig.height}px` }) }, null, 8, ["content", "style"])) : f("", true), (s(true), r(m, null, v(O2.value, (e3, t4) => P((s(), r("div", { class: p(["chart-contain", A2(e3)]), style: c(j2(e3)), key: e3?.chart.id }, [u("div", { ref_for: true, ref: (e4) => (function(e5, t5) {
     x2.value[t5] = e5;
-  })(e4, t4), style: c(H2(e3)) }, [(s(), h(E(e3?.chart && e3.chart.type && d(Sd)[e3.chart.type].component), { class: "component", id: `com${e3?.chart.id}`, chart: e3?.chart, "chart-contain": e3?.chartContain }, null, 8, ["id", "chart", "chart-contain"]))], 4)], 6)), [[F, void 0 === e3.chart?.showHide?.show && e3.chartContain?.show || void 0 !== e3.chart?.showHide?.show && e3.chart?.showHide?.show]])), 128))], 512)], 4)]), _: 1 }, 8, ["class", "style"]), g(d(ne), { open: I2.value, "onUpdate:open": o2[0] || (o2[0] = (e3) => I2.value = e3), "get-container": G2, width: T2.value + 48, footer: null, mask: true, centered: true }, { title: M(() => [u("div", cu, k(B2.value), 1)]), default: M(() => [g(Ip, { "frame-src": D2.value, "frame-width": T2.value, "frame-height": N2.value }, null, 8, ["frame-src", "frame-width", "frame-height"])]), _: 1 }, 8, ["open", "width"])]), _: 1 }, 8, ["locale", "theme"]));
-} }), du = Ot(pu, [["__scopeId", "data-v-71da9bb4"]]), uu = e({ __name: "ScreenSizeConfig", setup(e2) {
+  })(e4, t4), style: c(H2(e3)) }, [(s(), h(E(e3?.chart && e3.chart.type && d(Sd)[e3.chart.type].component), { class: "component", id: `com${e3?.chart.id}`, chart: e3?.chart, "chart-contain": e3?.chartContain }, null, 8, ["id", "chart", "chart-contain"]))], 4)], 6)), [[F, void 0 === e3.chart?.showHide?.show && e3.chartContain?.show || void 0 !== e3.chart?.showHide?.show && e3.chart?.showHide?.show]])), 128))], 512)], 4)]), _: 1 }, 8, ["class", "style"]), g(d(ne), { open: I2.value, "onUpdate:open": o2[0] || (o2[0] = (e3) => I2.value = e3), "get-container": G2, width: T2.value + 48, footer: null, mask: true, centered: true }, { title: M(() => [u("div", du, k(B2.value), 1)]), default: M(() => [g(Ip, { "frame-src": D2.value, "frame-width": T2.value, "frame-height": N2.value }, null, 8, ["frame-src", "frame-width", "frame-height"])]), _: 1 }, 8, ["open", "width"])]), _: 1 }, 8, ["locale", "theme"]));
+} }), fu = zt(uu, [["__scopeId", "data-v-71da9bb4"]]), hu = e({ __name: "ScreenSizeConfig", setup(e2) {
   const t2 = y("1k"), o2 = y([{ value: "720", label: "1280*720" }, { value: "1k", label: "1920*1080" }, { value: "2k", label: "2048*1152" }, { value: "4k", label: "4096*2160" }, { value: "自定义", label: "自定义" }]), n2 = Ci(), l2 = (e3) => {
     const t3 = o2.value?.find((t4) => t4.value === e3);
     if (t3) {
@@ -3634,9 +3640,9 @@ const cu = { class: "share-title" }, pu = e({ __name: "ScreenPreview", props: { 
   const { prefixCls: i2 } = fe("size-config");
   return (e3, a2) => {
     const r2 = x("AInput");
-    return s(), h(d(ae), { compact: "", class: p(d(i2)) }, { default: M(() => [g(d(le), { class: "select-size", value: t2.value, "onUpdate:value": a2[0] || (a2[0] = (e4) => t2.value = e4), options: o2.value, onChange: l2 }, null, 8, ["value", "options"]), g(d(Z), { value: d(n2).getCanvasConfig.width, "onUpdate:value": a2[1] || (a2[1] = (e4) => d(n2).getCanvasConfig.width = e4), class: "input-left", placeholder: "宽度", min: 50, max: 1e4, controls: false, maxlength: 5 }, { prefix: M(() => [...a2[3] || (a2[3] = [u("div", { class: "prefix" }, "W", -1)])]), _: 1 }, 8, ["value"]), g(r2, { class: "input-split", placeholder: "*", disabled: "" }), g(d(Z), { value: d(n2).getCanvasConfig.height, "onUpdate:value": a2[2] || (a2[2] = (e4) => d(n2).getCanvasConfig.height = e4), class: "input-right", placeholder: "高度", min: 50, max: 1e4, controls: false, maxlength: 5 }, { prefix: M(() => [...a2[4] || (a2[4] = [u("div", { class: "prefix" }, "H", -1)])]), _: 1 }, 8, ["value"])]), _: 1 }, 8, ["class"]);
+    return s(), h(d(ae), { compact: "", class: p(d(i2)) }, { default: M(() => [g(d(le), { class: "select-size", value: t2.value, "onUpdate:value": a2[0] || (a2[0] = (e4) => t2.value = e4), options: o2.value, onChange: l2 }, null, 8, ["value", "options"]), g(d(q), { value: d(n2).getCanvasConfig.width, "onUpdate:value": a2[1] || (a2[1] = (e4) => d(n2).getCanvasConfig.width = e4), class: "input-left", placeholder: "宽度", min: 50, max: 1e4, controls: false, maxlength: 5 }, { prefix: M(() => [...a2[3] || (a2[3] = [u("div", { class: "prefix" }, "W", -1)])]), _: 1 }, 8, ["value"]), g(r2, { class: "input-split", placeholder: "*", disabled: "" }), g(d(q), { value: d(n2).getCanvasConfig.height, "onUpdate:value": a2[2] || (a2[2] = (e4) => d(n2).getCanvasConfig.height = e4), class: "input-right", placeholder: "高度", min: 50, max: 1e4, controls: false, maxlength: 5 }, { prefix: M(() => [...a2[4] || (a2[4] = [u("div", { class: "prefix" }, "H", -1)])]), _: 1 }, 8, ["value"])]), _: 1 }, 8, ["class"]);
   };
-} }), fu = Ot(uu, [["__scopeId", "data-v-148656f7"]]), hu = { class: "label" }, gu = { key: 2 }, yu = { key: 0, class: "copy-action" }, mu = { class: "child-item" }, vu = e({ __name: "ConfigGroup", props: { title: { type: String, default: "" }, allowCollapse: { type: Boolean, default: true }, allowCheck: { type: Boolean, default: false }, titleCheck: { type: Boolean, default: false }, defaultExpand: { type: Boolean, default: true }, allowCopy: { type: Boolean, default: false }, tooltip: { type: String, default: "" } }, emits: ["checked", "copy", "paste"], setup(e2, { emit: t2 }) {
+} }), gu = zt(hu, [["__scopeId", "data-v-148656f7"]]), yu = { class: "label" }, mu = { key: 2 }, vu = { key: 0, class: "copy-action" }, Cu = { class: "child-item" }, bu = e({ __name: "ConfigGroup", props: { title: { type: String, default: "" }, allowCollapse: { type: Boolean, default: true }, allowCheck: { type: Boolean, default: false }, titleCheck: { type: Boolean, default: false }, defaultExpand: { type: Boolean, default: true }, allowCopy: { type: Boolean, default: false }, tooltip: { type: String, default: "" } }, emits: ["checked", "copy", "paste"], setup(e2, { emit: t2 }) {
   const o2 = e2, n2 = t2, l2 = y(), i2 = y(o2.defaultExpand), { prefixCls: c2 } = fe("config-group"), m2 = Ci();
   function v2() {
     o2.allowCollapse ? i2.value = !i2.value : i2.value = true;
@@ -3654,13 +3660,13 @@ const cu = { class: "share-title" }, pu = e({ __name: "ScreenPreview", props: { 
   }
   return a(() => o2.titleCheck, (e3) => {
     l2.value = e3, e3 && (i2.value = e3);
-  }, { immediate: true }), (t3, o3) => (s(), r("div", { class: p(d(c2)) }, [u("div", { class: p(["group-title", [e2.allowCollapse ? "collapsed" : ""]]), onClick: v2 }, [u("div", hu, [e2.allowCheck ? (s(), h(d(K), { key: 0, checked: l2.value, "onUpdate:checked": o3[0] || (o3[0] = (e3) => l2.value = e3), onClick: o3[1] || (o3[1] = w(() => {
-  }, ["stop"])), onChange: C2 }, null, 8, ["checked"])) : f("", true), e2.tooltip ? (s(), h(d(Y), { key: 1, title: e2.tooltip }, { default: M(() => [S(k(e2.title), 1)]), _: 1 }, 8, ["title"])) : (s(), r("span", gu, k(e2.title), 1)), !e2.allowCheck && e2.allowCollapse || e2.allowCheck && e2.titleCheck ? (s(), h(d(be), { key: 3, icon: `ant-design:${i2.value ? "up" : "down"}-outlined`, size: 12 }, null, 8, ["icon"])) : f("", true)]), u("div", { onClick: o3[2] || (o3[2] = w(() => {
-  }, ["stop"])) }, [H(t3.$slots, "action", {}, void 0, true)]), e2.allowCopy ? (s(), r("div", yu, [g(d(Y), { placement: "top", title: `复制${e2.title}` }, { default: M(() => [g(d(be), { "aria-hidden": "false", size: 12, icon: "iconfont:icon-mfish-copy", onClick: w(b2, ["stop"]) })]), _: 1 }, 8, ["title"]), g(d(Y), { placement: "top", title: `粘贴${e2.title}` }, { default: M(() => [g(d(be), { "aria-hidden": "false", size: 12, icon: "iconfont:icon-mfish-paste", onClick: w(x2, ["stop"]) })]), _: 1 }, 8, ["title"])])) : f("", true)], 2), g(d(rt), { show: !e2.allowCheck && i2.value || e2.allowCheck && i2.value && e2.titleCheck }, { default: M(() => [u("div", mu, [H(t3.$slots, "default", {}, void 0, true)])]), _: 3 }, 8, ["show"])], 2));
-} }), Cu = Ot(vu, [["__scopeId", "data-v-64cffaa0"]]), bu = { class: "table-bordered" }, Mu = e({ __name: "GlobalParamsConfig", setup(e2) {
+  }, { immediate: true }), (t3, o3) => (s(), r("div", { class: p(d(c2)) }, [u("div", { class: p(["group-title", [e2.allowCollapse ? "collapsed" : ""]]), onClick: v2 }, [u("div", yu, [e2.allowCheck ? (s(), h(d(K), { key: 0, checked: l2.value, "onUpdate:checked": o3[0] || (o3[0] = (e3) => l2.value = e3), onClick: o3[1] || (o3[1] = w(() => {
+  }, ["stop"])), onChange: C2 }, null, 8, ["checked"])) : f("", true), e2.tooltip ? (s(), h(d(Z), { key: 1, title: e2.tooltip }, { default: M(() => [S(k(e2.title), 1)]), _: 1 }, 8, ["title"])) : (s(), r("span", mu, k(e2.title), 1)), !e2.allowCheck && e2.allowCollapse || e2.allowCheck && e2.titleCheck ? (s(), h(d(be), { key: 3, icon: `ant-design:${i2.value ? "up" : "down"}-outlined`, size: 12 }, null, 8, ["icon"])) : f("", true)]), u("div", { onClick: o3[2] || (o3[2] = w(() => {
+  }, ["stop"])) }, [H(t3.$slots, "action", {}, void 0, true)]), e2.allowCopy ? (s(), r("div", vu, [g(d(Z), { placement: "top", title: `复制${e2.title}` }, { default: M(() => [g(d(be), { "aria-hidden": "false", size: 12, icon: "iconfont:icon-mfish-copy", onClick: w(b2, ["stop"]) })]), _: 1 }, 8, ["title"]), g(d(Z), { placement: "top", title: `粘贴${e2.title}` }, { default: M(() => [g(d(be), { "aria-hidden": "false", size: 12, icon: "iconfont:icon-mfish-paste", onClick: w(x2, ["stop"]) })]), _: 1 }, 8, ["title"])])) : f("", true)], 2), g(d(rt), { show: !e2.allowCheck && i2.value || e2.allowCheck && i2.value && e2.titleCheck }, { default: M(() => [u("div", Cu, [H(t3.$slots, "default", {}, void 0, true)])]), _: 3 }, 8, ["show"])], 2));
+} }), Mu = zt(bu, [["__scopeId", "data-v-64cffaa0"]]), wu = { class: "table-bordered" }, xu = e({ __name: "GlobalParamsConfig", setup(e2) {
   const { prefixCls: t2 } = fe("global-params-config"), o2 = Ci(), n2 = [{ title: "参数名", dataIndex: "name", align: "center" }, { title: "默认值", dataIndex: "defaultValue", align: "center" }];
-  return (e3, a2) => (s(), r("div", { class: p(d(t2)) }, [g(Cu, { title: "全局变量", tooltip: "用于大屏全局接收外部参数，此处只展示。配置在数据->参数绑定->全局变量中设置" }, { default: M(() => [u("div", bu, [g(d(ie), { size: "small", columns: n2, "data-source": d(o2).getCanvasConfig?.globalParams, bordered: "", pagination: false }, null, 8, ["data-source"])])]), _: 1 })], 2));
-} }), wu = { class: "title" }, xu = { class: "title" }, Su = { class: "title" }, ku = e({ __name: "CanvasConfig", setup(e2) {
+  return (e3, a2) => (s(), r("div", { class: p(d(t2)) }, [g(Mu, { title: "全局变量", tooltip: "用于大屏全局接收外部参数，此处只展示。配置在数据->参数绑定->全局变量中设置" }, { default: M(() => [u("div", wu, [g(d(ie), { size: "small", columns: n2, "data-source": d(o2).getCanvasConfig?.globalParams, bordered: "", pagination: false }, null, 8, ["data-source"])])]), _: 1 })], 2));
+} }), Su = { class: "title" }, ku = { class: "title" }, $u = { class: "title" }, Lu = e({ __name: "CanvasConfig", setup(e2) {
   const { prefixCls: t2 } = fe("canvas-config"), o2 = Ci(), n2 = y(), a2 = [{ title: "深色", value: Te.DARK }, { title: "浅色", value: Te.LIGHT }, { title: "跟随平台", value: Te.SYSTEM }], c2 = l({ [Li.FIT_BOX]: { name: "全屏铺满", icon: "carbon:fit-to-screen", description: "全屏铺满（设备与配置大屏比例不同时会变形）" }, [Li.FIT_ORIGINAL]: { name: "原始比例", icon: "carbon:center-to-fit", description: "原始比例（保持配置大屏比例，不填充空白处）" }, [Li.FIT_WIDTH_SCALE]: { name: "横向适配", icon: "carbon:fit-to-width", description: "横向适配-保持纵横比（横向铺满，允许纵向滚动，保持原有画布比例）" }, [Li.FIT_HEIGHT_SCALE]: { name: "纵向适配", icon: "carbon:fit-to-height", description: "纵向适配-保持纵横比（纵向铺满，允许横向滚动，保持原有画布比例）" }, [Li.FIT_WIDTH]: { name: "横向适配", icon: "carbon:fit-to-width", description: "横向适配（横向铺满，允许纵向滚动，会变形）" }, [Li.FIT_HEIGHT]: { name: "纵向适配", icon: "carbon:fit-to-height", description: "纵向适配（纵向铺满，允许横向滚动，会变形）" } });
   function f2(e3) {
     C2(e3), n2.value = e3;
@@ -3680,15 +3686,15 @@ const cu = { class: "share-title" }, pu = e({ __name: "ScreenPreview", props: { 
     }, 200);
   }), (e3, l2) => {
     const i2 = x("AInput");
-    return s(), h(d(tt), null, { default: M(() => [u("div", { class: p(d(t2)) }, [l2[8] || (l2[8] = u("div", { class: "title" }, "大屏名称", -1)), g(i2, { value: d(o2).getCanvasConfig.screenName, "onUpdate:value": l2[0] || (l2[0] = (e4) => d(o2).getCanvasConfig.screenName = e4), "show-count": "", maxlength: 30 }, null, 8, ["value"]), l2[9] || (l2[9] = u("div", { class: "title" }, " 描述", -1)), g(d(re), { value: d(o2).getCanvasConfig.screenDesc, "onUpdate:value": l2[1] || (l2[1] = (e4) => d(o2).getCanvasConfig.screenDesc = e4), "show-count": "", maxlength: 200 }, null, 8, ["value"]), l2[10] || (l2[10] = u("div", { class: "title" }, "大屏尺寸", -1)), g(fu), u("div", wu, [l2[5] || (l2[5] = S(" 主题 ", -1)), g(d(se), { size: "small", value: d(o2).getCanvasConfig.theme, "onUpdate:value": l2[2] || (l2[2] = (e4) => d(o2).getCanvasConfig.theme = e4) }, { default: M(() => [(s(), r(m, null, v(a2, (e4, t3) => g(d(ce), { key: t3, value: e4.value }, { default: M(() => [S(k(e4.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])]), l2[11] || (l2[11] = u("div", { class: "title" }, "背景颜色", -1)), g(d(bo), { value: n2.value, onConfirmChange: f2, onInputChange: C2 }, null, 8, ["value"]), l2[12] || (l2[12] = u("div", { class: "title" }, "背景图片", -1)), g(d(it), { "file-keys": d(o2).getCanvasConfig.backgroundImage, accepts: ".jpg,.jpeg,.png,.svg", "button-text": "上传背景", "max-count": 1, "is-pic": true, onSuccess: b2, onRemove: w2 }, null, 8, ["file-keys"]), u("div", xu, [l2[6] || (l2[6] = S(" 水印 ", -1)), u("div", null, [g(i2, { value: d(o2).getCanvasConfig.watermark, "onUpdate:value": l2[3] || (l2[3] = (e4) => d(o2).getCanvasConfig.watermark = e4), placeholder: "清空无水印", "show-count": "", maxlength: 50 }, null, 8, ["value"])])]), u("div", Su, [l2[7] || (l2[7] = S(" 适配方式 ", -1)), u("div", null, [g(d(se), { value: d(o2).getCanvasConfig.fitType, "onUpdate:value": l2[4] || (l2[4] = (e4) => d(o2).getCanvasConfig.fitType = e4) }, { default: M(() => [(s(true), r(m, null, v(Object.keys(c2), (e4) => (s(), h(d(Y), { key: e4, placement: "bottomRight", title: c2[e4].description }, { default: M(() => [g(d(ce), { class: p(`${d(t2)}-radio-button`), value: e4 }, { default: M(() => [g(d(be), { icon: c2[e4].icon }, null, 8, ["icon"])]), _: 2 }, 1032, ["class", "value"])]), _: 2 }, 1032, ["title"]))), 128))]), _: 1 }, 8, ["value"])])]), g(Mu)], 2)]), _: 1 });
+    return s(), h(d(tt), null, { default: M(() => [u("div", { class: p(d(t2)) }, [l2[8] || (l2[8] = u("div", { class: "title" }, "大屏名称", -1)), g(i2, { value: d(o2).getCanvasConfig.screenName, "onUpdate:value": l2[0] || (l2[0] = (e4) => d(o2).getCanvasConfig.screenName = e4), "show-count": "", maxlength: 30 }, null, 8, ["value"]), l2[9] || (l2[9] = u("div", { class: "title" }, " 描述", -1)), g(d(re), { value: d(o2).getCanvasConfig.screenDesc, "onUpdate:value": l2[1] || (l2[1] = (e4) => d(o2).getCanvasConfig.screenDesc = e4), "show-count": "", maxlength: 200 }, null, 8, ["value"]), l2[10] || (l2[10] = u("div", { class: "title" }, "大屏尺寸", -1)), g(gu), u("div", Su, [l2[5] || (l2[5] = S(" 主题 ", -1)), g(d(se), { size: "small", value: d(o2).getCanvasConfig.theme, "onUpdate:value": l2[2] || (l2[2] = (e4) => d(o2).getCanvasConfig.theme = e4) }, { default: M(() => [(s(), r(m, null, v(a2, (e4, t3) => g(d(ce), { key: t3, value: e4.value }, { default: M(() => [S(k(e4.title), 1)]), _: 2 }, 1032, ["value"])), 64))]), _: 1 }, 8, ["value"])]), l2[11] || (l2[11] = u("div", { class: "title" }, "背景颜色", -1)), g(d(bo), { value: n2.value, onConfirmChange: f2, onInputChange: C2 }, null, 8, ["value"]), l2[12] || (l2[12] = u("div", { class: "title" }, "背景图片", -1)), g(d(it), { "file-keys": d(o2).getCanvasConfig.backgroundImage, accepts: ".jpg,.jpeg,.png,.svg", "button-text": "上传背景", "max-count": 1, "is-pic": true, onSuccess: b2, onRemove: w2 }, null, 8, ["file-keys"]), u("div", ku, [l2[6] || (l2[6] = S(" 水印 ", -1)), u("div", null, [g(i2, { value: d(o2).getCanvasConfig.watermark, "onUpdate:value": l2[3] || (l2[3] = (e4) => d(o2).getCanvasConfig.watermark = e4), placeholder: "清空无水印", "show-count": "", maxlength: 50 }, null, 8, ["value"])])]), u("div", $u, [l2[7] || (l2[7] = S(" 适配方式 ", -1)), u("div", null, [g(d(se), { value: d(o2).getCanvasConfig.fitType, "onUpdate:value": l2[4] || (l2[4] = (e4) => d(o2).getCanvasConfig.fitType = e4) }, { default: M(() => [(s(true), r(m, null, v(Object.keys(c2), (e4) => (s(), h(d(Z), { key: e4, placement: "bottomRight", title: c2[e4].description }, { default: M(() => [g(d(ce), { class: p(`${d(t2)}-radio-button`), value: e4 }, { default: M(() => [g(d(be), { icon: c2[e4].icon }, null, 8, ["icon"])]), _: 2 }, 1032, ["class", "value"])]), _: 2 }, 1032, ["title"]))), 128))]), _: 1 }, 8, ["value"])])]), g(xu)], 2)]), _: 1 });
   };
-} }), $u = Ot(ku, [["__scopeId", "data-v-c7f8401a"]]), Lu = { class: "header" }, _u = e({ name: "FrameConfig", __name: "index", props: { collapsed: et.bool.def(false) }, setup(e2, { expose: t2 }) {
+} }), _u = zt(Lu, [["__scopeId", "data-v-c7f8401a"]]), Iu = { class: "header" }, Du = e({ name: "FrameConfig", __name: "index", props: { collapsed: et.bool.def(false) }, setup(e2, { expose: t2 }) {
   const o2 = e2, { prefixCls: l2 } = fe("frame-config"), i2 = n(() => [l2, { collapsed: o2.collapsed }]), c2 = y(), m2 = y(), v2 = y(), C2 = Ci(), b2 = y();
   function w2(e3) {
     if (e3) {
       const t3 = Sd[e3.chart.type].config;
       c2.value = Object.keys(t3).filter((e4) => t3[e4].show).map((e4) => t3[e4]);
-    } else c2.value = [{ value: "画布配置", payload: { icon: "carbon:gui-management", component: T($u) } }];
+    } else c2.value = [{ value: "画布配置", payload: { icon: "carbon:gui-management", component: T(_u) } }];
     m2.value = c2.value[0].value, c2.value[0].payload.component ? v2.value = G(c2.value[0].payload.component) : v2.value = null;
   }
   function x2(e3) {
@@ -3700,13 +3706,13 @@ const cu = { class: "share-title" }, pu = e({ __name: "ScreenPreview", props: { 
     w2(void 0 === t3 ? e3 : C2.getCurConfigComponent);
   }, { immediate: true }), t2({ rowSelect: function(e3) {
     b2.value = e3;
-  } }), (e3, t3) => (s(), r("div", { class: p(i2.value) }, [u("div", Lu, [g(d(X), { value: m2.value, options: c2.value, onChange: x2, block: "" }, { label: M(({ value: e4, payload: t4 }) => [t4.icon ? (s(), h(d(be), { key: 0, icon: t4.icon }, null, 8, ["icon"])) : f("", true), S(" " + k(e4), 1)]), _: 1 }, 8, ["value", "options"])]), (s(), h(E(v2.value), { "select-data": b2.value }, { "data-select": M(() => [H(e3.$slots, "data-select", { curSelect: b2.value })]), _: 3 }, 8, ["select-data"]))], 2));
-} }), Iu = { class: "action" }, Du = { class: "ac-int" }, Tu = e({ __name: "CanvasRulerLine", props: { lineValue: { type: Number, default: 0 }, lineList: { type: Array, default: () => [] } }, setup(e2) {
+  } }), (e3, t3) => (s(), r("div", { class: p(i2.value) }, [u("div", Iu, [g(d(Y), { value: m2.value, options: c2.value, onChange: x2, block: "" }, { label: M(({ value: e4, payload: t4 }) => [t4.icon ? (s(), h(d(be), { key: 0, icon: t4.icon }, null, 8, ["icon"])) : f("", true), S(" " + k(e4), 1)]), _: 1 }, 8, ["value", "options"])]), (s(), h(E(v2.value), { "select-data": b2.value }, { "data-select": M(() => [H(e3.$slots, "data-select", { curSelect: b2.value })]), _: 3 }, 8, ["select-data"]))], 2));
+} }), Tu = { class: "action" }, Nu = { class: "ac-int" }, Bu = e({ __name: "CanvasRulerLine", props: { lineValue: { type: Number, default: 0 }, lineList: { type: Array, default: () => [] } }, setup(e2) {
   const t2 = e2, { lineList: o2 } = t2, n2 = Ci(), { prefixCls: a2 } = fe("canvas-ruler-line"), l2 = he().getThemeColor;
-  return (e3, t3) => (s(), r("div", { class: p(d(a2)) }, [(s(true), r(m, null, v(d(o2), (e4, t4) => (s(), r("div", { class: p(["line-item", { x: "x" === e4.position, y: "y" === e4.position }]), style: c({ left: "x" === e4.position ? `${Math.round(e4.offset * d(n2).getScale)}px` : 0, top: "y" === e4.position ? `${Math.round(e4.offset * d(n2).getScale)}px` : 0 }), key: `${e4}${t4}` }, [u("div", Iu, [g(d(be), { class: "ac-close", icon: "ant-design:close-outline", color: d(l2), onClick: (n3) => (function(e5, t5) {
+  return (e3, t3) => (s(), r("div", { class: p(d(a2)) }, [(s(true), r(m, null, v(d(o2), (e4, t4) => (s(), r("div", { class: p(["line-item", { x: "x" === e4.position, y: "y" === e4.position }]), style: c({ left: "x" === e4.position ? `${Math.round(e4.offset * d(n2).getScale)}px` : 0, top: "y" === e4.position ? `${Math.round(e4.offset * d(n2).getScale)}px` : 0 }), key: `${e4}${t4}` }, [u("div", Tu, [g(d(be), { class: "ac-close", icon: "ant-design:close-outline", color: d(l2), onClick: (n3) => (function(e5, t5) {
     o2.splice(t5, 1);
-  })(e4.position, t4) }, null, 8, ["color", "onClick"]), u("span", Du, k(e4.value), 1)])], 6))), 128))], 2));
-} }), Nu = Ot(Tu, [["__scopeId", "data-v-91bb6b29"]]), Bu = { id: "horn", class: "horn" }, zu = ["id", "width", "height"], Ou = { class: "indicator-value" }, Ru = ["id", "height", "width"], ju = { class: "indicator-value" }, Au = e({ __name: "CanvasRuler", props: { rulerXLeft: { type: Number, default: 0 }, rulerYTop: { type: Number, default: 0 }, rulerX: { type: Number, default: 5e3 }, rulerY: { type: Number, default: 3e3 }, drift: { type: Number, default: 0 }, rulerHeight: { type: Number, default: 28 }, rulerWidth: { type: Number, default: 38 } }, setup(e2) {
+  })(e4.position, t4) }, null, 8, ["color", "onClick"]), u("span", Nu, k(e4.value), 1)])], 6))), 128))], 2));
+} }), Ou = zt(Bu, [["__scopeId", "data-v-91bb6b29"]]), zu = { id: "horn", class: "horn" }, Ru = ["id", "width", "height"], ju = { class: "indicator-value" }, Au = ["id", "height", "width"], Pu = { class: "indicator-value" }, Eu = e({ __name: "CanvasRuler", props: { rulerXLeft: { type: Number, default: 0 }, rulerYTop: { type: Number, default: 0 }, rulerX: { type: Number, default: 5e3 }, rulerY: { type: Number, default: 3e3 }, drift: { type: Number, default: 0 }, rulerHeight: { type: Number, default: 28 }, rulerWidth: { type: Number, default: 38 } }, setup(e2) {
   const t2 = e2, l2 = Ci(), { prefixCls: i2 } = fe("canvas-ruler"), f2 = y(0), m2 = y(true), v2 = T({}), b2 = T({}), w2 = n(() => `${t2.rulerXLeft}px`), x2 = n(() => `${t2.rulerYTop}px`), S2 = o("rulerXRef"), $2 = o("rulerYRef"), L2 = n(() => he().getDarkMode.value === Te.DARK ? "#999" : "#666");
   a(() => he().getDarkMode.value, (e3, t3) => {
     e3 !== t3 && C(() => {
@@ -3725,11 +3731,11 @@ const cu = { class: "share-title" }, pu = e({ __name: "ScreenPreview", props: { 
     m2.value = true;
     const o2 = Math.round(e3.offsetX / l2.getScale);
     l2.getGuideLine.lineListY.push({ position: "x", offset: o2, value: o2 - t2.drift });
-  }, z2 = (e3) => {
+  }, O2 = (e3) => {
     b2.value = { display: "block", left: 0, top: `${e3.offsetY}px`, width: "100vw", height: "1px" };
     const o2 = Math.round(e3.offsetY / l2.getScale);
     f2.value = o2 - t2.drift;
-  }, O2 = () => {
+  }, z2 = () => {
     b2.value = { display: "none" };
   }, R2 = (e3) => {
     m2.value = true;
@@ -3763,14 +3769,14 @@ const cu = { class: "share-title" }, pu = e({ __name: "ScreenPreview", props: { 
   const V2 = () => {
     m2.value = !m2.value;
   };
-  return (t3, o2) => (s(), r("div", { class: p(d(i2)) }, [u("div", Bu, [g(d(Y), { title: (m2.value ? "隐藏" : "显示") + "辅助线" }, { default: M(() => [m2.value ? (s(), h(d(be), { key: 0, class: "icon", icon: "ant-design:eye-outlined", onClick: V2 })) : (s(), h(d(be), { key: 1, class: "icon", icon: "ant-design:eye-invisible-outlined", onClick: V2 }))]), _: 1 }, 8, ["title"])]), u("div", { class: "ruler rulerX", style: c({ width: `${_2.value}px`, left: w2.value }) }, [u("canvas", { ref_key: "rulerXRef", ref: S2, id: `${d(i2)}-x`, width: _2.value, height: e2.rulerHeight, onMousemove: D2, onMouseleave: N2, onClick: B2 }, null, 40, zu), u("div", { class: "indicator x", style: c(v2.value) }, [u("div", Ou, k(f2.value), 1)], 4), P(g(Nu, { "line-value": f2.value, "line-list": d(l2).getGuideLine.lineListY }, null, 8, ["line-value", "line-list"]), [[F, m2.value]])], 4), u("div", { class: "ruler rulerY", style: c({ height: `${I2.value}px`, top: x2.value }) }, [u("canvas", { ref_key: "rulerYRef", ref: $2, id: `${d(i2)}-y`, height: I2.value, width: e2.rulerWidth, onMousemove: z2, onMouseleave: O2, onClick: R2 }, null, 40, Ru), u("div", { class: "indicator y", style: c(b2.value) }, [u("div", ju, k(f2.value), 1)], 4), P(g(Nu, { "line-value": f2.value, "line-list": d(l2).getGuideLine.lineListX }, null, 8, ["line-value", "line-list"]), [[F, m2.value]])], 4)], 2));
-} }), Pu = Ot(Au, [["__scopeId", "data-v-eeb86e63"]]), Eu = e({ __name: "CanvasBackground", props: { drift: { type: Number, default: 0 }, width: { type: Number, default: 9e3 }, height: { type: Number, default: 6e3 }, ruler: { type: Object, default: () => ({ height: 28, width: 38 }) } }, setup(e2) {
+  return (t3, o2) => (s(), r("div", { class: p(d(i2)) }, [u("div", zu, [g(d(Z), { title: (m2.value ? "隐藏" : "显示") + "辅助线" }, { default: M(() => [m2.value ? (s(), h(d(be), { key: 0, class: "icon", icon: "ant-design:eye-outlined", onClick: V2 })) : (s(), h(d(be), { key: 1, class: "icon", icon: "ant-design:eye-invisible-outlined", onClick: V2 }))]), _: 1 }, 8, ["title"])]), u("div", { class: "ruler rulerX", style: c({ width: `${_2.value}px`, left: w2.value }) }, [u("canvas", { ref_key: "rulerXRef", ref: S2, id: `${d(i2)}-x`, width: _2.value, height: e2.rulerHeight, onMousemove: D2, onMouseleave: N2, onClick: B2 }, null, 40, Ru), u("div", { class: "indicator x", style: c(v2.value) }, [u("div", ju, k(f2.value), 1)], 4), P(g(Ou, { "line-value": f2.value, "line-list": d(l2).getGuideLine.lineListY }, null, 8, ["line-value", "line-list"]), [[F, m2.value]])], 4), u("div", { class: "ruler rulerY", style: c({ height: `${I2.value}px`, top: x2.value }) }, [u("canvas", { ref_key: "rulerYRef", ref: $2, id: `${d(i2)}-y`, height: I2.value, width: e2.rulerWidth, onMousemove: O2, onMouseleave: z2, onClick: R2 }, null, 40, Au), u("div", { class: "indicator y", style: c(b2.value) }, [u("div", Pu, k(f2.value), 1)], 4), P(g(Ou, { "line-value": f2.value, "line-list": d(l2).getGuideLine.lineListX }, null, 8, ["line-value", "line-list"]), [[F, m2.value]])], 4)], 2));
+} }), Fu = zt(Eu, [["__scopeId", "data-v-eeb86e63"]]), Hu = e({ __name: "CanvasBackground", props: { drift: { type: Number, default: 0 }, width: { type: Number, default: 9e3 }, height: { type: Number, default: 6e3 }, ruler: { type: Object, default: () => ({ height: 28, width: 38 }) } }, setup(e2) {
   const t2 = e2, o2 = Ci(), a2 = Wd(), l2 = n(() => t2.width * o2.getScale + "px"), i2 = n(() => t2.height * o2.getScale + "px"), { prefixCls: u2 } = fe("canvas-background");
   function f2(e3) {
     o2.cleanCurComponent(), 2 !== e3.button && a2.setShowMenu(false);
   }
   return (t3, n2) => (s(), r("div", { class: p(d(u2)), style: c({ width: l2.value, height: i2.value, padding: `${e2.drift * d(o2).getScale}px 0 0 ${e2.drift * d(o2).getScale}px` }), onMousedown: f2 }, [H(t3.$slots, "default", {}, void 0, true)], 38));
-} }), Fu = Ot(Eu, [["__scopeId", "data-v-2efcd248"]]), Hu = { class: "scale-add-reduce" }, Gu = { class: "scale-lock" }, Vu = e({ __name: "CanvasScale", props: { scale: { type: Number, default: 100 }, minScale: { type: Number, default: 20 }, maxScale: { type: Number, default: 500 } }, emits: ["addScale", "reduceScale", "changeScale", "autoScale"], setup(e2, { emit: t2 }) {
+} }), Gu = zt(Hu, [["__scopeId", "data-v-2efcd248"]]), Vu = { class: "scale-add-reduce" }, Uu = { class: "scale-lock" }, Wu = e({ __name: "CanvasScale", props: { scale: { type: Number, default: 100 }, minScale: { type: Number, default: 20 }, maxScale: { type: Number, default: 500 } }, emits: ["addScale", "reduceScale", "changeScale", "autoScale"], setup(e2, { emit: t2 }) {
   const o2 = t2, n2 = y(true), { prefixCls: a2 } = fe("canvas-scale"), l2 = () => {
     o2("reduceScale");
   }, i2 = () => {
@@ -3780,71 +3786,71 @@ const cu = { class: "share-title" }, pu = e({ __name: "ScreenPreview", props: { 
   }, f2 = (e3) => {
     o2("autoScale", e3), n2.value = e3;
   };
-  return (t3, o3) => (s(), r("div", { class: p(d(a2)) }, [u("div", Hu, [g(d(be), { class: "scale-icon", title: "放大", size: 18, icon: "ant-design:plus-outlined", onClick: i2 }), g(d(Z), { size: "small", bordered: false, value: e2.scale, max: e2.maxScale, min: e2.minScale, step: 5, controls: false, formatter: (e3) => `${Math.round(100 * e3)}`, onChange: c2 }, null, 8, ["value", "max", "min", "formatter"]), o3[2] || (o3[2] = u("div", { class: "scale-sign" }, "%", -1)), g(d(be), { class: "scale-icon", title: "缩小", size: 18, icon: "ant-design:minus-outlined", onClick: l2 })]), u("div", Gu, [g(d(Y), { title: n2.value ? "锁定自动比例" : "解锁自动比例", placement: "right" }, { default: M(() => [n2.value ? (s(), h(d(be), { key: 0, icon: "ant-design:unlock-outlined", onClick: o3[0] || (o3[0] = (e3) => f2(false)) })) : (s(), h(d(be), { key: 1, icon: "ant-design:lock-outlined", onClick: o3[1] || (o3[1] = (e3) => f2(true)) }))]), _: 1 }, 8, ["title"])])], 2));
-} }), Uu = e({ __name: "ShortcutViewModal", setup(e2) {
+  return (t3, o3) => (s(), r("div", { class: p(d(a2)) }, [u("div", Vu, [g(d(be), { class: "scale-icon", title: "放大", size: 18, icon: "ant-design:plus-outlined", onClick: i2 }), g(d(q), { size: "small", bordered: false, value: e2.scale, max: e2.maxScale, min: e2.minScale, step: 5, controls: false, formatter: (e3) => `${Math.round(100 * e3)}`, onChange: c2 }, null, 8, ["value", "max", "min", "formatter"]), o3[2] || (o3[2] = u("div", { class: "scale-sign" }, "%", -1)), g(d(be), { class: "scale-icon", title: "缩小", size: 18, icon: "ant-design:minus-outlined", onClick: l2 })]), u("div", Uu, [g(d(Z), { title: n2.value ? "锁定自动比例" : "解锁自动比例", placement: "right" }, { default: M(() => [n2.value ? (s(), h(d(be), { key: 0, icon: "ant-design:unlock-outlined", onClick: o3[0] || (o3[0] = (e3) => f2(false)) })) : (s(), h(d(be), { key: 1, icon: "ant-design:lock-outlined", onClick: o3[1] || (o3[1] = (e3) => f2(true)) }))]), _: 1 }, 8, ["title"])])], 2));
+} }), qu = e({ __name: "ShortcutViewModal", setup(e2) {
   const [t2, { setModalProps: o2 }] = st(async () => {
     o2({ confirmLoading: false, width: "800px", cancelText: "关闭", showOkBtn: false });
   }), [n2] = dt({ columns: [{ title: "功能", dataIndex: "label", width: 120 }, { title: "Win快捷键", dataIndex: "win", width: 120 }, { title: "Mac快捷键", dataIndex: "mac", width: 120 }], dataSource: [{ label: "拖拽 / 放大缩小画布", win: "CTRL + 🖱️拖动 / 滚动", mac: "⌘ + 🖱️拖动 / 滚动", macSource: true }, { label: "向 上/右/下/左 移动", win: "CTRL + ↑ / → / ↓ / ←", mac: "⌘ + ↑" }, { label: "锁定/解锁", win: "CTRL + L / CTRL + SHIFT+ L", mac: "⌘ + L / ⌘ + ⇧ + L" }, { label: "隐藏/显示", win: "CTRL + H / CTRL + SHIFT + H", mac: "⌘ + H / ⌘ + ⇧ + H" }, { label: "组合/拆分", win: "CTRL + G / CTRL + SHIFT + G", mac: "⌘ + G / ⌘ + SHIFT + G" }, { label: "后退/前进", win: "CTRL + Z / CTRL + SHIFT + Z", mac: "⌘ + Z / ⌘ + ⇧ + Z" }, { label: "复制/粘贴", win: "CTRL + C / V", mac: "⌘ + C / V" }, { label: "多选", win: "拖动🖱️框选 / CTRL + 🖱️点击", mac: "拖动🖱️框选 / ⌘ + 🖱️点击" }, { label: "保存", win: "CTRL + S", mac: "⌘ + S" }, { label: "预览", win: "CTRL + P", mac: "⌘ + P" }, { label: "全选", win: "CTRL + A", mac: "⌘ + A" }, { label: "删除", win: "Delete", mac: "Delete" }], bordered: true, showIndexColumn: false, pagination: false, canResize: false, size: "small" });
   return (e3, o3) => (s(), h(d(ct), { onRegister: d(t2), title: "快捷操作" }, { default: M(() => [g(d(ut), { onRegister: d(n2) }, null, 8, ["onRegister"])]), _: 1 }, 8, ["onRegister"]));
-} }), Wu = Ot(e({ __name: "CanvasOperator", setup(e2) {
+} }), Zu = zt(e({ __name: "CanvasOperator", setup(e2) {
   const { prefixCls: t2 } = fe("canvas-operator"), [o2, { openModal: n2 }] = pt();
   function a2() {
     n2(true, {});
   }
-  return (e3, n3) => (s(), r(m, null, [u("div", { class: p(d(t2)) }, [g(d(Y), { title: "快捷方式", placement: "right" }, { default: M(() => [g(d(be), { icon: "carbon:table-shortcut", onClick: a2 })]), _: 1 })], 2), g(Uu, { onRegister: d(o2) }, null, 8, ["onRegister"])], 64));
-} }), [["__scopeId", "data-v-2148ffa6"]]), Zu = { lt: function(e2, t2, o2, n2, a2, l2) {
+  return (e3, n3) => (s(), r(m, null, [u("div", { class: p(d(t2)) }, [g(d(Z), { title: "快捷方式", placement: "right" }, { default: M(() => [g(d(be), { icon: "carbon:table-shortcut", onClick: a2 })]), _: 1 })], 2), g(qu, { onRegister: d(o2) }, null, 8, ["onRegister"])], 64));
+} }), [["__scopeId", "data-v-2148ffa6"]]), Yu = { lt: function(e2, t2, o2, n2, a2, l2) {
   const { symmetricPoint: i2 } = a2;
-  let r2 = Oi(t2, i2), s2 = zi(t2, r2, -e2.rotate), c2 = zi(i2, r2, -e2.rotate), p2 = c2.x - s2.x, d2 = c2.y - s2.y;
+  let r2 = zi(t2, i2), s2 = Oi(t2, r2, -e2.rotate), c2 = Oi(i2, r2, -e2.rotate), p2 = c2.x - s2.x, d2 = c2.y - s2.y;
   if (n2) {
     p2 / d2 > o2 ? (s2.x += Math.abs(p2 - d2 * o2), p2 = d2 * o2) : (s2.y += Math.abs(d2 - p2 / o2), d2 = p2 / o2);
-    const t3 = zi(s2, r2, e2.rotate);
-    r2 = Oi(t3, i2), s2 = zi(t3, r2, -e2.rotate), c2 = zi(i2, r2, -e2.rotate), p2 = c2.x - s2.x, d2 = c2.y - s2.y;
+    const t3 = Oi(s2, r2, e2.rotate);
+    r2 = zi(t3, i2), s2 = Oi(t3, r2, -e2.rotate), c2 = Oi(i2, r2, -e2.rotate), p2 = c2.x - s2.x, d2 = c2.y - s2.y;
   }
   p2 > 10 && d2 > 10 && (e2.width = Math.round(p2 / l2), e2.height = Math.round(d2 / l2), e2.x = Math.round(s2.x / l2), e2.y = Math.round(s2.y / l2));
-}, t: Yu, rt: function(e2, t2, o2, n2, a2, l2) {
+}, t: Xu, rt: function(e2, t2, o2, n2, a2, l2) {
   const { symmetricPoint: i2 } = a2;
-  let r2 = Oi(t2, i2), s2 = zi(t2, r2, -e2.rotate), c2 = zi(i2, r2, -e2.rotate), p2 = s2.x - c2.x, d2 = c2.y - s2.y;
+  let r2 = zi(t2, i2), s2 = Oi(t2, r2, -e2.rotate), c2 = Oi(i2, r2, -e2.rotate), p2 = s2.x - c2.x, d2 = c2.y - s2.y;
   if (n2) {
     p2 / d2 > o2 ? (s2.x -= Math.abs(p2 - d2 * o2), p2 = d2 * o2) : (s2.y += Math.abs(d2 - p2 / o2), d2 = p2 / o2);
-    const t3 = zi(s2, r2, e2.rotate);
-    r2 = Oi(t3, i2), s2 = zi(t3, r2, -e2.rotate), c2 = zi(i2, r2, -e2.rotate), p2 = s2.x - c2.x, d2 = c2.y - s2.y;
+    const t3 = Oi(s2, r2, e2.rotate);
+    r2 = zi(t3, i2), s2 = Oi(t3, r2, -e2.rotate), c2 = Oi(i2, r2, -e2.rotate), p2 = s2.x - c2.x, d2 = c2.y - s2.y;
   }
   p2 > 10 && d2 > 10 && (e2.width = Math.round(p2 / l2), e2.height = Math.round(d2 / l2), e2.x = Math.round(c2.x / l2), e2.y = Math.round(s2.y / l2));
-}, r: Xu, rb: function(e2, t2, o2, n2, a2, l2) {
+}, r: Ku, rb: function(e2, t2, o2, n2, a2, l2) {
   const { symmetricPoint: i2 } = a2;
-  let r2 = Oi(t2, i2), s2 = zi(i2, r2, -e2.rotate), c2 = zi(t2, r2, -e2.rotate), p2 = c2.x - s2.x, d2 = c2.y - s2.y;
+  let r2 = zi(t2, i2), s2 = Oi(i2, r2, -e2.rotate), c2 = Oi(t2, r2, -e2.rotate), p2 = c2.x - s2.x, d2 = c2.y - s2.y;
   if (n2) {
     p2 / d2 > o2 ? (c2.x -= Math.abs(p2 - d2 * o2), p2 = d2 * o2) : (c2.y -= Math.abs(d2 - p2 / o2), d2 = p2 / o2);
-    const t3 = zi(c2, r2, e2.rotate);
-    r2 = Oi(t3, i2), s2 = zi(i2, r2, -e2.rotate), c2 = zi(t3, r2, -e2.rotate), p2 = c2.x - s2.x, d2 = c2.y - s2.y;
+    const t3 = Oi(c2, r2, e2.rotate);
+    r2 = zi(t3, i2), s2 = Oi(i2, r2, -e2.rotate), c2 = Oi(t3, r2, -e2.rotate), p2 = c2.x - s2.x, d2 = c2.y - s2.y;
   }
   p2 > 10 && d2 > 10 && (e2.width = Math.round(p2 / l2), e2.height = Math.round(d2 / l2), e2.x = Math.round(s2.x / l2), e2.y = Math.round(s2.y / l2));
-}, b: Yu, lb: function(e2, t2, o2, n2, a2, l2) {
+}, b: Xu, lb: function(e2, t2, o2, n2, a2, l2) {
   const { symmetricPoint: i2 } = a2;
-  let r2 = Oi(t2, i2), s2 = zi(i2, r2, -e2.rotate), c2 = zi(t2, r2, -e2.rotate), p2 = s2.x - c2.x, d2 = c2.y - s2.y;
+  let r2 = zi(t2, i2), s2 = Oi(i2, r2, -e2.rotate), c2 = Oi(t2, r2, -e2.rotate), p2 = s2.x - c2.x, d2 = c2.y - s2.y;
   if (n2) {
     p2 / d2 > o2 ? (c2.x += Math.abs(p2 - d2 * o2), p2 = d2 * o2) : (c2.y -= Math.abs(d2 - p2 / o2), d2 = p2 / o2);
-    const t3 = zi(c2, r2, e2.rotate);
-    r2 = Oi(t3, i2), s2 = zi(i2, r2, -e2.rotate), c2 = zi(t3, r2, -e2.rotate), p2 = s2.x - c2.x, d2 = c2.y - s2.y;
+    const t3 = Oi(c2, r2, e2.rotate);
+    r2 = zi(t3, i2), s2 = Oi(i2, r2, -e2.rotate), c2 = Oi(t3, r2, -e2.rotate), p2 = s2.x - c2.x, d2 = c2.y - s2.y;
   }
   p2 > 10 && d2 > 10 && (e2.width = Math.round(p2 / l2), e2.height = Math.round(d2 / l2), e2.x = Math.round(c2.x / l2), e2.y = Math.round(s2.y / l2));
-}, l: Xu };
-function Yu(e2, t2, o2, n2, a2, l2) {
-  const { symmetricPoint: i2, curPoint: r2 } = a2, s2 = zi(t2, r2, -e2.rotate), c2 = zi({ x: r2.x, y: s2.y }, r2, e2.rotate), p2 = Math.hypot(c2.x - i2.x, c2.y - i2.y), d2 = c2.x - (c2.x - i2.x) / 2, u2 = c2.y + (i2.y - c2.y) / 2;
+}, l: Ku };
+function Xu(e2, t2, o2, n2, a2, l2) {
+  const { symmetricPoint: i2, curPoint: r2 } = a2, s2 = Oi(t2, r2, -e2.rotate), c2 = Oi({ x: r2.x, y: s2.y }, r2, e2.rotate), p2 = Math.hypot(c2.x - i2.x, c2.y - i2.y), d2 = c2.x - (c2.x - i2.x) / 2, u2 = c2.y + (i2.y - c2.y) / 2;
   let f2 = e2.width;
   n2 && (f2 = p2 * o2 / l2), p2 > 10 && (e2.width = Math.round(f2), e2.height = Math.round(p2 / l2), e2.y = Math.round((u2 - p2 / 2) / l2), e2.x = Math.round(d2 / l2 - e2.width / 2));
 }
-function Xu(e2, t2, o2, n2, a2, l2) {
-  const { symmetricPoint: i2, curPoint: r2 } = a2, s2 = zi(t2, r2, -e2.rotate), c2 = zi({ x: s2.x, y: r2.y }, r2, e2.rotate), p2 = Math.hypot(c2.x - i2.x, c2.y - i2.y), d2 = c2.x - (c2.x - i2.x) / 2, u2 = c2.y + (i2.y - c2.y) / 2;
+function Ku(e2, t2, o2, n2, a2, l2) {
+  const { symmetricPoint: i2, curPoint: r2 } = a2, s2 = Oi(t2, r2, -e2.rotate), c2 = Oi({ x: s2.x, y: r2.y }, r2, e2.rotate), p2 = Math.hypot(c2.x - i2.x, c2.y - i2.y), d2 = c2.x - (c2.x - i2.x) / 2, u2 = c2.y + (i2.y - c2.y) / 2;
   let f2 = e2.height;
   n2 && (f2 = p2 / (o2 * l2)), p2 > 10 && (e2.height = Math.round(f2), e2.width = Math.round(p2 / l2), e2.y = Math.round(u2 / l2 - e2.height / 2), e2.x = Math.round((d2 - p2 / 2) / l2));
 }
-const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { key: 0, class: "cover-hover" }, Qu = e({ name: "ChartContain", __name: "index", props: { comOption: { require: true, type: Object, default: () => ({ chart: {}, chartContain: {} }) }, index: { require: true, type: Number, default: 0 } }, setup(e2) {
+const Ju = ["onMousedown"], Qu = { key: 2, class: "cover-layer-out" }, ef = { key: 0, class: "cover-hover" }, tf = e({ name: "ChartContain", __name: "index", props: { comOption: { require: true, type: Object, default: () => ({ chart: {}, chartContain: {} }) }, index: { require: true, type: Number, default: 0 } }, setup(e2) {
   t((e3) => ({ v15d86f1b: g2.value }));
-  const a2 = e2, { token: l2 } = U.useToken(), g2 = n(() => l2.value.colorInfoBg), C2 = n(() => l2.value.colorBorder), b2 = o("chartContainRef"), M2 = o("chartItemRef"), { prefixCls: x2 } = fe("chart-contain"), S2 = { points: ["lt", "t", "rt", "r", "rb", "b", "lb", "l"], initAngle: { lt: 0, t: 45, rt: 90, r: 135, rb: 180, b: 225, lb: 270, l: 315 }, pointCursor: [{ start: 338, end: 23, cursor: "nw" }, { start: 23, end: 68, cursor: "n" }, { start: 68, end: 113, cursor: "ne" }, { start: 113, end: 158, cursor: "e" }, { start: 158, end: 203, cursor: "se" }, { start: 203, end: 248, cursor: "s" }, { start: 248, end: 293, cursor: "sw" }, { start: 293, end: 338, cursor: "w" }] }, k2 = y(false), $2 = y(false), L2 = y({}), _2 = Ci(), I2 = Wd(), D2 = n(() => [x2, { active: z2.value || O2.value }]), T2 = n(() => !k2.value && !$2.value && a2.comOption.chart?.id === _2.getCurHoverComponentId || k2.value && _2.getCurComponent?.chart.id === a2.comOption?.chart?.id), N2 = n(() => Nd({ ...a2.comOption.chartContain.dropInfo })), B2 = n(() => {
+  const a2 = e2, { token: l2 } = U.useToken(), g2 = n(() => l2.value.colorInfoBg), C2 = n(() => l2.value.colorBorder), b2 = o("chartContainRef"), M2 = o("chartItemRef"), { prefixCls: x2 } = fe("chart-contain"), S2 = { points: ["lt", "t", "rt", "r", "rb", "b", "lb", "l"], initAngle: { lt: 0, t: 45, rt: 90, r: 135, rb: 180, b: 225, lb: 270, l: 315 }, pointCursor: [{ start: 338, end: 23, cursor: "nw" }, { start: 23, end: 68, cursor: "n" }, { start: 68, end: 113, cursor: "ne" }, { start: 113, end: 158, cursor: "e" }, { start: 158, end: 203, cursor: "se" }, { start: 203, end: 248, cursor: "s" }, { start: 248, end: 293, cursor: "sw" }, { start: 293, end: 338, cursor: "w" }] }, k2 = y(false), $2 = y(false), L2 = y({}), _2 = Ci(), I2 = Wd(), D2 = n(() => [x2, { active: O2.value || z2.value }]), T2 = n(() => !k2.value && !$2.value && a2.comOption.chart?.id === _2.getCurHoverComponentId || k2.value && _2.getCurComponent?.chart.id === a2.comOption?.chart?.id), N2 = n(() => Nd({ ...a2.comOption.chartContain.dropInfo })), B2 = n(() => {
     const e3 = Td(a2.comOption);
     return e3.borderColor || (e3.borderColor = C2.value), De(e3, ["transform"]);
-  }), z2 = n(() => _2.getCurComponent?.chart.id === a2.comOption?.chart.id), O2 = n(() => _2.getSelectArea.components.map((e3) => e3?.chart.id).includes(a2.comOption?.chart?.id));
+  }), O2 = n(() => _2.getCurComponent?.chart.id === a2.comOption?.chart.id), z2 = n(() => _2.getSelectArea.components.map((e3) => e3?.chart.id).includes(a2.comOption?.chart?.id));
   function R2(e3) {
     const { y: t2, x: o2, width: n2, height: a3, rotate: l3 } = e3;
     _2.getCurComponent && (t2 && (_2.getCurComponent.chartContain.dropInfo.y = t2), o2 && (_2.getCurComponent.chartContain.dropInfo.x = o2), n2 && (_2.getCurComponent.chartContain.dropInfo.width = n2), a3 && (_2.getCurComponent.chartContain.dropInfo.height = a3), l3 && (_2.getCurComponent.chartContain.dropInfo.rotate = l3));
@@ -3920,14 +3926,14 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
       k2.value = true;
       const a3 = { x: t3.clientX - l3.left, y: t3.clientY - l3.top }, i3 = o2.width / o2.height;
       !(function(e4, t4, o3, n3, a4, l4, i4) {
-        Zu[e4](t4, o3, n3, a4, l4, i4);
+        Yu[e4](t4, o3, n3, a4, l4, i4);
       })(e3, o2, a3, i3, p2, { center: n2, curPoint: r2, symmetricPoint: s2 }, _2.getScale), R2(o2), kd.emit(_i.MOVE, false);
     }, 2), f2 = () => {
       d(k2) && _2.setUndoRedoData("组件大小调整"), k2.value = false, kd.emit(_i.UN_MOVE), document.removeEventListener("mousemove", u2), document.removeEventListener("mouseup", f2);
     };
     document.addEventListener("mousemove", u2), document.addEventListener("mouseup", f2);
   }
-  function Z2(e3) {
+  function q2(e3) {
     if (!b2.value) return;
     _2.setCurComponent(a2.comOption, a2.index);
     const t2 = b2.value.getBoundingClientRect(), o2 = t2.left + t2.width / 2, n2 = t2.top + t2.height / 2, l3 = Math.atan2(e3.clientY - n2, e3.clientX - o2) / (Math.PI / 180), i2 = { ...a2.comOption.chartContain.dropInfo };
@@ -3959,12 +3965,12 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
         e3.classList.remove(...o2, ...n2, "animate__animated", "animate__infinite"), e3.style.removeProperty("--animate-duration");
       })(M2.value, a2.comOption.chart.animations);
     });
-  }), (t2, o2) => (s(), r("div", { ref_key: "chartContainRef", ref: b2, class: p(D2.value), style: c(N2.value), onMousedown: w(j2, ["stop"]), onMouseenter: w(E2, ["prevent", "stop"]), onMouseleave: w(G2, ["prevent"]) }, [(s(true), r(m, null, v(z2.value && !e2.comOption.chartContain.lock && e2.comOption.chartContain.show ? S2.points : [], (e3) => (s(), r("div", { key: e3, class: "contain-point", style: c(V2(e3)), onMousedown: w((t3) => W2(e3, t3), ["stop", "prevent"]) }, null, 44, qu))), 128)), P(u("div", { ref_key: "chartItemRef", ref: M2, class: "chart-item", style: c(B2.value) }, [H(t2.$slots, "default", {}, void 0, true)], 4), [[F, void 0 === e2.comOption.chart?.showHide?.show && e2.comOption.chartContain?.show || void 0 !== e2.comOption.chart?.showHide?.show && e2.comOption.chart?.showHide?.show]]), z2.value && !e2.comOption.chartContain.lock && e2.comOption.chartContain.show ? (s(), h(d(be), { key: 0, class: "icon-rotate", icon: "ant-design:sync-outlined", size: "20", onMousedown: w(Z2, ["prevent", "stop"]) })) : f("", true), e2.comOption.chartContain.lock && e2.comOption.chartContain.show ? (s(), h(d(be), { key: 1, class: "icon-lock", icon: "ant-design:lock-outlined" })) : f("", true), z2.value || O2.value || T2.value ? (s(), r("div", Ku, [T2.value ? (s(), r("div", Ju)) : f("", true)])) : f("", true)], 38));
-} }), ef = Ot(Qu, [["__scopeId", "data-v-2f19c653"]]), tf = "横上", of = "横中", nf = "横下", af = "纵左", lf = "纵中", rf = "纵右", sf = { class: "pos" }, cf = e({ name: "ChartNearLine", __name: "index", setup(e2) {
-  const t2 = l({ adsorb: 10, near: 2, lineStatus: { [tf]: { show: false, pos: 0, node: null }, [of]: { show: false, pos: 0, node: null }, [nf]: { show: false, pos: 0, node: null }, [af]: { show: false, pos: 0, node: null }, [lf]: { show: false, pos: 0, node: null }, [rf]: { show: false, pos: 0, node: null } } }), o2 = Ci(), { prefixCls: n2 } = fe("near-line");
+  }), (t2, o2) => (s(), r("div", { ref_key: "chartContainRef", ref: b2, class: p(D2.value), style: c(N2.value), onMousedown: w(j2, ["stop"]), onMouseenter: w(E2, ["prevent", "stop"]), onMouseleave: w(G2, ["prevent"]) }, [(s(true), r(m, null, v(O2.value && !e2.comOption.chartContain.lock && e2.comOption.chartContain.show ? S2.points : [], (e3) => (s(), r("div", { key: e3, class: "contain-point", style: c(V2(e3)), onMousedown: w((t3) => W2(e3, t3), ["stop", "prevent"]) }, null, 44, Ju))), 128)), P(u("div", { ref_key: "chartItemRef", ref: M2, class: "chart-item", style: c(B2.value) }, [H(t2.$slots, "default", {}, void 0, true)], 4), [[F, void 0 === e2.comOption.chart?.showHide?.show && e2.comOption.chartContain?.show || void 0 !== e2.comOption.chart?.showHide?.show && e2.comOption.chart?.showHide?.show]]), O2.value && !e2.comOption.chartContain.lock && e2.comOption.chartContain.show ? (s(), h(d(be), { key: 0, class: "icon-rotate", icon: "ant-design:sync-outlined", size: "20", onMousedown: w(q2, ["prevent", "stop"]) })) : f("", true), e2.comOption.chartContain.lock && e2.comOption.chartContain.show ? (s(), h(d(be), { key: 1, class: "icon-lock", icon: "ant-design:lock-outlined" })) : f("", true), O2.value || z2.value || T2.value ? (s(), r("div", Qu, [T2.value ? (s(), r("div", ef)) : f("", true)])) : f("", true)], 38));
+} }), of = zt(tf, [["__scopeId", "data-v-2f19c653"]]), nf = "横上", af = "横中", lf = "横下", rf = "纵左", sf = "纵中", cf = "纵右", pf = { class: "pos" }, df = e({ name: "ChartNearLine", __name: "index", setup(e2) {
+  const t2 = l({ adsorb: 10, near: 2, lineStatus: { [nf]: { show: false, pos: 0, node: null }, [af]: { show: false, pos: 0, node: null }, [lf]: { show: false, pos: 0, node: null }, [rf]: { show: false, pos: 0, node: null }, [sf]: { show: false, pos: 0, node: null }, [cf]: { show: false, pos: 0, node: null } } }), o2 = Ci(), { prefixCls: n2 } = fe("near-line");
   function a2(e3, { x: o3, y: n3, bottom: a3, right: l2, halfWidth: i2, halfHeight: r2 }) {
     const s2 = e3.width / 2, p2 = e3.height / 2, d2 = t2.lineStatus;
-    return { y: [{ isNear: c2(e3.y, n3), isAdsorb: f2(e3.y, n3), lineNode: d2[tf].node, line: tf, dragShift: n3, lineShift: n3 }, { isNear: c2(e3.bottom, n3), isAdsorb: f2(e3.bottom, n3), lineNode: d2[tf].node, line: tf, dragShift: n3 - e3.height, lineShift: n3 }, { isNear: c2(e3.y + p2, n3 + r2), isAdsorb: f2(e3.y + p2, n3 + r2), lineNode: d2[of].node, line: of, dragShift: n3 + r2 - p2, lineShift: n3 + r2 }, { isNear: c2(e3.y, a3), isAdsorb: f2(e3.y, a3), lineNode: d2[nf].node, line: nf, dragShift: a3, lineShift: a3 }, { isNear: c2(e3.bottom, a3), isAdsorb: f2(e3.bottom, a3), lineNode: d2[nf].node, line: nf, dragShift: a3 - e3.height, lineShift: a3 }], x: [{ isNear: c2(e3.x, o3), isAdsorb: f2(e3.x, o3), lineNode: d2[af].node, line: af, dragShift: o3, lineShift: o3 }, { isNear: c2(e3.right, o3), isAdsorb: f2(e3.right, o3), lineNode: d2[af].node, line: af, dragShift: o3 - e3.width, lineShift: o3 }, { isNear: c2(e3.x + s2, o3 + i2), isAdsorb: f2(e3.x + s2, o3 + i2), lineNode: d2[lf].node, line: lf, dragShift: o3 + i2 - s2, lineShift: o3 + i2 }, { isNear: c2(e3.x, l2), isAdsorb: f2(e3.x, l2), lineNode: d2[rf].node, line: rf, dragShift: l2, lineShift: l2 }, { isNear: c2(e3.right, l2), isAdsorb: f2(e3.right, l2), lineNode: d2[rf].node, line: rf, dragShift: l2 - e3.width, lineShift: l2 }] };
+    return { y: [{ isNear: c2(e3.y, n3), isAdsorb: f2(e3.y, n3), lineNode: d2[nf].node, line: nf, dragShift: n3, lineShift: n3 }, { isNear: c2(e3.bottom, n3), isAdsorb: f2(e3.bottom, n3), lineNode: d2[nf].node, line: nf, dragShift: n3 - e3.height, lineShift: n3 }, { isNear: c2(e3.y + p2, n3 + r2), isAdsorb: f2(e3.y + p2, n3 + r2), lineNode: d2[af].node, line: af, dragShift: n3 + r2 - p2, lineShift: n3 + r2 }, { isNear: c2(e3.y, a3), isAdsorb: f2(e3.y, a3), lineNode: d2[lf].node, line: lf, dragShift: a3, lineShift: a3 }, { isNear: c2(e3.bottom, a3), isAdsorb: f2(e3.bottom, a3), lineNode: d2[lf].node, line: lf, dragShift: a3 - e3.height, lineShift: a3 }], x: [{ isNear: c2(e3.x, o3), isAdsorb: f2(e3.x, o3), lineNode: d2[rf].node, line: rf, dragShift: o3, lineShift: o3 }, { isNear: c2(e3.right, o3), isAdsorb: f2(e3.right, o3), lineNode: d2[rf].node, line: rf, dragShift: o3 - e3.width, lineShift: o3 }, { isNear: c2(e3.x + s2, o3 + i2), isAdsorb: f2(e3.x + s2, o3 + i2), lineNode: d2[sf].node, line: sf, dragShift: o3 + i2 - s2, lineShift: o3 + i2 }, { isNear: c2(e3.x, l2), isAdsorb: f2(e3.x, l2), lineNode: d2[cf].node, line: cf, dragShift: l2, lineShift: l2 }, { isNear: c2(e3.right, l2), isAdsorb: f2(e3.right, l2), lineNode: d2[cf].node, line: cf, dragShift: l2 - e3.width, lineShift: l2 }] };
   }
   function c2(e3, o3) {
     return h2(e3, o3, t2.near);
@@ -4022,15 +4028,15 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
     }), kd.on(_i.UN_MOVE, () => {
       g2();
     });
-  }), (e3, o3) => (s(), r("div", { class: p(d(n2)) }, [(s(true), r(m, null, v(Object.keys(t2.lineStatus), (e4) => P((s(), r("div", { key: e4, ref_for: true, ref: (o4) => t2.lineStatus[e4].node = o4, class: p(["line", e4.includes("横") ? "xLine" : "yLine"]) }, [u("div", sf, k(t2.lineStatus[e4].pos), 1)], 2)), [[F, t2.lineStatus[e4].show || false]])), 128))], 2));
-} }), pf = Ot(cf, [["__scopeId", "data-v-88d9d34f"]]), df = e({ name: "ChartMultiSelect", __name: "index", props: { selectArea: { type: Object, default: () => {
+  }), (e3, o3) => (s(), r("div", { class: p(d(n2)) }, [(s(true), r(m, null, v(Object.keys(t2.lineStatus), (e4) => P((s(), r("div", { key: e4, ref_for: true, ref: (o4) => t2.lineStatus[e4].node = o4, class: p(["line", e4.includes("横") ? "xLine" : "yLine"]) }, [u("div", pf, k(t2.lineStatus[e4].pos), 1)], 2)), [[F, t2.lineStatus[e4].show || false]])), 128))], 2));
+} }), uf = zt(df, [["__scopeId", "data-v-88d9d34f"]]), ff = e({ name: "ChartMultiSelect", __name: "index", props: { selectArea: { type: Object, default: () => {
 } } }, setup(e2) {
   const t2 = Ci(), { prefixCls: o2 } = fe("select-area");
   return (n2, a2) => P((s(), r("div", { class: p(d(o2)), style: c({ transform: `translate(${e2.selectArea.x}px,${e2.selectArea.y}px)`, width: `${e2.selectArea.width}px`, height: `${e2.selectArea.height}px` }) }, [...a2[0] || (a2[0] = [u("div", { class: "select-area-bg" }, null, -1)])], 6)), [[F, d(t2).selectArea.show]]);
-} }), uf = Ot(df, [["__scopeId", "data-v-e9844525"]]), ff = e({ name: "ScreenCanvas", __name: "index", setup(e2) {
+} }), hf = zt(ff, [["__scopeId", "data-v-e9844525"]]), gf = e({ name: "ScreenCanvas", __name: "index", setup(e2) {
   const { prefixCls: t2 } = fe("screen-canvas"), a2 = Ci(), u2 = Wd(), y2 = o("screenCanvasRef"), { getAntdLocale: C2 } = lt(), { antTheme: b2 } = me(n(() => a2.getTheme)), x2 = n(() => [...a2.getComponentList].reverse()), S2 = l({ canvasX: 0, canvasY: 0, area: { show: false, x: 0, y: 0, width: 0, height: 0 }, comMoving: false, isUp: false }), k2 = n(() => ({ ...$d(a2.getCanvasConfig), transform: `scale(${a2.getScale})` })), $2 = (e3) => {
     if (e3.chart?.events?.emits && e3.chart.events.emits.length > 0) {
-      for (const t3 of e3.chart.events.emits) if (t3 === Zi.CHART_CLICK || t3 === Zi.CHART_DBLCLICK) return "allow-pointer";
+      for (const t3 of e3.chart.events.emits) if (t3 === qi.CHART_CLICK || t3 === qi.CHART_DBLCLICK) return "allow-pointer";
     }
   };
   i(() => {
@@ -4062,7 +4068,7 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
       S2.area.width = Math.abs((t4.clientX - e3.clientX) / a2.getScale), S2.area.height = Math.abs((t4.clientY - e3.clientY) / a2.getScale), t4.clientX < e3.clientX && (S2.area.x = (t4.clientX - S2.canvasX) / a2.getScale), t4.clientY < e3.clientY && (S2.area.y = (t4.clientY - S2.canvasY) / a2.getScale);
     }, 2), n2 = () => {
       document.removeEventListener("mousemove", o2), document.removeEventListener("mouseup", n2);
-      Kd(qd(Me(S2.area)));
+      Kd(Xd(Me(S2.area)));
     };
     document.addEventListener("mousemove", o2), document.addEventListener("mouseup", n2);
   }
@@ -4070,8 +4076,8 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
     S2.area.show = false, S2.area.width = 0, S2.area.height = 0, a2.cleanSelectArea();
   }
   return (e3, o2) => (s(), r("div", { ref_key: "screenCanvasRef", ref: y2, class: p(d(t2)), onDrop: L2, onDragstart: o2[0] || (o2[0] = w(() => {
-  }, ["prevent", "stop"])), onMousedown: I2, style: c(k2.value) }, [g(d(su), { locale: d(C2), theme: d(b2) }, { default: M(() => [d(a2).getCanvasConfig.watermark ? (s(), h(d(oe), { key: 0, content: d(a2).getCanvasConfig.watermark, style: c({ position: "absolute", width: `${d(a2).getCanvasConfig.width}px`, height: `${d(a2).getCanvasConfig.height}px` }) }, null, 8, ["content", "style"])) : f("", true), (s(true), r(m, null, v(x2.value, (e4, t3) => (s(), h(ef, { key: e4.chart?.id + d(a2).getKey, index: x2.value.length - t3 - 1, "com-option": e4, class: p($2(e4)) }, { default: M(() => [(s(), h(E(e4.chart.type && d(Sd)[e4.chart.type].component), { class: p(["component", { move: S2.comMoving && e4.chart.id !== d(a2).getCurComponent?.chart.id }]), id: `com${e4.chart.id}`, chart: e4.chart, "chart-contain": e4.chartContain }, null, 8, ["class", "id", "chart", "chart-contain"]))]), _: 2 }, 1032, ["index", "com-option", "class"]))), 128))]), _: 1 }, 8, ["locale", "theme"]), g(uf, { "select-area": S2.area }, null, 8, ["select-area"]), g(pf)], 38));
-} }), hf = Ot(ff, [["__scopeId", "data-v-8377e0c5"]]), gf = 0.2, yf = e({ name: "FrameCanvas", __name: "index", props: { width: { type: Number, default: 5e3 }, height: { type: Number, default: 3e3 } }, setup(e2) {
+  }, ["prevent", "stop"])), onMousedown: I2, style: c(k2.value) }, [g(d(pu), { locale: d(C2), theme: d(b2) }, { default: M(() => [d(a2).getCanvasConfig.watermark ? (s(), h(d(oe), { key: 0, content: d(a2).getCanvasConfig.watermark, style: c({ position: "absolute", width: `${d(a2).getCanvasConfig.width}px`, height: `${d(a2).getCanvasConfig.height}px` }) }, null, 8, ["content", "style"])) : f("", true), (s(true), r(m, null, v(x2.value, (e4, t3) => (s(), h(of, { key: e4.chart?.id + d(a2).getKey, index: x2.value.length - t3 - 1, "com-option": e4, class: p($2(e4)) }, { default: M(() => [(s(), h(E(e4.chart.type && d(Sd)[e4.chart.type].component), { class: p(["component", { move: S2.comMoving && e4.chart.id !== d(a2).getCurComponent?.chart.id }]), id: `com${e4.chart.id}`, chart: e4.chart, "chart-contain": e4.chartContain }, null, 8, ["class", "id", "chart", "chart-contain"]))]), _: 2 }, 1032, ["index", "com-option", "class"]))), 128))]), _: 1 }, 8, ["locale", "theme"]), g(hf, { "select-area": S2.area }, null, 8, ["select-area"]), g(uf)], 38));
+} }), yf = zt(gf, [["__scopeId", "data-v-8377e0c5"]]), mf = 0.2, vf = e({ name: "FrameCanvas", __name: "index", props: { width: { type: Number, default: 5e3 }, height: { type: Number, default: 3e3 } }, setup(e2) {
   const t2 = y(true), { prefixCls: n2 } = fe("frame-canvas"), l2 = y(0), c2 = y(0), f2 = y(1e3), h2 = y(1), m2 = Ci(), v2 = o("frameCanvasRef"), C2 = o("dropContentRef");
   let b2 = [0, 0], x2 = [0, 0];
   a([() => m2.getCanvasConfig.width, () => m2.getCanvasConfig.height], () => {
@@ -4081,7 +4087,7 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
     t2.value && (!(function() {
       if (d(t2) && v2.value) {
         const e3 = v2.value.getBoundingClientRect(), t3 = e3.width - 50, o2 = e3.height - 40, n3 = Number.parseFloat((m2.getCanvasConfig.width / m2.getCanvasConfig.height).toFixed(5)), a2 = Number.parseFloat((t3 / o2).toFixed(5));
-        h2.value = a2 > n3 ? Number.parseFloat((o2 * n3 / m2.getCanvasConfig.width).toFixed(2)) : Number.parseFloat((t3 / n3 / m2.getCanvasConfig.height).toFixed(2)), d(h2) > 5 && (h2.value = 5), d(h2) < gf && (h2.value = gf);
+        h2.value = a2 > n3 ? Number.parseFloat((o2 * n3 / m2.getCanvasConfig.width).toFixed(2)) : Number.parseFloat((t3 / n3 / m2.getCanvasConfig.height).toFixed(2)), d(h2) > 5 && (h2.value = 5), d(h2) < mf && (h2.value = mf);
       }
       m2.setScale(d(h2));
     })(), D2());
@@ -4097,7 +4103,7 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
   });
   const L2 = Ie((e3) => {
     const t3 = (100 * h2.value - Math.round(100 * h2.value) % 5) / 100;
-    h2.value = "add" === e3 ? Math.min(5, Number.parseFloat((t3 + 0.05).toFixed(2))) : Math.max(gf, Number.parseFloat((t3 - 0.05).toFixed(2))), D2(), m2.setScale(h2.value);
+    h2.value = "add" === e3 ? Math.min(5, Number.parseFloat((t3 + 0.05).toFixed(2))) : Math.max(mf, Number.parseFloat((t3 - 0.05).toFixed(2))), D2(), m2.setScale(h2.value);
   }, 100), _2 = Ie((e3) => {
     e3 && (h2.value = e3 / 100, D2(), m2.setScale(h2.value));
   }, 100), I2 = (e3) => {
@@ -4122,8 +4128,8 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
     };
     globalThis.addEventListener("mousemove", n3), globalThis.addEventListener("mouseup", a2);
   }
-  return (o2, a2) => (s(), r("div", { class: p(d(n2)), ref_key: "frameCanvasRef", ref: v2 }, [g(Pu, { "ruler-x-left": l2.value, "ruler-y-top": c2.value, drift: f2.value, "ruler-x": e2.width, "ruler-y": e2.height }, null, 8, ["ruler-x-left", "ruler-y-top", "drift", "ruler-x", "ruler-y"]), u("div", { ref_key: "dropContentRef", ref: C2, class: "drop-content", onScroll: k2 }, [g(Fu, { width: e2.width, height: e2.height, drift: f2.value }, { default: M(() => [g(hf, { draggable: "true", onDragstart: w(T2, ["prevent", "stop"]) })]), _: 1 }, 8, ["width", "height", "drift"])], 544), g(Wu), g(Vu, { scale: h2.value, "min-scale": 20, "max-scale": 500, onAddScale: a2[0] || (a2[0] = (e3) => d(L2)("add")), onReduceScale: a2[1] || (a2[1] = (e3) => d(L2)("reduce")), onChangeScale: d(_2), onAutoScale: a2[2] || (a2[2] = (e3) => t2.value = e3) }, null, 8, ["scale", "min-scale", "max-scale", "onChangeScale"])], 2));
-} }), mf = Ot(yf, [["__scopeId", "data-v-de9ae999"]]), vf = { key: 0, class: "header" }, Cf = { class: "title" }, bf = { class: "content" }, Mf = Ot(e({ name: "FrameBox", __name: "index", props: { showHeader: { type: Boolean, default: true }, icon: { type: String, default: "" }, iconSize: { type: Number, default: 14 }, title: { type: String, default: "" }, radioData: { type: Array, default: () => [] }, span: { type: Number, default: 8 }, chart: { type: Object } }, emits: ["radioChange", "titleClick"], setup(e2, { emit: t2 }) {
+  return (o2, a2) => (s(), r("div", { class: p(d(n2)), ref_key: "frameCanvasRef", ref: v2 }, [g(Fu, { "ruler-x-left": l2.value, "ruler-y-top": c2.value, drift: f2.value, "ruler-x": e2.width, "ruler-y": e2.height }, null, 8, ["ruler-x-left", "ruler-y-top", "drift", "ruler-x", "ruler-y"]), u("div", { ref_key: "dropContentRef", ref: C2, class: "drop-content", onScroll: k2 }, [g(Gu, { width: e2.width, height: e2.height, drift: f2.value }, { default: M(() => [g(yf, { draggable: "true", onDragstart: w(T2, ["prevent", "stop"]) })]), _: 1 }, 8, ["width", "height", "drift"])], 544), g(Zu), g(Wu, { scale: h2.value, "min-scale": 20, "max-scale": 500, onAddScale: a2[0] || (a2[0] = (e3) => d(L2)("add")), onReduceScale: a2[1] || (a2[1] = (e3) => d(L2)("reduce")), onChangeScale: d(_2), onAutoScale: a2[2] || (a2[2] = (e3) => t2.value = e3) }, null, 8, ["scale", "min-scale", "max-scale", "onChangeScale"])], 2));
+} }), Cf = zt(vf, [["__scopeId", "data-v-de9ae999"]]), bf = { key: 0, class: "header" }, Mf = { class: "title" }, wf = { class: "content" }, xf = zt(e({ name: "FrameBox", __name: "index", props: { showHeader: { type: Boolean, default: true }, icon: { type: String, default: "" }, iconSize: { type: Number, default: 14 }, title: { type: String, default: "" }, radioData: { type: Array, default: () => [] }, span: { type: Number, default: 8 }, chart: { type: Object } }, emits: ["radioChange", "titleClick"], setup(e2, { emit: t2 }) {
   const o2 = e2, n2 = t2, { prefixCls: a2 } = fe("frame-box"), l2 = y();
   i(() => {
     o2.radioData?.length > 0 && (l2.value = o2.radioData[0].value);
@@ -4134,8 +4140,8 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
   }, C2 = () => {
     n2("titleClick");
   };
-  return (t3, n3) => (s(), r("div", { class: p(d(a2)) }, [e2.showHeader ? (s(), r("div", vf, [u("div", { class: "icon-title", onClick: C2 }, [e2.icon ? (s(), h(d(be), { key: 0, class: "title", icon: e2.icon, size: e2.iconSize }, null, 8, ["icon", "size"])) : f("", true), u("div", Cf, k(e2.title), 1)]), g(d(se), { class: "radio-group", size: "small", value: l2.value, "onUpdate:value": n3[0] || (n3[0] = (e3) => l2.value = e3), onChange: c2 }, { default: M(() => [(s(true), r(m, null, v(o2.radioData, (e3) => (s(), h(d(Y), { key: e3.value, title: e3.tooltip }, { default: M(() => [g(d(ce), { class: "radio-button", value: e3.value }, { default: M(() => [g(d(be), { icon: e3.icon }, null, 8, ["icon"])]), _: 2 }, 1032, ["value"])]), _: 2 }, 1032, ["title"]))), 128))]), _: 1 }, 8, ["value"])])) : f("", true), u("div", bf, [(s(), h(E(e2.chart))), H(t3.$slots, "default", {}, void 0, true)])], 2));
-} }), [["__scopeId", "data-v-8929fb33"]]), wf = { class: "item-content" }, xf = ["src"], Sf = { class: "title", style: { flex: "1" } }, kf = { class: "iconContain" }, $f = e({ __name: "LayerItem", props: { parentItem: { type: Object }, item: { type: Object, required: true }, showEye: { type: Boolean, default: true }, showLock: { type: Boolean, default: true }, index: { type: Number }, expand: { type: Boolean, default: false }, externalSelect: { type: Boolean, default: false }, isSelect: { type: Boolean, default: false } }, emits: ["expand", "select", "enter", "leave"], setup(e2, { emit: o2 }) {
+  return (t3, n3) => (s(), r("div", { class: p(d(a2)) }, [e2.showHeader ? (s(), r("div", bf, [u("div", { class: "icon-title", onClick: C2 }, [e2.icon ? (s(), h(d(be), { key: 0, class: "title", icon: e2.icon, size: e2.iconSize }, null, 8, ["icon", "size"])) : f("", true), u("div", Mf, k(e2.title), 1)]), g(d(se), { class: "radio-group", size: "small", value: l2.value, "onUpdate:value": n3[0] || (n3[0] = (e3) => l2.value = e3), onChange: c2 }, { default: M(() => [(s(true), r(m, null, v(o2.radioData, (e3) => (s(), h(d(Z), { key: e3.value, title: e3.tooltip }, { default: M(() => [g(d(ce), { class: "radio-button", value: e3.value }, { default: M(() => [g(d(be), { icon: e3.icon }, null, 8, ["icon"])]), _: 2 }, 1032, ["value"])]), _: 2 }, 1032, ["title"]))), 128))]), _: 1 }, 8, ["value"])])) : f("", true), u("div", wf, [(s(), h(E(e2.chart))), H(t3.$slots, "default", {}, void 0, true)])], 2));
+} }), [["__scopeId", "data-v-8929fb33"]]), Sf = { class: "item-content" }, kf = ["src"], $f = { class: "title", style: { flex: "1" } }, Lf = { class: "iconContain" }, _f = e({ __name: "LayerItem", props: { parentItem: { type: Object }, item: { type: Object, required: true }, showEye: { type: Boolean, default: true }, showLock: { type: Boolean, default: true }, index: { type: Number }, expand: { type: Boolean, default: false }, externalSelect: { type: Boolean, default: false }, isSelect: { type: Boolean, default: false } }, emits: ["expand", "select", "enter", "leave"], setup(e2, { emit: o2 }) {
   t((e3) => ({ v56d1bd00: C2.value }));
   const a2 = e2, l2 = o2, { prefixCls: i2 } = fe("layer-item"), c2 = Ci(), g2 = bi(), m2 = n(() => c2.getChartImg(a2.item.chart.type)), { token: v2 } = U.useToken(), C2 = n(() => v2.value.colorInfoBg), b2 = he().getThemeColor, M2 = n(() => [i2, { select: a2.externalSelect && a2.isSelect || !a2.externalSelect && (c2.getCurComponent?.chart.id === a2.item?.chart.id || c2.getSelectArea.components.map((e3) => e3.chart.id).includes(a2.item?.chart.id) || c2.getCurConfigComponent?.chart.id === a2.item?.chart.id), hover: c2.getCurHoverComponentId === a2.item?.chart.id || c2.getCurHoverComponentId === a2.parentItem?.chart.id && a2.parentItem?.chart?.options?.hoverId === a2.item?.chart.id }]), w2 = y(false);
   function x2() {
@@ -4150,8 +4156,8 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
   function L2() {
     l2("select");
   }
-  return (t2, o3) => (s(), r("div", { class: p(M2.value), onMouseenter: x2, onMouseleave: S2, onMousedown: L2 }, [u("div", wf, [e2.item.chart.type === d(Hi).MfCombine ? (s(), r("div", { key: 0, onClick: $2 }, [a2.expand ? (s(), h(d(ht), { key: 0, class: "group", "two-tone-color": d(b2) }, null, 8, ["two-tone-color"])) : (s(), h(d(gt), { key: 1, class: "group", "two-tone-color": d(b2) }, null, 8, ["two-tone-color"]))])) : (s(), r("img", { key: 1, class: "img", alt: "组件", src: m2.value }, null, 8, xf)), u("span", Sf, k(e2.item?.chart.name), 1), u("div", kf, [!e2.showEye || d(g2).getLayerCollapsed || !w2.value && e2.item.chartContain.show ? f("", true) : (s(), h(d(be), { key: 0, class: "icon", icon: e2.item.chartContain.show ? "ant-design:eye-outlined" : "ant-design:eye-invisible-outlined", onClick: o3[0] || (o3[0] = () => e2.item.chartContain.show = !e2.item.chartContain.show) }, null, 8, ["icon"])), e2.showLock && !d(g2).getLayerCollapsed && (w2.value || e2.item.chartContain.lock) ? (s(), h(d(be), { key: 1, class: "icon", icon: e2.item.chartContain.lock ? "ant-design:lock-outlined" : "ant-design:unlock-outlined", onClick: o3[1] || (o3[1] = () => e2.item.chartContain.lock = !e2.item.chartContain.lock) }, null, 8, ["icon"])) : f("", true)])])], 34));
-} }), Lf = Ot($f, [["__scopeId", "data-v-925f45da"]]), _f = e({ __name: "LayerGroup", props: { item: { type: Object, required: true }, expand: { type: Boolean, default: false }, showEye: { type: Boolean, default: true }, showLock: { type: Boolean, default: true }, showChildEye: { type: Boolean, default: true }, showChildLock: { type: Boolean, default: true }, externalSelect: { type: Boolean, default: false }, isSelect: { type: Boolean, default: false }, childSelect: { type: String, default: "" } }, emits: ["parentClick", "childClick"], setup(e2, { emit: t2 }) {
+  return (t2, o3) => (s(), r("div", { class: p(M2.value), onMouseenter: x2, onMouseleave: S2, onMousedown: L2 }, [u("div", Sf, [e2.item.chart.type === d(Hi).MfCombine ? (s(), r("div", { key: 0, onClick: $2 }, [a2.expand ? (s(), h(d(ht), { key: 0, class: "group", "two-tone-color": d(b2) }, null, 8, ["two-tone-color"])) : (s(), h(d(gt), { key: 1, class: "group", "two-tone-color": d(b2) }, null, 8, ["two-tone-color"]))])) : (s(), r("img", { key: 1, class: "img", alt: "组件", src: m2.value }, null, 8, kf)), u("span", $f, k(e2.item?.chart.name), 1), u("div", Lf, [!e2.showEye || d(g2).getLayerCollapsed || !w2.value && e2.item.chartContain.show ? f("", true) : (s(), h(d(be), { key: 0, class: "icon", icon: e2.item.chartContain.show ? "ant-design:eye-outlined" : "ant-design:eye-invisible-outlined", onClick: o3[0] || (o3[0] = () => e2.item.chartContain.show = !e2.item.chartContain.show) }, null, 8, ["icon"])), e2.showLock && !d(g2).getLayerCollapsed && (w2.value || e2.item.chartContain.lock) ? (s(), h(d(be), { key: 1, class: "icon", icon: e2.item.chartContain.lock ? "ant-design:lock-outlined" : "ant-design:unlock-outlined", onClick: o3[1] || (o3[1] = () => e2.item.chartContain.lock = !e2.item.chartContain.lock) }, null, 8, ["icon"])) : f("", true)])])], 34));
+} }), If = zt(_f, [["__scopeId", "data-v-925f45da"]]), Df = e({ __name: "LayerGroup", props: { item: { type: Object, required: true }, expand: { type: Boolean, default: false }, showEye: { type: Boolean, default: true }, showLock: { type: Boolean, default: true }, showChildEye: { type: Boolean, default: true }, showChildLock: { type: Boolean, default: true }, externalSelect: { type: Boolean, default: false }, isSelect: { type: Boolean, default: false }, childSelect: { type: String, default: "" } }, emits: ["parentClick", "childClick"], setup(e2, { emit: t2 }) {
   const o2 = e2, l2 = t2, { prefixCls: i2 } = fe("layer-group"), c2 = Ci(), u2 = bi(), f2 = n(() => ({ "child-item": true, collapsed: u2.getLayerCollapsed })), C2 = y(o2.expand);
   function b2() {
     c2.setCurHoverComponent(o2.item?.chart.id);
@@ -4169,7 +4175,7 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
   function k2(e3) {
     l2("parentClick", e3);
   }
-  return a(() => o2.expand, (e3) => C2.value = e3), (t3, o3) => (s(), r("div", { class: p(d(i2)), onMouseenter: b2, onMouseleave: w2 }, [g(Lf, { item: e2.item, onExpand: S2, expand: C2.value, "show-eye": e2.showEye, "show-lock": e2.showLock, "external-select": e2.externalSelect, "is-select": e2.isSelect, onClick: k2 }, null, 8, ["item", "expand", "show-eye", "show-lock", "external-select", "is-select"]), g(d(rt), { show: C2.value, class: p(f2.value) }, { default: M(() => [(s(true), r(m, null, v(e2.item.chart.options.components, (t4, o4) => (s(), h(Lf, { key: t4.chart.id, "parent-item": e2.item, item: t4, index: o4, "external-select": e2.externalSelect, "is-select": e2.childSelect === t4.chart.id, "show-eye": e2.showChildEye, "show-lock": e2.showChildLock, onSelect: (t5) => (function(e3, t6) {
+  return a(() => o2.expand, (e3) => C2.value = e3), (t3, o3) => (s(), r("div", { class: p(d(i2)), onMouseenter: b2, onMouseleave: w2 }, [g(If, { item: e2.item, onExpand: S2, expand: C2.value, "show-eye": e2.showEye, "show-lock": e2.showLock, "external-select": e2.externalSelect, "is-select": e2.isSelect, onClick: k2 }, null, 8, ["item", "expand", "show-eye", "show-lock", "external-select", "is-select"]), g(d(rt), { show: C2.value, class: p(f2.value) }, { default: M(() => [(s(true), r(m, null, v(e2.item.chart.options.components, (t4, o4) => (s(), h(If, { key: t4.chart.id, "parent-item": e2.item, item: t4, index: o4, "external-select": e2.externalSelect, "is-select": e2.childSelect === t4.chart.id, "show-eye": e2.showChildEye, "show-lock": e2.showChildLock, onSelect: (t5) => (function(e3, t6) {
     e3.chart.options.selectIndex = t6;
   })(e2.item, o4), onEnter: (e3) => (function(e4) {
     const t5 = c2.getComponent(c2.getCurHoverComponentId);
@@ -4177,7 +4183,7 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
   })(t4.chart.id), onLeave: x2, onClick: (e3) => (function(e4) {
     l2("childClick", e4);
   })(t4) }, null, 8, ["parent-item", "item", "index", "external-select", "is-select", "show-eye", "show-lock", "onSelect", "onEnter", "onClick"]))), 128))]), _: 1 }, 8, ["show", "class"])], 34));
-} }), If = Ot(_f, [["__scopeId", "data-v-b118e01c"]]), Df = ["onDrop"], Tf = e({ name: "FrameLayer", __name: "index", props: { collapsed: et.bool.def(false) }, setup(e2) {
+} }), Tf = zt(Df, [["__scopeId", "data-v-b118e01c"]]), Nf = ["onDrop"], Bf = e({ name: "FrameLayer", __name: "index", props: { collapsed: et.bool.def(false) }, setup(e2) {
   const t2 = e2, { prefixCls: o2 } = fe("frame-layer"), a2 = n(() => [o2, { collapsed: t2.collapsed }]), l2 = [{ value: "collapse", icon: "iconfont:icon-mfish-collapse-all", tooltip: "折叠分组" }, { value: "expand", icon: "iconfont:icon-mfish-expand-all", tooltip: "展开分组" }], r2 = n(() => f2.getComponentList);
   i(() => {
     const e3 = f2.getComponentList.map((e4) => e4.chart.type).join(",");
@@ -4213,11 +4219,11 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
   function S2(e3) {
     c2.value = "expand" === e3;
   }
-  return (e3, t3) => (s(), h(Mf, { class: p(a2.value), title: d(m2).getLayerCollapsed ? "" : "图层", icon: "iconfont:icon-mfish-layer", "icon-size": d(m2).getLayerCollapsed ? 16 : 12, "radio-data": l2, onTitleClick: C2, onDrop: t3[1] || (t3[1] = (e4) => b2(e4, r2.value.length)), onRadioChange: S2 }, { default: M(() => [0 === r2.value.length ? (s(), h(d(pe), { key: 0, "image-style": d(m2).getLayerCollapsed ? { height: "20px" } : {}, description: "暂无图层", image: d(He) }, null, 8, ["image-style", "image"])) : (s(), h(d(tt), { key: 1 }, { default: M(() => [g(d(ft), { "item-key": "id", modelValue: r2.value, "onUpdate:modelValue": t3[0] || (t3[0] = (e4) => r2.value = e4), animation: "300", "ghost-class": "ghost", onChange: v2 }, { item: M(({ index: e4, element: t4 }) => [u("div", { onDrop: (t5) => b2(t5, e4), style: { "margin-top": "4px" } }, [t4.chart.type !== d(Hi).MfCombine ? (s(), h(Lf, { key: 0, item: t4, onMousedown: (o3) => w2(t4, e4, o3), onEnter: (e5) => {
+  return (e3, t3) => (s(), h(xf, { class: p(a2.value), title: d(m2).getLayerCollapsed ? "" : "图层", icon: "iconfont:icon-mfish-layer", "icon-size": d(m2).getLayerCollapsed ? 16 : 12, "radio-data": l2, onTitleClick: C2, onDrop: t3[1] || (t3[1] = (e4) => b2(e4, r2.value.length)), onRadioChange: S2 }, { default: M(() => [0 === r2.value.length ? (s(), h(d(pe), { key: 0, "image-style": d(m2).getLayerCollapsed ? { height: "20px" } : {}, description: "暂无图层", image: d(He) }, null, 8, ["image-style", "image"])) : (s(), h(d(tt), { key: 1 }, { default: M(() => [g(d(ft), { "item-key": "id", modelValue: r2.value, "onUpdate:modelValue": t3[0] || (t3[0] = (e4) => r2.value = e4), animation: "300", "ghost-class": "ghost", onChange: v2 }, { item: M(({ index: e4, element: t4 }) => [u("div", { onDrop: (t5) => b2(t5, e4), style: { "margin-top": "4px" } }, [t4.chart.type !== d(Hi).MfCombine ? (s(), h(If, { key: 0, item: t4, onMousedown: (o3) => w2(t4, e4, o3), onEnter: (e5) => {
     return o3 = t4, void f2.setCurHoverComponent(o3?.chart.id);
     var o3;
-  }, onLeave: x2 }, null, 8, ["item", "onMousedown", "onEnter"])) : (s(), h(If, { key: 1, item: t4, expand: c2.value, "show-child-lock": false, onMousedown: (o3) => w2(t4, e4, o3) }, null, 8, ["item", "expand", "onMousedown"]))], 40, Df)]), _: 1 }, 8, ["modelValue"])]), _: 1 }))]), _: 1 }, 8, ["class", "title", "icon-size"]));
-} }), Nf = Ot(Tf, [["__scopeId", "data-v-3b66e5f3"]]), Bf = { class: "menu-item-hide-title" }, zf = { class: "title" }, Of = Ot(e({ __name: "ChartMenus", props: { itemHeight: { type: Number }, width: { type: Number, default: 68 }, collapsed: { type: Boolean, default: false }, horizontal: { type: Boolean, default: false }, hideTitle: { type: Boolean, default: false }, backgroundColor: { type: Object, default: () => ({ light: "transparent", dark: "transparent" }) }, menus: { type: Array, default: () => [] } }, emits: ["menuClick", "menuChange"], setup(e2, { emit: o2 }) {
+  }, onLeave: x2 }, null, 8, ["item", "onMousedown", "onEnter"])) : (s(), h(Tf, { key: 1, item: t4, expand: c2.value, "show-child-lock": false, onMousedown: (o3) => w2(t4, e4, o3) }, null, 8, ["item", "expand", "onMousedown"]))], 40, Nf)]), _: 1 }, 8, ["modelValue"])]), _: 1 }))]), _: 1 }, 8, ["class", "title", "icon-size"]));
+} }), Of = zt(Bf, [["__scopeId", "data-v-3b66e5f3"]]), zf = { class: "menu-item-hide-title" }, Rf = { class: "title" }, jf = zt(e({ __name: "ChartMenus", props: { itemHeight: { type: Number }, width: { type: Number, default: 68 }, collapsed: { type: Boolean, default: false }, horizontal: { type: Boolean, default: false }, hideTitle: { type: Boolean, default: false }, backgroundColor: { type: Object, default: () => ({ light: "transparent", dark: "transparent" }) }, menus: { type: Array, default: () => [] } }, emits: ["menuClick", "menuChange"], setup(e2, { emit: o2 }) {
   t((e3) => ({ v0d1a8dbe: S2.value, v4d1bbc42: `${d(w2)}px`, v2f136afc: x2.value, v4b451fa0: d(w2) - 15 + "px" }));
   const l2 = e2, i2 = o2;
   a(() => l2.menus, (e3) => {
@@ -4229,8 +4235,8 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
   const { prefixCls: f2 } = fe("chart-menus"), C2 = y([]), { backgroundColor: b2, width: w2 } = l2, x2 = n(() => b2.light), S2 = n(() => b2.dark), $2 = (e3) => {
     i2("menuClick", e3, d(C2)), i2("menuChange", e3.key, e3.item.id);
   };
-  return (t2, o3) => (s(), r("div", { class: p(d(f2)) }, [g(d(de), { class: p({ collapsed: e2.collapsed }), "selected-keys": C2.value, "onUpdate:selectedKeys": o3[0] || (o3[0] = (e3) => C2.value = e3), onClick: $2 }, { default: M(() => [g(d(tt), null, { default: M(() => [(s(true), r(m, null, v(e2.menus, (t3) => (s(), h(d(ue), { id: t3.name, key: t3.value, style: c({ height: `${e2.itemHeight}px` }) }, { default: M(() => [e2.hideTitle ? (s(), h(d(Y), { key: 0, title: t3.name, placement: "right" }, { default: M(() => [u("div", Bf, [g(d(be), { style: c({ lineHeight: `${e2.itemHeight}px` }), icon: t3.icon }, null, 8, ["style", "icon"])])]), _: 2 }, 1032, ["title"])) : (s(), r("div", { key: 1, class: p(e2.horizontal ? "menu-item-horizontal" : "menu-item-vertical") }, [g(d(be), { icon: t3.icon }, null, 8, ["icon"]), u("div", zf, k(t3.name), 1)], 2))]), _: 2 }, 1032, ["id", "style"]))), 128))]), _: 1 })]), _: 1 }, 8, ["class", "selected-keys"])], 2));
-} }), [["__scopeId", "data-v-dea86191"]]), Rf = ["onDragstart", "onDblclick"], jf = { class: "box-header" }, Af = { class: "box-header-text" }, Pf = { class: "box-content" }, Ef = ["src"], Ff = e({ __name: "ChartItems", props: { charts: { type: Array, default: () => [] }, mode: { type: String, default: "single" } }, setup(e2) {
+  return (t2, o3) => (s(), r("div", { class: p(d(f2)) }, [g(d(de), { class: p({ collapsed: e2.collapsed }), "selected-keys": C2.value, "onUpdate:selectedKeys": o3[0] || (o3[0] = (e3) => C2.value = e3), onClick: $2 }, { default: M(() => [g(d(tt), null, { default: M(() => [(s(true), r(m, null, v(e2.menus, (t3) => (s(), h(d(ue), { id: t3.name, key: t3.value, style: c({ height: `${e2.itemHeight}px` }) }, { default: M(() => [e2.hideTitle ? (s(), h(d(Z), { key: 0, title: t3.name, placement: "right" }, { default: M(() => [u("div", zf, [g(d(be), { style: c({ lineHeight: `${e2.itemHeight}px` }), icon: t3.icon }, null, 8, ["style", "icon"])])]), _: 2 }, 1032, ["title"])) : (s(), r("div", { key: 1, class: p(e2.horizontal ? "menu-item-horizontal" : "menu-item-vertical") }, [g(d(be), { icon: t3.icon }, null, 8, ["icon"]), u("div", Rf, k(t3.name), 1)], 2))]), _: 2 }, 1032, ["id", "style"]))), 128))]), _: 1 })]), _: 1 }, 8, ["class", "selected-keys"])], 2));
+} }), [["__scopeId", "data-v-dea86191"]]), Af = ["onDragstart", "onDblclick"], Pf = { class: "box-header" }, Ef = { class: "box-header-text" }, Ff = { class: "box-content" }, Hf = ["src"], Gf = e({ __name: "ChartItems", props: { charts: { type: Array, default: () => [] }, mode: { type: String, default: "single" } }, setup(e2) {
   const t2 = e2, { prefixCls: o2 } = fe("chart-items"), n2 = Ci(), l2 = (e3) => n2.getChartImg(e3);
   return a(() => t2.charts, (e3) => {
     e3.forEach((e4) => {
@@ -4247,8 +4253,8 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
   })(e3, t4), onDblclick: (e3) => (function(e4) {
     const t5 = Dd(e4);
     t5 && kd.emit(_i.CREATE_CHART, t5);
-  })(t4) }, [u("div", jf, [g(d(hl), { disabled: true, size: "single" === e2.mode ? "small" : "mini" }, null, 8, ["size"]), u("span", Af, k(t4.name), 1)]), u("div", Pf, [u("img", { class: "img", alt: "组件图片", src: l2(t4.type) }, null, 8, Ef)])], 40, Rf))), 128))], 2)]), _: 1 }, 8, ["class"]));
-} }), Hf = Ot(Ff, [["__scopeId", "data-v-c3ed6867"]]), Gf = e({ name: "FrameChart", __name: "index", props: { collapsed: et.bool.def(false) }, setup(e2) {
+  })(t4) }, [u("div", Pf, [g(d(hl), { disabled: true, size: "single" === e2.mode ? "small" : "mini" }, null, 8, ["size"]), u("span", Ef, k(t4.name), 1)]), u("div", Ff, [u("img", { class: "img", alt: "组件图片", src: l2(t4.type) }, null, 8, Hf)])], 40, Af))), 128))], 2)]), _: 1 }, 8, ["class"]));
+} }), Vf = zt(Gf, [["__scopeId", "data-v-c3ed6867"]]), Uf = e({ name: "FrameChart", __name: "index", props: { collapsed: et.bool.def(false) }, setup(e2) {
   const t2 = e2, o2 = bi(), a2 = y(), l2 = y(), r2 = y(""), c2 = y(/* @__PURE__ */ new Map()), f2 = n(() => l2.value && l2.value.length > 0 ? l2.value.map((e3) => ({ name: e3.categoryName, icon: e3.icon, value: e3?.id, children: e3.children })) : []), m2 = n(() => {
     if (a2.value) {
       const e3 = l2.value?.find((e4) => e4?.id === a2.value);
@@ -4278,15 +4284,15 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
       c2.value.set(o3, e4.list);
     });
   }
-  return (t3, o3) => (s(), h(Mf, { title: "组件", icon: "iconfont:icon-mfish-chart", "icon-size": 12, "radio-data": b2, onRadioChange: x2, class: p(w2.value), onTitleClick: k2 }, { default: M(() => [u("div", { class: p(`${d(v2)}-content`) }, [g(Of, { menus: f2.value, "item-height": 58, "background-color": { light: "#f0f2f5", dark: "#232324" }, onMenuClick: S2, onMenuChange: $2 }, null, 8, ["menus"]), u("div", { class: p(["charts", { collapsed: e2.collapsed }]) }, [g(Of, { menus: m2.value, collapsed: e2.collapsed, "hide-title": true, "background-color": { light: "#f8f8f9", dark: "#1e1e1f" }, horizontal: true, "item-height": 28, width: 40, onMenuChange: L2 }, null, 8, ["menus", "collapsed"]), g(Hf, { mode: C2.value, charts: c2.value.get(r2.value) }, null, 8, ["mode", "charts"])], 2)], 2)]), _: 1 }, 8, ["class"]));
-} }), Vf = Ot(Gf, [["__scopeId", "data-v-ee4060a5"]]), Uf = ["onClick"], Wf = { class: "name" }, Zf = { class: "short-cut" }, Yf = e({ __name: "SubMenu", props: { subData: { type: Array, default: () => [] } }, setup(e2, { expose: t2 }) {
+  return (t3, o3) => (s(), h(xf, { title: "组件", icon: "iconfont:icon-mfish-chart", "icon-size": 12, "radio-data": b2, onRadioChange: x2, class: p(w2.value), onTitleClick: k2 }, { default: M(() => [u("div", { class: p(`${d(v2)}-content`) }, [g(jf, { menus: f2.value, "item-height": 58, "background-color": { light: "#f0f2f5", dark: "#232324" }, onMenuClick: S2, onMenuChange: $2 }, null, 8, ["menus"]), u("div", { class: p(["charts", { collapsed: e2.collapsed }]) }, [g(jf, { menus: m2.value, collapsed: e2.collapsed, "hide-title": true, "background-color": { light: "#f8f8f9", dark: "#1e1e1f" }, horizontal: true, "item-height": 28, width: 40, onMenuChange: L2 }, null, 8, ["menus", "collapsed"]), g(Vf, { mode: C2.value, charts: c2.value.get(r2.value) }, null, 8, ["mode", "charts"])], 2)], 2)]), _: 1 }, 8, ["class"]));
+} }), Wf = zt(Uf, [["__scopeId", "data-v-ee4060a5"]]), qf = ["onClick"], Zf = { class: "name" }, Yf = { class: "short-cut" }, Xf = e({ __name: "SubMenu", props: { subData: { type: Array, default: () => [] } }, setup(e2, { expose: t2 }) {
   const { prefixCls: n2 } = fe("frame-shortcut"), a2 = y(false), l2 = y(0), i2 = o("subMenuRef"), C2 = he().getThemeColor;
   return t2({ show: function(e3) {
     a2.value = true;
   }, hidden: function() {
     a2.value = false;
-  } }), (t3, o2) => (s(), h(V, { name: "shortcut" }, { default: M(() => [P(u("div", { ref_key: "subMenuRef", ref: i2, class: p(d(n2)), style: c({ top: `${l2.value}px`, left: "160px" }) }, [(s(true), r(m, null, v(e2.subData, (e3) => (s(), r(m, { key: e3.name }, [u("div", { class: "menu-item", onClick: e3.action }, [g(d(be), { icon: e3.icon, color: d(C2) }, null, 8, ["icon", "color"]), u("span", Wf, k(e3.name), 1), u("span", Zf, k(e3.shortcut), 1)], 8, Uf), e3.divider ? (s(), r("div", { key: 0, class: p(`${d(n2)}__divider`) }, null, 2)) : f("", true)], 64))), 128))], 6), [[F, a2.value]])]), _: 1 }));
-} }), Xf = Ot(Yf, [["__scopeId", "data-v-f4307b07"]]), qf = { class: "short-cut" }, Kf = { class: "short-cut" }, Jf = { class: "short-cut" }, Qf = ["onClick"], eh = { class: "name" }, th = { class: "short-cut" }, oh = e({ name: "FrameShortcut", __name: "index", props: { menuTop: { type: Number, default: 0 }, menuLeft: { type: Number, default: 0 }, isUp: { type: Boolean, default: false } }, setup(e2, { expose: t2 }) {
+  } }), (t3, o2) => (s(), h(V, { name: "shortcut" }, { default: M(() => [P(u("div", { ref_key: "subMenuRef", ref: i2, class: p(d(n2)), style: c({ top: `${l2.value}px`, left: "160px" }) }, [(s(true), r(m, null, v(e2.subData, (e3) => (s(), r(m, { key: e3.name }, [u("div", { class: "menu-item", onClick: e3.action }, [g(d(be), { icon: e3.icon, color: d(C2) }, null, 8, ["icon", "color"]), u("span", Zf, k(e3.name), 1), u("span", Yf, k(e3.shortcut), 1)], 8, qf), e3.divider ? (s(), r("div", { key: 0, class: p(`${d(n2)}__divider`) }, null, 2)) : f("", true)], 64))), 128))], 6), [[F, a2.value]])]), _: 1 }));
+} }), Kf = zt(Xf, [["__scopeId", "data-v-f4307b07"]]), Jf = { class: "short-cut" }, Qf = { class: "short-cut" }, eh = { class: "short-cut" }, th = ["onClick"], oh = { class: "name" }, nh = { class: "short-cut" }, ah = e({ name: "FrameShortcut", __name: "index", props: { menuTop: { type: Number, default: 0 }, menuLeft: { type: Number, default: 0 }, isUp: { type: Boolean, default: false } }, setup(e2, { expose: t2 }) {
   const a2 = e2, i2 = n(() => ({ top: `${a2.menuTop}px`, left: `${a2.menuLeft}px` })), y2 = he().getThemeColor, { prefixCls: b2 } = fe("frame-shortcut"), x2 = Wd(), S2 = Ci(), $2 = o("frameShortcutRef"), L2 = o("canvasAlignMenuRef"), _2 = o("selectAlignMenuRef"), I2 = o("fitMenuRef"), { NoneShortcutKeyEnum: D2 } = tu(S2, x2);
   t2({ getBoundingClientRect: () => $2.value?.getBoundingClientRect() });
   const T2 = n(() => S2.getSelectArea.components.length > 1), N2 = l([{ icon: "iconfont:icon-mfish-copy", name: "复制", shortcut: "CTRL+C", action: x2.copyComponent, show: n(() => S2.getCurComponent || S2.getSelectArea.components.length > 0) }, { icon: "iconfont:icon-mfish-paste", name: "粘贴", shortcut: "CTRL+V", action: x2.pasteComponent, show: n(() => x2.getCopyData), divider: true }, { icon: "iconfont:icon-mfish-up-level", name: "上移一层", shortcut: "SHIFT+↑", action: x2.upComponent, show: n(() => S2.getCurComponent && !d(T2)) }, { icon: "iconfont:icon-mfish-down-level", name: "下移一层", shortcut: "SHIFT+↓", action: x2.downComponent, show: n(() => S2.getCurComponent && !d(T2)) }, { icon: "iconfont:icon-mfish-up-level", name: "置顶", shortcut: "CTRL+SHIFT+↑", action: x2.topComponent, show: n(() => S2.getCurComponent && !d(T2)) }, { icon: "iconfont:icon-mfish-bottom-level", name: "置底", shortcut: "CTRL+SHIFT+↓", action: x2.bottomComponent, show: n(() => S2.getCurComponent && !d(T2)), divider: true }, { icon: "iconfont:icon-mfish-combine", name: "组合", shortcut: "CTRL+G", action: x2.composeComponent, show: n(() => S2.getSelectArea.components.length > 1) }, { icon: "iconfont:icon-mfish-un-combine", name: "拆分", shortcut: "CTRL+SHIFT+G", action: x2.decomposeComponent, show: n(() => S2.getCurComponent?.chart.type === Hi.MfCombine && !d(T2)) }, { icon: "ant-design:lock-outlined", name: "锁定", shortcut: "CTRL+L", action: x2.lockComponent, show: n(() => {
@@ -4317,8 +4323,8 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
       break;
     }
     return void 0 !== e3 && !e3;
-  }) }, { icon: "ant-design:delete-outlined", name: "删除", shortcut: "DELETE", action: x2.deleteComponent, show: n(() => S2.getCurComponent || S2.getSelectArea.components.length > 0) }]), B2 = l([{ icon: "iconfont:icon-mfish-horizontal-distribution", name: "横向分布", shortcut: "", action: D2.distributeHorizontally }, { icon: "iconfont:icon-mfish-vertical-distribution", name: "纵向分布", shortcut: "", action: D2.distributeVertically, divider: true }, { icon: "iconfont:icon-mfish-left-align", name: "左对齐", shortcut: "", action: D2.alignLeft }, { icon: "iconfont:icon-mfish-horizontal-center", name: "水平居中", shortcut: "", action: D2.alignCenter }, { icon: "iconfont:icon-mfish-right-align", name: "右对齐", shortcut: "", action: D2.alignRight, divider: true }, { icon: "iconfont:icon-mfish-top-align", name: "顶端对齐", shortcut: "", action: D2.alignTop }, { icon: "iconfont:icon-mfish-vertical-center", name: "垂直居中", shortcut: "", action: D2.alignMiddle }, { icon: "iconfont:icon-mfish-bottom-align", name: "底端对齐", shortcut: "", action: D2.alignBottom, divider: true }]), z2 = l([{ icon: "carbon:fit-to-screen", name: "全屏撑满", shortcut: "", action: D2.fillScreen }, { icon: "carbon:fit-to-width", name: "横向撑满", shortcut: "", action: D2.fillWidth }, { icon: "carbon:fit-to-height", name: "纵向撑满", shortcut: "", action: D2.fillHeight }]);
-  function O2() {
+  }) }, { icon: "ant-design:delete-outlined", name: "删除", shortcut: "DELETE", action: x2.deleteComponent, show: n(() => S2.getCurComponent || S2.getSelectArea.components.length > 0) }]), B2 = l([{ icon: "iconfont:icon-mfish-horizontal-distribution", name: "横向分布", shortcut: "", action: D2.distributeHorizontally }, { icon: "iconfont:icon-mfish-vertical-distribution", name: "纵向分布", shortcut: "", action: D2.distributeVertically, divider: true }, { icon: "iconfont:icon-mfish-left-align", name: "左对齐", shortcut: "", action: D2.alignLeft }, { icon: "iconfont:icon-mfish-horizontal-center", name: "水平居中", shortcut: "", action: D2.alignCenter }, { icon: "iconfont:icon-mfish-right-align", name: "右对齐", shortcut: "", action: D2.alignRight, divider: true }, { icon: "iconfont:icon-mfish-top-align", name: "顶端对齐", shortcut: "", action: D2.alignTop }, { icon: "iconfont:icon-mfish-vertical-center", name: "垂直居中", shortcut: "", action: D2.alignMiddle }, { icon: "iconfont:icon-mfish-bottom-align", name: "底端对齐", shortcut: "", action: D2.alignBottom, divider: true }]), O2 = l([{ icon: "carbon:fit-to-screen", name: "全屏撑满", shortcut: "", action: D2.fillScreen }, { icon: "carbon:fit-to-width", name: "横向撑满", shortcut: "", action: D2.fillWidth }, { icon: "carbon:fit-to-height", name: "纵向撑满", shortcut: "", action: D2.fillHeight }]);
+  function z2() {
     P2(Qd.CANVAS), L2.value?.show(a2.isUp);
   }
   function R2() {
@@ -4340,30 +4346,30 @@ const qu = ["onMousedown"], Ku = { key: 2, class: "cover-layer-out" }, Ju = { ke
     I2.value?.hidden();
   }
   return (e3, t3) => (s(), h(V, { name: "shortcut" }, { default: M(() => [d(x2).getShowMenu ? (s(), r("div", { key: "shortcutMenu", ref_key: "frameShortcutRef", ref: $2, class: p(d(b2)), style: c(i2.value), onMousedown: t3[3] || (t3[3] = w(() => {
-  }, ["stop"])) }, [d(S2).getCurComponent || d(S2).getSelectArea.components.length > 1 ? (s(), r("div", { key: 0, class: "menu-item", onMouseenter: O2, onMouseleave: R2, onMouseup: t3[0] || (t3[0] = w(() => {
-  }, ["stop"])) }, [g(d(be), { icon: "iconfont:icon-mfish-left-align", color: d(y2) }, null, 8, ["color"]), t3[4] || (t3[4] = u("span", { class: "name" }, "画布对齐", -1)), u("span", qf, [g(d(be), { icon: "ant-design:right-outlined" })]), g(Xf, { ref_key: "canvasAlignMenuRef", ref: L2, "sub-data": B2 }, null, 8, ["sub-data"])], 32)) : f("", true), d(S2).getSelectArea.components.length > 1 ? (s(), r("div", { key: 1, class: "menu-item", onMouseenter: j2, onMouseleave: A2, onMouseup: t3[1] || (t3[1] = w(() => {
-  }, ["stop"])) }, [g(d(be), { icon: "iconfont:icon-mfish-left-align", color: d(y2) }, null, 8, ["color"]), t3[5] || (t3[5] = u("span", { class: "name" }, "选中对齐", -1)), u("span", Kf, [g(d(be), { icon: "ant-design:right-outlined" })]), g(Xf, { ref_key: "selectAlignMenuRef", ref: _2, "sub-data": B2 }, null, 8, ["sub-data"])], 32)) : f("", true), d(S2).getCurComponent ? (s(), r("div", { key: 2, class: "menu-item", onMouseenter: E2, onMouseleave: F2, onMouseup: t3[2] || (t3[2] = w(() => {
-  }, ["stop"])) }, [g(d(be), { icon: "carbon:fit-to-screen", color: d(y2) }, null, 8, ["color"]), t3[6] || (t3[6] = u("span", { class: "name" }, "撑满", -1)), u("span", Jf, [g(d(be), { icon: "ant-design:right-outlined" })]), g(Xf, { ref_key: "fitMenuRef", ref: I2, "sub-data": z2 }, null, 8, ["sub-data"])], 32)) : f("", true), d(S2).getCurComponent || d(S2).getSelectArea.components.length > 1 ? (s(), r("div", { key: 3, class: p(`${d(b2)}__divider`) }, null, 2)) : f("", true), (s(true), r(m, null, v(N2, (e4) => (s(), r(m, { key: e4.name }, [e4.show ? (s(), r("div", { key: 0, class: "menu-item", onClick: (t4) => {
+  }, ["stop"])) }, [d(S2).getCurComponent || d(S2).getSelectArea.components.length > 1 ? (s(), r("div", { key: 0, class: "menu-item", onMouseenter: z2, onMouseleave: R2, onMouseup: t3[0] || (t3[0] = w(() => {
+  }, ["stop"])) }, [g(d(be), { icon: "iconfont:icon-mfish-left-align", color: d(y2) }, null, 8, ["color"]), t3[4] || (t3[4] = u("span", { class: "name" }, "画布对齐", -1)), u("span", Jf, [g(d(be), { icon: "ant-design:right-outlined" })]), g(Kf, { ref_key: "canvasAlignMenuRef", ref: L2, "sub-data": B2 }, null, 8, ["sub-data"])], 32)) : f("", true), d(S2).getSelectArea.components.length > 1 ? (s(), r("div", { key: 1, class: "menu-item", onMouseenter: j2, onMouseleave: A2, onMouseup: t3[1] || (t3[1] = w(() => {
+  }, ["stop"])) }, [g(d(be), { icon: "iconfont:icon-mfish-left-align", color: d(y2) }, null, 8, ["color"]), t3[5] || (t3[5] = u("span", { class: "name" }, "选中对齐", -1)), u("span", Qf, [g(d(be), { icon: "ant-design:right-outlined" })]), g(Kf, { ref_key: "selectAlignMenuRef", ref: _2, "sub-data": B2 }, null, 8, ["sub-data"])], 32)) : f("", true), d(S2).getCurComponent ? (s(), r("div", { key: 2, class: "menu-item", onMouseenter: E2, onMouseleave: F2, onMouseup: t3[2] || (t3[2] = w(() => {
+  }, ["stop"])) }, [g(d(be), { icon: "carbon:fit-to-screen", color: d(y2) }, null, 8, ["color"]), t3[6] || (t3[6] = u("span", { class: "name" }, "撑满", -1)), u("span", eh, [g(d(be), { icon: "ant-design:right-outlined" })]), g(Kf, { ref_key: "fitMenuRef", ref: I2, "sub-data": O2 }, null, 8, ["sub-data"])], 32)) : f("", true), d(S2).getCurComponent || d(S2).getSelectArea.components.length > 1 ? (s(), r("div", { key: 3, class: p(`${d(b2)}__divider`) }, null, 2)) : f("", true), (s(true), r(m, null, v(N2, (e4) => (s(), r(m, { key: e4.name }, [e4.show ? (s(), r("div", { key: 0, class: "menu-item", onClick: (t4) => {
     return o2 = e4.action, x2.setShowMenu(false), void C(() => {
       o2();
     });
     var o2;
-  } }, [g(d(be), { icon: e4.icon, color: d(y2) }, null, 8, ["icon", "color"]), u("span", eh, k(e4.name), 1), u("span", th, k(e4.shortcut), 1)], 8, Qf)) : f("", true), e4.show && e4.divider ? (s(), r("div", { key: 1, class: p(`${d(b2)}__divider`) }, null, 2)) : f("", true)], 64))), 128))], 38)) : f("", true)]), _: 1 }));
-} }), nh = Ot(oh, [["__scopeId", "data-v-2dcb7415"]]);
+  } }, [g(d(be), { icon: e4.icon, color: d(y2) }, null, 8, ["icon", "color"]), u("span", oh, k(e4.name), 1), u("span", nh, k(e4.shortcut), 1)], 8, th)) : f("", true), e4.show && e4.divider ? (s(), r("div", { key: 1, class: p(`${d(b2)}__divider`) }, null, 2)) : f("", true)], 64))), 128))], 38)) : f("", true)]), _: 1 }));
+} }), lh = zt(ah, [["__scopeId", "data-v-2dcb7415"]]);
 export {
   Fo as $,
   An as A,
   No as B,
-  Zi as C,
+  qi as C,
   Hi as D,
-  If as E,
+  Tf as E,
   El as F,
   $l as G,
   xi as H,
   Di as I,
   gl as J,
   xl as K,
-  Lf as L,
+  If as L,
   bo as M,
   Ml as N,
   Sl as O,
@@ -4378,25 +4384,25 @@ export {
   Fn as X,
   Vn as Y,
   Ao as Z,
-  Ot as _,
+  zt as _,
   bd as a,
   Hl as a$,
   Vo as a0,
-  Zo as a1,
-  qo as a2,
+  qo as a1,
+  Xo as a2,
   en as a3,
   nn as a4,
   ea as a5,
-  Oa as a6,
+  za as a6,
   Ei as a7,
   Pa as a8,
   Ua as a9,
-  du as aA,
-  _u as aB,
-  mf as aC,
-  Nf as aD,
-  Vf as aE,
-  nh as aF,
+  fu as aA,
+  Du as aB,
+  Cf as aC,
+  Of as aD,
+  Wf as aE,
+  lh as aF,
   hl as aG,
   mt as aH,
   vt as aI,
@@ -4411,8 +4417,8 @@ export {
   Tl as aR,
   Nl as aS,
   Bl as aT,
-  zl as aU,
-  Ol as aV,
+  Ol as aU,
+  zl as aV,
   Rl as aW,
   jl as aX,
   Al as aY,
@@ -4426,7 +4432,7 @@ export {
   $a as af,
   Ia as ag,
   Na as ah,
-  Ya as ai,
+  Za as ai,
   Ka as aj,
   el as ak,
   nl as al,
@@ -4437,7 +4443,7 @@ export {
   Vc as aq,
   xc as ar,
   Cp as as,
-  Yc as at,
+  Zc as at,
   Wc as au,
   Kc as av,
   up as aw,
@@ -4449,15 +4455,15 @@ export {
   Vl as b1,
   Ul as b2,
   Wl as b3,
-  Zl as b4,
-  Yl as b5,
-  Xl as b6,
-  ql as b7,
+  ql as b4,
+  Zl as b5,
+  Yl as b6,
+  Xl as b7,
   Kl as b8,
   Jl as b9,
   Nd as bA,
   Bd as bB,
-  Od as bC,
+  zd as bC,
   Rd as bD,
   jd as bE,
   Ad as bF,
@@ -4469,9 +4475,9 @@ export {
   Ii as bL,
   Ti as bM,
   Ni as bN,
-  Yd as bO,
-  Xd as bP,
-  qd as bQ,
+  Zd as bO,
+  Yd as bP,
+  Xd as bQ,
   Kd as bR,
   Jd as bS,
   Qd as bT,
@@ -4506,12 +4512,12 @@ export {
   Dd as by,
   Td as bz,
   $i as c,
-  Cu as d,
+  Mu as d,
   vl as e,
-  zd as f,
-  Yi as g,
+  Od as f,
+  Zi as g,
   wd as h,
-  Xi as i,
+  Yi as i,
   cr as j,
   rr as k,
   or as l,
@@ -4527,6 +4533,6 @@ export {
   $n as v,
   In as w,
   Nn as x,
-  On as y,
-  Oo as z
+  zn as y,
+  zo as z
 };
