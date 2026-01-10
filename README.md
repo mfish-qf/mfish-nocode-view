@@ -43,7 +43,7 @@
 数据展示看板等轻应用开发快速集成
 
 ## 💡技术栈
-摸鱼低代码前端采用 Vue3.x、Vite6.x、 Ant-Design-Vue4.0.X、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
+摸鱼低代码前端采用 Vue3.x、Vite7.x、 Ant-Design-Vue4.0.X、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
 是在Vben-Admin基础上进行优化研发的适合于摸鱼低代码平台的前端解决方案，目前已是稳定版本，可用于生产项目。
 
 * 后端基于SpringBoot3, Spring Cloud Alibaba，实现微服务、单体服务代码一体化架构
@@ -87,7 +87,7 @@
 
 | 项目名                 | 说明             | 
 |---------------------|----------------|
-| `mfish-nocode-view` | Vue3.4+Vite5前端 | 
+| `mfish-nocode-view` | Vue3.4+Vite7前端 | 
 | `mfish-nocode`      | JAVA后台（微服务架构）  |  
 
 ## 📖技术文档
@@ -193,6 +193,8 @@ http://localhost:5186
 [4.自助大屏配置系列-动画绑定](https://www.bilibili.com/video/BV1K1JNzdEG1/?share_source=copy_web&vd_source=0cf425790dc7750eb5d8a4d1c0b028f4)
 
 [5.自助大屏配置系列-多屏联动](https://www.bilibili.com/video/BV1kvjHzdEok/?share_source=copy_web&vd_source=0cf425790dc7750eb5d8a4d1c0b028f4)
+
+[6.自助大屏配置系列-动态显隐](https://www.bilibili.com/video/BV1CkrNBWEsj/?share_source=copy_web&vd_source=0cf425790dc7750eb5d8a4d1c0b028f4)
 
 #### 项目截图
 
