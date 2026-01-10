@@ -1965,7 +1965,9 @@ function Ui(e2, t2) {
     if (e2?.pageType === $i.System) {
       let a2 = e2?.page.value || "";
       (a2.startsWith("http://") || a2.startsWith("https://")) && (a2 = "");
-      o2 = qe.resolve({ name: "ScreenPreview", params: { id: a2 }, query: { ...n2, isResource: t2.getIsResource } }).href;
+      const l2 = { ...n2 };
+      t2.getIsResource && (l2.isResource = t2.getIsResource), t2.getShareToken && (l2.shareToken = t2.getShareToken);
+      o2 = qe.resolve({ name: "ScreenPreview", params: { id: a2 }, query: l2 }).href;
     } else o2 = e2?.page.value, o2.startsWith("http") || (o2 = `http://${o2}`), Object.keys(n2).length > 0 && (o2 += `?${new URLSearchParams(n2).toString()}`);
     return o2;
   } };
