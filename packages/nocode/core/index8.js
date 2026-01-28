@@ -1,4 +1,4 @@
-import { defineComponent as t, watch as a, nextTick as o, createBlock as e, openBlock as r, unref as i, mergeProps as n, toHandlers as c } from "vue";
+import { defineComponent as t, watch as a, nextTick as o, openBlock as e, createBlock as r, unref as i, mergeProps as n, toHandlers as c } from "vue";
 import { VueUiTiremarks as s } from "vue-data-ui";
 import "vue-data-ui/style.css";
 import { i as l, u } from "./index.js";
@@ -12,7 +12,7 @@ const p = t({ name: "MfTireMarks", __name: "index", props: { chart: { type: Obje
         t4.options.style.chart.layout.inactiveColor !== o2.dark && t4.options.style.chart.layout.inactiveColor !== o2.light || (t4.options.style.chart.layout.inactiveColor = o2[a2]);
       })(p2.chart, t3);
     });
-  }, { immediate: true }), (a2, o2) => (r(), e(i(s), n({ dataset: t2.chart.data?.dataSet || { percentage: 0 }, config: t2.chart.options }, c(i(h))), null, 16, ["dataset", "config"]));
+  }, { immediate: true }), (a2, o2) => (e(), r(i(s), n({ dataset: t2.chart.data?.dataSet || { percentage: 0 }, config: t2.chart.options }, c(i(h))), null, 16, ["dataset", "config"]));
 } });
 export {
   p as default

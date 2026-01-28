@@ -1,4 +1,4 @@
-import { defineComponent as e, reactive as t, watch as o, createElementBlock as n, openBlock as a, normalizeClass as l, unref as i, Fragment as r, renderList as u, createBlock as c, createCommentVNode as d, withCtx as s, createVNode as m } from "vue";
+import { defineComponent as e, reactive as t, watch as o, openBlock as n, createElementBlock as a, normalizeClass as l, unref as i, Fragment as r, renderList as u, createBlock as c, withCtx as d, createVNode as s, createCommentVNode as m } from "vue";
 import { Icon as h } from "@mfish/core/components/Icon";
 import { Tooltip as f, RadioButton as v } from "ant-design-vue";
 import { useDesign as p } from "@mfish/core/hooks";
@@ -9,7 +9,7 @@ const b = y(e({ __name: "TextFontStyle", props: { bold: { type: Boolean, default
     x.bold.value = e3, x.italic.value = t2, x.strikethrough.value = o2, x.underline.value = n2;
   }, { immediate: true, deep: true });
   const { prefixCls: S } = p("font-style");
-  return (e3, t2) => (a(), n("div", { class: l(i(S)) }, [(a(true), n(r, null, u(Object.keys(x), (e4) => (a(), n(r, { key: e4 }, [_(e4) ? (a(), c(i(f), { key: 0, placement: "bottom", title: `${x[e4].value ? "关闭" : "打开"}${x[e4].name}` }, { default: s(() => [m(i(v), { class: "radio-button", checked: x[e4].value, onMousedown: (t3) => (function(e5) {
+  return (e3, t2) => (n(), a("div", { class: l(i(S)) }, [(n(true), a(r, null, u(Object.keys(x), (e4) => (n(), a(r, { key: e4 }, [_(e4) ? (n(), c(i(f), { key: 0, placement: "bottom", title: `${x[e4].value ? "关闭" : "打开"}${x[e4].name}` }, { default: d(() => [s(i(v), { class: "radio-button", checked: x[e4].value, onMousedown: (t3) => (function(e5) {
     if (e5) {
       x[e5].value = !x[e5].value, x[e5].value && (e5 === k.Underline && (x[k.Strikethrough].value = false), e5 === k.Strikethrough && (x[k.Underline].value = false));
       const t4 = {};
@@ -17,7 +17,7 @@ const b = y(e({ __name: "TextFontStyle", props: { bold: { type: Boolean, default
         t4[e6] = x[e6].value;
       }), g("fontStyleChange", t4);
     }
-  })(e4) }, { default: s(() => [m(i(h), { icon: x[e4].icon }, null, 8, ["icon"])]), _: 2 }, 1032, ["checked", "onMousedown"])]), _: 2 }, 1032, ["title"])) : d("", true)], 64))), 128))], 2));
+  })(e4) }, { default: d(() => [s(i(h), { icon: x[e4].icon }, null, 8, ["icon"])]), _: 2 }, 1032, ["checked", "onMousedown"])]), _: 2 }, 1032, ["title"])) : m("", true)], 64))), 128))], 2));
 } }), [["__scopeId", "data-v-0aa6420d"]]);
 export {
   b as T

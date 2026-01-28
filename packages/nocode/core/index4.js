@@ -1,4 +1,4 @@
-import { defineComponent as t, computed as o, ref as e, watch as n, onMounted as r, nextTick as a, createElementBlock as h, openBlock as s, mergeProps as i, unref as c, toHandlers as p, Fragment as l, renderList as d, withDirectives as u, normalizeStyle as m, normalizeClass as C, createBlock as v, resolveDynamicComponent as f, vShow as g } from "vue";
+import { defineComponent as t, computed as o, ref as e, watch as n, onMounted as r, nextTick as a, openBlock as h, createElementBlock as s, mergeProps as i, unref as c, toHandlers as p, Fragment as l, renderList as d, withDirectives as u, normalizeStyle as m, normalizeClass as C, createBlock as v, resolveDynamicComponent as f, vShow as g } from "vue";
 import { useDesign as I } from "@mfish/core/hooks";
 import { u as w, s as y, S as _, p as M, h as A, i as x, b as T, C as E, _ as N } from "./index.js";
 import { theme as O } from "ant-design-vue";
@@ -47,9 +47,9 @@ const k = t({ name: "MfCombine", __name: "index", props: { chart: { type: Object
     })();
   });
   const { commonEvents: D } = x(N2.chart);
-  return (o2, e2) => (s(), h("div", i({ class: c(k2), onClick: Y }, p(c(D), true), { key: L.value }), [(s(true), h(l, null, d(H2.value, (o3, n2) => u((s(), h("div", { class: C([V(o3, H2.value, n2), "component"]), style: m(j(o3)), ref_for: true, ref: (t3) => (function(t4, o4) {
+  return (o2, e2) => (h(), s("div", i({ class: c(k2), onClick: Y }, p(c(D), true), { key: L.value }), [(h(true), s(l, null, d(H2.value, (o3, n2) => u((h(), s("div", { class: C([V(o3, H2.value, n2), "component"]), style: m(j(o3)), ref_for: true, ref: (t3) => (function(t4, o4) {
     B.value[o4] = t4;
-  })(t3, n2), key: n2 }, [(s(), v(f(c(T)[o3.chart.type].component), { style: m(q(o3)), class: "component", id: `com${o3.chart.id}`, chart: o3.chart, "chart-contain": o3.chartContain, onMouseenter: (e3) => {
+  })(t3, n2), key: n2 }, [(h(), v(f(c(T)[o3.chart.type].component), { style: m(q(o3)), class: "component", id: `com${o3.chart.id}`, chart: o3.chart, "chart-contain": o3.chartContain, onMouseenter: (e3) => {
     return n3 = t2.chart, r2 = o3.chart.id, void (c(R) || (n3.options.hoverId = r2));
     var n3, r2;
   }, onMouseleave: e2[0] || (e2[0] = (o4) => {

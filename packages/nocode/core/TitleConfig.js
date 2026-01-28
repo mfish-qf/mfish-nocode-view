@@ -1,4 +1,4 @@
-import { defineComponent as o, ref as n, watch as t, createElementBlock as e, openBlock as i, normalizeClass as C, unref as l, createElementVNode as a, createVNode as g, toDisplayString as r } from "vue";
+import { defineComponent as o, ref as n, watch as t, openBlock as e, createElementBlock as i, normalizeClass as C, unref as l, createElementVNode as a, toDisplayString as g, createVNode as r } from "vue";
 import { u, _ as p } from "./index.js";
 import { useDesign as f } from "@mfish/core/hooks";
 import { T as s } from "./index59.js";
@@ -24,7 +24,7 @@ const h = { class: "title" }, c = p(o({ __name: "TitleConfig", props: { title: {
   }
   return t(() => p2.getCurConfigComponent, (o3) => {
     o3 && (c2.value = {}, c2.value.font = p2.getCurConfigComponent.chart.options.font?.value, c2.value.fontSize = p2.getCurConfigComponent.chart.options.fontSize?.value, c2.value.hAlignType = p2.getCurConfigComponent.chart.options.hAlign?.value, c2.value.vAlignType = p2.getCurConfigComponent.chart.options.vAlign?.value, c2.value.textColor = p2.getCurConfigComponent.chart.options.textColor?.value, c2.value.fontStyle = p2.getCurConfigComponent.chart.options.fontStyle?.value);
-  }, { immediate: true }), (n2, t2) => (i(), e("div", { class: C(l(m)) }, [a("div", h, r(o2.title), 1), g(s, { "hide-align": o2.hideAlign, "text-style": c2.value, onFontChange: v, onSizeChange: d, onHAlignChange: y, onVAlignChange: A, onFontStyleChange: x, onColorChange: S }, null, 8, ["hide-align", "text-style"])], 2));
+  }, { immediate: true }), (n2, t2) => (e(), i("div", { class: C(l(m)) }, [a("div", h, g(o2.title), 1), r(s, { "hide-align": o2.hideAlign, "text-style": c2.value, onFontChange: v, onSizeChange: d, onHAlignChange: y, onVAlignChange: A, onFontStyleChange: x, onColorChange: S }, null, 8, ["hide-align", "text-style"])], 2));
 } }), [["__scopeId", "data-v-033080e0"]]);
 export {
   c as T

@@ -1,7 +1,7 @@
-import { defineComponent as t, computed as a, createBlock as e, openBlock as n, normalizeClass as o, unref as s, withCtx as i, createElementVNode as r, createVNode as l, toDisplayString as u, renderSlot as d } from "vue";
+import { defineComponent as t, computed as a, openBlock as e, createBlock as n, normalizeClass as o, unref as s, withCtx as i, createElementVNode as r, toDisplayString as l, createVNode as u, renderSlot as d } from "vue";
 import { D as f, a as c } from "./DragInData.js";
 import { useDesign as C } from "@mfish/core/hooks";
-import { u as g, j as m, ar as p, _ as h } from "./index.js";
+import { u as g, j as m, aq as p, _ as h } from "./index.js";
 import { J as x } from "./JsonData.js";
 const D = { class: "title" }, y = { class: "title" }, v = h(t({ __name: "MfBarLineDataConfig", props: { xTitle: { type: String, default: "X轴 / 维度" }, yTitle: { type: String, default: "Y轴 / 值" }, xMaxCount: { type: Number, default: 1 }, yMaxCount: { type: Number, default: 100 } }, setup(t2) {
   const h2 = g(), { setFields: v2, deleteFields: S, getFields: _, setDataTable: M } = m(), { resetDefault: T, setStaticData: b } = p(), { prefixCls: j } = C("bar-line-data-config"), F = a(() => h2.getCurConfigComponent.chart.data?.dataSet?.source ? JSON.stringify(h2.getCurConfigComponent.chart.data.dataSet.source) : ""), J = a(() => h2.getCurConfigComponent.chart.data.fields ? h2.getCurConfigComponent.chart.data.fields?.dimensions ?? [] : []), N = a(() => h2.getCurConfigComponent.chart.data.fields ? h2.getCurConfigComponent.chart.data.fields?.source ?? [] : []);
@@ -12,13 +12,13 @@ const D = { class: "title" }, y = { class: "title" }, v = h(t({ __name: "MfBarLi
   function k(t3) {
     t3?.length > 0 ? v2("dimensions", t3) : S("dimensions"), I();
   }
-  function B(t3) {
+  function q(t3) {
     t3.length > 0 ? v2("source", t3) : S("source"), I();
   }
-  function L(t3) {
+  function B(t3) {
     b(h2.getCurConfigComponent.chart, t3);
   }
-  return (a2, C2) => (n(), e(f, { class: o(s(j)), onRefreshData: I }, { "data-select": i(() => [d(a2.$slots, "data-select", {}, void 0, true)]), "static-data": i(() => [l(x, { data: F.value, onDataChange: L }, null, 8, ["data"])]), "target-data": i(() => [r("div", D, u(t2.xTitle), 1), l(c, { "max-count": t2.xMaxCount, height: 150, onDataChange: k, fields: J.value }, null, 8, ["max-count", "fields"]), r("div", y, u(t2.yTitle), 1), l(c, { "max-count": t2.yMaxCount, height: 150, onDataChange: B, fields: N.value }, null, 8, ["max-count", "fields"])]), _: 3 }, 8, ["class"]));
+  return (a2, C2) => (e(), n(f, { class: o(s(j)), onRefreshData: I }, { "data-select": i(() => [d(a2.$slots, "data-select", {}, void 0, true)]), "static-data": i(() => [u(x, { data: F.value, onDataChange: B }, null, 8, ["data"])]), "target-data": i(() => [r("div", D, l(t2.xTitle), 1), u(c, { "max-count": t2.xMaxCount, height: 150, onDataChange: k, fields: J.value }, null, 8, ["max-count", "fields"]), r("div", y, l(t2.yTitle), 1), u(c, { "max-count": t2.yMaxCount, height: 150, onDataChange: q, fields: N.value }, null, 8, ["max-count", "fields"])]), _: 3 }, 8, ["class"]));
 } }), [["__scopeId", "data-v-c1e0ecfc"]]);
 export {
   v as default

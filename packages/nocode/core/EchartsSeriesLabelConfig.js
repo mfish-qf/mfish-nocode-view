@@ -1,4 +1,4 @@
-import { defineComponent as e, ref as l, watch as a, createElementBlock as t, openBlock as o, normalizeClass as i, unref as n, createVNode as u, withCtx as s, createElementVNode as v, createTextVNode as r } from "vue";
+import { defineComponent as e, ref as l, watch as a, openBlock as t, createElementBlock as o, normalizeClass as i, unref as n, createVNode as u, withCtx as s, createElementVNode as v, createTextVNode as r } from "vue";
 import { u as b, d as h, O as c, _ as f } from "./index.js";
 import { Select as p } from "ant-design-vue";
 import { useDesign as d } from "@mfish/core/hooks";
@@ -36,7 +36,7 @@ const m = { class: "title" }, C = f(e({ __name: "EchartsSeriesLabelConfig", prop
       const e4 = S.value?.label?.fontStyle ? { italic: true } : {}, l2 = S.value?.label?.fontWeight ? { bold: true } : {};
       k.value.fontStyle = { ...e4, ...l2 }, k.value.hAlignType = S.value?.label?.align, k.value.vAlignType = S.value?.label?.verticalAlign;
     })();
-  }, { immediate: true }), (l2, a2) => (o(), t("div", { class: i(n(x)) }, [u(h, { title: "标签设置", "default-expand": false, "allow-check": true, "title-check": e2.series?.label?.show, onChecked: w }, { default: s(() => [u(g, { "hide-font-style": [n(c).Underline, n(c).Strikethrough], "color-type": 1, "vertical-align": true, "text-style": k.value, onFontChange: B, onSizeChange: B, onFontStyleChange: z, onColorChange: B, onHAlignChange: L, onVAlignChange: j }, null, 8, ["hide-font-style", "text-style"]), v("div", m, [a2[1] || (a2[1] = r(" 标签位置 ", -1)), u(n(p), { value: A.value, "onUpdate:value": a2[0] || (a2[0] = (e3) => A.value = e3), options: T, "show-search": false, "filter-option": false, placeholder: "请选择", onChange: F }, null, 8, ["value"])])]), _: 1 }, 8, ["title-check"])], 2));
+  }, { immediate: true }), (l2, a2) => (t(), o("div", { class: i(n(x)) }, [u(h, { title: "标签设置", "default-expand": false, "allow-check": true, "title-check": e2.series?.label?.show, onChecked: w }, { default: s(() => [u(g, { "hide-font-style": [n(c).Underline, n(c).Strikethrough], "color-type": 1, "vertical-align": true, "text-style": k.value, onFontChange: B, onSizeChange: B, onFontStyleChange: z, onColorChange: B, onHAlignChange: L, onVAlignChange: j }, null, 8, ["hide-font-style", "text-style"]), v("div", m, [a2[1] || (a2[1] = r(" 标签位置 ", -1)), u(n(p), { value: A.value, "onUpdate:value": a2[0] || (a2[0] = (e3) => A.value = e3), options: T, "show-search": false, "filter-option": false, placeholder: "请选择", onChange: F }, null, 8, ["value"])])]), _: 1 }, 8, ["title-check"])], 2));
 } }), [["__scopeId", "data-v-21531387"]]);
 export {
   C as E
