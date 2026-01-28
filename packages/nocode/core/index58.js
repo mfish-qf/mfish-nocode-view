@@ -1,4 +1,4 @@
-import { defineComponent as t, useCssVars as e, computed as o, watch as a, createBlock as n, openBlock as r, unref as i, mergeProps as c, toHandlers as s } from "vue";
+import { defineComponent as t, useCssVars as e, computed as o, watch as a, openBlock as n, createBlock as r, unref as i, mergeProps as c, toHandlers as s } from "vue";
 import { i as p, u as l } from "./index.js";
 import { Table as h } from "ant-design-vue";
 import { useDesign as d } from "@mfish/core/hooks";
@@ -33,7 +33,7 @@ const C = t({ __name: "index", props: { chart: { type: Object, required: true },
       for (const t3 of C2.chart.events.emits) if ("rowClick" === t3) return "allow-pointer";
     }
   });
-  return (t3, e2) => (r(), n(i(h), c({ class: [i(v), y.value] }, w.value, s(i(f)), { "row-class-name": (t4, e3) => e3 % 2 == 1 ? "even-table-striped" : "odd-table-striped", "custom-row": k }), null, 16, ["class", "row-class-name"]));
+  return (t3, e2) => (n(), r(i(h), c({ class: [i(v), y.value] }, w.value, s(i(f)), { "row-class-name": (t4, e3) => e3 % 2 == 1 ? "even-table-striped" : "odd-table-striped", "custom-row": k }), null, 16, ["class", "row-class-name"]));
 } });
 export {
   C as default

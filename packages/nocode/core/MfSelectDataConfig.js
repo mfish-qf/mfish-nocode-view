@@ -1,4 +1,4 @@
-import { defineComponent as a, computed as t, createBlock as e, openBlock as n, normalizeClass as o, unref as s, withCtx as l, createElementVNode as i, createVNode as d, renderSlot as r } from "vue";
+import { defineComponent as a, computed as t, openBlock as e, createBlock as n, normalizeClass as o, unref as s, withCtx as l, createElementVNode as i, createVNode as d, renderSlot as r } from "vue";
 import { D as f, a as c } from "./DragInData.js";
 import { useDesign as u } from "@mfish/core/hooks";
 import { u as g, j as C, _ as m } from "./index.js";
@@ -17,7 +17,7 @@ const p = m(a({ __name: "MfSelectDataConfig", setup(a2) {
   function I(a3) {
     a3 && (m2.getCurConfigComponent.chart.data.dataSet = a3);
   }
-  return (a3, t2) => (n(), e(f, { class: o(s(_)), onRefreshData: j }, { "data-select": l(() => [r(a3.$slots, "data-select", {}, void 0, true)]), "static-data": l(() => [d(h, { data: S.value, onDataChange: I }, null, 8, ["data"])]), "target-data": l(() => [t2[0] || (t2[0] = i("div", { class: "title" }, "标签显示", -1)), d(c, { "max-count": 1, height: 180, onDataChange: J, fields: b.value }, null, 8, ["fields"]), t2[1] || (t2[1] = i("div", { class: "title" }, "标签值", -1)), d(c, { "max-count": 1, height: 180, onDataChange: F, fields: x.value }, null, 8, ["fields"])]), _: 3 }, 8, ["class"]));
+  return (a3, t2) => (e(), n(f, { class: o(s(_)), onRefreshData: j }, { "data-select": l(() => [r(a3.$slots, "data-select", {}, void 0, true)]), "static-data": l(() => [d(h, { data: S.value, onDataChange: I }, null, 8, ["data"])]), "target-data": l(() => [t2[0] || (t2[0] = i("div", { class: "title" }, "标签显示", -1)), d(c, { "max-count": 1, height: 180, onDataChange: J, fields: b.value }, null, 8, ["fields"]), t2[1] || (t2[1] = i("div", { class: "title" }, "标签值", -1)), d(c, { "max-count": 1, height: 180, onDataChange: F, fields: x.value }, null, 8, ["fields"])]), _: 3 }, 8, ["class"]));
 } }), [["__scopeId", "data-v-99b1c7a3"]]);
 export {
   p as default

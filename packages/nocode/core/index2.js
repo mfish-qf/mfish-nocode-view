@@ -1,4 +1,4 @@
-import { defineComponent as e, useCssVars as n, computed as o, ref as a, createBlock as t, openBlock as l, unref as i, normalizeClass as s, withCtx as u, createElementVNode as c, createTextVNode as r, toDisplayString as v, createCommentVNode as m, createVNode as d, onMounted as p, onUnmounted as f, createElementBlock as g, Fragment as C, renderList as h, withModifiers as k, normalizeStyle as _, nextTick as y } from "vue";
+import { defineComponent as e, useCssVars as n, computed as o, ref as a, openBlock as t, createBlock as l, unref as i, normalizeClass as s, withCtx as u, createElementVNode as c, createTextVNode as r, toDisplayString as v, createCommentVNode as m, createVNode as d, onMounted as p, onUnmounted as f, createElementBlock as g, Fragment as C, renderList as h, withModifiers as k, normalizeStyle as _, nextTick as y } from "vue";
 import { theme as I, Dropdown as x, InputNumber as A, Checkbox as b, Empty as M, Tooltip as E, Segmented as T } from "ant-design-vue";
 import { Icon as w } from "@mfish/core/components/Icon";
 import { u as O, _ as N, a as P, s as S, S as U, p as L } from "./index.js";
@@ -18,9 +18,9 @@ const q = ["onMouseenter"], F = { class: "setting" }, H = e({ __name: "Animation
   }, M2 = (e3) => {
     _2.value = e3;
   };
-  return (e3, n2) => (l(), t(i(G), { "item-key": "id", class: s(i(C2)), modelValue: f2.value, "onUpdate:modelValue": n2[0] || (n2[0] = (e4) => f2.value = e4), animation: "300", "ghost-class": "ghost", onChange: y2 }, { item: u(({ element: e4, index: o2 }) => [c("div", { class: "animation", onMouseenter: (e5) => (function(e6) {
+  return (e3, n2) => (t(), l(i(G), { "item-key": "id", class: s(i(C2)), modelValue: f2.value, "onUpdate:modelValue": n2[0] || (n2[0] = (e4) => f2.value = e4), animation: "300", "ghost-class": "ghost", onChange: y2 }, { item: u(({ element: e4, index: o2 }) => [c("div", { class: "animation", onMouseenter: (e5) => (function(e6) {
     g2.value = e6;
-  })(o2) }, [r(v(e4.label) + " ", 1), c("div", null, [g2.value === o2 ? (l(), t(i(w), { key: 0, class: "icon", icon: "ant-design:delete-outlined", onClick: (e5) => (function(e6) {
+  })(o2) }, [r(v(e4.label) + " ", 1), c("div", null, [g2.value === o2 ? (t(), l(i(w), { key: 0, class: "icon", icon: "ant-design:delete-outlined", onClick: (e5) => (function(e6) {
     p2.getCurConfigComponent.chart.animations.splice(e6, 1), g2.value = -1;
   })(o2) }, null, 8, ["onClick"])) : m("", true), d(i(x), { placement: "bottom", trigger: ["click"], open: _2.value && g2.value === o2, onOpenChange: M2, arrow: true }, { overlay: u(() => [c("div", F, [d(i(A), { style: { width: "100%" }, value: e4.duration, "onUpdate:value": (n3) => e4.duration = n3, size: "small", placeholder: "时长 ms", step: 100, min: 0, max: 1e5 }, null, 8, ["value", "onUpdate:value"]), d(i(A), { style: { width: "100%" }, disabled: e4.loop, value: e4.repeat, "onUpdate:value": (n3) => e4.repeat = n3, size: "small", placeholder: "重复次数", step: 1, min: 0, max: 3 }, null, 8, ["disabled", "value", "onUpdate:value"]), d(i(b), { checked: e4.loop, "onUpdate:checked": (n3) => e4.loop = n3, onChange: (n3) => (function(e5) {
     e5.loop && (e5.repeat = void 0);
@@ -49,14 +49,14 @@ const q = ["onMouseenter"], F = { class: "setting" }, H = e({ __name: "Animation
     x2.value = P[0].value, S.on(U.PLAY_ANIMATION_COMPLETE, oe);
   }), f(() => {
     S.off(U.PLAY_ANIMATION_COMPLETE, oe);
-  }), (e3, n2) => (l(), g("div", { class: s(i(ee)) }, [d(i(B), { style: { "min-height": "250px", height: "250px" } }, { default: u(() => [q2.value && 0 !== q2.value.length ? (l(), g("div", Q, [d(J), c("div", W, [d(i(E), { title: ne.value ? "暂停动画" : "播放动画" }, { default: u(() => [c("div", X, [ne.value ? (l(), t(i(Y), { key: 0, "two-tone-color": i(G2), style: { fontSize: "60px" }, onClick: le }, null, 8, ["two-tone-color"])) : (l(), t(i(j), { key: 1, "two-tone-color": i(G2), style: { fontSize: "60px" }, onClick: te }, null, 8, ["two-tone-color"]))])]), _: 1 }, 8, ["title"])])])) : (l(), t(i(M), { key: 0, description: "未添加动画", image: i(M).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"]))]), _: 1 }), d(i(T), { class: "segment", value: x2.value, options: i(P), onChange: ae, block: "" }, { label: u(({ value: e4, payload: n3 }) => [n3.icon ? (l(), t(i(w), { key: 0, icon: n3.icon }, null, 8, ["icon"])) : m("", true), r(" " + v(e4), 1)]), _: 1 }, 8, ["value", "options"]), d(i(B), null, { default: u(() => [c("div", { class: "animation-contain", onMouseleave: n2[0] || (n2[0] = (e4) => A2.value = "") }, [(l(true), g(C, null, h(F2.value, (e4) => (l(), g("div", { style: { cursor: "pointer", height: "28px" }, key: e4.value, onClick: (n3) => (function(e5) {
+  }), (e3, n2) => (t(), g("div", { class: s(i(ee)) }, [d(i(B), { style: { "min-height": "250px", height: "250px" } }, { default: u(() => [q2.value && 0 !== q2.value.length ? (t(), g("div", Q, [d(J), c("div", W, [d(i(E), { title: ne.value ? "暂停动画" : "播放动画" }, { default: u(() => [c("div", X, [ne.value ? (t(), l(i(Y), { key: 0, "two-tone-color": i(G2), style: { fontSize: "60px" }, onClick: le }, null, 8, ["two-tone-color"])) : (t(), l(i(j), { key: 1, "two-tone-color": i(G2), style: { fontSize: "60px" }, onClick: te }, null, 8, ["two-tone-color"]))])]), _: 1 }, 8, ["title"])])])) : (t(), l(i(M), { key: 0, description: "未添加动画", image: i(M).PRESENTED_IMAGE_SIMPLE }, null, 8, ["image"]))]), _: 1 }), d(i(T), { class: "segment", value: x2.value, options: i(P), onChange: ae, block: "" }, { label: u(({ value: e4, payload: n3 }) => [n3.icon ? (t(), l(i(w), { key: 0, icon: n3.icon }, null, 8, ["icon"])) : m("", true), r(" " + v(e4), 1)]), _: 1 }, 8, ["value", "options"]), d(i(B), null, { default: u(() => [c("div", { class: "animation-contain", onMouseleave: n2[0] || (n2[0] = (e4) => A2.value = "") }, [(t(true), g(C, null, h(F2.value, (e4) => (t(), g("div", { style: { cursor: "pointer", height: "28px" }, key: e4.value, onClick: (n3) => (function(e5) {
     const n4 = V(e5, ["label", "value"]);
     K2.getCurConfigComponent.chart.animations ? K2.getCurConfigComponent.chart.animations.push(n4) : K2.getCurConfigComponent.chart.animations = [n4];
   })(e4), onMouseenter: k((n3) => (async function(e5) {
     A2.value = e5.value, await y(), await L(e5.animationRef, [e5]);
   })(e4), ["stop", "prevent"]) }, [c("div", { class: "animation-block", style: _(A2.value === e4.value ? N2.value : {}), ref_for: true, ref: (n3) => {
     e4.animationRef = n3;
-  } }, v(e4.label), 5), A2.value === e4.value ? (l(), t(i(w), { key: 0, class: "mask-icon", icon: "ant-design:plus-outlined", size: 24 })) : m("", true)], 40, Z))), 128))], 32)]), _: 1 })], 2));
+  } }, v(e4.label), 5), A2.value === e4.value ? (t(), l(i(w), { key: 0, class: "mask-icon", icon: "ant-design:plus-outlined", size: 24 })) : m("", true)], 40, Z))), 128))], 32)]), _: 1 })], 2));
 } }), [["__scopeId", "data-v-031d35c9"]]);
 export {
   $ as default

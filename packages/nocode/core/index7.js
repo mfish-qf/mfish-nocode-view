@@ -1,4 +1,4 @@
-import { defineComponent as t, watch as e, nextTick as o, createBlock as i, openBlock as r, unref as a, mergeProps as n, toHandlers as s } from "vue";
+import { defineComponent as t, watch as e, nextTick as o, openBlock as i, createBlock as r, unref as a, mergeProps as n, toHandlers as s } from "vue";
 import { VueUiWheel as c } from "vue-data-ui";
 import "vue-data-ui/style.css";
 import { i as l, u as h } from "./index.js";
@@ -14,7 +14,7 @@ const u = t({ name: "MfWheel", __name: "index", props: { chart: { type: Object, 
         t4.options.style.chart.layout.wheel.ticks.inactiveColor !== o2.dark && t4.options.style.chart.layout.wheel.ticks.inactiveColor !== o2.light || (t4.options.style.chart.layout.wheel.ticks.inactiveColor = o2[e2]);
       })(u2.chart, t3);
     });
-  }, { immediate: true }), (e2, o2) => (r(), i(a(c), n({ dataset: t2.chart.data?.dataSet || { percentage: 0 }, config: t2.chart.options }, s(a(y))), null, 16, ["dataset", "config"]));
+  }, { immediate: true }), (e2, o2) => (i(), r(a(c), n({ dataset: t2.chart.data?.dataSet || { percentage: 0 }, config: t2.chart.options }, s(a(y))), null, 16, ["dataset", "config"]));
 } });
 export {
   u as default
