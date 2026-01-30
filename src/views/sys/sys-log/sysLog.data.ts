@@ -76,7 +76,7 @@ export const columns: BasicColumn[] = [
 export const searchFormSchema: FormSchema[] = [
   {
     field: "title",
-    label: "中文标题",
+    label: "日志标签",
     component: "Input",
     colProps: { xl: 4, md: 6 }
   },

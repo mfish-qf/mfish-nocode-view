@@ -1,5 +1,3 @@
-import { Recordable } from "@mfish/types";
-
 /**
  * 分页查询请求参数
  */
@@ -22,7 +20,7 @@ export interface PageResult<T> {
 /**
  * 对象基类
  */
-export interface BaseEntity<T> extends Recordable {
+export interface BaseEntity<T = string> {
   id?: T;
   createBy?: string;
   createTime?: string;

@@ -11,6 +11,21 @@
         <AButton type="primary" @click="handleCreate" v-auth="'nocode:screenCharts:insert'">新增</AButton>
         <AButton color="warning" @click="handleExport" v-auth="'nocode:screenCharts:export'">导出</AButton>
         <AButton color="error" @click="handleBatchDelete" v-auth="'nocode:screenCharts:delete'">批量删除</AButton>
+        <Upload
+          multiple
+          accept="image/*"
+          v-auth="'nocode:screenCharts:update'"
+          :show-upload-list="false"
+          v-model:file-list="fileList"
+          :custom-request="customRequest"
+          @change="handleChange"
+        >
+          <ATooltip title="导入组件图片，可以多选图片进行批量导入">
+            <AButton type="primary" pre-icon="ant-design:upload-outlined" :loading="uploadLoading">
+              导入图片资源
+            </AButton>
+          </ATooltip>
+        </Upload>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -56,8 +71,10 @@
     deleteScreenCharts,
     exportScreenCharts,
     getScreenChartsList,
-    ScreenCharts
+    ScreenCharts,
+    updatePic
   } from "@mfish/nocode";
+  import { Tooltip as ATooltip, Upload } from "ant-design-vue";
   import { useModal } from "@mfish/core/components/Modal";
   import ScreenChartsModal from "./ScreenChartsModal.vue";
   import ScreenChartsViewModal from "./ScreenChartsViewModal.vue";
@@ -65,11 +82,13 @@
   import { ref } from "vue";
   import { useMessage } from "@mfish/core/hooks";
   import { Button as AButton } from "@mfish/core/components/Button";
+  import { uploadApi } from "@mfish/core/api";
 
   defineOptions({ name: "ScreenChartsManagement" });
   const [registerModal, { openModal }] = useModal();
   const [registerViewModal, { openModal: openViewModal }] = useModal();
   const selectedRowKeys = ref<any[]>([]);
+  const uploadLoading = ref(false);
   const [registerTable, { reload, getForm }] = useTable({
     title: "组件管理列表",
     api: getScreenChartsList,
@@ -96,6 +115,8 @@
       dataIndex: "action"
     }
   });
+  const fileList = ref([]);
+  const picList: { fileKey: string; fileName: string }[] = [];
   const { createMessage } = useMessage();
 
   /**
@@ -156,6 +177,43 @@
     } else {
       createMessage.warning("请勾选要删除的数据");
     }
+  }
+
+  /**
+   * 自定义上传
+   * @param e 事件对象
+   */
+  function customRequest(e: any) {
+    uploadLoading.value = true;
+    uploadApi({ file: e.file, path: "screen/charts" }, (_) => {})
+      .then((res) => {
+        picList.push({ fileKey: res.fileKey, fileName: res.fileName });
+        e.onSuccess(res, e);
+      })
+      .catch((error) => {
+        e.onError(error);
+      })
+      .finally(() => (uploadLoading.value = false));
+  }
+
+  /**
+   * 上传完成后处理
+   * @param e 事件对象
+   */
+  function handleChange(e: any) {
+    if (e.fileList.length !== picList.length) {
+      return;
+    }
+    uploadLoading.value = true;
+    updatePic(picList)
+      .then(() => {
+        handleSuccess();
+      })
+      .finally(() => {
+        fileList.value.length = 0;
+        picList.length = 0;
+        uploadLoading.value = false;
+      });
   }
 
   /**

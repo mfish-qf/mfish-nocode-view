@@ -102,6 +102,7 @@ export default {
 
     preview: "预览",
     choose: "选择文件",
+    chooseDirectory: "选择目录",
 
     accept: "支持{0}格式",
     acceptUpload: "只能上传{0}格式文件",
