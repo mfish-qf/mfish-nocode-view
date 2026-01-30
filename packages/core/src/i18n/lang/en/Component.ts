@@ -99,6 +99,7 @@ export default {
 
     preview: "Preview",
     choose: "Select the file",
+    chooseDirectory: "Select the directory",
 
     accept: "Support {0} format",
     acceptUpload: "Only upload files in {0} format",

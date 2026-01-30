@@ -141,7 +141,7 @@
     "prettier": "catalog:",
     "prettier-plugin-packagejson": "catalog:",
     "rimraf": "^6.1.2",
-    "rollup": "^4.55.1",
+    "rollup": "^4.57.1",
     "rollup-plugin-visualizer": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
@@ -158,11 +158,11 @@
     "vite-plugin-mock": "catalog:",
     "vite-plugin-svg-icons": "catalog:",
     "vite-plugin-vue-setup-extend": "catalog:",
-    "vue": "^3.5.26",
+    "vue": "^3.5.27",
     "vue-eslint-parser": "catalog:",
     "vue-tsc": "catalog:"
   },
-  "packageManager": "pnpm@10.26.0",
+  "packageManager": "pnpm@10.28.1",
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"
