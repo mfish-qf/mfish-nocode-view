@@ -5,7 +5,7 @@ import { getApiFolderTree } from "@mfish/custom-api";
  * @description: 自定义API
  * @author: mfish
  * @date: 2023-09-06
- * @version: V2.2.0
+ * @version: V2.3.0
  */
 export const mfApiFormSchema: FormSchema[] = [
   { field: "id", label: "id", component: "Input", show: false },

@@ -1,6 +1,6 @@
 摸鱼低代码开发平台（前端）
 ======================================
-当前最新版本： V2.2.0
+当前最新版本： V2.3.0
 
 [![Author](https://img.shields.io/badge/Author-mfish-orange.svg)](http://www.mfish.com.cn)
 [![Blog](https://img.shields.io/badge/Blog-个人博客-yellow.svg)](http://www.mfish.com.cn)
@@ -46,7 +46,7 @@
 摸鱼低代码前端采用 Vue3.x、Vite7.x、 Ant-Design-Vue4.0.X、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
 是在Vben-Admin基础上进行优化研发的适合于摸鱼低代码平台的前端解决方案，目前已是稳定版本，可用于生产项目。
 
-* 后端基于SpringBoot3, Spring Cloud Alibaba，实现微服务、单体服务代码一体化架构
+* 后端基于SpringBoot4, Spring Cloud Alibaba，实现微服务、单体服务代码一体化架构
 * 注册中心、配置中心采用nacos(作为单体服务时无需使用注册中心)
 * 支持oauth2统一认证接入，支持多种登录方式（账号密码登录、手机短信登录、微信扫码登录）
 * 支持租户切换，租户可以自己管理自己的人员、组织、角色
