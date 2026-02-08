@@ -7,7 +7,7 @@
       </div>
       <div>
         后端<a :href="GITHUB_BACK_URL" target="_blank">{{ name }}</a>
-        基于SpringBoot3, Spring Cloud Alibaba，实现微服务、单体服务一体化架构的后台管理解决方案。
+        基于SpringBoot4, Spring Cloud Alibaba，实现微服务、单体服务一体化架构的后台管理解决方案。
       </div>
       <div>
         一套代码两种架构，目标是为小中大型项目开发提供现成的开箱解决方案及丰富的示例，原则上不会限制任何代码用于商用。

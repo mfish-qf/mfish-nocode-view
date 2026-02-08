@@ -2,7 +2,7 @@
  @description: 系统日志
  @author: mfish
  @date: 2023-01-08
- @version: V2.2.0
+ @version: V2.3.0
 -->
 <template>
   <div>

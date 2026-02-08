@@ -8,7 +8,7 @@ import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
  * @description: 租户信息表
  * @author: mfish
  * @date: 2023-05-31
- * @version: V2.2.0
+ * @version: V2.3.0
  */
 export const columns: BasicColumn[] = [
   {
