@@ -424,10 +424,12 @@
         onSuccess: (data) => {
           if (data && data.length > 0) {
             const index = messages.value.findIndex((msg) => msg.id === data[0].id && msg.message.role === "assistant");
-            status.value = "success";
-            messages.value[index].status = "success";
-            if (!messages.value[index].message?.content) {
-              messages.value[index].message.content = "小助手未获取到回复";
+            if (index !== -1) {
+              status.value = "success";
+              messages.value[index].status = "success";
+              if (!messages.value[index].message?.content) {
+                messages.value[index].message.content = "小助手未获取到回复";
+              }
             }
           } else {
             status.value = "error";
@@ -459,7 +461,7 @@
       },
       new TransformStream<string, { id: string; content: string }>({
         transform(chunk, controller) {
-          const regexData = /data:(?<data>\{"id":"\w+","content":.+\})/g;
+          const regexData = /data:(?<data>\{.+\})/g;
           let content = "";
           let id = "";
           for (const match of chunk.matchAll(regexData)) {
