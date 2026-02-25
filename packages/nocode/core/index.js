@@ -1814,7 +1814,7 @@ const bi = Ee("screen-edit", { state: () => ({ key: 0, id: "", isResource: false
     const { createMessage: e3 } = ge();
     return void e3.error("大屏不存在或无权限访问");
   }
-  this.setIsReleased(void 0 !== t2.released && null !== t2.released);
+  this.setIsReleased(null != t2?.released);
   const o2 = t2.canvasConfig ? JSON.parse(t2.canvasConfig) : void 0;
   this.setCanvasConfig(o2);
   const n2 = t2.contains ? JSON.parse(t2.contains) : [];
@@ -1864,10 +1864,14 @@ const bi = Ee("screen-edit", { state: () => ({ key: 0, id: "", isResource: false
         t5.id && (t5.id = e2.get(t5.id));
       });
     });
+  }, i2 = (t3) => {
+    t3.chart.jump?.params?.forEach((t4) => {
+      t4.value?.id && (t4.value.id = e2.get(t4.value.id));
+    });
   };
   this.componentList.forEach((e3) => {
-    o2(e3), n2(e3), a2(e3), l2(e3), e3.chart.type === Gi.MfCombine && e3.chart.options.components.forEach((e4) => {
-      o2(e4), n2(e4), a2(e4), l2(e4);
+    o2(e3), n2(e3), a2(e3), l2(e3), i2(e3), e3.chart.type === Gi.MfCombine && e3.chart.options.components.forEach((t3) => {
+      o2(t3), n2(t3), a2(t3), l2(t3), i2(e3);
     });
   });
 }, setCopyConfig(e2) {
