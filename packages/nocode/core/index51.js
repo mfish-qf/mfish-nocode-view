@@ -2,13 +2,13 @@ import { defineComponent as e, useTemplateRef as a, onMounted as t, openBlock as
 import { i as m, at as l, ar as p } from "./index.js";
 import { cloneDeep as u } from "lodash-es";
 import { g as c } from "./geoCoordinate.js";
-const f = e({ name: "MfMapLine", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
-  const f2 = e2, d = a("mfMapLineRef"), { commonEvents: h } = m(f2.chart), v = c;
-  l(f2.chart.options.geo, f2.chart.options), t(() => {
-    p(d.value, f2.chart, f2.chartContain, g, { renderer: "canvas" });
+const d = e({ name: "MfMapLine", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(e2) {
+  const d2 = e2, f = a("mfMapLineRef"), { commonEvents: h } = m(d2.chart), v = c;
+  l(d2.chart.options.geo, d2.chart.options), t(() => {
+    p(f.value, d2.chart, d2.chartContain, void 0, g, { renderer: "canvas" });
   });
   function g(e3, a2) {
-    const t2 = { ...u(f2.chart.options), backgroundColor: "transparent" }, r2 = ((e4) => {
+    const t2 = { ...u(d2.chart.options), backgroundColor: "transparent" }, r2 = ((e4) => {
       const a3 = [], t3 = [], r3 = /* @__PURE__ */ new Set();
       let o2 = 0, n2 = e4 && e4.length > 1 && e4[1].length > 2 ? e4[1][2] : 0;
       const i2 = (e5, t4) => {
@@ -25,8 +25,8 @@ const f = e({ name: "MfMapLine", __name: "index", props: { chart: { type: Object
     })(a2.source);
     t2.series[0].data = r2.lineDataArray, t2.series[0].tooltip = { trigger: "item", formatter: (e4) => `${e4.data.fromName} → ${e4.data.toName}<br>值: ${e4.data.value}` }, t2.series.length > 1 && (t2.series[1].data = r2.rippleDataArray, t2.series[1].tooltip = { trigger: "item", formatter: (e4) => `${e4.name}<br>合计: ${e4.value[2]}` }), t2.visualMap.min = r2.min, t2.visualMap.max = r2.max, e3?.setOption(t2, true);
   }
-  return (e3, a2) => (r(), o("div", n({ ref_key: "mfMapLineRef", ref: d, style: { width: "100%", height: "100%" } }, i(s(h), true)), null, 16));
+  return (e3, a2) => (r(), o("div", n({ ref_key: "mfMapLineRef", ref: f, style: { width: "100%", height: "100%" } }, i(s(h), true)), null, 16));
 } });
 export {
-  f as default
+  d as default
 };

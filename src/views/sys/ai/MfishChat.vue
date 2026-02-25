@@ -211,21 +211,21 @@
     UserOutlined
   } from "@ant-design/icons-vue";
   import {
-    Attachments,
     type Attachment,
+    Attachments,
     Bubble,
+    BubbleProps,
     Conversations,
     Prompts,
     Sender,
     Suggestion,
-    Welcome,
     theme,
-    XRequest,
-    BubbleProps
+    Welcome,
+    XRequest
   } from "ant-design-x-vue";
   import { Icon } from "@mfish/core/components/Icon";
-  import { Button as AButton, Popover, Space, Spin, message } from "ant-design-vue";
-  import { ref, watch, computed, h } from "vue";
+  import { Button as AButton, message, Popover, Space, Spin } from "ant-design-vue";
+  import { computed, h, ref, watch } from "vue";
   import { useDesign, useRootSetting } from "@mfish/core/hooks";
   import { getToken } from "@mfish/core/utils/auth";
   import { buildUUID } from "@mfish/core/utils/Uuid";
@@ -424,12 +424,10 @@
         onSuccess: (data) => {
           if (data && data.length > 0) {
             const index = messages.value.findIndex((msg) => msg.id === data[0].id && msg.message.role === "assistant");
-            if (index !== -1) {
-              status.value = "success";
-              messages.value[index].status = "success";
-              if (!messages.value[index].message?.content) {
-                messages.value[index].message.content = "小助手未获取到回复";
-              }
+            status.value = "success";
+            messages.value[index].status = "success";
+            if (!messages.value[index].message?.content) {
+              messages.value[index].message.content = "小助手未获取到回复";
             }
           } else {
             status.value = "error";
@@ -459,6 +457,7 @@
           abortController.value = controller;
         }
       },
+      // 解析 SSE 流数据
       new TransformStream<string, { id: string; content: string }>({
         transform(chunk, controller) {
           const regexData = /data:(?<data>\{.+\})/g;

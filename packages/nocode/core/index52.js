@@ -10,7 +10,7 @@ const g = e({ name: "MfMapLine3D", __name: "index", props: { chart: { type: Obje
   m(g2.chart.options.geo3D, g2.chart.options), f([h, d, v]);
   const y = a("mfMapLineRef"), { commonEvents: x } = p(g2.chart), D = u;
   t(() => {
-    c(y.value, g2.chart, g2.chartContain, M, { renderer: "canvas" });
+    c(y.value, g2.chart, g2.chartContain, void 0, M, { renderer: "canvas" });
   });
   function M(e3, a2) {
     const t2 = { ...l(g2.chart.options), backgroundColor: "transparent" }, r2 = ((e4) => {
