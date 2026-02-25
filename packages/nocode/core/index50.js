@@ -4,7 +4,7 @@ import { cloneDeep as u } from "lodash-es";
 const h = t({ name: "MfMapChunks", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(t2) {
   const h2 = t2, f = e("mfMapChunksRef"), { commonEvents: l } = m(h2.chart);
   p(h2.chart.options.series[0], h2.chart.options), r(() => {
-    c(f.value, h2.chart, h2.chartContain, d);
+    c(f.value, h2.chart, h2.chartContain, void 0, d);
   });
   function d(t3, e2) {
     const r2 = { ...u(h2.chart.options), backgroundColor: "transparent" }, a2 = ((t4) => {

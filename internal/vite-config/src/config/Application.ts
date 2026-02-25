@@ -5,6 +5,8 @@ import { defineConfig, loadEnv, mergeConfig, type UserConfig } from "vite";
 import { createPlugins } from "../plugins";
 import { generateModifyVars } from "../utils/ModifyVars";
 import { commonConfig } from "./Common";
+import fs from "node:fs";
+import { parse } from "yaml";
 
 export interface DefineOptions {
   overrides?: UserConfig;
@@ -117,7 +119,21 @@ async function createDefineData(root: string) {
   try {
     const pkgJson = await readPackageJSON(root);
     const { dependencies, devDependencies, name, version } = pkgJson;
-
+    const fileContent = fs.readFileSync("pnpm-workspace.yaml", "utf8");
+    const yamlData = parse(fileContent);
+    //从catalog中获取依赖版本
+    if (yamlData?.catalog) {
+      if (dependencies) {
+        Object.keys(dependencies).forEach((key) => {
+          dependencies[key] = yamlData.catalog[key] || dependencies[key];
+        });
+      }
+      if (devDependencies) {
+        Object.keys(devDependencies).forEach((key) => {
+          devDependencies[key] = yamlData.catalog[key] || devDependencies[key];
+        });
+      }
+    }
     const __APP_INFO__ = {
       pkg: { dependencies, devDependencies, name, version },
       lastBuildTime: dayjs().format("YYYY-MM-DD HH:mm:ss")

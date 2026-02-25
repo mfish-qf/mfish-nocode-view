@@ -1,13 +1,13 @@
 import { defineComponent as t, useTemplateRef as e, onMounted as a, openBlock as r, createElementBlock as o, mergeProps as n, toHandlers as s, unref as i } from "vue";
-import { i as m, at as c, ar as p } from "./index.js";
+import { i as c, at as m, ar as p } from "./index.js";
 import { cloneDeep as u } from "lodash-es";
 import { g as f } from "./geoCoordinate.js";
 const l = t({ name: "MfMapScatter", __name: "index", props: { chart: { type: Object, required: true }, chartContain: { type: Object, required: true } }, setup(t2) {
-  const l2 = t2, h = e("mfMapScatterRef"), { commonEvents: d } = m(l2.chart), g = f;
-  c(l2.chart.options.geo, l2.chart.options), a(() => {
-    p(h.value, l2.chart, l2.chartContain, v);
+  const l2 = t2, h = e("mfMapScatterRef"), { commonEvents: d, emitEvent: v } = c(l2.chart, void 0, ["clickEcharts"]), g = f;
+  m(l2.chart.options.geo, l2.chart.options), a(() => {
+    p(h.value, l2.chart, l2.chartContain, v, x);
   });
-  function v(t3, e2) {
+  function x(t3, e2) {
     const a2 = { ...u(l2.chart.options), backgroundColor: "transparent" }, r2 = ((t4) => {
       const e3 = [];
       let a3 = 0, r3 = t4 && t4.length > 1 && t4[1].length > 2 ? t4[1][2] : 0;

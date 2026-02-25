@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "catalog:",
+    "@types/js-yaml": "^4.0.9",
     "@vitejs/plugin-vue": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
     "ant-design-vue": "catalog:",
@@ -47,6 +48,7 @@
     "vite-plugin-dts": "catalog:",
     "vite-plugin-html": "catalog:",
     "vite-plugin-mock": "catalog:",
-    "vite-plugin-svg-icons": "catalog:"
+    "vite-plugin-svg-icons": "catalog:",
+    "yaml": "^2.8.2"
   }
 }

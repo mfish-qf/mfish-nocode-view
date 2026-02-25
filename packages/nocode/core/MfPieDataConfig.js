@@ -1,9 +1,6 @@
-import { defineComponent as t, resolveDirective as a, withDirectives as e, openBlock as o, createBlock as s, withCtx as n, renderSlot as r } from "vue";
+import { defineComponent as t, openBlock as a, createBlock as e, withCtx as o, renderSlot as s } from "vue";
 import f from "./MfBarLineDataConfig.js";
-const i = t({ __name: "MfPieDataConfig", setup: (t2) => (t3, i2) => {
-  const m = a("s");
-  return e((o(), s(f, { "y-max-count": 1 }, { "data-select": n(() => [r(t3.$slots, "data-select")]), _: 3 })), [[m]]);
-} });
+const i = t({ __name: "MfPieDataConfig", setup: (t2) => (t3, i2) => (a(), e(f, { "y-max-count": 1 }, { "data-select": o(() => [s(t3.$slots, "data-select")]), _: 3 })) });
 export {
   i as default
 };
