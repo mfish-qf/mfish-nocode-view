@@ -3245,7 +3245,7 @@ function Rd(e2, t2, o2) {
   if (!e2) return;
   if (e2 && void 0 !== e2.chart.data?.defaultValue) return e2.chart.data.defaultValue;
   const n2 = 0 === e2.chart.data.type ? e2.chart.data.dataSet : e2.chart.data.result;
-  return o2 && o2.e ? o2.e[t2.param] : ze(n2) ? n2[0][t2.param] : n2 ? n2[t2.param] : void 0;
+  return o2 && o2.e && o2.e[t2.param] ? o2.e[t2.param] : ze(n2) ? n2[0][t2.param] : n2 ? n2[t2.param] : void 0;
 }
 async function jd(e2, t2) {
   const o2 = (t3) => {
