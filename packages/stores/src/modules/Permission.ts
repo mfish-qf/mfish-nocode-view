@@ -105,6 +105,18 @@ export const usePermissionStore = defineStore("app-permission", {
       };
       const menuList: Menu[] = [];
       const routes: AppRouteRecordRaw[] = [];
+      const changeUrlToIframe = (menu: MenuListItem, route: AppRouteRecordRaw) => {
+        // 如果组件是URL地址，设置frame地址
+        if (isUrl(menu.component)) {
+          route.meta.frameSrc = menu.component;
+          // 如果URL外部打开设置path为url,如果是内部打开设置基于iframe打开
+          if (!menu.isExternal) {
+            route.component = IFRAME;
+          }
+        } else {
+          route.component = importComponent(menu.component);
+        }
+      };
       const buildMenu = (menu: MenuListItem): Menu => {
         const newMenu: Menu = {
           name: menu.menuName,
@@ -138,18 +150,7 @@ export const usePermissionStore = defineStore("app-permission", {
             break;
           }
           case MenuType.菜单: {
-            // 如果组件是URL地址，设置frame地址
-            if (isUrl(menu.component)) {
-              route.meta.frameSrc = menu.component;
-              // 如果URL外部打开设置path为url,如果是内部打开设置基于iframe打开
-              if (menu.isExternal) {
-                route.path = menu.component;
-              } else {
-                route.component = IFRAME;
-              }
-            } else {
-              route.component = importComponent(menu.component);
-            }
+            changeUrlToIframe(menu, route);
             // 如果菜单为隐藏菜单且设置了选中时激活菜单
             if (!menu.isVisible && menu.activeMenu) {
               route.meta.currentActiveMenu = getActiveMenu(menus, menu.activeMenu);
@@ -168,14 +169,13 @@ export const usePermissionStore = defineStore("app-permission", {
         const route = buildRoute(menu);
         if (!menu.isExternal) {
           route.component = LAYOUT;
-          route.children = [
-            {
-              path: "",
-              name: `${menu.id}child`,
-              meta: { title: menu.menuName, icon: menu.menuIcon },
-              component: importComponent(menu.component)
-            }
-          ];
+          const childRoute = {
+            path: "",
+            name: `${menu.id}child`,
+            meta: { title: menu.menuName, icon: menu.menuIcon }
+          };
+          changeUrlToIframe(menu, childRoute);
+          route.children = [childRoute];
         }
         return route;
       };
