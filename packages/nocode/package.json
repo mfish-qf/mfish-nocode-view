@@ -22,6 +22,6 @@
     }
   },
   "devDependencies": {
-    "vite-plugin-style-inject": "catalog:"
+    "vite-plugin-css-injected-by-js": "catalog:"
   }
 }

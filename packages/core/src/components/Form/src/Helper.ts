@@ -25,7 +25,6 @@ export function createPlaceholderMessage(component?: ComponentType) {
     component.includes("Radio") ||
     component.includes("Switch")
   ) {
-    // return `请选择${label}`;
     return t("common.chooseText");
   }
   return "";

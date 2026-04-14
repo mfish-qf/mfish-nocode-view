@@ -2,7 +2,7 @@
  @description: 大屏资源API
  @author: mfish
  @date: 2025-03-21
- @version: V2.3.0
+ @version: V2.3.1
 -->
 <template>
   <div>

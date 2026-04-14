@@ -1,6 +1,6 @@
 摸鱼低代码开发平台（前端）
 ======================================
-当前最新版本： V2.3.0
+当前最新版本： V2.3.1
 
 [![Author](https://img.shields.io/badge/Author-mfish-orange.svg)](http://www.mfish.com.cn)
 [![Blog](https://img.shields.io/badge/Blog-个人博客-yellow.svg)](http://www.mfish.com.cn)
@@ -204,6 +204,10 @@ http://localhost:5186
     <tr>
       <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-88ced73c1f0228af408c50349497540b.png" /></td>
       <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-c77cdb0b34e61b837cbfc22e5ad5acb7.png" /></td>
+    </tr>
+    <tr>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-ee4f2a35788db09fcc6e281cf171f8c1.jpg" /></td>
+      <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-6e87424a0defbdb968a21f9bc42a610b.jpg" /></td>
     </tr>
     <tr>
       <td><img src="http://oscimg.oschina.net/AiCreationDetail/up-0d6f1ff813c700191c34536a1d84bf6d.jpg" /></td>

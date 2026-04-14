@@ -2,21 +2,21 @@
  @description: 代码构建
  @author: mfish
  @date: 2023-04-11
- @version: V2.3.0
+ @version: V2.3.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="代码构建" @ok="handleSubmit">
     <BasicForm @register="registerForm" @submit="handleSubmit" @field-value-change="valueChange">
       <template #addDatabase>
-        <a-button
-          type="link"
-          pre-icon="ant-design:database-outlined"
-          v-if="hasPermission('sys:database:insert')"
-          icon-size="16"
-          @click="handleAddDb"
-        >
-          添加数据库
-        </a-button>
+        <ATooltip placement="top" title="添加数据库连接">
+          <a-button
+            style="padding: 4px"
+            type="link"
+            pre-icon="ant-design:database-outlined"
+            v-if="hasPermission('sys:database:insert')"
+            @click="handleAddDb"
+          />
+        </ATooltip>
       </template>
     </BasicForm>
     <BasicTable @register="registerTable">
@@ -52,6 +52,7 @@
   import { BasicModal, useModal, useModalInner } from "@mfish/core/components/Modal";
   import { insertCodeBuild, updateCodeBuild } from "@/api/sys/CodeBuild";
   import { buildUUID } from "@mfish/core/utils/Uuid";
+  import { Tooltip as ATooltip } from "ant-design-vue";
   import { DictItem, getDBTree, getDictItems, getFieldList } from "@mfish/core/api";
   import { getDictList } from "@/api/sys/Dict";
   import { Recordable } from "@mfish/types";

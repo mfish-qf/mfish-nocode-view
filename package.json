@@ -1,6 +1,6 @@
 {
   "name": "mfish-nocode",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "homepage": "https://github.com/mfish-qf/mfish-nocode-view",
   "bugs": {
     "url": "https://github.com/mfish-qf/mfish-nocode-view/issues"
@@ -20,20 +20,22 @@
     "build": "vite --filter ./packages/** --filter ./internal/** build",
     "build:analyze": "cross-env NODE_OPTIONS=--max-old-space-size=8192 pnpm vite build --mode analyze",
     "build:docker": "vite build --mode docker",
-    "build:no-cache": "pnpm store prune && npm run build",
-    "build:test": "cross-env NODE_OPTIONS=--max-old-space-size=8192 pnpm vite build --mode test",
-    "clean:cache": "rimraf node_modules/.cache/ && rimraf node_modules/.vite",
-    "clean:lib": "rimraf node_modules",
+    "build:test": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo run build -- --mode test",
+    "clean": "rimraf --glob \"**/node_modules\"",
+    "clean:all": "pnpm run clean && pnpm store prune",
+    "clean:cache": "rimraf --glob \"**/node_modules/.cache\" \"**/node_modules/.vite\"",
+    "clean:dist": "rimraf --glob \"**/mfish-nocode-view\" \"**/dist\"",
     "dev": "vite dev",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "turbo run stub",
     "lint": "turbo run lint",
-    "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
-    "lint:lint-staged": "lint-staged",
-    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
-    "lint:stylelint": "stylelint --cache --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
-    "preview": "npm run build && vite preview",
-    "reinstall": "rimraf pnpm-lock.yaml && rimraf package.lock.json && rimraf node_modules && npm run bootstrap",
+    "lint:eslint": "eslint --cache --max-warnings 0 \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
+    "lint:fix": "turbo run lint -- --fix",
+    "lint:prettier": "prettier --write \"**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
+    "lint:staged": "lint-staged",
+    "lint:stylelint": "stylelint --cache --fix \"**/*.{vue,less,postcss,css,scss}\" --cache-location node_modules/.cache/stylelint/",
+    "preview": "pnpm build && vite preview",
+    "reinstall": "pnpm run clean:all && pnpm install",
     "type:check": "vue-tsc --noEmit --skipLibCheck"
   },
   "config": {
@@ -87,11 +89,10 @@
   },
   "devDependencies": {
     "@iconify/json": "catalog:",
-    "@logicflow/core": "catalog:",
-    "@logicflow/extension": "catalog:",
     "@mfish/core": "workspace:*",
     "@mfish/custom-api": "workspace:*",
     "@mfish/eslint-config": "workspace:*",
+    "@mfish/form-designer": "workspace:*",
     "@mfish/nocode": "workspace:*",
     "@mfish/prettier-config": "workspace:*",
     "@mfish/stores": "workspace:*",
@@ -100,6 +101,7 @@
     "@mfish/ts-config": "workspace:*",
     "@mfish/types": "workspace:*",
     "@mfish/vite-config": "workspace:*",
+    "@mfish/workflow": "workspace:*",
     "@purge-icons/generated": "catalog:",
     "@rushstack/eslint-patch": "catalog:",
     "@types/crypto-js": "catalog:",
@@ -116,6 +118,7 @@
     "@types/sortablejs": "catalog:",
     "@typescript-eslint/eslint-plugin": "catalog:",
     "@typescript-eslint/parser": "catalog:",
+    "@unocss/preset-wind3": "catalog:",
     "@vitejs/plugin-legacy": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "@vitejs/plugin-vue-jsx": "catalog:",
@@ -141,7 +144,7 @@
     "prettier": "catalog:",
     "prettier-plugin-packagejson": "catalog:",
     "rimraf": "^6.1.3",
-    "rollup": "^4.59.0",
+    "rollup": "^4.60.1",
     "rollup-plugin-visualizer": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
@@ -151,18 +154,18 @@
     "typescript": "catalog:",
     "unbuild": "catalog:",
     "unocss": "catalog:",
-    "vite": "^7.3.1",
+    "vite": "^7.3.2",
     "vite-plugin-html": "catalog:",
     "vite-plugin-imagemin": "catalog:",
     "vite-plugin-mkcert": "catalog:",
     "vite-plugin-mock": "catalog:",
     "vite-plugin-svg-icons": "catalog:",
     "vite-plugin-vue-setup-extend": "catalog:",
-    "vue": "^3.5.29",
+    "vue": "^3.5.32",
     "vue-eslint-parser": "catalog:",
     "vue-tsc": "catalog:"
   },
-  "packageManager": "pnpm@10.28.1",
+  "packageManager": "pnpm@10.33.0",
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"
@@ -182,7 +185,8 @@
     },
     "ignoredBuiltDependencies": [
       "core-js",
-      "esbuild"
+      "esbuild",
+      "vue-demi"
     ]
   }
 }

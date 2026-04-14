@@ -1,0 +1,30 @@
+{
+  "name": "@mfish/form-designer",
+  "version": "2.3.1",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": {
+    "name": "mfish",
+    "email": "qiufeng9862@qq.com",
+    "url": "https://github.com/mfish-qf"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./core/index.mjs",
+      "import": "./core/index.mjs"
+    }
+  },
+  "main": "./core/index.mjs",
+  "module": "./core/index.mjs",
+  "types": "./core/index.mjs",
+  "files": [
+    "core"
+  ],
+  "dependencies": {
+    "lucide-vue-next": "^0.576.0"
+  },
+  "devDependencies": {
+    "vite-plugin-css-injected-by-js": "catalog:"
+  }
+}

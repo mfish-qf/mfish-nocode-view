@@ -8,8 +8,8 @@ const flows: AppRouteRecordRaw = {
   redirect: "/workflow/flowChart",
   meta: {
     menuSort: 998,
-    icon: "tabler:chart-dots",
-    title: "图形编辑器"
+    icon: "ant-design:apartment-outline",
+    title: "流程表单"
   },
   children: [
     {
@@ -17,7 +17,19 @@ const flows: AppRouteRecordRaw = {
       name: "flowChartDemo",
       component: () => import("@/views/demo/flow-chart/index.vue"),
       meta: {
-        title: "流程图"
+        title: "流程图",
+        keepAlive: true,
+        icon: "ant-design:apartment-outline"
+      }
+    },
+    {
+      path: "formDesigner",
+      name: "formDesignerDemo",
+      component: () => import("@/views/demo/form-designer/index.vue"),
+      meta: {
+        title: "表单设计器",
+        keepAlive: true,
+        icon: "ant-design:form-outlined"
       }
     }
   ]

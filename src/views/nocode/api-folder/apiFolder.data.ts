@@ -5,7 +5,7 @@ import { buildDictTag } from "@mfish/core/components/DictTag";
  * @description: API目录
  * @author: mfish
  * @date: 2023-07-21
- * @version: V2.3.0
+ * @version: V2.3.1
  */
 export const columns: BasicColumn[] = [
   {

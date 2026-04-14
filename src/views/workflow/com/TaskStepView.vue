@@ -9,7 +9,7 @@
 <script setup lang="ts">
   import { Steps as ASteps } from "ant-design-vue";
   import { computed, h, ref, watch } from "vue";
-  import { getProcessTasks } from "@/api/workflow/FlowProcess";
+  import { getProcessTasks } from "@mfish/workflow";
   import { MfTask } from "@/api/workflow/model/MfTaskModel";
   import AuditCommentView from "@/views/workflow/com/AuditCommentView.vue";
 
@@ -50,8 +50,9 @@
 
   watch(
     () => props.processInstanceId,
-    (newVal, oldVal) => {
-      if (newVal && newVal !== oldVal) {
+    (newVal) => {
+      if (newVal) {
+        debugger;
         getProcessTasks(newVal).then((res) => {
           tasks.value = res;
         });

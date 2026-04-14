@@ -5,33 +5,32 @@
 -->
 <template>
   <AImage
-    :style="{ display: 'none' }"
-    :preview="{
+      :style="{ display: 'none' }"
+      :preview="{
       visible: previewVisible,
       onVisibleChange: setPreviewVisible
     }"
-    :src="fileImage"
+      :src="fileImage"
   />
 </template>
 <script setup lang="ts">
-  import { ref } from "vue";
-  import { Image as AImage } from "ant-design-vue";
+import {ref} from "vue";
+import {Image as AImage} from "ant-design-vue";
+import {getImage} from "@mfish/workflow";
 
-  import { queryImage } from "@/api/workflow/FlowProcess";
+const previewVisible = ref(false);
+const fileImage = ref("");
+const setPreviewVisible = (value: boolean): void => {
+  previewVisible.value = value;
+};
 
-  const previewVisible = ref(false);
-  const fileImage = ref("");
-  const setPreviewVisible = (value: boolean): void => {
-    previewVisible.value = value;
-  };
+function showPreview(processInstanceId: string) {
+  getImage(processInstanceId).then((res) => {
+    fileImage.value = res;
+    previewVisible.value = true;
+  });
+}
 
-  function showPreview(processInstanceId: string) {
-    queryImage(processInstanceId).then((res) => {
-      fileImage.value = res;
-      previewVisible.value = true;
-    });
-  }
-
-  defineExpose({ showPreview });
+defineExpose({showPreview});
 </script>
 <style scoped lang="less"></style>
