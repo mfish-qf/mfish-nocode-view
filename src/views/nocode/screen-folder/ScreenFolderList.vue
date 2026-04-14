@@ -13,8 +13,16 @@
         </div>
       </template>
       <template #renderItem="{ item, index }">
-        <ACard v-if="index === 0" v-auth="'sys:screen:insert'" class="add-screen">
-          <AButton type="primary" @click="createScreen" pre-icon="ant-design:plus-outlined"> 新建大屏</AButton>
+        <ACard v-if="index === 0" v-auth="'sys:screen:insert'" class="add-screen" @click="createScreen">
+          <div class="flex flex-col items-center justify-center gap-2">
+            <div
+              class="flex flex-col items-center justify-center h-16 w-16 rounded-lg"
+              :style="{ backgroundColor: bgColor }"
+            >
+              <Icon icon="ant-design:plus-outlined" class="description" size="26" />
+            </div>
+            <div class="description">点击 新建大屏</div>
+          </div>
         </ACard>
         <ScreenCard
           v-else
@@ -67,6 +75,7 @@
   import InputSearch from "@mfish/core/components/InputSearch";
   import PreviewModal from "@/views/nocode/screen-folder/PreviewModal.vue";
   import ScreenResource from "@/views/nocode/screen-resource/ScreenResource.vue";
+  import { Icon } from "@mfish/core/components/Icon";
 
   const props = defineProps({
     folderId: propTypes.string.def("")
@@ -201,6 +210,9 @@
         &:hover {
           box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.1);
         }
+        .description {
+          color: rgba(255, 255, 255, 0.45);
+        }
       }
     }
   }
@@ -219,9 +231,10 @@
     }
 
     .add-screen {
+      border: 2px dashed @border-color-base;
       border-radius: 8px;
       box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.05);
-      transition: all 0.25s ease-in;
+      transition: all 0.3s ease-in;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -229,11 +242,23 @@
       margin: 10px;
       height: 34vh;
       min-height: 258px;
-      background-color: v-bind(bgColor);
+      cursor: pointer;
+
+      .description {
+        font-size: 16px;
+        font-weight: 700;
+        color: rgba(0, 0, 0, 0.45);
+        transition: color 0.3s ease-in;
+      }
 
       &:hover {
+        border: 2px dashed @main-color;
         box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
         transform: scale(1.01);
+
+        .description {
+          color: @main-color; // 这里变蓝
+        }
       }
     }
   }

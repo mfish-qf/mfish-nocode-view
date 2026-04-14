@@ -60,6 +60,14 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
           {
             find: /@custom-api\//,
             replacement: `${pathResolve("packages/custom-api/src")}/`
+          },
+          {
+            find: /@workflow\//,
+            replacement: `${pathResolve("packages/workflow/src")}/`
+          },
+          {
+            find: /@form-designer\//,
+            replacement: `${pathResolve("packages/form-designer/src")}/`
           }
         ]
       },

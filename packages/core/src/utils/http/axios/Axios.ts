@@ -170,10 +170,10 @@ export class VAxios {
   download<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     return this.request(
       {
-        ...config,
         method: "get",
         responseType: "blob",
-        timeout: 30 * 60 * 1000 // 下载超时时间设置为30分钟
+        timeout: 30 * 60 * 1000, // 下载超时时间设置为30分钟
+        ...config
         // headers: { "Content-Type": ContentTypeEnum.OCTET_STREAM}
       },
       options,

@@ -41,7 +41,7 @@
         <AButton type="primary" :loading="approveLoading" @click.stop.prevent>通过</AButton>
       </Popconfirm>
     </template>
-    <TaskStepView class="p-2" direction="horizontal" :process-instance-id="task?.processInstanceId" />
+    <TaskStepView class="p-2" direction="horizontal" :process-instance-id="processInstanceId" />
     <component :is="auditComponent?.component" class="pl-4 pr-4" :business-key="task?.businessKey" />
   </BasicModal>
 </template>
@@ -49,9 +49,9 @@
   import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
   import TaskStepView from "@/views/workflow/com/TaskStepView.vue";
   import { Popconfirm, Textarea } from "ant-design-vue";
-  import { computed, ref } from "vue";
+  import { computed, nextTick, ref } from "vue";
   import { MfTask } from "@/api/workflow/model/MfTaskModel";
-  import { approveTask, rejectTask } from "@/api/workflow/FlowProcess";
+  import { approveTask, rejectTask } from "@mfish/workflow";
   import { useWorkflow } from "@/views/workflow/com/UseWorkflow";
 
   const emit = defineEmits(["register", "success"]);
@@ -64,9 +64,14 @@
   const approveReason = ref("");
   const { getAuditComponent } = useWorkflow();
   const auditComponent = computed(() => getAuditComponent(task.value?.processDefinitionKey));
+  const processInstanceId = ref<string>("");
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
-    task.value = data;
-    setModalProps({ confirmLoading: false, width: `${auditComponent.value?.width || 800}px` });
+    processInstanceId.value = "";
+    nextTick(() => {
+      task.value = data;
+      processInstanceId.value = data.processInstanceId;
+      setModalProps({ confirmLoading: false, width: `${auditComponent.value?.width || 800}px` });
+    }).then();
   });
   function handleReject() {
     if (!rejectReason.value) {

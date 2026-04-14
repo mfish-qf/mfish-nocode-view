@@ -4,7 +4,7 @@ import { BaseEntity } from "@mfish/core/api";
  * @description: 界面配置
  * @author: mfish
  * @date: 2023-03-07
- * @version: V2.3.0
+ * @version: V2.3.1
  */
 export interface SysConfig extends BaseEntity<number> {
   userId?: string;

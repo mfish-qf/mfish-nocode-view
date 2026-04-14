@@ -1,7 +1,7 @@
 import { h } from "vue";
 import { Tag } from "ant-design-vue";
 import { DictTag } from "./index";
-import { getDictItems } from "../../api/sys/DictItem";
+import { getDictItems } from "@core/api";
 
 /**
  * @description: 通用Tag

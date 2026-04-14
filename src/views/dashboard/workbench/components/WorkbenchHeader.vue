@@ -31,7 +31,7 @@
   import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
   import { SsoUser } from "@mfish/core/api";
   import { Nullable } from "@mfish/types";
-  import { getTotalTasks } from "@/api/workflow/FlowProcess";
+  import { getTotalTasks } from "@mfish/workflow";
   import { TaskTotal } from "@/api/workflow/model/MfTaskModel";
 
   const userStore = useUserStore();

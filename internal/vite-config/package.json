@@ -1,6 +1,6 @@
 {
   "name": "@mfish/vite-config",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "private": true,
   "license": "Apache-2.0",
   "author": {
@@ -43,12 +43,12 @@
     "rollup-plugin-visualizer": "catalog:",
     "unbuild": "catalog:",
     "unocss": "catalog:",
-    "vite": "^7.3.1",
+    "vite": "^7.3.2",
     "vite-plugin-compression": "catalog:",
     "vite-plugin-dts": "catalog:",
     "vite-plugin-html": "catalog:",
     "vite-plugin-mock": "catalog:",
     "vite-plugin-svg-icons": "catalog:",
-    "yaml": "^2.8.2"
+    "yaml": "^2.8.3"
   }
 }

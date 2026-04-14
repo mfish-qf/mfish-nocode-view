@@ -2,7 +2,7 @@
  @description: 自定义API
  @author: mfish
  @date: 2023-09-06
- @version: V2.3.0
+ @version: V2.3.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">

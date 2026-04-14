@@ -2,7 +2,7 @@
  @description: 大屏资源发布
  @author: mfish
  @date: 2025-03-19
- @version: V2.3.0
+ @version: V2.3.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="资源发布">

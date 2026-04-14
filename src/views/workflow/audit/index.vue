@@ -38,6 +38,12 @@
                 icon: 'ant-design:apartment-outlined',
                 onClick: handlePreviewFlow.bind(null, record),
                 tooltip: '查看流程图'
+              },
+              {
+                icon: 'ant-design:fork-outlined',
+                onClick: handleQuery.bind(null, record),
+                color: 'success',
+                tooltip: '查看流程配置'
               }
             ]"
           />
@@ -46,6 +52,7 @@
     </BasicTable>
     <AuditModal @register="registerModal" @success="handleSuccess" />
     <FlowImgPreview ref="flowImgPreviewRef" />
+    <FlowManageViewModal @register="registerViewModal" />
   </PageWrapper>
 </template>
 <script lang="ts" setup>
@@ -53,13 +60,14 @@
   import { PageWrapper } from "@/components/general/Page";
   import { useModal } from "@mfish/core/components/Modal";
   import { columns, searchFormSchema } from "@/views/workflow/audit/audit.data";
-  import { delProcess, getAllTasks } from "@/api/workflow/FlowProcess";
+  import { delProcess, getActiveDefinitionKeys, getAllTasks, queryFlowManage } from "@mfish/workflow";
   import AuditModal from "@/views/workflow/com/AuditModal.vue";
   import { MfTask } from "@/api/workflow/model/MfTaskModel";
   import { usePermission } from "@mfish/core/hooks";
   import FlowImgPreview from "@/views/workflow/com/FlowImgPreview.vue";
   import { h, ref, useTemplateRef } from "vue";
   import { Input } from "ant-design-vue";
+  import FlowManageViewModal from "@/views/workflow/flow-manage/FlowManageViewModal.vue";
 
   defineOptions({ name: "AuditManagement" });
   const [registerTable, { reload }] = useTable({
@@ -78,12 +86,13 @@
     bordered: true,
     showIndexColumn: false,
     actionColumn: {
-      width: 80,
+      width: 120,
       title: "操作",
       dataIndex: "action"
     }
   });
   const [registerModal, { openModal }] = useModal();
+  const [registerViewModal, { openModal: openViewModal }] = useModal();
   const { userIsSuperAdmin } = usePermission();
   const flowImgPreviewRef = useTemplateRef<typeof FlowImgPreview>("flowImgPreviewRef");
   const cancelReason = ref<string>("");
@@ -108,5 +117,16 @@
   }
   function handlePreviewFlow(record: MfTask) {
     flowImgPreviewRef.value?.showPreview(record?.processInstanceId);
+  }
+  /**
+   * 查看
+   * @param item 任务对象
+   */
+  async function handleQuery(item: MfTask) {
+    const [activeDefinitionKeys, flowManage] = await Promise.all([
+      getActiveDefinitionKeys(item.processInstanceId),
+      queryFlowManage(item.processInstanceId)
+    ]);
+    openViewModal(true, { record: { ...flowManage, activeDefinitionKeys } });
   }
 </script>

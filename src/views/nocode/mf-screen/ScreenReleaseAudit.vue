@@ -2,7 +2,7 @@
  @description: 大屏资源发布审批
  @author: mfish
  @date: 2025-10-20
- @version: V2.3.0
+ @version: V2.3.1
 -->
 <template>
   <Description v-show="screenResourceData" style="min-height: 350px" @register="registerDesc" />

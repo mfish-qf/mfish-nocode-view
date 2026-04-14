@@ -51,7 +51,7 @@
 <script lang="ts" setup>
   import { Card, List } from "ant-design-vue";
   import { onMounted, ref, useTemplateRef } from "vue";
-  import { getApplyTasks, getPendingTask } from "@/api/workflow/FlowProcess";
+  import { getApplyTasks, getPendingTask } from "@mfish/workflow";
   import { MfTask } from "@/api/workflow/model/MfTaskModel";
   import AuditModal from "@/views/workflow/com/AuditModal.vue";
   import { useModal } from "@mfish/core/components/Modal";

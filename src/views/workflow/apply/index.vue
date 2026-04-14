@@ -34,7 +34,7 @@
   import { PageWrapper } from "@/components/general/Page";
   import { columns, searchFormSchema } from "@/views/workflow/apply/apply.data";
   import { useModal } from "@mfish/core/components/Modal";
-  import { getApplyTasks } from "@/api/workflow/FlowProcess";
+  import { getApplyTasks } from "@mfish/workflow";
   import { MfTask } from "@/api/workflow/model/MfTaskModel";
   import { useTemplateRef } from "vue";
   import FlowImgPreview from "@/views/workflow/com/FlowImgPreview.vue";

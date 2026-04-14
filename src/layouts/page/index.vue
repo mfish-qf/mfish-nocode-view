@@ -29,7 +29,7 @@
 
   function setName(route, Component) {
     //由于添加时无法获取到组件名称，所以此处操作滞后设置
-    const name = Component.type.name;
+    const name = Component?.type?.name;
     if (name) {
       tabStore.addCacheTab(route, name);
       tabStore.openEnd(route.name);
