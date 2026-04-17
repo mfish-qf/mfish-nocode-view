@@ -27,7 +27,8 @@
       confirmLoading: false,
       width: "1200px",
       cancelText: "关闭",
-      showOkBtn: false
+      showOkBtn: false,
+      destroyOnClose: true
     });
     flowManageData.value = data.record;
     if (data.record?.flowConfig) {

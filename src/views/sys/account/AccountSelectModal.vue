@@ -14,28 +14,45 @@
           placeholder="检索成员"
           :filter-option="false"
           :not-found-content="accountList.fetching ? undefined : null"
-          :options="accountList.userList"
           @search="fetchUser"
           @change="changeUser"
         >
           <template v-if="accountList.fetching" #notFoundContent>
             <ASpin size="small" />
           </template>
+          <template #dropdownRender="{ menuNode }">
+            <div :class="`${prefixCls}-select-option`" class="header">
+              <span>账号</span>
+              <span>昵称</span>
+              <span>手机号</span>
+            </div>
+            <VNodes :vnodes="menuNode" />
+          </template>
+          <!-- 手写 option -->
+          <ASelectOption v-for="(item, index) in accountList.userList" :key="index" :value="item.id">
+            <div :class="`${prefixCls}-select-option`">
+              <span>{{ item.account }}</span>
+              <span>{{ item.nickname }}</span>
+              <span>{{ item.phone }}</span>
+            </div>
+          </ASelectOption>
         </ASelect>
       </template>
     </BasicForm>
   </BasicModal>
 </template>
 <script lang="ts" setup>
-  import { Select as ASelect, Spin as ASpin } from "ant-design-vue";
+  import { Select as ASelect, SelectOption as ASelectOption, Spin as ASpin } from "ant-design-vue";
   import { BasicForm, RenderCallbackParams, useForm } from "@mfish/core/components/Form";
   import { BasicModal, useModalInner } from "@mfish/core/components/Modal";
-  import { bindUserOrg, getTenantOrgTree, searchUserList } from "@mfish/core/api";
+  import { bindUserOrg, getTenantOrgTree, searchUserList, SsoUser } from "@mfish/core/api";
   import { reactive } from "vue";
   import { debounce } from "lodash-es";
   import { TreeItem } from "@mfish/core/components/Tree";
+  import { useDesign } from "@mfish/core/hooks";
 
   const emit = defineEmits(["success", "register"]);
+  const { prefixCls } = useDesign("account-select");
   const [registerForm, { setFieldsValue, validate, updateSchema, resetFields }] = useForm({
     name: "model_form_item",
     baseColProps: { span: 24 },
@@ -71,8 +88,12 @@
     showActionButtonGroup: false,
     autoSubmitOnEnter: true
   });
+  const VNodes = (_: any, { attrs }: any) => {
+    return attrs.vnodes;
+  };
+
   const accountList = reactive({
-    userList: [] as { label: string; value: string }[],
+    userList: [] as SsoUser[],
     userId: undefined,
     fetching: false
   });
@@ -80,6 +101,7 @@
     resetFields().then();
     accountList.userId = undefined;
     const treeData: TreeItem[] = (await getTenantOrgTree()) as unknown as TreeItem[];
+    fetchUser("");
     updateSchema({
       field: "orgId",
       componentProps: { treeData }
@@ -93,13 +115,13 @@
   const fetchUser = debounce((value) => {
     accountList.userList = [];
     accountList.fetching = true;
-    searchUserList(value).then((res) => {
-      accountList.userList = res.map((user) => ({
-        label: user.account + (user.nickname ? `-${user.nickname}` : ""),
-        value: user.id
-      }));
-      accountList.fetching = false;
-    });
+    searchUserList(value)
+      .then((res: SsoUser[]) => {
+        accountList.userList = res;
+      })
+      .finally(() => {
+        accountList.fetching = false;
+      });
   }, 300);
 
   function changeUser(id) {
@@ -117,3 +139,25 @@
     });
   }
 </script>
+<style scoped lang="less">
+  @prefix-cls: ~"@{namespace}-account-select";
+  .@{prefix-cls}-select-option {
+    &.header {
+      padding: 0 16px 4px 16px;
+      border-bottom: 1px solid @border-color-base;
+    }
+    display: flex;
+    align-items: center;
+    > span {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0 4px 0 4px;
+    }
+    > span:last-child {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+</style>

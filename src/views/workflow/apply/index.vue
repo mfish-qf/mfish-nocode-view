@@ -19,6 +19,12 @@
                 icon: 'ant-design:apartment-outlined',
                 onClick: handlePreviewFlow.bind(null, record),
                 tooltip: '查看流程图'
+              },
+              {
+                icon: 'ant-design:fork-outlined',
+                onClick: handleQuery.bind(null, record),
+                color: 'success',
+                tooltip: '查看流程配置'
               }
             ]"
           />
@@ -27,6 +33,7 @@
     </BasicTable>
     <FlowImgPreview ref="flowImgPreviewRef" />
     <AuditModal @register="registerModal" @success="handleSuccess" />
+    <FlowManageViewModal @register="registerViewModal" />
   </PageWrapper>
 </template>
 <script lang="ts" setup>
@@ -34,11 +41,12 @@
   import { PageWrapper } from "@/components/general/Page";
   import { columns, searchFormSchema } from "@/views/workflow/apply/apply.data";
   import { useModal } from "@mfish/core/components/Modal";
-  import { getApplyTasks } from "@mfish/workflow";
+  import { getActiveDefinitionKeys, getApplyTasks, queryFlowManage } from "@mfish/workflow";
   import { MfTask } from "@/api/workflow/model/MfTaskModel";
   import { useTemplateRef } from "vue";
   import FlowImgPreview from "@/views/workflow/com/FlowImgPreview.vue";
   import AuditModal from "@/views/workflow/com/AuditModal.vue";
+  import FlowManageViewModal from "@/views/workflow/flow-manage/FlowManageViewModal.vue";
 
   defineOptions({ name: "AuditManagement" });
   const [registerTable, { reload }] = useTable({
@@ -63,6 +71,7 @@
     }
   });
   const [registerModal, { openModal }] = useModal();
+  const [registerViewModal, { openModal: openViewModal }] = useModal();
   const flowImgPreviewRef = useTemplateRef<typeof FlowImgPreview>("flowImgPreviewRef");
   function handlePreviewFlow(record: MfTask) {
     flowImgPreviewRef.value?.showPreview(record?.processInstanceId);
@@ -72,5 +81,12 @@
   }
   function handleSuccess() {
     reload();
+  }
+  async function handleQuery(item: MfTask) {
+    const [activeDefinitionKeys, flowManage] = await Promise.all([
+      getActiveDefinitionKeys(item.processInstanceId),
+      queryFlowManage(item.processInstanceId)
+    ]);
+    openViewModal(true, { record: { ...flowManage, activeDefinitionKeys } });
   }
 </script>
