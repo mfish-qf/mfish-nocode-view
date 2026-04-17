@@ -52,6 +52,8 @@ export interface ReqSsoUser extends ReqPage {
   phone?: string;
   nickname?: string;
   status?: number;
+  //可传入账号、手机号、昵称进行模糊查询
+  condition?: string;
 }
 
 export interface SsoUser {
@@ -76,7 +78,9 @@ export interface SsoUser {
   updateBy: string;
   updateTime: string;
   roleIds: string[];
+  roleNames: string[];
   orgIds: string[];
+  orgNames?: string[];
   userRoles: RoleInfo[];
   permissions: Set<string>;
   tenants: TenantVo[];

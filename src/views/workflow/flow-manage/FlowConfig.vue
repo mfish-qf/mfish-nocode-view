@@ -10,7 +10,7 @@
         <FlowKeyConfig :value="flowKey" @flow-key-change="flowKeyChange" />
       </template>
     </BasicForm>
-    <BpmnConfig ref="bpmnRef" style="height: calc(100% - 50px)" />
+    <BpmnConfig ref="bpmnRef" :flow-key="flowKey" :name="name" :remark="remark" style="height: calc(100% - 50px)" />
   </BasicModal>
 </template>
 <script setup lang="ts">
@@ -34,6 +34,8 @@
     autoSubmitOnEnter: true
   });
   const flowKey = ref<string>();
+  const name = ref<string>();
+  const remark = ref<string>();
   const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
     setModalProps({
       confirmLoading: false,
@@ -46,6 +48,8 @@
     isUpdate.value = !!data?.isUpdate;
     if (unref(isUpdate)) {
       flowKey.value = data.record.flowKey;
+      name.value = data.record.name;
+      remark.value = data.record.remark;
       setFieldsValue({
         ...data.record
       }).then();
@@ -55,6 +59,8 @@
     } else {
       resetFields().then();
       flowKey.value = "";
+      name.value = "";
+      remark.value = "";
       unref(bpmnRef)?.clearHistory();
     }
   });
@@ -67,6 +73,9 @@
       name: e.dictLabel,
       remark: e.remark
     }).then();
+    flowKey.value = e.dictValue;
+    name.value = e.dictLabel;
+    remark.value = e.remark;
   }
   async function handleSubmit() {
     const values = await validate();

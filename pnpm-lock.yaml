@@ -967,9 +967,6 @@ importers:
       dagre:
         specifier: ^0.8.5
         version: 0.8.5
-      lucide-vue-next:
-        specifier: ^0.576.0
-        version: 0.576.0(vue@3.5.32(typescript@6.0.2))
     devDependencies:
       '@types/dagre':
         specifier: ^0.7.54
