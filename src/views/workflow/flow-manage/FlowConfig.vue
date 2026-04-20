@@ -7,7 +7,7 @@
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
     <BasicForm @register="registerForm">
       <template #flowKeyConfig>
-        <FlowKeyConfig :value="flowKey" @flow-key-change="flowKeyChange" />
+        <FlowKeyConfig :disabled="isUpdate" :value="flowKey" @flow-key-change="flowKeyChange" />
       </template>
     </BasicForm>
     <BpmnConfig ref="bpmnRef" :flow-key="flowKey" :name="name" :remark="remark" style="height: calc(100% - 50px)" />
