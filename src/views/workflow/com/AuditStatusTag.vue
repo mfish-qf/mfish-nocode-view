@@ -6,9 +6,16 @@
 <template>
   <Popover :overlay-style="{ minWidth: '280px' }">
     <template #content>
-      <TaskStepView :key="taskStepKey" direction="vertical" :status="status" :process-instance-id="processInstanceId" />
+      <TaskStepView
+        :key="taskStepKey"
+        direction="vertical"
+        :status="status"
+        :process-instance-id="processInstanceId"
+        :business-key="businessKey"
+      />
     </template>
-    <DictTag code="workflow_task_status" :value="status" />
+    <DictTag v-if="defaultTag" code="workflow_task_status" :value="status" />
+    <slot v-else> </slot>
   </Popover>
 </template>
 <script setup lang="ts">
@@ -20,8 +27,15 @@
     processInstanceId: {
       type: String
     },
+    businessKey: {
+      type: String
+    },
     status: {
       type: String
+    },
+    defaultTag: {
+      type: Boolean,
+      default: true
     }
   });
   const taskStepKey = ref(0);

@@ -4,7 +4,7 @@
  @date: 2026/4/8
 -->
 <template>
-  <ASelect v-model:value="selectValue" @change="selectChange">
+  <ASelect v-model:value="selectValue" @change="selectChange" :disabled="disabled">
     <template #dropdownRender="{ menuNode }">
       <VNodes :vnodes="menuNode" />
       <div v-auth="'sys:dict:insert'">
@@ -26,7 +26,7 @@
         <div>
           {{ item.remark }}
         </div>
-        <div>
+        <div v-if="!disabled">
           <Icon
             icon="ant-design:edit-outlined"
             v-auth="'sys:dict:update'"
@@ -56,7 +56,8 @@
   import { deleteDictItem, DictItem, getDictItems } from "@mfish/core/api";
 
   const props = defineProps({
-    value: { type: String }
+    value: { type: String },
+    disabled: { type: Boolean, default: false }
   });
 
   const emit = defineEmits(["flowKeyChange"]);
