@@ -1,30 +1,31 @@
 <template>
-  <div class="relative !h-full w-full overflow-hidden" ref="el" style="border-radius: 6px"></div>
+  <div
+    class="relative !h-full w-full overflow-hidden"
+    :class="{ 'cm-dark': appStore.getDarkMode !== 'light' }"
+    style="border-radius: 6px; min-height: 100px"
+  >
+    <Codemirror v-model="code" :style="{ height: '100%' }" :extensions="extensions" @ready="handleReady" />
+  </div>
 </template>
 
 <script lang="ts" setup>
-  import { nextTick, onMounted, onUnmounted, PropType, ref, unref, watch, watchEffect } from "vue";
-  import { useDebounceFn } from "@vueuse/core";
+  import { ref, shallowRef, watch } from "vue";
+  import { Codemirror } from "vue-codemirror";
+  import { basicSetup } from "codemirror";
+  import { Compartment, EditorState } from "@codemirror/state";
+  import { json } from "@codemirror/lang-json";
+  import { javascript } from "@codemirror/lang-javascript";
+  import { html } from "@codemirror/lang-html";
+  import { materialDark } from "cm6-theme-material-dark";
+  import type { EditorView } from "@codemirror/view";
   import { useAppStore } from "@mfish/stores/modules";
-  import { useWindowSizeFn } from "@core/hooks";
-  import CodeMirror from "codemirror";
   import { MODE } from "../Typing";
-  // css
-  import "./codemirror.css";
-  import "codemirror/theme/idea.css";
-  import "codemirror/theme/material-darker.css";
-  // modes
-  import "codemirror/mode/javascript/javascript";
-  import "codemirror/mode/css/css";
-  import "codemirror/mode/htmlmixed/htmlmixed";
-  import { Nullable } from "@mfish/types";
 
   const props = defineProps({
     mode: {
-      type: String as PropType<MODE>,
+      type: String as () => MODE,
       default: MODE.JSON,
-      validator(value: any) {
-        // 这个值必须匹配下列字符串中的一个
+      validator(value: MODE) {
         return Object.values(MODE).includes(value);
       }
     },
@@ -34,78 +35,105 @@
 
   const emit = defineEmits(["change"]);
 
-  const el = ref();
-  let editor: Nullable<CodeMirror.Editor>;
-
-  const debounceRefresh = useDebounceFn(refresh, 100);
+  const code = ref(props.value);
+  const view = shallowRef<EditorView>();
   const appStore = useAppStore();
+
+  const languageCompartment = new Compartment();
+  const themeCompartment = new Compartment();
+  const readOnlyCompartment = new Compartment();
+
+  function getLanguage(mode: string) {
+    switch (mode) {
+      case MODE.JSON: {
+        return json();
+      }
+      case MODE.JS: {
+        return javascript();
+      }
+      case MODE.HTML: {
+        return html();
+      }
+      default: {
+        return json();
+      }
+    }
+  }
+
+  const extensions = [
+    basicSetup,
+    languageCompartment.of(getLanguage(props.mode)),
+    themeCompartment.of(appStore.getDarkMode === "light" ? [] : materialDark),
+    readOnlyCompartment.of(EditorState.readOnly.of(props.readonly))
+  ];
+
+  function handleReady(payload: { view: EditorView }) {
+    view.value = payload.view;
+  }
 
   watch(
     () => props.value,
-    async (value) => {
-      await nextTick();
-      const oldValue = editor?.getValue();
-      if (value !== oldValue) {
-        editor?.setValue(value || "");
+    (newValue) => {
+      if (newValue !== code.value) {
+        code.value = newValue ?? "";
       }
-    },
-    { flush: "post" }
-  );
-
-  watchEffect(() => {
-    editor?.setOption("mode", props.mode);
-  });
-
-  watch(
-    () => appStore.getDarkMode,
-    async () => {
-      setTheme();
-    },
-    {
-      immediate: true
     }
   );
 
-  function setTheme() {
-    unref(editor)?.setOption("theme", appStore.getDarkMode === "light" ? "idea" : "material-darker");
-  }
+  watch(
+    () => props.mode,
+    (newMode) => {
+      if (view.value) {
+        view.value.dispatch({ effects: languageCompartment.reconfigure(getLanguage(newMode)) });
+      }
+    }
+  );
 
-  function refresh() {
-    editor?.refresh();
-  }
+  watch(
+    () => props.readonly,
+    (newReadonly) => {
+      if (view.value) {
+        view.value.dispatch({ effects: readOnlyCompartment.reconfigure(EditorState.readOnly.of(newReadonly)) });
+      }
+    }
+  );
 
-  async function init() {
-    const addonOptions = {
-      autoCloseBrackets: true,
-      autoCloseTags: true,
-      foldGutter: true,
-      gutters: ["CodeMirror-linenumbers"]
-    };
+  watch(
+    () => appStore.getDarkMode,
+    () => {
+      if (view.value) {
+        view.value.dispatch({
+          effects: themeCompartment.reconfigure(appStore.getDarkMode === "light" ? [] : materialDark)
+        });
+      }
+    }
+  );
 
-    editor = CodeMirror(el.value!, {
-      value: "",
-      mode: props.mode,
-      readOnly: props.readonly,
-      tabSize: 2,
-      theme: "material-palenight",
-      lineWrapping: true,
-      lineNumbers: true,
-      ...addonOptions
-    });
-    editor?.setValue(props.value);
-    setTheme();
-    editor?.on("change", () => {
-      emit("change", editor?.getValue());
-    });
-  }
-
-  onMounted(async () => {
-    await nextTick();
-    init().then();
-    useWindowSizeFn(debounceRefresh);
-  });
-
-  onUnmounted(() => {
-    editor = null;
+  watch(code, (newVal) => {
+    emit("change", newVal);
   });
 </script>
+
+<style lang="less" scoped>
+  .cm-dark {
+    :deep(.cm-editor) {
+      background-color: @sider-darken-bg-color !important;
+    }
+
+    :deep(.cm-gutters) {
+      background-color: @sider-darken-bg-color !important;
+    }
+
+    :deep(.cm-activeLine) {
+      background-color: rgba(255, 255, 255, 0.06) !important;
+    }
+
+    :deep(.cm-activeLineGutter) {
+      background-color: rgba(255, 255, 255, 0.06) !important;
+    }
+
+    :deep(.cm-selectionBackground) {
+      background-color: rgba(255, 255, 255, 0.15) !important;
+    }
+  }
+</style>

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm why *)",
+      "Bash(pnpm update *)",
+      "Bash(npm view *)",
+      "WebSearch",
+      "Bash(npx vue-tsc *)",
+      "Bash(pnpm run *)",
+      "Bash(pnpm ls *)",
+      "Bash(pnpm view *)"
+    ]
+  }
+}

@@ -21,7 +21,8 @@
     "preserveWatchOutput": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "removeComments": true
+    "removeComments": true,
+    "noUncheckedSideEffectImports": false
   },
   "exclude": ["**/node_modules/**", "**/dist/**", "**/.turbo/**"]
 }

@@ -52,7 +52,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: "审批人",
-    dataIndex: "assignee",
+    dataIndex: "assigneeName",
     width: 120
   },
   {
