@@ -15,6 +15,7 @@ import { isDevMode } from "@mfish/core/utils/Env";
 import { registerGlobComponent } from "@mfish/core/components/RegisterGlobComponent";
 import { setupGlobDirectives } from "@mfish/core/directives";
 import { initAppConfigStore } from "@mfish/core/logics/InitAppConfig";
+if (import.meta.env.VITE_LOCAL_ICONS === "true") import("./assets/icons/local-iconify-data");
 
 if (isDevMode()) {
   import("ant-design-vue/es/style");

@@ -25,6 +25,7 @@ export interface AuditComment {
   taskName: string;
   type: string;
   assignee: string;
+  assigneeName: string;
   comment: string;
   time: string;
 }
@@ -42,6 +43,8 @@ export interface MfTask {
   candidateGroups: string[];
   formKey: string;
   assignee: string;
+  assigneeName: string;
+  assigneeAccount: string;
   startAccount: string;
   startTime: string;
   endTime: string;

@@ -5,51 +5,51 @@ packages:
 catalog:
   '@ant-design/colors': ^8.0.1
   '@ant-design/icons-vue': ^7.0.1
+  '@codemirror/lang-html': ^6.4.11
+  '@codemirror/lang-javascript': ^6.2.5
+  '@codemirror/lang-json': ^6.0.2
+  '@codemirror/state': ^6.6.0
+  '@codemirror/view': ^6.42.1
   '@eslint/js': ^9.39.4
-  '@iconify/json': ^2.2.464
+  '@iconify-json/ant-design': ^1.2.5
+  '@iconify-json/carbon': ^1.2.20
+  '@iconify-json/ion': ^1.2.7
+  '@iconify-json/mdi': ^1.2.3
+  '@iconify-json/ri': ^1.2.10
+  '@iconify-json/simple-icons': ^1.2.81
   '@iconify/vue': ^4.3.0
   '@jiaminghi/color': ^1.1.3
-  '@purge-icons/generated': ^0.10.0
   '@rollup/plugin-terser': ^0.4.4
-  '@rushstack/eslint-patch': ^1.16.1
   '@stylistic/stylelint-plugin': ^3.1.3
   '@types/crypto-js': ^4.2.2
   '@types/eslint': ^9.6.1
-  '@types/fs-extra': ^11.0.4
-  '@types/inquirer': ^9.0.9
-  '@types/intro.js': ^5.1.5
-  '@types/jsdom': ^21.1.7
   '@types/lodash-es': ^4.17.12
-  '@types/node': ^22.19.17
+  '@types/node': ^22.19.18
   '@types/nprogress': ^0.2.3
   '@types/qrcode': ^1.5.6
-  '@types/qs': ^6.15.0
+  '@types/qs': ^6.15.1
   '@types/sm-crypto': ^0.3.4
   '@types/sortablejs': ^1.15.9
-  '@typescript-eslint/eslint-plugin': ^8.58.2
-  '@typescript-eslint/parser': ^8.58.2
+  '@typescript-eslint/eslint-plugin': ^8.59.2
+  '@typescript-eslint/parser': ^8.59.2
   "@unocss/preset-wind3": ^66.6.8
-  '@vitejs/plugin-legacy': ^6.1.1
   '@vitejs/plugin-vue': ^5.2.4
   '@vitejs/plugin-vue-jsx': ^4.2.0
   '@vue-flow/background': ^1.3.2
   '@vue-flow/controls': ^1.1.3
   '@vue-flow/core': ^1.48.2
   '@vue-flow/minimap': ^1.5.4
-  '@vue/eslint-config-prettier': ^10.2.0
-  '@vue/shared': ^3.5.32
-  '@vue/test-utils': ^2.4.6
-  '@vue/tsconfig': ^0.7.0
+  '@vue/shared': ^3.5.34
   '@vueuse/core': ^13.9.0
   '@vueuse/shared': ^13.9.0
   '@zxcvbn-ts/core': ^3.0.4
   animate.css: ^4.1.1
   ant-design-vue: ^4.2.6
   ant-design-x-vue: ^1.6.0
-  autoprefixer: ^10.5.0
-  axios: ^1.15.1
+  axios: ^1.16.0
   bootstrap: ^5.3.8
-  codemirror: 5.65.16
+  cm6-theme-material-dark: ^0.2.0
+  codemirror: ^6.0.2
   cropperjs: ^1.6.2
   cross-env: ^7.0.3
   crypto-js: ^4.2.0
@@ -59,35 +59,29 @@ catalog:
   echarts-gl: ^2.0.9
   eslint: ^9.39.4
   eslint-config-prettier: ^10.1.8
-  eslint-config-turbo: ^2.9.6
+  eslint-config-turbo: ^2.9.10
   eslint-plugin-command: ^0.2.7
   eslint-plugin-eslint-comments: ^3.2.0
   eslint-plugin-jsdoc: ^50.8.0
   eslint-plugin-jsonc: ^2.21.1
-  eslint-plugin-no-only-tests: ^3.3.0
+  eslint-plugin-no-only-tests: ^3.4.0
   eslint-plugin-prettier: ^5.5.5
   eslint-plugin-regexp: ^2.10.0
   eslint-plugin-unicorn: ^56.0.1
   eslint-plugin-unused-imports: ^4.4.1
-  eslint-plugin-vue: ^10.8.0
-  esno: ^4.8.0
-  fs-extra: ^11.3.4
+  eslint-plugin-vue: ^10.9.1
   globals: ^15.15.0
   html2canvas: ^1.4.1
-  inquirer: ^12.11.1
-  jsdom: ^26.1.0
   jsonc-eslint-parser: ^2.4.2
   less: ^4.6.4
   lodash-es: ^4.18.1
   markdown-it: ^14.1.1
   naive-ui: ^2.44.1
-  npm-run-all: ^4.1.5
   nprogress: ^0.2.0
-  path-to-regexp: ^8.4.2
   picocolors: ^1.1.1
   pinia: ^3.0.4
   pkg-types: ^1.3.1
-  postcss: ^8.5.10
+  postcss: ^8.5.14
   postcss-html: ^1.8.1
   postcss-scss: ^4.0.9
   prettier: ^3.8.3
@@ -98,7 +92,7 @@ catalog:
   rimraf: ^6.1.0
   rollup: ^4.53.2
   rollup-plugin-visualizer: ^5.14.0
-  sm-crypto: ^0.3.14
+  sm-crypto: ^0.4.0
   sortablejs: ^1.15.7
   stylelint: ^16.26.1
   stylelint-config-recess-order: ^5.1.1
@@ -109,28 +103,23 @@ catalog:
   stylelint-order: ^6.0.4
   stylelint-prettier: ^5.0.3
   stylelint-scss: ^6.14.0
-  terser: ^5.46.1
-  turbo: ^2.9.6
-  typescript: ^5.9.3
+  turbo: ^2.9.10
+  typescript: ^6.0.3
   unbuild: ^3.6.1
   unocss: ^66.6.8
   uuid: ^11.1.0
   vite: ^7.3.1
   vite-plugin-compression: ^0.5.1
   vite-plugin-css-injected-by-js: ^4.0.1
-  vite-plugin-dts: ^3.9.1
   vite-plugin-html: ^3.2.2
-  vite-plugin-imagemin: ^0.6.1
-  vite-plugin-mkcert: ^1.17.12
-  vite-plugin-mock: ^3.0.2
   vite-plugin-svg-icons: ^2.0.1
-  vite-plugin-vue-setup-extend: ^0.4.0
   vue: ^3.5.24
-  vue-data-ui: ^3.17.13
+  vue-codemirror: ^6.1.1
+  vue-data-ui: ^3.19.4
   vue-eslint-parser: ^10.4.0
-  vue-i18n: ^11.3.2
+  vue-i18n: ^11.4.2
   vue-json-pretty: ^2.6.0
   vue-router: ^4.6.4
-  vue-tsc: ^3.2.7
+  vue-tsc: ^3.2.8
   vue-types: ^6.0.0
   vuedraggable: ^4.1.0

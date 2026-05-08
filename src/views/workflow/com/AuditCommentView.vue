@@ -28,8 +28,11 @@
             >
               审批意见：{{ item.comment }}
             </div>
-            <div class="text-ellipsis whitespace-nowrap overflow-hidden max-w-[300px] text-left" :title="item.assignee">
-              审批人：{{ item.assignee }}
+            <div
+              class="text-ellipsis whitespace-nowrap overflow-hidden max-w-[300px] text-left"
+              :title="item.assigneeName"
+            >
+              审批人：{{ item.assigneeName }}
             </div>
             <div class="text-ellipsis whitespace-nowrap overflow-hidden max-w-[300px] text-left" :title="item.time">
               审批时间：{{ item.time }}

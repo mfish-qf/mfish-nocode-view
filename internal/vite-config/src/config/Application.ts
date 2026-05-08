@@ -97,11 +97,27 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
           output: {
             // 入口文件名
             entryFileNames: "assets/[name]-[hash].js",
-            manualChunks: {
-              vue: ["vue", "pinia", "vue-router"],
-              antd: ["ant-design-vue", "@ant-design/icons-vue"],
-              naive: ["naive-ui"],
-              echarts: ["echarts"]
+            manualChunks(id) {
+              if (!id.includes("node_modules")) return;
+
+              // antd 细粒度拆分（icons 单独拆出，通常最大）
+              if (id.includes("@ant-design/icons-vue")) return "antd-icons";
+              if (id.includes("ant-design-vue")) return "antd";
+              if (id.includes("@ant-design")) return "antd-utils";
+
+              // vue 核心（精确匹配包名目录，避免匹配到 ant-design-vue 等含 vue 字符串的包）
+              if (/[\\/]node_modules[\\/](?:vue|@vue|pinia|vue-router)[\\/]/.test(id)) return "vue-vendor";
+
+              // echarts 细粒度拆分
+              if (id.includes("echarts-gl")) return "echarts-gl";
+              if (id.includes("echarts")) return "echarts";
+
+              // 其他大依赖
+              if (id.includes("naive-ui")) return "naive";
+              if (id.includes("dayjs")) return "dayjs";
+              if (id.includes("lodash")) return "lodash";
+              if (id.includes("codemirror") || id.includes("@codemirror")) return "codemirror";
+              if (id.includes("html2canvas")) return "html2canvas";
             }
           }
         }
