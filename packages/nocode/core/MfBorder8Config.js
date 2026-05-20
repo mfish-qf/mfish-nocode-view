@@ -1,17 +1,1 @@
-import { defineComponent as o, openBlock as e, createBlock as t, normalizeClass as r, unref as s, withCtx as n, createVNode as i, createTextVNode as a, createElementVNode as m } from "vue";
-import { Checkbox as p } from "ant-design-vue";
-import c from "./MfBorderConfig.js";
-import { useDesign as f } from "@mfish/core/hooks";
-import { u, e as d, _ as l } from "./index.js";
-import "@vueuse/core";
-import "@mfish/core/components/Icon";
-import "lodash-es";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-const h = { class: "title" }, C = l(o({ __name: "MfBorder8Config", setup(o2) {
-  const { prefixCls: l2 } = f("border8-config"), C2 = u();
-  return (o3, f2) => (e(), t(c, { class: r(s(l2)) }, { default: n(() => [i(s(p), { checked: s(C2).getCurConfigComponent.chart.options.reverse, "onUpdate:checked": f2[0] || (f2[0] = (o4) => s(C2).getCurConfigComponent.chart.options.reverse = o4) }, { default: n(() => [...f2[2] || (f2[2] = [a(" 是否反转", -1)])]), _: 1 }, 8, ["checked"]), m("div", h, [f2[3] || (f2[3] = a(" 单次动画时长 ", -1)), i(s(d), { suffix: "秒", style: { width: "120px" }, value: s(C2).getCurConfigComponent.chart.options.duration, "onUpdate:value": f2[1] || (f2[1] = (o4) => s(C2).getCurConfigComponent.chart.options.duration = o4), placeholder: "单次动画时长", min: 1, max: 100, maxlength: 3 }, null, 8, ["value"])])]), _: 1 }, 8, ["class"]));
-} }), [["__scopeId", "data-v-649ee8d3"]]);
-export {
-  C as default
-};
+import{_t as e,ur as t,yn as n}from"./common.js";import{t as r}from"./MfBorderConfig.js";import{createBlock as i,createElementVNode as a,createTextVNode as o,createVNode as s,defineComponent as c,normalizeClass as l,openBlock as u,unref as d,withCtx as f}from"vue";import{Checkbox as p}from"ant-design-vue";import{useDesign as m}from"@mfish/core/hooks";var h={class:`title`},g=t(c({__name:`MfBorder8Config`,setup(t){let{prefixCls:c}=m(`border8-config`),g=e();return(e,t)=>(u(),i(r,{class:l(d(c))},{default:f(()=>[s(d(p),{checked:d(g).getCurConfigComponent.chart.options.reverse,"onUpdate:checked":t[0]||=e=>d(g).getCurConfigComponent.chart.options.reverse=e},{default:f(()=>[...t[2]||=[o(` 是否反转`,-1)]]),_:1},8,[`checked`]),a(`div`,h,[t[3]||=o(` 单次动画时长 `,-1),s(d(n),{suffix:`秒`,style:{width:`120px`},value:d(g).getCurConfigComponent.chart.options.duration,"onUpdate:value":t[1]||=e=>d(g).getCurConfigComponent.chart.options.duration=e,placeholder:`单次动画时长`,min:1,max:100,maxlength:3},null,8,[`value`])])]),_:1},8,[`class`]))}}),[[`__scopeId`,`data-v-649ee8d3`]]);export{g as default};

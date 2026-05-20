@@ -21,12 +21,11 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
   return defineConfig(async ({ command, mode }) => {
     const root = process.cwd();
     const isBuild = command === "build";
-    const { VITE_PORT, VITE_PUBLIC_PATH, VITE_USE_VISUALIZER, VITE_PROXY } = loadEnv(mode, root);
+    const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY } = loadEnv(mode, root);
     const defineData = await createDefineData(root);
     const plugins = await createPlugins({
       isBuild,
-      root,
-      enableAnalyze: VITE_USE_VISUALIZER === "true"
+      root
     });
 
     const pathResolve = (pathname: string) => resolve(root, ".", pathname);
@@ -35,10 +34,6 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
       base: VITE_PUBLIC_PATH,
       resolve: {
         alias: [
-          {
-            find: "vue-i18n",
-            replacement: "vue-i18n/dist/vue-i18n.cjs.js"
-          },
           // @/xxxx => src/xxxx
           {
             find: /@\//,
@@ -93,31 +88,59 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
         target: "es2015",
         cssTarget: "chrome80",
         outDir: OUTPUT_DIR,
-        rollupOptions: {
+        rolldownOptions: {
           output: {
             // 入口文件名
             entryFileNames: "assets/[name]-[hash].js",
-            manualChunks(id) {
-              if (!id.includes("node_modules")) return;
+            codeSplitting: {
+              groups: [
+                // antd 细粒度拆分（icons 单独拆出，通常最大）
+                { name: "antd-icons", test: /node_modules[\\/]@ant-design[\\/]icons-vue/, priority: 30 },
+                { name: "antd-utils", test: /node_modules[\\/]@ant-design[\\/]/, priority: 20 },
+                { name: "antd", test: /node_modules[\\/]ant-design-vue[\\/]/, priority: 20 },
+                { name: "antd-x", test: /node_modules[\\/]ant-design-x-vue[\\/]/, priority: 20 },
 
-              // antd 细粒度拆分（icons 单独拆出，通常最大）
-              if (id.includes("@ant-design/icons-vue")) return "antd-icons";
-              if (id.includes("ant-design-vue")) return "antd";
-              if (id.includes("@ant-design")) return "antd-utils";
+                // vue 核心（@vue[\\/] 精确匹配 @vue/，不会误匹配 @vueuse）
+                { name: "vue-vendor", test: /node_modules[\\/](vue|@vue[\\/]|pinia|vue-router)[\\/]/, priority: 20 },
+                { name: "vueuse", test: /node_modules[\\/]@vueuse[\\/]/, priority: 20 },
 
-              // vue 核心（精确匹配包名目录，避免匹配到 ant-design-vue 等含 vue 字符串的包）
-              if (/[\\/]node_modules[\\/](?:vue|@vue|pinia|vue-router)[\\/]/.test(id)) return "vue-vendor";
+                // echarts 细粒度拆分
+                { name: "echarts-gl", test: /node_modules[\\/]echarts-gl[\\/]/, priority: 20 },
+                { name: "echarts", test: /node_modules[\\/]echarts[\\/]/, priority: 15 },
 
-              // echarts 细粒度拆分
-              if (id.includes("echarts-gl")) return "echarts-gl";
-              if (id.includes("echarts")) return "echarts";
+                // 工作流引擎
+                { name: "vue-flow", test: /node_modules[\\/]@vue-flow[\\/]/, priority: 15 },
 
-              // 其他大依赖
-              if (id.includes("naive-ui")) return "naive";
-              if (id.includes("dayjs")) return "dayjs";
-              if (id.includes("lodash")) return "lodash";
-              if (id.includes("codemirror") || id.includes("@codemirror")) return "codemirror";
-              if (id.includes("html2canvas")) return "html2canvas";
+                // UI 组件
+                { name: "naive", test: /node_modules[\\/]naive-ui[\\/]/, priority: 15 },
+
+                // 编辑器
+                { name: "codemirror", test: /node_modules[\\/](@codemirror|codemirror|cm6-theme)[\\/]/, priority: 15 },
+
+                // 工具库
+                { name: "dayjs", test: /node_modules[\\/]dayjs[\\/]/, priority: 15 },
+                { name: "lodash", test: /node_modules[\\/]lodash/, priority: 15 },
+                { name: "markdown-it", test: /node_modules[\\/]markdown-it[\\/]/, priority: 10 },
+                { name: "html2canvas", test: /node_modules[\\/]html2canvas[\\/]/, priority: 10 },
+                { name: "sm-crypto", test: /node_modules[\\/]sm-crypto[\\/]/, priority: 10 },
+                { name: "crypto-js", test: /node_modules[\\/]crypto-js[\\/]/, priority: 10 },
+                { name: "bootstrap", test: /node_modules[\\/]bootstrap[\\/]/, priority: 10 },
+
+                // 拖拽/排序
+                { name: "dnd", test: /node_modules[\\/](sortablejs|vuedraggable)[\\/]/, priority: 10 },
+
+                // 国际化
+                { name: "vue-i18n", test: /node_modules[\\/]vue-i18n[\\/]/, priority: 10 },
+
+                // 其他零散依赖
+                { name: "cropperjs", test: /node_modules[\\/]cropperjs[\\/]/, priority: 5 },
+                { name: "qrcode", test: /node_modules[\\/]qrcode[\\/]/, priority: 5 },
+                { name: "zxcvbn", test: /node_modules[\\/]@zxcvbn-ts[\\/]/, priority: 5 },
+                { name: "iconify", test: /node_modules[\\/]@iconify[\\/]/, priority: 5 },
+
+                // 兜底：其余 node_modules 统一放入 vendor
+                { name: "vendor", test: /node_modules[\\/]/, priority: 1 }
+              ]
             }
           }
         }

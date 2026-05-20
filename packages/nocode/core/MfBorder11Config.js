@@ -1,17 +1,1 @@
-import { defineComponent as o, openBlock as e, createBlock as t, normalizeClass as i, unref as r, withCtx as s, createElementVNode as n, createVNode as a } from "vue";
-import l from "./MfBorderConfig.js";
-import { useDesign as m } from "@mfish/core/hooks";
-import { u as p, e as u, _ as f } from "./index.js";
-import "ant-design-vue";
-import "@vueuse/core";
-import "@mfish/core/components/Icon";
-import "lodash-es";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-const c = f(o({ __name: "MfBorder11Config", setup(o2) {
-  const { prefixCls: f2 } = m("border11-config"), c2 = p();
-  return (o3, m2) => (e(), t(l, { class: i(r(f2)) }, { default: s(() => [m2[2] || (m2[2] = n("div", { class: "title" }, "标题", -1)), a(r(u), { value: r(c2).getCurConfigComponent.chart.options.title, "onUpdate:value": m2[0] || (m2[0] = (o4) => r(c2).getCurConfigComponent.chart.options.title = o4), "is-number": false, placeholder: "标题内容" }, null, 8, ["value"]), m2[3] || (m2[3] = n("div", { class: "title" }, "标题宽度", -1)), a(r(u), { suffix: "px", value: r(c2).getCurConfigComponent.chart.options.titleWidth, "onUpdate:value": m2[1] || (m2[1] = (o4) => r(c2).getCurConfigComponent.chart.options.titleWidth = o4), placeholder: "标题宽度", min: 50, max: 1e4, maxlength: 5 }, null, 8, ["value"])]), _: 1 }, 8, ["class"]));
-} }), [["__scopeId", "data-v-b381667b"]]);
-export {
-  c as default
-};
+import{_t as e,ur as t,yn as n}from"./common.js";import{t as r}from"./MfBorderConfig.js";import{createBlock as i,createElementVNode as a,createVNode as o,defineComponent as s,normalizeClass as c,openBlock as l,unref as u,withCtx as d}from"vue";import{useDesign as f}from"@mfish/core/hooks";var p=t(s({__name:`MfBorder11Config`,setup(t){let{prefixCls:s}=f(`border11-config`),p=e();return(e,t)=>(l(),i(r,{class:c(u(s))},{default:d(()=>[t[2]||=a(`div`,{class:`title`},`标题`,-1),o(u(n),{value:u(p).getCurConfigComponent.chart.options.title,"onUpdate:value":t[0]||=e=>u(p).getCurConfigComponent.chart.options.title=e,"is-number":!1,placeholder:`标题内容`},null,8,[`value`]),t[3]||=a(`div`,{class:`title`},`标题宽度`,-1),o(u(n),{suffix:`px`,value:u(p).getCurConfigComponent.chart.options.titleWidth,"onUpdate:value":t[1]||=e=>u(p).getCurConfigComponent.chart.options.titleWidth=e,placeholder:`标题宽度`,min:50,max:1e4,maxlength:5},null,8,[`value`])]),_:1},8,[`class`]))}}),[[`__scopeId`,`data-v-b381667b`]]);export{p as default};

@@ -8,7 +8,7 @@ import { setJobStatus } from "@/api/scheduler/Job";
  * @description: 定时调度任务
  * @author: mfish
  * @date: 2023-02-20
- * @version: V2.3.1
+ * @version: V2.4.0
  */
 export const columns: BasicColumn[] = [
   {

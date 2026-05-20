@@ -2,7 +2,7 @@
  @description: 我的大屏信息
  @author: mfish
  @date: 2024-08-07
- @version: V2.3.1
+ @version: V2.4.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">

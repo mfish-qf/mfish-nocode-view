@@ -2,7 +2,7 @@
  @description: 租户信息表
  @author: mfish
  @date: 2023-05-31
- @version: V2.3.1
+ @version: V2.4.0
 -->
 <template>
   <div>

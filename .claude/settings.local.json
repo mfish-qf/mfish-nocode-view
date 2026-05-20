@@ -8,7 +8,9 @@
       "Bash(npx vue-tsc *)",
       "Bash(pnpm run *)",
       "Bash(pnpm ls *)",
-      "Bash(pnpm view *)"
+      "Bash(pnpm view *)",
+      "Bash(pnpm install *)",
+      "Bash(VITE_USE_VISUALIZER=true pnpm run stub)"
     ]
   }
 }

@@ -1,17 +1,1 @@
-import { defineComponent as o, openBlock as e, createBlock as t, normalizeClass as i, unref as r, withCtx as s, createElementVNode as n, createTextVNode as a, createVNode as m } from "vue";
-import f from "./MfDecorationConfig.js";
-import "ant-design-vue";
-import { useDesign as p } from "@mfish/core/hooks";
-import { u as c, e as u, _ as l } from "./index.js";
-import "@vueuse/core";
-import "@mfish/core/components/Icon";
-import "lodash-es";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-const d = { class: "title" }, h = l(o({ __name: "MfDecoration5Config", setup(o2) {
-  const { prefixCls: l2 } = p("decoration5-config"), h2 = c();
-  return (o3, p2) => (e(), t(f, { class: i(r(l2)) }, { default: s(() => [n("div", d, [p2[1] || (p2[1] = a(" 单次动画时长 ", -1)), m(r(u), { suffix: "秒", value: r(h2).getCurConfigComponent.chart.options.duration, "onUpdate:value": p2[0] || (p2[0] = (o4) => r(h2).getCurConfigComponent.chart.options.duration = o4), placeholder: "单次动画时长", min: 1, max: 100, maxlength: 3 }, null, 8, ["value"])])]), _: 1 }, 8, ["class"]));
-} }), [["__scopeId", "data-v-1606d90f"]]);
-export {
-  h as default
-};
+import{_t as e,ur as t,yn as n}from"./common.js";import{t as r}from"./MfDecorationConfig.js";import{createBlock as i,createElementVNode as a,createTextVNode as o,createVNode as s,defineComponent as c,normalizeClass as l,openBlock as u,unref as d,withCtx as f}from"vue";import{useDesign as p}from"@mfish/core/hooks";var m={class:`title`},h=t(c({__name:`MfDecoration5Config`,setup(t){let{prefixCls:c}=p(`decoration5-config`),h=e();return(e,t)=>(u(),i(r,{class:l(d(c))},{default:f(()=>[a(`div`,m,[t[1]||=o(` 单次动画时长 `,-1),s(d(n),{suffix:`秒`,value:d(h).getCurConfigComponent.chart.options.duration,"onUpdate:value":t[0]||=e=>d(h).getCurConfigComponent.chart.options.duration=e,placeholder:`单次动画时长`,min:1,max:100,maxlength:3},null,8,[`value`])])]),_:1},8,[`class`]))}}),[[`__scopeId`,`data-v-1606d90f`]]);export{h as default};

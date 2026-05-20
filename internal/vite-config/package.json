@@ -1,6 +1,6 @@
 {
   "name": "@mfish/vite-config",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "private": true,
   "license": "Apache-2.0",
   "author": {
@@ -22,7 +22,7 @@
     "dist"
   ],
   "scripts": {
-    "stub": "pnpm unbuild --stub"
+    "stub": "unbuild --stub"
   },
   "dependencies": {
     "@ant-design/colors": "catalog:"
@@ -38,13 +38,13 @@
     "picocolors": "catalog:",
     "pkg-types": "catalog:",
     "postcss": "catalog:",
-    "rollup-plugin-visualizer": "catalog:",
+    "vite-bundle-analyzer": "catalog:",
     "unbuild": "catalog:",
     "unocss": "catalog:",
-    "vite": "^7.3.3",
+    "vite": "^8.0.13",
     "vite-plugin-compression": "catalog:",
     "vite-plugin-html": "catalog:",
     "vite-plugin-svg-icons": "catalog:",
-    "yaml": "^2.8.4"
+    "yaml": "^2.9.0"
   }
 }

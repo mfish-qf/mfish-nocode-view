@@ -1,6 +1,1 @@
-import { defineComponent as t, openBlock as a, createBlock as e, withCtx as o, renderSlot as s } from "vue";
-import f from "./MfInputDataConfig.js";
-const m = t({ __name: "MfInputNumberDataConfig", setup: (t2) => (t3, m2) => (a(), e(f, { "is-number": true }, { "data-select": o(() => [s(t3.$slots, "data-select")]), _: 3 })) });
-export {
-  m as default
-};
+import{t as e}from"./MfInputDataConfig.js";import{createBlock as t,defineComponent as n,openBlock as r,renderSlot as i,withCtx as a}from"vue";var o=n({__name:`MfInputNumberDataConfig`,setup(n){return(n,o)=>(r(),t(e,{"is-number":!0},{"data-select":a(()=>[i(n.$slots,`data-select`)]),_:3}))}});export{o as default};

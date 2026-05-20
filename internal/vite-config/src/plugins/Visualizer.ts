@@ -1,14 +1,16 @@
 /**
  * Package file volume analysis
  */
-import { visualizer } from "rollup-plugin-visualizer";
+import { analyzer } from "vite-bundle-analyzer";
 import { type PluginOption } from "vite";
 
 export function configVisualizerConfig() {
-  return visualizer({
-    filename: "./node_modules/.cache/visualizer/stats.html",
-    open: true,
-    gzipSize: true,
-    brotliSize: true
+  return analyzer({
+    analyzerMode: "static",
+    reportTitle: "MFish Bundle Analyzer",
+    gzipOptions: {
+      level: 9
+    },
+    openAnalyzer: true
   }) as PluginOption;
 }

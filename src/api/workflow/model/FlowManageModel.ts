@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@mfish/core/api";
  * @description: 流程管理
  * @author: mfish
  * @date: 2026-03-30
- * @version: V2.3.1
+ * @version: V2.4.0
  */
 export interface FlowManage extends BaseEntity<string> {
   //流程key

@@ -6,7 +6,7 @@ import { buildDictTag, getDictProps, YNTag_Name } from "@mfish/core/components/D
  * @description: 流程管理
  * @author: mfish
  * @date: 2026-03-30
- * @version: V2.3.1
+ * @version: V2.4.0
  */
 export const columns: BasicColumn[] = [
   {
