@@ -1,6 +1,6 @@
 {
   "name": "mfish-nocode",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "homepage": "https://github.com/mfish-qf/mfish-nocode-view",
   "bugs": {
     "url": "https://github.com/mfish-qf/mfish-nocode-view/issues"
@@ -19,6 +19,7 @@
   "scripts": {
     "build": "vite --filter ./packages/** --filter ./internal/** build",
     "build:analyze": "cross-env NODE_OPTIONS=--max-old-space-size=8192 pnpm vite build --mode analyze",
+    "build:visualizer": "cross-env VITE_USE_VISUALIZER=true turbo run stub",
     "build:docker": "vite build --mode docker",
     "build:local": "pnpm generate:icons && vite --filter ./packages/** --filter ./internal/** build",
     "build:test": "cross-env NODE_OPTIONS=--max-old-space-size=8192 turbo run build -- --mode test",
@@ -47,8 +48,7 @@
   },
   "resolutions": {
     "bin-wrapper": "npm:bin-wrapper-china",
-    "rimraf": "^6.0.1",
-    "uuid": "^11.1.0"
+    "rimraf": "^6.0.1"
   },
   "dependencies": {
     "@ant-design/icons-vue": "catalog:",
@@ -73,19 +73,19 @@
     "cropperjs": "catalog:",
     "crypto-js": "catalog:",
     "dayjs": "catalog:",
-    "echarts": "^6.0.0",
+    "echarts": "catalog:",
     "echarts-gl": "catalog:",
     "html2canvas": "catalog:",
     "lodash-es": "catalog:",
     "markdown-it": "catalog:",
     "nprogress": "catalog:",
-    "pinia": "^3.0.4",
+    "pinia": "catalog:",
     "qrcode": "catalog:",
     "qs": "catalog:",
     "resize-observer-polyfill": "catalog:",
     "sm-crypto": "catalog:",
     "sortablejs": "catalog:",
-    "uuid": "^11.1.1",
+    "uuid": "catalog:",
     "vue-codemirror": "catalog:",
     "vue-data-ui": "catalog:",
     "vue-i18n": "catalog:",
@@ -116,7 +116,7 @@
     "@mfish/workflow": "workspace:*",
     "@types/crypto-js": "catalog:",
     "@types/lodash-es": "catalog:",
-    "@types/node": "^22.19.18",
+    "@types/node": "catalog:",
     "@types/nprogress": "catalog:",
     "@types/qrcode": "catalog:",
     "@types/qs": "catalog:",
@@ -139,8 +139,6 @@
     "prettier": "catalog:",
     "prettier-plugin-packagejson": "catalog:",
     "rimraf": "^6.1.3",
-    "rollup": "^4.60.3",
-    "rollup-plugin-visualizer": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
     "stylelint-order": "catalog:",
@@ -148,36 +146,16 @@
     "typescript": "catalog:",
     "unbuild": "catalog:",
     "unocss": "catalog:",
-    "vite": "^7.3.3",
+    "vite": "catalog:",
     "vite-plugin-html": "catalog:",
     "vite-plugin-svg-icons": "catalog:",
-    "vue": "^3.5.34",
+    "vue": "catalog:",
     "vue-eslint-parser": "catalog:",
     "vue-tsc": "catalog:"
   },
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@11.1.3",
   "engines": {
     "node": ">=20",
-    "pnpm": ">=9"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "eslint": "*"
-      }
-    },
-    "overrides": {
-      "@types/node": "$@types/node",
-      "echarts": "$echarts",
-      "pinia": "$pinia",
-      "rollup": "$rollup",
-      "vite": "$vite",
-      "vue": "$vue"
-    },
-    "ignoredBuiltDependencies": [
-      "core-js",
-      "esbuild",
-      "vue-demi"
-    ]
+    "pnpm": ">=11"
   }
 }

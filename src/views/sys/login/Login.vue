@@ -162,7 +162,7 @@
           </div>
         </div>
       </div>
-      <div class="footer"> Copyright &copy; 2023 &mdash; {{ shortName }} {{ title }}</div>
+      <div class="footer"> Copyright &copy; 2021 - 2026 &mdash; {{ shortName }} {{ title }}</div>
     </div>
   </section>
 </template>

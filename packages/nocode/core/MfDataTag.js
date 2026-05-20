@@ -1,0 +1,1 @@
+import{K as e}from"./common.js";import{createBlock as t,defineComponent as n,openBlock as r}from"vue";var i=n({name:`MfDataTag`,__name:`index`,props:{chart:{type:Object,required:!0},chartContain:{type:Object,required:!0}},setup(n){return(i,a)=>(r(),t(e,{"chart-contain":n.chartContain,chart:n.chart},null,8,[`chart-contain`,`chart`]))}});export{i as default};

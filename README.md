@@ -1,6 +1,6 @@
 摸鱼低代码开发平台（前端）
 ======================================
-当前最新版本： V2.3.1
+当前最新版本： V2.4.0
 
 [![Author](https://img.shields.io/badge/Author-mfish-orange.svg)](http://www.mfish.com.cn)
 [![Blog](https://img.shields.io/badge/Blog-个人博客-yellow.svg)](http://www.mfish.com.cn)
@@ -43,7 +43,7 @@
 数据展示看板等轻应用开发快速集成
 
 ## 💡技术栈
-摸鱼低代码前端采用 Vue3.x、Vite7.x、 Ant-Design-Vue4.0.X、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
+摸鱼低代码前端采用 Vue3.x、Vite8.x、 Ant-Design-Vue4.0.X、TypeScript 等新技术方案，包括二次封装组件、utils、hooks、动态菜单、权限校验、按钮级别权限控制等功能。
 是在Vben-Admin基础上进行优化研发的适合于摸鱼低代码平台的前端解决方案，目前已是稳定版本，可用于生产项目。
 
 * 后端基于SpringBoot4, Spring Cloud Alibaba，实现微服务、单体服务代码一体化架构
@@ -87,7 +87,7 @@
 
 | 项目名                 | 说明             | 
 |---------------------|----------------|
-| `mfish-nocode-view` | Vue3.4+Vite7前端 | 
+| `mfish-nocode-view` | Vue3.4+Vite8前端 | 
 | `mfish-nocode`      | JAVA后台（微服务架构）  |  
 
 ## 📖技术文档

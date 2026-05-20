@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@mfish/core/api";
  * @description: 请假申请审批Demo
  * @author: mfish
  * @date: 2026-04-20
- * @version: V2.3.1
+ * @version: V2.4.0
  */
 export interface DemoLeaveApply extends BaseEntity<string> {
   //申请标题

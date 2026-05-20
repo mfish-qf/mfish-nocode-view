@@ -1,6 +1,1 @@
-import { defineComponent as t, openBlock as a, createBlock as e, withCtx as o, renderSlot as s } from "vue";
-import f from "./MfBarLineDataConfig.js";
-const r = t({ __name: "MfScatterDataConfig", setup: (t2) => (t3, r2) => (a(), e(f, { "x-title": "X轴 / 值", "y-max-count": 1 }, { "data-select": o(() => [s(t3.$slots, "data-select")]), _: 3 })) });
-export {
-  r as default
-};
+import{t as e}from"./MfBarLineDataConfig.js";import{createBlock as t,defineComponent as n,openBlock as r,renderSlot as i,withCtx as a}from"vue";var o=n({__name:`MfScatterDataConfig`,setup(n){return(n,o)=>(r(),t(e,{"x-title":`X轴 / 值`,"y-max-count":1},{"data-select":a(()=>[i(n.$slots,`data-select`)]),_:3}))}});export{o as default};

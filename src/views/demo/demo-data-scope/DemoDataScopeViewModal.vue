@@ -2,7 +2,7 @@
  @description: demo_data_scope查看
  @author: mfish
  @date: 2024-09-04
- @version: V2.3.1
+ @version: V2.4.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="demo_data_scope信息">

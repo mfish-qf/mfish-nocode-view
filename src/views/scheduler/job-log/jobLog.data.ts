@@ -7,7 +7,7 @@ import { buildJsonPreview } from "@mfish/core/utils/HBuildUtils";
  * @description: 任务日志
  * @author: mfish
  * @date: 2023-02-14
- * @version: V2.3.1
+ * @version: V2.4.0
  */
 export const columns: BasicColumn[] = [
   {

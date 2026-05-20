@@ -1,6 +1,1 @@
-import { defineComponent as t, openBlock as e, createBlock as o } from "vue";
-import f from "./MfInputConfig.js";
-const r = t({ __name: "MfInputTextAreaConfig", setup: (t2) => (t3, r2) => (e(), o(f, { "text-area": true })) });
-export {
-  r as default
-};
+import{t as e}from"./MfInputConfig.js";import{createBlock as t,defineComponent as n,openBlock as r}from"vue";var i=n({__name:`MfInputTextAreaConfig`,setup(n){return(n,i)=>(r(),t(e,{"text-area":!0}))}});export{i as default};

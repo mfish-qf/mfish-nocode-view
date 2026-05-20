@@ -13,7 +13,8 @@
       "cache": false
     },
     "stub": {
-      "cache": false
+      "cache": false,
+      "env": ["VITE_USE_VISUALIZER"]
     },
     "lint": {}
   }

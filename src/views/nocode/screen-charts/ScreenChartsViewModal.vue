@@ -2,7 +2,7 @@
  @description: 组件基础信息查看
  @author: mfish
  @date: 2024-11-19
- @version: V2.3.1
+ @version: V2.4.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="组件基础信息信息">

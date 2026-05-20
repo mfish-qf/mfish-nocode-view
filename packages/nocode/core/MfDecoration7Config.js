@@ -1,18 +1,1 @@
-import { defineComponent as o, openBlock as e, createBlock as t, normalizeClass as i, unref as s, withCtx as r, createElementVNode as n, createVNode as a } from "vue";
-import m from "./MfDecorationConfig.js";
-import { useDesign as p } from "@mfish/core/hooks";
-import { u as c, e as f, _ as l } from "./index.js";
-import "ant-design-vue";
-import "@vueuse/core";
-import "@mfish/core/components/Icon";
-import "lodash-es";
-import "@mfish/core/enums";
-import "@mfish/core/utils/Is";
-import { T as u } from "./TitleConfig.js";
-const d = l(o({ __name: "MfDecoration7Config", setup(o2) {
-  const { prefixCls: l2 } = p("decoration7-config"), d2 = c();
-  return (o3, p2) => (e(), t(m, { class: i(s(l2)) }, { default: r(() => [p2[1] || (p2[1] = n("div", { class: "title" }, "标题", -1)), a(s(f), { value: s(d2).getCurConfigComponent.chart.options.title, "onUpdate:value": p2[0] || (p2[0] = (o4) => s(d2).getCurConfigComponent.chart.options.title = o4), "is-number": false, placeholder: "标题内容" }, null, 8, ["value"]), a(u)]), _: 1 }, 8, ["class"]));
-} }), [["__scopeId", "data-v-2a6938b0"]]);
-export {
-  d as default
-};
+import{_t as e,ur as t,yn as n}from"./common.js";import{t as r}from"./TitleConfig.js";import{t as i}from"./MfDecorationConfig.js";import{createBlock as a,createElementVNode as o,createVNode as s,defineComponent as c,normalizeClass as l,openBlock as u,unref as d,withCtx as f}from"vue";import{useDesign as p}from"@mfish/core/hooks";var m=t(c({__name:`MfDecoration7Config`,setup(t){let{prefixCls:c}=p(`decoration7-config`),m=e();return(e,t)=>(u(),a(i,{class:l(d(c))},{default:f(()=>[t[1]||=o(`div`,{class:`title`},`标题`,-1),s(d(n),{value:d(m).getCurConfigComponent.chart.options.title,"onUpdate:value":t[0]||=e=>d(m).getCurConfigComponent.chart.options.title=e,"is-number":!1,placeholder:`标题内容`},null,8,[`value`]),s(r)]),_:1},8,[`class`]))}}),[[`__scopeId`,`data-v-2a6938b0`]]);export{m as default};

@@ -1,6 +1,1 @@
-import { defineComponent as t, openBlock as e, createBlock as o } from "vue";
-import i from "./MfTagConfig.js";
-const a = t({ __name: "MfDataTagStyleConfig", setup: (t2) => (t3, a2) => (e(), o(i, { "hide-title": true, "hide-icon": true })) });
-export {
-  a as default
-};
+import{t as e}from"./MfTagConfig.js";import{createBlock as t,defineComponent as n,openBlock as r}from"vue";var i=n({__name:`MfDataTagStyleConfig`,setup(n){return(n,i)=>(r(),t(e,{"hide-title":!0,"hide-icon":!0}))}});export{i as default};

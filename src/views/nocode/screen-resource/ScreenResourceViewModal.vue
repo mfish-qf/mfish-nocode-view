@@ -2,7 +2,7 @@
  @description: 大屏资源信息查看
  @author: mfish
  @date: 2025-03-19
- @version: V2.3.1
+ @version: V2.4.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="大屏资源信息信息">

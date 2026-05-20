@@ -43,7 +43,7 @@
   import MenuItem from "./components/MenuItem.vue";
   import SubMenu from "./components/SubMenuItem.vue";
   import { propTypes } from "@mfish/core/utils/PropTypes";
-  import { createAsyncComponent } from "@mfish/core/utils/factory/CreateAsyncComponent";
+  import SimpleMenuTag from "./SimpleMenuTag.vue";
 
   defineOptions({ name: "SimpleSubMenu" });
 
@@ -57,8 +57,6 @@
     collapse: propTypes.bool,
     theme: propTypes.oneOf(["dark", "light"])
   });
-
-  const SimpleMenuTag = createAsyncComponent(() => import("./SimpleMenuTag.vue"));
 
   const { t } = useI18n();
   const { prefixCls } = useDesign("simple-menu");

@@ -5,7 +5,7 @@ import { DemoLeaveApply, ReqDemoLeaveApply, DemoLeaveApplyPageModel } from "@/ap
  * @description: 请假申请审批Demo
  * @author: mfish
  * @date: 2026-04-20
- * @version: V2.3.1
+ * @version: V2.4.0
  */
 enum Api {
   DemoLeaveApply = "/demo/demoLeaveApply"

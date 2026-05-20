@@ -2,7 +2,7 @@
  @description: 流程管理查看
  @author: mfish
  @date: 2026-03-30
- @version: V2.3.1
+ @version: V2.4.0
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="流程管理信息">
