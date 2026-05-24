@@ -4,19 +4,17 @@ import { usePermissionStoreWithOut } from "@mfish/stores/modules";
 
 export function createParamMenuGuard(router: Router) {
   const permissionStore = usePermissionStoreWithOut();
-  router.beforeEach(async (to, _, next) => {
+  router.beforeEach(async (to) => {
     // 过滤没有name的路由
     if (!to.name) {
-      next();
-      return;
+      return true;
     }
     // 是否已经动态添加路由
     if (!permissionStore.getIsDynamicAddedRoute) {
-      next();
-      return;
+      return true;
     }
     const menus: Menu[] = permissionStore.getMenuList;
     menus.forEach((item) => configureDynamicParamsMenu(item, to.params));
-    next();
+    return true;
   });
 }

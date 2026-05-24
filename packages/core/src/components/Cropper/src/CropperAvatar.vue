@@ -23,79 +23,74 @@
     />
   </div>
 </template>
-<script lang="ts">
-  import { computed, CSSProperties, defineComponent, PropType, ref, unref, watch, watchEffect } from "vue";
+<script lang="ts" setup>
+  import { computed, ref, watch, watchEffect } from "vue";
+  import type { CSSProperties } from "vue";
   import CopperModal from "./CopperModal.vue";
   import { useDesign, useI18n, useMessage } from "@core/hooks";
   import { useModal } from "@core/components/Modal";
   import type { ButtonProps } from "@core/components/Button";
   import { Icon } from "@core/components/Icon";
-  import { UploadFileParams } from "@mfish/types/src/type/axios";
+  import type { UploadFileParams } from "@mfish/types/src/type/axios";
 
-  const props = {
-    width: { type: [String, Number], default: "200px" },
-    value: { type: String },
-    showBtn: { type: Boolean, default: true },
-    btnProps: { type: Object as PropType<ButtonProps> },
-    btnText: { type: String, default: "" },
-    uploadApi: { type: Function as PropType<(params: UploadFileParams) => Promise<any>> }
-  };
-
-  export default defineComponent({
-    name: "CropperAvatar",
-    components: { CopperModal, Icon },
-    props,
-    emits: ["update:value", "change"],
-    setup(props, { emit, expose }) {
-      const sourceValue = ref(props.value || "");
-      const { prefixCls } = useDesign("cropper-avatar");
-      const [register, { openModal, closeModal }] = useModal();
-      const { createMessage } = useMessage();
-      const { t } = useI18n();
-
-      const getClass = computed(() => [prefixCls]);
-
-      const getWidth = computed(() => `${`${props.width}`.replace(/px/, "")}px`);
-
-      const getIconWidth = computed(() => `${Number.parseInt(`${props.width}`.replace(/px/, "")) / 2}px`);
-
-      const getStyle = computed((): CSSProperties => ({ width: unref(getWidth) }));
-
-      const getImageWrapperStyle = computed((): CSSProperties => ({ width: unref(getWidth), height: unref(getWidth) }));
-
-      watchEffect(() => {
-        sourceValue.value = props.value || "";
-      });
-
-      watch(
-        () => sourceValue.value,
-        (v: string) => {
-          emit("update:value", v);
-        }
-      );
-
-      function handleUploadSuccess({ source, data }: { source: any; data: any }) {
-        sourceValue.value = source;
-        emit("change", { source, data });
-        createMessage.success(t("component.cropper.uploadSuccess"));
-      }
-
-      expose({ openModal: openModal.bind(null, true), closeModal });
-
-      return {
-        t,
-        prefixCls,
-        register,
-        openModal: openModal as any,
-        getIconWidth,
-        sourceValue,
-        getClass,
-        getImageWrapperStyle,
-        getStyle,
-        handleUploadSuccess
-      };
+  const props = withDefaults(
+    defineProps<{
+      width?: string | number;
+      value?: string;
+      showBtn?: boolean;
+      btnProps?: ButtonProps;
+      btnText?: string;
+      uploadApi?: (params: UploadFileParams) => Promise<any>;
+    }>(),
+    {
+      width: "200px",
+      showBtn: true,
+      btnText: ""
     }
+  );
+
+  const emit = defineEmits<{
+    "update:value": [value: string];
+    change: [data: { source: string; data: any }];
+  }>();
+
+  const sourceValue = ref(props.value || "");
+  const { prefixCls } = useDesign("cropper-avatar");
+  const [register, { openModal, closeModal }] = useModal();
+  const { createMessage } = useMessage();
+  const { t } = useI18n();
+
+  const getClass = computed(() => [prefixCls]);
+
+  const getWidth = computed(() => `${`${props.width}`.replace(/px/, "")}px`);
+
+  const getIconWidth = computed(() => `${Number.parseInt(`${props.width}`.replace(/px/, "")) / 2}px`);
+
+  const getStyle = computed((): CSSProperties => ({ width: getWidth.value }));
+
+  const getImageWrapperStyle = computed((): CSSProperties => ({
+    width: getWidth.value,
+    height: getWidth.value
+  }));
+
+  watchEffect(() => {
+    sourceValue.value = props.value || "";
   });
+
+  watch(
+    () => sourceValue.value,
+    (v: string) => {
+      emit("update:value", v);
+    }
+  );
+
+  function handleUploadSuccess({ source, data }: { source: string; data: any }) {
+    sourceValue.value = source;
+    emit("change", { source, data });
+    createMessage.success(t("component.cropper.uploadSuccess"));
+  }
+
+  defineExpose({ openModal: openModal.bind(null, true), closeModal });
 </script>
 
 <style lang="less" scoped>

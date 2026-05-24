@@ -10,7 +10,9 @@
       "Bash(pnpm ls *)",
       "Bash(pnpm view *)",
       "Bash(pnpm install *)",
-      "Bash(VITE_USE_VISUALIZER=true pnpm run stub)"
+      "Bash(VITE_USE_VISUALIZER=true pnpm run stub)",
+      "Bash(grep *)",
+      "Bash(npm run *)"
     ]
   }
 }
