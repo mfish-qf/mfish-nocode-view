@@ -208,8 +208,8 @@ catalogs:
       specifier: ^4.18.1
       version: 4.18.1
     markdown-it:
-      specifier: ^14.1.1
-      version: 14.1.1
+      specifier: ^14.2.0
+      version: 14.2.0
     naive-ui:
       specifier: ^2.44.1
       version: 2.44.1
@@ -322,8 +322,8 @@ catalogs:
       specifier: ^6.1.1
       version: 6.1.1
     vue-data-ui:
-      specifier: ^3.19.9
-      version: 3.19.9
+      specifier: ^3.20.7
+      version: 3.20.7
     vue-eslint-parser:
       specifier: ^10.4.0
       version: 10.4.0
@@ -430,7 +430,7 @@ importers:
         version: 4.18.1
       markdown-it:
         specifier: 'catalog:'
-        version: 14.1.1
+        version: 14.2.0
       nprogress:
         specifier: 'catalog:'
         version: 0.2.0
@@ -460,7 +460,7 @@ importers:
         version: 6.1.1(codemirror@6.0.2)(vue@3.5.34(typescript@6.0.3))
       vue-data-ui:
         specifier: 'catalog:'
-        version: 3.19.9(vue@3.5.34(typescript@6.0.3))
+        version: 3.20.7(vue@3.5.34(typescript@6.0.3))
       vue-i18n:
         specifier: 'catalog:'
         version: 11.4.4(vue@3.5.34(typescript@6.0.3))
@@ -2787,8 +2787,8 @@ packages:
     resolution: {integrity: sha512-buhp5kePrmda3vhc5B9t7pUQXAb2Tnd0qgpkIhPhkHXxJpiPJ11H0ZEU0oBpJ2QztSbzG/ZxMj/CHsYJqRHmyg==}
     engines: {node: '>= 12.0.0'}
 
-  comment-parser@1.4.6:
-    resolution: {integrity: sha512-ObxuY6vnbWTN6Od72xfwN9DbzC7Y2vv8u1Soi9ahRKL37gb6y1qk6/dgjs+3JWuXJHWvsg3BXIwzd/rkmAwavg==}
+  comment-parser@1.4.7:
+    resolution: {integrity: sha512-0h+uSNtQGW3D98eQt3jJ8L06Fves8hncB4V/PKdw/Qb8Hnk19VaKuTr55UNRYiSoVa7WwrFls+rh3ux9agmkeQ==}
     engines: {node: '>= 12.0.0'}
 
   commondir@1.0.1:
@@ -4264,8 +4264,8 @@ packages:
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  linkify-it@5.0.0:
-    resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
+  linkify-it@5.0.1:
+    resolution: {integrity: sha512-wVoTjP4Q6R0NW5hiZkVJaFZPWgtXfoGF+6LucL3/FtiNjmcHhYjEr5f1Kqjirc1nBW07J/ZuRFumqr2oqccEWg==}
 
   loader-utils@1.4.2:
     resolution: {integrity: sha512-I5d00Pd/jwMD2QCduo657+YM/6L3KZu++pmX9VFncxaxvHcru9jx1lBaFft+r4Mt2jK0Yhp41XlRAihzPxHNCg==}
@@ -4343,8 +4343,8 @@ packages:
     resolution: {integrity: sha512-4y7uGv8bd2WdM9vpQsiQNo41Ln1NvhvDRuVt0k2JZQ+ezN2uaQes7lZeZ+QQUHOLQAtDaBJ+7wCbi+ab/KFs+w==}
     engines: {node: '>=0.10.0'}
 
-  markdown-it@14.1.1:
-    resolution: {integrity: sha512-BuU2qnTti9YKgK5N+IeMubp14ZUKUUw7yeJbkjtosvHiP0AZ5c8IAgEMk79D0eC8F23r4Ac/q8cAIFdm2FtyoA==}
+  markdown-it@14.2.0:
+    resolution: {integrity: sha512-1TGiQiJVRQ3NPmZH6sx5Cfnmg6GQm9jvC1ch4TK511NjSJvjzKLzn5pPfZRNZkRPZP0HqCioSndqH8v2nRaWVQ==}
     hasBin: true
 
   math-intrinsics@1.1.0:
@@ -5832,8 +5832,8 @@ packages:
       codemirror: 6.x
       vue: 3.x
 
-  vue-data-ui@3.19.9:
-    resolution: {integrity: sha512-FW/XWJx/5K5aKkgXwyHD2IWvMc5FjUiezf97+rJDuqiVl1UfERaFYYtqkCX2ZjxLRbdRKeMq31aLrzRXYksrpA==}
+  vue-data-ui@3.20.7:
+    resolution: {integrity: sha512-tZXH5Y7dBWamWVTzGYhp2DyoXQGSk2tJkkI1iWQ43RzXGlDnlU2HfU9/S0RmSrXpitwSR5Eo6ZHRnxYgCO5LWQ==}
     peerDependencies:
       jspdf: '>=3.0.1'
       vue: '>=3.3.0'
@@ -7987,7 +7987,7 @@ snapshots:
 
   comment-parser@1.4.1: {}
 
-  comment-parser@1.4.6: {}
+  comment-parser@1.4.7: {}
 
   commondir@1.0.1: {}
 
@@ -8624,7 +8624,7 @@ snapshots:
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.4.0(jiti@2.7.0))
       '@eslint-community/regexpp': 4.12.2
-      comment-parser: 1.4.6
+      comment-parser: 1.4.7
       eslint: 10.4.0(jiti@2.7.0)
       jsdoc-type-pratt-parser: 4.0.0
       refa: 0.12.1
@@ -9536,7 +9536,7 @@ snapshots:
 
   lines-and-columns@1.2.4: {}
 
-  linkify-it@5.0.0:
+  linkify-it@5.0.1:
     dependencies:
       uc.micro: 2.1.0
 
@@ -9620,11 +9620,11 @@ snapshots:
     dependencies:
       object-visit: 1.0.1
 
-  markdown-it@14.1.1:
+  markdown-it@14.2.0:
     dependencies:
       argparse: 2.0.1
       entities: 4.4.0
-      linkify-it: 5.0.0
+      linkify-it: 5.0.1
       mdurl: 2.0.0
       punycode.js: 2.3.1
       uc.micro: 2.1.0
@@ -11350,7 +11350,7 @@ snapshots:
       codemirror: 6.0.2
       vue: 3.5.34(typescript@6.0.3)
 
-  vue-data-ui@3.19.9(vue@3.5.34(typescript@6.0.3)):
+  vue-data-ui@3.20.7(vue@3.5.34(typescript@6.0.3)):
     dependencies:
       vue: 3.5.34(typescript@6.0.3)
 

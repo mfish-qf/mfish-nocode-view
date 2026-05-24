@@ -1,1 +1,1 @@
-import{Wn as e}from"./common.js";import{t}from"./MfDataV.js";import{createBlock as n,defineComponent as r,openBlock as i,unref as a}from"vue";var o=r({name:`MfBorder19`,__name:`index`,setup(r){return(r,o)=>(i(),n(t,{component:a(e)},null,8,[`component`]))}});export{o as default};
+import{Jn as e}from"./common.js";import{t}from"./MfDataV.js";import{createBlock as n,defineComponent as r,openBlock as i,unref as a}from"vue";var o=r({name:`MfBorder19`,__name:`index`,setup(r){return(r,o)=>(i(),n(t,{component:a(e)},null,8,[`component`]))}});export{o as default};

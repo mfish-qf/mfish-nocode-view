@@ -83,6 +83,7 @@
   import ScreenShareModal from "@/views/nocode/mf-screen/ScreenShareModal.vue";
   import ScreenReleaseModal from "@/views/nocode/mf-screen/ScreenReleaseModal.vue";
   import { useModal } from "@mfish/core/components/Modal";
+  import "@/components/nocode/screen/custom-components/register";
 
   const screenUrl = "/low-code/mf-screen/config";
 
