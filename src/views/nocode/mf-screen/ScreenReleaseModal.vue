@@ -40,6 +40,7 @@
   import { Image as AImage, Popconfirm as APopconfirm } from "ant-design-vue";
   import { FormSchema } from "@mfish/core/components/Table";
   import { getLocalFileUrl, imageUrl } from "@mfish/core/utils/file/FileUtils";
+  import "@/components/nocode/screen/custom-components/register";
 
   defineOptions({ name: "ScreenReleaseModal" });
   const props = defineProps({

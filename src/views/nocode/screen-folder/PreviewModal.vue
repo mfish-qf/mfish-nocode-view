@@ -28,6 +28,7 @@
   import { Icon } from "@mfish/core/components/Icon";
   import { Tooltip as ATooltip } from "ant-design-vue";
   import { router } from "@mfish/core/router";
+  import "@/components/nocode/screen/custom-components/register";
 
   const emit = defineEmits(["cloneScreen", "submit", "register"]);
   const screenEditStore = useScreenEditStore();

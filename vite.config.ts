@@ -12,6 +12,16 @@ export default defineApplicationConfig({
         "@iconify/vue",
         "ant-design-vue/es/locale/zh_CN",
         "ant-design-vue/es/locale/en_US"
+      ],
+      exclude: [
+        "vue",
+        "@vue/runtime-dom",
+        "@vue/runtime-core",
+        "@vue/reactivity",
+        "@vue/shared",
+        "vue-i18n",
+        "vue-router",
+        "pinia"
       ]
     }
   }

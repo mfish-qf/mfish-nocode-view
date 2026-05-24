@@ -17,15 +17,14 @@ const whitePathList: Set<PageEnum> = new Set([
 export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const permissionStore = usePermissionStoreWithOut();
-  router.beforeEach(async (to, from, next) => {
+  router.beforeEach(async (to, from) => {
     const token = userStore.getToken;
     const refreshToken = userStore.getRefreshToken;
     if (!token && refreshToken) {
       // 如果token过期，刷新token
       try {
         await userStore.refreshTokenAction();
-        next(to.path);
-        return;
+        return to.path;
       } catch {
         userStore.setRefreshToken(undefined);
       }
@@ -38,8 +37,7 @@ export function createPermissionGuard(router: Router) {
         try {
           //获取用户信息成功，进入首页，失败如果返回401会自动刷新
           await userStore.getAccountInfo();
-          next((to.query?.redirect as string) || "/");
-          return;
+          return (to.query?.redirect as string) || "/";
         } catch {
           userStore.setToken(undefined);
         }
@@ -47,8 +45,7 @@ export function createPermissionGuard(router: Router) {
           // 如果token过期，刷新token
           try {
             await userStore.refreshTokenAction();
-            next(to.query?.redirect as string);
-            return;
+            return to.query?.redirect as string;
           } catch {
             userStore.setRefreshToken(undefined);
           }
@@ -74,19 +71,16 @@ export function createPermissionGuard(router: Router) {
           userStore.setIsLogout(false);
         }
         globalThis.location.href = url;
-        next(false);
-        return;
+        return false;
       }
-      next();
-      return;
+      return true;
     }
     const user = userStore.getUserInfo;
     // 如果token或者user不存在
     if (!token || !user) {
       // 如果设置ignoreAuth为true，允许直接访问
       if (to.meta.ignoreAuth) {
-        next();
-        return;
+        return true;
       }
       // 重定向到登录页面
       const redirectData: { path: string; replace: boolean; query?: Recordable<string> } = {
@@ -96,26 +90,23 @@ export function createPermissionGuard(router: Router) {
       if (to.path) {
         redirectData.query = { redirect: to.fullPath };
       }
-      next(redirectData);
-      return;
+      return redirectData;
     }
     if (permissionStore.getIsDynamicAddedRoute) {
-      next();
-      return;
+      return true;
     }
     await permissionStore.addRouter(router);
     if (from.path === ROOT_PATH && to.path === PageEnum.BASE_HOME && permissionStore.homePath !== PageEnum.BASE_HOME) {
-      next(permissionStore.homePath);
-      return;
+      return permissionStore.homePath;
     }
     if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
       // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
-      next({ path: to.fullPath, replace: true, query: to.query });
+      return { path: to.fullPath, replace: true, query: to.query };
     } else {
       const redirectPath = (from.query.redirect || to.path) as string;
       const redirect = decodeURIComponent(redirectPath);
       const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect };
-      next(nextData);
+      return nextData;
     }
   });
 }

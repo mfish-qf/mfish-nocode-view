@@ -110,103 +110,105 @@
     </div>
   </BasicModal>
 </template>
-<script lang="ts">
-  import type { Cropper, CropperResult } from "./typing";
-  import { defineComponent, PropType, ref } from "vue";
+<script lang="ts" setup>
+  import Cropper from "cropperjs";
+  import { ref } from "vue";
   import CropperImage from "./Cropper.vue";
   import { Avatar, Space, Tooltip, Upload } from "ant-design-vue";
   import { useDesign, useI18n } from "@core/hooks";
   import { BasicModal, useModalInner } from "@core/components/Modal";
   import { dataURLtoBlob } from "@core/utils/file/Base64Convert";
   import { isFunction } from "@core/utils/Is";
-  import { UploadFileParams } from "@mfish/types/src/type/axios";
+  import type { UploadFileParams } from "@mfish/types/src/type/axios";
 
-  const props = {
-    circled: { type: Boolean, default: true },
-    uploadApi: {
-      type: Function as PropType<(params: UploadFileParams) => Promise<any>>
-    },
-    src: { type: String }
-  };
+  interface CropperResult {
+    imgBase64: string;
+    imgInfo: { x: number; y: number; width: number; height: number };
+  }
 
-  export default defineComponent({
-    name: "CropperModal",
-    components: { BasicModal, Space, CropperImage, Upload, Avatar, Tooltip },
-    props,
-    emits: ["uploadSuccess", "register"],
-    setup(props, { emit }) {
-      let fileName = "";
-      const src = ref(props.src || "");
-      const previewSource = ref("");
-      const cropper = ref<Cropper>();
-      let scaleX = 1;
-      let scaleY = 1;
+  const props = defineProps<{
+    circled?: boolean;
+    uploadApi?: (params: UploadFileParams) => Promise<any>;
+    src?: string;
+  }>();
 
-      const { prefixCls } = useDesign("cropper-am");
-      const [register, { closeModal, setModalProps }] = useModalInner();
-      const { t } = useI18n();
+  const emit = defineEmits<{
+    uploadSuccess: [data: { source: string; data: any }];
+    register: [];
+  }>();
 
-      // Block upload
-      function handleBeforeUpload(file: File) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        src.value = "";
-        previewSource.value = "";
-        reader.addEventListener("load", (e) => {
-          src.value = (e.target?.result as string) ?? "";
-          fileName = file.name;
-        });
-        return false;
-      }
+  let fileName = "";
+  const src = ref(props.src || "");
+  const previewSource = ref("");
+  const cropperInstance = ref<Cropper>();
+  let scaleX = 1;
+  let scaleY = 1;
 
-      function handleCropper({ imgBase64 }: CropperResult) {
-        previewSource.value = imgBase64;
-      }
+  const { prefixCls } = useDesign("cropper-am");
+  const [register, { closeModal, setModalProps }] = useModalInner();
+  const { t } = useI18n();
 
-      function handleReady(cropperInstance: Cropper) {
-        cropper.value = cropperInstance;
-      }
+  function handleBeforeUpload(file: File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    src.value = "";
+    previewSource.value = "";
+    reader.addEventListener("load", (e) => {
+      src.value = (e.target?.result as string) ?? "";
+      fileName = file.name;
+    });
+    return false;
+  }
 
-      function handlerToolbar(event: string, arg?: number) {
-        if (event === "scaleX") {
-          scaleX = arg = scaleX === -1 ? 1 : -1;
-        }
-        if (event === "scaleY") {
-          scaleY = arg = scaleY === -1 ? 1 : -1;
-        }
-        //@ts-ignore 忽略类型错误
-        cropper?.value?.[event]?.(arg);
-      }
+  function handleCropper({ imgBase64 }: CropperResult) {
+    previewSource.value = imgBase64;
+  }
 
-      async function handleOk() {
-        const uploadApi = props.uploadApi;
-        if (uploadApi && isFunction(uploadApi)) {
-          const blob = dataURLtoBlob(previewSource.value);
-          try {
-            setModalProps({ confirmLoading: true });
-            const result = await uploadApi({ file: blob, fileName, path: "avatar" });
-            emit("uploadSuccess", { source: previewSource.value, data: result.fileKey });
-            closeModal();
-          } finally {
-            setModalProps({ confirmLoading: false });
-          }
-        }
-      }
+  function handleReady(instance: Cropper) {
+    cropperInstance.value = instance;
+  }
 
-      return {
-        t,
-        prefixCls,
-        src,
-        register,
-        previewSource,
-        handleBeforeUpload,
-        handleCropper,
-        handleReady,
-        handlerToolbar,
-        handleOk
-      };
+  function handlerToolbar(event: string, arg?: number) {
+    const cropper = cropperInstance.value;
+    if (!cropper) return;
+    const image = cropper.getCropperImage();
+    const selection = cropper.getCropperSelection();
+    switch (event) {
+      case "rotate":
+        image?.$rotate((arg! * Math.PI) / 180);
+        break;
+      case "scaleX":
+        scaleX = scaleX === -1 ? 1 : -1;
+        image?.$scale(scaleX, 1);
+        break;
+      case "scaleY":
+        scaleY = scaleY === -1 ? 1 : -1;
+        image?.$scale(1, scaleY);
+        break;
+      case "zoom":
+        image?.$zoom(arg!);
+        break;
+      case "reset":
+        image?.$resetTransform();
+        selection?.$reset();
+        break;
     }
-  });
+  }
+
+  async function handleOk() {
+    const { uploadApi } = props;
+    if (uploadApi && isFunction(uploadApi)) {
+      const blob = dataURLtoBlob(previewSource.value);
+      try {
+        setModalProps({ confirmLoading: true });
+        const result = await uploadApi({ file: blob, fileName, path: "avatar" });
+        emit("uploadSuccess", { source: previewSource.value, data: result.fileKey });
+        closeModal();
+      } finally {
+        setModalProps({ confirmLoading: false });
+      }
+    }
+  }
 </script>
 
 <style lang="less">

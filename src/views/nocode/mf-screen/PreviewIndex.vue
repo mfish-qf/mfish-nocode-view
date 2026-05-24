@@ -9,6 +9,7 @@
 <script setup lang="ts">
   import { onBeforeMount } from "vue";
   import { ScreenPreview, useScreenEditStore } from "@mfish/nocode";
+  import "@/components/nocode/screen/custom-components/register";
   import { useRoute } from "vue-router";
 
   const { params, query } = useRoute();
