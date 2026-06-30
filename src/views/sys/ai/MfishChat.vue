@@ -231,7 +231,6 @@
   import { buildUUID } from "@mfish/core/utils/Uuid";
   import markdownit from "markdown-it";
   import { useClipboard } from "@vueuse/core";
-  import { getAiRouter } from "@/api/ai/AiRouter";
   import { JsonPreview } from "@mfish/core/components/CodeEditor";
 
   defineOptions({ name: "MfishChat" });
@@ -396,18 +395,7 @@
   }
 
   function sendMessage(id: string, val: string) {
-    getAiRouter(val)
-      .then((aiRouter) => {
-        sseRequest(aiRouter?.path || "/sys/ai/chat", id, val);
-      })
-      .catch((error) => {
-        status.value = error;
-        const index = messages.value.findIndex((msg) => msg.id === id && msg.message.role === "assistant");
-        if (index !== -1) {
-          messages.value[index].message.content += error.message;
-          messages.value[index].status = "error";
-        }
-      });
+    sseRequest("/aiRouter", id, val);
   }
   function sseRequest(path: string, id: string, val: string) {
     // 建立新 SSE 连接，并把 prompt 传给后端

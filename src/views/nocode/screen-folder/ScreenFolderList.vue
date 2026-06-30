@@ -15,10 +15,7 @@
       <template #renderItem="{ item, index }">
         <ACard v-if="index === 0" v-auth="'sys:screen:insert'" class="add-screen" @click="createScreen">
           <div class="flex flex-col items-center justify-center gap-2">
-            <div
-              class="flex flex-col items-center justify-center h-16 w-16 rounded-lg"
-              :style="{ backgroundColor: bgColor }"
-            >
+            <div class="flex flex-col items-center justify-center rounded-lg">
               <Icon icon="ant-design:plus-outlined" class="description" size="26" />
             </div>
             <div class="description">点击 新建大屏</div>
@@ -82,7 +79,9 @@
   });
   const emit = defineEmits(["folderClick", "folderDelete", "folderRename"]);
   const data = ref();
-  const { paginationProp, setCurrentPage, getPageNum, getPageSize, setTotal } = usePagination(pageRefresh);
+  const { paginationProp, setCurrentPage, getPageNum, getPageSize, setTotal } = usePagination(pageRefresh, {
+    pageSize: 9
+  });
   const { prefixCls } = useDesign("screen-list");
   const listKey = ref<number>(1);
   const [registerFolderMoveModal, { openModal: openFolderMoveModal }] = useModal();
@@ -233,7 +232,7 @@
     .add-screen {
       border: 2px dashed @border-color-base;
       border-radius: 8px;
-      box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease-in;
       display: flex;
       flex-direction: column;
@@ -253,6 +252,7 @@
 
       &:hover {
         border: 2px dashed @main-color;
+        background: v-bind(bgColor);
         box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
         transform: scale(1.01);
 
