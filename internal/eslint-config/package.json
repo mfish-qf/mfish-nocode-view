@@ -35,7 +35,7 @@
     "@typescript-eslint/parser": "catalog:",
     "eslint": "catalog:",
     "eslint-config-prettier": "catalog:",
-    "eslint-plugin-eslint-comments": "catalog:",
+    "@eslint-community/eslint-plugin-eslint-comments": "catalog:",
     "eslint-plugin-jsdoc": "catalog:",
     "eslint-plugin-jsonc": "catalog:",
     "eslint-plugin-no-only-tests": "catalog:",

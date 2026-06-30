@@ -1,4 +1,4 @@
-﻿---
+---
 name: frontend-crud
 description: 为 mfish-nocode-pro 项目前端（Vue3 + TypeScript）生成标准增删改查页面代码，包括 Model、API、data、index.vue、Modal、ViewModal 六个文件。当用户说"帮我生成前端增删改查"、"新增前端页面"、"生成前端CRUD"时使用此 skill。
 ---

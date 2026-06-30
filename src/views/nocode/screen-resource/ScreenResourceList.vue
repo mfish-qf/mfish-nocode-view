@@ -70,7 +70,9 @@
   });
   const emit = defineEmits(["cloneScreen"]);
   const data = ref();
-  const { paginationProp, setCurrentPage, getPageNum, getPageSize, setTotal } = usePagination(pageRefresh);
+  const { paginationProp, setCurrentPage, getPageNum, getPageSize, setTotal } = usePagination(pageRefresh, {
+    pageSize: 9
+  });
   const [registerPreviewModal, { openModal: openPreviewModal }] = useModal();
   const { prefixCls } = useDesign("screen-resource-list");
   const listKey = ref<number>(1);

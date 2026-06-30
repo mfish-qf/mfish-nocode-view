@@ -219,6 +219,8 @@
     }
     const { width, height } = screenEditStore.getScreenCanvas.getBoundingClientRect();
     const ignoreClass = new Set(["contain-point", "mfish-near-line", "mfish-select-area"]);
+    // 截图前捕获所有iframe内容为图片
+    const iframeSnapshots = await captureIframes(screenEditStore.getScreenCanvas as HTMLElement);
     const canvas = await html2canvas(screenEditStore.getScreenCanvas as HTMLElement, {
       useCORS: true,
       allowTaint: true,
@@ -228,7 +230,26 @@
       },
       width,
       height,
-      scale: 0.4
+      scale: 0.4,
+      onclone: (clonedDoc) => {
+        // 在克隆的DOM中，用截图替换iframe
+        const clonedCanvas =
+          clonedDoc.querySelector(
+            screenEditStore.getScreenCanvas!.id ? `#${screenEditStore.getScreenCanvas!.id}` : ".mfish-screen-canvas"
+          ) || clonedDoc.body;
+        const clonedIframes = clonedCanvas.querySelectorAll("iframe");
+        clonedIframes.forEach((iframe, index) => {
+          if (iframeSnapshots[index]) {
+            const img = clonedDoc.createElement("img");
+            img.src = iframeSnapshots[index];
+            img.style.width = iframe.style.width || `${iframe.offsetWidth}px`;
+            img.style.height = iframe.style.height || `${iframe.offsetHeight}px`;
+            img.style.position = iframe.style.position || "static";
+            img.style.objectFit = "fill";
+            iframe.parentNode?.replaceChild(img, iframe);
+          }
+        });
+      }
     });
     const dataURL = canvas.toDataURL("image/png");
     const file = dataURLtoBlob(dataURL);
@@ -237,6 +258,39 @@
       fileName: screenEditStore.getCanvasConfig.screenName,
       path: "screen/thumbnail"
     });
+  }
+
+  /**
+   * 捕获画布中所有iframe的内容为base64图片
+   * 同源iframe通过html2canvas直接截取contentDocument
+   * 跨域iframe无法截取，返回空字符串
+   */
+  async function captureIframes(container: HTMLElement): Promise<string[]> {
+    const iframes = container.querySelectorAll("iframe");
+    const snapshots: string[] = [];
+    for (const iframe of iframes) {
+      let snapshot = "";
+      try {
+        const doc = iframe.contentDocument || iframe.contentWindow?.document;
+        if (doc?.body) {
+          const iframeCanvas = await html2canvas(doc.body, {
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: null,
+            width: iframe.clientWidth,
+            height: iframe.clientHeight,
+            scale: 0.4,
+            windowWidth: iframe.clientWidth,
+            windowHeight: iframe.clientHeight
+          });
+          snapshot = iframeCanvas.toDataURL("image/png");
+        }
+      } catch {
+        // 跨域iframe无法访问contentDocument，跳过
+      }
+      snapshots.push(snapshot);
+    }
+    return snapshots;
   }
 
   function previewScreen() {
