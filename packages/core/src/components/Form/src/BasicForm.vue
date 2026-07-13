@@ -227,6 +227,9 @@
         initDefault();
         isInitedDefaultRef.value = true;
       }
+    },
+    {
+      immediate: true
     }
   );
 
@@ -288,7 +291,6 @@
   });
 
   onMounted(() => {
-    initDefault();
     emit("register", formActionType);
   });
 </script>

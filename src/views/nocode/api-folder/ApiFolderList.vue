@@ -312,7 +312,7 @@
       api: () =>
         getApiFolderAndFile({
           parentId: name ? undefined : props.folderId,
-          name: name || undefined,
+          name: name ?? undefined,
           pageNum: (getPaginationRef() as PaginationProps).current,
           pageSize: (getPaginationRef() as PaginationProps).pageSize
         })

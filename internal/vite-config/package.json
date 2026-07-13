@@ -40,7 +40,7 @@
     "postcss": "catalog:",
     "unbuild": "catalog:",
     "unocss": "catalog:",
-    "vite": "^8.1.0",
+    "vite": "^8.1.4",
     "vite-bundle-analyzer": "catalog:",
     "vite-plugin-compression": "catalog:",
     "vite-plugin-html": "catalog:",

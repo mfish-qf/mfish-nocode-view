@@ -35,6 +35,10 @@ export interface DescriptionProps extends DescriptionsProps {
    * @type CollapseContainerOptions
    */
   collapseOptions?: CollapseContainerOptions;
+  /**
+   * 标签宽度
+   */
+  labelWidth?: number;
 }
 
 export interface DescInstance {

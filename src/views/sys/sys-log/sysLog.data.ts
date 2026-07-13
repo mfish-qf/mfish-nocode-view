@@ -163,44 +163,35 @@ export const searchFormSchema: FormSchema[] = [
 export const sysLogSchema: DescItem[] = [
   {
     field: "title",
-    label: "日志标签",
-    labelMinWidth: 60
+    label: "日志标签"
   },
   {
     field: "method",
-    label: "方法",
-    labelMinWidth: 60
+    label: "方法"
   },
   {
     field: "reqTypeTag",
-    label: "请求类型",
-    labelMinWidth: 60
+    label: "请求类型"
   },
   {
     field: "reqUri",
-    label: "请求路径",
-    labelMinWidth: 60
+    label: "请求路径"
   },
-
   {
     field: "reqSourceTag",
-    label: "请求来源",
-    labelMinWidth: 60
+    label: "请求来源"
   },
   {
     field: "operTypeTag",
-    label: "操作类型",
-    labelMinWidth: 60
+    label: "操作类型"
   },
   {
     field: "operIp",
-    label: "操作IP",
-    labelMinWidth: 60
+    label: "操作IP"
   },
   {
     field: "operStatus",
     label: "操作状态",
-    labelMinWidth: 60,
     render: (record) => {
       const enable = Math.trunc(record) === 0;
       const color = enable ? "green" : "red";

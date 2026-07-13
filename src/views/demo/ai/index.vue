@@ -107,7 +107,7 @@
     }
     let aiRouter = await getAiRouter(value);
     if (!aiRouter) {
-      aiRouter = { path: "/sys/ai/chat" };
+      aiRouter = { path: "/ai/agent/chat" };
     }
     // 建立新 SSE 连接，并把 prompt 传给后端
     eventSource = new EventSource(
