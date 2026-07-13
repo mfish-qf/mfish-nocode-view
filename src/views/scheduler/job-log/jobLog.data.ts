@@ -102,33 +102,27 @@ export const searchFormSchema: FormSchema[] = [
 export const jobLogSchema: DescItem[] = [
   {
     field: "jobName",
-    label: "任务名称",
-    labelMinWidth: 60
+    label: "任务名称"
   },
   {
     field: "jobGroup",
-    label: "任务组",
-    labelMinWidth: 60
+    label: "任务组"
   },
   {
     field: "jobTypesTag",
-    label: "任务类型",
-    labelMinWidth: 60
+    label: "任务类型"
   },
   {
     field: "cron",
-    label: "cron表达式",
-    labelMinWidth: 60
+    label: "cron表达式"
   },
   {
     field: "className",
-    label: "类名称",
-    labelMinWidth: 60
+    label: "类名称"
   },
   {
     field: "methodName",
-    label: "方法名称",
-    labelMinWidth: 60
+    label: "方法名称"
   },
   {
     field: "params",
@@ -138,33 +132,27 @@ export const jobLogSchema: DescItem[] = [
   },
   {
     field: "startTime",
-    label: "生效时间",
-    labelMinWidth: 60
+    label: "生效时间"
   },
   {
     field: "endTime",
-    label: "失效时间",
-    labelMinWidth: 60
+    label: "失效时间"
   },
   {
     field: "costTime",
-    label: "耗时(ms)",
-    labelMinWidth: 60
+    label: "耗时(ms)"
   },
   {
     field: "jobStatusTag",
-    label: "执行状态",
-    labelMinWidth: 60
+    label: "执行状态"
   },
   {
     field: "createTime",
-    label: "创建时间",
-    labelMinWidth: 60
+    label: "创建时间"
   },
   {
     field: "createTime",
-    label: "更新时间",
-    labelMinWidth: 60
+    label: "更新时间"
   },
   {
     field: "remark",

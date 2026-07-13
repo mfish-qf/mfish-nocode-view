@@ -395,7 +395,7 @@
   }
 
   function sendMessage(id: string, val: string) {
-    sseRequest("/aiRouter", id, val);
+    sseRequest("/ai/router", id, val);
   }
   function sseRequest(path: string, id: string, val: string) {
     // 建立新 SSE 连接，并把 prompt 传给后端

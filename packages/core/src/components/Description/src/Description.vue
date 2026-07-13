@@ -16,7 +16,7 @@
     title: { type: String, default: "" },
     size: {
       type: String,
-      validator: (v) => ["small", "default", "middle", undefined].includes(v),
+      validator: (v: any) => ["small", "default", "middle", undefined].includes(v),
       default: "small"
     },
     bordered: { type: Boolean, default: true },
@@ -34,6 +34,7 @@
       type: Array as PropType<DescItem[]>,
       default: () => []
     },
+    labelWidth: { type: Number, default: 120 },
     data: { type: Object }
   };
 
@@ -92,20 +93,21 @@
       }
 
       // Prevent line breaks
-      function renderLabel({ label, labelMinWidth, labelStyle }: DescItem) {
-        if (!labelStyle && !labelMinWidth) {
+      function renderLabel({ label, labelMinWidth, labelStyle }: DescItem, labelWidth: number) {
+        if (!labelStyle && !labelMinWidth && !labelWidth) {
           return label;
         }
 
         const labelStyles: CSSProperties = {
           ...labelStyle,
-          minWidth: `${labelMinWidth}px `
+          width: `${labelWidth ? `${labelWidth}px` : "auto"}`,
+          minWidth: `${labelMinWidth ? `${labelMinWidth}px` : "auto"} `
         };
         return <div style={labelStyles}>{label}</div>;
       }
 
       function renderItem() {
-        const { schema, data } = unref(getProps);
+        const { schema, data, labelWidth } = unref(getProps);
         return unref(schema)
           .map((item) => {
             const { render, field, span, show, contentMinWidth, init } = item;
@@ -129,7 +131,7 @@
 
             const width = contentMinWidth;
             return (
-              <Descriptions.Item label={renderLabel(item)} key={field} span={span}>
+              <Descriptions.Item label={renderLabel(item, labelWidth)} key={field} span={span}>
                 {() => {
                   if (!contentMinWidth) {
                     return getContent();

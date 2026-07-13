@@ -75,7 +75,7 @@ export default function useAdvanced({
     const lgWidth = Number.parseInt(itemCol.lg as string) || mdWidth;
     const xlWidth = Number.parseInt(itemCol.xl as string) || lgWidth;
     const xxlWidth = Number.parseInt(itemCol.xxl as string) || xlWidth;
-    const sumRowCol = (width) => {
+    const sumRowCol = (width: any) => {
       itemColSum += width;
       let temp = lastRowCol;
       temp += width;
@@ -122,7 +122,7 @@ export default function useAdvanced({
     }
   }
 
-  const fieldsIsAdvancedMap = shallowReactive({});
+  const fieldsIsAdvancedMap: any = shallowReactive({});
 
   function updateAdvanced() {
     let itemColSum = 0;
