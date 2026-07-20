@@ -7,7 +7,7 @@ import { dateUtil, formatToDateTime } from "@mfish/core/utils/DateUtil";
  * @description: 任务订阅表
  * @author: mfish
  * @date: 2023-02-20
- * @version: V2.4.0
+ * @version: V2.4.1
  */
 export const columns: BasicColumn[] = [
   {

@@ -2,7 +2,7 @@
  @description: AI模型配置信息查看
  @author: mfish
  @date: 2026-07-03
- @version: V2.4.0
+ @version: V2.4.1
 -->
 <template>
   <BasicModal v-bind="$attrs" @register="registerModal" title="AI模型配置信息信息">

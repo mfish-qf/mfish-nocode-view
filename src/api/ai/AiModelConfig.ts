@@ -5,7 +5,7 @@ import { AiModelConfig, ReqAiModelConfig, AiModelConfigPageModel } from "@/api/a
  * @description: AI模型配置信息
  * @author: mfish
  * @date: 2026-07-03
- * @version: V2.4.0
+ * @version: V2.4.1
  */
 enum Api {
   AiModelConfig = "/ai/aiModelConfig"

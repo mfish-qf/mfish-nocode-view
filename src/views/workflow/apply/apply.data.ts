@@ -8,7 +8,7 @@ import AuditStatusTag from "@/views/workflow/com/AuditStatusTag.vue";
  * @description: 审批管理
  * @author: mfish
  * @date: 2025-10-15
- * @version: V2.4.0
+ * @version: V2.4.1
  */
 export const columns: BasicColumn[] = [
   {

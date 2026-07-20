@@ -4,7 +4,7 @@ import { BaseEntity, PageResult, ReqPage } from "@mfish/core/api";
  * @description: AI模型配置信息
  * @author: mfish
  * @date: 2026-07-03
- * @version: V2.4.0
+ * @version: V2.4.1
  */
 export interface AiModelConfig extends BaseEntity<string> {
   //租户ID

@@ -5,12 +5,12 @@
       :trigger="['click']"
       placement="topLeft"
       :arrow="{ pointAtCenter: true }"
-      :overlay-style="{ width: '500px', minWidth: '300px' }"
+      :overlay-style="{ width: getIsMobile ? '100%' : '680px', minWidth: '300px' }"
     >
       <template #overlay>
         <AMenu>
           <AMenu.Item style="padding: 0; cursor: default; background: transparent">
-            <MfishChat style="height: 70vh; display: flex" @close="open = false" />
+            <MfishChat style="display: flex" :style="{ height: getIsMobile ? '85vh' : '75vh' }" @close="open = false" />
           </AMenu.Item>
         </AMenu>
       </template>
@@ -31,11 +31,13 @@
   import { RedditOutlined } from "@ant-design/icons-vue";
   import { ref } from "vue";
   import MfishChat from "@/views/sys/ai/MfishChat.vue";
+  import { useAppInject } from "@/hooks/UseAppInject.ts";
 
   defineOptions({ name: "LayoutContent" });
   const { prefixCls } = useDesign("layout-content");
   const { getOpenPageLoading } = useTransitionSetting();
   const { getLayoutContentMode, getPageLoading } = useRootSetting();
+  const { getIsMobile } = useAppInject();
 
   useContentViewHeight();
   const open = ref<boolean>(false);

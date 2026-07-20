@@ -2,7 +2,7 @@
  @description: 文件目录列表
  @author: mfish
  @date: 2023-07-28
- @version: V2.4.0
+ @version: V2.4.1
 -->
 <template>
   <div :class="prefixCls">
