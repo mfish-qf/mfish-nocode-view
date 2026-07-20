@@ -2,7 +2,7 @@
  * @description: AI路由
  * @author: mfish
  * @date: 2025-08-18
- * @version: V2.4.0
+ * @version: V2.4.1
  */
 export interface AiRouter {
   //日期

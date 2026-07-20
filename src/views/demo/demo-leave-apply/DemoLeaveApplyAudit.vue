@@ -2,7 +2,7 @@
  @description: 请假申请审批
  @author: mfish
  @date: 2025-10-20
- @version: V2.4.0
+ @version: V2.4.1
 -->
 <template>
   <Description v-show="demoLeaveApplyData" style="min-height: 350px" @register="registerDesc" />
