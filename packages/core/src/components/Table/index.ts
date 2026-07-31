@@ -7,6 +7,7 @@ export * from "./src/types/Table";
 export * from "./src/types/Pagination";
 export * from "./src/types/TableAction";
 export { useTable } from "./src/hooks/UseTable";
+export { triggerTableRefresh, onTableRefresh } from "./src/hooks/UseTableRefresh";
 export * from "./src/Const";
 export type { FormSchemaInner as FormSchema, FormProps } from "../Form/src/types/Form";
 export type { EditRecordRow } from "./src/components/editable";

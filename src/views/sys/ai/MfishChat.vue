@@ -156,6 +156,7 @@
   import { uploadApi } from "@mfish/core/api";
   import ChatMessageList from "./ChatMessageList.vue";
   import { useChatSSE, type ChatStatus, type SseEvent } from "./hooks/useChatSSE";
+  import { useFrontendAction, type FrontendAction } from "./hooks/useFrontendAction";
 
   defineOptions({ name: "MfishChat" });
   const emit = defineEmits(["close"]);
@@ -238,9 +239,9 @@
         }
       },
       chatList: {
-        overflow: "auto",
         "padding-block": "16px",
-        flex: 1
+        flex: 1,
+        "min-height": 0
       },
       chatSend: {
         padding: "12px"
@@ -260,6 +261,7 @@
 
   // ==================== SSE ====================
   const { sseRequest, abort } = useChatSSE();
+  const { executeAction, parseAction } = useFrontendAction();
 
   watch(curSession, (val: string, oldVal: string) => {
     //保存历史对话
@@ -275,10 +277,11 @@
   async function request(val: string) {
     status.value = "pending";
     const id = buildUUID();
-    const answer: any = { id, message: { role: "assistant", content: "" }, status: "pending" };
+    // animateTyping=true 标记仅本次提问触发的加载才启用打字机效果（刷新/加载历史不带此标记）
+    const answer: any = { id, message: { role: "assistant", content: "" }, status: "pending", animateTyping: true };
     // agent 模式预初始化 agent 字段，使渲染函数能展示加载态
     if (chatMode.value === "agent") {
-      answer.agent = { planText: "", steps: [], done: false };
+      answer.agent = { planText: "", steps: [], actions: [], done: false };
     }
     // 携带已上传文件的 fileKey 数组，发送后清空附件状态
     const fileIds = [...fileIdList.value];
@@ -314,6 +317,16 @@
     const found = findAssistantMsg(id);
     if (!found) return;
     const { msg } = found;
+    // 结束标志：content 为 null 且 finishReason 为 STOP，不追加内容
+    if (data.content === null && data.finishReason === "STOP") {
+      msg.status = "loading";
+      return;
+    }
+    // FRONTEND_ACTION 类型：解析 content JSON 并执行对应前端动作（navigate/refresh/click/fill/openModal）
+    if (data.type === "FRONTEND_ACTION") {
+      handleFrontendActionEvent(msg, data);
+      return;
+    }
     // agent 模式按 type 分发；chat 模式无 type，直接追加 content
     if (data.type) {
       handleAgentEvent(msg, data);
@@ -321,6 +334,90 @@
       msg.message.content += data.content || "";
       msg.status = "loading";
     }
+  }
+
+  /**
+   * 处理 FRONTEND_ACTION 事件：
+   *   1. 解析 content JSON 得到 FrontendAction
+   *   2. 记录到 msg.agent.actions 数组（pending 状态）便于在气泡中展示
+   *   3. 串行执行：同一消息的多个 action 按到达顺序排队，前一个完成后再执行下一个
+   *      （navigate 后等待页面渲染，refresh 等待列表加载，避免操作相互覆盖）
+   *   不阻塞 SSE 流，后续 TOKEN_STREAM/STOP 等事件照常处理
+   */
+  function handleFrontendActionEvent(msg: any, data: SseEvent) {
+    if (!msg.agent) {
+      msg.agent = { planText: "", steps: [], actions: [], done: false };
+    }
+    if (!Array.isArray(msg.agent.actions)) {
+      msg.agent.actions = [];
+    }
+    // action 执行队列：每个 msg 维护一个 Promise 链，新 action 接到链尾实现串行
+    if (!msg.agent._actionChain) {
+      msg.agent._actionChain = Promise.resolve();
+    }
+    const action = parseAction(data.content);
+    if (!action) {
+      console.warn("[FRONTEND_ACTION] content 解析失败，已忽略:", data.content);
+      return;
+    }
+    // 先以 pending 状态记录，便于即时在气泡中展示"执行中"
+    const record: {
+      action: string;
+      description?: string;
+      params?: Record<string, any>;
+      target?: string;
+      status: "pending" | "success" | "error";
+      result: string;
+    } = {
+      ...action,
+      status: "pending",
+      result: ""
+    };
+    msg.agent.actions.push(record);
+    msg.status = "loading";
+    // 排队串行执行：等前一个 action 完成后再执行当前 action
+    msg.agent._actionChain = msg.agent._actionChain.then(async () => {
+      // 前一个 action 是 navigate/refresh 时，等待页面渲染/列表加载完成再执行下一个
+      // navigate 路由跳转 + 目标页面挂载需要时间；refresh 触发列表请求也需要时间
+      await executeAction(action).then((result) => {
+        record.status = result.success ? "success" : "error";
+        record.result = result.message;
+      });
+      await waitForNextAction(action);
+    });
+  }
+
+  /**
+   * action 执行后等待时间：navigate 后页面有异步渲染/请求，需等待完成再执行下一个 action
+   * 否则下一个 refresh/click 会作用在旧 DOM 或被新页面渲染覆盖
+   *
+   * 注意：navigate 的 executeAction 已 await router.push，路由跳转本身已完成，
+   * 但目标页面的组件挂载 + onTableRefresh 注册是异步的，仍需等待
+   * refresh 通过事件总线触发 reload（同步触发，异步查询），不阻塞下一个 action，无需额外等待
+   */
+  function waitForNextAction(action: FrontendAction): Promise<void> {
+    const { action: type } = action;
+    let delay = 0;
+    switch (type) {
+      case "navigate":
+        // router.push 已 await（路由切换完成），等待目标页面组件挂载 + onTableRefresh 注册 + 列表首次加载
+        delay = 500;
+        break;
+      case "refresh":
+        // triggerTableRefresh 同步触发 reload，reload 在后台异步查询，不阻塞下一个 action
+        delay = 0;
+        break;
+      case "openModal":
+        // 模态框打开 + 表单渲染
+        delay = 300;
+        break;
+      case "fill":
+        // 表单填充后可能触发联动，稍等一下
+        delay = 100;
+        break;
+    }
+    if (delay <= 0) return Promise.resolve();
+    return new Promise((resolve) => setTimeout(resolve, delay));
   }
 
   function handleSseComplete(id: string, events: SseEvent[]) {
@@ -368,7 +465,7 @@
   //   PLAN_COMPLETED: { content: 最终汇总, stepIndex: null }
   function handleAgentEvent(msg: any, data: SseEvent) {
     if (!msg.agent) {
-      msg.agent = { planText: "", steps: [], done: false };
+      msg.agent = { planText: "", steps: [], actions: [], done: false };
     }
     if (!Array.isArray(msg.agent.steps)) {
       msg.agent.steps = [];
@@ -381,16 +478,17 @@
         break;
       }
       case "STEP_STARTED": {
-        msg.agent.steps[stepIndex!] = {
-          index: stepIndex!,
-          title: data.content || `步骤 ${(stepIndex || 0) + 1}`,
+        if (stepIndex == null) break;
+        msg.agent.steps[stepIndex] = {
+          index: stepIndex,
+          title: data.content || `步骤 ${stepIndex + 1}`,
           content: "",
           status: "running"
         };
         break;
       }
       case "TOKEN_STREAM": {
-        if (stepIndex !== null && msg.agent.steps[stepIndex]) {
+        if (stepIndex != null && msg.agent.steps[stepIndex]) {
           msg.agent.steps[stepIndex].content += data.content || "";
         } else {
           msg.message.content += data.content || "";
@@ -398,7 +496,7 @@
         break;
       }
       case "STEP_COMPLETED": {
-        if (stepIndex !== null && msg.agent.steps[stepIndex]) {
+        if (stepIndex != null && msg.agent.steps[stepIndex]) {
           msg.agent.steps[stepIndex].status = "completed";
           if (data.content) {
             msg.agent.steps[stepIndex].content = data.content;
@@ -422,7 +520,8 @@
   // 重置 agent 状态（用于刷新请求）
   function resetAgentState(msg: any) {
     if (msg.agent) {
-      msg.agent = { planText: "", steps: [], done: false };
+      // 保留 _actionChain 引用避免正在执行的 then 链丢失，但重置其他展示字段
+      msg.agent = { planText: "", steps: [], actions: [], _actionChain: msg.agent._actionChain, done: false };
     }
   }
 
@@ -434,6 +533,8 @@
       if (answer) {
         answer.message.content = "";
         answer.status = "pending";
+        // 刷新重试不启用打字机效果（仅用户本次提问触发才启用）
+        answer.animateTyping = false;
         // 重置 agent 状态，使重新请求时展示加载效果
         if (answer.agent) {
           resetAgentState(answer);

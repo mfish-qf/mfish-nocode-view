@@ -4,11 +4,13 @@ import type { DynamicProps } from "@mfish/types/src/type/utils";
 import type { FormActionType } from "@core/components/Form";
 import type { WatchStopHandle } from "vue";
 import { onUnmounted, ref, toRaw, unref, watch } from "vue";
+import { useRoute } from "vue-router";
 import { getDynamicProps } from "@core/utils";
 import { isProdMode } from "@core/utils/Env";
 import { error } from "@core/utils/Log";
 import { Nullable, Recordable } from "@mfish/types";
 import { Key } from "ant-design-vue/lib/table/interface";
+import { onTableRefresh } from "./UseTableRefresh";
 
 type Props = Partial<DynamicProps<BasicTableProps>>;
 
@@ -174,6 +176,11 @@ export function useTable(tableProps?: Props): [
       return getTableInstance().getExpandedRowKeys();
     }
   };
+
+  // 自动注册到全局表格刷新总线：外部调用 triggerTableRefresh(path) 即可触发本表格 reload 重新查询数据
+  // 使所有 BasicTable 页面支持外部触发刷新（如 AI FRONTEND_ACTION 的 refresh 操作），业务页面无需单独改动
+  // keep-alive 下组件缓存，reload 闭包持续有效；组件真正销毁时 onUnmounted 自动移除监听
+  onTableRefresh(methods.reload, useRoute().path);
 
   return [register, methods];
 }

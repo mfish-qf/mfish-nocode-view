@@ -4,14 +4,14 @@
 -->
 <template>
   <div class="agent-message">
-    <!-- 加载态：还没有计划数据 -->
-    <div v-if="!hasPlan" class="agent-loading">
+    <!-- 加载态：既没有计划数据，也没有任何最终内容和前端动作 -->
+    <div v-if="!hasPlan && !hasActions && !displayedFinalContent" class="agent-loading">
       <Spin size="small" />
       <span class="agent-loading-text">正在规划任务，请稍后...</span>
     </div>
     <template v-else>
-      <!-- 计划面板 -->
-      <div class="agent-plan-panel">
+      <!-- 计划面板（仅在存在计划数据时展示） -->
+      <div v-if="hasPlan" class="agent-plan-panel">
         <div class="agent-plan-header" @click="toggleExpand">
           <RightOutlined class="agent-plan-arrow" :class="[expanded && 'agent-plan-arrow-open']" />
           <component :is="headerIcon" :style="headerIconStyle" />
@@ -20,18 +20,40 @@
         <!-- 步骤列表（可折叠） -->
         <Steps v-if="expanded" direction="vertical" size="small" :items="stepItems" class="agent-step-list" />
       </div>
-      <!-- 最终汇总内容 -->
-      <div v-if="finalContent" class="agent-content" v-html="renderedFinalContent"></div>
+      <!-- 前端动作执行记录（FRONTEND_ACTION 事件触发后展示） -->
+      <div v-if="hasActions" class="agent-actions">
+        <div v-for="(act, i) in actions" :key="i" class="agent-action-item">
+          <component
+            :is="getActionStatusIcon(act.status)"
+            :style="{ color: getActionStatusColor(act.status), fontSize: '14px', flexShrink: 0 }"
+          />
+          <div class="agent-action-body">
+            <div class="agent-action-desc">{{ act.description || actionTypeLabel[act.action] }}</div>
+            <div v-if="act.status === 'error' && act.result" class="agent-action-result agent-action-error">
+              {{ act.result }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 最终汇总内容（有计划时打字机逐字显示；无计划流式追加时直接显示） -->
+      <div v-if="displayedFinalContent" class="agent-content" v-html="renderedFinalContent"></div>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, watch } from "vue";
-  import { CheckCircleOutlined, ClockCircleOutlined, LoadingOutlined, RightOutlined } from "@ant-design/icons-vue";
+  import { computed, onUnmounted, ref, watch } from "vue";
+  import {
+    CheckCircleOutlined,
+    ClockCircleOutlined,
+    CloseCircleOutlined,
+    LoadingOutlined,
+    RightOutlined
+  } from "@ant-design/icons-vue";
   import { Spin, Steps, theme } from "ant-design-vue";
   import markdownit from "markdown-it";
   import { renderMarkdown } from "./hooks/useMarkdownRender";
+  import type { FrontendActionType } from "./hooks/useFrontendAction";
 
   const props = defineProps<{
     /** 消息 ID（用于折叠状态记录） */
@@ -40,6 +62,8 @@
     agent: AgentState;
     /** 最终汇总内容（PLAN_COMPLETED 的 content） */
     finalContent: string;
+    /** 是否启用打字机效果（仅用户本次提问触发的 assistant 消息才为 true；刷新重试/加载历史不启用） */
+    animateTyping?: boolean;
   }>();
 
   // 单独的 markdownit 实例，供模板中 v-html 使用（返回字符串）
@@ -52,9 +76,20 @@
     status: "pending" | "running" | "completed";
   }
 
+  /** 前端动作记录（FRONTEND_ACTION 事件触发后写入） */
+  interface AgentAction {
+    action: FrontendActionType;
+    description?: string;
+    params?: Record<string, any>;
+    target?: string;
+    status: "pending" | "success" | "error";
+    result?: string;
+  }
+
   interface AgentState {
     planText: string;
     steps: AgentStep[];
+    actions?: AgentAction[];
     done: boolean;
   }
 
@@ -66,11 +101,33 @@
 
   const hasPlan = computed(() => props.agent && (props.agent.planText || props.agent.steps?.length));
   const steps = computed(() => props.agent?.steps || []);
+  const actions = computed(() => props.agent?.actions || []);
+  const hasActions = computed(() => actions.value.length > 0);
   const completedCount = computed(() => steps.value.filter((s) => s.status === "completed").length);
   const isRunning = computed(() => !props.agent?.done && steps.value.some((s) => s.status === "running"));
   const allDone = computed(
     () => props.agent?.done || (steps.value.length > 0 && completedCount.value === steps.value.length)
   );
+
+  // 前端动作状态 → 图标组件映射（pending 显示 loading，success 显示对勾，error 显示叉号）
+  function getActionStatusIcon(status: AgentAction["status"]) {
+    if (status === "success") return CheckCircleOutlined;
+    if (status === "error") return CloseCircleOutlined;
+    return LoadingOutlined;
+  }
+  function getActionStatusColor(status: AgentAction["status"]) {
+    if (status === "success") return "#52c41a";
+    if (status === "error") return "#ff4d4f";
+    return token.value.colorPrimary;
+  }
+  // 动作类型中文标签（无 description 时作为兜底展示）
+  const actionTypeLabel: Record<FrontendActionType, string> = {
+    navigate: "页面跳转",
+    click: "点击元素",
+    fill: "填充表单",
+    refresh: "刷新页面",
+    openModal: "打开弹窗"
+  };
 
   // 默认：运行中展开、完成后折叠；用户操作过后尊重用户选择
   const expanded = computed(() => {
@@ -126,10 +183,62 @@
     }))
   );
 
+  // 最终汇总内容打字机效果：PLAN_COMPLETED 一次性给完整内容，逐字显示增强可读性
+  // 仅当 animateTyping=true（用户本次提问触发）时启用；刷新重试 / 加载历史直接显示完整内容
+  const displayedLength = ref(0);
+  let typingTimer: number | null = null;
+
+  const displayedFinalContent = computed(() => props.finalContent.slice(0, displayedLength.value));
+
   // 最终内容 markdown 渲染（返回 HTML 字符串供 v-html 使用）
   const renderedFinalContent = computed(() => {
-    if (!props.finalContent) return "";
-    return md.render(props.finalContent);
+    if (!displayedFinalContent.value) return "";
+    return md.render(displayedFinalContent.value);
+  });
+
+  // 监听 finalContent 变化，启动打字机逐字显示
+  watch(
+    () => props.finalContent,
+    (newVal) => {
+      if (typingTimer) {
+        clearInterval(typingTimer);
+        typingTimer = null;
+      }
+      // 已显示长度大于新内容长度时重置（如刷新重试场景）
+      if (displayedLength.value > newVal.length) {
+        displayedLength.value = 0;
+      }
+      if (!newVal || displayedLength.value >= newVal.length) return;
+      // 不启用打字机时直接显示完整内容（刷新重试 / 加载历史记录场景）
+      if (!props.animateTyping) {
+        displayedLength.value = newVal.length;
+        return;
+      }
+      // 无计划数据（type=null 流式追加场景）：直接同步显示完整内容，实现边输出边打印
+      // 有计划数据（PLAN_COMPLETED 一次性给完整内容）：启用打字机逐字显示增强可读性
+      if (!hasPlan.value) {
+        displayedLength.value = newVal.length;
+        return;
+      }
+      // 每 16ms 显示 2 个字符，兼顾中英文阅读速度
+      typingTimer = window.setInterval(() => {
+        displayedLength.value = Math.min(displayedLength.value + 2, newVal.length);
+        if (displayedLength.value >= newVal.length) {
+          if (typingTimer) {
+            clearInterval(typingTimer);
+            typingTimer = null;
+          }
+        }
+      }, 16);
+    },
+    { immediate: true }
+  );
+
+  onUnmounted(() => {
+    if (typingTimer) {
+      clearInterval(typingTimer);
+      typingTimer = null;
+    }
   });
 </script>
 
@@ -184,6 +293,47 @@
     .agent-plan-title {
       margin-left: 6px;
     }
+  }
+
+  // 前端动作执行记录列表
+  .agent-actions {
+    margin-top: 4px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .agent-action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.03);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .agent-action-body {
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .agent-action-desc {
+    color: @text-color;
+  }
+
+  .agent-action-result {
+    margin-top: 2px;
+    font-size: 12px;
+    color: @text-color-secondary;
+  }
+
+  .agent-action-error {
+    color: #ff4d4f;
   }
 
   .agent-step-list {

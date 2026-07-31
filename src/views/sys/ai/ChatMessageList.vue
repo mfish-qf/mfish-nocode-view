@@ -5,9 +5,11 @@
 <template>
   <Bubble.List
     v-if="messages?.length"
+    ref="bubbleListRef"
     :style="{ height: '100%', paddingInline: '16px' }"
     :items="bubbleItems"
     :roles="roles"
+    :auto-scroll="false"
   >
     <template #footer="{ item }">
       <div class="msg-footer">
@@ -62,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, h } from "vue";
+  import { computed, h, nextTick, onUnmounted, ref, watch } from "vue";
   import { CopyOutlined, ReloadOutlined, UserOutlined } from "@ant-design/icons-vue";
   import { Bubble, Prompts, Welcome } from "ant-design-x-vue";
   import { Button as AButton, Space, Spin } from "ant-design-vue";
@@ -72,10 +74,22 @@
   import { useRootSetting } from "@mfish/core/hooks";
   import { renderSmart } from "./hooks/useMarkdownRender";
   import AgentMessage from "./AgentMessage.vue";
+  import type { FrontendActionType } from "./hooks/useFrontendAction";
+
+  /** 前端动作记录（FRONTEND_ACTION 事件触发后写入） */
+  interface AgentAction {
+    action: FrontendActionType;
+    description?: string;
+    params?: Record<string, any>;
+    target?: string;
+    status: "pending" | "success" | "error";
+    result?: string;
+  }
 
   interface AgentState {
     planText: string;
     steps: any[];
+    actions?: AgentAction[];
     done: boolean;
   }
 
@@ -86,6 +100,8 @@
     agent?: AgentState;
     /** 用户消息附带的已上传文件 fileKey 数组（用于在气泡中展示文件列表） */
     fileIds?: string[];
+    /** 是否启用打字机效果（仅用户本次提问触发的 assistant 消息才为 true） */
+    animateTyping?: boolean;
   }
 
   const props = defineProps<{
@@ -150,10 +166,24 @@
           footer: { marginTop: "2px" }
         },
         loading: i.status === "pending" && !isAgent,
-        typing: i.status === "pending" && !isAgent ? { step: 3, interval: 20 } : false,
+        // 逐字打字机效果：与底部 LoadingButton 同步（pending / loading 期间持续显示）
+        // 仅用户本次提问触发的 assistant 消息（animateTyping=true）才启用；刷新重试 / 加载历史直接显示完整内容
+        typing:
+          (i.status === "pending" || i.status === "loading") && !isAgent && i.animateTyping
+            ? { step: 1, interval: 28 }
+            : false,
         // agent 消息渲染为 AgentMessage 组件；带文件的用户消息在内容下方追加 FileHref；其他用 renderSmart
+        // animateTyping 同时结合 status 判断：仅 pending/loading 期间才启用打字机
+        // 切换 session 加载的历史消息 status 为 success，不启用打字机，直接显示完整内容
         messageRender: isAgent
-          ? () => h(AgentMessage, { msgId: i.id, agent: i.agent!, finalContent: i.message.content })
+          ? () =>
+              h(AgentMessage, {
+                msgId: i.id,
+                agent: i.agent!,
+                finalContent: i.message.content,
+                animateTyping:
+                  i.animateTyping && (i.status === "pending" || i.status === "loading")
+              })
           : hasFiles
             ? (content: any) =>
                 h("div", { style: "display: flex; flex-direction: column; gap: 6px" }, [
@@ -172,6 +202,86 @@
   function openGithub() {
     window.open("https://github.com/mfish-qf/mfish-nocode", "_blank");
   }
+
+  // ==================== 自动滚动到底部 ====================
+  // Bubble.List 内置 autoScroll 只监听 items.length 和 typing 完成，不监听 content 变化
+  // 这里用组件 expose 的 scrollTo 方法直接操作内置滚动容器，配合 MutationObserver 监听所有内容变化
+  const bubbleListRef = ref<any>();
+  // 用户是否手动向上滚动离开底部（true 时不自动跟踪）
+  let userScrolledUp = false;
+  let mutationObserver: MutationObserver | null = null;
+  let scrollRaf: number | null = null;
+
+  // 滚动到最底部。force=true 时忽略用户手动滚动状态（用于新消息发送场景）
+  function scrollToBottom(force = false) {
+    if (!force && userScrolledUp) return;
+    if (scrollRaf !== null) cancelAnimationFrame(scrollRaf);
+    scrollRaf = requestAnimationFrame(() => {
+      scrollRaf = null;
+      const comp = bubbleListRef.value;
+      const el: HTMLElement | undefined = comp?.nativeElement;
+      if (!el) return;
+      el.scrollTop = el.scrollHeight;
+    });
+  }
+
+  // 滚动事件：判断用户是否离开底部
+  function onScroll() {
+    const el: HTMLElement | undefined = bubbleListRef.value?.nativeElement;
+    if (!el) return;
+    const distanceToBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+    userScrolledUp = distanceToBottom > 80;
+  }
+
+  // 监听 Bubble.List 内部 DOM 变化：chat 流式追加 content、agent steps/打字机更新
+  function setupObserver() {
+    const el: HTMLElement | undefined = bubbleListRef.value?.nativeElement;
+    if (!el) return;
+    el.addEventListener("scroll", onScroll, { passive: true });
+    mutationObserver = new MutationObserver(() => scrollToBottom());
+    mutationObserver.observe(el, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+  }
+
+  // Bubble.List 挂载后初始化监听（用 watch 等待 ref 就绪）
+  const stopWatch = watch(
+    () => bubbleListRef.value,
+    (comp) => {
+      if (comp?.nativeElement) {
+        nextTick(() => {
+          setupObserver();
+          scrollToBottom();
+        });
+        stopWatch();
+      }
+    },
+    { immediate: true }
+  );
+
+  onUnmounted(() => {
+    const el: HTMLElement | undefined = bubbleListRef.value?.nativeElement;
+    el?.removeEventListener("scroll", onScroll);
+    mutationObserver?.disconnect();
+    mutationObserver = null;
+    if (scrollRaf !== null) {
+      cancelAnimationFrame(scrollRaf);
+      scrollRaf = null;
+    }
+  });
+
+  // 新消息发送时（messages.length 增加）：重置用户滚动状态并强制滚动
+  watch(
+    () => props.messages.length,
+    (newLen, oldLen) => {
+      if (newLen > (oldLen || 0)) {
+        userScrolledUp = false;
+        nextTick(() => scrollToBottom(true));
+      }
+    }
+  );
 </script>
 
 <style lang="less" scoped>
